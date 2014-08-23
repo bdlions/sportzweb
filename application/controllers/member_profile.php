@@ -63,9 +63,15 @@ class Member_profile extends Role_Controller{
         $photo_list = $this->profile->get_photo_list($user_id)->result_array();
         $photo = array();
             
-        for($i=0;$i<6;$i++){
-            $photo[$i]= USER_PHOTO_DEFAULT_IMAGE;
-        }
+        //for($i=0;$i<6;$i++){
+        //    $photo[$i]= USER_PHOTO_DEFAULT_IMAGE;
+        //}
+        $photo[0]= USER_PHOTO_DEFAULT_IMAGE1;
+        $photo[1]= USER_PHOTO_DEFAULT_IMAGE2;
+        $photo[2]= USER_PHOTO_DEFAULT_IMAGE3;
+        $photo[3]= USER_PHOTO_DEFAULT_IMAGE4;
+        $photo[4]= USER_PHOTO_DEFAULT_IMAGE5;
+        $photo[5]= USER_PHOTO_DEFAULT_IMAGE6;
         
         if(!empty($photo_list))
         {

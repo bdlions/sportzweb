@@ -12,6 +12,12 @@
     define("PROFILE_PICTURE_H32",                        "32");
     define("PROFILE_PICTURE_COMMENT_PATH",               "resources/uploads/profile_picture/32x32/");
     define("USER_PHOTO_DEFAULT_IMAGE",                   "photo.jpg");
+    define("USER_PHOTO_DEFAULT_IMAGE1",                  "1.jpg");
+    define("USER_PHOTO_DEFAULT_IMAGE2",                  "2.jpg");
+    define("USER_PHOTO_DEFAULT_IMAGE3",                  "3.jpg");
+    define("USER_PHOTO_DEFAULT_IMAGE4",                  "4.jpg");
+    define("USER_PHOTO_DEFAULT_IMAGE5",                  "5.jpg");
+    define("USER_PHOTO_DEFAULT_IMAGE6",                  "6.jpg");
     
     
     //login page
