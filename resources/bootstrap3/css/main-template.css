@@ -1,0 +1,137 @@
+@import url("bootstrap.min.css");
+
+.navbar-top {
+    background: #ffffff url('../bg2.png') top repeat-x;
+    min-height:80px;
+    border:0px;
+}
+.logo{
+    width:60px;
+    height:60px;
+}
+.top-menu{
+    padding-top:80px;
+    padding-left:0;
+}
+.top-menu-style{
+    background-color:white;
+    height:34px;
+}
+
+.button-custom{
+    background-color:orange;
+}
+
+.list-group-item{
+    border-left:0px;
+    border-right:0px;
+}
+.column{
+    height:100%;
+}
+
+.search-top{
+    width:280px;
+}
+
+.more-dropdown{
+    padding-right:15px;
+}
+
+.feed{
+    padding-top:20px;
+}
+
+.left-panel{
+    border: 0px;
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0px;
+}
+.left-panel-heading{
+    border-bottom: 10;
+    padding: 10px 0px;
+}
+.left-panel-body{
+    padding:0px;
+}
+.left-panel-list{
+    margin-bottom:0px;
+}
+.left-panel-item{
+    padding: 8px 0px;
+}
+.list-icon{
+    margin-right:10px;
+}
+.right-panel-container{
+    border:2px solid rgba(0, 0, 0, 0.05);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.right-panel{
+    border: 0px;
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0px;
+    padding:0;
+}
+.right-panel-heading{
+    border-bottom: 10;
+    padding: 10px 0px;
+}
+.right-panel-body{
+    padding:0px;
+}
+.right-panel-list{
+    margin-bottom:0px;
+}
+.right-panel-item{
+    padding: 8px 0px;
+}
+.foot {
+    background: #f4f4f4;
+    padding-top: 4px;
+}
+.footer {
+    position: relative;
+    overflow: hidden;
+    width: 960px;
+    height: 40px;
+    margin: auto;
+    color: #959595;
+}
+.footer-menu {
+    position: absolute;
+    left: 0px;
+    top: 8px;
+    color: #959595;
+}
+.footer-menu li {
+    float: left;
+    border-left: #959595 1px solid;
+    display: inline;
+    margin-right: 12px;
+    padding-left: 8px;
+    line-height: 12PX;
+    color: #959595;
+}
+.footer-menu li {
+    border-left: #959595 0px solid;
+}
+.footer a {
+    color: #959595;
+}
+.copyright {
+    position: absolute;
+    right: 0px;
+    top: 6px;
+    text-align: right;
+    color: #959595;
+    font-size: 12px;
+    line-height: 150%;
+}
+
+
+
+

@@ -1,0 +1,14 @@
+.wrong_attempt_box{
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+}
+
+.login-box{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.main{
+    margin-top: 50px;
+}

@@ -1,0 +1,43 @@
+/* 
+    Document   : left-meu
+    Created on : Jan 14, 2014, 12:38:18 PM
+    Author     : Alamgir
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.left-nav{
+    background-color: #f9f9f9;
+    min-height: 200px;
+}
+.left-nav > ul, 
+.left-nav > ul > li > ul{
+    list-style: none outside none;
+    font-size: 14px;
+    padding-left: 0px;
+}
+
+.left-nav > ul > li > a, 
+.left-nav > ul > li > ul > li > a{
+    text-decoration: none;
+    color: black;
+    padding-left: 10px;
+    display: block;
+}
+.left-nav > ul > li > a:hover, 
+.left-nav > ul > li > ul > li:hover{
+    background-color: #E3E3E3;
+    border-radius: 5px;
+}
+
+.left-nav > ul > li > ul{
+    font-size: 13px;
+} 
+
+.left-nav > ul > li > a {
+    padding: 5px 0px;
+    position: relative;
+}
+
+.left-nav .active > a{
+    font-weight: bold;
+}

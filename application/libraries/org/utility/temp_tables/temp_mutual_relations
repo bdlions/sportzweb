@@ -1,0 +1,8 @@
+CREATE TEMPORARY TABLE IF NOT EXISTS `temp_mutual_realations` ( 
+                 `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT, 
+                 `user_id` INT(11) UNSIGNED NOT NULL,
+                 `is_pending` BOOLEAN DEFAULT FALSE,
+                 `is_follower` BOOLEAN DEFAULT FALSE,
+                 PRIMARY KEY (`id`),
+                 UNIQUE KEY(`user_id`)
+                 ) ENGINE=INNODB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/sportzweb/application/libraries/Template.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/admin/templates/tmpl.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/controllers/admin/application.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/controllers/admin/access_level.php</file>
+            <file>file:/C:/wamp/www/sportzweb/constants/admin_access_level.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/admin/applications/application_manage.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/admin/access_level/index.php</file>
+        </group>
+        <group>
+            <file>file:/C:/xampp/htdocs/sportzweb/application/libraries/org/utility/Utils.php</file>
+        </group>
+    </open-files>
+</project-private>

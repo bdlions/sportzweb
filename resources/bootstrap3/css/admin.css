@@ -1,0 +1,26 @@
+.table-left-padding{
+    padding-left: 25px;
+}
+
+.table-top-padding{
+    padding-top: 25px;
+}
+
+.admin_login_page
+{
+    padding: 8px;
+}
+
+.login-subheading
+{
+    color: white;
+    font-weight: bolder;
+    padding-bottom: 8px;
+}
+.fg_label
+{
+    color: white;
+    font-weight: bolder;
+    text-align: right;
+    padding-bottom: 8px;
+}

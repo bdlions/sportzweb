@@ -1,0 +1,274 @@
+.blank-row
+{
+    margin-top: 30px;
+}
+.xb-home
+{
+    
+}
+.xb-home img
+{
+    width: 100%;
+    height: 100%;
+    clear: both;
+    float: left;
+}
+.xb-home select
+{
+    font-size: 20px;
+}
+
+.xb-home-form-control
+{
+    height:40px;
+}
+
+.upcoming-fixtures
+{
+    margin: auto;
+    text-align: center;
+}
+
+.upcoming-fixtures h5
+{
+    font-size: 20px;
+    float: left;
+    clear: both;
+    color: #000000;
+}
+.upcoming-fixtures h3
+{
+    color: #000000;
+    font-size: 30px;
+    clear: both;
+}
+.upcoming-fixtures a
+{
+    text-decoration: none;
+    color: #4e98df;
+    font-size: 20px;
+}
+
+.selected-match
+{
+    margin: auto;
+    text-align: center;
+}
+.selected-match h5
+{
+    font-size: 20px;
+    float: left;
+    clear: both;
+    color: #000000;
+}
+.selected-match h4
+{
+    font-size: 22px;
+    float: left;
+    clear: both;
+    color: #000000;
+}
+.selected-match h3
+{
+    color: #000000;
+    font-size: 30px;
+    clear: both;
+}
+.selected-match h2
+{
+    color: #4e98df;
+    font-size: 32px;
+}
+.kick-off
+{
+    color: #000000;
+    font-size: 25px;
+    padding-bottom:30px;
+}
+.create-chat-room
+{
+    
+}
+
+.create-chat-room h5
+{
+    font-size: 20px;
+    float: left;
+    clear: both;
+    color: #000000;
+}
+
+.create-chat-room h4
+{
+    color: #000000;
+    float: left;  
+    margin: 0;  
+    font-size: 25px;
+}
+
+.create-chat-room h3
+{
+    font-size: 25px;
+    float: left;
+    clear: both;
+    color: #000000;
+}
+
+.create-chat-room h2
+{
+    float: left;  
+    margin: 0;  
+    font-size: 25px;
+    color: #76b4e7;
+}
+.create-chat-room select
+{
+    font-size: 20px;
+}
+
+.create-chat-room-form-control
+{
+    height:40px;
+}
+.btn-xstream-banter
+{
+    border: 2px solid #76b4e7;
+    background-color: #efe4b0;
+    font-size: 18px;
+    height:40px;
+}
+.join-chat-room
+{
+    
+}
+
+.join-chat-room h5
+{
+    font-size: 20px;
+    float: left;
+    clear: both;
+    color: #000000;
+}
+
+.join-chat-room h4
+{
+    font-size: 20px;
+    float: left;
+    clear: both;
+    color: #cccccc;
+}
+
+.join-chat-room-label
+{
+    font-size: 20px;
+}
+
+.join-chat-room-code
+{
+    font-size: 20px;
+    color: #76b4e7;
+}
+
+.join-chat-room select
+{
+    font-size: 20px;
+}
+
+.join-chat-room-form-control
+{
+    height:40px;
+}
+
+.chat-room h5
+{
+    font-size: 18px;
+    float: left;
+    clear: both;
+    color: #000000;
+}
+.chat-room-code
+{
+    text-align: center;
+    color: #000000;
+    font-size: 25px;
+    clear: both;
+}
+.chat-room h3
+{
+    text-align: center;
+    color: #000000;
+    font-size: 25px;
+    clear: both;
+}
+
+.chat-room h4
+{
+    text-align: center;
+    color: #76b4e7;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1%;
+    margin-bottom: 2% !important;
+    width: 60%;
+    margin: 2% auto !important;
+}
+
+.chat-room textarea
+{
+    width: 100%;
+    height: 50px;
+    background: #f1e4b0;
+    color: #000000;
+}
+
+.chat_message
+{
+    float: left;
+    text-align: left;
+    color: #76b4e7;
+}
+
+.chat_message-left
+{
+    float: left;
+}
+.chat_message-left span
+{
+    color: #000000;
+}
+
+.chat_message-right
+{
+    float: left;
+    clear: none;
+    color: #000000;
+}
+
+.chat_message-pre-scrollable {
+  height: 200px;
+}
+
+div.xb1.xb2{text-align: center;}
+div.head_title{border-bottom: 1px solid #ccc;padding-bottom: 1%;margin-bottom: 2% !important;width: 84%;margin: 2% auto !important;}
+div.xb1.xb2 h5{float: left;clear: both;color: #cccccc;}
+div.xb1.xb2 h3{color: #000000;font-size: 20px;clear: both;margin: 0;}
+div.xb1.xb2 h4{margin: 0;}
+div.xb1.xb2 div{margin: 1% 0;clear: both;float: left;}
+div.xb1.xb2 div a{text-decoration: none;color: #4e98df;font-size: 18px;}
+div.xb1.xb2 div a:hover{color: blue;}
+div.sports_raw{float: left;text-align: left;width: 100%;color: #76b4e7;}
+div.sports_raw div.left{float: left;width: 35%;}
+div.sports_raw div.left span{color: #000000;}
+div.sports_raw div.right{float: left;padding-top: 3%;clear: none;}
+div.comment_box {width: 100%;}
+div.comment_box textarea{width: 100%;height: 50px;background: #f1e4b0;color: #cccccc;}
+div.xb1xb2 span.ecr{border: 1px solid #cccccc;padding: 0.2%;}
+div.xb1xb2 h2{color: #4e98df;}
+div.xb1xb2 div span{float: left;color: #76b4e7;}    
+div.xb1xb2 div a{text-decoration: none;color: #4e98df;font-size: 18px;float: left;clear: both;margin: 6% 0;}
+div.xb1xb2 div a:hover{color: blue;}
+div.xb1xb2 div.bttn a{float: left;border: 2px solid #76b4e7;padding: 0.5%;background: #efe4b0;font-size: 12px;}
+div.xb1xb2 div a.jag{float: right;}
+div.xb1xb2 h3{color: #000000;font-size: 20px;clear: both;}
+div.xb1xb2 div{margin: 1% 0;clear: both;float: left;width: 100%;}
+div.xb11{padding: 3% 15%;}
+div.xb11 img{width: 266px;height: 90px;clear: both;float: left;}

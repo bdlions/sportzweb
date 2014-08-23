@@ -1,0 +1,65 @@
+.business-panel{
+    height:100%;
+}
+.business-panel > .panel-heading {
+    height: 38px;
+    padding-left: 8px;
+    padding-right: 3px;
+}
+.business-panel > .panel-heading > label{
+    padding-top: 5px;
+    margin-top: 0xp;
+    font-size: 15px;
+}
+
+.business-panel > .panel-heading > button{
+    margin-top: 3px;
+}
+
+.business-panel > .panel-heading{
+    padding-top: 0px;
+}
+.panel-body{
+    min-height:110px
+}
+.connect-button{
+    height: 42px;
+    width: 125px;
+    background-color: #7CB8EC;
+    font-weight: bold;
+}
+.connect-button > .connections-label{
+    color: #FFFFFF;
+}
+
+.picture-box{
+    border: 1px solid #CCCCCC;
+    cursor: pointer;
+}
+
+.picture-box img{
+    height:100px;
+    width: 100%;
+    padding: 5px;
+}
+.name{
+    text-align: center;
+    font-size: 15px;
+}
+
+.about-me{
+    border:1px solid #DDDDDD; 
+    min-height: 120px; 
+    padding: 5px;
+}
+.button-custom{
+    margin-top: 2px;
+    color: #000000;
+}
+
+.cover-photo{
+    min-height: 200px; 
+    text-align: center;
+    line-height: 200px;
+    border: 1px solid #DDDDDD;
+}

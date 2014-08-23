@@ -1,0 +1,483 @@
+@import url("bootstrap.min.css");
+.form-control{
+    height:30px;
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+}
+.logo{
+    width:60px;
+    height:60px;
+    margin-right: 20px;
+    margin-bottom: 5%;
+}
+.logo-text{
+    color: #ffffff;
+    font-size: 70px;
+}
+
+.logo-text a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 70px;
+}
+.navbar-top {
+    background: #ffffff url('../../images/bg2.png') top repeat-x;
+    border:0px;
+}
+.logo{
+    width:60px;
+    height:60px;
+}
+.top-menu{
+    padding-top:80px;
+    padding-left:0;
+}
+.top-menu-style{
+    height:34px;
+}
+
+.button-custom{
+    background-color:orange;
+    height:30px;
+    border-radius: 0px;
+}
+
+.button-custom-profile-message{
+    height:22px;  
+    padding-top:0px;
+}
+
+.list-group-item{
+    border-left:0px;
+    border-right:0px;
+}
+.column{
+    height:100%;
+}
+
+.search-top{
+    width:280px;
+}
+
+.more-dropdown{
+    padding-right:15px;
+}
+
+.feed{
+    padding-top:20px;
+}
+.feed-profile-picture{
+    max-width: 80px;
+}
+.feed_shared_link_box
+{
+    box-shadow: 0px 0px 1px 0px #959595;
+}
+
+.image-display-modal {
+    width:1000px;
+}
+/*.feed_shared_link
+{
+    padding: 0px;
+    height: 128px;
+    margin-top: 32px;
+    border: 1px solid #959595;
+    box-shadow:0px 1px 1px 0px #959595;
+}
+.feed_shared_link_textbox
+{
+    padding: 16px;
+    color: #959595;
+    margin: 20px;
+}
+.feed_shared_link_textbox a:link
+{
+     color: #0044cc;
+     font-weight: bold;
+     font-size: 16px;
+}
+
+
+*/
+.feed_shared_status
+{
+    //margin-top: 28px;
+    //margin-left: 4px;
+    //border-left: 2px solid #959595;
+    //padding-left: 4px;
+    //color: #959595;
+    color:gray;
+}
+.feed-description{
+    padding-top: 10px;
+}
+
+.left-panel{
+    border: 0px;
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0px;
+}
+.left-panel-heading{
+    border-bottom: 10;
+    padding: 10px 0px;
+}
+.left-panel-body{
+    padding:0px;
+}
+.left-panel-list{
+    margin-bottom:0px;
+}
+.left-panel-item{
+    padding: 8px 0px;
+}
+.list-icon{
+    margin-right:10px;
+}
+.right-panel-container{
+    border:2px solid rgba(0, 0, 0, 0.05);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.right-panel{
+    border: 0px;
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0px;
+    padding:0;
+}
+.right-panel-heading{
+    border-bottom: 10;
+    padding: 10px 0px;
+}
+.right-panel-body{
+    padding:0px;
+}
+.right-panel-list{
+    margin-bottom:0px;
+    max-height:270px;
+    overflow:auto;
+    overflow-x: hidden;
+}
+.right-panel-item{
+    padding: 8px 0px;
+    width: 220px;
+}
+.right-panel-listitem-suggested-people
+{
+    padding: 0px 0px 8px;
+}
+.see_all
+{
+    text-align: right;
+}
+.foot {
+    background: #f4f4f4;
+    padding-top: 4px;
+}
+.footer {
+    position: relative;
+    overflow: hidden;
+    width: 960px;
+    height: 40px;
+    margin: auto;
+    color: #959595;
+}
+.footer-menu {
+    position: absolute;
+    left: 0px;
+    top: 8px;
+    color: #959595;
+}
+.footer-menu li {
+    float: left;
+    border-left: #959595 1px solid;
+    display: inline;
+    margin-right: 12px;
+    padding-left: 8px;
+    line-height: 12PX;
+    color: #959595;
+}
+.footer-menu li {
+    border-left: #959595 0px solid;
+}
+.footer a {
+    color: #959595;
+}
+.copyright {
+    position: absolute;
+    right: 0px;
+    top: 6px;
+    text-align: right;
+    color: #959595;
+    font-size: 12px;
+    line-height: 150%;
+}
+
+.error-message{
+    text-align: center;
+    background-color: white;
+    border: 1px solid #990000;
+    padding: 5px;
+    clear:both;
+}
+.right-menu{
+    padding-left:0px; 
+    padding-right:0px;
+}
+.right-menu a{
+    text-decoration: none;
+    color: black;
+}
+.header-menu-row{
+    padding-top: 50px;
+}
+.status-box-container{
+    padding-top: 10px;
+    display: block;
+}
+.status-box-outer-container{
+    padding: 5px; 
+    border: 1px solid #CCCCCC;
+}
+
+.status-box{
+    background-color: rgb(239, 228, 176);
+    border: 0px;
+    resize: none;
+}
+.status-box:focus{
+    box-shadow: 0px 0px 0px;
+    border: 0px;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+.search-box-followers{
+    border: 1px solid #CCCCCC;
+}
+
+.search-box-followers .input-group-addon {
+    border: 0px;
+    background-color: #FFFFFF;
+    border-radius: 0px;
+}
+.search-box-followers input, .search-box-followers input:focus {
+    border: 0px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.search-box{
+    border: 0px;
+}
+.search-box .input-group-addon {
+    border: 0px;
+    background-color: #FFFFFF;
+    border-radius: 0px;
+}
+.search-box input, .search-box input:focus {
+    border: 0px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    padding-left: 0px;
+}
+.tt-suggestion{
+    padding: 5px;
+}
+.twitter-typeahead > .dropdown-menu{
+    width: 100%;
+}
+
+.anchor-undecorated{
+    text-decoration: none;
+    pointer-events: none;
+}
+.google_map_canvas {
+  width: 550px;
+  height: 450px;
+}
+.status-arrow{
+    background:url('../../images/MWZW-8fqgdv.png') 0px -468px;
+    height: 6px;
+    width: 9px;
+    display: block;
+    z-index: 10;
+    position: relative;
+    top:1px;
+    left:20px;
+}
+
+.feed .profile-name, .feed .profile-name:hover{
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(0, 63, 171);
+}
+.shared-text
+{
+    font-size: 15px;
+}
+.feed a{
+    color: rgb(99, 63, 171);
+}
+
+.friends-satus-dropdown{
+    margin-top: 1px;
+    padding-left: 7px; 
+    padding-bottom: 2px;
+    background-color: rgb(245, 245, 245); 
+    border: 1px solid rgb(127, 127, 127); 
+}
+.friends-satus-dropdown .caret{
+    margin-left: -2px;
+}
+.friends-satus-dropdown a{
+    color:black;
+}
+
+.friends-satus-dropdown-profile{
+    padding-left:0px;
+}
+
+.profile-photo{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100x;
+    font-size: 30px;
+    color: white;
+}
+.comment-profile-photo{
+    min-height: 40px;
+    min-width: 40px;
+    background-color: blue;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    font-size: 20px;
+    color: white;
+}
+
+/*****************************************************/
+/*       Modified by Noor    */
+/*****************************************************/
+
+input#r_captcha_input{
+width: 88%;
+float: left;
+}
+#register_btn.button-custom{
+	margin: 5px 0;
+}
+.spacer {
+    margin-bottom: 60px;
+}
+
+.panel-default > .panel-heading {
+    font-weight: bold;
+    font-size: 14px;
+}
+.profile-background{
+	background-color:#93C8FA; 
+	height:50px;
+	width:50px;
+	line-height: 50px;	
+	text-align: center; 
+	vertical-align: middle;
+	font-size: 30px;
+    color: white;
+}
+.profile-background-comment{
+	background-color:#93C8FA; 
+	height:32px;
+	//width:32px;
+	line-height: 32px;	
+	text-align: center; 
+	vertical-align: middle;
+	font-size: 30px;
+    color: white;
+}
+
+/****************************************************/
+/*    Modified by Nazmul*/
+/****************************************************/
+.disable_padding_left {
+    padding-left: 0;
+}
+.disable_padding_right {
+    padding-right: 0;
+}
+.disable_padding_all {
+    padding-left: 0;
+    padding-right: 0;
+}
+.new_line {
+    margin-bottom: 10px;
+}
+
+.business-label label{
+    font-weight:  normal;
+    margin-bottom: 0px;
+}
+
+.member-name{
+    font-size:  15px;
+}
+
+.modal_liked_user_list_image{
+    height: 48px;
+    width: 48px;
+}
+
+.registration_steps_header_text
+{
+    color:blue;
+}
+
+input#chat_friends,
+input#chat_friends:hover{
+ border: 0;
+    box-shadow: 0 0 0;
+}
+div.status-box-menu{
+	border: 1px solid #cccccc;
+	padding: 1%;
+	width: 95%;
+	margin: auto;
+}
+div.status-box-menu div.div1{
+	float: left;padding-top: 0.8%;
+}
+div.status-box-menu div.div1 div#status_selected_friends{
+	float: left;padding: 0 0 2% 0;
+}
+div.status-box-menu div.div2{
+	float: left;
+        width:250px;
+}
+div.status-box-menu div.div3{
+	float:right;
+	width:100%;	
+	clear:both;
+	margin: 1% -1%;
+}
+
+
+/****************************************************/
+/*    Modified by Tanveer*/
+/****************************************************/
+
+.feed_share_box_img
+{
+    height: 64px;
+    border: 1px solid #cccccc; 
+    padding: 4px;
+}
+.feed_share_box_style
+{
+    border: 1px solid #cccccc; 
+    margin-top: 16px;
+    padding: 12px;
+}

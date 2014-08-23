@@ -1,0 +1,31 @@
+body
+{
+    //padding-bottom: 100px;
+}
+
+/*****************************************************/
+/*       Modified by Noor    */
+/*****************************************************/
+
+div.home-left-tit.home-left-tit12{
+    border-bottom: #cecece solid 1px;
+    margin-bottom: 16px;
+    padding-bottom: 5px;
+    font-size: 18px;
+}
+div.capcha_anchor a{
+    background: url('../img/refresh.png');
+    background-size: 18px;
+    background-repeat: no-repeat;
+    color: transparent;
+    height: 30px;
+    background-position: -1px 7px;
+    position: relative;
+    display: block;
+    float: right;
+}
+
+h3.questions_header{
+    width: 90%;
+    padding-left: 15px;
+}

@@ -1,0 +1,7 @@
+/* 
+    Created on : Apr 24, 2014, 5:57:10 PM
+    Author     : nazmul
+*/
+.borderless td {
+    border: none;
+}

@@ -1,0 +1,25 @@
+.security-captcha{
+    overflow: hidden;
+    display: block;
+    line-height:0;
+    height: 0;   
+}
+.main{
+    margin-top: 50px;
+}
+.profile-picture-box{
+    width:120px; 
+    height: 120px; 
+    background-image: url('../../images/your.jpg');
+}
+.profile-picture{
+    height:120px;
+    width: 120px;
+}
+.home-left-tit{
+	font-size: 27px;
+	color: #89c1f4;
+	border-bottom: #cecece solid 1px;
+	padding-bottom: 3px;
+	margin-bottom: 13px;
+}

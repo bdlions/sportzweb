@@ -1,0 +1,108 @@
+ul.simpleTabsNavigation { 
+    margin:0 10px; 
+    padding:0; 
+    text-align:left; 
+    height:56px;
+}
+ul.simpleTabsNavigation li { 
+    list-style:none; 
+    display:inline;
+    margin:0; 
+    padding:0; 
+}
+ul.simpleTabsNavigation li a {
+    border:1px solid #E0E0E0; 
+    padding:3px 60px; 
+    background:#F0F0F0; 
+    font-size:14px; 
+    text-decoration:none; 
+    position:relative;
+    background:url("../images/bg_menu_blank.png") no-repeat scroll 1px 6px rgba(0, 0, 0, 0);
+    height: 44px;
+    padding: 17px 40px;
+    width: 200px;
+    background-repeat:no-repeat;
+    height: 44px;
+    padding: 17px 63px;
+    width: 191px;
+    background-repeat: no-repeat;
+    border: 0;color: #d5d5d5;
+    font-weight: bold;
+    font-size: 23px;
+	background: transparent;
+}
+ul.simpleTabsNavigation li a:hover 
+{ 
+    background-color:transparent;
+}
+ul.simpleTabsNavigation li a.current { 
+    background:url("../images/bg_menu.png") no-repeat scroll 1px 6px rgba(0, 0, 0, 0);
+    border: 0 none;
+    color: #454fce;
+	height: 44px;
+	padding: 17px 77px;
+	width: 200px;
+	background-repeat: no-repeat;
+	background: none;
+}
+div.simpleTabsContent { 
+    border:0px solid #E0E0E0; 
+    padding:5px 15px 15px; 
+    margin-top:3px; 
+    display:none; 
+}
+div.simpleTabsContent.currentTab { 
+    display:block; 
+}
+ul.simpleTabsNavigation li a span{
+    /*background: none repeat scroll 0 0 #008000;*/
+    clear: both;
+    left: 0;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+}
+ul.simpleTabsNavigation li a.current span{
+    top: 50px;
+    font-size: 16px;
+}
+ul.simpleTabsNavigation{
+	
+}
+div.steps_div{
+	border-bottom: 3px solid #7cb8ec;
+	width: 57%;
+	margin: 4% -2%;
+	position: absolute;
+	color: transparent;	
+}
+
+div.partial_blue_border{
+	border-bottom: 5px solid #E9E9E9;
+	color: transparent;
+        padding-top: 8px;
+}
+
+div.steps_header{
+	width: 0%;
+        padding-right: 0px;
+}
+
+div.steps_number{
+	margin-left: -10px;
+}
+@media screen and (max-width: 750px),
+@media screen and (max-width: 750px),
+@media screen and (max-device-width: 750px),
+@media (min-width: 400px) and (max-width: 750px), 
+@media (max-width: 750px),
+@media (max-width: 750px),
+@media screen and (max-device-width: 750px)
+{
+	div.row ul.simpleTabsNavigation{
+			
+	}
+}

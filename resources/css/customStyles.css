@@ -1,0 +1,88 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 22, 2014, 12:19:47 PM
+    Author     : Tanveer_Sampan-IT
+*/
+
+.cus_text_heading_theme
+{
+    color: #54B948;
+    font-size: 32px;
+}
+.cus_text_subheading_theme
+{
+    color: #54B948;
+    font-size: 24px;
+}
+.cus_command_buttons
+{
+    padding: 16px;
+}
+.cus_command_buttons a
+{
+    padding-right: 8px;
+}
+
+.cus_comment_image
+{
+    padding-right: 0px;
+}
+.cus_comment_reply_field
+{
+    background-color: #FFFFCC;
+}
+.cus_comment_field
+{
+    padding-left: 0px;
+    background-color: #E9ECFF;
+}
+.cus_comment_field_pos
+{
+    padding-left: 0px;
+    background-color: #CCFFCC;
+}
+.cus_comment_field_neg
+{
+    padding-left: 0px;
+    background-color: #FFCCCC;
+}
+.cus_comment_field_commenter
+{
+    font-size: 16px;
+    font-weight: bold;
+    color: #0044cc;
+}
+.cus_comment_box_header
+{
+    border-bottom: 1px;
+    background: linear-gradient(white, #F2F2F2); 
+    margin-bottom: 10px;
+}
+.cus_comment_box
+{
+    border: 1px solid #cccccc;
+}
+.cus_service_detail_box
+{
+    border: 1px solid #cccccc;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+.cus_service_directory_heading
+{
+    
+}
+.cus_service_detail_heading
+{
+    color: #54B948;
+    font-size: 16px;
+}
+.blog_app_cnt_post_btn
+{
+    width: 64px;
+    font-size: 14px;
+}
