@@ -109,5 +109,18 @@ class Followers extends Role_Controller{
         $this->template->load("templates/business_tmpl", "followers/invite", $this->data);
     }
     
+    public function get_followers_infor(){
+        $response = array();
+        $follwers_id = $_POST['follwers_id'];
+        
+        $follower_info_array = $this->follower->follow_user($follwers_id)->result_array();
+        echo '<pre/>';print_r();exit('here');
+        if(!empty($follower_info_array))
+        {
+            $response = $follower_info_array[0];
+        }
+        echo json_encode($response);
+    }
+    
 }
 ?>

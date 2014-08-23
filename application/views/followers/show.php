@@ -23,27 +23,35 @@
 <div class="col-md-2 column">
     <?php $this->load->view("templates/sections/member_profile_left_pane"); ?>
 </div>
-<div class="col-md-8 column">
+<div class="col-md-9 column">
     <div class="row" style="padding-bottom: 30px;">
-        <div class="col-md-7">
+        <div class="col-md-5">
             <div class=" input-group search-box-followers">
                 <input id="search_followers_box" class="form-control typeahead" type="text" placeholder="Search for followers" />
                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
             </div>
         </div>
-        <div class="col-md-5">
-            <div class="row pull-right">
-                <div class="col-md-9">
+        
+        <div class="col-md-7">
+            
+                <div class="col-md-3">
                     <?php if($follow_permission->value == FOLLOWER_ACCEPTANCE_TYPE_MANUAL){?>
-                    <button class="btn button-custom pull-right" id="button_pending_request">Pending Requests</button>
+                        <button class="btn button-custom" id="button_pending_request">Pending Requests</button>
                     <?php }?>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <?php echo form_open("followers/invite");?>
-                    <button class="btn button-custom pull-right">Invite</button>
+                    <button class="btn button-custom">Invite</button>
+                    
+                </div>
+                <div class="col-md-3">
+                    <button class="btn button-custom">My Followers</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn button-custom">Blocked Members</button>
                     <?php echo form_close();?>
                 </div>
-            </div>
+            
         </div>
     </div>
     <?php

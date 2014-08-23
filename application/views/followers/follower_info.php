@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-5">
     <div class="row">
         <div class="col-md-4">
             <a href='<?php echo base_url() . "member_profile/show/{$follower->id}" ?>' class="profile-name"> 
@@ -35,10 +35,34 @@
                         <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>register/business_profile">Block</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>register/business_profile">Report</a>
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_report_modal('<?php echo $follower->id; ?>')">Report</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+<div class="col-md-1">
+    
+</div>
+<?php $this->load->view("followers/modal_report"); ?>
+<script type="text/javascript">
+    function open_report_modal(followers_id){
+        $('#follwers_id').val(followers_id);
+        $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: '<?php echo base_url(); ?>' + "followers/get_followers_infor",
+                    data: {
+                        follwers_id: $('#follwers_id').val(),
+                    },
+                    success: function(data) {
+                        //window.location.reload();
+                    }
+                });
+        $('#modal_report_content').modal('show');
+    }
+//    $(function(){
+//        
+//    });
+</script>
