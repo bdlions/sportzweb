@@ -42,9 +42,9 @@
                             <?php $i=1;foreach($pending_list as $blog):?>
                             <tr>
                                 <td><?php echo $blog['username'];?></td>
-                                <td><a href="<?php echo base_url().'admin/blogapp/blog_detail/'.$blog['id'] ?>"><?php echo html_entity_decode(html_entity_decode($blog['title']));?></a></td>
-                                <td><a href="<?php echo base_url().'admin/blogapp/blog_detail/'.$blog['id'] ?>">View</a></td>
-                                <td><a href="<?php echo base_url().'admin/blogapp/edit_blog/'.$blog['id'] ?>">Edit</a></td>
+                                <td><a href="<?php echo base_url().'admin/applications_blogs/blog_detail/'.$blog['id'] ?>"><?php echo html_entity_decode(html_entity_decode($blog['title']));?></a></td>
+                                <td><a href="<?php echo base_url().'admin/applications_blogs/blog_detail/'.$blog['id'] ?>">View</a></td>
+                                <td><a href="<?php echo base_url().'admin/applications_blogs/edit_blog/'.$blog['id'] ?>">Edit</a></td>
                                 <td><?php echo $blog['blog_status_title']?></td>
                                 <td onclick="delete_pending(<?php echo $blog['id']?>)" >Confirm</td>
                             </tr>
@@ -53,7 +53,7 @@
                     </table>
                 </div>
                 <div class="btn-group" style="padding-left: 25px;">
-                    <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/blogapp')" class="form-control btn button-custom">
+                    <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
                 </div>
             </div>            
         </div>        

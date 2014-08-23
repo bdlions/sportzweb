@@ -44,7 +44,7 @@
                 <a href="<?php echo base_url();?>resources/import/applications/service_directory/services_sample.xlsx"><button class="btn btn-info pull-right">Download sample</button></a>
                 <a href="<?php echo base_url();?>resources/import/applications/service_directory/services_country_code.xlsx"><button class="btn btn-info pull-right" style="margin-right: 4px">Download Country Code</button></a>
                 <div id="progress">
-                    <?php echo form_open_multipart('admin/servicedirectory/page_import_service', array('name'=>'file_upload'));?>
+                    <?php echo form_open_multipart('admin/applications_servicedirectory/page_import_service', array('name'=>'file_upload'));?>
                         <div class="form-group">
                             <label for="fileupload">Select the data file for service directory:</label>
                             <input id="fileupload" type="file" name="userfile">

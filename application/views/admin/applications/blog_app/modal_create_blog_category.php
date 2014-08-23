@@ -9,7 +9,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/blogapp/create_blog_category",
+                url: '<?php echo base_url(); ?>' + "admin/applications_blogs/create_blog_category",
                 data: {
                     blog_category_name: $("#input_blog_category_name").val()
                 },

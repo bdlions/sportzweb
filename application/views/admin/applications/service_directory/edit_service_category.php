@@ -2,7 +2,7 @@
     <div class="panel-heading">Edit Service Category</div>
     <div class="panel-body">
         <div class="row form-horizontal form-background top-bottom-padding">  
-            <form id="formsubmit" method="post" action="<?php echo base_url(); ?>admin/servicedirectory/edit_service_category/<?php echo $service_category_id; ?>" onsubmit="return false;">
+            <form id="formsubmit" method="post" action="<?php echo base_url(); ?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>" onsubmit="return false;">
                 <div class="row">
                     <div class ="col-md-10 margin-top-bottom">
                         <div class ="row">
@@ -71,17 +71,17 @@ $(function () {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url();?>admin/servicedirectory/edit_service_category/<?php echo $service_category_id; ?>',
+            url: '<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/servicedirectory/edit_service_category/<?php echo $service_category_id; ?>';
+                window.location = '<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>';
             }
         });
     });
     
     // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/servicedirectory/edit_service_category/<?php echo $service_category_id; ?>",
+    var url = "<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>",
                     uploadButton = $('<input type="submit" value="Update"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
                                     if ($("#title").val().length == 0)
@@ -143,7 +143,7 @@ $(function () {
         }).on('fileuploaddone', function(e, data) {
             console.log(data);
             alert(data.result.message);
-            window.location = '<?php echo base_url();?>admin/servicedirectory/edit_service_category/<?php echo $service_category_id; ?>';
+            window.location = '<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>';
             //console.log(data);
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();

@@ -96,41 +96,40 @@
                     <div class="left-nav">
                         <ul id="left-nav">
                             <li id="overview">
-                                <a href="<?php echo base_url()?>admin/overview">Overview</a>
+                                <a href="<?php echo base_url()?>admin/overview_show">Overview</a>
                             </li>
                             <li id="users">
-                                <a href="<?php echo base_url()?>admin/users/overview">Users</a>
+                                <a href="#">Users</a>
                                 <ul>
-                                    <li id="users_overview"><a href="<?php echo base_url()?>admin/users/overview">Overview</a></li>
-                                    <li id="users_user_manage"><a href="<?php echo base_url()?>admin/users/user_manage">User Manage</a></li>                                    
+                                    <li id="users_overview"><a href="<?php echo base_url()?>admin/users_overview">Overview</a></li>
+                                    <li id="users_user_manage"><a href="<?php echo base_url()?>admin/users_usermanage">User Manage</a></li>                                    
                                 </ul>
                             </li>
                             <li id="applications">
                                 <a href="<?php echo base_url()?>admin/application/application_manage">Applications</a>
                                 <ul>
-                                    <li id="users_user_manage"><a href="<?php echo base_url()?>admin/application/application_manage">Application Manage</a></li>                                    
+                                    <li id="applications_xstreambanter"><a href="<?php echo base_url()?>admin/applications_xstreambanter">Xstream Banter</a></li>                                    
+                                    <li id="applications_healthyrecipes"><a href="<?php echo base_url()?>admin/applications_healthyrecipes">Healthy Recipes</a></li>
+                                    <li id="applications_servicedirectory"><a href="<?php echo base_url()?>admin/applications_servicedirectory">Service Directory</a></li>
+                                    <li id="applications_news"><a href="<?php echo base_url()?>admin/applications_news">News</a></li>
+                                    <li id="applications_blogs"><a href="<?php echo base_url()?>admin/applications_blogs">Blogs</a></li>
+                                    <li id="applications_bmicalculator"><a href="<?php echo base_url()?>admin/applications_bmicalculator">BMI Calculator</a></li>
+                                    <li id="applications_photography"><a href="<?php echo base_url()?>admin/applications_photography">Photography</a></li>
                                 </ul>
                             </li>
                             <li id="business_profiles">
-                                <a href="<?php echo base_url()?>admin/dashboard/business_profiles">Business Profiles</a>
+                                <a href="<?php echo base_url()?>admin/businessprofiles_show">Business Profiles</a>
                             </li>
                             <li id="visitors">
-                                <a href="<?php echo base_url()?>admin/dashboard/visitors">Visitors</a>
+                                <a href="#">Visitors</a>
                                 <ul>
-                                    <li id="visitors_page"><a href="<?php echo base_url()?>admin/dashboard/visitors_page">Page</a></li>
-                                    <li id="visitors_application"><a href="<?php echo base_url()?>admin/dashboard/visitors_application">Application</a></li>                                    
-                                    <li id="visitors_business_profile"><a href="<?php echo base_url()?>admin/dashboard/visitors_business_profile">Business Profile</a></li>                                    
-                                </ul>
-                            </li>
-                            <li id="configure">
-                                <a href="<?php echo base_url()?>admin/configure_login_page">Configure</a>
-                                <ul>
-                                    <li id="configure_login_page"><a href="<?php echo base_url()?>admin/configure_login_page">Login Page</a></li>
-                                    <li id="configure_logout_page"><a href="<?php echo base_url()?>admin/configure_logout_page">Logout Page</a></li>
+                                    <li id="visitors_page"><a href="<?php echo base_url()?>admin/visitors_page">Page</a></li>
+                                    <li id="visitors_application"><a href="<?php echo base_url()?>admin/visitors_application">Application</a></li>
+                                    <li id="visitors_business_profile"><a href="<?php echo base_url()?>admin/visitors_businessprofile">Business Profile</a></li>
                                 </ul>
                             </li>
                             <li id="log">
-                                <a href="<?php echo base_url()?>admin/dashboard/log">Log</a>
+                                <a href="<?php echo base_url()?>admin/log_view">Log</a>
                             </li>
                             <li id="settings">
                                 <a href="<?php echo base_url()?>admin/auth/logout">Logout</a>                                

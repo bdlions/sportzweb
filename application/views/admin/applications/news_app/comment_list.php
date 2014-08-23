@@ -4,7 +4,7 @@
             $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/newsapp/remove_comment",
+            url: '<?php echo base_url(); ?>' + "admin/applications_news/remove_comment",
             data: {
                 comment_id: id
             },
@@ -12,7 +12,7 @@
                 alert(data['message']);
                     if (data['status'] === 1)
                     {
-                       window.location = '<?php echo base_url();?>admin/newsapp/all_comments/<?php echo $news_id;?>';
+                       window.location = '<?php echo base_url();?>admin/applications_news/all_comments/<?php echo $news_id;?>';
                     }
             }
         });
@@ -39,7 +39,7 @@
                             <?php if(count($comment_list)>0) :?>
                                 <?php foreach($comment_list as $comment):?>
                                     <tr>
-                                        <td><a href="<?php echo base_url().'admin/newsapp/comment_details/'.$comment['id']?>"><?php echo $counter++;?></a></td>
+                                        <td><a href="<?php echo base_url().'admin/applications_news/comment_details/'.$comment['id']?>"><?php echo $counter++;?></a></td>
                                         <td><?php echo $comment['comment'];?></td>
                                         <td><?php echo $comment['username'];?></td>
                                         <td><a href="javascript:void(o)" onclick="delete_news_comment('<?php echo $comment['id'];?>')" id="">Delete</a></td>

@@ -41,7 +41,7 @@
                                 </td>
                             </tr> 
                             <tr>
-                                <td><div id="topic_desc_2">1</div></td>
+                                <td><div id="topic_desc_2">2</div></td>
                                 <td><div id="topic_desc_2">Picture upload</div></td>
                                 <td>
                                     <button id="button_edit_topic_list" onclick="openModal('button_edit_topic_list_1','<?php echo 1;?>')" value="" class="form-control btn pull-right">

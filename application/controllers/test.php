@@ -7,6 +7,7 @@ class Test extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
+        $this->load->library('org/admin/footer/admin_about_us');
         $this->load->library('org/application/photography_library');
         $this->load->library('org/admin/application/admin_photography');
         $this->load->library('org/admin/application/admin_xstream_banter');
@@ -162,7 +163,7 @@ class Test extends CI_Controller {
     
     function test1()
     {
-        $this->photography_library->test();
+        $this->admin_about_us->test();
     
     }
     function test_details()

@@ -45,7 +45,7 @@
                         </a>
                     </h4>-->
                     <div class="cookbook-recommend">
-                        <a href="<?php echo base_url() . 'admin/applications/healthy_recipes/recipes/' . $recommend_item['id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recommend_item['id']; ?>">
                         <?php if (!empty($recommend_item['main_picture'])): ?>
                             <img style="padding-top:15px;padding-bottom:10px;width: 160px;height: 120px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recommend_item['main_picture']; ?>" class="img-responsive" alt="<?php echo $recommend_item['title']; ?>"/>
                             <?php echo $recommend_item['title']; ?>
@@ -63,7 +63,7 @@
             <?php if (!empty($alternative_recipes_item)): ?>
                 <?php foreach ($alternative_recipes_item as $alternative_item): ?>
                     <div class="cookbook-recommend">
-                        <a href="<?php echo base_url() . 'admin/applications/healthy_recipes/recipes/' . $alternative_item['id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $alternative_item['id']; ?>">
                         <?php if (!empty($alternative_item['main_picture'])): ?>
                             <img style="padding-top:15px;padding-bottom:10px;width: 160px;height: 120px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $alternative_item['main_picture']; ?>" class="img-responsive" alt="<?php echo $recommend_item['title']; ?>"/>
                             <?php echo $alternative_item['title']; ?>

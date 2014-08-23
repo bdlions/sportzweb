@@ -95,7 +95,7 @@
                                     <br>
                                     <span class="blog_post_home_cards_heading">
                                         <h2 id="title_<?php echo $i; ?>">
-                                            <a href="<?php echo base_url(); ?>admin/blogapp/blog_detail/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$i]]['blog_id']; ?>">
+                                            <a href="<?php echo base_url(); ?>admin/applications_blogs/blog_detail/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$i]]['blog_id']; ?>">
                                                 <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['title'])); ?>
                                             </a>
                                         </h2>
@@ -120,7 +120,7 @@
                                     <br>
                                     <span class="blog_post_home_cards_heading">
                                         <h2 id="title_<?php echo $i; ?>">
-                                            <a href="<?php echo base_url(); ?>admin/blogapp/blog_detail/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$i]]['blog_id']; ?>">
+                                            <a href="<?php echo base_url(); ?>admin/applications_blogs/blog_detail/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$i]]['blog_id']; ?>">
                                                 <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['title'])); ?>
                                             </a>
                                         </h2>
@@ -147,7 +147,7 @@
                                 <br>
                                 <span class="blog_post_home_cards_heading">
                                     <h2 id="title_<?php echo $i; ?>">
-                                        <a href="<?php echo base_url(); ?>admin/blogapp/blog_detail/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$i]]['blog_id']; ?>">
+                                        <a href="<?php echo base_url(); ?>admin/applications_blogs/blog_detail/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$i]]['blog_id']; ?>">
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['title'])); ?>
                                         </a>
                                     </h2>
@@ -172,7 +172,7 @@
                                 <br>
                                 <span class="blog_post_home_cards_heading">
                                     <h2 id="title_<?php echo $i; ?>">
-                                        <a href="<?php echo base_url(); ?>admin/blogapp/blog_detail/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$i]]['blog_id']; ?>">
+                                        <a href="<?php echo base_url(); ?>admin/applications_blogs/blog_detail/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$i]]['blog_id']; ?>">
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['title'])); ?>
                                         </a>
                                     </h2>
@@ -198,7 +198,7 @@
         </div>
 
         <div class="btn-group" style="padding-left: 10px;">
-            <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url(); ?>admin/blogapp')" class="form-control btn button-custom">
+            <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
         </div>
         <div class="row col-md-12" style="margin-top: 30px;">
 
@@ -333,7 +333,7 @@
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/blogapp/save_selected_blog",
+            url: '<?php echo base_url(); ?>' + "admin/applications_blogs/save_selected_blog",
             data: {
                 region_id_blog_id_map:region_id_blog_id_map,
                 selected_date: selected_date_for_item,

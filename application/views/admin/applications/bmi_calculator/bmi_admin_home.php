@@ -1,10 +1,10 @@
 <div class="panel panel-default">
     <div class="panel-heading">All Questions</div>
     <div class="panel-body">
-        
+        <?php if($allow_access): ?>
         <div class="row form-group col-md-12">
             <div class="col-sm-3">
-                <a href="<?php echo base_url();?>admin/bmicalculator/add_question">
+                <a href="<?php echo base_url();?>admin/applications_bmicalculator/add_question">
                     <button class="btn button-custom pull-right" value="" id="">Create Question</button>  
                 </a>
             </div>
@@ -16,14 +16,14 @@
             <div class="col-sm-3">
                 <!--<button class="btn button-custom" value="" id="button_create_blog_category">another button</button>-->  
             </div>
-            <?php if($allow_access): ?>
+            
                 <div class="col-sm-3">
-                    <a href="<?php echo base_url();?>admin/bmicalculator/manage_homepage">
+                    <a href="<?php echo base_url();?>admin/applications_bmicalculator/manage_homepage">
                         <button class="btn button-custom" value="" id="">Manage Home Page</button>  
                     </a>
-                </div>
-            <?php endif; ?>
+                </div>            
         </div>
+        <?php endif; ?>
         
         <table class="table table-bordered table-responsive">
             <thead>
@@ -31,8 +31,12 @@
                     <th>Serial</th>
                     <th>Question</th>
                     <th>Answer</th>
+                    <?php if($allow_access){ ?>
                     <th>Edit</th>
+                    <?php } ?>
+                    <?php if($allow_access){ ?>
                     <th>Delete</th>
+                    <?php } ?>
                 </tr>
             </thead>
             
@@ -42,14 +46,18 @@
                     <td><?php echo $i++;?></td>
                     <td><?php echo $question['question'];?></td>
                     <td><?php echo $question['answer'];?></td>
+                    <?php if($allow_access){ ?>
                     <td>
                         <?php if($allow_access): ?>
-                            <a href="<?php echo base_url();?>admin/bmicalculator/edit_question/<?php echo $question['id']?>">
+                            <a href="<?php echo base_url();?>admin/applications_bmicalculator/edit_question/<?php echo $question['id']?>">
                                 Edit
                             </a>
                         <?php endif; ?>
                     </td>
-                    <?php if($allow_access): ?><td onclick="delete_question(<?php echo $question['id']?>)">Delete</td><?php endif;?>
+                    <?php } ?>
+                    <?php if($allow_access){ ?>
+                    <td onclick="delete_question(<?php echo $question['id']?>)">Delete</td>
+                    <?php } ?>
                 </tr>
                 <?php endforeach;?>
             </tbody>
@@ -86,14 +94,14 @@
         $.ajax({
             dataType : 'json',
             type : "POST",
-            url : '<?php echo base_url()?>admin/bmicalculator/delete_question',
+            url : '<?php echo base_url()?>admin/applications_bmicalculator/delete_question',
             data: {
               question_id : id   
             },
             success: function(data){
                 if(data.status === 1) {
                     alert(data.message);
-                    window.location = '<?php echo base_url();?>admin/bmicalculator';
+                    window.location = '<?php echo base_url();?>admin/applications_bmicalculator';
                     location.reload(true);
                 }
                 else if(data.status == 0)
@@ -104,14 +112,14 @@
                         $.ajax({
                             dataType: 'json',
                             type: "POST",
-                            url: '<?php echo base_url();?>admin/bmicalculator/confirmation_for_delete',
+                            url: '<?php echo base_url();?>admin/applications_bmicalculator/confirmation_for_delete',
                             data: {
                                 question_id: id
                             },
                             success: function(data){
                                 alert(data.message);
                                 
-                                window.location = '<?php echo base_url();?>admin/bmicalculator';
+                                window.location = '<?php echo base_url();?>admin/applications_bmicalculator';
                                 location.reload(true);
                             }
                         });

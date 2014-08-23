@@ -43,7 +43,7 @@
             <div class="col-md-8" style="border: 2px dotted #999; padding: 32px;">
                 <a href="<?php echo base_url();?>resources/import/applications/xstream_banter/xstream_sample.xlsx"><button class="btn btn-info pull-right">Download sample</button></a>
                 <div id="progress">
-                    <?php echo form_open_multipart('admin/application/page_import_xstream', array('name'=>'file_upload'));?>
+                    <?php echo form_open_multipart('admin/applications_xstreambanter/page_import_xstream', array('name'=>'file_upload'));?>
                         <div class="form-group">
                             <label for="fileupload">Select the data file for Xstream Banter:</label>
                             <input id="fileupload" type="file" name="userfile">

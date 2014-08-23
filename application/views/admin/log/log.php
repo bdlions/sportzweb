@@ -28,32 +28,32 @@
                             <tr>
                                 <td>Today</td>
                                 <td><?php echo $today_count;?></td>
-                                <td><a href="<?php echo base_url("./admin/users/user_manage/1"); ?>">Show</a></td>
+                                <td><a href="<?php echo base_url("./admin/users_usermanage/user_manage/1"); ?>">Show</a></td>
                             </tr>
                             <tr>
                                 <td>Yesterday</td>
                                 <td><?php echo $yesterday;?></td>
-                                <td><a href="<?php echo base_url("./admin/users/user_manage/2"); ?>">Show</a></td>
+                                <td><a href="<?php echo base_url("./admin/users_usermanage/user_manage/2"); ?>">Show</a></td>
                             </tr>
                             <tr>
                                 <td>This week</td>
                                 <td><?php echo $this_week;?></td>
-                                <td><a href="<?php echo base_url("./admin/users/user_manage/3"); ?>">Show</a></td>
+                                <td><a href="<?php echo base_url("./admin/users_usermanage/user_manage/3"); ?>">Show</a></td>
                             </tr>
                             <tr>
                                 <td>Last week</td>
                                 <td><?php echo $last_week;?></td>
-                                <td><a href="<?php echo base_url("./admin/users/user_manage/4"); ?>">Show</a></td>
+                                <td><a href="<?php echo base_url("./admin/users_usermanage/user_manage/4"); ?>">Show</a></td>
                             </tr>
                             <tr>
                                 <td>This month</td>
                                 <td><?php echo $this_month;?></td>
-                                <td><a href="<?php echo base_url("./admin/users/user_manage/5"); ?>">Show</a></td>
+                                <td><a href="<?php echo base_url("./admin/users_usermanage/user_manage/5"); ?>">Show</a></td>
                             </tr>
                             <tr>
                                 <td>Last month</td>
                                 <td><?php echo $last_month;?></td>
-                                <td><a href="<?php echo base_url("./admin/users/user_manage/6"); ?>">Show</a></td>
+                                <td><a href="<?php echo base_url("./admin/users_usermanage/user_manage/6"); ?>">Show</a></td>
                             </tr>
                         </tbody>
                     </table>

@@ -53,6 +53,11 @@ class Access_level extends CI_Controller{
                 
                 $this->admin_access_level_library->store_access_level_info($user_id, $access_level_mapping);
                 //$this->session->set_flashdata('message', $this->ion_auth->messages());
+                $update_data = array(
+                    'account_status_id' => 1
+                );
+                //activating the created user
+                $this->ion_auth->update($user_id, $update_data);
                 redirect('admin/access_level/show_users','refresh');
             } 
             else {

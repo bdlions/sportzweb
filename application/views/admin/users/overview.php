@@ -9,7 +9,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/users/get_users_by_ages",
+                url: '<?php echo base_url(); ?>' + "admin/users_overview/get_users_by_ages",
                 data: {
                     start_age:$("#start_age").val(),
                     end_age: $("#end_age").val()

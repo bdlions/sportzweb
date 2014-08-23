@@ -102,7 +102,7 @@ window.onload = function()
     <div class="panel-heading">Create Recipes</div>
     <div class="panel-body">
     <div class="row form-horizontal form-background top-bottom-padding">  
-        <?php echo form_open_multipart("admin/healthyrecipes/create_recipe/".$recipe_category_id, array('id' => 'form_create_recipe', 'class' => 'form-horizontal','onsubmit'=>"return false;")); ?>
+        <?php echo form_open_multipart("admin/applications_healthyrecipes/create_recipe/".$recipe_category_id, array('id' => 'form_create_recipe', 'class' => 'form-horizontal','onsubmit'=>"return false;")); ?>
         <div class="row">
             <div class ="col-md-10 margin-top-bottom">
                 <div class ="row">
@@ -264,17 +264,17 @@ $(function () {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url();?>admin/healthyrecipes/create_recipe/<?php echo $recipe_category_id?>',
+            url: '<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe/<?php echo $recipe_category_id?>',
             data: $("#form_create_recipe").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/healthyrecipes/create_recipe/<?php echo $recipe_category_id?>';
+                window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe/<?php echo $recipe_category_id?>';
             }
         });
     });
     
     // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/healthyrecipes/create_recipe//<?php echo $recipe_category_id?>",
+    var url = "<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe//<?php echo $recipe_category_id?>",
                     uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
                                 $("#duration_editortext").val(jQuery('<div />').text(CKEDITOR.instances.duration.getData()).html());
@@ -358,7 +358,7 @@ $(function () {
         }).on('fileuploaddone', function(e, data) {
             //console.log(data);
             alert(data.result.message);
-            window.location = '<?php echo base_url();?>admin/healthyrecipes/create_recipe/<?php echo $recipe_category_id?>';
+            window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe/<?php echo $recipe_category_id?>';
             //console.log(data);
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();

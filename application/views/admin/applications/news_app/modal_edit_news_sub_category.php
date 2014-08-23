@@ -10,7 +10,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/newsapp/update_news_sub_category",
+                url: '<?php echo base_url(); ?>' + "admin/applications_news/update_news_sub_category",
                 data: {
                     news_sub_category_name: $("#input_news_sub_category_name_for_edit").val(),
                     news_category_id: $("#input_news_category_id").val(),
@@ -34,7 +34,7 @@ function openModal(val,id) {
     $.ajax({
         dataType: 'json',
         type: "POST",
-        url: '<?php echo base_url(); ?>' + "admin/newsapp/get_news_sub_category_data",
+        url: '<?php echo base_url(); ?>' + "admin/applications_news/get_news_sub_category_data",
         data: {
             news_sub_category_id: id
         },

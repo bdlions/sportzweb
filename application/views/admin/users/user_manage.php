@@ -16,7 +16,7 @@
                         <tbody id="tbody_business_profiles">                
                             <?php foreach($user_list as $user_info){?>
                                 <tr>
-                                    <td><a href="<?php echo base_url()."admin/users/display_user_info/".$user_info['user_id']; ?>"><?php echo $user_info['first_name'].' '.$user_info['last_name']?></a></td>
+                                    <td><a href="<?php echo base_url()."admin/users_usermanage/display_user_info/".$user_info['user_id']; ?>"><?php echo $user_info['first_name'].' '.$user_info['last_name']?></a></td>
                                     <td><?php echo $user_info['email']?></td>
                                     <td><?php echo $user_info['created_on']?></td>
                                     <td><?php echo $user_info['last_login']?></td>

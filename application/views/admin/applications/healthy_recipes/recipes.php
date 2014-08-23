@@ -28,19 +28,21 @@
     <div class="panel-heading">Recipes List</div>
     <div class="panel-body">
         <div class="row col-md-12">
+            <?php if($allow_access){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
                 <!--<div class ="col-sm-2">
                     <button id="button_create_recipe" value="" class="form-control btn button-custom pull-right">Create Recipe</button>  
                 </div>-->
                 <div class ="col-sm-2">
-                    <a href="<?php echo base_url()."admin/healthyrecipes/create_recipe/".$recipe_category_id ?>" >
+                    <a href="<?php echo base_url()."admin/applications_healthyrecipes/create_recipe/".$recipe_category_id ?>" >
                         <button id="" value="" class="btn button-custom" style="margin-left: -10px;">
                         Create Recipe 
                         </button>
                     </a> 
                 </div>
             </div>
+            <?php } ?>
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered">
@@ -50,18 +52,22 @@
                                 <th>Recipe Category</th>
                                 <th>Recipe Title</th>
                                 <th>Created On</th>
+                                <?php if($allow_access){ ?>
                                 <th>Action</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody id="tbody_recipe_list">
                             <?php $i=1; ?>
                             <?php foreach($recipes_list as $recipes){?>
                                 <tr>
-                                    <td><a href="<?php echo base_url()."admin/healthyrecipes/recipes/".$recipes['id']?>"><?php echo $recipes['id']; ?></a></td>
+                                    <td><a href="<?php echo base_url()."admin/applications_healthyrecipes/recipes/".$recipes['id']?>"><?php echo $recipes['id']; ?></a></td>
                                     <td><?php echo $recipes['categoty_description']?></td>
                                     <td><?php echo $recipes['title']?></td>
                                     <td><?php echo unix_to_human($recipes['created_on']);?></td>
-                                    <td><a href="<?php echo base_url()."admin/healthyrecipes/edit_recipe/".$recipes['id'] ?>">Edit</a></td>
+                                    <?php if($allow_access){ ?>
+                                    <td><a href="<?php echo base_url()."admin/applications_healthyrecipes/edit_recipe/".$recipes['id'] ?>">Edit</a></td>
+                                    <?php } ?>
                                 </tr>
                             <?php } ?> 
                         </tbody>
@@ -70,7 +76,7 @@
             </div>
         </div>
         <div class="btn-group" style="padding-left: 10px;">
-                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/healthyrecipes')" class="form-control btn button-custom">
+                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/applications_healthyrecipes')" class="form-control btn button-custom">
         </div>
     </div>
 </div>

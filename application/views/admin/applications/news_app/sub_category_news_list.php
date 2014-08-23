@@ -7,7 +7,7 @@
                     
                 </div>
                 <div class ="col-sm-3" style="padding-right: 10px;">
-                    <a href="<?php echo base_url()."admin/newsapp/create_sub_news/".$news['id'] ?>" >
+                    <a href="<?php echo base_url()."admin/applications_news/create_sub_news/".$news['id'] ?>" >
                         <button id="" value="" class="form-control btn button-custom pull-right">
                         Create News
                         </button>
@@ -34,7 +34,7 @@
                                             <td><?php echo $i++;?></td>
                                             <td><?php echo html_entity_decode(html_entity_decode($row[0]['headline']));?></td>
                                             <td><?php echo html_entity_decode(html_entity_decode($row[0]['description']));?></td>
-                                            <td><a href="<?php echo base_url().'admin/newsapp/news_details/'.$row[0]['id']?>">Edit</a></td>
+                                            <td><a href="<?php echo base_url().'admin/applications_news/news_details/'.$row[0]['id']?>">Edit</a></td>
                                         </tr>
                                     <?php endif;?>
                                 <?php endforeach;?>

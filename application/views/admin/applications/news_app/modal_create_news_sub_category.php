@@ -9,7 +9,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/newsapp/create_news_sub_category",
+                url: '<?php echo base_url(); ?>' + "admin/applications_news/create_news_sub_category",
                 data: {
                     news_sub_category_name: $("#input_news_sub_category_name").val(),
                     news_category_id: $("#input_news_category_id").val()

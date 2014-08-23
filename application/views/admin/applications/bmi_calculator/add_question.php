@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Add Question</div>
     <div class="panel-body">
-        <?php echo form_open("admin/bmicalculator/add_question/", array('class' => 'form-horizontal')); ?>
+        <?php echo form_open("admin/applications_bmicalculator/add_question/", array('class' => 'form-horizontal')); ?>
             <div class="row">
                 
                 <div class ="row">
@@ -33,7 +33,7 @@
                 
                     <div class ="col-md-12" style="margin-top: 10px">
                         <div class="col-md-2 col-md-push-1">
-                             <button type="button" style="width:120px; " value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url(); ?>admin/bmicalculator')" class="form-control btn button-custom">Back</button>
+                             <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
                         </div>
                         <div class="col-md-2 col-md-offset-7">
                              <?php echo form_input($submit_add_question+array('class'=>'form-control  btn button-custom')); ?>

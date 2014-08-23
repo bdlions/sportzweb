@@ -52,7 +52,7 @@
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/newsapp/get_selected_news_data",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_news/get_selected_news_data",
                     data: {
                         news_id: news_id
                     },

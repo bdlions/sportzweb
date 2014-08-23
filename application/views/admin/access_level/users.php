@@ -19,8 +19,11 @@
                 <?php if(!empty($user_list)): ?>
                     <?php foreach($user_list as $user):?>
                     <div class="row customrow col-md-12">
-                        <div class="col-md-8">
+                        <div class="col-md-5">
                             <?php echo $user['first_name'].' '.$user['last_name']?>
+                        </div>
+                        <div class="col-md-3">
+                            <?php echo $user['email']?>
                         </div>
                         <div class="col-md-1">
                             <a href="<?php echo base_url().'admin/access_level/edit_user/'.$user['user_id'] ?>">Edit</a>

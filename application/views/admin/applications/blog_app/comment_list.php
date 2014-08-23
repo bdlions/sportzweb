@@ -4,7 +4,7 @@
             $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/blogapp/remove_comment",
+            url: '<?php echo base_url(); ?>' + "admin/applications_blogs/remove_comment",
             data: {
                 comment_id: id
             },
@@ -12,7 +12,7 @@
                 alert(data['message']);
                     if (data['status'] === 1)
                     {
-                       window.location = '<?php echo base_url();?>admin/blogapp/comment_list/<?php echo $blog_id;?>';
+                       window.location = '<?php echo base_url();?>admin/applications_blogs/comment_list/<?php echo $blog_id;?>';
                     }
             }
         });
@@ -31,7 +31,9 @@
                                 <th>Comment</th>
                                 <th>User</th>
                                 <th>Counted Like</th>
+                                <?php if($allow_access){ ?>
                                 <th>Delete</th>
+                                <?php } ?>
                                 
                             </tr>
                         </thead>
@@ -44,7 +46,9 @@
                                         <td><?php echo $comment['comment'];?></td>
                                         <td><?php echo $comment['username'];?></td>
                                         <td><?php echo $comment['user_liked_list'];?></td>
+                                        <?php if($allow_access){ ?>
                                         <td><a href="javascript:void(o)" onclick="delete_blog_comment('<?php echo $comment['id'];?>')" id="">Delete</a></td>
+                                        <?php } ?>
                                     </tr>
                                 <?php endforeach;?>
                             <?php endif; ?>

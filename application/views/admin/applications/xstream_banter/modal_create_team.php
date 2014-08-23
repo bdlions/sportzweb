@@ -9,7 +9,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/application/create_team",
+                url: '<?php echo base_url(); ?>' + "admin/applications_xstreambanter/create_team",
                 data: {
                     team_name: $("#input_team_name").val(),
                 },

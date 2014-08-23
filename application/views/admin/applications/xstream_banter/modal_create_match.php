@@ -47,7 +47,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/application/create_match",
+                url: '<?php echo base_url(); ?>' + "admin/applications_xstreambanter/create_match",
                 data: {
                     team1_id: $("#team1").val(),
                     team2_id: $("#team2").val(),

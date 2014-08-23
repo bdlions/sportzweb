@@ -10,7 +10,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/blogapp/edit_blog_category",
+                url: '<?php echo base_url(); ?>' + "admin/applications_blogs/edit_blog_category",
                 data: {
                     blog_category_name: $("#input_blog_category_name_for_edit").val(),
                     blog_category_id: $("#input_blog_category_id").val()
@@ -33,7 +33,7 @@ function openModal(val,id) {
     $.ajax({
         dataType: 'json',
         type: "POST",
-        url: '<?php echo base_url(); ?>' + "admin/blogapp/get_blog_data",
+        url: '<?php echo base_url(); ?>' + "admin/applications_blogs/get_blog_data",
         data: {
             blog_category_id: id
         },

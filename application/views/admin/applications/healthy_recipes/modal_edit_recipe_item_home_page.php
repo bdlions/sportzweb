@@ -55,7 +55,7 @@
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/healthyrecipes/get_selected_recipe_data",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/get_selected_recipe_data",
                     data: {
                         recipe_id: recipe_id
                     },

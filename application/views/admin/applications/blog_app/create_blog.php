@@ -68,7 +68,7 @@ window.onload = function()
     <div class="panel-heading">Create Blog</div>
     <div class="panel-body">
         <div class="row form-horizontal form-background top-bottom-padding">  
-            <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/blogapp/create_blog/<?php echo $blog_category_id; ?>" onsubmit="return false;">
+            <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/applications_blogs/create_blog/<?php echo $blog_category_id; ?>" onsubmit="return false;">
             <div class="row">
                 <div class ="col-md-10 margin-top-bottom">
                     <div class ="row">
@@ -164,17 +164,17 @@ $(function () {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url();?>admin/blogapp/create_blog/<?php echo $blog_category_id;?>',
+            url: '<?php echo base_url();?>admin/applications_blogs/create_blog/<?php echo $blog_category_id;?>',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/blogapp/create_blog/<?php echo $blog_category_id;?>';
+                window.location = '<?php echo base_url();?>admin/applications_blogs/create_blog/<?php echo $blog_category_id;?>';
             }
         });
     });
     
     // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/blogapp/create_blog/<?php echo $blog_category_id; ?>",
+    var url = "<?php echo base_url();?>admin/applications_blogs/create_blog/<?php echo $blog_category_id; ?>",
                     uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
                                     $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
@@ -243,7 +243,7 @@ $(function () {
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
             alert(data.result.message);
-            window.location = '<?php echo base_url();?>admin/blogapp/create_blog/<?php echo $blog_category_id; ?>';
+            window.location = '<?php echo base_url();?>admin/applications_blogs/create_blog/<?php echo $blog_category_id; ?>';
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {

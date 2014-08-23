@@ -96,7 +96,7 @@ window.onload = function()
     <div class="panel-heading"><?php echo html_entity_decode(html_entity_decode($news['headline'])); ?></div>
     <div class="panel-body">
         <div class="row form-horizontal form-background top-bottom-padding">  
-            <form id="formsubmit"  onsubmit="return false;" method="post" action="<?php echo base_url(); ?>admin/newsapp/edit_news/<?php echo $news_id; ?>">
+            <form id="formsubmit"  onsubmit="return false;" method="post" action="<?php echo base_url(); ?>admin/applications_news/edit_news/<?php echo $news_id; ?>">
                 <div class="row">
                     <div class ="col-md-10 margin-top-bottom">
                         <div class ="row">
@@ -195,17 +195,17 @@ $(function () {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url();?>admin/newsapp/edit_news/<?php echo $news_id; ?>',
+            url: '<?php echo base_url();?>admin/applications_news/edit_news/<?php echo $news_id; ?>',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/newsapp/edit_news/<?php echo $news_id; ?>';
+                window.location = '<?php echo base_url();?>admin/applications_news/edit_news/<?php echo $news_id; ?>';
             }
         });
     });
     
     // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/newsapp/edit_news/<?php echo $news_id; ?>",
+    var url = "<?php echo base_url();?>admin/applications_news/edit_news/<?php echo $news_id; ?>",
                     uploadButton = $('<input type="submit" value="Update"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
                                     $("#headline_editortext").val(jQuery('<div />').text(CKEDITOR.instances.headline.getData()).html());
@@ -277,7 +277,7 @@ $(function () {
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
             alert(data.result.message);
-            window.location = '<?php echo base_url();?>admin/newsapp/edit_news/<?php echo $news_id; ?>';
+            window.location = '<?php echo base_url();?>admin/applications_news/edit_news/<?php echo $news_id; ?>';
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {

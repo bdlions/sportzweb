@@ -12,7 +12,7 @@
     {% var i=0, tournament_info = ((o instanceof Array) ? o[i++] : o); %}
     {% while(tournament_info){ %}
     <tr>
-        <td><a href="<?php echo base_url()."admin/application/xstream_banter_tournament/{%= tournament_info.id%}"; ?>">{%= tournament_info.title%}</a></td>
+        <td><a href="<?php echo base_url()."admin/applications_xstreambanter/xstream_banter_tournament/{%= tournament_info.id%}"; ?>">{%= tournament_info.title%}</a></td>
         <td>{%= tournament_info.total_teams%}</td>
     </tr>
     {% tournament_info = ((o instanceof Array) ? o[i++] : null); %}
@@ -32,12 +32,14 @@
     <div class="panel-heading">Tournaments</div>
     <div class="panel-body">
         <div class="row col-md-12">
+            <?php if($allow_access){ ?>
             <div class="row form-group">
                 <div class ="col-sm-9"></div>
                 <div class ="col-sm-3">
                     <button id="button_create_tournament" value="" class="form-control btn button-custom pull-right">Create Tournament</button>  
                 </div>
             </div>
+            <?php } ?>
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered">
@@ -50,7 +52,7 @@
                         <tbody id="tbody_tournament_list">                
                             <?php foreach($tournament_list as $tournament){?>
                             <tr>
-                                <td><a href="<?php echo base_url()."admin/application/xstream_banter_tournament/".$tournament['id']; ?>"><?php echo $tournament['title']?></a></td>
+                                <td><a href="<?php echo base_url()."admin/applications_xstreambanter/xstream_banter_tournament/".$tournament['id']; ?>"><?php echo $tournament['title']?></a></td>
                                 <td><?php echo $tournament['total_teams']?></td>
                             </tr>
                             <?php } ?>                            
@@ -60,12 +62,14 @@
             </div>            
         </div>
         <div class="row col-md-12">
+            <?php if($allow_access){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
                 <div class ="col-sm-2">
                     <button id="button_create_team" value="" class="form-control btn button-custom pull-right">Create Team</button>  
                 </div>                
             </div>
+            <?php } ?>
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered">
@@ -88,7 +92,7 @@
             </div>
         </div>
         <div class="btn-group" style="padding-left: 10px;">
-                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/application/xstream_banter')" class="form-control btn button-custom">
+                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/applications_xstreambanter/xstream_banter')" class="form-control btn button-custom">
         </div>
     </div>
 </div>

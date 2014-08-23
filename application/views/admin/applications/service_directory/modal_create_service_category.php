@@ -9,7 +9,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/servicedirectory/create_service_category",
+                url: '<?php echo base_url(); ?>' + "admin/applications_servicedirectory/create_service_category",
                 data: {
                     service_category_name: $("#input_service_category_name").val()
                 },

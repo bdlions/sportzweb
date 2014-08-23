@@ -24,7 +24,7 @@
             <div class="panel-heading">Edit Configuration</div>
             <div class="panel-body">
                 <div class="row form-horizontal form-background top-bottom-padding">  
-                    <?php echo form_open("admin/photography/add_image", array('id' => 'form_add_image', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
+                    <?php echo form_open("admin/applications_photography/add_image", array('id' => 'form_add_image', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
                     <div class="row">
                         <div class ="col-md-10 margin-top-bottom">                            
                             <div class="form-group">
@@ -114,7 +114,7 @@
 <script>
 $(function () {
     // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/photography/add_image",
+    var url = "<?php echo base_url();?>admin/applications_photography/add_image",
     uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
     on('click', function() {
         var $this = $(this),data = $this.data();
@@ -170,7 +170,7 @@ $(function () {
         $('#progress .progress-bar').css('width',progress + '%');
     }).on('fileuploaddone', function(e, data) {
         alert(data.result.message);
-        window.location = '<?php echo base_url();?>admin/photography/add_image';
+        window.location = '<?php echo base_url();?>admin/applications_photography/add_image';
     }).on('fileuploadsubmit', function(e, data){
         data.formData = $('#form_add_image').serializeArray();
     }).on('fileuploadfail', function(e, data) {

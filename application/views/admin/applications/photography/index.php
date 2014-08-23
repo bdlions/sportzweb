@@ -35,7 +35,7 @@
     <div class="panel-body">
         <?php if($allow_access){ ?>
         <div class ="row col-md-2 pull-left" style="margin-bottom: 10px">
-            <a href="<?php echo base_url(); ?>admin/photography/add_image">
+            <a href="<?php echo base_url(); ?>admin/applications_photography/add_image">
                 <button id="button_add_image" value="" class="form-control btn button-custom pull-right">Add Image</button>  
             </a>
         </div>
@@ -67,8 +67,8 @@
             <?php if($allow_access){ ?>
             <div class="col-md-2" style="padding-left: 25px;">
                 <?php if(!empty($image_list)): ?>
-                    <a id="edit_current_image" href="<?php echo base_url().'admin/photography/edit_image/'.$image_list[0]['id']; ?>">Edit</a> &nbsp;&nbsp;| &nbsp;&nbsp;
-                    <a id="delete_current_image" href="<?php echo base_url() . 'admin/photography/delete_image/'.$image_list[0]['id']; ?>">Delete</a>
+                    <a id="edit_current_image" href="<?php echo base_url().'admin/applications_photography/edit_image/'.$image_list[0]['id']; ?>">Edit</a> &nbsp;&nbsp;| &nbsp;&nbsp;
+                    <a id="delete_current_image" href="<?php echo base_url() . 'admin/applications_photography/delete_image/'.$image_list[0]['id']; ?>">Delete</a>
                 <?php endif; ?>
             </div>
             <?php } ?>
@@ -88,8 +88,8 @@
         });
         $('#myCarousel').bind('slid.bs.carousel', function (e) {
             var current_img_id = $('.item.active').find('div').prop('id');
-            var edit_url = '<?php echo base_url(); ?>' +'admin/photography/edit_image/'+current_img_id;
-            var delete_url = '<?php echo base_url(); ?>' +'admin/photography/delete_image/'+current_img_id;
+            var edit_url = '<?php echo base_url(); ?>' +'admin/applications_photography/edit_image/'+current_img_id;
+            var delete_url = '<?php echo base_url(); ?>' +'admin/applications_photography/delete_image/'+current_img_id;
             $("#edit_current_image").attr("href", ""+edit_url);
             $("#delete_current_image").attr("href", ""+delete_url);
             //console.log($('.item.active').find('div').prop('id'));

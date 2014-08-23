@@ -26,7 +26,7 @@
                     $.ajax({
                         dataType: 'json',    
                         type: "POST",
-                        url: '<?php echo base_url(); ?>' + "admin/application/remove_team_from_tournament",
+                        url: '<?php echo base_url(); ?>' + "admin/applications_xstreambanter/remove_team_from_tournament",
                         data: {
                             team_id:team_id,
                             tournament_id:'<?php echo $tournament_id;?>'
@@ -51,12 +51,14 @@
     <div class="panel-heading"><?php echo $tournament_info['title']?></div>
     <div class="panel-body">
         <div class="row col-md-12">
+            <?php if($allow_access){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
                 <div class ="col-sm-2">
                     <button id="button_assign_teams_tournament" name="button_assign_teams_tournament" type="submit" value="" class="form-control btn button-custom pull-right">Assign Team</button>  
                 </div>
-            </div>            
+            </div> 
+            <?php } ?>
             <div class="row form-group">
                 <label class="col-sm-2 control-label">Start Date:</label>
                 <div class ="col-sm-2">
@@ -69,9 +71,11 @@
                 <div class ="col-sm-2">
                     <input type="button" value="Search" class="form-control btn button-custom pull-right"/>  
                 </div>
+                <?php if($allow_access){ ?>
                 <div class ="col-sm-2">
                     <button id="button_create_match" type="button" value="" class="form-control btn button-custom pull-right">Create Match</button>  
                 </div>
+                <?php } ?>
             </div>
             <div class="row">
                 <div class="table-responsive table-left-padding">
@@ -88,7 +92,7 @@
                         <tbody id="tbody_match_list">                
                             <?php foreach($match_list as $match){?>
                                 <tr>
-                                    <td><a href="<?php echo base_url()."admin/application/xstream_banter_match/".$match['id']; ?>"><?php echo $match['id'];?></a></td>
+                                    <td><a href="<?php echo base_url()."admin/applications_xstreambanter/xstream_banter_match/".$match['id']; ?>"><?php echo $match['id'];?></a></td>
                                     <td><?php echo $match['team1_title']?></td>
                                     <td><?php echo $match['team2_title']?></td>
                                     <td><?php echo $match['date']?></td>
@@ -108,7 +112,7 @@
                             <tr>
                                 <th>Team name</th>
                                 <th>Created Date</th>
-                                <th>Action</th>
+                                <?php if($allow_access){ ?><th>Action</th><?php } ?>
                             </tr>
                         </thead>
                         <tbody id="tbody_team_list"> 
@@ -117,9 +121,11 @@
                                 <tr>
                                     <td><?php echo $team['title']?></td>
                                     <td><?php echo $team['created_on']?></td>
+                                    <?php if($allow_access){ ?>
                                     <td>
                                         <button id="<?php echo $team['id'];?>" class="glyphicon glyphicon-trash middle"></button>
                                     </td>
+                                    <?php } ?>
                                 </tr>
                             <?php } ?> 
                         </tbody>

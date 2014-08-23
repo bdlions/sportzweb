@@ -9,7 +9,7 @@
             <tbody id="tbody_business_profiles">                
                 <?php foreach($message_user_list as $message_user_info){?>
                     <tr>
-                        <td><a href="<?php echo base_url() . "admin/users/user_conversation/".$user_info['user_id']."/".$message_user_info['user_id'].""; ?>"><?php echo $message_user_info['first_name'].' '.$message_user_info['last_name']?></a></td>
+                        <td><a href="<?php echo base_url() . "admin/users_usermanage/user_conversation/".$user_info['user_id']."/".$message_user_info['user_id'].""; ?>"><?php echo $message_user_info['first_name'].' '.$message_user_info['last_name']?></a></td>
                     </tr>
                 <?php } ?>          
             </tbody>

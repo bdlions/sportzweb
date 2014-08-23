@@ -8,7 +8,7 @@
             </div>
             <div class="panel-body">
                 <div class="row form-horizontal form-background top-bottom-padding">  
-                    <?php echo form_open("admin/photography/edit_image/".$image_id, array('id' => 'form_edit_image', 'class' => 'form-horizontal'))?>
+                    <?php echo form_open("admin/applications_photography/edit_image/".$image_id, array('id' => 'form_edit_image', 'class' => 'form-horizontal'))?>
                     <div class="row">
                         <div class ="col-md-10 margin-top-bottom">                            
                             <div class="form-group">

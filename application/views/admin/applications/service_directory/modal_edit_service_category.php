@@ -10,7 +10,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/servicedirectory/edit_service_category",
+                url: '<?php echo base_url(); ?>' + "admin/applications_servicedirectory/edit_service_category",
                 data: {
                     service_category_name: $("#input_service_category_name_for_edit").val(),
                     service_category_id: $("#input_service_category_id").val()
@@ -34,7 +34,7 @@ function openModal(val,id) {
     $.ajax({
         dataType: 'json',
         type: "POST",
-        url: '<?php echo base_url(); ?>' + "admin/servicedirectory/get_service_data",
+        url: '<?php echo base_url(); ?>' + "admin/applications_servicedirectory/get_service_data",
         data: {
             service_category_id: id
         },

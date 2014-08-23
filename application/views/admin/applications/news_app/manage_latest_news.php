@@ -15,7 +15,7 @@
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/newsapp/latest_news_for_home_page",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_news/latest_news_for_home_page",
                     data: {
                         selected_news_array_list: JSON.stringify(selected_news_array)
                     },
@@ -63,7 +63,7 @@
                                 <?php $i=1; ?>
                                 <?php foreach($news_list as $news):?>
                                     <tr>
-                                        <td><a href="<?php echo base_url().'admin/newsapp/news_details/'.$news['id'] ?>"><?php echo $i++; ?></a></td>
+                                        <td><a href="<?php echo base_url().'admin/applications_news/news_details/'.$news['id'] ?>"><?php echo $i++; ?></a></td>
                                         <td><?php echo html_entity_decode(html_entity_decode($news['headline'])) ;?></td>
                                         <td><?php echo $news['news_date']?></td>
                                         <td>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="btn-group" style="padding-left: 10px;">
-                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/newsapp')" class="form-control btn button-custom">
+                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
             </div>
         </div>
         

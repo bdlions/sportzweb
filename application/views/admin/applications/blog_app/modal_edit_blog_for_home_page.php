@@ -62,7 +62,7 @@
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/blogapp/get_selected_blog_data",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_blogs/get_selected_blog_data",
                     data: {
                         blog_id: blog_id
                     },

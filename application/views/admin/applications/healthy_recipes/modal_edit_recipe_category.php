@@ -10,7 +10,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/healthyrecipes/edit_recipe_category",
+                url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/edit_recipe_category",
                 data: {
                     recipe_category_name: $("#input_recipe_category_name_for_edit").val(),
                     recipe_category_id: $("#input_recipe_category_id").val()

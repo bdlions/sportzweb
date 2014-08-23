@@ -16,7 +16,7 @@
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/healthyrecipes/get_selected_recipes_list",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/get_selected_recipes_list",
                     data: {
                         selected_recipes_item: JSON.stringify(selected_array),
                     },

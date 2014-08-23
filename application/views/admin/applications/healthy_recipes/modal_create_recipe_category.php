@@ -9,7 +9,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/healthyrecipes/create_recipe_category",
+                url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/create_recipe_category",
                 data: {
                     recipe_category_name: $("#input_recipe_category_name").val()
                 },

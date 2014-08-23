@@ -80,7 +80,7 @@
             <?php if(array_key_exists(0, $region_id_news_id_map)) : ?>
                 <div class="row" style="padding-bottom: 20px"><!--Greatest news-->
                     <div class="col-md-6 col-lg-6">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>">
                             <img id="image_position_1" style="width:280px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_TOP_LEFT_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[0]]['picture'] ?>"/>
                         </a>
                     </div>
@@ -90,7 +90,7 @@
                         <input type="hidden" name="position_of_news_1" id="position_of_news_1" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[0]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[0]]['news_id']:'';?>">
                         <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
                     <div class="col-md-6 col-lg-6">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>">
                             <span class="cus_news_headline">
                                 <p id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline']));?></p>
                             </span>
@@ -109,11 +109,11 @@
                         </button>
 
                         <input type="hidden" name="position_of_news_2" id="position_of_news_2" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[1]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[1]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[1]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[1]]['news_id']; ?>">
                             <img id="image_position_2" style="width:180px;height:120px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[1]]['picture'] ?>"/>
                         </a>
                         <br>
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[1]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[1]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_2"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[1]]['headline']));?></p>
                             </span>
@@ -131,11 +131,11 @@
                         </button>
 
                         <input type="hidden" name="position_of_news_3" id="position_of_news_3" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[2]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[2]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[2]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[2]]['news_id']; ?>">
                             <img id="image_position_3" style="width:180px;height:120px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[2]]['picture'] ?>"/>
                         </a>
                         <br>
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[2]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[2]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_3">
                                     <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[2]]['headline']))?>
@@ -155,11 +155,11 @@
                         </button>
 
                         <input type="hidden" name="position_of_news_4" id="position_of_news_4" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[3]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[3]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[3]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[3]]['news_id']; ?>">
                             <img id="image_position_4" style="width:180px;height:120px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[3]]['picture'] ?>"/>
                         </a>
                         <br>
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[3]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[3]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_4">
                                     <?php echo $news_id_news_info_map[$region_id_news_id_map[3]]['headline']?>
@@ -183,12 +183,12 @@
                         </button>
 
                         <input type="hidden" name="position_of_news_5" id="position_of_news_5" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[4]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[4]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[4]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[4]]['news_id']; ?>">
                             <img id="image_position_5" style="width:150px;height:100px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[4]]['picture'] ?>"/>
                         </a>
                     </div>
                     <div class="col-md-3 col-lg-3" style="padding-left: 0px;">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[4]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[4]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_5">
                                     <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[4]]['headline']));?>
@@ -205,12 +205,12 @@
                         </button>
 
                         <input type="hidden" name="position_of_news_6" id="position_of_news_6" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[5]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[5]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[5]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[5]]['news_id']; ?>">
                             <img id="image_position_6" style="width:150px;height:100px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[5]]['picture'] ?>"/>
                         </a>
                     </div>
                     <div class="col-md-3 col-lg-3" style="padding-left: 0px;">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[5]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[5]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_6">
                                     <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[5]]['headline']));?>
@@ -228,12 +228,12 @@
                         </button>
 
                         <input type="hidden" name="position_of_news_7" id="position_of_news_7" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[6]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[6]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[6]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[6]]['news_id']; ?>">
                             <img id="image_position_7" style="width:150px;height:100px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[6]]['picture'] ?>"/>
                         </a>
                     </div>
                     <div class="col-md-3 col-lg-3" style="padding-left: 0px;">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[6]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[6]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_7"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[6]]['headline']));?></p>
                             </span>
@@ -247,12 +247,12 @@
                             Edit
                         </button>
                         <input type="hidden" name="position_of_news_8" id="position_of_news_8" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[7]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[7]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[7]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[7]]['news_id']; ?>">
                             <img id="image_position_8" style="width:150px;height:100px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[7]]['picture'] ?>"/>
                         </a>
                     </div>
                     <div class="col-md-3 col-lg-3" style="padding-left: 0px;">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[7]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[7]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_8"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[7]]['headline']));?></p>
                             </span>
@@ -269,12 +269,12 @@
                                 Edit
                             </button>
                             <input type="hidden" name="position_of_news_9" id="position_of_news_9" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[8]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[8]]['news_id']:'';?>">
-                                <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[8]]['news_id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[8]]['news_id']; ?>">
                                     <span class="cus_news_smallheadline">
                                         <p id="heading_9"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[8]]['headline']));?></p>
                                     </span>
                                 </a>
-                                <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[8]]['news_id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[8]]['news_id']; ?>">
                                     <span class="cus_news_descr">
                                         <p id="summary_9"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[8]]['summary']));?></p>
                                     </span>
@@ -288,12 +288,12 @@
                                     Edit
                                 </button>
                                 <input type="hidden" name="position_of_news_10" id="position_of_news_10" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[9]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[9]]['news_id']:'';?>">
-                                <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[9]]['news_id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[9]]['news_id']; ?>">
                                     <span class="cus_news_smallheadline">
                                         <p id="heading_10"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[9]]['headline'])) ;?></p>
                                     </span>
                                 </a>
-                                <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[9]]['news_id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[9]]['news_id']; ?>">
                                     <span  class="cus_news_descr">
                                         <p id="summary_10"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[9]]['summary']));?></p>
                                     </span>
@@ -308,12 +308,12 @@
                                     Edit
                                 </button>
                                 <input type="hidden" name="position_of_news_11" id="position_of_news_11" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[10]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[10]]['news_id']:'';?>">
-                                <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[10]]['news_id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[10]]['news_id']; ?>">
                                     <span class="cus_news_smallheadline">
                                         <p id="heading_11"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[10]]['headline']));?></p>
                                     </span>
                                 </a>
-                                <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[10]]['news_id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[10]]['news_id']; ?>">
                                     <span class="cus_news_descr">
                                         <p id="summary_11"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[10]]['summary']));?></p>
                                     </span>
@@ -327,12 +327,12 @@
                                     Edit
                                 </button>
                                 <input type="hidden" name="position_of_news_12" id="position_of_news_12" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[11]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[11]]['news_id']:'';?>">
-                                <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[11]]['news_id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[11]]['news_id']; ?>">
                                     <span class="cus_news_smallheadline">
                                         <p id="heading_12"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[11]]['headline']));?></p>
                                     </span>
                                 </a>
-                                <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[11]]['news_id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[11]]['news_id']; ?>">
                                     <span class="cus_news_descr">
                                         <p id="summary_12"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[11]]['summary']));?></p>
                                     </span>
@@ -347,10 +347,10 @@
                             Edit
                         </button>
                         <input type="hidden" name="position_of_news_13" id="position_of_news_13" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[12]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[12]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[12]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[12]]['news_id']; ?>">
                             <img id="image_position_13" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[12]]['picture'] ?>"/>
                         </a>
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[12]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[12]]['news_id']; ?>">
                             <span class="cus_news_subheadline" id="heading_13">
                                 <p>
                                     <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[12]]['headline']));?>
@@ -370,11 +370,11 @@
                             Edit
                         </button>
                         <input type="hidden" name="position_of_news_<?php echo 14+$fi;?>" id="position_of_news_<?php echo 14+$fi;?>" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[13+$fi]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[13+$fi]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[13+$fi]['id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[13+$fi]['id']; ?>">
                             <img id="image_position_<?php echo 14+$fi;?>" style="width:180px;height:120px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[13+$fi]]['picture'] ?>"/>
                         </a>
                         <br>
-                        <a href="<?php echo base_url() . 'admin/newsapp/news_details/'.$news_id_news_info_map[$region_id_news_id_map[13+$fi]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[13+$fi]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_<?php echo 14+$fi;?>">
                                     <?php echo $news_id_news_info_map[$region_id_news_id_map[13+$fi]]['headline']?>
@@ -395,7 +395,7 @@
             
         <div class="row col-md-12">
             <div class ="col-md-6 pull-left">
-                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url(); ?>admin/newsapp')" class="form-control btn button-custom">
+                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
             </div>
             <div class ="row col-md-6 pull-right">
                 <div class ="col-md-8" style="z-index: 6">
@@ -451,7 +451,7 @@ function openModal(val,id) {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/newsapp/save_selected_news",
+            url: '<?php echo base_url(); ?>' + "admin/applications_news/save_selected_news",
             data: {
                 region_id_news_id_map:region_id_news_id_map,
                 is_hide_advertisement:is_hide_advertisement,

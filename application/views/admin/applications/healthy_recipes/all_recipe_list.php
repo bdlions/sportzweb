@@ -44,7 +44,7 @@
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/healthyrecipes/recipe_list_for_home_page",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/recipe_list_for_home_page",
                     data: {
                         selected_recipe_array_list: JSON.stringify(selected_recipe_array),
                         selected_recipe_item: JSON.stringify(selected_recipe_item),
@@ -111,7 +111,7 @@
                                         </button>
                                         <input type="hidden" name="top_left" id="position_of_recipe_1" value="<?php echo $recipe_view_list_item[0]["id"]; ?>">
                                         <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
-                                        <a href="<?php echo base_url() . 'admin/healthyrecipes/recipes/' . $recipe_view_list_item[0]['id']; ?>">
+                                        <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[0]['id']; ?>">
                                             <img id="image_position_1" style="width: 480px;height: 200px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[0]['main_picture']; ?>" class="img-responsive" alt="<?php echo $recipe_view_list_item[0]['title']; ?>"/>
                                         </a>
                                     <?php endif; ?>
@@ -125,7 +125,7 @@
                                     </button>
                                     <input type="hidden" name="top_right" id="position_of_recipe_2" value="<?php echo $recipe_view_list_item[1]["id"]; ?>">
                                     <img src="<?php echo base_url(); ?>resources/images/quote.png" class="img-responsive" alt=""/>
-                                    <a style="color: red" href="<?php echo base_url() . 'admin/healthyrecipes/recipes/' . $recipe_view_list_item[1]['id']; ?>">
+                                    <a style="color: red" href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[1]['id']; ?>">
                                         <h2 id="title_2" class="reciepe_title"><?php echo (!empty($recipe_view_list_item[1]['title'])) ? $recipe_view_list_item[1]['title'] : ''; ?></h2>
                                     </a>
                                     <span id="description_2" class="recipe_description">
@@ -145,7 +145,7 @@
                                     </button>
                                     <input type="hidden" name="bottom_left" id="position_of_recipe_3" value="<?php echo $recipe_view_list_item[2]["id"]; ?>">
                                     <img src="<?php echo base_url(); ?>resources/images/quote.png" class="img-responsive" alt=""/>
-                                    <a style="color: red" href="<?php echo base_url() . 'admin/healthyrecipes/recipes/' . $recipe_view_list_item[2]['id']; ?>">
+                                    <a style="color: red" href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[2]['id']; ?>">
                                         <h4 id="title_3" class="reciepe_title"><?php echo (!empty($recipe_view_list_item[2]['title'])) ? $recipe_view_list_item[2]['title'] : ''; ?></h4>
                                     </a>
                                     <div id="description_3" class="recipe_description"><?php echo $recipe_view_list_item[2]['description']; ?></div>
@@ -165,7 +165,7 @@
                             <div id="show_recipes_after_select">
                                 <?php if (count($recipe_list_item) > 0): ?>
                                     <?php foreach ($recipe_list_item as $key => $value): ?>
-                                        <a class="recipe_a_list" href="<?php echo base_url() . 'admin/healthyrecipes/recipes/' . $value['id']; ?>">
+                                        <a class="recipe_a_list" href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $value['id']; ?>">
                                             <?php echo $value['title']; ?>
                                         </a>
                                         <br>
@@ -180,7 +180,7 @@
                                         Edit
                                     </button>
                                     <input type="hidden" name="bottom_right" id="position_of_recipe_4" value="<?php echo $recipe_view_list_item[3]["id"]; ?>">
-                                    <a href="<?php echo base_url() . 'admin/healthyrecipes/recipes/' . $recipe_view_list_item[3]['id']; ?>">
+                                    <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[3]['id']; ?>">
                                         <img id="image_position_4" style="width: 500px;height: 150px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[3]['main_picture']; ?>" class="img-responsive" alt=""/>
                                     </a>
                                 <?php endif; ?>
@@ -196,7 +196,7 @@
                                 Edit
                             </button>
                             <input type="hidden" name="right_up_extra" id="position_of_recipe_5" value="<?php echo $recipe_view_list_item[4]["id"]; ?>">
-                            <a href="<?php echo base_url() . 'admin/healthyrecipes/recipes/' . $recipe_view_list_item[4]['id']; ?>">
+                            <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[4]['id']; ?>">
                                 <img id="image_position_5" style="width: 500px;height: 150px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[4]['main_picture']; ?>" class="img-responsive" alt=""/>
                             </a>
                         <?php endif; ?>
@@ -208,7 +208,7 @@
                                 Edit
                             </button>
                             <input type="hidden" name="right_down_extra" id="position_of_recipe_6" value="<?php echo $recipe_view_list_item[5]["id"]; ?>">
-                            <a href="<?php echo base_url() . 'admin/healthyrecipes/recipes/' . $recipe_view_list_item[5]['id']; ?>">
+                            <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[5]['id']; ?>">
                                 <img id="image_position_6" style="width: 500px;height: 150px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[5]['main_picture']; ?>" class="img-responsive" alt=""/>
                             </a>
                         <?php endif; ?>
@@ -220,7 +220,7 @@
                                 Edit
                             </button>
                             <input type="hidden" name="right_right" id="position_of_recipe_7" value="<?php echo $recipe_view_list_item[6]["id"]; ?>">
-                            <a href="<?php echo base_url() . 'admin/healthyrecipes/recipes/' . $recipe_view_list_item[6]['id']; ?>">
+                            <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[6]['id']; ?>">
                                 <img id="image_position_7" style="width: 500px;height: 150px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[6]['main_picture']; ?>" class="img-responsive" alt=""/>
                             </a>
                         <?php endif; ?>
@@ -243,7 +243,7 @@
                     Submit
                 </button>
             </div>
-            <input type="button" style="width:120px; float: right" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url(); ?>admin/healthyrecipes')" class="form-control btn button-custom">
+            <input type="button" style="width:120px; float: right" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url(); ?>admin/applications_healthyrecipes')" class="form-control btn button-custom">
         </div>
                     
     </div>
@@ -303,7 +303,7 @@
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/healthyrecipes/save_selected_recipe",
+            url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/save_selected_recipe",
             data: {
                 value_top_left: value_top_left,
                 value_top_right: value_top_right,

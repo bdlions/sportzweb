@@ -2,8 +2,8 @@
     <div class="panel-heading">Edit Service</div>
     <div class="panel-body">
     <div class="row form-horizontal form-background top-bottom-padding">  
-        <?php //echo form_open_multipart("admin/servicedirectory/service_edit/".$service_id, array('id' => 'form_edit_recipe', 'class' => 'form-horizontal')); ?>
-        <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/servicedirectory/service_edit/<?php echo $service_id;?>" onsubmit="return false;">
+        <?php //echo form_open_multipart("admin/applications_servicedirectory/service_edit/".$service_id, array('id' => 'form_edit_recipe', 'class' => 'form-horizontal')); ?>
+        <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/applications_servicedirectory/service_edit/<?php echo $service_id;?>" onsubmit="return false;">
         <div class="row">
             <div class ="col-md-10 margin-top-bottom">
                 <div class ="row">
@@ -144,7 +144,7 @@
             </form>
     </div>
     <div class="btn-group" style="padding-left: 10px;">
-        <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/servicedirectory/service_category/<?php echo $service_info['service_category_id'];?>')" class="form-control btn button-custom">
+        <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/applications_servicedirectory/service_category/<?php echo $service_info['service_category_id'];?>')" class="form-control btn button-custom">
     </div>    
     </div>
 </div>
@@ -177,16 +177,16 @@ $(function () {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url();?>admin/servicedirectory/service_edit/<?php echo $service_id;?>',
+            url: '<?php echo base_url();?>admin/applications_servicedirectory/service_edit/<?php echo $service_id;?>',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/servicedirectory/service_edit/<?php echo $service_id;?>';
+                window.location = '<?php echo base_url();?>admin/applications_servicedirectory/service_edit/<?php echo $service_id;?>';
             }
         });
     });
     // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/servicedirectory/service_edit/<?php echo $service_id?>",
+    var url = "<?php echo base_url();?>admin/applications_servicedirectory/service_edit/<?php echo $service_id?>",
                     uploadButton = $('<input type="submit" value="Update"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
                                     if ($("#name").val().length == 0)
@@ -263,7 +263,7 @@ $(function () {
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
             alert(data.result.message);
-            window.location = '<?php echo base_url();?>admin/servicedirectory/service_edit/<?php echo $service_id;?>';
+            window.location = '<?php echo base_url();?>admin/applications_servicedirectory/service_edit/<?php echo $service_id;?>';
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {

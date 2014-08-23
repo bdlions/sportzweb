@@ -19,7 +19,7 @@
                                     <td><?php echo $chat_room['id']?></td>
                                     <td><?php echo $chat_room['first_name'].' '.$chat_room['last_name']?></td>
                                     <td><?php echo $chat_room['group_access_code']?></td>
-                                    <td><a href="<?php echo base_url()."admin/application/xstream_banter_room_conversation/".$chat_room['id']; ?>">view</a></td>                                    
+                                    <td><a href="<?php echo base_url()."admin/applications_xstreambanter/xstream_banter_room_conversation/".$chat_room['id']; ?>">view</a></td>                                    
                                 </tr>
                             <?php } ?>                            
                         </tbody>

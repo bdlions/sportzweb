@@ -23,9 +23,10 @@ class Auth extends Role_Controller{
             //redirect them to the login page
             redirect('admin/auth/login', 'refresh');
         } else {
-            if ($this->ion_auth->is_user_type(ADMIN)) {
-                redirect('admin/overview','refresh');
-            }
+            //if ($this->ion_auth->is_user_type(ADMIN)) {
+            //    redirect('admin/overview_show','refresh');
+            //}
+            redirect('admin/overview_show','refresh');
         }
     }
     
@@ -40,7 +41,7 @@ class Auth extends Role_Controller{
                 $remember = FALSE;
                 if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) {
                     $this->session->set_flashdata('message', $this->ion_auth->messages());
-                    redirect('admin/overview', 'refresh');
+                    redirect('admin/overview_show','refresh');
                 } else {
                     $this->session->set_flashdata('message', $this->ion_auth->errors());
                     redirect('admin/auth/login', 'refresh');

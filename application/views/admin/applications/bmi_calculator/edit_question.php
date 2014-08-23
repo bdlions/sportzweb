@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Edit Question</div>
     <div class="panel-body">
-        <?php echo form_open("admin/bmicalculator/edit_question/".$question_id, array('class' => 'form-horizontal')); ?>
+        <?php echo form_open("admin/applications_bmicalculator/edit_question/".$question_id, array('class' => 'form-horizontal')); ?>
             <div class="row">
                 
                 <div class ="row">

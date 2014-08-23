@@ -16,7 +16,7 @@
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/application/assign_teams_tournament",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_xstreambanter/assign_teams_tournament",
                     data: {
                         tournament_id:'<?php echo $tournament_id; ?>',
                         team_id_list: selected_array

@@ -44,7 +44,7 @@
             <div class="col-md-8" style="border: 2px dotted #999; padding: 32px;">
                 <a href="<?php echo base_url();?>resources/import/applications/healthy_recipes/healthy_recipes_sample.xlsx"><button class="btn btn-info pull-right">Download sample</button></a>
                 <div id="progress">
-                    <?php echo form_open_multipart('admin/healthyrecipes/page_import_recipe', array('name'=>'file_upload'));?>
+                    <?php echo form_open_multipart('admin/applications_healthyrecipes/page_import_recipe', array('name'=>'file_upload'));?>
                         <div class="form-group">
                             <label for="fileupload">Select the data file for Healthy recipes:</label>
                             <input id="fileupload" type="file" name="userfile">

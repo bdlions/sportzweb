@@ -12,21 +12,21 @@
                     <div class ="col-sm-4" style="padding-left: 25px;">
                         <a href="<?php echo base_url();?>admin/contact_us/create_topic">
                             <button id="button_create_topic_name" class="btn button-custom pull-left" >
-                                Create Topic
+                                Manage Topic
                             </button>
                         </a>
                     </div>
                     <div class =" col-sm-4">
                         <a href="<?php echo base_url().'admin/contact_us/create_os' ?>">
                             <button id="button_create_os_name" value="" class="btn button-custom " style="margin-left: 0px;">
-                                Create Operating System name
+                                Manage Operating System name
                             </button>
                         </a>
                     </div>
                     <div class =" col-sm-4">
                         <a href="<?php echo base_url().'admin/contact_us/create_browser' ?>">
                             <button id="button_create_browser_name" value="" class="btn button-custom pull-right " style="margin-left: 0px;">
-                                Create Browser name
+                                Manage Browser name
                             </button>
                         </a>
                     </div>
@@ -43,7 +43,7 @@
                                 <th style="text-align: center;">Phone</th>
                                 <th style="text-align: center;">Feedback</th>
                                 <th style="text-align: center;">Reply</th>
-                                <th style="text-align: center;">Edit</th>
+                                <th style="text-align: center;">View</th>
                                 <th style="text-align: center;">Delete</th>
                             </tr>
                         </thead>
@@ -60,7 +60,7 @@
                                         Reply
                                     </button>
                                 </td>
-                                <td>Edit</td>
+                                <td>View</td>
                                 <td>Delete</td>
                             </tr> 
                             <tr>
@@ -75,7 +75,7 @@
                                         Reply
                                     </button>
                                 </td>
-                                <td>Edit</td>
+                                <td>View</td>
                                 <td>Delete</td>
                             </tr>
                         </tbody>

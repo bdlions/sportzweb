@@ -4,7 +4,7 @@
             $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/servicedirectory/remove_comment",
+            url: '<?php echo base_url(); ?>' + "admin/applications_servicedirectory/remove_comment",
             data: {
                 comment_id: id
             },
@@ -12,7 +12,7 @@
                 alert(data['message']);
                     if (data['status'] === 1)
                     {
-                       window.location = '<?php echo base_url();?>admin/servicedirectory/service_comments/<?php echo $service_id;?>';
+                       window.location = '<?php echo base_url();?>admin/applications_servicedirectory/service_comments/<?php echo $service_id;?>';
                     }
             }
         });

@@ -99,7 +99,7 @@
                     Submit
                 </button>
             </div>
-            <input type="button" style="width:120px; float: right" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url(); ?>admin/bmicalculator')" class="form-control btn button-custom">
+            <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
         </div>
     </div>
 </div>
@@ -165,7 +165,7 @@
                $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/bmicalculator/question_list_for_home_page",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_bmicalculator/question_list_for_home_page",
                     data: {
                         selected_questions_list: JSON.stringify(selected_question_array),
                         selected_questions_order_list: JSON.stringify(selected_questions_order_array),
