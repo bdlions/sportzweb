@@ -46,6 +46,17 @@ margin:0 auto; /* center your carousel if other than 100% */
 }
 #imgbuttonb{ height: 32px; width: 32px; position: absolute; right: 64px; top: 30px;}
 #imgbuttonf{ height: 32px; width: 32px; position: absolute; right: 32px; top: 30px;}
+.overimgtext{
+        position: absolute;
+        bottom: 5%; 
+        /*border: 2px solid #75B3E6;*/
+        background:rgba(100,100,111,0.6); 
+        width: 100%;
+        color: white;
+        font-size: larger; 
+        text-align: center;
+        padding: 12px;
+    }
 </style>
 
 <div class="row col-md-12">
@@ -58,13 +69,13 @@ margin:0 auto; /* center your carousel if other than 100% */
                         <div  id="div_slider" class="slider-size" style="background-image: url('<?php echo base_url() . PHOTOGRAPHY_IMAGE_PATH . $image_info['img']; ?>');" >
                             <div class="col-md-12 col-sm-12 col-xs-12 overimgtext">
                                 <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <span>top text</br>bottom text</span>
+                                    <span><?php echo $image_info['text1']; ?></br><?php echo $image_info['text2']; ?></span>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <span>top text</br>bottom text</span>
+                                    <span><?php echo $image_info['text3']; ?></br><?php echo $image_info['text4']; ?></span>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <span>top text</br>bottom text</span>
+                                    <span><?php echo $image_info['text5']; ?></br><?php echo $image_info['text6']; ?></span>
                                 </div>
                             </div>
                         </div>

@@ -20,7 +20,7 @@ class Admin_photography_model extends Ion_auth_model
     public function add_image($additional_data)
     {
         $this->trigger_events('pre_add_image');
-        $data = $this->_filter_data($this->tables['photography'], $additional_data);        
+        $data = $this->_filter_data($this->tables['photography'], $additional_data);
         $this->db->insert($this->tables['photography'], $data);
         $id = $this->db->insert_id();        
         $this->trigger_events('post_add_image');
