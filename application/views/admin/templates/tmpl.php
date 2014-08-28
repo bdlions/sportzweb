@@ -143,6 +143,7 @@
                                 <ul>
                                     <li id="manage_new_user"><a href="<?php echo base_url()?>admin/access_level">New User</a></li>
                                     <li id="manage_show_users"><a href="<?php echo base_url()?>admin/access_level/show_users">Show Users</a></li>
+                                    <li id="manage_create_access_level"><a href="<?php echo base_url()?>admin/access_level/create_access_level">Create Access Level </a></li>
                                 </ul>
                             </li>
                             <li id="footer">

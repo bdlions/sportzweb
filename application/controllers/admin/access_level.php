@@ -699,4 +699,35 @@ class Access_level extends CI_Controller{
         $this->admin_access_level_library->delete_user($user_id);
         redirect('admin/access_level/show_users','refresh');
     }
+    
+    public function create_access_level()
+    {
+        $this->data['message'] = $this->session->flashdata('message');
+        
+        $this->data['user_list'] = $this->admin_access_level_library->get_all_users_groups(array(ACCESS_LEVEL_PUBLISHER_ID))->result_array();
+        $current_user_info = array();
+        $current_user_info_array = $this->admin_access_level_library->get_user_info()->result_array();
+        if(!empty($current_user_info_array))
+        {
+            $current_user_info = $current_user_info_array[0];
+        }
+        $this->data['current_user_info'] = $current_user_info;
+        
+        
+        $this->data['access_level'] = array(
+            'name' => 'access_level',
+            'id' => 'access_level',
+            'type' => 'text',
+            'value' => ''
+        );
+        
+        $this->data['create_access_level'] = array(
+            'name' => 'create_access_level',
+            'id' => 'create_access_level',
+            'type' => 'submit',
+            'value' => 'Create Access Level',
+        );
+        
+        $this->template->load(ADMIN_DASHBOARD_TEMPLATE, "admin/access_level/create_access_level", $this->data);
+    }
 }
