@@ -29,7 +29,7 @@
                         <div class ="col-md-10 margin-top-bottom">                            
                             <div class="form-group">
                                 <label for="type" class="col-md-3 control-label requiredField">
-                                    Text1
+                                    Left Top
                                 </label>
                                 <div class ="col-md-9">
                                     <?php echo form_input($text1); ?>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="type" class="col-md-3 control-label requiredField">
-                                    Text2
+                                    Left Bottom
                                 </label>
                                 <div class ="col-md-9">
                                     <?php echo form_input($text2); ?>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="type" class="col-md-3 control-label requiredField">
-                                    Text3
+                                    Middle Top
                                 </label>
                                 <div class ="col-md-9">
                                     <?php echo form_input($text3); ?>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="type" class="col-md-3 control-label requiredField">
-                                    Text4
+                                    Middle Bottom
                                 </label>
                                 <div class ="col-md-9">
                                     <?php echo form_input($text4); ?>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="type" class="col-md-3 control-label requiredField">
-                                    Text5
+                                    Right Top
                                 </label>
                                 <div class ="col-md-9">
                                     <?php echo form_input($text5); ?>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="type" class="col-md-3 control-label requiredField">
-                                    Text6
+                                    Right Bottom
                                 </label>
                                 <div class ="col-md-9">
                                     <?php echo form_input($text6); ?>

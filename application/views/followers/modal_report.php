@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-4">
-                            <img src="<?php echo base_url() . "resources/uploads/profile_picture/100x100/2_1408101612.jpg" ?>" alt="" class="img-responsive profile-photo"  />
+                            <img src="<?php echo base_url() . "resources/uploads/profile_picture/100x100/4_1407803389.jpg" ?>" alt="" class="img-responsive profile-photo"  />
                         </div>
                         <div class="col-md-3">
                              Nazmul Hasan <br>

@@ -276,16 +276,16 @@
 
                     context.beginPath();
                     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-                    context.fillStyle = 'white';
+                    context.fillStyle = '#00acea';
                     context.fill();
                     context.lineWidth = 1;
-                    context.strokeStyle = 'white';
+                    context.strokeStyle = '#00acea';
                     context.stroke();
                 }
                 
                 function drawText(){
                     context.font = "15px Arial";
-                    context.fillStyle = 'white';
+                    context.fillStyle = '#00acea';
                     
                     var weight_kg = 0;
                     var height_inch = 0;
