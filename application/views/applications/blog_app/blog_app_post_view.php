@@ -56,13 +56,12 @@
         </div>
         <div class="col-md-12 blog_post_subtitle_bar">
             <span class="blog_post_body_text">
-                By 
-                <a href="#comment-form">
-                    <?php echo isset($blog['first_name']) ? $blog['first_name'].' '.$blog['last_name'] : '';?>
-                </a><!-- / in 
-                <a href="#comment-form">Models Photos
-                    
-                </a>-->
+                By
+                <?php if(isset($blog['user_id'])): ?>
+                    <a href="<?php echo base_url(); ?>member_profile/show/<?php echo $blog['user_id']; ?>">
+                        <?php echo isset($blog['first_name']) ? $blog['first_name'].' '.$blog['last_name'] : '';?>
+                    </a>
+                <?php endif; ?>
             </span>
             <div id="total_comments">
                 <span class="pull-right">
@@ -87,12 +86,6 @@
         </div>
         <div class="blog_post_body_text">
             <?php echo isset($blog['description']) ? html_entity_decode(html_entity_decode($blog['description'])) : ''; ?>
-            <!--body caption-->
-
-            <!--            <div class="col-md-offset-2 col-md-8 blog_post_body_caption">
-                The bedding was hardly able to cover it and seemed ready to slide off any moment.
-            </div>-->
-
         </div>
         <div class="col-md-12 blog_post_subtitle_bar" style="text-align:center;">
             <span class="blog_post_body_text" style="font-size: 24px; font-weight: normal;">Related Posts</span>

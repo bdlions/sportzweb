@@ -196,7 +196,7 @@ class Applications_blogs extends CI_Controller{
         
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
-        
+        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
         
         if($this->input->post())
         {
@@ -220,15 +220,17 @@ class Applications_blogs extends CI_Controller{
                 
                 $blog_title = trim(htmlentities($this->input->post('title_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
+                $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
                 
                 $data = array(
                     'title' => $blog_title,
                     'blog_category_id' => $blog_category_id,
                     'description' => $description,
-                    'user_id' => 3,
-                    'blog_status_id' => 2,
+                    'user_id' => $this->session->userdata('user_id'),
+                    'blog_status_id' => APPROVED,
                     'related_posts' => json_encode($related_blogs),
                     'picture' => empty($uploaded_image_data['upload_data']['file_name'])? '' : $uploaded_image_data['upload_data']['file_name'],
+                    'picture_description' => $picture_description,
                     'created_on' => now()
                 );
                 
@@ -262,6 +264,15 @@ class Applications_blogs extends CI_Controller{
             'cols'  => '10'
         );
         
+        $this->data['image_description'] = array(
+            'name' => 'image_description',
+            'id' => 'image_description',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('image_description'),
+            'rows'  => '4',
+            'cols'  => '10'
+        );
+        
         $this->data['related_blogs'] = array(
             'name' => 'related_blogs',
             'id' => 'related_blogs',
@@ -286,6 +297,7 @@ class Applications_blogs extends CI_Controller{
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
         
         $blog_info_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
+        
         if(count($blog_info_array>0)) {
             $blog_info_array = $blog_info_array[0];
         }
@@ -315,11 +327,13 @@ class Applications_blogs extends CI_Controller{
                 
                 $blog_title = trim(htmlentities($this->input->post('title_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
+                $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
                 
                 $data = array(
                     'blog_category_id' => $blog_category_id,
                     'title' => $blog_title,
                     'description' => $description,
+                    'picture_description' => $picture_description,
                     'related_posts' => json_encode($related_blogs),
                     'modified_on' => now()
                 );
@@ -373,6 +387,16 @@ class Applications_blogs extends CI_Controller{
             'rows'  => '4',
             'cols'  => '10'
         );
+        
+        $this->data['image_description'] = array(
+            'name' => 'image_description',
+            'id' => 'image_description',
+            'type' => 'text',
+            'value' => isset($blog_info_array['picture_description']) ? html_entity_decode(html_entity_decode($blog_info_array['picture_description'])) : '',
+            'rows'  => '4',
+            'cols'  => '10'
+        );
+        
         
         $this->data['related_blogs'] = array(
             'name' => 'related_blogs',

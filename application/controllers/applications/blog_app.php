@@ -221,8 +221,7 @@ class Blog_app extends Role_Controller {
         {
             $this->data['have_my_blogs'] = 1;
         }
-        
-        
+
         $this->data['blog'] = $blog;
         $this->data['comments'] = $comments;
         $this->data['user_info'] = $this->ion_auth->get_user_info();
@@ -360,6 +359,7 @@ class Blog_app extends Role_Controller {
         $this->form_validation->set_rules('category_id', 'Category_id', 'required');
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
+        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
 
 
         if ($this->input->post()) {
@@ -382,6 +382,7 @@ class Blog_app extends Role_Controller {
             $blog_category_id = $this->input->post('category_id');
             $blog_title = trim(htmlentities($this->input->post('title_editortext')));
             $description = trim(htmlentities($this->input->post('description_editortext')));
+            $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
 
             $data = array(
                 'title' => $blog_title,
@@ -389,8 +390,9 @@ class Blog_app extends Role_Controller {
                 'description' => $description,
                 'user_id' => $this->session->userdata('user_id'),
                 'picture' => empty($uploaded_image_data['upload_data']['file_name']) ? '' : $uploaded_image_data['upload_data']['file_name'],
+                'picture_description' => $picture_description,
                 'created_on' => now(),
-                'blog_status_id' => 1
+                'blog_status_id' => PENDING
             );
 
             $blog_id = $this->blog_app_library->create_blog($data);
@@ -430,6 +432,15 @@ class Blog_app extends Role_Controller {
             'value' => $this->form_validation->set_value('description'),
             'rows' => '4',
             'cols' => '10'
+        );
+        
+        $this->data['image_description'] = array(
+            'name' => 'image_description',
+            'id' => 'image_description',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('image_description'),
+            'rows'  => '4',
+            'cols'  => '10'
         );
         
         $this->data['have_my_blogs'] = 0;
@@ -594,6 +605,7 @@ class Blog_app extends Role_Controller {
         
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
+        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
         
         $blog_info = array();
         $blog_info_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
@@ -618,11 +630,14 @@ class Blog_app extends Role_Controller {
 
             $blog_title = trim(htmlentities($this->input->post('title_editortext')));
             $description = trim(htmlentities($this->input->post('description_editortext')));
+            $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
+            
             $blog_category_id = $this->input->post('blog_category_id');
             $data = array(
                 'blog_category_id' => $this->input->post('category_id'),
                 'title' => $blog_title,
                 'description' => $description,
+                'picture_description' => $picture_description,
                 'user_id' => $user_id,
                 'modified_on' => now()
             );
@@ -687,9 +702,7 @@ class Blog_app extends Role_Controller {
                 {
                     $result['status']=FALSE;
                     $result['message'] = $this->blog_app_library->errors();
-                }
-                
-                
+                }   
             }
             
             $edited_blog_info = array();
@@ -726,6 +739,15 @@ class Blog_app extends Role_Controller {
             'id' => 'description',
             'type' => 'text',
             'value' => html_entity_decode(html_entity_decode($blog_info['description'])),
+            'rows'  => '4',
+            'cols'  => '10'
+        );
+        
+        $this->data['image_description'] = array(
+            'name' => 'image_description',
+            'id' => 'image_description',
+            'type' => 'text',
+            'value' => html_entity_decode(html_entity_decode($blog_info['picture_description'])),
             'rows'  => '4',
             'cols'  => '10'
         );

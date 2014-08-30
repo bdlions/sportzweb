@@ -274,4 +274,21 @@
             </div>-->
         </div>
     </div>
+    
+    <div class="col-md-12" style="padding-top: 10px;">
+        <div class="right-panel-container">
+            <div class="panel right-panel">
+                <div class="panel-heading right-panel-heading">Trends</div>
+                <div class="panel-body right-panel-body">
+                    <ul class="list-group right-panel-list">
+                        <li><a href="#A">#A</a></li>  
+                        <li><a href="#B">#B</a></li>  
+                        <li><a href="#C">#C</a></li>  
+                        <li><a href="#D">#D</a></li>  
+                        <li><a href="#E">#E</a></li> 
+                    </ul>
+                </div>
+            </div> 
+        </div>
+    </div>
 </div>
