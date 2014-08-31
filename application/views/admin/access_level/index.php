@@ -314,6 +314,48 @@
                                     </div>
                                 </td>
                             </tr>
+                            
+                            <tr class="success">
+                                <td>
+                                    Footer
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td_text_color">
+                                    About Us
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($about_us_view); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($about_us_access); ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="td_text_color">
+                                    Contact Us
+                                </td>
+                                 <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($contact_us_view); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($contact_us_access); ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            
                         </tbody>
                     </table>
                     <div class="form-group">

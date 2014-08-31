@@ -51,6 +51,8 @@ class Access_level extends CI_Controller{
                 $form_post_array = $this->input->post();
                 $access_level_mapping = $this->access_level_input_process($form_post_array);
                 
+                echo '<pre/>';print_r($access_level_mapping);exit('data');
+                
                 $this->admin_access_level_library->store_access_level_info($user_id, $access_level_mapping);
                 //$this->session->set_flashdata('message', $this->ion_auth->messages());
                 $update_data = array(
@@ -112,7 +114,10 @@ class Access_level extends CI_Controller{
     
     public function get_access_level_items($access_level_mapping = array())
     {
+        //echo '<pre/>';print_r($access_level_mapping);
         $accesss_map = $this->get_access_map();
+        //echo '<pre/>';print_r($accesss_map);exit('data df edit');
+        
         $result['overview_view'] = array(
             'name' => $accesss_map['overview_view_map_id'],
             'id' => $accesss_map['overview_view_map_id'],
@@ -383,8 +388,6 @@ class Access_level extends CI_Controller{
             $result['visitor_applications_access']['checked'] = 'checked';
         }
         
-        
-        
         //visitor business_profile checkbox
         $result['visitor_busines_profile_view'] = array(
             'name' => $accesss_map['visitor_business_profile_view_map_id'],
@@ -426,6 +429,51 @@ class Access_level extends CI_Controller{
         {
             $result['log_access']['checked'] = 'checked';
         }
+        
+        
+        //Footer about us checkbox
+        $result['about_us_view'] = array(
+            'name' => $accesss_map['about_us_view_map_id'],
+            'id' => $accesss_map['about_us_view_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['about_us_view_map_id'], $access_level_mapping))
+        {
+            $result['about_us_view']['checked'] = 'checked';
+        }
+        
+        $result['about_us_access'] = array(
+            'name' => $accesss_map['about_us_access_map_id'],
+            'id' => $accesss_map['about_us_access_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['about_us_access_map_id'], $access_level_mapping))
+        {
+            $result['about_us_access']['checked'] = 'checked';
+        }
+        
+        //Footer Contact us checkbox
+        $result['contact_us_view'] = array(
+            'name' => $accesss_map['contact_us_view_map_id'],
+            'id' => $accesss_map['contact_us_view_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['contact_us_view_map_id'], $access_level_mapping))
+        {
+            $result['contact_us_view']['checked'] = 'checked';
+        }
+        
+        $result['contact_us_access'] = array(
+            'name' => $accesss_map['contact_us_access_map_id'],
+            'id' => $accesss_map['contact_us_access_map_id'],
+            'type' => 'checkbox'
+        );
+        
+        if(array_key_exists($accesss_map['contact_us_access_map_id'], $access_level_mapping))
+        {
+            $result['contact_us_access']['checked'] = 'checked';
+        }
+       
         return $result;
     }
     
@@ -475,7 +523,13 @@ class Access_level extends CI_Controller{
         $accesss_map['visitor_business_profile_access_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         
         $accesss_map['log_view_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
-        $accesss_map['log_access_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;   
+        $accesss_map['log_access_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
+        
+        $accesss_map['about_us_view_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
+        $accesss_map['about_us_access_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
+        
+        $accesss_map['contact_us_view_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
+        $accesss_map['contact_us_access_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         
         return $accesss_map;
     }
@@ -616,6 +670,25 @@ class Access_level extends CI_Controller{
         {
             $access_level_mapping[$accesss_map['log_access_map_id']] = 1;
         }
+        
+        if(array_key_exists($accesss_map['about_us_view_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['about_us_view_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['about_us_access_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['about_us_access_map_id']] = 1;
+        }
+        
+        if(array_key_exists($accesss_map['contact_us_view_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['contact_us_view_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['contact_us_access_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['contact_us_access_map_id']] = 1;
+        }
+        
         return $access_level_mapping;
     }
     
@@ -648,11 +721,16 @@ class Access_level extends CI_Controller{
             //update user info
             $form_post_array = $this->input->post();
             $access_level_mapping = $this->access_level_input_process($form_post_array);
+            
+            //echo '<pre/>';print_r($access_level_mapping);exit('data edit');
+            
             $this->admin_access_level_library->store_access_level_info($user_id, $access_level_mapping, $user_info_data);
             $this->session->set_flashdata('message', $this->ion_auth->messages());
             redirect('admin/access_level/show_users','refresh');
         }
         $access_level_mapping = $this->admin_access_level_library->get_access_level_info($user_id);
+        
+            
         $user_info = array();
         $user_info_array = $this->admin_access_level_library->get_user_info($user_id)->result_array();
         if(!empty($user_info_array))
