@@ -150,7 +150,7 @@
                             <div class ="col-md-9">
                                 <?php echo form_textarea($image_description + array('class' => 'form-control')); ?>
                             </div>
-                            <input type="hidden" name="description_editortext" id="description_editortext">
+                            <input type="hidden" name="image_description_editortext" id="image_description_editortext">
                         </div>
 
                         <div class="form-group">
@@ -202,6 +202,7 @@
             $('#blog_category_id').val(blog_category_id);
             $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
             $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
+            $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
             if (CKEDITOR.instances.title.getData() === "")
             {
                 alert("Blog heading is required.");
@@ -230,6 +231,7 @@
             on('click', function() {
                 $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
                 $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
+                $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
                 if (CKEDITOR.instances.title.getData() === "")
                 {
                     alert("Blog heading is required.");

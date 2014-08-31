@@ -337,6 +337,8 @@ class Applications_blogs extends CI_Controller{
                     'related_posts' => json_encode($related_blogs),
                     'modified_on' => now()
                 );
+                
+                //echo '<pre/>';print_r($data);exit('ddd');
                 if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
                     $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
                 }

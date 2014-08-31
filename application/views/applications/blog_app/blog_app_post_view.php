@@ -83,7 +83,13 @@
             <?php if(isset($blog['picture'])): ?>
                 <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH ?><?php echo $blog['picture']; ?>"/>
             <?php endif; ?>
+                <div class="col-md-12" style="padding-top:20px;padding-right: 0px;">
+                    <a href="" >
+                        <?php echo isset($blog['picture_description']) ? html_entity_decode(html_entity_decode($blog['picture_description'])) : '';?>
+                    </a>
+                </div>
         </div>
+        
         <div class="blog_post_body_text">
             <?php echo isset($blog['description']) ? html_entity_decode(html_entity_decode($blog['description'])) : ''; ?>
         </div>
@@ -99,9 +105,12 @@
                             <br>
                             <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $row['id']; ?>"><?php echo html_entity_decode(html_entity_decode($row['title'])); ?></a>
                         </div>
+                       
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
+            <br>
+           
             <div class="row">
                 <div class="col-md-12"><button data-toggle="modal" data-target="#modal_share_news" style="float: right" class="btn btn-default">Share</button></div>
             </div>
