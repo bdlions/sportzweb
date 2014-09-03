@@ -84,9 +84,7 @@
                 <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH ?><?php echo $blog['picture']; ?>"/>
             <?php endif; ?>
                 <div class="col-md-12" style="padding-top:20px;padding-right: 0px;">
-                    <a href="" >
-                        <?php echo isset($blog['picture_description']) ? html_entity_decode(html_entity_decode($blog['picture_description'])) : '';?>
-                    </a>
+                    <?php echo isset($blog['picture_description']) ? html_entity_decode(html_entity_decode($blog['picture_description'])) : '';?>
                 </div>
         </div>
         

@@ -187,9 +187,12 @@ class Blog_app extends Role_Controller {
 
     function view_blog_post($blog_id) {
         $this->data['message'] = '';
-
+        
         $blog_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
-        //echo'<pre/>';print_r($blog_array);exit('ddd');
+        if(empty($blog_array)){
+            redirect('applications/blog_app', 'refresh');
+        }
+        
         $blog = array();
         $related_blogs = array();
         $related_blogs_id = null;

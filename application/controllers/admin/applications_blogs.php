@@ -160,6 +160,27 @@ class Applications_blogs extends CI_Controller{
         echo json_encode($response);
     }
     
+    //Ajax call for Delete blog category
+    //Written by Omar Faruk
+    function delete_blog_category()
+    {
+        
+        $response = array();
+        $blog_category_id = $_POST['blog_category_id'];
+        $id = $this->admin_blog->delete_blog_categroy($blog_category_id);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = 'Blog Category is Deleted successfully.';       
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_blog->errors_alert();
+        }
+        echo json_encode($response);
+    }
+    
     public function image_upload($file_info)
     {
         $data = null;

@@ -112,6 +112,33 @@ class Admin_blog_model extends Ion_auth_model
         return true;
     }
     
+    //written by omar faruk
+    public function delete_blog_categroy($id)
+    {
+        $blog_category_info = $this->get_blog_category_info($id)->row();
+        if (empty($blog_category_info))
+        {
+            $this->set_error('blog_category_can_not_delete');
+            return FALSE;
+        }else {
+            $this->db->trans_begin();
+            $this->db->where('blog_category_id',$id);
+            $this->db->delete($this->tables['blogs']);
+
+            if ($this->db->affected_rows() == 0 || $this->db->trans_status() === FALSE) {
+                $this->db->trans_rollback();
+                $this->set_error('blog_category_can_not_delete');
+                return FALSE;
+            } else {
+                $this->db->trans_commit();
+                $this->db->where('id',$id);
+                $this->db->delete($this->tables['blog_category']);
+                $this->set_message('blog_category_delete_successful');
+                return true;
+            }
+        }
+    }
+    
     public function get_all_blogs($category_id=0)
     {
         if($category_id!=0)

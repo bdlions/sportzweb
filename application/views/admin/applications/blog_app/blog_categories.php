@@ -12,10 +12,25 @@
         <td><a href="<?php echo base_url() . "admin/applications_blogs/blog_list/{%= blog_category_info.id%}"; ?>">{%= blog_category_info.id%}</td>
         <td><div id="blog_desc_{%= blog_category_info.id%}">{%= blog_category_info.title%}</div></td>
         <td><button id="button_edit_blog_category_{%= blog_category_info.id%}" onclick="openModal('button_edit_blog_category_{%= blog_category_info.id%}','{%= blog_category_info.id%}')" value="" class="form-control btn pull-right">Edit</button></td>
+        <td><button id="button_delete_blog_category_{%= blog_category_info.id%}" onclick="openDeleteModal('button_delete_blog_category_{%= blog_category_info.id%}','{%= blog_category_info.id%}')" value="" class="form-control btn pull-right">Delete</button></td>
     </tr>
     {% blog_category_info = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
+
+<!--Written By Omar for remove selected category -->
+<script type="text/javascript">
+    $(function () {
+        /*$("#tbody_blog_category_list").on("click", "button", function(e) {
+            alert('here');
+            //console.log(this.id);
+            var target = e.target;
+            //console.log(target);
+            $(target).closest('tr').remove();
+        });*/
+    });
+</script>
+
 <div class="panel panel-default">
     <div class="panel-heading">Blog Categories</div>
     <div class="panel-body">
@@ -49,9 +64,10 @@
                                 <tr>
                                     <th style="text-align: center;">Id</th>
                                     <th style="text-align: center;">Name</th>
-                                    <?php if($allow_access){ ?>
+                                    <?php if($allow_access): ?>
                                     <th style="text-align: center;">Edit</th> 
-                                    <?php } ?>
+                                    <th style="text-align: center;">Delete</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody id="tbody_blog_category_list">
@@ -65,6 +81,13 @@
                                                 Edit
                                             </button>                                            
                                         </td>
+                                        
+                                        <td>                                            
+                                            <button id="button_delete_blog_category_<?php echo $row['id']; ?>" onclick="openDeleteModal('button_delete_blog_category_<?php echo $row["id"]; ?>', '<?php echo $row['id']; ?>')" value="" class="form-control btn pull-right">
+                                                Delete
+                                            </button>                                            
+                                        </td>
+                                        
                                         <?php } ?>
                                     </tr>
                                 <?php endforeach; ?>
@@ -80,3 +103,4 @@
 </div>
 <?php $this->load->view("admin/applications/blog_app/modal_create_blog_category"); ?>
 <?php $this->load->view("admin/applications/blog_app/modal_edit_blog_category"); ?>
+<?php $this->load->view("admin/applications/blog_app/modal_delete_blog_category"); ?>

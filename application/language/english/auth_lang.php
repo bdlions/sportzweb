@@ -210,4 +210,6 @@ $lang['news_category_update_duplicate_category']                        = "News 
 // for blog
 $lang['blog_category_creation_duplicate_blog_category_name']            = "Blog category name is duplicate";
 $lang['blog_category_duplicate']                                        = "Blog categeory title is duplicate"; 
+$lang['blog_category_can_not_delete']                                   = "Blog categeory can not be deleted"; 
+$lang['blog_category_delete_successful']                                = "Blog categeory is deleted successfully"; 
 
