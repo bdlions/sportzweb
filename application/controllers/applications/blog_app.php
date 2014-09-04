@@ -11,6 +11,7 @@ class Blog_app extends Role_Controller {
 
         $this->load->helper('language');
         $this->load->helper('url');
+        $this->load->library('org/utility/Utils');
         $this->load->library('org/application/blog_app_library');
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
@@ -387,7 +388,7 @@ class Blog_app extends Role_Controller {
             $blog_title = trim(htmlentities($this->input->post('title_editortext')));
             $description = trim(htmlentities($this->input->post('description_editortext')));
             $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
-
+            
             $data = array(
                 'title' => $blog_title,
                 'blog_category_id' => $blog_category_id,

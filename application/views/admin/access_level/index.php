@@ -51,12 +51,17 @@
                         </div> 
                     </div>                    
                 </div>
-                <div class="col-md-6 pull-right">
+                <div class="col-md-8 pull-right">
                     <table class="table table-responsive">
                         <thead>
                             <td></td>
                             <td><div class="form-group">View</div></td>
                             <td><div class="form-group">Access</div></td>
+                            <td><div class="form-group">Write</div></td>
+                            <td><div class="form-group">Approve</div></td>
+                            <td><div class="form-group">Edit</div></td>
+                            <td><div class="form-group">Delete</div></td>
+                            <td><div class="form-group">Configuration</div></td>
                         </thead>
 
                         <tbody>
@@ -74,15 +79,43 @@
                                        <?php echo form_input($overview_access); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($overview_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($overview_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($overview_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($overview_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($overview_configuration); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="success">
                                 <td>
                                     Users
                                 </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>
@@ -96,6 +129,31 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($user_overview_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_overview_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_overview_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_overview_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_overview_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_overview_configuration); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -113,15 +171,43 @@
                                        <?php echo form_input($user_manage_access); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_manage_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_manage_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_manage_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_manage_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_manage_configuration); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="success">
                                 <td>
                                     Applications
                                 </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -135,6 +221,31 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($xstream_banter_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($xstream_banter_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($xstream_banter_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($xstream_banter_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($xstream_banter_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($xstream_banter_configuration); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -153,6 +264,31 @@
                                        <?php echo form_input($healthy_recipes_access); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($healthy_recipes_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($healthy_recipes_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($healthy_recipes_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($healthy_recipes_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($healthy_recipes_configuration); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -166,6 +302,31 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($service_directory_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($service_directory_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($service_directory_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($service_directory_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($service_directory_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($service_directory_configuration); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -184,6 +345,31 @@
                                        <?php echo form_input($news_access); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($news_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($news_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($news_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($news_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($news_configuration); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -197,6 +383,31 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($blogs_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($blogs_write); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($blogs_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($blogs_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($blogs_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($blogs_configuration); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -214,6 +425,31 @@
                                        <?php echo form_input($bmi_calculator_access); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($bmi_calculator_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($bmi_calculator_approve); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($bmi_calculator_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($bmi_calculator_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($bmi_calculator_configuration); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -227,6 +463,31 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($photography_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($photography_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($photography_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($photography_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($photography_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($photography_configuration); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -244,15 +505,43 @@
                                        <?php echo form_input($business_profile_access); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($business_profile_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($business_profile_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($business_profile_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($business_profile_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($business_profile_configuration); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="success">
                                 <td>
                                     Visitors
                                 </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>
@@ -266,6 +555,31 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($visitor_page_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_page_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_page_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_page_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_page_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_page_configuration); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -283,6 +597,31 @@
                                        <?php echo form_input($visitor_applications_access); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_applications_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_applications_approve); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_applications_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_applications_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_applications_configuration); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -290,12 +629,37 @@
                                 </td>
                                <td>
                                     <div class="form-group">
-                                       <?php echo form_input($visitor_busines_profile_view); ?>
+                                       <?php echo form_input($visitor_business_profile_view); ?>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($visitor_business_profile_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_business_profile_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_business_profile_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_business_profile_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_business_profile_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_business_profile_configuration); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -313,16 +677,44 @@
                                        <?php echo form_input($log_access); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($log_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($log_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($log_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($log_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($log_configuration); ?>
+                                    </div>
+                                </td>
                             </tr>
                             
                             <tr class="success">
                                 <td>
                                     Footer
                                 </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -336,6 +728,31 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($about_us_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($about_us_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($about_us_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($about_us_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($about_us_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($about_us_configuration); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -352,6 +769,31 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($contact_us_access); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($contact_us_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($contact_us_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($contact_us_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($contact_us_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($contact_us_configuration); ?>
                                     </div>
                                 </td>
                             </tr>

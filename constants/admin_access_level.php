@@ -1,4 +1,5 @@
 <?php
+define("ACCESS_LEVEL_DEFAULT_PASSWORD",                                         'Sp00rtzwebS00nutu');
 define("ACCESS_LEVEL_PUBLISHER_ID",                                             4);
 
 define("ADMIN_ACCESS_LEVEL_OVERVIEW_ID",                                        1);
@@ -21,3 +22,8 @@ define("ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID",                               
 
 define("ADMIN_ACCESS_LEVEL_VIEW",                                               1);
 define("ADMIN_ACCESS_LEVEL_ACCESS",                                             2);
+define("ADMIN_ACCESS_LEVEL_WRITE",                                              3);
+define("ADMIN_ACCESS_LEVEL_APPROVE",                                            4);
+define("ADMIN_ACCESS_LEVEL_EDIT",                                               5);
+define("ADMIN_ACCESS_LEVEL_DELETE",                                             6);
+define("ADMIN_ACCESS_LEVEL_CONFIGURATION",                                      7);

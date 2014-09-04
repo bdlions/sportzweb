@@ -4,9 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Applications_blogs extends CI_Controller{
+    public $tmpl = '';
     public $user_group_array = array();
-    public $allow_view = FALSE;
-    public $allow_access = FALSE;
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -30,6 +29,14 @@ class Applications_blogs extends CI_Controller{
             redirect('admin/auth/login', 'refresh');
         }
         
+        $this->data['allow_view'] = FALSE;
+        $this->data['allow_access'] = FALSE;
+        $this->data['allow_write'] = FALSE;
+        $this->data['allow_approve'] = FALSE;
+        $this->data['allow_edit'] = FALSE;
+        $this->data['allow_delete'] = FALSE;
+        $this->data['allow_configuration'] = FALSE; 
+        
         $selected_user_group = $this->session->userdata('user_type');
         if(isset($selected_user_group ) && $selected_user_group != ""){
             $this->user_group_array = array($selected_user_group);
@@ -39,21 +46,49 @@ class Applications_blogs extends CI_Controller{
             $this->user_group_array = $this->ion_auth->get_current_user_types();
         } 
         if (in_array(ADMIN, $this->user_group_array)) {
-            $this->allow_view = TRUE;
-            $this->allow_access = TRUE;
+            $this->tmpl = ADMIN_DASHBOARD_TEMPLATE;
+            $this->data['allow_view'] = TRUE;
+            $this->data['allow_access'] = TRUE;
+            $this->data['allow_write'] = TRUE;
+            $this->data['allow_approve'] = TRUE;
+            $this->data['allow_edit'] = TRUE;
+            $this->data['allow_delete'] = TRUE;
+            $this->data['allow_configuration'] = TRUE;
         }
         else
         {
             $access_level_mapping = $this->admin_access_level_library->get_access_level_info($this->session->userdata('user_id'));
+            $this->tmpl = USER_DASHBOARD_TEMPLATE;
+            $this->data['access_level_mapping'] = $access_level_mapping;
+            
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
             {
-                $this->allow_view = TRUE;
+                $this->data['allow_view'] = TRUE;
             }
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS, $access_level_mapping))
             {
-                $this->allow_access = TRUE;
+                $this->data['allow_access'] = TRUE;
             }
-            if(!$this->allow_view)
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE, $access_level_mapping))
+            {
+                $this->data['allow_write'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE, $access_level_mapping))
+            {
+                $this->data['allow_approve'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
+            {
+                $this->data['allow_edit'] = TRUE;
+            }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE, $access_level_mapping))
+            {
+                $this->data['allow_delete'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
+            {
+                $this->data['allow_configuration'] = TRUE;  
+            }
+            if(!$this->data['allow_view'])
             {
                 redirect('admin/general/restriction_view', 'refresh');
             }
@@ -63,15 +98,13 @@ class Applications_blogs extends CI_Controller{
     function index()
     {
         $this->data['message'] = '';
-        $this->data['allow_access'] = $this->allow_access;
         $category_list = $this->admin_blog->get_all_blog_category()->result_array();
         $this->data['category_list'] = $category_list;
-        $this->template->load(null, "admin/applications/blog_app/blog_categories", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/blog_categories", $this->data);
     }
     function blog_list($category_id)
     {
         $this->data['message'] = '';
-        $this->data['allow_access'] = $this->allow_access;
         $blog_list = $this->admin_blog->get_all_blogs($category_id)->result_array();
         $blog_count = count($blog_list);
         $order_list = array();
@@ -83,8 +116,7 @@ class Applications_blogs extends CI_Controller{
         $this->data['blog_list'] = $blog_list;
         $this->data['blog_count'] = $blog_count;
         $this->data['category_id'] = $category_id;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/blog_app/blog_list", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/blog_list", $this->data);
     }
     //Ajax call for create blog category
     //Written by Omar Faruk
@@ -212,7 +244,6 @@ class Applications_blogs extends CI_Controller{
     
     function create_blog($category_id = 0)
     {
-        $this->data['allow_access'] = $this->allow_access;
         $this->data['message'] = '';
         
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
@@ -306,12 +337,11 @@ class Applications_blogs extends CI_Controller{
         $this->data['selected_blog_data_array'] = $selected_blog_data_array;
         
         $this->data['blog_category_id'] = $category_id;
-        $this->template->load(null, "admin/applications/blog_app/create_blog", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/create_blog", $this->data);
     }
     
     public function edit_blog($blog_id)
     {
-        $this->data['allow_access'] = $this->allow_access;
         $this->data['message'] = '';
         
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
@@ -429,7 +459,7 @@ class Applications_blogs extends CI_Controller{
         );
         
         $this->data['blog_id'] = $blog_id;
-        $this->template->load(null, "admin/applications/blog_app/edit_blog", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/edit_blog", $this->data);
     }
     
     
@@ -451,7 +481,6 @@ class Applications_blogs extends CI_Controller{
     
     function blog_detail($blog_id)
     {
-        $this->data['allow_access'] = $this->allow_access;
         $this->data['message'] = '';
 
         $blog_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
@@ -488,12 +517,11 @@ class Applications_blogs extends CI_Controller{
         $this->data['item_id'] = $blog['id'];
         $this->data['total_comments'] = $total_comments;
         //echo '<pre/>';print_r($this->data['user_info']);exit;
-        $this->template->load(null, "admin/applications/blog_app/blog_detail", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/blog_detail", $this->data);
     }
     
     function blog_detail_pending($blog_id)
     {
-        $this->data['allow_access'] = $this->allow_access;
         $this->data['message'] = '';
         $blog_detail = $this->admin_blog->get_blog_info($blog_id)->result_array();
         if(!empty($blog_detail)){
@@ -511,7 +539,7 @@ class Applications_blogs extends CI_Controller{
         }
         
         $this->data['blog_id'] = $blog_id;
-        $this->template->load(null, "admin/applications/blog_app/blog_detail_pending", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/blog_detail_pending", $this->data);
     }
     
     function comment_list($blog_id)
@@ -528,8 +556,7 @@ class Applications_blogs extends CI_Controller{
         $this->data['comment_list'] = $comment_list;
         $this->data['blog_id'] = $blog_id;
         
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/blog_app/comment_list", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/comment_list", $this->data);
     }
     
     function remove_comment()
@@ -554,7 +581,6 @@ class Applications_blogs extends CI_Controller{
     function config_blog()
     {
         $this->data['message'] = '';
-        $this->data['allow_access'] = $this->allow_access;
         /*$all_blogs = $this->admin_blog->get_configed_blog_for_home_page();
         //echo '<pre/>';print_r($all_blogs);exit('here');
         $this->data['all_blogs'] = $all_blogs;
@@ -566,12 +592,11 @@ class Applications_blogs extends CI_Controller{
         //echo "<pre/>";
         //print_r($this->data);
         //exit();
-        $this->template->load(null, "admin/applications/blog_app/config_blog", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/config_blog", $this->data);
     }
     
     public function blog_list_for_home_page()
     {
-        $this->data['allow_access'] = $this->allow_access;
         $response = array();
         $blog_item_id = $this->input->post('selected_blog_array_list');
         $selected_date_to_show_blog = $this->input->post('selected_date_for_item');
@@ -599,7 +624,6 @@ class Applications_blogs extends CI_Controller{
     
     public function page_import_blogs()
     {
-        $this->data['allow_access'] = $this->allow_access;
         $success_counter = 0;
         $result_array = array();
         $this->data['message'] = '';
@@ -714,7 +738,7 @@ class Applications_blogs extends CI_Controller{
             
             
         }
-        $this->template->load(null, "admin/applications/blog_app/import_blogs_view", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/import_blogs_view", $this->data);
     }
     
     
@@ -786,7 +810,7 @@ class Applications_blogs extends CI_Controller{
         $blog_status_list = array(PENDING,RE_APPROVAL,DELETION_PENDING);
         $pending_list = $this->admin_blog->get_all_pending_blogs($blog_status_list)->result_array();
         $this->data['pending_list'] = $pending_list;
-        $this->template->load(null, "admin/applications/blog_app/approve_blog", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/approve_blog", $this->data);
     }
     
     public function get_selected_blog_data()
@@ -877,7 +901,6 @@ class Applications_blogs extends CI_Controller{
     function view_blog_post($blog_id)
     {
         $this->data['message'] = '';
-        $this->data['allow_access'] = $this->allow_access;
         $blog_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
         $blog = array();
         if (count($blog_array) > 0) {
@@ -901,7 +924,7 @@ class Applications_blogs extends CI_Controller{
         $this->data['application_id'] = APPLICATION_BLOG_APP_ID;
         $this->data['item_id'] = $blog['id'];
         $this->data['total_comments'] = $total_comments;
-        $this->template->load(null, "admin/applications/blog_app/blog_admin_post_view", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/blog_app/blog_admin_post_view", $this->data);
     }
     function update_blog()
     {

@@ -4,9 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Applications_news extends CI_Controller{
+    public $tmpl = '';
     public $user_group_array = array();
-    public $allow_view = FALSE;
-    public $allow_access = FALSE;
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -31,6 +30,14 @@ class Applications_news extends CI_Controller{
             redirect('admin/auth/login', 'refresh');
         }
         
+        $this->data['allow_view'] = FALSE;
+        $this->data['allow_access'] = FALSE;
+        $this->data['allow_write'] = FALSE;
+        $this->data['allow_approve'] = FALSE;
+        $this->data['allow_edit'] = FALSE;
+        $this->data['allow_delete'] = FALSE;
+        $this->data['allow_configuration'] = FALSE; 
+        
         $selected_user_group = $this->session->userdata('user_type');
         if(isset($selected_user_group ) && $selected_user_group != ""){
             $this->user_group_array = array($selected_user_group);
@@ -40,21 +47,49 @@ class Applications_news extends CI_Controller{
             $this->user_group_array = $this->ion_auth->get_current_user_types();
         } 
         if (in_array(ADMIN, $this->user_group_array)) {
-            $this->allow_view = TRUE;
-            $this->allow_access = TRUE;
+            $this->tmpl = ADMIN_DASHBOARD_TEMPLATE;
+            $this->data['allow_view'] = TRUE;
+            $this->data['allow_access'] = TRUE;
+            $this->data['allow_write'] = TRUE;
+            $this->data['allow_approve'] = TRUE;
+            $this->data['allow_edit'] = TRUE;
+            $this->data['allow_delete'] = TRUE;
+            $this->data['allow_configuration'] = TRUE;   
         }
         else
         {
             $access_level_mapping = $this->admin_access_level_library->get_access_level_info($this->session->userdata('user_id'));
+            $this->tmpl = USER_DASHBOARD_TEMPLATE;
+            $this->data['access_level_mapping'] = $access_level_mapping;
+            
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
             {
-                $this->allow_view = TRUE;
+                $this->data['allow_view'] = TRUE;
             }
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS, $access_level_mapping))
             {
-                $this->allow_access = TRUE;
+                $this->data['allow_access'] = TRUE;
             }
-            if(!$this->allow_view)
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE, $access_level_mapping))
+            {
+                $this->data['allow_write'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE, $access_level_mapping))
+            {
+                $this->data['allow_approve'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
+            {
+                $this->data['allow_edit'] = TRUE;
+            }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE, $access_level_mapping))
+            {
+                $this->data['allow_delete'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
+            {
+                $this->data['allow_configuration'] = TRUE;  
+            }
+            if(!$this->data['allow_view'])
             {
                 redirect('admin/general/restriction_view', 'refresh');
             }
@@ -64,11 +99,10 @@ class Applications_news extends CI_Controller{
     function index()
     {
         $this->data['message'] = '';
-        $this->data['allow_access'] = $this->allow_access;
         $news_category = $this->admin_news->get_all_news_category()->result_array();
         
         $this->data['news_category'] = $news_category;
-        $this->template->load(null, "admin/applications/news_app/news_category", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/news_app/news_category", $this->data);
     }
     
     //Ajax call for create news category
@@ -153,8 +187,7 @@ class Applications_news extends CI_Controller{
         $this->data['news_sub_category'] = $news_sub_category;
         $this->data['news'] = $news;
         $this->data['news_category_id'] = $sub_category_id;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/news_app/news_sub_category", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/news_app/news_sub_category", $this->data);
     }
     
     function sub_category_news_list($id)
@@ -165,7 +198,7 @@ class Applications_news extends CI_Controller{
         $this->data['news'] = $sub_category_news;
         $this->data['category_id'] = $sub_category_news['news_category_id'];
         
-        $this->template->load(null, "admin/applications/news_app/sub_category_news_list", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/news_app/sub_category_news_list", $this->data);
     }
     
     /**
@@ -265,7 +298,7 @@ class Applications_news extends CI_Controller{
         );
         
         $this->data['news_id'] = $news_id;
-        $this->template->load(null, "admin/applications/news_app/edit_news", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/news_app/edit_news", $this->data);
     }
     
     
@@ -282,7 +315,7 @@ class Applications_news extends CI_Controller{
         $this->data['news'] = $news;
         $this->data['application_id'] = APPLICATION_NEWS_APP_ID;
         $this->data['item_id'] = $news['id'];
-        $this->template->load(null, "admin/applications/news_app/news_details", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/news_app/news_details", $this->data);
     }
     
     /**
@@ -386,7 +419,7 @@ class Applications_news extends CI_Controller{
         
         $this->data['news_category_id'] = $news_category_id;
         
-        $this->template->load(null,"admin/applications/news_app/create_news",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/create_news",  $this->data);
     }
     
     public function image_upload($file_info)
@@ -606,7 +639,7 @@ class Applications_news extends CI_Controller{
             }
             $this->data['message'] = $message;
         }
-        $this->template->load(null, "admin/applications/news_app/import_news_view", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/news_app/import_news_view", $this->data);
     }
     
 
@@ -758,7 +791,7 @@ class Applications_news extends CI_Controller{
         
         $this->data['news_sub_category_id'] = $news_sub_category_id;
         
-        $this->template->load(null,"admin/applications/news_app/create_sub_news",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/create_sub_news",  $this->data);
     }
     
 
@@ -768,7 +801,7 @@ class Applications_news extends CI_Controller{
         $news_list = $this->admin_news->config_news();//print_r($news_list);exit;
         $this->data['news_list_old'] = $news_list;
         $this->data = array_merge($this->data, $this->admin_news->get_news_home_page_configuration());
-        $this->template->load("admin/templates/dashboard_tmpl","admin/applications/news_app/config_news_for_home_page",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/config_news_for_home_page",  $this->data);
     }
     
     public function news_list_for_home_page()
@@ -804,7 +837,7 @@ class Applications_news extends CI_Controller{
         $news_list = $this->admin_news->config_news($news_list);
         $this->data['news_list'] = $news_list;
         //echo '<pre/>';print_r($news_list);exit('heere');
-        $this->template->load(null,"admin/applications/news_app/manage_latest_news",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/manage_latest_news",  $this->data);
     }
     
     public function latest_news_for_home_page()
@@ -837,7 +870,7 @@ class Applications_news extends CI_Controller{
         $news_list = $this->admin_news->get_all_news($date)->result_array();
         $news_list = $this->admin_news->config_news($news_list);
         $this->data['news_list'] = $news_list;
-        $this->template->load(null,"admin/applications/news_app/manage_breaking_news",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/manage_breaking_news",  $this->data);
     }
     
     function manage_breaking_news()
@@ -867,7 +900,7 @@ class Applications_news extends CI_Controller{
         $comment_list = $this->admin_news->get_all_comments($news_id)->result_array();
         $this->data['comment_list'] = $comment_list;
         $this->data['news_id'] = $news_id;
-        $this->template->load(null,"admin/applications/news_app/comment_list",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/comment_list",  $this->data);
     }
     
     function comment_details($comment_id)
@@ -876,7 +909,7 @@ class Applications_news extends CI_Controller{
         $comment = $comment[0];
         
         $this->data['comment'] = $comment;
-        $this->template->load(null,"admin/applications/news_app/comment_details",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/comment_details",  $this->data);
     }
     
     function remove_comment()
@@ -969,7 +1002,7 @@ class Applications_news extends CI_Controller{
         
         $this->data = array_merge($this->data, $this->admin_news->get_news_category_configuration($news_category_id));
         
-        $this->template->load(null,"admin/applications/news_app/config_news_for_catagory_new",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/config_news_for_catagory_new",  $this->data);
     }
     
     public function set_news_list_for_category()
@@ -1030,7 +1063,7 @@ class Applications_news extends CI_Controller{
         //$this->data['news_list']  = $news_list;
         
         $this->data = array_merge($this->data, $this->admin_news->get_news_sub_category_configuration($sub_category_id));
-        $this->template->load(null,"admin/applications/news_app/config_news_for_sub_category",  $this->data);
+        $this->template->load($this->tmpl,"admin/applications/news_app/config_news_for_sub_category",  $this->data);
     }
     
     public function set_news_list_for_sub_category()

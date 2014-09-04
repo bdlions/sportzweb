@@ -62,3 +62,6 @@ $lang['email_activation_subject']            = 'Account Activation';
 
 $lang['incorrect_security_answer']            = 'Security quesstion\'s answer is incorrect';
 $lang['invalid_email_address']              = "Your provided email address is invalid.";
+
+$lang['group_creation_duplicate_group_name']   = 'Group Name Already Used or Invalid.';
+$lang['group_creation_success_message']   = 'Group is created successfully.';

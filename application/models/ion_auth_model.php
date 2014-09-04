@@ -1345,10 +1345,10 @@ class Ion_auth_model extends CI_Model {
 
             return FALSE;
         }
-
+        
         // Filter the data passed
         $data = $this->_filter_data($this->tables['users'], $data);
-
+        
         if (array_key_exists('username', $data) || array_key_exists('password', $data) || array_key_exists('email', $data)) {
             if (array_key_exists('password', $data)) {
                 if (!empty($data['password'])) {
@@ -1359,7 +1359,7 @@ class Ion_auth_model extends CI_Model {
                 }
             }
         }
-
+        
         $this->trigger_events('extra_where');
         $this->db->update($this->tables['users'], $data, array('id' => $user->id));
 
@@ -1860,13 +1860,13 @@ class Ion_auth_model extends CI_Model {
      * @author Ben Edmunds
      * */
     public function errors() {
-        $_output = '';
+        $_output = "<div style='color:red'>";
         foreach ($this->errors as $error) {
             $errorLang = $this->lang->line($error) ? $this->lang->line($error) : '##' . $error . '##';
             $_output .= $this->error_start_delimiter . $errorLang . $this->error_end_delimiter;
         }
 
-        return $_output;
+        return $_output."</div>";
     }
     
     public function errors_alert() {
@@ -1903,7 +1903,7 @@ class Ion_auth_model extends CI_Model {
     protected function _filter_data($table, $data) {
         $filtered_data = array();
         $columns = $this->db->list_fields($table);
-
+        
         if (is_array($data)) {
             foreach ($columns as $column) {
                 if (array_key_exists($column, $data))

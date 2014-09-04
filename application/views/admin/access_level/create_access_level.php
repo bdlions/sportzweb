@@ -8,6 +8,16 @@
         </div>
 
         <div class="panel-body">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="message" class="col-md-4 control-label requiredField">
+                        
+                    </label>
+                    <div class ="col-md-5">
+                        <?php echo $message; ?>
+                    </div> 
+                </div>
+            </div>
             <?php echo form_open("admin/access_level/create_access_level", array('id' => 'form_create_user', 'class' => 'form-horizontal')); ?>
             <div class="col-md-8">
                 <div class="form-group">
@@ -25,7 +35,7 @@
 
                 </label>
                 <div class ="col-md-3 col-md-offset-0">
-                    <?php echo form_input($create_access_level + array('class' => 'form-control btn button-custom')); ?>
+                    <?php echo form_input($submit_create_access_level + array('class' => 'form-control btn button-custom')); ?>
                 </div> 
             </div>
             </div>

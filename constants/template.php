@@ -18,6 +18,8 @@ define('LOGIN_VIEW', 'nonmember/templates/main');
 define('PUBLISHER_LOGIN_SUCCESS_TEMPLATE', 'publisher/templates/tmpl');
 define('PUBLISHER_DASHBOARD_TEMPLATE', 'publisher/templates/dashboard_tmpl');
 
+define('USER_DASHBOARD_TEMPLATE', 'admin/templates/user_tmpl');
+
 define('ADMIN_LOGIN_SUCCESS_URI', 'admin/auth/login');
 define('ADMIN_LOGIN_SUCCESS_TEMPLATE', 'admin/templates/tmpl');
 define('ADMIN_DASHBOARD_TEMPLATE', 'admin/templates/dashboard_tmpl');

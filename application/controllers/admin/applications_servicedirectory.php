@@ -4,9 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Applications_servicedirectory extends CI_Controller{
+    public $tmpl = '';
     public $user_group_array = array();
-    public $allow_view = FALSE;
-    public $allow_access = FALSE;
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -29,6 +28,14 @@ class Applications_servicedirectory extends CI_Controller{
             redirect('admin/auth/login', 'refresh');
         }
         
+        $this->data['allow_view'] = FALSE;
+        $this->data['allow_access'] = FALSE;
+        $this->data['allow_write'] = FALSE;
+        $this->data['allow_approve'] = FALSE;
+        $this->data['allow_edit'] = FALSE;
+        $this->data['allow_delete'] = FALSE;
+        $this->data['allow_configuration'] = FALSE;
+        
         $selected_user_group = $this->session->userdata('user_type');
         if(isset($selected_user_group ) && $selected_user_group != ""){
             $this->user_group_array = array($selected_user_group);
@@ -38,21 +45,49 @@ class Applications_servicedirectory extends CI_Controller{
             $this->user_group_array = $this->ion_auth->get_current_user_types();
         } 
         if (in_array(ADMIN, $this->user_group_array)) {
-            $this->allow_view = TRUE;
-            $this->allow_access = TRUE;
+            $this->tmpl = ADMIN_DASHBOARD_TEMPLATE;
+            $this->data['allow_view'] = TRUE;
+            $this->data['allow_access'] = TRUE;
+            $this->data['allow_write'] = TRUE;
+            $this->data['allow_approve'] = TRUE;
+            $this->data['allow_edit'] = TRUE;
+            $this->data['allow_delete'] = TRUE;
+            $this->data['allow_configuration'] = TRUE; 
         }
         else
         {
             $access_level_mapping = $this->admin_access_level_library->get_access_level_info($this->session->userdata('user_id'));
+            $this->tmpl = USER_DASHBOARD_TEMPLATE;
+            $this->data['access_level_mapping'] = $access_level_mapping;
+            
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
             {
-                $this->allow_view = TRUE;
+                $this->data['allow_view'] = TRUE;
             }
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS, $access_level_mapping))
             {
-                $this->allow_access = TRUE;
+                $this->data['allow_access'] = TRUE;
             }
-            if(!$this->allow_view)
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE, $access_level_mapping))
+            {
+                $this->data['allow_write'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE, $access_level_mapping))
+            {
+                $this->data['allow_approve'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
+            {
+                $this->data['allow_edit'] = TRUE;
+            }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE, $access_level_mapping))
+            {
+                $this->data['allow_delete'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
+            {
+                $this->data['allow_configuration'] = TRUE;  
+            }
+            if(!$this->data['allow_view'])
             {
                 redirect('admin/general/restriction_view', 'refresh');
             }
@@ -70,8 +105,7 @@ class Applications_servicedirectory extends CI_Controller{
             $service_category_list = $service_category_list_array;
         }
         $this->data['service_category_list'] = $service_category_list;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/service_directory/service_category", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/service_category", $this->data);
     }
     
     //Ajax call for create service category
@@ -166,7 +200,7 @@ class Applications_servicedirectory extends CI_Controller{
             'value' => $this->form_validation->set_value('title'),
         );
         
-        $this->template->load(null, "admin/applications/service_directory/create_service_category", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/create_service_category", $this->data);
         
     }
     
@@ -279,7 +313,7 @@ class Applications_servicedirectory extends CI_Controller{
         
         $this->data['service_category_id'] = $service_category_id;
         
-        $this->template->load(null, "admin/applications/service_directory/edit_service_category", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/edit_service_category", $this->data);
         
     }
     
@@ -303,8 +337,7 @@ class Applications_servicedirectory extends CI_Controller{
         $services_list = array();
         $service_list_array = $this->admin_service_directory->get_all_services($service_category_id)->result_array();
         $this->data['services_list'] = $service_list_array;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/service_directory/services", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/services", $this->data);
     }
     
     function create_service($service_category_id = 0)
@@ -453,7 +486,7 @@ class Applications_servicedirectory extends CI_Controller{
         }
         
         $this->data['service_category_id'] = $service_category_id;
-        $this->template->load(null, "admin/applications/service_directory/create_service", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/create_service", $this->data);
     }
     
     /**
@@ -711,7 +744,7 @@ class Applications_servicedirectory extends CI_Controller{
         $this->data['service_id'] = $service_id;
         $this->data['service_info'] = $service_info;
         
-        $this->template->load(null, "admin/applications/service_directory/edit_service", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/edit_service", $this->data);
     }
     
     function service_show($service_id = 0)
@@ -720,7 +753,7 @@ class Applications_servicedirectory extends CI_Controller{
         $service_info = $this->admin_service_directory->get_service_info($service_id)->result_array();
         
         $this->data['service_info'] = $service_info[0];
-        $this->template->load("admin/templates/dashboard_tmpl", "admin/applications/service_directory/service_show", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/service_show", $this->data);
     }
     function service_comments($service_id = 0)
     {
@@ -739,7 +772,7 @@ class Applications_servicedirectory extends CI_Controller{
 
         $this->data['service_comments'] = $service_comments;
         $this->data['service_id'] = $service_id;
-        $this->template->load(null, "admin/applications/service_directory/service_comments", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/service_comments", $this->data);
     }
     
     function remove_comment()
@@ -771,7 +804,7 @@ class Applications_servicedirectory extends CI_Controller{
         }
         $this->data['service_info'] = $service_info;
         
-        $this->template->load(null, "admin/applications/service_directory/service_pictures", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/service_pictures", $this->data);
     }
     
     public function check_country_code_validity($country_code)
@@ -891,7 +924,7 @@ class Applications_servicedirectory extends CI_Controller{
             $this->data['message'] = $message;
 
         }
-        $this->template->load(null, "admin/applications/service_directory/import_services_view", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/service_directory/import_services_view", $this->data);
     }
     public function import_services()
     {

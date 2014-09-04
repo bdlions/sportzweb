@@ -4,9 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Applications_healthyrecipes extends CI_Controller{
+    public $tmpl = '';
     public $user_group_array = array();
-    public $allow_view = FALSE;
-    public $allow_access = FALSE;
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -30,6 +29,14 @@ class Applications_healthyrecipes extends CI_Controller{
             redirect('admin/auth/login', 'refresh');
         }
         
+        $this->data['allow_view'] = FALSE;
+        $this->data['allow_access'] = FALSE;
+        $this->data['allow_write'] = FALSE;
+        $this->data['allow_approve'] = FALSE;
+        $this->data['allow_edit'] = FALSE;
+        $this->data['allow_delete'] = FALSE;
+        $this->data['allow_configuration'] = FALSE; 
+        
         $selected_user_group = $this->session->userdata('user_type');
         if(isset($selected_user_group ) && $selected_user_group != ""){
             $this->user_group_array = array($selected_user_group);
@@ -39,21 +46,49 @@ class Applications_healthyrecipes extends CI_Controller{
             $this->user_group_array = $this->ion_auth->get_current_user_types();
         } 
         if (in_array(ADMIN, $this->user_group_array)) {
-            $this->allow_view = TRUE;
-            $this->allow_access = TRUE;
+            $this->tmpl = ADMIN_DASHBOARD_TEMPLATE;
+            $this->data['allow_view'] = TRUE;
+            $this->data['allow_access'] = TRUE;
+            $this->data['allow_write'] = TRUE;
+            $this->data['allow_approve'] = TRUE;
+            $this->data['allow_edit'] = TRUE;
+            $this->data['allow_delete'] = TRUE;
+            $this->data['allow_configuration'] = TRUE; 
         }
         else
         {
             $access_level_mapping = $this->admin_access_level_library->get_access_level_info($this->session->userdata('user_id'));
+            $this->tmpl = USER_DASHBOARD_TEMPLATE;
+            $this->data['access_level_mapping'] = $access_level_mapping;
+            
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
             {
-                $this->allow_view = TRUE;
+                $this->data['allow_view'] = TRUE;
             }
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS, $access_level_mapping))
             {
-                $this->allow_access = TRUE;
+                $this->data['allow_access'] = TRUE;
             }
-            if(!$this->allow_view)
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE, $access_level_mapping))
+            {
+                $this->data['allow_write'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE, $access_level_mapping))
+            {
+                $this->data['allow_approve'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
+            {
+                $this->data['allow_edit'] = TRUE;
+            }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE, $access_level_mapping))
+            {
+                $this->data['allow_delete'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
+            {
+                $this->data['allow_configuration'] = TRUE;  
+            }
+            if(!$this->data['allow_view'])
             {
                 redirect('admin/general/restriction_view', 'refresh');
             }
@@ -64,7 +99,6 @@ class Applications_healthyrecipes extends CI_Controller{
     function index()
     {
         $this->data['message'] = '';
-        $this->data['allow_access'] = $this->allow_access;
         $recipes_category_list = array();
         $recipe_category_list_array = $this->admin_healthy_recipes->get_all_category()->result_array();
         if(!empty($recipe_category_list_array))
@@ -72,8 +106,7 @@ class Applications_healthyrecipes extends CI_Controller{
             $recipes_category_list = $recipe_category_list_array;
         }
         $this->data['recipes_category_list'] = $recipes_category_list;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/healthy_recipes/recipes_category", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/healthy_recipes/recipes_category", $this->data);
     }
     
     //Written by Omar Faruk for recipe category list  
@@ -87,8 +120,7 @@ class Applications_healthyrecipes extends CI_Controller{
         }
         $this->data['recipes_list'] = $recipes_list;
         $this->data['recipe_category_id'] = $recipe_category_id;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/healthy_recipes/recipes", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/healthy_recipes/recipes", $this->data);
     }
     
     public function get_recipe_data()
@@ -333,7 +365,7 @@ class Applications_healthyrecipes extends CI_Controller{
             'value' => 'Add',
         );
         $this->data['recipe_category_id'] = $recipe_category_id;
-        $this->template->load(null, "admin/applications/healthy_recipes/create_recipes", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/healthy_recipes/create_recipes", $this->data);
     }
     
     /**
@@ -410,11 +442,6 @@ class Applications_healthyrecipes extends CI_Controller{
     //Written by Omar Faruk edit recipe
     function edit_recipe($recipe_id = 0)
     {
-        if(!$this->allow_access)
-        {
-            redirect('admin/general/restriction_access', 'refresh');
-        }
-        
         $this->data['message'] = '';
         
         $this->form_validation->set_rules('title', ' Title', 'xss_clean|required');
@@ -597,7 +624,7 @@ class Applications_healthyrecipes extends CI_Controller{
             'value' => 'Update',
         );
 
-        $this->template->load(null, "admin/applications/healthy_recipes/edit_recipes", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/healthy_recipes/edit_recipes", $this->data);
     }
     
     //Ajax call for create recipe category
@@ -686,7 +713,7 @@ class Applications_healthyrecipes extends CI_Controller{
             $this->data['show_advertise'] = 1;
         }
         
-        $this->template->load(null, "admin/applications/healthy_recipes/all_recipe_list", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/healthy_recipes/all_recipe_list", $this->data);
     }
     
     public function recipe_list_for_home_page()
@@ -873,7 +900,7 @@ class Applications_healthyrecipes extends CI_Controller{
             $this->data['message'] = $message;
             
         }
-        $this->template->load(null, "admin/applications/healthy_recipes/import_healthy_recipes_view", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/healthy_recipes/import_healthy_recipes_view", $this->data);
     }
     
     public function import_from_xlsx_file()
@@ -974,7 +1001,7 @@ class Applications_healthyrecipes extends CI_Controller{
         $this->data['user_info'] = $this->ion_auth->get_user_info();
         $this->data['application_id'] = APPLICATION_HEALTYY_RECIPES_ID;
         $this->data['item_id'] = $this->data['recipe_item']['id'];
-        $this->template->load(null, "admin/applications/healthy_recipes/recipe_detail", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/healthy_recipes/recipe_detail", $this->data);
     }
 
 }

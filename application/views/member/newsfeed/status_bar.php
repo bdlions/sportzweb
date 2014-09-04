@@ -1,3 +1,9 @@
+<style type="text/css">
+.hashtag{  
+    color:blue;
+}
+</style>
+<script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/twitter-text.js"></script>
 <script type="text/javascript">
     $(function() {
         $("#status_box").empty();
@@ -5,6 +11,23 @@
             $("#status-box-menu").removeClass("hidden");
         });
         $("#button-post").on("click", function() {
+            var status_text = $("#description").html().trim();
+            var myRegexp = new RegExp('#([^\\s]*)','g');
+            var match = myRegexp.exec(status_text);
+            if(match != null){
+                //console.log(match);
+                if(match[1] != '')
+                {
+                    //var status_text = $("#appendedInputButton").html();
+                    status_text = status_text.replace(match[0], addHashTag(match[0]));
+                    $("#description").html(status_text);
+                }                
+            }            
+            //return false;
+            
+            
+//console.log(twttr.txt.autoLink(twttr.txt.htmlEscape($('#status_box').val())));
+            //$('#status_box').val(twttr.txt.autoLink(twttr.txt.htmlEscape($('#status_box').val())));
             var user_list = new Array();
             var counter = 0;
             $("input", "#status_selected_friends").each(function() {
@@ -17,7 +40,7 @@
                 type: 'POST',
                 url: '<?php echo base_url() ."feed/post_status/";?>',
                 dataType: 'json',
-                data: $("#form-status").serialize()+ "&status_category_id=" + <?php echo $status_list_id;?>+ "&user_id=" + <?php echo (isset($user_id) == true ? $user_id:$this->session->userdata('user_id'));?>+ "&mapping_id=" + <?php echo $mapping_id;?>+ "&user_list=" + user_list,
+                data: $("#form-status").serialize()+ "&status_category_id=" + <?php echo $status_list_id;?>+ "&user_id=" + <?php echo (isset($user_id) == true ? $user_id:$this->session->userdata('user_id'));?>+ "&mapping_id=" + <?php echo $mapping_id;?>+ "&user_list=" + user_list+ "&description=" + status_text,
                 success: function(data) {
                     if (data == <?php echo STATUS_POST_REFRESH?>) 
                     {
@@ -113,10 +136,121 @@
                     //window.location = "<?php echo base_url()?>" + "messages/new_message/" + $(this).val();
                 });
         });
+        $("#appendedInputButton").on("keyup", function(){
+            /*var status_text = $("#appendedInputButton").html();
+            var status_text_array = status_text.trim().split(" ");
+            for(var counter = 0; counter < status_text_array.length; counter++)
+            {
+                var text = status_text_array[counter];
+                var myRegexp = /#(.*)/;
+                var match = myRegexp.exec(text);
+                if(match != null){
+                    if(match[1] != '')
+                    {
+                        var hashtag = '#'+match[1];
+                        status_text = status_text.replace(hashtag, addHashTag(hashtag));
+                        $("#appendedInputButton").html(status_text);
+                        //addHashTag(hashtag);
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?php echo base_url() ."trending_feature/get_hash_tags";?>',
+                            dataType: 'json',
+                            data: {
+                                hashtag: hashtag
+                            },
+                            success: function(data) {
+                                //$('.dropdown-menu').empty();
+                                //for(var i = 0; i < data.length; i ++){
+                                //        $('.dropdown-menu').append('<li><a href="#"><i class="icon-pencil"></i>'+ $("#appendedInputButton").val() + data[i].name +'</a></li>');
+                                //}
+                                //$('.input-append').addClass("open");                            
+                            }
+                        });
+                    }
+                    
+                }    
+            }*/
+            //var myRegexp = /#([^\\s]*)/;
+//            var el = document.getElementById("appendedInputButton");
+//var range = document.createRange();
+//var sel = window.getSelection();
+//console.log(el.childNodes[0]);
+//range.setStart(el.childNodes[0], 2);
+//range.setEnd(el.childNodes[0], 2);
+            //alert("Current position: " + $(this).caret().start);
+            
+            /*var content = $('<div>' + $("#appendedInputButton").html().trim() + '</div>');
+            content.find('a').replaceWith(function() { return ''; });
+            var newHtml = content.html().trim();
+            
+            var myRegexp = new RegExp('#([^\\s]*)','g');
+            var match = myRegexp.exec(newHtml);
+            if(match != null){
+                console.log(match);
+                if(match[1] != '')
+                {
+                    var status_text = $("#appendedInputButton").html();
+                    var status_text = status_text.replace(match[0], addHashTag(match[0]));
+                    $("#appendedInputButton").html(status_text);
+                    //$("#appendedInputButton").focus();
+                    placeCaretAtEnd( $("#appendedInputButton").get(0) );
+                }
+                
+            }  */  
+            /*$('.dropdown-menu').empty();
+            for(var i = 1; i < 2; i ++){
+                    $('.dropdown-menu').append('<li><a href="#"><i class="icon-pencil"></i>'+ $("#appendedInputButton").val() + i +'</a></li>');
+            }
+            $('.input-append').addClass("open");*/
+
+        });
     });
+    
+    function placeCaretAtEnd(ele) {
+         var range = document.createRange();
+        var sel = window.getSelection();
+        range.setStart(ele, 1);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ele.focus();
+        /*el.focus();
+        if (typeof window.getSelection != "undefined"
+                && typeof document.createRange != "undefined") {
+            var range = document.createRange();
+            range.selectNodeContents(el);
+            range.collapse(false);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+        } else if (typeof document.body.createTextRange != "undefined") {
+            var textRange = document.body.createTextRange();
+            textRange.moveToElementText(el);
+            textRange.collapse(false);
+            textRange.select();
+        }*/
+    }
+    
+    
     function removeSelectedUser(span){
         span.parentNode.parentNode.removeChild(span.parentNode);
         $("#chat_friends").val("");
+    }
+    
+    function addHashTag(name)
+    {
+        twttr.sourceUrl = '<?php echo base_url()?>'+'trending_feature/hashtag/';
+        //$("#test1").html(twttr.txt.autoLink(twttr.txt.htmlEscape(name)));
+        //alert(twttr.txt.autoLink(twttr.txt.htmlEscape(name)));
+        //alert(user_id);
+        //alert(name);
+        return twttr.txt.autoLink(twttr.txt.htmlEscape(name));
+    }
+    
+    function addAt(user_id, name)
+    {
+        twttr.sourceUrl = '<?php echo base_url()?>'+'member_profiles/show/'+user_id;
+        return twttr.txt.autoLink(twttr.txt.htmlEscape(name));
     }
 </script>
 <div class="row">
@@ -152,10 +286,26 @@
             <div class="col-md-12">
                 <div class="status-arrow"></div>
                 <div class="status-box-outer-container">
-                    
+                    <div class="row col-md-12">
+                        <div contenteditable="true" id="test1">
+                                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 input-append">
+                            <div class="form-control expanding status-box" contenteditable="true" id="description">
+                            
+                            </div>
+                            
+                                <ul class="dropdown-menu" style="left:15px;width:100%">
+
+                                </ul>
+                            
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?php echo form_textarea( array("name" => "description", "class" =>'form-control expanding status-box', "placeholder" => "What are you thinking?",  "id" => "status_box", "rows" => "2")) ?>
+                            <?php //echo form_textarea( array("name" => "description2", "class" =>'form-control expanding status-box', "placeholder" => "What are you thinking?",  "id" => "status_box", "rows" => "2")) ?>
                             <!--<div contenteditable="true" name ="description" class='form-control expanding status-box' placeholder = "What are you thinking?"id = "status_box"></div>-->
                             <div id="files" class="list-inline list-unstyled files" style="padding-top: 10px;">
                                 

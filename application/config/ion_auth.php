@@ -135,6 +135,7 @@ $config['join']['groups']       = 'group_id';
 $config['join']['gender']       = 'gender_id';
 $config['join']['countries']    = 'country_id';
 
+$config['group_identity_column']                        = 'name';
 $config['sports_identity_column']                       = 'title';
 $config['tournament_identity_column']                   = 'title';
 $config['team_identity_column']                         = 'title';
@@ -144,7 +145,7 @@ $config['service_category_identity_column']             = 'description';
 $config['service_identity_column']                      = 'title';
 $config['news_category_identity_column']                = 'title';
 $config['news_sub_category_identity_column']            = 'title';
-$config['blog_category_identity_column']               = 'title';
+$config['blog_category_identity_column']                = 'title';
 
 /*
  | -------------------------------------------------------------------------

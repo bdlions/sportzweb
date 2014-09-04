@@ -4,9 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Applications_xstreambanter extends CI_Controller{
+    public $tmpl = '';
     public $user_group_array = array();
-    public $allow_view = FALSE;
-    public $allow_access = FALSE;
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -31,6 +30,15 @@ class Applications_xstreambanter extends CI_Controller{
         if (!$this->ion_auth->logged_in()) {
             redirect('admin/auth/login', 'refresh');
         }
+        
+        $this->data['allow_view'] = FALSE;
+        $this->data['allow_access'] = FALSE;
+        $this->data['allow_write'] = FALSE;
+        $this->data['allow_approve'] = FALSE;
+        $this->data['allow_edit'] = FALSE;
+        $this->data['allow_delete'] = FALSE;
+        $this->data['allow_configuration'] = FALSE; 
+        
         $selected_user_group = $this->session->userdata('user_type');
         if(isset($selected_user_group ) && $selected_user_group != ""){
             $this->user_group_array = array($selected_user_group);
@@ -40,21 +48,49 @@ class Applications_xstreambanter extends CI_Controller{
             $this->user_group_array = $this->ion_auth->get_current_user_types();
         } 
         if (in_array(ADMIN, $this->user_group_array)) {
-            $this->allow_view = TRUE;
-            $this->allow_access = TRUE;
+            $this->tmpl = ADMIN_DASHBOARD_TEMPLATE;
+            $this->data['allow_view'] = TRUE;
+            $this->data['allow_access'] = TRUE;
+            $this->data['allow_write'] = TRUE;
+            $this->data['allow_approve'] = TRUE;
+            $this->data['allow_edit'] = TRUE;
+            $this->data['allow_delete'] = TRUE;
+            $this->data['allow_configuration'] = TRUE; 
         }
         else
         {
             $access_level_mapping = $this->admin_access_level_library->get_access_level_info($this->session->userdata('user_id'));
+            $this->tmpl = USER_DASHBOARD_TEMPLATE;
+            $this->data['access_level_mapping'] = $access_level_mapping;
+            
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
             {
-                $this->allow_view = TRUE;
+                $this->data['allow_view'] = TRUE;
             }
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS, $access_level_mapping))
             {
-                $this->allow_access = TRUE;
+                $this->data['allow_access'] = TRUE;
             }
-            if(!$this->allow_view)
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE, $access_level_mapping))
+            {
+                $this->data['allow_write'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE, $access_level_mapping))
+            {
+                $this->data['allow_approve'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
+            {
+                $this->data['allow_edit'] = TRUE;
+            }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE, $access_level_mapping))
+            {
+                $this->data['allow_delete'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
+            {
+                $this->data['allow_configuration'] = TRUE;  
+            }
+            if(!$this->data['allow_view'])
             {
                 redirect('admin/general/restriction_view', 'refresh');
             }
@@ -76,8 +112,7 @@ class Applications_xstreambanter extends CI_Controller{
             $sports_list = $sports_list_array;
         }
         $this->data['sports_list'] = $sports_list;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/xstream_banter/sports", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/sports", $this->data);
     }
     
     function xstream_banter_sports($sports_id)
@@ -93,8 +128,7 @@ class Applications_xstreambanter extends CI_Controller{
         $team_list = $this->admin_xstream_banter->get_all_teams();
         $this->data['team_list'] = $team_list;
         $this->data['sports_id'] = $sports_id;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/xstream_banter/tournaments", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/tournaments", $this->data);
     }
     
     function xstream_banter_tournament($tournament_id)
@@ -120,8 +154,7 @@ class Applications_xstreambanter extends CI_Controller{
         $this->data['new_team_list'] = $new_team_list;
         $match_list = $this->admin_xstream_banter->get_all_matches($tournament_id)->result_array();
         $this->data['match_list'] = $match_list;
-        $this->data['allow_access'] = $this->allow_access;
-        $this->template->load(null, "admin/applications/xstream_banter/tournament", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/tournament", $this->data);
     }
     
     
@@ -137,7 +170,7 @@ class Applications_xstreambanter extends CI_Controller{
         $this->data['match_info'] = $match_info;
         $chat_room_list = $this->admin_xstream_banter->get_all_chat_rooms($match_id)->result_array();
         $this->data['chat_room_list'] = $chat_room_list;
-        $this->template->load(null, "admin/applications/xstream_banter/match", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/match", $this->data);
     }
     function xstream_banter_room_conversation($room_id)
     {
@@ -162,7 +195,7 @@ class Applications_xstreambanter extends CI_Controller{
         
         $this->data['chat_room_message_list'] = $this->xstream_banter_library->get_chat_room_messages($room_id);
         
-        $this->template->load(null, "admin/applications/xstream_banter/room_conversation", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/room_conversation", $this->data);
     }
     //Ajax calls
     function create_sports()
@@ -419,7 +452,7 @@ class Applications_xstreambanter extends CI_Controller{
             $this->data['message'] = $message;
             
         }
-        $this->template->load(null, "admin/applications/xstream_banter/import_xstream_view", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/import_xstream_view", $this->data);
     }
 }
 ?>

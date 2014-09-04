@@ -6,7 +6,8 @@ class Auth extends Role_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
-        $this->load->library('form_validation');        
+        $this->load->library('form_validation');  
+        $this->load->library('org/admin/access_level/admin_access_level_library');
         $this->load->helper('url'); 
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
@@ -41,7 +42,7 @@ class Auth extends Role_Controller{
                 $remember = FALSE;
                 if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) {
                     $this->session->set_flashdata('message', $this->ion_auth->messages());
-                    redirect('admin/overview_show','refresh');
+                    redirect('admin/auth/home','refresh');
                 } else {
                     $this->session->set_flashdata('message', $this->ion_auth->errors());
                     redirect('admin/auth/login', 'refresh');
@@ -81,5 +82,28 @@ class Auth extends Role_Controller{
         $logout = $this->ion_auth->logout();
         redirect('admin/auth/login','refresh');
         
+    }
+    
+    public function home()
+    {
+        $tmpl = '';
+        $this->data['message'] = "Welcome";
+        $selected_user_group = $this->session->userdata('user_type');
+        if(isset($selected_user_group ) && $selected_user_group != ""){
+            $this->user_group_array = array($selected_user_group);
+        }
+        else
+        {
+            $this->user_group_array = $this->ion_auth->get_current_user_types();
+        } 
+        if (in_array(ADMIN, $this->user_group_array)) {
+            $tmpl = ADMIN_DASHBOARD_TEMPLATE;
+        }
+        else
+        {
+            $tmpl = USER_DASHBOARD_TEMPLATE;
+            $this->data['access_level_mapping'] = $this->admin_access_level_library->get_access_level_info($this->session->userdata('user_id'));
+        }
+        $this->template->load($tmpl, "admin/home", $this->data);
     }
 }

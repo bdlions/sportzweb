@@ -5,7 +5,7 @@
             
             <div class="row form-group">
                 <div class ="col-sm-9"></div>
-                <?php if ($allow_access): ?>
+                <?php if($allow_write){ ?>
                 <div class ="col-sm-3">
                     <a href="<?php echo base_url()."admin/applications_blogs/create_blog/".$category_id ?>" >
                         <button id="" value="" class="form-control btn button-custom pull-right">
@@ -13,19 +13,21 @@
                         </button>
                     </a> 
                 </div>
-                <?php endif;?>
+                <?php } ?>
             </div>
-            <?php if ($allow_access): ?>
+            
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <?php if($allow_write){ ?>
                                 <th>Order</th>
+                                <?php } ?>
                                 <th>Title</th>
                                 <th>Comments</th>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_edit){ ?>
                                 <th>Edit</th>
                                 <?php } ?>
                             </tr>
@@ -34,13 +36,15 @@
                             <?php $i=1;foreach($blog_list as $blog):?>
                             <tr>
                                 <td><a href="<?php echo base_url().'admin/applications_blogs/blog_detail/'.$blog['id'] ?>"><?php echo $i++;?></td>
+                                <?php if($allow_write){ ?>
                                 <td>
                                     <?php echo form_dropdown('order_list', array('0' => 'Order by date')+$order_list, $blog['order_no'],'id='.$blog['id'].' class=form-control'); ?>                                    
                                     <input type="hidden" id="<?php echo $blog['id'].'_created_on';?>" value="<?php echo $blog['created_on'];?>"/>
                                 </td>
+                                <?php } ?>
                                 <td><?php echo html_entity_decode(html_entity_decode($blog['title']));?></td>
                                 <td><a href="<?php echo base_url().'admin/applications_blogs/comment_list/'.$blog['id']; ?>">Comments</a></td>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_edit){ ?>
                                 <td><a href="<?php echo base_url().'admin/applications_blogs/edit_blog/'.$blog['id']; ?>">Edit</a></td>
                                 <?php } ?>
                             </tr>
@@ -51,14 +55,14 @@
                 <div class="btn-group" style="padding-left: 25px;">
                     <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
                 </div>
-                <?php if($allow_access){ ?>
+                <?php if($allow_write){ ?>
                 <div class="btn-group pull-right" style="padding-left: 25px;">
                     <input type="button" style="width:120px;" value="Save Order" id="button_save_order" class="form-control btn button-custom">
                 </div>
                 <?php } ?>
             </div>            
         </div>   
-        <?php endif;?>
+        
     </div>
 </div>
 <script type="text/javascript">
