@@ -1377,6 +1377,7 @@ CREATE TABLE `news_home_page`(
 CREATE TABLE `blog_category`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(30) NOT NULL,
+  `blog_list` text,
   `created_on` int(11) DEFAULT NULL,
   `modified_on` int(11) DEFAULT NULL,
   PRIMARY KEY(`id`)
