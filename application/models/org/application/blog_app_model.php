@@ -32,6 +32,16 @@ class Blog_app_model extends Ion_auth_model {
                     ->get();
     }
     
+    public function update_blog_categroy($id,$data)
+    {
+        $blog_category_info = $this->get_blog_category_info($id)->row();
+        
+        $data = $this->_filter_data($this->tables['blog_category'], $data);
+        $this->db->update($this->tables['blog_category'], $data, array('id' => $id));
+        $this->set_message('blog_category_update_successful');
+        return true;
+    }
+    
     public function get_blog_info($blog_id)
     {
         $this->db->where($this->tables['blogs'].'.id',$blog_id);
@@ -250,6 +260,13 @@ class Blog_app_model extends Ion_auth_model {
                     ->get(); 
     }
     
+    public function get_all_custom_blogs_for_home_page()
+    {
+        return $this->db->select("*")
+                    ->from($this->tables['blog_custom_category'])
+                    ->get(); 
+    }
+    
     public function get_all_comments($blog_id,$sorted=0,$limit_no=0, $comment_id = 0)
     {
         //if we have a comment id then we are skipping constraints
@@ -329,6 +346,11 @@ class Blog_app_model extends Ion_auth_model {
                     ->from($this->tables['blogs'])
                     ->join($this->tables['users'],  $this->tables['users'].'.id='.$this->tables['blogs'].'.user_id')
                     ->get();
+    }
+    
+    public function blog_category_list_update()
+    {
+        
     }
      
 }

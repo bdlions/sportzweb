@@ -19,4 +19,6 @@
     define("APPLICATION_SERVICE_PATH",                                        "applications/service_directory/show_service_detail/");
     define("APPLICATION_NEWS_PATH",                                           "applications/news_app/news_item/");
     define("APPLICATION_BLOG_PATH",                                           "applications/blog_app/view_blog_post");
+    
+    
 ?>

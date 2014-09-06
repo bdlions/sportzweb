@@ -22,6 +22,13 @@ class Admin_blog_model extends Ion_auth_model
         
     }
     
+    public function get_all_custom_blog_category()
+    {
+        return $this->db->select($this->tables['blog_custom_category'].".id as blog_custom_category_id, ".$this->tables['blog_custom_category'].".*")
+                    ->from($this->tables['blog_custom_category'])
+                    ->get();
+    }
+    
     public function get_all_blog_category()
     {
         return $this->db->select($this->tables['blog_category'].".id as blog_category_id, ".$this->tables['blog_category'].".*")
@@ -34,6 +41,14 @@ class Admin_blog_model extends Ion_auth_model
         $this->db->where('id',$id);
         return $this->db->select("*")
                     ->from($this->tables['blog_category'])
+                    ->get();
+    }
+    
+    public function get_custom_blog_category_info($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->select("*")
+                    ->from($this->tables['blog_custom_category'])
                     ->get();
     }
     
@@ -100,7 +115,7 @@ class Admin_blog_model extends Ion_auth_model
     
     public function update_blog_categroy($id,$data)
     {
-        $blog_category_info = $this->get_blog_category_info($id)->row();
+        $blog_category_info = $this->get_custom_blog_category_info($id)->row();
         if (array_key_exists($this->blog_category_identity_column, $data) && $this->blog_category_identity_check($data[$this->blog_category_identity_column]) && $blog_category_info->title == $data[$this->blog_category_identity_column])
         {
             $this->set_error('blog_category_duplicate');
@@ -108,6 +123,20 @@ class Admin_blog_model extends Ion_auth_model
         }
         $data = $this->_filter_data($this->tables['blog_category'], $data);
         $this->db->update($this->tables['blog_category'], $data, array('id' => $id));
+        $this->set_message('blog_category_update_successful');
+        return true;
+    }
+    
+     public function update_custom_blog_categroy($id,$data)
+    {
+        $blog_category_info = $this->get_blog_category_info($id)->row();
+        if (array_key_exists($this->blog_category_identity_column, $data) && $this->blog_category_identity_check($data[$this->blog_category_identity_column]) && $blog_category_info->title == $data[$this->blog_category_identity_column])
+        {
+            $this->set_error('blog_category_duplicate');
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['blog_custom_category'], $data);
+        $this->db->update($this->tables['blog_custom_category'], $data, array('id' => $id));
         $this->set_message('blog_category_update_successful');
         return true;
     }

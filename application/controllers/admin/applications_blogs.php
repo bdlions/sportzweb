@@ -99,6 +99,9 @@ class Applications_blogs extends CI_Controller{
     {
         $this->data['message'] = '';
         $category_list = $this->admin_blog->get_all_blog_category()->result_array();
+        $custom_category_list = $this->admin_blog->get_all_custom_blog_category()->result_array();
+        //echo '<pre/>';print_r($custom_category_list);exit('dfd');
+        $this->data['custom_category_list'] = $custom_category_list;
         $this->data['category_list'] = $category_list;
         $this->template->load($this->tmpl, "admin/applications/blog_app/blog_categories", $this->data);
     }
@@ -161,6 +164,19 @@ class Applications_blogs extends CI_Controller{
         echo json_encode($response);
     }
     
+    public function get_custom_blog_data()
+    {
+        $response = array();
+        $blog_category_id = $_POST['blog_category_id'];
+        
+        $blog_category_array = $this->admin_blog->get_custom_blog_category_info($blog_category_id)->result_array();
+        if(!empty($blog_category_array))
+        {
+            $response = $blog_category_array[0];
+        }
+        echo json_encode($response);
+    }
+    
     //Ajax call for create blog category
     //Written by Omar Faruk
     function edit_blog_category()
@@ -179,6 +195,38 @@ class Applications_blogs extends CI_Controller{
             $response['status'] = 1;
             $response['message'] = 'Blog Category is Update successfully.';
             $blog_category_info_array = $this->admin_blog->get_blog_category_info($blog_category_id)->result_array();
+            if(!empty($blog_category_info_array))
+            {
+                $response['blog_category_info'] = $blog_category_info_array[0];
+            }             
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_blog->errors_alert();
+        }
+        echo json_encode($response);
+    }
+    
+    
+    //Ajax call for create blog category
+    //Written by Omar Faruk
+    function edit_custom_blog_category()
+    {
+        
+        $response = array();
+        $blog_category_id = $_POST['blog_category_id'];
+        $blog_category_name = $_POST['blog_category_name'];
+        $additional_data = array(
+            'title' => $blog_category_name,
+            'application_id' => APPLICATION_BLOG_APP_ID
+        );
+        $id = $this->admin_blog->update_custom_blog_categroy($blog_category_id, $additional_data);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = 'Blog Category is Update successfully.';
+            $blog_category_info_array = $this->admin_blog->get_custom_blog_category_info($blog_category_id)->result_array();
             if(!empty($blog_category_info_array))
             {
                 $response['blog_category_info'] = $blog_category_info_array[0];

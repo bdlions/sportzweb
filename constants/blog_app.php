@@ -9,5 +9,9 @@
     define('MODIFIED',5);
     define('DELETED',6);
     
+    define('HOME',1);
+    define('WRITE_BLOG',2);
+    define('MY_BLOG',3);
+    
     
 ?>

@@ -111,7 +111,32 @@ window.onload = function()
                                     Blog Category
                                 </label>
                                 <div class ="col-md-3">
-                                    <?php echo form_dropdown('category_id', $category_id, '', 'class=form-control'); ?>
+                                    <?php if(!empty($category_list)): $i = 0; $length = count($category_list);?>
+                                        <?php foreach ($category_list as $category) : ?>
+                                            <?php $i++; ?>
+                                            <?php if($i>5): ?>
+                                               <?php $i--;break; ?>
+                                            <?php endif;?>
+                                            <input class="category_id" name="category_name[]" id="<?php echo $category['id']; ?>" type="checkbox" value="<?php echo $category['id']; ?>"/>
+                                            <label for="type" class=" control-label requiredField">
+                                                <?php echo $category['title']; ?>
+                                            </label><br>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </div>
+                                <div class ="col-md-3"></div>
+                                <div class ="col-md-3">
+                                     <?php $j = 0 ?>
+                                        <?php foreach ($category_list as $category) : ?>
+                                            <?php $j++; ?>
+                                            <?php if($j>5): ?>
+                                               <input class="category_id" name="category_name[]" id="<?php echo $category['id']; ?>" type="checkbox" value="<?php echo $category['id']; ?>" />
+                                                <label for="type" class=" control-label requiredField">
+                                                    <?php echo $category['title']; ?>
+                                                </label><br>
+                                            <?php endif;?>
+                                        <?php endforeach; ?>
+                                    <?php //echo form_dropdown('category_id', $category_id, '', 'class=form-control'); ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -187,7 +212,11 @@ $(function () {
         $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
         $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
         $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
-        if (CKEDITOR.instances.title.getData() === "")
+        if (!$('.category_id').is(':checked')) {
+            alert("Checked atleast one blog category");
+            return;
+        }
+        else if (CKEDITOR.instances.title.getData() === "")
         {
             alert("Blog heading is required.");
             return;
@@ -216,7 +245,10 @@ $(function () {
                                     $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
                                     $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
                                     $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
-                                    if (CKEDITOR.instances.title.getData() === "")
+                                    if (!$('.category_id').is(':checked')) {
+                                        alert("Checked atleast one blog category");
+                                        return;
+                                    }else if (CKEDITOR.instances.title.getData() === "")
                                     {
                                         alert("Blog heading is required.");
                                         return;

@@ -18,6 +18,8 @@ class Blog_app extends Role_Controller {
         
         $this->load->library('visitors');
         $this->data['blog_category_menu'] = $this->get_all_menu_item();
+        $this->data['custom_blog_category_menu'] = $this->get_all_custom_blog_category();
+        //echo '<pre/>';print_r($this->data['custom_blog_category_menu']);exit('here');
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         }
@@ -240,6 +242,11 @@ class Blog_app extends Role_Controller {
         $result = $this->blog_app_library->get_all_blogs_for_home_page()->result_array();
         return $result;
     }
+    
+    public function get_all_custom_blog_category() {
+        $result = $this->blog_app_library->get_all_custom_blogs_for_home_page()->result_array();
+        return $result;
+    }
 
     function post_comment() {
         $response = array();
@@ -361,14 +368,15 @@ class Blog_app extends Role_Controller {
     function create_blog_by_user($category_id = 0) {
         $this->data['message'] = '';
 
-        $this->form_validation->set_rules('category_id', 'Category_id', 'required');
+        //$this->form_validation->set_rules('category_id', 'Category_id', 'required');
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
         $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
 
 
         if ($this->input->post()) {
-
+            $blog_list_array = array();
+            
             //$blog_category_id = $this->input->post('blog_category_id');
             if (isset($_FILES["userfile"])) {
                 $file_info = $_FILES["userfile"];
@@ -384,14 +392,14 @@ class Blog_app extends Role_Controller {
             }
 
             //$related_blogs = explode(",",$this->input->post('related_blogs'));
-            $blog_category_id = $this->input->post('category_id');
             $blog_title = trim(htmlentities($this->input->post('title_editortext')));
             $description = trim(htmlentities($this->input->post('description_editortext')));
             $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
             
+            //'blog_list' => json_encode($blog_category_list_array),
+            
             $data = array(
                 'title' => $blog_title,
-                'blog_category_id' => $blog_category_id,
                 'description' => $description,
                 'user_id' => $this->session->userdata('user_id'),
                 'picture' => empty($uploaded_image_data['upload_data']['file_name']) ? '' : $uploaded_image_data['upload_data']['file_name'],
@@ -402,6 +410,13 @@ class Blog_app extends Role_Controller {
 
             $blog_id = $this->blog_app_library->create_blog($data);
             if ($blog_id !== FALSE) {
+                
+                foreach ($this->input->post('category_name') as $key => $value)
+                {
+                    $this->blog_app_library->blog_category_list_update($value,$blog_id);
+
+                }
+                
                 $this->data['message'] = "Blog is created successfully.";
                 echo json_encode($this->data);
                 return;
@@ -413,13 +428,19 @@ class Blog_app extends Role_Controller {
         }
 
         $category_list = $this->blog_app_library->get_all_blog_category()->result_array();
-
+        $this->data['category_list'] = $category_list;
         $this->data['category_id'] = array();
         if (!empty($category_list)) {
             foreach ($category_list as $category) {
-                $this->data['category_id'][$category['id']] = $category['title'];
+                //$this->data['category_id'][$category['id']] = $category['title'];
+                $this->data['category_id'][$category['id']] = array(
+                    'name' => $category['title'],
+                    'id' => $category['id'],
+                    'type' => 'checkbox'
+                );
             }
         }
+        
 
         $this->data['title'] = array(
             'name' => 'title',

@@ -107,6 +107,7 @@ $config['tables']['latest_news']                            = 'latest_news';
 $config['tables']['breaking_news']                          = 'breaking_news';
 $config['tables']['news_home_page']                         = 'news_home_page';
 $config['tables']['blog_category']                          = 'blog_category';
+$config['tables']['blog_custom_category']                   = 'blog_custom_category';
 $config['tables']['blogs']                                  = 'blogs';
 $config['tables']['blog_status']                            = 'blog_status';
 $config['tables']['blog_comments']                          = 'blog_comments';
