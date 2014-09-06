@@ -33,7 +33,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Photography</div>
     <div class="panel-body">
-        <?php if($allow_access){ ?>
+        <?php if($allow_configuration){ ?>
         <div class ="row col-md-2 pull-left" style="margin-bottom: 10px">
             <a href="<?php echo base_url(); ?>admin/applications_photography/add_image">
                 <button id="button_add_image" value="" class="form-control btn button-custom pull-right">Add Image</button>  
@@ -64,14 +64,18 @@
                     </a>
                 </div>
             </div>
-            <?php if($allow_access){ ?>
+            
             <div class="col-md-2" style="padding-left: 25px;">
                 <?php if(!empty($image_list)): ?>
+                    <?php if($allow_edit){ ?>
                     <a id="edit_current_image" href="<?php echo base_url().'admin/applications_photography/edit_image/'.$image_list[0]['id']; ?>">Edit</a> &nbsp;&nbsp;| &nbsp;&nbsp;
+                    <?php } ?>
+                    <?php if($allow_delete){ ?>
                     <a id="delete_current_image" href="<?php echo base_url() . 'admin/applications_photography/delete_image/'.$image_list[0]['id']; ?>">Delete</a>
+                    <?php } ?>
                 <?php endif; ?>
             </div>
-            <?php } ?>
+            
         </div>
     </div>
 </div>

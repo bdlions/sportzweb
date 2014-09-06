@@ -32,7 +32,7 @@
     <div class="panel-heading">Tournaments</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-9"></div>
                 <div class ="col-sm-3">
@@ -62,7 +62,7 @@
             </div>            
         </div>
         <div class="row col-md-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
                 <div class ="col-sm-2">

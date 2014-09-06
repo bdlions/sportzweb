@@ -20,7 +20,7 @@
     <div class="panel-heading">Sports</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-2 pull-left">
                     <button id="button_create_sports" value="" class="form-control btn button-custom pull-right">Create Sports</button>  

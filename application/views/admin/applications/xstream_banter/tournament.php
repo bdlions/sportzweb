@@ -51,7 +51,7 @@
     <div class="panel-heading"><?php echo $tournament_info['title']?></div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
                 <div class ="col-sm-2">
@@ -71,7 +71,7 @@
                 <div class ="col-sm-2">
                     <input type="button" value="Search" class="form-control btn button-custom pull-right"/>  
                 </div>
-                <?php if($allow_access){ ?>
+                <?php if($allow_configuration){ ?>
                 <div class ="col-sm-2">
                     <button id="button_create_match" type="button" value="" class="form-control btn button-custom pull-right">Create Match</button>  
                 </div>
@@ -112,7 +112,7 @@
                             <tr>
                                 <th>Team name</th>
                                 <th>Created Date</th>
-                                <?php if($allow_access){ ?><th>Action</th><?php } ?>
+                                <?php if($allow_delete){ ?><th>Action</th><?php } ?>
                             </tr>
                         </thead>
                         <tbody id="tbody_team_list"> 
@@ -121,7 +121,7 @@
                                 <tr>
                                     <td><?php echo $team['title']?></td>
                                     <td><?php echo $team['created_on']?></td>
-                                    <?php if($allow_access){ ?>
+                                    <?php if($allow_delete){ ?>
                                     <td>
                                         <button id="<?php echo $team['id'];?>" class="glyphicon glyphicon-trash middle"></button>
                                     </td>

@@ -20,7 +20,7 @@
     <div class="panel-heading">Service Directory</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-3" style="padding-right: 0px;">
                     <a href="<?php echo base_url();?>admin/applications_servicedirectory/create_service_category"><button id="button_create_service_category" value="" class="form-control btn button-custom pull-right">Create Service Category</button></a>
@@ -39,7 +39,7 @@
                             <tr>
                                 <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Name</th>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_edit){ ?>
                                 <th style="text-align: center;">Edit</th>
                                 <?php } ?>
                             </tr>
@@ -49,7 +49,7 @@
                             <tr>
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_category/'.$service_category['id']?>"><?php echo $service_category['id']; ?></a></td>
                                 <td><div id="service_desc_<?php echo $service_category['id'];?>"><?php echo $service_category['description']?></div></td>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_edit){ ?>
                                 <td>
                                     <a href="<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category['id'];?>">
                                         Edit

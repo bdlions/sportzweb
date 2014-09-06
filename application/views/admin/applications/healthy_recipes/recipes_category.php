@@ -29,7 +29,7 @@
     <div class="panel-heading">Healthy Recipes</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-5">
                     <a href="<?php echo base_url();?>admin/applications_healthyrecipes/page_import_recipe">
@@ -56,7 +56,7 @@
                             <tr>
                                 <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Name</th>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_edit){ ?>
                                 <th style="text-align: center;">Edit</th> 
                                 <?php } ?>
                             </tr>
@@ -66,7 +66,7 @@
                             <tr>
                                 <td><a href="<?php echo base_url().'admin/applications_healthyrecipes/recipe_category/'.$recipes_category['id']?>"><?php echo $recipes_category['id']; ?></a></td>
                                 <td><div id="recipe_desc_<?php echo $recipes_category['id'];?>"><?php echo $recipes_category['description']?></div></td>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_edit){ ?>
                                 <td> <button id="button_edit_recipe_category_<?php echo $recipes_category['id'];?>" onclick="openModal('button_edit_recipe_category_<?php echo $recipes_category["id"];?>','<?php echo $recipes_category['id'];?>')" value="" class="form-control btn pull-right">Edit</button></td>
                                 <?php } ?>
                             </tr>

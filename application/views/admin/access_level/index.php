@@ -56,7 +56,6 @@
                         <thead>
                             <td></td>
                             <td><div class="form-group">View</div></td>
-                            <td><div class="form-group">Access</div></td>
                             <td><div class="form-group">Write</div></td>
                             <td><div class="form-group">Approve</div></td>
                             <td><div class="form-group">Edit</div></td>
@@ -72,11 +71,6 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($overview_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($overview_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -115,7 +109,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td>
@@ -124,11 +117,6 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($user_overview_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($user_overview_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -168,11 +156,6 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                       <?php echo form_input($user_manage_access); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
                                        <?php echo form_input($user_manage_write); ?>
                                     </div>
                                 </td>
@@ -207,7 +190,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -216,11 +198,6 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($xstream_banter_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($xstream_banter_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -261,11 +238,6 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                       <?php echo form_input($healthy_recipes_access); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
                                        <?php echo form_input($healthy_recipes_write); ?>
                                     </div>
                                 </td>
@@ -297,11 +269,6 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($service_directory_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($service_directory_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -342,11 +309,6 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                       <?php echo form_input($news_access); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
                                        <?php echo form_input($news_write); ?>
                                     </div>
                                 </td>
@@ -378,11 +340,6 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($blogs_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($blogs_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -422,11 +379,6 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                       <?php echo form_input($bmi_calculator_access); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
                                        <?php echo form_input($bmi_calculator_write); ?>
                                     </div>
                                 </td>
@@ -458,11 +410,6 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($photography_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($photography_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -502,11 +449,6 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                       <?php echo form_input($business_profile_access); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
                                        <?php echo form_input($business_profile_write); ?>
                                     </div>
                                 </td>
@@ -541,7 +483,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td>
@@ -550,11 +491,6 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($visitor_page_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($visitor_page_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -594,11 +530,6 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                       <?php echo form_input($visitor_applications_access); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
                                        <?php echo form_input($visitor_applications_write); ?>
                                     </div>
                                 </td>
@@ -630,11 +561,6 @@
                                <td>
                                     <div class="form-group">
                                        <?php echo form_input($visitor_business_profile_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($visitor_business_profile_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -674,11 +600,6 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                       <?php echo form_input($log_access); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
                                        <?php echo form_input($log_write); ?>
                                     </div>
                                 </td>
@@ -714,7 +635,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -723,11 +643,6 @@
                                 <td>
                                     <div class="form-group">
                                        <?php echo form_input($about_us_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($about_us_access); ?>
                                     </div>
                                 </td>
                                 <td>
@@ -764,11 +679,6 @@
                                  <td>
                                     <div class="form-group">
                                        <?php echo form_input($contact_us_view); ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                       <?php echo form_input($contact_us_access); ?>
                                     </div>
                                 </td>
                                 <td>

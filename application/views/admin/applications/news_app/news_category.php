@@ -22,7 +22,7 @@
     <div class="panel-heading">News Category</div>
     <div class="panel-body">
         <div class="row col-sm-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-2">
                     <a href="<?php echo base_url();?>admin/applications_news/config_news">
@@ -72,10 +72,10 @@
                             <tr>
                                 <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Name</th>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_edit){ ?>
                                 <th style="text-align: center;">Edit</th> 
                                 <?php } ?>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_configuration){ ?>
                                 <th style="text-align: center;">Configure News</th> 
                                 <?php } ?>
                             </tr>
@@ -85,22 +85,18 @@
                             <tr>
                                 <td><a href="<?php echo base_url().'admin/applications_news/news_sub_category/'.$category['id']?>"><?php echo $category['id'];?></a></td>
                                 <td><div id="news_title_<?php echo $category['id'];?>"><?php echo $category['title'];?></div></td>
-                                <?php if($allow_access){ ?>
-                                <td>
-                                   <?php //if ($allow_access): ?> 
-                                        <button id="button_edit_news_category_<?php echo $category['id'];?>" onclick="openModal('button_edit_news_category_<?php echo $category["id"];?>','<?php echo $category['id'];?>')" value="" class="form-control btn pull-right">
-                                            Edit
-                                        </button>
-                                    <?php //endif; ?>
+                                <?php if($allow_edit){ ?>
+                                <td>                                   
+                                    <button id="button_edit_news_category_<?php echo $category['id'];?>" onclick="openModal('button_edit_news_category_<?php echo $category["id"];?>','<?php echo $category['id'];?>')" value="" class="form-control btn pull-right">
+                                        Edit
+                                    </button>                                    
                                 </td>
                                 <?php } ?>
-                                <?php if($allow_access){ ?>
-                                <td>
-                                    <?php if ($allow_access): ?>
-                                        <a href="<?php echo base_url().'admin/applications_news/config_news_for_category/'.$category['id']?>">
-                                            Config
-                                        </a>
-                                    <?php endif; ?>
+                                <?php if($allow_configuration){ ?>
+                                <td>                                   
+                                    <a href="<?php echo base_url().'admin/applications_news/config_news_for_category/'.$category['id']?>">
+                                        Config
+                                    </a>
                                 </td>
                                 <?php } ?>
                             </tr>
