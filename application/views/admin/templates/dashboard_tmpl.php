@@ -106,7 +106,7 @@
                                 </ul>
                             </li>
                             <li id="applications">
-                                <a href="<?php echo base_url()?>admin/application/application_manage">Applications</a>
+                                <a href="#">Applications</a>
                                 <ul>
                                     <li id="applications_xstreambanter"><a href="<?php echo base_url()?>admin/applications_xstreambanter">Xstream Banter</a></li>                                    
                                     <li id="applications_healthyrecipes"><a href="<?php echo base_url()?>admin/applications_healthyrecipes">Healthy Recipes</a></li>
@@ -129,7 +129,7 @@
                                 </ul>
                             </li>
                             <li id="configure">
-                                <a href="<?php echo base_url()?>admin/configure_login_page">Configure</a>
+                                <a href="#">Configure</a>
                                 <ul>
                                     <li id="configure_login_page"><a href="<?php echo base_url()?>admin/configure_login_page">Login Page</a></li>
                                     <li id="configure_logout_page"><a href="<?php echo base_url()?>admin/configure_logout_page">Logout Page</a></li>
@@ -139,7 +139,7 @@
                                 <a href="<?php echo base_url()?>admin/log_view">Log</a>
                             </li>
                             <li id="manage">
-                                <a href="<?php echo base_url()?>admin/access_level">Access</a>
+                                <a href="#">Access</a>
                                 <ul>
                                     <li id="manage_new_user"><a href="<?php echo base_url()?>admin/access_level">New User</a></li>
                                     <li id="manage_show_users"><a href="<?php echo base_url()?>admin/access_level/show_users">Show Users</a></li>
@@ -147,7 +147,7 @@
                                 </ul>
                             </li>
                             <li id="footer">
-                                <a href="<?php echo base_url()?>admin/footer/about_us">Footer</a>
+                                <a href="#">Footer</a>
                                 <ul>
                                     <li id="manage_new_user"><a href="<?php echo base_url()?>admin/footer/about_us">About Us</a></li>     
                                     <li id="manage_contact_us"><a href="<?php echo base_url()?>admin/contact_us">Contact Us</a></li>

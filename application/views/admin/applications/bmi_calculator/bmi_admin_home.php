@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">All Questions</div>
     <div class="panel-body">
-        <?php if($allow_access): ?>
+        <?php if($allow_configuration){ ?>
         <div class="row form-group col-md-12">
             <div class="col-sm-3">
                 <a href="<?php echo base_url();?>admin/applications_bmicalculator/add_question">
@@ -23,7 +23,7 @@
                     </a>
                 </div>            
         </div>
-        <?php endif; ?>
+        <?php } ?>
         
         <table class="table table-bordered table-responsive">
             <thead>
@@ -31,10 +31,10 @@
                     <th>Serial</th>
                     <th>Question</th>
                     <th>Answer</th>
-                    <?php if($allow_access){ ?>
+                    <?php if($allow_edit){ ?>
                     <th>Edit</th>
                     <?php } ?>
-                    <?php if($allow_access){ ?>
+                    <?php if($allow_delete){ ?>
                     <th>Delete</th>
                     <?php } ?>
                 </tr>
@@ -46,16 +46,14 @@
                     <td><?php echo $i++;?></td>
                     <td><?php echo $question['question'];?></td>
                     <td><?php echo $question['answer'];?></td>
-                    <?php if($allow_access){ ?>
-                    <td>
-                        <?php if($allow_access): ?>
-                            <a href="<?php echo base_url();?>admin/applications_bmicalculator/edit_question/<?php echo $question['id']?>">
-                                Edit
-                            </a>
-                        <?php endif; ?>
+                    <?php if($allow_edit){ ?>
+                    <td>                        
+                        <a href="<?php echo base_url();?>admin/applications_bmicalculator/edit_question/<?php echo $question['id']?>">
+                            Edit
+                        </a>                        
                     </td>
                     <?php } ?>
-                    <?php if($allow_access){ ?>
+                    <?php if($allow_delete){ ?>
                     <td onclick="delete_question(<?php echo $question['id']?>)">Delete</td>
                     <?php } ?>
                 </tr>

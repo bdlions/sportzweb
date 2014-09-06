@@ -10,7 +10,7 @@
     <div class="panel-heading">Service List</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
                 <div class ="col-sm-2">
@@ -32,7 +32,7 @@
                                 <th>View</th>
                                 <th>Comments</th>
                                 <th>Pictures</th>  
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_configuration){ ?>
                                 <th>Edit</th>
                                 <?php } ?>
                             </tr>
@@ -45,7 +45,7 @@
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_show/'.$service['id']?>">view</a></td>
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_comments/'.$service['id']?>">comments</a></td>
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_pictures/'.$service['id']?>">pictures</a></td>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_configuration){ ?>
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_edit/'.$service['id']?>">Edit</a></td>
                                 <?php } ?>
                                </tr>

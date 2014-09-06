@@ -36,7 +36,7 @@
     <div class="panel-body">
             <div class="row col-md-12">
                 <div class="row form-group">
-                    <?php if($allow_write){ ?>
+                    <?php if($allow_configuration){ ?>
                     <div class ="col-sm-3">
                         <a href="<?php echo base_url(); ?>admin/applications_blogs/page_import_blogs">
                             <button class="btn button-custom pull-right">Import Blogs</button>
@@ -57,7 +57,7 @@
                         </a>
                     </div>
                     <?php } ?>
-                    <?php if($allow_write){ ?>
+                    <?php if($allow_configuration){ ?>
                     <div class ="col-sm-3">
                         <button id="button_create_blog_category" value="" class="btn button-custom">Create Blog Category</button>  
                     </div>

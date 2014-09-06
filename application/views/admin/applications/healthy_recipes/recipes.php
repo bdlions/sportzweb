@@ -28,7 +28,7 @@
     <div class="panel-heading">Recipes List</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_access){ ?>
+            <?php if($allow_configuration){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
                 <!--<div class ="col-sm-2">
@@ -52,7 +52,7 @@
                                 <th>Recipe Category</th>
                                 <th>Recipe Title</th>
                                 <th>Created On</th>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_edit){ ?>
                                 <th>Action</th>
                                 <?php } ?>
                             </tr>
@@ -65,7 +65,7 @@
                                     <td><?php echo $recipes['categoty_description']?></td>
                                     <td><?php echo $recipes['title']?></td>
                                     <td><?php echo unix_to_human($recipes['created_on']);?></td>
-                                    <?php if($allow_access){ ?>
+                                    <?php if($allow_edit){ ?>
                                     <td><a href="<?php echo base_url()."admin/applications_healthyrecipes/edit_recipe/".$recipes['id'] ?>">Edit</a></td>
                                     <?php } ?>
                                 </tr>
