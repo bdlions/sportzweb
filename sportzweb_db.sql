@@ -1374,6 +1374,18 @@ CREATE TABLE `news_home_page`(
 )AUTO_INCREMENT=1;
 
 -- blog application
+CREATE TABLE `blog_custom_category`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `created_on` int(11) DEFAULT NULL,
+  `modified_on` int(11) DEFAULT NULL,
+  PRIMARY KEY(`id`)
+)AUTO_INCREMENT=1;
+INSERT INTO `blog_custom_category` (`title`) VALUES
+('Home'),
+('Write blog'),
+('My blogs');
+
 CREATE TABLE `blog_category`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(30) NOT NULL,
