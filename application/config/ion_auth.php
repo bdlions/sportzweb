@@ -124,6 +124,8 @@ $config['tables']['business_profile_visitor']               = 'business_profile_
 $config['tables']['configure_login_page']                   = 'configure_login_page';
 //logout page
 $config['tables']['configure_logout_page']                  = 'configure_logout_page';
+//trending feature
+$config['tables']['hashtags']                               = 'hashtags';
 
 /*
  | Users table column and Group table column you want to join WITH.

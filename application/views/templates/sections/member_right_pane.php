@@ -281,11 +281,9 @@
                 <div class="panel-heading right-panel-heading">Trends</div>
                 <div class="panel-body right-panel-body">
                     <ul class="list-group right-panel-list">
-                        <li><a href="#A">#A</a></li>  
-                        <li><a href="#B">#B</a></li>  
-                        <li><a href="#C">#C</a></li>  
-                        <li><a href="#D">#D</a></li>  
-                        <li><a href="#E">#E</a></li> 
+                        <?php foreach($popular_trends as $trend){?>
+                        <li><a href="<?php echo base_url().'trending_feature/hashtag/'.$trend['hashtag']?>">#<?php echo $trend['hashtag']?></a></li>  
+                        <?php } ?>
                     </ul>
                 </div>
             </div> 

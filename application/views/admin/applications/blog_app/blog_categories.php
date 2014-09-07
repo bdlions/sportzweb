@@ -115,14 +115,7 @@
                                                 Edit
                                             </button>                                            
                                         </td>
-                                    <?php } ?>
-                                    <?php if ($allow_delete) { ?>
-                                        <td>                                            
-                                            <button id="button_delete_custom_blog_category_<?php echo $row['id']; ?>" onclick="openDeleteModal('button_delete_blog_custom_category_<?php echo $row["id"]; ?>', '<?php echo $row['id']; ?>')" value="" class="form-control btn pull-right">
-                                                Delete
-                                            </button>                                            
-                                        </td>                                        
-                                    <?php } ?>
+                                    <?php } ?>                                   
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

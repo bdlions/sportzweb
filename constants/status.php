@@ -20,6 +20,7 @@
     define("STATUS_LIST_NEWSFEED",                                  1);
     define("STATUS_LIST_USER_PROFILE",                              2);
     define("STATUS_LIST_BUSINESS_PROFILE",                          3);
+    define("STATUS_LIST_HASHTAG",                                   4);
     
     define("STATUS_LIKE_FOLLOWER",                                  1);
     define("STATUS_LIKE_NON_FOLLOWER",                              2);

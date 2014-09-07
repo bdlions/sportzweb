@@ -11,6 +11,7 @@ class Feed extends Role_Controller{
         $this->load->helper('url');
         $this->load->library("basic_profile");
         $this->load->library("statuses");
+        $this->load->library("Trending_features");
         $this->load->library("users_album");
         $this->load->library("org/utility/utils");
         
@@ -65,8 +66,17 @@ class Feed extends Role_Controller{
             $status_data["attachments"] = json_encode($attachment_array);
             
         }
-        if($this->statuses->post_status($status_data) !== FALSE)
+        $status_id = $this->statuses->post_status($status_data);
+        if( $status_id !== FALSE)
         {
+            $hashtag_list_array = explode(",", $status_data['hashtag_list']);
+            foreach($hashtag_list_array as $hashtag)
+            {
+                if($hashtag != '')
+                {
+                    $this->trending_features->store_hashtag($hashtag, $status_id);
+                }            
+            } 
             if(strpos($status_data["description"], "<object" ) !== false){
                 echo STATUS_POST_REFRESH;
             }
@@ -118,13 +128,22 @@ class Feed extends Role_Controller{
         }
     }
     
-    function get_statuses($status_list_id, $mapping_id, $limit, $offset){
-        $newsfeeds = $this->statuses->get_statuses($status_list_id, $mapping_id, $limit, $offset);
+    function get_statuses($status_list_id, $mapping_id, $limit, $offset, $hashtag = ''){
+        if($status_list_id == STATUS_LIST_HASHTAG)
+        {
+            $status_ids = $this->trending_features->get_status_ids_hashtag($hashtag);
+            $newsfeeds = $this->statuses->get_statuses($status_list_id, $mapping_id, $limit, $offset, $status_ids);
+        }
+        else
+        {
+            $newsfeeds = $this->statuses->get_statuses($status_list_id, $mapping_id, $limit, $offset);
+        }        
         $this->data['user_info'] = $this->ion_auth->get_user_info();
         //$this->data['user_id'] = $user_id;
         if($newsfeeds){
             $this->data["status_list_id"] = $status_list_id;
             $this->data["mapping_id"] = $mapping_id;
+            $this->data["hashtag"] = $hashtag;
             $this->data["newsfeeds"] = $newsfeeds;
             $this->data["next_start"] = $offset + $limit;
             $this->load->view("member/newsfeed/partial_feeds_renderer", $this->data);

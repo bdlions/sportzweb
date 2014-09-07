@@ -75,7 +75,60 @@ class Trending_features {
     public function __get($var) {
         return get_instance()->$var;
     }
+    
+    public function store_hashtag($hashtag, $status_id)
+    {
+        $status_info = new stdClass();
+        $status_info->status_id = $status_id;
         
+        $status_list_array = array();
+        $status_list_array[] = $status_info;
+        
+        $counter = 0;
+        $hashtag_info_array = $this->trending_features_model->get_hashtag_info($hashtag)->result_array();
+        if(!empty($hashtag_info_array))
+        {
+            $hashtag_info = $hashtag_info_array[0];
+            $status_list = json_decode($hashtag_info['status_list']);     
+            foreach($status_list as $status)
+            {
+                $status_list_array[] = $status;
+            }
+            
+            $counter = count($status_list_array);
+            $data = array(
+                'status_list' => json_encode($status_list_array),
+                'counter' => $counter
+            );
+            $this->trending_features_model->update_hashtag_info($hashtag, $data);
+        }
+        else
+        {
+            $counter = 1;
+            $data = array(
+                'hashtag' => $hashtag,
+                'status_list' => json_encode($status_list_array),
+                'counter' => $counter
+            );
+            $this->trending_features_model->add_hashtag_info($data);
+        }
+    }
+    
+    public function get_status_ids_hashtag($hashtag)
+    {
+        $status_id_list = array();
+        $hashtag_info_array = $this->trending_features_model->get_hashtag_info($hashtag)->result_array();
+        if(!empty($hashtag_info_array))
+        {
+            $hashtag_info = $hashtag_info_array[0];
+            $status_list_array = json_decode($hashtag_info['status_list']);            
+            foreach($status_list_array as $status_info)
+            {
+                $status_id_list[] = $status_info->status_id;
+            }
+        }
+        return $status_id_list;
+    }   
 }
 
 ?>

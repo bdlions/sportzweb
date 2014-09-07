@@ -80,15 +80,19 @@ class Statuses_model extends Ion_auth_model {
             {
                 $this->db->where($this->tables['statuses'].'.status_category_id',$status_category_id);
                 $this->db->where($this->tables['statuses'].'.mapping_id',$mapping_id);
-            }
-            $this->db->order_by($this->tables['statuses'].'.modified_on', 'desc');
+            }            
             //$this->db->where($this->tables['statuses'].'.user_id',$user_id);
-            $this->db->limit($limit, $offset);
+            //$this->db->limit($limit, $offset);
         }
         else
         {
             $this->db->where_in($this->tables['statuses'].'.id',$status_id_list);
         }
+        if(isset($limit) && $limit > 0)
+        {
+            $this->db->limit($limit, $offset);
+        }
+        $this->db->order_by($this->tables['statuses'].'.modified_on', 'desc');
         
         $result = $this->db->select($this->tables['statuses'] . '.id as status_id,'.$this->tables['statuses'] . '.modified_on as status_modified_on,'.$this->tables['statuses'] . '.created_on as status_created_on,'.$this->tables['statuses'] . '.*,'.$this->tables['users'] . '.*,'.$this->tables['basic_profile'] . '.*')
                 ->from($this->tables['statuses'])

@@ -1699,3 +1699,11 @@ CREATE TABLE IF NOT EXISTS `footer_about_us` (
   `modified_on` int(11) DEFAULT NULL,
   PRIMARY KEY(`id`) 
 );
+
+-- trending feature
+CREATE TABLE IF NOT EXISTS `hashtags` (
+  `hashtag` varchar(300),
+  `status_list` text,
+  `counter` int(11) unsigned DEFAULT 0,
+  PRIMARY KEY(`hashtag`) 
+);

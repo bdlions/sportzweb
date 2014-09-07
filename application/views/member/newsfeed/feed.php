@@ -90,7 +90,7 @@
     $(function() {
         var newsfeeds = <?php echo json_encode(isset($newsfeeds) ? $newsfeeds: null); ?>;
         var next_start = <?php echo isset($newsfeeds) ?  count($newsfeeds):  0 ?>;
-        $("#feeds").html($("#feeds").html()).append("<a href='<?php echo base_url();?>feed/get_statuses/<?php echo $status_list_id."/".$mapping_id."/".STATUS_LIMIT_PER_REQUEST?>/"+ next_start +"/<?php echo $user_id?>'>next</a>");
+        $("#feeds").html($("#feeds").html()).append("<a href='<?php echo base_url();?>feed/get_statuses/<?php echo $status_list_id."/".$mapping_id."/".STATUS_LIMIT_PER_REQUEST?>/"+ next_start +"/<?php echo (isset($hashtag)) ? $hashtag : ''?>'>next</a>");
         $('.scroll').jscroll({
             loadingHtml: '<div class="col-md-3 col-md-offset-6"><img src="<?php echo base_url()?>resources/images/loading.gif" alt="Loading" /> Loading...</div>',
             padding: 20

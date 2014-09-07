@@ -12,24 +12,34 @@
         });
         $("#button-post").on("click", function() {
             var status_text = $("#description").html().trim();
+            var content = $('<div>' + $("#description").html().trim() + '</div>');
+            content.find('a').replaceWith(function() { return ''; });
+            content.find('div').replaceWith(function() { return $(this).text(); });
             var myRegexp = new RegExp('#([^\\s]*)','g');
-            var match = myRegexp.exec(status_text);
+            var match = myRegexp.exec(content.text());
             if(match != null){
                 //console.log(match);
                 if(match[1] != '')
                 {
                     //var status_text = $("#appendedInputButton").html();
-                    status_text = status_text.replace(match[0], addHashTag(match[0]));
+                    status_text = status_text.replace(match[0], generate_hashtag(match[1]));
                     $("#description").html(status_text);
                 }                
-            }            
-            //return false;
+            }
             
-            
-//console.log(twttr.txt.autoLink(twttr.txt.htmlEscape($('#status_box').val())));
-            //$('#status_box').val(twttr.txt.autoLink(twttr.txt.htmlEscape($('#status_box').val())));
-            var user_list = new Array();
+            var hashtag_list = new Array();
             var counter = 0;
+            $("#description a").each(function () {
+                var text = $(this).text();
+                if(text.indexOf("#") > -1)
+                {
+                    text = text.replace("#", ""); 
+                    hashtag_list[counter++] = text;
+                }                
+            });
+            
+            var user_list = new Array();
+            counter = 0;
             $("input", "#status_selected_friends").each(function() {
                 if ($(this).attr("type") === "hidden")
                 {
@@ -40,7 +50,7 @@
                 type: 'POST',
                 url: '<?php echo base_url() ."feed/post_status/";?>',
                 dataType: 'json',
-                data: $("#form-status").serialize()+ "&status_category_id=" + <?php echo $status_list_id;?>+ "&user_id=" + <?php echo (isset($user_id) == true ? $user_id:$this->session->userdata('user_id'));?>+ "&mapping_id=" + <?php echo $mapping_id;?>+ "&user_list=" + user_list+ "&description=" + status_text,
+                data: $("#form-status").serialize()+ "&status_category_id=" + <?php echo $status_list_id;?>+ "&user_id=" + <?php echo (isset($user_id) == true ? $user_id:$this->session->userdata('user_id'));?>+ "&mapping_id=" + <?php echo $mapping_id;?>+ "&user_list=" + user_list+ "&hashtag_list=" + hashtag_list+"&description=" + status_text,
                 success: function(data) {
                     if (data == <?php echo STATUS_POST_REFRESH?>) 
                     {
@@ -136,7 +146,66 @@
                     //window.location = "<?php echo base_url()?>" + "messages/new_message/" + $(this).val();
                 });
         });
-        $("#appendedInputButton").on("keyup", function(){
+        $("#description").on("keyup", function(){
+            //check @ functionality
+            var status_text = $("#description").text();
+            var myRegexp = new RegExp('@([^\\s]*)','g');
+            var match = myRegexp.exec(status_text);
+            if(match != null){
+                if(match[1] != '')
+                {                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url() ."trending_feature/get_at";?>',
+                        dataType: 'json',
+                        data: {
+                            at: match[1]
+                        },
+                        success: function(data) {
+                            $('.dropdown-menu').empty();
+                            for(var i = 0; i < data.length; i ++){
+                                    $('.dropdown-menu').append('<li><a href="#" onclick="get_selected_at('+data[i].type_id+','+data[i].id+')"><i class="icon-pencil"></i>'+ data[i].name +'</a></li>');
+                            }
+                            $('.input-append').addClass("open");                            
+                        }
+                    });
+                }
+                
+            }
+            
+            //check # functionality
+            status_text = $("#description").text();
+            myRegexp = new RegExp('#([^\\s]*)','g');
+            match = myRegexp.exec(status_text);
+            if(match != null){
+                if(match[1] != '')
+                {                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url() ."trending_feature/get_hash_tags";?>',
+                        dataType: 'json',
+                        data: {
+                            hash_tag: match[1]
+                        },
+                        success: function(data) {
+                            if(data.length > 0)
+                            {
+                                $('.dropdown-menu').empty();
+                                for(var i = 0; i < data.length; i ++){
+                                    $('.dropdown-menu').append('<li><a onclick="get_selected_ht(\''+data[i].name+'\')" href="#" ><i class="icon-pencil"></i>'+ data[i].name +'</a></li>');
+                                }
+                                $('.input-append').addClass("open"); 
+                            }
+                            else
+                            {
+                                $('.dropdown-menu').empty();
+                                $('.dropdown-menu').hide();
+                            }
+                        }
+                    });
+                }
+                
+            }
             /*var status_text = $("#appendedInputButton").html();
             var status_text_array = status_text.trim().split(" ");
             for(var counter = 0; counter < status_text_array.length; counter++)
@@ -207,7 +276,7 @@
     });
     
     function placeCaretAtEnd(ele) {
-         var range = document.createRange();
+        var range = document.createRange();
         var sel = window.getSelection();
         range.setStart(ele, 1);
         range.collapse(true);
@@ -231,6 +300,62 @@
         }*/
     }
     
+    function get_selected_at(type_id, id)
+    {
+        $('.dropdown-menu').empty();
+        $('.dropdown-menu').hide();
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() ."trending_feature/get_selected_at";?>',
+            dataType: 'json',
+            data: {
+                type_id: type_id,
+                id: id
+            },
+            success: function(data) {
+                var status_text = $("#description").text();
+                var myRegexp = new RegExp('@([^\\s]*)','g');
+                var match = myRegexp.exec(status_text);
+                if(match != null){
+                    if(match[1] != '')
+                    {
+                        var status_text = $("#description").html();
+                        var anchor = '<a rel="nofollow" data-screen-name="" href="'+data.url+'" class="tweet-url username">'+data.name+'</a>&nbsp;';
+                        var status_text = status_text.replace(match[0], anchor);
+                        $("#description").html(status_text);
+                        placeCaretAtEnd( $("#description").get(0) );
+                    }
+
+                }
+            }
+        });
+    }
+    
+    function get_selected_ht(name)
+    {
+        $('.dropdown-menu').empty();
+        $('.dropdown-menu').hide();
+        var status_text = $("#description").text();
+        var myRegexp = new RegExp('#([^\\s]*)','g');
+        var match = myRegexp.exec(status_text);
+        if(match != null){
+            if(match[1] != '')
+            {
+                var status_text = $("#description").html();
+                var anchor = generate_hashtag(name);
+                var status_text = status_text.replace(match[0], anchor);
+                $("#description").html(status_text);
+                placeCaretAtEnd( $("#description").get(0) );
+            }
+
+        }
+    }
+    
+    function generate_hashtag(hashtag)
+    {
+        var url = '<?php echo base_url()?>'+'trending_feature/hashtag/'+hashtag;
+        return '<a rel="nofollow" data-screen-name="" href="'+url+'" class="tweet-url username">#'+hashtag+'</a>&nbsp;';
+    }
     
     function removeSelectedUser(span){
         span.parentNode.parentNode.removeChild(span.parentNode);
@@ -246,12 +371,7 @@
         //alert(name);
         return twttr.txt.autoLink(twttr.txt.htmlEscape(name));
     }
-    
-    function addAt(user_id, name)
-    {
-        twttr.sourceUrl = '<?php echo base_url()?>'+'member_profiles/show/'+user_id;
-        return twttr.txt.autoLink(twttr.txt.htmlEscape(name));
-    }
+        
 </script>
 <div class="row">
     <?php echo form_open(base_url()."feed/post/".STATUS_CATEGORY_USER_NEWSFEED, array("id" => "form-status"))?>
@@ -293,14 +413,10 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 input-append">
-                            <div class="form-control expanding status-box" contenteditable="true" id="description">
-                            
-                            </div>
-                            
-                                <ul class="dropdown-menu" style="left:15px;width:100%">
-
-                                </ul>
-                            
+                            <div class="form-control expanding status-box" contenteditable="true" id="description">                            
+                            </div>                            
+                            <ul class="dropdown-menu" style="left:15px;width:95%">
+                            </ul>                            
                         </div>
                     </div>
                     <div class="row">

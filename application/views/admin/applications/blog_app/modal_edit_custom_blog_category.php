@@ -19,7 +19,7 @@
                     alert(data['message']);
                     if (data['status'] === 1)
                     {
-                        alert(data['blog_category_info']['id']);
+                        //alert(data['blog_category_info']['id']);
                         $("#custom_blog_desc_" + data['blog_category_info']['id']).text(data['blog_category_info']['title']);
                         $("#modal_edit_custom_blog_category").modal('hide');
                     }
