@@ -182,13 +182,22 @@ class Admin_blog_model extends Ion_auth_model
                     ->get();
     }
     
-    public function get_blog_info($blog_id)
+    /*public function get_blog_info($blog_id)
     {
         $this->db->where($this->tables['blogs'].'.id',$blog_id);
         
         return $this->db->select($this->tables['blogs'].'.*,'.$this->tables['blog_category'].'.title as blog_category_name')
                     ->from($this->tables['blogs'])
                     ->join($this->tables['blog_category'],  $this->tables['blog_category'].'.id='.$this->tables['blogs'].'.blog_category_id')
+                    ->get();
+    }*/
+    
+    public function get_blog_info($blog_id)
+    {
+        $this->db->where($this->tables['blogs'].'.id',$blog_id);
+        
+        return $this->db->select($this->tables['blogs'].'.*')
+                    ->from($this->tables['blogs'])
                     ->get();
     }
     

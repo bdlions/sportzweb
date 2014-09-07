@@ -625,6 +625,7 @@ class Blog_app extends Role_Controller {
     {
         $result = array();
         $this->data['message'] = '';
+        
         $result['status'] = true;
         $result['message'] = "A request to edit your blog has been sent";
         $user_id = $this->session->userdata('user_id');

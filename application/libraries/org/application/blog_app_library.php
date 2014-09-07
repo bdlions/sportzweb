@@ -308,40 +308,34 @@ class Blog_app_library {
         return $user_blog_list;
     }
     
+    //written by omar faruk
     public function blog_category_list_update($blog_category_id, $blog_id)
     {
         $new_blog_list_array = array();
         $blog_list_object = new stdClass();
         $blog_list_object->blog_id = $blog_id;
         $new_blog_list_array[] = $blog_list_object;
-        //echo json_encode($blog_list_array);
         
         $blog_category_info_array = $this->blog_app_model->get_blog_category_info($blog_category_id)->result_array();
-
         if(!empty($blog_category_info_array)){
              $blog_category_info_array = $blog_category_info_array[0];
              $blog_list = $blog_category_info_array['blog_list'];
-             //echo '<pre/>';print_r($blog_list);
         }
         
         $blog_id_list = array();
         if($blog_list != '' && $blog_list != NULL)
         {
             $blog_list_array = json_decode($blog_list);
-            //echo '<pre/>';print_r($blog_list_array);exit('array ');
-            
             foreach($blog_list_array as $blog_info)
             {
                 $new_blog_list_array[] = $blog_info;
-                
             }
-            //echo '<pre/>';print_r($new_blog_list_array);exit('ddd ');
         }
         
         $additional_data = array(
             'blog_list' => json_encode($new_blog_list_array)
         );
-        
+        echo '<pre/>';print_r($additional_data); exit('ff ff fdddddddfd');
         $this->blog_app_model->update_blog_categroy($blog_category_id, $additional_data);
     }
      

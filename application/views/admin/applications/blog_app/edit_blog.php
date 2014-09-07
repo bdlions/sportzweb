@@ -92,7 +92,7 @@
 </script>
 
 <div class="panel panel-default">
-    <div class="panel-heading">Create Blog</div>
+    <div class="panel-heading">Edit Blog</div>
     <div class="panel-body">
         <div class="row form-horizontal form-background top-bottom-padding">  
             <form id="formsubmit" method="post" action="<?php echo base_url(); ?>admin/applications_blogs/edit_blog/<?php echo $blog_id; ?>" onsubmit="return false;">
@@ -104,14 +104,49 @@
                         </div>
                         
                         <div class="form-group">
+                            <label for="type" class="col-md-3 control-label requiredField">
+                                Blog Category
+                            </label>
+                            <div class ="col-md-3">
+                                <?php if(!empty($category_list)): $i = 0; $length = count($category_list);?>
+                                    <?php foreach ($category_list as $category) : ?>
+                                        <?php $i++; ?>
+                                        <?php if($i>5): ?>
+                                           <?php $i--;break; ?>
+                                        <?php endif;?>
+                                
+                                        <input <?php echo ($category['checked'] == 1) ? 'checked' : ''; ?> class="category_id" name="category_name[]" id="<?php echo $category['id']; ?>" type="checkbox" value="<?php echo $category['id']; ?>"/>
+                                        <label for="type" class=" control-label requiredField">
+                                            <?php echo $category['title']; ?>
+                                        </label><br>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class ="col-md-3"></div>
+                            <div class ="col-md-3">
+                                 <?php $j = 0 ?>
+                                    <?php foreach ($category_list as $category) : ?>
+                                        <?php $j++; ?>
+                                        <?php if($j>5): ?>
+                                           <input <?php echo ($category['checked'] == 1) ? 'checked' : ''; ?> class="category_id" name="category_name[]" id="<?php echo $category['id']; ?>" type="checkbox" value="<?php echo $category['id']; ?>"/>
+                                            <label for="type" class=" control-label requiredField">
+                                                <?php echo $category['title']; ?>
+                                            </label><br>
+                                        <?php endif;?>
+                                    <?php endforeach; ?>
+                                <?php //echo form_dropdown('category_id', $category_id, '', 'class=form-control'); ?>
+                            </div>
+                        </div>
+                        
+                        <!--<div class="form-group">
                             <label for="name" class="col-md-3 control-label requiredField">
                                 Category: 
                             </label>
                             <div class ="col-md-2">
-                                <?php echo form_dropdown('category_id', $category_id, $selected_category_id, 'class=form-control id=dropdown'); ?>
+                                <?php //echo form_dropdown('category_id', $category_id, $selected_category_id, 'class=form-control id=dropdown'); ?>
                                 <input type="hidden" name="blog_category_id" id="blog_category_id">
                             </div>
-                        </div>
+                        </div>-->
                         <div class="form-group">
                             <label for="name" class="col-md-3 control-label requiredField">
                                 Blog Title
@@ -198,12 +233,16 @@
 <script>
     $(function() {
         $("#btnSubmit").on("click", function() {
-            var blog_category_id = $('#dropdown').val();
-            $('#blog_category_id').val(blog_category_id);
+            //var blog_category_id = $('#dropdown').val();
+            //$('#blog_category_id').val(blog_category_id);
             $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
             $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
             $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
-            if (CKEDITOR.instances.title.getData() === "")
+            if (!$('.category_id').is(':checked')) {
+                alert("Checked atleast one blog category");
+                return;
+            }
+            else if (CKEDITOR.instances.title.getData() === "")
             {
                 alert("Blog heading is required.");
                 return;
@@ -232,7 +271,11 @@
                 $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
                 $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
                 $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
-                if (CKEDITOR.instances.title.getData() === "")
+                if (!$('.category_id').is(':checked')) {
+                    alert("Checked atleast one blog category");
+                    return;
+                }
+                else if (CKEDITOR.instances.title.getData() === "")
                 {
                     alert("Blog heading is required.");
                     return;

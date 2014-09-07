@@ -392,6 +392,10 @@ class Applications_blogs extends CI_Controller{
     {
         $this->data['message'] = '';
         
+        if(empty($blog_id)){
+            redirect('admin/applications_blogs/approve_blog', 'refresh');
+        }
+        
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
         
@@ -407,7 +411,7 @@ class Applications_blogs extends CI_Controller{
         
         if($this->input->post())
         {
-            $blog_category_id = $this->input->post('category_id');
+            //$blog_category_id = $this->input->post('category_id');
             if (isset($_FILES["userfile"]))
                 {
                     $file_info = $_FILES["userfile"];
@@ -429,15 +433,14 @@ class Applications_blogs extends CI_Controller{
                 $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
                 
                 $data = array(
-                    'blog_category_id' => $blog_category_id,
+                    //'blog_category_id' => $blog_category_id,
                     'title' => $blog_title,
                     'description' => $description,
                     'picture_description' => $picture_description,
                     'related_posts' => json_encode($related_blogs),
                     'modified_on' => now()
                 );
-                
-                //echo '<pre/>';print_r($data);exit('ddd');
+
                 if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
                     $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
                 }
@@ -447,11 +450,27 @@ class Applications_blogs extends CI_Controller{
                     $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
                 }*/
                 
-                $blog_id = $this->admin_blog->update_blog($blog_info_array['id'],$data);
-                if($blog_id !== FALSE){
-                        $this->data['message'] = "Blog updated is successful";
-                        echo json_encode($this->data);
-                        return;
+                
+                $blog_id_new = $this->admin_blog->update_blog($blog_info_array['id'],$data);
+                if($blog_id_new !== FALSE){
+                    $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
+                    if(!empty($blog_category_list_array_map))
+                    {
+                        foreach ($blog_category_list_array_map as $key => $category_array)
+                        {
+                            // here $category_array->blog_id means category_id
+                            $categoryid = $category_array->blog_id;
+                            $this->admin_blog->blog_category_list_update_by_remove($categoryid,$blog_id);
+                        }
+                    }
+                    
+                    foreach ($this->input->post('category_name') as $key => $category_id)
+                    {
+                        $this->admin_blog->blog_category_list_update($category_id,$blog_id);
+                    }
+                    $this->data['message'] = "Blog updated is successful";
+                    echo json_encode($this->data);
+                    return;
                 }else{
                     $this->data['message'] = $this->admin_blog->errors();
                     echo json_encode($this->data);
@@ -459,15 +478,39 @@ class Applications_blogs extends CI_Controller{
                 }
         }
         
+        $populated_blog_category_array = array();
+        $category_list = $this->admin_blog->get_all_blog_category()->result_array();
+        $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
+        
+        if(!empty($category_list)){
+            foreach ($category_list as $key => $category) {
+                $flag = 0;
+                if(!empty($blog_category_list_array_map)){
+                   foreach ($blog_category_list_array_map as $key => $blog_category){
+                        if($blog_category->blog_id == $category['id']) {
+                            $category['checked'] = 1;
+                            $populated_blog_category_array[$category['id']] = $category;
+                            $flag = 1;
+                        }
+                    } 
+                }
+                if($flag == 0){
+                    $category['checked'] = 0;
+                    $populated_blog_category_array[$category['id']] = $category;
+                } 
+            }
+        }
+        $this->data['category_list'] = $populated_blog_category_array;
+        
         //for blog category
-        $this->data['selected_category_id']=$blog_info_array['blog_category_id'];
+        /*$this->data['selected_category_id'] = $blog_info_array['blog_category_id'];
         $category_list = $this->admin_blog->get_all_blog_category()->result_array();
         $this->data['category_id'] = array();
         if (!empty($category_list)) {
             foreach ($category_list as $category) {
                 $this->data['category_id'][$category['id']] = $category['title'];
             }
-        }
+        }*/
         
         $this->data['all_blog_lists'] = $this->admin_blog->get_all_blogs()->result_array();
         
