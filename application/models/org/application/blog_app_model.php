@@ -353,4 +353,17 @@ class Blog_app_model extends Ion_auth_model {
         
     }
      
+    public function get_all_blogs_by_category($category_ids = array())
+    {
+        if(!empty($category_ids))
+        {
+            $this->db->where_in($this->tables['blogs'].'.id', $category_ids);
+        }else {
+            return array();
+        }
+        $this->db->where($this->tables['blogs'].'.blog_status_id',2);
+        return $this->db->select($this->tables['blogs'].'.*')
+                    ->from($this->tables['blogs'])
+                    ->get();
+    }
 }

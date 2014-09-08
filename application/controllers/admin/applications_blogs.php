@@ -108,10 +108,11 @@ class Applications_blogs extends CI_Controller{
     function blog_list($category_id)
     {
         $this->data['message'] = '';
-        $blog_list = $this->admin_blog->get_all_blogs($category_id)->result_array();
+        //$blog_list = $this->admin_blog->get_all_blogs($category_id)->result_array();
+        $blog_list = $this->admin_blog->get_all_blog_by_category($category_id);
         $blog_count = count($blog_list);
         $order_list = array();
-        for($counter = 1 ; $counter <= $blog_count ; $counter++)
+        for($counter = 1; $counter <= $blog_count; $counter++)
         {
             $order_list[$counter] = $counter;
         }
@@ -300,7 +301,6 @@ class Applications_blogs extends CI_Controller{
         
         if($this->input->post())
         {
-            
             $blog_category_id = $this->input->post('blog_category_id');
             if (isset($_FILES["userfile"]))
                 {
@@ -335,16 +335,20 @@ class Applications_blogs extends CI_Controller{
                 );
                 
                 $blog_id = $this->admin_blog->create_blog($data);
+                $this->update_checked_blog_id($blog_id);
                 if($blog_id !== FALSE){
-                        $this->data['message'] = "Blog create is successful";
-                        echo json_encode($this->data);
-                        return;
+                    $this->data['message'] = "Blog create is successful";
+                    echo json_encode($this->data);
+                    return;
                 }else{
                     $this->data['message'] = $this->admin_blog->errors();
                     echo json_encode($this->data);
                     return;
                 }
         }
+        
+        $category_list = $this->admin_blog->get_all_blog_category()->result_array();
+        $this->data['category_list'] = $category_list;
         
         $this->data['title'] = array(
             'name' => 'title',
@@ -450,10 +454,10 @@ class Applications_blogs extends CI_Controller{
                     $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
                 }*/
                 
-                
+                $this->update_checked_blog_id($blog_id);
                 $blog_id_new = $this->admin_blog->update_blog($blog_info_array['id'],$data);
                 if($blog_id_new !== FALSE){
-                    $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
+                    /*$blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
                     if(!empty($blog_category_list_array_map))
                     {
                         foreach ($blog_category_list_array_map as $key => $category_array)
@@ -467,7 +471,7 @@ class Applications_blogs extends CI_Controller{
                     foreach ($this->input->post('category_name') as $key => $category_id)
                     {
                         $this->admin_blog->blog_category_list_update($category_id,$blog_id);
-                    }
+                    }*/
                     $this->data['message'] = "Blog updated is successful";
                     echo json_encode($this->data);
                     return;
@@ -551,6 +555,60 @@ class Applications_blogs extends CI_Controller{
         
         $this->data['blog_id'] = $blog_id;
         $this->template->load($this->tmpl, "admin/applications/blog_app/edit_blog", $this->data);
+    }
+    
+    
+    public function update_checked_blog_id($blog_id) {
+        $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
+        if(!empty($blog_category_list_array_map))
+        {
+            foreach ($blog_category_list_array_map as $key => $category_array)
+            {
+                // here $category_array->blog_id means category_id
+                $categoryid = $category_array->blog_id;
+                $this->admin_blog->blog_category_list_update_by_remove($categoryid,$blog_id);
+            }
+        }
+
+        foreach ($this->input->post('category_name') as $key => $category_id)
+        {
+            $this->admin_blog->blog_category_list_update($category_id,$blog_id);
+        }
+    }
+    
+    public function remove_blog_by_admin() {
+        $response = array();
+        $delete_confirm = FALSE;
+
+        $blog_id = $_POST['blog_id'];
+        $blog_info = array();
+        $blog_info_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
+        if(!empty($blog_info_array)) {
+            $blog_info = $blog_info_array[0];
+        }
+        
+        $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
+        if(!empty($blog_category_list_array_map))
+        {
+            foreach ($blog_category_list_array_map as $key => $category_array)
+            {
+                // here $category_array->blog_id means category_id
+                $categoryid = $category_array->blog_id;
+                $delete_confirm = $this->admin_blog->blog_category_list_update_by_remove($categoryid,$blog_id);
+            }
+        }
+        
+        if($delete_confirm !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = 'Blog is removed successfully.';          
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_blog->errors_alert();
+        }
+        echo json_encode($response);
     }
     
     
@@ -801,8 +859,8 @@ class Applications_blogs extends CI_Controller{
                         'blog_category_name' => strip_tags($result_data['A']),
                         'title' => strip_tags($result_data['B']),
                         'description' => strip_tags($result_data['C']),
-                        'user_id' => 3,
-                        'blog_status_id' => 2,
+                        'user_id' => $this->session->userdata('user_id'),
+                        'blog_status_id' => APPROVED,
                         'created_on' => now()
                     );
 
@@ -869,8 +927,8 @@ class Applications_blogs extends CI_Controller{
                 'title' => $splited_content[1],
                 'description' => $splited_content[2],
                 'picture' => $splited_content[3],
-                'user_id' => 3,
-                'blog_status_id' => 2,
+                'user_id' => $this->session->userdata('user_id'),
+                'blog_status_id' => APPROVED,
                 'created_on' => now()
             );
             $flag = $this->admin_blog->create_blog($additional_data);

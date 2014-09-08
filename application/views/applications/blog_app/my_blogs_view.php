@@ -66,9 +66,6 @@
             });
             $('#myModal').modal('hide');
         });
-        
-        
-        
     }
 </script>
 <style>

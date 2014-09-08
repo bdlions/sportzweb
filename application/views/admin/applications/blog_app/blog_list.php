@@ -27,26 +27,34 @@
                                 <?php } ?>
                                 <th>Title</th>
                                 <th>Comments</th>
-                                <?php if($allow_edit){ ?>
-                                <th>Edit</th>
-                                <?php } ?>
+                                <?php if($allow_edit): ?>
+                                    <th>Edit</th>
+                                <?php endif; ?>
+                                    
+                                <?php if($allow_delete): ?>
+                                    <th>Delete</th>
+                                <?php endif; ?>
                             </tr>
                         </thead>
                         <tbody id="tbody_blog_list_category">
                             <?php $i=1;foreach($blog_list as $blog):?>
                             <tr>
                                 <td><a href="<?php echo base_url().'admin/applications_blogs/blog_detail/'.$blog['id'] ?>"><?php echo $i++;?></td>
-                                <?php if($allow_configuration){ ?>
-                                <td>
-                                    <?php echo form_dropdown('order_list', array('0' => 'Order by date')+$order_list, $blog['order_no'],'id='.$blog['id'].' class=form-control'); ?>                                    
-                                    <input type="hidden" id="<?php echo $blog['id'].'_created_on';?>" value="<?php echo $blog['created_on'];?>"/>
-                                </td>
-                                <?php } ?>
+                                <?php if($allow_configuration): ?>
+                                    <td>
+                                        <?php echo form_dropdown('order_list', array('0' => 'Order by date')+$order_list, $blog['order_no'],'id='.$blog['id'].' class=form-control'); ?>                                    
+                                        <input type="hidden" id="<?php echo $blog['id'].'_created_on';?>" value="<?php echo $blog['created_on'];?>"/>
+                                    </td>
+                                <?php endif; ?>
                                 <td><?php echo html_entity_decode(html_entity_decode($blog['title']));?></td>
                                 <td><a href="<?php echo base_url().'admin/applications_blogs/comment_list/'.$blog['id']; ?>">Comments</a></td>
-                                <?php if($allow_edit){ ?>
-                                <td><a href="<?php echo base_url().'admin/applications_blogs/edit_blog/'.$blog['id']; ?>">Edit</a></td>
-                                <?php } ?>
+                                <?php if($allow_edit): ?>
+                                    <td><a href="<?php echo base_url().'admin/applications_blogs/edit_blog/'.$blog['id']; ?>">Edit</a></td>
+                                <?php endif; ?>
+                                    
+                                <?php if($allow_delete): ?>
+                                    <td><a href="javascript:void(0)" onclick="delete_blog(<?php echo $blog['id']?>)">Delete</a></td>
+                                <?php endif; ?>
                             </tr>
                             <?php endforeach;?>
                         </tbody>
@@ -65,6 +73,27 @@
         
     </div>
 </div>
+
+<!-- Delete confirmation modal -->
+
+<div class="modal fade" id="delete_Confirm_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 class="modal-title" id="myModalLabel">Confirm Message</h2>
+      </div>
+      <div class="modal-body">
+        Do You want to proceed?
+      </div>
+      <div class="modal-footer">          
+        <button type="button" id ="modal_button_confirm" class="btn btn-primary">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
 <script type="text/javascript">
     $(function() {
         $("#button_save_order").on("click", function() {
@@ -92,4 +121,26 @@
 
         });
     });
+</script>
+
+<script>
+    function delete_blog(blog_id)
+    {
+        $('#delete_Confirm_Modal').modal('show');
+        $('#modal_button_confirm').on("click", function() {
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url();?>admin/applications_blogs/remove_blog_by_admin',
+                data: {
+                    blog_id : blog_id
+                },
+                success: function(data) {
+                    alert(data.message);
+                    location.reload();
+                }
+            });
+            $('#delete_Confirm_Modal').modal('hide');
+        });
+    }
 </script>

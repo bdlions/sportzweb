@@ -335,8 +335,86 @@ class Blog_app_library {
         $additional_data = array(
             'blog_list' => json_encode($new_blog_list_array)
         );
-        echo '<pre/>';print_r($additional_data); exit('ff ff fdddddddfd');
+       
         $this->blog_app_model->update_blog_categroy($blog_category_id, $additional_data);
+    }
+    
+    
+    // written by omar faruk
+    public function get_all_category_of_this_blog($blog_id) {
+        $all_blog_category = $this->blog_app_model->get_all_blog_category()->result_array();
+        $blog_list_array_map = array();
+        $blog_list_array = array();
+        foreach ($all_blog_category as $key => $blog_category) {
+            if(!empty($blog_category['blog_list'])) {
+                $blog_list_array = json_decode($blog_category['blog_list']);
+                if(!empty($blog_list_array)){
+                    foreach ($blog_list_array as $key => $blog_id_value) {
+                        if($blog_id_value->blog_id == $blog_id){
+                            $blog_id_object = new stdClass();
+                            $blog_id_object->blog_id = $blog_category['id'];
+                            $blog_list_array_map[] = $blog_id_object;
+                        }
+                    }
+                }
+                
+            }
+        }
+        return $blog_list_array_map;
+    }
+    
+    //written by omar faruk
+    public function blog_category_list_update_by_remove($blog_category_id, $blog_id)
+    {
+        $new_blog_list_array = array();
+        $blog_category_info_array = $this->blog_app_model->get_blog_category_info($blog_category_id)->result_array();
+        if(!empty($blog_category_info_array)){
+             $blog_category_info_array = $blog_category_info_array[0];
+             $blog_list = $blog_category_info_array['blog_list'];
+        }
+        if($blog_list != '' && $blog_list != NULL)
+        {
+            $blog_list_array = json_decode($blog_list);
+            foreach($blog_list_array as $blog_info)
+            {
+                 if($blog_info->blog_id != $blog_id){
+                    $blog_list_object = new stdClass();
+                    $blog_list_object->blog_id = $blog_info->blog_id;
+                    $new_blog_list_array[] = $blog_list_object;
+                 }
+            }
+        }
+        
+        $additional_data = array(
+            'blog_list' => json_encode($new_blog_list_array)
+        );
+        $this->blog_app_model->update_blog_categroy($blog_category_id, $additional_data);
+        return true;
+    }
+    
+    public function get_all_blog_by_category($category_id) {
+        $blog_list_array = array();
+        $all_blogs_info = array();
+        $blog_category_array = $this->blog_app_model->get_blog_category_info($category_id)->result_array();
+        $pupulated_blog_id_array = array();
+
+        if(!empty($blog_category_array))
+        {
+            $blog_category_array = $blog_category_array[0];
+            $blog_list_array = json_decode($blog_category_array['blog_list']);
+            
+            if(!empty($blog_list_array)) {
+                foreach ($blog_list_array as $key => $blog_list) {
+                    array_push($pupulated_blog_id_array,$blog_list->blog_id);
+                }
+            }
+        }
+
+        $all_blogs_info = $this->blog_app_model->get_all_blogs_by_category($pupulated_blog_id_array);
+        if(!empty($all_blogs_info)) {
+            $all_blogs_info = $all_blogs_info->result_array();
+        }
+        return $all_blogs_info;
     }
      
     

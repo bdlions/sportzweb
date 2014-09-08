@@ -57,15 +57,23 @@ class Blog_app extends Role_Controller {
 
     function blog_category($category_id = 0) {
         $this->data['category_id'] = $category_id;
-        $catagory_info = $this->blog_app_library->get_blog_category_info($category_id)->result_array();
+        /*$catagory_info = $this->blog_app_library->get_blog_category_info($category_id)->result_array();
         if (count($catagory_info) > 0) {
             $catagory_info = $catagory_info[0];
         }
         $all_blogs_by_category = $this->blog_app_library->get_all_blogs($category_id)->result_array();
+        */
+        
+        $all_blogs_by_category = $this->blog_app_library->get_all_blog_by_category($category_id);
+        //echo '<pre/>';print_r($all_blogs_by_category);exit('c here');
+        
         $blog_arr_length = count($all_blogs_by_category);
-        for ($i = 0; $i < $blog_arr_length; $i++) {
-            $all_blogs_by_category[$i]['counted_comment'] = count($this->blog_app_library->get_all_comments($all_blogs_by_category[$i]['id']));
+        if($blog_arr_length>0){
+           for ($i = 0; $i < $blog_arr_length; $i++) {
+                $all_blogs_by_category[$i]['counted_comment'] = count($this->blog_app_library->get_all_comments($all_blogs_by_category[$i]['id']));
+            } 
         }
+        
         $blog_col_1 = array();
         $blog_col_2 = array();
         $blog_col_3 = array();
@@ -183,7 +191,7 @@ class Blog_app extends Role_Controller {
             $this->data['have_my_blogs'] = 1;
         }
 
-        $this->data['catagory_info'] = $catagory_info;
+        //$this->data['catagory_info'] = $catagory_info;
         $this->data['all_blogs_by_category'] = $all_blogs_by_category;
         $this->template->load(null, "applications/blog_app/blog_list_by_catagory_view", $this->data);
     }
@@ -621,11 +629,13 @@ class Blog_app extends Role_Controller {
      * @Author Nazmul on 10th June 2014
      * @param $blog_id, blog id
      */
-    public function edit_blog($blog_id)
+    public function edit_blog($blog_id=null)
     {
         $result = array();
         $this->data['message'] = '';
-        
+        if(empty($blog_id)){
+            redirect('applications/blog_app', 'refresh');
+        } 
         $result['status'] = true;
         $result['message'] = "A request to edit your blog has been sent";
         $user_id = $this->session->userdata('user_id');
@@ -636,6 +646,7 @@ class Blog_app extends Role_Controller {
         
         $blog_info = array();
         $blog_info_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
+        //echo '<pre/>'; print_r($blog_info_array);exit('here');
         if(!empty($blog_info_array)) {
             $blog_info = $blog_info_array[0];
         }
@@ -659,15 +670,17 @@ class Blog_app extends Role_Controller {
             $description = trim(htmlentities($this->input->post('description_editortext')));
             $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
             
-            $blog_category_id = $this->input->post('blog_category_id');
+            //$blog_category_id = $this->input->post('blog_category_id');
             $data = array(
-                'blog_category_id' => $this->input->post('category_id'),
+                //'blog_category_id' => $this->input->post('category_id'),
                 'title' => $blog_title,
                 'description' => $description,
                 'picture_description' => $picture_description,
                 'user_id' => $user_id,
                 'modified_on' => now()
             );
+            
+            $this->update_checked_blog_id($blog_id);
 
             if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
                 $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
@@ -689,7 +702,6 @@ class Blog_app extends Role_Controller {
             else if($blog_info['blog_status_id'] == PENDING || $blog_info['blog_status_id'] == RE_APPROVAL)
             {
                 $flag = $this->blog_app_library->update_blog($blog_id,$data);
-                
                 if($flag == FALSE)
                 {
                     $result['status']=FALSE;
@@ -712,7 +724,6 @@ class Blog_app extends Role_Controller {
                     $reference_blog['modified_on'] = $data['modified_on'];
                     
                     $flag = $this->blog_app_library->update_blog($reference_blog['id'],$reference_blog);
-                    
                     if($flag == FALSE)
                     {
                         $result['status']=FALSE;
@@ -743,14 +754,37 @@ class Blog_app extends Role_Controller {
         }
         
         
-        $this->data['selected_category_id']=$blog_info['blog_category_id'];
+        $populated_blog_category_array = array();
+        $category_list = $this->blog_app_library->get_all_blog_category()->result_array();
+        $blog_category_list_array_map = $this->blog_app_library->get_all_category_of_this_blog($blog_id);
+        if(!empty($category_list)){
+            foreach ($category_list as $key => $category) {
+                $flag = 0;
+                if(!empty($blog_category_list_array_map)){
+                   foreach ($blog_category_list_array_map as $key => $blog_category){
+                        if($blog_category->blog_id == $category['id']) {
+                            $category['checked'] = 1;
+                            $populated_blog_category_array[$category['id']] = $category;
+                            $flag = 1;
+                        }
+                    } 
+                }
+                if($flag == 0){
+                    $category['checked'] = 0;
+                    $populated_blog_category_array[$category['id']] = $category;
+                } 
+            }
+        }
+        $this->data['category_list'] = $populated_blog_category_array;
+        
+        /*$this->data['selected_category_id']=$blog_info['blog_category_id'];
         $category_list = $this->blog_app_library->get_all_blog_category()->result_array();
         $this->data['category_id'] = array();
         if (!empty($category_list)) {
             foreach ($category_list as $category) {
                 $this->data['category_id'][$category['id']] = $category['title'];
             }
-        }
+        }*/
         
         $this->data['title'] = array(
             'name' => 'title',
@@ -791,6 +825,24 @@ class Blog_app extends Role_Controller {
         $this->template->load("", "applications/blog_app/edit_blog", $this->data);
     }
     
+    public function update_checked_blog_id($blog_id) {
+        $blog_category_list_array_map = $this->blog_app_library->get_all_category_of_this_blog($blog_id);
+        if(!empty($blog_category_list_array_map))
+        {
+            foreach ($blog_category_list_array_map as $key => $category_array)
+            {
+                // here $category_array->blog_id means category_id
+                $categoryid = $category_array->blog_id;
+                $this->blog_app_library->blog_category_list_update_by_remove($categoryid,$blog_id);
+            }
+        }
+
+        foreach ($this->input->post('category_name') as $key => $category_id)
+        {
+            $this->blog_app_library->blog_category_list_update($category_id,$blog_id);
+        }
+    }
+    
     /*
      * This method will send the delete request to the admin
      * @Author Nazmul on 10th June 2014
@@ -798,11 +850,9 @@ class Blog_app extends Role_Controller {
     public function request_to_remove_blog()
     {
         $response = array();
-        
         $response['status'] = true;
         $response['message'] = "A request to delete your blog has been sent";
-        
-        
+
         $blog_id = $_POST['blog_id'];
         $blog_info = array();
         $blog_info_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
@@ -833,7 +883,6 @@ class Blog_app extends Role_Controller {
             {
                 $response['status'] = false;
                 $response['message'] = "Your request to delete the blog is unsuccessful";
-        
             }
         }
         echo json_encode($response);
