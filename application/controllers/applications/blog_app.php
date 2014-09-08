@@ -73,7 +73,7 @@ class Blog_app extends Role_Controller {
                 $all_blogs_by_category[$i]['counted_comment'] = count($this->blog_app_library->get_all_comments($all_blogs_by_category[$i]['id']));
             } 
         }
-        
+        //echo '<pre/>';print_r($all_blogs_by_category);
         $blog_col_1 = array();
         $blog_col_2 = array();
         $blog_col_3 = array();
@@ -180,6 +180,9 @@ class Blog_app extends Role_Controller {
             if ($j >= $blog_arr_length)
                 break;
         }
+        
+        //echo '<pre/>';print_r($blog_col_1);exit('this is here fdf');
+        
         $this->data['blog_col_1'] = $blog_col_1;
         $this->data['blog_col_2'] = $blog_col_2;
         $this->data['blog_col_3'] = $blog_col_3;
@@ -675,16 +678,18 @@ class Blog_app extends Role_Controller {
                 //'blog_category_id' => $this->input->post('category_id'),
                 'title' => $blog_title,
                 'description' => $description,
+                'picture' => empty($uploaded_image_data['upload_data']['file_name'])?  $blog_info['picture'] : $uploaded_image_data['upload_data']['file_name'],
                 'picture_description' => $picture_description,
                 'user_id' => $user_id,
+                'created_on' => now(),
                 'modified_on' => now()
             );
             
             $this->update_checked_blog_id($blog_id);
 
-            if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
+            /*if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
                 $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
-            }
+            }*/
             if($blog_info['blog_status_id'] == APPROVED)
             {
                 $data['blog_status_id'] = RE_APPROVAL;

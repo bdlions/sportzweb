@@ -67,7 +67,7 @@
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url();?>admin/blogapp/blog_confirmation',
+            url: '<?php echo base_url();?>admin/applications_blogs/blog_confirmation',
             data: {
                 blog_id : blog_id
             },
@@ -75,7 +75,7 @@
                 
                 if(data.status === 1) {
                     alert(data.message);
-                    window.location = '<?php echo base_url();?>admin/blogapp/approve_blog';
+                    window.location = '<?php echo base_url();?>admin/applications_blogs/approve_blog';
                     location.reload(true);
                 }
                 else if(data.status==0)
@@ -87,14 +87,14 @@
                         $.ajax({
                             dataType: 'json',
                             type: "POST",
-                            url: '<?php echo base_url();?>admin/blogapp/blog_confirmation_for_delete',
+                            url: '<?php echo base_url();?>admin/applications_blogs/blog_confirmation_for_delete',
                             data: {
                                 blog_id: blog_id
                             },
                             success: function(data){
                                 alert(data.message);
                                 
-                                window.location = '<?php echo base_url();?>admin/blogapp/approve_blog';
+                                window.location = '<?php echo base_url();?>admin/applications_blogs/approve_blog';
                                 location.reload(true);
                             }
                         });
@@ -113,7 +113,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url();?>admin/blogapp/get_blog_by_status_id',
+                url: '<?php echo base_url();?>admin/applications_blogs/get_blog_by_status_id',
                 data: {
                   status_id: id  
                 },
@@ -134,9 +134,9 @@
     {% while(blog_list){ %}
         <tr>
             <td>{%= blog_list.username %}</td>
-           <td><a href="<?php echo base_url().'admin/blogapp/blog_detail/{%= blog_list.id %}' ?>">{%=blog_list.title%}</a></td>
-            <td><a href="<?php echo base_url().'admin/blogapp/blog_detail/{%= blog_list.id %}' ?>">View</a></td>
-            <td><a href="<?php echo base_url().'admin/blogapp/edit_blog/{%= blog_list.id %}' ?>">Edit</a></td>
+           <td><a href="<?php echo base_url().'admin/applications_blogs/blog_detail/{%= blog_list.id %}' ?>">{%=blog_list.title%}</a></td>
+            <td><a href="<?php echo base_url().'admin/applications_blogs/blog_detail/{%= blog_list.id %}' ?>">View</a></td>
+            <td><a href="<?php echo base_url().'admin/applications_blogs/edit_blog/{%= blog_list.id %}' ?>">Edit</a></td>
             <td>{%= blog_list.blog_status_title %}</td>
             <td onclick="delete_pending({%=blog_list.id%})" >Confirm</td>
         </tr>
