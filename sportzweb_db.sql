@@ -1429,6 +1429,7 @@ CREATE TABLE `blogs`(
   `title` varchar(5000) NOT NULL,
   `description` varchar(5000) NOT NULL,
   `picture` text,
+  `picture_description` text default '',
   `order_no` int(11) DEFAULT 99999999,
   `related_posts` text DEFAULT '',
   `reference_id` int(11) unsigned DEFAULT NULL,
