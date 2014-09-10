@@ -79,7 +79,9 @@
                         var description_ = $("#description_" + present_value);
                         if(description_ != undefined){
                             //description_.text(data.description);
-                            description_.text($("<div/>").html($("<div/>").html(data.description).text()).text().replace(/(<([^>]+)>)/ig, ""));
+                            var str = data.description;
+                            var res = str.substring(0, 256);
+                            description_.text($("<div/>").html($("<div/>").html(res).text()).text().replace(/(<([^>]+)>)/ig, ""));
                         }
                     }
                 });

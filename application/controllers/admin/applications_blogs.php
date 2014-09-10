@@ -560,7 +560,24 @@ class Applications_blogs extends CI_Controller{
         $delete_confirm = FALSE;
 
         $blog_id = $_POST['blog_id'];
-        $delete_confirm = $this->remove_blog_by_id($blog_id);
+        
+        $present_date = $this->utils->get_current_date();
+        //check this requested blog id is not set in the home page today to future days
+        $has_or_not = $this->admin_blog->check_blog_before_delete_confirm($reference_id,$present_date);
+        
+        if(!empty($has_or_not)) {
+            //$all_blogs = $this->admin_blog->get_blog_list_without_one($reference_id)->result_array();
+            $response['status'] = 0;
+            $response['message'] = 'This blog is configured in following date:';
+            foreach($has_or_not as $date)
+            {
+                $response['message'] = $response['message'].' '.$date;
+            }
+            echo json_encode($response);
+            return;
+        } else {
+            $delete_confirm = $this->remove_blog_by_id($blog_id);
+        }
         /*$blog_info = array();
         $blog_info_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
         if(!empty($blog_info_array)) {
@@ -741,6 +758,9 @@ class Applications_blogs extends CI_Controller{
         $this->data['blog_list'] = $blog_list;*/
         
         $this->data = array_merge($this->data, $this->admin_blog->get_home_page_blog_configuration());
+        //echo '<pre/>';print_r($this->data);exit('here');
+        //$result = $this->admin_blog->get_home_page_blog_configuration();
+        //echo '<pre/>';print_r($result['blog_id_blog_info_map']);exit('here');
         $this->template->load($this->tmpl, "admin/applications/blog_app/config_blog", $this->data);
     }
     
@@ -1154,7 +1174,6 @@ class Applications_blogs extends CI_Controller{
             
             if(!empty($has_or_not)) {
                 //$all_blogs = $this->admin_blog->get_blog_list_without_one($reference_id)->result_array();
-                //echo '<pre/>';print_r($all_blogs);exit('fdsfds');
                 $response['status'] = 0;
                 $response['message'] = 'This blog is configured in following date:';
                 foreach($has_or_not as $date)

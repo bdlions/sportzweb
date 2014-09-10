@@ -101,7 +101,7 @@
                                         </h2>
                                     </span><!--card heading-->
                                     <div class="blog_post_body_text" id="description_<?php echo $i; ?>">
-                                        <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])); ?>
+                                        <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])),0,255)." ....."; ?>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                                         </h2>
                                     </span><!--card heading-->
                                     <div class="blog_post_body_text" id="description_<?php echo $i; ?>">
-                                        <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])); ?>
+                                        <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])),0,255)." ....."; ?>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                                     </h2>
                                 </span><!--card heading-->
                                 <div class="blog_post_body_text" id="description_<?php echo $i; ?>">
-                                    <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])); ?>
+                                    <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])),0,255)." ....."; ?>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                     </h2>
                                 </span><!--card heading-->
                                 <div class="blog_post_body_text" id="description_<?php echo $i; ?>">
-                                    <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])); ?>
+                                    <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])),0,255)." ....."; ?>
                                 </div>
                             </div>
                         </div>

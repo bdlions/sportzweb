@@ -649,7 +649,6 @@ class Blog_app extends Role_Controller {
         
         $blog_info = array();
         $blog_info_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
-        //echo '<pre/>'; print_r($blog_info_array);exit('here');
         if(!empty($blog_info_array)) {
             $blog_info = $blog_info_array[0];
         }

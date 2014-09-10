@@ -441,7 +441,8 @@ class Admin_blog_model extends Ion_auth_model
      * @param, $blog_id_list, blog id list
      * @Author Nazmul on 14th June 2014
      */
-    public function get_blog_list($blog_id_list = array())
+    // old
+    /*public function get_blog_list($blog_id_list = array())
     {
         if(!empty($blog_id_list))
         {
@@ -456,6 +457,23 @@ class Admin_blog_model extends Ion_auth_model
         return $this->db->select($this->tables['blogs'].'.id as blog_id, '.$this->tables['blogs'].'.*,'.$this->tables['blog_category'].'.title as blog_category_name')
                     ->from($this->tables['blogs'])
                     ->join($this->tables['blog_category'],  $this->tables['blog_category'].'.id='.$this->tables['blogs'].'.blog_category_id')
+                    ->get();
+    }*/
+    
+    public function get_blog_list($blog_id_list = array())
+    {
+        if(!empty($blog_id_list))
+        {
+            $list = implode (", ", array_filter($blog_id_list));
+            $this->db->_protect_identifiers = FALSE;
+            $this->db->where_in($this->tables['blogs'].'.id',$blog_id_list);
+            $this->db->order_by("FIELD (blogs.id, " . $list . ")");
+            $this->db->_protect_identifiers = TRUE;
+            //$this->db->where_in($this->tables['blogs'].'.id', $blog_id_list);
+        }
+        $this->db->where($this->tables['blogs'].'.blog_status_id',APPROVED);
+        return $this->db->select($this->tables['blogs'].'.id as blog_id, '.$this->tables['blogs'].'.*')
+                    ->from($this->tables['blogs'])
                     ->get();
     }
     
@@ -499,6 +517,7 @@ class Admin_blog_model extends Ion_auth_model
     public function get_blog_list_initial_configuration()
     {
         $this->db->limit(BLOG_CONFIGURATION_COUNTER);
+        $this->db->where($this->tables['blogs'].'.blog_status_id',APPROVED);
         return $this->db->select($this->tables['blogs'].'.id as blog_id, '.$this->tables['blogs'].'.*')
                     ->from($this->tables['blogs'])
                     ->get();

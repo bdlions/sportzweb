@@ -210,10 +210,15 @@
                 </div>
             </div>
             <div style="border-top: 1px solid #000;"></div>-->
+            
             <div class="panel right-panel">
                 <div class="panel-heading right-panel-heading">App Directory</div>
-                <div class="panel-body right-panel-body">
-                    <ul class="list-inline list-unstyled">
+                <div class="panel-body right-panel-body" style="padding-bottom: 20px;">
+                    <a class="" href="<?php echo base_url(); ?>app_directory">
+                        See all app
+                    </a>
+                    
+                    <!--<ul class="list-inline list-unstyled">
                         <li>
                             <a href="<?php echo base_url(); ?>applications/xstream_banter">
                                 <img alt="Xstream Banter" title="Xstream Banter" src="<?php echo base_url(); ?>resources/images/xb_icon.png" height="16px" width="16px"/>
@@ -249,7 +254,7 @@
                                 <img alt="Photography" title="Photography" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/>
                             </a>
                         </li>
-                    </ul>
+                    </ul>-->
 
                 </div>
             </div>
