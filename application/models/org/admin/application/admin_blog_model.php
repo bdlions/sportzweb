@@ -187,6 +187,8 @@ class Admin_blog_model extends Ion_auth_model
         if(!empty($category_ids))
         {
             $this->db->where_in($this->tables['blogs'].'.id', $category_ids);
+        } else{
+            return array();
         }
         $this->db->where($this->tables['blogs'].'.blog_status_id',2);
         return $this->db->select($this->tables['blogs'].'.*')
@@ -457,6 +459,14 @@ class Admin_blog_model extends Ion_auth_model
                     ->get();
     }
     
+    public function all_blogs()
+    {
+        $this->db->where($this->tables['blogs'].'.blog_status_id',APPROVED);
+        return $this->db->select($this->tables['blogs'].'.id as blog_id, '.$this->tables['blogs'].'.*')
+                    ->from($this->tables['blogs'])
+                    ->get();
+    }
+    
      /*
      * This method will return  all blogs without delete requested one
      * @Author omar on 14th June 2014
@@ -477,12 +487,20 @@ class Admin_blog_model extends Ion_auth_model
      * This method will return  all blogs without delete requested one
      * @Author omar on 14th June 2014
      */
-    public function get_blog_list_initial_configuration()
+    /*public function get_blog_list_initial_configuration()
     {
         $this->db->limit(BLOG_CONFIGURATION_COUNTER);
         return $this->db->select($this->tables['blogs'].'.id as blog_id, '.$this->tables['blogs'].'.*,'.$this->tables['blog_category'].'.title as blog_category_name')
                     ->from($this->tables['blogs'])
                     ->join($this->tables['blog_category'],  $this->tables['blog_category'].'.id='.$this->tables['blogs'].'.blog_category_id')
+                    ->get();
+    }*/
+    
+    public function get_blog_list_initial_configuration()
+    {
+        $this->db->limit(BLOG_CONFIGURATION_COUNTER);
+        return $this->db->select($this->tables['blogs'].'.id as blog_id, '.$this->tables['blogs'].'.*')
+                    ->from($this->tables['blogs'])
                     ->get();
     }
     

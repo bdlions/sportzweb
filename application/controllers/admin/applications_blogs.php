@@ -100,7 +100,6 @@ class Applications_blogs extends CI_Controller{
         $this->data['message'] = '';
         $category_list = $this->admin_blog->get_all_blog_category()->result_array();
         $custom_category_list = $this->admin_blog->get_all_custom_blog_category()->result_array();
-        //echo '<pre/>';print_r($custom_category_list);exit('dfd');
         $this->data['custom_category_list'] = $custom_category_list;
         $this->data['category_list'] = $category_list;
         $this->template->load($this->tmpl, "admin/applications/blog_app/blog_categories", $this->data);
@@ -301,7 +300,6 @@ class Applications_blogs extends CI_Controller{
         
         if($this->input->post())
         {
-            $blog_category_id = $this->input->post('blog_category_id');
             if (isset($_FILES["userfile"]))
                 {
                     $file_info = $_FILES["userfile"];
@@ -317,14 +315,12 @@ class Applications_blogs extends CI_Controller{
                 }
                 
                 $related_blogs = explode(",",$this->input->post('related_blogs'));
-                
                 $blog_title = trim(htmlentities($this->input->post('title_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
                 $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
                 
                 $data = array(
                     'title' => $blog_title,
-                    'blog_category_id' => $blog_category_id,
                     'description' => $description,
                     'user_id' => $this->session->userdata('user_id'),
                     'blog_status_id' => APPROVED,
@@ -336,6 +332,10 @@ class Applications_blogs extends CI_Controller{
                 
                 $blog_id = $this->admin_blog->create_blog($data);
                 $this->update_checked_blog_id($blog_id);
+                foreach ($this->input->post('category_name') as $key => $category_id)
+                {
+                    $this->admin_blog->blog_category_list_update($category_id,$blog_id);
+                }
                 if($blog_id !== FALSE){
                     $this->data['message'] = "Blog create is successful";
                     echo json_encode($this->data);
@@ -395,7 +395,6 @@ class Applications_blogs extends CI_Controller{
     public function edit_blog($blog_id)
     {
         $this->data['message'] = '';
-        
         if(empty($blog_id)){
             redirect('admin/applications_blogs/approve_blog', 'refresh');
         }
@@ -404,7 +403,6 @@ class Applications_blogs extends CI_Controller{
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
         
         $blog_info_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
-        
         if(count($blog_info_array>0)) {
             $blog_info_array = $blog_info_array[0];
         }
@@ -415,7 +413,6 @@ class Applications_blogs extends CI_Controller{
         
         if($this->input->post())
         {
-            //$blog_category_id = $this->input->post('category_id');
             if (isset($_FILES["userfile"]))
                 {
                     $file_info = $_FILES["userfile"];
@@ -431,13 +428,11 @@ class Applications_blogs extends CI_Controller{
                 }
                 
                 $related_blogs = explode(",",$this->input->post('related_blogs'));
-                
                 $blog_title = trim(htmlentities($this->input->post('title_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
                 $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
                 
                 $data = array(
-                    //'blog_category_id' => $blog_category_id,
                     'title' => $blog_title,
                     'description' => $description,
                     'picture_description' => $picture_description,
@@ -455,23 +450,12 @@ class Applications_blogs extends CI_Controller{
                 }*/
                 
                 $this->update_checked_blog_id($blog_id);
+                foreach ($this->input->post('category_name') as $key => $category_id)
+                {
+                    $this->admin_blog->blog_category_list_update($category_id,$blog_id);
+                }
                 $blog_id_new = $this->admin_blog->update_blog($blog_info_array['id'],$data);
                 if($blog_id_new !== FALSE){
-                    /*$blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
-                    if(!empty($blog_category_list_array_map))
-                    {
-                        foreach ($blog_category_list_array_map as $key => $category_array)
-                        {
-                            // here $category_array->blog_id means category_id
-                            $categoryid = $category_array->blog_id;
-                            $this->admin_blog->blog_category_list_update_by_remove($categoryid,$blog_id);
-                        }
-                    }
-                    
-                    foreach ($this->input->post('category_name') as $key => $category_id)
-                    {
-                        $this->admin_blog->blog_category_list_update($category_id,$blog_id);
-                    }*/
                     $this->data['message'] = "Blog updated is successful";
                     echo json_encode($this->data);
                     return;
@@ -501,21 +485,11 @@ class Applications_blogs extends CI_Controller{
                 if($flag == 0){
                     $category['checked'] = 0;
                     $populated_blog_category_array[$category['id']] = $category;
-                } 
+                }
             }
         }
+        
         $this->data['category_list'] = $populated_blog_category_array;
-        
-        //for blog category
-        /*$this->data['selected_category_id'] = $blog_info_array['blog_category_id'];
-        $category_list = $this->admin_blog->get_all_blog_category()->result_array();
-        $this->data['category_id'] = array();
-        if (!empty($category_list)) {
-            foreach ($category_list as $category) {
-                $this->data['category_id'][$category['id']] = $category['title'];
-            }
-        }*/
-        
         $this->data['all_blog_lists'] = $this->admin_blog->get_all_blogs()->result_array();
         
         $this->data['title'] = array(
@@ -557,7 +531,12 @@ class Applications_blogs extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/blog_app/edit_blog", $this->data);
     }
     
-    
+    /**
+     * This function is for to remove a blod_id from blog_category table 
+     * where this blog_id is present in blog_list JSON object
+     * @param type $blog_id
+     * @return type
+     */
     public function update_checked_blog_id($blog_id) {
         $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
         if(!empty($blog_category_list_array_map))
@@ -569,19 +548,20 @@ class Applications_blogs extends CI_Controller{
                 $this->admin_blog->blog_category_list_update_by_remove($categoryid,$blog_id);
             }
         }
-
-        foreach ($this->input->post('category_name') as $key => $category_id)
-        {
-            $this->admin_blog->blog_category_list_update($category_id,$blog_id);
-        }
+        return ;
     }
     
+    /**
+     * In this function blog_id is removed from blog_category table's JSON object
+     * and then update blog_blog_status_id to DELETED
+     */
     public function remove_blog_by_admin() {
         $response = array();
         $delete_confirm = FALSE;
 
         $blog_id = $_POST['blog_id'];
-        $blog_info = array();
+        $delete_confirm = $this->remove_blog_by_id($blog_id);
+        /*$blog_info = array();
         $blog_info_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
         if(!empty($blog_info_array)) {
             $blog_info = $blog_info_array[0];
@@ -596,10 +576,16 @@ class Applications_blogs extends CI_Controller{
                 $categoryid = $category_array->blog_id;
                 $delete_confirm = $this->admin_blog->blog_category_list_update_by_remove($categoryid,$blog_id);
             }
-        }
+        }*/
         
         if($delete_confirm !== FALSE)
         {
+            //update the old blog blog_status_id to modified
+            $old_blog_data = array(
+                'blog_status_id' => DELETED,
+                'modified_on' => now()
+            );
+            $this->admin_blog->update_blog($blog_id,$old_blog_data);
             $response['status'] = 1;
             $response['message'] = 'Blog is removed successfully.';          
         }
@@ -611,6 +597,29 @@ class Applications_blogs extends CI_Controller{
         echo json_encode($response);
     }
     
+    public function remove_blog_by_id($blog_id) {
+        $blog_info = array();
+        if($blog_id != '' && $blog_id != NULL)
+        {
+            $blog_info_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
+            if(!empty($blog_info_array)) {
+                $blog_info = $blog_info_array[0];
+                $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
+                if(!empty($blog_category_list_array_map))
+                {
+                    foreach ($blog_category_list_array_map as $key => $category_array)
+                    {
+                        // here $category_array->blog_id means category_id
+                        $categoryid = $category_array->blog_id;
+                        $this->admin_blog->blog_category_list_update_by_remove($categoryid,$blog_id);
+                    }
+                    return TRUE;
+                }
+            }
+        }
+        return FALSE;
+        
+    }
     
     public function update_blog_by_approval($blog_id)
     {
@@ -618,7 +627,6 @@ class Applications_blogs extends CI_Controller{
             'blog_status_id' => APPROVED
         );
         $state = $this->admin_blog->update_blog($blog_id,$data);
-        
         if($state==False)
         {
             $this->data['message'] = 'Update is not successful';
@@ -665,7 +673,6 @@ class Applications_blogs extends CI_Controller{
         $this->data['application_id'] = APPLICATION_BLOG_APP_ID;
         $this->data['item_id'] = $blog['id'];
         $this->data['total_comments'] = $total_comments;
-        //echo '<pre/>';print_r($this->data['user_info']);exit;
         $this->template->load($this->tmpl, "admin/applications/blog_app/blog_detail", $this->data);
     }
     
@@ -695,7 +702,6 @@ class Applications_blogs extends CI_Controller{
     {
         
         $comment_list = $this->admin_blog->get_all_blog_comments($blog_id)->result_array();
-        
         for($i=0;$i<count($comment_list);$i++)
         {
             $comment_list[$i]['user_liked_list'] = json_decode($comment_list[$i]['user_liked_list']);
@@ -704,16 +710,13 @@ class Applications_blogs extends CI_Controller{
         
         $this->data['comment_list'] = $comment_list;
         $this->data['blog_id'] = $blog_id;
-        
         $this->template->load($this->tmpl, "admin/applications/blog_app/comment_list", $this->data);
     }
     
     function remove_comment()
     {
         $comment_id = $this->input->post('comment_id');
-        
         $id = $this->admin_blog->remove_blog_comment($comment_id);
-        
         if($id !== FALSE)
         {
             $response['status'] = 1;
@@ -738,9 +741,6 @@ class Applications_blogs extends CI_Controller{
         $this->data['blog_list'] = $blog_list;*/
         
         $this->data = array_merge($this->data, $this->admin_blog->get_home_page_blog_configuration());
-        //echo "<pre/>";
-        //print_r($this->data);
-        //exit();
         $this->template->load($this->tmpl, "admin/applications/blog_app/config_blog", $this->data);
     }
     
@@ -951,11 +951,6 @@ class Applications_blogs extends CI_Controller{
     public function approve_blog()
     {
         $this->data['message'] = '';
-        
-        //$all_blogs = $this->admin_blog->get_blog_list_without_one()->result_array();
-        //echo '<pre/>';print_r($all_blogs);exit('here');
-        //$this->data['all_blogs'] = $all_blogs;
-        
         $blog_status_list = array(PENDING,RE_APPROVAL,DELETION_PENDING);
         $pending_list = $this->admin_blog->get_all_pending_blogs($blog_status_list)->result_array();
         $this->data['pending_list'] = $pending_list;
@@ -1127,40 +1122,37 @@ class Applications_blogs extends CI_Controller{
         else if($blog['blog_status_id']==RE_APPROVAL)
         {
             $reference_id = $blog['reference_id'];
-            $reference_blog = $this->admin_blog->get_blog_info($reference_id)->result_array();
-            
+            /*$reference_blog = $this->admin_blog->get_blog_info($reference_id)->result_array();
             if(!empty($reference_blog))
             {
                 $reference_blog = $reference_blog[0];
-            }
+            }*/
+            //reference blog_id is removed from blog_category's blog list and add the replica_blog_id
+            $this->admin_blog->remove_reference_blog_update_replica($reference_id,$blog_id);
+             //update the new blog blog_status_id to APPROVED
+            $new_blog_data = array(
+                'blog_status_id' => APPROVED,
+                'modified_on' => now()
+            );
+            $flag = $this->admin_blog->update_blog($blog_id,$new_blog_data);
             
-            $temp_blog = $reference_blog;
-            unset($blog['id']);
-            $blog['blog_status_id'] = APPROVED;
-            $blog['reference_id'] = NULL;
-            
-            $flag = $this->admin_blog->update_blog($reference_id,$blog);
-            
-            //check whether modified
-            unset($temp_blog['id']);
-            $temp_blog['blog_status_id'] = MODIFIED;
-            $temp_blog['reference_id'] = $reference_id;
-            $temp_blog['modified_on'] = now();
-            
-            $flag = $this->admin_blog->update_blog($blog_id,$temp_blog);
-            
+            //update the old blog blog_status_id to modified
+            $old_blog_data = array(
+                'blog_status_id' => MODIFIED,
+                'modified_on' => now()
+            );
+            $flag = $this->admin_blog->update_blog($reference_id,$old_blog_data);
         }
         else if($blog['blog_status_id']==DELETION_PENDING)
         {
             $flag = FALSE;
             $response = array();
             $reference_id = $blog['reference_id'];
-            //echo $reference_id;exit('HI');
             $present_date = $this->utils->get_current_date();
             //check this requested blog id is not set in the home page today to future days
             $has_or_not = $this->admin_blog->check_blog_before_delete_confirm($reference_id,$present_date);
+            
             if(!empty($has_or_not)) {
-                
                 //$all_blogs = $this->admin_blog->get_blog_list_without_one($reference_id)->result_array();
                 //echo '<pre/>';print_r($all_blogs);exit('fdsfds');
                 $response['status'] = 0;
@@ -1172,11 +1164,13 @@ class Applications_blogs extends CI_Controller{
                 echo json_encode($response);
                 return;
             } else {
+                
+                $delete_confirm = $this->remove_blog_by_id($reference_id);
                 $data = array(
                     'blog_status_id' => DELETED,
                     'modified_on' => now()
                 );
-                $reference_id = $this->admin_blog->update_blog($reference_id,$data);
+                $this->admin_blog->update_blog($reference_id,$data);
                 $flag = $this->admin_blog->remove_blog($blog_id);
             }
              
@@ -1192,7 +1186,6 @@ class Applications_blogs extends CI_Controller{
             $response['status'] = 0;
             $response['message'] = 'This id can not be deleted because this blog is set in configuration';
         }
-        
         echo json_encode($response);
     }
     

@@ -15,8 +15,6 @@
 
             if(selected_array.length == 1) {
                 var present_value = $('#get_selected_id').val();
-                //alert(present_value);
-                //alert(blog_id);
                 var id = '#position_of_blog_'+present_value;  
                 var position = $(id+"").val(blog_id);
                 
@@ -85,11 +83,20 @@
                         }
                     }
                 });
+                
                 $('#modal_edit_blog_home_page').modal('hide');
             } else {
                 alert('You can only select one blog for this position');
                 return ;
             }
+           
+        //Clear input of modal when modal close
+        $('#modal_edit_blog_home_page').on('hidden.bs.modal', function (e) {
+            $(this).find("input,textarea,select").val('').end()
+              .find("input[type=checkbox], input[type=radio]")
+                 .prop("checked", "")
+                 .end();
+          });
            
         });
     });
@@ -108,7 +115,6 @@
                             <thead>
                                 <tr>
                                     <th>Check box</th>
-                                    <th>Blog Category</th>
                                     <th>Blog Title</th>
                                     <th>Details</th>
                                 </tr>
@@ -118,7 +124,6 @@
                             <?php foreach ($blog_list as $key => $blog) :?>
                                 <tr>
                                     <td><input id="<?php echo $blog['id'] ?>" name="checkbox[]" class="" type="checkbox" /></td>
-                                    <td id="<?php echo $blog['id'] ?>"><?php echo html_entity_decode(html_entity_decode($blog['blog_category_name'])) ?></td>
                                     <td id="<?php echo $blog['id'] ?>"><?php echo html_entity_decode(html_entity_decode($blog['title'])) ?></td>
                                     <td id="<?php echo $blog['id'] ?>"><?php echo html_entity_decode(html_entity_decode($blog['description'])); ?></td>
                                 </tr>

@@ -61,7 +61,6 @@
 </div>
 
 <script>
-    
     function delete_pending(blog_id)
     {
         $.ajax({
@@ -72,7 +71,6 @@
                 blog_id : blog_id
             },
             success: function(data){
-                
                 if(data.status === 1) {
                     alert(data.message);
                     window.location = '<?php echo base_url();?>admin/applications_blogs/approve_blog';
@@ -93,7 +91,6 @@
                             },
                             success: function(data){
                                 alert(data.message);
-                                
                                 window.location = '<?php echo base_url();?>admin/applications_blogs/approve_blog';
                                 location.reload(true);
                             }

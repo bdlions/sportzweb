@@ -93,6 +93,7 @@ window.onload = function()
 }
 </script>
 <?php $this->load->view("applications/blog_app/templates/header_menu"); ?>
+<?php  ?>
 <div class="col-md-9" style="background-color: #F5F5F5">
     <div class="col-md-12" style="border-bottom: 1px solid #cccccc; padding-bottom: 8px;"><!--heading-->
         <div class="panel panel-default">
@@ -106,37 +107,28 @@ window.onload = function()
                                 <div class="col-md-3"></div>
                                 <div class="col-md-9"><?php echo $message; ?></div>
                             </div>
+                            
                             <div class="form-group">
                                 <label for="type" class="col-md-3 control-label requiredField">
                                     Blog Category
                                 </label>
-                                <div class ="col-md-3">
-                                    <?php if(!empty($category_list)): $i = 0; $length = count($category_list);?>
-                                        <?php foreach ($category_list as $category) : ?>
-                                            <?php $i++; ?>
-                                            <?php if($i>5): ?>
-                                               <?php $i--;break; ?>
-                                            <?php endif;?>
-                                            <input class="category_id" name="category_name[]" id="<?php echo $category['id']; ?>" type="checkbox" value="<?php echo $category['id']; ?>"/>
-                                            <label for="type" class=" control-label requiredField">
-                                                <?php echo $category['title']; ?>
-                                            </label><br>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </div>
-                                <div class ="col-md-3"></div>
-                                <div class ="col-md-3">
-                                     <?php $j = 0 ?>
-                                        <?php foreach ($category_list as $category) : ?>
-                                            <?php $j++; ?>
-                                            <?php if($j>5): ?>
-                                               <input class="category_id" name="category_name[]" id="<?php echo $category['id']; ?>" type="checkbox" value="<?php echo $category['id']; ?>" />
-                                                <label for="type" class=" control-label requiredField">
-                                                    <?php echo $category['title']; ?>
-                                                </label><br>
-                                            <?php endif;?>
-                                        <?php endforeach; ?>
-                                    <?php //echo form_dropdown('category_id', $category_id, '', 'class=form-control'); ?>
+                                <div class ="col-md-9">
+                                    <?php
+                                        if(!empty($category_list)){
+                                            $total_length = count($category_list);
+                                            for ($i = 0; $i < $total_length; ) {
+                                                echo '<div class="row">';
+                                                for($j = $i; $j < ($i + NO_OF_COLLUMN) && $j<$total_length ; $j++ ){
+                                                    echo '<div class="col-md-4">';
+                                                    echo '<input class="category_id" name="category_name[]" type="checkbox" id="'.$category_list[$j]["id"].'" value="'.$category_list[$j]["id"].'"/>';
+                                                    echo '<label style="padding-left:10px;" for="type" class=" control-label requiredField">'.$category_list[$j]["title"].'</label>';
+                                                    echo "</div>";
+                                                }
+                                                $i = $j;
+                                                echo "</div>";
+                                            }
+                                        }  
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group">

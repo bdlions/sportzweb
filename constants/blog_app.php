@@ -12,6 +12,7 @@
     define('HOME',1);
     define('WRITE_BLOG',2);
     define('MY_BLOG',3);
+    define('NO_OF_COLLUMN',3);
     
     
 ?>

@@ -348,11 +348,6 @@ class Blog_app_model extends Ion_auth_model {
                     ->get();
     }
     
-    public function blog_category_list_update()
-    {
-        
-    }
-     
     public function get_all_blogs_by_category($category_ids = array())
     {
         if(!empty($category_ids))
@@ -361,9 +356,10 @@ class Blog_app_model extends Ion_auth_model {
         }else {
             return array();
         }
-        $this->db->where($this->tables['blogs'].'.blog_status_id',2);
+        $this->db->where($this->tables['blogs'].'.blog_status_id',APPROVED);
         return $this->db->select($this->tables['blogs'].'.*')
                     ->from($this->tables['blogs'])
                     ->get();
+        //echo $this->db->last_query();exit('here');
     }
 }

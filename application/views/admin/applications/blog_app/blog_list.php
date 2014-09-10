@@ -37,26 +37,37 @@
                             </tr>
                         </thead>
                         <tbody id="tbody_blog_list_category">
-                            <?php $i=1;foreach($blog_list as $blog):?>
-                            <tr>
-                                <td><a href="<?php echo base_url().'admin/applications_blogs/blog_detail/'.$blog['id'] ?>"><?php echo $i++;?></td>
-                                <?php if($allow_configuration): ?>
-                                    <td>
-                                        <?php echo form_dropdown('order_list', array('0' => 'Order by date')+$order_list, $blog['order_no'],'id='.$blog['id'].' class=form-control'); ?>                                    
-                                        <input type="hidden" id="<?php echo $blog['id'].'_created_on';?>" value="<?php echo $blog['created_on'];?>"/>
-                                    </td>
-                                <?php endif; ?>
-                                <td><?php echo html_entity_decode(html_entity_decode($blog['title']));?></td>
-                                <td><a href="<?php echo base_url().'admin/applications_blogs/comment_list/'.$blog['id']; ?>">Comments</a></td>
-                                <?php if($allow_edit): ?>
-                                    <td><a href="<?php echo base_url().'admin/applications_blogs/edit_blog/'.$blog['id']; ?>">Edit</a></td>
-                                <?php endif; ?>
-                                    
-                                <?php if($allow_delete): ?>
-                                    <td><a href="javascript:void(0)" onclick="delete_blog(<?php echo $blog['id']?>)">Delete</a></td>
-                                <?php endif; ?>
-                            </tr>
-                            <?php endforeach;?>
+                            <?php if(!empty($blog_list)): ?>
+                                <?php $i=1;foreach($blog_list as $blog):?>
+                                    <tr>
+                                        <td><a href="<?php echo base_url().'admin/applications_blogs/blog_detail/'.$blog['id'] ?>"><?php echo $i++;?></td>
+                                        <?php if($allow_configuration): ?>
+                                            <td>
+                                                <?php echo form_dropdown('order_list', array('0' => 'Order by date')+$order_list, $blog['order_no'],'id='.$blog['id'].' class=form-control'); ?>                                    
+                                                <input type="hidden" id="<?php echo $blog['id'].'_created_on';?>" value="<?php echo $blog['created_on'];?>"/>
+                                            </td>
+                                        <?php endif; ?>
+                                        <td><?php echo html_entity_decode(html_entity_decode($blog['title']));?></td>
+                                        <td><a href="<?php echo base_url().'admin/applications_blogs/comment_list/'.$blog['id']; ?>">Comments</a></td>
+                                        <?php if($allow_edit): ?>
+                                            <td><a href="<?php echo base_url().'admin/applications_blogs/edit_blog/'.$blog['id']; ?>">Edit</a></td>
+                                        <?php endif; ?>
+
+                                        <?php if($allow_delete): ?>
+                                            <td><a href="javascript:void(0)" onclick="delete_blog(<?php echo $blog['id']?>)">Delete</a></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                <?php endforeach;?>
+                            <?php else: ?>
+                                    <tr>
+                                        <td style="border:none;"></td>
+                                        <td style="border:none;"></td>
+                                        <td style="font-size: 20px; border:none;text-align: center;">No result is found</td>
+                                        <td style="border:none;"></td>
+                                        <td style="border:none;"></td>
+                                    </tr>  
+                            <?php endif;?>
+                            
                         </tbody>
                     </table>
                 </div>

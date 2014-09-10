@@ -378,7 +378,7 @@ class Blog_app extends Role_Controller {
 
     function create_blog_by_user($category_id = 0) {
         $this->data['message'] = '';
-
+       
         //$this->form_validation->set_rules('category_id', 'Category_id', 'required');
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
@@ -685,7 +685,6 @@ class Blog_app extends Role_Controller {
                 'modified_on' => now()
             );
             
-            $this->update_checked_blog_id($blog_id);
 
             /*if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
                 $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
@@ -694,7 +693,8 @@ class Blog_app extends Role_Controller {
             {
                 $data['blog_status_id'] = RE_APPROVAL;
                 $data['reference_id'] = $blog_id;
-                $blog_id = $this->blog_app_library->create_blog($data);
+                $new_blog_id = $this->blog_app_library->create_blog($data);
+                $this->update_checked_blog_id($new_blog_id);
                 if($blog_id == FALSE)
                 {
                     $result['status'] = false;
@@ -703,7 +703,7 @@ class Blog_app extends Role_Controller {
                     echo json_encode($result);
                     return;
                 }
-            }                
+            }             
             else if($blog_info['blog_status_id'] == PENDING || $blog_info['blog_status_id'] == RE_APPROVAL)
             {
                 $flag = $this->blog_app_library->update_blog($blog_id,$data);

@@ -111,7 +111,10 @@ class Admin_blog{
      */
     public function get_home_page_blog_configuration()
     {
-        $all_blogs_array = $this->admin_blog_model->get_blog_list()->result_array();
+        //$all_blogs_array = $this->admin_blog_model->get_blog_list()->result_array();
+        $all_blogs_array = $this->admin_blog_model->all_blogs()->result_array();
+        //echo '<pre/>';print_r($all_blogs_array);exit('dd here i m');
+        
         //blog_list will contain all blogs of the application
         $show_advertise = true;
         $region_id_blog_id_map = array();
@@ -120,9 +123,9 @@ class Admin_blog{
         $present_date = $this->utils->get_current_date();
         $blog_id_list = array();
         $blog_configuration_array = $this->admin_blog_model->get_home_page_blog_configuration($present_date)->result_array();        
+        
         if(!empty($blog_configuration_array)) {
             $blog_configuration_info = $blog_configuration_array[0];
-            
             $show_advertise = $blog_configuration_info['show_advertise_home_page'];
             $blog_list = json_decode($blog_configuration_info['blog_list']);
             
@@ -131,13 +134,11 @@ class Admin_blog{
                 $blog_id_list[] = $blog_info->blog_id;
                 $region_id_blog_id_map[$blog_info->region_id] = $blog_info->blog_id;
             }
-            
             $blog_list_array = $this->admin_blog_model->get_blog_list($blog_id_list)->result_array();
         }
         else 
         {
             $blog_list_array = $this->admin_blog_model->get_blog_list_initial_configuration()->result_array();
-            
             for($region_counter = 0; $region_counter < BLOG_CONFIGURATION_COUNTER ; $region_counter++)
             {
                 $region_id_blog_id_map[$region_counter] = $blog_list_array[$region_counter]['blog_id'];
@@ -246,12 +247,11 @@ class Admin_blog{
         if($blog_list != '' && $blog_list != NULL)
         {
             $blog_list_array = json_decode($blog_list);
-            
             foreach($blog_list_array as $blog_info)
             {
-                 if($blog_info->blog_id != $blog_id){
-                     $new_blog_list_array[] = $blog_info;
-                 }
+                if($blog_info->blog_id != $blog_id){
+                    $new_blog_list_array[] = $blog_info;
+                }
             }
         }
         
@@ -261,7 +261,7 @@ class Admin_blog{
         $this->admin_blog_model->update_blog_categroy($blog_category_id, $additional_data);
     }
     
-    //written by omar faruk
+    //written by omar faruk 
     public function blog_category_list_update_by_remove($blog_category_id, $blog_id)
     {
         $new_blog_list_array = array();
@@ -269,25 +269,28 @@ class Admin_blog{
         if(!empty($blog_category_info_array)){
              $blog_category_info_array = $blog_category_info_array[0];
              $blog_list = $blog_category_info_array['blog_list'];
-        }
-        if($blog_list != '' && $blog_list != NULL)
-        {
-            $blog_list_array = json_decode($blog_list);
-            foreach($blog_list_array as $blog_info)
+             if(!empty($blog_list))
             {
-                 if($blog_info->blog_id != $blog_id){
-                    $blog_list_object = new stdClass();
-                    $blog_list_object->blog_id = $blog_info->blog_id;
-                    $new_blog_list_array[] = $blog_list_object;
-                 }
+                $blog_list_array = json_decode($blog_list);
+                foreach($blog_list_array as $blog_info)
+                {
+                     if($blog_info->blog_id != $blog_id){
+                        $blog_list_object = new stdClass();
+                        $blog_list_object->blog_id = $blog_info->blog_id;
+                        $new_blog_list_array[] = $blog_list_object;
+                     }
+                }
             }
+
+            $additional_data = array(
+                'blog_list' => json_encode($new_blog_list_array)
+            );
+            $this->admin_blog_model->update_blog_categroy($blog_category_id, $additional_data);
+            return TRUE;
+        } else {
+            return FALSE;
         }
         
-        $additional_data = array(
-            'blog_list' => json_encode($new_blog_list_array)
-        );
-        $this->admin_blog_model->update_blog_categroy($blog_category_id, $additional_data);
-        return true;
     }
     
     public function get_all_blog_by_category($category_id) {
@@ -312,6 +315,67 @@ class Admin_blog{
             $all_blogs_info = $all_blogs_info->result_array();
         }
         return $all_blogs_info;
+    }
+    
+    
+    public function remove_reference_blog_update_replica($reference_blog_id, $replica_blog_id) {
+        
+        $populated_blog_category_array = array();
+        $category_list = $this->admin_blog->get_all_blog_category()->result_array();
+        $blog_category_list_array_map = $this->get_all_category_of_this_blog($reference_blog_id);
+        if(!empty($blog_category_list_array_map)){
+           foreach ($blog_category_list_array_map as $key => $blog_category){
+               //here $blog_category->blog_id is blog_category_id
+                $this->remove_reference_update_replica($blog_category->blog_id,$reference_blog_id,$replica_blog_id);
+            }
+            
+            /*$data = array(
+                'blog_status_id' => APPROVED,
+                'modified_on' => now()
+            );
+            $this->admin_blog_model->update_blog($replica_blog_id,$data);*/
+            return true;
+        }else {
+            return false;
+        }
+    }
+    
+    public function remove_reference_update_replica($blog_category_id,$reference_blog_id,$replica_blog_id){
+        $new_blog_list_array = array();
+        $blog_list = array();
+        $blog_category_info_array = $this->admin_blog_model->get_blog_category_info($blog_category_id)->result_array();
+        if(!empty($blog_category_info_array)){
+             $blog_category_info_array = $blog_category_info_array[0];
+             $blog_list = $blog_category_info_array['blog_list'];
+        }
+        if($blog_list != '' && $blog_list != NULL)
+        {
+            $blog_list_array = json_decode($blog_list);
+            foreach($blog_list_array as $blog_info)
+            {
+                if($blog_info->blog_id != $reference_blog_id){
+                    $blog_list_object = new stdClass();
+                    $blog_list_object->blog_id = $blog_info->blog_id;
+                    $new_blog_list_array[] = $blog_list_object;
+                }
+            }
+            
+            $additional_data = array(
+                'blog_list' => json_encode($new_blog_list_array)
+            ); 
+
+            $this->admin_blog_model->update_blog_categroy($blog_category_id, $additional_data);
+
+            /*$data = array(
+                'blog_status_id' => MODIFIED,
+                'modified_on' => now()
+            );
+            $this->admin_blog_model->update_blog($reference_blog_id, $data);*/
+
+            return true;
+        }
+        
+        return false;
     }
     
 
