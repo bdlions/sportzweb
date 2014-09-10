@@ -619,7 +619,7 @@ class Applications_blogs extends CI_Controller{
         else
         {
             $response['status'] = 0;
-            $response['message'] = 'Blog is not removed.';
+            $response['message'] = 'This blog is configured in home page';
         }
         echo json_encode($response);
     }
