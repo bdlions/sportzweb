@@ -213,9 +213,10 @@
             
             <div class="panel right-panel">
                 <div class="panel-body right-panel-body" style="padding-bottom: 20px;">
-
+                    <div class="panel-heading right-panel-heading">App Directory</div>
+                    <div class="panel-body right-panel-body">
                     
-                    <!--<ul class="list-inline list-unstyled">
+                    <ul class="list-inline list-unstyled">
                         <li>
                             <a href="<?php echo base_url(); ?>applications/xstream_banter">
                                 <img alt="Xstream Banter" title="Xstream Banter" src="<?php echo base_url(); ?>resources/images/xb_icon.png" height="16px" width="16px"/>
@@ -251,8 +252,14 @@
                                 <img alt="Photography" title="Photography" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/>
                             </a>
                         </li>
-                    </ul>-->
-
+                        
+                        <li>
+                            <a href="<?php echo base_url(); ?>app_directory">
+                                See all
+                            </a>
+                        </li>
+                    </ul>
+                    </div>
                 </div>
             </div>
             <!--<div class="panel right-panel">
@@ -277,7 +284,7 @@
         </div>
     </div>
     
-    <div class="col-md-12" style="padding-top: 10px;">
+    <!--<div class="col-md-12" style="padding-top: 10px;">
         <div class="right-panel-container">
             <div class="row">
                 <div class="col-md-12" style="padding-top: 10px;">
@@ -298,7 +305,7 @@
                 </div>
             </div> 
         </div>
-    </div>
+    </div>-->
     
     <div class="col-md-12" style="padding-top: 10px;">
         <div class="right-panel-container">
