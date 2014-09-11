@@ -212,11 +212,8 @@
             <div style="border-top: 1px solid #000;"></div>-->
             
             <div class="panel right-panel">
-                <div class="panel-heading right-panel-heading">App Directory</div>
                 <div class="panel-body right-panel-body" style="padding-bottom: 20px;">
-                    <a class="" href="<?php echo base_url(); ?>app_directory">
-                        See all app
-                    </a>
+
                     
                     <!--<ul class="list-inline list-unstyled">
                         <li>
@@ -277,6 +274,29 @@
                     </div>
                 </div>
             </div>-->
+        </div>
+    </div>
+    
+    <div class="col-md-12" style="padding-top: 10px;">
+        <div class="right-panel-container">
+            <div class="row">
+                <div class="col-md-12" style="padding-top: 10px;">
+                    <div class="col-md-8" style="padding-left:0px; font-size: 20px;">
+                        App Directory
+                    </div>
+                    <div class="col-md-4" style="margin-top: 5px;">
+                    <a class="" style="font-size: 15px;" href="<?php echo base_url(); ?>app_directory">
+                        See all
+                    </a>
+                </div>
+                </div>
+                
+                <div class="col-md-12" style="padding-top:20px; font-size: 15px; padding-bottom: 10px;">
+                    <span>
+                        5 new featured apps added to the App Directory this week. 
+                    </span>
+                </div>
+            </div> 
         </div>
     </div>
     

@@ -113,8 +113,6 @@ class Admin_blog{
     {
         //$all_blogs_array = $this->admin_blog_model->get_blog_list()->result_array();
         $all_blogs_array = $this->admin_blog_model->all_blogs()->result_array();
-        //echo '<pre/>';print_r($all_blogs_array);exit('dd here i m');
-        
         //blog_list will contain all blogs of the application
         $show_advertise = true;
         $region_id_blog_id_map = array();
@@ -123,7 +121,6 @@ class Admin_blog{
         $present_date = $this->utils->get_current_date();
         $blog_id_list = array();
         $blog_configuration_array = $this->admin_blog_model->get_home_page_blog_configuration($present_date)->result_array();        
-        //echo '<pre/>';print_r($blog_configuration_array);
         if(!empty($blog_configuration_array)) {
             $blog_configuration_info = $blog_configuration_array[0];
             $show_advertise = $blog_configuration_info['show_advertise_home_page'];
@@ -134,9 +131,7 @@ class Admin_blog{
                 $blog_id_list[] = $blog_info->blog_id;
                 $region_id_blog_id_map[$blog_info->region_id] = $blog_info->blog_id;
             }
-            //echo '<pre/>';print_r($blog_id_list);
             $blog_list_array = $this->admin_blog_model->get_blog_list($blog_id_list)->result_array();
-            //echo '<pre/>';print_r($region_id_blog_id_map);//exit();
         }
         else 
         {
@@ -149,16 +144,14 @@ class Admin_blog{
         
         foreach($blog_list_array as $blog_info)
         {
-            //echo '<pre/>';print_r($blog_info);
             $blog_id_blog_info_map[$blog_info['blog_id']] = $blog_info;
-        }//exit('dd here ddd i m');
+        }
         $result = array(
             'blog_list' => $all_blogs_array,
             'region_id_blog_id_map' => $region_id_blog_id_map,
             'blog_id_blog_info_map' => $blog_id_blog_info_map,
             'show_advertise' => $show_advertise
         );
-        //echo '<pre/>';print_r($result);exit('dd here ddd i m');
         return $result;
     }
     

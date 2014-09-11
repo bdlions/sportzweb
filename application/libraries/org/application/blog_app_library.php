@@ -109,7 +109,9 @@ class Blog_app_library {
      */
     public function get_home_page_blog_configuration()
     {
-        $all_blogs_array = $this->blog_app_model->get_blog_list()->result_array();
+        //$all_blogs_array = $this->blog_app_model->get_blog_list()->result_array();
+        $all_blogs_array = $this->blog_app_model->all_blogs()->result_array();
+        
         //blog_list will contain all blogs of the application
         $show_advertise = true;
         $region_id_blog_id_map = array();

@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-md-5">
                         <a href="">
-                            <button class="button button-custom">Try It</button>
+                            <button class="button button-custom">Remove</button>
                         </a>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-md-4">
                         <a class="" href="">
-                            <button class="button button-custom">Try It</button>
+                            <button class="button button-custom">Remove</button>
                         </a>
                     </div>
                 </div>

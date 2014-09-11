@@ -565,45 +565,20 @@ class Applications_blogs extends CI_Controller{
             $blog = $blog[0];
             $reference_id = $blog['reference_id'];
         }
-        
-        if($reference_id !=null) {
-            $present_date = $this->utils->get_current_date();
-            //check this requested blog id is not set in the home page today to future days
-            $has_or_not = $this->admin_blog->check_blog_before_delete_confirm($reference_id,$present_date);
-            echo $has_or_not;exit('here');
-            if(!empty($has_or_not)) {
-                //$all_blogs = $this->admin_blog->get_blog_list_without_one($reference_id)->result_array();
-                $response['status'] = 0;
-                $response['message'] = 'This blog is configured in following date:';
-                foreach($has_or_not as $date)
-                {
-                    $response['message'] = $response['message'].' '.$date;
-                }
-                echo json_encode($response);
-                return;
-            } else {
-                $delete_confirm = $this->remove_blog_by_id($blog_id);
-            }
-        }
-        
-        
-        
-        /*$blog_info = array();
-        $blog_info_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
-        if(!empty($blog_info_array)) {
-            $blog_info = $blog_info_array[0];
-        }
-        
-        $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
-        if(!empty($blog_category_list_array_map))
-        {
-            foreach ($blog_category_list_array_map as $key => $category_array)
+        $present_date = $this->utils->get_current_date();
+        //check this requested blog id is not set in the home page today to future days
+        $has_or_not = $this->admin_blog->check_blog_before_delete_confirm($blog_id,$present_date);
+        if(!empty($has_or_not)) {
+            $response['status'] = 0;
+            $response['message'] = 'This blog is configured in following date:';
+            foreach($has_or_not as $date)
             {
-                // here $category_array->blog_id means category_id
-                $categoryid = $category_array->blog_id;
-                $delete_confirm = $this->admin_blog->blog_category_list_update_by_remove($categoryid,$blog_id);
+                $response['message'] = $response['message'].' '.$date;
             }
-        }*/
+            $response['status'] = 0;
+        } else {
+            $delete_confirm = $this->remove_blog_by_id($blog_id);
+        }
         
         if($delete_confirm !== FALSE)
         {
@@ -619,7 +594,7 @@ class Applications_blogs extends CI_Controller{
         else
         {
             $response['status'] = 0;
-            $response['message'] = 'This blog is configured in home page';
+            $response['message'] = $response['message'];
         }
         echo json_encode($response);
     }
