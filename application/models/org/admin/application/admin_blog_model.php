@@ -22,6 +22,17 @@ class Admin_blog_model extends Ion_auth_model
         
     }
     
+    /*
+     * This method will return all blog categories 
+     * @Author Nazmul on 9th September 2014
+     */
+    public function get_all_blog_categoties()
+    {
+        return $this->db->select($this->tables['blog_category'].".id as blog_category_id, ".$this->tables['blog_category'].".*")
+                    ->from($this->tables['blog_category'])
+                    ->get();
+    }
+    
     public function get_all_custom_blog_category()
     {
         return $this->db->select($this->tables['blog_custom_category'].".id as blog_custom_category_id, ".$this->tables['blog_custom_category'].".*")
@@ -115,8 +126,7 @@ class Admin_blog_model extends Ion_auth_model
     
     public function update_blog_categroy($id,$data)
     {
-        $blog_category_info = $this->get_custom_blog_category_info($id)->row();
-        if (array_key_exists($this->blog_category_identity_column, $data) && $this->blog_category_identity_check($data[$this->blog_category_identity_column]) && $blog_category_info->title == $data[$this->blog_category_identity_column])
+        if (array_key_exists($this->blog_category_identity_column, $data) && $this->blog_category_identity_check($data[$this->blog_category_identity_column]))
         {
             $this->set_error('blog_category_duplicate');
             return FALSE;

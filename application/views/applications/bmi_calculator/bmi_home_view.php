@@ -13,22 +13,22 @@
     <div class="col-md-12">
         <div class="col-md-5">
             <div class="form-group">
-                <label style="width: 159px; text-align: left" for="btn-group">Select your gender: </label>
+                <label style="width: 159px; text-align: right" for="btn-group">Select your gender: </label>
                 <div class="btn-group" style="padding-left: 1px" > 
-                    <button class="btn btn-success active" id="button_male" style="border-radius:0 !important; border: 2px solid #22b14c;" >Male</button>
-                    <button class="btn" id="button_female" style="margin-left: 10px; border-radius:0 !important; border: 2px solid #22b14c;" >Female</button>
+                    <button class="btn btn-success active" id="button_male" style="border-radius:0 !important; border: 2px solid #22b14c;" >&nbsp;Male&nbsp;</button>
+                    <button class="btn" id="button_female" style="margin-left: 12px; border-radius:0 !important; border: 2px solid #22b14c;" >&nbsp;Female&nbsp;</button>
                 </div>
             </div>
             <div class="form-group">
                 
-                <label style="width: 159px; text-align: left" for="btn-group">Choose unit of measurements: </label>
+                <label style="width: 159px; text-align: right" for="btn-group">Choose unit of measurements: </label>
                 <div class="btn-group" style="padding-left: 1px"> 
                     <button class="btn btn-success active" id="button_metric" style="border-radius:0 !important; border: 2px solid #22b14c;">Metric</button>
                     <button class="btn" id="button_imperial" style="margin-left: 10px;  border-radius:0 !important; border: 2px solid #22b14c;">Imperial</button>
                 </div>
             </div>
         </div>
-        <div class="col-md-offset-1 col-md-6">
+        <div class="col-md-6">
             <span class="grey_title">BMI Calculator</span>
         </div>
     </div>
@@ -46,9 +46,9 @@
         </div>
     </div>
     <div class="row col-md-12">
-        <div class="row col-md-offset-3 col-md-8 result_box">
-            <div class="col-md-4">Your BMI is: <span style="color: green" id="bmi_value">123</span></div>
-            <div class="col-md-8">Your BMI catagory is: <span style="color: green" id="bmi_status">Healthy</span></div>
+        <div class="row col-md-offset-3 col-md-8 result_box" style="font-size:17px;">
+            <div class="col-md-5">Your BMI is: <span style="color: green" id="bmi_value">123</span></div>
+            <div class="col-md-7">Your BMI catagory is: <span style="color: green" id="bmi_status">Healthy</span></div>
         </div>
     </div>
 </div>
@@ -284,7 +284,7 @@
                 }
                 
                 function drawText(){
-                    context.font = "15px Arial";
+                    context.font = "12px Arial";
                     context.fillStyle = '#00acea';
                     
                     var weight_kg = 0;

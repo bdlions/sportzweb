@@ -80,6 +80,7 @@ $config['tables']['footer_about_us']                        = 'footer_about_us';
 /*
  * Applications
  */
+$config['tables']['application_directory']                  = 'application_directory';
 $config['tables']['applications']                           = 'applications';
 $config['tables']['sports']                                 = 'sports';
 $config['tables']['tournaments']                            = 'tournaments';

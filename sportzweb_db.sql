@@ -466,6 +466,7 @@ CREATE TABLE IF NOT EXISTS `basic_profile` (
   `facebook_name` varchar(50),
   `linkedin_name` varchar(50),
   `twitter_name` varchar(50),
+  `application_list` text default '',
   PRIMARY KEY (`id`),
   UNIQUE KEY(`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -979,6 +980,19 @@ INSERT INTO `applications` (`id`, `name`, `title`) VALUES
 (5, 'blogs', 'Blogs'),
 (6, 'bmicalculator', 'BMI Calculator'),
 (7, 'photography', 'Photography');
+
+CREATE TABLE IF NOT EXISTS `application_directory` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(500),
+  `description` varchar(500),
+  `summary` text,
+  `img1` varchar(500),
+  `img2` varchar(500),
+  `img_gallery` text,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 -- -----------Xstream Banter --------------------
 CREATE TABLE IF NOT EXISTS `sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

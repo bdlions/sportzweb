@@ -40,7 +40,7 @@ class Followers extends Role_Controller{
         $this->data['follow_permission'] = $this->follower ->get_acceptance_type();
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info($user_id);
         $this->data['followers'] = $this->follower->get_followers($user_id);
-        $this->template->load("templates/business_tmpl", "followers/show", $this->data);
+        $this->template->load(null, "followers/show", $this->data);
     }
     function pending_followers(){
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info();

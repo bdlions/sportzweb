@@ -4,7 +4,7 @@
 <div class="col-md-7 column">
     <?php //$this->load->view("member/newsfeed/status_bar");?>
     <div class="col-md-12" style="padding-bottom: 25px;padding-left: 0px !important;">
-        <div class="col-md-11" style="border: 2px solid #c3c3c3; padding: 8px 8px;">
+        <div class="col-md-11" style="border: 2px solid #c3c3c3; padding: 8px 8px; font-size:20px;">
             <?php echo '#'.$hashtag; ?>
         </div>
     </div>

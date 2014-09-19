@@ -213,7 +213,16 @@
             
             <div class="panel right-panel">
                 <div class="panel-body right-panel-body" style="padding-bottom: 20px;">
-                    <div class="panel-heading right-panel-heading">App Directory</div>
+                    <div class="panel-heading right-panel-heading">
+                        <div class="row">
+                            <div class="col-md-8 pull-left">App Directory</div>
+                            <div class="col-md-4 pull-right">
+                                <a href="<?php echo base_url(); ?>applications/application_directory">
+                                    See all
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="panel-body right-panel-body">
                     
                     <ul class="list-inline list-unstyled">
@@ -250,12 +259,6 @@
                         <li>
                             <a href="<?php echo base_url(); ?>applications/photography">
                                 <img alt="Photography" title="Photography" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/>
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="<?php echo base_url(); ?>app_directory">
-                                See all
                             </a>
                         </li>
                     </ul>
@@ -310,7 +313,7 @@
     <div class="col-md-12" style="padding-top: 10px;">
         <div class="right-panel-container">
             <div class="panel right-panel">
-                <div class="panel-heading right-panel-heading">Trends</div>
+                <div class="panel-heading right-panel-heading">Trending</div>
                 <div class="panel-body right-panel-body">
                     <ul class="list-group right-panel-list">
                         <?php foreach($popular_trends as $trend){?>

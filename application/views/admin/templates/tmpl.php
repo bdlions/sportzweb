@@ -108,6 +108,7 @@
                             <li id="applications">
                                 <a href="#">Applications</a>
                                 <ul>
+                                    <li id="applications_directory"><a href="<?php echo base_url()?>admin/applications_directory">App Directory</a></li>
                                     <li id="applications_xstreambanter"><a href="<?php echo base_url()?>admin/applications_xstreambanter">Xstream Banter</a></li>                                    
                                     <li id="applications_healthyrecipes"><a href="<?php echo base_url()?>admin/applications_healthyrecipes">Healthy Recipes</a></li>
                                     <li id="applications_servicedirectory"><a href="<?php echo base_url()?>admin/applications_servicedirectory">Service Directory</a></li>

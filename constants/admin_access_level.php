@@ -5,6 +5,7 @@ define("ACCESS_LEVEL_PUBLISHER_ID",                                             
 define("ADMIN_ACCESS_LEVEL_OVERVIEW_ID",                                        1);
 define("ADMIN_ACCESS_LEVEL_USERS_OVERVIEW_ID",                                  2);
 define("ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID",                               3);
+define("ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID",                           18);
 define("ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID",                      4);
 define("ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID",                     5);
 define("ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID",                   6);

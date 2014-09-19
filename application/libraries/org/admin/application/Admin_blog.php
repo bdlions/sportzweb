@@ -314,7 +314,7 @@ class Admin_blog{
         return $all_blogs_info;
     }
     
-    
+
     public function remove_reference_blog_update_replica($reference_blog_id, $replica_blog_id) {
         
         $populated_blog_category_array = array();
@@ -374,9 +374,70 @@ class Admin_blog{
         
         return false;
     }
+    /*
+     * This method will remove blog id from blog category table 
+     * @param $blog_id, id of a blog
+     * @Author Nazmul on 9th September 2014
+     */
+    public function remove_blog_id_from_blog_category($blog_id)
+    {
+        $blog_categories_array = $this->admin_blog_model->get_all_blog_categoties()->result_array();
+        foreach($blog_categories_array as $blog_category_info){
+            $blog_list = $blog_category_info['blog_list'];
+            $blog_category_id = $blog_category_info['blog_category_id'];
+            $blog_list_array = json_decode($blog_list);
+            $blog_id_exists = false;
+            $new_blog_list_array = array();
+            foreach($blog_list_array as $blog_info)
+            {
+                 if($blog_info->blog_id != $blog_id){
+                     $new_blog_list_array[] = $blog_info;
+                 }
+                 else
+                 {
+                     $blog_id_exists = true;
+                 }
+            }
+            if($blog_id_exists)
+            {
+                $data = array( 
+                    'blog_list' => json_encode($new_blog_list_array)
+                );
+                $this->admin_blog_model->update_blog_categroy($blog_category_id, $data);
+            }
+        }
+    }
     
-
+    /*
+     * This method will add blog id in blog category table based on blog_category_ids
+     * @param $blog_id, id of a blog
+     * @param $blog_category_ids, blog category ids
+     * @Author Nazmul on 9th September 2014
+     */
+    public function add_blog_id_in_blog_category($blog_id, $blog_category_ids = array())
+    {
+        $new_blog_info = new stdClass();
+        $new_blog_info->blog_id = $blog_id;
+        $blog_categories_array = $this->admin_blog_model->get_all_blog_categoties()->result_array();
+        foreach($blog_categories_array as $blog_category_info){            
+            $blog_category_id = $blog_category_info['blog_category_id'];
+            if(in_array($blog_category_id, $blog_category_ids))
+            {
+                $blog_list = $blog_category_info['blog_list'];
+                $blog_list_array = json_decode($blog_list);
+                $new_blog_list_array = array();
+                foreach($blog_list_array as $blog_info)
+                {
+                     $new_blog_list_array[] = $blog_info;
+                }
+                $new_blog_list_array[] = $new_blog_info;
+                $additional_data = array( 
+                    'blog_list' => json_encode($new_blog_list_array)
+                );
+                $this->admin_blog_model->update_blog_categroy($blog_category_id, $additional_data);
+            }
+        }
+    }
 }
-
 ?>
  
