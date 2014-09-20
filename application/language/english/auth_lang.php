@@ -213,3 +213,6 @@ $lang['blog_category_duplicate']                                        = "Blog 
 $lang['blog_category_can_not_delete']                                   = "Blog categeory can not be deleted"; 
 $lang['blog_category_delete_successful']                                = "Blog categeory is deleted successfully"; 
 
+//for application directory
+$lang['application_name_duplicate']            = "Application title is duplicate";
+

@@ -151,6 +151,8 @@ $config['news_category_identity_column']                = 'title';
 $config['news_sub_category_identity_column']            = 'title';
 $config['blog_category_identity_column']                = 'title';
 
+$config['application_title_identity_column']            = 'title';
+
 /*
  | -------------------------------------------------------------------------
  | Hash Method (sha1 or bcrypt)
