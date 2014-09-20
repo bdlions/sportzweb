@@ -470,7 +470,7 @@ class Applications_blogs extends CI_Controller{
         $category_list = $this->admin_blog->get_all_blog_category()->result_array();
         $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);
         
-        if(!empty($category_list)){
+        /*if(!empty($category_list)){
             foreach ($category_list as $key => $category) {
                 $flag = 0;
                 if(!empty($blog_category_list_array_map)){
@@ -487,9 +487,26 @@ class Applications_blogs extends CI_Controller{
                     $populated_blog_category_array[$category['id']] = $category;
                 }
             }
+        }*/
+        //$this->data['category_list'] = $populated_blog_category_array;
+        
+        if(!empty($category_list)){
+            foreach ($category_list as $key => $category) {
+                $category_list[$key]['checked'] = 0;
+            }
+            foreach ($category_list as $key => $category) {
+                if(!empty($blog_category_list_array_map)){
+                   foreach ($blog_category_list_array_map as $k => $blog_category){
+                        if($blog_category->blog_id == $category['id']) {
+                            $category_list[$key]['checked'] = 1;
+                            $populated_blog_category_array[$category['id']] = $category;
+                        }
+                    } 
+                }
+            }
         }
         
-        $this->data['category_list'] = $populated_blog_category_array;
+        $this->data['category_list'] = $category_list;
         $this->data['all_blog_lists'] = $this->admin_blog->get_all_blogs()->result_array();
         
         $this->data['title'] = array(

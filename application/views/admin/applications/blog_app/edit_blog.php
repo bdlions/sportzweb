@@ -109,11 +109,12 @@
                             </label>
                             <div class ="col-md-9">
                                 <?php
+                                
                                     if(!empty($category_list)){
                                         $total_length = count($category_list);
-                                        for ($i = 1; $i <= $total_length; ) {
+                                        for ($i = 0; $i < $total_length; ) {
                                             echo '<div class="row">';
-                                            for($j = $i; $j < ($i + NO_OF_COLLUMN) && ($j<=$total_length) ; $j++ ){
+                                            for($j = $i; $j < ($i + NO_OF_COLLUMN) && ($j<$total_length) ; $j++ ){
                                                 echo '<div class="col-md-4">';
 
                                                 if($category_list[$j]['checked'] == 1)

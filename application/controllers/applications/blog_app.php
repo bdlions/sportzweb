@@ -761,25 +761,25 @@ class Blog_app extends Role_Controller {
         $populated_blog_category_array = array();
         $category_list = $this->blog_app_library->get_all_blog_category()->result_array();
         $blog_category_list_array_map = $this->blog_app_library->get_all_category_of_this_blog($blog_id);
+
         if(!empty($category_list)){
             foreach ($category_list as $key => $category) {
-                $flag = 0;
+                $category_list[$key]['checked'] = 0;
+            }
+            foreach ($category_list as $key => $category) {
                 if(!empty($blog_category_list_array_map)){
-                   foreach ($blog_category_list_array_map as $key => $blog_category){
+                   foreach ($blog_category_list_array_map as $k => $blog_category){
                         if($blog_category->blog_id == $category['id']) {
-                            $category['checked'] = 1;
+                            $category_list[$key]['checked'] = 1;
                             $populated_blog_category_array[$category['id']] = $category;
-                            $flag = 1;
                         }
                     } 
                 }
-                if($flag == 0){
-                    $category['checked'] = 0;
-                    $populated_blog_category_array[$category['id']] = $category;
-                } 
             }
         }
-        $this->data['category_list'] = $populated_blog_category_array;
+        
+        //$this->data['category_list'] = $populated_blog_category_array;
+        $this->data['category_list'] = $category_list;
         
         /*$this->data['selected_category_id']=$blog_info['blog_category_id'];
         $category_list = $this->blog_app_library->get_all_blog_category()->result_array();
