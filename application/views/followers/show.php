@@ -24,6 +24,7 @@
     <?php $this->load->view("templates/sections/member_profile_left_pane"); ?>
 </div>
 <div class="col-md-9 column">
+    <?php if($current_user_id == $user_id){?>
     <div class="row" style="padding-bottom: 30px;">
         <div class="col-md-5">
             <div class=" input-group search-box-followers">
@@ -40,29 +41,27 @@
                     <?php }?>
                 </div>
                 <div class="col-md-2">
-                    <?php echo form_open("followers/invite");?>
-                    <button class="btn button-custom">Invite</button>
-                    
+                    <a href="<?php echo base_url().'followers/invite'?>"><button class="btn button-custom">Invite</button></a>                    
                 </div>
                 <div class="col-md-3">
-                    <button class="btn button-custom">My Followers</button>
+                    <a href="<?php echo base_url().'followers/show/'.$user_id?>"><button class="btn button-custom">My Followers</button></a>
                 </div>
                 <div class="col-md-3">
-                    <button class="btn button-custom">Blocked Members</button>
-                    <?php echo form_close();?>
+                    <a href="<?php echo base_url().'followers/blocked_followers/'.$user_id?>"><button class="btn button-custom">Blocked Members</button></a>                    
                 </div>
             
         </div>
     </div>
+    <?php } ?>
     <?php
     $follower_count = 0;
     foreach ($followers as $follower) {
         if ($follower_count % 2 == 0) {?>
         <div class="row" style="padding-top: 10px;">
-        <?php $this->load->view("followers/follower_info", array("follower" => $follower));
+        <?php $this->load->view("followers/follower_info", array("follower" => $follower, 'user_id' => $user_id, 'current_user_id' => $current_user_id));
         } 
         else {
-            $this->load->view("followers/follower_info", array("follower" => $follower));?>
+            $this->load->view("followers/follower_info", array("follower" => $follower, 'user_id' => $user_id, 'current_user_id' => $current_user_id));?>
         </div>
         <?php } 
         $follower_count++;

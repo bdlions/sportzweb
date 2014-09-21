@@ -164,5 +164,52 @@ class Follower_model extends Ion_auth_model {
                           ->get("temp_mutual_realations");
         return $query -> result();
     }
+    
+    /*
+     * This method will return user list
+     * @param $user_id_list, user id list
+     * @Author Nazmul on 20th September 2014
+     */
+    public function get_users($user_id_list)
+    {
+        $this->db->where_in($this->tables["users"].'.id', $user_id_list);
+        return $this->db->select($this->tables["users"].'.*,'.$this->tables["basic_profile"].'.*,'.$this->tables["usres_mutual_relations"].'.relations')
+                        ->from($this->tables['users'])
+                        ->join($this->tables["basic_profile"], $this->tables["basic_profile"].".user_id = ".$this->tables["users"].".id")
+                        ->join($this->tables["usres_mutual_relations"], $this->tables["basic_profile"].".user_id = ".$this->tables["usres_mutual_relations"].".user_id")
+                        ->get();
+    }
+    
+    /*
+     * This method will return user mutual relation info
+     * @Author Nazmul on 20th September 2014
+     */
+    public function get_user_mutual_relations($user_id)
+    {
+        return $this->db->select($this->tables['usres_mutual_relations'].".*")
+                          ->where('user_id', $user_id)
+                          ->get($this->tables['usres_mutual_relations']);
+    }
+    
+    /*
+     * This method will add user mutual relation table
+     * @Author Nazmul on 20th September 2014
+     */
+    public function add_user_mutual_relations($additional_data)
+    {
+        $data = $this->_filter_data($this->tables['usres_mutual_relations'], $additional_data);
+        $this->db->insert($this->tables['usres_mutual_relations'], $data);
+    }
+    
+    /*
+     * This method will update user mutual relation table
+     * @Author Nazmul on 20th September 2014
+     */
+    public function update_user_mutual_relations($user_id, $additional_data)
+    {
+        $this->db->where('user_id', $user_id);
+        $data = $this->_filter_data($this->tables['usres_mutual_relations'], $additional_data);
+        $this->db->update($this->tables['usres_mutual_relations'], $data);
+    }
 }
 ?>

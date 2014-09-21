@@ -7,10 +7,10 @@
     foreach ($followers as $follower) {
         if ($follower_count % 2 == 0) {?>
         <div class="row" style="padding-top: 10px;">
-        <?php $this->load->view("followers/pending_follower_info", array("follower" => $follower));
+        <?php $this->load->view("followers/blocked_follower_info", array("follower" => $follower));
         } 
         else {
-            $this->load->view("followers/pending_follower_info", array("follower" => $follower));?>
+            $this->load->view("followers/blocked_follower_info", array("follower" => $follower));?>
         </div>
         <?php } 
         $follower_count++;

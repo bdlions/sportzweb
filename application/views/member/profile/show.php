@@ -3,7 +3,7 @@
         $("#button_user_follow").on("click", function() {
             $.ajax({
                 type: 'POST',
-                url: '<?php echo base_url() ?>followers/follow_user/' + <?php echo $user_id ?>,
+                url: '<?php echo base_url() ?>followers/add_follower/' + <?php echo $user_id ?>,
                 dataType: 'json',
                 success: function(data) {
                     if (data == true) {

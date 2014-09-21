@@ -27,7 +27,7 @@ class Followers extends Role_Controller{
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         }
-
+        $this->data['current_user_id'] = $this->session->userdata('user_id');
     }
 
     function index(){
@@ -36,26 +36,90 @@ class Followers extends Role_Controller{
         $this->show();
     }
     function show( $user_id = 0) {
-
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }        
+        $this->data['user_id'] = $user_id;
         $this->data['follow_permission'] = $this->follower ->get_acceptance_type();
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info($user_id);
         $this->data['followers'] = $this->follower->get_followers($user_id);
         $this->template->load(null, "followers/show", $this->data);
     }
-    function pending_followers(){
+    
+    /*function pending_followers(){
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
         $this->data['followers'] = $this->follower->get_pending_followers();
         $this->template->load("templates/business_tmpl", "followers/show_pending_users", $this->data);
+    }*/
+    
+    function pending_followers($user_id = 0){
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        } 
+        $this->data['user_id'] = $user_id;
+        $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
+        $this->data['followers'] = $this->follower->get_pending_followers($user_id);
+        $this->template->load(null, "followers/show_pending_users", $this->data);
     }
     
-    function accept_request($follower_id){
+    function blocked_followers($user_id = 0){
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        } 
+        $this->data['user_id'] = $user_id;
+        $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
+        $this->data['followers'] = $this->follower->get_blocked_followers($user_id);
+        $this->template->load(null, "followers/show_blocked_users", $this->data);
+    }
+    
+    /*function accept_request($follower_id){
         if($this->follower->accept_request($follower_id) == true){
             redirect("followers/pending_followers", "refresh");
+        }
+    }*/
+    
+    function accept_request($follower_id){
+        $user_id = $this->session->userdata('user_id');
+        if($this->follower->accept_follower($user_id, $follower_id) == true){
+            redirect("followers/pending_followers/".$user_id, "refresh");
         }
     }
     /*Remote call*/
     function follow_user($follower_id){
         echo $this->follower->follow_user($follower_id);
+    }
+    
+    /*
+     * Ajax Call
+     * This method will add a follower
+     * @Author Nazmul on 20th september 2014
+     */
+    function add_follower($follower_id){
+        $user_id = $this->session->userdata('user_id');
+        echo $this->follower->add_follower($user_id, $follower_id);
+    }
+    
+    /*
+     * This method will remove a follower
+     * @Author Nazmul on 20th september 2014
+     */
+    function remove_follower($follower_id){
+        $user_id = $this->session->userdata('user_id');
+        $this->follower->remove_follower($user_id, $follower_id);
+        redirect("followers");
+    }
+    
+    /*
+     * This method will block a follower
+     * @Author Nazmul on 20th september 2014
+     */
+    function block_follower($follower_id){
+        $user_id = $this->session->userdata('user_id');
+        $this->follower->block_follower($user_id, $follower_id);
+        redirect("followers");
     }
     
     function user_follow($follower_id){
@@ -106,7 +170,7 @@ class Followers extends Role_Controller{
             }
         }
         $this->data['emailList'] = $result;
-        $this->template->load("templates/business_tmpl", "followers/invite", $this->data);
+        $this->template->load(null, "followers/invite", $this->data);
     }
     
     public function get_followers_infor(){

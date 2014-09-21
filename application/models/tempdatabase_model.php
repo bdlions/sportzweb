@@ -93,8 +93,14 @@ class Tempdatabase_model extends Ion_auth_model {
         $query = "CREATE TEMPORARY TABLE IF NOT EXISTS `temp_mutual_realations` (" .
                  "`id` int(11) unsigned NOT NULL AUTO_INCREMENT," .
                  "`user_id` int(11) unsigned NOT NULL,".
+                 "`created_on` int(11) unsigned,".
+                 "`modified_on` int(11) unsigned,".
+                 "`pending` boolean default false,".
                  "`is_pending` boolean default false,".
+                 "`follows` boolean default false,".
                  "`is_follower` boolean default false,".
+                 "`blocks` boolean default false,".
+                 "`is_blocked` boolean default false,".
                  "`time` int(11) unsigned DEFAULT NULL,".
                  "PRIMARY KEY (`id`),".
                  "UNIQUE KEY(`user_id`)".

@@ -86,7 +86,7 @@ class Member_profile extends Role_Controller{
         
         $this->data['photo_list'] = $photo;
         
-        $this->template->load("templates/business_tmpl", "member/profile/show", $this->data);
+        $this->template->load(null, "member/profile/show", $this->data);
     }
     function followers($user_id = 0){
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info($user_id);
