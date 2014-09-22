@@ -234,11 +234,61 @@ class Test extends CI_Controller {
 
     }
     
-    
     function image_slide(){
         $bg = array('1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'); // array of filenames
         $this->data['bg_image'] = $bg;
         $this->load->view('change_image', $this->data);
+    }
+    
+    function app_dir()
+    {
+//        $this->load->view('test', $this->data);
+        $app1 = array(
+            'app_name' => 'FaceGGame',
+            'desc' => 'Description description description description description description description description description description.',
+            'summ' => '',
+            'img1' => base_url()."resources/images/face.jpg",
+            'img2' => base_url()."resources/images/face.jpg",
+            'gal_img1' => base_url()."resources/images/face.jpg",
+            'gal_img2' => base_url()."resources/images/face.jpg",
+            'gal_img3' => base_url()."resources/images/face.jpg",
+            'gal_img4' => base_url()."resources/images/face.jpg",
+            'btn_state' => "Try it",
+        );
+        $app2 = array(
+            'app_name' => 'abc',
+            'desc' => 'desc',
+            'summ' => '',
+            'img1' => base_url()."resources/images/face.jpg",
+            'img2' => base_url()."resources/images/face.jpg",
+            'gal_img1' => base_url()."resources/images/face.jpg",
+            'gal_img2' => base_url()."resources/images/face.jpg",
+            'gal_img3' => base_url()."resources/images/face.jpg",
+            'gal_img4' => base_url()."resources/images/face.jpg",
+            'btn_state' => "Try it",
+        );
+        $app3 = array(
+            'app_name' => 'abc',
+            'desc' => 'desc',
+            'summ' => '',
+            'img1' => base_url()."resources/images/face.jpg",
+            'img2' => base_url()."resources/images/face.jpg",
+            'gal_img1' => base_url()."resources/images/face.jpg",
+            'gal_img2' => base_url()."resources/images/face.jpg",
+            'gal_img3' => base_url()."resources/images/face.jpg",
+            'gal_img4' => base_url()."resources/images/face.jpg",
+            'btn_state' => "Try it",
+        );
+        
+        $app_data = array();
+        $app_data[0] = $app1;
+        $app_data[1] = $app2;
+        $app_data[2] = $app3;
+        
+        
+        
+        $this->data['app_data'] = $app_data;
+        $this->template->load(null, "test", $this->data);
     }
     
 }
