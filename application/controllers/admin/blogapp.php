@@ -408,7 +408,6 @@ class Blogapp extends Role_Controller{
         $this->data['message'] = '';
 
         $blog_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
-        
         $blog = array();
         $related_blogs = array();
         $related_blogs_id = null;
