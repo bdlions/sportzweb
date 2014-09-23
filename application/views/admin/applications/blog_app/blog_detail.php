@@ -7,12 +7,11 @@
         <div class="col-md-12 blog_post_subtitle_bar">
             <span class="blog_post_body_text">
                 By 
-                <a href="#comment-form">
-                    <?php echo isset($user_info['first_name']) ? $user_info['first_name'].' '.$user_info['last_name'] : '';?>
-                </a><!-- / in 
-                <a href="#comment-form">Models Photos
-                    
-                </a>-->
+                <?php if(isset($blog['user_id'])): ?>
+                    <a href="<?php echo base_url(); ?>member_profile/show/<?php echo $blog['user_id']; ?>">
+                        <?php echo isset($blog['first_name']) ? $blog['first_name'].' '.$blog['last_name'] : '';?>
+                    </a>
+                <?php endif; ?>
             </span>
             <div id="total_comments">
                 <span class="pull-right">
@@ -33,6 +32,9 @@
         <div class="col-md-12" style="padding:24px"><!--Images-->
             <?php if(isset($blog['picture'])): ?>
                 <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH ?><?php echo $blog['picture']; ?>"/>
+                <div class="col-md-12" style="padding-top:20px;padding-right: 0px;">
+                    <?php echo isset($blog['picture_description']) ? html_entity_decode(html_entity_decode($blog['picture_description'])) : '';?>
+                </div>
             <?php endif; ?>
         </div>
         <div class="blog_post_body_text">

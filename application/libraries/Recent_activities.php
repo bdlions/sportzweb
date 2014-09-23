@@ -96,11 +96,12 @@ class Recent_activities {
                 $relations_array = json_decode($relations);   
                 foreach($relations_array as $relation)
                 {
-                    if(!in_array($relation->user_id, $follower_id_list))
+                    //checking only followers
+                    if(!in_array($relation->user_id, $follower_id_list) && $relation->is_follower == 1)
                     {
                         $follower_id_list[] = $relation->user_id;
-                    }
-                    $latest_follower_id = $relation->user_id;
+                        $latest_follower_id = $relation->user_id;
+                    }                    
                 }
             }
             if($latest_follower_id != 0)
@@ -180,7 +181,8 @@ class Recent_activities {
                     $likes_array = json_decode($likes);
                     foreach($likes_array as $like_info)
                     {
-                        if($like_info->time > $max_time_like)
+                        //checking latest like from one user to another user
+                        if($like_info->time > $max_time_like && $status['user_id'] != $like_info->user_id)
                         {
                             $max_time_like = $like_info->time;
                             $like_from_user_id = $status['user_id'];
@@ -195,7 +197,8 @@ class Recent_activities {
                     $feedbacks_array = json_decode($feedbacks);   
                     foreach($feedbacks_array as $feedback)
                     {
-                        if($feedback->created_on > $max_time_comment)
+                        //checking latest comment from one user to another user
+                        if($feedback->created_on > $max_time_comment && $status['user_id'] != $feedback->user_id)
                         {
                             $max_time_comment = $feedback->created_on;
                             $comment_from_user_id = $status['user_id'];

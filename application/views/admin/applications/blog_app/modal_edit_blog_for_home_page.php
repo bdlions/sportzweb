@@ -72,8 +72,10 @@
                         
                         var title = $("#title_" + present_value);
                         if(title != undefined){
+                            var start_anchor = '<a href="<?php echo base_url()?>admin/applications_blogs/blog_detail/'+data.id+'">';
+                            var end_anchor = "</a>";
                             title.text($("<div/>").html($("<div/>").html(data.title).text()).text().replace(/(<([^>]+)>)/ig, ""));
-                            //title.text(data.title);
+                            title.html(start_anchor+title.text()+end_anchor);
                         }
                         
                         var description_ = $("#description_" + present_value);
