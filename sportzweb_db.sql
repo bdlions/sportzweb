@@ -1261,6 +1261,7 @@ CREATE TABLE `news`(
   `summary` varchar(5000) NOT NULL,
   `description` varchar(5000) NOT NULL,
   `picture` text,
+  `picture_description` text default '',
   `news_date` varchar(50) DEFAULT NULL,
   `user_liked_list` text,
   `shared_text` varchar(2000) NOT NULL,
