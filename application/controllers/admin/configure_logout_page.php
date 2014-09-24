@@ -25,7 +25,7 @@ class Configure_logout_page extends CI_Controller{
     function index() 
     {
         $this->data['current_configuration'] = array();
-        $current_date = $this->utils->get_current_date();
+        $current_date = $this->utils->get_current_date_yyyymmdd();
         $current_configuration = $this->logout_page_library->get_current_configuration($current_date)->result_array();
         if(!empty($current_configuration))
         {
@@ -49,7 +49,7 @@ class Configure_logout_page extends CI_Controller{
                 
                     $additional_data = array(
                         'img' => $result['upload_data']['file_name'],
-                        'selected_date' => $this->input->post('selected_date')
+                        'selected_date' => $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('selected_date'))
                     );
                     $id = $this->logout_page_library->add_configuration($additional_data);
                     if($id !== FALSE)

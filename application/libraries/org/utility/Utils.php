@@ -68,6 +68,41 @@ class Utils {
     }
     
     /*
+     * This method will return current date in YYYY-mm-dd format
+     * @Author Nazmul on 24 September 2014
+     */
+    public function get_current_date_yyyymmdd($country_code = 'GB')
+    {
+        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
+        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
+        $dateTime = new DateTime("now", $dateTimeZone);
+        $unix_current_time = now() + $dateTime->getOffset();
+        $human_current_time = unix_to_human($unix_current_time);
+        $human_current_time_array= explode(" ", $human_current_time);
+        $human_current_date = $human_current_time_array[0];
+        return $human_current_date;
+    }
+    
+    /*
+     * This method will convert date from dd-mm-yyyy to yyyy-mm-dd format
+     * If date is invalide then this method will return invalid date
+     * @param $date, date to be converted
+     * @Author Nazmul on 24 September 2014
+     */
+    public function convert_date_from_ddmmyyyy_to_yyyymmdd($date)
+    {
+        $splited_date_content = explode("-", $date);
+        if(count($splited_date_content) == 3)
+        {
+            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0];
+        }
+        else
+        {
+            return $date;
+        }        
+    }
+    
+    /*
      * This method will return current date in DD-MM-YYYY format
      * @Author Nazmul on 14 June 2014
      */
