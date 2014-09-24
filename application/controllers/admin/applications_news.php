@@ -211,6 +211,8 @@ class Applications_news extends CI_Controller{
         $this->form_validation->set_rules('headline_editortext', 'HeadLine', 'xss_clean|required');
         $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
+        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
+        
         
         $news = $this->admin_news->get_news_info($news_id)->result_array();
         if(count($news)>0) {
@@ -218,13 +220,10 @@ class Applications_news extends CI_Controller{
         }
         $this->data['news'] = $news;
         
-        //echo '<pre />';print_r($news);exit;
-        
         if($this->input->post())
         {
             if($this->form_validation->run() == true)
-            {
-                
+            { 
                 $uploaded_image_data = array();
                 if (isset($_FILES["userfile"]))
                 {
@@ -244,10 +243,12 @@ class Applications_news extends CI_Controller{
                 $news_headline = trim(htmlentities($this->input->post('headline_editortext')));
                 $summary_headline = trim(htmlentities($this->input->post('summary_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
+                $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
                 $data = array(
                     'headline' => $news_headline,
                     'summary' => $summary_headline,
                     'description' => $description,
+                    'picture_description' => $picture_description,
                     'modified_on' => now(),
                 );
                 
@@ -259,7 +260,7 @@ class Applications_news extends CI_Controller{
                
                 $id = $this->admin_news->update_news($news['id'], $data);
                 if($id !== FALSE) {
-                    $this->data['message'] = 'Service Category is Update successfully.';
+                    $this->data['message'] = 'Newsis Update successfully.';
                     echo json_encode($this->data);
                     return;
                 }else {
@@ -297,6 +298,15 @@ class Applications_news extends CI_Controller{
             'value' => html_entity_decode(html_entity_decode($news['description'])),
         );
         
+        $this->data['image_description'] = array(
+            'name' => 'image_description',
+            'id' => 'image_description',
+            'type' => 'text',
+            'value' => isset($news['picture_description']) ? html_entity_decode(html_entity_decode($news['picture_description'])) : '',
+            'rows'  => '4',
+            'cols'  => '10'
+        );
+        
         $this->data['news_id'] = $news_id;
         $this->template->load($this->tmpl, "admin/applications/news_app/edit_news", $this->data);
     }
@@ -330,6 +340,7 @@ class Applications_news extends CI_Controller{
         $this->form_validation->set_rules('headline_editortext', 'HeadLine', 'xss_clean|required');
         $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
+        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
         
         if($this->input->post())
         {
@@ -353,6 +364,7 @@ class Applications_news extends CI_Controller{
                 $news_headline = trim(htmlentities($this->input->post('headline_editortext')));
                 $news_summary = trim(htmlentities($this->input->post('summary_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
+                $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
                 
                 $data = array(
                     'headline' => $news_headline,
@@ -360,6 +372,7 @@ class Applications_news extends CI_Controller{
                     'description' => $description,
                     'news_date' => date('Y-m-d'),
                     'picture' => empty($uploaded_image_data['upload_data']['file_name'])? '' : $uploaded_image_data['upload_data']['file_name'],
+                    'picture_description' => $picture_description,
                     'created_on' => now()
                 );
                
@@ -413,6 +426,15 @@ class Applications_news extends CI_Controller{
             'id' => 'description',
             'type' => 'text',
             'value' => $this->form_validation->set_value('description'),
+            'rows'  => '4',
+            'cols'  => '10'
+        );
+        
+        $this->data['image_description'] = array(
+            'name' => 'image_description',
+            'id' => 'image_description',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('image_description'),
             'rows'  => '4',
             'cols'  => '10'
         );
@@ -1107,6 +1129,14 @@ class Applications_news extends CI_Controller{
         }
         
         echo json_encode($response);
+    }
+    
+    function news_list()
+    {
+        $this->data['message'] = '';
+        $news_lists = $this->admin_news->get_all_news()->result_array();
+        $this->data['news_lists'] = $news_lists;
+        $this->template->load($this->tmpl, "admin/applications/news_app/news_list", $this->data);
     }
 }
 ?>

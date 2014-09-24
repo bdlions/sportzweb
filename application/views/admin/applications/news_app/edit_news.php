@@ -89,6 +89,34 @@ window.onload = function()
         { name: 'forms' },
         ]
     });
+    CKEDITOR.replace('image_description', {
+        language: 'en',
+        toolbar: [
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Preview', '-', 'Templates' ] },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+        { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+        { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+        '/',
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+
+        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+        '/',
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl' ] },
+        { name: 'forms', items: ['ImageButton'] },
+        ],
+        toolbarGroups: [
+                { name: 'document',	   groups: [ 'mode', 'document' ] },			// Displays document group with its two subgroups.
+                { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },			// Group's name will be used to create voice label.
+        { name: 'links' },
+        { name: 'colors' },
+                '/',																// Line break - next group will be placed in new line.
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'styles' },
+        '/',
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+        { name: 'forms' },
+        ]
+    });
 }
 </script>
 
@@ -130,10 +158,19 @@ window.onload = function()
                             </div>
                         </div>
                         
+                        <div class="form-group">
+                            <label for="description" class="col-md-3 control-label requiredField">
+                                Image Description
+                            </label>
+                            <div class ="col-md-9">
+                                <?php echo form_textarea($image_description + array('class' => 'form-control')); ?>
+                            </div>
+                            <input type="hidden" name="image_description_editortext" id="image_description_editortext">
+                        </div>
                         
                         <div class="form-group">
                             <label for="website" class="col-md-6 control-label requiredField">
-                                Set Service picture
+                                Set News picture
                             </label>
                             <div class ="col-md-6">
                                 <div class="col-md-6">
@@ -179,6 +216,7 @@ $(function () {
         $("#headline_editortext").val(jQuery('<div />').text(CKEDITOR.instances.headline.getData()).html());
         $("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());
         $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
+        $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
         if (CKEDITOR.instances.headline.getData() === "")
         {
             alert("News Heading is required.");
@@ -211,6 +249,7 @@ $(function () {
                                     $("#headline_editortext").val(jQuery('<div />').text(CKEDITOR.instances.headline.getData()).html());
                                     $("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());                            
                                     $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
+                                    $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
                                     if (CKEDITOR.instances.headline.getData() === "")
                                     {
                                         alert("News Heading is required.");

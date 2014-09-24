@@ -57,11 +57,20 @@
                         </button>
                     </a>
                 </div>
+                
+                
                 <div class ="col-sm-2">
                     <a href="<?php echo base_url();?>admin/applications_news/page_import_news">
                         <button class="btn button-custom ">Import News</button>  
                     </a>
                 </div>                            
+            </div>
+            <div class="row form-group">
+                <div class ="col-sm-2">
+                    <a href="<?php echo base_url();?>admin/applications_news/news_list">
+                        <button class="btn button-custom ">New List</button>  
+                    </a>
+                </div>
             </div>
             <?php } ?>
             <div class="row form-group">

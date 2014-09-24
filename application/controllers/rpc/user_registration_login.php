@@ -7,7 +7,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'jsonRPCServer.php';
 
-class User_registration_login extends JsonRPCServer{
+class User_registration_login extends JsonRPCServer {
+
 //class User_registration_login extends CI_Controller {
 
     function __construct() {
@@ -37,36 +38,75 @@ class User_registration_login extends JsonRPCServer{
     function getUserInfo() {
         
     }
-    
-    function userRegistration($data){
+
+    function userRegistration($data) {
         //$data = json_decode('{"last_name":"sdfsd","password":"dsfds","email":"sdf","first_name":"sdf"}');
-        return json_decode($data);
+        /* $data = array(
+          'first_name' => $data->first_name,
+          'last_name' => $data->last_name,
+          'email' => $data->email,
+          'password' => $data->password,
+          'account_status_id' =>1,
+          'created_on' => now()
+          );
+
+          if (!$this->user_rpc_library->checkEmail($data->email)) {
+          if ($this->user_rpc_library->user_registration($data))
+          $msg = "SIGNUP_COMPLETED";
+          else
+          $msg = "SIGNUP_FAILD_PLEASE_TRY_AGAIN";
+          } else {
+          $msg = "EMAIL_ALREADY_EXIST";
+          }
+          $output = array(
+          'msg' => $msg
+          );
+
+          json_encode($output); */
+        json_decode($data);
     }
-    
+
     function getAllUsers() {
         $result = $this->user_rpc_library->getALlUsers()->result_array();
         //echo '<pre/>';echo json_encode($result);exit('here');
-        //return json_encode($result);
-        return '{
-                "id": "1",
-                "user": [
-                  {
-                    "id": "1",
-                    "name": "Q1",
-                    "email": "a@yahoo.com"
-                  },
-                  {
-                    "id": "2",
-                    "name": "emob",
-                    "email": "ass@yahoo.com"
-                  },
-                  {
-                    "id": "3",
-                    "name": "ruton",
-                    "noOfMsgs": "add@yahoo.com"
-                  }
-                ]
-            }';
+        return json_encode($result);
+    
+    }
+
+    // signin 
+    public function signin($email = "", $password = "") {
+        $accessToken = "";
+        $id = "";
+        if ($this->user_rpc_library->checkEmail(trim($email))) {
+
+            $result = $this->user_rpc_library->signin($email, $password);
+            if ($result != "ZERO") {
+                $msg = "SIGNIN_SUCCESSFULLY";
+                $id = $result->id;
+                $email = $result->email;
+
+                $accessToken = $this->api_model->generateAccessToken($id);
+                if ($accessToken == FALSE) {
+                    $msg = "SERVER_BUSY_PLEASE_TRY_AGAIN";
+                    $id = "";
+                    $email = "";
+                    $accessToken = "";
+                }
+            } else {
+                $msg = "EMAIL_AND_PASSWORD_DOES_NOT_MATCH";
+            }
+        } else {
+            $msg = "EMAIL_NOT_EXIST";
+        }
+
+        $output = array(
+            'msg' => $msg,
+            'id' => $id,
+            'accessToken' => "" . $accessToken,
+            'email' => $email
+        );
+
+        json_encode($output);
     }
 
 }

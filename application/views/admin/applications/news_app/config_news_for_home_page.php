@@ -416,7 +416,6 @@
 <script type="text/javascript">
 function openModal(val,id) {
     $('#get_selected_id').val(id);
-    alert($('#get_selected_id').val());
     $('#modal_edit_news_item_home_page').modal('show');
 }
 </script>
@@ -424,13 +423,10 @@ function openModal(val,id) {
  
     function submit_setting() {       
         //take this value from dropdown
-         
         var is_hide_advertisement = 0;
         
-        
-         // Problem
+        // Problem
         var id = $('#panel').val();
-        
         if(id==3) is_hide_advertisement = 1;
         
         var selected_date_for_item = $('#date_for_show_item').val();

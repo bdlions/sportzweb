@@ -25,4 +25,58 @@ class User_rpc_model extends Ion_auth_model {
                     ->get();
     }
     
+    public function user_registration($data) {
+        $data = $this->_filter_data($this->tables['users'], $data);
+
+        $this->db->insert($this->tables['users'],$data);
+        $id = $this->db->insert_id();
+        
+        return isset($id)? $id: False;
+    }
+    
+    // check email address exist or not
+    public function checkEmail($email) {
+        $query = $this->db->query("SELECT * FROM `user` WHERE email = '$email' ");
+        
+        if ($query->num_rows() > 0){
+            return TRUE;
+        }else {
+            return FALSE;
+        }
+    }
+    
+    // Notification number
+    public function generateAccessToken($id) {
+        $randomNumber = rand(1, 9999999);
+        $time = time();
+        $accessToken = md5($randomNumber . $time);
+
+        $data = array(
+            'salt' => $accessToken,
+            'lastLogin' => $time
+        );
+
+        $this->db->where(array('id' => $id));
+        if ($this->db->update('user', $data)){
+            return $accessToken;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    // signin
+    public function signin($email,$password) {
+        $data = array(
+            'email' => trim($email),
+            'password' => sha1($password)
+        );
+
+        $query = $this->db->get_where('user', $data);
+        if ($query->num_rows() > 0){
+            return $query->row();
+        } else{
+            return "ZERO";
+        }
+            
+    }
 }
