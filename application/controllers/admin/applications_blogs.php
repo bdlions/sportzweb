@@ -690,7 +690,7 @@ class Applications_blogs extends CI_Controller{
         $this->data['comments'] = $comments;
         $this->data['user_info'] = $this->ion_auth->get_user_info($blog['user_id']);
         $this->data['application_id'] = APPLICATION_BLOG_APP_ID;
-        $this->data['item_id'] = $blog['id'];
+        $this->data['item_id'] = $blog['blog_id'];
         $this->data['total_comments'] = $total_comments;
         $this->template->load($this->tmpl, "admin/applications/blog_app/blog_detail", $this->data);
     }
