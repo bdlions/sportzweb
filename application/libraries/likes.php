@@ -179,7 +179,7 @@ class Likes {
             {
                 $user_id = $this->session->userdata('user_id');
             }
-            $follower_list_array = $this->follower->get_followers($user_id);
+            $follower_list_array = $this->follower->get_user_followers($user_id);
             $follower_user_id_list = array();
             foreach($follower_list_array as $follower_info)
             {

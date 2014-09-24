@@ -1,7 +1,8 @@
 <div class="col-md-2 column">
     <?php $this->load->view("templates/sections/member_profile_left_pane"); ?>
 </div>
-<div class="col-md-8 column">
+<div class="col-md-9 column">
+    <?php $this->load->view("followers/template/section/member_header"); ?>
     <?php
     $follower_count = 0;
     foreach ($followers as $follower) {

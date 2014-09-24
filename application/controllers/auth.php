@@ -76,7 +76,7 @@ class Auth extends Role_Controller{
                         $this->data['message'] = validation_errors() ? validation_errors() : $this->session->flashdata('message');
                         $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
                         $this->data['newsfeeds'] = $this->statuses->get_statuses();
-                        $this->data['followers'] = $this->follower->get_followers();
+                        //$this->data['followers'] = $this->follower->get_user_followers();
                         $this->data['user_info'] = $this->ion_auth->get_user_info();
                         $this->data['user_id'] = $this->ion_auth->get_user_id();
                         $this->data['current_user_id'] = $this->data['user_id'];
@@ -121,7 +121,7 @@ class Auth extends Role_Controller{
             //setting the filled values also
             
             $this->data['current_configuration'] = array();
-            $current_date = $this->utils->get_current_date();
+            $current_date = $this->utils->get_current_date_yyyymmdd();
             $current_configuration = $this->login_page_library->get_current_configuration($current_date)->result_array();
             if(!empty($current_configuration))
             {
@@ -287,7 +287,7 @@ class Auth extends Role_Controller{
             //setting all values for all forms of this page
             //setting the filled values also
             $this->data['current_configuration'] = array();
-            $current_date = $this->utils->get_current_date();
+            $current_date = $this->utils->get_current_date_yyyymmdd();
             $current_configuration = $this->logout_page_library->get_current_configuration($current_date)->result_array();
             if(!empty($current_configuration))
             {

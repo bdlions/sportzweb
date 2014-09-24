@@ -42,7 +42,8 @@ class Search extends CI_Controller {
     }
     
     public function get_followers(){
-        $users = $this->follower->get_followers();
+        $user_id = $this->session->userdata('user_id');
+        $users = $this->follower->get_user_followers($user_id);
         $temp_users = array();
         
         foreach ($users as  $user) {

@@ -43,7 +43,7 @@ class Followers extends Role_Controller{
         $this->data['user_id'] = $user_id;
         $this->data['follow_permission'] = $this->follower ->get_acceptance_type();
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info($user_id);
-        $this->data['followers'] = $this->follower->get_followers($user_id);
+        $this->data['followers'] = $this->follower->get_user_followers($user_id);
         $this->template->load(null, "followers/show", $this->data);
     }
     
@@ -58,6 +58,7 @@ class Followers extends Role_Controller{
         {
             $user_id = $this->session->userdata('user_id');
         } 
+        $this->data['follow_permission'] = $this->follower ->get_acceptance_type();
         $this->data['user_id'] = $user_id;
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
         $this->data['followers'] = $this->follower->get_pending_followers($user_id);
@@ -69,6 +70,7 @@ class Followers extends Role_Controller{
         {
             $user_id = $this->session->userdata('user_id');
         } 
+        $this->data['follow_permission'] = $this->follower ->get_acceptance_type();
         $this->data['user_id'] = $user_id;
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
         $this->data['followers'] = $this->follower->get_blocked_followers($user_id);
@@ -119,6 +121,16 @@ class Followers extends Role_Controller{
     function block_follower($follower_id){
         $user_id = $this->session->userdata('user_id');
         $this->follower->block_follower($user_id, $follower_id);
+        redirect("followers");
+    }
+    
+    /*
+     * This method will unblock a follower
+     * @Author Nazmul on 25th september 2014
+     */
+    function unblock_follower($follower_id){
+        $user_id = $this->session->userdata('user_id');
+        $this->follower->unblock_follower($user_id, $follower_id);
         redirect("followers");
     }
     

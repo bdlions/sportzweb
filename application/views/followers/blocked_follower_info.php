@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-5">
     <div class="row">
         <div class="col-md-4">
             <a href='<?php echo base_url() . "member_profile/show/{$follower->user_id}" ?>' class="profile-name"> 
@@ -27,10 +27,12 @@
                 </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="friends_status">
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>followers/remove_follower/<?php echo $follower->user_id ?>">Unblock</a>
+                        <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>followers/unblock_follower/<?php echo $follower->user_id ?>">Unblock</a>
                     </li>
                 </ul>
             </div>
        </div>
     </div>
+</div>
+<div class="col-md-1">    
 </div>

@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-5">
     <div class="row">
         <div class="col-md-4">
             <a href='<?php echo base_url() . "member_profile/show/{$follower->user_id}" ?>' class="profile-name"> 
@@ -39,4 +39,6 @@
             </div>
        </div>
     </div>
+</div>
+<div class="col-md-1">    
 </div>
