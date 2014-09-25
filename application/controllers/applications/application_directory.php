@@ -23,7 +23,7 @@ class Application_directory extends Role_Controller{
         $this->data['message'] = '';
         
         
-//        $this->load->view('test', $this->data);
+        //dummy array... load data into app_data[] 2d array dynamically.
         $app1 = array(
             'app_name' => 'FaceGGame',
             'desc' => 'Description description description description description description description description description description.',
@@ -66,7 +66,17 @@ class Application_directory extends Role_Controller{
         $app_data[1] = $app2;
         $app_data[2] = $app3;
         
-        $this->data['app_data'] = $app_data;
+        //dummy array end ^^.
+        
+        
+        
+        
+        
+        
+        $length = sizeof($app_data);
+        
+        $this->data['app_data1'] = array_slice($app_data, 0, $length/2);
+        $this->data['app_data2'] = array_slice($app_data, $length/2, $length);
         $this->template->load(null, "applications/application_directory_view", $this->data);
     }
     
