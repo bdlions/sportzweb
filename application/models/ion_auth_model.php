@@ -1951,4 +1951,22 @@ class Ion_auth_model extends CI_Model {
         return $result;
     }
     
+    /*
+     * This method will retunr user info from users table
+     * @param $user_id, user id
+     * @Author Nazmul on 25 September 2014
+     */
+    public function get_user_info($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        } 
+        $this->response = $this->db->select($this->tables['users'] . '.id as user_id,'.$this->tables['users'] . '.*')
+                ->from($this->tables['users'])
+                ->where('id', $user_id)
+                ->get();
+        return $this;
+    }
+    
 }

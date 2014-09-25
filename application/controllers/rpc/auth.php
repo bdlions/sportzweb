@@ -69,13 +69,13 @@ class Auth extends JsonRPCServer {
      */
     public function login($identity = '', $password = '')
     {
-        //$identity = 'bdlions@gmail.com';
-        //$password = 'password';
+        //$identity = 'mim@yahoo.com';
+        //$password = '121212';
         $response = array();
-        if ($this->ion_auth->login($identity, $$password)) {
+        if ($this->ion_auth->login($identity, $password)) {
             $response['message'] = $this->ion_auth->messages();
             $user_id = $this->session->userdata('user_id');
-            $user_info_array = $this->ion_auth_model->get_users(array($user_id))->result();
+            $user_info_array = $this->ion_auth_model->get_user_info($user_id)->result();
             if(!empty($user_info_array))
             {
                 $response['user_info'] = $user_info_array[0];
