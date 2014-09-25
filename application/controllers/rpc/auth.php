@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include 'jsonRPCServer.php';
 
 class Auth extends JsonRPCServer {
+//class Auth extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -26,10 +27,15 @@ class Auth extends JsonRPCServer {
      * @param $user_data, user data to be registered
      * @Author Nazmul on 25th September 2014
      */
-    function register($user_data) {        
+    function register($user_data = '') {        
         $result = array();
         //decoding json data from string to object
         $data = json_decode($user_data);
+        /*$data = new stdClass();
+        $data->first_name = 'bdlions';
+        $data->last_name = 'bdlions';
+        $data->email = 'bdlions@test.com';
+        $data->password = 'password';*/
         $username = strtolower($data->first_name) . ' ' . strtolower($data->last_name);
         $email = $data->email;
         $password = $data->password;
@@ -42,18 +48,15 @@ class Auth extends JsonRPCServer {
         $user_id = $this->ion_auth->register($username, $password, $email, $additional_data);
         if ($user_id !== FALSE) 
         {
-            $result['message'] = $this->ion_auth->messages();
+            $result['message'] = 'Account is created successfully.';
             //activating newly created user
-            if(!$this->ion_auth->activate($user_id))
-            {
-                $result['message'] = $this->ion_auth->errors();
-            }
+            $this->ion_auth_model->activate($user_id);
         } 
         else 
         {
             $result['message'] = $this->ion_auth->errors();
         }
-        json_decode($result);
+        return json_encode($result);
     }
     
     /*
@@ -68,7 +71,7 @@ class Auth extends JsonRPCServer {
         if ($this->ion_auth->login($identity, $$password)) {
             $response['message'] = $this->ion_auth->messages();
             $user_id = $this->session->userdata('user_id');
-            $user_info_array = $$this->ion_auth->get_users($array($user_id))->result();
+            $user_info_array = $this->ion_auth_model->get_users(array($user_id))->result();
             if(!empty($user_info_array))
             {
                 $response['user_info'] = $user_info_array[0];
@@ -79,9 +82,10 @@ class Auth extends JsonRPCServer {
         else
         {
             $response['message'] = $this->ion_auth->errors();
+            //status 0 means there is an error
             $response['status'] = 0;
         }
-        echo json_encode($response);
+        return json_encode($response);
     }
 }
 
