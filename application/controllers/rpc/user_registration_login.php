@@ -39,58 +39,63 @@ class User_registration_login extends JsonRPCServer {
         
     }
 
-    function userRegistration($data) {
+    function userRegistration($data='') {
+        $data = json_decode($data);
         //$data = json_decode('{"last_name":"sdfsd","password":"dsfds","email":"sdf","first_name":"sdf"}');
-        /* $data = array(
-          'first_name' => $data->first_name,
-          'last_name' => $data->last_name,
-          'email' => $data->email,
-          'password' => $data->password,
-          'account_status_id' =>1,
-          'created_on' => now()
-          );
 
-          if (!$this->user_rpc_library->checkEmail($data->email)) {
-          if ($this->user_rpc_library->user_registration($data))
-          $msg = "SIGNUP_COMPLETED";
-          else
-          $msg = "SIGNUP_FAILD_PLEASE_TRY_AGAIN";
-          } else {
-          $msg = "EMAIL_ALREADY_EXIST";
-          }
-          $output = array(
-          'msg' => $msg
-          );
+        $user_data = array(
+            'first_name' => $data->first_name,
+            'last_name' => $data->last_name,
+            'email' => $data->email,
+            'password' => $data->password,
+            'account_status_id' => 1,
+            'created_on' => now()
+        );
 
-          json_encode($output); */
-        json_decode($data);
+        if ($this->user_rpc_library->user_registration($user_data)){
+            $msg = "SIGNUP_COMPLETED";
+        } else {
+            $msg = "SIGNUP_FAILD_PLEASE_TRY_AGAIN";
+        }
+                
+        $output = array(
+            'msg' => $msg
+        );
+
+        
+        return json_encode($output);
+        //return "afsdf";
+        //return json_decode($data);
     }
 
     function getAllUsers() {
         $result = $this->user_rpc_library->getALlUsers()->result_array();
         //echo '<pre/>';echo json_encode($result);exit('here');
         return json_encode($result);
-    
     }
 
     // signin 
     public function signin($email = "", $password = "") {
         $accessToken = "";
         $id = "";
-        if ($this->user_rpc_library->checkEmail(trim($email))) {
 
+        if ($this->user_rpc_library->checkEmail(trim($email))) { 
             $result = $this->user_rpc_library->signin($email, $password);
             if ($result != "ZERO") {
                 $msg = "SIGNIN_SUCCESSFULLY";
                 $id = $result->id;
                 $email = $result->email;
+                $fname = $result->first_name;
+                $lname = $result->last_name;
 
-                $accessToken = $this->api_model->generateAccessToken($id);
+                $accessToken = $this->user_rpc_library->generateAccessToken($id);
                 if ($accessToken == FALSE) {
                     $msg = "SERVER_BUSY_PLEASE_TRY_AGAIN";
                     $id = "";
                     $email = "";
                     $accessToken = "";
+                    $fname = "";
+                    $lname = "";
                 }
             } else {
                 $msg = "EMAIL_AND_PASSWORD_DOES_NOT_MATCH";
@@ -103,10 +108,12 @@ class User_registration_login extends JsonRPCServer {
             'msg' => $msg,
             'id' => $id,
             'accessToken' => "" . $accessToken,
-            'email' => $email
+            'email' => $email,
+            'first_name' => $fname,
+            'last_name' => $lname,
         );
 
-        json_encode($output);
+        return json_encode($output);
     }
 
 }

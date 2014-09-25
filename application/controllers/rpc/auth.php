@@ -27,7 +27,7 @@ class Auth extends JsonRPCServer {
      * @param $user_data, user data to be registered
      * @Author Nazmul on 25th September 2014
      */
-    function register($user_data = '') {        
+    function register($user_data = '') {  
         $result = array();
         //decoding json data from string to object
         $data = json_decode($user_data);
@@ -49,11 +49,13 @@ class Auth extends JsonRPCServer {
         if ($user_id !== FALSE) 
         {
             $result['message'] = 'Account is created successfully.';
+            $result['msg'] = "SIGNUP_COMPLETED";
             //activating newly created user
             $this->ion_auth_model->activate($user_id);
         } 
         else 
         {
+            $result['msg'] = "SIGNUP_FAILD_PLEASE_TRY_AGAIN";
             $result['message'] = $this->ion_auth->errors();
         }
         return json_encode($result);
@@ -67,6 +69,8 @@ class Auth extends JsonRPCServer {
      */
     public function login($identity = '', $password = '')
     {
+        //$identity = 'bdlions@gmail.com';
+        //$password = 'password';
         $response = array();
         if ($this->ion_auth->login($identity, $$password)) {
             $response['message'] = $this->ion_auth->messages();
@@ -75,15 +79,20 @@ class Auth extends JsonRPCServer {
             if(!empty($user_info_array))
             {
                 $response['user_info'] = $user_info_array[0];
+                $response['id'] = $user_info_array[0]->user_id;
+                $response['first_name'] = $user_info_array[0]->first_name;
+                $response['last_name'] = $user_info_array[0]->last_name;
+                $response['email'] = $user_info_array[0]->email;
+                
                 //status 1 means everything is perfect
-                $response['status'] = 1;
+                $response['msg'] = "SIGNIN_SUCCESSFULLY";
             }
         }
         else
         {
             $response['message'] = $this->ion_auth->errors();
             //status 0 means there is an error
-            $response['status'] = 0;
+            $response['msg'] = "EMAIL_AND_PASSWORD_DOES_NOT_MATCH";
         }
         return json_encode($response);
     }

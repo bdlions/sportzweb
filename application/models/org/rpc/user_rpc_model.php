@@ -34,9 +34,9 @@ class User_rpc_model extends Ion_auth_model {
         return isset($id)? $id: False;
     }
     
-    // check email address exist or not
+     //check email address exist or not
     public function checkEmail($email) {
-        $query = $this->db->query("SELECT * FROM `user` WHERE email = '$email' ");
+        $query = $this->db->query("SELECT * FROM `users` WHERE email = '$email' ");
         
         if ($query->num_rows() > 0){
             return TRUE;
@@ -53,11 +53,11 @@ class User_rpc_model extends Ion_auth_model {
 
         $data = array(
             'salt' => $accessToken,
-            'lastLogin' => $time
+            'last_login' => $time
         );
 
         $this->db->where(array('id' => $id));
-        if ($this->db->update('user', $data)){
+        if ($this->db->update('users', $data)){
             return $accessToken;
         } else {
             return FALSE;
@@ -71,7 +71,8 @@ class User_rpc_model extends Ion_auth_model {
             'password' => sha1($password)
         );
 
-        $query = $this->db->get_where('user', $data);
+        $query = $this->db->get_where('users', $data);
+        //echo $this->db->last_query();exit('sss');
         if ($query->num_rows() > 0){
             return $query->row();
         } else{
