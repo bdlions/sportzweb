@@ -550,7 +550,7 @@ class Ion_auth {
         }
         else
         {
-            return false;
+            return array();
         }
     }
     

@@ -381,7 +381,7 @@ class Ion_auth_model extends CI_Model {
                 'account_status_id' => $this->account_status_list['active_id']
             );
 
-
+            
             $this->trigger_events('extra_where');
             $this->db->update($this->tables['users'], $data, array('id' => $id));
         }
@@ -1815,6 +1815,18 @@ class Ion_auth_model extends CI_Model {
 
         return $_output;
     }
+    
+    /* 
+     * This method will return messages for rpc call of mobile app
+     * @Author Nazmul on 26th September 2014
+     */
+    public function messages_mobile_app() {
+        $_output = array();
+        foreach ($this->messages as $message) {
+            $_output[] = $this->lang->line($message) ? $this->lang->line($message) : '##' . $message . '##';
+        }
+        return $_output;
+    }
 
     /**
      * messages as array
@@ -1867,6 +1879,18 @@ class Ion_auth_model extends CI_Model {
         }
 
         return $_output."</div>";
+    }
+    
+    /* 
+     * This method will return error messages for rpc call of mobile app
+     * @Author Nazmul on 26th September 2014
+     */
+    public function errors_mobile_app() {
+        $_output = array();
+        foreach ($this->errors as $error) {
+            $_output[] = $this->lang->line($error) ? $this->lang->line($error) : '##' . $error . '##';
+        }
+        return $_output;
     }
     
     public function errors_alert() {
@@ -1962,11 +1986,13 @@ class Ion_auth_model extends CI_Model {
         {
             $user_id = $this->session->userdata('user_id');
         } 
-        $this->response = $this->db->select($this->tables['users'] . '.id as user_id,'.$this->tables['users'] . '.*')
+        $this->response = $this->db->select($this->tables['users'] . '.id as user_id,'.$this->tables['users'] . '.first_name,'.$this->tables['users'] . '.last_name,'.$this->tables['users'] . '.email')
                 ->from($this->tables['users'])
                 ->where('id', $user_id)
                 ->get();
         return $this;
     }
+    
+    // RPC MODULE
     
 }

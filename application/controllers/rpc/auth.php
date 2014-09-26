@@ -28,7 +28,7 @@ class Auth extends JsonRPCServer {
      * @Author Nazmul on 25th September 2014
      */
     function register($user_data = '') {  
-        $result = array();
+        $response = array();
         //decoding json data from string to object
         $data = json_decode($user_data);
         /*$data = new stdClass();
@@ -45,20 +45,22 @@ class Auth extends JsonRPCServer {
             'last_name' => $data->last_name
         );
         //registering a new user
-        $user_id = $this->ion_auth->register($username, $password, $email, $additional_data);
+        $user_id = $this->ion_auth_model->register($username, $password, $email, $additional_data);
         if ($user_id !== FALSE) 
         {
-            $result['message'] = 'Account is created successfully.';
-            $result['msg'] = "SIGNUP_COMPLETED";
+            $response['success_message'] = $this->ion_auth->messages_mobile_app();
+            $response['msg'] = "SIGNUP_COMPLETED";
+            $response['status'] = RPC_SUCCESS;
             //activating newly created user
             $this->ion_auth_model->activate($user_id);
         } 
         else 
         {
-            $result['msg'] = "SIGNUP_FAILD_PLEASE_TRY_AGAIN";
-            $result['message'] = $this->ion_auth->errors();
+            $response['msg'] = "SIGNUP_FAILD_PLEASE_TRY_AGAIN";
+            $response['error_messages'] = $this->ion_auth->errors_mobile_app();
+            $response['status'] = RPC_ERROR;
         }
-        return json_encode($result);
+        return json_encode($response);
     }
     
     /*
@@ -69,13 +71,15 @@ class Auth extends JsonRPCServer {
      */
     public function login($identity = '', $password = '')
     {
-        //$identity = 'mim@yahoo.com';
-        //$password = '121212';
+        //$identity = 'bdlions@bdlions.com';
+        //$password = 'password';
         $response = array();
         if ($this->ion_auth->login($identity, $password)) {
-            $response['message'] = $this->ion_auth->messages();
+            $response['success_message'] = $this->ion_auth->messages_mobile_app();
             $user_id = $this->session->userdata('user_id');
+            //print_r($user_id);
             $user_info_array = $this->ion_auth_model->get_user_info($user_id)->result();
+            //print_r($user_info_array);
             if(!empty($user_info_array))
             {
                 $response['user_info'] = $user_info_array[0];
@@ -84,14 +88,14 @@ class Auth extends JsonRPCServer {
                 $response['last_name'] = $user_info_array[0]->last_name;
                 $response['email'] = $user_info_array[0]->email;
                 
-                //status 1 means everything is perfect
-                $response['msg'] = "SIGNIN_SUCCESSFULLY";
+                $response['status'] = RPC_SUCCESS;
+                $response['msg'] = "SIGNIN_SUCCESSFULLY";                
             }
         }
         else
         {
-            $response['message'] = $this->ion_auth->errors();
-            //status 0 means there is an error
+            $response['error_messages'] = $this->ion_auth->errors_mobile_app();
+            $response['status'] = RPC_ERROR;
             $response['msg'] = "EMAIL_AND_PASSWORD_DOES_NOT_MATCH";
         }
         return json_encode($response);
