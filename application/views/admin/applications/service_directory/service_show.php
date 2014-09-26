@@ -4,7 +4,8 @@
     $(function() {
         var services = Array();
         services = <?php echo json_encode($service_info);?>;
-        var town_code = '<?php echo $service_info['address'].", ".$service_info['city'].", ".$service_info['country_name'].", ".$service_info['post_code'] ?>';
+//        var town_code = '<?php echo $service_info['address'].", ".$service_info['city'].", ".$service_info['country_name'].", ".$service_info['post_code'] ?>';
+        var town_code = '<?php echo $service_info['post_code'] ?>';
         var map_canvas = document.getElementById('map_canvas');
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': town_code}, function(results, status) {
