@@ -15,5 +15,11 @@
         </div>
         <?php } 
         $follower_count++;
-    } ?>
+    } 
+    if ($follower_count % 2 == 0)
+    {
+        echo '</div>';
+    }
+    ?>
 </div>
+<?php $this->load->view("followers/modal_report");

@@ -103,6 +103,7 @@
                                 <ul>
                                     <li id="users_overview"><a href="<?php echo base_url()?>admin/users_overview">Overview</a></li>
                                     <li id="users_user_manage"><a href="<?php echo base_url()?>admin/users_usermanage">User Manage</a></li>                                    
+                                    <li id="users_reports"><a href="<?php echo base_url()?>admin/users_reports">Reports</a></li>
                                 </ul>
                             </li>
                             <li id="applications">

@@ -29,7 +29,7 @@ if (!function_exists('get_followers')) {
     function get_followers() {
         $CI = & get_instance();
         $CI->load->library("follower");
-        return $CI->follower->get_followers();
+        return $CI->follower->get_user_followers();
     }
 }
 

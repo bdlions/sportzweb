@@ -162,11 +162,11 @@
             <?php echo $basic_profile->about_me ?>
         </div>
         <div class="col-md-3">
-            <?php if (is_myself($user_id)) { ?>
+            <?php if ($is_myself) { ?>
                 <?php echo form_open("member_profile/update_basic_profile") ?>
                 <button class="btn button-custom pull-right">Edit Profile</button>
                 <?php echo form_close(); ?>
-                <?php } elseif (is_follower($user_id)) { ?>
+                <?php } elseif ($is_follower) { ?>
 
 
                 <div class="col-md-8"><a href="<?php echo base_url() . 'messages/new_message/' . $user_id ?>"><button class="btn button-custom button-custom-profile-message">Message</button></a>
@@ -193,7 +193,7 @@
 
 
 
-            <?php } else if (is_follower_pending($user_id)) { ?>
+            <?php } else if ($is_pending) { ?>
                 <button class="btn button-custom pull-right">Request Pending</button>
             <?php } else { ?>
                 <button class="btn button-custom pull-right" id="button_user_follow">Follow</button>

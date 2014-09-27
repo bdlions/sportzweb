@@ -415,8 +415,51 @@ class Follower {
         return TRUE;
     }
     
-    public function get_pending_followers($user_id)
+    public function get_relation_with_user($follower_id)
     {
+        $result = array(
+            'is_follower' => FALSE,
+            'is_blocked' => FALSE,
+            'is_pending' => FALSE
+        );
+        $user_id = $this->session->userdata('user_id');
+        $user_mutual_relation_array = $this->follower_model->get_user_mutual_relations($user_id)->result_array();
+        if(!empty($user_mutual_relation_array))
+        {
+            $user_mutual_relation = $user_mutual_relation_array[0];
+            $relations = $user_mutual_relation['relations'];
+            if( $relations != "" && $relations != NULL )
+            {
+                $relations_array = json_decode($relations);
+                foreach($relations_array as $relation_info)
+                {
+                    if($relation_info->user_id == $follower_id)
+                    {
+                        if($relation_info->is_blocked == 1)
+                        {
+                            $result['is_blocked'] = TRUE;
+                        }
+                        else if($relation_info->is_pending == 1)
+                        {
+                            $result['is_pending'] = TRUE;
+                        }
+                        else if($relation_info->is_follower == 1)
+                        {
+                            $result['is_follower'] = TRUE;
+                        }                        
+                    }                    
+                }
+            }
+        }
+        return $result;
+    }
+    
+    public function get_pending_followers($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
         $pending_follower_list = array();  
         $follower_id_list = array();
         $user_mutual_relation_array = $this->follower_model->get_user_mutual_relations($user_id)->result_array();
@@ -443,8 +486,12 @@ class Follower {
         return $pending_follower_list;
     }
     
-    public function get_user_followers($user_id)
+    public function get_user_followers($user_id = 0)
     {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
         $follower_list = array();  
         $follower_id_list = array();
         $user_mutual_relation_array = $this->follower_model->get_user_mutual_relations($user_id)->result_array();
@@ -471,8 +518,12 @@ class Follower {
         return $follower_list;
     }
     
-    public function get_blocked_followers($user_id)
+    public function get_blocked_followers($user_id = 0)
     {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
         $blocked_follower_list = array();  
         $follower_id_list = array();
         $user_mutual_relation_array = $this->follower_model->get_user_mutual_relations($user_id)->result_array();

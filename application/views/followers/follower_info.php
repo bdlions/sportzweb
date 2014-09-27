@@ -36,7 +36,7 @@
                         <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>followers/block_follower/<?php echo $follower->user_id ?>">Block</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_report_modal('<?php echo $follower->id; ?>')">Report</a>
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_report_modal('<?php echo $follower->user_id; ?>')">Report</a>
                     </li>
                 </ul>
             </div>
@@ -46,24 +46,3 @@
 </div>
 <div class="col-md-1">    
 </div>
-<?php $this->load->view("followers/modal_report"); ?>
-<script type="text/javascript">
-    function open_report_modal(followers_id){
-        $('#follwers_id').val(followers_id);
-        $.ajax({
-                    dataType: 'json',
-                    type: "POST",
-                    url: '<?php echo base_url(); ?>' + "followers/get_followers_infor",
-                    data: {
-                        follwers_id: $('#follwers_id').val(),
-                    },
-                    success: function(data) {
-                        //window.location.reload();
-                    }
-                });
-        $('#modal_report_content').modal('show');
-    }
-//    $(function(){
-//        
-//    });
-</script>

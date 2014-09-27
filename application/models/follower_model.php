@@ -69,8 +69,8 @@ class Follower_model extends Ion_auth_model {
         }
     }
     
-    public function follow_user($follower_id){
-        /*add follower for current user*/
+    /*public function follow_user($follower_id){
+        //add follower for current user
         if($this->get_acceptance_type($follower_id)->value == FOLLOWER_ACCEPTANCE_TYPE_MANUAL){
             $this->tempdatabase_model->create_followers($follower_id);
             $data = array('user_id' => $this->current_user_id, 'is_pending' => TRUE, 'time' => now());
@@ -79,7 +79,7 @@ class Follower_model extends Ion_auth_model {
             $this->tempdatabase_model->create_followers($this->current_user_id);
             $data = array('user_id' => $follower_id, 'is_follower' => TRUE, 'time' => now());
             if($this->tempdatabase_model->add_relation($data, $this->current_user_id) == true){
-                /*add follower to the follower user*/
+                //add follower to the follower user
                 $this->tempdatabase_model->create_followers($follower_id);
                 $data = array('user_id' => $this->current_user_id, 'is_follower' => TRUE, 'time' => now());
                 return $this->tempdatabase_model->add_relation($data, $follower_id);
@@ -87,60 +87,60 @@ class Follower_model extends Ion_auth_model {
         }
         return false;
         
-    }
+    }*/
     
-    public function unfollow_user($follower_id){
+    /*public function unfollow_user($follower_id){
         $this->tempdatabase_model->create_followers($this->current_user_id);
         if($this->tempdatabase_model->remove_relation( $this->current_user_id, $follower_id) == true){
             $this->tempdatabase_model->create_followers($follower_id);
             return $this->tempdatabase_model->remove_relation($follower_id, $this->current_user_id);
         }
-    }
+    }*/
     
-    public function accept_request($follower_id){
+    /*public function accept_request($follower_id){
         $this->tempdatabase_model->create_followers($this->current_user_id);
         $data = array('user_id' => $follower_id, 'is_follower' => TRUE, 'is_pending' => FALSE);
         if($this->tempdatabase_model->update_relation($data, $this->current_user_id, $follower_id) == true){
-            /*add follower to the follower user*/
+            //add follower to the follower user
             $this->tempdatabase_model->create_followers($follower_id);
             $data = array('user_id' => $this->current_user_id, 'is_follower' => TRUE ,'is_pending' => FALSE);
             return $this->tempdatabase_model->add_relation($data, $follower_id);
         }
-    }
+    }*/
     
-    public function is_follower($follower_id){
+    /*public function is_follower($follower_id){
         $this->tempdatabase_model->create_followers($this->current_user_id);
         $query = $this->db->select("*")
                           ->where("user_id", $follower_id)
                           ->where("is_follower", TRUE)
                           ->get("temp_mutual_realations");
         return $query -> num_rows() >= 1;
-    }
-    public function is_follower_pending($follower_id){
+    }*/
+    /*public function is_follower_pending($follower_id){
         $this->tempdatabase_model->create_followers($follower_id);
         $query = $this->db->select("*")
                           ->where("user_id", $this->current_user_id)
                           ->where("is_pending", TRUE)
                           ->get("temp_mutual_realations");
         return $query -> num_rows() >= 1;
-    }
-    public function is_follower_blocked($follower_id){
+    }*/
+    /*public function is_follower_blocked($follower_id){
         $this->tempdatabase_model->create_followers($this->current_user_id);
         $query = $this->db->select("*")
                           ->where("user_id", $follower_id)
                           ->where("is_blocked", TRUE)
                           ->get("temp_mutual_realations");
         return $query -> num_rows() >= 1;
-    }
-    public function is_follower_reported($follower_id){
+    }*/
+    /*public function is_follower_reported($follower_id){
         $this->tempdatabase_model->create_followers($this->current_user_id);
         $query = $this->db->select("*")
                           ->where("user_id", $follower_id)
                           ->where("is_reported", TRUE)
                           ->get("temp_mutual_realations");
         return $query -> num_rows() >= 1;
-    }
-    public function get_followers($user_id = 0){
+    }*/
+    /*public function get_followers($user_id = 0){
         if($user_id == 0){
             $user_id = $this->current_user_id;
         }
@@ -153,8 +153,8 @@ class Follower_model extends Ion_auth_model {
                           ->get("temp_mutual_realations");
         //print_r($query->result());
         return $query -> result();
-    }
-    public function get_pending_followers(){
+    }*/
+    /*public function get_pending_followers(){
         $this->tempdatabase_model->create_followers($this->current_user_id);
         $query = $this->db->select("*")
                           ->where("is_pending", TRUE)
@@ -163,7 +163,7 @@ class Follower_model extends Ion_auth_model {
                           ->join($this->tables["usres_mutual_relations"], $this->tables["usres_mutual_relations"].".user_id="."temp_mutual_realations".".user_id")
                           ->get("temp_mutual_realations");
         return $query -> result();
-    }
+    }*/
     
     /*
      * This method will return user list
@@ -173,7 +173,7 @@ class Follower_model extends Ion_auth_model {
     public function get_users($user_id_list)
     {
         $this->db->where_in($this->tables["users"].'.id', $user_id_list);
-        return $this->db->select($this->tables["users"].'.*,'.$this->tables["basic_profile"].'.*,'.$this->tables["usres_mutual_relations"].'.relations')
+        return $this->db->select('(FROM_UNIXTIME(`last_activity`) > (NOW() - INTERVAL 1 MINUTE)) as online_status,'.$this->tables["users"].'.*,'.$this->tables["basic_profile"].'.*,'.$this->tables["usres_mutual_relations"].'.relations')
                         ->from($this->tables['users'])
                         ->join($this->tables["basic_profile"], $this->tables["basic_profile"].".user_id = ".$this->tables["users"].".id")
                         ->join($this->tables["usres_mutual_relations"], $this->tables["basic_profile"].".user_id = ".$this->tables["usres_mutual_relations"].".user_id")

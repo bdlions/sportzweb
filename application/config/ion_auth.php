@@ -127,6 +127,9 @@ $config['tables']['configure_login_page']                   = 'configure_login_p
 $config['tables']['configure_logout_page']                  = 'configure_logout_page';
 //trending feature
 $config['tables']['hashtags']                               = 'hashtags';
+//report users
+$config['tables']['follower_report_type']                   = 'follower_report_type';
+$config['tables']['follower_report_list']                   = 'follower_report_list';
 
 /*
  | Users table column and Group table column you want to join WITH.

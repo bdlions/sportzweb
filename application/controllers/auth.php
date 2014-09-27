@@ -76,7 +76,7 @@ class Auth extends Role_Controller{
                         $this->data['message'] = validation_errors() ? validation_errors() : $this->session->flashdata('message');
                         $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
                         $this->data['newsfeeds'] = $this->statuses->get_statuses();
-                        //$this->data['followers'] = $this->follower->get_user_followers();
+                        $this->data['followers'] = $this->follower->get_user_followers();
                         $this->data['user_info'] = $this->ion_auth->get_user_info();
                         $this->data['user_id'] = $this->ion_auth->get_user_id();
                         $this->data['current_user_id'] = $this->data['user_id'];

@@ -26,6 +26,24 @@
                 window.location = "<?php echo base_url()?>member_profile/show/" + datum.user_id;
             });
     });
+    function open_report_modal(follower_id){
+        $('#follower_id').val(follower_id);
+        $('#<?php echo FOLLOWER_REPORT_TYPE_SHARED_CONTENT_ID?>').attr('checked', false);
+        $('#<?php echo FOLLOWER_REPORT_TYPE_ACCOUNT_ID?>').attr('checked', false);
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $('#span_shared_content').text('Report content shared by '+data.user_info.first_name+' '+data.user_info.last_name);
+                $('#modal_report_content').modal('show');
+            }
+        });
+
+    }
 </script>
 <div class="row" style="padding-bottom: 30px;">
     <div class="col-md-5">

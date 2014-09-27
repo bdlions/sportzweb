@@ -13,6 +13,7 @@ class Followers extends Role_Controller{
         $this->load->library('basic_profile');
         $this->load->library('follower');
         $this->load->library('permission');
+        $this->load->library('report_users');
         $this->load->library('visitors');
         
         // Load MongoDB library instead of native db driver if required
@@ -28,6 +29,7 @@ class Followers extends Role_Controller{
             redirect('auth/login', 'refresh');
         }
         $this->data['current_user_id'] = $this->session->userdata('user_id');
+        $this->data['my_user_id'] = $this->session->userdata('user_id');
     }
 
     function index(){
@@ -185,17 +187,30 @@ class Followers extends Role_Controller{
         $this->template->load(null, "followers/invite", $this->data);
     }
     
-    public function get_followers_infor(){
+    public function get_follower_info(){
         $response = array();
-        $follwers_id = $_POST['follwers_id'];
-        
-        $follower_info_array = $this->follower->follow_user($follwers_id)->result_array();
-        echo '<pre/>';print_r();exit('here');
-        if(!empty($follower_info_array))
-        {
-            $response = $follower_info_array[0];
-        }
+        $follower_id = $_POST['follower_id'];        
+        $response['user_info'] = $this->ion_auth->get_user_info($follower_id);
         echo json_encode($response);
+    }
+    
+    public function store_report()
+    {
+        $follower_id = $this->input->post('follower_id');
+        $reported_id_list = $this->input->post('reported_id_list');
+        if(!empty($reported_id_list))
+        {
+            $report_list = array();
+            foreach($reported_id_list as $report_type_id)
+            {
+                $report_data = array(
+                    'user_id' => $follower_id,
+                    'report_type_id' => $report_type_id
+                );
+                $report_list[] = $report_data;
+            }
+            $this->report_users->add_report($report_list);
+        }
     }
     
 }

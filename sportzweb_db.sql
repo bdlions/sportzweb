@@ -643,7 +643,7 @@ INSERT INTO `notification_types` (`id`, `type`, `description`, `value`) VALUES
 (5, 'ADDS_IN_GROUP', 'Adds you to a group', 5),
 (6, 'SHARES_POST_IN_ASSOCIATED_WITH_GROUP', 'Shares a post in a group you are assocaited with', 6),
 (7, 'PHOTO_TAG', 'Tags you in a photo', 7),
-(8, 'COMMENTS_ON_ADDED_PHOTO', 'Comments on a photo you\'ve added', 8);
+(8, 'COMMENTS_ON_ADDED_PHOTO', 'Comments on a photo you have added', 8);
 
 CREATE TABLE IF NOT EXISTS `notification_media_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -703,6 +703,9 @@ CREATE TABLE IF NOT EXISTS `users_notifications` (
 ALTER TABLE `users_notifications`
   ADD CONSTRAINT `fk_users_notifications_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+  
+-- follower module  
+  
 CREATE TABLE IF NOT EXISTS `following_acceptance_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` int(11) unsigned NOT NULL,
@@ -754,6 +757,26 @@ CREATE TABLE IF NOT EXISTS `usres_mutual_relations` (
 ALTER TABLE `usres_mutual_relations`
     ADD CONSTRAINT `fk_users_usres_mutual_relations1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- follower report
+CREATE TABLE IF NOT EXISTS `follower_report_type` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `description` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `follower_report_type` (`id`, `description`) VALUES
+(1, 'Report shared content'),
+(2, 'Report account');
+CREATE TABLE IF NOT EXISTS `follower_report_list` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `report_type_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `follower_report_list`
+    ADD CONSTRAINT `fk_follower_report_list_usres1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_follower_report_list_report_type1` FOREIGN KEY(`report_type_id`) REFERENCES `follower_report_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+	
 CREATE TABLE IF NOT EXISTS `attachment_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(50),
@@ -779,7 +802,7 @@ CREATE TABLE IF NOT EXISTS `status_place_types` (
 INSERT INTO `status_place_types` (`id`, `type`, `description`, `order`) VALUES
 (1, 'BASIC_PROFILE', 'in basic profile', 1),
 (2, 'BUSINESS_PROFILE', 'in business profile', 2),
-(3, 'WALL', 'in user\'s wall', 3);
+(3, 'WALL', 'in user wall', 3);
 
 CREATE TABLE IF NOT EXISTS `users_statuses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

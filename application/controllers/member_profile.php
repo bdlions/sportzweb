@@ -7,6 +7,7 @@ class Member_profile extends Role_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
+        $this->load->library("follower");
         $this->load->library('form_validation');
         $this->load->library("statuses");
         $this->load->helper('url');
@@ -41,23 +42,30 @@ class Member_profile extends Role_Controller{
         $this->show();
     }
     function show( $user_id = 0) {
-        if($user_id == 0)
+        $this->data['is_follower'] = FALSE;
+        $this->data['is_blocked'] = FALSE;
+        $this->data['is_pending'] = FALSE;
+        $this->data['is_myself'] = FALSE;
+        if($user_id == 0 || $user_id == $this->ion_auth->get_user_id()){
+            $this->data['myself'] = $this->basic_profile->get_profile_info();
+            $user_id = $this->ion_auth->get_user_id();
+            $this->data['is_myself'] = TRUE;
+        }
+        else
         {
-            $user_id = $this->session->userdata('user_id');
+            $this->data = array_merge($this->data, $this->follower->get_relation_with_user($user_id));            
         }
         $this->data['newsfeeds'] = $this->statuses->get_statuses(STATUS_LIST_USER_PROFILE, $user_id);
         $this->data['status_list_id'] = STATUS_LIST_USER_PROFILE;
         $this->data['mapping_id'] = $user_id;
         $this->data['user_info'] = $this->ion_auth->get_user_info();
         
-        
+                
         $this->data['status_or_comment_in'] = STATUS_POSTED_IN_BASIC_PROFILE;
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info($user_id);
         $this->data['myself'] = $this->data['basic_profile'];
                 
-        if($user_id == 0 || $user_id == $this->ion_auth->get_user_id()){
-            $this->data['myself'] = $this->basic_profile->get_profile_info();
-        }
+        
         $this->data['user_id'] = $user_id;
         
         $photo_list = $this->profile->get_photo_list($user_id)->result_array();
