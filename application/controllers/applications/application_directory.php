@@ -28,19 +28,19 @@ class Application_directory extends Role_Controller{
             'app_name' => 'FaceGGame',
             'desc' => 'Description description description description description description description description description description.',
             'summ' => '',
-            'img1' => base_url()."resources/images/face.jpg",
+            'img1' => base_url()."resources/images/photo.jpg",
             'img2' => base_url()."resources/images/face.jpg",
             'gal_img1' => base_url()."resources/images/face.jpg",
-            'gal_img2' => base_url()."resources/images/face.jpg",
-            'gal_img3' => base_url()."resources/images/face.jpg",
-            'gal_img4' => base_url()."resources/images/face.jpg",
+            'gal_img2' => base_url()."resources/images/event.jpg",
+            'gal_img3' => base_url()."resources/images/map.jpg",
+            'gal_img4' => base_url()."resources/images/shop.jpg",
             'btn_state' => "Try it",
         );
         $app2 = array(
-            'app_name' => 'abc',
+            'app_name' => 'second app',
             'desc' => 'desc',
             'summ' => '',
-            'img1' => base_url()."resources/images/face.jpg",
+            'img1' => base_url()."resources/images/golf.jpg",
             'img2' => base_url()."resources/images/face.jpg",
             'gal_img1' => base_url()."resources/images/face.jpg",
             'gal_img2' => base_url()."resources/images/face.jpg",
@@ -49,10 +49,10 @@ class Application_directory extends Role_Controller{
             'btn_state' => "Try it",
         );
         $app3 = array(
-            'app_name' => 'abc',
+            'app_name' => 'map',
             'desc' => 'desc',
             'summ' => '',
-            'img1' => base_url()."resources/images/face.jpg",
+            'img1' => base_url()."resources/images/map.jpg",
             'img2' => base_url()."resources/images/face.jpg",
             'gal_img1' => base_url()."resources/images/face.jpg",
             'gal_img2' => base_url()."resources/images/face.jpg",
@@ -73,10 +73,11 @@ class Application_directory extends Role_Controller{
         
         
         
-        $length = sizeof($app_data);
-        
-        $this->data['app_data1'] = array_slice($app_data, 0, $length/2);
-        $this->data['app_data2'] = array_slice($app_data, $length/2, $length);
+//        $length = sizeof($app_data);
+//        
+//        $this->data['app_data1'] = array_slice($app_data, 0, $length/2);
+//        $this->data['app_data2'] = array_slice($app_data, $length/2, $length);
+        $this->data['app_data'] = $app_data;
         $this->template->load(null, "applications/application_directory_view", $this->data);
     }
     
