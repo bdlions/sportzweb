@@ -11,12 +11,12 @@
         geocoder.geocode({'address': town_code}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK)
             {
-                var latitude = results[0].geometry.location.lat();
-                var longitude = results[0].geometry.location.lng();
+                var latitude = <?php echo $service_info['latitude'] ?>;
+                var longitude = <?php echo $service_info['longitude'] ?>;
                 var lat_long = new google.maps.LatLng(latitude, longitude);
                 var map_options = {
                     center: lat_long,
-                    zoom: 12,
+                    zoom: 17,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(map_canvas, map_options);
