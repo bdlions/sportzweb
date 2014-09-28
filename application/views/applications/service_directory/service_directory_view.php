@@ -67,7 +67,7 @@
                             data: null,
                             success: function(data) {
                                 var p = data.results[0].geometry.location
-                                var latlng = new google.maps.LatLng(p.lat, p.lng);
+                                var latlng = new google.maps.LatLng(services[x]['latitude'], services[x]['longitude']);
                                 var markers = new google.maps.Marker({
                                     position: latlng,
                                     map: map
