@@ -27,6 +27,22 @@
                         </div> 
                     </div>
                     <div class="form-group">
+                        <label for="latitude" class="col-md-6 control-label requiredField">
+                            Latitude
+                        </label>
+                        <div class ="col-md-6">
+                            <?php echo form_input($latitude+array('class'=>'form-control')); ?>
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="longitude" class="col-md-6 control-label requiredField">
+                            Longitude
+                        </label>
+                        <div class ="col-md-6">
+                            <?php echo form_input($longitude+array('class'=>'form-control')); ?>
+                        </div> 
+                    </div>
+                    <div class="form-group">
                         <label for="Address" class="col-md-6 control-label requiredField">
                             Address
                         </label>

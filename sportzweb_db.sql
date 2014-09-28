@@ -1239,6 +1239,8 @@ CREATE TABLE IF NOT EXISTS `services` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(300) DEFAULT NULL,
   `title` varchar(300) DEFAULT NULL,
+  `latitude` float DEFAULT 0,
+  `longitude` float DEFAULT 0,
   `address` varchar(300) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `country_id` int(11) unsigned NOT NULL,

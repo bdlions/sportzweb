@@ -346,6 +346,8 @@ class Applications_servicedirectory extends CI_Controller{
         
         $this->form_validation->set_rules('name', 'Name', 'xss_clean|required');
         $this->form_validation->set_rules('title', ' Title', 'xss_clean|required');
+        $this->form_validation->set_rules('latitude', 'Latitude', 'xss_clean|required');
+        $this->form_validation->set_rules('longitude', 'Longitude', 'xss_clean|required');
         $this->form_validation->set_rules('address', 'Address', 'xss_clean|required');
         $this->form_validation->set_rules('city', 'City', 'xss_clean|required');
         $this->form_validation->set_rules('post_code', 'Post Code', 'xss_clean|required');
@@ -373,6 +375,8 @@ class Applications_servicedirectory extends CI_Controller{
                 $service_name = $this->input->post('title');
                 $data = array(
                     'name' => $this->input->post('name'),
+                    'latitude' => $this->input->post('latitude'),
+                    'longitude' => $this->input->post('longitude'),
                     'address' => $this->input->post('address'),
                     'city' => $this->input->post('city'),
                     'country_id' => $this->input->post('country_name'),
@@ -423,7 +427,18 @@ class Applications_servicedirectory extends CI_Controller{
             'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
         );
-        
+        $this->data['latitude'] = array(
+            'name'  => 'latitude',
+            'id'    => 'latitude',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('latitude')
+        );   
+        $this->data['longitude'] = array(
+            'name'  => 'longitude',
+            'id'    => 'longitude',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('longitude')
+        );
         $this->data['address'] = array(
             'name' => 'address',
             'id' => 'address',
@@ -564,6 +579,8 @@ class Applications_servicedirectory extends CI_Controller{
         $this->data['message'] = '';
         $this->form_validation->set_rules('name', 'Name', 'xss_clean|required');
         $this->form_validation->set_rules('title', ' Title', 'xss_clean|required');
+        $this->form_validation->set_rules('latitude', 'Latitude', 'xss_clean|required');
+        $this->form_validation->set_rules('longitude', 'Longitude', 'xss_clean|required');
         $this->form_validation->set_rules('address', 'Address', 'xss_clean|required');
         $this->form_validation->set_rules('city', 'City', 'xss_clean|required');
         $this->form_validation->set_rules('post_code', 'Post Code', 'xss_clean|required');
@@ -604,6 +621,8 @@ class Applications_servicedirectory extends CI_Controller{
                 $data = array(
                     'name' => $this->input->post('name'),
                     'title' => $service_name,
+                    'latitude' => $this->input->post('latitude'),
+                    'longitude' => $this->input->post('longitude'),
                     'address' => $this->input->post('address'),
                     'city' => $this->input->post('city'),
                     'country_id' => $this->input->post('country_name'),
@@ -660,7 +679,18 @@ class Applications_servicedirectory extends CI_Controller{
             'type' => 'text',
             'value' => $service_info['name']
         );
-        
+        $this->data['latitude'] = array(
+            'name'  => 'latitude',
+            'id'    => 'latitude',
+            'type' => 'text',
+            'value' => $service_info['latitude']
+        );   
+        $this->data['longitude'] = array(
+            'name'  => 'longitude',
+            'id'    => 'longitude',
+            'type' => 'text',
+            'value' => $service_info['longitude']
+        );
         $this->data['address'] = array(
             'name' => 'address',
             'id' => 'address',
