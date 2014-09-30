@@ -12,6 +12,7 @@ class Auth extends JsonRPCServer {
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
+        $this->load->library('basic_profile');
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->library('mongo_db') :
@@ -71,6 +72,106 @@ class Auth extends JsonRPCServer {
         $response['status'] = RPC_SUCCESS;
         $response['msg'] = "UPDATE_OK";
         
+        return json_encode($response);
+    }
+    
+    /*
+     * This method will update gender of a user
+     * @param $user_data, user id and gender id
+     * @Author Nazmul on 1st October 2014
+     */
+    public function update_gender($user_data = '') {
+        $response = array();
+        $data = json_decode($user_data);
+        /*$data = new stdClass();
+        $data->user_id = 2;
+        $data->gender_id = 2;*/
+        
+        $gender_id = $data->gender_id;
+        $user_id = $data->user_id;
+        $profile_data = array(
+            'gender_id' => $gender_id
+        );
+        if($this->basic_profile->update_profile_info($profile_data, $user_id))
+        {
+            $response['status'] = RPC_SUCCESS;
+            $response['success_message'] = 'Gender is updated successfully';
+        }
+        else
+        {
+            $response['status'] = RPC_ERROR;
+            $response['error_messages'] = 'Error while storing gender';
+        }
+        return json_encode($response);
+    }
+    
+    /*
+     * This method will update date of birth of a user
+     * @param $user_data, user id and date of birth in yyyy-mm-dd format
+     * @Author Nazmul on 1st October 2014
+     */
+    public function update_dob($user_data = '') {
+        $response = array();
+        $data = json_decode($user_data);
+        /*$data = new stdClass();
+        $data->user_id = 2;
+        $data->dob = '2014-06-30';*/
+        
+        $dob = $data->dob;
+        $user_id = $data->user_id;
+        $profile_data = array(
+            'dob' => $dob
+        );
+        if($this->basic_profile->update_profile_info($profile_data, $user_id))
+        {
+            $response['status'] = RPC_SUCCESS;
+            $response['success_message'] = 'Date of birth is updated successfully';
+        }
+        else
+        {
+            $response['status'] = RPC_ERROR;
+            $response['error_messages'] = 'Error while storing date of birth';
+        }
+        return json_encode($response);
+    }
+    
+    /*
+     * This method will update profile information of a user
+     * @param $user_data, user id, country id, school/university, employer, occupation
+     * @Author Nazmul on 1st October 2014
+     */
+    public function update_profile_information($user_data = '') {
+        $response = array();
+        $data = json_decode($user_data);
+        /*$data = new stdClass();
+        $data->user_id = 2;
+        $data->country_id = 223;
+        $data->clg_or_uni = 'university';
+        $data->employer = 'bdlions';
+        $data->occupation = 'Software Developer';*/
+        
+        $user_id = $data->user_id;
+        $country_id = $data->country_id;
+        $clg_or_uni = $data->clg_or_uni;
+        $employer = $data->employer;
+        $occupation = $data->occupation;
+        
+        $profile_data = array(
+            'country_id' => $country_id,
+            'clg_or_uni' => $clg_or_uni,
+            'employer' => $employer,
+            'occupation' => $occupation
+        );
+        if($this->basic_profile->update_profile_info($profile_data, $user_id))
+        {
+            $response['status'] = RPC_SUCCESS;
+            $response['success_message'] = 'Profile is updated successfully';
+        }
+        else
+        {
+            $response['status'] = RPC_ERROR;
+            $response['error_messages'] = 'Error while storing date of profile';
+        }
         return json_encode($response);
     }
     
