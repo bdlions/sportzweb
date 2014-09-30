@@ -63,6 +63,28 @@ class Auth extends JsonRPCServer {
         return json_encode($response);
     }
     
+    public function updateGender($user_data = '') {
+        $response = array();
+        //decoding json data from string to object
+        //{"genden":"MALE"}
+        $data = json_decode($user_data);
+        $response['status'] = RPC_SUCCESS;
+        $response['msg'] = "UPDATE_OK";
+        
+        return json_encode($response);
+    }
+    
+    public function updateUsersInfo($user_data = '') {
+        $response = array();
+        //decoding json data from string to object
+        //{"genden":"MALE"}
+        $data = json_decode($user_data);
+        $response['status'] = RPC_SUCCESS;
+        $response['msg'] = "UPDATE_OK";
+        
+        return json_encode($response);
+    }
+    
     /*
      * This method will check login based on identity and password
      * @param $identity, user identity
