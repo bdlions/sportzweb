@@ -574,6 +574,18 @@ class Applications_servicedirectory extends CI_Controller{
         $this->image_lib->clear();
     }
 
+    function delete_service()
+    {
+        $service_id = $_POST['service_id'];
+        if($this->admin_service_directory->remove_service($service_id))
+        {
+            echo TRUE;
+        }
+        else
+        {
+            echo FALSE;
+        }
+    }
     function service_edit($service_id = 0)
     {
         $this->data['message'] = '';
