@@ -8,6 +8,7 @@
     
     define("STATUS_TYPE_GENERAL",                                   1);
     define("STATUS_TYPE_PROFILE_PIC_CHANGE",                        2);
+    define("STATUS_TYPE_IMAGE_ATTACHMENT",                          3);
     
     define("STATUS_CATEGORY_USER_NEWSFEED",                         1);
     define("STATUS_CATEGORY_USER_PROFILE",                          2);

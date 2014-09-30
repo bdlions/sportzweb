@@ -27,6 +27,22 @@ class Albums_model extends Ion_auth_model {
                     ->get();
     }
     
+    /*
+     * This method will return album info
+     * @param $album_type_id, album type id
+     * @param $reference_id, reference id
+     * @Author Nazmul on 30th September 2014
+     */
+    public function get_reference_album_info($album_type_id, $reference_id)
+    {
+        $this->db->where('album_type_id', $album_type_id);
+        $this->db->where('reference_id', $reference_id);
+        return $this->db->select($this->tables['albums'].'.id as album_id, '.$this->tables['albums'].".*")
+                    ->from($this->tables['albums'])
+                    ->limit(1)
+                    ->get();
+    }
+    
     public function get_user_album_info($album_type_id, $user_id)
     {
         $this->db->where('album_type_id', $album_type_id);

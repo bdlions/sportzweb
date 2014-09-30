@@ -549,6 +549,12 @@ class Follower {
         }
         return $blocked_follower_list;
     }
+    
+    public function get_users($user_id_list)
+    {
+        $user_info_array = $this->follower_model->get_users($user_id_list)->result();
+        return $user_info_array;
+    }
 
 }
 

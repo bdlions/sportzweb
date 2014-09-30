@@ -416,22 +416,23 @@ class User_album extends Role_Controller {
         $photo_data = array(
             'img' => $temp_src_name
         );
-        $id = $this->albums->add_profile_picture($photo_data);
+        $photo_id = $this->albums->add_profile_picture($photo_data);
         //add status in user profile related to the change of profile picture
         $status_data = array(
             'user_id' => $user_id,
             'mapping_id' => $user_id,
             'status_type_id' => STATUS_TYPE_PROFILE_PIC_CHANGE,
             'status_category_id' => STATUS_CATEGORY_USER_PROFILE,
+            'reference_id' => $photo_id,
             'created_on' => now(),
             'modified_on' => now()
         );
-        $attachment_array = array();
-        $current_attachment = new stdClass();
-        $current_attachment->type = STATUS_ATTACHMENT_IMAGE;
-        $current_attachment->name = $temp_src_name;
-        $attachment_array[] = $current_attachment;
-        $status_data["attachments"] = json_encode($attachment_array);
+        //$attachment_array = array();
+        //$current_attachment = new stdClass();
+        //$current_attachment->type = STATUS_ATTACHMENT_IMAGE;
+        //$current_attachment->name = $temp_src_name;
+        //$attachment_array[] = $current_attachment;
+        //$status_data["attachments"] = json_encode($attachment_array);
         if($this->statuses->post_status($status_data) !== FALSE)
         {
             $result['status'] = 1;

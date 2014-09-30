@@ -62,13 +62,18 @@
                     <div class="list-inline list-unstyled row col-md-12">
                         <?php foreach ($newsfeed['attachments'] as $attachments){?>
                             <li class="col-md-12">
-                                <?php if($newsfeed['status_type_id'] == STATUS_TYPE_PROFILE_PIC_CHANGE){?>
-                                    <img src="<?php echo base_url().ALBUM_IMAGE_PATH.$attachments['name'] ?>" class="img-responsive"/> 
-                                <?php } else {?>
-                                    <img src="<?php echo base_url().STATUS_IMAGE_UPLOAD_PATH.$attachments['name'] ?>" class="img-responsive"/> 
-                                <?php }?>
+                                <img src="<?php echo base_url().STATUS_IMAGE_UPLOAD_PATH.$attachments['name'] ?>" class="img-responsive"/> 
                            </li>
                         <?php }?>
+                    </div>
+                </div>
+                <?php } ?>
+                <?php if($newsfeed['status_type_id'] == STATUS_TYPE_PROFILE_PIC_CHANGE || $newsfeed['status_type_id'] == STATUS_TYPE_IMAGE_ATTACHMENT) {?>
+                <div class="row col-md-12" style="padding-top: 10px; padding-bottom:10px;">               
+                    <div class="list-inline list-unstyled row col-md-12">
+                        <li class="col-md-12">
+                            <img src="<?php echo base_url().ALBUM_IMAGE_PATH.$newsfeed['reference_info']['img'] ?>" class="img-responsive" onclick="mediaDisplay('<?php echo base_url().ALBUM_IMAGE_PATH.$newsfeed['reference_info']['img'] ?>', <?php echo $newsfeed['reference_info']['photo_id']?>)"/> 
+                       </li>
                     </div>
                 </div>
                 <?php } ?>

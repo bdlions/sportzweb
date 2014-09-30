@@ -9,6 +9,7 @@ class Feed extends Role_Controller{
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
         $this->load->helper('url');
+        $this->load->library("albums");
         $this->load->library("basic_profile");
         $this->load->library("statuses");
         $this->load->library("Trending_features");
@@ -57,13 +58,25 @@ class Feed extends Role_Controller{
         $status_data["reference_list"] = json_encode($reference_list);
         if(isset($status_data['uploaded_image']))
         {
-            $attachment_array = array();
+            /*$attachment_array = array();
             $this->utils->copy_image_from_source_to_destination(STATUS_IMAGE_UPLOAD_TEMP_PATH, STATUS_IMAGE_UPLOAD_PATH, $status_data['uploaded_image']);
             $current_attachment = new stdClass();
             $current_attachment->type = STATUS_ATTACHMENT_IMAGE;
             $current_attachment->name = $status_data['uploaded_image'];
             $attachment_array[] = $current_attachment;
-            $status_data["attachments"] = json_encode($attachment_array);
+            $status_data["attachments"] = json_encode($attachment_array);*/
+            
+            if($status_data["status_category_id"] == STATUS_LIST_NEWSFEED || $status_data["status_category_id"] == STATUS_LIST_USER_PROFILE)
+            {
+                $this->utils->copy_image_from_source_to_destination(STATUS_IMAGE_UPLOAD_TEMP_PATH, ALBUM_IMAGE_PATH, $status_data['uploaded_image']);
+                //adding this picture into profile picture album
+                $photo_data = array(
+                    'img' => $status_data['uploaded_image']
+                );
+                $photo_id = $this->albums->add_photo_in_album(ALBUM_TYPE_USER_PHOTOS, $this->session->userdata('user_id'), $photo_data);
+                $status_data["status_type_id"] = STATUS_TYPE_IMAGE_ATTACHMENT;
+                $status_data["reference_id"] = $photo_id;
+            }
             
         }
         $status_id = $this->statuses->post_status($status_data);

@@ -103,7 +103,7 @@ class Statuses {
                 $relations_array = json_decode($relations);   
                 foreach($relations_array as $relation)
                 {
-                    if(!in_array($relation->user_id, $filtered_user_id_list))
+                    if(!in_array($relation->user_id, $filtered_user_id_list) && $relation->is_follower == 1)
                     {
                         $filtered_user_id_list[] = $relation->user_id;
                     }                    
@@ -146,6 +146,14 @@ class Statuses {
                     }
                 }
                 else if($status['shared_type_id'] == STATUS_SHARE_PHOTO)
+                {
+                    if(!in_array($status['reference_id'], $photo_id_list))
+                    {
+                        $photo_id_list[] = $status['reference_id'];
+                    }
+                }
+                //we have photo id for changing profile picture or status with image
+                if(($status['status_type_id'] == STATUS_TYPE_PROFILE_PIC_CHANGE || $status['status_type_id'] == STATUS_TYPE_IMAGE_ATTACHMENT) && $status['reference_id'] != null)
                 {
                     if(!in_array($status['reference_id'], $photo_id_list))
                     {
@@ -351,6 +359,12 @@ class Statuses {
                 {
                     $status['via_user_info'] = $user_id_user_info_map[$status['via_user_id']];
                 }
+                
+                if(($status['status_type_id'] == STATUS_TYPE_PROFILE_PIC_CHANGE || $status['status_type_id'] == STATUS_TYPE_IMAGE_ATTACHMENT) && isset($photo_id_photo_info_map[$status['reference_id']]) )
+                {
+                    $status['reference_info'] = $photo_id_photo_info_map[$status['reference_id']];
+                }
+                
                 $status_list[] = $status;
             }
             

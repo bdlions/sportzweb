@@ -189,8 +189,14 @@ class Followers extends Role_Controller{
     
     public function get_follower_info(){
         $response = array();
-        $follower_id = $_POST['follower_id'];        
-        $response['user_info'] = $this->ion_auth->get_user_info($follower_id);
+        $follower_id = $_POST['follower_id'];  
+        $user_info = array();
+        $user_info_array = $this->follower->get_users(array($follower_id));
+        if(!empty($user_info_array))
+        {
+             $user_info = $user_info_array[0];             
+        } 
+        $response['user_info'] = $user_info;
         echo json_encode($response);
     }
     

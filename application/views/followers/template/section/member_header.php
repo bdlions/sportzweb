@@ -38,6 +38,7 @@
                 follower_id: follower_id
             },
             success: function(data) {
+                $("#div_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
                 $('#span_shared_content').text('Report content shared by '+data.user_info.first_name+' '+data.user_info.last_name);
                 $('#modal_report_content').modal('show');
             }

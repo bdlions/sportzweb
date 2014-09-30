@@ -129,6 +129,49 @@ class Albums {
         return FALSE;
     }
     
+    /*
+     * This method will add a photo in an album, 
+     * If there is no album then at first album will be created and then photo will be stored
+     * @param $album_type_id, album type id
+     * @param $reference_id, reference id i.e. user id/business profile id
+     * @Author Nazmul on 30th September 2014
+     */
+    public function add_photo_in_album($album_type_id, $reference_id, $photo_data)
+    {
+        $current_time = now();
+        $album_id = 0;
+        $album_info_array = $this->albums_model->get_reference_album_info($album_type_id, $reference_id)->result_array();
+        if(!empty($album_info_array))
+        {
+            $album_info = $album_info_array[0];
+            $album_id = $album_info['album_id'];
+        }
+        else
+        {
+            $album_title = '';
+            if($album_type_id == ALBUM_TYPE_USER_PROFILE_PHOTOS)
+            {
+                $album_title = ALBUM_TYPE_USER_PROFILE_PHOTOS_TITLE;
+            }
+            $additional_data = array(
+                'title' => $album_title,
+                'reference_id' => $reference_id,
+                'album_type_id' => $album_type_id,
+                'created_on' => $current_time,
+                'creation_complete' => TRUE
+            );
+            $album_id = $this->albums_model->create_album($additional_data);
+        }
+        if($album_id !== FALSE && $album_id > 0)
+        {
+            $photo_data['album_id'] = $album_id;
+            $photo_data['created_on'] = $current_time;
+            $photo_id = $this->albums_model->add_photo($photo_data);
+            return $photo_id;
+        }
+        return FALSE;
+    }
+    
     public function get_photo_details($photo_id)
     {
         $current_user_id = $this->session->userdata('user_id');
