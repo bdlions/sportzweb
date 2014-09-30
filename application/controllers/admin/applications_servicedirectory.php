@@ -931,6 +931,8 @@ class Applications_servicedirectory extends CI_Controller{
                         'telephone' => strip_tags($result_data['G']),
                         'website' => strip_tags($result_data['H']),
                         'business_profile_id' => $result_data['I'],
+                        'latitude' => $result_data['K'],
+                        'longitude' => $result_data['L'],
                         'created_on' => now()
                     );
 
