@@ -7,6 +7,7 @@ class Media extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->library('Basic_profile');
         $this->load->library('ion_auth');
         $this->load->library('org/utility/Utils');
 
@@ -24,11 +25,20 @@ class Media extends CI_Controller {
     public function upload_profile_picture() {
         $name = $_POST['name'];
         $data = $_POST['data'];
+        $user_id = $_POST['user_id'];
         
         if (isset($_FILES["userfile"])) {
             $file_info = $_FILES["userfile"];
-            $result = $this->utils->upload_image($file_info, SERVICE_MEDIA_PROFILE_PICTURE_PATH);   
-            
+            $result = $this->utils->upload_image($file_info, SERVICE_MEDIA_PROFILE_PICTURE_PATH);
+            $image_name = $result['upload_data']['file_name'];
+            $this->utils->resize_image(SERVICE_MEDIA_PROFILE_PICTURE_PATH.$image_name, PROFILE_PICTURE_PATH_W100_H100.$image_name, PROFILE_PICTURE_H100, PROFILE_PICTURE_W100);
+            $this->utils->resize_image(SERVICE_MEDIA_PROFILE_PICTURE_PATH.$image_name, PROFILE_PICTURE_PATH_W50_H50.$image_name, PROFILE_PICTURE_H50, PROFILE_PICTURE_W50);
+            $this->utils->resize_image(SERVICE_MEDIA_PROFILE_PICTURE_PATH.$image_name, PROFILE_PICTURE_PATH_W32_H32.$image_name, PROFILE_PICTURE_H32, PROFILE_PICTURE_W32);
+            //update database related to profile picture
+            $data = array(
+                'photo' => $image_name
+            );
+            $this->basic_profile->update_profile_info($data, $user_id);
             echo json_encode($result);
         }         
          
