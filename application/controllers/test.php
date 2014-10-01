@@ -290,5 +290,9 @@ class Test extends CI_Controller {
         $this->data['app_data'] = $app_data;
         $this->template->load(null, "test", $this->data);
     }
+    function run_test_page_in_view()
+    {
+        $this->template->load(null, "test", $this->data);
+    }
     
 }

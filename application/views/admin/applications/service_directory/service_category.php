@@ -41,6 +41,7 @@
                                 <th style="text-align: center;">Name</th>
                                 <?php if($allow_edit){ ?>
                                 <th style="text-align: center;">Edit</th>
+                                <th style="text-align: center;">Delete</th>
                                 <?php } ?>
                             </tr>
                         </thead>
@@ -54,6 +55,9 @@
                                     <a href="<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category['id'];?>">
                                         Edit
                                     </a>
+                                </td>
+                                <td>
+                                    <a role="button" tabindex="0" onclick="confirmation_delete(<?php echo $service_category['id'];?>)" >Delete</a>
                                 </td>
                                 <?php } ?>
                             </tr>
@@ -71,3 +75,46 @@
 <!-- for add and edit service category with modal -->
 <?php //$this->load->view("admin/applications/service_directory/modal_create_service_category"); ?>
 <?php //$this->load->view("admin/applications/service_directory/modal_edit_service_category"); ?>
+
+
+<div class="modal fade" id="confirmModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Confirm Delete...</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure you want to delete this service category?</h3>
+            </div>
+            <div class="modal-footer">
+                <button onclick="delete_service()" type="button" class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <input id="service_id" name="service_id" type="hidden" value="">
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    function confirmation_delete(service_id)
+    {
+        $("#service_id").val(service_id);
+        $("#confirmModal").modal("show");
+    }
+    function delete_service()
+    {
+        var service_id = $("#service_id").val();
+        $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url(); ?>' + "admin/applications_servicedirectory/delete_service_catagory",
+                dataType: 'json',
+                data: {
+                    service_id: service_id
+                },
+                success: function(data) {
+                    //alert(service_id);
+                    location.reload();
+                }
+            });
+    }
+</script>

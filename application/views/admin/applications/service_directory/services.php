@@ -76,8 +76,6 @@
 <script>
     function confirmation_delete(service_id)
     {
-        var link = document.getElementById("idstore");
-//        link.setAttribute("value", id);
         $("#service_id").val(service_id);
         $("#confirmModal").modal("show");
     }
