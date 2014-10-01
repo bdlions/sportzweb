@@ -4,4 +4,4 @@
     
     
     
-    define("SERVICE_MEDIA_PROFILE_PICTURE_PATH",            "resource/uploads/profile_picture/");
+    define("SERVICE_MEDIA_PROFILE_PICTURE_PATH",            "resources/uploads/profile_picture/");

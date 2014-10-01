@@ -25,19 +25,11 @@ class Media extends CI_Controller {
         $name = $_POST['name'];
         $data = $_POST['data'];
         
-        if (isset($_FILES["image"])) {
-            $file_info = $_FILES["image"];
+        if (isset($_FILES["userfile"])) {
+            $file_info = $_FILES["userfile"];
             $result = $this->utils->upload_image($file_info, SERVICE_MEDIA_PROFILE_PICTURE_PATH);   
-            if($result['status'] == 1)
-            {
-                echo json_encode(
-                array(
-                            'result' => 'success',
-                            'msg' => "file added successfully",
-                            'status' => 1
-                        )
-                );
-            }
+            
+            echo json_encode($result);
         }         
          
 
