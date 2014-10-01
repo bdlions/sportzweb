@@ -1,7 +1,7 @@
 <?php if($newsfeed['shared_type_id'] == STATUS_SHARE_OTHER_STATUS && isset($newsfeed['reference_info']) ){ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" ><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></a>
     <span class="shared-text">shared </span>
-    <?php if($user_id != $newsfeed['reference_info']['user_id']){ ?>
+    <?php if($newsfeed['user_id'] != $newsfeed['reference_info']['user_id']){ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['reference_info']['user_id']}"?>' class="profile-name" ><?php echo $newsfeed['reference_info']['first_name'] . " ". $newsfeed['reference_info']['last_name'] ?>'s </a>
     <?php }else{ echo 'a'; } ?>
     <a href="<?php echo base_url().'member_profile/view_shared_status/'.$newsfeed['reference_info']['status_id'];?>">
@@ -38,7 +38,7 @@
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_PHOTO && isset($newsfeed['reference_info']) ){ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" ><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></a>
     <span class="shared-text">shared </span>
-    <?php if($user_id != $newsfeed['reference_info']['user_id']){ ?>
+    <?php if($newsfeed['user_id'] != $newsfeed['reference_info']['user_id']){ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['reference_info']['user_id']}"?>' class="profile-name" ><?php echo $newsfeed['reference_info']['first_name'] . " ". $newsfeed['reference_info']['last_name'] ?>'s</a>
     <?php }else{ echo 'a'; } ?>
     <span class="shared-text"> photo</span>
