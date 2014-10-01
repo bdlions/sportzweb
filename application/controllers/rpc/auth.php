@@ -97,16 +97,33 @@ class Auth extends JsonRPCServer {
         $profile_data = array(
             'gender_id' => $gender_id
         );
-        if($this->basic_profile->update_profile_info($profile_data, $user_id))
+        if($this->basic_profile_model->get_profile_id($user_id) > 0)
         {
-            $response['status'] = RPC_SUCCESS;
-            $response['success_message'] = 'Gender is updated successfully';
+            if($this->basic_profile_model->update_profile_info($profile_data, $user_id))
+            {
+                $response['status'] = RPC_SUCCESS;
+                $response['success_message'] = 'Gender is updated successfully';
+            }
+            else
+            {
+                $response['status'] = RPC_ERROR;
+                $response['error_messages'] = 'Error while storing gender';
+            }
         }
         else
         {
-            $response['status'] = RPC_ERROR;
-            $response['error_messages'] = 'Error while storing gender';
-        }
+            $profile_data['user_id'] = $user_id;
+            if($this->basic_profile_model->create_profile($profile_data))
+            {
+                $response['status'] = RPC_SUCCESS;
+                $response['success_message'] = 'Gender is updated successfully';
+            }
+            else
+            {
+                $response['status'] = RPC_ERROR;
+                $response['error_messages'] = 'Error while storing gender';
+            }            
+        }        
         return json_encode($response);
     }
     
@@ -120,22 +137,39 @@ class Auth extends JsonRPCServer {
         $data = json_decode($user_data);
         /*$data = new stdClass();
         $data->user_id = 2;
-        $data->dob = '2014-06-30';*/
+        $data->dob = '2014-07-30';*/
         
         $dob = $data->dob;
         $user_id = $data->user_id;
         $profile_data = array(
             'dob' => $dob
         );
-        if($this->basic_profile->update_profile_info($profile_data, $user_id))
+        if($this->basic_profile_model->get_profile_id($user_id) > 0)
         {
-            $response['status'] = RPC_SUCCESS;
-            $response['success_message'] = 'Date of birth is updated successfully';
+            if($this->basic_profile_model->update_profile_info($profile_data, $user_id))
+            {
+                $response['status'] = RPC_SUCCESS;
+                $response['success_message'] = 'Date of birth is updated successfully';
+            }
+            else
+            {
+                $response['status'] = RPC_ERROR;
+                $response['error_messages'] = 'Error while storing date of birth';
+            }
         }
         else
         {
-            $response['status'] = RPC_ERROR;
-            $response['error_messages'] = 'Error while storing date of birth';
+            $profile_data['user_id'] = $user_id;
+            if($this->basic_profile_model->create_profile($profile_data))
+            {
+                $response['status'] = RPC_SUCCESS;
+                $response['success_message'] = 'Date of birth is updated successfully';
+            }
+            else
+            {
+                $response['status'] = RPC_ERROR;
+                $response['error_messages'] = 'Error while storing date of birth';
+            }            
         }
         return json_encode($response);
     }
@@ -151,9 +185,9 @@ class Auth extends JsonRPCServer {
         /*$data = new stdClass();
         $data->user_id = 2;
         $data->country_id = 223;
-        $data->clg_or_uni = 'university';
-        $data->employer = 'bdlions';
-        $data->occupation = 'Software Developer';*/
+        $data->clg_or_uni = 'university2';
+        $data->employer = 'bdlions2';
+        $data->occupation = 'Software Developer2';*/
         
         $user_id = $data->user_id;
         $country_id = $data->country_id;
@@ -167,15 +201,32 @@ class Auth extends JsonRPCServer {
             'employer' => $employer,
             'occupation' => $occupation
         );
-        if($this->basic_profile->update_profile_info($profile_data, $user_id))
+        if($this->basic_profile_model->get_profile_id($user_id) > 0)
         {
-            $response['status'] = RPC_SUCCESS;
-            $response['success_message'] = 'Profile is updated successfully';
+            if($this->basic_profile_model->update_profile_info($profile_data, $user_id))
+            {
+                $response['status'] = RPC_SUCCESS;
+                $response['success_message'] = 'Profile is updated successfully';
+            }
+            else
+            {
+                $response['status'] = RPC_ERROR;
+                $response['error_messages'] = 'Error while storing profile';
+            }
         }
         else
         {
-            $response['status'] = RPC_ERROR;
-            $response['error_messages'] = 'Error while storing date of profile';
+            $profile_data['user_id'] = $user_id;
+            if($this->basic_profile_model->create_profile($profile_data))
+            {
+                $response['status'] = RPC_SUCCESS;
+                $response['success_message'] = 'Profile is updated successfully';
+            }
+            else
+            {
+                $response['status'] = RPC_ERROR;
+                $response['error_messages'] = 'Error while storing profile';
+            }            
         }
         return json_encode($response);
     }
