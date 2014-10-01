@@ -107,9 +107,15 @@ $(function(){
     <div class="col-md-8">
         <div class="cover-photo fileinput-button">
             <div id="cover_photo">
-                <img src="<?php echo base_url()."resources/uploads/business/".$profile->cover_photo ?>" alt="Click to add cover photo" style="max-height:310px; width:100%"/>
+                <?php if($user_id == $profile->user_id){?>
+                    <img src="<?php echo base_url().BUSINESS_PROFILE_COVER_PHOTO_PATH.$profile->cover_photo ?>" alt="Click to add cover photo" style="max-height:310px; width:100%"/>
+                <?php }else{ ?>
+                    <img src="<?php echo base_url().BUSINESS_PROFILE_COVER_PHOTO_PATH.$profile->cover_photo ?>" alt="" style="max-height:310px; width:100%"/>
+                <?php } ?>
             </div>
-             <input id="fileuploadCoverPhoto" type="file" name="userfile">
+            <?php if($user_id == $profile->user_id){?>
+            <input id="fileuploadCoverPhoto" type="file" name="userfile">
+            <?php } ?>
         </div>
     </div>
     <div class="col-md-4">
@@ -181,9 +187,12 @@ $(function(){
                     <div class="col-md-6">
                         <div class="picture-box fileinput-button">
                             <div id="logo">
-                                <img src="<?php echo base_url() . "resources/uploads/business/" . $profile->logo ?>" alt="Logo" class="img-responsive"/>
+                                <img src="<?php echo base_url() . BUSINESS_PROFILE_LOGO_PATH . $profile->logo ?>" alt="Logo" class="img-responsive"/>
                             </div>
+                            <?php if($user_id == $profile->user_id){?>
                             <input id="fileuploadLogo" type="file" name="userfile">
+                            <?php } ?>
+                            
                         </div>
                         <div class="name">Logo</div>
                     </div>

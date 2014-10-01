@@ -9,6 +9,7 @@ class Business_profile extends Role_Controller {
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
         $this->load->library("org/profile/business/business_profile_library");
+        $this->load->library('org/utility/Utils');
         $this->load->library("profile");
         $this->load->library("statuses");
         $this->load->library("basic_profile");
@@ -212,7 +213,31 @@ class Business_profile extends Role_Controller {
         echo $this->business_profile_library->update_profile($this->input->post());
     }
     function upload_logo(){
-        $config['image_library'] = 'gd2';
+        $result = array();
+        if (isset($_FILES["userfile"])) {
+            $file_info = $_FILES["userfile"];
+            $result = $this->utils->upload_image($file_info, BUSINESS_PROFILE_LOGO_PATH);   
+            if($result['status'] == 1)
+            {
+                $profile_data = array(
+                    'user_id' => $this->ion_auth->get_user_id(),
+                    'logo' => $result['upload_data']['file_name']
+                );
+                $profile_id = $this->business_profile_library->get_profile_id();
+                if ($profile_id > 0) {
+                    //update profile
+                    $this->business_profile_library->update_profile($profile_data);
+                }
+                else {
+                    //insert profile for the first time
+                    $this->business_profile_library->create_profile($profile_data);
+                }
+            }
+            echo json_encode($result);
+        } 
+        
+        
+        /*$config['image_library'] = 'gd2';
         $config['upload_path'] = './resources/uploads/business/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '10240';
@@ -245,11 +270,36 @@ class Business_profile extends Role_Controller {
                 $this->business_profile_library->create_profile($profile_data);
             }
             echo json_encode($data);
-        }
+        }*/
     }
     
      function upload_cover_photo(){
-        $config['image_library'] = 'gd2';
+        $result = array();
+        if (isset($_FILES["userfile"])) {
+            $file_info = $_FILES["userfile"];
+            $result = $this->utils->upload_image($file_info, BUSINESS_PROFILE_COVER_PHOTO_PATH);   
+            if($result['status'] == 1)
+            {
+                //$path = BUSINESS_PROFILE_COVER_PHOTO_PATH.$result['upload_data']['file_name'];
+                //$resize_result = $this->utils->resize_image($path, $path, BUSINESS_PROFILE_COVER_PHOTO_MAX_HEIGHT, BUSINESS_PROFILE_COVER_PHOTO_MAX_WIDTH);
+                $profile_data = array(
+                    'user_id' => $this->ion_auth->get_user_id(),
+                    'cover_photo' => $result['upload_data']['file_name']
+                );
+                $profile_id = $this->business_profile_library->get_profile_id();
+                if ($profile_id > 0) {
+                    //update profile
+                    $this->business_profile_library->update_profile($profile_data);
+                }
+                else {
+                    //insert profile for the first time
+                    $this->business_profile_library->create_profile($profile_data);
+                }
+            }
+            echo json_encode($result);
+        }         
+         
+        /*$config['image_library'] = 'gd2';
         $config['upload_path'] = './resources/uploads/business/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '10240';
@@ -282,13 +332,13 @@ class Business_profile extends Role_Controller {
                 $this->business_profile_library->create_profile($profile_data);
             }
             echo json_encode($data);
-        }
+        }*/
     }
     
     public function show($business_profile_id = 0){
+        $user_id = $this->session->userdata('user_id');
         if($business_profile_id == 0)
-        {
-            $user_id = $this->session->userdata('user_id');
+        {            
             $this->data['profile'] = $this->business_profile_library->get_profile_info($user_id);
             $business_profile_id = $this->data['profile']->business_profile_id;
         }

@@ -19,6 +19,7 @@ include './constants/footer.php';
 include './constants/trending_feature.php';
 include './constants/follower.php';
 include './constants/rpc_mobile_app.php';
+include './constants/business_profile.php';
 //define("STATUS_POST_SUCCESS",                                   1);
 //define("STATUS_POST_EMPTY_ERROR",                               2);
 //define("STATUS_POST_REFRESH",                                   3);

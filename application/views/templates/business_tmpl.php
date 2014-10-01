@@ -66,7 +66,7 @@
                 <?php echo $contents; ?>
             </div>
         </div>
-        <?php $this->load->view("templates/sections/footer");?>
+        <?php //$this->load->view("templates/sections/footer");?>
         <?php $this->load->view("member/messages/chat");?>
     </body>
 </html>
