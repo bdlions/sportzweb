@@ -54,6 +54,11 @@ class Auth extends JsonRPCServer {
             $response['status'] = RPC_SUCCESS;
             //activating newly created user
             $this->ion_auth_model->activate($user_id);
+            $user_info_array = $this->ion_auth_model->get_user_info($user_id)->result();
+            if(!empty($user_info_array))
+            {
+                $response['user_info'] = $user_info_array[0];     
+            }
         } 
         else 
         {
