@@ -179,7 +179,7 @@
                                 </a>
                             </div>
                             <div class="row col-md-10">
-                                <input id="text_input_comment_<?php echo $newsfeed['status_id']?>" type="text" onkeyup="store_feedback(event, this, <?php echo $newsfeed['status_id']?>)" class="form-control" placeholder="Write a comment..."  name ="feedback" style="background-color: #EFE4B0"/>
+                                <input id="text_input_comment_<?php echo $newsfeed['status_id']?>" type="text" onkeyup="store_status_feedback(event, this, <?php echo $newsfeed['status_id']?>)" class="form-control" placeholder="Write a comment..."  name ="feedback" style="background-color: #EFE4B0"/>
                             </div>
                         </div>
                     </div>

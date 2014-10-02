@@ -96,7 +96,7 @@
             padding: 20
         });          
     });
-    function store_feedback(evt, element, status_id)
+    function store_status_feedback(evt, element, status_id)
     {
         if(evt.keyCode == 13)
         {
