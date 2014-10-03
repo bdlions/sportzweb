@@ -470,6 +470,8 @@ CREATE TABLE IF NOT EXISTS `basic_profile` (
   PRIMARY KEY (`id`),
   UNIQUE KEY(`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+INSERT INTO `basic_profile` (`user_id`, `gender_id`, `country_id`) VALUES
+(1, 1, 223);
 
 --
 -- Constraints for table `basic_profile`

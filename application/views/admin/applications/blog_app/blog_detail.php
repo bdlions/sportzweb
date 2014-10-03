@@ -8,7 +8,7 @@
             <span class="blog_post_body_text">
                 By 
                 <?php if(isset($blog['user_id'])): ?>
-                    <a href="<?php echo base_url(); ?>member_profile/show/<?php echo $blog['user_id']; ?>">
+                    <a href="<?php echo base_url(); ?>admin/users_usermanage/display_user_info/<?php echo $blog['user_id']; ?>">
                         <?php echo isset($blog['first_name']) ? $blog['first_name'].' '.$blog['last_name'] : '';?>
                     </a>
                 <?php endif; ?>

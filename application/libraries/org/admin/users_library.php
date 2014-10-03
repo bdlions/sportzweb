@@ -166,7 +166,7 @@ class Users_library {
                 foreach($relations_array as $relations_info)
                 {
                     $follower_info = $user_id_user_info_map[$relations_info->user_id];
-                    $follower_info['following_time'] = unix_to_human($relations_info->time);
+                    $follower_info['following_time'] = unix_to_human($relations_info->created_on);
                     $follower_list[] = $follower_info;
                 }
             }
@@ -272,7 +272,7 @@ class Users_library {
                 foreach($user_info_array as $user)
                 {
                     if($user['gender_id']==1) $male_friend++;
-                    else $female ++;
+                    else $female_friend ++;
                 }
             }
         }
