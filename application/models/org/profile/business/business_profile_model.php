@@ -240,4 +240,47 @@ class Business_profile_model extends Ion_auth_model {
         $this->db->where('business_profile_id', $business_profile_id);
         $this->db->update($this->tables['business_profile_connection'], $business_profile_connection_data);
     }
+    
+    //RPC MODULE
+    public function get_country_list()
+    {
+        return $this->db->select('*')
+            ->from($this->tables['countries'])
+            ->get();
+    }
+    
+    public function get_business_profile_type_list()
+    {
+        $query = $this->db->select('*')
+            ->from($this->tables['business_profile_type'])
+            ->get();
+        
+        $result = $query->result_array();
+        $business_profile_types = array();
+        
+        foreach ($result as $value) {
+            $business_profile_types[] = array( 'id'=>$value['id'], 
+                'description' => $value['description'], 
+                'sub_type_list' => json_decode($value['sub_type_list']));
+        }
+        return $business_profile_types;
+    }
+    
+    /*
+     * This method will create a new business profile
+     * @Author Nazmul on 11th October 2014
+     */
+    public function add_business_profile($data)
+    {
+        if (!isset($data['user_id']) || $data['user_id'] <= 0) {
+            $data['user_id'] = $this->ion_auth->get_user_id();
+        }
+        if(array_key_exists('business_name', $data))
+        {
+            $data['business_name'] = ucwords($data['business_name']);
+        }
+        $this->db->insert($this->tables['business_profile'], $data);
+        $id = $this->db->insert_id();
+        return (isset($id)) ? $id : FALSE;
+    }
 }
