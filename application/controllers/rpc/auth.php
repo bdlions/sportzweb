@@ -13,6 +13,7 @@ class Auth extends JsonRPCServer {
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->library('basic_profile');
+        $this->load->library('org/profile/business/business_profile_library');
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->library('mongo_db') :
@@ -278,6 +279,13 @@ class Auth extends JsonRPCServer {
             $response['msg'] = "EMAIL_AND_PASSWORD_DOES_NOT_MATCH";
         }
         return json_encode($response);
+    }
+    
+    function country_list() {
+        $output = array();
+        $output['country_list'] = $this->business_profile_library->get_country_list()->result_array();
+        //echo json_encode($output);
+        return json_encode($output);
     }
 }
 

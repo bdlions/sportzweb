@@ -41,9 +41,10 @@ class Business_profile extends JsonRPCServer {
      */
     function create_business_profile($business_profile_data = '')
     {
-        //$data = json_decode($business_profile_data);
-        $data = new stdClass();
-        $data->user_id = 2;
+        $response = array();
+        $data = json_decode($business_profile_data);
+        //$data = new stdClass();
+        /*$data->user_id = 2;
         $data->business_profile_type = 1;
         $data->business_profile_sub_type = 1;
         $data->business_name = 'test profile';
@@ -56,7 +57,7 @@ class Business_profile extends JsonRPCServer {
         $data->website_address = 'www.abc.com';
         $data->business_hour = 'www.abc.com';
         $data->registered_company_number = 1;
-        $data->business_description = 'description';
+        $data->business_description = 'description';*/
         $additional_data = array(
             'user_id' => $data->user_id,
             'business_profile_type' => $data->business_profile_type,
