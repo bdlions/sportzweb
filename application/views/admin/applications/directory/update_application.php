@@ -38,7 +38,7 @@ window.onload = function()
     <div class="panel-heading">Update Application</div>
     <div class="panel-body">
         <div class="row form-horizontal form-background top-bottom-padding">  
-            <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/applications_directory/update_application/<?php echo $application_info['id']; ?>" onsubmit="return false;">
+            <form id="form_update_application_directory" method="post" action="<?php echo base_url();?>admin/applications_directory/update_application/<?php echo $application_info['id']; ?>" onsubmit="return false;">
             <div class="row">
                 <div class ="col-md-10 margin-top-bottom">
                     <div class ="row">
@@ -74,11 +74,24 @@ window.onload = function()
                         </div> 
                         <input type="hidden" name="summary_editortext" id="summary_editortext">
                     </div>
-
                     <div class="form-group">
-                        <label for="website" class="col-md-3 control-label requiredField">
-                            Set application picture 1
-                        </label>
+                        <div class ="col-md-12">
+                            <input id="button_update_application_directory" type="submit" value="Update" class="btn button-custom pull-right"/>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="row form-horizontal form-background top-bottom-padding">  
+            <form id="formsubmitimage" method="post" action="<?php echo base_url();?>admin/applications_directory/update_application_directory_image/<?php echo $application_info['id']; ?>" onsubmit="return false;">
+            <div class="row">
+                <div class ="col-md-10 margin-top-bottom">
+                    <div class="form-group">
+                        <div class ="col-md-2 col-md-offset-1">
+                            <?php echo form_dropdown('image_type_list', $image_type_list, APPLICATION_DIRECTORY_IMAGE1_TYPE_ID, 'class="form-control" id="image_type_list"'); ?>
+                        </div>
                         <div class ="col-md-6">
                             <div class="col-md-6">
                                 <div class="row fileinput-button">
@@ -94,9 +107,7 @@ window.onload = function()
                             <div class=" col-md-4">
                                 <div class="profile-picture-box" >
                                     <div id="files" class="files">
-                                        <?php if (!empty($application_info['img1'])): ?>
-                                            <img style="width: 120px; height: 120px;" src="<?php echo base_url() . APPLICATION_DIRECTORY_IMAGE_PATH . $application_info['img1']; ?>" class="img-responsive"/>
-                                        <?php endif; ?>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +129,7 @@ window.onload = function()
 
 <script>
 $(function () {
-    $("#btnSubmit").on("click", function(){
+    $("#button_update_application_directory").on("click", function(){
         $("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());
         if (CKEDITOR.instances.summary.getData() === "")
         {
@@ -130,7 +141,7 @@ $(function () {
             dataType: 'json',
             type: "POST",
             url: '<?php echo base_url();?>admin/applications_directory/update_application/<?php echo $application_info["id"]; ?>',
-            data: $("#formsubmit").serializeArray(),
+            data: $("#form_update_application_directory").serializeArray(),
             success: function(data) {
                 alert(data.message);
                 window.location = '<?php echo base_url();?>admin/applications_directory/update_application/<?php echo $application_info["id"]; ?>';
@@ -139,30 +150,23 @@ $(function () {
     });
     
     // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/applications_directory/create_application",
-                    uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
-                    on('click', function() {
-                                    $("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());
-                                    if (CKEDITOR.instances.summary.getData() === "")
-                                    {
-                                        alert("Application summary is required.");
-                                        return;
-                                    }
-                                    
-                                    var $this = $(this),data = $this.data();
-                                    $this.off('click').text('Abort').on('click', function() {
-                                        $this.remove();
-                                        data.abort();
-                                    });
-                                    data.submit().always(function() {
-                                        $this.remove();
-                                    });
-                                });
+    var url = '<?php echo base_url();?>admin/applications_directory/update_application_directory_image/<?php echo $application_info["id"]; ?>',
+    uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
+        on('click', function() {
+            var $this = $(this),data = $this.data();
+            $this.off('click').text('Abort').on('click', function() {
+                $this.remove();
+                data.abort();
+            });
+            data.submit().always(function() {
+                $this.remove();
+            });
+        });
         
         $('#fileupload').fileupload({
             url: url,
             dataType: 'json',
-            formData: $("form").serializeArray(),
+            formData: $("#formsubmitimage").serializeArray(),
             autoUpload: false,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
             maxFileSize: 5000000, // 5 MB
@@ -204,7 +208,7 @@ $(function () {
             alert(data.result.message);
             window.location = '<?php echo base_url();?>admin/applications_directory/update_application/<?php echo $application_info['id']; ?>';
         }).on('fileuploadsubmit', function(e, data){
-            data.formData = $('form').serializeArray();
+            data.formData = $("#formsubmitimage").serializeArray();
         }).on('fileuploadfail', function(e, data) {
             alert(data.message);
             $.each(data.files, function(index, file) {

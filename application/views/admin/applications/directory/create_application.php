@@ -1,5 +1,4 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>resources/ckeditor/ckeditor.js"></script>
-
 <script type="text/javascript">
 window.onload = function()
 {   
@@ -74,35 +73,11 @@ window.onload = function()
                         </div> 
                         <input type="hidden" name="summary_editortext" id="summary_editortext">
                     </div>
-
                     <div class="form-group">
-                        <label for="website" class="col-md-3 control-label requiredField">
-                            Set application picture 1
-                        </label>
-                        <div class ="col-md-6">
-                            <div class="col-md-6">
-                                <div class="row fileinput-button">
-                                    <i class="glyphicon glyphicon-plus"></i>
-                                    <span>Upload a photo</span>
-                                    <input id="fileupload" type="file" name="userfile">
-                                </div>
-                                <div id="progress" class="row progress">
-                                    <div class="progress-bar progress-bar-success"></div>
-                                </div>
-                            </div>
-
-                            <div class=" col-md-4">
-                                <div class="profile-picture-box" >
-                                    <div id="files" class="files">
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="col-md-offset-8 col-md-4 disable_padding_right" id="upload">
-                                <input id="btnSubmit" type="submit" value="Save" class="btn button-custom pull-right"/>
-                            </div>
+                        <div class ="col-md-12">
+                            <input id="button_create_application_directory" type="submit" value="Save" class="btn button-custom pull-right"/>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </form>
@@ -115,14 +90,13 @@ window.onload = function()
 
 <script>
 $(function () {
-    $("#btnSubmit").on("click", function(){
+    $("#button_create_application_directory").on("click", function(){
         $("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());
         if (CKEDITOR.instances.summary.getData() === "")
         {
             alert("Application summary is required .");
             return;
-        }
-        
+        }        
         $.ajax({
             dataType: 'json',
             type: "POST",
@@ -130,86 +104,9 @@ $(function () {
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/applications_directory/create_application';
+                window.location = '<?php echo base_url();?>admin/applications_directory';
             }
         });
     });
-    
-    // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/applications_directory/create_application",
-                    uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
-                    on('click', function() {
-                                    $("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());
-                                    if (CKEDITOR.instances.summary.getData() === "")
-                                    {
-                                        alert("Application summary is required.");
-                                        return;
-                                    }
-                                    
-                                    var $this = $(this),data = $this.data();
-                                    $this.off('click').text('Abort').on('click', function() {
-                                        $this.remove();
-                                        data.abort();
-                                    });
-                                    data.submit().always(function() {
-                                        $this.remove();
-                                    });
-                                });
-        
-        $('#fileupload').fileupload({
-            url: url,
-            dataType: 'json',
-            formData: $("form").serializeArray(),
-            autoUpload: false,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            maxFileSize: 5000000, // 5 MB
-            // Enable image resizing, except for Android and Opera,
-            // which actually support image resizing, but fail to
-            // send Blob objects via XHR requests:
-            disableImageResize: /Android(?!.*Chrome)|Opera/
-                    .test(window.navigator.userAgent),
-            previewMaxWidth: 120,
-            maxNumberOfFiles: 1,
-            previewMaxHeight: 120,
-            previewCrop: true
-        }).on('fileuploadadd', function(e, data) {
-            $("#files").empty();
-            data.context = $('<div/>').appendTo('#files');
-            $("div#upload").empty();
-            $("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
-            $.each(data.files, function(index, file) {
-                var node = $('<p/>');
-                node.appendTo(data.context);
-            });
-        }).on('fileuploadprocessalways', function(e, data) {
-            var index = data.index,
-                    file = data.files[index],
-                    node = $(data.context.children()[index]);
-            if (file.preview) {
-                node.prepend('<br>').prepend(file.preview);
-            }
-            if (file.error) {
-                $("div#header").append('<br>').append($('<span class="text-danger"/>').text(file.error));
-            }
-            if (index + 1 === data.files.length) {
-                data.context.find('button').text('Upload').prop('disabled', !!data.files.error);
-            }
-        }).on('fileuploadprogressall', function(e, data) {
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .progress-bar').css('width',progress + '%');
-        }).on('fileuploaddone', function(e, data) {
-            alert(data.result.message);
-            window.location = '<?php echo base_url();?>admin/applications_directory/create_application';
-        }).on('fileuploadsubmit', function(e, data){
-            data.formData = $('form').serializeArray();
-        }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
-            $.each(data.files, function(index, file) {
-                var error = $('<span class="text-danger"/>').text('File upload failed.');
-                $(data.context.children()[index]).append('<br>').append(error);
-            });
-        }).prop('disabled', !$.support.fileInput)
-                .parent().addClass($.support.fileInput ? undefined : 'disabled');
-
-    });
+});
 </script>

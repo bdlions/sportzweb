@@ -20,7 +20,19 @@
     define("APPLICATION_NEWS_PATH",                                           "applications/news_app/news_item/");
     define("APPLICATION_BLOG_PATH",                                           "applications/blog_app/view_blog_post");
     
-    define("APPLICATION_DIRECTORY_IMAGE_PATH",                               "resources/images/applications/application_directory/")
+    define("APPLICATION_DIRECTORY_IMAGE_PATH",                               "resources/images/applications/application_directory/");
+    define("APPLICATION_DIRECTORY_GALLERY_SMALL_IMAGE_PATH",                 "resources/images/applications/application_directory/gallery/small/");
+    define("APPLICATION_DIRECTORY_GALLERY_LARGE_IMAGE_PATH",                 "resources/images/applications/application_directory/gallery/large/");
+    define("APPLICATION_DIRECTORY_IMAGE_GALLERY_TOTAL_IMAGES",               4);
+    define("APPLICATION_DIRECTORY_IMAGE1_TYPE_ID",                           1);
+    define("APPLICATION_DIRECTORY_IMAGE2_TYPE_ID",                           2);
+    define("APPLICATION_DIRECTORY_IMAGE_GALLERY_TYPE_ID",                    3);
+    define("APPLICATION_DIRECTORY_IMAGE1_WIDTH",                             75);
+    define("APPLICATION_DIRECTORY_IMAGE1_HEIGHT",                            75);
+    define("APPLICATION_DIRECTORY_IMAGE2_WIDTH",                             690);
+    define("APPLICATION_DIRECTORY_IMAGE2_HEIGHT",                            275);
+    define("APPLICATION_DIRECTORY_GALLERY_IMAGE_SMALL_WIDTH",                150);
+    define("APPLICATION_DIRECTORY_GALLERY_IMAGE_SMALL_HEIGHT",               150);
+    define("APPLICATION_DIRECTORY_GALLERY_IMAGE_LARGE_WIDTH",                539);
+    define("APPLICATION_DIRECTORY_GALLERY_IMAGE_LARGE_HEIGHT",               347);
     
-    
-?>

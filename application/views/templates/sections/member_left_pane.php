@@ -35,39 +35,75 @@
         <div class="panel-heading left-panel-heading">Application</div>
         <div class="panel-body left-panel-body">
             <ul class="list-group left-panel-list">
+                <?php 
+                if(in_array(APPLICATION_XSTREAM_BANTER_ID, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/xb_icon.png"/><a href="<?php echo base_url().'applications/xstream_banter' ?>">Xstream Banter</a>
                 </li>
+                <?php 
+                }if(in_array(APPLICATION_HEALTYY_RECIPES_ID, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/saddress_book.png"/><a href="<?php echo base_url().'applications/healthy_recipes' ?>">Healthy Recipes</a>
                 </li>
+                <?php 
+                }if(in_array(APPLICATION_SERVICE_DIRECTORY_ID, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/mapservice16.png"/><a href="<?php echo base_url().'applications/service_directory' ?>">Service Directory</a>
                 </li>
+                <?php 
+                }if(in_array(100, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/saddress_book.png"/><a href="#">Sports</a>
                 </li>
+                <?php 
+                }if(in_array(APPLICATION_BLOG_APP_ID, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item list-icon">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/045631686.gif"/><a href="<?php echo base_url().'applications/blog_app' ?>"></i>Blogs</a>
                 </li>
+                <?php 
+                }if(in_array(APPLICATION_NEWS_APP_ID, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item list-icon">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/newspaper.png"/><a href="<?php echo base_url().'applications/news_app' ?>"></i>News</a>
                 </li>
+                <?php 
+                }if(in_array(APPLICATION_BMI_CALCULATOR_ID, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item list-icon">
                     <img class="list-icon" src="<?php echo base_url(); ?>resources/images/bmi_calculator.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/bmi_calculator' ?>"></i>BMI Calculator</a>
                 </li>
+                <?php 
+                }if(in_array(APPLICATION_PHOTOGRAPHY_ID, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item list-icon">
                     <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/photography' ?>"></i>Photography</a>
                 </li>
+                <?php 
+                }if(in_array(100, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item list-icon">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/calendar.png"/><a href="#">Events</a>
                 </li>
+                <?php 
+                }if(in_array(100, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item list-icon">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/gnome_system_users.png"/><a href="#">Buddy</a>
                 </li>
+                <?php 
+                }if(in_array(100, $app_id_list))
+                {?>
                 <li class="list-group-item left-panel-item list-icon">
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/shop_16.png"/><a href="#">Shop</a>
                 </li>
+                <?php 
+                }
+                ?>
             </ul>
         </div>
     </div>

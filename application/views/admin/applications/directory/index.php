@@ -31,7 +31,7 @@
                                 <?php foreach ($all_applications as $row): ?>
                                     <tr>
                                         <td>
-                                            <a href="<?php echo base_url() . 'admin/applications_blogs/blog_list/' . $row['id'] ?>">
+                                            <a href="#">
                                                 <?php echo $row['id']; ?>
                                             </a>
                                         </td>

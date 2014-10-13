@@ -1018,6 +1018,14 @@ CREATE TABLE IF NOT EXISTS `application_directory` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `application_directory` (`id`, `title`) VALUES
+(1, 'Xstream Banter'),
+(2, 'Healthy Recipes'),
+(3, 'Service Directory'),
+(4, 'News'),
+(5, 'Blogs'),
+(6, 'BMI Calculator'),
+(7, 'Photography');
 -- -----------Xstream Banter --------------------
 CREATE TABLE IF NOT EXISTS `sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

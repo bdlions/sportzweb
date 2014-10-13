@@ -21,6 +21,7 @@ class Auth extends Role_Controller{
         $this->load->library("recent_activities");
         $this->load->library("trending_features");
         $this->load->library("user_logs");
+        $this->load->library('org/application/application_directory_library');
         $this->load->library('org/utility/Utils');
         $this->load->library('org/configure/login_page_library');
         $this->load->library('org/configure/logout_page_library');
@@ -84,7 +85,7 @@ class Auth extends Role_Controller{
                         $this->data['mapping_id'] = $user_id;
                         $this->data['recent_activities'] = $this->recent_activities->get_recent_activites();
                         $this->data['popular_trends'] = $this->trending_features->get_popular_trends()->result_array();
-                        
+                        $this->data['app_id_list'] = $this->application_directory_library->get_user_application_id_list($user_id);
                         $visit_success = $this->visitors->store_page_visitor(VISITOR_PAGE_NEWSFEED_ID);
                         $this->template->load(NULL, MEMBER_LOGIN_SUCCESS_VIEW, $this->data);
                     }

@@ -63,6 +63,39 @@ class Admin_application_directory_library {
     public function __get($var) {
         return get_instance()->$var;
     }
+    
+    public function add_gallery_image($application_id, $data)
+    {
+        $application_info_array = $this->admin_application_directory_model->get_application_info($application_id)->result_array();
+        if(!empty($application_info_array) && isset($data['img']) )
+        {
+            $image_info = new stdClass();
+            $image_info->img = $data['img'];
+            $image_list = array();
+            $image_list[] = $image_info;
+            $image_counter = 1;
+            $application_info = $application_info_array[0];
+            $img_gallery = $application_info['img_gallery'];
+            if( $img_gallery != "" && $img_gallery != NULL )
+            {
+                $img_gallery_array = json_decode($img_gallery); 
+                foreach($img_gallery_array as $img_gallery_info)
+                {
+                    $image_list[] = $img_gallery_info;
+                    $image_counter++;
+                    if($image_counter == APPLICATION_DIRECTORY_IMAGE_GALLERY_TOTAL_IMAGES)
+                    {
+                        break;
+                    }
+                }
+            }
+            $additional_data = array(
+                'img_gallery' => json_encode($image_list)
+            );
+            return $this->admin_application_directory_model->update_application($application_id, $additional_data);
+        }
+        return FALSE;
+    }
 }
 
 ?>

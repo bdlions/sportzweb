@@ -63,6 +63,128 @@ class Application_directory_library {
     public function __get($var) {
         return get_instance()->$var;
     }
+    
+    /*
+     * This method will return all applications adding a new column named gallery_image_list including
+     * all images from json object of gallery images
+     * @Author Nazmul on 13th October 2014
+     */
+    public function get_all_applications()
+    {
+        $application_list = array();
+        $application_list_array = $this->application_directory_model->get_all_applications()->result_array();
+        foreach($application_list_array as $application_info)
+        {
+            $img_gallery = $application_info['img_gallery'];
+            $application_info['gallery_image_list'] = array();
+            if( $img_gallery != "" && $img_gallery != NULL )
+            {
+                $gallery_image_list = array();
+                $img_gallery_array = json_decode($img_gallery); 
+                foreach($img_gallery_array as $img_gallery_info)
+                {
+                    $gallery_image_list[] = $img_gallery_info->img;
+                }
+                $application_info['gallery_image_list'] = $gallery_image_list;
+            }
+            $application_list[] = $application_info;
+        }
+        return $application_list;
+    }
+    
+    /*
+     * This method will add an application under a user
+     * @Author Nazmul on 13th October 2014
+     */
+    public function add_user_application($application_id, $user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $app_list = array();
+        $user_basic_profile_array = $this->application_directory_model->get_user_basic_profile($user_id)->result_array();
+        if(!empty($user_basic_profile_array))
+        {
+            $basic_profile = $user_basic_profile_array[0];
+            $application_list = $basic_profile['application_list'];
+            if( $application_list != "" && $application_list != NULL )
+            {
+                $application_list_array = json_decode($application_list); 
+                foreach($application_list_array as $application_info)
+                {
+                    $app_list[] = $application_info;
+                }
+            }
+        }
+        $app_info = new stdClass();
+        $app_info->id = $application_id;        
+        $app_list[] = $app_info;
+        $additional_data = array(
+            'application_list' => json_encode($app_list)
+        );
+        $this->application_directory_model->update_user_basic_profile($user_id, $additional_data);
+    }
+    
+    /*
+     * This method will remove an application from a user
+     * @Author Nazmul on 13th October 2014
+     */
+    public function remove_user_application($application_id, $user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $app_list = array();
+        $user_basic_profile_array = $this->application_directory_model->get_user_basic_profile($user_id)->result_array();
+        if(!empty($user_basic_profile_array))
+        {
+            $basic_profile = $user_basic_profile_array[0];
+            $application_list = $basic_profile['application_list'];
+            if( $application_list != "" && $application_list != NULL )
+            {
+                $application_list_array = json_decode($application_list); 
+                foreach($application_list_array as $application_info)
+                {
+                    if($application_info->id != $application_id)
+                    {
+                        $app_list[] = $application_info;
+                    }                    
+                }
+            }
+        }
+        $additional_data = array(
+            'application_list' => json_encode($app_list)
+        );
+        $this->application_directory_model->update_user_basic_profile($user_id, $additional_data);
+    }
+    
+    /*
+     * This method will return application id list of a user
+     * @Author Nazmul on 13th October 2014
+     */
+    public function get_user_application_id_list($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $application_id_list = array();
+        $user_basic_profile_array = $this->application_directory_model->get_user_basic_profile($user_id)->result_array();
+        if(!empty($user_basic_profile_array))
+        {
+            $basic_profile = $user_basic_profile_array[0];
+            $application_list = $basic_profile['application_list'];
+            if( $application_list != "" && $application_list != NULL )
+            {
+                $application_list_array = json_decode($application_list); 
+                foreach($application_list_array as $application_info)
+                {
+                    $application_id_list[] = $application_info->id;
+                }
+            }
+        }
+        return $application_id_list;
+    }
 }
-
-?>

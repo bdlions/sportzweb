@@ -11,6 +11,7 @@ class Application_directory extends Role_Controller{
         $this->load->helper('language');
         $this->load->helper('url');
         $this->load->library('ion_auth');
+        $this->load->library('org/application/application_directory_library');
         
         $this->load->library('visitors');
         if (!$this->ion_auth->logged_in()) {
@@ -21,8 +22,30 @@ class Application_directory extends Role_Controller{
     public function index()
     {
         $this->data['message'] = '';
-        
-        
+        $user_id = $this->session->userdata('user_id');
+        $user_application_id_list = $this->application_directory_library->get_user_application_id_list($user_id);
+        $application_list = $this->application_directory_library->get_all_applications();
+        $app_data = array();
+        foreach($application_list as $application)
+        {
+            $application['summary'] = html_entity_decode(html_entity_decode($application['summary']));
+            if(in_array($application['id'], $user_application_id_list))
+            {
+                $application['is_removed'] = 1;
+            }
+            else
+            {
+                $application['is_removed'] = 0;
+            }
+            $application['btn_state'] = "Try it";  
+            $app_data[$application['id']] = $application;
+        }
+        $this->data['app_data'] = $app_data;
+        $this->template->load(null, "applications/directory/index", $this->data);
+    }
+    
+    public function test()
+    {
         //dummy array... load data into app_data[] 2d array dynamically.
         $app1 = array(
             'app_name' => 'FaceGGame',
@@ -87,7 +110,13 @@ class Application_directory extends Role_Controller{
      */
     public function add_application_to_user()
     {
-        
+        $app_id = $this->input->post('app_id');
+        $user_id = $this->session->userdata('user_id');
+        $this->application_directory_library->add_user_application($app_id, $user_id);
+        $result = array(
+            'message' => 'Application is added successfully'
+        );
+        echo json_encode($result);
     }
     
     /*
@@ -96,7 +125,13 @@ class Application_directory extends Role_Controller{
      */
     public function remove_application_from_user()
     {
-        
+        $app_id = $this->input->post('app_id');
+        $user_id = $this->session->userdata('user_id');
+        $this->application_directory_library->remove_user_application($app_id, $user_id);
+        $result = array(
+            'message' => 'Application is removed successfully'
+        );
+        echo json_encode($result);
     }
     
     
