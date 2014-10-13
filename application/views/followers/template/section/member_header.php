@@ -47,26 +47,26 @@
     }
 </script>
 <div class="row" style="padding-bottom: 30px;">
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class=" input-group search-box-followers">
             <input id="search_followers_box" class="form-control typeahead" type="text" placeholder="Search for followers" />
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
         </div>
     </div>       
-    <div class="col-md-7">            
+    <div class="col-md-8">            
         <div class="col-md-3">
             <?php if($follow_permission->value == FOLLOWER_ACCEPTANCE_TYPE_MANUAL){?>
-                <a href="<?php echo base_url().'followers/pending_followers'?>"><button class="btn button-custom" id="button_pending_request">Pending Requests</button></a>
+                <a href="<?php echo base_url().'followers/pending_followers'?>"><button style="width:100%" class="btn button-custom" id="button_pending_request">Pending Requests</button></a>
             <?php }?>
         </div>
         <div class="col-md-2">
-            <a href="<?php echo base_url().'followers/invite'?>"><button class="btn button-custom">Invite</button></a>                    
+            <a href="<?php echo base_url().'followers/invite'?>"><button style="width:100%" class="btn button-custom">Invite</button></a>                    
         </div>
         <div class="col-md-3">
-            <a href="<?php echo base_url().'followers/show/'.$user_id?>"><button class="btn button-custom">My Followers</button></a>
+            <a href="<?php echo base_url().'followers/show/'.$user_id?>"><button style="width:100%" class="btn button-custom">My Followers</button></a>
         </div>
         <div class="col-md-3">
-            <a href="<?php echo base_url().'followers/blocked_followers/'.$user_id?>"><button class="btn button-custom">Blocked Members</button></a>                    
+            <a href="<?php echo base_url().'followers/blocked_followers/'.$user_id?>"><button style="width:100%" class="btn button-custom">Blocked Members</button></a>                    
         </div>
     </div>
 </div>

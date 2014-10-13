@@ -151,7 +151,14 @@ class Followers extends Role_Controller{
         redirect('member_profile/show/'.$follower_id,'refresh');
     }
     
-    function invite(){
+    function invite($user_id = 0){
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }        
+        $this->data['user_id'] = $user_id;
+        $this->data['follow_permission'] = $this->follower ->get_acceptance_type();
+        $this->data['basic_profile'] = $this->basic_profile->get_profile_info($user_id);
         $result = array();
         for ($i = 1; $i <= 5; $i ++) {
             $result[ "email".$i ] = array('status' => '', 'message' => '', 'email' => '');
