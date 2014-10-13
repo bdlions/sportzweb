@@ -317,7 +317,7 @@ class Applications_blogs extends CI_Controller{
                 $related_blogs = explode(",",$this->input->post('related_blogs'));
                 $blog_title = trim(htmlentities($this->input->post('title_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
-                $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
+                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
                 
                 $data = array(
                     'title' => $blog_title,
@@ -430,7 +430,7 @@ class Applications_blogs extends CI_Controller{
                 $related_blogs = explode(",",$this->input->post('related_blogs'));
                 $blog_title = trim(htmlentities($this->input->post('title_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
-                $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
+                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
                 
                 $data = array(
                     'title' => $blog_title,

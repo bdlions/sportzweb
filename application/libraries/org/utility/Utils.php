@@ -315,6 +315,23 @@ class Utils {
             
         }
     }
+    
+    /*
+     * This method will set the attribute value of target to _blank in all anchors
+     * @Author Nazmul on 13October 2014
+     */
+    function add_blank_target_in_anchor($content)
+    {
+        $doc = new DOMDocument();
+        $doc->loadHTML($content);
+        $links = $doc->getElementsByTagName('a');
+        foreach ($links as $item) {
+            //if (!$item->hasAttribute('target'))
+                $item->setAttribute('target','_blank');  
+        }
+        $content=$doc->saveHTML();
+        return $content;
+    }
 }
 
 ?>

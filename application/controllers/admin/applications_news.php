@@ -15,6 +15,7 @@ class Applications_news extends CI_Controller{
         $this->load->helper(array('form', 'url'));
         $this->load->library('org/admin/access_level/admin_access_level_library');
         $this->load->library('org/admin/application/admin_news');
+        $this->load->library('org/utility/Utils');
 
        
         // Load MongoDB library instead of native db driver if required
@@ -243,7 +244,7 @@ class Applications_news extends CI_Controller{
                 $news_headline = trim(htmlentities($this->input->post('headline_editortext')));
                 $summary_headline = trim(htmlentities($this->input->post('summary_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
-                $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
+                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
                 $data = array(
                     'headline' => $news_headline,
                     'summary' => $summary_headline,
@@ -364,7 +365,7 @@ class Applications_news extends CI_Controller{
                 $news_headline = trim(htmlentities($this->input->post('headline_editortext')));
                 $news_summary = trim(htmlentities($this->input->post('summary_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
-                $picture_description = trim(htmlentities($this->input->post('image_description_editortext')));
+                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
                 
                 $data = array(
                     'headline' => $news_headline,
@@ -372,7 +373,7 @@ class Applications_news extends CI_Controller{
                     'description' => $description,
                     'news_date' => date('Y-m-d'),
                     'picture' => empty($uploaded_image_data['upload_data']['file_name'])? '' : $uploaded_image_data['upload_data']['file_name'],
-                    'picture_description' => $picture_description,
+                    'picture_description' => $this->utils->add_blank_target_in_anchor($picture_description),
                     'created_on' => now()
                 );
                
