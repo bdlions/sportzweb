@@ -76,6 +76,10 @@ $config['tables']['albums']                                 = 'albums';
 $config['tables']['albums_photos']                          = 'albums_photos';
 //footer
 $config['tables']['footer_about_us']                        = 'footer_about_us';
+$config['tables']['footer_cu_topics']                       = 'footer_cu_topics';
+$config['tables']['footer_cu_operating_systems']            = 'footer_cu_operating_systems';
+$config['tables']['footer_cu_browsers']                     = 'footer_cu_browsers';
+$config['tables']['footer_cu_feedbacks']                    = 'footer_cu_feedbacks';
 
 /*
  * Applications

@@ -26,28 +26,24 @@ class Contact_us extends CI_Controller{
     public function index()
     {
         $this->data['message'] = '';
-        //$this->template->load("admin/templates/dashboard_tmpl", "admin/contact_us/topic_list", $this->data);
         $this->template->load(null, "admin/footer/contact_us/customers_feedback", $this->data);
     }
     
-    public function create_topic()
+    public function manage_topic()
     {
         $this->data['message'] = '';
-        //$this->template->load("admin/templates/dashboard_tmpl", "admin/contact_us/topic_list", $this->data);
         $this->template->load(null, "admin/footer/contact_us/topic_list", $this->data);
     }
     
-    public function create_os()
+    public function manage_os()
     {
         $this->data['message'] = '';
-        //$this->template->load("admin/templates/dashboard_tmpl", "admin/contact_us/topic_list", $this->data);
         $this->template->load(null, "admin/footer/contact_us/operating_system_list", $this->data);
     }
     
-    public function create_browser()
+    public function manage_browser()
     {
         $this->data['message'] = '';
-        //$this->template->load("admin/templates/dashboard_tmpl", "admin/contact_us/topic_list", $this->data);
         $this->template->load(null, "admin/footer/contact_us/browser_list", $this->data);
     }
 }

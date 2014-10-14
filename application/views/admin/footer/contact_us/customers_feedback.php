@@ -10,23 +10,23 @@
         <div class="row col-md-12">
             <div class="row form-group">
                     <div class ="col-sm-4" style="padding-left: 25px;">
-                        <a href="<?php echo base_url();?>admin/contact_us/create_topic">
+                        <a href="<?php echo base_url();?>admin/contact_us/manage_topic">
                             <button id="button_create_topic_name" class="btn button-custom pull-left" >
                                 Manage Topic
                             </button>
                         </a>
                     </div>
                     <div class =" col-sm-4">
-                        <a href="<?php echo base_url().'admin/contact_us/create_os' ?>">
+                        <a href="<?php echo base_url().'admin/contact_us/manage_os' ?>">
                             <button id="button_create_os_name" value="" class="btn button-custom " style="margin-left: 0px;">
-                                Manage Operating System name
+                                Manage Operating System
                             </button>
                         </a>
                     </div>
                     <div class =" col-sm-4">
-                        <a href="<?php echo base_url().'admin/contact_us/create_browser' ?>">
+                        <a href="<?php echo base_url().'admin/contact_us/manage_browser' ?>">
                             <button id="button_create_browser_name" value="" class="btn button-custom pull-right " style="margin-left: 0px;">
-                                Manage Browser name
+                                Manage Browser
                             </button>
                         </a>
                     </div>
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="btn-group" style="padding-left: 10px;">
-                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url();?>admin/overview')" class="form-control btn button-custom">
+                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
             </div>
         </div>        
     </div>

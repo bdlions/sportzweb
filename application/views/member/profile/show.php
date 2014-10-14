@@ -179,7 +179,7 @@
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="friends_status">
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="<?php echo base_url() . 'followers/unfollow_user/' . $user_id ?>">Unfollow</a>
+                                <a role="menuitem" tabindex="-1" href="<?php echo base_url() . 'followers/remove_follower/' . $user_id ?>">Unfollow</a>
                             </li>
                             <li role="presentation">
                                 <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>register/business_profile">Block</a>

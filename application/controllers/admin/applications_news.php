@@ -261,7 +261,7 @@ class Applications_news extends CI_Controller{
                
                 $id = $this->admin_news->update_news($news['id'], $data);
                 if($id !== FALSE) {
-                    $this->data['message'] = 'Newsis Update successfully.';
+                    $this->data['message'] = 'News is updated successfully.';
                     echo json_encode($this->data);
                     return;
                 }else {
@@ -382,7 +382,7 @@ class Applications_news extends CI_Controller{
                 if($news_id !== FALSE){
                     //$id = $this->admin_news->get_news_category_info_for_update($news_category_id,$news_id);
                     //if($id !== FALSE) {
-                        $this->data['message'] = "News create is successful";
+                        $this->data['message'] = "News is created successfully";
                         echo json_encode($this->data);
                         return;
 //                    } else {

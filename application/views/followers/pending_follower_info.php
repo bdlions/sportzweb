@@ -3,7 +3,7 @@
         <div class="col-md-4">
             <a href='<?php echo base_url() . "member_profile/show/{$follower->user_id}" ?>' class="profile-name"> 
                 <div>
-                    <img alt="<?php echo $follower->first_name[0] . $follower->last_name[0] ?>" src="<?php echo base_url() . "resources/uploads/" . $follower->photo ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
+                    <img alt="<?php echo $follower->first_name[0] . $follower->last_name[0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $follower->photo ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
                     <p style="visibility:hidden"><?php echo $follower->first_name[0].$follower->last_name[0] ?></p>
                 </div>
             </a>

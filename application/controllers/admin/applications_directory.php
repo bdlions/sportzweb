@@ -225,8 +225,8 @@ class Applications_directory extends CI_Controller{
             'cols'  => '10'
         );        
         $this->data['image_type_list'] = array(
-            APPLICATION_DIRECTORY_IMAGE1_TYPE_ID => 'Image1',
-            APPLICATION_DIRECTORY_IMAGE2_TYPE_ID => 'Image2',
+            APPLICATION_DIRECTORY_IMAGE1_TYPE_ID => 'Icon',
+            APPLICATION_DIRECTORY_IMAGE2_TYPE_ID => 'Slider',
             APPLICATION_DIRECTORY_IMAGE_GALLERY_TYPE_ID => 'Gallery',
         );
         $this->template->load(null, "admin/applications/directory/update_application", $this->data);

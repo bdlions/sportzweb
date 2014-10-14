@@ -1775,6 +1775,9 @@ CREATE TABLE IF NOT EXISTS `footer_cu_feedbacks` (
   `topic_id` int(11) unsigned DEFAULT NULL,
   `os_id` int(11) unsigned DEFAULT NULL,
   `browser_id` int(11) unsigned DEFAULT NULL,
+  `email` varchar(500),
+  `phone` varchar(500),
+  `description` text default '',
   `created_on` int(11) unsigned DEFAULT 0,
   `modified_on` int(11) unsigned DEFAULT 0,
   PRIMARY KEY (`id`)
