@@ -294,5 +294,20 @@ class Test extends CI_Controller {
     {
         $this->template->load(null, "test", $this->data);
     }
-    
+    function run_toms_page()
+    {
+        $this->template->load(null, "toms/toms", $this->data);
+    }
+    function run_toms_shoes()
+    {
+        $this->template->load(null, "toms/toms_shoes", $this->data);
+    }
+    function toms_item()
+    {
+        $this->template->load(null, "toms/toms_item", $this->data);
+    }
+    function toms_item_by_category()
+    {
+        $this->template->load(null, "toms/toms_item_by_category", $this->data);
+    }
 }
