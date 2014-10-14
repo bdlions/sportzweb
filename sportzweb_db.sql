@@ -1779,11 +1779,11 @@ CREATE TABLE IF NOT EXISTS `footer_cu_feedbacks` (
   `modified_on` int(11) unsigned DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-ALTER TABLE `footer_contact_us_feedbacks`
+ALTER TABLE `footer_cu_feedbacks`
     ADD CONSTRAINT `fk_footer_cu_feedbacks_topics1` FOREIGN KEY(`topic_id`) REFERENCES `footer_cu_topics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `footer_contact_us_feedbacks`
-    ADD CONSTRAINT `fk_footer_cu_feedbacks_operating_systems1` FOREIGN KEY(`os_id`) REFERENCES `footer_cu_operating_systems` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `footer_contact_us_feedbacks`
+ALTER TABLE `footer_cu_feedbacks`
+    ADD CONSTRAINT `fk_footer_cu_feedbacks_os1` FOREIGN KEY(`os_id`) REFERENCES `footer_cu_operating_systems` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `footer_cu_feedbacks`
     ADD CONSTRAINT `fk_footer_cu_feedbacks_browsers1` FOREIGN KEY(`browser_id`) REFERENCES `footer_cu_browsers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- trending feature
