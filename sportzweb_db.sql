@@ -470,9 +470,6 @@ CREATE TABLE IF NOT EXISTS `basic_profile` (
   PRIMARY KEY (`id`),
   UNIQUE KEY(`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-INSERT INTO `basic_profile` (`user_id`, `gender_id`, `country_id`) VALUES
-(1, 1, 223);
-
 --
 -- Constraints for table `basic_profile`
 --
@@ -488,7 +485,9 @@ INSERT INTO `basic_profile` (`id`, `user_id`, `clg_or_uni`, `employer`, `gender_
 (2, 3, '', '', 1, '1984-08-24 00:00:00', 223, 'London_eye.jpg', NULL, NULL, '', NULL, '', NULL, NULL, NULL, '[{"interest_id":"1","sub_interest_id":"1"},{"interest_id":"1","sub_interest_id":"2"},{"interest_id":"1","sub_interest_id":"4"},{"interest_id":"2","sub_interest_id":"1"},{"interest_id":"2","sub_interest_id":"2"},{"interest_id":"3","sub_interest_id":"1"},{"interest_id":"3","sub_interest_id":"2"}]', NULL),
 (3, 4, '', '', 1, '1984-08-24 00:00:00', 223, 'London_eye.jpg', NULL, NULL, '', NULL, '', NULL, NULL, NULL, '[{"interest_id":"1","sub_interest_id":"1"},{"interest_id":"1","sub_interest_id":"2"},{"interest_id":"1","sub_interest_id":"4"},{"interest_id":"2","sub_interest_id":"1"},{"interest_id":"2","sub_interest_id":"2"},{"interest_id":"3","sub_interest_id":"1"},{"interest_id":"3","sub_interest_id":"2"}]', NULL),
 (4, 5, 'univ', 'emp', 1, '1987-06-14 00:00:00', 20, 'small2.jpg', NULL, NULL, 'ocu', NULL, 'my town', NULL, NULL, NULL, '[{"interest_id":"2","sub_interest_id":"1"}]', NULL),
-(5, 6, '', '', 1, '1984-08-24 00:00:00', 223, '254979_4275577722563_304196965_n.jpg', NULL, NULL, '', NULL, '', NULL, NULL, NULL, '[{"interest_id":"3","sub_interest_id":"1"}]', NULL);
+(5, 6, '', '', 1, '1984-08-24 00:00:00', 223, '254979_4275577722563_304196965_n.jpg', NULL, NULL, '', NULL, '', NULL, NULL, NULL, '[{"interest_id":"3","sub_interest_id":"1"}]', NULL),
+(6, 1, 'Jamalpur RM vidaypith', 'Apurbatech', 1, '2010-01-01 00:00:00', 1, 'Koala4.jpg', NULL, NULL, 'SW Engg', NULL, 'Dhaka', NULL, NULL, NULL, '[{"interest_id":"1","sub_interest_id":"1"},{"interest_id":"1","sub_interest_id":"2"},{"interest_id":"1","sub_interest_id":"3"},{"interest_id":"1","sub_interest_id":"4"},{"interest_id":"1","sub_interest_id":"5"},{"interest_id":"2","sub_interest_id":"3"},{"interest_id":"3","sub_interest_id":"1"},{"interest_id":"3","sub_interest_id":"2"},{"interest_id":"3","sub_interest_id":"3"}]', NULL);
+
  CREATE TABLE IF NOT EXISTS `special_interests_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(200) NOT NULL,
@@ -1741,7 +1740,7 @@ CREATE TABLE IF NOT EXISTS `albums_photos` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `albums_photos`
     ADD CONSTRAINT `fk_albums_photos_albums1` FOREIGN KEY(`album_id`) REFERENCES `albums` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-	
+-- footer
 CREATE TABLE IF NOT EXISTS `footer_about_us` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `text_region` text,
@@ -1750,6 +1749,42 @@ CREATE TABLE IF NOT EXISTS `footer_about_us` (
   `modified_on` int(11) DEFAULT NULL,
   PRIMARY KEY(`id`) 
 );
+CREATE TABLE IF NOT EXISTS `footer_cu_topics` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(500),
+  `created_on` int(11) unsigned DEFAULT 0,
+  `modified_on` int(11) unsigned DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE TABLE IF NOT EXISTS `footer_cu_operating_systems` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(500),
+  `created_on` int(11) unsigned DEFAULT 0,
+  `modified_on` int(11) unsigned DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE TABLE IF NOT EXISTS `footer_cu_browsers` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(500),
+  `created_on` int(11) unsigned DEFAULT 0,
+  `modified_on` int(11) unsigned DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE TABLE IF NOT EXISTS `footer_cu_feedbacks` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `topic_id` int(11) unsigned DEFAULT NULL,
+  `os_id` int(11) unsigned DEFAULT NULL,
+  `browser_id` int(11) unsigned DEFAULT NULL,
+  `created_on` int(11) unsigned DEFAULT 0,
+  `modified_on` int(11) unsigned DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `footer_contact_us_feedbacks`
+    ADD CONSTRAINT `fk_footer_cu_feedbacks_topics1` FOREIGN KEY(`topic_id`) REFERENCES `footer_cu_topics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `footer_contact_us_feedbacks`
+    ADD CONSTRAINT `fk_footer_cu_feedbacks_operating_systems1` FOREIGN KEY(`os_id`) REFERENCES `footer_cu_operating_systems` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `footer_contact_us_feedbacks`
+    ADD CONSTRAINT `fk_footer_cu_feedbacks_browsers1` FOREIGN KEY(`browser_id`) REFERENCES `footer_cu_browsers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- trending feature
 CREATE TABLE IF NOT EXISTS `hashtags` (
