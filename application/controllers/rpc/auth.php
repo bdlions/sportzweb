@@ -58,7 +58,17 @@ class Auth extends JsonRPCServer {
             $user_info_array = $this->ion_auth_model->get_user_info($user_id)->result();
             if(!empty($user_info_array))
             {
-                $response['user_info'] = $user_info_array[0];     
+                $response['user_info'] = $user_info_array[0];   
+                $business_profile_info = $this->business_profile_library->get_profile_info($user_info_array[0]->user_id);
+                if($business_profile_info != FALSE)
+                {
+                    $response['is_bp_exists'] = 1;
+                    $response['business_profile_info'] = $business_profile_info;
+                }
+                else
+                {
+                    $response['is_bp_exists'] = 0;
+                }
             }
         } 
         else 
