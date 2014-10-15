@@ -225,15 +225,24 @@
 <!--APPLICATIONS-->
 <div class="col-md-12">
     <?php
+    $total_apps = count($app_data);
     $counter = 0;
     foreach($app_data as $application)
     {
-        if($counter/2 == 0)
+        if($counter%2 == 0)
         {
-            //echo '<div class="row col-md-12">';
+            echo '<div class="row" style="padding:0px;margin:5px;">';
+        }
+        if($counter%2 == 0)
+        {
+            echo '<div class="col-md-6" style="padding-left: 0px; padding-right: 0px; margin-right: -1px">';
+        }
+        else
+        {
+            echo '<div class="col-md-6" style="padding-left: 10px; padding-right: 0px; margin-right: -1px">';
         }
         ?>
-        <div class="col-md-6" style="padding-left: 0px; padding-right: 0px; margin-right: -1px">
+        
             <div class="col-md-12" style="background-color: white; border: 1px solid lightgray; box-sizing: border-box; margin: -1px; padding: 20px;">
                 <div class="col-md-12" style="padding: 5px 0px 5px;">
                     <div class="col-md-2" style="padding: 0px;">
@@ -265,11 +274,12 @@
             </div>
         </div>
         <?php
-        $counter++;
-        if($counter/2 == 1)
+        
+        if($counter%2 == 1 || $counter == $total_apps)
         {
-            //echo '</div>';
-        }        
+            echo '</div>';
+        }  
+        $counter++;
     }
     ?>
 </div>    
