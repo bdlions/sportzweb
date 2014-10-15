@@ -62,12 +62,12 @@ class Auth extends JsonRPCServer {
                 $business_profile_info = $this->business_profile_library->get_profile_info($user_info_array[0]->user_id);
                 if($business_profile_info != FALSE)
                 {
-                    $response['is_bp_exists'] = 1;
+                    $response['is_bp_exists'] = "1";
                     $response['business_profile_info'] = $business_profile_info;
                 }
                 else
                 {
-                    $response['is_bp_exists'] = 0;
+                    $response['is_bp_exists'] = "0";
                 }
             }
         } 
@@ -281,12 +281,12 @@ class Auth extends JsonRPCServer {
                 $business_profile_info = $this->business_profile_library->get_profile_info($user_info_array[0]->user_id);
                 if($business_profile_info != FALSE)
                 {
-                    $response['is_bp_exists'] = 1;
+                    $response['is_bp_exists'] = "1";
                     $response['business_profile_info'] = $business_profile_info;
                 }
                 else
                 {
-                    $response['is_bp_exists'] = 0;
+                    $response['is_bp_exists'] = "0";
                 }
                 
                 $response['status'] = RPC_SUCCESS;
