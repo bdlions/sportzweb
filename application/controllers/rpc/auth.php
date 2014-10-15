@@ -251,7 +251,7 @@ class Auth extends JsonRPCServer {
      */
     public function login($identity = '', $password = '')
     {
-        //$identity = 'bdlions@bdlions.com';
+        //$identity = 'alamgir@apurbatech.com';
         //$password = 'password';
         $response = array();
         if ($this->ion_auth->login($identity, $password)) {
@@ -267,6 +267,17 @@ class Auth extends JsonRPCServer {
                 $response['first_name'] = $user_info_array[0]->first_name;
                 $response['last_name'] = $user_info_array[0]->last_name;
                 $response['email'] = $user_info_array[0]->email;
+                
+                $business_profile_info = $this->business_profile_library->get_profile_info($user_info_array[0]->user_id);
+                if($business_profile_info != FALSE)
+                {
+                    $response['is_bp_exists'] = 1;
+                    $response['business_profile_info'] = $business_profile_info;
+                }
+                else
+                {
+                    $response['is_bp_exists'] = 0;
+                }
                 
                 $response['status'] = RPC_SUCCESS;
                 $response['msg'] = "SIGNIN_SUCCESSFULLY";                
