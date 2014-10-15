@@ -148,11 +148,11 @@
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1140px; height: 300px;
             overflow: hidden;">
   
-            <?php foreach ($app_data as $key => $value):?>
+            <?php foreach ($app_data as $application):?>
                     <div>
-                        <img u="image" onclick="showmodal('<?php echo $key;?>')" style="height: 300px; width: 100%" src="<?php echo base_url().APPLICATION_DIRECTORY_IMAGE_PATH.$value['img2'];?>" alt="...">
+                        <img u="image" onclick="showmodal('<?php echo $application["id"];?>')" style="height: 300px; width: 100%" src="<?php echo base_url().APPLICATION_DIRECTORY_IMAGE_PATH.$application['img2'];?>" alt="...">
                         <div class="carousel-caption">
-                            <?php echo $value['title'];?>
+                            <?php echo $application['title'];?>
                         </div>
                     </div>
                 <?php endforeach;?>
@@ -242,9 +242,18 @@
             echo '<div class="col-md-6" style="padding-left: 10px; padding-right: 0px; margin-right: -1px">';
         }
         ?>
-        
-            <div class="col-md-12" style="background-color: white; border: 1px solid lightgray; box-sizing: border-box; margin: -1px; padding: 20px;">
-                <div class="col-md-12" style="padding: 5px 0px 5px;">
+    <style>
+        .hover_color
+        {
+            background-color: white;
+        }
+        .hover_color:hover
+        {
+            background-color: #EFEFEF;
+        }
+    </style>
+            <div class="col-md-12 hover_color" style="border: 1px solid lightgray; box-sizing: border-box; margin: -1px; padding: 20px;">
+                <div class="col-md-12" style="padding: 5px 0px 5px;" onclick="showmodal('<?php echo $application["id"];?>')">
                     <div class="col-md-2" style="padding: 0px;">
                         <img width="100%" class="image-responsive" src="<?php echo base_url().APPLICATION_DIRECTORY_IMAGE_PATH.$application['img1'];?>"/>
                     </div>
