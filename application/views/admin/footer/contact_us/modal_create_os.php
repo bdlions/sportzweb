@@ -1,6 +1,6 @@
 <script type="text/javascript">
     $(function() {
-        $("#button_save_topic").on("click", function() {
+        $("#button_save_os").on("click", function() {
             if ($("#input_os_name").val().length == 0)
             {
                 alert("Operating System name is required.");
@@ -9,12 +9,14 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "",
+                url: '<?php echo base_url(); ?>' + "admin/contact_us/create_os",
                 data: {
-                    input_topic_name: $("#input_os_name").val()
+                    new_os_name: $("#input_os_name").val()
                 },
                 success: function(data) {
-                    
+                    alert(data.message);
+                    $('#modal_create_os').modal('hide');
+                    window.location = '<?php echo base_url();?>admin/contact_us/manage_os';
                 }
             });
         });

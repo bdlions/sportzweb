@@ -28,19 +28,31 @@
                                 <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Name</th>
                                 <th style="text-align: center;">Edit</th>               
+                                <th style="text-align: center;">Delete</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_topic_list">
+                            <?php foreach ($all_topics as $topic):?>
                             <tr>
-                                <td><div id="topic_desc_1">1</div></td>
-                                <td><div id="topic_desc_1">Problem</div></td>
+                                <td><div id="topic_desc_1"><?php echo $topic['id']?></div></td>
+                                <td><div id="topic_desc_1"><?php echo $topic['title']?></div></td>
                                 <td>
-                                    <button id="button_edit_topic_list" onclick="openModal('button_edit_topic_list_1','<?php echo 1;?>')" value="" class="form-control btn pull-right">
+                                    <button id="button_edit_topic_list" onclick="showmodal(<?php echo $topic['id'];?>)" value="" class="form-control btn pull-right">
                                         Edit
                                     </button>
                                 </td>
-                            </tr> 
-                            <tr>
+                                <td>
+                                    <button onclick="showmodaldel(<?php echo $topic['id'];?>)" value="" class="form-control btn pull-right">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php endforeach;?>
+                            
+                            
+                            
+                            
+<!--                            <tr>
                                 <td><div id="topic_desc_2">2</div></td>
                                 <td><div id="topic_desc_2">Picture upload</div></td>
                                 <td>
@@ -48,7 +60,7 @@
                                         Edit
                                     </button>
                                 </td>
-                            </tr>
+                            </tr>-->
                         </tbody>
                     </table>
                 </div>

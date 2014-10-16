@@ -24,7 +24,22 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function get_all_topics()
     {
-        
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_topics'])
+                ->get();
+    }
+    
+    /*
+     * This method will return topic info
+     * @param $topic_id, topic id
+     * @Author Nazmul on 14th October 2014
+     */
+    public function get_topic_info($topic_id)
+    {
+        $this->db->where('id', $topic_id);
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_topics'])
+                ->get();
     }
     
     /*
@@ -33,7 +48,8 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function update_topic($topic_id, $additional_data)
     {
-        
+        $data = $this->_filter_data($this->tables['footer_cu_topics'], $additional_data);
+        $this->db->update($this->tables['footer_cu_topics'], $data, array('id' => $topic_id));
     }
     
     /*
@@ -42,7 +58,8 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function add_topic($additional_data)
     {
-        
+        $data = $this->_filter_data($this->tables['footer_cu_topics'], $additional_data);
+        $this->db->insert($this->tables['footer_cu_topics'], $data);
     }
     
     /*
@@ -51,7 +68,8 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function delete_topic($topic_id)
     {
-        
+        $this->db->where($this->tables['footer_cu_topics'].'.id', $topic_id);
+        $this->db->delete($this->tables['footer_cu_topics']);
     }
     
     /*
@@ -60,7 +78,22 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function get_all_operating_systems()
     {
-        
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_operating_systems'])
+                ->get();
+    }
+    
+    /*
+     * This method will return operating system info
+     * @param $os_id, operating system id
+     * @Author Nazmul on 14th October 2014
+     */
+    public function get_operating_system_info($os_id)
+    {
+        $this->db->where('id', $os_id);
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_operating_systems'])
+                ->get();
     }
     
     /*
@@ -69,7 +102,8 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function update_operating_system($operating_system_id, $additional_data)
     {
-        
+        $data = $this->_filter_data($this->tables['footer_cu_operating_systems'], $additional_data);
+        $this->db->update($this->tables['footer_cu_operating_systems'], $data, array('id' => $operating_system_id));
     }
     
     /*
@@ -78,7 +112,8 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function add_operaging_system($additional_data)
     {
-        
+        $data = $this->_filter_data($this->tables['footer_cu_operating_systems'], $additional_data);
+        $this->db->insert($this->tables['footer_cu_operating_systems'], $data);
     }
     
     /*
@@ -87,7 +122,8 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function delete_operaging_system($operating_system_id)
     {
-        
+        $this->db->where($this->tables['footer_cu_operating_systems'].'.id', $operating_system_id);
+        $this->db->delete($this->tables['footer_cu_operating_systems']);
     }
     
     /*
@@ -96,34 +132,51 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function get_all_browers()
     {
-        
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_browsers'])
+                ->get();
+    }
+        /*
+     * This method will return topic info
+     * @param $browser_id, browser_id id
+     * @Author Nazmul on 14th October 2014
+     */
+    public function get_browser_info($browser_id)
+    {
+        $this->db->where('id', $browser_id);
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_browsers'])
+                ->get();
     }
     
     /*
      * This method will update a brower 
      * @Author Nazmul on 14th October 2014
      */
-    public function update_brower($brower_id, $additional_data)
+    public function update_browser($browser_id, $additional_data)
     {
-        
+        $data = $this->_filter_data($this->tables['footer_cu_browsers'], $additional_data);
+        $this->db->update($this->tables['footer_cu_browsers'], $data, array('id' => $browser_id));
     }
     
     /*
      * This method will add a new brower 
      * @Author Nazmul on 14th October 2014
      */
-    public function add_brower($additional_data)
+    public function add_browser($additional_data)
     {
-        
+        $data = $this->_filter_data($this->tables['footer_cu_browsers'], $additional_data);
+        $this->db->insert($this->tables['footer_cu_browsers'], $data);
     }
     
     /*
      * This method will delete a brower 
      * @Author Nazmul on 14th October 2014
      */
-    public function delete_brower($browser_id)
+    public function delete_browser($browser_id)
     {
-        
+        $this->db->where($this->tables['footer_cu_browsers'].'.id', $browser_id);
+        $this->db->delete($this->tables['footer_cu_browsers']);
     }
     
     /*

@@ -9,12 +9,13 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "",
+                url: '<?php echo base_url(); ?>' + "admin/contact_us/create_topic",
                 data: {
                     input_topic_name: $("#input_topic_name").val()
                 },
                 success: function(data) {
-                    
+                    alert(data.message);
+                    window.location = '<?php echo base_url();?>admin/contact_us/manage_topic';
                 }
             });
         });

@@ -1,6 +1,6 @@
 <script type="text/javascript">
     $(function() {
-        $("#button_save_topic").on("click", function() {
+        $("#button_save_browser").on("click", function() {
             if ($("#input_browser_name").val().length == 0)
             {
                 alert("Browser name is required.");
@@ -9,12 +9,14 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "",
+                url: '<?php echo base_url(); ?>' + "admin/contact_us/create_browser",
                 data: {
-                    input_browser_name: $("#input_browser_name").val()
+                    new_browser_name: $("#input_browser_name").val()
                 },
                 success: function(data) {
-                    
+                    alert(data.message);
+                    $('#modal_create_browser').modal('hide');
+                    window.location = '<?php echo base_url();?>admin/contact_us/manage_browser';
                 }
             });
         });

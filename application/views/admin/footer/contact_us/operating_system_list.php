@@ -28,28 +28,26 @@
                                 <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Name</th>
                                 <th style="text-align: center;">Edit</th>               
+                                <th style="text-align: center;">Delete</th>               
                             </tr>
                         </thead>
                         <tbody id="tbody_os_list">
+                            <?php foreach ($all_os as $os):?>
                             <tr>
-                                <td><div id="os_desc_1">1</div></td>
-                                <td><div id="os_desc_1">Windows 7</div></td>
+                                <td><div><?php echo $os['id'];?></div></td>
+                                <td><div><?php echo $os['title'];?></div></td>
                                 <td>
-                                    <button id="button_edit_os" onclick="openModal('button_edit_os_1','<?php echo 1;?>')" value="" class="form-control btn pull-right">
+                                    <button onclick="showmodal(<?php echo $os['id'];?>)" value="" class="form-control btn pull-right">
                                         Edit
                                     </button>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td><div id="os_desc_2">2</div></td>
-                                <td><div id="os_desc_2">Windows 8</div></td>
                                 <td>
-                                    <button id="button_edit_os" onclick="openModal('button_edit_os_2','<?php echo 2;?>')" value="" class="form-control btn pull-right">
-                                        Edit
+                                    <button onclick="showmodaldel(<?php echo $os['id'];?>)" value="" class="form-control btn pull-right">
+                                        Delete
                                     </button>
                                 </td>
                             </tr>
-                            
+                            <?php endforeach;?>                  
                         </tbody>
                     </table>
                 </div>
