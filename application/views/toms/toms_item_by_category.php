@@ -67,54 +67,67 @@
     
     <!--VERTI MENU-->
     <div id="left_menu" class="col-md-3 pull-left">
+        
         <!--MENU BOXES-->
         <div class="menubox">
-            <a>
-                box header
-            </a>
-            <div class="menubox_item">
-                <a>item aosdaosd</a>
-                <div class="menubox_item">
-                    <a>inner item aosdaosd</a>
-                </div>
-                <div class="menubox_item">
-                    <a>inner item aosdaosd</a>
-                </div>
-                <div class="menubox_item">
-                    <a>inner item aosdaosd</a>
-                </div>
+            <div class="expandable">first</div>            
+            <div class="collupsible">
+                <div>first item </div>
+                <div>first item </div>
+                <div>first item </div>
+                <div>first item </div>
+                <div>first item </div>
             </div>
-            <div class="menubox_item">
-                <a>item aosdaosd</a>
-            </div>
-            <div class="menubox_item">
-                <a>item aosdaosd</a>
-            </div>
-            
-            <a>inner aosdaosd</a>
-        </ul>
         </div>
         
-        
-        
-        
-        
-        
-        
-        
-        <ul>
-            <li>aosdaosd
-                <ul>
-                    <li>
-                        asdasd
-                    </li>
-                </ul>
-            </li>
-            <li>aosdaosd</li>
-            <li>aosdaosd</li>
-            <li>aosdaosd</li>
-        </ul>
+        <div class="menubox">
+            <div class="expandable">Second</div>            
+            <div class="collupsible">
+                <div>first item </div>
+                <div>first item </div>
+                <div>first item </div>
+                <div>first item </div>
+                <div>first item </div>
+            </div>
+        </div>
+        <div>
+            <div class="menubox">
+                <div class="expandable">inner</div>            
+                <div class="collupsible">
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                </div>
+            </div>
+            <div class="menubox">
+                <div class="expandable">inner</div>            
+                <div class="collupsible">
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                </div>
+            </div>
+            <div class="menubox">
+                <div class="expandable">inner</div>            
+                <div class="collupsible">
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                    <div>first item </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    
+    
+    
+    
     
     <!--ITEMS-->
     <div class="col-md-8 pull-right">
@@ -436,39 +449,78 @@
 <style>
     #left_menu
     {
-        box-sizing: border-box;
-        background-color: black;
+        /*box-sizing: border-box;*/
+        /*background-color: black;*/
         min-height: 200px;
         clear: both;
-        
+        color: #53504c;
+        font-size: 16px;
     }
-    .menubox a:hover
+    #left_menu a:hover
     {
-        background-color: #E9E4DE;
         text-decoration: none;
     }
-    .menubox a, .menubox_item
+    #left_menu a
     {
         display: block;
-        /*background-color: transparent !important;*/
-        /*border: medium none;*/
         color: #53504c;
-        /*display: block;*/
-        font-family: proxima;
-        font-size: 14px;
-        font-weight: normal;
-        line-height: 32px;
-        text-transform: none;
+        font-size: 16px;
+    }
+    #left_menu > div
+    {
+        margin-top: 15px;
     }
     .menubox
     {
-        margin-top: 20px;
-        padding: 20px;
+        font-size: 16px;
+        color: #53504c;
+        margin-bottom: -2px;
         border: 2px solid #E9E4DE;
         background-color: #F6F3EF;
     }
-    .menubox_item
+    
+    
+    
+    .collupsible a:hover,
+    .collupsible > div:hover
     {
-        padding-left: 15px;
+        color: #57b9e1;
+        background-color: #E9E4DE;
     }
+    .collupsible > div
+    {
+        display: block;
+        padding: 5px;
+        padding-left: 20px;
+        font-size: 16px;
+    }
+    .collupsible
+    {
+        padding-bottom: 10px;
+    }
+    .expandable
+    {
+        padding: 15px;
+        color: #53504c;
+        font-size: 18px;
+        font-weight: bolder;
+        text-transform: uppercase;
+    }
+/*    .menubox a, .menubox_item
+    {
+        color: #53504c;
+        display: block;
+        font-size: 16px;
+        font-weight: normal;
+    }*/
 </style>
+<script>
+        $('.expandable').click(function(){
+            var collup_var = $(this).siblings('.collupsible:first');
+                collup_var.slideToggle();
+                if (collup_var.is(":visible")) {
+                    alert('Element is visible: ' + collup_var.toString());
+                }
+            }
+        );
+</script>
