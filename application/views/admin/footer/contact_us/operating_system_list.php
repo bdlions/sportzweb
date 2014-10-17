@@ -15,9 +15,11 @@
         <div class="row col-md-12">
             <div class="row form-group">
                 <div class ="col-sm-3" style="padding-left: 35px;">
+                    <?php if($allow_write){ ?>
                     <button id="button_create_os" value="" class="btn button-custom " style="margin-left: -10px;">
                         Create Operating System
-                    </button>  
+                    </button> 
+                    <?php } ?>
                 </div>
             </div>
             <div class="row">
@@ -27,8 +29,8 @@
                             <tr>
                                 <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Name</th>
-                                <th style="text-align: center;">Edit</th>               
-                                <th style="text-align: center;">Delete</th>               
+                                <?php if($allow_edit){ ?><th style="text-align: center;">Edit</th><?php } ?>               
+                                <?php if($allow_delete){ ?><th style="text-align: center;">Delete</th><?php } ?>             
                             </tr>
                         </thead>
                         <tbody id="tbody_os_list">
@@ -36,16 +38,20 @@
                             <tr>
                                 <td><div><?php echo $os['id'];?></div></td>
                                 <td><div><?php echo $os['title'];?></div></td>
+                                <?php if($allow_edit){ ?>
                                 <td>
                                     <button onclick="showmodal(<?php echo $os['id'];?>)" value="" class="form-control btn pull-right">
                                         Edit
                                     </button>
                                 </td>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <td>
                                     <button onclick="showmodaldel(<?php echo $os['id'];?>)" value="" class="form-control btn pull-right">
                                         Delete
                                     </button>
                                 </td>
+                                <?php } ?>
                             </tr>
                             <?php endforeach;?>                  
                         </tbody>

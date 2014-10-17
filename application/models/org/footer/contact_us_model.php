@@ -24,7 +24,9 @@ class Contact_us_model extends Ion_auth_model {
      */
     public function get_all_topics()
     {
-        
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_topics'])
+                ->get();
     }
     
     /*
@@ -33,7 +35,9 @@ class Contact_us_model extends Ion_auth_model {
      */
     public function get_all_operating_systems()
     {
-        
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_operating_systems'])
+                ->get();
     }
     
     /*
@@ -42,7 +46,9 @@ class Contact_us_model extends Ion_auth_model {
      */
     public function get_all_browers()
     {
-        
+        return $this->db->select('*')
+                ->from($this->tables['footer_cu_browsers'])
+                ->get();
     }
     
     /*
@@ -51,7 +57,8 @@ class Contact_us_model extends Ion_auth_model {
      */
     public function add_feedback($additional_data)
     {
-        
+        $data = $this->_filter_data($this->tables['footer_cu_feedbacks'], $additional_data);
+        $this->db->insert($this->tables['footer_cu_feedbacks'], $data);
     }
     
 }

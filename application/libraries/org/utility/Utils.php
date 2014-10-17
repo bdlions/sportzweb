@@ -131,14 +131,14 @@ class Utils {
         $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
         $dateTimeZone = new DateTimeZone($time_zone_array[0]);
         $dateTime = new DateTime("now", $dateTimeZone);
-        $unix_current_time = now() + $dateTime->getOffset();
-        $human_current_time = unix_to_human($unix_current_time);
+        $relative_unix_time = $unix_time + $dateTime->getOffset();
+        $human_current_time = unix_to_human($relative_unix_time);
         $human_current_time_array= explode(" ", $human_current_time);
         $human_current_date = $human_current_time_array[0];
         $splited_date_content = explode("-", $human_current_date);
         if($show_minute == 1)
         {
-            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0].' '.$human_current_time_array[0];
+            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0].' '.$human_current_time_array[1];
         }
         else
         {

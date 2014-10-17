@@ -17,6 +17,7 @@ class Admin_contact_us_library {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
+        $this->load->library('org/utility/utils');
         
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
@@ -63,4 +64,16 @@ class Admin_contact_us_library {
     public function __get($var) {
         return get_instance()->$var;
     } 
+    
+    public function get_all_feedbacks()
+    {
+        $feedback_list = array();
+        $feedbacks_array = $this->admin_contact_us_model->get_all_feedbacks()->result_array();
+        foreach($feedbacks_array as $feedback)
+        {
+            $feedback['created_on'] = $this->utils->get_unix_to_human_date($feedback['created_on'], 1);
+            $feedback_list[] = $feedback;
+        }
+        return $feedback_list;
+    }
 }

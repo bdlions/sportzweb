@@ -7,6 +7,7 @@ class Footer extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
+        $this->load->library('org/admin/access_level/admin_access_level_library');
         $this->load->library('org/admin/footer/admin_about_us');
         $this->load->library('org/utility/Utils');
         $this->load->helper('url');
@@ -20,6 +21,71 @@ class Footer extends CI_Controller{
         $this->load->helper('language');
         if (!$this->ion_auth->logged_in()) {
             redirect('admin/auth/login', 'refresh');
+        }
+        
+        $this->data['allow_view'] = FALSE;
+        $this->data['allow_access'] = FALSE;
+        $this->data['allow_write'] = FALSE;
+        $this->data['allow_approve'] = FALSE;
+        $this->data['allow_edit'] = FALSE;
+        $this->data['allow_delete'] = FALSE;
+        $this->data['allow_configuration'] = FALSE; 
+        
+        $selected_user_group = $this->session->userdata('user_type');
+        if(isset($selected_user_group ) && $selected_user_group != ""){
+            $this->user_group_array = array($selected_user_group);
+        }
+        else
+        {
+            $this->user_group_array = $this->ion_auth->get_current_user_types();
+        } 
+        if (in_array(ADMIN, $this->user_group_array)) {
+            $this->tmpl = ADMIN_DASHBOARD_TEMPLATE;
+            $this->data['allow_view'] = TRUE;
+            $this->data['allow_access'] = TRUE;
+            $this->data['allow_write'] = TRUE;
+            $this->data['allow_approve'] = TRUE;
+            $this->data['allow_edit'] = TRUE;
+            $this->data['allow_delete'] = TRUE;
+            $this->data['allow_configuration'] = TRUE;
+        }
+        else
+        {
+            $access_level_mapping = $this->admin_access_level_library->get_access_level_info($this->session->userdata('user_id'));
+            $this->tmpl = USER_DASHBOARD_TEMPLATE;
+            $this->data['access_level_mapping'] = $access_level_mapping;
+            
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+            {
+                $this->data['allow_view'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS, $access_level_mapping))
+            {
+                $this->data['allow_access'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE, $access_level_mapping))
+            {
+                $this->data['allow_write'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE, $access_level_mapping))
+            {
+                $this->data['allow_approve'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
+            {
+                $this->data['allow_edit'] = TRUE;
+            }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE, $access_level_mapping))
+            {
+                $this->data['allow_delete'] = TRUE;
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
+            {
+                $this->data['allow_configuration'] = TRUE;  
+            }
+            if(!$this->data['allow_view'])
+            {
+                redirect('admin/general/restriction_view', 'refresh');
+            }
         }
     }
     
@@ -209,7 +275,7 @@ class Footer extends CI_Controller{
         //echo '<pre/>';print_r($region_text_map);exit();
         $this->data['region_text_map'] = $region_text_map;
         $this->data['region_image_map'] = $region_image_map;
-        $this->template->load(null, "admin/footer/about_us/index", $this->data);
+        $this->template->load($this->tmpl, "admin/footer/about_us/index", $this->data);
     }
     
     /*
@@ -230,14 +296,10 @@ class Footer extends CI_Controller{
      */
     public function get_about_us_info()
     {
-        $response = array();
-        $selected_region_id = $_POST['selected_region_id'];
-        $text_content_array = array();
-        //$text_content_array = $this->->get_footer_content_info($selected_region_id)->result_array();
-        if(!empty($text_content_array))
-        {
-            $response = $text_content_array[0];
-        }
+        $region_id = $_POST['region_id'];
+        $response = array(
+            'region_text' => $this->admin_about_us->get_about_us_text_info($region_id)
+        );        
         echo json_encode($response);
     }
     
@@ -278,7 +340,7 @@ class Footer extends CI_Controller{
         
         $this->data['image_region_id'] = $image_region_id;
         $this->data['image_info'] = '';
-        $this->template->load(null, "admin/footer/about_us/update_image", $this->data);
+        $this->template->load($this->tmpl, "admin/footer/about_us/update_image", $this->data);
     }
     
     public function middle_image_change($image_id)
@@ -313,7 +375,7 @@ class Footer extends CI_Controller{
         }
         
         $this->data['image_info'] = '';
-        $this->template->load(null, "admin/footer/image_update_view", $this->data);
+        $this->template->load($this->tmpl, "admin/footer/image_update_view", $this->data);
        
     }
     

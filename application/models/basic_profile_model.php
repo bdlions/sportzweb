@@ -106,6 +106,33 @@ class Basic_Profile_model extends Ion_auth_model {
             $this->set_error('update_profile_unsuccessful');
             return FALSE;
         }
+        
+        //by default there will be 7 applicaitons for each user
+        $app_list = array();
+        $xb_info = new stdClass();
+        $xb_info->id = APPLICATION_XSTREAM_BANTER_ID;        
+        $app_list[] = $xb_info;
+        $hr_info = new stdClass();
+        $hr_info->id = APPLICATION_HEALTYY_RECIPES_ID;        
+        $app_list[] = $hr_info;
+        $sd_info = new stdClass();
+        $sd_info->id = APPLICATION_SERVICE_DIRECTORY_ID;        
+        $app_list[] = $sd_info;
+        $news_info = new stdClass();
+        $news_info->id = APPLICATION_NEWS_APP_ID;        
+        $app_list[] = $news_info;
+        $blog_info = new stdClass();
+        $blog_info->id = APPLICATION_BLOG_APP_ID;        
+        $app_list[] = $blog_info;
+        $bmi_info = new stdClass();
+        $bmi_info->id = APPLICATION_BMI_CALCULATOR_ID;        
+        $app_list[] = $bmi_info;
+        $pg_info = new stdClass();
+        $pg_info->id = APPLICATION_PHOTOGRAPHY_ID;        
+        $app_list[] = $pg_info;
+        $profile_data['application_list'] = json_encode($app_list);
+        
+        $profile_data = $this->_filter_data($this->tables['basic_profile'], $profile_data);
 
         $this->trigger_events('extra_where');
         $this->db->insert($this->tables['basic_profile'], $profile_data);

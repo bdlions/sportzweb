@@ -26,7 +26,7 @@ class Media extends CI_Controller {
         $name = $_POST['name'];
         $data = $_POST['data'];
         $user_id = $_POST['user_id'];
-        
+        $result = array();
         if (isset($_FILES["userfile"])) {
             $file_info = $_FILES["userfile"];
             $result = $this->utils->upload_image($file_info, SERVICE_MEDIA_PROFILE_PICTURE_PATH);
@@ -38,10 +38,14 @@ class Media extends CI_Controller {
             $data = array(
                 'photo' => $image_name
             );
-            $this->basic_profile->update_profile_info($data, $user_id);
-            echo json_encode($result);
-        }         
-         
+            $this->basic_profile->update_profile_info($data, $user_id);            
+        } 
+        else
+        {
+            $result['status'] = "0";
+            $result['message'] = 'Please select and image to upload';
+        }
+        echo json_encode($result); 
 
         //Receive the file
         /*$objFile = & $_FILES["image"];

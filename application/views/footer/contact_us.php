@@ -1,53 +1,50 @@
 <div class="row col-md-12" style="height: 64px; font-size: 32px;">
     Contact Us
 </div>
+<div class ="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-8"><?php echo $message; ?></div>
+</div>
 <div class="row col-md-12">
-    <form id="" role="form" accept-charset="utf-8" method="post" action="">
+    <?php echo form_open("footer/contact_us", array('id' => 'form_add_feedback', 'class' => 'form-horizontal')); ?>
+        
         <div class="col-md-3">
             <div style="font-size: 16px">
                 Topic :
                 <div class = "form-group">
-                    <select id = "sports_list" class = "form-control" name = "sports_list">
-                        <option selected = "selected" value = "">Select Topic...</option>
-                        <option value = "1">Basketball</option>
-                        <option value = "2">Football</option>
-                        <option value = "3">Rugby Union</option>
-                    </select> 
+                    <?php echo form_dropdown('topic_list', $topic_list, '', 'class=form-control id=topic_list'); ?>
                 </div>
                 Operating System :
                 <div class = "form-group">
-                    <select id = "sports_list" class = "form-control" name = "sports_list">
-                        <option selected = "selected" value = "">Select Operating System...</option>
-                        <option value = "1">Basketball</option>
-                        <option value = "2">Football</option>
-                        <option value = "3">Rugby Union</option>
-                    </select> 
+                    <?php echo form_dropdown('os_list', $os_list, '', 'class=form-control id=os_list'); ?> 
                 </div>
                 Browser :
                 <div class = "form-group">
-                    <select id = "sports_list" class = "form-control" name = "sports_list">
-                        <option selected = "selected" value = "">Select Browser...</option>
-                        <option value = "1">Basketball</option>
-                        <option value = "2">Football</option>
-                        <option value = "3">Rugby Union</option>
-                    </select> 
+                    <?php echo form_dropdown('browser_list', $browser_list, '', 'class=form-control id=browser_list'); ?> 
                 </div>
                 Email address :
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Email" value="" name="r_email">            
+                    <?php echo form_input($email+array('class'=>'form-control')); ?>
                 </div>
                 Phone (optional) :
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Phone number" value="" name="r_email">            
+                    <?php echo form_input($phone+array('class'=>'form-control')); ?>
                 </div>
             </div>
         </div>
         <div class="col-md-7 pull-right" style="font-size: 16px">
             Please describe your question, comment or concern. If you are reporting a site error, please include all relevent details (e.g. operating system, browser etc)
             <div class="form-group">          
-                <textarea style="height: 300px; width: 100%;"></textarea>
+                <?php echo form_textarea($description+array('class'=>'form-control')); ?>
             </div>
-            <input type="submit" class="btn button-custom pull-right" id="submit_btn" value="Submit" name="submit_btn">
+            <div class="form-group">
+                <label for="submit_feedback" class="col-md-6 control-label requiredField">
+
+                </label>
+                <div class ="col-md-3 col-md-offset-3">
+                    <?php echo form_input($submit_feedback+array('class'=>'btn button-custom pull-right')); ?>
+                </div> 
+            </div>
         </div>
-    </form>
+    <?php echo form_close(); ?>
 </div>

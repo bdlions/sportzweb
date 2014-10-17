@@ -3,6 +3,7 @@
     function showmodal(app_id)
     {
         $("#sample").html(tmpl("tmpl_display_app_data", allappdata[app_id]));
+        $("#div_summary").html(allappdata[app_id]['summary']);
         $('#modal_viewapp').modal('show');
     }
     
@@ -57,8 +58,8 @@
 <div class="modal-body">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-5">
-                {%=o['summary']%}
+            <div class="col-md-5 col-sm-5 col-xs-5" id="div_summary">
+                
             </div>
             {% if(o['gallery_image_list'].length>0){ %}
             <div class="col-md-7 col-sm-7 col-xs-7">
@@ -231,7 +232,7 @@
     {
         if($counter%2 == 0)
         {
-            echo '<div class="row" style="padding:0px;margin:5px;">';
+            echo '<div class="row" style="padding:0px;margin:0px;">';
         }
         if($counter%2 == 0)
         {

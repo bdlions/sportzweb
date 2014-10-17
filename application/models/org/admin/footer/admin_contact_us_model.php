@@ -185,7 +185,12 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function get_all_feedbacks()
     {
-        
+        $this->db->order_by($this->tables['footer_cu_feedbacks'].'.created_on','desc');
+        return $this->db->select($this->tables['footer_cu_topics'].'.title as topic,'.$this->tables['footer_cu_operating_systems'].'.title as operating_system,'.$this->tables['footer_cu_browsers'].'.title as browser,'.$this->tables['footer_cu_feedbacks'].'.*')
+                ->join($this->tables['footer_cu_topics'], $this->tables['footer_cu_topics'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.topic_id')
+                ->join($this->tables['footer_cu_operating_systems'], $this->tables['footer_cu_operating_systems'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.os_id')
+                ->join($this->tables['footer_cu_browsers'], $this->tables['footer_cu_browsers'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.browser_id')
+                ->get($this->tables['footer_cu_feedbacks']);
     }
     
     /*

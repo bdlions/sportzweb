@@ -198,6 +198,25 @@
                                     <li id="visitors_business_profile"><a href="<?php echo base_url()?>admin/visitors_businessprofile">Business Profile</a></li>                                    
                                     <?php } ?>
                                 </ul>
+                            </li> 
+                            <?php 
+                            }if(
+                                    array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)
+                                    || array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                            {?>
+                            <li id="footer">
+                                <a href="#">Footer</a>
+                                <ul>
+                                    <?php 
+                                    if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                                    {?>
+                                    <li id="manage_new_user"><a href="<?php echo base_url()?>admin/footer/about_us">About Us</a></li>
+                                    <?php 
+                                    }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                                    {?>
+                                    <li id="manage_contact_us"><a href="<?php echo base_url()?>admin/contact_us">Contact Us</a></li>
+                                    <?php } ?>
+                                </ul>
                             </li>
                             <?php 
                             }if(array_key_exists(ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))

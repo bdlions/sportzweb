@@ -2,7 +2,7 @@
     function showmodal(os_id)
     {
         $.ajax({
-            datatype: 'json',
+            dataType: 'json',
             type: 'POST',
             url: '<?php echo base_url(); ?>' + "admin/contact_us/get_os_info",
             data: {
@@ -36,7 +36,7 @@
         $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/contact_us/delete_browser",
+                url: '<?php echo base_url(); ?>' + "admin/contact_us/delete_operaging_system",
                 data: {
                     del_id: $("#delete_id_data").val()
                 },

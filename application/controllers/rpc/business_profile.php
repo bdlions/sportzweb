@@ -79,6 +79,16 @@ class Business_profile extends JsonRPCServer {
         {
             $response['success_message'] = 'Business Profile is created successfully';
             $response['status'] = RPC_SUCCESS;
+            $business_profile_info = $this->business_profile_library->get_profile_info($data->user_id);
+            if($business_profile_info != FALSE)
+            {
+                $response['is_bp_exists'] = "1";
+                $response['business_profile_info'] = $business_profile_info;
+            }
+            else
+            {
+                $response['is_bp_exists'] = "0";
+            }
         } 
         else 
         {

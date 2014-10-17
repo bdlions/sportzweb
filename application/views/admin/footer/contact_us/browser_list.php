@@ -15,9 +15,11 @@
         <div class="row col-md-12">
             <div class="row form-group">
                 <div class ="col-sm-3" style="padding-left: 35px;">
+                    <?php if($allow_write){ ?>
                     <button id="button_create_browser" value="" class="btn button-custom " style="margin-left: -10px;">
                         Create Browser
-                    </button>  
+                    </button>
+                    <?php } ?>
                 </div>
             </div>
             <div class="row">
@@ -27,8 +29,8 @@
                             <tr>
                                 <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Name</th>
-                                <th style="text-align: center;">Edit</th>
-                                <th style="text-align: center;">Delete</th>
+                                <?php if($allow_edit){ ?><th style="text-align: center;">Edit</th><?php } ?>
+                                <?php if($allow_delete){ ?><th style="text-align: center;">Delete</th><?php } ?>
                             </tr>
                         </thead>
                         <tbody id="tbody_topic_list">
@@ -36,16 +38,20 @@
                             <tr>
                                 <td><div ><?php echo $browser['id']?></div></td>
                                 <td><div ><?php echo $browser['title']?></div></td>
+                                <?php if($allow_edit){ ?>
                                 <td>
                                     <button id="button_edit_browser_list" onclick="showmodal(<?php echo $browser['id'];?>)" value="" class="form-control btn pull-right">
                                         Edit
                                     </button>
                                 </td>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <td>
                                     <button onclick="showmodaldel(<?php echo $browser['id'];?>)" value="" class="form-control btn pull-right">
                                         Delete
                                     </button>
                                 </td>
+                                <?php } ?>
                             </tr>
                             <?php endforeach;?>
 <!--                            <tr>
