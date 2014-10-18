@@ -172,4 +172,14 @@ class Xstream_banter_model extends Ion_auth_model {
                     ->join($this->tables['xb_chat_rooms'],  $this->tables['xb_chat_rooms'].'.id='.$this->tables['xb_chat_rooms_map'].'.xb_chat_room_id')
                     ->get();
     }
+    
+    
+    
+    //mobile app
+    public function app_get_all_sports()
+    {
+        return $this->db->select('id, title')
+                    ->from($this->tables['sports'])
+                    ->get();
+    }
 }
