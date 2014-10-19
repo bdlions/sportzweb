@@ -563,6 +563,18 @@ class News_app_library {
         );
         return $result;
     }
+    
+    public function get_news_info($news_id)
+    {
+        $news_info = array();
+        $news_info_array = $this->news_app_model->get_news_info($news_id)->result_array();
+        if(!empty($news_info_array))
+        {
+            $news_info = $news_info_array[0];
+            $news_info['created_on'] = $this->utils->get_unix_to_human_date($news_info['created_on'], 1);
+        }
+        return $news_info;
+    }
 }
 
 ?>

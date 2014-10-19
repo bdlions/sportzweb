@@ -17,7 +17,7 @@ class Blog_app_library {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
-
+        $this->load->library('org/utility/utils');
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
             $this->load->library('session');
@@ -147,7 +147,8 @@ class Blog_app_library {
         
         foreach($blog_list_array as $blog_info)
         {
-             $blog_id_blog_info_map[$blog_info['blog_id']] = $blog_info;
+            $blog_info['created_on'] = $this->utils->get_unix_to_human_date($blog_info['created_on'], 1); 
+            $blog_id_blog_info_map[$blog_info['blog_id']] = $blog_info;
         }
         $result = array(
             'blog_list' => $all_blogs_array,

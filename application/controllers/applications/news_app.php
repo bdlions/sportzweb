@@ -78,10 +78,11 @@ class News_app extends Role_Controller {
         $comment_list = $this->news_app_library->get_all_comments($news_id, NEWEST_FIRST,DEFAULT_VIEW_PER_PAGE);
         $this->data['comments'] = $comment_list;
         $this->data['user_info'] = $this->ion_auth->get_user_info();
-        $news = $this->news_app_library->get_news_info($news_id)->result_array();
-        if(count($news)>0)
+        $news = $this->news_app_library->get_news_info($news_id);
+        if(empty($news))
         {
-            $news = $news[0];
+            //show a page to display that this news is invalid. i.e. news doesnot exist
+            return;
         }
         $this->data['news'] = $news;
         $this->data['application_id'] = APPLICATION_NEWS_APP_ID;

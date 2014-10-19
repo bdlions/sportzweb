@@ -31,7 +31,7 @@
                                 <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
-                                    <div class="pull-left"><?php echo date("d-m-Y h:i A", $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']); ?></div>
+                                    <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
                                     <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                 <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
-                                    <div class="pull-left"><?php echo date("d-m-Y h:i A", $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']); ?></div>
+                                    <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
                                     <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
                                 </div>
                             </div>                        
@@ -75,7 +75,7 @@
                                 <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
-                                    <div class="pull-left"><?php echo date("d-m-Y h:i A", $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']); ?></div>
+                                    <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
                                     <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                 <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
-                                    <div class="pull-left"><?php echo date("d-m-Y h:i A", $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']); ?></div>
+                                    <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
                                     <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                 <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
-                                    <div class="pull-left"><?php echo date("d-m-Y h:i A", $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']); ?></div>
+                                    <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
                                     <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                 <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
-                                    <div class="pull-left"><?php echo date("d-m-Y h:i A", $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']); ?></div>
+                                    <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
                                     <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                 <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
-                                    <div class="pull-left"><?php echo date("d-m-Y h:i A", $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']); ?></div>
+                                    <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
                                     <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@
                                 <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
-                                    <div class="pull-left"><?php echo date("d-m-Y h:i A", $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']); ?></div>
+                                    <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
                                     <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
                                 </div>
                             </div>
