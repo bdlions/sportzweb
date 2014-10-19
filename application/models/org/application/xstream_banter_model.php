@@ -181,5 +181,25 @@ class Xstream_banter_model extends Ion_auth_model {
         return $this->db->select('id, title')
                     ->from($this->tables['sports'])
                     ->get();
+    }    
+    public function app_get_all_tournaments($sports_id)
+    {
+        $this->db->where('sports_id',$sports_id);
+        return $this->db->select('id, title, sports_id')
+                    ->from($this->tables['tournaments'])
+                    ->get();
+    }
+    public function app_get_all_matches($tournament_id, $date = '')
+    {
+        if(!empty($date))
+        {
+            $this->db->where('date',$date);
+        }
+        $this->db->where('tournament_id',$tournament_id);
+        return $this->db->select($this->tables['matches'].'.id,'.$this->tables['matches'].'.id as match_id, team1.title as team1_title, team2.title as team2_title,'.$this->tables['matches'].'.date,'.$this->tables['matches'].'.time')
+                    ->from($this->tables['matches'])
+                    ->join($this->tables['teams'].' as team1', 'team1.id='.$this->tables['matches'].'.team1_id')
+                    ->join($this->tables['teams'].' as team2', 'team2.id='.$this->tables['matches'].'.team2_id')
+                    ->get();
     }
 }
