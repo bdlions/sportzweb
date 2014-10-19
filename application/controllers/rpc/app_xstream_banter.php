@@ -7,8 +7,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'jsonRPCServer.php';
 
-//class App_xstream_banter extends JsonRPCServer {
-class App_xstream_banter extends CI_Controller{
+class App_xstream_banter extends JsonRPCServer {
+//class App_xstream_banter extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
