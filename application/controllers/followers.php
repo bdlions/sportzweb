@@ -85,10 +85,24 @@ class Followers extends Role_Controller{
         }
     }*/
     
-    function accept_request($follower_id){
+    /*function accept_request($follower_id){
         $user_id = $this->session->userdata('user_id');
         if($this->follower->accept_follower($user_id, $follower_id) == true){
             redirect("followers/pending_followers/".$user_id, "refresh");
+        }
+    }*/
+    
+    function accept_follower(){
+        $follower_id = $this->input->post('follower_id');
+        $user_id = $this->session->userdata('user_id');
+        if( !isset($follower_id) || !isset($user_id) )
+        {
+            echo FALSE;
+        }
+        else
+        {
+            $this->follower->accept_follower($user_id, $follower_id);
+            echo TRUE;
         }
     }
     /*Remote call*/
@@ -110,30 +124,87 @@ class Followers extends Role_Controller{
      * This method will remove a follower
      * @Author Nazmul on 20th september 2014
      */
-    function remove_follower($follower_id){
+    /*function remove_follower($follower_id){
         $user_id = $this->session->userdata('user_id');
         $this->follower->remove_follower($user_id, $follower_id);
         redirect("followers");
+    }*/
+    
+    /*
+     * Ajax call
+     * This method will remove a follower
+     * @Author Nazmul modified on 20th October 2014
+     */
+    function remove_follower(){
+        $follower_id = $this->input->post('follower_id');
+        $user_id = $this->session->userdata('user_id');
+        if( !isset($follower_id) || !isset($user_id) )
+        {
+            echo FALSE;
+        }
+        else
+        {
+            $this->follower->remove_follower($user_id, $follower_id);
+            echo TRUE;
+        }
     }
     
     /*
      * This method will block a follower
      * @Author Nazmul on 20th september 2014
      */
-    function block_follower($follower_id){
+    /*function block_follower($follower_id){
         $user_id = $this->session->userdata('user_id');
         $this->follower->block_follower($user_id, $follower_id);
         redirect("followers");
+    }*/
+    
+    /*
+     * Ajax call
+     * This method will block a follower
+     * @Author Nazmul modified on 20th October 2014
+     */
+    function block_follower(){
+        $follower_id = $this->input->post('follower_id');
+        $user_id = $this->session->userdata('user_id');
+        if( !isset($follower_id) || !isset($user_id) )
+        {
+            echo FALSE;
+        }
+        else
+        {
+            $this->follower->block_follower($user_id, $follower_id);
+            echo TRUE;
+        }
     }
     
     /*
      * This method will unblock a follower
      * @Author Nazmul on 25th september 2014
      */
-    function unblock_follower($follower_id){
+    /*function unblock_follower($follower_id){
         $user_id = $this->session->userdata('user_id');
         $this->follower->unblock_follower($user_id, $follower_id);
         redirect("followers");
+    }*
+    
+    /*
+     * Ajax Call
+     * This method will unblock a follower
+     * @Author Nazmul modified on 20th October 2014
+     */
+    function unblock_follower(){
+        $follower_id = $this->input->post('follower_id');
+        $user_id = $this->session->userdata('user_id');
+        if( !isset($follower_id) || !isset($user_id) )
+        {
+            echo FALSE;
+        }
+        else
+        {
+            $this->follower->unblock_follower($user_id, $follower_id);
+            echo TRUE;
+        }
     }
     
     function user_follow($follower_id){

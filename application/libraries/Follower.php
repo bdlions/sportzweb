@@ -417,11 +417,7 @@ class Follower {
     
     public function get_relation_with_user($follower_id)
     {
-        $result = array(
-            'is_follower' => FALSE,
-            'is_blocked' => FALSE,
-            'is_pending' => FALSE
-        );
+        $result['profile_type'] = PROFILE_NON_FOLLOWER;
         $user_id = $this->session->userdata('user_id');
         $user_mutual_relation_array = $this->follower_model->get_user_mutual_relations($user_id)->result_array();
         if(!empty($user_mutual_relation_array))
@@ -437,15 +433,30 @@ class Follower {
                     {
                         if($relation_info->is_blocked == 1)
                         {
-                            $result['is_blocked'] = TRUE;
+                            if($relation_info->blocks == 1)
+                            {
+                                $result['profile_type'] = PROFILE_BLOCKED_FOLLOWER;
+                            }
+                            else
+                            {
+                                $result['profile_type'] = PROFILE_HIDE_BLOCKED_FOLLOWER;
+                            }
+                            
                         }
                         else if($relation_info->is_pending == 1)
                         {
-                            $result['is_pending'] = TRUE;
+                            if($relation_info->pending == 1)
+                            {
+                                $result['profile_type'] = PROFILE_PENDING_FOLLOWER;
+                            }
+                            else
+                            {
+                                $result['profile_type'] = PROFILE_APPROVE_PENDING_FOLLOWER;
+                            }
                         }
                         else if($relation_info->is_follower == 1)
                         {
-                            $result['is_follower'] = TRUE;
+                            $result['profile_type'] = PROFILE_FOLLOWER;
                         }                        
                     }                    
                 }

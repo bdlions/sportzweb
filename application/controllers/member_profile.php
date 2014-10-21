@@ -42,14 +42,13 @@ class Member_profile extends Role_Controller{
         $this->show();
     }
     function show( $user_id = 0) {
-        $this->data['is_follower'] = FALSE;
-        $this->data['is_blocked'] = FALSE;
-        $this->data['is_pending'] = FALSE;
+        $this->data['profile_type'] = PROFILE_NON_FOLLOWER;
         $this->data['is_myself'] = FALSE;
         if($user_id == 0 || $user_id == $this->ion_auth->get_user_id()){
             $this->data['myself'] = $this->basic_profile->get_profile_info();
             $user_id = $this->ion_auth->get_user_id();
             $this->data['is_myself'] = TRUE;
+            $this->data['profile_type'] = PROFILE_MYSELF;
         }
         else
         {

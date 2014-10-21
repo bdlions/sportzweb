@@ -230,6 +230,18 @@
                                 <?php echo form_input(array('name' => 'post_code', 'value' => $profile_info->post_code, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-4">Latitude:</label>
+                            <div class="col-md-8">
+                                <?php echo form_input(array('name' => 'latitude', 'value' => $profile_info->latitude, 'class' => 'form-control', 'type' => 'text')); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4">Longitude:</label>
+                            <div class="col-md-8">
+                                <?php echo form_input(array('name' => 'longitude', 'value' => $profile_info->longitude, 'class' => 'form-control', 'type' => 'text')); ?>
+                            </div>
+                        </div>
                         To save these settings please enter your sportzweb password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>

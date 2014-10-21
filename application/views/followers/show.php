@@ -24,4 +24,3 @@
     } 
     ?>
 </div>
-<?php $this->load->view("followers/modal_report");

@@ -1,4 +1,34 @@
 <script type="text/javascript">
+    function open_confirm_unfollow_modal(follower_id){
+        $('#follower_id_confirm_unfollow').val(follower_id);
+        $('#modal_unfollow_confirm').modal('show');
+    }
+    
+    function open_confirm_block_modal(follower_id){
+        $('#follower_id_confirm_block').val(follower_id);
+        $('#modal_block_confirm').modal('show');
+    }
+    
+    function open_report_modal(follower_id){
+        $('#follower_id').val(follower_id);
+        $('#<?php echo FOLLOWER_REPORT_TYPE_SHARED_CONTENT_ID?>').attr('checked', false);
+        $('#<?php echo FOLLOWER_REPORT_TYPE_ACCOUNT_ID?>').attr('checked', false);
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $("#div_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
+                $('#span_shared_content').text('Report content shared by '+data.user_info.first_name+' '+data.user_info.last_name);
+                $('#modal_report_content').modal('show');
+            }
+        });
+
+    }
+    
     $(function() {
         $("#button_user_follow").on("click", function() {
             $.ajax({
@@ -12,6 +42,34 @@
                     else {
                         alert("error for following users.");
                     }
+                }
+            });
+        });
+        
+        $("#button_unblock").on("click", function() {
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url(); ?>' + "followers/unblock_follower",
+                data: {
+                    follower_id: '<?php echo $user_id ?>'
+                },
+                success: function(data) {
+                    location.reload();
+                }
+            });
+        });
+        
+        $("#button_accept_request").on("click", function() {
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url(); ?>' + "followers/accept_follower",
+                data: {
+                    follower_id: '<?php echo $user_id ?>'
+                },
+                success: function(data) {
+                    location.reload();
                 }
             });
         });
@@ -162,13 +220,11 @@
             <?php echo $basic_profile->about_me ?>
         </div>
         <div class="col-md-3">
-            <?php if ($is_myself) { ?>
+            <?php if ($profile_type == PROFILE_MYSELF) { ?>
                 <?php echo form_open("member_profile/update_basic_profile") ?>
                 <button class="btn button-custom pull-right">Edit Profile</button>
                 <?php echo form_close(); ?>
-                <?php } elseif ($is_follower) { ?>
-
-
+            <?php } elseif ($profile_type == PROFILE_FOLLOWER) { ?>
                 <div class="col-md-8"><a href="<?php echo base_url() . 'messages/new_message/' . $user_id ?>"><button class="btn button-custom button-custom-profile-message">Message</button></a>
                 </div>
                 <div class="col-md-4">
@@ -179,22 +235,23 @@
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="friends_status">
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="<?php echo base_url() . 'followers/remove_follower/' . $user_id ?>">Unfollow</a>
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_confirm_unfollow_modal('<?php echo $basic_profile->id; ?>')">Unfollow</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>register/business_profile">Block</a>
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_confirm_block_modal('<?php echo $basic_profile->id; ?>')">Block</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>register/business_profile">Report</a>
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_report_modal('<?php echo $basic_profile->id; ?>')">Report</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-
-
-
-            <?php } else if ($is_pending) { ?>
+            <?php } else if ($profile_type == PROFILE_PENDING_FOLLOWER) { ?>
                 <button class="btn button-custom pull-right">Request Pending</button>
+            <?php } else if ($profile_type == PROFILE_APPROVE_PENDING_FOLLOWER) { ?>
+                <button id="button_accept_request" name="button_accept_request" class="btn button-custom pull-right">Accept Request</button>
+            <?php } else if ($profile_type == PROFILE_BLOCKED_FOLLOWER) { ?>
+                <button id="button_unblock" name="button_unblock" class="btn button-custom pull-right">Unblock</button>
             <?php } else { ?>
                 <button class="btn button-custom pull-right" id="button_user_follow">Follow</button>
             <?php } ?>
@@ -203,3 +260,6 @@
     <?php $this->load->view("member/newsfeed/status_bar"); ?>
 <?php $this->load->view("member/newsfeed/feed"); ?>
 </div>
+<?php $this->load->view("followers/modal_report");
+      $this->load->view("followers/modal_unfollow_confirm");
+      $this->load->view("followers/modal_block_confirm");

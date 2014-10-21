@@ -26,6 +26,27 @@
                 window.location = "<?php echo base_url()?>member_profile/show/" + datum.user_id;
             });
     });
+    
+    function open_confirm_unfollow_modal(follower_id){
+        $('#follower_id_confirm_unfollow').val(follower_id);
+        $('#modal_unfollow_confirm').modal('show');
+    }
+    
+    function open_confirm_block_modal(follower_id){
+        $('#follower_id_confirm_block').val(follower_id);
+        $('#modal_block_confirm').modal('show');
+    }
+    
+    function open_confirm_accept_modal(follower_id){
+        $('#follower_id_confirm_accept').val(follower_id);
+        $('#modal_accept_confirm').modal('show');
+    }
+    
+    function open_confirm_unblock_modal(follower_id){
+        $('#follower_id_confirm_unblock').val(follower_id);
+        $('#modal_unblock_confirm').modal('show');
+    }
+    
     function open_report_modal(follower_id){
         $('#follower_id').val(follower_id);
         $('#<?php echo FOLLOWER_REPORT_TYPE_SHARED_CONTENT_ID?>').attr('checked', false);
@@ -70,3 +91,8 @@
         </div>
     </div>
 </div>
+<?php $this->load->view("followers/modal_report");
+      $this->load->view("followers/modal_unfollow_confirm");
+      $this->load->view("followers/modal_block_confirm");
+      $this->load->view("followers/modal_accept_confirm");
+      $this->load->view("followers/modal_unblock_confirm");

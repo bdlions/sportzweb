@@ -27,7 +27,7 @@
                 </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="friends_status">
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>followers/unblock_follower/<?php echo $follower->user_id ?>">Unblock</a>
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_confirm_unblock_modal('<?php echo $follower->user_id; ?>')">Unblock</a>
                     </li>
                     <li role="presentation">
                         <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_report_modal('<?php echo $follower->user_id; ?>')">Report</a>

@@ -533,6 +533,8 @@ CREATE TABLE IF NOT EXISTS `business_profile` (
   `street_name` varchar(30),
   `address` varchar(300),
   `post_code` varchar(30),
+  `latitude` varchar(300) DEFAULT 0,
+  `longitude` varchar(300) DEFAULT 0,
   `telephone` varchar(30),
   `registered_company_number` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
