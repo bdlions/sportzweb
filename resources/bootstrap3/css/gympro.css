@@ -1,0 +1,90 @@
+/* 
+    Created on : Oct 22, 2014, 1:15:58 PM
+    Author     : Tanveer
+*/
+
+
+/*UNIVARSAL*/
+
+li
+{
+    list-style: none;
+}
+a
+{
+    /*display: inline-block;*/
+}
+a:hover
+{
+    text-decoration: none;
+}
+
+/*PAGE*/
+.top_margin{
+    margin-top: 20px;
+}
+.user_prof img
+{
+    width: 100%;
+}
+/*.user_prof:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
+}*/
+.user_prof a:hover
+{
+    text-decoration: none;
+}
+.user_prof a span
+{
+    color: blue;
+}
+.user_prof a
+{
+    font-size: 16px;
+    color: black;
+}
+.user_prof
+{
+    background-color: #E4E4E4;
+}
+.user_prof, .ln_item
+{
+    padding: 10px;
+    display: inline-block;
+    width: 100%;
+}
+.ln_item img
+{
+    margin-right: 10px;
+    height: 32px;
+    width: 32px;
+}
+.ln_item:hover
+{
+    background-color: lightyellow;
+}
+.ln_current
+{
+    background-color: #F5F5F5;
+    font-size: 16px;
+    font-weight: bold;
+}
+.ln_item
+{
+    font-size: 16px;
+    line-height: 32px;
+    color: darkgray;
+}
+.btn_gympro:hover
+{
+    color: wheat;
+}
+.btn_gympro
+{
+    background-color: #880015;
+    color: whitesmoke;
+    font-weight: bold;
+}

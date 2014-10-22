@@ -310,4 +310,8 @@ class Test extends CI_Controller {
     {
         $this->template->load(null, "toms/toms_item_by_category", $this->data);
     }
+    function gympro_home()
+    {
+        $this->template->load(null, "gympro/gympro_home", $this->data);
+    }
 }
