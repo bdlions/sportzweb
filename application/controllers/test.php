@@ -314,4 +314,12 @@ class Test extends CI_Controller {
     {
         $this->template->load(null, "gympro/gympro_home", $this->data);
     }
+    function gympro_nutrition()
+    {
+        $this->template->load(null, "gympro/gympro_nutrition", $this->data);
+    }
+    function gympro_edit_programme()
+    {
+        $this->template->load(null, "gympro/gympro_edit_programme", $this->data);
+    }
 }
