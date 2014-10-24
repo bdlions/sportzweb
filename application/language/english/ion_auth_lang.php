@@ -65,3 +65,27 @@ $lang['invalid_email_address']              = "Your provided email address is in
 
 $lang['group_creation_duplicate_group_name']   = 'Group Name Already Used or Invalid.';
 $lang['group_creation_success_message']   = 'Group is created successfully.';
+
+//Score Prediction Application
+$lang['create_sports_successful']              = "Sports is created successfully";
+$lang['update_sports_duplicate_title']         = "Sports Name Already used or invalid";
+$lang['update_sports_unsuccessful']            = "Unable to update sports info";
+$lang['update_sports_successful']              = "Sports is updated successfully";
+$lang['delete_sports_unsuccessful']            = "Unable to delete sports info";
+$lang['delete_sports_successful']              = "Sports is deleted successfully";
+
+$lang['create_team_successful']              = "Team is created successfully";
+$lang['update_team_duplicate_title']         = "Team Name Already used or invalid";
+$lang['update_team_unsuccessful']            = "Unable to update team info";
+$lang['update_team_successful']              = "Team is updated successfully";
+$lang['delete_team_unsuccessful']            = "Unable to delete team info";
+$lang['delete_team_successful']              = "Team is deleted successfully";
+
+$lang['create_tournament_successful']        = "Tournament is created successfully";
+$lang['update_tournament_duplicate_title']   = "Tournament Name Already used or invalid";
+$lang['update_tournament_unsuccessful']      = "Unable to update tournament info";
+$lang['update_tournament_successful']        = "Tournament is updated successfully";
+$lang['delete_tournament_unsuccessful']      = "Unable to delete tournament info";
+$lang['delete_tournament_successful']        = "Tournament is deleted successfully";
+
+$lang['configure_homepage_successful']        = "Homepage is configured successfully";

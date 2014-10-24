@@ -6,6 +6,7 @@
     define("APPLICATION_BLOG_APP_ID",                                         5);
     define("APPLICATION_BMI_CALCULATOR_ID",                                   6);
     define("APPLICATION_PHOTOGRAPHY_ID",                                      7);
+    define("APPLICATION_SCORE_PREDICTION_ID",                                 8);
     
     define("APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH",                       "admin/application/xstream_banter");
     define("APPLICATION_HEALTHY_RECIPES_HOME_PAGE_PATH",                      "admin/healthyrecipes");

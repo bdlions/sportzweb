@@ -103,6 +103,25 @@ class Utils {
     }
     
     /*
+     * This method will convert date from yyyy-mm-dd to dd-mm-yyyy format
+     * If date is invalide then this method will return invalid date
+     * @param $date, date to be converted
+     * @Author Nazmul on 24 September 2014
+     */
+    public function convert_date_from_yyyymmdd_to_ddmmyyyy($date)
+    {
+        $splited_date_content = explode("-", $date);
+        if(count($splited_date_content) == 3)
+        {
+            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0];
+        }
+        else
+        {
+            return $date;
+        }        
+    }
+    
+    /*
      * This method will return current date in DD-MM-YYYY format
      * @Author Nazmul on 14 June 2014
      */

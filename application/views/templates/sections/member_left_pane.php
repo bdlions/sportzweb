@@ -84,6 +84,12 @@
                     <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/photography' ?>"></i>Photography</a>
                 </li>
                 <?php 
+                }if(in_array(APPLICATION_SCORE_PREDICTION_ID, $app_id_list))
+                {?>
+                <li class="list-group-item left-panel-item list-icon">
+                    <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/score_prediction' ?>"></i>Score Prediction</a>
+                </li>
+                <?php 
                 }if(in_array(100, $app_id_list))
                 {?>
                 <li class="list-group-item left-panel-item list-icon">

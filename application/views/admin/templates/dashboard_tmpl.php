@@ -117,6 +117,7 @@
                                     <li id="applications_blogs"><a href="<?php echo base_url()?>admin/applications_blogs">Blogs</a></li>
                                     <li id="applications_bmicalculator"><a href="<?php echo base_url()?>admin/applications_bmicalculator">BMI Calculator</a></li>
                                     <li id="applications_photography"><a href="<?php echo base_url()?>admin/applications_photography">Photography</a></li>
+                                    <li id="applications_scoreprediction"><a href="<?php echo base_url()?>admin/applications_scoreprediction">Score Prediction</a></li>
                                 </ul>
                             </li>
                             <li id="business_profiles">

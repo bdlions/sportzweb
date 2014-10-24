@@ -1,0 +1,358 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+/*
+ * Name: Admin Score Prediciton Model
+ * 
+ * Author: Nazmul
+ * 
+ * Requirement: PHP 5 and more
+ */
+
+class Admin_score_prediction_model extends Ion_auth_model
+{
+    protected $sports_identity_column;
+    protected $team_identity_column;
+    protected $tournament_identity_column1;
+    protected $tournament_identity_column2;
+    public function __construct() {
+        parent::__construct();
+        $this->sports_identity_column = $this->config->item('app_sp_sports_identity_column', 'ion_auth');
+        $this->team_identity_column = $this->config->item('app_sp_team_identity_column', 'ion_auth');
+        $this->tournament_identity_column1 = $this->config->item('app_sp_tournament_identity_column1', 'ion_auth');
+        $this->tournament_identity_column2 = $this->config->item('app_sp_tournament_identity_column2', 'ion_auth');
+    }
+    
+    // -------------------------------- Sports Module --------------------------------------
+    /*
+     * This method will check identity of sports table
+     * @param $identity, identity of sports table
+     * @Author Nazmul on 24th October 2014
+     */
+    public function sports_identity_check($identity = '') {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->sports_identity_column,$identity);
+        return $this->db->count_all_results($this->tables['app_sp_sports']) > 0;
+    }
+    /*
+     * This method will create a sports
+     * @param $additional_data, sports data to be added
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_sports($additional_data)
+    {
+        if (array_key_exists($this->sports_identity_column, $additional_data) && $this->sports_identity_check($additional_data[$this->sports_identity_column]) )
+        {
+            $this->set_error('update_sports_duplicate_' . $this->sports_identity_column);
+            return FALSE;
+        }
+        $additional_data = $this->_filter_data($this->tables['app_sp_sports'], $additional_data);       
+        
+        $this->db->insert($this->tables['app_sp_sports'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_sports_successful');
+        return (isset($id)) ? $id : FALSE;
+    }
+    
+    /*
+     * This method will update sports info
+     * @param $sports_id, sports id
+     * @param $additional_data, sports data to be updated
+     * @Author Nazmul on 24th October 2014
+     */
+    public function update_sports($sports_id, $additional_data)
+    {
+        $sports_info = $this->get_sports_info($sports_id)->row();
+        if (array_key_exists($this->sports_identity_column, $additional_data) && $this->sports_identity_check($additional_data[$this->sports_identity_column]) && $sports_info->{$this->sports_identity_column} !== $additional_data[$this->sports_identity_column])
+        {
+            $this->set_error('update_sports_duplicate_' . $this->sports_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_sp_sports'], $additional_data);
+        $this->db->update($this->tables['app_sp_sports'], $data, array('id' => $sports_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_sports_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('update_sports_successful');
+        return TRUE;
+    }
+    
+    /*
+     * This method will return sports info
+     * @param $sports_id, sports id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_sports_info($sports_id)
+    {
+        $this->db->where($this->tables['app_sp_sports'].'.id', $sports_id);
+        return $this->db->select($this->tables['app_sp_sports'].'.id as sports_id,'.$this->tables['app_sp_sports'].'.*')
+                    ->from($this->tables['app_sp_sports'])
+                    ->get();
+    }
+    
+    /*
+     * This method will return all sports
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_all_sports()
+    {
+        return $this->db->select($this->tables['app_sp_sports'].'.id as sports_id,'.$this->tables['app_sp_sports'].'.*')
+                    ->from($this->tables['app_sp_sports'])
+                    ->get();
+    }
+    
+    /*
+     * This method will delete sports info
+     * @param $sports_id, sports id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function delete_sports($sports_id)
+    {
+        if(!isset($sports_id) || $sports_id <= 0)
+        {
+            $this->set_error('delete_sports_unsuccessful');
+            return FALSE;
+        }
+        $this->db->where('id',$sports_id);
+        $this->db->delete($this->tables['app_sp_sports']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_sports_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('delete_sports_successful');
+        return TRUE;
+    }
+    // ------------------------------------- Team Module ------------------------------
+    /*
+     * This method will check identity of team table
+     * @param $identity, identity of team table
+     * @Author Nazmul on 24th October 2014
+     */
+    public function team_identity_check($identity = '') {
+        
+    }
+    /*
+     * This method will create a team
+     * @param $additional_data, team data to be added
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_team($additional_data)
+    {
+        
+    }
+    
+    /*
+     * This method will update team info
+     * @param $team_id, sports id
+     * @param $additional_data, team data to be updated
+     * @Author Nazmul on 24th October 2014
+     */
+    public function update_team($team_id, $additional_data)
+    {
+        
+    }
+    
+    /*
+     * This method will return team info
+     * @param $team_id, team id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_team_info($team_id)
+    {
+        
+    }
+    
+    /*
+     * This method will return all teams
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_all_teams()
+    {
+        return $this->db->select($this->tables['app_sp_teams'].'.id as team_id,'.$this->tables['app_sp_teams'].'.*')
+                    ->from($this->tables['app_sp_teams'])
+                    ->get();
+    }
+    
+    /*
+     * This method will delete team info
+     * @param $team_id, team id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function delete_team($team_id)
+    {
+        
+    }
+    
+    // -------------------------- Tournament Module ------------------------------------
+    /*
+     * This method will check identity of tournament table
+     * @param $identity1, identity1 of tournament table
+     * @param $identity2, identity2 of tournament table
+     * @Author Nazmul on 24th October 2014
+     */
+    public function tournament_identity_check($identity1 = '', $identity2 = '') {
+        
+    }
+    /*
+     * This method will create a tournament
+     * @param $additional_data, tournament data to be added
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_tournament($additional_data)
+    {
+        
+    }
+    
+    /*
+     * This method will update tournament info
+     * @param $tournament_id, tournament id
+     * @param $additional_data, tournament data to be updated
+     * @Author Nazmul on 24th October 2014
+     */
+    public function update_tournament($tournament_id, $additional_data)
+    {
+        
+    }
+    
+    /*
+     * This method will return tournament info
+     * @param $tournament_id, tournament id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_tournament_info($tournament_id)
+    {
+        
+    }
+    
+    /*
+     * This method will return all tournaments
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_all_tournaments()
+    {
+        return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id,'.$this->tables['app_sp_tournaments'].'.*')
+                    ->from($this->tables['app_sp_tournaments'])
+                    ->get();
+    }
+    
+    /*
+     * This method will delete tournament info
+     * @param $tournament_id, tournament id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function delete_tournament($tournament_id)
+    {
+        
+    }
+    
+    // ----------------------------------- Match status module -------------------------
+    /*
+     * This method will return all match statuses
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_all_match_statuses()
+    {
+        
+    }
+    
+    // ------------------------------------ Match Module ----------------------------------
+    /*
+     * This method will create a match
+     * @param $additional_data, match data to be added
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_match($additional_data)
+    {
+        
+    }
+    
+    /*
+     * This method will update match info
+     * @param $match_id, match id
+     * @param $additional_data, match data to be updated
+     * @Author Nazmul on 24th October 2014
+     */
+    public function update_match($match_id, $additional_data)
+    {
+        
+    }
+    
+    /*
+     * This method will return match info
+     * @param $match_id, match id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_match_info($match_id)
+    {
+        
+    }
+    
+    /*
+     * This method will return all matches
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_all_matches($tournament_id)
+    {
+        $this->db->where($this->tables['app_sp_matches'].'.tournament_id',$tournament_id);
+        return $this->db->select($this->tables['app_sp_matches'].'.id as match_id,'.$this->tables['app_sp_matches'].'.*,'.$this->tables['app_sp_tournaments'].'.title as tournament_name,'.$this->tables['app_sp_tournaments'].'.season, home_team.title as home_team_name, away_team.title as away_team_name,'.$this->tables['app_sp_match_statuses'].'.title as match_status')
+                    ->from($this->tables['app_sp_matches'])
+                    ->join($this->tables['app_sp_tournaments'], $this->tables['app_sp_tournaments'].'.id='.$this->tables['app_sp_matches'].'.tournament_id')
+                    ->join($this->tables['app_sp_match_statuses'], $this->tables['app_sp_match_statuses'].'.id='.$this->tables['app_sp_matches'].'.status_id')
+                    ->join($this->tables['app_sp_teams'].' as home_team', 'home_team.id='.$this->tables['app_sp_matches'].'.team_id_home')
+                    ->join($this->tables['app_sp_teams'].' as away_team', 'away_team.id='.$this->tables['app_sp_matches'].'.team_id_away')
+                    ->get();
+    }
+    
+    /*
+     * This method will delete match info
+     * @param $match_id, match id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function delete_match($match_id)
+    {
+        
+    }
+    
+    // -------------------------------- Match Prediction Module ------------------------
+    /*
+     * This method will create a match prediction
+     * @param $additional_data, match prediction data to be added
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_match_prediction($additional_data)
+    {
+        
+    }
+    
+    // ------------------------------- Home Page Configuration ---------------------------
+    /*
+     * This method will add home page configuration
+     * @param $additional_data, home page configuration data to be added
+     * @Author Nazmul on 24th October 2014
+     */
+    public function add_home_page_configuration($additional_data)
+    {
+        $additional_data = $this->_filter_data($this->tables['app_sp_configure_homepage'], $additional_data);       
+        
+        $this->db->insert($this->tables['app_sp_configure_homepage'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('configure_homepage_successful');
+        return (isset($id)) ? $id : FALSE;
+    }
+    
+    /*
+     * This method will return all home page configurations
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_all_home_page_configurations()
+    {
+        
+    }
+}

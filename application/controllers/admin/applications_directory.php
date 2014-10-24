@@ -99,7 +99,7 @@ class Applications_directory extends CI_Controller{
         $this->data['message'] = '';
         $all_applications_array = $this->admin_application_directory_library->get_all_applications()->result_array();
         $this->data['all_applications'] = $all_applications_array;
-        $this->template->load(null, "admin/applications/directory/index", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/directory/index", $this->data);
     }
     
     /*

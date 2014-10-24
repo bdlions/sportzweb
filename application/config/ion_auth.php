@@ -120,6 +120,13 @@ $config['tables']['blog_configure_homepage']                = 'blog_configure_ho
 $config['tables']['bmi_questions']                          = 'bmi_questions';
 $config['tables']['bmi_home_page_configuration']            = 'bmi_home_page_configuration';
 $config['tables']['photography']                            = 'photography';
+$config['tables']['app_sp_sports']                          = 'app_sp_sports';
+$config['tables']['app_sp_teams']                           = 'app_sp_teams';
+$config['tables']['app_sp_tournaments']                     = 'app_sp_tournaments';
+$config['tables']['app_sp_match_statuses']                  = 'app_sp_match_statuses';
+$config['tables']['app_sp_matches']                         = 'app_sp_matches';
+$config['tables']['app_sp_match_predictions']               = 'app_sp_match_predictions';
+$config['tables']['app_sp_configure_homepage']              = 'app_sp_configure_homepage';
 // visitors
 $config['tables']['pages']                                  = 'pages';
 $config['tables']['page_visitor']                           = 'page_visitor';
@@ -157,7 +164,10 @@ $config['service_identity_column']                      = 'title';
 $config['news_category_identity_column']                = 'title';
 $config['news_sub_category_identity_column']            = 'title';
 $config['blog_category_identity_column']                = 'title';
-
+$config['app_sp_sports_identity_column']                = 'title';
+$config['app_sp_team_identity_column']                  = 'title';
+$config['app_sp_tournament_identity_column1']           = 'title';
+$config['app_sp_tournament_identity_column2']           = 'season';
 $config['application_title_identity_column']            = 'title';
 
 /*

@@ -1564,7 +1564,127 @@ CREATE TABLE `photography`(
   `modified_on` int(11) DEFAULT NULL,
   PRIMARY KEY(`id`)
 )AUTO_INCREMENT=1;
+-- score prediction
+CREATE TABLE IF NOT EXISTS `app_sp_sports` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_sp_sports` (`id`, `title`) VALUES
+(1, 'Football'),
+(2, 'Baseball'),
+(3, 'Formula 1'),
+(4, 'Basketball'),
+(5, 'Boxing'),
+(6, 'Tennis'),
+(7, 'Cricket'),
+(8, 'Rugby');
+CREATE TABLE IF NOT EXISTS `app_sp_teams` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_sp_teams` (`id`, `title`) VALUES
+(1, 'Chelsea'),
+(2, 'Southampton'),
+(3, 'Aston Villa'),
+(4, 'Arsenal'),
+(5, 'Swansea'),
+(6, 'Man City'),
+(7, 'Leicester'),
+(8, 'West Ham'),
+(9, 'Tottenham'),
+(10, 'Hull');
 
+CREATE TABLE IF NOT EXISTS `app_sp_tournaments` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `sports_id` int(11) unsigned NOT NULL,
+  `title` varchar(200),
+  `season` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_app_sp_tournaments` (`title`, `season`),
+  KEY `fk_app_sp_tournaments_sports1_idx` (`sports_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_sp_tournaments`
+    ADD CONSTRAINT `fk_app_sp_tournaments_sports1` FOREIGN KEY(`sports_id`) REFERENCES `app_sp_sports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `app_sp_tournaments` (`id`, `sports_id`, `title`, `season`) VALUES
+(1, 1, 'Barclays premier league', '2014/2015'),
+(2, 1, 'Championship', '2014/2015'),
+(3, 1, 'League one', '2014/2015');
+
+CREATE TABLE IF NOT EXISTS `app_sp_match_statuses` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_sp_match_statuses` (`id`, `title`) VALUES
+(1, 'Upcoming'),
+(2, 'Win_home'),
+(3, 'Win_away'),
+(4, 'Draw'),
+(5, 'Cancel');
+
+CREATE TABLE IF NOT EXISTS `app_sp_matches` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tournament_id` int(11) unsigned NOT NULL,
+  `team_id_home` int(11) unsigned NOT NULL,
+  `team_id_away` int(11) unsigned NOT NULL,
+  `date` varchar(200),
+  `time` varchar(200),
+  `score_home` varchar(200),
+  `score_away` varchar(200),
+  `status_id` int(11) unsigned DEFAULT 1,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_app_sp_matches_tournaments1_idx` (`tournament_id`),
+  KEY `fk_app_sp_matches_teams1_idx` (`team_id_home`),
+  KEY `fk_app_sp_matches_teams2_idx` (`team_id_away`),
+  KEY `fk_app_sp_matches_statuses1_idx` (`status_id`)
+  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_sp_matches`
+    ADD CONSTRAINT `fk_app_sp_matches_tournaments1` FOREIGN KEY(`tournament_id`) REFERENCES `app_sp_tournaments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_app_sp_matches_teams1` FOREIGN KEY(`team_id_home`) REFERENCES `app_sp_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_app_sp_matches_teams2` FOREIGN KEY(`team_id_away`) REFERENCES `app_sp_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_app_sp_matches_statuses1` FOREIGN KEY(`status_id`) REFERENCES `app_sp_match_statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `app_sp_matches` (`id`, `tournament_id`, `team_id_home`, `team_id_away`, `date`, `time`) VALUES
+(1, 1, 1, 2, '2014-06-17', '09:00'),
+(2, 1, 3, 4, '2014-06-17', '11:00');
+CREATE TABLE IF NOT EXISTS `app_sp_match_predictions` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `match_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `status_id` int(11) unsigned DEFAULT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `app_sp_match_predictions_matches1_idx` (`match_id`),
+  KEY `app_sp_match_predictions_users1_idx` (`user_id`),
+  KEY `app_sp_match_predictions_statuses1_idx` (`status_id`)
+  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_sp_match_predictions`
+	ADD CONSTRAINT `app_sp_match_predictions_matches1` FOREIGN KEY(`match_id`) REFERENCES `app_sp_matches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_sp_match_predictions_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_sp_match_predictions_statuses1` FOREIGN KEY(`status_id`) REFERENCES `app_sp_match_statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE IF NOT EXISTS `app_sp_configure_homepage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sports_id` int(11) unsigned NOT NULL,
+  `selected_date` varchar(25) NOT NULL,
+  `created_on` int(11) DEFAULT NULL,
+  `modified_on` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_app_sp_configure_homepage_sports1_idx` (`sports_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+ALTER TABLE `app_sp_configure_homepage`
+    ADD CONSTRAINT `fk_app_sp_configure_homepage_sports1` FOREIGN KEY(`sports_id`) REFERENCES `app_sp_sports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 -- Visitor log
 CREATE TABLE `pages`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

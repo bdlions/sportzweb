@@ -1816,6 +1816,16 @@ class Ion_auth_model extends CI_Model {
         return $_output;
     }
     
+    public function messages_alert() {
+        $_output = '';
+        foreach ($this->messages as $message) {
+            $messageLang = $this->lang->line($message) ? $this->lang->line($message) : '##' . $message . '##';
+            $_output .= $messageLang;
+        }
+
+        return $_output;
+    }
+    
     /* 
      * This method will return messages for rpc call of mobile app
      * @Author Nazmul on 26th September 2014
