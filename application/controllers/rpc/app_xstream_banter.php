@@ -36,8 +36,8 @@ class App_xstream_banter extends JsonRPCServer {
         $response = array();
         $data = json_decode($sports_data);
         /*$data = new stdClass();
-        $data->sports_id = 2;*/
-        $sports_id = $data->sports_id;
+        $data->id = 2;*/
+        $sports_id = $data->id;
         $tournament_list = $this->xstream_banter_library->app_get_all_tournaments($sports_id)->result_array();
         $response['tournament_list'] = $tournament_list;
         return json_encode($response);
