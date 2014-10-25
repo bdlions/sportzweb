@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 <div class="container-fluid">
     <div class="row">
-        <h1>Score Prediction</h1>
+        <h1>Fixtures & Results</h1>
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>
         <div class="col-md-7 pull-left">
             <div class="heading blue_banner">

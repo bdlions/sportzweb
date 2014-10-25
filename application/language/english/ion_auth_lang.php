@@ -82,10 +82,14 @@ $lang['delete_team_unsuccessful']            = "Unable to delete team info";
 $lang['delete_team_successful']              = "Team is deleted successfully";
 
 $lang['create_tournament_successful']        = "Tournament is created successfully";
-$lang['update_tournament_duplicate_title']   = "Tournament Name Already used or invalid";
+$lang['update_tournament_duplicate_title']   = "Tournament Name and season already used or invalid";
+$lang['update_tournament_duplicate_season']  = "Tournament Name and season already used or invalid";
 $lang['update_tournament_unsuccessful']      = "Unable to update tournament info";
 $lang['update_tournament_successful']        = "Tournament is updated successfully";
 $lang['delete_tournament_unsuccessful']      = "Unable to delete tournament info";
 $lang['delete_tournament_successful']        = "Tournament is deleted successfully";
+
+$lang['delete_match_successful']             = "Match deleted successfully.";
+$lang['delete_match_unsuccessful']           = "Match is not deleted!";
 
 $lang['configure_homepage_successful']        = "Homepage is configured successfully";

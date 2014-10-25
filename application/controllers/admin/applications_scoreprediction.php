@@ -196,7 +196,21 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function create_team()
     {
-        
+        $result = array();
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title,
+            'created_on' => now()
+        );
+        if($this->admin_score_prediction_library->create_team($additional_data))
+        {
+            $result['message'] = $this->admin_score_prediction_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_score_prediction_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     /*
      * Ajax call to get team info
@@ -204,7 +218,14 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function get_team_info()
     {
-        
+        $result['team_info'] = array();
+        $team_id = $this->input->post('team_id');
+        $team_info_array = $this->admin_score_prediction_library->get_team_info($team_id)->result_array();
+        if(!empty($team_info_array))
+        {
+            $result['team_info'] = $team_info_array[0];
+        }
+        echo json_encode($result);
     }
     /*
      * Ajax call to update team
@@ -212,7 +233,22 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function update_team()
     {
-        
+        $result = array();
+        $team_id = $this->input->post('team_id');
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title,
+            'modified_on' => now()
+        );
+        if($this->admin_score_prediction_library->update_team($team_id, $additional_data))
+        {
+            $result['message'] = $this->admin_score_prediction_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_score_prediction_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     /*
@@ -221,13 +257,24 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function delete_team()
     {
-        
+        $result = array();
+        $team_id = $this->input->post('team_id');
+        if($this->admin_score_prediction_library->delete_team($team_id))
+        {
+            $result['message'] = $this->admin_score_prediction_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_score_prediction_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     // ----------------------------------- Tournament Module -----------------------------
-    public function manage_tournaments()
+    public function manage_tournaments($tournament_id)
     {
         $this->data['message'] = '';
+        $this->data['tournament_id'] = $tournament_id;
         $this->data['tournament_list'] = $this->admin_score_prediction_library->get_all_tournaments()->result_array();
         $this->template->load($this->tmpl, "admin/applications/score_prediction/tournament_list", $this->data);
     }
@@ -238,7 +285,25 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function create_tournament()
     {
-        
+        $result = array();
+        $title = $this->input->post('title');
+        $tournament_id = $this->input->post('tournament_id');
+        $season = $this->input->post('season');
+        $additional_data = array(
+            'title' => $title,
+            'tournament_id' => $tournament_id,
+            'season' => $season,
+            'created_on' => now()
+        );
+        if($this->admin_score_prediction_library->create_tournament($additional_data))
+        {
+            $result['message'] = $this->admin_score_prediction_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_score_prediction_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     /*
      * Ajax call to get tournament info
@@ -246,7 +311,14 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function get_tournament_info()
     {
-        
+        $result['tournament_info'] = array();
+        $tournament_id = $this->input->post('tournament_id');
+        $tournament_info_array = $this->admin_score_prediction_library->get_tournament_info($tournament_id)->result_array();
+        if(!empty($tournament_info_array))
+        {
+            $result['tournament_info'] = $tournament_info_array[0];
+        }
+        echo json_encode($result);
     }
     /*
      * Ajax call to update tournament
@@ -254,7 +326,24 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function update_tournament()
     {
-        
+        $result = array();
+        $tournament_id = $this->input->post('tournament_id');
+        $season = $this->input->post('season');
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title,
+            'season' => $season,
+            'modified_on' => now()
+        );
+        if($this->admin_score_prediction_library->update_tournament($tournament_id, $additional_data))
+        {
+            $result['message'] = $this->admin_score_prediction_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_score_prediction_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     /*
@@ -263,7 +352,17 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function delete_tournament()
     {
-        
+        $result = array();
+        $tournament_id = $this->input->post('tournament_id');
+        if($this->admin_score_prediction_library->delete_tournament($tournament_id))
+        {
+            $result['message'] = $this->admin_score_prediction_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_score_prediction_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     // ---------------------------------- Match Module ------------------------------
@@ -283,6 +382,7 @@ class Applications_scoreprediction extends CI_Controller{
     public function create_match($tournament_id)
     {
         $this->data['message'] = '';
+        $this->data['tournament_id'] = $tournament_id;
         $this->template->load($this->tmpl, "admin/applications/score_prediction/match_create", $this->data);
     }
     
@@ -303,7 +403,17 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function delete_match()
     {
-        
+        $result = array();
+        $match_id = $this->input->post('match_id');
+        if($this->admin_score_prediction_library->delete_match($match_id))
+        {
+            $result['message'] = $this->admin_score_prediction_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_score_prediction_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     // ----------------------------- Home page configuration module -----------------------

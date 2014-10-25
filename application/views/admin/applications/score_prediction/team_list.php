@@ -5,7 +5,7 @@
             <div class="row form-group" style="padding-left: 10px;">
                 <?php if($allow_write){ ?>
                 <div class ="col-md-2 pull-left">
-                    <button id="button_create_team" value="" class="form-control btn button-custom pull-right">Create Team</button>  
+                    <button onclick="open_modal_team_create()" value="" class="form-control btn button-custom pull-right">Create Team</button>  
                 </div>
                 <?php } ?>
             </div>
@@ -15,19 +15,32 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th style="text-align: right">Id</th>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">Edit</th>
+                                <th style="text-align: center">Delete</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_sports_list">                
+                        <tbody id="tbody_team_list">                
                             <?php foreach($team_list as $team){?>
                             <tr>
-                                <td><?php echo $team['team_id']?></td>
-                                <td><?php echo $team['title']?></td>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <td style="text-align: right"><?php echo $team['team_id']?></td>
+                                <td style="text-align: center"><?php echo $team['title']?></td>
+                                <?php if($allow_edit){ ?>
+                                <td style="text-align: center">
+                                    <button onclick="open_modal_team_update('<?php echo $team['team_id']; ?>')" value="" class="form-control btn pull-right">
+                                        Edit
+                                    </button>
+                                </td> 
+                                <?php } ?>
+                                
+                                <?php if($allow_delete){ ?> 
+                                <td style="text-align: center">
+                                    <button onclick="open_modal_team_delete_confirm('<?php echo $team['team_id']; ?>')" value="" class="form-control btn pull-right">
+                                        Delete
+                                    </button>
+                                </td>
+                                <?php } ?>
                             </tr>
                             <?php } ?>                            
                         </tbody>
@@ -40,3 +53,9 @@
         </div>
     </div>
 </div>
+
+<?php 
+$this->load->view("admin/applications/score_prediction/modal/team_create");
+$this->load->view("admin/applications/score_prediction/modal/team_update");
+$this->load->view("admin/applications/score_prediction/modal/team_delete_confirm");
+?>

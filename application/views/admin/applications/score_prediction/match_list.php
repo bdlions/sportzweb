@@ -17,39 +17,45 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Tournament</th>
-                                <th>Season</th>
-                                <th>Home</th>
-                                <th>Away</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Home Score</th>
-                                <th>Away Score</th>
-                                <th>Status</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th style="text-align: center">Id</th>
+                                <th style="text-align: center">Tournament</th>
+                                <th style="text-align: center">Season</th>
+                                <th style="text-align: center">Home</th>
+                                <th style="text-align: center">Away</th>
+                                <th style="text-align: center">Date</th>
+                                <th style="text-align: center">Time</th>
+                                <th style="text-align: center">Home Score</th>
+                                <th style="text-align: center">Away Score</th>
+                                <th style="text-align: center">Status</th>
+                                <th style="text-align: center">Edit</th>
+                                <th style="text-align: center">Delete</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_sports_list">                
                             <?php foreach($match_list as $match){?>
                             <tr>
-                                <td><?php echo $match['match_id']?></td>
-                                <td><?php echo $match['tournament_name']?></td>
-                                <td><?php echo $match['season']?></td>
-                                <td><?php echo $match['home_team_name']?></td>
-                                <td><?php echo $match['away_team_name']?></td>
-                                <td><?php echo $match['date']?></td>
-                                <td><?php echo $match['time']?></td>
-                                <td><?php echo $match['score_home']?></td>
-                                <td><?php echo $match['score_away']?></td>
-                                <td><?php echo $match['match_status']?></td>
-                                <td>
+                                <td style="text-align: center"><?php echo $match['match_id']?></td>
+                                <td style="text-align: center"><?php echo $match['tournament_name']?></td>
+                                <td style="text-align: center"><?php echo $match['season']?></td>
+                                <td style="text-align: center"><?php echo $match['home_team_name']?></td>
+                                <td style="text-align: center"><?php echo $match['away_team_name']?></td>
+                                <td style="text-align: center"><?php echo $match['date']?></td>
+                                <td style="text-align: center"><?php echo $match['time']?></td>
+                                <td style="text-align: center"><?php echo $match['score_home']?></td>
+                                <td style="text-align: center"><?php echo $match['score_away']?></td>
+                                <td style="text-align: center"><?php echo $match['match_status']?></td>
+                                <td style="text-align: center">
                                     <a href="<?php echo base_url()."admin/applications_scoreprediction/update_match/".$match['match_id'];?>">
                                         Edit
                                     </a>
                                 </td>
-                                <td>Delete</td>
+                                <?php if($allow_delete){ ?> 
+                                <td style="text-align: center">
+                                    <button onclick="open_modal_match_delete_confirm('<?php echo $match['match_id']; ?>')" value="" class="form-control btn pull-right">
+                                        Delete
+                                    </button>
+                                </td>
+                                <?php } ?>
                             </tr>
                             <?php } ?>                            
                         </tbody>
@@ -62,3 +68,8 @@
         </div>
     </div>
 </div>
+<?php 
+//$this->load->view("admin/applications/score_prediction/modal/team_create");
+//$this->load->view("admin/applications/score_prediction/modal/team_update");
+$this->load->view("admin/applications/score_prediction/modal/match_delete_confirm");
+?>

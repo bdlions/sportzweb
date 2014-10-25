@@ -136,7 +136,12 @@ class Admin_score_prediction_model extends Ion_auth_model
      * @Author Nazmul on 24th October 2014
      */
     public function team_identity_check($identity = '') {
-        
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->team_identity_column,$identity);
+        return $this->db->count_all_results($this->tables['app_sp_teams']) > 0;
     }
     /*
      * This method will create a team
@@ -145,7 +150,17 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function create_team($additional_data)
     {
+        if (array_key_exists($this->team_identity_column, $additional_data) && $this->team_identity_check($additional_data[$this->team_identity_column]) )
+        {
+            $this->set_error('update_team_duplicate_' . $this->team_identity_column);
+            return FALSE;
+        }
+        $additional_data = $this->_filter_data($this->tables['app_sp_teams'], $additional_data);       
         
+        $this->db->insert($this->tables['app_sp_teams'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_team_successful');
+        return (isset($id)) ? $id : FALSE;
     }
     
     /*
@@ -156,7 +171,20 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function update_team($team_id, $additional_data)
     {
-        
+        $team_info = $this->get_team_info($team_id)->row();
+        if (array_key_exists($this->team_identity_column, $additional_data) && $this->team_identity_check($additional_data[$this->team_identity_column]) && $team_info->{$this->team_identity_column} !== $additional_data[$this->team_identity_column])
+        {
+            $this->set_error('update_team_duplicate_' . $this->team_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_sp_teams'], $additional_data);
+        $this->db->update($this->tables['app_sp_teams'], $data, array('id' => $team_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_team_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('update_team_successful');
+        return TRUE;
     }
     
     /*
@@ -166,7 +194,10 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function get_team_info($team_id)
     {
-        
+        $this->db->where($this->tables['app_sp_teams'].'.id', $team_id);
+        return $this->db->select($this->tables['app_sp_teams'].'.id as team_id,'.$this->tables['app_sp_teams'].'.*')
+                    ->from($this->tables['app_sp_teams'])
+                    ->get();
     }
     
     /*
@@ -187,7 +218,20 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function delete_team($team_id)
     {
+        if(!isset($team_id) || $team_id <= 0)
+        {
+            $this->set_error('delete_team_unsuccessful');
+            return FALSE;
+        }
+        $this->db->where('id',$team_id);
+        $this->db->delete($this->tables['app_sp_teams']);
         
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_team_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('delete_team_successful');
+        return TRUE;
     }
     
     // -------------------------- Tournament Module ------------------------------------
@@ -198,7 +242,13 @@ class Admin_score_prediction_model extends Ion_auth_model
      * @Author Nazmul on 24th October 2014
      */
     public function tournament_identity_check($identity1 = '', $identity2 = '') {
-        
+        if(empty($identity1) || empty($identity2))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->tournament_identity_column1,$identity1);
+        $this->db->where($this->tournament_identity_column2,$identity2);
+        return $this->db->count_all_results($this->tables['app_sp_tournaments']) > 0;
     }
     /*
      * This method will create a tournament
@@ -207,7 +257,17 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function create_tournament($additional_data)
     {
+        if ( array_key_exists($this->tournament_identity_column1, $additional_data) && array_key_exists($this->tournament_identity_column2, $additional_data) && $this->tournament_identity_check($additional_data[$this->tournament_identity_column1], $additional_data[$this->tournament_identity_column2]) )
+        {
+            $this->set_error('update_tournament_duplicate_' . $this->tournament_identity_column1);
+            return FALSE;
+        }
+        $additional_data = $this->_filter_data($this->tables['app_sp_tournaments'], $additional_data);       
         
+        $this->db->insert($this->tables['app_sp_tournaments'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_tournament_successful');
+        return (isset($id)) ? $id : FALSE;
     }
     
     /*
@@ -218,7 +278,20 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function update_tournament($tournament_id, $additional_data)
     {
-        
+        $tournament_info = $this->get_tournament_info($tournament_id)->row();
+        if ( array_key_exists($this->tournament_identity_column1, $additional_data) && array_key_exists($this->tournament_identity_column2, $additional_data) && $this->tournament_identity_check($additional_data[$this->tournament_identity_column1], $additional_data[$this->tournament_identity_column2]) )
+        {
+            $this->set_error('update_tournament_duplicate_' . $this->tournament_identity_column1);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_sp_tournaments'], $additional_data);
+        $this->db->update($this->tables['app_sp_tournaments'], $data, array('id' => $tournament_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_tournament_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('update_tournament_successful');
+        return TRUE;
     }
     
     /*
@@ -228,7 +301,10 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function get_tournament_info($tournament_id)
     {
-        
+        $this->db->where($this->tables['app_sp_tournaments'].'.id', $tournament_id);
+        return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id,'.$this->tables['app_sp_tournaments'].'.*')
+                    ->from($this->tables['app_sp_tournaments'])
+                    ->get();
     }
     
     /*
@@ -249,7 +325,20 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function delete_tournament($tournament_id)
     {
+        if(!isset($tournament_id) || $tournament_id <= 0)
+        {
+            $this->set_error('delete_tournament_unsuccessful');
+            return FALSE;
+        }
+        $this->db->where('id',$tournament_id);
+        $this->db->delete($this->tables['app_sp_tournaments']);
         
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_tournament_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('delete_tournament_successful');
+        return TRUE;
     }
     
     // ----------------------------------- Match status module -------------------------
@@ -317,7 +406,20 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function delete_match($match_id)
     {
+        if(!isset($match_id) || $match_id <= 0)
+        {
+            $this->set_error('delete_match_unsuccessful');
+            return FALSE;
+        }
+        $this->db->where('id',$match_id);
+        $this->db->delete($this->tables['app_sp_matches']);
         
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_match_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('delete_match_successful');
+        return TRUE;
     }
     
     // -------------------------------- Match Prediction Module ------------------------

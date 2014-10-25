@@ -183,33 +183,33 @@ window.onload = function()
                 </div>
                 
                 <div class="form-group">
-                        <label for="website" class="col-md-6 control-label requiredField">
-                            Set Service picture
-                        </label>
-                        <div class ="col-md-6">
-                            <div class="col-md-6">
-                                <div class="row fileinput-button">
-                                    <i class="glyphicon glyphicon-plus"></i>
-                                    <span>Upload a photo</span>
-                                    <input id="fileupload" type="file" name="userfile">
-                                </div>
-                                <div id="progress" class="row progress">
-                                    <div class="progress-bar progress-bar-success"></div>
-                                </div>
+                    <label for="website" class="col-md-6 control-label requiredField">
+                        Set Service picture
+                    </label>
+                    <div class ="col-md-6">
+                        <div class="col-md-6">
+                            <div class="row fileinput-button">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                <span>Upload a photo</span>
+                                <input id="fileupload" type="file" name="userfile">
                             </div>
+                            <div id="progress" class="row progress">
+                                <div class="progress-bar progress-bar-success"></div>
+                            </div>
+                        </div>
 
-                            <div class=" col-md-6">
-                                <div class="profile-picture-box" >
-                                    <div id="files" class="files">
-                                        <img style="width: 120px; height: 120px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $image; ?>" class="img-responsive"/>
-                                        <br>
-                                    </div>
+                        <div class=" col-md-6">
+                            <div class="profile-picture-box" >
+                                <div id="files" class="files">
+                                    <img style="width: 120px; height: 120px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $image; ?>" class="img-responsive"/>
+                                    <br>
                                 </div>
                             </div>
-                        
-                            <div class="col-md-offset-8 col-md-4 disable_padding_right" id="upload">
-                                <input id="btnSubmit" type="submit" value="Update" class="btn button-custom pull-right"/>
-                            </div>
+                        </div>
+
+                        <div class="col-md-offset-8 col-md-4 disable_padding_right" id="upload">
+                            <input id="btnSubmit" type="submit" value="Update" class="btn button-custom pull-right"/>
+                        </div>
                     </div>
                 </div>
 

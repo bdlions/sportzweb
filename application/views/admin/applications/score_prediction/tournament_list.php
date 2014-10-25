@@ -5,7 +5,7 @@
             <div class="row form-group" style="padding-left: 10px;">
                 <?php if($allow_write){ ?>
                 <div class ="col-md-2 pull-left">
-                    <button id="button_create_tournament" value="" class="form-control btn button-custom pull-right">Create Tournament</button>  
+                    <button onclick="open_modal_tournament_create()" value="" class="form-control btn button-custom pull-right">Create Tournament</button>  
                 </div>
                 <?php } ?>
             </div>
@@ -15,21 +15,33 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Season</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th style="text-align: center">Id</th>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">Season</th>
+                                <th style="text-align: center">Edit</th>
+                                <th style="text-align: center">Delete</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_sports_list">                
+                        <tbody id="tbody_tournament_list">                
                             <?php foreach($tournament_list as $tournament){?>
                             <tr>
-                                <td><a href="<?php echo base_url()."admin/applications_scoreprediction/manage_matches/".$tournament['tournament_id']; ?>"><?php echo $tournament['tournament_id']?></a></td>
-                                <td><?php echo $tournament['title']?></td>
-                                <td><?php echo $tournament['season']?></td>
-                                <td>Edit</td>
-                                <td>Delete</td>
+                                <td style="text-align: center"><a href="<?php echo base_url()."admin/applications_scoreprediction/manage_matches/".$tournament['tournament_id']; ?>"><?php echo $tournament['tournament_id']?></a></td>
+                                <td style="text-align: center"><?php echo $tournament['title']?></td>
+                                <td style="text-align: center"><?php echo $tournament['season']?></td>
+                                <?php if($allow_edit){ ?>
+                                <td>
+                                    <button onclick="open_modal_tournament_update('<?php echo $tournament['tournament_id']; ?>')" value="" class="form-control btn pull-right">
+                                        Edit
+                                    </button>
+                                </td>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
+                                <td>
+                                    <button onclick="open_modal_tournament_delete_confirm('<?php echo $tournament['tournament_id']; ?>')" value="" class="form-control btn pull-right">
+                                        Delete
+                                    </button>
+                                </td>
+                                <?php } ?>
                             </tr>
                             <?php } ?>                            
                         </tbody>
@@ -42,3 +54,9 @@
         </div>
     </div>
 </div>
+
+<?php 
+$this->load->view("admin/applications/score_prediction/modal/tournament_create");
+$this->load->view("admin/applications/score_prediction/modal/tournament_update");
+$this->load->view("admin/applications/score_prediction/modal/tournament_delete_confirm");
+?>

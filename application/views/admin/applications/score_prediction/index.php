@@ -44,14 +44,14 @@
                                 <td><?php echo $sports['title']?></td>
                                 <?php if($allow_edit){ ?>
                                 <td>
-                                    <button onclick="open_modal_sports_update('<?php echo $sports['id']; ?>')" value="" class="form-control btn pull-right">
+                                    <button onclick="open_modal_sports_update('<?php echo $sports['sports_id']; ?>')" value="" class="form-control btn pull-right">
                                         Edit
                                     </button> 
                                 </td>
                                 <?php } ?>
                                 <?php if($allow_delete){ ?>
                                 <td>
-                                    <button onclick="open_modal_sports_delete_confirm('<?php echo $sports['id']; ?>')" value="" class="form-control btn pull-right">
+                                    <button onclick="open_modal_sports_delete_confirm('<?php echo $sports['sports_id']; ?>')" value="" class="form-control btn pull-right">
                                         Delete
                                     </button>
                                 </td>
@@ -72,3 +72,4 @@
 $this->load->view("admin/applications/score_prediction/modal/sports_create");
 $this->load->view("admin/applications/score_prediction/modal/sports_update");
 $this->load->view("admin/applications/score_prediction/modal/sports_delete_confirm");
+?>
