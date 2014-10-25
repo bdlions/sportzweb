@@ -56,4 +56,52 @@ class App_news extends JsonRPCServer {
         $response['news_list'] = $news_list;
         return json_encode($response);
     }
+    
+    function get_news_list($news_category_id, $news_subcategory_id)
+    {
+        $response = array();
+        $news_subcategory_list = array();
+        $news_list = array();
+        $news_configuration = array();
+        $news_subcategory_list_array = array();
+        if($news_category_id > 0)
+        {
+            $news_configuration = $this->news_app_library->get_news_category_configuration($news_category_id);            
+            $news_subcategory_list_array = $this->news_app_library->get_all_news_sub_category($news_category_id)->result_array();
+        
+        }
+        else if($news_subcategory_id > 0)
+        {
+            $news_configuration = $this->news_app_library->get_news_sub_category_configuration($news_subcategory_id);
+        }
+        if(!empty($news_configuration))
+        {
+            if(array_key_exists('news_id_news_info_map', $news_configuration))
+            {
+                $news_list_array = $news_configuration['news_id_news_info_map'];
+                foreach($news_list_array as $news_info)
+                {
+                    $news = array(
+                        'id' => $news_info['news_id'],
+                        'news_id' => $news_info['news_id'],
+                        'headline' => $news_info['headline'],
+                        'picture' => $news_info['picture']
+                    );
+                    $news_list[] = $news;
+                }
+            }
+        }
+        foreach($news_subcategory_list_array as $subcategory_info)
+        {
+            $subcategory = array(
+                'id' => $subcategory_info['id'],
+                'title' => $subcategory_info['title']
+            );
+            $news_subcategory_list[] = $subcategory;
+        }
+        $response['news_subcategory_list'] = $news_subcategory_list;
+        $response['news_list'] = $news_list;        
+        return json_encode($response);
+        
+    }
 }
