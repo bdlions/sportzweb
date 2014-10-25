@@ -1026,7 +1026,9 @@ INSERT INTO `application_directory` (`id`, `title`) VALUES
 (4, 'News'),
 (5, 'Blogs'),
 (6, 'BMI Calculator'),
-(7, 'Photography');
+(7, 'Photography'),
+(8, 'Score Prediction');
+
 -- -----------Xstream Banter --------------------
 CREATE TABLE IF NOT EXISTS `sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
