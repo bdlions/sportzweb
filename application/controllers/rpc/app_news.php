@@ -27,6 +27,11 @@ class App_news extends JsonRPCServer {
     {
         $response = array();
         $news_category_list = array();
+        $category = array(
+            'id' => 0,
+            'title' => 'Home'
+        );
+        $news_category_list[] = $category;
         $news_list = array();
         $news_category_list_array = $this->news_app_library->get_all_news_category()->result_array();
         foreach($news_category_list_array as $news_category)
