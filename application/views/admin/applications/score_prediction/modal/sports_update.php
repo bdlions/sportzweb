@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(function() {
         $("#button_update_sports").on("click", function() {
-            if ($("#input_sports_title").val().length == 0)
+            if ($("#input_sports_update_title").val().length == 0)
             {
                 alert("Please assign sports name");
                 return;
@@ -11,7 +11,7 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>' + "admin/applications_scoreprediction/update_sports",
                 data: {
-                    title: $("#input_sports_title").val(),
+                    title: $("#input_sports_update_title").val(),
                     sports_id: $("#input_sports_id").val()
                 },
                 success: function(data) {
@@ -32,7 +32,7 @@
             },
             success: function(data) {
                 $('#input_sports_id').val(data.sports_info['sports_id']);
-                $('#input_sports_title').val(data.sports_info['title']);
+                $('#input_sports_update_title').val(data.sports_info['title']);
                 $("#modal_sports_update").modal('show');
             }
         });
@@ -51,7 +51,7 @@
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Sports Name:</label>
                         <div class ="col-sm-4">
-                            <input id="input_sports_title" name="input_sports_title" value="" type="text" class="form-control"/>
+                            <input id="input_sports_update_title" name="input_sports_update_title" value="" type="text" class="form-control"/>
                             <input id="input_sports_id" name="input_sports_id" value="" type="hidden" class="form-control"/>
                         </div>
                     </div>
