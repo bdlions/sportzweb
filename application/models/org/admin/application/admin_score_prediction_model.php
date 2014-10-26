@@ -279,7 +279,7 @@ class Admin_score_prediction_model extends Ion_auth_model
     public function update_tournament($tournament_id, $additional_data)
     {
         $tournament_info = $this->get_tournament_info($tournament_id)->row();
-        if ( array_key_exists($this->tournament_identity_column1, $additional_data) && array_key_exists($this->tournament_identity_column2, $additional_data) && $this->tournament_identity_check($additional_data[$this->tournament_identity_column1], $additional_data[$this->tournament_identity_column2]) )
+        if ( array_key_exists($this->tournament_identity_column1, $additional_data) && array_key_exists($this->tournament_identity_column2, $additional_data) && $this->tournament_identity_check($additional_data[$this->tournament_identity_column1], $additional_data[$this->tournament_identity_column2])  && $tournament_info ->{$this->tournament_identity_column1} !== $additional_data[$this->tournament_identity_column1] && $tournament_info ->{$this->tournament_identity_column2} !== $additional_data[$this->tournament_identity_column2])
         {
             $this->set_error('update_tournament_duplicate_' . $this->tournament_identity_column1);
             return FALSE;

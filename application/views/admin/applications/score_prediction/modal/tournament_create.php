@@ -16,7 +16,7 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>' + "admin/applications_scoreprediction/create_tournament",
                 data: {
-                    tournament_id: '<?php echo $tournament_id?>',
+                    sports_id: '<?php echo $sports_id?>',
                     title: $("#input_tournament_create_title").val(),
                     season: $("#input_tournament_create_season").val()
                 },
