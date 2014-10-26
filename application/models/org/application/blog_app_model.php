@@ -396,5 +396,20 @@ class Blog_app_model extends Ion_auth_model {
                     ->get();
         //echo $this->db->last_query();exit('here');
     }
+    
+    // --------------------------------Mobile app module -----------------------------------
+    public function get_all_blog_categories()
+    {
+        return $this->db->select("*")
+                    ->from($this->tables['blog_category'])
+                    ->get(); 
+    }
+    
+    public function get_all_blog_custom_categories()
+    {
+        return $this->db->select("*")
+                    ->from($this->tables['blog_custom_category'])
+                    ->get(); 
+    }
 
 }
