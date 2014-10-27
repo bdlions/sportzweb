@@ -86,132 +86,144 @@
         <div>Be more productive with applications.</div>
     </div>
     
+<script type="text/javascript" src="<?php echo base_url()?>resources/js/jquery-1.7.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo base_url()?>resources/js/jquery.featureCarousel.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+      $(document).ready(function() {
+        var carousel = $("#carousel").featureCarousel({
+          // include options like this:
+          // (use quotes only for string values, and no trailing comma after last option)
+          // option: value,
+          // option: value
+        });
 
-
-<script type="text/javascript" src="<?php echo base_url()?>resources/js/jssor.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>resources/js/jssor.slider.mini.js"></script>
-<script>
-
-    jQuery(document).ready(function ($) {
-        var options = {
-            $AutoPlay: true,
-
-            $PauseOnHover: true,                               //[Optional] Whether to pause when mouse over if a slideshow is auto playing, default value is false
-
-            $ArrowKeyNavigation: true,   			            //Allows arrow key to navigate or not
-            $SlideWidth: 800,                                   //[Optional] Width of every slide in pixels, the default is width of 'slides' container
-            //$SlideHeight: 300,                                  //[Optional] Height of every slide in pixels, the default is width of 'slides' container
-            $SlideSpacing: 0, 					                //Space between each slide in pixels
-            $DisplayPieces: 2,                                  //Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
-            $ParkingPosition: 170,                                //The offset position to park slide (this options applys only when slideshow disabled).
-
-            $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
-                $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
-                $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
-                $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
-                $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
-            }
-        };
-
-        var jssor_slider1 = new $JssorSlider$("slider1_container", options);
-
-        //responsive code begin
-        //you can remove responsive code if you don't want the slider scales while window resizes
-        function ScaleSlider() {
-            var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
-            if (parentWidth)
-                jssor_slider1.$ScaleWidth(Math.min(parentWidth, 1140));
-            else
-                window.setTimeout(ScaleSlider, 30);
-        }
-
-        ScaleSlider();
-
-        if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-            $(window).bind('resize', ScaleSlider);
-        }
-
-
-        //if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
-        //    $(window).bind("orientationchange", ScaleSlider);
-        //}
-        //responsive code end
-    });
-</script>
-
+        $("#but_prev").click(function () {
+          carousel.prev();
+        });
+        $("#but_pause").click(function () {
+          carousel.pause();
+        });
+        $("#but_start").click(function () {
+          carousel.start();
+        });
+        $("#but_next").click(function () {
+          carousel.next();
+        });
+      });
+    </script>
+    <style>
+/********************
+ * FEATURE CAROUSEL *
+********************/
+.carousel-container {
+  position:relative;
+  width:960px;
+}
+#carousel {
+  height:300px;
+  width:960px;
+  /*background-color:#CCC;*/
+  position:relative;
+  margin-bottom:0.5em;
+  font-size:12px;
+  font-family: Arial;
+}
+.carousel-image {
+    height: 250px;
+    width: 500px;
+  /*border:0;*/
+  display:block;
+}
+.carousel-feature {
+  position:absolute;
+  top:-1000px;
+  left:-1000px;
+  /*border:2px solid #5d5d5d;*/
+  cursor:pointer;
+}
+.carousel-feature .carousel-caption {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  background-color:#000;
+}
+.carousel-feature .carousel-caption p {
+  /*margin:0;*/
+  padding:5px;
+  font-weight:bold;
+  font-size:12px;
+  color:white;
+}
+.tracker-summation-container {
+  position:absolute;
+  color:transparent;
+  right:48px;
+  top:230px;
+  padding:3px;
+  margin:3px;
+  background-color:transparent;
+}
+.tracker-individual-container {
+  position:absolute;
+  color:transparent;
+  right:48px;
+  top:210px;
+  padding:0;
+  margin:0;
+}
+.tracker-individual-container li {
+  list-style:none;
+}
+.tracker-individual-container .tracker-individual-blip {
+  margin:0 3px;
+  padding:0 3px;
+  color:transparent;
+  text-align:center;
+  background-color:transparent;
+}
+.tracker-individual-container .tracker-individual-blip-selected {
+  color:transparent;
+  font-weight:bold;
+  background-color:transparent;
+}
+#carousel-left {
+  position:absolute;
+  bottom:33px;
+  left:220px;
+  cursor:pointer;
+}
+#carousel-right img,  
+#carousel-left img 
+{
+    height: 30px;
+}
+#carousel-right {
+  position:absolute;
+  bottom:33px;
+  right:220px;
+  cursor:pointer;
+}
+    </style>
 
 <!--NEW CAROUSEL-->
 <div class="col-md-12" style="margin-bottom: 25px">
-
-<!--<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px; height: 300px; overflow: hidden;">-->
-<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 1140px; height: 300px; overflow: hidden;">
-        <!-- Slides Container -->
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1140px; height: 300px;
-            overflow: hidden;">
-  
+    <div class="carousel-container" style="width: 100%">
+        <div id="carousel" style="width: 100%">
+<!--            <div class="carousel-feature">
+                <a href="#">
+                    <img class="carousel-image" alt="Image Caption" src="<?php echo base_url()?>/resources/images/face.jpg">
+                </a>
+            </div>-->
             <?php foreach ($app_data as $application):?>
-                    <div>
-                        <img u="image" onclick="showmodal('<?php echo $application["id"];?>')" style="height: 300px; width: 100%" src="<?php echo base_url().APPLICATION_DIRECTORY_IMAGE_PATH.$application['img2'];?>" alt="...">
-                        <div class="carousel-caption">
-                            <?php echo $application['title'];?>
-                        </div>
-                    </div>
-                <?php endforeach;?>
-            
+            <div class="carousel-feature">
+                <img class="carousel-image" onclick="showmodal('<?php echo $application["id"];?>')" src="<?php echo base_url().APPLICATION_DIRECTORY_IMAGE_PATH.$application['img2'];?>" alt="image not found">
+            </div>
+            <?php endforeach;?>
         </div>
-
-        <!-- Arrow Navigator Skin Begin -->
-        <style>
-            /* jssor slider arrow navigator skin 13 css */
-            /*
-            .jssora13l              (normal)
-            .jssora13r              (normal)
-            .jssora13l:hover        (normal mouseover)
-            .jssora13r:hover        (normal mouseover)
-            .jssora13ldn            (mousedown)
-            .jssora13rdn            (mousedown)
-            */
-            .jssora13l, .jssora13r, .jssora13ldn, .jssora13rdn {
-                position: absolute;
-                cursor: pointer;
-                display: block;
-                background: url(<?php echo base_url()?>/resources/images/a13.png) no-repeat ;
-                overflow: hidden;
-            }
-
-            .jssora13l {
-                background-position: -10px -35px;
-            }
-
-            .jssora13r {
-                background-position: -70px -35px;
-            }
-
-            .jssora13l:hover {
-                background-position: -130px -35px;
-            }
-
-            .jssora13r:hover {
-                background-position: -190px -35px;
-            }
-
-            .jssora13ldn {
-                background-position: -250px -35px;
-            }
-
-            .jssora13rdn {
-                background-position: -310px -35px;
-            }
-        </style>
-        <!-- Arrow Left -->
-        <span u="arrowleft" class="jssora13l" style="width: 40px; height: 50px; top: 123px; left: 30px;">
-        </span>
-        <!-- Arrow Right -->
-        <span u="arrowright" class="jssora13r" style="width: 40px; height: 50px; top: 123px; right: 30px">
-        </span>
-        <!-- Arrow Navigator Skin End -->
-        <a style="display: none" href="http://www.jssor.com">jquery slider example</a>
+        <div id="carousel-left"><img src="<?php echo base_url()?>/resources/images/backArrow.png" /></div>
+        <div id="carousel-right"><img src="<?php echo base_url()?>/resources/images/frontArrow.png" /></div>
     </div>
+    
 </div>
 
 
