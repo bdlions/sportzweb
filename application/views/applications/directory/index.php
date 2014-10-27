@@ -85,9 +85,7 @@
         <h2>App directory</h2>
         <div>Be more productive with applications.</div>
     </div>
-    
-<script type="text/javascript" src="<?php echo base_url()?>resources/js/jquery-1.7.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="<?php echo base_url()?>resources/js/jquery.featureCarousel.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php echo base_url()?>resources/js/jquery.featureCarousel.js" charset="utf-8"></script>
 <script type="text/javascript">
       $(document).ready(function() {
         var carousel = $("#carousel").featureCarousel({
@@ -121,7 +119,6 @@
 }
 #carousel {
   height:300px;
-  width:960px;
   /*background-color:#CCC;*/
   position:relative;
   margin-bottom:0.5em;
