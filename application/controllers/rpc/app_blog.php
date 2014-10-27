@@ -25,34 +25,53 @@ class App_blog extends JsonRPCServer {
     
     function load_blog_app()
     {
-        $response = array();
-        $blog_category_list = array();
+        $response = array();        
+        $blog_category_blog_list = array();
         $blog_custom_category_list = array();
-        $blog_list = array();
-        $blog_category_list_array = $this->blog_app_model->get_all_blog_categories()->result_array();
-        foreach($blog_category_list_array as $blog_category)
-        {
-            $category = array(
-                'id' => $blog_category['id'],
-                'title' => $blog_category['title']
-            );
-            $blog_category_list[] = $category;
-        }
         
         $blog_custom_category_list_array = $this->blog_app_model->get_all_blog_custom_categories()->result_array();
         foreach($blog_custom_category_list_array as $blog_custom_category)
         {
-            $category = array(
-                'id' => $blog_custom_category['id'],
-                'title' => $blog_custom_category['title']
-            );
-            $blog_custom_category_list[] = $category;
+            if($blog_custom_category['id'] == 1)
+            {
+                $blog_list = array();
+                $blog_home_page_configuration = $this->blog_app_library->get_home_page_blog_configuration();
+                if(array_key_exists('blog_id_blog_info_map', $blog_home_page_configuration))
+                {
+                    $blog_list_array = $blog_home_page_configuration['blog_id_blog_info_map'];
+                    foreach($blog_list_array as $blog_info)
+                    {
+                        $blog = array(
+                            'id' => $blog_info['id'],
+                            'title' => $blog_info['title'],
+                            'picture' => $blog_info['picture']
+                        );
+                        $blog_list[] = $blog;
+                    }
+                    $category_blog = array(
+                        'id' => 0,
+                        'title' => $blog_custom_category['title'],
+                        'blog_list' => $blog_list
+                    );
+                    $blog_category_blog_list[] = $category_blog;
+                }
+            }
+            else
+            {
+                $category = array(
+                    'id' => $blog_custom_category['id'],
+                    'title' => $blog_custom_category['title']
+                );
+                $blog_custom_category_list[] = $category;
+            }
+            
         }
         
-        $blog_home_page_configuration = $this->blog_app_library->get_home_page_blog_configuration();
-        if(array_key_exists('blog_id_blog_info_map', $blog_home_page_configuration))
+        $blog_category_list_array = $this->blog_app_model->get_all_blog_categories()->result_array();
+        foreach($blog_category_list_array as $blog_category)
         {
-            $blog_list_array = $blog_home_page_configuration['blog_id_blog_info_map'];
+            $blog_list = array();
+            $blog_list_array = $this->blog_app_library->get_all_blog_by_category($blog_category['id']);
             foreach($blog_list_array as $blog_info)
             {
                 $blog = array(
@@ -62,12 +81,15 @@ class App_blog extends JsonRPCServer {
                 );
                 $blog_list[] = $blog;
             }
-        }
-        
-        $response['blog_category_list'] = $blog_category_list;
+            $category_blog = array(
+                'id' => $blog_category['id'],
+                'title' => $blog_category['title'],
+                'blog_list' => $blog_list
+            );
+            $blog_category_blog_list[] = $category_blog;
+        }        
+        $response['blog_category_blog_list'] = $blog_category_blog_list;
         $response['blog_custom_category_list'] = $blog_custom_category_list;
-        $response['blog_list'] = $blog_list;
-        
         return json_encode($response);
     }
     
