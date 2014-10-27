@@ -93,21 +93,16 @@ class App_blog extends JsonRPCServer {
         return json_encode($response);
     }
     
-    function get_blog_list($blog_category_id)
+    function get_blog_info($blog_id)
     {
-        $response = array();
-        $blog_list = array();
-        $blog_list_array = $this->blog_app_library->get_all_blog_by_category($blog_category_id);
-        foreach($blog_list_array as $blog_info)
+        $result = array();
+        $blog_info = array();
+        $blog_info_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
+        if(!empty($blog_info_array))
         {
-            $blog = array(
-                'id' => $blog_info['id'],
-                'title' => $blog_info['title'],
-                'picture' => $blog_info['picture']
-            );
-            $blog_list[] = $blog;
+            $blog_info = $blog_info_array[0];
         }
-        $response['blog_list'] = $blog_list; 
-        return json_encode($response);
+        $result['blog_info'] = $blog_info;
+        return json_encode($result);
     }
 }
