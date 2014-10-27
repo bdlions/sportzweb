@@ -385,7 +385,7 @@ class Applications_scoreprediction extends CI_Controller{
         //incomplete method
         $this->data['message'] = '';
         $this->form_validation->set_rules('title', ' Title', 'xss_clean|required');
-        if ($this->input->post())
+        if ($this->input->post('btnSubmit'))
         {            
             var_dump($_POST);
             exit();
@@ -395,15 +395,14 @@ class Applications_scoreprediction extends CI_Controller{
             if ($this->form_validation->run() == true)
             {
                 $result = array();
-                $new_match_data = $this->input->post('sports_id');
                 $additional_data = array(
-                    'hometeam'      => $new_match_data['hometeam'],
-                    'awayteam'      => $new_match_data['awayteam'],
-                    'date'          => $new_match_data['date'],
-                    'time'          => $new_match_data['time'],
-                    'homescore'     => $new_match_data['homescore'],
-                    'awayscore'     => $new_match_data['awayscore'],
-                    'status'        => $new_match_data['status'],
+                    'hometeam'      => $this->input->post['hometeam'],
+                    'awayteam'      => $this->input->post['awayteam'],
+                    'date'          => $this->input->post['date'],
+                    'time'          => $this->input->post['time'],
+                    'homescore'     => $this->input->post['homescore'],
+                    'awayscore'     => $this->input->post['awayscore'],
+                    'status'        => $this->input->post['status'],
                     'created_on'    => now()
                 );
 
@@ -432,6 +431,37 @@ class Applications_scoreprediction extends CI_Controller{
     public function update_match($match_id)
     {
         $this->data['message'] = '';
+//        $this->form_validation->set_rules('title', ' Title', 'xss_clean|required');
+        if ($this->input->post('btnSubmit'))
+        {            
+            if ($this->form_validation->run() == true)
+            {
+                $result = array();
+                $additional_data = array(
+                    'hometeam'      => $this->input->post['hometeam'],
+                    'awayteam'      => $this->input->post['awayteam'],
+                    'date'          => $this->input->post['date'],
+                    'time'          => $this->input->post['time'],
+                    'homescore'     => $this->input->post['homescore'],
+                    'awayscore'     => $this->input->post['awayscore'],
+                    'status'        => $this->input->post['status'],
+                    'created_on'    => now()
+                );
+
+                if ($this->admin_score_prediction_library->create_match($additional_data)) {
+                    $result['message'] = $this->admin_score_prediction_library->messages_alert();
+                } else {
+                    $result['message'] = $this->admin_score_prediction_library->errors_alert();
+                }
+                echo json_encode($result);
+            }
+        }
+
+        $teams = $this->admin_score_prediction_library->get_all_teams()->result_array();
+
+        $this->data['message'] = '';
+        $this->data['teams'] = $teams;
+        $this->data['match_id'] = $match_id;
         $this->template->load($this->tmpl, "admin/applications/score_prediction/match_update", $this->data);
     }
     

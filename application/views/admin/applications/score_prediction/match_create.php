@@ -8,7 +8,7 @@
                     <!--<form id="form_create_match" role="form" class="form-horizontal" method="post" action="admin/applications_scoreprediction/create_match/" onsubmit="return false">-->
                     <form id="form_create_match" role="form" class="form-horizontal" method="post" onsubmit="">
                         <div class="form-group">
-                            <label for="title" class="col-md-3 control-label requiredField">
+                            <label for="" class="col-md-3 control-label requiredField">
                                 Home Team:
                             </label>
                             <div class ="col-md-9">
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="col-md-3 control-label requiredField">
+                            <label for="" class="col-md-3 control-label requiredField">
                                 Away team:
                             </label>
                             <div class ="col-md-9">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="col-md-3 control-label requiredField">
+                            <label for="" class="col-md-3 control-label requiredField">
                                 Date: 
                             </label>
                             <div class ="col-md-9">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="col-md-3 control-label requiredField">
+                            <label for="" class="col-md-3 control-label requiredField">
                                 Time (24HR): 
                             </label>
                             <div class ="col-md-9">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="col-md-3 control-label requiredField">
+                            <label for="" class="col-md-3 control-label requiredField">
                                 Home Score: 
                             </label>
                             <div class ="col-md-9">
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="col-md-3 control-label requiredField">
+                            <label for="" class="col-md-3 control-label requiredField">
                                 Away Score: 
                             </label>
                             <div class ="col-md-9">
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="col-md-3 control-label requiredField">
+                            <label for="" class="col-md-3 control-label requiredField">
                                 Match status: 
                             </label>
                             <div class ="col-md-9">
@@ -80,7 +80,7 @@
                     </form>
                     <div class="form-group">
                         <div class="pull-right col-md-4">
-                            <button id="btnSubmit" class="btn button-custom pull-right">Create Match</button>
+                            <button id="btnSubmit" name="btnSubmit" class="btn button-custom pull-right">Create Match</button>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,6 @@
     });
     
     $("#btnSubmit").on("click", function(){
-    alert("pokaaa");
         $.ajax({
             dataType: 'json',
             type: "POST",
