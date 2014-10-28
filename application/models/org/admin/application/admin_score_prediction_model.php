@@ -359,7 +359,12 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function create_match($additional_data)
     {
+        $additional_data = $this->_filter_data($this->tables['app_sp_matches'], $additional_data);       
         
+        $this->db->insert($this->tables['app_sp_matches'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_match_successful');
+        return (isset($id)) ? $id : FALSE;
     }
     
     /*
@@ -380,7 +385,10 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function get_match_info($match_id)
     {
-        
+        $this->db->where($this->tables['app_sp_matches'].'.id', $match_id);
+        return $this->db->select($this->tables['app_sp_matches'].'.id as match_id,'.$this->tables['app_sp_matches'].'.*')
+                    ->from($this->tables['app_sp_matches'])
+                    ->get();
     }
     
     /*
@@ -420,6 +428,17 @@ class Admin_score_prediction_model extends Ion_auth_model
         }
         $this->set_message('delete_match_successful');
         return TRUE;
+    }
+    
+    /*
+     * This method will return all match statuses
+     * @Author Nazmul on 27th October 2014
+     */
+    public function get_match_statuses()
+    {
+        return $this->db->select($this->tables['app_sp_match_statuses'].'.id as match_status_id,'.$this->tables['app_sp_match_statuses'].'.*')
+                    ->from($this->tables['app_sp_match_statuses'])
+                    ->get();
     }
     
     // -------------------------------- Match Prediction Module ------------------------

@@ -382,43 +382,95 @@ class Applications_scoreprediction extends CI_Controller{
      */
     public function create_match($tournament_id)
     {
-        //incomplete method
         $this->data['message'] = '';
-        $this->form_validation->set_rules('title', ' Title', 'xss_clean|required');
-        if ($this->input->post('btnSubmit'))
-        {            
-            var_dump($_POST);
-            exit();
-            
-            
-            //incomplete array
-            if ($this->form_validation->run() == true)
-            {
-                $result = array();
-                $additional_data = array(
-                    'hometeam'      => $this->input->post['hometeam'],
-                    'awayteam'      => $this->input->post['awayteam'],
-                    'date'          => $this->input->post['date'],
-                    'time'          => $this->input->post['time'],
-                    'homescore'     => $this->input->post['homescore'],
-                    'awayscore'     => $this->input->post['awayscore'],
-                    'status'        => $this->input->post['status'],
-                    'created_on'    => now()
-                );
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('match_date', 'Match Date', 'xss_clean|required');
+        $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
+        $this->form_validation->set_rules('score_home', 'Home Score', 'xss_clean');
+        $this->form_validation->set_rules('score_away', 'Away Score', 'xss_clean');
 
-                if ($this->admin_score_prediction_library->create_match($additional_data)) {
-                    $result['message'] = $this->admin_score_prediction_library->messages_alert();
-                } else {
-                    $result['message'] = $this->admin_score_prediction_library->errors_alert();
+        if ($this->input->post('submit_create_match'))
+        {            
+            if($this->form_validation->run() == true)
+            {
+                $additional_data = array(
+                    'tournament_id' => $tournament_id,
+                    'team_id_home' => $this->input->post('home_team_list'),
+                    'team_id_away' => $this->input->post('away_team_list'),
+                    'date' => $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('match_date')),
+                    'time' => $this->input->post('match_time'),
+                    'score_home' => $this->input->post('score_home'),
+                    'score_away' => $this->input->post('score_away'),
+                    'status_id' => $this->input->post('match_status_list'),
+                    'created_on' => now()
+                );
+                $match_id = $this->admin_score_prediction_library->create_match($additional_data);
+                if($match_id !== FALSE)
+                {
+                    $this->session->set_flashdata('message', $this->admin_score_prediction_library->messages());
+                    redirect('admin/applications_scoreprediction/create_match/'.$tournament_id,'refresh');
                 }
-                echo json_encode($result);
+                else
+                {
+                    $this->data['message'] = 'Error while creating a match.';
+                }
             }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }            
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
         }
 
-        $teams = $this->admin_score_prediction_library->get_all_teams()->result_array();
-
-        $this->data['message'] = '';
-        $this->data['teams'] = $teams;
+        $team_list = array();
+        $team_list_array = $this->admin_score_prediction_library->get_all_teams()->result_array();
+        foreach($team_list_array as $team_info)
+        {
+            $team_list[$team_info['team_id']] = $team_info['title'];
+        }
+        $this->data['team_list'] = $team_list;
+        
+        $match_status_list = array();
+        $match_status_list_array = $this->admin_score_prediction_library->get_match_statuses()->result_array();
+        foreach($match_status_list_array as $match_status)
+        {
+            $match_status_list[$match_status['match_status_id']] = $match_status['title'];
+        }
+        $this->data['match_status_list'] = $match_status_list;
+        
+        $this->data['match_date'] = array(
+            'name' => 'match_date',
+            'id' => 'match_date',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('match_date'),
+        );
+        $this->data['match_time'] = array(
+            'name' => 'match_time',
+            'id' => 'match_time',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('match_time'),
+        );
+        $this->data['score_home'] = array(
+            'name' => 'score_home',
+            'id' => 'score_home',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('score_home'),
+        );
+        $this->data['score_away'] = array(
+            'name' => 'score_away',
+            'id' => 'score_away',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('score_away'),
+        );
+        $this->data['submit_create_match'] = array(
+            'name' => 'submit_create_match',
+            'id' => 'submit_create_match',
+            'type' => 'submit',
+            'value' => 'Create',
+        );
         $this->data['tournament_id'] = $tournament_id;
         $this->template->load($this->tmpl, "admin/applications/score_prediction/match_create", $this->data);
     }
@@ -428,41 +480,12 @@ class Applications_scoreprediction extends CI_Controller{
      * @param $match_id, match id
      * @Author Nazmul on 24th October 2014
      */
-    public function update_match($match_id)
+    public function update_match($match_id = 0)
     {
-        $this->data['message'] = '';
-//        $this->form_validation->set_rules('title', ' Title', 'xss_clean|required');
-        if ($this->input->post('btnSubmit'))
-        {            
-            if ($this->form_validation->run() == true)
-            {
-                $result = array();
-                $additional_data = array(
-                    'hometeam'      => $this->input->post['hometeam'],
-                    'awayteam'      => $this->input->post['awayteam'],
-                    'date'          => $this->input->post['date'],
-                    'time'          => $this->input->post['time'],
-                    'homescore'     => $this->input->post['homescore'],
-                    'awayscore'     => $this->input->post['awayscore'],
-                    'status'        => $this->input->post['status'],
-                    'created_on'    => now()
-                );
-
-                if ($this->admin_score_prediction_library->create_match($additional_data)) {
-                    $result['message'] = $this->admin_score_prediction_library->messages_alert();
-                } else {
-                    $result['message'] = $this->admin_score_prediction_library->errors_alert();
-                }
-                echo json_encode($result);
-            }
+        if(empty($match_id))
+        {
+            redirect("admin/applications_scoreprediction","refresh");
         }
-
-        $teams = $this->admin_score_prediction_library->get_all_teams()->result_array();
-
-        $this->data['message'] = '';
-        $this->data['teams'] = $teams;
-        $this->data['match_id'] = $match_id;
-        $this->template->load($this->tmpl, "admin/applications/score_prediction/match_update", $this->data);
     }
     
     /*
