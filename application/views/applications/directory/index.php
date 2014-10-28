@@ -118,7 +118,7 @@
   width:960px;
 }
 #carousel {
-  height:300px;
+  height:260px;
   /*background-color:#CCC;*/
   position:relative;
   margin-bottom:0.5em;

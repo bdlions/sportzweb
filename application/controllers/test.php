@@ -294,21 +294,25 @@ class Test extends CI_Controller {
     {
         $this->template->load(null, "test", $this->data);
     }
-    function run_toms_page()
+    function shop_home()
     {
-        $this->template->load(null, "toms/toms", $this->data);
+        $this->template->load(null, "shop/shop_home", $this->data);
+    }
+    function shop_shopping_bag()
+    {
+        $this->template->load(null, "shop/shop_shopping_bag", $this->data);
     }
     function run_toms_shoes()
     {
-        $this->template->load(null, "toms/toms_shoes", $this->data);
+        $this->template->load(null, "shop/toms_shoes", $this->data);
     }
-    function toms_item()
+    function shop_item()
     {
-        $this->template->load(null, "toms/toms_item", $this->data);
+        $this->template->load(null, "shop/shop_item", $this->data);
     }
-    function toms_item_by_category()
+    function shop_items_by_category()
     {
-        $this->template->load(null, "toms/toms_item_by_category", $this->data);
+        $this->template->load(null, "shop/shop_items_by_category", $this->data);
     }
     function gympro_home()
     {
