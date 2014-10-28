@@ -91,6 +91,8 @@ $lang['delete_tournament_successful']        = "Tournament is deleted successful
 
 $lang['create_match_successful']             = "Match is created successfully.";
 $lang['create_match_unsuccessful']           = "Unable to create a match.";
+$lang['update_match_successful']             = "Match is updated successfully.";
+$lang['update_match_unsuccessful']           = "Unable to update this match.";
 $lang['delete_match_successful']             = "Match is deleted successfully.";
 $lang['delete_match_unsuccessful']           = "Unable to delete a match.";
 

@@ -311,8 +311,9 @@ class Admin_score_prediction_model extends Ion_auth_model
      * This method will return all tournaments
      * @Author Nazmul on 24th October 2014
      */
-    public function get_all_tournaments()
+    public function get_all_tournaments($sports_id)
     {
+        $this->db->where('sports_id', $sports_id);
         return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id,'.$this->tables['app_sp_tournaments'].'.*')
                     ->from($this->tables['app_sp_tournaments'])
                     ->get();
@@ -375,7 +376,14 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function update_match($match_id, $additional_data)
     {
-        
+        $data = $this->_filter_data($this->tables['app_sp_matches'], $additional_data);
+        $this->db->update($this->tables['app_sp_matches'], $data, array('id' => $match_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_match_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('update_match_successful');
+        return TRUE;
     }
     
     /*
