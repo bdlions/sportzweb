@@ -221,6 +221,7 @@ class Footer extends CI_Controller {
     public function contact_us()
     {
         $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('name', 'Name', 'xss_clean|required');
         $this->form_validation->set_rules('email', 'Email', 'xss_clean|required|valid_email');
         $this->form_validation->set_rules('phone', 'Phone', 'xss_clean');
         $this->form_validation->set_rules('description', 'Description', 'xss_clean|required');
@@ -234,6 +235,7 @@ class Footer extends CI_Controller {
                     'topic_id' => $this->input->post('topic_list'),
                     'os_id' => $this->input->post('os_list'),
                     'browser_id' => $this->input->post('browser_list'),
+                    'name' => $this->input->post('name'),
                     'email' => $this->input->post('email'),
                     'phone' => $this->input->post('phone'),
                     'description' => $this->input->post('description'),
@@ -278,6 +280,13 @@ class Footer extends CI_Controller {
         }
         $this->data['browser_list'] = $browser_list;
         
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name'),
+        );
+        
         $this->data['email'] = array(
             'name' => 'email',
             'id' => 'email',
@@ -294,7 +303,7 @@ class Footer extends CI_Controller {
             'name' => 'description',
             'id' => 'description',
             'type' => 'textarea',
-            'rows' => '15'            
+            'rows' => '13'            
         );
         $this->data['submit_feedback'] = array(
             'name' => 'submit_feedback',

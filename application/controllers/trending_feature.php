@@ -8,7 +8,7 @@ class Trending_feature extends Role_Controller {
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
-        
+        $this->load->library('org/application/application_directory_library');
         $this->load->library("basic_profile");
         $this->load->library("recent_activities");
         $this->load->library("statuses");
@@ -31,14 +31,16 @@ class Trending_feature extends Role_Controller {
         $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
          
         //$this->data['followers'] = $this->follower->get_followers();
+        $user_id = $this->ion_auth->get_user_id();
         $this->data['user_info'] = $this->ion_auth->get_user_info();
-        $this->data['user_id'] = $this->ion_auth->get_user_id();
+        $this->data['user_id'] = $user_id;
         $this->data['current_user_id'] = $this->session->userdata['user_id'];
         $this->data['status_list_id'] = STATUS_LIST_HASHTAG;
         $this->data['hashtag'] = $hashtag;
         $this->data['mapping_id'] = $user_id;
         $this->data['recent_activities'] = $this->recent_activities->get_recent_activites();
         $this->data['popular_trends'] = $this->trending_features->get_popular_trends()->result_array();
+        $this->data['app_id_list'] = $this->application_directory_library->get_user_application_id_list($user_id);
         $this->template->load(null, "trending_feature/hashtag/index", $this->data);
     }
     

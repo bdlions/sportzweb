@@ -27,27 +27,85 @@
             });
     });
     
-    function open_confirm_unfollow_modal(follower_id){
-        $('#follower_id_confirm_unfollow').val(follower_id);
-        $('#modal_unfollow_confirm').modal('show');
+    function open_modal_unfollow_confirm(follower_id){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $("#div_unfollow_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
+                $('#span_unfollow_confirm_message').text('Unfollow '+data.user_info.first_name+' '+data.user_info.last_name+'?');
+                $('#follower_id_confirm_unfollow').val(follower_id);
+                $('#modal_unfollow_confirm').modal('show');
+            }
+        });        
+        //$('#follower_id_confirm_unfollow').val(follower_id);
+        //$('#modal_unfollow_confirm').modal('show');
     }
     
-    function open_confirm_block_modal(follower_id){
-        $('#follower_id_confirm_block').val(follower_id);
-        $('#modal_block_confirm').modal('show');
+    function open_modal_block_confirm(follower_id){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $("#div_block_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
+                $('#span_block_confirm_message').text('Block '+data.user_info.first_name+' '+data.user_info.last_name+'?');
+                $('#follower_id_confirm_block').val(follower_id);
+                $('#modal_block_confirm').modal('show');
+            }
+        });
+        
+        //$('#follower_id_confirm_block').val(follower_id);
+        //$('#modal_block_confirm').modal('show');
     }
     
-    function open_confirm_accept_modal(follower_id){
-        $('#follower_id_confirm_accept').val(follower_id);
-        $('#modal_accept_confirm').modal('show');
+    function open_modal_accept_confirm(follower_id){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $("#div_accept_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
+                $('#span_accept_confirm_message').text('Accept '+data.user_info.first_name+' '+data.user_info.last_name+'?');
+                $('#follower_id_confirm_accept').val(follower_id);
+                $('#modal_accept_confirm').modal('show');
+            }
+        });
+        
+        //$('#follower_id_confirm_accept').val(follower_id);
+        //$('#modal_accept_confirm').modal('show');
     }
     
-    function open_confirm_unblock_modal(follower_id){
-        $('#follower_id_confirm_unblock').val(follower_id);
-        $('#modal_unblock_confirm').modal('show');
+    function open_modal_unblock_confirm(follower_id){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $("#div_unblock_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
+                $('#span_unblock_confirm_message').text('Unblock '+data.user_info.first_name+' '+data.user_info.last_name+'?');
+                $('#follower_id_confirm_unblock').val(follower_id);
+                $('#modal_unblock_confirm').modal('show');
+            }
+        });        
+        //$('#follower_id_confirm_unblock').val(follower_id);
+        //$('#modal_unblock_confirm').modal('show');
     }
     
-    function open_report_modal(follower_id){
+    function open_modal_report(follower_id){
         $('#follower_id').val(follower_id);
         $('#<?php echo FOLLOWER_REPORT_TYPE_SHARED_CONTENT_ID?>').attr('checked', false);
         $('#<?php echo FOLLOWER_REPORT_TYPE_ACCOUNT_ID?>').attr('checked', false);

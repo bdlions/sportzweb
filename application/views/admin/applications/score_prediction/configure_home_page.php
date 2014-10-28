@@ -47,6 +47,9 @@
             </div>
         </div>
     </div>
+    <div class="btn-group" style="padding-left: 10px;">
+        <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
+    </div>
     <?php echo form_close(); ?>
 </div>
 <script type="text/javascript">

@@ -30,13 +30,13 @@
                 </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="friends_status">
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_confirm_unfollow_modal('<?php echo $follower->user_id; ?>')">Unfollow</a>
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_unfollow_confirm('<?php echo $follower->user_id; ?>')">Unfollow</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_confirm_block_modal('<?php echo $follower->user_id; ?>')">Block</a>
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_block_confirm('<?php echo $follower->user_id; ?>')">Block</a>
                     </li>
                     <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_report_modal('<?php echo $follower->user_id; ?>')">Report</a>
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_report('<?php echo $follower->user_id; ?>')">Report</a>
                     </li>
                 </ul>
             </div>

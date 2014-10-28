@@ -1,15 +1,44 @@
 <script type="text/javascript">
-    function open_confirm_unfollow_modal(follower_id){
-        $('#follower_id_confirm_unfollow').val(follower_id);
-        $('#modal_unfollow_confirm').modal('show');
+    function open_modal_unfollow_confirm(follower_id){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $("#div_unfollow_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
+                $('#span_unfollow_confirm_message').text('Unfollow '+data.user_info.first_name+' '+data.user_info.last_name+'?');
+                $('#follower_id_confirm_unfollow').val(follower_id);
+                $('#modal_unfollow_confirm').modal('show');
+            }
+        });
+        //$('#follower_id_confirm_unfollow').val(follower_id);
+        //$('#modal_unfollow_confirm').modal('show');
     }
     
-    function open_confirm_block_modal(follower_id){
-        $('#follower_id_confirm_block').val(follower_id);
-        $('#modal_block_confirm').modal('show');
+    function open_modal_block_confirm(follower_id){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $("#div_block_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
+                $('#span_block_confirm_message').text('Block '+data.user_info.first_name+' '+data.user_info.last_name+'?');
+                $('#follower_id_confirm_block').val(follower_id);
+                $('#modal_block_confirm').modal('show');
+            }
+        });
+        
+        //$('#follower_id_confirm_block').val(follower_id);
+        //$('#modal_block_confirm').modal('show');
     }
     
-    function open_report_modal(follower_id){
+    function open_modal_report(follower_id){
         $('#follower_id').val(follower_id);
         $('#<?php echo FOLLOWER_REPORT_TYPE_SHARED_CONTENT_ID?>').attr('checked', false);
         $('#<?php echo FOLLOWER_REPORT_TYPE_ACCOUNT_ID?>').attr('checked', false);
@@ -235,13 +264,13 @@
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="friends_status">
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_confirm_unfollow_modal('<?php echo $basic_profile->id; ?>')">Unfollow</a>
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_unfollow_confirm('<?php echo $basic_profile->id; ?>')">Unfollow</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_confirm_block_modal('<?php echo $basic_profile->id; ?>')">Block</a>
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_block_confirm('<?php echo $basic_profile->id; ?>')">Block</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_report_modal('<?php echo $basic_profile->id; ?>')">Report</a>
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_report('<?php echo $basic_profile->id; ?>')">Report</a>
                             </li>
                         </ul>
                     </div>

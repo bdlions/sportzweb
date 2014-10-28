@@ -351,6 +351,32 @@ class Utils {
         $content=$doc->saveHTML();
         return $content;
     }
+    
+    /*
+     * This method will validate time in hh:mm format
+     * @Author Nazmul on 28th October 2014
+     */
+    public function validate_time($time)
+    {
+        if(preg_match("/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/", $time) === 0) {
+            return 0;
+        } else {
+           return 1;
+        }
+    }
+    
+    /*
+     * This method will validate date in mm-dd-yyyy format
+     * @Author Nazmul on 28th October 2014
+     */
+    public function validate_date($date)
+    {
+        if(preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])\-(0[1-9]|1[0-2])\-[0-9]{4}$/", $date) === 0) {
+           RETURN 0;
+        } else {
+           RETURN 1;
+        }
+    }
 }
 
 ?>

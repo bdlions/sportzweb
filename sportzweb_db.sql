@@ -1476,7 +1476,7 @@ INSERT INTO `blog_status` (`title`) VALUES
 
 CREATE TABLE `blogs`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `blog_category_id` int(11) unsigned NOT NULL,
+  `blog_category_id` int(11) unsigned DEFAULT NULL,
   `blog_status_id` int(11) unsigned DEFAULT NULL,
   `user_id` int(11) unsigned DEFAULT NULL,
   `title` varchar(5000) NOT NULL,
@@ -1491,19 +1491,18 @@ CREATE TABLE `blogs`(
   PRIMARY KEY(`id`)
 )AUTO_INCREMENT=1;
 ALTER TABLE `blogs`
-    ADD CONSTRAINT `fk_blogs_blog_category1` FOREIGN KEY(`blog_category_id`) REFERENCES `blog_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_blogs_blog_status1` FOREIGN KEY(`blog_status_id`) REFERENCES `blog_status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_blogs_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-INSERT INTO `blogs` (`id`, `blog_category_id`, `blog_status_id`, `user_id`, `title`, `description`, `picture`, `related_posts`, `created_on`, `modified_on`) VALUES
-(42, 1, 2, 3, '&amp;lt;p&amp;gt;I&amp;amp;#39;m Not Alone&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.&amp;lt;/p&amp;gt;', '1.jpg', '[""]', 1399982767, NULL),
-(43, 2, 2, 3, '&amp;lt;p&amp;gt;Cool car wallpapers&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn&amp;amp;rsquo;t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.&amp;lt;/p&amp;gt;', '5.jpg', '["42"]', 1399982862, NULL),
-(44, 3, 2, 3, '&amp;lt;p&amp;gt;Beatifull girl&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.&amp;lt;/p&amp;gt;', '4.jpg', '["43"]', 1399983068, NULL),
-(45, 4, 2, 3, '&amp;lt;p&amp;gt;Nutrition&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nEven the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&amp;lt;/p&amp;gt;', '1.jpg', '[""]', 1399983353, NULL),
-(46, 5, 2, 3, 'My first photoshoot', '&amp;lt;p&amp;gt;One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.&amp;lt;/p&amp;gt;', '2.jpg', '[""]', 1399983426, 1399983747),
-(47, 6, 2, 3, 'Cutest doggy ever', '&amp;lt;p&amp;gt;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;Pityful a rethoric question ran over her cheek, then she continued her way. On her way she met a copy.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nThe copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word &amp;amp;ldquo;and&amp;amp;rdquo; and the Little Blind Text should turn around and return to its own, safe country.&amp;lt;/p&amp;gt;', '6.jpg', '[""]', 1399983497, 1399983636),
-(48, 7, 2, 3, 'I''m not alone', 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.\r\n\r\nHe lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.\r\n\r\nThe bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.', '1.jpg', '[""]', 1399984646, NULL),
-(49, 8, 2, 3, 'u are alone', 'He found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.\r\n\r\nThe bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.', '5.jpg', '[""]', 1399984646, NULL),
-(50, 9, 2, 3, 'Food poisoning', '&amp;lt;p&amp;gt;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nEven the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&amp;lt;/p&amp;gt;', '1.jpg', '[""]', 1399983353, NULL);
+INSERT INTO `blogs` (`id`, `blog_status_id`, `user_id`, `title`, `description`, `picture`, `related_posts`, `created_on`, `modified_on`) VALUES
+(1, 2, 3, '&amp;lt;p&amp;gt;I&amp;amp;#39;m Not Alone&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.&amp;lt;/p&amp;gt;', '1.jpg', '[""]', 1399982767, NULL),
+(2, 2, 3, '&amp;lt;p&amp;gt;Cool car wallpapers&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn&amp;amp;rsquo;t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.&amp;lt;/p&amp;gt;', '5.jpg', '["42"]', 1399982862, NULL),
+(3, 2, 3, '&amp;lt;p&amp;gt;Beatifull girl&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.&amp;lt;/p&amp;gt;', '4.jpg', '["43"]', 1399983068, NULL),
+(4, 2, 3, '&amp;lt;p&amp;gt;Nutrition&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nEven the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&amp;lt;/p&amp;gt;', '1.jpg', '[""]', 1399983353, NULL),
+(5, 2, 3, 'My first photoshoot', '&amp;lt;p&amp;gt;One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.&amp;lt;/p&amp;gt;', '2.jpg', '[""]', 1399983426, 1399983747),
+(6, 2, 3, 'Cutest doggy ever', '&amp;lt;p&amp;gt;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;Pityful a rethoric question ran over her cheek, then she continued her way. On her way she met a copy.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nThe copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word &amp;amp;ldquo;and&amp;amp;rdquo; and the Little Blind Text should turn around and return to its own, safe country.&amp;lt;/p&amp;gt;', '6.jpg', '[""]', 1399983497, 1399983636),
+(7, 2, 3, 'I''m not alone', 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.\r\n\r\nHe lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.\r\n\r\nThe bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.', '1.jpg', '[""]', 1399984646, NULL),
+(8, 2, 3, 'u are alone', 'He found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.\r\n\r\nThe bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.', '5.jpg', '[""]', 1399984646, NULL),
+(9, 2, 3, 'Food poisoning', '&amp;lt;p&amp;gt;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nEven the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&amp;lt;/p&amp;gt;', '1.jpg', '[""]', 1399983353, NULL);
 CREATE TABLE IF NOT EXISTS `blog_comments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -1616,9 +1615,9 @@ CREATE TABLE IF NOT EXISTS `app_sp_tournaments` (
 ALTER TABLE `app_sp_tournaments`
     ADD CONSTRAINT `fk_app_sp_tournaments_sports1` FOREIGN KEY(`sports_id`) REFERENCES `app_sp_sports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 INSERT INTO `app_sp_tournaments` (`id`, `sports_id`, `title`, `season`) VALUES
-(1, 1, 'Barclays premier league', '2014/2015'),
-(2, 1, 'Championship', '2014/2015'),
-(3, 1, 'League one', '2014/2015');
+(1, 1, 'Barclays premier league', '2014/15'),
+(2, 1, 'Championship', '2014/15'),
+(3, 1, 'League one', '2014/15');
 
 CREATE TABLE IF NOT EXISTS `app_sp_match_statuses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -1629,8 +1628,8 @@ CREATE TABLE IF NOT EXISTS `app_sp_match_statuses` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 INSERT INTO `app_sp_match_statuses` (`id`, `title`) VALUES
 (1, 'Upcoming'),
-(2, 'Win_home'),
-(3, 'Win_away'),
+(2, 'Win home'),
+(3, 'Win away'),
 (4, 'Draw'),
 (5, 'Cancel');
 
@@ -1641,8 +1640,8 @@ CREATE TABLE IF NOT EXISTS `app_sp_matches` (
   `team_id_away` int(11) unsigned NOT NULL,
   `date` varchar(200),
   `time` varchar(200),
-  `score_home` varchar(200),
-  `score_away` varchar(200),
+  `score_home` varchar(200) default '',
+  `score_away` varchar(200) default '',
   `status_id` int(11) unsigned DEFAULT 1,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
@@ -1899,6 +1898,7 @@ CREATE TABLE IF NOT EXISTS `footer_cu_feedbacks` (
   `topic_id` int(11) unsigned DEFAULT NULL,
   `os_id` int(11) unsigned DEFAULT NULL,
   `browser_id` int(11) unsigned DEFAULT NULL,
+  `name` varchar(500) default '',
   `email` varchar(500),
   `phone` varchar(500),
   `description` text default '',

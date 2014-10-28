@@ -156,7 +156,7 @@ class Applications_directory extends CI_Controller{
             'rows'  => '4',
             'cols'  => '10'
         );        
-        $this->template->load(null, "admin/applications/directory/create_application", $this->data);        
+        $this->template->load($this->tmpl, "admin/applications/directory/create_application", $this->data);        
     }
     /*
      * This method will update an application
@@ -229,7 +229,7 @@ class Applications_directory extends CI_Controller{
             APPLICATION_DIRECTORY_IMAGE2_TYPE_ID => 'Slider',
             APPLICATION_DIRECTORY_IMAGE_GALLERY_TYPE_ID => 'Gallery',
         );
-        $this->template->load(null, "admin/applications/directory/update_application", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/directory/update_application", $this->data);
     }
     
     /*

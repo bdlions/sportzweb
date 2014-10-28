@@ -144,7 +144,7 @@
                                     <li role="presentation">
                                         <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>settings.html?menu=privacy&section=tag_photo">Privacy settings</a>
                                     </li><li role="presentation">
-                                        <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>auth/logout">Logout</a>
+                                        <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>auth/logout">Log out</a>
                                     </li>
                                 </ul>
                             </div>

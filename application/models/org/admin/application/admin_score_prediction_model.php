@@ -51,6 +51,7 @@ class Admin_score_prediction_model extends Ion_auth_model
             $this->set_error('update_sports_duplicate_' . $this->sports_identity_column);
             return FALSE;
         }
+        $additional_data['created_on'] = now();
         $additional_data = $this->_filter_data($this->tables['app_sp_sports'], $additional_data);       
         
         $this->db->insert($this->tables['app_sp_sports'], $additional_data);
@@ -92,6 +93,19 @@ class Admin_score_prediction_model extends Ion_auth_model
     {
         $this->db->where($this->tables['app_sp_sports'].'.id', $sports_id);
         return $this->db->select($this->tables['app_sp_sports'].'.id as sports_id,'.$this->tables['app_sp_sports'].'.*')
+                    ->from($this->tables['app_sp_sports'])
+                    ->get();
+    }
+    
+    /*
+     * This method will return sports id based on sports title
+     * @param $sports_title, sports title
+     * @Author Nazmul on 28th October 2014
+     */
+    public function get_sports_id($sports_title)
+    {
+        $this->db->where($this->tables['app_sp_sports'].'.title', $sports_title);
+        return $this->db->select($this->tables['app_sp_sports'].'.id as sports_id')
                     ->from($this->tables['app_sp_sports'])
                     ->get();
     }
@@ -155,6 +169,7 @@ class Admin_score_prediction_model extends Ion_auth_model
             $this->set_error('update_team_duplicate_' . $this->team_identity_column);
             return FALSE;
         }
+        $additional_data['created_on'] = now();
         $additional_data = $this->_filter_data($this->tables['app_sp_teams'], $additional_data);       
         
         $this->db->insert($this->tables['app_sp_teams'], $additional_data);
@@ -196,6 +211,19 @@ class Admin_score_prediction_model extends Ion_auth_model
     {
         $this->db->where($this->tables['app_sp_teams'].'.id', $team_id);
         return $this->db->select($this->tables['app_sp_teams'].'.id as team_id,'.$this->tables['app_sp_teams'].'.*')
+                    ->from($this->tables['app_sp_teams'])
+                    ->get();
+    }
+    
+    /*
+     * This method will return team id based on team title
+     * @param $team_title, team title
+     * @Author Nazmul on 28th October 2014
+     */
+    public function get_team_id($team_title)
+    {
+        $this->db->where($this->tables['app_sp_teams'].'.title', $team_title);
+        return $this->db->select($this->tables['app_sp_teams'].'.id as team_id')
                     ->from($this->tables['app_sp_teams'])
                     ->get();
     }
@@ -262,6 +290,7 @@ class Admin_score_prediction_model extends Ion_auth_model
             $this->set_error('update_tournament_duplicate_' . $this->tournament_identity_column1);
             return FALSE;
         }
+        $additional_data['created_on'] = now();
         $additional_data = $this->_filter_data($this->tables['app_sp_tournaments'], $additional_data);       
         
         $this->db->insert($this->tables['app_sp_tournaments'], $additional_data);
@@ -303,6 +332,21 @@ class Admin_score_prediction_model extends Ion_auth_model
     {
         $this->db->where($this->tables['app_sp_tournaments'].'.id', $tournament_id);
         return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id,'.$this->tables['app_sp_tournaments'].'.*')
+                    ->from($this->tables['app_sp_tournaments'])
+                    ->get();
+    }
+    
+    /*
+     * This method will return tournament id based on tournament title and season
+     * @param $tournament_title, tournament title
+     * @param $season, season
+     * @Author Nazmul on 28th October 2014
+     */
+    public function get_tournament_id($tournament_title, $season)
+    {
+        $this->db->where($this->tables['app_sp_tournaments'].'.title', $tournament_title);
+        $this->db->where($this->tables['app_sp_tournaments'].'.season', $season);
+        return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id')
                     ->from($this->tables['app_sp_tournaments'])
                     ->get();
     }
@@ -360,6 +404,7 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function create_match($additional_data)
     {
+        $additional_data['created_on'] = now();
         $additional_data = $this->_filter_data($this->tables['app_sp_matches'], $additional_data);       
         
         $this->db->insert($this->tables['app_sp_matches'], $additional_data);

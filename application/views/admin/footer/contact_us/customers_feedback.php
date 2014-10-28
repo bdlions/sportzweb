@@ -41,6 +41,7 @@
                                 <th style="text-align: center;">Topic</th>
                                 <th style="text-align: center;">Operating System</th>
                                 <th style="text-align: center;">Browser</th>
+                                <th style="text-align: center;">Name</th>
                                 <th style="text-align: center;">Customer Email</th>
                                 <th style="text-align: center;">Phone</th>
                                 <th style="text-align: center;">Feedback</th>
@@ -53,6 +54,7 @@
                                 <td><?php echo $feedback['topic']?></td>
                                 <td><?php echo $feedback['operating_system']?></td>
                                 <td><?php echo $feedback['browser']?></td>
+                                <td><?php echo $feedback['name']?></td>
                                 <td><?php echo $feedback['email']?></td>
                                 <td><?php echo $feedback['phone']?></td>
                                 <td><?php echo $feedback['description']?></td>

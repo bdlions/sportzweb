@@ -20,6 +20,13 @@
                     </a>
                 </div>
                 <?php } ?>
+                <?php if($allow_write){ ?>
+                <div class ="col-md-2 pull-left">
+                    <a href="<?php echo base_url()."admin/applications_scoreprediction/import_matches"; ?>">
+                        <button id="button_import_matches" value="" class="form-control btn button-custom pull-right">Import Matches</button>  
+                    </a>
+                </div>
+                <?php } ?>
             </div>
             
             <div class="row">

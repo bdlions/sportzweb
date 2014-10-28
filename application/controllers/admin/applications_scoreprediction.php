@@ -8,6 +8,7 @@ class Applications_scoreprediction extends CI_Controller{
     public $user_group_array = array();
     function __construct() {
         parent::__construct();
+        $this->load->library('excel');
         $this->load->library('form_validation');
         $this->load->library('ion_auth');
         $this->load->library('org/admin/access_level/admin_access_level_library');
@@ -109,8 +110,7 @@ class Applications_scoreprediction extends CI_Controller{
         $result = array();
         $title = $this->input->post('title');
         $additional_data = array(
-            'title' => $title,
-            'created_on' => now()
+            'title' => $title
         );
         if($this->admin_score_prediction_library->create_sports($additional_data))
         {
@@ -199,8 +199,7 @@ class Applications_scoreprediction extends CI_Controller{
         $result = array();
         $title = $this->input->post('title');
         $additional_data = array(
-            'title' => $title,
-            'created_on' => now()
+            'title' => $title
         );
         if($this->admin_score_prediction_library->create_team($additional_data))
         {
@@ -292,8 +291,7 @@ class Applications_scoreprediction extends CI_Controller{
         $additional_data = array(
             'title' => $title,
             'sports_id' => $sports_id,
-            'season' => $season,
-            'created_on' => now()
+            'season' => $season
         );
         
         if($this->admin_score_prediction_library->create_tournament($additional_data))
@@ -401,8 +399,7 @@ class Applications_scoreprediction extends CI_Controller{
                     'time' => $this->input->post('match_time'),
                     'score_home' => $this->input->post('score_home'),
                     'score_away' => $this->input->post('score_away'),
-                    'status_id' => $this->input->post('match_status_list'),
-                    'created_on' => now()
+                    'status_id' => $this->input->post('match_status_list')
                 );
                 $match_id = $this->admin_score_prediction_library->create_match($additional_data);
                 if($match_id !== FALSE)
@@ -661,6 +658,121 @@ class Applications_scoreprediction extends CI_Controller{
             'value' => 'Configure',
         );
         $this->template->load($this->tmpl, "admin/applications/score_prediction/configure_home_page", $this->data);
+    }
+    
+    // ------------------------------------ Import match module -------------------------
+    
+    /*
+     * This method will import matches from external excel file
+     * @Author Nazmul on 28th October 2014
+     */
+    public function import_matches()
+    {
+        $this->data['message'] = '';
+        if($this->input->post('submit_import_matches'))
+        {
+            $config['upload_path'] = FCPATH.'resources/import/applications/score_prediction/';
+            $config['allowed_types'] = 'xlsx';
+            $config['file_name'] = MATCH_IMPORT_FILE_NAME;
+            $config['overwrite'] = TRUE;
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload())
+            {
+                
+                $this->data['message'] = $this->upload->display_errors();
+            }
+            else
+            {
+                $file = 'resources/import/applications/score_prediction/'.MATCH_IMPORT_FILE_NAME;
+
+                //read file from path
+                $objPHPExcel = PHPExcel_IOFactory::load($file);
+
+                //get only the Cell Collection
+                $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+
+                //extract to a PHP readable array format
+                $header = array();
+                $arr_data = array();
+                //task_tanvir validate each row before extracting information
+                foreach ($cell_collection as $cell) {
+
+                    $column = $objPHPExcel->getActiveSheet()->getCell($cell)->getColumn();
+
+                    $row = $objPHPExcel->getActiveSheet()->getCell($cell)->getRow();
+
+                    $data_value = $objPHPExcel->getActiveSheet()->getCell($cell)->getValue();
+
+                    //header will/should be in row 1 only. of course this can be modified to suit your need.
+                    if ($row == 1) {
+                        $header[$row][$column] = $data_value;
+                    } else {
+                        $arr_data[$row][$column] = $data_value;
+                    }
+                }
+                
+                $header_len = sizeof($header[1]);
+                $row_counter = 1;
+                $success_counter = 0;
+                $error_messages = array();
+                $i=0;
+                foreach ($arr_data as $result_data)
+                {
+                    $i++;
+                    if(sizeof($result_data)!=$header_len){ 
+                        
+                        $error_messages[] = 'Row no '.$row_counter.' is not a valid row';
+                        continue;
+                    }
+                    if(strip_tags($result_data['A']) == '' || strip_tags($result_data['B']) == '' || strip_tags($result_data['C']) == '' || strip_tags($result_data['D']) == '' || strip_tags($result_data['E']) == '' || strip_tags($result_data['F']) == '' || strip_tags($result_data['G']) == '')
+                    {
+                        $error_messages[] = 'Row no '.$row_counter.' is contains empty cell';
+                        continue;
+                    }
+                    if((array_key_exists('F', $result_data) && !$this->utils->validate_date($result_data['F'])) ){ 
+                        
+                        $error_messages[] = 'Row no '.$row_counter.' is not containing valid date';
+                        continue;
+                    }
+                    
+                    if((array_key_exists('G', $result_data) && !$this->utils->validate_time($result_data['G']))){ 
+                        
+                        $error_messages[] = 'Row no '.$row_counter.' is not containing valid time';
+                        continue;
+                    }
+                    
+                    $match_data = array(
+                        'sports' => strip_tags($result_data['A']),
+                        'tournament' => strip_tags($result_data['B']),
+                        'season' => strip_tags($result_data['C']),
+                        'home_team' => strip_tags($result_data['D']),
+                        'away_team' => strip_tags($result_data['E']),
+                        'date' => $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($result_data['F']),
+                        'time' => $result_data['G']
+                    );
+                    if($this->admin_score_prediction_library->process_imported_match($match_data))
+                    {
+                        $success_counter++;
+                    }
+                    else
+                    {
+                        $error_messages[] = 'Row no '.$row_counter.' contains invalid data';
+                    }
+                    $row_counter++;
+                }
+                $import_message = '';
+                if($success_counter > 0)
+                {
+                    $import_message = $success_counter.' rows inserted successfully'.'<br>';
+                }                
+                foreach($error_messages as $error_message)
+                {
+                    $import_message = $import_message.' '.$error_message.'<br>';
+                }
+                $this->data['message'] = $import_message;
+            }
+        }
+        $this->template->load($this->tmpl, "admin/applications/score_prediction/import_matches", $this->data);
     }
 }
 

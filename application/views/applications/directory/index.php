@@ -83,7 +83,7 @@
 
     <div class="col-md-12">
         <h2>App directory</h2>
-        <div>Be more productive with applications.</div>
+        
     </div>
 <script type="text/javascript" src="<?php echo base_url()?>resources/js/jquery.featureCarousel.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -231,7 +231,9 @@
 
 
 
-
+<div class='col-md-12'>
+    <h3>Featured apps</h3>
+</div>
 <!--APPLICATIONS-->
 <div class="col-md-12">
     <?php

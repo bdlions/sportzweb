@@ -157,7 +157,7 @@
                                 </ul>
                             </li>
                             <li id="settings">
-                                <a href="<?php echo base_url()?>admin/auth/logout">Logout</a>                                
+                                <a href="<?php echo base_url()?>admin/auth/logout">Log out</a>                                
                             </li>                            
                         </ul>
                     </div>

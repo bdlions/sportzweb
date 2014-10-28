@@ -575,6 +575,25 @@ class News_app_library {
         }
         return $news_info;
     }
+    
+    // ------------------------------------ Mobile App module -----------------------
+    public function get_sub_category_list($news_category_id)
+    {
+        $news_subcategory_list_array = $this->news_app_model->get_all_news_sub_category($news_category_id)->result_array();
+        
+        
+        $category_lists = $this->news_app_model->get_all_news_category()->result_array();
+        $sub_categorys_of_a_categoty = array();
+
+        $sub_categorys_of_a_categoty = array();
+            foreach ($category_lists as $key => $category_list) {
+                $id = $category_list['id'];
+                $category_title = $category_list['title'];
+                $sub_categorys_result = $this->news_app_model->get_all_news_sub_category($id)->result_array();
+                $sub_categorys_of_a_categoty[$category_list['title']] = array("category_id"=> $id, 'sub_list'=>$sub_categorys_result);
+            }
+        return $sub_categorys_of_a_categoty;
+    }
 }
 
 ?>
