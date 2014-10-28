@@ -1585,21 +1585,25 @@ INSERT INTO `app_sp_sports` (`id`, `title`) VALUES
 CREATE TABLE IF NOT EXISTS `app_sp_teams` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
+  `sports_id` int(11) unsigned NOT NULL,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_app_sp_teams_sports1_idx` (`sports_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-INSERT INTO `app_sp_teams` (`id`, `title`) VALUES
-(1, 'Chelsea'),
-(2, 'Southampton'),
-(3, 'Aston Villa'),
-(4, 'Arsenal'),
-(5, 'Swansea'),
-(6, 'Man City'),
-(7, 'Leicester'),
-(8, 'West Ham'),
-(9, 'Tottenham'),
-(10, 'Hull');
+ALTER TABLE `app_sp_teams`
+    ADD CONSTRAINT `fk_app_sp_teams_sports1` FOREIGN KEY(`sports_id`) REFERENCES `app_sp_sports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `app_sp_teams` (`id`, `sports_id`, `title`) VALUES
+(1, 1, 'Chelsea'),
+(2, 1, 'Southampton'),
+(3, 1, 'Aston Villa'),
+(4, 1, 'Arsenal'),
+(5, 1, 'Swansea'),
+(6, 1, 'Man City'),
+(7, 1, 'Leicester'),
+(8, 1, 'West Ham'),
+(9, 1, 'Tottenham'),
+(10, 1, 'Hull');
 
 CREATE TABLE IF NOT EXISTS `app_sp_tournaments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

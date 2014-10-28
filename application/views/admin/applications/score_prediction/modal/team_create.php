@@ -11,7 +11,8 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>' + "admin/applications_scoreprediction/create_team",
                 data: {
-                    title: $("#input_team_create_title").val()
+                    title: $("#input_team_create_title").val(),
+                    sports_id:'<?php echo $sports_id?>'
                 },
                 success: function(data) {
                     alert(data['message']);

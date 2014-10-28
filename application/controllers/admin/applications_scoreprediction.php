@@ -183,10 +183,11 @@ class Applications_scoreprediction extends CI_Controller{
     }
     
     // ---------------------------------- Team Module ----------------------------------------
-    public function manage_teams()
+    public function manage_teams($sports_id)
     {
         $this->data['message'] = '';
-        $this->data['team_list'] = $this->admin_score_prediction_library->get_all_teams()->result_array();
+        $this->data['sports_id'] = $sports_id;
+        $this->data['team_list'] = $this->admin_score_prediction_library->get_all_teams($sports_id)->result_array();
         $this->template->load($this->tmpl, "admin/applications/score_prediction/team_list", $this->data);
     }
     
@@ -199,7 +200,8 @@ class Applications_scoreprediction extends CI_Controller{
         $result = array();
         $title = $this->input->post('title');
         $additional_data = array(
-            'title' => $title
+            'title' => $title,
+            'sports_id' => $this->input->post('sports_id')
         );
         if($this->admin_score_prediction_library->create_team($additional_data))
         {
@@ -421,9 +423,18 @@ class Applications_scoreprediction extends CI_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
-
+        
+        $sports_id = 0;
+        $tournament_info = array();
+        $tournament_info_array = $this->admin_score_prediction_library->get_tournament_info($tournament_id)->result_array();
+        if(!empty($tournament_info_array))
+        {
+            $tournament_info = $tournament_info_array[0];
+            $sports_id = $tournament_info['sports_id'];
+        }
+        
         $team_list = array();
-        $team_list_array = $this->admin_score_prediction_library->get_all_teams()->result_array();
+        $team_list_array = $this->admin_score_prediction_library->get_all_teams($sports_id)->result_array();
         foreach($team_list_array as $team_info)
         {
             $team_list[$team_info['team_id']] = $team_info['title'];
@@ -530,8 +541,18 @@ class Applications_scoreprediction extends CI_Controller{
         {
             $match_info = $match_info_array[0];
         }
+        $tournament_id = $match_info['tournament_id'];
+        $sports_id = 0;
+        $tournament_info = array();
+        $tournament_info_array = $this->admin_score_prediction_library->get_tournament_info($tournament_id)->result_array();
+        if(!empty($tournament_info_array))
+        {
+            $tournament_info = $tournament_info_array[0];
+            $sports_id = $tournament_info['sports_id'];
+        }
+        
         $team_list = array();
-        $team_list_array = $this->admin_score_prediction_library->get_all_teams()->result_array();
+        $team_list_array = $this->admin_score_prediction_library->get_all_teams($sports_id)->result_array();
         foreach($team_list_array as $team_info)
         {
             $team_list[$team_info['team_id']] = $team_info['title'];

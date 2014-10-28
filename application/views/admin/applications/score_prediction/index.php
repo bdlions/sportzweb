@@ -8,11 +8,6 @@
                     <button onclick="open_modal_sports_create()" value="" class="form-control btn button-custom pull-right">Create Sports</button>  
                 </div>
                 <?php } ?>
-                <div class ="col-md-2 pull-left">
-                    <a href="<?php echo base_url()."admin/applications_scoreprediction/manage_teams"; ?>">
-                        <button id="button_manage_teams" value="" class="form-control btn button-custom pull-right">Teams</button>  
-                    </a>
-                </div>
                 <?php if($allow_configuration){ ?>
                 <div class ="col-md-2 pull-left">
                     <a href="<?php echo base_url()."admin/applications_scoreprediction/configure_home_page"; ?>">

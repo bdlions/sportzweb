@@ -232,8 +232,9 @@ class Admin_score_prediction_model extends Ion_auth_model
      * This method will return all teams
      * @Author Nazmul on 24th October 2014
      */
-    public function get_all_teams()
+    public function get_all_teams($sports_id)
     {
+        $this->db->where($this->tables['app_sp_teams'].'.sports_id', $sports_id);        
         return $this->db->select($this->tables['app_sp_teams'].'.id as team_id,'.$this->tables['app_sp_teams'].'.*')
                     ->from($this->tables['app_sp_teams'])
                     ->get();

@@ -8,6 +8,11 @@
                     <button onclick="open_modal_tournament_create()" value="" class="form-control btn button-custom pull-right">Create Tournament</button>  
                 </div>
                 <?php } ?>
+                <div class ="col-md-2 pull-left">
+                    <a href="<?php echo base_url()."admin/applications_scoreprediction/manage_teams/".$sports_id; ?>">
+                        <button id="button_manage_teams" value="" class="form-control btn button-custom pull-right">Teams</button>  
+                    </a>
+                </div>
             </div>
             
             <div class="row">
