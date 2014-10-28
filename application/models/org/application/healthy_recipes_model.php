@@ -209,4 +209,43 @@ class Healthy_recipes_model extends Ion_auth_model {
     }
     
     
+    // ---------------------------- Mobile Application Module ---------------------
+    /*
+     * This method will return all recipe categories
+     * @Author Nazmul on 28th October 2014
+     */
+    public function get_all_recipe_categories()
+    {
+        return $this->db->select($this->tables['recipe_category'].'.id as recipe_category_id,'.$this->tables['recipe_category'].'.*')
+                ->from($this->tables['recipe_category'])
+                ->get();
+    }
+    /*
+     * This method will return all recipe list under a recipe category
+     * @param $recipe_category_id, recipe category id
+     * @Author Nazmul on 28th October 2014
+     */
+    public function get_recipe_list_by_category($recipe_category_id = 0)
+    {
+        if($recipe_category_id != 0)
+        {
+            $this->db->where('recipe_category_id', $recipe_category_id);
+        }
+        return $this->db->select($this->tables['recipes'].'.id as recipe_id,'.$this->tables['recipes'].'.*')
+                    ->from($this->tables['recipes'])
+                    ->get();
+    }
+    
+    /*
+     * This method will return recipe info of a recipe
+     * @param $recipe_id, recipe id
+     * @Author Nazmul on 28th October 2014
+     */
+    public function get_recipe_info($recipe_id)
+    {
+        $this->db->where($this->tables['recipes'].'.id',$recipe_id);
+        return $this->db->select($this->tables['recipes'].'.id as recipe_id,'.$this->tables['recipes'].'.main_picture as picture,'.$this->tables['recipes'].'.*')
+                ->from($this->tables['recipes'])
+                ->get();
+    }
 }
