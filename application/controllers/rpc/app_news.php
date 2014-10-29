@@ -97,8 +97,15 @@ class App_news extends JsonRPCServer {
     {
         $result = array();
         $category_news_list = array();
-        $subcategory_id_news_list = array();
+        $subcategory_info_news_list = array();
         $subcategory_news_list = array();
+        
+        $news_category_info = array();
+        $news_category_info_array = $this->news_app_library->get_news_category_info($news_category_id)->result_array();
+        if(!empty($news_category_info_array))
+        {
+            $news_category_info = $news_category_info_array[0];
+        }
         $news_configuration = $this->news_app_library->get_news_category_configuration($news_category_id);            
         if(!empty($news_configuration))
         {
@@ -117,6 +124,11 @@ class App_news extends JsonRPCServer {
                 }
             }
         }
+        $category_info_news_list = array(
+            'id' => $news_category_info['id'],
+            'title' => $news_category_info['title'],
+            'news_list' => $category_news_list
+        );
         $news_subcategory_list_array = $this->news_app_library->get_all_news_sub_category($news_category_id)->result_array();
         foreach($news_subcategory_list_array as $subcategory_info)
         {
@@ -136,13 +148,19 @@ class App_news extends JsonRPCServer {
                             'picture' => $news_info['picture']
                         );
                         $subcategory_news_list[] = $news;
-                    }
-                    $subcategory_id_news_list[$subcategory_info['id']] = $subcategory_news_list;
+                    }                    
                 }
             }
+            $subcategory_news = array(
+                'id' => $subcategory_info['id'],
+                'title' => $subcategory_info['title'],
+                'news_list' => $subcategory_news_list
+            );
+            $subcategory_info_news_list[] = $subcategory_news;
         }
-        $result['category_news_list'] = $category_news_list;
-        $result['subcategory_id_news_list'] = $subcategory_id_news_list;
+        $result['category_info_news_list'] = $category_info_news_list;
+        $result['subcategory_info_news_list'] = $subcategory_info_news_list;
+        //echo (json_encode($result));
         return json_encode($result);
     }
     
