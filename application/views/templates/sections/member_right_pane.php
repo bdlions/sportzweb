@@ -63,11 +63,12 @@
             <div class="panel right-panel">
                 <div class="panel-heading right-panel-heading">Recent Activity</div>
                 <div class="panel-body right-panel-body">
-                    <ul class="list-group right-panel-list">
+                    <div class="container-fluid right-panel-list">
+                    <div style="padding-bottom: 30px">
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']) && !empty($recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info'])) { ?>
-                            <li class="list-group-item right-panel-item">
+                            <div class="list-group-item right-panel-item">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
                                                 <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
@@ -75,14 +76,14 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['last_name'] ?></a> likes <a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']['last_name'] ?></a>'s status</div>
+                                    <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['last_name'] ?></a> likes <a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']['last_name'] ?></a>'s status</div>
                                 </div>
-                            </li>
+                            </div>
                         <?php } ?> 
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']) && !empty($recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info'])) { ?>
-                            <li class="list-group-item right-panel-item">
+                            <div class="list-group-item right-panel-item">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
                                                 <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
@@ -90,14 +91,14 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['last_name'] ?></a> Added a new photo</div>
+                                    <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['last_name'] ?></a> Added a new photo</div>
                                 </div>
-                            </li>
+                            </div>
                         <?php } ?>
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']) && !empty($recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['follower_info'])) { ?>
-                            <li class="list-group-item right-panel-item">
+                            <div class="list-group-item right-panel-item">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
                                                 <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
@@ -105,14 +106,14 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['last_name'] ?></a> is now following <a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['follower_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['follower_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['follower_info']['last_name'] ?></a></div>
+                                    <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['last_name'] ?></a> is now following <a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['follower_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['follower_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['follower_info']['last_name'] ?></a></div>
                                 </div>
-                            </li>
+                            </div>
                         <?php } ?> 
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_STATUS]['status_info'])) { ?>
-                            <li class="list-group-item right-panel-item">
+                            <div class="list-group-item right-panel-item">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
                                                 <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
@@ -120,14 +121,14 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['last_name'] ?></a> posted a status</div>
+                                    <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['last_name'] ?></a> posted a status</div>
                                 </div>
-                            </li>
+                            </div>
                         <?php } ?>
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_COMMENTS]['from_user_info']) && !empty($recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info'])) { ?>
-                            <li class="list-group-item right-panel-item">
+                            <div class="list-group-item right-panel-item">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
                                                 <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
@@ -135,14 +136,14 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['last_name'] ?></a> commented on <a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['from_user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_COMMENTS]['from_user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['from_user_info']['last_name'] ?></a>'s status</div>
+                                    <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['last_name'] ?></a> commented on <a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['from_user_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_COMMENTS]['from_user_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['from_user_info']['last_name'] ?></a>'s status</div>
                                 </div>
-                            </li>
+                            </div>
                         <?php } ?> 
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_CONNECTIONS])) { ?>
-                            <li class="list-group-item right-panel-item">
+                            <div class="list-group-item right-panel-item">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['user_id'] ?>' class="profile-name"> 
                                             <div>
                                                 <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
@@ -150,14 +151,14 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['last_name'] ?></a> is now connected to Sonuto</div>
+                                    <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['last_name'] ?></a> is now connected to Sonuto</div>
                                 </div>
-                            </li>
+                            </div>
                         <?php } ?>
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_BLOGS]) && !empty($recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info'])) { ?>
-                            <li class="list-group-item right-panel-item">
+                            <div class="list-group-item right-panel-item">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
                                                 <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
@@ -165,11 +166,12 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['last_name'] ?></a> created a <a href="<?php echo base_url().'applications/blog_app/view_blog_post/'.$recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['blog_id']; ?>">blog</a></div>
+                                    <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8"><a href="<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['user_id'] ?>"><?php echo $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['first_name'] . ' ' . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['last_name'] ?></a> created a <a href="<?php echo base_url().'applications/blog_app/view_blog_post/'.$recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['blog_id']; ?>">blog</a></div>
                                 </div>
-                            </li>
+                            </div>
                         <?php } ?>
-                    </ul>
+                    </div>
+                    </div>
                 </div>
             </div>  
             <!--<div class="panel right-panel">

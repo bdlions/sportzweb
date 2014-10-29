@@ -156,7 +156,7 @@
 }
 .right-panel-list{
     margin-bottom:0px;
-    max-height:270px;
+    max-height:280px;
     overflow:auto;
     overflow-x: hidden;
 }

@@ -75,7 +75,3 @@
         $('#ex1').zoom();
     }
 </script>
-
-<!--<style>
-
-</style>-->
