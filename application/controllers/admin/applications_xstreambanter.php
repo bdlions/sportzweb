@@ -10,9 +10,7 @@ class Applications_xstreambanter extends CI_Controller{
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
-        $this->load->library('org/admin/application/admin_application_library');
-        $this->load->library('org/admin/application/admin_xstream_banter');
-        $this->load->library('org/application/xstream_banter_library');
+        $this->load->library('org/admin/application/admin_xstream_banter_library');
         $this->load->library('org/admin/access_level/admin_access_level_library'); 
         $this->load->library('excel');
         $this->load->helper('url');
@@ -97,281 +95,498 @@ class Applications_xstreambanter extends CI_Controller{
         } 
     }
     
-    function index()
-    {
-        $this->xstream_banter();
-    }
-    //---------------------------------------Xstream Banter---------------------------
-    function xstream_banter()
+    public function index()
     {
         $this->data['message'] = '';
-        $sports_list = array();
-        $sports_list_array = $this->admin_xstream_banter->get_all_sports()->result_array();
-        if(!empty($sports_list_array))
-        {
-            $sports_list = $sports_list_array;
-        }
-        $this->data['sports_list'] = $sports_list;
-        $this->template->load($this->tmpl, "admin/applications/xstream_banter/sports", $this->data);
+        $this->data['sports_list'] = $this->admin_xstream_banter_library->get_all_sports()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/index", $this->data);
     }
     
-    function xstream_banter_sports($sports_id)
+    // ---------------------------------------- Sports Module -------------------------------
+    /*
+     * Ajax call to create a new sports
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_sports()
+    {
+        $result = array();
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title
+        );
+        if($this->admin_xstream_banter_library->create_sports($additional_data))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    /*
+     * Ajax call to get sports info
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_sports_info()
+    {
+        $result['sports_info'] = array();
+        $sports_id = $this->input->post('sports_id');
+        $sports_info_array = $this->admin_xstream_banter_library->get_sports_info($sports_id)->result_array();
+        if(!empty($sports_info_array))
+        {
+            $result['sports_info'] = $sports_info_array[0];
+        }
+        echo json_encode($result);
+    }
+    
+    /*
+     * Ajax call to update sports
+     * @Author Nazmul on 24th October 2014
+     */
+    public function update_sports()
+    {
+        $result = array();
+        $sports_id = $this->input->post('sports_id');
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title,
+            'modified_on' => now()
+        );
+        if($this->admin_xstream_banter_library->update_sports($sports_id, $additional_data))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    /*
+     * Ajax call to delete sports
+     * @Author Nazmul on 24th October 2014
+     */
+    public function delete_sports()
+    {
+        $result = array();
+        $sports_id = $this->input->post('sports_id');
+        if($this->admin_xstream_banter_library->delete_sports($sports_id))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    // ---------------------------------- Team Module ----------------------------------------
+    public function manage_teams($sports_id)
     {
         $this->data['message'] = '';
-        $tournament_list = array();
-        $tournament_list_array = $this->admin_xstream_banter->get_all_tournaments($sports_id)->result_array();
-        if(!empty($tournament_list_array))
-        {
-            $tournament_list = $tournament_list_array;
-        }
-        $this->data['tournament_list'] = $tournament_list;
-        $team_list = $this->admin_xstream_banter->get_all_teams();
-        $this->data['team_list'] = $team_list;
         $this->data['sports_id'] = $sports_id;
-        $this->template->load($this->tmpl, "admin/applications/xstream_banter/tournaments", $this->data);
+        $this->data['team_list'] = $this->admin_xstream_banter_library->get_all_teams($sports_id)->result_array();
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/team_list", $this->data);
     }
     
-    function xstream_banter_tournament($tournament_id)
+    /*
+     * Ajax call to create a new team
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_team()
+    {
+        $result = array();
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title,
+            'sports_id' => $this->input->post('sports_id')
+        );
+        if($this->admin_xstream_banter_library->create_team($additional_data))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    /*
+     * Ajax call to get team info
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_team_info()
+    {
+        $result['team_info'] = array();
+        $team_id = $this->input->post('team_id');
+        $team_info_array = $this->admin_xstream_banter_library->get_team_info($team_id)->result_array();
+        if(!empty($team_info_array))
+        {
+            $result['team_info'] = $team_info_array[0];
+        }
+        echo json_encode($result);
+    }
+    /*
+     * Ajax call to update team
+     * @Author Nazmul on 24th October 2014
+     */
+    public function update_team()
+    {
+        $result = array();
+        $team_id = $this->input->post('team_id');
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title,
+            'modified_on' => now()
+        );
+        if($this->admin_xstream_banter_library->update_team($team_id, $additional_data))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    /*
+     * Ajax call to delete team
+     * @Author Nazmul on 24th October 2014
+     */
+    public function delete_team()
+    {
+        $result = array();
+        $team_id = $this->input->post('team_id');
+        if($this->admin_xstream_banter_library->delete_team($team_id))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    // ----------------------------------- Tournament Module -----------------------------
+    public function manage_tournaments($sports_id)
+    {
+        $this->data['message'] = '';
+        $this->data['sports_id'] = $sports_id;
+        $this->data['tournament_list'] = $this->admin_xstream_banter_library->get_all_tournaments($sports_id)->result_array();
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/tournament_list", $this->data);
+    }
+    
+    /*
+     * Ajax call to create a new tournament
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_tournament()
+    {
+        $result = array();
+        $title = $this->input->post('title');
+        $sports_id = $this->input->post('sports_id');
+        $season = $this->input->post('season');
+        $additional_data = array(
+            'title' => $title,
+            'sports_id' => $sports_id,
+            'season' => $season
+        );
+        
+        if($this->admin_xstream_banter_library->create_tournament($additional_data))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    /*
+     * Ajax call to get tournament info
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_tournament_info()
+    {
+        $result['tournament_info'] = array();
+        $tournament_id = $this->input->post('tournament_id');
+        $tournament_info_array = $this->admin_xstream_banter_library->get_tournament_info($tournament_id)->result_array();
+        if(!empty($tournament_info_array))
+        {
+            $result['tournament_info'] = $tournament_info_array[0];
+        }
+        echo json_encode($result);
+    }
+    /*
+     * Ajax call to update tournament
+     * @Author Nazmul on 24th October 2014
+     */
+    public function update_tournament()
+    {
+        $result = array();
+        $tournament_id = $this->input->post('tournament_id');
+        $season = $this->input->post('season');
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title,
+            'season' => $season,
+            'modified_on' => now()
+        );
+        if($this->admin_xstream_banter_library->update_tournament($tournament_id, $additional_data))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    /*
+     * Ajax call to delete tournament
+     * @Author Nazmul on 24th October 2014
+     */
+    public function delete_tournament()
+    {
+        $result = array();
+        $tournament_id = $this->input->post('tournament_id');
+        if($this->admin_xstream_banter_library->delete_tournament($tournament_id))
+        {
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    // ---------------------------------- Match Module ------------------------------
+    public function manage_matches($tournament_id)
     {
         $this->data['message'] = '';
         $this->data['tournament_id'] = $tournament_id;
+        $this->data['match_list'] = $this->admin_xstream_banter_library->get_all_matches($tournament_id);
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/match_list", $this->data);
+    }
+    
+    /*
+     * This method will create a match
+     * @param $tournament_id , tournament id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function create_match($tournament_id)
+    {
+        $this->data['message'] = '';
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('match_date', 'Match Date', 'xss_clean|required');
+        $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
+
+        if ($this->input->post('submit_create_match'))
+        {            
+            if($this->form_validation->run() == true)
+            {
+                $additional_data = array(
+                    'tournament_id' => $tournament_id,
+                    'team_id_home' => $this->input->post('home_team_list'),
+                    'team_id_away' => $this->input->post('away_team_list'),
+                    'date' => $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('match_date')),
+                    'time' => $this->input->post('match_time')
+                );
+                $match_id = $this->admin_xstream_banter_library->create_match($additional_data);
+                if($match_id !== FALSE)
+                {
+                    $this->session->set_flashdata('message', $this->admin_xstream_banter_library->messages());
+                    redirect('admin/applications_xstreambanter/create_match/'.$tournament_id,'refresh');
+                }
+                else
+                {
+                    $this->data['message'] = 'Error while creating a match.';
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }            
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        
+        $sports_id = 0;
         $tournament_info = array();
-        $tournament_info_array = $this->admin_xstream_banter->get_tournament_info($tournament_id)->result_array();
+        $tournament_info_array = $this->admin_xstream_banter_library->get_tournament_info($tournament_id)->result_array();
         if(!empty($tournament_info_array))
         {
             $tournament_info = $tournament_info_array[0];
+            $sports_id = $tournament_info['sports_id'];
         }
-        $this->data['tournament_info'] = $tournament_info;
-        $team_list = $this->admin_xstream_banter->get_all_teams_tournament($tournament_id);
-        $this->data['team_list'] = $team_list;
-        $team_list_match = array();
-        foreach($team_list as $team)
+        
+        $team_list = array();
+        $team_list_array = $this->admin_xstream_banter_library->get_all_teams($sports_id)->result_array();
+        foreach($team_list_array as $team_info)
         {
-            $team_list_match[$team['id']] = $team['title'];
+            $team_list[$team_info['team_id']] = $team_info['title'];
         }
-        $this->data['team_list_match'] = $team_list_match;
-        $new_team_list = $this->admin_xstream_banter->get_all_teams_not_in_tournament($tournament_id);
-        $this->data['new_team_list'] = $new_team_list;
-        $match_list = $this->admin_xstream_banter->get_all_matches($tournament_id)->result_array();
-        $this->data['match_list'] = $match_list;
-        $this->template->load($this->tmpl, "admin/applications/xstream_banter/tournament", $this->data);
+        $this->data['team_list'] = $team_list;
+        
+        $this->data['match_date'] = array(
+            'name' => 'match_date',
+            'id' => 'match_date',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('match_date'),
+        );
+        $this->data['match_time'] = array(
+            'name' => 'match_time',
+            'id' => 'match_time',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('match_time'),
+        );
+        $this->data['submit_create_match'] = array(
+            'name' => 'submit_create_match',
+            'id' => 'submit_create_match',
+            'type' => 'submit',
+            'value' => 'Create',
+        );
+        $this->data['tournament_id'] = $tournament_id;
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/match_create", $this->data);
     }
     
-    
-    function xstream_banter_match($match_id)
+    /*
+     * This method will update a match
+     * @param $match_id, match id
+     * @Author Nazmul on 24th October 2014
+     */
+    public function update_match($match_id = 0)
     {
+        if(empty($match_id))
+        {
+            redirect("admin/applications_xstreambanter","refresh");
+        }
         $this->data['message'] = '';
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('match_date', 'Match Date', 'xss_clean|required');
+        $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
+        
+        if ($this->input->post('submit_update_match'))
+        {            
+            if($this->form_validation->run() == true)
+            {
+                $additional_data = array(
+                    'team_id_home' => $this->input->post('home_team_list'),
+                    'team_id_away' => $this->input->post('away_team_list'),
+                    'date' => $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('match_date')),
+                    'time' => $this->input->post('match_time'),
+                    'modified_on' => now()
+                );
+                if($this->admin_xstream_banter_library->update_match($match_id, $additional_data))
+                {
+                    $this->session->set_flashdata('message', $this->admin_xstream_banter_library->messages());
+                    redirect('admin/applications_xstreambanter/update_match/'.$match_id,'refresh');
+                }
+                else
+                {
+                    $this->data['message'] = $this->admin_xstream_banter_library->errors();
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }            
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        
         $match_info = array();
-        $match_info_array = $this->admin_xstream_banter->get_matche_info($match_id)->result_array();
+        $match_info_array = $this->admin_xstream_banter_library->get_match_info($match_id)->result_array();
         if(!empty($match_info_array))
         {
             $match_info = $match_info_array[0];
         }
-        $this->data['match_info'] = $match_info;
-        $chat_room_list = $this->admin_xstream_banter->get_all_chat_rooms($match_id)->result_array();
-        $this->data['chat_room_list'] = $chat_room_list;
-        $this->template->load($this->tmpl, "admin/applications/xstream_banter/match", $this->data);
-    }
-    function xstream_banter_room_conversation($room_id)
-    {
-        $this->data['message'] = '';
-        $room_conversation_match_info = array();
-        $room_conversation_match_info_array = $this->admin_xstream_banter->get_room_conversation_match_info($room_id)->result_array();
-        if(!empty($room_conversation_match_info_array))
+        $tournament_id = $match_info['tournament_id'];
+        $sports_id = 0;
+        $tournament_info = array();
+        $tournament_info_array = $this->admin_xstream_banter_library->get_tournament_info($tournament_id)->result_array();
+        if(!empty($tournament_info_array))
         {
-            $room_conversation_match_info = $room_conversation_match_info_array[0];
+            $tournament_info = $tournament_info_array[0];
+            $sports_id = $tournament_info['sports_id'];
         }
-        $team_total_users_map = array(
-            $room_conversation_match_info['team1_id'] => 0,
-            $room_conversation_match_info['team2_id'] => 0,
-        );
-        $users_chat_room_mapping_array = $this->admin_xstream_banter->get_users_chat_room_mapping($room_id)->result_array();
-        foreach($users_chat_room_mapping_array as $users_chat_room_mapping)
-        {
-            $team_total_users_map[$users_chat_room_mapping['team_id']] = $users_chat_room_mapping['total_users'];
-        }
-        $this->data['room_conversation_match_info'] = $room_conversation_match_info;
-        $this->data['team_total_users_map'] = $team_total_users_map;
         
-        $this->data['chat_room_message_list'] = $this->xstream_banter_library->get_chat_room_messages($room_id);
+        $team_list = array();
+        $team_list_array = $this->admin_xstream_banter_library->get_all_teams($sports_id)->result_array();
+        foreach($team_list_array as $team_info)
+        {
+            $team_list[$team_info['team_id']] = $team_info['title'];
+        }
+        $this->data['team_list'] = $team_list;
         
-        $this->template->load($this->tmpl, "admin/applications/xstream_banter/room_conversation", $this->data);
-    }
-    //Ajax calls
-    function create_sports()
-    {
-        $response = array();
-        $sports_name = $_POST['sports_name'];
-        $additional_data = array(
-            'application_id' => APPLICATION_XSTREAM_BANTER_ID
+        $this->data['match_date'] = array(
+            'name' => 'match_date',
+            'id' => 'match_date',
+            'type' => 'text',
+            'value' => $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($match_info['date']),
         );
-        $id = $this->admin_xstream_banter->create_sports($sports_name, $additional_data);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'Sports is added successfully.';
-            $sports_info_array = $this->admin_xstream_banter->get_sports($id)->result_array();
-            if(!empty($sports_info_array))
-            {
-                $response['sports_info'] = $sports_info_array[0];
-            }             
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_xstream_banter->errors_alert();
-        }
-        echo json_encode($response);
-    }
-    
-    function create_tournament()
-    {
-        $response = array();
-        $tournament_name = $_POST['tournament_name'];
-        $sports_id = $_POST['sports_id'];
-        $additional_data = array(
-            'sports_id' => $sports_id
+        $this->data['match_time'] = array(
+            'name' => 'match_time',
+            'id' => 'match_time',
+            'type' => 'text',
+            'value' => $match_info['time'],
         );
-        $id = $this->admin_xstream_banter->create_tournament($tournament_name, $additional_data);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'Tournament is added successfully.';
-            $tournament_info_array = $this->admin_xstream_banter->get_tournament($id)->result_array();
-            if(!empty($tournament_info_array))
-            {
-                $response['tournament_info'] = $tournament_info_array[0];
-            }             
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_xstream_banter->errors_alert();
-        }
-        echo json_encode($response);
-    }
-    
-    function create_team()
-    {
-        $response = array();
-        $team_name = $_POST['team_name'];
-        $id = $this->admin_xstream_banter->create_team($team_name);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'Team is added successfully.';
-            $team_info_array = $this->admin_xstream_banter->get_team($id);
-            if(!empty($team_info_array))
-            {
-                $response['team_info'] = $team_info_array[0];
-            }             
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_xstream_banter->errors_alert();
-        }
-        echo json_encode($response);
-    }
-    
-    function assign_teams_tournament()
-    {
-        $response = array();
-        $tournament_id = $_POST['tournament_id'];
-        $team_id_list = $_POST['team_id_list'];
-        $data = array();
-        foreach($team_id_list as $team_id){
-            $team_tournament = array(
-                'team_id' => $team_id,
-                'tournament_id' => $tournament_id
-            );
-            $data[] = $team_tournament;
-        }
-        if($this->admin_xstream_banter->assign_teams_tournament($data))
-        {
-            $response['status'] = 1;
-        }
-        else
-        {
-            $response['status'] = 0;
-        }
-        echo json_encode($response);
-    }
-    
-    function create_match()
-    {
-        $response = array();
-        $tournament_id = $_POST['tournament_id'];
-        $team1_id = $_POST['team1_id']; 
-        $team2_id = $_POST['team2_id']; 
-        $date = $_POST['date']; 
-        $time = $_POST['time'];
-        $additional_data = array(
-            'tournament_id' => $tournament_id,
-            'team1_id' => $team1_id,
-            'team2_id' => $team2_id,
-            'date' => $date,
-            'time' => $time
+        $this->data['submit_update_match'] = array(
+            'name' => 'submit_update_match',
+            'id' => 'submit_update_match',
+            'type' => 'submit',
+            'value' => 'Update',
         );
-        $match_id = $this->admin_xstream_banter->create_match($additional_data);
-        if($match_id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'Match is stored successfully.';
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = 'Error while creating a match.';
-        }
-        echo json_encode($response);
+        $this->data['selected_home_team'] = $match_info['team_id_home'];
+        $this->data['selected_away_team'] = $match_info['team_id_away'];
+        $this->data['match_id'] = $match_id;
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/match_update", $this->data);
     }
     
-    function remove_team_from_tournament()
+    /*
+     * Ajax call to delete match
+     * @Author Nazmul on 24th October 2014
+     */
+    public function delete_match()
     {
         $result = array();
-        $team_id = $_POST['team_id']; 
-        $tournament_id = $_POST['tournament_id']; 
-        if($this->admin_xstream_banter->remove_team_from_tournament($tournament_id, $team_id))
+        $match_id = $this->input->post('match_id');
+        if($this->admin_xstream_banter_library->delete_match($match_id))
         {
-            $result['status'] = 1;
-            $result['message'] = 'Team is removed successfully.';
+            $result['message'] = $this->admin_xstream_banter_library->messages_alert();
         }
         else
         {
-            $result['status'] = 0;
-            $result['message'] = 'Error while removing the team. Please try again.';
+            $result['message'] = $this->admin_xstream_banter_library->errors_alert();
         }
         echo json_encode($result);
     }
-    public function import_time_validation($time)
-    {
-        if(preg_match("/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/", $time) === 0) {
-            return 0;
-        } else {
-           return 1;
-        }
-    }
+    // ------------------------------------ Import match module -------------------------
     
-    public function import_date_validation($date)
+    /*
+     * This method will import matches from external excel file
+     * @Author Nazmul on 28th October 2014
+     */
+    public function import_matches()
     {
-        if(preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])\-(0[1-9]|1[0-2])\-[0-9]{4}$/", $date) === 0) {
-           RETURN 0;
-        } else {
-           RETURN 1;
-        }
-    }
-    
-    function page_import_xstream()
-    {
-        $success_counter = 0;
-        $result_array = array();
         $this->data['message'] = '';
-        if($this->input->post('button_submit'))
+        if($this->input->post('submit_import_matches'))
         {
-            $config['upload_path'] = './././resources/import/applications/xstream_banter/';
+            $config['upload_path'] = FCPATH.'resources/import/applications/xstream_banter/';
             $config['allowed_types'] = 'xlsx';
-            $config['file_name'] = 'xstream.xlsx';
+            $config['file_name'] = MATCH_IMPORT_XB_FILE_NAME;
             $config['overwrite'] = TRUE;
             $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload())
@@ -381,7 +596,7 @@ class Applications_xstreambanter extends CI_Controller{
             }
             else
             {
-                $file = 'resources/import/applications/xstream_banter/xstream.xlsx';
+                $file = 'resources/import/applications/xstream_banter/'.MATCH_IMPORT_XB_FILE_NAME;
 
                 //read file from path
                 $objPHPExcel = PHPExcel_IOFactory::load($file);
@@ -410,49 +625,67 @@ class Applications_xstreambanter extends CI_Controller{
                 }
                 
                 $header_len = sizeof($header[1]);
-                
+                $row_counter = 1;
+                $success_counter = 0;
+                $error_messages = array();
                 $i=0;
                 foreach ($arr_data as $result_data)
                 {
                     $i++;
-                    
-                    
-                    if(sizeof($result_data)!=$header_len || (array_key_exists('E', $result_data) && !$this->import_date_validation($result_data['E'])) || (array_key_exists('F', $result_data) && !$this->import_time_validation($result_data['F']))){ 
+                    if(sizeof($result_data)!=$header_len){ 
                         
-                        $result_array[$i] = 'Row no '.$i.' is not containing valid data';
+                        $error_messages[] = 'Row no '.$row_counter.' is not a valid row';
+                        continue;
+                    }
+                    if(strip_tags($result_data['A']) == '' || strip_tags($result_data['B']) == '' || strip_tags($result_data['C']) == '' || strip_tags($result_data['D']) == '' || strip_tags($result_data['E']) == '' || strip_tags($result_data['F']) == '' || strip_tags($result_data['G']) == '')
+                    {
+                        $error_messages[] = 'Row no '.$row_counter.' is contains empty cell';
+                        continue;
+                    }
+                    if((array_key_exists('F', $result_data) && !$this->utils->validate_date($result_data['F'])) ){ 
+                        
+                        $error_messages[] = 'Row no '.$row_counter.' is not containing valid date';
                         continue;
                     }
                     
-                    $data = array(
-                        'sports_name' => strip_tags($result_data['A']),
-                        'tournament_name' => strip_tags($result_data['B']),
-                        'team_a_name' => strip_tags($result_data['C']),
-                        'team_b_name' => strip_tags($result_data['D']),
-                        'date' => $result_data['E'],
-                        'time' => $result_data['F']
-                    );
-                    //task_redwan
-                    $flag = $this->admin_xstream_banter_model->add_imported_match_info($data);
-                    //$this->import_xstream_banter_match($data);
-                
-                     if ($flag !== FALSE) {
-                        $success_counter++;
-                    } else {
-                        $result_array[$i] = 'row no ' . $i . ' contain duplicated recipe title';
+                    if((array_key_exists('G', $result_data) && !$this->utils->validate_time($result_data['G']))){ 
+                        
+                        $error_messages[] = 'Row no '.$row_counter.' is not containing valid time';
+                        continue;
                     }
+                    
+                    $match_data = array(
+                        'sports' => strip_tags($result_data['A']),
+                        'tournament' => strip_tags($result_data['B']),
+                        'season' => strip_tags($result_data['C']),
+                        'home_team' => strip_tags($result_data['D']),
+                        'away_team' => strip_tags($result_data['E']),
+                        'date' => $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($result_data['F']),
+                        'time' => $result_data['G']
+                    );
+                    if($this->admin_xstream_banter_library->process_imported_match($match_data))
+                    {
+                        $success_counter++;
+                    }
+                    else
+                    {
+                        $error_messages[] = 'Row no '.$row_counter.' contains invalid data';
+                    }
+                    $row_counter++;
                 }
+                $import_message = '';
+                if($success_counter > 0)
+                {
+                    $import_message = $success_counter.' rows inserted successfully'.'<br>';
+                }                
+                foreach($error_messages as $error_message)
+                {
+                    $import_message = $import_message.' '.$error_message.'<br>';
+                }
+                $this->data['message'] = $import_message;
             }
-            
-            $message = $success_counter.' rows are inserted '.'<br>';
-            if(!empty($result_array)) $message = $message.'';
-            foreach($result_array as $result)
-            {
-                $message = $message.' '.$result.'<br>';
-            }
-            $this->data['message'] = $message;
-            
         }
-        $this->template->load($this->tmpl, "admin/applications/xstream_banter/import_xstream_view", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/xstream_banter/import_matches", $this->data);
     }
 }
 ?>

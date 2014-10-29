@@ -1,52 +1,51 @@
 <script type="text/javascript">
     $(function() {
-        $("#button_save_tournament").on("click", function() {
-            if ($("#input_tournament_name").val().length == 0)
+        $("#button_create_sports").on("click", function() {
+            if ($("#input_sports_create_title").val().length == 0)
             {
-                alert("Tournament name is required.");
+                alert("Please assign sports name");
                 return;
             }
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/applications_xstreambanter/create_tournament",
+                url: '<?php echo base_url(); ?>' + "admin/applications_xstreambanter/create_sports",
                 data: {
-                    tournament_name: $("#input_tournament_name").val(),
-                    sports_id: '<?php echo $sports_id?>'
+                    title: $("#input_sports_create_title").val()
                 },
                 success: function(data) {
                     alert(data['message']);
-                    if (data['status'] === 1)
-                    {                        
-                        $("#tbody_tournament_list").html($("#tbody_tournament_list").html()+tmpl("tmpl_tournament_list",  data['tournament_info']));
-                        $("#modal_create_tournament").modal('hide');
-                    }
+                    $("#modal_sports_create").modal('hide');
+                    window.location.reload();
                 }
             });
         });
     });
-
+    function open_modal_sports_create() {
+        $("#modal_sports_create").modal('show');
+    }
 </script>
-<div class="modal fade" id="modal_create_tournament" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_sports_create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Create Tournament</h4>
+                <h4 class="modal-title" id="myModalLabel">Create Sports</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
-                        <label class="col-sm-3 control-label">Tournament Name:</label>
+                        <label class="col-sm-3 control-label">Sports Name:</label>
                         <div class ="col-sm-4">
-                            <input id="input_tournament_name" name="input_tournament_name" type="text" class="form-control"/>
+                            <input id="input_sports_create_title" name="input_sports_create_title" value="" type="text" class="form-control"/>
+                            <input id="input_sports_id" name="input_sports_id" value="" type="hidden" class="form-control"/>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class ="col-sm-6"></div>
                         <div class ="col-sm-3">
-                            <button id="button_save_tournament" name="button_save_tournament" value="" class="form-control btn button-custom pull-right">Create</button>
+                            <button id="button_create_sports" name="button_create_sports" value="" class="form-control btn button-custom pull-right">Create</button>
                         </div>
                     </div>
                 </div>                

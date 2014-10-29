@@ -1029,6 +1029,132 @@ INSERT INTO `application_directory` (`id`, `title`) VALUES
 (7, 'Photography'),
 (8, 'Score Prediction');
 
+-- modified xstream banter
+CREATE TABLE IF NOT EXISTS `app_xb_sports` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_xb_sports` (`id`, `title`) VALUES
+(1, 'Football'),
+(2, 'Baseball'),
+(3, 'Formula 1'),
+(4, 'Basketball'),
+(5, 'Boxing'),
+(6, 'Tennis'),
+(7, 'Cricket'),
+(8, 'Rugby');
+CREATE TABLE IF NOT EXISTS `app_xb_teams` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `sports_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_app_xb_teams_sports1_idx` (`sports_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_xb_teams`
+    ADD CONSTRAINT `fk_app_xb_teams_sports1` FOREIGN KEY(`sports_id`) REFERENCES `app_xb_sports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `app_xb_teams` (`id`, `sports_id`, `title`) VALUES
+(1, 1, 'Chelsea'),
+(2, 1, 'Southampton'),
+(3, 1, 'Aston Villa'),
+(4, 1, 'Arsenal'),
+(5, 1, 'Swansea'),
+(6, 1, 'Man City'),
+(7, 1, 'Leicester'),
+(8, 1, 'West Ham'),
+(9, 1, 'Tottenham'),
+(10, 1, 'Hull');
+
+CREATE TABLE IF NOT EXISTS `app_xb_tournaments` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `sports_id` int(11) unsigned NOT NULL,
+  `title` varchar(200),
+  `season` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_app_xb_tournaments` (`title`, `season`),
+  KEY `fk_app_xb_tournaments_sports1_idx` (`sports_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_xb_tournaments`
+    ADD CONSTRAINT `fk_app_xb_tournaments_sports1` FOREIGN KEY(`sports_id`) REFERENCES `app_xb_sports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `app_xb_tournaments` (`id`, `sports_id`, `title`, `season`) VALUES
+(1, 1, 'Barclays premier league', '2014/15'),
+(2, 1, 'Championship', '2014/15'),
+(3, 1, 'League one', '2014/15');
+
+CREATE TABLE IF NOT EXISTS `app_xb_matches` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tournament_id` int(11) unsigned NOT NULL,
+  `team_id_home` int(11) unsigned NOT NULL,
+  `team_id_away` int(11) unsigned NOT NULL,
+  `date` varchar(200),
+  `time` varchar(200),
+  `score_home` varchar(200) default '',
+  `score_away` varchar(200) default '',
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_app_xb_matches_tournaments1_idx` (`tournament_id`),
+  KEY `fk_app_xb_matches_teams1_idx` (`team_id_home`),
+  KEY `fk_app_xb_matches_teams2_idx` (`team_id_away`)
+  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_xb_matches`
+    ADD CONSTRAINT `fk_app_xb_matches_tournaments1` FOREIGN KEY(`tournament_id`) REFERENCES `app_xb_tournaments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_app_xb_matches_teams1` FOREIGN KEY(`team_id_home`) REFERENCES `app_xb_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_app_xb_matches_teams2` FOREIGN KEY(`team_id_away`) REFERENCES `app_xb_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `app_xb_matches` (`id`, `tournament_id`, `team_id_home`, `team_id_away`, `date`, `time`) VALUES
+(1, 1, 1, 2, '2014-06-17', '09:00'),
+(2, 1, 3, 4, '2014-06-17', '11:00');
+CREATE TABLE IF NOT EXISTS `app_xb_chat_rooms` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `group_access_code` varchar(200) DEFAULT '',
+  `match_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_app_xb_chat_rooms_matches1_idx` (`match_id`),
+  KEY `fk_app_xb_chat_rooms_users1_idx` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_xb_chat_rooms`
+    ADD CONSTRAINT `fk_app_xb_chat_rooms_matches1` FOREIGN KEY(`match_id`) REFERENCES `app_xb_matches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_app_xb_chat_rooms_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE IF NOT EXISTS `app_xb_chat_rooms_map` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `xb_chat_room_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `team_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_app_xb_chat_rooms_map_rooms1_idx` (`xb_chat_room_id`),
+  KEY `fk_app_xb_chat_rooms_map_users1_idx` (`user_id`),
+  KEY `fk_app_xb_chat_rooms_map_teams1_idx` (`team_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_xb_chat_rooms_map`
+    ADD CONSTRAINT `fk_app_xb_chat_rooms_map_rooms1` FOREIGN KEY(`xb_chat_room_id`) REFERENCES `app_xb_chat_rooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_app_xb_chat_rooms_map_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_app_xb_chat_rooms_map_teams1` FOREIGN KEY(`team_id`) REFERENCES `app_xb_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE IF NOT EXISTS `app_xb_chat_messages` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `xb_chat_room_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `message_list` text,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `app_xb_chat_messages_rooms1_idx` (`xb_chat_room_id`),
+  KEY `app_xb_chat_messages_users1_idx` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_xb_chat_messages`
+    ADD CONSTRAINT `app_xb_chat_messages_rooms1` FOREIGN KEY(`xb_chat_room_id`) REFERENCES `app_xb_chat_rooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_xb_chat_messages_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 -- -----------Xstream Banter --------------------
 CREATE TABLE IF NOT EXISTS `sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

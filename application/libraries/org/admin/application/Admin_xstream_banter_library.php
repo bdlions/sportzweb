@@ -5,14 +5,14 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Name:  Admin Score Prediction Library
+ * Name:  Admin Xstream Banter Library
  *
  * Author: @Nazmul
  * 
  * Requirements: PHP5 or above
  *
  */
-class Admin_score_prediction_library {
+class Admin_xstream_banter_library {
     public function __construct() {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
@@ -29,9 +29,9 @@ class Admin_score_prediction_library {
         // We assign the model object to "ion_auth_model" variable.
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->model('ion_auth_mongodb_model', 'ion_auth_model') :
-                        $this->load->model('org/admin/application/admin_score_prediction_model');
+                        $this->load->model('org/admin/application/admin_xstream_banter_model');
 
-        $this->admin_score_prediction_model->trigger_events('library_constructor');
+        $this->admin_xstream_banter_model->trigger_events('library_constructor');
     }
 
     /**
@@ -41,11 +41,11 @@ class Admin_score_prediction_library {
      *
      * */
     public function __call($method, $arguments) {
-        if (!method_exists($this->admin_score_prediction_model, $method)) {
-            throw new Exception('Undefined method ::' . $method . '() called in admin_score_prediction_model');
+        if (!method_exists($this->admin_xstream_banter_model, $method)) {
+            throw new Exception('Undefined method ::' . $method . '() called in admin_xstream_banter_model');
         }
 
-        return call_user_func_array(array($this->admin_score_prediction_model, $method), $arguments);
+        return call_user_func_array(array($this->admin_xstream_banter_model, $method), $arguments);
     }
     
 
@@ -67,7 +67,7 @@ class Admin_score_prediction_library {
     public function get_all_matches($tournament_id)
     {
         $match_list = array();
-        $match_list_array = $this->admin_score_prediction_model->get_all_matches($tournament_id)->result_array();
+        $match_list_array = $this->admin_xstream_banter_model->get_all_matches($tournament_id)->result_array();
         foreach($match_list_array as $match_info)
         {
             $match_info['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($match_info['date']);
@@ -87,14 +87,14 @@ class Admin_score_prediction_library {
         $time = $match_data['time'];
         
         $sports_id = 0;
-        $sports_id_array = $this->admin_score_prediction_model->get_sports_id($sports_title)->result_array();
+        $sports_id_array = $this->admin_xstream_banter_model->get_sports_id($sports_title)->result_array();
         if(!empty($sports_id_array))
         {
             $sports_id = $sports_id_array[0]['sports_id'];
         }
         else
         {
-            $sports_id = $this->admin_score_prediction_model->create_sports(array('title' => $sports_title));
+            $sports_id = $this->admin_xstream_banter_model->create_sports(array('title' => $sports_title));
         }
         if($sports_id <= 0)
         {
@@ -102,7 +102,7 @@ class Admin_score_prediction_library {
         }
         
         $tournament_id = 0;
-        $tournament_id_array = $this->admin_score_prediction_model->get_tournament_id($tournament_title, $season)->result_array();
+        $tournament_id_array = $this->admin_xstream_banter_model->get_tournament_id($tournament_title, $season)->result_array();
         if(!empty($tournament_id_array))
         {
             $tournament_id = $tournament_id_array[0]['tournament_id'];
@@ -115,7 +115,7 @@ class Admin_score_prediction_library {
                 'season' => $season,
                 'created_on' => now()
             );
-            $tournament_id = $this->admin_score_prediction_model->create_tournament($additional_data);
+            $tournament_id = $this->admin_xstream_banter_model->create_tournament($additional_data);
         }
         if($tournament_id <= 0)
         {
@@ -123,7 +123,7 @@ class Admin_score_prediction_library {
         }
         
         $team_id_home = 0;
-        $home_team_id_array = $this->admin_score_prediction_model->get_team_id($home_team_title)->result_array();
+        $home_team_id_array = $this->admin_xstream_banter_model->get_team_id($home_team_title)->result_array();
         if(!empty($home_team_id_array))
         {
             $team_id_home = $home_team_id_array[0]['team_id'];
@@ -134,7 +134,7 @@ class Admin_score_prediction_library {
                 'title' => $home_team_title,
                 'sports_id' => $sports_id
             );
-            $team_id_home = $this->admin_score_prediction_model->create_team($home_team_data);
+            $team_id_home = $this->admin_xstream_banter_model->create_team($home_team_data);
         }
         if($team_id_home <= 0)
         {
@@ -142,7 +142,7 @@ class Admin_score_prediction_library {
         }
         
         $team_id_away = 0;
-        $away_team_id_array = $this->admin_score_prediction_model->get_team_id($away_team_title)->result_array();
+        $away_team_id_array = $this->admin_xstream_banter_model->get_team_id($away_team_title)->result_array();
         if(!empty($away_team_id_array))
         {
             $team_id_away = $away_team_id_array[0]['team_id'];
@@ -153,7 +153,7 @@ class Admin_score_prediction_library {
                 'title' => $away_team_title,
                 'sports_id' => $sports_id
             );
-            $team_id_away = $this->admin_score_prediction_model->create_team($away_team_data);
+            $team_id_away = $this->admin_xstream_banter_model->create_team($away_team_data);
         }
         if($team_id_away <= 0)
         {
@@ -165,10 +165,9 @@ class Admin_score_prediction_library {
             'team_id_home' => $team_id_home,
             'team_id_away' => $team_id_away,
             'date' => $date,
-            'time' => $time,
-            'status_id' => MATCH_STATUS_UPCOMING
+            'time' => $time
         );
-        $match_id = $this->admin_score_prediction_model->create_match($additional_data);
+        $match_id = $this->admin_xstream_banter_model->create_match($additional_data);
         if($match_id !== FALSE)
         {
             return TRUE;
@@ -178,4 +177,7 @@ class Admin_score_prediction_library {
             return FALSE;
         }        
     }
+    
 }
+
+?>

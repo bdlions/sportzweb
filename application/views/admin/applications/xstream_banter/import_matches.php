@@ -35,22 +35,22 @@
     <div class="panel-heading">Upload xlsx data file:</div>
     <div class="row" style="margin-top: 10px;margin-left: 20px;">
         <div class="col-md-2"></div>
-        <div class="col-md-8" style="color: red;"><?php echo $message;?></div>
+        <div class="col-md-8"><?php echo $message;?></div>
     </div>
     <div class="panel-body">
         <div>
             <div class="col-md-2"></div>
             <div class="col-md-8" style="border: 2px dotted #999; padding: 32px;">
-                <a href="<?php echo base_url();?>resources/import/applications/xstream_banter/xstream_sample.xlsx"><button class="btn btn-info pull-right">Download sample</button></a>
+                <a href="<?php echo base_url();?>resources/import/applications/xstream_banter/xb_sample.xlsx"><button class="btn btn-info pull-right">Download sample</button></a>
                 <div id="progress">
-                    <?php echo form_open_multipart('admin/applications_xstreambanter/page_import_xstream', array('name'=>'file_upload'));?>
+                    <?php echo form_open_multipart('admin/applications_xstreambanter/import_matches', array('name'=>'file_upload'));?>
                         <div class="form-group">
-                            <label for="fileupload">Select the data file for Xstream Banter:</label>
+                            <label for="fileupload">Select the data file to import matches for score prediction:</label>
                             <input id="fileupload" type="file" name="userfile">
                             <p class="help-block">Select ".XLSX" files only.</p>
                             <div class="bar" style="height: 18px; background: green; width: 0%;"></div>
                         </div>
-                        <input id="button_submit" name="button_submit" value="Submit" type="submit" class="btn btn-default"/>
+                        <input id="submit_import_matches" name="submit_import_matches" value="Submit" type="submit" class="btn btn-default"/>
                     <?php echo form_close(); ?>
                 </div>
             </div>

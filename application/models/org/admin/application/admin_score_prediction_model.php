@@ -390,11 +390,13 @@ class Admin_score_prediction_model extends Ion_auth_model
     // ----------------------------------- Match status module -------------------------
     /*
      * This method will return all match statuses
-     * @Author Nazmul on 24th October 2014
+     * @Author Nazmul on 27th October 2014
      */
-    public function get_all_match_statuses()
+    public function get_match_statuses()
     {
-        
+        return $this->db->select($this->tables['app_sp_match_statuses'].'.id as match_status_id,'.$this->tables['app_sp_match_statuses'].'.*')
+                    ->from($this->tables['app_sp_match_statuses'])
+                    ->get();
     }
     
     // ------------------------------------ Match Module ----------------------------------
@@ -482,17 +484,6 @@ class Admin_score_prediction_model extends Ion_auth_model
         }
         $this->set_message('delete_match_successful');
         return TRUE;
-    }
-    
-    /*
-     * This method will return all match statuses
-     * @Author Nazmul on 27th October 2014
-     */
-    public function get_match_statuses()
-    {
-        return $this->db->select($this->tables['app_sp_match_statuses'].'.id as match_status_id,'.$this->tables['app_sp_match_statuses'].'.*')
-                    ->from($this->tables['app_sp_match_statuses'])
-                    ->get();
     }
     
     // -------------------------------- Match Prediction Module ------------------------

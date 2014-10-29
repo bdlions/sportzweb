@@ -120,6 +120,15 @@ $config['tables']['blog_configure_homepage']                = 'blog_configure_ho
 $config['tables']['bmi_questions']                          = 'bmi_questions';
 $config['tables']['bmi_home_page_configuration']            = 'bmi_home_page_configuration';
 $config['tables']['photography']                            = 'photography';
+
+$config['tables']['app_xb_sports']                          = 'app_xb_sports';
+$config['tables']['app_xb_teams']                           = 'app_xb_teams';
+$config['tables']['app_xb_tournaments']                     = 'app_xb_tournaments';
+$config['tables']['app_xb_matches']                         = 'app_xb_matches';
+$config['tables']['app_xb_chat_rooms']                      = 'app_xb_chat_rooms';
+$config['tables']['app_xb_chat_rooms_map']                  = 'app_xb_chat_rooms_map';
+$config['tables']['app_xb_chat_messages']                   = 'app_xb_chat_messages';
+
 $config['tables']['app_sp_sports']                          = 'app_sp_sports';
 $config['tables']['app_sp_teams']                           = 'app_sp_teams';
 $config['tables']['app_sp_tournaments']                     = 'app_sp_tournaments';
@@ -168,6 +177,10 @@ $config['app_sp_sports_identity_column']                = 'title';
 $config['app_sp_team_identity_column']                  = 'title';
 $config['app_sp_tournament_identity_column1']           = 'title';
 $config['app_sp_tournament_identity_column2']           = 'season';
+$config['app_xb_sports_identity_column']                = 'title';
+$config['app_xb_team_identity_column']                  = 'title';
+$config['app_xb_tournament_identity_column1']           = 'title';
+$config['app_xb_tournament_identity_column2']           = 'season';
 $config['application_title_identity_column']            = 'title';
 
 /*

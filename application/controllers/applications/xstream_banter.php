@@ -86,7 +86,7 @@ class Xstream_banter extends Role_Controller{
             $tournament_info = $tournament_info_array[0];
         }
         $this->data['tournament_info'] = $tournament_info;
-        $current_date = $this->utils->get_current_date();
+        $current_date = $this->utils->get_current_date_yyyymmdd();
         $match_list = $this->xstream_banter_library->get_all_matches($tournament_id, $current_date)->result_array();
         $this->data['match_list'] = $match_list;
         $formatted_date = $this->utils->formate_date($current_date);
@@ -141,8 +141,8 @@ class Xstream_banter extends Role_Controller{
         }
         $this->data['match_info'] = $match_info;
         $team_list = array();
-        $team_list[$match_info['team1_id']] = $match_info['team1_title'];
-        $team_list[$match_info['team2_id']] = $match_info['team2_title'];
+        $team_list[$match_info['team_id_home']] = $match_info['team1_title'];
+        $team_list[$match_info['team_id_away']] = $match_info['team2_title'];
         $this->data['team_list'] = $team_list;
         $group_access_code = $this->generateRandomString(10);
         $this->data['group_access_code'] = $group_access_code;

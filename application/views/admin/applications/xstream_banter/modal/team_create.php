@@ -1,9 +1,9 @@
 <script type="text/javascript">
     $(function() {
-        $("#button_save_team").on("click", function() {
-            if ($("#input_team_name").val().length == 0)
+        $("#button_create_team").on("click", function() {
+            if ($("#input_team_create_title").val().length == 0)
             {
-                alert("Team name is required.");
+                alert("Please assign team name");
                 return;
             }
             $.ajax({
@@ -11,22 +11,22 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>' + "admin/applications_xstreambanter/create_team",
                 data: {
-                    team_name: $("#input_team_name").val(),
+                    title: $("#input_team_create_title").val(),
+                    sports_id:'<?php echo $sports_id?>'
                 },
                 success: function(data) {
                     alert(data['message']);
-                    if (data['status'] === 1)
-                    {                        
-                        $("#tbody_team_list").html($("#tbody_team_list").html()+tmpl("tmpl_team_list",  data['team_info']));
-                        $("#modal_create_team").modal('hide');
-                    }
+                    $("#modal_team_create").modal('hide');
+                    window.location.reload();
                 }
             });
         });
     });
-
+    function open_modal_team_create() {
+        $("#modal_team_create").modal('show');
+    }
 </script>
-<div class="modal fade" id="modal_create_team" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_team_create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,13 +39,14 @@
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Team Name:</label>
                         <div class ="col-sm-4">
-                            <input id="input_team_name" name="input_team_name" type="text" class="form-control"/>
+                            <input id="input_team_create_title" name="input_team_create_title" value="" type="text" class="form-control"/>
+                            <input id="input_team_id" name="input_team_id" value="" type="hidden" class="form-control"/>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class ="col-sm-6"></div>
                         <div class ="col-sm-3">
-                            <button id="button_save_team" name="button_save_team" value="" class="form-control btn button-custom pull-right">Create</button>
+                            <button id="button_create_team" name="button_create_team" value="" class="form-control btn button-custom pull-right">Create</button>
                         </div>
                     </div>
                 </div>                
