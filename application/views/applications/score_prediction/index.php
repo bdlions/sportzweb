@@ -8,9 +8,9 @@
                 Barclay premier league 2014
             </div>
             <div style="height: 50px">
-                <input class="lr_image" type="image" src="<?php echo base_url();?>resources/images/caret_l.png">
+                <input class="lr_image" type="image" src="<?php echo base_url();?>resources/images/caret_l20.png">
                 <span class="heading">month</span>
-                <input class="lr_image" type="image" src="<?php echo base_url();?>resources/images/caret_r.png">
+                <input class="lr_image" type="image" src="<?php echo base_url();?>resources/images/caret_r20.png">
             </div>
             <div>
                 <table class="table-responsive table ">

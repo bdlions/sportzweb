@@ -20,6 +20,10 @@ a:hover
 }
 
 /*PAGE*/
+.right_padding_zero
+{
+    padding-right: 0px;
+}
 .top_margin{
     margin-top: 20px;
 }
@@ -39,7 +43,7 @@ a:hover
 }
 .user_prof a span
 {
-    color: blue;
+    color: #007AA3;
 }
 .user_prof a
 {
@@ -71,6 +75,14 @@ a:hover
     background-color: #F5F5F5;
     font-size: 16px;
     font-weight: bold;
+}
+.ln_wide_portion
+{
+    border-top: 1px solid lightgray;
+}
+.ln_wide_portion .ln_item img
+{
+    margin-right: 30px;
 }
 .ln_item
 {

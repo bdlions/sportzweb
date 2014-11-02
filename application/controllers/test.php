@@ -10,7 +10,7 @@ class Test extends CI_Controller {
         $this->load->library('org/admin/footer/admin_about_us');
         $this->load->library('org/application/photography_library');
         $this->load->library('org/admin/application/admin_photography');
-        $this->load->library('org/admin/application/admin_xstream_banter');
+//        $this->load->library('org/admin/application/admin_xstream_banter');
         $this->load->library('org/admin/application/admin_service_directory');
         $this->load->library('org/application/service_directory_library');
         $this->load->library('org/admin/application/admin_healthy_recipes');
@@ -316,6 +316,8 @@ class Test extends CI_Controller {
     }
     function gympro_home()
     {
+        $application_id = 1;
+        $this->data['application_id'] = $application_id;
         $this->template->load(null, "gympro/gympro_home", $this->data);
     }
     function gympro_nutrition()

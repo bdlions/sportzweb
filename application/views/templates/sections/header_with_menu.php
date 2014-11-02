@@ -154,4 +154,7 @@
             </div>
         </div>
     </div>
+    <?php if(isset($application_id) && $application_id==1):?>
+    <?php $this->load->view("gympro/gympro_top_banner"); ?>
+    <?php endif;?>
 </nav>

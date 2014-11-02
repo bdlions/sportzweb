@@ -6,14 +6,14 @@
         <div class="col-md-2">
             <?php $this->load->view("gympro/gympro_leftnav"); ?>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-7">
             <div class="row">
                 <div class="col-md-2">
                     <button class="btn button-custom btn_gympro">New Client</button>
                 </div>
             </div>
             <div class="row top_margin">
-                <div class="col-md-3">
+                <div class="col-md-4 right_padding_zero">
                     <div class="user_prof">
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-4">
@@ -24,11 +24,11 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <a href=""><span>edit</span></a>
+                            <a href=""><span>Edit</span></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4 right_padding_zero">
                     <div class="user_prof">
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-4">
@@ -39,11 +39,11 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <a href=""><span>edit</span></a>
+                            <a href=""><span>Edit</span></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4 right_padding_zero">
                     <div class="user_prof">
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-4">
@@ -54,22 +54,7 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <a href=""><span>edit</span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="user_prof">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <img class="img-circle img-responsive" src="<?php echo base_url() ?>resources/images/face.jpg">
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8">
-                                <a href="">Shemai Khan</a>
-                            </div>
-                        </div>
-                        <div class="pull-right">
-                            <a href=""><span>edit</span></a>
+                            <a href=""><span>Edit</span></a>
                         </div>
                     </div>
                 </div>
