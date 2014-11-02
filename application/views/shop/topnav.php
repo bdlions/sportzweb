@@ -22,7 +22,7 @@
                 <a href='#'>Gift Card</a>
             </div>
             <div class="col-md-10">
-                <div class="col-md-2 item_card" style="background-color: red">
+                <div class="col-md-2 item_card">
                     <div>
                         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/video.jpg" />
                     </div>
@@ -48,12 +48,11 @@
     
     <!--MEN TRAY-->
     <div class="mega_nav_tray container-fluid"  id="tray_men" onmouseout="document.getElementById('tray_men').style.display = 'none';" onmouseover="document.getElementById('tray_men').style.display = 'block';" >
-        <div class="row">
-            <div>
-                <div class="col-md-2">success uhasdhoasd </div>
-                <div class="col-md-10">bog colums</div>
-            </div>
+        <div class="row white_back">
+            asdasd
         </div>
-        <div style="height: 50px; background: red"></div>
+        <div class="row brwn_back">
+            asdasd
+        </div>
     </div>
 </div>

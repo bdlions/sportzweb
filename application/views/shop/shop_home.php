@@ -12,7 +12,9 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img style="height: 400px; width: 100%" src="<?php echo base_url()?>resources/images/fitness.jpg" alt="...">
+                    <div style="background-image: url('<?php echo base_url()?>resources/images/fitness.jpg')">
+                        
+                    </div>
                     <div class="carousel-caption">
                         cap a
                     </div>

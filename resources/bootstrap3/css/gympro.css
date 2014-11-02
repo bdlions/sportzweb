@@ -62,9 +62,10 @@ a:hover
 }
 .ln_item img
 {
+    float: left;
     margin-right: 10px;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
 }
 .ln_item:hover
 {
@@ -87,7 +88,7 @@ a:hover
 .ln_item
 {
     font-size: 16px;
-    line-height: 32px;
+    line-height: 26px;
     color: darkgray;
 }
 .btn_gympro:hover
