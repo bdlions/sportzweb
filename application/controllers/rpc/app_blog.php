@@ -93,6 +93,11 @@ class App_blog extends JsonRPCServer {
         return json_encode($response);
     }
     
+    /*
+     * This method will return blog info
+     * @param $blog_id, blog id
+     * @Author Nazmul on 3rd November 2014
+     */
     function get_blog_info($blog_id)
     {
         $result = array();
@@ -101,8 +106,102 @@ class App_blog extends JsonRPCServer {
         if(!empty($blog_info_array))
         {
             $blog_info = $blog_info_array[0];
+            $blog_info['category_id_list'] = $this->blog_app_library->get_category_id_list_of_blog($blog_info['blog_id']);
         }
         $result['blog_info'] = $blog_info;
+        //echo(json_encode($result));
+        return json_encode($result);
+    }
+    
+    /*
+     * This method will return my blog list
+     * @Author Nazmul on 3rd November 2014
+     */
+    function get_my_blogs()
+    {
+        $result = array();
+        $my_blog_list = $this->blog_app_library->get_all_blogs_by_user();
+        $result['my_blog_list'] = $my_blog_list;
+        //print_r(json_encode($result));
+        return json_encode($result);
+    }
+    
+    /*
+     * This method will create a new blog
+     * @Author Nazmul on 3rd November 2014
+     */
+    function create_blog($blog_data = '')
+    {
+        $result = array();
+        $data = json_decode($blog_data);
+        /*$data = new stdClass();
+        $data->title = 'sample blog title';
+        $data->description = 'sample description';
+        $data->user_id = '2';
+        $data->picture = 'a.jpg';
+        $data->picture_description = 'pictuer description'; 
+        $data->created_on = now(); 
+        $data->blog_status_id = PENDING; 
+         */
+        $blog_id = $this->blog_app_library->create_blog($data);
+        //based on the structure of your category id, update blog category table
+        //$this->blog_app_library->blog_category_list_update($blog_category_id,$blog_id);
+        $result['status'] = RPC_SUCCESS;
+        return json_encode($result);
+    }
+    
+    function update_blog($blog_data = '')
+    {
+        
+    }
+    
+    /*
+     * This method will send the delete request to the admin
+     * @Author Nazmul on 3rd November 2014
+     */
+    function request_to_remove_blog($blog_id)
+    {
+        $result = array();
+        $result['status'] = true;
+        $result['message'] = "A request to delete your blog has been sent";
+
+        $blog_info = array();
+        $blog_info_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
+        if(!empty($blog_info_array)) {
+            $blog_info = $blog_info_array[0];
+            if($blog_info['blog_status_id'] == PENDING || $blog_info['blog_status_id'] == APPROVED)
+            {
+                //implement case 2,6
+                unset($blog_info['id']);
+                $blog_info['blog_status_id'] = DELETION_PENDING;
+                $blog_info['reference_id'] = $blog_id;
+                $id = $this->blog_app_library->create_blog($blog_info);
+
+                if($id == FALSE)
+                {
+                    $result['status'] = false;
+                    $result['message'] = "Your request to delete the blog is unsuccessful";
+                }
+            }
+            else if($blog_info['blog_status_id'] == RE_APPROVAL)
+            {
+                //implement case 9
+                $blog_info['blog_status_id'] = DELETION_PENDING;
+                $flag = $this->blog_app_library->update_blog($blog_id,$blog_info);
+
+                if($flag == FALSE)
+                {
+                    $result['status'] = false;
+                    $result['message'] = "Your request to delete the blog is unsuccessful";
+                }
+            }
+        }
+        else
+        {
+            $result['status'] = false;
+            $result['message'] = "Invalid blog. Please try again later.";
+        }        
+        //echo json_encode($result);
         return json_encode($result);
     }
 }

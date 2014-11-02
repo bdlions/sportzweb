@@ -67,5 +67,29 @@ class Media extends CI_Controller {
                 )
         );*/
     }
+    
+    /*
+     * This method will upload blog picture
+     * @Author Nazmul on 3rd November 2014
+     */
+    public function upload_blog_picture()
+    {
+        $result = array();
+        $user_id = $_POST['user_id'];
+        if (isset($_FILES["userfile"])) {
+            $file_info = $_FILES["userfile"];
+            $result = $this->utils->upload_image($file_info, BLOG_POST_IMAGE_PATH);
+            $image_name = $result['upload_data']['file_name'];
+            $resized_image_name = $user_id.'_'.$this->utils->generateRandomString().'.jpg';
+            $this->utils->resize_image(BLOG_POST_IMAGE_PATH.$image_name, BLOG_POST_IMAGE_PATH.$resized_image_name, BLOG_IMAGE_HEIGHT, BLOG_IMAGE_WIDTH);
+            $result['image_name'] = $resized_image_name;          
+        } 
+        else
+        {
+            $result['status'] = "0";
+            $result['message'] = 'Please select and image to upload';
+        }
+        echo json_encode($result); 
+    }
 
 }
