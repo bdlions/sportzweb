@@ -117,10 +117,10 @@ class App_blog extends JsonRPCServer {
      * This method will return my blog list
      * @Author Nazmul on 3rd November 2014
      */
-    function get_my_blogs()
+    function get_my_blogs($user_id)
     {
         $result = array();
-        $my_blog_list = $this->blog_app_library->get_all_blogs_by_user();
+        $my_blog_list = $this->blog_app_library->get_all_blogs_by_user($user_id);
         $result['my_blog_list'] = $my_blog_list;
         //print_r(json_encode($result));
         return json_encode($result);
