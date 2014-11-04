@@ -69,20 +69,33 @@ class Media extends CI_Controller {
     }
     
     /*
-     * This method will upload blog picture
+     * This method will upload blog picture and also create the blog
      * @Author Nazmul on 3rd November 2014
      */
-    public function upload_blog_picture()
+    public function create_blog_with_picture()
     {
         $result = array();
-        $user_id = $_POST['user_id'];
+        $user_id = $this->input->post('user_id');
         if (isset($_FILES["userfile"])) {
             $file_info = $_FILES["userfile"];
             $result = $this->utils->upload_image($file_info, BLOG_POST_IMAGE_PATH);
             $image_name = $result['upload_data']['file_name'];
             $resized_image_name = $user_id.'_'.$this->utils->generateRandomString().'.jpg';
             $this->utils->resize_image(BLOG_POST_IMAGE_PATH.$image_name, BLOG_POST_IMAGE_PATH.$resized_image_name, BLOG_IMAGE_HEIGHT, BLOG_IMAGE_WIDTH);
-            $result['image_name'] = $resized_image_name;          
+            $result['image_name'] = $resized_image_name;
+            
+            $data = array(
+                'user_id' => $this->input->post('user_id'),
+                'title' => $this->input->post('title'),
+                'description' => $this->input->post('description'),
+                'picture' => $resized_image_name,
+                'picture_description' => '',
+                'created_on' => now(),
+                'blog_status_id' => PENDING
+            );
+            $blog_id = $this->blog_app_library->create_blog($data);
+            //based on the structure of your category id, update blog category table
+            //$this->blog_app_library->blog_category_list_update($blog_category_id,$blog_id);
         } 
         else
         {
