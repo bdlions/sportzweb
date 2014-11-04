@@ -421,24 +421,36 @@ class Blog_app_library {
     }
     
     /*
-     * This method will return blog category id list of a blog
+     * This method will return blog category list and selected blog category list
      * @param $blog_id, blog id
      * @Author Nazmul on 3rd November 2014
      */
-    public function get_category_id_list_of_blog($blog_id)
+    public function get_category_info_of_blog($blog_id)
     {
+        $result = array();
+        $blog_category_list = array();
+        $selected_blog_category_list = array();
         $blog_category_id_list = array();
         $blog_category_list_array = $this->blog_app_model->get_all_blog_category()->result_array();
         foreach ($blog_category_list_array as $blog_category_info) {
+            $category_info = array(
+                'id' => $blog_category_info['id'],
+                'title' => $blog_category_info['title']
+            );
+            $blog_category_list[] = $category_info;
+            
             $blog_category_id = $blog_category_info['id'];
             $blog_list_array = json_decode($blog_category_info['blog_list']);
             foreach ($blog_list_array as $blog_id_info) {
                 if($blog_id_info->blog_id == $blog_id && !in_array($blog_category_id, $blog_category_id_list)){
                     $blog_category_id_list[] = $blog_category_id;
+                    $selected_blog_category_list[] = $category_info;
                 }
             }
         }
-        return $blog_category_id_list;
+        $result['blog_category_list'] = $blog_category_list;
+        $result['selected_blog_category_list'] = $selected_blog_category_list;
+        return $result;
     }
 }
 
