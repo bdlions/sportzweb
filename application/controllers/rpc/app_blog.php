@@ -13,6 +13,7 @@ class App_blog extends JsonRPCServer {
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->library('org/application/blog_app_library');
+		
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->library('mongo_db') :
@@ -204,4 +205,21 @@ class App_blog extends JsonRPCServer {
         //echo json_encode($result);
         return json_encode($result);
     }
+	
+	function get_blog_category_list(){
+		$result = array();
+		$blog_category_list = array();
+		$category_list_array = $this->blog_app_library->get_all_blog_category()->result_array();
+		foreach($category_list_array as $blog_category_info)
+		{
+			$blog_category = array(
+				'id' => $blog_category_info['id'],
+				'title' => $blog_category_info['title']
+			);
+			$blog_category_list[] = $blog_category;
+		}
+		$result['blog_category_list'] = $blog_category_list;
+		//print_r(json_encode($result));
+        return json_encode($result);
+	}
 }
