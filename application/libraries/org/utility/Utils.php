@@ -166,6 +166,23 @@ class Utils {
         
     }
     
+    /*
+     * This method will return HH:MM AM/PM of a unix time for xstream banter chat room
+     * @param $unix_time, unix time
+     * @param $country_code, user country code
+     * @Author Nazmul on 4 Nov 2014
+     */
+    public function get_unix_to_human_time_xb_chat_room($unix_time, $country_code = 'GB')
+    {
+        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
+        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
+        $dateTime = new DateTime("now", $dateTimeZone);
+        $relative_unix_time = $unix_time + $dateTime->getOffset();
+        $human_current_time = unix_to_human($relative_unix_time);
+        $human_current_time_array= explode(" ", $human_current_time);
+        return $human_current_time_array[1].' '.$human_current_time_array[2];
+    }
+    
     public function formate_date($date_string)
     {
         $original_date = new DateTime($date_string);

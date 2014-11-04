@@ -250,8 +250,8 @@ class Xstream_banter extends Role_Controller{
             $match_info = $match_info_array[0];
         }
         $team_list = array();
-        $team_list[$match_info['team1_id']] = $match_info['team1_title'];
-        $team_list[$match_info['team2_id']] = $match_info['team2_title'];
+        $team_list[$match_info['team_id_home']] = $match_info['team1_title'];
+        $team_list[$match_info['team_id_away']] = $match_info['team2_title'];
         $this->data['team_list'] = $team_list;
         $this->data['xb_chat_room_id'] = $xb_chat_room_id;
         $this->data['match_id'] = $match_id;
@@ -267,6 +267,7 @@ class Xstream_banter extends Role_Controller{
     function step7($xb_chat_room_id = 0)
     {
         $this->data['message'] = '';
+        $this->data['user_id'] = $this->session->userdata('user_id');
         $this->data['xb_chat_room_id'] = $xb_chat_room_id;
         $match_info = array();
         $chat_room_info_array = $this->xstream_banter_library->get_chat_room_info($xb_chat_room_id, 0)->result_array();

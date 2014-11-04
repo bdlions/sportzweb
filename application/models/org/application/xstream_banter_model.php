@@ -214,7 +214,25 @@ class Xstream_banter_model extends Ion_auth_model {
         $this->db->update($this->tables['app_xb_chat_messages'], $additional_data);
     }
     
-    
+    /*
+     * This method will return chat room map and user info
+     * @param $user_id, user id
+     * @Author Nazmul on 4th November 2014
+     */
+    public function get_user_chat_room_map_info($chat_room_id, $user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $this->db->where($this->tables['app_xb_chat_rooms_map'].'.xb_chat_room_id',$chat_room_id);
+        $this->db->where($this->tables['app_xb_chat_rooms_map'].'.user_id',$user_id);
+        return $this->db->select($this->tables['users'].'.first_name, '.$this->tables['users'].'.last_name, '.$this->tables['app_xb_teams'].'.title as team_name')
+                    ->from($this->tables['users'])
+                    ->join($this->tables['app_xb_chat_rooms_map'], $this->tables['app_xb_chat_rooms_map'].'.user_id='.$this->tables['users'].'.id')
+                    ->join($this->tables['app_xb_teams'], $this->tables['app_xb_teams'].'.id='.$this->tables['app_xb_chat_rooms_map'].'.team_id')
+                    ->get();
+    }
     
     
     

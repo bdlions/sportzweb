@@ -88,12 +88,9 @@ class Xstream_banter_library {
                 $message_list_array = json_decode($message_list);
                 foreach($message_list_array as $message_info)
                 {
-                    $message_time = $message_info->created_on; 
-                    $custom_time_array = explode(" ", unix_to_human($message_time));
-                    $custom_time = $custom_time_array[1].' '.$custom_time_array[2];
                     $chat_room_message_info = array(
-                        'created_on' => $message_time,
-                        'time' => $custom_time,
+                        'created_on' => $message_info->created_on,
+                        'time' => $this->utils->get_unix_to_human_time_xb_chat_room($message_info->created_on),
                         'first_name' => $chat_room_messages_info['first_name'],
                         'last_name' => $chat_room_messages_info['last_name'],
                         'team_name' => $chat_room_messages_info['team_name'],

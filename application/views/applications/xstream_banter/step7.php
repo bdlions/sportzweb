@@ -1,6 +1,41 @@
-<script>
+<script src="http://127.0.0.1:8080/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    function MessageInfo(){
+        this.roomId = "";
+        this.userId = "";
+        this.message = "";
+    };
+</script>
+<script type="text/javascript">
+    function UserInfo(){
+        this.userId = "3";
+        this.roomId = "axcvvy";
+        this.roomName = "axcvvy";
+        this.teamId = "1";
+        this.teamName = "Bangladesh";
+        this.firstName = "Alamgir";
+        this.lastName = "Kabir";
+    };
+</script>
+<script type="text/javascript">
 $(function(){
-    setInterval(function (){
+    
+    var socket = io.connect('http://127.0.0.1:8080');
+    socket.on('connect', function(){
+        //console.log('a user conneccted to the server.');
+
+        var userInfo = new UserInfo();
+        userInfo.roomId = '<?php echo $xb_chat_room_id?>';
+        //console.log(userInfo);
+        socket.emit('adduser', JSON.stringify(userInfo));
+    });
+    socket.on('updatemessages', function (data) {
+        //$("#chatHistory").append(username + " " +data + "<br/>");
+        console.log(data);
+        data = JSON.parse(data);
+        $("#chat_messages").html(tmpl("tmpl_message_list",  data['chat_room_message_list']) +  $("#chat_messages").html());
+    });    
+    /*setInterval(function (){
         $.ajax({
             dataType: 'json',
             type: "POST",
@@ -12,9 +47,16 @@ $(function(){
                 $("#chat_messages").html(tmpl("tmpl_message_list",  data['chat_room_message_list']));
             }
         });
-    }, 4000);
+    }, 4000);*/
     $("#button_send_message2").on("click", function() {
-        $.ajax({
+        var messageInfo = new MessageInfo();
+        messageInfo.roomId = '<?php echo $xb_chat_room_id?>';
+        messageInfo.userId = '<?php echo $user_id?>';
+        messageInfo.message = $("#textarea_chat_message").val();
+        socket.emit('sendmessage', JSON.stringify(messageInfo));
+        
+        $("#textarea_chat_message").val('')
+        /*$.ajax({
             dataType: 'json',
             type: "POST",
             url: '<?php echo base_url(); ?>' + "applications/xstream_banter/store_chat_message",
@@ -26,7 +68,7 @@ $(function(){
                 $("#textarea_chat_message").val('');
                 $("#chat_messages").html(tmpl("tmpl_message_list",  data['chat_room_message_list']));
             }
-        });
+        });*/
         
     });
 });
