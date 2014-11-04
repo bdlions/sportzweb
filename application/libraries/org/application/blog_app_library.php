@@ -419,8 +419,27 @@ class Blog_app_library {
         //echo '<pre/>'; print_r($all_blogs_info);exit('jeeee');
         return $all_blogs_info;
     }
-     
     
+    /*
+     * This method will return blog category id list of a blog
+     * @param $blog_id, blog id
+     * @Author Nazmul on 3rd November 2014
+     */
+    public function get_category_id_list_of_blog($blog_id)
+    {
+        $blog_category_id_list = array();
+        $blog_category_list_array = $this->blog_app_model->get_all_blog_category()->result_array();
+        foreach ($blog_category_list_array as $blog_category_info) {
+            $blog_category_id = $blog_category_info['id'];
+            $blog_list_array = json_decode($blog_category_info['blog_list']);
+            foreach ($blog_list_array as $blog_id_info) {
+                if($blog_id_info->blog_id == $blog_id && !in_array($blog_category_id, $blog_category_id_list)){
+                    $blog_category_id_list[] = $blog_category_id;
+                }
+            }
+        }
+        return $blog_category_id_list;
+    }
 }
 
 ?>
