@@ -185,6 +185,10 @@ $config['app_xb_tournament_identity_column1']           = 'title';
 $config['app_xb_tournament_identity_column2']           = 'season';
 $config['application_title_identity_column']            = 'title';
 
+//SHOP APP
+$config['app_shop_product_identity_column']             = 'title';
+
+
 /*
  | -------------------------------------------------------------------------
  | Hash Method (sha1 or bcrypt)

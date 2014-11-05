@@ -97,3 +97,13 @@ $lang['delete_match_successful']             = "Match is deleted successfully.";
 $lang['delete_match_unsuccessful']           = "Unable to delete a match.";
 
 $lang['configure_homepage_successful']        = "Homepage is configured successfully";
+
+//SHOP APPLICATION
+$lang['create_product_category_duplicate_title']        = "Product Category title already used.";
+$lang['create_product_category_successful']             = "Product Category is created successfully.";
+$lang['create_product_category_fail']                   = "Failed to create Product Category.";
+$lang['delete_product_category_successful']             = "Product Category is deleted successfully.";
+$lang['delete_product_category_fail']                   = "Failed to delete Product Category.";
+$lang['update_product_category_duplicate_title']        = "Product Category title already used.";
+$lang['update_product_category_successful']             = "Product Category is updated successfully.";
+$lang['update_product_category_fail']                   = "Failed to update Product Category.";

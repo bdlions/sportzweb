@@ -9,6 +9,7 @@ class Applications_shop extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
+        $this->load->library('org/admin/application/admin_shop_library.php');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
         // Load MongoDB library instead of native db driver if required
@@ -91,7 +92,7 @@ class Applications_shop extends CI_Controller{
     public function index()
     {
         $this->data['message'] = '';
-        $this->data['product_category_list'] = array();
+        $this->data['product_category_list'] = $this->admin_shop_library->get_all_product_categories()->result_array();
         $this->template->load($this->tmpl, "admin/applications/shop/index", $this->data);
     }
     
@@ -101,7 +102,35 @@ class Applications_shop extends CI_Controller{
      */
     public function create_product_category()
     {
-        
+        $result = array();
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title
+        );
+        if($this->admin_shop_library->create_product_category($additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    /*
+     * @Author Tanveer
+     */
+    public function get_product_category_info()
+    {
+        $result['product_category_info'] = array();
+        $category_id = $this->input->post('category_id');
+        $product_category_info_array = $this->admin_shop_library->get_product_category_info($category_id)->result_array();
+        if(!empty($product_category_info_array))
+        {
+            $result['product_category_info'] = $product_category_info_array[0];
+        }
+        echo json_encode($result);
     }
     
     /*
@@ -110,7 +139,22 @@ class Applications_shop extends CI_Controller{
      */
     public function update_product_category()
     {
-        
+        $result = array();
+        $category_id = $this->input->post('category_id');
+        $title = $this->input->post('title');
+        $additional_data = array(
+            'title' => $title,
+            'modified_on' => now()
+        );
+        if($this->admin_shop_library->update_product_category($category_id, $additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     /*
@@ -119,7 +163,17 @@ class Applications_shop extends CI_Controller{
      */
     public function delete_product_category()
     {
-        
+        $result = array();
+        $category_id = $this->input->post('category_id');
+        if($this->admin_shop_library->delete_product_category($category_id))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
     }
 }
 

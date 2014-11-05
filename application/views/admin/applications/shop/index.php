@@ -5,7 +5,7 @@
             <div class="row form-group" style="padding-left: 10px;">
                 <?php if($allow_write){ ?>
                 <div class ="col-md-2 pull-left">
-                    <button onclick="" value="" class="form-control btn button-custom pull-right">Create Product Category</button>  
+                    <button onclick="open_modal_product_category_create()" value="" class="btn button-custom">Create Product Category</button>
                 </div>
                 <?php } ?>
             </div>
@@ -25,21 +25,21 @@
                                 <?php } ?>
                             </tr>
                         </thead>
-                        <tbody id="tbody_sports_list">                
+                        <tbody id="tbody_product_category_list">                
                             <?php foreach($product_category_list as $product_category){?>
                             <tr>
-                                <td><?php echo $sports['sports_id']?></a></td>
-                                <td><?php echo $sports['title']?></td>
+                                <td><?php echo $product_category['category_id']?></a></td>
+                                <td><?php echo $product_category['title']?></td>
                                 <?php if($allow_edit){ ?>
                                 <td>
-                                    <button onclick="" value="" class="form-control btn pull-right">
+                                    <button onclick="open_modal_product_category_update(<?php echo $product_category['category_id']?>)" value="" class="form-control btn">
                                         Edit
                                     </button> 
                                 </td>
                                 <?php } ?>
                                 <?php if($allow_delete){ ?>
                                 <td>
-                                    <button onclick="" value="" class="form-control btn pull-right">
+                                    <button onclick="open_modal_category_delete_confirm(<?php echo $product_category['category_id']?>)" value="" class="form-control btn">
                                         Delete
                                     </button>
                                 </td>
@@ -56,3 +56,8 @@
         </div>
     </div>
 </div>
+<?php 
+$this->load->view("admin/applications/shop/modal/product_category_create");
+$this->load->view("admin/applications/shop/modal/product_category_delete_confirm");
+$this->load->view("admin/applications/shop/modal/product_category_update");
+?>
