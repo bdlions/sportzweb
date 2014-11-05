@@ -156,8 +156,13 @@ li
     padding: 16px;
     margin-top: 10px;
 }
+.items_page_body .item_card:hover
+{
+    border: 1px dotted #53504C;
+}
 .item_card
 {
+    border: 1px dotted transparent;
     font-size: 16px;
     text-align: center;
     color: #5A534C;
@@ -249,6 +254,33 @@ li
         font-size: 16px;
         font-weight: normal;
     }*/
+
+/*CATEGORY PAGE TITLE BAR*/
+.shop_title_bar #heading_select
+{
+    display: block;
+    border: 2px solid #F0ECE8;
+    padding: 4px;
+    width: 20%;
+    font-size: 16px;
+    color: #53504C;
+}
+.shop_title_bar #heading_type
+{
+    margin-left: 30px;
+    font-size: 21px;
+    color: #979492;
+}
+.shop_title_bar #heading_big
+{
+    font-size: 30px;
+    color: #53504C;
+}
+.shop_title_bar
+{
+    margin-bottom: 20px;
+    border-bottom: 4px solid #E9E4DE;
+}
 
 /*ITEM PAGE ZOOM-IMAGE*/
 

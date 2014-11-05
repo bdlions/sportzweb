@@ -1,4 +1,5 @@
 <?php $this->load->view("shop/topnav"); ?>
+<?php $this->load->view("shop/breadcrumb"); ?>
 
 <div class="row">
     <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
@@ -12,9 +13,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <div style="background-image: url('<?php echo base_url()?>resources/images/fitness.jpg')">
-                        
-                    </div>
+                    <img style="height: 400px; width: 100%" src="<?php echo base_url()?>resources/images/fitness.jpg" alt="...">
                     <div class="carousel-caption">
                         cap a
                     </div>
@@ -28,7 +27,10 @@
             </div>
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
+                <div style="top: 50%" >
+                <img src="<?php echo base_url()?>resources/images/carat_tall_left.png" alt="...">
+                    
+                </div>
             </a>
             <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right"></span>

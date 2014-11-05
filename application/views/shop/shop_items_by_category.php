@@ -1,9 +1,27 @@
 <?php $this->load->view("shop/topnav"); ?>
+<?php $this->load->view("shop/breadcrumb"); ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shop_title_bar">
+                <span id="heading_big">SANDALS</span>
+                <span id="heading_type">All Styles</span>
+                <select id="heading_select" class="pull-right">
+                    <option>asdasd</option>
+                    <option>asdasd</option>
+                    <option>asdasd</option>
+                </select>
+                
+            </div>
+        </div>
 
+    </div>
+    
+</div>
 <div class="row">
     
     <!--VERTI MENU-->
-    <div id="left_menu" class="col-md-3 pull-left">
+    <div id="left_menu" class="col-md-3 col-sm-3 pull-left">
         
         <!--MENU BOXES-->
         <div class="menubox">
@@ -79,7 +97,7 @@
     
     <!--ITEMS-->
     <div class="col-md-8 pull-right">
-        <div class="container-fluid ">
+        <div class="container-fluid items_page_body">
             <div class="row">
                 <div class="col-md-3 col-xs-3 col-sm-3">
                     <div class="row item_card">

@@ -1,7 +1,7 @@
 <script src='<?php echo base_url(); ?>resources/js/jquery.zoom.min.js'></script>
 
 <?php $this->load->view("shop/topnav"); ?>
-
+<?php $this->load->view("shop/breadcrumb"); ?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-7">

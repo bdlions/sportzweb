@@ -223,8 +223,6 @@ class Test extends CI_Controller {
         $this->load->view('test', $this->data);
     }
     }
-    
-
     function change_image() {
         $bg = array('1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'); // array of filenames
         //$i = rand(0, count($bg)-1); // generate random number size of the array
@@ -233,13 +231,11 @@ class Test extends CI_Controller {
         $this->load->view('background_img_view', $this->data);
 
     }
-    
     function image_slide(){
         $bg = array('1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'); // array of filenames
         $this->data['bg_image'] = $bg;
         $this->load->view('change_image', $this->data);
     }
-    
     function app_dir()
     {
 //        $this->load->view('test', $this->data);
@@ -294,6 +290,10 @@ class Test extends CI_Controller {
     {
         $this->template->load(null, "test", $this->data);
     }
+    function run_toms_shoes()
+    {
+        $this->template->load(null, "shop/toms_shoes", $this->data);
+    }
     function shop_home()
     {
         $this->template->load(null, "shop/shop_home", $this->data);
@@ -301,10 +301,6 @@ class Test extends CI_Controller {
     function shop_shopping_bag()
     {
         $this->template->load(null, "shop/shop_shopping_bag", $this->data);
-    }
-    function run_toms_shoes()
-    {
-        $this->template->load(null, "shop/toms_shoes", $this->data);
     }
     function shop_item()
     {

@@ -1,4 +1,5 @@
 <?php $this->load->view("shop/topnav"); ?>
+<?php $this->load->view("shop/breadcrumb"); ?>
 
 <div class="container-fluid">
     <div class="row">
