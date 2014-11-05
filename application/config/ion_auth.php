@@ -138,6 +138,7 @@ $config['tables']['app_sp_match_predictions']               = 'app_sp_match_pred
 $config['tables']['app_sp_configure_homepage']              = 'app_sp_configure_homepage';
 
 $config['tables']['app_shop_product_category']              = 'app_shop_product_category';
+$config['tables']['app_shop_product_color']                 = 'app_shop_product_color';
 // visitors
 $config['tables']['pages']                                  = 'pages';
 $config['tables']['page_visitor']                           = 'page_visitor';

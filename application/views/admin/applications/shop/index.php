@@ -8,6 +8,11 @@
                     <button onclick="open_modal_product_category_create()" value="" class="btn button-custom">Create Product Category</button>
                 </div>
                 <?php } ?>
+                <div class ="col-md-2 pull-left">
+                    <a href="<?php echo base_url()."admin/applications_shop/manage_colors"; ?>">
+                        <button class="form-control btn button-custom pull-right">Product Color</button>  
+                    </a>
+                </div>
             </div>
             
             <div class="row">

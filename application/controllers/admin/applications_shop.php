@@ -175,5 +175,40 @@ class Applications_shop extends CI_Controller{
         }
         echo json_encode($result);
     }
+    
+    // ---------------------------------- Product Color Module ----------------------------------------
+    public function manage_colors()
+    {
+        $this->data['message'] = '';
+        $this->data['product_color_list'] = array();
+        $this->template->load($this->tmpl, "admin/applications/shop/product_color_list", $this->data);
+    }
+    
+    /*
+     * This method will create a new color
+     * @Author Nazmul on 5th November 2014
+     */
+    public function create_color()
+    {
+        
+    }
+    /*
+     * This method will update color
+     * @param $color_id, color id
+     * @Author Nazmul on 5th November 2014
+     */
+    public function update_color($color_id)
+    {
+        
+    }
+    
+    /*
+     * Ajax call to delete color
+     * @Author Nazmul on 5th November 2014
+     */
+    public function delete_color()
+    {
+        
+    }
 }
 

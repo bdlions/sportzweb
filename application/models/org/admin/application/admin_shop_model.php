@@ -123,4 +123,63 @@ class Admin_shop_model extends Ion_auth_model
         $this->set_message('delete_product_category_successful');
         return TRUE;
     }
+    
+    // -------------------------------- Product Color Module --------------------------------------
+    /*
+     * This method will check identity of product color
+     * @param $identity, identity of product color
+     * @Author Nazmul on 5th November 2014
+     */
+    public function product_color_identity_check($identity = '') {
+        
+    }
+    /*
+     * This method will create a product color
+     * @param $additional_data, product color data to be added
+     * @Author Nazmul on 5th November 2014
+     */
+    public function create_product_color($additional_data)
+    {
+        
+    }
+    
+    /*
+     * This method will update product color info
+     * @param $color_id, color id
+     * @param $additional_data, product color data to be updated
+     * @Author Nazmul on 5th November 2014
+     */
+    public function update_product_color($color_id, $additional_data)
+    {
+        
+    }
+    
+    /*
+     * This method will return product color info
+     * @param $color_id, color id
+     * @Author Nazmul on 5th November 2014
+     */
+    public function get_product_color_info($color_id)
+    {
+        
+    }
+    
+    /*
+     * This method will return all product colors
+     * @Author Nazmul on 5th November 2014
+     */
+    public function get_all_product_colors()
+    {
+        
+    }
+    
+    /*
+     * This method will delete product color info
+     * @param $color_id, color id
+     * @Author Nazmul on 5th November 2014
+     */
+    public function delete_product_color($color_id)
+    {
+        
+    }
 }

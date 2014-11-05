@@ -1881,6 +1881,31 @@ INSERT INTO `app_shop_product_category` (`id`, `title`) VALUES
 (1, 'WOMEN'),
 (2, 'MEN'),
 (3, 'KIDS');
+
+CREATE TABLE IF NOT EXISTS `app_shop_product_color` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `description` varchar(200),
+  `picture` varchar(200) DEFAULT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_shop_product_color` (`id`, `title`, `description`, `picture`) VALUES
+(1, 'black', 'Black', 'black.jpg'),
+(2, 'blue', 'Blue', 'blue.jpg'),
+(3, 'brown', 'Brown', 'brown.jpg'),
+(4, 'gold', 'Gold', 'gold.jpg'),
+(5, 'green', 'Green', 'green.jpg'),
+(6, 'grey', 'Grey', 'grey.jpg'),
+(7, 'natural', 'Natural', 'natural.jpg'),
+(8, 'orange', 'Orange', 'orange.jpg'),
+(9, 'pink', 'Pink', 'pink.jpg'),
+(10, 'purple', 'Purple', 'purple.jpg'),
+(11, 'red', 'Red', 'red.jpg'),
+(12, 'silver', 'Silver', 'silver.jpg'),
+(13, 'white', 'White', 'white.jpg'),
+(14, 'yellow', 'Yellow', 'yellow.jpg');
 	
 -- user logs	
 CREATE TABLE IF NOT EXISTS `user_log` (
