@@ -1869,6 +1869,19 @@ ALTER TABLE `business_profile_visitor`
     ADD CONSTRAINT `fk_business_profile_visitor_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_business_profile_visitor_business_profile1` FOREIGN KEY(`business_profile_id`) REFERENCES `business_profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- shop
+CREATE TABLE IF NOT EXISTS `app_shop_product_category` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_shop_product_category` (`id`, `title`) VALUES
+(1, 'WOMEN'),
+(2, 'MEN'),
+(3, 'KIDS');
+	
 -- user logs	
 CREATE TABLE IF NOT EXISTS `user_log` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

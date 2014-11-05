@@ -136,6 +136,8 @@ $config['tables']['app_sp_match_statuses']                  = 'app_sp_match_stat
 $config['tables']['app_sp_matches']                         = 'app_sp_matches';
 $config['tables']['app_sp_match_predictions']               = 'app_sp_match_predictions';
 $config['tables']['app_sp_configure_homepage']              = 'app_sp_configure_homepage';
+
+$config['tables']['app_shop_product_category']              = 'app_shop_product_category';
 // visitors
 $config['tables']['pages']                                  = 'pages';
 $config['tables']['page_visitor']                           = 'page_visitor';

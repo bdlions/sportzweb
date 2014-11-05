@@ -13,7 +13,8 @@ define("ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID",                                
 define("ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID",                               8);
 define("ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID",                      9);
 define("ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID",                         10);
-define("ADMIN_ACCESS_LEVEL_APPLICATION_SCORE_PREDICTION_ID",                         19);
+define("ADMIN_ACCESS_LEVEL_APPLICATION_SCORE_PREDICTION_ID",                    19);
+define("ADMIN_ACCESS_LEVEL_APPLICATION_SHOP_ID",                                20);
 define("ADMIN_ACCESS_LEVEL_BUSINESS_PROFILES_ID",                               11);
 define("ADMIN_ACCESS_LEVEL_VISITORS_PAGES_ID",                                  12);
 define("ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID",                           13);
