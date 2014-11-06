@@ -170,7 +170,9 @@ class Admin_shop_model extends Ion_auth_model
      */
     public function get_all_product_colors()
     {
-        
+        return $this->db->select($this->tables['app_shop_product_color'].'.id as id,'.$this->tables['app_shop_product_color'].'.*')
+                    ->from($this->tables['app_shop_product_color'])
+                    ->get();
     }
     
     /*
@@ -180,6 +182,19 @@ class Admin_shop_model extends Ion_auth_model
      */
     public function delete_product_color($color_id)
     {
+        if(!isset($color_id) || $color_id <= 0)
+        {
+            $this->set_error('delete_product_color_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $color_id);
+        $this->db->delete($this->tables['app_shop_product_color']);
         
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_product_color_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_product_color_successful');
+        return TRUE;
     }
 }

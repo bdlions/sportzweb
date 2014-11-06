@@ -180,7 +180,7 @@ class Applications_shop extends CI_Controller{
     public function manage_colors()
     {
         $this->data['message'] = '';
-        $this->data['product_color_list'] = array();
+        $this->data['product_color_list'] = $this->admin_shop_library->get_all_product_colors()->result_array();
         $this->template->load($this->tmpl, "admin/applications/shop/product_color_list", $this->data);
     }
     
@@ -190,7 +190,8 @@ class Applications_shop extends CI_Controller{
      */
     public function create_color()
     {
-        
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
     }
     /*
      * This method will update color
@@ -208,7 +209,17 @@ class Applications_shop extends CI_Controller{
      */
     public function delete_color()
     {
-        
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_shop_library->delete_product_color($id))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
     }
 }
 

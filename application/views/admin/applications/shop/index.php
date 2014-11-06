@@ -4,8 +4,8 @@
         <div class="row col-md-12">            
             <div class="row form-group" style="padding-left: 10px;">
                 <?php if($allow_write){ ?>
-                <div class ="col-md-2 pull-left">
-                    <button onclick="open_modal_product_category_create()" value="" class="btn button-custom">Create Product Category</button>
+                <div class ="col-md-3 pull-left">
+                    <button onclick="open_modal_product_category_create()" value="" class="form-control btn button-custom">Create Product Category</button>
                 </div>
                 <?php } ?>
                 <div class ="col-md-2 pull-left">
