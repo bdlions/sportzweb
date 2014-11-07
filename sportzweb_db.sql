@@ -1906,6 +1906,68 @@ INSERT INTO `app_shop_product_color` (`id`, `title`, `description`, `picture`) V
 (12, 'silver', 'Silver', 'silver.jpg'),
 (13, 'white', 'White', 'white.jpg'),
 (14, 'yellow', 'Yellow', 'yellow.jpg');
+
+CREATE TABLE IF NOT EXISTS `app_shop_sizing_chart_men` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `us_ca` varchar(200),
+  `uk` varchar(200),
+  `eu` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_shop_sizing_chart_men` (`id`, `title`, `us_ca`, `uk`, `eu`) VALUES
+(1, 'UK6/US7', '7', '6', '40'),
+(2, 'UK7/US8', '8', '7', '40.5'),
+(3, 'UK7.5/US8.5', '8.5', '7.5', '41'),
+(4, 'UK8/US9', '9', '8', '42'),
+(5, 'UK8.5/US9.6', '9.5', '8.5', '42.5'),
+(6, 'UK9/US10', '10', '9', '43'),
+(7, 'UK9.5/US10.5', '10.5', '9.5', '43.5'),
+(8, 'UK10/US11', '11', '10', '44'),
+(9, 'UK10.5/US11.5', '11.5', '10.5', '44.5'),
+(10, 'UK11/US12', '12', '11', '45'),
+(11, 'UK12/US13', '13', '12', '46'),
+(12, 'UK13/US14', '14', '13', '47.5');
+CREATE TABLE IF NOT EXISTS `app_shop_sizing_chart_women` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `us_ca` varchar(200),
+  `uk` varchar(200),
+  `eu` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_shop_sizing_chart_women` (`id`, `title`, `us_ca`, `uk`, `eu`) VALUES
+(1, 'UK3/US5', '5', '3', '35.5');
+CREATE TABLE IF NOT EXISTS `app_shop_sizing_chart_tiny_toms` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `us_ca` varchar(200),
+  `uk` varchar(200),
+  `eu` varchar(200),
+  `approx_age` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_shop_sizing_chart_tiny_toms` (`id`, `title`, `us_ca`, `uk`, `eu`, `approx_age`) VALUES
+(1, 'UK1.5/US2', '2', '1.5', '17.5', 'Infant (0-12 months)');
+CREATE TABLE IF NOT EXISTS `app_shop_sizing_chart_youth` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `us_ca` varchar(200),
+  `uk` varchar(200),
+  `eu` varchar(200),
+  `approx_age` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_shop_sizing_chart_youth` (`id`, `title`, `us_ca`, `uk`, `eu`, `approx_age`) VALUES
+(1, 'UK12.0/US11.0', '12.0', '11.0', '30.0', 'Children (5 years)');
 	
 -- user logs	
 CREATE TABLE IF NOT EXISTS `user_log` (
