@@ -14,6 +14,11 @@ class Status_feed extends JsonRPCServer {
         $this->load->library('ion_auth');
         $this->load->library("statuses");
         $this->load->library("Trending_features");	
+		if (substr(CI_VERSION, 0, 1) == '2') {
+            $this->load->library('session');
+        } else {
+            $this->load->driver('session');
+        }
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->library('mongo_db') :
@@ -27,6 +32,7 @@ class Status_feed extends JsonRPCServer {
     function get_statuses($status_data = ''){
         $result = array();
         //$data = json_decode($status_data);
+		$this->session->set_userdata('user_id', 2);
         $data = new stdClass();
         $data->status_list_id = 1;
         $data->mapping_id = 4;
