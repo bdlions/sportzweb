@@ -107,7 +107,12 @@ $lang['delete_product_category_fail']                   = "Failed to delete Prod
 $lang['update_product_category_duplicate_title']        = "Product Category title already used.";
 $lang['update_product_category_successful']             = "Product Category is updated successfully.";
 $lang['update_product_category_fail']                   = "Failed to update Product Category.";
+
 $lang['update_product_color_fail']                      = "Failed to update Product Color.";
 $lang['update_product_color_successful']                = "Product Color is updated successfully.";
 $lang['delete_product_color_fail']                      = "Failed to delete Product Color.";
 $lang['delete_product_color_successful']                = "Product Color is deleted successfully.";
+$lang['create_product_color_duplicate_title']           = "Product Color title already used.";
+$lang['update_product_color_duplicate_title']           = "Product Color title already used.";
+$lang['create_product_color_successful']                = "Product Color is created successfully.";
+$lang['create_product_color_fail']                      = "Failed to create Product Color.";

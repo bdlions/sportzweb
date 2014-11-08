@@ -14,9 +14,11 @@ if (!defined('BASEPATH'))
 class Admin_shop_model extends Ion_auth_model
 {
     protected $app_shop_product_identity_column;
+    protected $app_shop_product_color_identity_column;
     public function __construct() {
         parent::__construct();
         $this->app_shop_product_identity_column = $this->config->item('app_shop_product_identity_column', 'ion_auth');
+        $this->app_shop_product_color_identity_column = $this->config->item('app_shop_product_color_identity_column', 'ion_auth');
     }
     
     // -------------------------------- Product Category Module --------------------------------------
@@ -140,7 +142,17 @@ class Admin_shop_model extends Ion_auth_model
      */
     public function create_product_color($additional_data)
     {
-        
+        if ( array_key_exists($this->app_shop_product_color_identity_column, $additional_data) && $this->product_color_identity_check($additional_data[$this->app_shop_product_color_identity_column]) )
+        {
+            $this->set_error('create_product_color_duplicate_' . $this->app_shop_product_color_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_shop_product_color'], $additional_data); 
+        $this->db->insert($this->tables['app_shop_product_color'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_product_color_successful');
+        return (isset($id)) ? $id : FALSE;
     }
     
     /*
@@ -161,7 +173,10 @@ class Admin_shop_model extends Ion_auth_model
      */
     public function get_product_color_info($color_id)
     {
-        
+        $this->db->where($this->tables['app_shop_product_color'].'.id', $color_id);
+        return $this->db->select($this->tables['app_shop_product_color'].'.id as id,'.$this->tables['app_shop_product_color'].'.*')
+                    ->from($this->tables['app_shop_product_color'])
+                    ->get();
     }
     
     /*

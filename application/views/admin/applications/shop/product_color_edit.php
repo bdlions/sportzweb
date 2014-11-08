@@ -1,14 +1,11 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Create New Color</div>
+    <div class="panel-heading">Edit Color</div>
     <div class="panel-body">
         <div class="row">            
             <div class="col-md-12">
 
-                <div class="row form-horizontal form-background top-bottom-padding"> 
-                    <div class="row col-md-offset-2 col-md-9" style="font-weight: bold; padding-bottom: 15px">
-                        <?php echo $message;?>
-                    </div>
-                    <?php echo form_open("admin/applications_shop/create_color", array('id' => 'form_create_color', 'class' => 'form-horizontal')) ?>
+                <div class="row form-horizontal form-background top-bottom-padding">  
+                    <?php echo form_open("admin/applications_shop/create_color", array('id' => 'form_create_color', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')) ?>
                     <div class="row">
                         <div class ="col-md-10 margin-top-bottom">                            
                             <div class="form-group">
@@ -16,7 +13,7 @@
                                     Color Title
                                 </label>
                                 <div class ="col-md-9">
-                                    <input id="input_color_title" name="input_color_title">
+                                    <input id="input_color_title" name="input_color_title" value="<?php echo $title;?>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -24,7 +21,7 @@
                                     Color Description
                                 </label>
                                 <div class ="col-md-9">
-                                    <input id="input_color_desc" name="input_color_desc">
+                                    <input id="input_color_desc" name="input_color_desc" value="<?php echo $description;?>">
                                 </div>
                             </div>
 
@@ -49,8 +46,8 @@
                                         </div>
                                     </div>-->
 
-                                    <div class="col-md-offset-8 col-md-4 disable_padding_right" id="upload">
-                                        <input id="btnSubmit" name="btnSubmit" type="submit" value="Save" class="btn button-custom pull-right form-control"/>
+                                    <div class="col-md-offset-5 col-md-4 disable_padding_right" id="upload">
+                                        <input id="btnSubmit" type="submit" value="Update" class="form-control btn button-custom pull-right"/>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +59,7 @@
                 <div>
                     <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
                 </div>
-            </div>
+            </div>          
         </div>
     </div>
 </div>

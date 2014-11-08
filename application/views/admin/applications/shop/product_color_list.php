@@ -34,7 +34,7 @@
                                 <td><?php echo $color_data['description']?></td>
                                 <?php if($allow_edit){ ?>
                                 <td>
-                                    <button onclick="(<?php echo $color_data['id']?>)" class="form-control btn">
+                                    <button onclick="location.href='<?php echo base_url()?>admin/applications_shop/update_color/<?php echo $color_data["id"]?>'" class="form-control btn">
                                         Edit
                                     </button> 
                                 </td>

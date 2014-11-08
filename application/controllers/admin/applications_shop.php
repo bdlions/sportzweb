@@ -9,6 +9,7 @@ class Applications_shop extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
+        $this->load->library('form_validation');
         $this->load->library('org/admin/application/admin_shop_library.php');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
@@ -190,8 +191,57 @@ class Applications_shop extends CI_Controller{
      */
     public function create_color()
     {
-        $this->data['message'] = '';
-        $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('input_color_title', 'Color Title', 'xss_clean|required');
+        $this->form_validation->set_rules('input_color_desc', 'Color Description', 'xss_clean|required');
+
+        if ($this->input->post('btnSubmit'))
+        {
+            if ($this->form_validation->run() == true)
+            {
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];
+                    $uploaded_image_data = $this->image_upload($file_info, PRODUCT_COLOR_PICTURE_PATH);
+                    if(isset($uploaded_image_data['error'])) {
+                        $this->data['message'] = strip_tags($uploaded_image_data['error']);
+                        echo json_encode($this->data);
+                        return;
+                    } else if(!empty($uploaded_image_data['upload_data']['file_name'])){
+                        $path = FCPATH.PRODUCT_COLOR_PICTURE_PATH.$uploaded_image_data['upload_data']['file_name'];
+                        unlink($path);
+                    }
+                }
+                $result = array();
+                $title = $this->input->post('input_color_title');
+                $description = $this->input->post('input_color_desc');
+//                $picture = $this->input->post('userfile');
+                $additional_data = array(
+                    'title' => $title,
+                    'description' => $description
+                );
+                if ($this->admin_shop_library->create_product_color($additional_data)) {
+                    $result['message'] = $this->admin_shop_library->messages_alert();
+                    $this->data['message'] = json_encode($result['message']);
+                    $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+//                    redirect('admin/applications_shop/manage_colors'.$tournament_id,'refresh');
+                } else {
+                    $result['message'] = $this->admin_shop_library->errors_alert();
+                    $this->data['message'] = json_encode($result['message']);
+                    $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+                }
+//                echo json_encode($result);
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message');
+            $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+        }
     }
     /*
      * This method will update color
@@ -200,7 +250,62 @@ class Applications_shop extends CI_Controller{
      */
     public function update_color($color_id)
     {
-        
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('input_color_title', 'Color Title', 'xss_clean|required');
+        $this->form_validation->set_rules('input_color_desc', 'Color Description', 'xss_clean|required');
+
+        if ($this->input->post('btnSubmit'))
+        {
+            if ($this->form_validation->run() == true)
+            {
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];
+                    $uploaded_image_data = $this->image_upload($file_info, PRODUCT_COLOR_PICTURE_PATH);
+                    if(isset($uploaded_image_data['error'])) {
+                        $this->data['message'] = strip_tags($uploaded_image_data['error']);
+                        echo json_encode($this->data);
+                        return;
+                    } else if(!empty($uploaded_image_data['upload_data']['file_name'])){
+                        $path = FCPATH.PRODUCT_COLOR_PICTURE_PATH.$uploaded_image_data['upload_data']['file_name'];
+                        unlink($path);
+                    }
+                }
+                $result = array();
+                $title = $this->input->post('input_color_title');
+                $description = $this->input->post('input_color_desc');
+//                $picture = $this->input->post('userfile');
+                $additional_data = array(
+                    'title' => $title,
+                    'description' => $description
+                );
+                if ($this->admin_shop_library->create_product_color($additional_data)) {
+                    $result['message'] = $this->admin_shop_library->messages_alert();
+                    $this->data['message'] = json_encode($result['message']);
+                    $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+//                    redirect('admin/applications_shop/manage_colors'.$tournament_id,'refresh');
+                } else {
+                    $result['message'] = $this->admin_shop_library->errors_alert();
+                    $this->data['message'] = json_encode($result['message']);
+                    $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+                }
+//                echo json_encode($result);
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        else
+        {
+            $color_info = $this->admin_shop_library->get_product_color_info($color_id);
+            var_dump($color_info); exit();
+            $this->data['title'] = $color_info["title"];
+            $this->data['description'] = $color_info["description"];
+            $this->data['message'] = $this->session->flashdata('message');
+            
+            $this->template->load($this->tmpl, "admin/applications/shop/product_color_edit", $this->data);
+        }
     }
     
     /*

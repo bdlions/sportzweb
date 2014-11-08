@@ -188,6 +188,7 @@ $config['application_title_identity_column']            = 'title';
 
 //SHOP APP
 $config['app_shop_product_identity_column']             = 'title';
+$config['app_shop_product_color_identity_column']       = 'title';
 
 
 /*
