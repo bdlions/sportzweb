@@ -133,7 +133,12 @@ class Admin_shop_model extends Ion_auth_model
      * @Author Nazmul on 5th November 2014
      */
     public function product_color_identity_check($identity = '') {
-        
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_shop_product_color_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_shop_product_color']) > 0;
     }
     /*
      * This method will create a product color
@@ -163,7 +168,20 @@ class Admin_shop_model extends Ion_auth_model
      */
     public function update_product_color($color_id, $additional_data)
     {
-        
+        $color_info = $this->get_product_color_info($color_id)->row();
+        if (array_key_exists($this->app_shop_product_color_identity_column, $additional_data) && $this->product_color_identity_check($additional_data[$this->app_shop_product_color_identity_column]) && $color_info->{$this->app_shop_product_color_identity_column} !== $additional_data[$this->app_shop_product_color_identity_column])
+        {
+            $this->set_error('update_product_color_duplicate_' . $this->app_shop_product_color_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_shop_product_color'], $additional_data);
+        $this->db->update($this->tables['app_shop_product_color'], $data, array('id' => $color_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_product_color_fail');
+            return FALSE;
+        }
+        $this->set_message('update_product_color_successful');
+        return TRUE;
     }
     
     /*
