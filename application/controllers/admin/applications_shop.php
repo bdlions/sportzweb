@@ -192,120 +192,125 @@ class Applications_shop extends CI_Controller{
     public function create_color()
     {
         $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
-        $this->form_validation->set_rules('input_color_title', 'Color Title', 'xss_clean|required');
-        $this->form_validation->set_rules('input_color_desc', 'Color Description', 'xss_clean|required');
-
-        if ($this->input->post('btnSubmit'))
-        {
-            if ($this->form_validation->run() == true)
+        $this->form_validation->set_rules('title', 'Color Title', 'xss_clean|required');
+        $this->form_validation->set_rules('description', 'Color Description', 'xss_clean|required');
+        if ($this->input->post('submit_create_color'))
+        {            
+            if($this->form_validation->run() == true)
             {
-                if (isset($_FILES["userfile"]))
-                {
-                    $file_info = $_FILES["userfile"];
-                    $uploaded_image_data = $this->image_upload($file_info, PRODUCT_COLOR_PICTURE_PATH);
-                    if(isset($uploaded_image_data['error'])) {
-                        $this->data['message'] = strip_tags($uploaded_image_data['error']);
-                        echo json_encode($this->data);
-                        return;
-                    } else if(!empty($uploaded_image_data['upload_data']['file_name'])){
-                        $path = FCPATH.PRODUCT_COLOR_PICTURE_PATH.$uploaded_image_data['upload_data']['file_name'];
-                        unlink($path);
-                    }
-                }
-                $result = array();
-                $title = $this->input->post('input_color_title');
-                $description = $this->input->post('input_color_desc');
-//                $picture = $this->input->post('userfile');
                 $additional_data = array(
-                    'title' => $title,
-                    'description' => $description
+                    'title' => $this->input->post('title'),
+                    'description' => $this->input->post('description')
                 );
-                if ($this->admin_shop_library->create_product_color($additional_data)) {
-                    $result['message'] = $this->admin_shop_library->messages_alert();
-                    $this->data['message'] = json_encode($result['message']);
-                    $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
-//                    redirect('admin/applications_shop/manage_colors'.$tournament_id,'refresh');
-                } else {
-                    $result['message'] = $this->admin_shop_library->errors_alert();
-                    $this->data['message'] = json_encode($result['message']);
-                    $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+                $color_id = $this->admin_shop_library->create_product_color($additional_data);
+                if($color_id !== FALSE)
+                {
+                    $this->session->set_flashdata('message', $this->admin_shop_library->messages());
+                    redirect('admin/applications_shop/create_color','refresh');
                 }
-//                echo json_encode($result);
+                else
+                {
+                    $this->data['message'] = 'Error while creating a color.';
+                }
             }
             else
             {
                 $this->data['message'] = validation_errors();
-            }
+            }            
         }
         else
         {
-            $this->data['message'] = $this->session->flashdata('message');
-            $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+            $this->data['message'] = $this->session->flashdata('message'); 
         }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('title'),
+        );
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('description'),
+        );
+        $this->data['submit_create_color'] = array(
+            'name' => 'submit_create_color',
+            'id' => 'submit_create_color',
+            'type' => 'submit',
+            'value' => 'Create',
+        );
+        $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
     }
     /*
      * This method will update color
      * @param $color_id, color id
      * @Author Nazmul on 5th November 2014
      */
-    public function update_color($color_id)
+    public function update_color($color_id = 0)
     {
-        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
-        $this->form_validation->set_rules('input_color_title', 'Color Title', 'xss_clean|required');
-        $this->form_validation->set_rules('input_color_desc', 'Color Description', 'xss_clean|required');
-
-        if ($this->input->post('btnSubmit'))
+        if(empty($color_id))
         {
-            if ($this->form_validation->run() == true)
+            redirect("admin/applications_scoreprediction","refresh");
+        }
+        $this->data['message'] = '';
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('title', 'Color Title', 'xss_clean|required');
+        $this->form_validation->set_rules('description', 'Color Description', 'xss_clean|required');
+        if ($this->input->post('submit_update_color'))
+        {            
+            if($this->form_validation->run() == true)
             {
-                if (isset($_FILES["userfile"]))
-                {
-                    $file_info = $_FILES["userfile"];
-                    $uploaded_image_data = $this->image_upload($file_info, PRODUCT_COLOR_PICTURE_PATH);
-                    if(isset($uploaded_image_data['error'])) {
-                        $this->data['message'] = strip_tags($uploaded_image_data['error']);
-                        echo json_encode($this->data);
-                        return;
-                    } else if(!empty($uploaded_image_data['upload_data']['file_name'])){
-                        $path = FCPATH.PRODUCT_COLOR_PICTURE_PATH.$uploaded_image_data['upload_data']['file_name'];
-                        unlink($path);
-                    }
-                }
-                $result = array();
-                $title = $this->input->post('input_color_title');
-                $description = $this->input->post('input_color_desc');
-//                $picture = $this->input->post('userfile');
                 $additional_data = array(
-                    'title' => $title,
-                    'description' => $description
+                    'title' => $this->input->post('title'),
+                    'description' => $this->input->post('description'),
+                    'modified_on' => now()
                 );
-                if ($this->admin_shop_library->create_product_color($additional_data)) {
-                    $result['message'] = $this->admin_shop_library->messages_alert();
-                    $this->data['message'] = json_encode($result['message']);
-                    $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
-//                    redirect('admin/applications_shop/manage_colors'.$tournament_id,'refresh');
-                } else {
-                    $result['message'] = $this->admin_shop_library->errors_alert();
-                    $this->data['message'] = json_encode($result['message']);
-                    $this->template->load($this->tmpl, "admin/applications/shop/product_color_create", $this->data);
+                if($this->admin_shop_library->update_product_color($color_id, $additional_data))
+                {
+                    $this->session->set_flashdata('message', $this->admin_shop_library->messages());
+                    redirect('admin/applications_shop/update_color/'.$color_id,'refresh');
                 }
-//                echo json_encode($result);
+                else
+                {
+                    $this->data['message'] = $this->admin_shop_library->errors();
+                }
             }
             else
             {
                 $this->data['message'] = validation_errors();
-            }
+            }            
         }
         else
         {
-            $color_info = $this->admin_shop_library->get_product_color_info($color_id);
-            var_dump($color_info); exit();
-            $this->data['title'] = $color_info["title"];
-            $this->data['description'] = $color_info["description"];
-            $this->data['message'] = $this->session->flashdata('message');
-            
-            $this->template->load($this->tmpl, "admin/applications/shop/product_color_edit", $this->data);
+            $this->data['message'] = $this->session->flashdata('message'); 
         }
+        $color_info = array();
+        $color_info_array = $this->admin_shop_library->get_product_color_info($color_id)->result_array();
+        if(!empty($color_info_array))
+        {
+            $color_info = $color_info_array[0];
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text',
+            'value' => $color_info['title'],
+        );
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text',
+            'value' => $color_info['description'],
+        );
+        $this->data['submit_update_color'] = array(
+            'name' => 'submit_update_color',
+            'id' => 'submit_update_color',
+            'type' => 'submit',
+            'value' => 'Update',
+        );
+        $this->data['color_id'] = $color_id;
+        $this->template->load($this->tmpl, "admin/applications/shop/product_color_edit", $this->data);        
     }
     
     /*

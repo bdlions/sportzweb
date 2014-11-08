@@ -1,67 +1,43 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Create New Color</div>
+    <div class="panel-heading">Create Match</div>
     <div class="panel-body">
-        <div class="row">            
-            <div class="col-md-12">
-
-                <div class="row form-horizontal form-background top-bottom-padding"> 
-                    <div class="row col-md-offset-2 col-md-9" style="font-weight: bold; padding-bottom: 15px">
-                        <?php echo $message;?>
-                    </div>
-                    <?php echo form_open("admin/applications_shop/create_color", array('id' => 'form_create_color', 'class' => 'form-horizontal')) ?>
-                    <div class="row">
-                        <div class ="col-md-10 margin-top-bottom">                            
-                            <div class="form-group">
-                                <label for="input_color_title" class="col-md-3 control-label requiredField">
-                                    Color Title
-                                </label>
-                                <div class ="col-md-9">
-                                    <input id="input_color_title" name="input_color_title">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="input_color_desc" class="col-md-3 control-label requiredField">
-                                    Color Description
-                                </label>
-                                <div class ="col-md-9">
-                                    <input id="input_color_desc" name="input_color_desc">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="website" class="col-md-3 control-label requiredField">
-                                    Set picture
-                                </label>
-                                <div class ="col-md-9">
-                                    <div class="col-md-9">
-                                        <div class="row fileinput-button">
-                                            <button class="btn button-custom">Upload a photo</button>
-                                            <input id="fileupload" type="file" name="userfile">
-                                        </div>
-<!--                                        <div id="progress" class="row progress" style="margin-top: 8px;">
-                                            <div class="progress-bar progress-bar-success"></div>
-                                        </div>-->
-                                    </div>
-<!--                                    <div class="col-md-9">
-                                        <div class="profile-picture-box" >
-                                            <div id="files" class="files">
-                                            </div>
-                                        </div>
-                                    </div>-->
-
-                                    <div class="col-md-offset-8 col-md-4 disable_padding_right" id="upload">
-                                        <input id="btnSubmit" name="btnSubmit" type="submit" value="Save" class="btn button-custom pull-right form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-
+        <div class="form-background top-bottom-padding">
+            <div class="row">
+                <div class ="col-md-8 margin-top-bottom">
+                    <?php echo form_open("admin/applications_shop/create_color/", array('id' => 'form_create_color', 'class' => 'form-horizontal')); ?>
+                        <div class ="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8"><?php echo $message; ?></div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="title" class="col-md-6 control-label requiredField">
+                                Title:
+                            </label>
+                            <div class ="col-md-6">
+                                <?php echo form_input($title + array('class' => 'form-control')); ?>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-md-6 control-label requiredField">
+                                Description:
+                            </label>
+                            <div class ="col-md-6">
+                                <?php echo form_input($description + array('class' => 'form-control')); ?>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <label for="submit_create_color" class="col-md-6 control-label requiredField">
+
+                            </label>
+                            <div class ="col-md-3 pull-right">
+                                <?php echo form_input($submit_create_color+array('class'=>'form-control button-custom')); ?>
+                            </div> 
+                        </div>
                     <?php echo form_close(); ?>
                 </div>
-                <div>
-                    <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
-                </div>
+            </div>
+            <div class="btn-group" style="padding-left: 10px;">
+                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
             </div>
         </div>
     </div>
