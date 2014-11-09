@@ -340,7 +340,7 @@ class Applications_shop extends CI_Controller{
     public function manage_size_men()
     {
         $this->data['message'] = '';
-        $this->data['size_list_men'] = $this->admin_shop_library->get_all_sizes_men()->result_array();
+        $this->data['size_list'] = $this->admin_shop_library->get_all_sizes_men()->result_array();
         $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_men", $this->data);
     }
 
@@ -430,7 +430,7 @@ class Applications_shop extends CI_Controller{
 //        $this->template->load($this->tmpl, "admin/applications/shop/product_size_men_create", $this->data);
     }
     
-    public function get_size_info_men($id)
+    public function get_size_info_men()
     {
         $result['size_info'] = array();
         $id = $this->input->post('id');
@@ -460,22 +460,68 @@ class Applications_shop extends CI_Controller{
     
     public function update_size_men()
     {
-        
+        $result = array();
+        $id = $this->input->post('id');
+        $title = $this->input->post('title');
+        $us_ca = $this->input->post('us_ca');
+        $uk = $this->input->post('uk');
+        $eu = $this->input->post('eu');
+        $additional_data = array(
+            'title' => $title,
+            'us_ca' => $us_ca,
+            'uk' => $uk,
+            'eu' => $eu,
+            'modified_on' => now()
+        );
+        if($this->admin_shop_library->update_size_men($id, $additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     // WOMEN ----------------------------------
     public function manage_size_women()
     {
         $this->data['message'] = '';
-        $this->data['size_list_women'] = $this->admin_shop_library->get_all_sizes_women()->result_array();
+        $this->data['size_list'] = $this->admin_shop_library->get_all_sizes_women()->result_array();
         $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_women", $this->data);
+    }
+    
+    public function create_size_women()
+    {
+        $result = array();
+        $title = $this->input->post('title');
+        $us_ca = $this->input->post('us_ca');
+        $uk = $this->input->post('uk');
+        $eu = $this->input->post('eu');
+        $additional_data = array(
+            'title' => $this->input->post('title'),
+            'us_ca' => $this->input->post('us_ca'),
+            'uk' => $this->input->post('uk'),
+            'eu' => $this->input->post('eu')
+        );
+        if($this->admin_shop_library->create_size_women($additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+        
     }
     
     // TINY TOMS ----------------------------------
     public function manage_size_tinytoms()
     {
         $this->data['message'] = '';
-        $this->data['size_list_tinytoms'] = $this->admin_shop_library->get_all_sizes_tinytoms()->result_array();
+        $this->data['size_list'] = $this->admin_shop_library->get_all_sizes_tinytoms()->result_array();
         $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_tinytoms", $this->data);
     }
     
@@ -483,7 +529,7 @@ class Applications_shop extends CI_Controller{
     public function manage_size_youth()
     {
         $this->data['message'] = '';
-        $this->data['size_list_youth'] = $this->admin_shop_library->get_all_sizes_youth()->result_array();
+        $this->data['size_list'] = $this->admin_shop_library->get_all_sizes_youth()->result_array();
         $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_youth", $this->data);
     }
     

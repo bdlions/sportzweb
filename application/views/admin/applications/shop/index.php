@@ -19,17 +19,17 @@
                     </a>
                 </div>
                 <div class ="col-md-2 pull-left">
-                    <a href="<?php echo base_url()."admin/applications_shop/manage_colors"; ?>">
+                    <a href="<?php echo base_url()."admin/applications_shop/manage_size_women"; ?>">
                         <button class="form-control btn button-custom pull-right">Sizing: WEMEN</button>  
                     </a>
                 </div>
                 <div class ="col-md-2 pull-left">
-                    <a href="<?php echo base_url()."admin/applications_shop/manage_colors"; ?>">
+                    <a href="<?php echo base_url()."admin/applications_shop/manage_size_tinytoms"; ?>">
                         <button class="form-control btn button-custom pull-right">Sizing: TINY TOMS</button>  
                     </a>
                 </div>
                 <div class ="col-md-2 pull-left">
-                    <a href="<?php echo base_url()."admin/applications_shop/manage_colors"; ?>">
+                    <a href="<?php echo base_url()."admin/applications_shop/manage_size_youth"; ?>">
                         <button class="form-control btn button-custom pull-right">Sizing: YOUTH</button>  
                     </a>
                 </div>

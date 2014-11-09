@@ -118,9 +118,12 @@ $lang['create_product_color_successful']                = "Product Color is crea
 $lang['create_product_color_fail']                      = "Failed to create Product Color.";
 
 $lang['create_product_size_duplicate_title']            = "Product Size title already used.";
-$lang['create_product_size_successful']                = "Product Size is created successfully.";
+$lang['create_product_size_successful']                 = "Product Size is created successfully.";
 $lang['create_product_size_fail']                       = "Failed to create Product Size.";
 $lang['delete_product_size_fail']                       = "Failed to delete Product Size.";
 $lang['delete_product_size_successful']                 = "Product Size is deleted successfully.";
+$lang['update_product_size_duplicate_title']            = "Product Size title already used.";
+$lang['update_product_size_successful']                 = "Product Size is updated successfully.";
+$lang['update_product_size_fail']                       = "Failed to update Product Size.";
 
                                                         

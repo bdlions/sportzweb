@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Product Sizes for MEN</div>
+    <div class="panel-heading">Product Sizes for TINY TOMS</div>
     <div class="panel-body">
         <div class="row col-md-12">
             <div class="row form-group" style="padding-left: 10px;">
@@ -63,7 +63,7 @@
     </div>
 </div>
 <?php
-    $this->load->view("admin/applications/shop/modal/product_size_create_men");
-    $this->load->view("admin/applications/shop/modal/product_size_deleteconfirm_men");
-    $this->load->view("admin/applications/shop/modal/product_size_update_men");
+    $this->load->view("admin/applications/shop/modal/product_size_create_tinytoms");
+    $this->load->view("admin/applications/shop/modal/product_size_deleteconfirm_tinytoms");
+    $this->load->view("admin/applications/shop/modal/product_size_update_tinytoms");
 ?>

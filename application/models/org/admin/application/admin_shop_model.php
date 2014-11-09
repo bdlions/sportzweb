@@ -236,17 +236,17 @@ class Admin_shop_model extends Ion_auth_model
     
     // -------------------------------- Product SIZE Module --------------------------------------
 
-//    public function product_category_identity_check($identity = '') {
-//        if(empty($identity))
-//        {
-//            return FALSE;
-//        }
-//        $this->db->where($this->app_shop_product_identity_column, $identity);
-//        return $this->db->count_all_results($this->tables['app_shop_product_category']) > 0;
-//    }
-//    public function get_product_category_info($category_id)
+    public function size_men_identity_check($identity = '') {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_shop_product_size_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_shop_sizing_chart_men']) > 0;
+    }
+//    public function get_size_info_men($id)
 //    {
-//        $this->db->where($this->tables['app_shop_product_category'].'.id', $category_id);
+//        $this->db->where($this->tables['app_shop_sizing_chart_men'].'.id', $category_id);
 //        return $this->db->select($this->tables['app_shop_product_category'].'.id as category_id,'.$this->tables['app_shop_product_category'].'.*')
 //                    ->from($this->tables['app_shop_product_category'])
 //                    ->get();
@@ -299,5 +299,48 @@ class Admin_shop_model extends Ion_auth_model
                     ->from($this->tables['app_shop_sizing_chart_men'])
                     ->get();
     }
-
+    
+    public function update_size_men($id, $additional_data)
+    {
+        $size_info = $this->get_size_info_men($id)->row();
+        if (array_key_exists($this->app_shop_product_size_identity_column, $additional_data) && $this->size_men_identity_check($additional_data[$this->app_shop_product_size_identity_column]) && $size_info->{$this->app_shop_product_size_identity_column} !== $additional_data[$this->app_shop_product_size_identity_column])
+        {
+            $this->set_error('update_product_size_duplicate_' . $this->app_shop_product_size_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_shop_sizing_chart_men'], $additional_data);
+        $this->db->update($this->tables['app_shop_sizing_chart_men'], $data, array('id' => $id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_product_size_fail');
+            return FALSE;
+        }
+        $this->set_message('update_product_size_successful');
+        return TRUE;
+    }
+    
+    
+    // WOMEN ----------------------------------
+    public function get_all_sizes_women()
+    {
+        return $this->db->select($this->tables['app_shop_sizing_chart_women'].'.id as category_id,'.$this->tables['app_shop_sizing_chart_women'].'.*')
+                    ->from($this->tables['app_shop_sizing_chart_women'])
+                    ->get();
+    }
+    
+//    
+//    // TINYTOSM ----------------------------------
+//    public function get_all_sizes_women()
+//    {
+//        return $this->db->select($this->tables['app_shop_sizing_chart_women'].'.id as category_id,'.$this->tables['app_shop_sizing_chart_women'].'.*')
+//                    ->from($this->tables['app_shop_sizing_chart_women'])
+//                    ->get();
+//    }
+//    
+//    // Youth ----------------------------------
+//    public function get_all_sizes_women()
+//    {
+//        return $this->db->select($this->tables['app_shop_sizing_chart_women'].'.id as category_id,'.$this->tables['app_shop_sizing_chart_women'].'.*')
+//                    ->from($this->tables['app_shop_sizing_chart_women'])
+//                    ->get();
+//    }
 }
