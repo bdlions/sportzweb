@@ -15,10 +15,12 @@ class Admin_shop_model extends Ion_auth_model
 {
     protected $app_shop_product_identity_column;
     protected $app_shop_product_color_identity_column;
+    protected $app_shop_product_size_identity_column;
     public function __construct() {
         parent::__construct();
-        $this->app_shop_product_identity_column = $this->config->item('app_shop_product_identity_column', 'ion_auth');
-        $this->app_shop_product_color_identity_column = $this->config->item('app_shop_product_color_identity_column', 'ion_auth');
+        $this->app_shop_product_identity_column         = $this->config->item('app_shop_product_identity_column', 'ion_auth');
+        $this->app_shop_product_color_identity_column   = $this->config->item('app_shop_product_color_identity_column', 'ion_auth');
+        $this->app_shop_product_size_identity_column    = $this->config->item('app_shop_product_size_identity_column', 'ion_auth');
     }
     
     // -------------------------------- Product Category Module --------------------------------------
@@ -230,4 +232,72 @@ class Admin_shop_model extends Ion_auth_model
         $this->set_message('delete_product_color_successful');
         return TRUE;
     }
+    
+    
+    // -------------------------------- Product SIZE Module --------------------------------------
+
+//    public function product_category_identity_check($identity = '') {
+//        if(empty($identity))
+//        {
+//            return FALSE;
+//        }
+//        $this->db->where($this->app_shop_product_identity_column, $identity);
+//        return $this->db->count_all_results($this->tables['app_shop_product_category']) > 0;
+//    }
+//    public function get_product_category_info($category_id)
+//    {
+//        $this->db->where($this->tables['app_shop_product_category'].'.id', $category_id);
+//        return $this->db->select($this->tables['app_shop_product_category'].'.id as category_id,'.$this->tables['app_shop_product_category'].'.*')
+//                    ->from($this->tables['app_shop_product_category'])
+//                    ->get();
+//    }
+    
+    public function get_all_sizes_men()
+    {
+        return $this->db->select($this->tables['app_shop_sizing_chart_men'].'.id as category_id,'.$this->tables['app_shop_sizing_chart_men'].'.*')
+                    ->from($this->tables['app_shop_sizing_chart_men'])
+                    ->get();
+    }
+    
+    public function delete_size_men($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_product_size_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_shop_sizing_chart_men']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_product_size_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_product_size_successful');
+        return TRUE;
+    }
+    
+    public function create_size_men($additional_data)
+    {
+        if ( array_key_exists($this->app_shop_product_size_identity_column, $additional_data) && $this->product_color_identity_check($additional_data[$this->app_shop_product_size_identity_column]) )
+        {
+            $this->set_error('create_product_size_duplicate_' . $this->app_shop_product_size_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_shop_sizing_chart_men'], $additional_data); 
+        $this->db->insert($this->tables['app_shop_sizing_chart_men'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_product_size_successful');
+        return (isset($id)) ? $id : FALSE;
+    }
+    
+    public function get_size_info_men($id)
+    {
+        $this->db->where($this->tables['app_shop_sizing_chart_men'].'.id', $id);
+        return $this->db->select($this->tables['app_shop_sizing_chart_men'].'.id as id,'.$this->tables['app_shop_sizing_chart_men'].'.*')
+                    ->from($this->tables['app_shop_sizing_chart_men'])
+                    ->get();
+    }
+
 }

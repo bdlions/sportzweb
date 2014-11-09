@@ -139,6 +139,11 @@ $config['tables']['app_sp_configure_homepage']              = 'app_sp_configure_
 
 $config['tables']['app_shop_product_category']              = 'app_shop_product_category';
 $config['tables']['app_shop_product_color']                 = 'app_shop_product_color';
+$config['tables']['app_shop_sizing_chart_men']              = 'app_shop_sizing_chart_men';
+$config['tables']['app_shop_sizing_chart_women']            = 'app_shop_sizing_chart_women';
+$config['tables']['app_shop_sizing_chart_tiny_toms']        = 'app_shop_sizing_chart_tiny_toms';
+$config['tables']['app_shop_sizing_chart_youth']            = 'app_shop_sizing_chart_youth';
+
 // visitors
 $config['tables']['pages']                                  = 'pages';
 $config['tables']['page_visitor']                           = 'page_visitor';
@@ -189,6 +194,7 @@ $config['application_title_identity_column']            = 'title';
 //SHOP APP
 $config['app_shop_product_identity_column']             = 'title';
 $config['app_shop_product_color_identity_column']       = 'title';
+$config['app_shop_product_size_identity_column']        = 'title';
 
 
 /*

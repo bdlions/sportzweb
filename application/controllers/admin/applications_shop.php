@@ -331,5 +331,161 @@ class Applications_shop extends CI_Controller{
         }
         echo json_encode($result);
     }
+    
+    
+        
+    // ---------------------------------- Product Size Module ----------------------------------------
+
+    // MEN ----------------------------------
+    public function manage_size_men()
+    {
+        $this->data['message'] = '';
+        $this->data['size_list_men'] = $this->admin_shop_library->get_all_sizes_men()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_men", $this->data);
+    }
+
+    public function create_size_men()
+    {
+//        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+//        $this->form_validation->set_rules('title', 'Size Title', 'xss_clean|required');
+//        $this->form_validation->set_rules('us_ca', 'US - CA', 'xss_clean|required');
+//        $this->form_validation->set_rules('uk', 'UK', 'xss_clean|required');
+//        $this->form_validation->set_rules('eu', 'EU', 'xss_clean|required');
+        
+        $result = array();
+        $title = $this->input->post('title');
+        $us_ca = $this->input->post('us_ca');
+        $uk = $this->input->post('uk');
+        $eu = $this->input->post('eu');
+        $additional_data = array(
+            'title' => $this->input->post('title'),
+            'us_ca' => $this->input->post('us_ca'),
+            'uk' => $this->input->post('uk'),
+            'eu' => $this->input->post('eu')
+        );
+        if($this->admin_shop_library->create_size_men($additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+        
+        
+//        if ($this->input->post('submit_create_size'))/////////////////
+//        {
+//            if($this->form_validation->run() == true)
+//            {
+//                $additional_data = array(
+//                    'title' => $this->input->post('title'),
+//                    'us_ca' => $this->input->post('us_ca'),
+//                    'uk'    => $this->input->post('uk'),
+//                    'eu'    => $this->input->post('eu')
+//                );
+//                $id = $this->admin_shop_library->create_size_men($additional_data);
+//                if($id !== FALSE)
+//                {
+//                    $this->session->set_flashdata('message', $this->admin_shop_library->messages());
+//                    redirect('admin/applications_shop/manage_size_men','refresh');
+//                }
+//                else
+//                {
+//                    $this->data['message'] = 'Error while creating a new Size.';
+//                }
+//            }
+//            else
+//            {
+//                $this->data['message'] = validation_errors();
+//            }
+//        }
+//        else
+//        {
+//            $this->data['message'] = $this->session->flashdata('message'); 
+//        }
+        
+//        echo json_encode($result);
+        
+        
+        
+//        $this->data['title'] = array(
+//            'name' => 'title',
+//            'id' => 'title',
+//            'type' => 'text',
+//            'value' => $this->form_validation->set_value('title'),
+//        );
+//        $this->data['us_ca'] = array(
+//            'name' => 'us_ca',
+//            'id' => 'us_ca',
+//            'type' => 'text',
+//            'value' => $this->form_validation->set_value('us_ca'),
+//        );
+//        $this->data['submit_create_size'] = array(
+//            'name' => 'submit_create_size',
+//            'id' => 'submit_create_size',
+//            'type' => 'submit',
+//            'value' => 'Create',
+//        );
+//        $this->template->load($this->tmpl, "admin/applications/shop/product_size_men_create", $this->data);
+    }
+    
+    public function get_size_info_men($id)
+    {
+        $result['size_info'] = array();
+        $id = $this->input->post('id');
+        $size_info_array = $this->admin_shop_library->get_size_info_men($id)->result_array();
+        if(!empty($size_info_array))
+        {
+            $result['size_info'] = $size_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+
+    public function delete_size_men()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_shop_library->delete_size_men($id))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    public function update_size_men()
+    {
+        
+    }
+    
+    // WOMEN ----------------------------------
+    public function manage_size_women()
+    {
+        $this->data['message'] = '';
+        $this->data['size_list_women'] = $this->admin_shop_library->get_all_sizes_women()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_women", $this->data);
+    }
+    
+    // TINY TOMS ----------------------------------
+    public function manage_size_tinytoms()
+    {
+        $this->data['message'] = '';
+        $this->data['size_list_tinytoms'] = $this->admin_shop_library->get_all_sizes_tinytoms()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_tinytoms", $this->data);
+    }
+    
+    // YOUTH ----------------------------------
+    public function manage_size_youth()
+    {
+        $this->data['message'] = '';
+        $this->data['size_list_youth'] = $this->admin_shop_library->get_all_sizes_youth()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_youth", $this->data);
+    }
+    
 }
 
