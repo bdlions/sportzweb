@@ -90,16 +90,16 @@
                     <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/score_prediction' ?>"></i>Score Prediction</a>
                 </li>
                 <?php 
-                }if(in_array(100, $app_id_list))
+                }if(in_array(APPLICATION_SHOP_ID, $app_id_list))
                 {?>
                 <li class="list-group-item left-panel-item list-icon">
-                    <img class="list-icon" src="<?php echo base_url() ?>resources/images/calendar.png"/><a href="#">Events</a>
+                    <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/shop' ?>"></i>Shop</a>
                 </li>
                 <?php 
-                }if(in_array(100, $app_id_list))
+                }if(in_array(APPLICATION_GYMPRO_ID, $app_id_list))
                 {?>
                 <li class="list-group-item left-panel-item list-icon">
-                    <img class="list-icon" src="<?php echo base_url() ?>resources/images/gnome_system_users.png"/><a href="#">Buddy</a>
+                    <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/gympro' ?>"></i>Gympro</a>
                 </li>
                 <?php 
                 }if(in_array(100, $app_id_list))

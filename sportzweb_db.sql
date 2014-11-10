@@ -1027,7 +1027,9 @@ INSERT INTO `application_directory` (`id`, `title`) VALUES
 (5, 'Blogs'),
 (6, 'BMI Calculator'),
 (7, 'Photography'),
-(8, 'Score Prediction');
+(8, 'Score Prediction'),
+(9, 'Shop'),
+(10, 'Gympro');
 
 -- modified xstream banter
 CREATE TABLE IF NOT EXISTS `app_xb_sports` (
@@ -1997,6 +1999,14 @@ INSERT INTO `app_shop_product_feature` (`id`, `title`) VALUES
 (17, 'Wool'),
 (18, 'Woven');
 	
+CREATE TABLE IF NOT EXISTS `app_shop_product_info` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
 -- user logs	
 CREATE TABLE IF NOT EXISTS `user_log` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
