@@ -1,10 +1,10 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Update Match</div>
+    <div class="panel-heading">Update Product Feature</div>
     <div class="panel-body">
         <div class="form-background top-bottom-padding">
             <div class="row">
                 <div class ="col-md-8 margin-top-bottom">
-                    <?php echo form_open("admin/applications_shop/update_color/".$color_id, array('id' => 'form_update_color', 'class' => 'form-horizontal')); ?>
+                    <?php echo form_open("admin/applications_shop/update_feature/".$feature_id, array('id' => 'form_update_feature', 'class' => 'form-horizontal')); ?>
                         <div class ="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-8"><?php echo $message; ?></div>
@@ -16,21 +16,13 @@
                             <div class ="col-md-6">
                                 <?php echo form_input($title + array('class' => 'form-control')); ?>
                             </div> 
-                        </div>
+                        </div>                        
                         <div class="form-group">
-                            <label for="description" class="col-md-6 control-label requiredField">
-                                Description:
-                            </label>
-                            <div class ="col-md-6">
-                                <?php echo form_input($description + array('class' => 'form-control')); ?>
-                            </div> 
-                        </div>
-                        <div class="form-group">
-                            <label for="submit_update_color" class="col-md-6 control-label requiredField">
+                            <label for="submit_update_feature" class="col-md-6 control-label requiredField">
 
                             </label>
                             <div class ="col-md-3 pull-right">
-                                <?php echo form_input($submit_update_color+array('class'=>'form-control button-custom')); ?>
+                                <?php echo form_input($submit_update_feature+array('class'=>'form-control button-custom')); ?>
                             </div> 
                         </div>
                     <?php echo form_close(); ?>

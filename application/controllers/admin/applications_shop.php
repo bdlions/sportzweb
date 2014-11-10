@@ -788,13 +788,7 @@ class Applications_shop extends CI_Controller{
             'id' => 'title',
             'type' => 'text',
             'value' => $this->form_validation->set_value('title'),
-        );
-        $this->data['description'] = array(
-            'name' => 'description',
-            'id' => 'description',
-            'type' => 'text',
-            'value' => $this->form_validation->set_value('description'),
-        );
+        );       
         $this->data['submit_create_feature'] = array(
             'name' => 'submit_create_feature',
             'id' => 'submit_create_feature',
@@ -804,29 +798,27 @@ class Applications_shop extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/shop/product_feature_create", $this->data);
     }
     
-    public function update_feature($id = 0)
+    public function update_feature($feature_id = 0)
     {
-        if(empty($id))
+        if(empty($feature_id))
         {
             redirect("admin/applications_shop","refresh");
         }
         $this->data['message'] = '';
         $this->form_validation->set_error_delimiters("<div style='feature:red'>", '</div>');
         $this->form_validation->set_rules('title', 'Color Title', 'xss_clean|required');
-        $this->form_validation->set_rules('description', 'Color Description', 'xss_clean|required');
         if ($this->input->post('submit_update_feature'))
         {            
             if($this->form_validation->run() == true)
             {
                 $additional_data = array(
                     'title' => $this->input->post('title'),
-                    'description' => $this->input->post('description'),
                     'modified_on' => now()
                 );
-                if($this->admin_shop_library->update_product_feature($id, $additional_data))
+                if($this->admin_shop_library->update_product_feature($feature_id, $additional_data))
                 {
                     $this->session->set_flashdata('message', $this->admin_shop_library->messages());
-                    redirect('admin/applications_shop/update_feature/'.$id,'refresh');
+                    redirect('admin/applications_shop/update_feature/'.$feature_id,'refresh');
                 }
                 else
                 {
@@ -843,7 +835,7 @@ class Applications_shop extends CI_Controller{
             $this->data['message'] = $this->session->flashdata('message'); 
         }
         $feature_info = array();
-        $feature_info_array = $this->admin_shop_library->get_product_feature_info($id)->result_array();
+        $feature_info_array = $this->admin_shop_library->get_product_feature_info($feature_id)->result_array();
         if(!empty($feature_info_array))
         {
             $feature_info = $feature_info_array[0];
@@ -854,19 +846,13 @@ class Applications_shop extends CI_Controller{
             'type' => 'text',
             'value' => $feature_info['title'],
         );
-        $this->data['description'] = array(
-            'name' => 'description',
-            'id' => 'description',
-            'type' => 'text',
-            'value' => $feature_info['description'],
-        );
         $this->data['submit_update_feature'] = array(
             'name' => 'submit_update_feature',
             'id' => 'submit_update_feature',
             'type' => 'submit',
             'value' => 'Update',
         );
-        $this->data['id'] = $id;
+        $this->data['feature_id'] = $feature_id;
         $this->template->load($this->tmpl, "admin/applications/shop/product_feature_edit", $this->data);        
     }
     public function delete_feature()

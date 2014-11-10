@@ -18,14 +18,6 @@
                             </div> 
                         </div>
                         <div class="form-group">
-                            <label for="description" class="col-md-6 control-label requiredField">
-                                Description:
-                            </label>
-                            <div class ="col-md-6">
-                                <?php echo form_input($description + array('class' => 'form-control')); ?>
-                            </div> 
-                        </div>
-                        <div class="form-group">
                             <label for="submit_create_feature" class="col-md-6 control-label requiredField">
 
                             </label>

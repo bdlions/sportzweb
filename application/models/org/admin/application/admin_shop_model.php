@@ -562,6 +562,18 @@ class Admin_shop_model extends Ion_auth_model
                     ->from($this->tables['app_shop_product_feature'])
                     ->get();
     }
+    /*
+     * This method will return product feature info
+     * @param $id, product feature id
+     * @Author Nazmul on 11th November 2014
+     */
+    public function get_product_feature_info($id)
+    {
+        $this->db->where($this->tables['app_shop_product_feature'].'.id', $id);
+        return $this->db->select($this->tables['app_shop_product_feature'].'.id as feature_id,'.$this->tables['app_shop_product_feature'].'.*')
+                    ->from($this->tables['app_shop_product_feature'])
+                    ->get();
+    }
     public function product_feature_identity_check($identity = '') {
         if(empty($identity))
         {
