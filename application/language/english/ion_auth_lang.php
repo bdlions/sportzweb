@@ -126,4 +126,11 @@ $lang['update_product_size_duplicate_title']            = "Product Size title al
 $lang['update_product_size_successful']                 = "Product Size is updated successfully.";
 $lang['update_product_size_fail']                       = "Failed to update Product Size.";
 
-                                                        
+$lang['update_product_feature_fail']                      = "Failed to update Product Feature.";
+$lang['update_product_feature_successful']                = "Product Feature is updated successfully.";
+$lang['delete_product_feature_fail']                      = "Failed to delete Product Feature.";
+$lang['delete_product_feature_successful']                = "Product Feature is deleted successfully.";
+$lang['create_product_feature_duplicate_title']           = "Product Feature title already used.";
+$lang['update_product_feature_duplicate_title']           = "Product Feature title already used.";
+$lang['create_product_feature_successful']                = "Product Feature is created successfully.";
+$lang['create_product_feature_fail']                      = "Failed to create Product Feature.";

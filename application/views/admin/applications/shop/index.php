@@ -14,6 +14,13 @@
                     </a>
                 </div>
                 <div class ="col-md-2 pull-left">
+                    <a href="<?php echo base_url()."admin/applications_shop/manage_feature"; ?>">
+                        <button class="form-control btn button-custom pull-right">Product Features</button>  
+                    </a>
+                </div>
+            </div>
+            <div class="row form-group" style="padding-left: 10px; margin-top: 8px">
+                <div class ="col-md-2 pull-left">
                     <a href="<?php echo base_url()."admin/applications_shop/manage_size_men"; ?>">
                         <button class="form-control btn button-custom pull-right">Sizing: MEN</button>  
                     </a>

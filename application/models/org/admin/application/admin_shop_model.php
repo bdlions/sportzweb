@@ -15,12 +15,14 @@ class Admin_shop_model extends Ion_auth_model
 {
     protected $app_shop_product_identity_column;
     protected $app_shop_product_color_identity_column;
+    protected $app_shop_product_feature_identity_column;
     protected $app_shop_product_size_identity_column;
     public function __construct() {
         parent::__construct();
-        $this->app_shop_product_identity_column         = $this->config->item('app_shop_product_identity_column', 'ion_auth');
-        $this->app_shop_product_color_identity_column   = $this->config->item('app_shop_product_color_identity_column', 'ion_auth');
-        $this->app_shop_product_size_identity_column    = $this->config->item('app_shop_product_size_identity_column', 'ion_auth');
+        $this->app_shop_product_identity_column             = $this->config->item('app_shop_product_identity_column', 'ion_auth');
+        $this->app_shop_product_color_identity_column       = $this->config->item('app_shop_product_color_identity_column', 'ion_auth');
+        $this->app_shop_product_feature_identity_column     = $this->config->item('app_shop_product_feature_identity_column', 'ion_auth');
+        $this->app_shop_product_size_identity_column        = $this->config->item('app_shop_product_size_identity_column', 'ion_auth');
     }
     
     // -------------------------------- Product Category Module --------------------------------------
@@ -550,5 +552,75 @@ class Admin_shop_model extends Ion_auth_model
         $this->set_message('update_product_size_successful');
         return TRUE;
     }
+    
+    
+    // -------------------------------- Product SIZE Module --------------------------------------    
+   
+    public function get_all_product_feature()
+    {
+        return $this->db->select($this->tables['app_shop_product_feature'].'.id as id,'.$this->tables['app_shop_product_feature'].'.*')
+                    ->from($this->tables['app_shop_product_feature'])
+                    ->get();
+    }
+    public function product_feature_identity_check($identity = '') {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_shop_product_feature_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_shop_product_feature']) > 0;
+    }
+    
+    public function create_product_feature($additional_data)
+    {
+        if ( array_key_exists($this->app_shop_product_feature_identity_column, $additional_data) && $this->product_feature_identity_check($additional_data[$this->app_shop_product_feature_identity_column]) )
+        {
+            $this->set_error('create_product_feature_duplicate_' . $this->app_shop_product_feature_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_shop_product_feature'], $additional_data); 
+        $this->db->insert($this->tables['app_shop_product_feature'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_product_feature_successful');
+        return (isset($id)) ? $id : FALSE;
+    }
+    
+    public function update_product_feature($id, $additional_data)
+    {
+        $feature_info = $this->get_product_feature_info($id)->row();
+        if (array_key_exists($this->app_shop_product_feature_identity_column, $additional_data) && $this->product_feature_identity_check($additional_data[$this->app_shop_product_feature_identity_column]) && $feature_info->{$this->app_shop_product_feature_identity_column} !== $additional_data[$this->app_shop_product_feature_identity_column])
+        {
+            $this->set_error('update_product_feature_duplicate_' . $this->app_shop_product_feature_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_shop_product_feature'], $additional_data);
+        $this->db->update($this->tables['app_shop_product_feature'], $data, array('id' => $id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_product_feature_fail');
+            return FALSE;
+        }
+        $this->set_message('update_product_feature_successful');
+        return TRUE;
+    }
+    
+    public function delete_product_feature($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_product_feature_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_shop_product_feature']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_product_feature_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_product_feature_successful');
+        return TRUE;
+    }
+    
     
 }

@@ -143,6 +143,8 @@ $config['tables']['app_shop_sizing_chart_men']              = 'app_shop_sizing_c
 $config['tables']['app_shop_sizing_chart_women']            = 'app_shop_sizing_chart_women';
 $config['tables']['app_shop_sizing_chart_tiny_toms']        = 'app_shop_sizing_chart_tiny_toms';
 $config['tables']['app_shop_sizing_chart_youth']            = 'app_shop_sizing_chart_youth';
+$config['tables']['app_shop_product_feature']               = 'app_shop_product_feature';
+
 
 // visitors
 $config['tables']['pages']                                  = 'pages';
@@ -194,6 +196,7 @@ $config['application_title_identity_column']            = 'title';
 //SHOP APP
 $config['app_shop_product_identity_column']             = 'title';
 $config['app_shop_product_color_identity_column']       = 'title';
+$config['app_shop_product_feature_identity_column']     = 'title';
 $config['app_shop_product_size_identity_column']        = 'title';
 
 
