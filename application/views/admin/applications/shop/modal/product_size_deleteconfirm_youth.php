@@ -4,7 +4,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/applications_shop/delete_size_men",
+                url: '<?php echo base_url(); ?>' + "admin/applications_shop/delete_size_youth",
                 data: {
                     id: $("#del_id").val()
                 },

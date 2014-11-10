@@ -24,7 +24,7 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/applications_shop/update_size_women",
+                url: '<?php echo base_url(); ?>' + "admin/applications_shop/update_size_youth",
                 data: {
                     id: $("#upd_id").val(),
                     title: $("#upd_title").val(),
@@ -44,7 +44,7 @@
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/applications_shop/get_size_info_women",
+            url: '<?php echo base_url(); ?>' + "admin/applications_shop/get_size_info_youth",
             data: {
                 id: id
             },
@@ -64,7 +64,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Update product size for WOMEN</h4>
+                <h4 class="modal-title" id="myModalLabel">Update product size for YOUTH</h4>
             </div>
             <div class="modal-body">
                 <div class="row">

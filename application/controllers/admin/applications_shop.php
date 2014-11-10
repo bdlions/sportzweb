@@ -514,7 +514,60 @@ class Applications_shop extends CI_Controller{
             $result['message'] = $this->admin_shop_library->errors_alert();
         }
         echo json_encode($result);
-        
+    }
+    
+    public function get_size_info_women()
+    {
+        $result['size_info'] = array();
+        $id = $this->input->post('id');
+        $size_info_array = $this->admin_shop_library->get_size_info_women($id)->result_array();
+        if(!empty($size_info_array))
+        {
+            $result['size_info'] = $size_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+
+    public function delete_size_women()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_shop_library->delete_size_women($id))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    public function update_size_women()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        $title = $this->input->post('title');
+        $us_ca = $this->input->post('us_ca');
+        $uk = $this->input->post('uk');
+        $eu = $this->input->post('eu');
+        $additional_data = array(
+            'title' => $title,
+            'us_ca' => $us_ca,
+            'uk' => $uk,
+            'eu' => $eu,
+            'modified_on' => now()
+        );
+        if($this->admin_shop_library->update_size_women($id, $additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     // TINY TOMS ----------------------------------
@@ -525,12 +578,167 @@ class Applications_shop extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_tinytoms", $this->data);
     }
     
+    public function create_size_tinytoms()
+    {
+        $result = array();
+        $title = $this->input->post('title');
+        $us_ca = $this->input->post('us_ca');
+        $uk = $this->input->post('uk');
+        $eu = $this->input->post('eu');
+        $additional_data = array(
+            'title' => $this->input->post('title'),
+            'us_ca' => $this->input->post('us_ca'),
+            'uk' => $this->input->post('uk'),
+            'eu' => $this->input->post('eu')
+        );
+        if($this->admin_shop_library->create_size_tinytoms($additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    public function get_size_info_tinytoms()
+    {
+        $result['size_info'] = array();
+        $id = $this->input->post('id');
+        $size_info_array = $this->admin_shop_library->get_size_info_tinytoms($id)->result_array();
+        if(!empty($size_info_array))
+        {
+            $result['size_info'] = $size_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+
+    public function delete_size_tinytoms()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_shop_library->delete_size_tinytoms($id))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    public function update_size_tinytoms()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        $title = $this->input->post('title');
+        $us_ca = $this->input->post('us_ca');
+        $uk = $this->input->post('uk');
+        $eu = $this->input->post('eu');
+        $additional_data = array(
+            'title' => $title,
+            'us_ca' => $us_ca,
+            'uk' => $uk,
+            'eu' => $eu,
+            'modified_on' => now()
+        );
+        if($this->admin_shop_library->update_size_tinytoms($id, $additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
     // YOUTH ----------------------------------
     public function manage_size_youth()
     {
         $this->data['message'] = '';
         $this->data['size_list'] = $this->admin_shop_library->get_all_sizes_youth()->result_array();
         $this->template->load($this->tmpl, "admin/applications/shop/product_sizing_youth", $this->data);
+    }
+    
+    public function create_size_youth()
+    {
+        $result = array();
+        $title = $this->input->post('title');
+        $us_ca = $this->input->post('us_ca');
+        $uk = $this->input->post('uk');
+        $eu = $this->input->post('eu');
+        $additional_data = array(
+            'title' => $this->input->post('title'),
+            'us_ca' => $this->input->post('us_ca'),
+            'uk' => $this->input->post('uk'),
+            'eu' => $this->input->post('eu')
+        );
+        if($this->admin_shop_library->create_size_youth($additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    public function get_size_info_youth()
+    {
+        $result['size_info'] = array();
+        $id = $this->input->post('id');
+        $size_info_array = $this->admin_shop_library->get_size_info_youth($id)->result_array();
+        if(!empty($size_info_array))
+        {
+            $result['size_info'] = $size_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+
+    public function delete_size_youth()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_shop_library->delete_size_youth($id))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    public function update_size_youth()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        $title = $this->input->post('title');
+        $us_ca = $this->input->post('us_ca');
+        $uk = $this->input->post('uk');
+        $eu = $this->input->post('eu');
+        $additional_data = array(
+            'title' => $title,
+            'us_ca' => $us_ca,
+            'uk' => $uk,
+            'eu' => $eu,
+            'modified_on' => now()
+        );
+        if($this->admin_shop_library->update_size_youth($id, $additional_data))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
 }

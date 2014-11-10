@@ -322,25 +322,233 @@ class Admin_shop_model extends Ion_auth_model
     // WOMEN ----------------------------------
     public function get_all_sizes_women()
     {
-        return $this->db->select($this->tables['app_shop_sizing_chart_women'].'.id as category_id,'.$this->tables['app_shop_sizing_chart_women'].'.*')
+        return $this->db->select($this->tables['app_shop_sizing_chart_women'].'.id as id,'.$this->tables['app_shop_sizing_chart_women'].'.*')
                     ->from($this->tables['app_shop_sizing_chart_women'])
                     ->get();
     }
     
-//    
+    public function create_size_women($additional_data)
+    {
+        if ( array_key_exists($this->app_shop_product_size_identity_column, $additional_data) && $this->product_color_identity_check($additional_data[$this->app_shop_product_size_identity_column]) )
+        {
+            $this->set_error('create_product_size_duplicate_' . $this->app_shop_product_size_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_shop_sizing_chart_women'], $additional_data); 
+        $this->db->insert($this->tables['app_shop_sizing_chart_women'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_product_size_successful');
+        return (isset($id)) ? $id : FALSE;
+    }
+    
+    public function size_women_identity_check($identity = '') {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_shop_product_size_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_shop_sizing_chart_women']) > 0;
+    }
+    
+    
+    public function delete_size_women($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_product_size_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_shop_sizing_chart_women']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_product_size_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_product_size_successful');
+        return TRUE;
+    }
+    
+    public function get_size_info_women($id)
+    {
+        $this->db->where($this->tables['app_shop_sizing_chart_women'].'.id', $id);
+        return $this->db->select($this->tables['app_shop_sizing_chart_women'].'.id as id,'.$this->tables['app_shop_sizing_chart_women'].'.*')
+                    ->from($this->tables['app_shop_sizing_chart_women'])
+                    ->get();
+    }
+    
+    public function update_size_women($id, $additional_data)
+    {
+        $size_info = $this->get_size_info_women($id)->row();
+        if (array_key_exists($this->app_shop_product_size_identity_column, $additional_data) && $this->size_women_identity_check($additional_data[$this->app_shop_product_size_identity_column]) && $size_info->{$this->app_shop_product_size_identity_column} !== $additional_data[$this->app_shop_product_size_identity_column])
+        {
+            $this->set_error('update_product_size_duplicate_' . $this->app_shop_product_size_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_shop_sizing_chart_women'], $additional_data);
+        $this->db->update($this->tables['app_shop_sizing_chart_women'], $data, array('id' => $id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_product_size_fail');
+            return FALSE;
+        }
+        $this->set_message('update_product_size_successful');
+        return TRUE;
+    }
+    
 //    // TINYTOSM ----------------------------------
-//    public function get_all_sizes_women()
-//    {
-//        return $this->db->select($this->tables['app_shop_sizing_chart_women'].'.id as category_id,'.$this->tables['app_shop_sizing_chart_women'].'.*')
-//                    ->from($this->tables['app_shop_sizing_chart_women'])
-//                    ->get();
-//    }
-//    
+    public function get_all_sizes_tinytoms()
+    {
+        return $this->db->select($this->tables['app_shop_sizing_chart_tiny_toms'].'.id as id,'.$this->tables['app_shop_sizing_chart_tiny_toms'].'.*')
+                    ->from($this->tables['app_shop_sizing_chart_tiny_toms'])
+                    ->get();
+    }
+    
+    public function create_size_tinytoms($additional_data)
+    {
+        if ( array_key_exists($this->app_shop_product_size_identity_column, $additional_data) && $this->product_color_identity_check($additional_data[$this->app_shop_product_size_identity_column]) )
+        {
+            $this->set_error('create_product_size_duplicate_' . $this->app_shop_product_size_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_shop_sizing_chart_tiny_toms'], $additional_data); 
+        $this->db->insert($this->tables['app_shop_sizing_chart_tiny_toms'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_product_size_successful');
+        return (isset($id)) ? $id : FALSE;
+    }
+    
+    
+    public function size_tinytoms_identity_check($identity = '') {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_shop_product_size_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_shop_sizing_chart_tiny_toms']) > 0;
+    }
+    
+    
+    public function delete_size_tinytoms($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_product_size_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_shop_sizing_chart_tiny_toms']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_product_size_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_product_size_successful');
+        return TRUE;
+    }
+    
+    public function get_size_info_tinytoms($id)
+    {
+        $this->db->where($this->tables['app_shop_sizing_chart_tiny_toms'].'.id', $id);
+        return $this->db->select($this->tables['app_shop_sizing_chart_tiny_toms'].'.id as id,'.$this->tables['app_shop_sizing_chart_tiny_toms'].'.*')
+                    ->from($this->tables['app_shop_sizing_chart_tiny_toms'])
+                    ->get();
+    }
+    
+    public function update_size_tinytoms($id, $additional_data)
+    {
+        $size_info = $this->get_size_info_tinytoms($id)->row();
+        if (array_key_exists($this->app_shop_product_size_identity_column, $additional_data) && $this->size_tinytoms_identity_check($additional_data[$this->app_shop_product_size_identity_column]) && $size_info->{$this->app_shop_product_size_identity_column} !== $additional_data[$this->app_shop_product_size_identity_column])
+        {
+            $this->set_error('update_product_size_duplicate_' . $this->app_shop_product_size_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_shop_sizing_chart_tiny_toms'], $additional_data);
+        $this->db->update($this->tables['app_shop_sizing_chart_tiny_toms'], $data, array('id' => $id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_product_size_fail');
+            return FALSE;
+        }
+        $this->set_message('update_product_size_successful');
+        return TRUE;
+    }
+    
 //    // Youth ----------------------------------
-//    public function get_all_sizes_women()
-//    {
-//        return $this->db->select($this->tables['app_shop_sizing_chart_women'].'.id as category_id,'.$this->tables['app_shop_sizing_chart_women'].'.*')
-//                    ->from($this->tables['app_shop_sizing_chart_women'])
-//                    ->get();
-//    }
+    public function get_all_sizes_youth()
+    {
+        return $this->db->select($this->tables['app_shop_sizing_chart_youth'].'.id as id,'.$this->tables['app_shop_sizing_chart_youth'].'.*')
+                    ->from($this->tables['app_shop_sizing_chart_youth'])
+                    ->get();
+    }
+    
+    public function create_size_youth($additional_data)
+    {
+        if ( array_key_exists($this->app_shop_product_size_identity_column, $additional_data) && $this->product_color_identity_check($additional_data[$this->app_shop_product_size_identity_column]) )
+        {
+            $this->set_error('create_product_size_duplicate_' . $this->app_shop_product_size_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_shop_sizing_chart_youth'], $additional_data); 
+        $this->db->insert($this->tables['app_shop_sizing_chart_youth'], $additional_data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_product_size_successful');
+        return (isset($id)) ? $id : FALSE;
+    }
+    
+    public function size_youth_identity_check($identity = '') {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_shop_product_size_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_shop_sizing_chart_youth']) > 0;
+    }
+    
+    
+    public function delete_size_youth($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_product_size_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_shop_sizing_chart_youth']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_product_size_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_product_size_successful');
+        return TRUE;
+    }
+    
+    public function get_size_info_youth($id)
+    {
+        $this->db->where($this->tables['app_shop_sizing_chart_youth'].'.id', $id);
+        return $this->db->select($this->tables['app_shop_sizing_chart_youth'].'.id as id,'.$this->tables['app_shop_sizing_chart_youth'].'.*')
+                    ->from($this->tables['app_shop_sizing_chart_youth'])
+                    ->get();
+    }
+    
+    public function update_size_youth($id, $additional_data)
+    {
+        $size_info = $this->get_size_info_youth($id)->row();
+        if (array_key_exists($this->app_shop_product_size_identity_column, $additional_data) && $this->size_youth_identity_check($additional_data[$this->app_shop_product_size_identity_column]) && $size_info->{$this->app_shop_product_size_identity_column} !== $additional_data[$this->app_shop_product_size_identity_column])
+        {
+            $this->set_error('update_product_size_duplicate_' . $this->app_shop_product_size_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_shop_sizing_chart_youth'], $additional_data);
+        $this->db->update($this->tables['app_shop_sizing_chart_youth'], $data, array('id' => $id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_product_size_fail');
+            return FALSE;
+        }
+        $this->set_message('update_product_size_successful');
+        return TRUE;
+    }
+    
 }
