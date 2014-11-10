@@ -21,6 +21,18 @@ class Service_directory_model extends Ion_auth_model {
     /*
      * This method will return all service categories
      * @Author Nazmul Hasan
+     * @Created on 10 November 2014
+     */
+    public function get_all_service_categories()
+    {
+        return $this->db->select("*")
+                    ->from($this->tables['service_category'])
+                    ->get();
+    }
+    
+    /*
+     * This method will return all service categories
+     * @Author Nazmul Hasan
      * @Created on 24th April 2014
      */
     public function get_service_categories()
