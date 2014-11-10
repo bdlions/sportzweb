@@ -1968,6 +1968,34 @@ CREATE TABLE IF NOT EXISTS `app_shop_sizing_chart_youth` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 INSERT INTO `app_shop_sizing_chart_youth` (`id`, `title`, `us_ca`, `uk`, `eu`, `approx_age`) VALUES
 (1, 'UK12.0/US11.0', '12.0', '11.0', '30.0', 'Children (5 years)');
+
+CREATE TABLE IF NOT EXISTS `app_shop_product_feature` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `category_id_list` text,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_shop_product_feature` (`id`, `title`) VALUES
+(1, 'Animal Print'),
+(2, 'Burlap'),
+(3, 'Canvas'),
+(4, 'Core'),
+(5, 'Denim'),
+(6, 'Glitter'),
+(7, 'Fleece'),
+(8, 'Knit'),
+(9, 'Pattern'),
+(10, 'Plaid'),
+(11, 'Prints and Patterns'),
+(12, 'Recyclable'),
+(13, 'Shine'),
+(14, 'Solids'),
+(15, 'Twill'),
+(16, 'Vegan'),
+(17, 'Wool'),
+(18, 'Woven');
 	
 -- user logs	
 CREATE TABLE IF NOT EXISTS `user_log` (
