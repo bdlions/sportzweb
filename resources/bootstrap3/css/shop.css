@@ -144,17 +144,37 @@ li
 }
 
 /*HOME PAGE STYLES*/
-
-.page_section_heading
+.page_section
 {
-    font-size: 26px;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    border-top: 2px solid #DDDDDD;
+    padding-top: 15px;
+}
+.page_section_subheading, .page_section_heading
+{
     line-height: 1;
     text-transform: uppercase;
-    color: #5A534C;
-    text-align: center;
     font-weight: bolder;
-    padding: 16px;
     margin-top: 10px;
+}
+
+.page_section_subheading
+{
+    text-align: left;
+    font-size: 18px;
+    color: #373533;
+    border-bottom: 1px solid #DDDDDD;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.page_section_heading
+{
+    padding: 16px;
+    text-align: center;
+    font-size: 26px;
+    color: #5A534C;
 }
 .items_page_body .item_card:hover
 {

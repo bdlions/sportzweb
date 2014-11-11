@@ -1,10 +1,10 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Create Product Feature</div>
+    <div class="panel-heading">Create Info</div>
     <div class="panel-body">
         <div class="form-background top-bottom-padding">
             <div class="row">
                 <div class ="col-md-8 margin-top-bottom">
-                    <?php echo form_open("admin/applications_shop/create_feature/", array('id' => 'form_create_feature', 'class' => 'form-horizontal')); ?>
+                    <?php echo form_open("admin/applications_shop/create_inform/", array('id' => 'form_create_inform', 'class' => 'form-horizontal')); ?>
                         <div class ="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-8"><?php echo $message; ?></div>
@@ -18,11 +18,11 @@
                             </div> 
                         </div>
                         <div class="form-group">
-                            <label for="submit_create_feature" class="col-md-6 control-label requiredField">
+                            <label for="submit_create_inform" class="col-md-6 control-label requiredField">
 
                             </label>
                             <div class ="col-md-3 pull-right">
-                                <?php echo form_input($submit_create_feature+array('class'=>'form-control button-custom')); ?>
+                                <?php echo form_input($submit_create_inform+array('class'=>'form-control button-custom')); ?>
                             </div> 
                         </div>
                     <?php echo form_close(); ?>

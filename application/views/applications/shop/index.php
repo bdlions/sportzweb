@@ -27,8 +27,8 @@
             </div>
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <div style="top: 50%" >
-                <img src="<?php echo base_url()?>resources/images/carat_tall_left.png" alt="...">
+                <div class="glyphicon-chevron-left" >
+                    <img class="" src="<?php echo base_url()?>resources/images/carat_tall_left.png" alt="...">
                     
                 </div>
             </a>

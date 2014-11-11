@@ -753,7 +753,7 @@ class Applications_shop extends CI_Controller{
     }
     public function create_feature()
     {
-        $this->form_validation->set_error_delimiters("<div style='feature:red'>", '</div>');
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
         $this->form_validation->set_rules('title', 'Color Title', 'xss_clean|required');
         if ($this->input->post('submit_create_feature'))
         {            
@@ -860,6 +860,134 @@ class Applications_shop extends CI_Controller{
         $result = array();
         $id = $this->input->post('id');
         if($this->admin_shop_library->delete_product_feature($id))
+        {
+            $result['message'] = $this->admin_shop_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_shop_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    
+    // ---------------------------------- Product Inform Module ----------------------------------------
+    
+    public function manage_inform()
+    {
+        $this->data['message'] = '';
+        $this->data['product_inform_list'] = $this->admin_shop_library->get_all_product_inform()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/shop/product_inform_list", $this->data);
+    }
+    public function create_inform()
+    {
+        $this->form_validation->set_error_delimiters("<div style='inform:red'>", '</div>');
+        $this->form_validation->set_rules('title', 'Color Title', 'xss_clean|required');
+        if ($this->input->post('submit_create_inform'))
+        {            
+            if($this->form_validation->run() == true)
+            {
+                $additional_data = array(
+                    'title' => $this->input->post('title'),
+//                    'description' => $this->input->post('description')
+                );
+                $id = $this->admin_shop_library->create_product_inform($additional_data);
+                if($id !== FALSE)
+                {
+                    $this->session->set_flashdata('message', $this->admin_shop_library->messages());
+                    redirect('admin/applications_shop/create_inform','refresh');
+                }
+                else
+                {
+                    $this->data['message'] = 'Error while creating a inform.';
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }            
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('title'),
+        );       
+        $this->data['submit_create_inform'] = array(
+            'name' => 'submit_create_inform',
+            'id' => 'submit_create_inform',
+            'type' => 'submit',
+            'value' => 'Create',
+        );
+        $this->template->load($this->tmpl, "admin/applications/shop/product_inform_create", $this->data);
+    }
+    
+    public function update_inform($inform_id = 0)
+    {
+        if(empty($inform_id))
+        {
+            redirect("admin/applications_shop","refresh");
+        }
+        $this->data['message'] = '';
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('title', 'Color Title', 'xss_clean|required');
+        if ($this->input->post('submit_update_inform'))
+        {            
+            if($this->form_validation->run() == true)
+            {
+                $additional_data = array(
+                    'title' => $this->input->post('title'),
+                    'modified_on' => now()
+                );
+                if($this->admin_shop_library->update_product_inform($inform_id, $additional_data))
+                {
+                    $this->session->set_flashdata('message', $this->admin_shop_library->messages());
+                    redirect('admin/applications_shop/update_inform/'.$inform_id,'refresh');
+                }
+                else
+                {
+                    $this->data['message'] = $this->admin_shop_library->errors();
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }            
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        $inform_info = array();
+        $inform_info_array = $this->admin_shop_library->get_product_inform_info($inform_id)->result_array();
+        if(!empty($inform_info_array))
+        {
+            $inform_info = $inform_info_array[0];
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text',
+            'value' => $inform_info['title'],
+        );
+        $this->data['submit_update_inform'] = array(
+            'name' => 'submit_update_inform',
+            'id' => 'submit_update_inform',
+            'type' => 'submit',
+            'value' => 'Update',
+        );
+        $this->data['inform_id'] = $inform_id;
+        $this->template->load($this->tmpl, "admin/applications/shop/product_inform_edit", $this->data);        
+    }
+    public function delete_inform()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_shop_library->delete_product_inform($id))
         {
             $result['message'] = $this->admin_shop_library->messages_alert();
         }

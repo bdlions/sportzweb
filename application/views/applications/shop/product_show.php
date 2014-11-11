@@ -42,23 +42,71 @@
             </div>
         </div>
     </div>
-    <div style="margin-top: 15px; border-top: 2px solid #5A534C; padding-top: 15px;">
-        <div class="col-md-6">
-                        e stitching
-            Denser EVA rubber outsole for traction
-            Perforated insole for breathability
-            Leather TOMS flag tongue logo
-        </div>
-        <div class="col-md-6">
-                        e stitching
-            Denser EVA rubber outsole for traction
-            Perforated insole for breathability
-            Leather TOMS flag tongue logoe stitching
-            Denser EVA rubber outsole for traction
-            Perforated insole for breathability
-            Leather TOMS flag tongue logo
+    <div class="page_section"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="page_section_subheading">
+                    DETAILS
+                </div>
+                e stitching
+                Denser EVA rubber outsole for traction
+                Perforated insole for breathability
+                Leather TOMS flag tongue logo
+            </div>
+            <div class="col-md-6">
+                <div class="page_section_subheading">
+                    Sizing
+                </div>
+                e stitching
+                Denser EVA rubber outsole for traction
+                Perforated insole for breathability
+                Leather TOMS flag tongue logoe stitching
+                Denser EVA rubber outsole for traction
+                Perforated insole for breathability
+                Leather TOMS flag tongue logo
+            </div>
         </div>
     </div>
+    <div class="page_section"></div>
+
+    <div class="row">
+        <div class="page_section_heading">
+            You might also like
+            <div class="row">
+                <div class="col-md-3 col-xs-3 col-sm-3">
+                    <div class="row item_card">
+                        <div class="col-md-12" >
+                            <img class="" src="<?php echo base_url() ?>resources/images/video.jpg" />
+                        </div>
+                        <div class="col-md-12" >
+                            BEST SELLERS
+                            BEST SELLERS
+                            BEST SELLERS
+                            BEST SELLERS
+                            <span>BEST SELLERS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3 col-sm-3">
+                    <div class="row item_card">
+                        <div class="col-md-12" >
+                            <img class="" src="<?php echo base_url() ?>resources/images/video.jpg" />
+                        </div>
+                        <div class="col-md-12" >
+                            BEST SELLERS
+                            BEST SELLERS
+                            BEST SELLERS
+                            BEST SELLERS
+                            <span>BEST SELLERS</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
 </div>
 <script>
     $(document).ready(function(){

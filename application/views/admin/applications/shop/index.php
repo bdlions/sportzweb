@@ -18,6 +18,11 @@
                         <button class="form-control btn button-custom pull-right">Product Features</button>  
                     </a>
                 </div>
+                <div class ="col-md-2 pull-left">
+                    <a href="<?php echo base_url()."admin/applications_shop/manage_inform"; ?>">
+                        <button class="form-control btn button-custom pull-right">Product Informations</button>  
+                    </a>
+                </div>
             </div>
             <div class="row form-group" style="padding-left: 10px; margin-top: 8px">
                 <div class ="col-md-2 pull-left">
