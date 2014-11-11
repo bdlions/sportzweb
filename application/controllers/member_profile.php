@@ -100,11 +100,11 @@ class Member_profile extends Role_Controller{
         $this->template->load("templates/business_tmpl", "followers/show", $this->data);
     }
     
-    function info($member_id = 0){
-        $this->data['basic_profile'] = $this->basic_profile->get_profile_info($member_id);
+    function info($user_id = 0){
+        $this->data['basic_profile'] = $this->basic_profile->get_profile_info($user_id);
         $this->data["gender_list"] = $this->dataprovider_model->getGenderList()->dropDownList('id', 'gender_name');
         $this->data["country_list"] = $this->dataprovider_model->getCountryList()->dropDownList('id', 'country_name');
-        $profile_info = $this->basic_profile->get_profile_info($member_id);
+        $profile_info = $this->basic_profile->get_profile_info($user_id);
 
         $this->data['first_name'] = $profile_info->first_name;
         $this->data['last_name'] = $profile_info->last_name;
@@ -171,7 +171,8 @@ class Member_profile extends Role_Controller{
         
         $this->data['selected_special_interest'] = json_encode($selected_special_interest);
         $this->data['special_interests'] = json_encode($this->special_interest->get_all_special_interests());
-        $this->template->load("templates/member_tmpl", "member/profile/info", $this->data);
+        $this->data['user_id'] = $user_id;
+        $this->template->load(null, "member/profile/info", $this->data);
     }
     
     
