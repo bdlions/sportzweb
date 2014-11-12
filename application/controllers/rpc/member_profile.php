@@ -7,8 +7,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'jsonRPCServer.php';
 
-//class Member_profile extends JsonRPCServer {
-class Member_profile extends CI_Controller{
+class Member_profile extends JsonRPCServer {
+//class Member_profile extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -32,7 +32,7 @@ class Member_profile extends CI_Controller{
      * @param $is_myself, 1 or 0 based on user id is mine or not
      * @Author Nazmul on 11th November 2014
      */
-    function show($user_id, $is_myself)
+    function show($user_id = 0, $is_myself = 1)
     {
         $response = array();
         $response['profile_type'] = PROFILE_NON_FOLLOWER;
@@ -51,8 +51,8 @@ class Member_profile extends CI_Controller{
         
         $response['status_or_comment_in'] = STATUS_POSTED_IN_BASIC_PROFILE;
         $response['basic_profile'] = $this->basic_profile->get_profile_info($user_id);
-        echo json_encode($response);
-        //return json_encode($response);
+        //echo json_encode($response);
+        return json_encode($response);
     }
     
     /*
