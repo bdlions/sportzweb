@@ -25,5 +25,23 @@ class Shop extends Role_Controller{
         $this->data['message'] = '';        
         $this->template->load(null,'applications/shop/product_show', $this->data);
     }
+    public function shopping_bag()
+    {
+        $this->data['message'] = '';        
+        $this->template->load(null, "applications/shop/shopping_bag", $this->data);
+    }
+    public function items_by_category()
+    {
+        $this->data['message'] = '';        
+        $this->template->load(null, "applications/shop/items_by_category", $this->data);
+    }
+    
+    //////////////////
+    
+    
+    function run_toms_shoes()
+    {
+        $this->template->load(null, "shop/toms_shoes", $this->data);
+    }
 }
 

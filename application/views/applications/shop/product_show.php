@@ -17,9 +17,9 @@
             <div class="page_section_heading" style="margin-top: 50px">
                 Brown Chambray Men's Brogues
             </div>
-            <div>
-                <span style="color: limegreen; font-size: 25px; font-weight: bolder;" class="pull-left">
-                    content price
+            <div style="display: inline-block; width: 100%">
+                <span style="color: #5ACB89; font-size: 25px; font-weight: bolder;" class="pull-left">
+                    £39.99
                 </span>
                 <div style="display: inline-block; padding-top: 7px; float: right">
                     <img style="margin: 2px;"src="<?php echo base_url()?>resources/images/vote_star_gray_32.png"/>
@@ -27,11 +27,7 @@
                     <img style="margin: 2px;"src="<?php echo base_url()?>resources/images/vote_star_gray_32.png"/>
                 </div>
             </div>
-            <div>
-                test
-            </div>
-            
-            <div style="border: 2px solid #5A534C; border-radius: 5px">
+            <div class="cart_dropdown">
                 <select>
                     <option value="">asdasc</option>
                     <option value="">zxczxc</option>
@@ -39,6 +35,27 @@
                     <option value="">cazscz</option>
                     <option value="">zxczxc</option>
                 </select>
+            </div>
+            <div class="cart_dropdown">
+                <select>
+                    <option value="">asdasc</option>
+                    <option value="">zxczxc</option>
+                    <option value="">qweqwe</option>
+                    <option value="">cazscz</option>
+                    <option value="">zxczxc</option>
+                </select>
+            </div>
+            <div class="cart_dropdown">
+                <select style="width: 20%; border: 2px solid #5ACB89; float: left">
+                    <option value="">1</option>
+                    <option value="">zxczxc</option>
+                    <option value="">qweqwe</option>
+                    <option value="">cazscz</option>
+                    <option value="">zxczxc</option>
+                </select>
+                <div class="add_to_cart">
+                    Add to cart
+                </div>                
             </div>
         </div>
     </div>
@@ -73,7 +90,7 @@
     <div class="row">
         <div class="page_section_heading">
             You might also like
-            <div class="row">
+            <div class="row" style="padding-top: 30px">
                 <div class="col-md-3 col-xs-3 col-sm-3">
                     <div class="row item_card">
                         <div class="col-md-12" >

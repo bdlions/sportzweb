@@ -882,14 +882,15 @@ class Applications_shop extends CI_Controller{
     public function create_inform()
     {
         $this->form_validation->set_error_delimiters("<div style='inform:red'>", '</div>');
-        $this->form_validation->set_rules('title', 'Color Title', 'xss_clean|required');
+        $this->form_validation->set_rules('title', 'Product Title', 'xss_clean|required');
+        $this->form_validation->set_rules('details_editortext', 'Description', 'xss_clean|required');
         if ($this->input->post('submit_create_inform'))
         {            
             if($this->form_validation->run() == true)
             {
                 $additional_data = array(
                     'title' => $this->input->post('title'),
-//                    'description' => $this->input->post('description')
+                    'details' => $this->input->post('details_editortext')
                 );
                 $id = $this->admin_shop_library->create_product_inform($additional_data);
                 if($id !== FALSE)
@@ -917,6 +918,12 @@ class Applications_shop extends CI_Controller{
             'type' => 'text',
             'value' => $this->form_validation->set_value('title'),
         );       
+        $this->data['details'] = array(
+            'name' => 'details',
+            'id' => 'details',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('details'),
+        );       
         $this->data['submit_create_inform'] = array(
             'name' => 'submit_create_inform',
             'id' => 'submit_create_inform',
@@ -935,12 +942,14 @@ class Applications_shop extends CI_Controller{
         $this->data['message'] = '';
         $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
         $this->form_validation->set_rules('title', 'Color Title', 'xss_clean|required');
+        $this->form_validation->set_rules('details_editortext', 'Description', 'xss_clean|required');
         if ($this->input->post('submit_update_inform'))
         {            
             if($this->form_validation->run() == true)
             {
                 $additional_data = array(
                     'title' => $this->input->post('title'),
+                    'details' => $this->input->post('details_editortext'),
                     'modified_on' => now()
                 );
                 if($this->admin_shop_library->update_product_inform($inform_id, $additional_data))
@@ -974,12 +983,21 @@ class Applications_shop extends CI_Controller{
             'type' => 'text',
             'value' => $inform_info['title'],
         );
+        $this->data['details'] = array(
+            'name' => 'details',
+            'id' => 'details',
+            'type' => 'text',
+            'value' => html_entity_decode(html_entity_decode($inform_info['details'])),
+        );       
         $this->data['submit_update_inform'] = array(
             'name' => 'submit_update_inform',
             'id' => 'submit_update_inform',
             'type' => 'submit',
             'value' => 'Update',
         );
+        
+//        var_dump($this->data);
+//        exit();
         $this->data['inform_id'] = $inform_id;
         $this->template->load($this->tmpl, "admin/applications/shop/product_inform_edit", $this->data);        
     }
