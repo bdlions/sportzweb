@@ -48,15 +48,12 @@ class App_xstream_banter extends JsonRPCServer {
     
     /*
      * This method will return all tournaments of a sports
+     * @param $sports_id, sports id
      * @Author Nazmul on 29th October 2014
      */
-    public function get_all_tournaments($sports_data = '')
+    public function get_all_tournaments($sports_id = 0)
     {
         $response = array();
-        $data = json_decode($sports_data);
-        /*$data = new stdClass();
-        $data->id = 1;*/
-        $sports_id = $data->id;
         $tournament_list = $this->xstream_banter_library->get_all_tournaments($sports_id)->result_array();
         $response['tournament_list'] = $tournament_list;
         //print_r(json_encode($response));
@@ -67,13 +64,9 @@ class App_xstream_banter extends JsonRPCServer {
      * This method will return all matches of a tournament of current date
      * @Author Nazmul on 29th October 2014
      */
-    public function get_all_matches($tournament_data = '')
+    public function get_all_matches($tournament_id = 0)
     {
         $response = array();
-        $data = json_decode($tournament_data);
-        /*$data = new stdClass();
-        $data->id = 1;*/
-        $tournament_id = $data->id;
         $current_date = $this->utils->get_current_date_yyyymmdd();
         $match_list = $this->xstream_banter_library->get_all_matches($tournament_id, $current_date)->result_array();
         $response['match_list'] = $match_list;
@@ -85,26 +78,22 @@ class App_xstream_banter extends JsonRPCServer {
      * This method will create a new chat room of a match under a user
      * @Author Nazmul on 29th October 2014
      */
-    public function create_chat_rooom($match_data = '')
+    public function create_chat_rooom($match_id = 0, $user_id = 0)
     {
         $result = array();
-        $data = json_decode($match_data);
-        $data = new stdClass();
-        $data->match_id = 1;
-        $data->user_id = 4;
         
         $group_access_code = $this->utils->generateRandomString(10);
         $result['group_access_code'] = $group_access_code;
         
         $additional_data = array(
             'group_access_code' => $group_access_code,
-            'match_id' => $data->match_id,
-            'user_id' => $data->user_id
+            'match_id' => $match_id,
+            'user_id' => $user_id
         );
         $xb_chat_room_id = $this->xstream_banter_library->create_chat_room($additional_data);
         $result['xb_chat_room_id'] = $xb_chat_room_id;
         
-        $response = array_merge($result, $this->process_chat_room_map($data->match_id));
+        $response = array_merge($result, $this->process_chat_room_map($match_id));
         //print_r(json_encode($response));
         return json_encode($response);
     }
@@ -113,10 +102,11 @@ class App_xstream_banter extends JsonRPCServer {
      * This method will store chat room mapping of a user
      * @Author Nazmul on 29th October 2014
      */
-    function store_chat_room_map($map_data = '')
+    function store_chat_room_map()
     {
         $result = array();
-        $data = json_decode($map_data);
+        $xb_chat_room_id = 12;
+        /*$data = json_decode($map_data);
         $data = new stdClass();
         $data->xb_chat_room_id = 12;
         $data->team_id = 2;
@@ -128,8 +118,8 @@ class App_xstream_banter extends JsonRPCServer {
             'created_on' => now()
         );
         $this->xstream_banter_library->store_chat_room_mapping($additional_data);
-        $result['xb_chat_room_id'] = $data->xb_chat_room_id;
-        $response = array_merge($result, $this->process_access_room($data->xb_chat_room_id));
+        $result['xb_chat_room_id'] = $data->xb_chat_room_id;*/
+        $response = array_merge($result, $this->process_access_room($xb_chat_room_id));
         //print_r(json_encode($response));
         return json_encode($response);
     }
@@ -138,21 +128,20 @@ class App_xstream_banter extends JsonRPCServer {
      * This method will return previously accessed room code of a match of a user
      * @Author Nazmul on 29th October 2014
      */
-    function join_chat_room($room_data = '')
+    function join_chat_room($match_id = 0, $user_id = 0)
     {
         $response = array();
-        $data = json_decode($room_data);
-        $data = new stdClass();
-        $data->match_id = 1;
-        $data->user_id = 4;
+        //$room_data = '[{"user_id":4,"match_id":"1"}]';
+        //$data = json_decode($room_data);
+        //$data = $data[0];
         $match_info = array();
-        $match_info_array = $this->xstream_banter_library->get_match($data->match_id)->result_array();
+        $match_info_array = $this->xstream_banter_library->get_match($match_id)->result_array();
         if(!empty($match_info_array))
         {
             $match_info = $match_info_array[0];
         }
         $response['match_info'] = $match_info;
-        $response['previous_chat_rooms'] = $this->xstream_banter_library->previous_joined_chat_rooms($data->match_id,$data->user_id)->result_array();
+        $response['previous_chat_rooms'] = $this->xstream_banter_library->previous_joined_chat_rooms($match_id,$user_id)->result_array();
         //print_r(json_encode($response));
         return json_encode($response);
     }
