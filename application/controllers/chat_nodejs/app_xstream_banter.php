@@ -34,6 +34,7 @@ class App_xstream_banter extends CI_Controller{
     function store_chat_message()
     {   
         $response = array();
+        $updated_message_info = array();
         $message_info = json_decode($this->input->post('messageInfo'));        
         $user_id = $message_info->userId;
         $xb_chat_room_id = $message_info->roomId;
@@ -42,17 +43,20 @@ class App_xstream_banter extends CI_Controller{
             'message' => $message
         );
         $this->xstream_banter_library->store_chat_room_message($xb_chat_room_id, $user_id, $data);
-        $chat_room_message_list = array();
+        //$chat_room_message_list = array();
         $use_chat_room_map_info_array = $this->xstream_banter_library->get_user_chat_room_map_info($xb_chat_room_id, $user_id)->result_array();
         if(!empty($use_chat_room_map_info_array))
         {
-            $message_info = $use_chat_room_map_info_array[0];
-            $message_info['message'] = $message;
-            $message_info['time'] = $this->utils->get_unix_to_human_time_xb_chat_room(now());
-            $chat_room_message_list[] = $message_info;
+            $updated_message_info['userId'] =  $user_id;
+            $updated_message_info['roomId'] =  $xb_chat_room_id;
+            $updated_message_info['message'] =  $message;
+            $updated_message_info = array_merge($updated_message_info, $use_chat_room_map_info_array[0]);
+            //$message_info['message'] = $message;
+            $updated_message_info['time'] = $this->utils->get_unix_to_human_time_xb_chat_room(now());
+            //$chat_room_message_list[] = $message_info;
         }
         
-        $response['chat_room_message_list'] = $chat_room_message_list;
+        $response['messageInfo'] = $updated_message_info;
         echo json_encode($response);
     }
     
