@@ -53,7 +53,12 @@ class App_healthy_recipe extends JsonRPCServer {
         return json_encode($response);
     }
     
-    function get_recipe_info($recipe_id)
+    /*
+     * This method will return recipe info
+     * @param $recipe_id, recipe id
+     * @Author Nazmul
+     */
+    function get_recipe_info($recipe_id = 0)
     {
         $result = array();
         $recipe_info = array();
@@ -63,6 +68,9 @@ class App_healthy_recipe extends JsonRPCServer {
             $recipe_info = $recipe_info_array[0];
         }
         $result['recipe_info'] = $recipe_info;
+        $recipe_comments_array = $this->healthy_recipes_library->get_all_comments($recipe_id);
+        $result['comment_list'] = $recipe_comments_array;
+        //echo json_encode($result);
         return json_encode($result);
-    }
+    }    
 }

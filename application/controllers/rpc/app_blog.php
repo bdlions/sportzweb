@@ -7,8 +7,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'jsonRPCServer.php';
 
-class App_blog extends JsonRPCServer {
-//class App_blog extends CI_Controller{
+//class App_blog extends JsonRPCServer {
+class App_blog extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -99,7 +99,7 @@ class App_blog extends JsonRPCServer {
      * @param $blog_id, blog id
      * @Author Nazmul on 3rd November 2014
      */
-    function get_blog_info($blog_id)
+    function get_blog_info($blog_id = 0)
     {
         $result = array();
         $blog_info = array();
@@ -113,8 +113,9 @@ class App_blog extends JsonRPCServer {
             //$blog_info['category_id_list'] = $this->blog_app_library->get_category_id_list_of_blog($blog_info['blog_id']);
         }
         $result['blog_info'] = $blog_info;
-        //echo(json_encode($result));
-        return json_encode($result);
+        $result['comment_list'] = $this->blog_app_library->get_all_comments($blog_id);
+        echo(json_encode($result));
+        //return json_encode($result);
     }
     
     /*

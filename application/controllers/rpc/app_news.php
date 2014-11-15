@@ -174,6 +174,9 @@ class App_news extends JsonRPCServer {
         $result = array();
         $news_info = $this->news_app_library->get_news_info($news_id);
         $result['news_info'] = $news_info;
+        $comment_list = $this->news_app_library->get_all_comments($news_id);
+        $result['comment_list'] = $comment_list;
+        //echo json_encode($result);
         return json_encode($result);
     }
 }

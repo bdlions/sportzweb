@@ -102,23 +102,17 @@ class App_xstream_banter extends JsonRPCServer {
      * This method will store chat room mapping of a user
      * @Author Nazmul on 29th October 2014
      */
-    function store_chat_room_map()
+    function store_chat_room_map($user_id = 0, $xb_chat_room_id = 0 , $team_id = 0)
     {
         $result = array();
-        $xb_chat_room_id = 12;
-        /*$data = json_decode($map_data);
-        $data = new stdClass();
-        $data->xb_chat_room_id = 12;
-        $data->team_id = 2;
-        $data->user_id = 4;
         $additional_data = array(
-            'xb_chat_room_id' => $data->xb_chat_room_id,
-            'team_id' => $data->team_id,
-            'user_id' => $data->user_id,
+            'xb_chat_room_id' => $xb_chat_room_id,
+            'team_id' => $team_id,
+            'user_id' => $user_id,
             'created_on' => now()
         );
         $this->xstream_banter_library->store_chat_room_mapping($additional_data);
-        $result['xb_chat_room_id'] = $data->xb_chat_room_id;*/
+        $result['xb_chat_room_id'] = $xb_chat_room_id;
         $response = array_merge($result, $this->process_access_room($xb_chat_room_id));
         //print_r(json_encode($response));
         return json_encode($response);
@@ -146,24 +140,20 @@ class App_xstream_banter extends JsonRPCServer {
         return json_encode($response);
     }
     
-    function enter_chat_room($room_data = '')
+    function enter_chat_room($group_access_code = '', $user_id = 0)
     {
         $response = array();
         $result = array();
-        $data = json_decode($room_data);
-        $data = new stdClass();
-        $data->group_access_code = 'AqNt4nqq6J';
-        $data->user_id = 4;
-        
-        $chat_room_info_array = $this->xstream_banter_library->get_chat_room_info(0, $data->group_access_code)->result_array();
+        $chat_room_info_array = $this->xstream_banter_library->get_chat_room_info(0, $group_access_code)->result_array();
         if(!empty($chat_room_info_array))
         {
             $char_room_info = $chat_room_info_array[0];
+            $result['chat_room_id'] = $char_room_info['id'];
             //check whether team is selected or not
-            if($this->xstream_banter_library->is_chat_room_mapping_stored($char_room_info['id'], $data->user_id))
+            if($this->xstream_banter_library->is_chat_room_mapping_stored($char_room_info['id'], $user_id))
             {
                 $result['room_map_exists'] = 1;
-                $result['group_access_code'] = $data->group_access_code;
+                $result['group_access_code'] = $group_access_code;
                 $response = array_merge($result, $this->process_access_room($char_room_info['id']));
             }
             else
