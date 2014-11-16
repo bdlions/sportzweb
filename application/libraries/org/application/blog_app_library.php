@@ -342,6 +342,98 @@ class Blog_app_library {
         $this->blog_app_model->update_blog_categroy($blog_category_id, $additional_data);
     }
     
+    /*
+     * This method will return blog category id list of a blog
+     * @param $blog_id , blog id
+     * @Author Nazmul on 10th November 2014
+     */
+    public function get_blog_category_id_list_of_blog($blog_id)
+    {
+        $blog_category_id_list = array();
+        $blog_category_list_array = $this->blog_app_model->get_all_blog_categories()->result_array();
+        foreach ($blog_category_list_array as $blog_category_info) {            
+            $blog_list_array = json_decode($blog_category_info['blog_list']);
+            foreach ($blog_list_array as $blog_info) {
+                if($blog_info->blog_id == $blog_id){
+                    if(!in_array($blog_category_info['id'], $blog_category_id_list))
+                    {
+                        $blog_category_id_list[] = $blog_category_info['id'];
+                    }
+                }
+            }
+        }
+        return $blog_category_id_list;
+    }
+    
+    /*
+     * This method will store blog id in blog category table
+     * @param $blog_id, blog id
+     * @param $category_id_list, blog category id list
+     * @Author Nazmul on 10th November 2014
+     */
+    public function add_blog_under_blog_category($blog_id, $category_id_list)
+    {
+        $blog_category_list = array();
+        $blog_category_list_array = $this->blog_app_model->get_all_blog_categories()->result_array();
+        foreach ($blog_category_list_array as $blog_category_info) {            
+            if(in_array($blog_category_info['id'], $category_id_list))
+            {
+                $is_blog_id_exists = false;
+                $blog_list_array = json_decode($blog_category_info['blog_list']);
+                foreach ($blog_list_array as $blog_info) {
+                    if($blog_info->blog_id == $blog_id){
+                        $is_blog_id_exists = true;
+                    }
+                }
+                if(!$is_blog_id_exists)
+                {
+                    $blog_info = new stdClass();
+                    $blog_info->blog_id = $blog_id;
+                    $blog_list_array[] = $blog_info;
+                }
+                $blog_category_info = array(
+                    'id' => $blog_category_info['id'],
+                    'blog_list' => json_encode($blog_list_array)
+                );
+                $blog_category_list[] = $blog_category_info;
+            }            
+        }
+        if(!empty($blog_category_list))
+        {
+            return $this->blog_app_model->update_blog_categories($blog_category_list);
+        }    
+        return false;
+    }
+    
+    /*
+     * This method will remove blog id from all locations of blog category table
+     * @param $blog_id, blog id
+     * @Author Nazmul on 10th November 2014
+     */
+    public function remove_blog_from_blog_category($blog_id)
+    {
+        $blog_category_list = array();
+        $blog_category_list_array = $this->blog_app_model->get_all_blog_categories()->result_array();
+        foreach ($blog_category_list_array as $blog_category_info) {            
+            $new_blog_list = array();
+            $blog_list_array = json_decode($blog_category_info['blog_list']);
+            foreach ($blog_list_array as $blog_info) {
+                if($blog_info->blog_id != $blog_id){
+                    $new_blog_list[] = $blog_info;
+                }
+            }
+            $blog_category_info = array(
+                'id' => $blog_category_info['id'],
+                'blog_list' => json_encode($new_blog_list)
+            );
+            $blog_category_list[] = $blog_category_info;           
+        }
+        if(!empty($blog_category_list))
+        {
+            return $this->blog_app_model->update_blog_categories($blog_category_list);
+        }    
+        return false;
+    }
     
     // written by omar faruk
     public function get_all_category_of_this_blog($blog_id) {

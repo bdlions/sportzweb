@@ -20,6 +20,21 @@ class Blog_app_model extends Ion_auth_model {
     }
     
     /*
+     * This method will update multiple blog categories
+     * @param $data, array of updated data
+     * @Autor Nazmul on 10th November 2014
+     */
+    public function update_blog_categories($data)
+    {
+        if(!empty($data))
+        {
+            $this->db->update_batch($this->tables['blog_category'], $data, 'id');
+            return true;
+        }
+        return false;
+    }
+    
+    /*
      * This method will return blog list
      * @param $blog_id_list, list of blog ids
      * @Author Nazmul
@@ -59,13 +74,17 @@ class Blog_app_model extends Ion_auth_model {
                     ->get();
     }
     
+    /*
+     * This method will create a new blog by user
+     * @param $data, blog data
+     * @Author Nazmul on 11th November 2014
+     */
     public function create_blog($data)
     {
+        $data['created_on'] = now();
         $data = $this->_filter_data($this->tables['blogs'], $data);
-        $this->db->insert($this->tables['blogs'],$data);
-    
-        $id = $this->db->insert_id();
-        
+        $this->db->insert($this->tables['blogs'],$data);    
+        $id = $this->db->insert_id();        
         return isset($id)?$id:False;
     }
     
@@ -349,6 +368,7 @@ class Blog_app_model extends Ion_auth_model {
     
     public function update_blog($blog_id,$data)
     {
+        $data['modified_on'] = now();
         $data = $this->_filter_data($this->tables['blogs'], $data);
         
         $this->db->update($this->tables['blogs'],$data,array('id' => $blog_id));
@@ -398,6 +418,10 @@ class Blog_app_model extends Ion_auth_model {
     }
     
     // --------------------------------Mobile app module -----------------------------------
+    /*
+     * This method will return all blog categories 
+     * @Author Nazmul on 10 November 2014
+     */
     public function get_all_blog_categories()
     {
         return $this->db->select("*")

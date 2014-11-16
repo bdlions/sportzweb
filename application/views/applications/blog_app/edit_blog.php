@@ -111,28 +111,34 @@ window.onload = function()
                         </label>
                         <div class ="col-md-9">
                             <?php
-                                if(!empty($category_list)){
-                                    $total_length = count($category_list);
-                                    for ($i = 1; $i <= $total_length; ) {
+                                $counter = 0;
+                                $tag_completed = true;
+                                foreach($blog_category_list as $blog_category){
+                                    if($counter % NO_OF_COLLUMN == 0)
+                                    {
                                         echo '<div class="row">';
-                                        for($j = $i; $j < ($i + NO_OF_COLLUMN) && ($j<=$total_length) ; $j++ ){
-                                            echo '<div class="col-md-4">';
-
-                                            if($category_list[$j]['checked'] == 1)
-                                            {
-                                                echo '<input checked="checked" class="category_id" name="category_name[]" type="checkbox" id="'.$category_list[$j]["id"].'" value="'.$category_list[$j]["id"].'"/>';
-                                            } else
-                                            {
-                                                echo '<input class="category_id" name="category_name[]" type="checkbox" id="'.$category_list[$j]["id"].'" value="'.$category_list[$j]["id"].'"/>';
-                                            }
-
-                                            echo '<label style="padding-left:10px;" for="type" class=" control-label requiredField">'.$category_list[$j]["title"].'</label>';
-                                            echo "</div>";
-                                        }
-                                        $i = $j;
-                                        echo "</div>";
+                                        $tag_completed = false;
                                     }
-                                }  
+                                    $checked = "";
+                                    if(in_array($blog_category['id'], $blog_category_id_list_of_blog))
+                                    {
+                                        $checked = 'checked="checked"';
+                                    }
+                                    echo '<div class="col-md-4">';
+                                    echo '<input class="category_id" '.$checked.' name="category_name[]" type="checkbox" id="'.$blog_category["id"].'" value="'.$blog_category["id"].'"/>';
+                                    echo '<label style="padding-left:10px;" for="type" class=" control-label requiredField">'.$blog_category["title"].'</label>';
+                                    echo "</div>";
+                                    if(($counter+1) % NO_OF_COLLUMN == 0)
+                                    {
+                                        echo '</div>';
+                                        $tag_completed = true;
+                                    }
+                                    $counter++;
+                                }
+                                if($tag_completed == false)
+                                {
+                                    echo '</div>';
+                                }
                             ?>
                         </div>
                     </div>
