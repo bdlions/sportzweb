@@ -1818,6 +1818,25 @@ CREATE TABLE IF NOT EXISTS `app_sp_configure_homepage` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 ALTER TABLE `app_sp_configure_homepage`
     ADD CONSTRAINT `fk_app_sp_configure_homepage_sports1` FOREIGN KEY(`sports_id`) REFERENCES `app_sp_sports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- gympro application
+CREATE TABLE IF NOT EXISTS `app_gympro_account_type` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `price` varchar(200),
+  `total_user` int(11) NOT NULL DEFAULT 0,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE TABLE IF NOT EXISTS `app_gympro_clients` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(200),
+  `last_name` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+	
 -- Visitor log
 CREATE TABLE `pages`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
