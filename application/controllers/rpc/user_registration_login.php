@@ -7,9 +7,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'jsonRPCServer.php';
 
-class User_registration_login extends JsonRPCServer {
+//class User_registration_login extends JsonRPCServer {
 
-//class User_registration_login extends CI_Controller {
+class User_registration_login extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -24,6 +24,8 @@ class User_registration_login extends JsonRPCServer {
         //$this->load->library("profile");
         //$this->load->library('org/utility/Utils');
         // Load MongoDB library instead of native db driver if required
+        $this->load->library("org/profile/business/business_profile_library");
+        $this->load->model("dataprovider_model");
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->library('mongo_db') :
                         $this->load->database();
@@ -114,6 +116,23 @@ class User_registration_login extends JsonRPCServer {
         );
 
         return json_encode($output);
+    }
+    
+    function business_registration() {
+       $country_list = $this->dataprovider_model->getCountryList()->dropDownList('id', 'country_name');
+       //echo '<pre/>';print_r($country_list);exit('here');
+       //$business_profile_types = $this->business_profile_library->get_business_types_profile();
+       //echo '<pre/>';print_r($business_profile_types);exit('here');
+       $msg = "MESSAGE";       
+        $output = array(
+            'country_list' => $country_list,
+            'msg' => $msg
+        );
+
+        
+        return json_encode($output);
+        //return "afsdf";
+        //return json_decode($data);
     }
 
 }

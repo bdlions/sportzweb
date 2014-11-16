@@ -331,4 +331,23 @@ class App_comments extends JsonRPCServer {
             $this->blog_app_library->remove_like($comment_id, $user_id);
         }
     }
+	
+	public function share_recipe ($application_id = 0, $item_id = 0, $user_id = 0) {
+		if($application_id == APPLICATION_HEALTYY_RECIPES_ID)
+        {
+           
+        }
+        else if($application_id == APPLICATION_SERVICE_DIRECTORY_ID)
+        {
+            
+        }
+        else if($application_id == APPLICATION_NEWS_APP_ID)
+        {
+           
+        }
+        else if($application_id == APPLICATION_BLOG_APP_ID)
+        {
+            
+        }
+	}
 }

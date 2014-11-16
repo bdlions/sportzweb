@@ -75,7 +75,7 @@ class Member_profile extends JsonRPCServer {
             }
         }
         $response['selected_special_interest'] = $selected_special_interest;
-        echo json_encode($response);
-        //return json_encode($response);
+        //echo json_encode($response);
+        return json_encode($response);
     }
 }

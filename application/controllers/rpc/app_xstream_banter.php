@@ -125,9 +125,7 @@ class App_xstream_banter extends JsonRPCServer {
     function join_chat_room($match_id = 0, $user_id = 0)
     {
         $response = array();
-        //$room_data = '[{"user_id":4,"match_id":"1"}]';
-        //$data = json_decode($room_data);
-        //$data = $data[0];
+
         $match_info = array();
         $match_info_array = $this->xstream_banter_library->get_match($match_id)->result_array();
         if(!empty($match_info_array))

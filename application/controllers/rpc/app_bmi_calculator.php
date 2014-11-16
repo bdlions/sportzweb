@@ -30,4 +30,5 @@ class App_bmi_calculator extends JsonRPCServer {
         //echo json_encode($response);
         return json_encode($response);
     }    
+
 }

@@ -32,6 +32,7 @@ class Business_profile extends JsonRPCServer {
         $response = array();
         $response['country_list'] = $this->business_profile_library->get_country_list()->result_array();
         $response['business_profile_type_list'] = $this->business_profile_library->get_business_profile_type_list();
+        //echo json_encode($response);exit;
         return json_encode($response);
     }
     

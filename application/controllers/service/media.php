@@ -10,7 +10,7 @@ class Media extends CI_Controller {
         $this->load->library('Basic_profile');
         $this->load->library('ion_auth');
         $this->load->library('org/utility/Utils');
-
+		$this->load->library('org/application/blog_app_library');
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->library('mongo_db') :
@@ -74,7 +74,8 @@ class Media extends CI_Controller {
      */
     public function create_blog_with_picture()
     {
-        $result = array();
+        $response = array();
+		$result = array();
         $user_id = $this->input->post('user_id');
         if (isset($_FILES["userfile"])) {
             $file_info = $_FILES["userfile"];
@@ -96,13 +97,16 @@ class Media extends CI_Controller {
             $blog_id = $this->blog_app_library->create_blog($data);
             //based on the structure of your category id, update blog category table
             //$this->blog_app_library->blog_category_list_update($blog_category_id,$blog_id);
+			$response['blog_id'] = $blog_id; 
+			$response['status'] = "1";
+			$response['message'] = 'Blog is created successfully';
         } 
         else
         {
-            $result['status'] = "0";
-            $result['message'] = 'Please select and image to upload';
+            $response['status'] = "0";
+            $response['message'] = 'Please select and image to upload';
         }
-        echo json_encode($result); 
+        echo json_encode($response); 
     }
 
 }
