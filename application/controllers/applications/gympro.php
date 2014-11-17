@@ -7,6 +7,7 @@ class Gympro extends Role_Controller{
     function __construct() {
         parent::__construct();
         $this->lang->load('auth');
+        $this->load->library('org/application/gympro_library');
         $this->load->helper('language');
         $this->load->helper('url');
         if (!$this->ion_auth->logged_in()) {
@@ -21,14 +22,20 @@ class Gympro extends Role_Controller{
         $this->manage_clients();
         
     }
-    
+    //----------------------------------- Client Module --------------------------------//
     public function manage_clients()
     {
         $this->data['message'] = '';        
-        $this->template->load(null,'applications/gympro/clients', $this->data);
+        $this->template->load(null,'applications/gympro/client/clients', $this->data);
         
     }
     
+    public function create_client()
+    {
+        $this->data['message'] = '';        
+        $this->template->load(null,'applications/gympro/client/create_client', $this->data);
+    }
+    //----------------------------------- Group Module ---------------------------------//
     public function manage_groups()
     {
         $this->data['message'] = '';        
@@ -51,9 +58,15 @@ class Gympro extends Role_Controller{
      * This method will load account info of a client
      * @Author Nazmul on 17th November 2014
      */
-    public function account()
-    {
-        $this->data['message'] = '';        
+    public function account($client_id = 0)
+    {        
+        $account_type_list = array();
+        $account_types_array = $this->gympro_library->get_all_account_types()->result_array();
+        foreach($account_types_array as $account_type)
+        {
+            $account_type_list[$account_type['account_type_id']] =  $account_type['title'];
+        }
+        $this->data['account_type_list'] = $account_type_list;  
         $this->template->load(null,'applications/gympro/account', $this->data);
     }
     /*

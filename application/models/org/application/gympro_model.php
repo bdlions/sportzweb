@@ -20,7 +20,9 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_account_types()
     {
-        
+        return $this->db->select($this->tables['app_gympro_account_types'].'.id as account_type_id,'.$this->tables['app_gympro_account_types'].'.*')
+                    ->from($this->tables['app_gympro_account_types'])
+                    ->get();
     }
     
     //------------------------------------- Preference Module -------------------------------//
