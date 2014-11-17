@@ -95,22 +95,94 @@ class Applications_gympro extends CI_Controller{
         $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/index", $this->data);
     }    
+    
+//    ACCOUNT TYPE
     public function manage_account_types()
     {
+        $this->data['account_type_list'] = $this->admin_gympro_library->get_all_account_types()->result_array();
         $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_account_types", $this->data);
     }
     public function get_account_type_info()
     {
         $result['account_type_info'] = array();
-        $category_id = $this->input->post('category_id');
-        $account_type_info_array = $this->admin_shop_library->get_account_type_info($category_id)->result_array();
+        $account_type_id = $this->input->post('id');
+        $account_type_info_array = $this->admin_gympro_library->get_account_type_info($account_type_id)->result_array();
         if(!empty($account_type_info_array))
         {
             $result['account_type_info'] = $account_type_info_array[0];
         }
         echo json_encode($result);
     }
-    
+    public function delete_account_type()
+    {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if($this->admin_gympro_library->delete_account_type($delete_id))
+        {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    public function update_account_type()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        $title = $this->input->post('title');
+        $price = $this->input->post('price');
+        $total_user = $this->input->post('total_user');
+        $additional_data = array(
+            'title' => $title,
+            'price' => $price,
+            'total_user' => $total_user,
+            'modified_on' => now()
+        );
+        if($this->admin_gympro_library->update_account_type($id, $additional_data))
+        {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    public function create_account_type()
+    {
+        $result = array();
+        $title = $this->input->post('title');
+        $price = $this->input->post('price');
+        $total_user = $this->input->post('total_user');
+        $additional_data = array(
+            'title' => $title,
+            'price' => $price,
+            'total_user' => $total_user
+        );
+        if($this->admin_gympro_library->create_account_type($additional_data))
+        {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    // ----------------------------------- Preferences ---------------------------//
+    public function manage_preferences()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/preferences/index", $this->data);
+    }
+    // ----------------------------------- Clients -------------------------------//
+    public function manage_clients()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/clients/index", $this->data);
+    }
 }
 

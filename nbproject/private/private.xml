@@ -3,16 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/sportzweb/application/libraries/Template.php</file>
-            <file>file:/C:/wamp/www/sportzweb/application/views/admin/templates/tmpl.php</file>
-            <file>file:/C:/wamp/www/sportzweb/application/controllers/admin/application.php</file>
-            <file>file:/C:/wamp/www/sportzweb/application/controllers/admin/access_level.php</file>
-            <file>file:/C:/wamp/www/sportzweb/constants/admin_access_level.php</file>
-            <file>file:/C:/wamp/www/sportzweb/application/views/admin/applications/application_manage.php</file>
-            <file>file:/C:/wamp/www/sportzweb/application/views/admin/access_level/index.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/applications/gympro/index.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/test.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/gympro/gympro_leftnav.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/gympro/gympro_add_client.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/controllers/test.php</file>
         </group>
         <group>
-            <file>file:/C:/xampp/htdocs/sportzweb/application/libraries/org/utility/Utils.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/gympro/gympro_home.php</file>
+            <file>file:/C:/wamp/www/sportzweb/resources/bootstrap3/css/gympro.css</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/gympro/gympro_add_client.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/controllers/admin/applications_gympro.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/controllers/test.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/gympro/gympro_top_banner.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/gympro/gympro_leftnav.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/controllers/applications/gympro.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/admin/applications/shop/index.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/gympro/gympro_nutrition.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/applications/shop/templates/topnav.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/admin/applications/gympro/manage_account_types.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/gympro/gympro_edit_programme.php</file>
+            <file>file:/C:/wamp/www/sportzweb/application/views/admin/applications/gympro/index.php</file>
         </group>
     </open-files>
 </project-private>

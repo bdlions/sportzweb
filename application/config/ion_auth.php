@@ -146,14 +146,19 @@ $config['tables']['app_shop_sizing_chart_youth']            = 'app_shop_sizing_c
 $config['tables']['app_shop_product_feature']               = 'app_shop_product_feature';
 $config['tables']['app_shop_product_info']                  = 'app_shop_product_info';
 
-$config['tables']['app_gympro_account_type']                = 'app_gympro_account_type';
-$config['tables']['app_gympro_height_unit_type']            = 'app_gympro_height_unit_type';
-$config['tables']['app_gympro_weight_unit_type']            = 'app_gympro_weight_unit_type';
-$config['tables']['app_gympro_girth_unit_type']             = 'app_gympro_girth_unit_type';
-$config['tables']['app_gympro_time_zone']                   = 'app_gympro_time_zone';
-$config['tables']['app_gympro_hourly_rate']                 = 'app_gympro_hourly_rate';
-$config['tables']['app_gympro_currency']                    = 'app_gympro_currency';
+$config['tables']['app_gympro_account_types']               = 'app_gympro_account_types';
+$config['tables']['app_gympro_height_unit_types']           = 'app_gympro_height_unit_types';
+$config['tables']['app_gympro_weight_unit_types']           = 'app_gympro_weight_unit_types';
+$config['tables']['app_gympro_girth_unit_types']            = 'app_gympro_girth_unit_types';
+$config['tables']['app_gympro_time_zones']                  = 'app_gympro_time_zones';
+$config['tables']['app_gympro_hourly_rates']                = 'app_gympro_hourly_rates';
+$config['tables']['app_gympro_currencies']                  = 'app_gympro_currencies';
 $config['tables']['app_gympro_clients']                     = 'app_gympro_clients';
+$config['tables']['app_gympro_health_questions']            = 'app_gympro_health_questions';
+$config['tables']['app_gympro_preferences']                 = 'app_gympro_preferences';
+$config['tables']['app_gympro_groups']                      = 'app_gympro_groups';
+$config['tables']['app_gympro_groups_clients']              = 'app_gympro_groups_clients';
+
 
 
 // visitors
@@ -202,6 +207,16 @@ $config['app_xb_team_identity_column']                  = 'title';
 $config['app_xb_tournament_identity_column1']           = 'title';
 $config['app_xb_tournament_identity_column2']           = 'season';
 $config['application_title_identity_column']            = 'title';
+
+//GYMPRO APP
+$config['app_gympro_account_type_identity_column']      = 'title';
+$config['app_gympro_height_unit_type_identity_column']  = 'title';
+$config['app_gympro_weight_unit_type_identity_column']  = 'title';
+$config['app_gympro_girth_unit_type_identity_column']   = 'title';
+$config['app_gympro_time_zone_identity_column']         = 'title';
+$config['app_gympro_hourly_rate_identity_column']       = 'title';
+$config['app_gympro_currency_identity_column']          = 'title';
+$config['app_gympro_clients_identity_column']           = 'title';
 
 //SHOP APP
 $config['app_shop_product_identity_column']             = 'title';

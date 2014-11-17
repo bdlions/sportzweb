@@ -143,3 +143,12 @@ $lang['update_product_inform_successful']               = "Product Info is updat
 $lang['update_product_inform_fail']                     = "Failed to update Product Info.";
 $lang['create_product_inform_duplicate_title']          = "Product Info title already used.";
 $lang['update_product_inform_duplicate_title']          = "Product Info title already used.";
+
+$lang['create_account_type_duplicate_title']            = "Account Type title already used.";
+$lang['create_account_type_successful']                 = "Account Type is created successfully.";
+$lang['create_account_type_fail']                       = "Failed to create Account Type.";
+$lang['delete_account_type_successful']                 = "Account Type is deleted successfully.";
+$lang['delete_account_type_fail']                       = "Failed to delete Account Type.";
+$lang['update_account_type_duplicate_title']            = "Account Type title already used.";
+$lang['update_account_type_successful']                 = "Account Type is updated successfully.";
+$lang['update_account_type_fail']                       = "Failed to update Account Type.";
