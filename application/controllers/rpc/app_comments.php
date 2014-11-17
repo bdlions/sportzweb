@@ -47,11 +47,12 @@ class App_comments extends JsonRPCServer {
         $item_id = $data->item_id;
         $comment = $data->comment;
         $rate_id = $data->rate_id;
+        $user_id = $data->user_id;
         
         $additional_data = array(
             'comment' => $comment,
             'rate_id' => $rate_id,
-            'user_id' => $this->session->userdata('user_id'),
+            'user_id' => $user_id,
             'created_on' => now()
         );
         $id = FALSE;
@@ -152,11 +153,12 @@ class App_comments extends JsonRPCServer {
         $comment_id = $data->comment_id;
         $comment = $data->comment;
         $rate_id = $data->rate_id;
+        $user_id = $data->user_id;
               
         $additional_data = array(
             'comment' => $comment,
             'rate_id' => $rate_id,
-            'user_id' => $data->user_id,
+            'user_id' => $user_id,
             'modified_on' => now()
         );
         $id = FALSE;
