@@ -101,3 +101,27 @@ a:hover
     color: whitesmoke;
     font-weight: bold;
 }
+
+/*PAGE EDIT-PROGRAMME*/
+.pad_body .hidden_tab
+{
+    display: none;
+}
+.pad_title, .pad_body
+{
+    background-color: #E4E4E4; 
+    display: inline-block; 
+    width: 100%;
+    font-size: 16px;
+}
+.pad_title
+{
+    padding: 10px; 
+    padding-left: 20px; 
+    font-weight: bold;
+    margin-bottom: 1px;
+}
+.pad_body
+{
+    padding: 20px;
+}

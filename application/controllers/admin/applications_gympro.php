@@ -95,6 +95,22 @@ class Applications_gympro extends CI_Controller{
         $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/index", $this->data);
     }    
+    public function manage_account_types()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_account_types", $this->data);
+    }
+    public function get_account_type_info()
+    {
+        $result['account_type_info'] = array();
+        $category_id = $this->input->post('category_id');
+        $account_type_info_array = $this->admin_shop_library->get_account_type_info($category_id)->result_array();
+        if(!empty($account_type_info_array))
+        {
+            $result['account_type_info'] = $account_type_info_array[0];
+        }
+        echo json_encode($result);
+    }
     
 }
 

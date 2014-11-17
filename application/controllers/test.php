@@ -324,4 +324,8 @@ class Test extends CI_Controller {
     {
         $this->template->load(null, "gympro/gympro_edit_programme", $this->data);
     }
+    function gympro_add_client()
+    {
+        $this->template->load(null, "gympro/gympro_add_client", $this->data);
+    }
 }

@@ -146,6 +146,15 @@ $config['tables']['app_shop_sizing_chart_youth']            = 'app_shop_sizing_c
 $config['tables']['app_shop_product_feature']               = 'app_shop_product_feature';
 $config['tables']['app_shop_product_info']                  = 'app_shop_product_info';
 
+$config['tables']['app_gympro_account_type']                = 'app_gympro_account_type';
+$config['tables']['app_gympro_height_unit_type']            = 'app_gympro_height_unit_type';
+$config['tables']['app_gympro_weight_unit_type']            = 'app_gympro_weight_unit_type';
+$config['tables']['app_gympro_girth_unit_type']             = 'app_gympro_girth_unit_type';
+$config['tables']['app_gympro_time_zone']                   = 'app_gympro_time_zone';
+$config['tables']['app_gympro_hourly_rate']                 = 'app_gympro_hourly_rate';
+$config['tables']['app_gympro_currency']                    = 'app_gympro_currency';
+$config['tables']['app_gympro_clients']                     = 'app_gympro_clients';
+
 
 // visitors
 $config['tables']['pages']                                  = 'pages';
