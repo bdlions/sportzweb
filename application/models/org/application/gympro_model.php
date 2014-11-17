@@ -32,7 +32,9 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_height_units()
     {
-        
+        return $this->db->select($this->tables['app_gympro_height_unit_types'].'.id as height_unit_id,'.$this->tables['app_gympro_height_unit_types'].'.*')
+                    ->from($this->tables['app_gympro_height_unit_types'])
+                    ->get();
     }
     /*
      * This method will return all weight units
@@ -40,7 +42,9 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_weight_units()
     {
-        
+        return $this->db->select($this->tables['app_gympro_weight_unit_types'].'.id as weight_unit_id,'.$this->tables['app_gympro_weight_unit_types'].'.*')
+                    ->from($this->tables['app_gympro_weight_unit_types'])
+                    ->get();
     }
     /*
      * This method will return all girth units
@@ -48,7 +52,9 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_girth_units()
     {
-        
+        return $this->db->select($this->tables['app_gympro_girth_unit_types'].'.id as girth_unit_id,'.$this->tables['app_gympro_girth_unit_types'].'.*')
+                    ->from($this->tables['app_gympro_girth_unit_types'])
+                    ->get();
     }
     /*
      * This method will return all time zones
@@ -56,7 +62,9 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_time_zones()
     {
-        
+        return $this->db->select($this->tables['app_gympro_time_zones'].'.id as time_zone_id,'.$this->tables['app_gympro_time_zones'].'.*')
+                    ->from($this->tables['app_gympro_time_zones'])
+                    ->get();
     }
     /*
      * This method will return all hourly rates
@@ -64,7 +72,9 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_hourly_rates()
     {
-        
+        return $this->db->select($this->tables['app_gympro_hourly_rates'].'.id as hourly_rate_id,'.$this->tables['app_gympro_hourly_rates'].'.*')
+                    ->from($this->tables['app_gympro_hourly_rates'])
+                    ->get();
     }
     /*
      * This method will return all currencies
@@ -72,7 +82,9 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_hourly_currencies()
     {
-        
+        return $this->db->select($this->tables['app_gympro_currencies'].'.id as currency_id,'.$this->tables['app_gympro_currencies'].'.*')
+                    ->from($this->tables['app_gympro_currencies'])
+                    ->get();
     }
     /*
      * This method will store preference info of a client

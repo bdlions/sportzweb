@@ -1818,7 +1818,17 @@ CREATE TABLE IF NOT EXISTS `app_sp_configure_homepage` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 ALTER TABLE `app_sp_configure_homepage`
     ADD CONSTRAINT `fk_app_sp_configure_homepage_sports1` FOREIGN KEY(`sports_id`) REFERENCES `app_sp_sports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 -- gympro application
+CREATE TABLE IF NOT EXISTS `app_gympro_users` (
+  `user_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `app_gympro_users1_idx` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_gympro_users`
+    ADD CONSTRAINT `app_gympro_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;	
 CREATE TABLE IF NOT EXISTS `app_gympro_account_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -1828,6 +1838,10 @@ CREATE TABLE IF NOT EXISTS `app_gympro_account_types` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_account_types` (`title`, `price`, `total_user`) VALUES
+('Lightweight (FREE) up to 5 clients', 0, 5),
+('Middleweight ($10/month)', 10, 30),
+('Heavyweight ($25/month)', 25, 100000);
 CREATE TABLE IF NOT EXISTS `app_gympro_health_questions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -1835,6 +1849,16 @@ CREATE TABLE IF NOT EXISTS `app_gympro_health_questions` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_health_questions` (`title`) VALUES
+('Smoker?'),
+('Blood pressure too high or too low?'),
+('Any known cardiovascular problems?'),
+('High cholesterol?'),
+('Overweight?'),
+('Any injuries or orthopaedic problems?'),
+('Taking any prescribed medication or dietary supplements?'),
+('Any other medical conditions or problems not previously mentioned?'),
+('Drinking?');
 CREATE TABLE IF NOT EXISTS `app_gympro_height_unit_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -1842,6 +1866,9 @@ CREATE TABLE IF NOT EXISTS `app_gympro_height_unit_types` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_height_unit_types` (`title`) VALUES
+('Centimeters'),
+('Feet & inches');
 CREATE TABLE IF NOT EXISTS `app_gympro_weight_unit_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -1849,6 +1876,9 @@ CREATE TABLE IF NOT EXISTS `app_gympro_weight_unit_types` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_weight_unit_types` (`title`) VALUES
+('Kilograms'),
+('Pounds');
 CREATE TABLE IF NOT EXISTS `app_gympro_girth_unit_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -1856,6 +1886,9 @@ CREATE TABLE IF NOT EXISTS `app_gympro_girth_unit_types` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_girth_unit_types` (`title`) VALUES
+('Centimeters'),
+('Inches');
 CREATE TABLE IF NOT EXISTS `app_gympro_time_zones` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -1870,6 +1903,47 @@ CREATE TABLE IF NOT EXISTS `app_gympro_hourly_rates` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_hourly_rates` (`title`) VALUES
+('5'),
+('10'),
+('15'),
+('20'),
+('25'),
+('30'),
+('35'),
+('40'),
+('45'),
+('50'),
+('55'),
+('60'),
+('65'),
+('70'),
+('75'),
+('80'),
+('85'),
+('90'),
+('95'),
+('100'),
+('105'),
+('110'),
+('115'),
+('120'),
+('125'),
+('130'),
+('135'),
+('140'),
+('145'),
+('150'),
+('155'),
+('160'),
+('165'),
+('170'),
+('175'),
+('180'),
+('185'),
+('190'),
+('195'),
+('200');
 CREATE TABLE IF NOT EXISTS `app_gympro_currencies` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -1877,6 +1951,10 @@ CREATE TABLE IF NOT EXISTS `app_gympro_currencies` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_currencies` (`title`) VALUES
+('Dollar ($)'),
+('Pound (£)'),
+('Euro (€)');
 CREATE TABLE IF NOT EXISTS `app_gympro_clients` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(200),

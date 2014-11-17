@@ -146,6 +146,7 @@ $config['tables']['app_shop_sizing_chart_youth']            = 'app_shop_sizing_c
 $config['tables']['app_shop_product_feature']               = 'app_shop_product_feature';
 $config['tables']['app_shop_product_info']                  = 'app_shop_product_info';
 
+$config['tables']['app_gympro_users']                       = 'app_gympro_users';
 $config['tables']['app_gympro_account_types']               = 'app_gympro_account_types';
 $config['tables']['app_gympro_height_unit_types']           = 'app_gympro_height_unit_types';
 $config['tables']['app_gympro_weight_unit_types']           = 'app_gympro_weight_unit_types';
