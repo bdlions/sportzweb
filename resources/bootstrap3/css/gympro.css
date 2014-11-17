@@ -5,7 +5,10 @@
 
 
 /*UNIVARSAL*/
-
+*
+{
+    font-size: 16px;
+}
 li
 {
     list-style: none;
@@ -24,7 +27,8 @@ a:hover
 {
     padding-right: 0px;
 }
-.top_margin{
+.top_margin
+{
     margin-top: 20px;
 }
 .user_prof img
@@ -47,7 +51,6 @@ a:hover
 }
 .user_prof a
 {
-    font-size: 16px;
     color: black;
 }
 .user_prof
@@ -74,7 +77,7 @@ a:hover
 .ln_current
 {
     background-color: #F5F5F5;
-    font-size: 16px;
+    
     font-weight: bold;
 }
 .ln_wide_portion
@@ -87,7 +90,6 @@ a:hover
 }
 .ln_item
 {
-    font-size: 16px;
     line-height: 26px;
     color: darkgray;
 }
@@ -102,6 +104,29 @@ a:hover
     font-weight: bold;
 }
 
+/*PAGE Groups*/
+.gympro_table
+{
+    text-align: center;
+}
+.gympro_table tbody
+{
+    background-color: #C3C3C3;
+}
+.gympro_table th
+{
+    text-align: center;
+    background-color: #00A2E8;
+    color: white;
+}
+.gympro_button
+{
+    font-weight: bold;
+    line-height: 0px;
+    color: white;
+    background-color: #880015;
+}
+
 /*PAGE EDIT-PROGRAMME*/
 .pad_body .hidden_tab
 {
@@ -112,7 +137,7 @@ a:hover
     background-color: #E4E4E4; 
     display: inline-block; 
     width: 100%;
-    font-size: 16px;
+    
 }
 .pad_title
 {
@@ -124,4 +149,11 @@ a:hover
 .pad_body
 {
     padding: 20px;
+}
+
+/*PAGE-CREATE-CLIENT*/
+.pad_lines
+{
+    border-bottom: 1px solid white;
+    padding-bottom: 8px;
 }

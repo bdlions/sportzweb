@@ -11,7 +11,7 @@
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();">contact_details</a>
+                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();">Contact Details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
@@ -34,7 +34,7 @@
                 <form class="form-horizontal" role="form">
 
                     <!--<div class="row" style="display: none">-->
-                    <div class="row hidden_tab" id="add_client">
+                    <div class="row hidden_tab" id="add_client" style="display: block">
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">First Name: </label>
@@ -168,8 +168,8 @@
                     <!--HEALTH-->
                     <!--<div class="row" style="display: none">-->
                     <div class="row hidden_tab" id="health">
-                        <div class="col-md-9">
-                            <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -177,7 +177,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">Smoker?</label>
+                                        <label class="patapota">Smoker?</label>
                                     </div>
                                     <div  style="float: left">
                                         Additional info: 
@@ -185,7 +185,7 @@
                                     <input class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -193,11 +193,11 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">Blood pressure too high or too low?</label>
+                                        <label class="patapota">Blood pressure too high or too low?</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -205,7 +205,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">Any known cardiovascular problems?</label>
+                                        <label class="patapota">Any known cardiovascular problems?</label>
                                     </div>
                                     <div  style="float: left">
                                         Additional info: 
@@ -213,7 +213,7 @@
                                     <input class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -221,7 +221,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">Smoker?</label>
+                                        <label class="patapota">Smoker?</label>
                                     </div>
                                     <div  style="float: left">
                                         Additional info: 
@@ -229,7 +229,7 @@
                                     <input class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -237,11 +237,11 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">High cholesterol?</label>
+                                        <label class="patapota">High cholesterol?</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -249,11 +249,11 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">Overweight?</label>
+                                        <label class="patapota">Overweight?</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -261,7 +261,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">Any injuries or orthopaedic problems?</label>
+                                        <label class="patapota">Any injuries or orthopaedic problems?</label>
                                     </div>
                                     <div  style="float: left">
                                         Additional info: 
@@ -269,7 +269,7 @@
                                     <input class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -277,7 +277,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">Taking any prescribed medication or dietary supplements?</label>
+                                        <label class="patapota">Taking any prescribed medication or dietary supplements?</label>
                                     </div>
                                     <div  style="float: left">
                                         Additional info: 
@@ -285,7 +285,7 @@
                                     <input class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pad_lines">
                                 <div class="col-sm-4">
                                     <input type="radio" checked="" name="smoker" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -293,7 +293,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="control-label">Any other medical conditions or problems not previously mentioned?</label>
+                                        <label class="patapota">Any other medical conditions or problems not previously mentioned?</label>
                                     </div>
                                     <div  style="float: left">
                                         Additional info: 
@@ -302,20 +302,20 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Height: </label>
+                            <div class="form-group pad_lines">
+                                <label class="col-sm-4 patapota">Height: </label>
                                 <div class="col-sm-4">
                                     <input class="form-control">cm
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Resting Heart Rate: </label>
+                            <div class="form-group pad_lines">
+                                <label class="col-sm-4 patapota">Resting Heart Rate: </label>
                                 <div class="col-sm-6">
                                     <input class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Blood Pressure: </label>
+                            <div class="form-group pad_lines">
+                                <label class="col-sm-4 patapota">Blood Pressure: </label>
                                 <div class="col-sm-6">
                                     <input class="form-control">
                                 </div>
