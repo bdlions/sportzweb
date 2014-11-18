@@ -144,11 +144,101 @@ $lang['update_product_inform_fail']                     = "Failed to update Prod
 $lang['create_product_inform_duplicate_title']          = "Product Info title already used.";
 $lang['update_product_inform_duplicate_title']          = "Product Info title already used.";
 
-$lang['create_account_type_duplicate_title']            = "Account Type title already used.";
-$lang['create_account_type_successful']                 = "Account Type is created successfully.";
-$lang['create_account_type_fail']                       = "Failed to create Account Type.";
-$lang['delete_account_type_successful']                 = "Account Type is deleted successfully.";
-$lang['delete_account_type_fail']                       = "Failed to delete Account Type.";
-$lang['update_account_type_duplicate_title']            = "Account Type title already used.";
-$lang['update_account_type_successful']                 = "Account Type is updated successfully.";
-$lang['update_account_type_fail']                       = "Failed to update Account Type.";
+$lang['create_account_types_duplicate_title']            = "Account Type title already used.";
+$lang['create_account_types_successful']                 = "Account Type is created successfully.";
+$lang['create_account_types_fail']                       = "Failed to create Account Type.";
+$lang['delete_account_types_successful']                 = "Account Type is deleted successfully.";
+$lang['delete_account_types_fail']                       = "Failed to delete Account Type.";
+$lang['update_account_types_duplicate_title']            = "Account Type title already used.";
+$lang['update_account_types_successful']                 = "Account Type is updated successfully.";
+$lang['update_account_types_fail']                       = "Failed to update Account Type.";
+
+$lang['create_clients_duplicate_title']            = "Client title already used.";
+$lang['create_clients_successful']                 = "Client is created successfully.";
+$lang['create_clients_fail']                       = "Failed to create Client.";
+$lang['delete_clients_successful']                 = "Client is deleted successfully.";
+$lang['delete_clients_fail']                       = "Failed to delete Client.";
+$lang['update_clients_duplicate_title']            = "Client title already used.";
+$lang['update_clients_successful']                 = "Client is updated successfully.";
+$lang['update_clients_fail']                       = "Failed to update Client.";
+
+
+$lang['create_health_questions_duplicate_title']            = "Health Question title already used.";
+$lang['create_health_questions_successful']                 = "Health Question is created successfully.";
+$lang['create_health_questions_fail']                       = "Failed to create Health Question.";
+$lang['delete_health_questions_successful']                 = "Health Question is deleted successfully.";
+$lang['delete_health_questions_fail']                       = "Failed to delete Health Question.";
+$lang['update_health_questions_duplicate_title']            = "Health Question title already used.";
+$lang['update_health_questions_successful']                 = "Health Question is updated successfully.";
+$lang['update_health_questions_fail']                       = "Failed to update Health Question.";
+
+
+$lang['create_height_unit_types_duplicate_title']            = "Height unit type title already used.";
+$lang['create_height_unit_types_successful']                 = "Height unit type is created successfully.";
+$lang['create_height_unit_types_fail']                       = "Failed to create Height unit type.";
+$lang['delete_height_unit_types_successful']                 = "Height unit type is deleted successfully.";
+$lang['delete_height_unit_types_fail']                       = "Failed to delete Height unit type.";
+$lang['update_height_unit_types_duplicate_title']            = "Height unit type title already used.";
+$lang['update_height_unit_types_successful']                 = "Height unit type is updated successfully.";
+$lang['update_height_unit_types_fail']                       = "Failed to update Height unit type.";
+
+
+$lang['create_weight_unit_types_duplicate_title']            = "Width unit type title already used.";
+$lang['create_weight_unit_types_successful']                 = "Width unit type is created successfully.";
+$lang['create_weight_unit_types_fail']                       = "Failed to create Width unit type.";
+$lang['delete_weight_unit_types_successful']                 = "Width unit type is deleted successfully.";
+$lang['delete_weight_unit_types_fail']                       = "Failed to delete Width unit type.";
+$lang['update_weight_unit_types_duplicate_title']            = "Width unit type title already used.";
+$lang['update_weight_unit_types_successful']                 = "Width unit type is updated successfully.";
+$lang['update_weight_unit_types_fail']                       = "Failed to update Width unit type.";
+
+
+$lang['create_girth_unit_types_duplicate_title']            = "Girth unit type title already used.";
+$lang['create_girth_unit_types_successful']                 = "Girth unit type is created successfully.";
+$lang['create_girth_unit_types_fail']                       = "Failed to create Girth unit type.";
+$lang['delete_girth_unit_types_successful']                 = "Girth unit type is deleted successfully.";
+$lang['delete_girth_unit_types_fail']                       = "Failed to delete Girth unit type.";
+$lang['update_girth_unit_types_duplicate_title']            = "Girth unit type title already used.";
+$lang['update_girth_unit_types_successful']                 = "Girth unit type is updated successfully.";
+$lang['update_girth_unit_types_fail']                       = "Failed to update Girth unit type.";
+
+
+$lang['create_time_zones_duplicate_title']            = "Time Zone title already used.";
+$lang['create_time_zones_successful']                 = "Time Zone is created successfully.";
+$lang['create_time_zones_fail']                       = "Failed to create Time Zone.";
+$lang['delete_time_zones_successful']                 = "Time Zone is deleted successfully.";
+$lang['delete_time_zones_fail']                       = "Failed to delete Time Zone.";
+$lang['update_time_zones_duplicate_title']            = "Time Zone title already used.";
+$lang['update_time_zones_successful']                 = "Time Zone is updated successfully.";
+$lang['update_time_zones_fail']                       = "Failed to update Time Zone.";
+
+
+$lang['create_hourly_rates_duplicate_title']            = "Hourly Rates title already used.";
+$lang['create_hourly_rates_successful']                 = "Hourly Rates is created successfully.";
+$lang['create_hourly_rates_fail']                       = "Failed to create Hourly Rates.";
+$lang['delete_hourly_rates_successful']                 = "Hourly Rates is deleted successfully.";
+$lang['delete_hourly_rates_fail']                       = "Failed to delete Hourly Rates.";
+$lang['update_hourly_rates_duplicate_title']            = "Hourly Rates title already used.";
+$lang['update_hourly_rates_successful']                 = "Hourly Rates is updated successfully.";
+$lang['update_hourly_rates_fail']                       = "Failed to update Hourly Rates.";
+
+
+$lang['create_currencies_duplicate_title']            = "Currency title already used.";
+$lang['create_currencies_successful']                 = "Currency is created successfully.";
+$lang['create_currencies_fail']                       = "Failed to create Currency.";
+$lang['delete_currencies_successful']                 = "Currency is deleted successfully.";
+$lang['delete_currencies_fail']                       = "Failed to delete Currency.";
+$lang['update_currencies_duplicate_title']            = "Currency title already used.";
+$lang['update_currencies_successful']                 = "Currency is updated successfully.";
+$lang['update_currencies_fail']                       = "Failed to update Currency.";
+
+
+$lang['create_preferences_duplicate_title']            = "Preference title already used.";
+$lang['create_preferences_successful']                 = "Preference is created successfully.";
+$lang['create_preferences_fail']                       = "Failed to create Preference.";
+$lang['delete_preferences_successful']                 = "Preference is deleted successfully.";
+$lang['delete_preferences_fail']                       = "Failed to delete Preference.";
+$lang['update_preferences_duplicate_title']            = "Preference title already used.";
+$lang['update_preferences_successful']                 = "Preference is updated successfully.";
+$lang['update_preferences_fail']                       = "Failed to update Preference.";
+

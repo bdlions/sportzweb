@@ -1,10 +1,10 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Manage account</div>
+    <div class="panel-heading">Manage time zones</div>
     <div class="panel-body">
         <?php if ($allow_write) { ?>
         <div class="row form-group">
             <div class ="col-md-3 pull-left">
-                <button onclick="open_modal_create()" class="form-control btn button-custom">Create Account Type</button>
+                <button onclick="open_modal_create()" class="form-control btn button-custom">Create time zones</button>
             </div>
         </div>
         <?php } ?>
@@ -15,19 +15,15 @@
                         <tr>
                             <th style="text-align: center">ID</th>
                             <th style="text-align: center">TITLE</th>
-                            <th style="text-align: center">PRICE</th>
-                            <th style="text-align: center">TOTAL USER</th>
                             <th style="text-align: center">EDIT</th>
                             <th style="text-align: center">DELETE</th>
                         </tr>
                     </thead>
                     <tbody id="tbody_product_category_list">
-                        <?php foreach($account_types_list as $type_info):?>
+                        <?php foreach($time_zones_list as $type_info):?>
                         <tr>
                             <td style="text-align: center"><?php echo $type_info['id'];?></td>
                             <td style="text-align: center"><?php echo $type_info['title'];?></td>
-                            <td style="text-align: center"><?php echo $type_info['price'];?></td>
-                            <td style="text-align: center"><?php echo $type_info['total_user'];?></td>
                             <?php if($allow_edit){ ?>
                                 <td style="text-align: center">
                                     <button onclick="open_modal_update(<?php echo $type_info['id']?>)" value="" class="form-control btn">
@@ -51,7 +47,7 @@
     </div>
 </div>
 <?php 
-$this->load->view("admin/applications/gympro/modal/account_types_create");
-$this->load->view("admin/applications/gympro/modal/account_types_edit");
-$this->load->view("admin/applications/gympro/modal/account_types_delete_confirm");
+$this->load->view("admin/applications/gympro/modal/time_zones_create");
+$this->load->view("admin/applications/gympro/modal/time_zones_edit");
+$this->load->view("admin/applications/gympro/modal/time_zones_delete_confirm");
 ?>
