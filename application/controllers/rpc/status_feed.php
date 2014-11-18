@@ -31,14 +31,15 @@ class Status_feed extends JsonRPCServer {
     
     function get_statuses($status_data = ''){
         $result = array();
-        //$data = json_decode($status_data);
-		$this->session->set_userdata('user_id', 2);
-        $data = new stdClass();
+        //$status_data = '{"hashtag":"","limit":5,"status_list_id":1,"mapping_id":0,"offset":0,"userId":4}';
+        $data = json_decode($status_data);
+	$this->session->set_userdata('user_id', $data->user_id);
+        /*$data = new stdClass();
         $data->status_list_id = 1;
         $data->mapping_id = 4;
-        $data->limit = 3;
+        $data->limit = 1;
         $data->offset = 0;
-        $data->hashtag = ''; 
+        $data->hashtag = ''; */
         
         if($data->status_list_id == STATUS_LIST_HASHTAG)
         {
