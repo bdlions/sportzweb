@@ -4,11 +4,11 @@
         <div class="col-md-2">
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
-        <div class="col-md-7 pad_body">
+        <div class="col-md-7">
+            <div class="pad_body">
             <?php echo form_open("applications/gympro/preference/".$gympro_user_id, array('id' => 'form_preference', 'class' => 'form-horizontal')); ?>
                 <div class ="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <?php if (isset($message) && ($message != NULL)): ?>
                             <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
                         <?php endif; ?>
@@ -71,6 +71,7 @@
                     </div>
                 </div>
             <?php echo form_close(); ?>
+            </div>
         </div>
     </div>
 </div>
