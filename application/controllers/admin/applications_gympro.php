@@ -176,12 +176,12 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
-    // ----------------------------------- Preferences ---------------------------//
-    public function manage_preferences()
+    // ----------------------------------- Users ---------------------------//
+    public function manage_users()
     {
-        $this->data['preferences_list'] = $this->admin_gympro_library->get_all_preferences()->result_array();
+        $this->data['user_list'] = $this->admin_gympro_library->get_all_users()->result_array();
         $this->data['message'] = '';
-        $this->template->load($this->tmpl, "admin/applications/gympro/manage_preferences", $this->data);
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_users", $this->data);
     }
     public function get_preferences_info()
     {

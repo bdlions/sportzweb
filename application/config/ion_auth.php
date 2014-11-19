@@ -156,7 +156,6 @@ $config['tables']['app_gympro_hourly_rates']                = 'app_gympro_hourly
 $config['tables']['app_gympro_currencies']                  = 'app_gympro_currencies';
 $config['tables']['app_gympro_clients']                     = 'app_gympro_clients';
 $config['tables']['app_gympro_health_questions']            = 'app_gympro_health_questions';
-$config['tables']['app_gympro_preferences']                 = 'app_gympro_preferences';
 $config['tables']['app_gympro_groups']                      = 'app_gympro_groups';
 $config['tables']['app_gympro_groups_clients']              = 'app_gympro_groups_clients';
 

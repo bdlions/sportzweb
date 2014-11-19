@@ -12,7 +12,7 @@
         </div>
         <div class="row form-group">
             <div class ="col-md-3 pull-left">
-                <a href="<?php echo base_url()?>admin/applications_gympro/manage_preferences"><button class="form-control btn button-custom">Manage Preferences</button></a>
+                <a href="<?php echo base_url()?>admin/applications_gympro/manage_users"><button class="form-control btn button-custom">Manage Users</button></a>
             </div>
             <div class ="col-md-3 pull-left">
                 <a href="<?php echo base_url()?>admin/applications_gympro/manage_clients"><button class="form-control btn button-custom">Manage Clients</button></a>

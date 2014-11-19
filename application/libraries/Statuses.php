@@ -364,7 +364,7 @@ class Statuses {
                 {
                     $status['reference_info'] = $photo_id_photo_info_map[$status['reference_id']];
                 }
-                
+                $status['status_created_on'] = $this->utils->convert_time($status['status_created_on']);
                 $status_list[] = $status;
             }
             

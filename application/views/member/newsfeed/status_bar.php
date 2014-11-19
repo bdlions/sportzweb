@@ -22,7 +22,7 @@
                 if(match[1] != '')
                 {
                     //var status_text = $("#appendedInputButton").html();
-                    status_text = status_text.replace(match[0], generate_hashtag(match[1]));
+                    status_text = status_text.replace(match[0], process_hashtag(match[1]));
                     $("#description").html(status_text);
                 }                
             }
@@ -355,6 +355,12 @@
     {
         var url = '<?php echo base_url()?>'+'trending_feature/hashtag/'+hashtag;
         return '<a rel="nofollow" data-screen-name="" href="'+url+'" class="tweet-url username">#'+hashtag+'</a>&nbsp;';
+    }
+    
+    function process_hashtag(hashtag)
+    {
+        var url = '<?php echo base_url()?>'+'trending_feature/hashtag/'+hashtag;
+        return '<a rel="nofollow" data-screen-name="" href="'+url+'" class="tweet-url username">#'+hashtag+'</a>';
     }
     
     function removeSelectedUser(span){

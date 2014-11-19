@@ -13,6 +13,63 @@ class Gympro_model extends Ion_auth_model {
     public function __construct() {
         parent::__construct();
     }
+    //------------------------------------- Gympro User Module ------------------------------//
+    /*
+     * This method will check whether gympro user exists or not
+     * @param $user_id, user id
+     * @Author Nazmul on 19th November 2014
+     */
+    public function is_gympro_user_exist($user_id)
+    {
+        if($user_id == 0)
+        {
+            return FALSE;
+        }
+        $this->db->where('user_id', $user_id);
+        return $this->db->count_all_results($this->tables['app_gympro_users']) > 0;
+    }
+    /*
+     * This method will create a new gympro user
+     * @param $additional_data, gympro user data
+     * @Author Nazmul on 19th November 2014
+     */
+    public function create_gympro_user($additional_data)
+    {
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_users'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_users'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+    /*
+     * This method will return gympor user info
+     * @param $user_id, user id
+     * @Author Nazmul on 19th November 2014
+     */
+    public function get_gympro_user_info($user_id)
+    {
+        $this->db->where('user_id', $user_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_users'])
+                    ->get();
+    }
+    /*
+     * This method will update gympro user info
+     * @param $user_id, user id
+     * @param $additional_data, 
+     */
+    public function update_gympro_user_info($user_id, $additional_data)
+    {
+        $additional_data['modified_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_users'], $additional_data);
+        $this->db->update($this->tables['app_gympro_users'], $data, array('user_id' => $user_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_gympro_user_fail');
+            return FALSE;
+        }
+        $this->set_message('update_gympro_user_successful');
+        return TRUE;
+    }
     //------------------------------------- Account Type Module -----------------------------//
     /*
      * This method will return account types

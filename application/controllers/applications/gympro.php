@@ -19,8 +19,37 @@ class Gympro extends Role_Controller{
     {
         //$this->data['message'] = '';        
         //$this->template->load(null,'applications/gympro/index', $this->data);
-        $this->manage_clients();
-        
+        $user_id = $this->session->userdata('user_id');
+        $gympro_user_info = array();
+        $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
+        if(!empty($gympro_user_info_array))
+        {
+            $gympro_user_info = $gympro_user_info_array[0];
+            if(!isset($gympro_user_info['account_type_id']) || $gympro_user_info['account_type_id'] < 0)
+            {
+                $this->account($gympro_user_info['user_id']);
+            }
+            else if(!isset($gympro_user_info['height_unit_id']) || $gympro_user_info['height_unit_id'] < 0)
+            {
+                $this->preference($gympro_user_info['user_id']);
+            }
+            else
+            {
+                $this->manage_clients();
+            }            
+        }
+        else
+        {
+            $data = array(
+                'user_id' => $user_id,
+                'account_type_id' => APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT
+            );
+            $gympro_user_id = $this->gympro_library->create_gympro_user($data);
+            if($gympro_user_id !== FALSE)
+            {
+                $this->account($user_id);
+            }
+        }
     }
     //----------------------------------- Client Module --------------------------------//
     public function manage_clients()
@@ -71,13 +100,28 @@ class Gympro extends Role_Controller{
      * This method will load account info of a client
      * @Author Nazmul on 17th November 2014
      */
-    public function account($gympro_user_id = 0)
+    public function account($user_id = 0)
     {        
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
         $this->data['message'] = '';   
         $this->data['application_id'] = 1;        
         if($this->input->post('submit_update_account'))
         {
-            return;
+            $data = array(
+                'account_type_id' => $this->input->post('account_type_list')
+            );
+            $status = $this->gympro_library->update_gympro_user_info($user_id, $data);
+            if($status)
+            {
+                $this->data['message'] = $this->gympro_library->messages();   
+            }
+            else
+            {
+                $this->data['message'] = $this->gympro_library->errors();  
+            }
         }
         $account_type_list = array();
         $account_types_array = $this->gympro_library->get_all_account_types()->result_array();
@@ -86,7 +130,15 @@ class Gympro extends Role_Controller{
             $account_type_list[$account_type['account_type_id']] =  $account_type['title'];
         }
         $this->data['account_type_list'] = $account_type_list;  
-        $this->data['gympro_user_id'] = $gympro_user_id; 
+        $this->data['selected_account_type'] = APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT;
+        $gympro_user_info = array();
+        $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
+        if(!empty($gympro_user_info_array))
+        {
+            $gympro_user_info = $gympro_user_info_array[0];
+            $this->data['selected_account_type'] = $gympro_user_info['account_type_id'];
+        }
+        $this->data['user_id'] = $user_id; 
         
         $this->data['submit_update_account'] = array(
             'name' => 'submit_update_account',
@@ -101,10 +153,34 @@ class Gympro extends Role_Controller{
      * This method will load preference info of a client
      * @Author Nazmul on 17th November 2014
      */
-    public function preference($gympro_user_id = 0)
+    public function preference($user_id = 0)
     {
-        $this->data['message'] = '';    
-        $this->data['application_id'] = 1;
+        $this->data['application_id'] = 1; 
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $this->data['message'] = ''; 
+        if($this->input->post('submit_update_preference'))
+        {
+            $data = array(
+                'height_unit_id' => $this->input->post('height_unit_list'),
+                'weight_unit_id' => $this->input->post('weight_unit_list'),
+                'girth_unit_id' => $this->input->post('girth_unit_list'),
+                'time_zone_id' => $this->input->post('time_zone_list'),
+                'hourly_rate_id' => $this->input->post('hourly_rate_list'),
+                'currency_id' => $this->input->post('currency_list')
+            );
+            $status = $this->gympro_library->update_gympro_user_info($user_id, $data);
+            if($status)
+            {
+                $this->data['message'] = $this->gympro_library->messages();   
+            }
+            else
+            {
+                $this->data['message'] = $this->gympro_library->errors();  
+            }
+        }
         $height_unit_list = array();
         $height_unit_array = $this->gympro_library->get_all_height_units()->result_array();
         foreach($height_unit_array as $height_unit)
@@ -129,7 +205,14 @@ class Gympro extends Role_Controller{
         }
         $this->data['girth_unit_list'] =$girth_unit_list;
         
-        $this->data['time_zone_list'] = array(); 
+        //$this->data['time_zone_list'] = array(); 
+        $time_zone_list = array();
+        $time_zone_array = $this->gympro_library->get_all_time_zones()->result_array();
+        foreach($time_zone_array as $time_zone)
+        {
+            $time_zone_list[$time_zone['time_zone_id']] =  $time_zone['title'];
+        }
+        $this->data['time_zone_list'] =$time_zone_list;
         
         $hourly_rate_list = array();
         $hourly_rate_array = $this->gympro_library->get_all_hourly_rates()->result_array();
@@ -147,7 +230,26 @@ class Gympro extends Role_Controller{
         }
         $this->data['currency_list'] =$currency_list;
         
-        $this->data['gympro_user_id'] = $gympro_user_id; 
+        $this->data['selected_height_unit_id'] = '';
+        $this->data['selected_weight_unit_id'] = '';
+        $this->data['selected_girth_unit_id'] = '';
+        $this->data['selected_time_zone_id'] = '';
+        $this->data['selected_hourly_rate_id'] = '';
+        $this->data['selected_currency_id'] = '';
+        $gympro_user_info = array();
+        $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
+        if(!empty($gympro_user_info_array))
+        {
+            $gympro_user_info = $gympro_user_info_array[0];
+            $this->data['selected_height_unit_id'] = $gympro_user_info['height_unit_id'];
+            $this->data['selected_weight_unit_id'] = $gympro_user_info['weight_unit_id'];
+            $this->data['selected_girth_unit_id'] = $gympro_user_info['girth_unit_id'];
+            $this->data['selected_time_zone_id'] = $gympro_user_info['time_zone_id'];
+            $this->data['selected_hourly_rate_id'] = $gympro_user_info['hourly_rate_id'];
+            $this->data['selected_currency_id'] = $gympro_user_info['currency_id'];
+        }
+        
+        $this->data['user_id'] = $user_id; 
         $this->data['submit_update_preference'] = array(
             'name' => 'submit_update_preference',
             'id' => 'submit_update_preference',

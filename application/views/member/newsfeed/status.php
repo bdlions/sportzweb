@@ -27,7 +27,8 @@
                     ?>
                 </div>
                 <div class="row col-md-12">
-                    <?php echo convert_time($newsfeed['status_created_on'])?> 
+                    <?php //echo convert_time($newsfeed['status_created_on'])?> 
+                    <?php echo $newsfeed['status_created_on']?> 
                 </div>
                 <?php if(!empty($newsfeed['reference_list']) && !empty($newsfeed['reference_list']['user_list'])) {?>
                 <div class="row col-md-12">

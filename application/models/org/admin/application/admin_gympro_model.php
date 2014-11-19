@@ -229,10 +229,10 @@ class Admin_gympro_model extends Ion_auth_model
      * This method will return all account types
      * @Author Nazmul on 16th November 2014
      */
-    public function get_all_preferences()
+    public function get_all_users()
     {
-        return $this->db->select($this->tables['app_gympro_preferences'].'.id as id,'.$this->tables['app_gympro_preferences'].'.*')
-                    ->from($this->tables['app_gympro_preferences'])
+        return $this->db->select($this->tables['app_gympro_users'].'.*')
+                    ->from($this->tables['app_gympro_users'])
                     ->get();
     }
     

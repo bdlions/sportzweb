@@ -242,3 +242,6 @@ $lang['update_preferences_duplicate_title']            = "Preference title alrea
 $lang['update_preferences_successful']                 = "Preference is updated successfully.";
 $lang['update_preferences_fail']                       = "Failed to update Preference.";
 
+$lang['update_gympro_user_successful']                 = "Account is updated successfully.";
+$lang['update_gympro_user_fail']                       = "Failed to update account info.";
+

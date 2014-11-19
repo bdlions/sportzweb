@@ -19,18 +19,17 @@
             <ul class="nav navbar-nav">
                 <li>
                     <a style="padding-left:2px;" href="<?php echo base_url() . 'applications/score_prediction' ?>" >Home</a>
-                </li> 
-                <?php // foreach ( as $key => $menu_item) : ?>
-                <li>
-                    <a href="<?php // echo base_url() . 'applications/' . $menu_item[''];  ?>">Baseball</a>
-                </li> 
-                <li>
-                    <a href="<?php // echo base_url() . 'applications/' . $menu_item[''];  ?>">Baseball</a>
-                </li> 
-                <li>
-                    <a href="<?php // echo base_url() . 'applications/' . $menu_item[''];  ?>">Baseball</a>
-                </li> 
-                <?php // endforeach; ?>
+                </li>
+                <?php
+                foreach($sports_list as $sports_info)
+                {
+                ?>
+                    <li>
+                        <a href="<?php echo base_url() . 'applications/score_prediction/sports/' . $sports_info['sports_id'];  ?>"><?php echo $sports_info['title']?></a>
+                    </li> 
+                <?php
+                }
+                ?>                
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
