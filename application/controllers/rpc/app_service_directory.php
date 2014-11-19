@@ -95,6 +95,25 @@ class App_service_directory extends JsonRPCServer {
     }
     
     /*
+     * This method will return service info
+     * @param $service_id, service id
+     * @Author Nazmul on 19th November 2014
+     */
+    function get_service_info($service_id = 0)
+    {
+        $response = array();
+        $service_info = $this->service_directory_library->get_service_info($service_id)->result_array();
+        $service_comment = $this->service_directory_library->get_all_comments($service_id, NEWEST_FIRST,DEFAULT_VIEW_PER_PAGE);
+        if(count($service_info)>0) {
+            $service_info = $service_info[0];
+        }
+        $response['service_info'] = $service_info;
+        $response['comment_list'] = $service_comment;
+        //echo (json_encode($response));
+        return json_encode($response);
+    }
+    
+    /*
      * This method will return all service categories
      * @Author Nazmul on 10th November 2014
      */
