@@ -132,14 +132,13 @@ a:hover
 {
     display: none;
 }
-.pad_title, .pad_body
+.pad_title, .pad_body, .pad_footer
 {
     background-color: #E4E4E4; 
     display: inline-block; 
     width: 100%;
-    
 }
-.pad_title
+.pad_title, .pad_footer
 {
     padding: 10px; 
     padding-left: 20px; 
@@ -149,6 +148,19 @@ a:hover
 .pad_body
 {
     padding: 20px;
+}
+.pad_footer button
+{
+    line-height: 22px;
+}
+.pad_footer a
+{
+    font-size: 16px;
+    line-height: 22px;
+}
+.pad_footer
+{
+    margin-top: 1px;
 }
 
 /*PAGE-CREATE-CLIENT*/

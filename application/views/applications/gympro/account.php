@@ -4,13 +4,16 @@
         <div class="col-md-2">
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
-        <div class="col-md-7" style="padding-top: 40px; background-color: lightgray;">
-            <div class="row">
-                <div class ="col-md-10 margin-top-bottom">
+        <div class="col-md-7">
+            <div class="row pad_body">
+                <div class ="col-md-10">
                     <?php echo form_open("applications/gympro/account/".$gympro_user_id, array('id' => 'form_account', 'class' => 'form-horizontal')); ?>
                         <div class ="row">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-8"><?php echo $message; ?></div>
+                            <div class="col-md-12">
+                                <?php if(isset($message) && ($message != NULL)): ?>
+                                <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-4 control-label requiredField">

@@ -26,6 +26,7 @@ class Gympro extends Role_Controller{
     public function manage_clients()
     {
         $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
         $this->template->load(null,'applications/gympro/client/clients', $this->data);
         
     }
@@ -33,12 +34,14 @@ class Gympro extends Role_Controller{
     public function create_client()
     {
         $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
         $this->template->load(null,'applications/gympro/client/create_client', $this->data);
     }
     //----------------------------------- Group Module ---------------------------------//
     public function manage_groups()
     {
         $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
         $this->template->load(null,'applications/gympro/groups', $this->data);
         
     }
@@ -46,13 +49,22 @@ class Gympro extends Role_Controller{
     public function nutrition()
     {
         $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
         $this->template->load(null,'applications/gympro/nutrition', $this->data);
     }
     
     public function program()
     {
         $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
         $this->template->load(null,'applications/gympro/program', $this->data);
+    }
+    
+    public function missions()
+    {
+        $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
+        $this->template->load(null,'applications/gympro/missions', $this->data);
     }
     //-----------------------------------Account Type Module-------------------------------//
     /*
@@ -62,6 +74,7 @@ class Gympro extends Role_Controller{
     public function account($gympro_user_id = 0)
     {        
         $this->data['message'] = '';   
+        $this->data['application_id'] = 1;        
         if($this->input->post('submit_update_account'))
         {
             return;
@@ -90,7 +103,8 @@ class Gympro extends Role_Controller{
      */
     public function preference($gympro_user_id = 0)
     {
-        $this->data['message'] = ''; 
+        $this->data['message'] = '';    
+        $this->data['application_id'] = 1;
         $height_unit_list = array();
         $height_unit_array = $this->gympro_library->get_all_height_units()->result_array();
         foreach($height_unit_array as $height_unit)

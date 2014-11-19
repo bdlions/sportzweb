@@ -7,10 +7,10 @@
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-10">
-            <div style="background-color: #E4E4E4; margin-bottom: 1px; padding: 10px; padding-left: 20px; font-weight: bold">
+            <div class="pad_title">
                 EDIT PROGRAMME
             </div>
-            <div style="background-color: #E4E4E4; margin-bottom: 1px; padding: 20px; display: inline-block; width: 100%">
+            <div class="pad_body">
                 <form class="form-horizontal" role="form">
                     <div class="row">
                         <div class="col-md-7">
@@ -67,7 +67,9 @@
                     </div>
                 </form>
                 <div style="background-color: #fff; margin-bottom: 1px; padding: 10px; display: inline-block; width: 100%">
-                    <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span><input style="width: 40%; min-width: 150px;">
+                    <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
+                    <input style="width: 40%; min-width: 150px;">
+                    <img onclick="open_modal_browse_exercise()" src="<?php echo base_url();?>resources/images/browse.png" style="margin: 4px">
                 </div>
                 <div style="background-color: #fff; margin-bottom: 1px; padding: 10px; display: inline-block; width: 100%">
                     <div>
@@ -102,11 +104,17 @@
                         Add another: <a href="" >Weight exercise</a>&nbsp; or &nbsp;<a href="">Cardio Exercise</a>
                     </div>
                 </div>
-                <div>
+<!--                <div>
                     <button style="line-height: 22px;">Save Changes</button> or <a href="" style="font-size: 16px; line-height: 22px;">Go Back</a>
-                </div>
+                </div>-->
+            </div>
+            <div class="pad_footer">
+                <button>Save Changes</button> or <a href="">Go Back</a>
             </div>
         </div>
     </div>
 
 </div>
+<?php
+$this->load->view("applications/gympro/template/modal/browse_exercise");
+?>
