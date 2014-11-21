@@ -75,26 +75,6 @@ class Gympro extends Role_Controller{
         
     }
     
-    public function nutrition()
-    {
-        $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
-        $this->template->load(null,'applications/gympro/nutrition', $this->data);
-    }
-    
-    public function program()
-    {
-        $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
-        $this->template->load(null,'applications/gympro/program', $this->data);
-    }
-    
-    public function missions()
-    {
-        $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
-        $this->template->load(null,'applications/gympro/missions', $this->data);
-    }
     //-----------------------------------Account Type Module-------------------------------//
     /*
      * This method will load account info of a client
@@ -258,8 +238,48 @@ class Gympro extends Role_Controller{
         );
         $this->template->load(null,'applications/gympro/preference', $this->data);
     }
-    
+    //---------------------------------------Program Module---------------------------------------//
+    public function programs()
+    {
+        $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
+        $this->template->load(null,'applications/gympro/programs', $this->data);
+    }
+    public function create_program()
+    {
+        $this->data['message'] = '';       
+        $this->template->load(null,'applications/gympro/program_create', $this->data);
+    }
+    public function exercises()
+    {
+        $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
+        $this->template->load(null,'applications/gympro/exercises', $this->data);
+    }
+    public function create_exercise()
+    {
+        $this->data['message'] = '';       
+        $this->template->load(null,'applications/gympro/exercise_create', $this->data);
+    }
+    //----------------------------------------Assessment Module------------------------------------//
+    public function assessments()
+    {
+        $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
+        $this->template->load(null,'applications/gympro/assessments', $this->data);
+    }
+    public function create_assessment()
+    {
+        $this->data['message'] = '';       
+        $this->template->load(null,'applications/gympro/assessment_create', $this->data);
+    }
     //-----------------------------------------Nutrition Module------------------------------------//
+    public function nutrition()
+    {
+        $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
+        $this->template->load(null,'applications/gympro/nutrition', $this->data);
+    }
     public function create_nutrition()
     {
         $meal_time_list = array();
@@ -282,6 +302,12 @@ class Gympro extends Role_Controller{
     }
     
     //-----------------------------------------Mission Module------------------------------------//
+    public function missions()
+    {
+        $this->data['message'] = '';        
+        $this->data['application_id'] = 1;        
+        $this->template->load(null,'applications/gympro/missions', $this->data);
+    }
     public function create_mission()
     {
         $this->data['message'] = '';        

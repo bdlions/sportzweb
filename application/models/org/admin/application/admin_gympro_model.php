@@ -1191,6 +1191,62 @@ class Admin_gympro_model extends Ion_auth_model
         $this->set_message('delete_currencies_successful');
         return TRUE;
     }
+    //----------------------------Program Module---------------------------------//
+    //----------------------------Review Module of Program--------------------//
+    /*
+     * This method will return all reviews
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_reviews()
+    {
+        return $this->db->select($this->tables['app_gympro_reviews'].'.id as review_id,'.$this->tables['app_gympro_reviews'].'.*')
+                    ->from($this->tables['app_gympro_reviews'])
+                    ->get();
+    }
+    //-----------------------------Exercise Category of Program-----------------------//
+     /*
+     * This method will return all exercise categories
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_exercise_categories()
+    {
+        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.id as exercise_category_id,'.$this->tables['app_gympro_exercise_categories'].'.*')
+                    ->from($this->tables['app_gympro_exercise_categories'])
+                    ->get();
+    }
+    //-----------------------------Exercise Subcategory of Program-----------------------//
+     /*
+     * This method will return all exercise subcategories
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_exercise_subcategories($exercise_category_id)
+    {
+        return $this->db->select($this->tables['app_gympro_exercise_subcategories'].'.id as exercise_subcategory_id,'.$this->tables['app_gympro_exercise_subcategories'].'.*')
+                    ->from($this->tables['app_gympro_exercise_subcategories'])
+                    ->get();
+    }
+    //----------------------------Assessment Module------------------------------//
+    //----------------------------Reassess Module of Assessment------------------//
+    /*
+     * This method will return all reassess
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_reassess()
+    {
+        return $this->db->select($this->tables['app_gympro_reassess'].'.id as reassess_id,'.$this->tables['app_gympro_reassess'].'.*')
+                    ->from($this->tables['app_gympro_reassess'])
+                    ->get();
+    }
+    /*
+     * This method will update reassess info
+     * @param $reassess_id, reassess id
+     * @param $additional_data, reassess data to be updated
+     * @Author Nazmul on 21st November 2014
+     */
+    public function update_reassess($reassess_id, $additional_data)
+    {
+        
+    }  
     //-----------------------------Nutrition Module -----------------------------//
     //-----------------------------Meal Time Module of Nutrition -----------------------------//
     /*

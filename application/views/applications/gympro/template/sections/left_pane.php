@@ -15,7 +15,7 @@
 <div class="ln_wide_portion">
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-        <a href="<?php echo base_url().'applications/gympro/program'?>">Programme</a>
+        <a href="<?php echo base_url().'applications/gympro/programs'?>">Programme</a>
     </div>
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/nutrition.png">
@@ -23,7 +23,7 @@
     </div>    
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/assesments.png">
-        <a href="">Assesments</a>
+        <a href="<?php echo base_url()?>applications/gympro/assessments">Assesments</a>
     </div>
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/missions.png">

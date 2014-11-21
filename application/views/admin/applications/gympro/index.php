@@ -11,14 +11,14 @@
         </div>
         <div class="row">
             <div class ="col-md-2">
+                <a href="<?php echo base_url()?>admin/applications_gympro/manage_assessments"><button class="form-control btn button-custom">Assessments</button></a>
+            </div>
+            <div class ="col-md-2">
                 <a href="<?php echo base_url()?>admin/applications_gympro/manage_programs"><button class="form-control btn button-custom">Programs</button></a>
             </div>
             <div class ="col-md-2">
                 <a href="<?php echo base_url()?>admin/applications_gympro/manage_nutritions"><button class="form-control btn button-custom">Nutrition</button></a>
-            </div>
-            <div class ="col-md-2">
-                <a href="<?php echo base_url()?>admin/applications_gympro/manage_assessments"><button class="form-control btn button-custom">Assessments</button></a>
-            </div>
+            </div>            
         </div>
     </div>
 </div>

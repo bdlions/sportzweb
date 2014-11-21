@@ -844,6 +844,38 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
+    //------------------------------------------Program Module---------------------------//
+    public function manage_programs()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_programs", $this->data);
+    }
+    public function manage_reviews()
+    {
+        $this->data['review_list'] = $this->admin_gympro_library->get_all_reviews()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_reviews", $this->data);
+    }
+    public function manage_exercise_categories()
+    {
+        $this->data['exercise_category_list'] = $this->admin_gympro_library->get_all_exercise_categories()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_exercise_categories", $this->data);
+    }
+    public function manage_exercise_subcategories($exercise_category_id = 0)
+    {
+        $this->data['exercise_subcategory_list'] = $this->admin_gympro_library->get_all_exercise_subcategories($exercise_category_id)->result_array();
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_exercise_subcategories", $this->data);
+    }
+    //------------------------------------------ Assessment Module ----------------------//
+    public function manage_assessments()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_assessments", $this->data);
+    }
+    public function manage_reassess()
+    {
+        $this->data['reassess_list'] = $this->admin_gympro_library->get_all_reassess()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_reassess", $this->data);
+    }
     //-------------------------------------------Nutrition-------------------------------//
     public function manage_nutritions()
     {
