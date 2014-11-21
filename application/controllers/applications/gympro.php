@@ -258,5 +258,34 @@ class Gympro extends Role_Controller{
         );
         $this->template->load(null,'applications/gympro/preference', $this->data);
     }
+    
+    //-----------------------------------------Nutrition Module------------------------------------//
+    public function create_nutrition()
+    {
+        $meal_time_list = array();
+        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
+        foreach($meal_time_array as $meal_time)
+        {
+            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
+        }
+        $this->data['meal_time_list'] =$meal_time_list;
+        
+        $workout_list = array();
+        $workout_array = $this->gympro_library->get_all_workouts()->result_array();
+        foreach($workout_array as $workout)
+        {
+            $workout_list[$workout['workout_id']] =  $workout['title'];
+        }
+        $this->data['workout_list'] =$workout_list;
+        
+        $this->template->load(null,'applications/gympro/nutrition_create', $this->data);
+    }
+    
+    //-----------------------------------------Mission Module------------------------------------//
+    public function create_mission()
+    {
+        $this->data['message'] = '';        
+        $this->template->load(null,'applications/gympro/mission_create', $this->data);
+    }
 }
 

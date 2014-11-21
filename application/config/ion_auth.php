@@ -154,10 +154,19 @@ $config['tables']['app_gympro_girth_unit_types']            = 'app_gympro_girth_
 $config['tables']['app_gympro_time_zones']                  = 'app_gympro_time_zones';
 $config['tables']['app_gympro_hourly_rates']                = 'app_gympro_hourly_rates';
 $config['tables']['app_gympro_currencies']                  = 'app_gympro_currencies';
+$config['tables']['app_gympro_client_statuses']             = 'app_gympro_client_statuses';
 $config['tables']['app_gympro_clients']                     = 'app_gympro_clients';
 $config['tables']['app_gympro_health_questions']            = 'app_gympro_health_questions';
 $config['tables']['app_gympro_groups']                      = 'app_gympro_groups';
 $config['tables']['app_gympro_groups_clients']              = 'app_gympro_groups_clients';
+$config['tables']['app_gympro_meal_times']                  = 'app_gympro_meal_times';
+$config['tables']['app_gympro_workouts']                    = 'app_gympro_workouts';
+$config['tables']['app_gympro_nutritions']                  = 'app_gympro_nutritions';
+$config['tables']['app_gympro_nutritions_groups']           = 'app_gympro_nutritions_groups';
+$config['tables']['app_gympro_nutritions_clients']          = 'app_gympro_nutritions_clients';
+$config['tables']['app_gympro_missions']                    = 'app_gympro_missions';
+$config['tables']['app_gympro_missions_groups']             = 'app_gympro_missions_groups';
+$config['tables']['app_gympro_missions_clients']            = 'app_gympro_missions_clients';
 
 
 

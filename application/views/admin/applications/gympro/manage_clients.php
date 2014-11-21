@@ -1,13 +1,21 @@
 <div class="panel panel-default">
     <div class="panel-heading">Manage Clients</div>
     <div class="panel-body">
-        <?php if ($allow_write) { ?>
-        <div class="row form-group">
-            <div class ="col-md-3 pull-left">
-                <button onclick="open_modal_create()" class="form-control btn button-custom">CREATE NEW CLIENT</button>
+        
+        <div class="row" style="padding-bottom:10px">
+            <div class ="col-md-2">
+                <a href="<?php echo base_url()?>admin/applications_gympro/manage_health_questions"><button class="form-control btn button-custom">Health Questions</button></a>
+            </div>
+            <div class ="col-md-2">
+                <a href="<?php echo base_url()?>admin/applications_gympro/manage_client_statuses">
+                    <button class="btn button-custom">Client Status</button>
+                </a>
+            </div>
+            <div class ="col-md-2">
+                <button onclick="open_modal_create()" class="form-control btn button-custom">Create Client</button>
             </div>
         </div>
-        <?php } ?>
+        
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered table-responsive">

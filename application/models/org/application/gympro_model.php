@@ -210,4 +210,26 @@ class Gympro_model extends Ion_auth_model {
     {
         
     }
+    
+    //----------------------------------Nutrition Module--------------------------------------//
+    /*
+     * This method will return all meal times
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_meal_times()
+    {
+        return $this->db->select($this->tables['app_gympro_meal_times'].'.id as meal_time_id,'.$this->tables['app_gympro_meal_times'].'.*')
+                    ->from($this->tables['app_gympro_meal_times'])
+                    ->get();
+    }
+    /*
+     * This method will return all workouts
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_workouts()
+    {
+        return $this->db->select($this->tables['app_gympro_workouts'].'.id as workout_id,'.$this->tables['app_gympro_workouts'].'.*')
+                    ->from($this->tables['app_gympro_workouts'])
+                    ->get();
+    }
 }

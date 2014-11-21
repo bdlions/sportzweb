@@ -269,6 +269,12 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     // ----------------------------------- Clients -------------------------------//
+    //-----------------------------------Client Statuses--------------------//
+    public function manage_client_statuses()
+    {
+        $this->data['client_status_list'] = $this->admin_gympro_library->get_all_client_statuses()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_client_statuses", $this->data);
+    }
     public function manage_clients()
     {
         $this->data['clients_list'] = $this->admin_gympro_library->get_all_clients()->result_array();
@@ -837,6 +843,24 @@ class Applications_gympro extends CI_Controller{
             $result['message'] = $this->admin_gympro_library->errors_alert();
         }
         echo json_encode($result);
+    }
+    //-------------------------------------------Nutrition-------------------------------//
+    public function manage_nutritions()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_nutritions", $this->data);
+    }
+    //-------------------------------------------Meal Time-------------------------------//
+    public function manage_meal_times()
+    {
+        $this->data['meal_time_list'] = $this->admin_gympro_library->get_all_meal_times()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_meal_times", $this->data);
+    }
+    //-------------------------------------------Workout-------------------------------//
+    public function manage_workouts()
+    {
+        $this->data['workout_list'] = $this->admin_gympro_library->get_all_workouts()->result_array();
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_workouts", $this->data);
     }
 }
 

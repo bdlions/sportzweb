@@ -1976,6 +1976,17 @@ INSERT INTO `app_gympro_health_questions` (`title`) VALUES
 ('Taking any prescribed medication or dietary supplements?'),
 ('Any other medical conditions or problems not previously mentioned?'),
 ('Drinking?');
+CREATE TABLE IF NOT EXISTS `app_gympro_client_statuses` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_client_statuses` (`title`) VALUES
+('Active'),
+('Inactive'),
+('Potential');
 CREATE TABLE IF NOT EXISTS `app_gympro_clients` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -2011,8 +2022,172 @@ CREATE TABLE IF NOT EXISTS `app_gympro_groups_clients` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `app_gympro_groups_clients`
 	ADD CONSTRAINT `app_gympro_groups_clients1` FOREIGN KEY(`client_id`) REFERENCES `app_gympro_clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-	ADD CONSTRAINT `app_gympro_groups_clients2` FOREIGN KEY(`group_id`) REFERENCES `app_gympro_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;	
-	
+	ADD CONSTRAINT `app_gympro_groups_clients2` FOREIGN KEY(`group_id`) REFERENCES `app_gympro_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- --------------------------------------------------Nutrition Module -------------------------------------------- --
+CREATE TABLE IF NOT EXISTS `app_gympro_meal_times` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `order` int(11) unsigned NOT NULL DEFAULT 0,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_meal_times` (`title`, `order`) VALUES
+('5.00 am', 1),
+('5.15 am', 2),
+('5.30 am', 3),
+('5.45 am', 4),
+('6.00 am', 5),
+('6.15 am', 6),
+('6.30 am', 7),
+('6.45 am', 8),
+('7.00 am', 9),
+('7.15 am', 10),
+('7.30 am', 11),
+('7.45 am', 12),
+('8.00 am', 13),
+('8.15 am', 14),
+('8.30 am', 15),
+('8.45 am', 16),
+('9.00 am', 17),
+('9.15 am', 18),
+('9.30 am', 19),
+('9.45 am', 20),
+('10.00 am', 21),
+('10.15 am', 22),
+('10.30 am', 23),
+('10.45 am', 24),
+('11.00 am', 25),
+('11.15 am', 26),
+('11.30 am', 27),
+('11.45 am', 28),
+('12.00 pm', 29),
+('12.15 pm', 30),
+('12.30 pm', 31),
+('12.45 pm', 32),
+('1.00 pm', 33),
+('1.15 pm', 34),
+('1.30 pm', 35),
+('1.45 pm', 36),
+('2.00 pm', 37),
+('2.15 pm', 38),
+('2.30 pm', 39),
+('2.45 pm', 40),
+('3.00 pm', 41),
+('3.15 pm', 42),
+('3.30 pm', 43),
+('3.45 pm', 44),
+('4.00 pm', 45),
+('4.15 pm', 46),
+('4.30 pm', 47),
+('4.45 pm', 48),
+('5.00 pm', 49),
+('5.15 pm', 50),
+('5.30 pm', 51),
+('5.45 pm', 52),
+('6.00 pm', 53),
+('6.15 pm', 54),
+('6.30 pm', 55),
+('6.45 pm', 56),
+('7.00 pm', 57),
+('7.15 pm', 58),
+('7.30 pm', 59),
+('7.45 pm', 60),
+('8.00 pm', 61),
+('8.15 pm', 62),
+('8.30 pm', 63),
+('8.45 pm', 64),
+('9.00 pm', 65),
+('9.15 pm', 66),
+('9.30 pm', 67),
+('9.45 pm', 68);
+CREATE TABLE IF NOT EXISTS `app_gympro_workouts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_workouts` (`title`) VALUES
+('Pre workout'),
+('Post workout');
+CREATE TABLE IF NOT EXISTS `app_gympro_nutritions` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `meal_list` text,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE TABLE IF NOT EXISTS `app_gympro_nutritions_groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nutrition_id` int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `app_gympro_nutritions_groups1_idx` (`nutrition_id`),
+  KEY `app_gympro_nutritions_groups2_idx` (`group_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_gympro_nutritions_groups`
+	ADD CONSTRAINT `app_gympro_nutritions_groups1` FOREIGN KEY(`nutrition_id`) REFERENCES `app_gympro_nutritions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_gympro_nutritions_groups2` FOREIGN KEY(`group_id`) REFERENCES `app_gympro_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;		
+CREATE TABLE IF NOT EXISTS `app_gympro_nutritions_clients` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nutrition_id` int(11) unsigned NOT NULL,
+  `client_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `app_gympro_nutritions_clients1_idx` (`nutrition_id`),
+  KEY `app_gympro_nutritions_clients2_idx` (`client_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_gympro_nutritions_clients`
+	ADD CONSTRAINT `app_gympro_nutritions_clients1` FOREIGN KEY(`nutrition_id`) REFERENCES `app_gympro_nutritions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_gympro_nutritions_clients2` FOREIGN KEY(`client_id`) REFERENCES `app_gympro_clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- --------------------------------------------------Mission Module -------------------------------------------- --
+CREATE TABLE IF NOT EXISTS `app_gympro_missions` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `label` varchar(500),
+  `start_date` varchar(50),
+  `end_date` varchar(50),
+  `monday` text,
+  `tuesday` text,
+  `wednesday` text,
+  `thursday` text,
+  `friday` text,
+  `saturday` text,
+  `sunday` text,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE TABLE IF NOT EXISTS `app_gympro_missions_groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `mission_id` int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `app_gympro_missions_groups1_idx` (`mission_id`),
+  KEY `app_gympro_missions_groups2_idx` (`group_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_gympro_missions_groups`
+	ADD CONSTRAINT `app_gympro_missions_groups1` FOREIGN KEY(`mission_id`) REFERENCES `app_gympro_missions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_gympro_missions_groups2` FOREIGN KEY(`group_id`) REFERENCES `app_gympro_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;		
+CREATE TABLE IF NOT EXISTS `app_gympro_missions_clients` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `mission_id` int(11) unsigned NOT NULL,
+  `client_id` int(11) unsigned NOT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `app_gympro_missions_clients1_idx` (`mission_id`),
+  KEY `app_gympro_missions_clients2_idx` (`client_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_gympro_missions_clients`
+	ADD CONSTRAINT `app_gympro_missions_clients1` FOREIGN KEY(`mission_id`) REFERENCES `app_gympro_missions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_gympro_missions_clients2` FOREIGN KEY(`client_id`) REFERENCES `app_gympro_clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;	
+
 -- Visitor log
 CREATE TABLE `pages`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

@@ -226,13 +226,21 @@ class Admin_gympro_model extends Ion_auth_model
     }
     
     /*
-     * This method will return all account types
+     * This method will return all users under gympro
      * @Author Nazmul on 16th November 2014
      */
     public function get_all_users()
     {
-        return $this->db->select($this->tables['app_gympro_users'].'.*')
+        return $this->db->select($this->tables['users'].'.first_name,'.$this->tables['users'].'.last_name,'.$this->tables['app_gympro_account_types'].'.title as account_type_title,'.$this->tables['app_gympro_height_unit_types'].'.title as height_unit_title,'.$this->tables['app_gympro_weight_unit_types'].'.title as weight_unit_title,'.$this->tables['app_gympro_girth_unit_types'].'.title as girth_unit_title,'.$this->tables['app_gympro_time_zones'].'.title as time_zone_title,'.$this->tables['app_gympro_hourly_rates'].'.title as hourly_rate_title,'.$this->tables['app_gympro_currencies'].'.title as currency_title,'.$this->tables['app_gympro_users'].'.*')
                     ->from($this->tables['app_gympro_users'])
+                    ->join($this->tables['users'],  $this->tables['users'].'.id='.$this->tables['app_gympro_users'].'.user_id')
+                    ->join($this->tables['app_gympro_account_types'],  $this->tables['app_gympro_account_types'].'.id='.$this->tables['app_gympro_users'].'.account_type_id')
+                    ->join($this->tables['app_gympro_height_unit_types'],  $this->tables['app_gympro_height_unit_types'].'.id='.$this->tables['app_gympro_users'].'.height_unit_id')
+                    ->join($this->tables['app_gympro_weight_unit_types'],  $this->tables['app_gympro_weight_unit_types'].'.id='.$this->tables['app_gympro_users'].'.weight_unit_id')
+                    ->join($this->tables['app_gympro_girth_unit_types'],  $this->tables['app_gympro_girth_unit_types'].'.id='.$this->tables['app_gympro_users'].'.girth_unit_id')
+                    ->join($this->tables['app_gympro_time_zones'],  $this->tables['app_gympro_time_zones'].'.id='.$this->tables['app_gympro_users'].'.time_zone_id')
+                    ->join($this->tables['app_gympro_hourly_rates'],  $this->tables['app_gympro_hourly_rates'].'.id='.$this->tables['app_gympro_users'].'.hourly_rate_id')
+                    ->join($this->tables['app_gympro_currencies'],  $this->tables['app_gympro_currencies'].'.id='.$this->tables['app_gympro_users'].'.currency_id')
                     ->get();
     }
     
@@ -264,7 +272,29 @@ class Admin_gympro_model extends Ion_auth_model
     
     
 //    ======================== CLIENTS ========================
+    // ----------------------Client Statuses Module of Client ------------------------//
     
+    /*
+     * This method will return all statuses of client
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_client_statuses()
+    {
+        return $this->db->select($this->tables['app_gympro_client_statuses'].'.id as client_status_id,'.$this->tables['app_gympro_client_statuses'].'.*')
+                    ->from($this->tables['app_gympro_client_statuses'])
+                    ->get();
+    }
+    
+    /*
+     * This method will update client status info
+     * @param $client_status_id, client status id
+     * @param $additional_data, client status to be updated
+     * @Author Nazmul on 21st November 2014
+     */
+    public function update_client_status($client_status_id, $additional_data)
+    {
+        
+    }
     
     /*
      * This method will check identity of account type table
@@ -1161,8 +1191,105 @@ class Admin_gympro_model extends Ion_auth_model
         $this->set_message('delete_currencies_successful');
         return TRUE;
     }
+    //-----------------------------Nutrition Module -----------------------------//
+    //-----------------------------Meal Time Module of Nutrition -----------------------------//
+    /*
+     * This method will create a new meal time
+     * @param $additional_data, meal time data to be added
+     * @Author Nazmul on 21st November 2014
+     */
+    public function create_meal_time($additional_data)
+    {
+        
+    }
+    /*
+     * This mehtod will return meal time info
+     * @param $meal_time_id, meal time id
+     * @Author Nazmul on 21st November 2014 
+     */
+    public function get_meal_time_info($meal_time_id)
+    {
+        
+    }
+    /*
+     * This method will return all meal times
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_meal_times()
+    {
+        return $this->db->select($this->tables['app_gympro_meal_times'].'.id as meal_time_id,'.$this->tables['app_gympro_meal_times'].'.*')
+                    ->from($this->tables['app_gympro_meal_times'])
+                    ->get();
+    }
+    /*
+     * This method will update meal time info
+     * @param $meal_time_id, meal time id
+     * @param $additional_data, meal time data to be updated
+     * @Author Nazmul on 21st November 2014
+     */
+    public function update_meal_time($meal_time_id, $additional_data)
+    {
+        
+    }    
+    /*
+     * This method will delete meal time info
+     * @param $meal_time_id, meal time id
+     * @Author Nazmul on 21st November 2014
+     */
+    public function delete_meal_time($meal_time_id)
+    {
+        
+    }    
+    //--------------------------------------------Workout Module of Nutrition -------------------------------//
+    /*
+     * This method will create a new workout
+     * @param $additional_data, workout data to be added
+     * @Author Nazmul on 21st November 2014
+     */
+    public function create_workout($additional_data)
+    {
+        
+    }
+    /*
+     * This mehtod will return workout info
+     * @param $workout_id, workout id
+     * @Author Nazmul on 21st November 2014 
+     */
+    public function get_workout_info($workout_id)
+    {
+        
+    }
+    /*
+     * This method will return all workouts
+     * @Author Nazmul on 21st November 2014
+     */
+    public function get_all_workouts()
+    {
+        return $this->db->select($this->tables['app_gympro_workouts'].'.id as workout_id,'.$this->tables['app_gympro_workouts'].'.*')
+                    ->from($this->tables['app_gympro_workouts'])
+                    ->get();
+    }
     
+    /*
+     * This method will update workout info
+     * @param $workout_id, workout id
+     * @param $additional_data, workout data to be updated
+     * @Author Nazmul on 21st November 2014
+     */
+    public function update_workout($workout_id, $additional_data)
+    {
+        
+    }
     
+    /*
+     * This method will delete workout info
+     * @param $workout_id, work out id
+     * @Author Nazmul on 21st November 2014
+     */
+    public function delete_workout($workout_id)
+    {
+        
+    }
     
 //    
 //    
