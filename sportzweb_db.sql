@@ -2015,7 +2015,7 @@ CREATE TABLE IF NOT EXISTS `app_gympro_clients` (
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `app_gympro_clients_u1_idx` (`user_id`)
+  KEY `app_gympro_clients_u1_idx` (`user_id`),
   KEY `app_gympro_clients_gender1_idx` (`gender_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `app_gympro_clients`
