@@ -54,4 +54,47 @@ class Status_feed extends JsonRPCServer {
         //echo json_encode($result);
         return json_encode($result);
     }
+    
+    /*
+     * This method will store a status
+     * @param $status_data, status data
+     * @Author Nazmul on 23rd November 2014
+     */
+    function post_status($status_data = '')
+    {
+        $result = array();
+        
+        //$data = json_decode($status_data);
+        $data = new stdClass();
+        $data->user_id = 4;
+        $data->mapping_id = 4;
+        $data->status_type_id = 1;
+        $data->status_category_id = 2;
+        $data->description = 'test';
+        $data->reference_id = '';
+        $data->shared_type_id = '';
+        $data->via_user_id = '';
+        
+        $this->session->set_userdata('user_id', $data->user_id);
+        
+        $additional_data["user_id"] = $data->user_id;
+        $additional_data["mapping_id"] = $data->mapping_id;
+        $additional_data["status_type_id"] = $data->status_type_id;
+        $additional_data["status_category_id"] = $data->status_category_id;
+        $additional_data["description"] = $data->description;
+        $additional_data["reference_id"] = $data->reference_id;
+        $additional_data["shared_type_id"] = $data->shared_type_id;
+        $additional_data["via_user_id"] = $data->via_user_id;
+        $status_id = $this->statuses->post_status($additional_data);
+        if( $status_id !== FALSE)
+        {
+            $result['status'] = 1;
+        }
+        else
+        {
+            $result['status'] = 0;
+        }
+        //echo json_encode($result);
+        return json_encode($result);
+    }
 }
