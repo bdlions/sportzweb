@@ -104,9 +104,6 @@
                         Add another: <a href="" >Weight exercise</a>&nbsp; or &nbsp;<a href="">Cardio Exercise</a>
                     </div>
                 </div>
-<!--                <div>
-                    <button style="line-height: 22px;">Save Changes</button> or <a href="" style="font-size: 16px; line-height: 22px;">Go Back</a>
-                </div>-->
             </div>
             <div class="pad_footer">
                 <button>Save Changes</button> or <a href="<?php echo base_url()?>applications/gympro/programs">Go Back</a>

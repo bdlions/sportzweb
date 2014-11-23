@@ -10,7 +10,7 @@
                 NEW MISSION
             </div>
             <div class="pad_body">
-                <div style="display: inline-block; width: 100%">
+                
                     <form class="form-horizontal" role="form">
                         <div class="row form-group">
                             <label class="col-sm-2 control-label">Label: </label>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                
             </div>
             <div class="pad_footer">
                 <button>Save Changes</button> or <a href="<?php echo base_url()?>applications/gympro/missions">Go Back</a>

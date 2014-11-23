@@ -268,13 +268,69 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
-    // ----------------------------------- Clients -------------------------------//
+    
+    
     //-----------------------------------Client Statuses--------------------//
-    public function manage_client_statuses()
-    {
-        $this->data['client_status_list'] = $this->admin_gympro_library->get_all_client_statuses()->result_array();
+    public function manage_client_statuses() {
+        $this->data['data_list'] = $this->admin_gympro_library->get_all_client_statuses()->result_array();
+        $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_client_statuses", $this->data);
     }
+
+    public function get_client_statuses_info() {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_client_statuses_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+    public function delete_client_statuses() {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if ($this->admin_gympro_library->delete_client_statuses($delete_id)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    public function update_client_statuses() {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );        
+        if ($this->admin_gympro_library->update_client_statuses($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    public function create_client_statuses() {
+        $result = array();
+        $additional_data = array(
+            'title' => $this->input->post('input_a'),
+        );
+        if ($this->admin_gympro_library->create_client_statuses($additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+
+
+    
+    
+    // ----------------------------------- Clients -------------------------------//
+
     public function manage_clients()
     {
         $this->data['clients_list'] = $this->admin_gympro_library->get_all_clients()->result_array();
@@ -850,11 +906,67 @@ class Applications_gympro extends CI_Controller{
         $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_programs", $this->data);
     }
-    public function manage_reviews()
-    {
-        $this->data['review_list'] = $this->admin_gympro_library->get_all_reviews()->result_array();
+    
+    //--------------------------------------------Review-----------------------
+    public function manage_reviews() {
+        $this->data['data_list'] = $this->admin_gympro_library->get_all_reviews()->result_array();
+        $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_reviews", $this->data);
     }
+
+    public function get_reviews_info() {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_reviews_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+    public function delete_reviews() {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if ($this->admin_gympro_library->delete_reviews($delete_id)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    public function update_reviews() {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_reviews($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    public function create_reviews() {
+        $result = array();
+        $additional_data = array(
+            'title' => $this->input->post('input_a'),
+        );
+        if ($this->admin_gympro_library->create_reviews($additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    
+    
+    
+    
+    
     public function manage_exercise_categories()
     {
         $this->data['exercise_category_list'] = $this->admin_gympro_library->get_all_exercise_categories()->result_array();
@@ -871,10 +983,61 @@ class Applications_gympro extends CI_Controller{
         $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_assessments", $this->data);
     }
-    public function manage_reassess()
-    {
-        $this->data['reassess_list'] = $this->admin_gympro_library->get_all_reassess()->result_array();
+    
+//    ========================================reasses Module===========================
+    
+	public function manage_reassess() {
+        $this->data['data_list'] = $this->admin_gympro_library->get_all_reassess()->result_array();
+        $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_reassess", $this->data);
+    }
+
+    public function delete_reassess() {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if ($this->admin_gympro_library->delete_reassess($delete_id)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    public function create_reassess() {
+        $result = array();
+        $additional_data = array(
+            'title' => $this->input->post('input_a'),
+        );
+        if ($this->admin_gympro_library->create_reassess($additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+ 
+    public function get_reassess_info() {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_reassess_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+    public function update_reassess() {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_reassess($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     //-------------------------------------------Nutrition-------------------------------//
     public function manage_nutritions()
@@ -883,16 +1046,189 @@ class Applications_gympro extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_nutritions", $this->data);
     }
     //-------------------------------------------Meal Time-------------------------------//
-    public function manage_meal_times()
-    {
-        $this->data['meal_time_list'] = $this->admin_gympro_library->get_all_meal_times()->result_array();
+    
+	public function manage_meal_times() {
+        $this->data['data_list'] = $this->admin_gympro_library->get_all_meal_times()->result_array();
+        $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_meal_times", $this->data);
     }
+
+    public function delete_meal_times() {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if ($this->admin_gympro_library->delete_meal_times($delete_id)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    public function create_meal_times() {
+        $result = array();
+        $additional_data = array(
+            'title' => $this->input->post('input_a'),
+        );
+        if ($this->admin_gympro_library->create_meal_times($additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+ 
+    public function get_meal_times_info() {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_meal_times_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+    public function update_meal_times() {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_meal_times($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
     //-------------------------------------------Workout-------------------------------//
-    public function manage_workouts()
-    {
-        $this->data['workout_list'] = $this->admin_gympro_library->get_all_workouts()->result_array();
+    
+	public function manage_workouts() {
+        $this->data['data_list'] = $this->admin_gympro_library->get_all_workouts()->result_array();
+        $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_workouts", $this->data);
     }
-}
 
+    public function delete_workouts() {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if ($this->admin_gympro_library->delete_workouts($delete_id)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    public function create_workouts() {
+        $result = array();
+        $additional_data = array(
+            'title' => $this->input->post('input_a'),
+        );
+        if ($this->admin_gympro_library->create_workouts($additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+ 
+    public function get_workouts_info() {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_workouts_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+    public function update_workouts() {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_workouts($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+//====================================TEMPLATE=========================================
+/*
+
+	public function manage_module_name() {
+        $this->data['data_list'] = $this->admin_gympro_library->get_all_module_name()->result_array();
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/manage_module_name", $this->data);
+    }
+
+    public function delete_module_name() {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if ($this->admin_gympro_library->delete_module_name($delete_id)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    public function create_module_name() {
+        $result = array();
+        $additional_data = array(
+            'title' => $this->input->post('input_a'),
+        );
+        if ($this->admin_gympro_library->create_module_name($additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+ 
+    public function get_module_name_info() {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_module_name_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+
+    public function update_module_name() {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_module_name($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+*/
+}

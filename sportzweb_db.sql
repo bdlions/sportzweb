@@ -1963,6 +1963,7 @@ ALTER TABLE `app_gympro_users`
 CREATE TABLE IF NOT EXISTS `app_gympro_health_questions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
+  `show_additional_info` boolean DEFAULT TRUE,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)

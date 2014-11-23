@@ -242,6 +242,57 @@ $lang['update_preferences_duplicate_title']            = "Preference title alrea
 $lang['update_preferences_successful']                 = "Preference is updated successfully.";
 $lang['update_preferences_fail']                       = "Failed to update Preference.";
 
+
+$lang['create_reviews_duplicate_title']            = "Review title already used.";
+$lang['create_reviews_successful']                 = "Review is created successfully.";
+$lang['create_reviews_fail']                       = "Failed to create Review.";
+$lang['delete_reviews_successful']                 = "Review is deleted successfully.";
+$lang['delete_reviews_fail']                       = "Failed to delete Review.";
+$lang['update_reviews_duplicate_title']            = "Review title already used.";
+$lang['update_reviews_successful']                 = "Review is updated successfully.";
+$lang['update_reviews_fail']                       = "Failed to update Review.";
+
+
+$lang['create_reassess_duplicate_title']            = "Reasses title already used.";
+$lang['create_reassess_successful']                 = "Reasses is created successfully.";
+$lang['create_reassess_fail']                       = "Failed to create Reasses.";
+$lang['delete_reassess_successful']                 = "Reasses is deleted successfully.";
+$lang['delete_reassess_fail']                       = "Failed to delete Reasses.";
+$lang['update_reassess_duplicate_title']            = "Reasses title already used.";
+$lang['update_reassess_successful']                 = "Reasses is updated successfully.";
+$lang['update_reassess_fail']                       = "Failed to update Reasses.";
+
+
+$lang['create_workouts_duplicate_title']            = "Workout title already used.";
+$lang['create_workouts_successful']                 = "Workout is created successfully.";
+$lang['create_workouts_fail']                       = "Failed to create Workout.";
+$lang['delete_workouts_successful']                 = "Workout is deleted successfully.";
+$lang['delete_workouts_fail']                       = "Failed to delete Workout.";
+$lang['update_workouts_duplicate_title']            = "Workout title already used.";
+$lang['update_workouts_successful']                 = "Workout is updated successfully.";
+$lang['update_workouts_fail']                       = "Failed to update Workout.";
+
+
+$lang['create_meal_times_duplicate_title']            = "Meal Time title already used.";
+$lang['create_meal_times_successful']                 = "Meal Time is created successfully.";
+$lang['create_meal_times_fail']                       = "Failed to create Meal Time.";
+$lang['delete_meal_times_successful']                 = "Meal Time is deleted successfully.";
+$lang['delete_meal_times_fail']                       = "Failed to delete Meal Time.";
+$lang['update_meal_times_duplicate_title']            = "Meal Time title already used.";
+$lang['update_meal_times_successful']                 = "Meal Time is updated successfully.";
+$lang['update_meal_times_fail']                       = "Failed to update Meal Time.";
+
+
+$lang['create_client_statuses_duplicate_title']            = "Client Status title already used.";
+$lang['create_client_statuses_successful']                 = "Client Status is created successfully.";
+$lang['create_client_statuses_fail']                       = "Failed to create Client Status.";
+$lang['delete_client_statuses_successful']                 = "Client Status is deleted successfully.";
+$lang['delete_client_statuses_fail']                       = "Failed to delete Client Status.";
+$lang['update_client_statuses_duplicate_title']            = "Client Status title already used.";
+$lang['update_client_statuses_successful']                 = "Client Status is updated successfully.";
+$lang['update_client_statuses_fail']                       = "Failed to update Client Status.";
+
+
 $lang['update_gympro_user_successful']                 = "Account is updated successfully.";
 $lang['update_gympro_user_fail']                       = "Failed to update account info.";
 

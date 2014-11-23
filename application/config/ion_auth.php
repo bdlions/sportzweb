@@ -240,6 +240,11 @@ $config['app_gympro_hourly_rates_identity_column']      = 'title';
 $config['app_gympro_currencies_identity_column']        = 'title';
 $config['app_gympro_clients_identity_column']           = 'title';
 $config['app_gympro_health_questions_identity_column']  = 'title';
+$config['app_gympro_client_statuses_identity_column']   = 'title';
+$config['app_gympro_reviews_identity_column']           = 'title';
+$config['app_gympro_reassess_identity_column']          = 'title';
+$config['app_gympro_meal_times_identity_column']        = 'title';
+$config['app_gympro_workouts_identity_column']          = 'title';
 
 //SHOP APP
 $config['app_shop_product_identity_column']             = 'title';

@@ -10,11 +10,44 @@
                 ADDING EXERCISE
             </div>
             <div class="pad_body">
-                <form class="form-horizontal" role="form">
-                    <div class="row">
-                        
+                <?php echo form_open("applications/gympro/create_assessment/", array('id' => 'form_assesment', 'class' => 'form-horizontal')); ?>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                Category:*
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                Name:*
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                Description:
+                            </div>
+                            <div class="col-md-8">
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                Upload a photo:
+                            </div>
+                            <div class="col-md-6">
+                                <input type="file">
+                            </div>
+                        </div>
                     </div>
-                </form>                
+                </div>
+                <?php echo form_close(); ?>
             </div>
             <div class="pad_footer">
                 <button>Save Exercise</button> or <a href="<?php echo base_url()?>applications/gympro/exercises">Cancel</a>

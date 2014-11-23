@@ -4,7 +4,7 @@
 
     <div class="row top_margin">
         <div class="col-md-2">
-            <!--left nav custom fore teis page-->
+            <!--left nav custom for this page-->
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#add_client').show();">ADDING CLIENT</a>
@@ -23,29 +23,29 @@
             </div>
         </div>
 
-
-
         <!--ADDING CLIENT-->
         <div class="col-md-7">
             <div class="pad_title">
                 ADDING CLIENT
             </div>
             <div class="pad_body">
-                <form class="form-horizontal" role="form">
-
+                <?php if (isset($message) && ($message != NULL)): ?>
+                    <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
+                <?php endif; ?>
+                <?php echo form_open("applications/gympro/create_client", array('id' => '', 'class' => 'form-horizontal')); ?>
                     <!--<div class="row" style="display: none">-->
                     <div class="row hidden_tab" id="add_client" style="display: block">
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">First Name: </label>
                                 <div class="col-sm-6">
-                                    <input class="form-control">
+                                    <?php echo form_input($first_name + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Last Name: </label>
                                 <div class="col-sm-6">
-                                    <input class="form-control">
+                                    <?php echo form_input($last_name + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -110,7 +110,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <!--CONTACT DETAILS-->
                     <!--<div class="row" style="display: none">-->
@@ -328,18 +327,6 @@
                     <div class="row hidden_tab" id="notes">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Current workout: </label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Goals: </label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-sm-4 control-label">Notes: </label>
                                 <div class="col-sm-8">
                                     <textarea class="form-control"></textarea>
@@ -348,26 +335,14 @@
                         </div>
                     </div>
 
-                </form>
                 <div>
-                    <button style="line-height: 22px;">Save Client</button> or <a href="<?php echo base_url().'applications/gympro/manage_clients'?>" style="font-size: 16px; line-height: 22px;">Cancel</a>
+                    <?php echo form_input($submit_button);?>
+
+                     or <a href="<?php echo base_url().'applications/gympro/manage_clients'?>" style="font-size: 16px; line-height: 22px;">Cancel</a>
                 </div>
+                <?php echo form_close();?>
             </div>
         </div>
 
     </div>
 </div>
-<script>
-function clicled_a()
-{
-//            .style.display = 'none';
-//    var classes = document.getElementsByClassName('hidden_tab');
-    
-//    document.getElementById('contact_details').style.display = 'block';
-    $('.hidden_tab').hide();$('#contact_details').show();
-}
-function clicled_b()
-{
-    $('.hidden_tab').hide();$('#add_client').show();
-}
-</script>

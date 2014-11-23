@@ -180,7 +180,12 @@ class Gympro_model extends Ion_auth_model {
      */
     public function create_client($additional_data)
     {
-        
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_clients'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_clients'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        $this->set_message('create_client_statuses_successful');
+        return (isset($insert_id)) ? $insert_id : FALSE;
     }
     /*
      * This method will update client info
@@ -199,7 +204,9 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_clients($user_id)
     {
-        
+        return $this->db->select($this->tables['app_gympro_clients'].'.id as client_id,'.$this->tables['app_gympro_clients'].'.*')
+                    ->from($this->tables['app_gympro_clients'])
+                    ->get();
     }
     /*
      * This method will return client info

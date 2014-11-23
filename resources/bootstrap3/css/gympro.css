@@ -135,8 +135,8 @@ a:hover
 .pad_title, .pad_body, .pad_footer
 {
     background-color: #E4E4E4; 
-    display: inline-block; 
-    width: 100%;
+/*    display: inline-block; 
+    width: 100%;*/
 }
 .pad_title, .pad_footer
 {
@@ -161,6 +161,12 @@ a:hover
 .pad_footer
 {
     margin-top: 1px;
+}
+.pad_white
+{
+    background-color: white;
+    padding: 10px; 
+    margin: 1px;
 }
 
 /*PAGE-CREATE-CLIENT*/

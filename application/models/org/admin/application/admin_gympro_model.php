@@ -21,7 +21,12 @@ class Admin_gympro_model extends Ion_auth_model
     protected $app_gympro_hourly_rates_identity_column;
     protected $app_gympro_currencies_identity_column;
     protected $app_gympro_clients_identity_column;
+    protected $app_gympro_client_statuses_identity_column;
     protected $app_gympro_health_questions_identity_column;
+    protected $app_gympro_meal_times_identity_column;
+    protected $app_gympro_reassess_identity_column;
+    protected $app_gympro_reviews_identity_column;
+    protected $app_gympro_workouts_identity_column;
 
     public function __construct() {
         parent::__construct();
@@ -33,7 +38,12 @@ class Admin_gympro_model extends Ion_auth_model
         $this->app_gympro_hourly_rates_identity_column          = $this->config->item('app_gympro_hourly_rates_identity_column', 'ion_auth');
         $this->app_gympro_currencies_identity_column            = $this->config->item('app_gympro_currencies_identity_column', 'ion_auth');
         $this->app_gympro_clients_identity_column               = $this->config->item('app_gympro_clients_identity_column', 'ion_auth');
-        $this->app_gympro_health_questions_identity_column               = $this->config->item('app_gympro_health_questions_identity_column', 'ion_auth');
+        $this->app_gympro_client_statuses_identity_column       = $this->config->item('app_gympro_client_statuses_identity_column', 'ion_auth');
+        $this->app_gympro_health_questions_identity_column      = $this->config->item('app_gympro_health_questions_identity_column', 'ion_auth');
+        $this->app_gympro_meal_times_identity_column            = $this->config->item('app_gympro_meal_times_identity_column', 'ion_auth');
+        $this->app_gympro_reassess_identity_column              = $this->config->item('app_gympro_reassess_identity_column', 'ion_auth');
+        $this->app_gympro_reviews_identity_column               = $this->config->item('app_gympro_reviews_identity_column', 'ion_auth');
+        $this->app_gympro_workouts_identity_column              = $this->config->item('app_gympro_workouts_identity_column', 'ion_auth');
     }
 
     
@@ -285,16 +295,78 @@ class Admin_gympro_model extends Ion_auth_model
                     ->get();
     }
     
-    /*
-     * This method will update client status info
-     * @param $client_status_id, client status id
-     * @param $additional_data, client status to be updated
-     * @Author Nazmul on 21st November 2014
-     */
-    public function update_client_status($client_status_id, $additional_data)
+    public function client_statuses_identity_check($identity = '')
     {
-        
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_gympro_client_statuses_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_gympro_client_statuses']) > 0;
     }
+    
+    public function create_client_statuses($additional_data)
+    {
+        if ( array_key_exists($this->app_gympro_client_statuses_identity_column, $additional_data) && $this->client_statuses_identity_check($additional_data[$this->app_gympro_client_statuses_identity_column]) )
+        {
+            $this->set_error('create_client_statuses_duplicate_' . $this->app_gympro_client_statuses_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_client_statuses'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_client_statuses'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        $this->set_message('create_client_statuses_successful');
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+    
+    public function update_client_statuses($client_statuses_id, $additional_data)
+    {
+        $client_statuses_info = $this->get_client_statuses_info($client_statuses_id)->row();
+        $additional_data['modified_on'] = now();
+        if (array_key_exists($this->app_gympro_client_statuses_identity_column, $additional_data) && $this->client_statuses_identity_check($additional_data[$this->app_gympro_client_statuses_identity_column]) && $client_statuses_info->{$this->app_gympro_client_statuses_identity_column} !== $additional_data[$this->app_gympro_client_statuses_identity_column])
+        {
+            $this->set_error('update_client_statuses_duplicate_' . $this->app_gympro_client_statuses_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_gympro_client_statuses'], $additional_data);
+        $this->db->update($this->tables['app_gympro_client_statuses'], $data, array('id' => $client_statuses_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_client_statuses_fail');
+            return FALSE;
+        }
+        $this->set_message('update_client_statuses_successful');
+        return TRUE;
+    }
+    
+    public function get_client_statuses_info($client_statuses_id)
+    {
+        $this->db->where($this->tables['app_gympro_client_statuses'].'.id', $client_statuses_id);
+        return $this->db->select($this->tables['app_gympro_client_statuses'].'.id as id,'.$this->tables['app_gympro_client_statuses'].'.*')
+                    ->from($this->tables['app_gympro_client_statuses'])
+                    ->get();
+    }
+    
+    public function delete_client_statuses($client_statuses_id)
+    {
+        if(!isset($client_statuses_id) || $client_statuses_id <= 0)
+        {
+            $this->set_error('delete_client_statuses_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $client_statuses_id);
+        $this->db->delete($this->tables['app_gympro_client_statuses']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_client_statuses_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_client_statuses_successful');
+        return TRUE;
+    }
+    
+    
+//    =========================CLIENTS-==========================
     
     /*
      * This method will check identity of account type table
@@ -1197,12 +1269,96 @@ class Admin_gympro_model extends Ion_auth_model
      * This method will return all reviews
      * @Author Nazmul on 21st November 2014
      */
-    public function get_all_reviews()
+//    public function get_all_reviews()
+//    {
+//        return $this->db->select($this->tables['app_gympro_reviews'].'.id as review_id,'.$this->tables['app_gympro_reviews'].'.*')
+//                    ->from($this->tables['app_gympro_reviews'])
+//                    ->get();
+//    }
+    
+    public function reviews_identity_check($identity = '')
     {
-        return $this->db->select($this->tables['app_gympro_reviews'].'.id as review_id,'.$this->tables['app_gympro_reviews'].'.*')
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_gympro_reviews_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_gympro_reviews']) > 0;
+    }
+    
+    public function create_reviews($additional_data)
+    {
+        if ( array_key_exists($this->app_gympro_reviews_identity_column, $additional_data) && $this->reviews_identity_check($additional_data[$this->app_gympro_reviews_identity_column]) )
+        {
+            $this->set_error('create_reviews_duplicate_' . $this->app_gympro_reviews_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_reviews'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_reviews'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        $this->set_message('create_reviews_successful');
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+    public function update_reviews($reviews_id, $additional_data)
+    {
+        $reviews_info = $this->get_reviews_info($reviews_id)->row();
+        $additional_data['modified_on'] = now();
+
+        if (array_key_exists($this->app_gympro_reviews_identity_column, $additional_data) && $this->reviews_identity_check($additional_data[$this->app_gympro_reviews_identity_column]) && $reviews_info->{$this->app_gympro_reviews_identity_column} !== $additional_data[$this->app_gympro_reviews_identity_column])
+        {
+            $this->set_error('update_reviews_duplicate_' . $this->app_gympro_reviews_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_gympro_reviews'], $additional_data);
+        $this->db->update($this->tables['app_gympro_reviews'], $data, array('id' => $reviews_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_reviews_fail');
+            return FALSE;
+        }
+        $this->set_message('update_reviews_successful');
+        return TRUE;
+    }
+    
+    public function get_reviews_info($reviews_id)
+    {
+        $this->db->where($this->tables['app_gympro_reviews'].'.id', $reviews_id);
+        return $this->db->select($this->tables['app_gympro_reviews'].'.id as id,'.$this->tables['app_gympro_reviews'].'.*')
                     ->from($this->tables['app_gympro_reviews'])
                     ->get();
     }
+    
+    public function get_all_reviews()
+    {
+        return $this->db->select($this->tables['app_gympro_reviews'].'.id as id,'.$this->tables['app_gympro_reviews'].'.*')
+                    ->from($this->tables['app_gympro_reviews'])
+                    ->get();
+    }
+    
+    public function delete_reviews($reviews_id)
+    {
+        if(!isset($reviews_id) || $reviews_id <= 0)
+        {
+            $this->set_error('delete_reviews_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $reviews_id);
+        $this->db->delete($this->tables['app_gympro_reviews']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_reviews_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_reviews_successful');
+        return TRUE;
+    }
+    
+    
+    
+    
+    
+    
+    
     //-----------------------------Exercise Category of Program-----------------------//
      /*
      * This method will return all exercise categories
@@ -1231,11 +1387,80 @@ class Admin_gympro_model extends Ion_auth_model
      * This method will return all reassess
      * @Author Nazmul on 21st November 2014
      */
+    public function reassess_identity_check($identity = '')
+    {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_gympro_reassess_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_gympro_reassess']) > 0;
+    }
+    
     public function get_all_reassess()
     {
-        return $this->db->select($this->tables['app_gympro_reassess'].'.id as reassess_id,'.$this->tables['app_gympro_reassess'].'.*')
+        return $this->db->select($this->tables['app_gympro_reassess'].'.id as id,'.$this->tables['app_gympro_reassess'].'.*')
                     ->from($this->tables['app_gympro_reassess'])
                     ->get();
+    }
+    
+    public function delete_reassess($reassess_id)
+    {
+        if(!isset($reassess_id) || $reassess_id <= 0)
+        {
+            $this->set_error('delete_reassess_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $reassess_id);
+        $this->db->delete($this->tables['app_gympro_reassess']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_reassess_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_reassess_successful');
+        return TRUE;
+    }
+    
+    public function create_reassess($additional_data)
+    {
+        if ( array_key_exists($this->app_gympro_reassess_identity_column, $additional_data) && $this->reassess_identity_check($additional_data[$this->app_gympro_reassess_identity_column]) )
+        {
+            $this->set_error('create_reassess_duplicate_' . $this->app_gympro_reassess_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_reassess'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_reassess'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        $this->set_message('create_reassess_successful');
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }    
+    public function get_reassess_info($reassess_id)
+    {
+        $this->db->where($this->tables['app_gympro_reassess'].'.id', $reassess_id);
+        return $this->db->select($this->tables['app_gympro_reassess'].'.id as id,'.$this->tables['app_gympro_reassess'].'.*')
+                    ->from($this->tables['app_gympro_reassess'])
+                    ->get();
+    }
+    public function update_reassess($reassess_id, $additional_data)
+    {
+        $reassess_info = $this->get_reassess_info($reassess_id)->row();
+        $additional_data['modified_on'] = now();
+
+        if (array_key_exists($this->app_gympro_reassess_identity_column, $additional_data) && $this->reassess_identity_check($additional_data[$this->app_gympro_reassess_identity_column]) && $reassess_info->{$this->app_gympro_reassess_identity_column} !== $additional_data[$this->app_gympro_reassess_identity_column])
+        {
+            $this->set_error('update_reassess_duplicate_' . $this->app_gympro_reassess_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_gympro_reassess'], $additional_data);
+        $this->db->update($this->tables['app_gympro_reassess'], $data, array('id' => $reassess_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_reassess_fail');
+            return FALSE;
+        }
+        $this->set_message('update_reassess_successful');
+        return TRUE;
     }
     /*
      * This method will update reassess info
@@ -1243,10 +1468,6 @@ class Admin_gympro_model extends Ion_auth_model
      * @param $additional_data, reassess data to be updated
      * @Author Nazmul on 21st November 2014
      */
-    public function update_reassess($reassess_id, $additional_data)
-    {
-        
-    }  
     //-----------------------------Nutrition Module -----------------------------//
     //-----------------------------Meal Time Module of Nutrition -----------------------------//
     /*
@@ -1254,101 +1475,157 @@ class Admin_gympro_model extends Ion_auth_model
      * @param $additional_data, meal time data to be added
      * @Author Nazmul on 21st November 2014
      */
-    public function create_meal_time($additional_data)
+    public function meal_times_identity_check($identity = '')
     {
-        
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_gympro_meal_times_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_gympro_meal_times']) > 0;
     }
-    /*
-     * This mehtod will return meal time info
-     * @param $meal_time_id, meal time id
-     * @Author Nazmul on 21st November 2014 
-     */
-    public function get_meal_time_info($meal_time_id)
-    {
-        
-    }
-    /*
-     * This method will return all meal times
-     * @Author Nazmul on 21st November 2014
-     */
+    
     public function get_all_meal_times()
     {
-        return $this->db->select($this->tables['app_gympro_meal_times'].'.id as meal_time_id,'.$this->tables['app_gympro_meal_times'].'.*')
+        return $this->db->select($this->tables['app_gympro_meal_times'].'.id as id,'.$this->tables['app_gympro_meal_times'].'.*')
                     ->from($this->tables['app_gympro_meal_times'])
                     ->get();
     }
-    /*
-     * This method will update meal time info
-     * @param $meal_time_id, meal time id
-     * @param $additional_data, meal time data to be updated
-     * @Author Nazmul on 21st November 2014
-     */
-    public function update_meal_time($meal_time_id, $additional_data)
+    
+    public function delete_meal_times($meal_times_id)
     {
+        if(!isset($meal_times_id) || $meal_times_id <= 0)
+        {
+            $this->set_error('delete_meal_times_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $meal_times_id);
+        $this->db->delete($this->tables['app_gympro_meal_times']);
         
-    }    
-    /*
-     * This method will delete meal time info
-     * @param $meal_time_id, meal time id
-     * @Author Nazmul on 21st November 2014
-     */
-    public function delete_meal_time($meal_time_id)
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_meal_times_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_meal_times_successful');
+        return TRUE;
+    }
+    
+    public function create_meal_times($additional_data)
     {
-        
+        if ( array_key_exists($this->app_gympro_meal_times_identity_column, $additional_data) && $this->meal_times_identity_check($additional_data[$this->app_gympro_meal_times_identity_column]) )
+        {
+            $this->set_error('create_meal_times_duplicate_' . $this->app_gympro_meal_times_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_meal_times'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_meal_times'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        $this->set_message('create_meal_times_successful');
+        return (isset($insert_id)) ? $insert_id : FALSE;
     }    
+    public function get_meal_times_info($meal_times_id)
+    {
+        $this->db->where($this->tables['app_gympro_meal_times'].'.id', $meal_times_id);
+        return $this->db->select($this->tables['app_gympro_meal_times'].'.id as id,'.$this->tables['app_gympro_meal_times'].'.*')
+                    ->from($this->tables['app_gympro_meal_times'])
+                    ->get();
+    }
+    public function update_meal_times($meal_times_id, $additional_data)
+    {
+        $meal_times_info = $this->get_meal_times_info($meal_times_id)->row();
+        $additional_data['modified_on'] = now();
+
+        if (array_key_exists($this->app_gympro_meal_times_identity_column, $additional_data) && $this->meal_times_identity_check($additional_data[$this->app_gympro_meal_times_identity_column]) && $meal_times_info->{$this->app_gympro_meal_times_identity_column} !== $additional_data[$this->app_gympro_meal_times_identity_column])
+        {
+            $this->set_error('update_meal_times_duplicate_' . $this->app_gympro_meal_times_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_gympro_meal_times'], $additional_data);
+        $this->db->update($this->tables['app_gympro_meal_times'], $data, array('id' => $meal_times_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_meal_times_fail');
+            return FALSE;
+        }
+        $this->set_message('update_meal_times_successful');
+        return TRUE;
+    }
     //--------------------------------------------Workout Module of Nutrition -------------------------------//
-    /*
-     * This method will create a new workout
-     * @param $additional_data, workout data to be added
-     * @Author Nazmul on 21st November 2014
-     */
-    public function create_workout($additional_data)
+    public function workouts_identity_check($identity = '')
     {
-        
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_gympro_workouts_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_gympro_workouts']) > 0;
     }
-    /*
-     * This mehtod will return workout info
-     * @param $workout_id, workout id
-     * @Author Nazmul on 21st November 2014 
-     */
-    public function get_workout_info($workout_id)
-    {
-        
-    }
-    /*
-     * This method will return all workouts
-     * @Author Nazmul on 21st November 2014
-     */
+    
     public function get_all_workouts()
     {
-        return $this->db->select($this->tables['app_gympro_workouts'].'.id as workout_id,'.$this->tables['app_gympro_workouts'].'.*')
+        return $this->db->select($this->tables['app_gympro_workouts'].'.id as id,'.$this->tables['app_gympro_workouts'].'.*')
                     ->from($this->tables['app_gympro_workouts'])
                     ->get();
     }
     
-    /*
-     * This method will update workout info
-     * @param $workout_id, workout id
-     * @param $additional_data, workout data to be updated
-     * @Author Nazmul on 21st November 2014
-     */
-    public function update_workout($workout_id, $additional_data)
+    public function delete_workouts($workouts_id)
     {
+        if(!isset($workouts_id) || $workouts_id <= 0)
+        {
+            $this->set_error('delete_workouts_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $workouts_id);
+        $this->db->delete($this->tables['app_gympro_workouts']);
         
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_workouts_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_workouts_successful');
+        return TRUE;
     }
     
-    /*
-     * This method will delete workout info
-     * @param $workout_id, work out id
-     * @Author Nazmul on 21st November 2014
-     */
-    public function delete_workout($workout_id)
+    public function create_workouts($additional_data)
     {
-        
+        if ( array_key_exists($this->app_gympro_workouts_identity_column, $additional_data) && $this->workouts_identity_check($additional_data[$this->app_gympro_workouts_identity_column]) )
+        {
+            $this->set_error('create_workouts_duplicate_' . $this->app_gympro_workouts_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_workouts'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_workouts'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        $this->set_message('create_workouts_successful');
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }    
+    public function get_workouts_info($workouts_id)
+    {
+        $this->db->where($this->tables['app_gympro_workouts'].'.id', $workouts_id);
+        return $this->db->select($this->tables['app_gympro_workouts'].'.id as id,'.$this->tables['app_gympro_workouts'].'.*')
+                    ->from($this->tables['app_gympro_workouts'])
+                    ->get();
     }
-    
-//    
-//    
+    public function update_workouts($workouts_id, $additional_data)
+    {
+        $workouts_info = $this->get_workouts_info($workouts_id)->row();
+        $additional_data['modified_on'] = now();
+
+        if (array_key_exists($this->app_gympro_workouts_identity_column, $additional_data) && $this->workouts_identity_check($additional_data[$this->app_gympro_workouts_identity_column]) && $workouts_info->{$this->app_gympro_workouts_identity_column} !== $additional_data[$this->app_gympro_workouts_identity_column])
+        {
+            $this->set_error('update_workouts_duplicate_' . $this->app_gympro_workouts_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_gympro_workouts'], $additional_data);
+        $this->db->update($this->tables['app_gympro_workouts'], $data, array('id' => $workouts_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_workouts_fail');
+            return FALSE;
+        }
+        $this->set_message('update_workouts_successful');
+        return TRUE;
+    }
 ////    ======================== ACCOUNT TYPE ========================
 //    
 //    
@@ -1457,4 +1734,96 @@ class Admin_gympro_model extends Ion_auth_model
 //        $this->set_message('delete_account_types_successful');
 //        return TRUE;
 //    }
+    
+    
+    
+    
+    
+    //====================================TEMPLATE===========================================
+    /*
+    
+    
+    
+    public function module_name_identity_check($identity = '')
+    {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_gympro_module_name_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_gympro_module_name']) > 0;
+    }
+    
+    public function get_all_module_name()
+    {
+        return $this->db->select($this->tables['app_gympro_module_name'].'.id as id,'.$this->tables['app_gympro_module_name'].'.*')
+                    ->from($this->tables['app_gympro_module_name'])
+                    ->get();
+    }
+    
+    public function delete_module_name($module_name_id)
+    {
+        if(!isset($module_name_id) || $module_name_id <= 0)
+        {
+            $this->set_error('delete_module_name_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $module_name_id);
+        $this->db->delete($this->tables['app_gympro_module_name']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_module_name_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_module_name_successful');
+        return TRUE;
+    }
+    
+    public function create_module_name($additional_data)
+    {
+        if ( array_key_exists($this->app_gympro_module_name_identity_column, $additional_data) && $this->module_name_identity_check($additional_data[$this->app_gympro_module_name_identity_column]) )
+        {
+            $this->set_error('create_module_name_duplicate_' . $this->app_gympro_module_name_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_module_name'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_module_name'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        $this->set_message('create_module_name_successful');
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }    
+    public function get_module_name_info($module_name_id)
+    {
+        $this->db->where($this->tables['app_gympro_module_name'].'.id', $module_name_id);
+        return $this->db->select($this->tables['app_gympro_module_name'].'.id as id,'.$this->tables['app_gympro_module_name'].'.*')
+                    ->from($this->tables['app_gympro_module_name'])
+                    ->get();
+    }
+    public function update_module_name($module_name_id, $additional_data)
+    {
+        $module_name_info = $this->get_module_name_info($module_name_id)->row();
+        $additional_data['modified_on'] = now();
+
+        if (array_key_exists($this->app_gympro_module_name_identity_column, $additional_data) && $this->module_name_identity_check($additional_data[$this->app_gympro_module_name_identity_column]) && $module_name_info->{$this->app_gympro_module_name_identity_column} !== $additional_data[$this->app_gympro_module_name_identity_column])
+        {
+            $this->set_error('update_module_name_duplicate_' . $this->app_gympro_module_name_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_gympro_module_name'], $additional_data);
+        $this->db->update($this->tables['app_gympro_module_name'], $data, array('id' => $module_name_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_module_name_fail');
+            return FALSE;
+        }
+        $this->set_message('update_module_name_successful');
+        return TRUE;
+    }
+
+    
+    
+    
+     */
+    
+    
 }
