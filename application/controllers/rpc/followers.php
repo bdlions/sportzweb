@@ -7,8 +7,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'jsonRPCServer.php';
 
-//class Followers extends JsonRPCServer {
-class Followers extends CI_Controller{
+class Followers extends JsonRPCServer {
+//class Followers extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
@@ -32,7 +32,7 @@ class Followers extends CI_Controller{
     {
         $response = array();
         $response['followers'] = $this->follower->get_user_followers($user_id);
-        echo json_encode($response);
-        //return json_encode($response);
+        //echo json_encode($response);
+        return json_encode($response);
     }
 }
