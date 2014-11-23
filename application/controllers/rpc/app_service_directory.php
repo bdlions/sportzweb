@@ -29,67 +29,36 @@ class App_service_directory extends JsonRPCServer {
      * @param $param, city or post code
      * @Author Nazmul on 11th November 2014
      */
-    function get_services_by_city_or_postcode($param)
+    function get_services_by_city_or_postcode($param = '')
     {
         $response = array();
-        
-        $service_list = array();
-        $service1 = array(
-            'service_id' => 1,
-            'service_category_id' => 1,
-            'title' => 'Dental Care',
-            'address' => 'Dhaka',
-            'phone' => '123456',
-            'distance' => '100'
-        );
-        $service2 = array(
-            'service_id' => 2,
-            'service_category_id' => 2,
-            'title' => 'Super good hotel',
-            'address' => 'Chittagong',
-            'phone' => '112233445566',
-            'distance' => '200'
-        );
-        $service3 = array(
-            'service_id' => 3,
-            'service_category_id' => 3,
-            'title' => 'Doctors chember',
-            'address' => 'Sylhet',
-            'phone' => '3333444',
-            'distance' => '300'
-        );
-        $service_list[] = $service1;
-        $service_list[] = $service2;
-        $service_list[] = $service3;
-        $response['service_list'] = $service_list;
+        $services_array = $this->service_directory_library->get_all_services()->result_array();
+        $service_category_id_service_list = array();
+        foreach($services_array as $service_info)
+        {
+            $service_category_id_service_list[$service_info['service_category_id']][] = $service_info;
+        }        
+        $response['service_list'] = $services_array;
         
         $service_category_list = array();
         $service_category_list_array = $this->service_directory_library->get_all_service_categories()->result_array();
         foreach($service_category_list_array as $service_category_info)
         {
-            $category_service_list = array();
-            if( $service_category_info['id'] == 1)
-            {
-                $category_service_list[] = $service1;
-            }
-            else if( $service_category_info['id'] == 2)
-            {
-                $category_service_list[] = $service2;
-            }
-            else if( $service_category_info['id'] == 3)
-            {
-                $category_service_list[] = $service3;
-            }
             $service_category = array(
                 'id' => $service_category_info['id'],
-                'title' => $service_category_info['description'],
-                'category_service_list' => $category_service_list
+                'title' => $service_category_info['description']
             );
+            if(array_key_exists($service_category_info['id'], $service_category_id_service_list))
+            {
+                $service_category['category_service_list'] = $service_category_id_service_list[$service_category_info['id']];
+            }
+            else
+            {
+                $service_category['category_service_list'] = array();
+            }
             $service_category_list[] = $service_category;
         }
         $response['service_category_list'] = $service_category_list;
-        
-        
         //echo (json_encode($response));
         return json_encode($response);
     }

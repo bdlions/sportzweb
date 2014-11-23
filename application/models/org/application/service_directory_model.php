@@ -42,13 +42,17 @@ class Service_directory_model extends Ion_auth_model {
                     ->get();
     }
     
-    public function get_all_services($data=0)
+    /*
+     * This method will return services of a category or all services if there is no assigned service category
+     * @param $$service_category_id, service category id
+     * @Author Nazmul on 23rd November 2014
+     */
+    public function get_all_services($service_category_id = 0)
     {
-        if($data!=0)
+        if($service_category_id != 0)
         {
-            $this->db->where_in($this->tables['services'].'.service_category_id',$data);
-        }
-        
+            $this->db->where_in($this->tables['services'].'.service_category_id',$service_category_id);
+        }        
         return $this->db->select("*")
                     ->from($this->tables['services'])
                     ->get();
