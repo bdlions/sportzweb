@@ -64,8 +64,8 @@ class Status_feed extends JsonRPCServer {
     {
         $result = array();
         
-        //$data = json_decode($status_data);
-        $data = new stdClass();
+        $data = json_decode($status_data);
+        /*$data = new stdClass();
         $data->user_id = 4;
         $data->mapping_id = 4;
         $data->status_type_id = 1;
@@ -73,10 +73,10 @@ class Status_feed extends JsonRPCServer {
         $data->description = 'test';
         $data->reference_id = '';
         $data->shared_type_id = '';
-        $data->via_user_id = '';
+        $data->via_user_id = '';*/
         
         $this->session->set_userdata('user_id', $data->user_id);
-        
+        $additional_data = array();
         $additional_data["user_id"] = $data->user_id;
         $additional_data["mapping_id"] = $data->mapping_id;
         $additional_data["status_type_id"] = $data->status_type_id;
@@ -94,6 +94,28 @@ class Status_feed extends JsonRPCServer {
         {
             $result['status'] = 0;
         }
+        //echo json_encode($result);
+        return json_encode($result);
+    }
+    
+    /*
+     * This method will post feedback of a status
+     * @param $feedback_data, feedback data
+     * @Author Nazmul on 23rd November 2014
+     */
+    function post_feedback($feedback_data = ''){
+        $result = array();        
+        $data = json_decode($feedback_data);
+        /*$data = new stdClass();
+        $data->user_id = 4;
+        $data->status_id = 10;
+        $data->feedback = 'test comment';*/
+        $this->session->set_userdata('user_id', $data->user_id);
+        $status_id = $data->status_id;
+        $feedback = $data->feedback;
+        
+        $this->statuses->add_feedback($status_id, $feedback);
+        $result['status'] = 1;
         //echo json_encode($result);
         return json_encode($result);
     }

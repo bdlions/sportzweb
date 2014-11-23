@@ -385,7 +385,7 @@ class Statuses {
         {
             $status_info = $status_info_array[0];
             $feedbacks = $status_info['feedbacks'];
-            $$feedbacks_array = array();
+            $feedbacks_array = array();
             if( $feedbacks != "" && $feedbacks != NULL )
             {
                 $feedbacks_array = json_decode($feedbacks);                
