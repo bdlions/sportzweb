@@ -22,7 +22,7 @@ class Chat_model extends Ion_auth_model {
     }
     
     public function add_new_message($data) {
-        $additional_data = array('from' => $this->current_user_id, 'send_date' => now(), 'received_date' => now());
+        $additional_data = array('from' => $this->ion_auth->get_user_id(), 'send_date' => now(), 'received_date' => now());
         $message_data = array_merge($this->_filter_data('users_messages', $data ), $additional_data);
 
         $this->db->insert('users_messages', $message_data);
@@ -55,6 +55,13 @@ class Chat_model extends Ion_auth_model {
             return array();
         }
         return $query->result();
+    }  
+    
+    public function get_user_info($user_id = 0)
+    {
+        $this->db->where('id', $user_id);
+        return $this->db->select('*')
+                    ->get('users');
     }
 }
 ?>

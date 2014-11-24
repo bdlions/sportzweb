@@ -28,8 +28,8 @@ class Messages extends Role_Controller{
     }
     public function index(){
         
-        
-        $this->data['followers'] = $this->follower->get_followers();
+        $user_id = $this->session->userdata('user_id');
+        $this->data['followers'] = $this->follower->get_user_followers($user_id);
         $this->data['messages'] = array();
         $this->data['me'] = $this->profile->get_user();
         
@@ -40,7 +40,8 @@ class Messages extends Role_Controller{
     public function user($user_id){
         $this->data['me'] = $this->profile->get_user();
         
-        $this->data['followers'] = $this->follower->get_followers();
+        //$this->data['followers'] = $this->follower->get_followers();
+        $this->data['followers'] = $this->follower->get_user_followers($this->session->userdata('user_id'));
         $this->data['follower'] = $this->profile->get_user($user_id);
         $this->data['to'] = $user_id;
         
@@ -60,7 +61,7 @@ class Messages extends Role_Controller{
     public function new_message($user_id = 0){
         $this->data['me'] = $this->profile->get_user();
         
-        $this->data['followers'] = $this->follower->get_followers();
+        $this->data['followers'] = $this->follower->get_user_followers($this->session->userdata('user_id'));
         $this->data['follower'] = $this->profile->get_user($user_id);
         $this->data['to'] = $user_id;
         

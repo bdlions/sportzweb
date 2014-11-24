@@ -60,7 +60,7 @@ class Member_profile extends JsonRPCServer {
      * @param $user_id, user id
      * @Author Nazmul on 11th November 2014
      */
-    function info($user_id)
+    function info($user_id = 0)
     {
         $response = array();
         $profile_info = $this->basic_profile->get_profile_info($user_id);

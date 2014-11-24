@@ -110,11 +110,16 @@ class Business_profile extends JsonRPCServer {
     
     /*
      * This method will return business profile
+     * @param $user_id, user id of the business profile
      * @author Nazmul on 11th October 2014
      */
-    function get_business_profile_info()
+    function get_business_profile_info($user_id = 0)
     {
-        
+        $response = array();
+        $business_profile_info = $this->business_profile_library->get_profile_info($user_id);
+        $response['business_profile_info'] = $business_profile_info;
+        echo json_encode($response);
+        //return json_encode($response);
     }
 }
 
