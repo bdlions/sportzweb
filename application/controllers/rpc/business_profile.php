@@ -118,8 +118,8 @@ class Business_profile extends JsonRPCServer {
         $response = array();
         $business_profile_info = $this->business_profile_library->get_profile_info($user_id);
         $response['business_profile_info'] = $business_profile_info;
-        echo json_encode($response);
-        //return json_encode($response);
+        //echo json_encode($response);
+        return json_encode($response);
     }
 }
 
