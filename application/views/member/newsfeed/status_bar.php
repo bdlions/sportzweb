@@ -419,7 +419,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 input-append">
-                            <div class="form-control expanding status-box" contenteditable="true" id="description">                            
+                            <div class="expanding status-box" contenteditable="true" id="description" style="min-height: 40px; padding: 10px;">                            
                             </div>                            
                             <ul class="dropdown-menu" style="left:15px;width:95%">
                             </ul>                            
@@ -429,7 +429,7 @@
                         <div class="col-md-12">
                             <?php //echo form_textarea( array("name" => "description2", "class" =>'form-control expanding status-box', "placeholder" => "What are you thinking?",  "id" => "status_box", "rows" => "2")) ?>
                             <!--<div contenteditable="true" name ="description" class='form-control expanding status-box' placeholder = "What are you thinking?"id = "status_box"></div>-->
-                            <div id="files" class="list-inline list-unstyled files" style="padding-top: 10px;">
+                            <div id="files" class="list-inline list-unstyled files">
                                 
                             </div>
                         </div>
