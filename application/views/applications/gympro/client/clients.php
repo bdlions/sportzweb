@@ -12,7 +12,9 @@
                     <a href="<?php echo base_url().'applications/gympro/create_client'?>">
                         <button class="btn button-custom btn_gympro">New Client</button>
                     </a>
-                    
+                </div>
+                <div class="col-md-4 pull-right">
+                    <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>
             </div>
 <!--            <div class="row top_margin">
@@ -99,8 +101,8 @@
             echo '</div>';
         }  
         $counter++;
-    }
-    ?>
+            }
+            ?>
             </div>
             <div class="row">
                 <div class="col-md-12">

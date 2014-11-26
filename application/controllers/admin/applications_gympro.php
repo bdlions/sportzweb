@@ -441,10 +441,9 @@ class Applications_gympro extends CI_Controller{
     {
         $result = array();
         $id = $this->input->post('id');
-        $title = $this->input->post('title');
-        $total_user = $this->input->post('total_user');
         $additional_data = array(
-            'title' => $title,
+            'title' => $this->input->post('title'),
+            'show_additional_info' => $this->input->post('show_additional_info'),
             'modified_on' => now()
         );
         if($this->admin_gympro_library->update_health_questions($id, $additional_data))
@@ -460,9 +459,9 @@ class Applications_gympro extends CI_Controller{
     public function create_health_questions()
     {
         $result = array();
-        $title = $this->input->post('title');
         $additional_data = array(
-            'title' => $title
+            'title' => $this->input->post('title'),
+            'show_additional_info' => $this->input->post('show_additional_info'),
         );
         if($this->admin_gympro_library->create_health_questions($additional_data))
         {

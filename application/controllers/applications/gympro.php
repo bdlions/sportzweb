@@ -74,6 +74,25 @@ class Gympro extends CI_Controller{
                 $data = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
+//                    'gender_id' => $this->input->post('gender_id'),
+                    'email' => $this->input->post('email'),
+                    'start_date' => $this->input->post('start_date'),
+                    'end_date' => $this->input->post('end_date'),
+                    'birth_date' => $this->input->post('birth_date'),
+                    'status_id' => $this->input->post('status_id'),
+                    'occupation' => $this->input->post('occupation'),
+                    'company_name' => $this->input->post('company_name'),
+                    'picture' => $this->input->post('picture'),
+                    'phone' => $this->input->post('phone'),
+                    'mobile' => $this->input->post('mobile'),
+                    'address' => $this->input->post('address'),
+                    'emergyncy_contact' => $this->input->post('emergyncy_contact'),
+                    'emergyncy_phone' => $this->input->post('emergyncy_phone'),
+                    'qestion_list' => $this->input->post('qestion_list'),
+                    'height' => $this->input->post('height'),
+                    'reseting_heart_rate' => $this->input->post('reseting_heart_rate'),
+                    'blood_pressure' => $this->input->post('blood_pressure'),
+                    'notes' => $this->input->post('notes'),
                     'user_id' => $this->session->userdata('user_id')
                 );
                 $client_create_id = $this->gympro_library->create_client($data);
@@ -91,6 +110,8 @@ class Gympro extends CI_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
+        
+//        CLIENT INFO
         $this->data['first_name'] = array(
             'name' => 'first_name',
             'id' => 'first_name',
@@ -101,6 +122,130 @@ class Gympro extends CI_Controller{
             'id' => 'last_name',
             'type' => 'text'
         );
+        $this->data['gender_id'] = array(
+            'name' => 'gender_id',
+            'id' => 'gender_id',
+            'type' => 'text'
+        );
+        $this->data['email'] = array(
+            'name' => 'email',
+            'id' => 'email',
+            'type' => 'text'
+        );
+        $this->data['start_date'] = array(
+            'name' => 'start_date',
+            'id' => 'start_date',
+            'type' => 'text'
+        );
+        $this->data['end_date'] = array(
+            'name' => 'end_date',
+            'id' => 'end_date',
+            'type' => 'text'
+        );
+        $this->data['birth_date'] = array(
+            'name' => 'birth_date',
+            'id' => 'birth_date',
+            'type' => 'text'
+        );
+        $this->data['status_id'] = array(
+            'name' => 'status_id',
+            'id' => 'status_id',
+            'type' => 'text'
+        );
+        $this->data['occupation'] = array(
+            'name' => 'occupation',
+            'id' => 'occupation',
+            'type' => 'text'
+        );
+        $this->data['company_name'] = array(
+            'name' => 'company_name',
+            'id' => 'company_name',
+            'type' => 'text'
+        );
+        $this->data['picture'] = array(
+            'name' => 'picture',
+            'id' => 'picture',
+            'type' => 'file'
+        );
+        
+//        CONTACT DETAILS
+        $this->data['phone'] = array(
+            'name' => 'phone',
+            'id' => 'phone',
+            'type' => 'text'
+        );
+        $this->data['mobile'] = array(
+            'name' => 'mobile',
+            'id' => 'mobile',
+            'type' => 'text'
+        );
+        $this->data['address'] = array(
+            'name' => 'address',
+            'id' => 'address',
+            'type' => 'text'
+        );
+        $this->data['emergency_contact'] = array(
+            'name' => 'emergency_contact',
+            'id' => 'emergency_contact',
+            'type' => 'text'
+        );
+        $this->data['emergency_phone'] = array(
+            'name' => 'emergency_phone',
+            'id' => 'emergency_phone',
+            'type' => 'text'
+        );
+        
+//        HEALTH Q
+        $this->data['smoker_txt'] = array(
+            'name' => 'smoker_txt',
+            'id' => 'smoker_txt',
+            'type' => 'text'
+        );
+        $this->data['cardiov_txt'] = array(
+            'name' => 'cardiov_txt',
+            'id' => 'cardiov_txt',
+            'type' => 'text'
+        );
+        $this->data['injury_txt'] = array(
+            'name' => 'injury_txt',
+            'id' => 'injury_txt',
+            'type' => 'text'
+        );
+        $this->data['medication_txt'] = array(
+            'name' => 'medication_txt',
+            'id' => 'medication_txt',
+            'type' => 'text'
+        );
+        $this->data['medicalcondition_txt'] = array(
+            'name' => 'medicalcondition_txt',
+            'id' => 'medicalcondition_txt',
+            'type' => 'text'
+        );
+        $this->data['height'] = array(
+            'name' => 'height',
+            'id' => 'height',
+            'type' => 'text'
+        );
+        $this->data['reseting_heart_rate'] = array(
+            'name' => 'reseting_heart_rate',
+            'id' => 'reseting_heart_rate',
+            'type' => 'text'
+        );
+        $this->data['blood_pressure'] = array(
+            'name' => 'blood_pressure',
+            'id' => 'blood_pressure',
+            'type' => 'text'
+        );
+        
+        
+//        NOTES
+        $this->data['notes'] = array(
+            'name' => 'notes',
+            'id' => 'notes',
+            'type' => 'text'
+        );
+        
+        
         $this->data['submit_button'] = array(
             'name' => 'submit_button',
             'id' => 'submit_button',
@@ -108,7 +253,8 @@ class Gympro extends CI_Controller{
             'value' => 'Create Client'
         );
         
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = 1;
+        $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();;
         $this->template->load(null,'applications/gympro/client/create_client', $this->data);
     }
     public function update_client($client_id = 0)

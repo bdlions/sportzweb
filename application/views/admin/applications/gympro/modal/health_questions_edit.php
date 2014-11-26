@@ -13,6 +13,7 @@
                 data: {
                     id: $("#input_update_id").val(),
                     title: $("#input_update_title").val(),
+                    show_additional_info: (($('.input_update_details_checkbox').prop('checked') == true)? 1:0)
                 },
                 success: function(data) {
                     alert(data['message']);
@@ -31,6 +32,7 @@
                 id: id
             },
             success: function(data) {
+                $('.input_update_details_checkbox').prop('checked', (data.health_questions_info['show_additional_info'] == 1));
                 $('#input_update_id').val(data.health_questions_info['id']);
                 $('#input_update_title').val(data.health_questions_info['title']);
                 $("#modal_update").modal('show');
@@ -53,6 +55,13 @@
                         <div class ="col-sm-4">
                             <input id="input_update_title" name="input_update_title" value="" type="text" class="form-control"/>
                             <input id="input_update_id" name="input_update_id" value="" type="hidden" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class ="col-sm-2"></div>
+                        <label class="col-sm-3 control-label">Show Details? &nbsp;</label>
+                        <div class ="col-sm-4">
+                            <input class="input_update_details_checkbox" name="input_update_details_checkbox" value="" type="checkbox"/>
                         </div>
                     </div>
                     <div class="row form-group">

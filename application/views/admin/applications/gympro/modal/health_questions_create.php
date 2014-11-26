@@ -11,7 +11,8 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>' + "admin/applications_gympro/create_health_questions",
                 data: {
-                    title: $("#input_title").val()
+                    title: $("#input_title").val(),
+                    show_additional_info: (($('.input_update_details_checkbox').prop('checked') == true)? 1:0)
                 },
                 success: function(data) {
                     alert(data['message']);
@@ -40,7 +41,13 @@
                         <input id="input_title" name="input_title" value="" type="text" class="form-control"/>
                     </div>
                 </div>
-
+                <div class="row form-group">
+                    <div class ="col-sm-2"></div>
+                    <label class="col-sm-3 control-label">Show Details? &nbsp;</label>
+                    <div class ="col-sm-4">
+                        <input id="input_details_checkbox" name="input_update_details_checkbox" value="" type="checkbox"/>
+                    </div>
+                </div>
                 <div class="row form-group">
                     <div class ="col-sm-6"></div>
                     <div class ="col-sm-3">

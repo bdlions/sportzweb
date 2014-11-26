@@ -2008,7 +2008,7 @@ CREATE TABLE IF NOT EXISTS `app_gympro_clients` (
   `address` text,
   `emergyncy_contact` varchar(200),
   `emergyncy_phone` varchar(200),
-  `qestion_list` text,
+  `question_list` text,
   `height` varchar(200),
   `reseting_heart_rate` varchar(200),
   `blood_pressure` varchar(200),

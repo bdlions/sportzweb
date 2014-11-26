@@ -187,6 +187,13 @@ class Gympro_model extends Ion_auth_model {
         $this->set_message('create_client_statuses_successful');
         return (isset($insert_id)) ? $insert_id : FALSE;
     }
+    
+    public function get_all_health_questions()
+    {
+        return $this->db->select($this->tables['app_gympro_health_questions'].'.id as question_id,'.$this->tables['app_gympro_health_questions'].'.*')
+                    ->from($this->tables['app_gympro_health_questions'])
+                    ->get();
+    }
     /*
      * This method will update client info
      * @param $client_id, client id
