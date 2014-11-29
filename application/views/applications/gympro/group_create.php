@@ -25,104 +25,101 @@
             <div class="pad_title">
                 NEW CLIENT GROUP
             </div>
+            <?php echo form_open("applications/gympro/create_group", array('id' => 'form_group', 'class' => 'form-horizontal')); ?>
             <div class="pad_body">
-                <?php echo form_open("applications/gympro/create_group", array('id' => 'form_group', 'class' => 'form-horizontal')); ?>
-                    
-                    <div class="row hidden_tab" id="group_details_tab" style="display: block">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Title: </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
+                <div class="row hidden_tab" id="group_details_tab" style="display: block">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Title: </label>
+                            <div class="col-sm-8">
+                                <!--<input class="form-control" id="last_name" name="last_name">-->
+                                <?php echo form_input($title + array('class' => 'form-control'));?>
                             </div>
                         </div>
                     </div>
-                    <div class="row hidden_tab" id="group_contacts_tab">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Phone Number: </label>
-                                <div class="col-sm-6">
-                                    <input class="form-control">
-                                </div>
+                </div>
+                <div class="row hidden_tab" id="group_contacts_tab">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Phone Number: </label>
+                            <div class="col-sm-6">
+                                <?php echo form_input($phone + array('class' => 'form-control'));?>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Mobile Number: </label>
-                                <div class="col-sm-6">
-                                    <input class="form-control">
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Mobile Number: </label>
+                            <div class="col-sm-6">
+                                <?php echo form_input($mobile + array('class' => 'form-control'));?>
                             </div>
                         </div>
                     </div>
-                    <div class="row hidden_tab" id="group_clients_tab">
-                        <div class="col-md-12">
-                            <div class="pad_white">
-                                <label class="control-label">Group Name </label><input class="form-control" style="width: 40%; min-width: 150px;">
-                            </div>
-                            <!--<div style="width: 100%; display: inline-block;">-->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="col-md-6" style="padding: 0px;">
-                                        <div class="pad_white" style="min-height: 300px;">
-                                            <div id="all">
-                                                <div class="clientrow">
-                                                    <input class="clientgroups_checkbox" type="checkbox" value="8793" name="group[]">
-                                                    Shem Haye
-                                                </div>
-                                                <div class="clientrow">
-                                                    <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
-                                                    Alamgir Kabir
-                                                </div>
-                                                <div class="clientrow">
-                                                    <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
-                                                    Alamgir Kabir
-                                                </div>
-                                                <div class="clientrow">
-                                                    <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
-                                                    Alamgir Kabir
-                                                </div>
-                                                <div class="clientrow">
-                                                    <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
-                                                    Alamgir Kabir
-                                                </div>
-                                                <div class="clientrow">
-                                                    <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
-                                                    Alamgir Kabir
-                                                </div>
-                                                <div class="clientrow">
-                                                    <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
-                                                    Alamgir Kabir
-                                                </div>
+                </div>
+                <div class="row hidden_tab" id="group_clients_tab">
+                    <div class="col-md-12">
+                        <!--<div style="width: 100%; display: inline-block;">-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-6" style="padding: 0px;">
+                                    <div class="pad_white" style="min-height: 300px;">
+                                        <div id="all">
+                                            <div class="clientrow">
+                                                <input class="clientgroups_checkbox" type="checkbox" value="8793" name="group[]">
+                                                Shem Haye
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6" style="padding: 0px;">
-                                        <div class="pad_white" style="min-height: 300px;">
-                                            <div id="added">
+                                            <div class="clientrow">
+                                                <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
+                                                Alamgir Kabir
+                                            </div>
+                                            <div class="clientrow">
+                                                <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
+                                                Alamgir Kabir
+                                            </div>
+                                            <div class="clientrow">
+                                                <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
+                                                Alamgir Kabir
+                                            </div>
+                                            <div class="clientrow">
+                                                <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
+                                                Alamgir Kabir
+                                            </div>
+                                            <div class="clientrow">
+                                                <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
+                                                Alamgir Kabir
+                                            </div>
+                                            <div class="clientrow">
+                                                <input class="clientgroups_checkbox" type="checkbox" value="8800" name="group[]">
+                                                Alamgir Kabir
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6" style="padding: 0px;">
+                                    <div class="pad_white" style="min-height: 300px;">
+                                        <div id="added">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                        </div>
                     </div>
-                    <div class="row hidden_tab" id="notes_tab">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Notes: </label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control"></textarea>
-                                </div>
+                </div>
+                <div class="row hidden_tab" id="notes_tab">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Notes: </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="notes" id="notes"></textarea>
                             </div>
                         </div>
                     </div>
+                </div>
                     
-                <?php echo form_close();?>
             </div>
             <div class="pad_footer">
                 <button>Save Changes</button> or <a href="<?php echo base_url()?>applications/gympro/programs">Go Back</a>
             </div>
+            <?php echo form_close();?>
         </div>
     </div>
 

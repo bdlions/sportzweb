@@ -58,7 +58,7 @@ class Gympro extends CI_Controller{
         $client_list = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
         $this->data['client_list'] = $client_list;
         $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/client/clients', $this->data);
     }
     
@@ -253,25 +253,298 @@ class Gympro extends CI_Controller{
             'value' => 'Create Client'
         );
         
-        $this->data['application_id'] = 1;
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();;
         $this->template->load(null,'applications/gympro/client/create_client', $this->data);
     }
-    public function update_client($client_id = 0)
+    public function update_client($client_id = 1)
     {
+        $client_list = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
+        $client = $client_list[$client_id-1];
+        $this->data['message'] = ''; 
+        $this->form_validation->set_rules('first_name', 'First Name', 'xss_clean|required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'xss_clean');
+        if ($this->input->post())
+        {
+            if($this->form_validation->run() == true)
+            {
+                $data = array(
+                    'first_name' => $this->input->post('first_name'),
+                    'last_name' => $this->input->post('last_name'),
+//                    'gender_id' => $this->input->post('gender_id'),
+                    'email' => $this->input->post('email'),
+                    'start_date' => $this->input->post('start_date'),
+                    'end_date' => $this->input->post('end_date'),
+                    'birth_date' => $this->input->post('birth_date'),
+                    'status_id' => $this->input->post('status_id'),
+                    'occupation' => $this->input->post('occupation'),
+                    'company_name' => $this->input->post('company_name'),
+                    'picture' => $this->input->post('picture'),
+                    'phone' => $this->input->post('phone'),
+                    'mobile' => $this->input->post('mobile'),
+                    'address' => $this->input->post('address'),
+                    'emergyncy_contact' => $this->input->post('emergyncy_contact'),
+                    'emergyncy_phone' => $this->input->post('emergyncy_phone'),
+                    'qestion_list' => $this->input->post('qestion_list'),
+                    'height' => $this->input->post('height'),
+                    'reseting_heart_rate' => $this->input->post('reseting_heart_rate'),
+                    'blood_pressure' => $this->input->post('blood_pressure'),
+                    'notes' => $this->input->post('notes'),
+                    'user_id' => $this->session->userdata('user_id')
+                );
+                $client_create_id = $this->gympro_library->update_client($data);
+                if ($client_create_id !== FALSE) {
+                    $this->data['message'] = "Client is created successfully.";
+                    redirect('applications/gympro/create_client','refresh');
+                } else {
+                    $this->data['message'] = $this->gympro_library->errors();
+                }
+            } else {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
         
+//        CLIENT INFO
+        $this->data['first_name'] = array(
+            'name' => 'first_name',
+            'id' => 'first_name',
+            'type' => 'text',
+            'value' => $client['first_name']
+            
+        );
+        $this->data['last_name'] = array(
+            'name' => 'last_name',
+            'id' => 'last_name',
+            'type' => 'text',
+            'value' => $client['last_name']
+        );
+        $this->data['gender_id'] = array(
+            'name' => 'gender_id',
+            'id' => 'gender_id',
+            'type' => 'text',
+            'value' => $client['gender_id']
+        );
+        $this->data['email'] = array(
+            'name' => 'email',
+            'id' => 'email',
+            'type' => 'text',
+            'value' => $client['email']
+        );
+        $this->data['start_date'] = array(
+            'name' => 'start_date',
+            'id' => 'start_date',
+            'type' => 'text',
+            'value' => $client['start_date']
+        );
+        $this->data['end_date'] = array(
+            'name' => 'end_date',
+            'id' => 'end_date',
+            'type' => 'text',
+            'value' => $client['end_date']
+        );
+        $this->data['birth_date'] = array(
+            'name' => 'birth_date',
+            'id' => 'birth_date',
+            'type' => 'text',
+            'value' => $client['birth_date']
+        );
+        $this->data['status_id'] = array(
+            'name' => 'status_id',
+            'id' => 'status_id',
+            'type' => 'text',
+            'value' => $client['status_id']
+        );
+        $this->data['occupation'] = array(
+            'name' => 'occupation',
+            'id' => 'occupation',
+            'type' => 'text',
+            'value' => $client['occupation']
+        );
+        $this->data['company_name'] = array(
+            'name' => 'company_name',
+            'id' => 'company_name',
+            'type' => 'text',
+            'value' => $client['company_name']
+        );
+        $this->data['picture'] = array(
+            'name' => 'picture',
+            'id' => 'picture',
+            'type' => 'file',
+            'value' => $client['picture']
+        );
+        
+//        CONTACT DETAILS
+        $this->data['phone'] = array(
+            'name' => 'phone',
+            'id' => 'phone',
+            'type' => 'text',
+            'value' => $client['phone']
+        );
+        $this->data['mobile'] = array(
+            'name' => 'mobile',
+            'id' => 'mobile',
+            'type' => 'text',
+            'value' => $client['mobile']
+        );
+        $this->data['address'] = array(
+            'name' => 'address',
+            'id' => 'address',
+            'type' => 'text',
+            'value' => $client['address']
+        );
+        $this->data['emergency_contact'] = array(
+            'name' => 'emergency_contact',
+            'id' => 'emergency_contact',
+            'type' => 'text',
+//            'value' => $client['emergency_contact']
+        );
+        $this->data['emergency_phone'] = array(
+            'name' => 'emergency_phone',
+            'id' => 'emergency_phone',
+            'type' => 'text',
+//            'value' => $client['emergency_phone']
+        );
+        
+//        HEALTH Q
+        $this->data['smoker_txt'] = array(
+            'name' => 'smoker_txt',
+            'id' => 'smoker_txt',
+            'type' => 'text',
+//            'value' => $client['smoker_txt']
+        );
+        $this->data['cardiov_txt'] = array(
+            'name' => 'cardiov_txt',
+            'id' => 'cardiov_txt',
+            'type' => 'text',
+//            'value' => $client['cardiov_txt']
+        );
+        $this->data['injury_txt'] = array(
+            'name' => 'injury_txt',
+            'id' => 'injury_txt',
+            'type' => 'text',
+//            'value' => $client['injury_txt']
+        );
+        $this->data['medication_txt'] = array(
+            'name' => 'medication_txt',
+            'id' => 'medication_txt',
+            'type' => 'text',
+//            'value' => $client['medication_txt']
+        );
+        $this->data['medicalcondition_txt'] = array(
+            'name' => 'medicalcondition_txt',
+            'id' => 'medicalcondition_txt',
+            'type' => 'text',
+//            'value' => $client['medicalcondition_txt']
+        );
+        $this->data['height'] = array(
+            'name' => 'height',
+            'id' => 'height',
+            'type' => 'text',
+            'value' => $client['height']
+        );
+        $this->data['reseting_heart_rate'] = array(
+            'name' => 'reseting_heart_rate',
+            'id' => 'reseting_heart_rate',
+            'type' => 'text',
+            'value' => $client['reseting_heart_rate']
+        );
+        $this->data['blood_pressure'] = array(
+            'name' => 'blood_pressure',
+            'id' => 'blood_pressure',
+            'type' => 'text',
+            'value' => $client['blood_pressure']
+        );
+        
+        
+//        NOTES
+        $this->data['notes'] = array(
+            'name' => 'notes',
+            'id' => 'notes',
+            'type' => 'text',
+            'value' => $client['notes']
+        );
+        
+        
+        $this->data['submit_button'] = array(
+            'name' => 'submit_button',
+            'id' => 'submit_button',
+            'type' => 'submit',
+            'value' => 'Create Client'
+        );
+        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
+        $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();
+        $this->template->load(null,'applications/gympro/client/edit_client', $this->data);
     }
     //----------------------------------- Group Module ---------------------------------//
     public function manage_groups()
     {
         $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/groups', $this->data);
-        
     }
     public function create_group()
     {
-        $this->data['message'] = '';       
+        $this->data['message'] = '';
+//        $this->form_validation->set_rules('title', 'First Name', 'xss_clean|required');
+//        $this->form_validation->set_rules('phone', 'First Name', 'xss_clean|required');
+//        $this->form_validation->set_rules('mobile', 'First Name', 'xss_clean|required');
+//        $this->form_validation->set_rules('notes', 'First Name', 'xss_clean|required');
+        
+        if ($this->input->post())
+        {
+            if($this->form_validation->run() == true)
+            {
+                $data = array(
+                    'title' => $this->input->post('title'),
+                    'phone' => $this->input->post('phone'),
+                    'mobile' => $this->input->post('mobile'),
+                    'notes' => $this->input->post('notes')
+                );
+                $create_id = $this->gympro_library->create_client_group($data);
+                if ($create_id !== FALSE) {
+                    $this->data['message'] = "Client group is created successfully.";
+                    redirect('applications/gympro/create_group','refresh');
+                } else {
+                    $this->data['message'] = $this->gympro_library->errors();
+                }
+            } else {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text'
+        );
+        $this->data['phone'] = array(
+            'name' => 'phone',
+            'id' => 'phone',
+            'type' => 'text'
+        );
+        $this->data['mobile'] = array(
+            'name' => 'mobile',
+            'id' => 'mobile',
+            'type' => 'text'
+        );
+        $this->data['notes'] = array(
+            'name' => 'notes',
+            'id' => 'notes',
+            'type' => 'text'
+        );
+        
+        
+        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/group_create', $this->data);
     }
     
@@ -287,7 +560,7 @@ class Gympro extends CI_Controller{
             $user_id = $this->session->userdata('user_id');
         }
         $this->data['message'] = '';   
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         if($this->input->post('submit_update_account'))
         {
             $data = array(
@@ -335,7 +608,7 @@ class Gympro extends CI_Controller{
      */
     public function preference($user_id = 0)
     {
-        $this->data['application_id'] = 1; 
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID; 
         if($user_id == 0)
         {
             $user_id = $this->session->userdata('user_id');
@@ -442,7 +715,7 @@ class Gympro extends CI_Controller{
     public function programs()
     {
         $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/programs', $this->data);
     }
     public function create_program()
@@ -453,7 +726,7 @@ class Gympro extends CI_Controller{
     public function exercises()
     {
         $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/exercises', $this->data);
     }
     public function create_exercise()
@@ -465,7 +738,7 @@ class Gympro extends CI_Controller{
     public function assessments()
     {
         $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/assessments', $this->data);
     }
     public function create_assessment()
@@ -477,7 +750,7 @@ class Gympro extends CI_Controller{
     public function nutrition()
     {
         $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/nutrition', $this->data);
     }
     public function create_nutrition()
@@ -505,13 +778,27 @@ class Gympro extends CI_Controller{
     public function missions()
     {
         $this->data['message'] = '';        
-        $this->data['application_id'] = 1;        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/missions', $this->data);
     }
     public function create_mission()
     {
         $this->data['message'] = '';        
         $this->template->load(null,'applications/gympro/mission_create', $this->data);
+    }
+    
+    
+    //-----------------------------------------Earnings Module------------------------------------//
+    public function earnings()
+    {
+        $this->data['message'] = '';        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
+        $this->template->load(null,'applications/gympro/earnings', $this->data);
+    }
+    public function create_session()
+    {
+        $this->data['message'] = '';        
+        $this->template->load(null,'applications/gympro/earning_create', $this->data);
     }
 }
 

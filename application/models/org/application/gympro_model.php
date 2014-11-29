@@ -202,7 +202,16 @@ class Gympro_model extends Ion_auth_model {
      */
     public function update_client($client_id, $additional_data)
     {
-        
+        //incomplete
+        $additional_data['modified_on'] = now();
+//        $data = $this->_filter_data($this->tables['app_gympro_users'], $additional_data);
+        $this->db->update($this->tables['app_gympro_clients'], $data, array('user_id' => $client_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_gympro_user_fail');
+            return FALSE;
+        }
+        $this->set_message('update_gympro_user_successful');
+        return TRUE;
     }
     /*
      * This method will return all clients of a user

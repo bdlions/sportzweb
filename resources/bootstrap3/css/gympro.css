@@ -93,7 +93,7 @@ a:hover
     line-height: 26px;
     color: darkgray;
 }
-.btn_gympro:hover
+.btn:hover, .btn:focus
 {
     color: wheat;
 }
@@ -102,9 +102,11 @@ a:hover
     background-color: #880015;
     color: whitesmoke;
     font-weight: bold;
+    line-height: 0px;
 }
 
 /*PAGE Groups*/
+
 .gympro_table
 {
     text-align: center;
@@ -119,13 +121,7 @@ a:hover
     background-color: #00A2E8;
     color: white;
 }
-.gympro_button
-{
-    font-weight: bold;
-    line-height: 0px;
-    color: white;
-    background-color: #880015;
-}
+
 
 /*PAGE EDIT-PROGRAMME*/
 .pad_body .hidden_tab

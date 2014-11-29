@@ -8,10 +8,10 @@
         <div class="col-md-7">
             <div class="row form-group">
                 <div class="col-md-2">
-                    <a href="<?php echo base_url()?>applications/gympro/exercises"><button class="btn button-custom gympro_button">Exercises</button></a>
+                    <a href="<?php echo base_url()?>applications/gympro/exercises"><button class="btn button-custom btn_gympro">Exercises</button></a>
                 </div>
                 <div class="col-md-2">
-                    <a href="<?php echo base_url()?>applications/gympro/create_program"><button class="btn button-custom gympro_button">New Program</button></a>
+                    <a href="<?php echo base_url()?>applications/gympro/create_program"><button class="btn button-custom btn_gympro">New Program</button></a>
                 </div>
             </div>
             <div class="row form-group">

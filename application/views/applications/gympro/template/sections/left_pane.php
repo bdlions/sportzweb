@@ -31,7 +31,7 @@
     </div>
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/earnings.png">
-        <a href="">Earnings</a>
+        <a href="<?php echo base_url().'applications/gympro/earnings'?>">Earnings</a>
     </div>
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/account.png">

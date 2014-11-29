@@ -8,7 +8,7 @@
         <div class="col-md-7">
             <div class="row form-group">
                 <div class="col-md-2">
-                    <a href="<?php echo base_url()?>applications/gympro/create_group"><button class="btn button-custom gympro_button">New Group</button></a>
+                    <a href="<?php echo base_url()?>applications/gympro/create_group"><button class="btn button-custom btn_gympro">New Group</button></a>
                 </div>
             </div>
             <div class="row form-group">
