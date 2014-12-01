@@ -259,8 +259,10 @@ class Gympro extends CI_Controller{
     }
     public function update_client($client_id = 1)
     {
-        $client_list = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
-        $client = $client_list[$client_id-1];
+        $client = $this->gympro_library->get_client_info($client_id)->result_array();
+        $client = $client[0];
+//        var_dump($client);
+//        exit();
         $this->data['message'] = ''; 
         $this->form_validation->set_rules('first_name', 'First Name', 'xss_clean|required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'xss_clean');
@@ -483,8 +485,10 @@ class Gympro extends CI_Controller{
     //----------------------------------- Group Module ---------------------------------//
     public function manage_groups()
     {
-        $this->data['message'] = '';        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
+        $this->data['message'] = '';
+        $this->data['group_list'] = $this->gympro_library->get_all_group_info()->result_array();
+        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/groups', $this->data);
     }
     public function create_group()

@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="pull-right">
-                    <a href="<?php echo base_url().'applications/gympro/update_client/'.$client_info['client_id']?>"><span>Edit</span></a>
+                    <a href="<?php echo base_url().'applications/gympro/update_client/'.$client_info['id']?>"><span>Edit</span></a>
                 </div>
             </div>
         </div>

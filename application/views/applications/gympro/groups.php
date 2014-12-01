@@ -21,12 +21,15 @@
                                 <th>Group Created</th>
                                 <th>Edit</th>
                             </tr>
+                            <?php foreach ($group_list as $group):?>
                             <tr>
-                                <td>tata</td>
-                                <td>22</td>
-                                <td>acsaasdc</td>
+                                <td><?php echo $group['name'];?></td>
+                                <td><?php echo $group['name'];?></td>
+                                <td><?php echo $group['name'];?></td>
                                 <td><a>Edit</a></td>
-                            </tr>
+                            </tr>                            
+                            <?php endforeach;?>
+                            
                             <tr>
                                 <td>acsaasdc</td>
                                 <td>acsaasdc</td>

@@ -231,8 +231,23 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_client_info($client_id)
     {
-        
+        $this->db->where($this->tables['app_gympro_clients'].'.id', $client_id);
+        return $this->db->select($this->tables['app_gympro_clients'].'.id as id,'.$this->tables['app_gympro_clients'].'.*')
+                    ->from($this->tables['app_gympro_clients'])
+                    ->get();
     }
+    
+    //----------------------------------Group Module--------------------------------------//
+
+    public function get_all_group_info()
+    {
+//        return $this->db->select($this->tables['app_gympro_groups'].'.id as group_id,'.$this->tables['app_gympro_groups'].'.*')
+//                    ->from($this->tables['app_gympro_groups'])
+//                    ->get();
+    }
+
+    
+    
     
     //----------------------------------Nutrition Module--------------------------------------//
     /*
