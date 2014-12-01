@@ -328,7 +328,8 @@ class Statuses {
                         $current_feedback['id'] = $feedback->id;
                         $current_feedback['user_info'] = $user_id_user_info_map[$feedback->user_id];
                         $current_feedback['description'] = $feedback->description;
-                        $current_feedback['created_on'] = $feedback->created_on;
+                        //$current_feedback['created_on'] = $feedback->created_on;
+                        $current_feedback['created_on'] = $this->utils->convert_time($feedback->created_on);
                         $feedback_list[] = $current_feedback;
                     }
                 }
