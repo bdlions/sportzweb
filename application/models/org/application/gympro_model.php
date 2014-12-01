@@ -270,4 +270,165 @@ class Gympro_model extends Ion_auth_model {
                     ->from($this->tables['app_gympro_workouts'])
                     ->get();
     }
+    
+    
+    
+    //----------------------------------Mission Module--------------------------------------//
+    /*
+     * This method will return all meal times
+     */
+    public function get_all_missions()
+    {
+        return $this->db->select($this->tables['app_gympro_missions'].'.id as id,'.$this->tables['app_gympro_missions'].'.*')
+                    ->from($this->tables['app_gympro_missions'])
+                    ->get();
+    }
+    
+    public function delete_mission($mission_id)
+    {
+        if(!isset($mission_id) || $mission_id <= 0)
+        {
+            $this->set_error('delete_missions_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $mission_id);
+        $this->db->delete($this->tables['app_gympro_missions']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_missions_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_missions_successful');
+        return TRUE;
+    }
+    
+    
+    
+
+    public function create_mission($additional_data)
+    {
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_missions'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }    
+//    public function get_missions_info($missions_id)
+//    {
+//        $this->db->where($this->tables['app_gympro_missions'].'.id', $missions_id);
+//        return $this->db->select($this->tables['app_gympro_missions'].'.id as id,'.$this->tables['app_gympro_missions'].'.*')
+//                    ->from($this->tables['app_gympro_missions'])
+//                    ->get();
+//    }
+    public function update_missions($missions_id, $additional_data)
+    {
+        $missions_info = $this->get_missions_info($missions_id)->row();
+        $additional_data['modified_on'] = now();
+
+        if (array_key_exists($this->app_gympro_missions_identity_column, $additional_data) && $this->missions_identity_check($additional_data[$this->app_gympro_missions_identity_column]) && $missions_info->{$this->app_gympro_missions_identity_column} !== $additional_data[$this->app_gympro_missions_identity_column])
+        {
+            $this->set_error('update_missions_duplicate_' . $this->app_gympro_missions_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data);
+        $this->db->update($this->tables['app_gympro_missions'], $data, array('id' => $missions_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_missions_fail');
+            return FALSE;
+        }
+        $this->set_message('update_missions_successful');
+        return TRUE;
+    }
+
+    
 }
+
+
+
+    
+    //====================================TEMPLATE===========================================
+    /*
+    
+    
+    
+    public function module_name_identity_check($identity = '')
+    {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->app_gympro_module_name_identity_column, $identity);
+        return $this->db->count_all_results($this->tables['app_gympro_module_name']) > 0;
+    }
+    
+    public function get_all_module_name()
+    {
+        return $this->db->select($this->tables['app_gympro_module_name'].'.id as id,'.$this->tables['app_gympro_module_name'].'.*')
+                    ->from($this->tables['app_gympro_module_name'])
+                    ->get();
+    }
+    
+    public function delete_module_name($module_name_id)
+    {
+        if(!isset($module_name_id) || $module_name_id <= 0)
+        {
+            $this->set_error('delete_module_name_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $module_name_id);
+        $this->db->delete($this->tables['app_gympro_module_name']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_module_name_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_module_name_successful');
+        return TRUE;
+    }
+    
+    public function create_module_name($additional_data)
+    {
+        if ( array_key_exists($this->app_gympro_module_name_identity_column, $additional_data) && $this->module_name_identity_check($additional_data[$this->app_gympro_module_name_identity_column]) )
+        {
+            $this->set_error('create_module_name_duplicate_' . $this->app_gympro_module_name_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_module_name'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_module_name'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        $this->set_message('create_module_name_successful');
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }    
+    public function get_module_name_info($module_name_id)
+    {
+        $this->db->where($this->tables['app_gympro_module_name'].'.id', $module_name_id);
+        return $this->db->select($this->tables['app_gympro_module_name'].'.id as id,'.$this->tables['app_gympro_module_name'].'.*')
+                    ->from($this->tables['app_gympro_module_name'])
+                    ->get();
+    }
+    public function update_module_name($module_name_id, $additional_data)
+    {
+        $module_name_info = $this->get_module_name_info($module_name_id)->row();
+        $additional_data['modified_on'] = now();
+
+        if (array_key_exists($this->app_gympro_module_name_identity_column, $additional_data) && $this->module_name_identity_check($additional_data[$this->app_gympro_module_name_identity_column]) && $module_name_info->{$this->app_gympro_module_name_identity_column} !== $additional_data[$this->app_gympro_module_name_identity_column])
+        {
+            $this->set_error('update_module_name_duplicate_' . $this->app_gympro_module_name_identity_column);
+            return FALSE;
+        }
+        $data = $this->_filter_data($this->tables['app_gympro_module_name'], $additional_data);
+        $this->db->update($this->tables['app_gympro_module_name'], $data, array('id' => $module_name_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_module_name_fail');
+            return FALSE;
+        }
+        $this->set_message('update_module_name_successful');
+        return TRUE;
+    }
+
+    
+    
+    
+     */
+    

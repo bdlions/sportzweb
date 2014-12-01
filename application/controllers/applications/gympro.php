@@ -786,10 +786,113 @@ class Gympro extends CI_Controller{
         $this->template->load(null,'applications/gympro/missions', $this->data);
     }
     public function create_mission()
-    {
-        $this->data['message'] = '';        
-        $this->template->load(null,'applications/gympro/mission_create', $this->data);
-    }
+    {    
+        $this->form_validation->set_rules('lable', 'Lable', 'xss_clean|required');
+        if ($this->input->post()) 
+        {
+            if ($this->form_validation->run() == true) 
+            {
+                $additional_data = array(
+                    'lable' => $this->input->post('lable'),
+                    'start_date' => $this->input->post('start_date'),
+                    'end_date' => $this->input->post('end_date'),
+                    'sunday' => $this->input->post('sunday'),
+                    'monday' => $this->input->post('monday'),
+                    'tuesday' => $this->input->post('tuesday'),
+                    'wednesday' => $this->input->post('wednesday'),
+                    'thursday' => $this->input->post('thursday'),
+                    'friday' => $this->input->post('friday'),
+                    'saturday' => $this->input->post('saturday')
+                );
+                $value = $this->gympro_library->create_mission($additional_data);
+                if ($value) 
+                {
+                    $this->data['message'] = $this->gympro_library->messages();
+                } else 
+                {
+                    $this->data['message'] = $this->gympro_library->errors();
+                }
+            }
+        }
+
+        $this->data['lable'] = array(
+            'name' => 'lable',
+            'id' => 'lable',
+            'type' => 'text'
+        );
+
+        $this->data['end_date'] = array(
+            'name' => 'end_date',
+            'id' => 'end_date',
+            'type' => 'text'
+        );
+
+        $this->data['start_date'] = array(
+            'name' => 'start_date',
+            'id' => 'start_date',
+            'type' => 'text'
+        );
+
+        $this->data['start_data'] = array(
+            'name' => 'start_data',
+            'id' => 'start_data',
+            'type' => 'text'
+        );
+
+        $this->data['sunday'] = array(
+            'name' => 'sunday',
+            'id' => 'sunday',
+            'type' => 'text',
+            'rows' => '4'
+        );
+        $this->data['monday'] = array(
+            'name' => 'monday',
+            'id' => 'monday',
+            'type' => 'text',
+            'rows' => '4'
+        );
+        $this->data['tuesday'] = array(
+            'name' => 'tuesday',
+            'id' => 'tuesday',
+            'type' => 'text',
+            'rows' => '4'
+        );
+        $this->data['wednesday'] = array(
+            'name' => 'wednesday',
+            'id' => 'wednesday',
+            'type' => 'text',
+            'rows' => '4'
+        );
+        $this->data['thursday'] = array(
+            'name' => 'thursday',
+            'id' => 'thursday',
+            'type' => 'text',
+            'rows' => '4'
+        );
+        $this->data['friday'] = array(
+            'name' => 'friday',
+            'id' => 'friday',
+            'type' => 'text',
+            'rows' => '4'
+        );
+        $this->data['saturday'] = array(
+            'name' => 'saturday',
+            'id' => 'saturday',
+            'type' => 'text',
+            'rows' => '4'
+        );
+        $this->data['submit_button'] = array(
+            'name' => 'submit_button',
+            'id' => 'submit_button',
+            'type' => 'submit',
+            'value' => 'Save'
+        );
+
+
+
+        $this->data['message'] = '';
+        $this->template->load(null, 'applications/gympro/mission_create', $this->data);
+}
     
     
     //-----------------------------------------Earnings Module------------------------------------//
@@ -805,4 +908,6 @@ class Gympro extends CI_Controller{
         $this->template->load(null,'applications/gympro/earning_create', $this->data);
     }
 }
+
+                    
 
