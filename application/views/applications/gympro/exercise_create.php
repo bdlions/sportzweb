@@ -9,8 +9,8 @@
             <div class="pad_title">
                 ADDING EXERCISE
             </div>
+            <?php echo form_open("applications/gympro/create_exercise", array('id' => '', 'class' => 'form-horizontal')); ?>
             <div class="pad_body">
-                <?php echo form_open("applications/gympro/create_assessment/", array('id' => 'form_assesment', 'class' => 'form-horizontal')); ?>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row form-group">
@@ -18,7 +18,9 @@
                                 Category:*
                             </div>
                             <div class="col-md-6">
-                                <select class="form-control"></select>
+                                <select class="form-control" name="category_id">
+                                    <option value="1" selected>Exercise 1</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -26,7 +28,7 @@
                                 Name:*
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control">
+                                <?php echo form_input($name + array('class' => 'form-control')) ?>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -34,7 +36,7 @@
                                 Description:
                             </div>
                             <div class="col-md-8">
-                                <textarea class="form-control"></textarea>
+                                <?php echo form_textarea($description + array('class' => 'form-control')) ?>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -47,11 +49,11 @@
                         </div>
                     </div>
                 </div>
-                <?php echo form_close(); ?>
             </div>
             <div class="pad_footer">
                 <button>Save Exercise</button> or <a href="<?php echo base_url()?>applications/gympro/exercises">Cancel</a>
             </div>
+                <?php echo form_close(); ?>
         </div>
     </div>
 

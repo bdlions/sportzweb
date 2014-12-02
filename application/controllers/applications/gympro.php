@@ -735,8 +735,45 @@ class Gympro extends CI_Controller{
     }
     public function create_exercise()
     {
-        $this->data['message'] = '';       
-        $this->template->load(null,'applications/gympro/exercise_create', $this->data);
+        $this->form_validation->set_rules('name', 'Catagory', 'xss_clean|required');
+        if ($this->input->post()) {
+            if ($this->form_validation->run() == true) {
+                $additional_data = array(
+                    'category_id' => $this->input->post('category_id'),
+                    'name' => $this->input->post('name'),
+                    'description' => $this->input->post('description')
+                );
+                $newValue = $this->gympro_library->create_exercise($additional_data);
+                if ($newValue) {
+                    $this->data['message'] = $this->gympro_library->messages();
+                    redirect('applications/gympro/create_exercise', 'refresh');
+                } else {
+                    $this->data['message'] = $this->gympro_library->errors();
+                }
+            }
+        }
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text'
+        );
+
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text'
+        );
+
+        $this->data['submit_button'] = array(
+            'name' => 'submit_button',
+            'id' => 'submit_button',
+            'type' => 'submit',
+            'value' => 'Save'
+        );
+
+        $this->data['message'] = '';
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
+        $this->template->load(null, 'applications/gympro/exercise_create', $this->data);
     }
     //----------------------------------------Assessment Module------------------------------------//
     public function assessments()
@@ -777,6 +814,11 @@ class Gympro extends CI_Controller{
         
         $this->template->load(null,'applications/gympro/nutrition_create', $this->data);
     }
+    
+    //-----------------------------------------Mission Module------------------------------------//
+    
+    
+    
     
     //-----------------------------------------Mission Module------------------------------------//
     public function missions()
@@ -905,7 +947,12 @@ class Gympro extends CI_Controller{
     public function create_session()
     {
         $this->data['message'] = '';        
-        $this->template->load(null,'applications/gympro/earning_create', $this->data);
+        $this->template->load(null,'applications/gympro/session_create', $this->data);
+    }
+    public function earnings_summary()
+    {
+        $this->data['message'] = '';        
+        $this->template->load(null,'applications/gympro/earnings_summary', $this->data);
     }
 }
 

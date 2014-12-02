@@ -273,6 +273,18 @@ class Gympro_model extends Ion_auth_model {
     
     
     
+    //----------------------------------Exercise Module--------------------------------------//
+    
+    public function create_exercise($additional_data)
+    {
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_exercises'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_exercises'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+    
+    
     //----------------------------------Mission Module--------------------------------------//
     /*
      * This method will return all meal times
