@@ -31,9 +31,9 @@ class Status_feed extends JsonRPCServer {
     
     function get_statuses($status_data = ''){
         $result = array();
-        //$status_data = '{"hashtag":"","limit":5,"status_list_id":1,"mapping_id":0,"offset":0,"userId":4}';
+        //$status_data = '{"hashtag":"","limit":5,"status_list_id":1,"mapping_id":0,"offset":0,"user_id":4}';
         $data = json_decode($status_data);
-	$this->session->set_userdata('user_id', $data->user_id);
+        $this->session->set_userdata('user_id', $data->user_id);
         /*$data = new stdClass();
         $data->status_list_id = 1;
         $data->mapping_id = 4;
@@ -82,9 +82,9 @@ class Status_feed extends JsonRPCServer {
         $additional_data["status_type_id"] = $data->status_type_id;
         $additional_data["status_category_id"] = $data->status_category_id;
         $additional_data["description"] = $data->description;
-        $additional_data["reference_id"] = $data->reference_id;
-        $additional_data["shared_type_id"] = $data->shared_type_id;
-        $additional_data["via_user_id"] = $data->via_user_id;
+        //$additional_data["reference_id"] = $data->reference_id;
+        //$additional_data["shared_type_id"] = $data->shared_type_id;
+        //$additional_data["via_user_id"] = $data->via_user_id;
         $status_id = $this->statuses->post_status($additional_data);
         if( $status_id !== FALSE)
         {
@@ -117,6 +117,21 @@ class Status_feed extends JsonRPCServer {
         $this->statuses->add_feedback($status_id, $feedback);
         $result['status'] = 1;
         //echo json_encode($result);
+        return json_encode($result);
+    }
+	
+	function delete_status($status_id = 0)
+    {
+        $result = array(); 
+		if($status_id > 0 )
+	    {
+			$result['status'] = $this->statuses->delete_status($status_id);
+		}
+		else
+		{
+			$result['status'] = FALSE;
+		}		
+		//echo json_encode($result);
         return json_encode($result);
     }
 }
