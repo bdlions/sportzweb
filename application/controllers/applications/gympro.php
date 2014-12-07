@@ -9,6 +9,7 @@ class Gympro extends CI_Controller{
         $this->lang->load('auth');
         $this->load->library('form_validation');
         $this->load->library('org/application/gympro_library');
+        $this->load->library('org/utility/Utils');
         $this->load->helper('language');
         $this->load->helper('url');
         if (!$this->ion_auth->logged_in()) {
@@ -62,19 +63,80 @@ class Gympro extends CI_Controller{
         $this->template->load(null,'applications/gympro/client/clients', $this->data);
     }
     
+//    public function image_upload($file_info) {
+//        $data = null;
+//        if (isset($file_info)) {
+//            $config['image_library'] = 'gd2';
+//            $config['upload_path'] = CLIENT_PROFILE_PIC_IMAGEPATH;
+//            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+//            $config['max_size'] = '10240';
+//            $config['maintain_ratio'] = FALSE;
+//            $config['width'] = 120;
+//            $config['height'] = 120;
+//            $config['create_thumb'] = TRUE;
+//
+//            $this->load->library('upload', $config);
+//
+//            if (!$this->upload->do_upload()) {
+//                $error = array('error' => $this->upload->display_errors());
+//                return $data = $error;
+//            } else {
+//                $upload_data = $this->upload->data();
+//                $data = array('upload_data' => $upload_data);
+//                return $data;
+//            }
+//        }
+//        return $data;
+//    }
+
     public function create_client()
     {
-        $this->data['message'] = ''; 
+        //CHECK IF THE CLIENT CREATE LIMIT HAS EXCEED
+        
+        
+        $this->data['message'] = '';
         $this->form_validation->set_rules('first_name', 'First Name', 'xss_clean|required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'xss_clean');
+        
+        $question_list = $this->gympro_library->get_all_health_questions()->result_array();
+        $this->data['question_list'] = $question_list;
+        $question_list_length = count($question_list);        
+        $answer_list = [];
+        
         if ($this->input->post())
         {
+            $result = array();
+            $result['message'] = '';
+            $picture = "";
+            if (isset($_FILES["userfile"]))
+            {
+                $result = $this->utils->upload_image($_FILES["userfile"], CLIENT_PROFILE_PIC_IMAGEPATH);
+                if($result['status'] == 1)
+                {
+                    $source_path = CLIENT_PROFILE_PIC_IMAGEPATH.$result['upload_data']['file_name'];
+                    $destination_path = CLIENT_PROFILE_PICTURE_PATH_W50_H50.$result['upload_data']['file_name'];
+                    
+                    $this->utils->resize_image($source_path, $destination_path, CLIENT_PROFILE_PICTURE_H50, CLIENT_PROFILE_PICTURE_W50);
+                    $picture = $result['upload_data']['file_name'];
+                }                
+            }
+            
+            for($i = 0; $i < $question_list_length; $i++)
+            {
+                $answer_list[$i] = array(
+                    'id' => $this->input->post('question_additional_info_'.$i),
+                    'answer' => $this->input->post('question_radio_'.$i),
+//                    'additional_info' => (isset($this->input->post('question_additional_info_'.$i)) ? $this->input->post('question_additional_info_'.$i) : NULL),
+                    'additional_info' => $this->input->post('question_additional_info_'.$i)
+                );
+            }
+            
             if($this->form_validation->run() == true)
             {
                 $data = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
-//                    'gender_id' => $this->input->post('gender_id'),
+                    'gender_id' => $this->input->post('gender_id'),
                     'email' => $this->input->post('email'),
                     'start_date' => $this->input->post('start_date'),
                     'end_date' => $this->input->post('end_date'),
@@ -82,29 +144,31 @@ class Gympro extends CI_Controller{
                     'status_id' => $this->input->post('status_id'),
                     'occupation' => $this->input->post('occupation'),
                     'company_name' => $this->input->post('company_name'),
-                    'picture' => $this->input->post('picture'),
+                    'picture' => $picture,
                     'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'address' => $this->input->post('address'),
                     'emergyncy_contact' => $this->input->post('emergyncy_contact'),
                     'emergyncy_phone' => $this->input->post('emergyncy_phone'),
-                    'qestion_list' => $this->input->post('qestion_list'),
                     'height' => $this->input->post('height'),
                     'reseting_heart_rate' => $this->input->post('reseting_heart_rate'),
                     'blood_pressure' => $this->input->post('blood_pressure'),
                     'notes' => $this->input->post('notes'),
-                    'user_id' => $this->session->userdata('user_id')
+                    'user_id' => $this->session->userdata('user_id'),
+                    
+                    'qestion_list' => serialize($answer_list)
                 );
                 $client_create_id = $this->gympro_library->create_client($data);
                 if ($client_create_id !== FALSE) {
-                    $this->data['message'] = "Client is created successfully.";
-                    redirect('applications/gympro/create_client','refresh');
+                    $result['message'] = 'Client is added successfully.';
                 } else {
-                    $this->data['message'] = $this->gympro_library->errors();
+                    $result['message'] = $this->gympro_library->errors_alert();
                 }
             } else {
                 $this->data['message'] = validation_errors();
             }
+            echo json_encode($result);
+            return;
         }
         else
         {
@@ -196,46 +260,46 @@ class Gympro extends CI_Controller{
         );
         
 //        HEALTH Q
-        $this->data['smoker_txt'] = array(
-            'name' => 'smoker_txt',
-            'id' => 'smoker_txt',
-            'type' => 'text'
-        );
-        $this->data['cardiov_txt'] = array(
-            'name' => 'cardiov_txt',
-            'id' => 'cardiov_txt',
-            'type' => 'text'
-        );
-        $this->data['injury_txt'] = array(
-            'name' => 'injury_txt',
-            'id' => 'injury_txt',
-            'type' => 'text'
-        );
-        $this->data['medication_txt'] = array(
-            'name' => 'medication_txt',
-            'id' => 'medication_txt',
-            'type' => 'text'
-        );
-        $this->data['medicalcondition_txt'] = array(
-            'name' => 'medicalcondition_txt',
-            'id' => 'medicalcondition_txt',
-            'type' => 'text'
-        );
-        $this->data['height'] = array(
-            'name' => 'height',
-            'id' => 'height',
-            'type' => 'text'
-        );
-        $this->data['reseting_heart_rate'] = array(
-            'name' => 'reseting_heart_rate',
-            'id' => 'reseting_heart_rate',
-            'type' => 'text'
-        );
-        $this->data['blood_pressure'] = array(
-            'name' => 'blood_pressure',
-            'id' => 'blood_pressure',
-            'type' => 'text'
-        );
+//        $this->data['smoker_txt'] = array(
+//            'name' => 'smoker_txt',
+//            'id' => 'smoker_txt',
+//            'type' => 'text'
+//        );
+//        $this->data['cardiov_txt'] = array(
+//            'name' => 'cardiov_txt',
+//            'id' => 'cardiov_txt',
+//            'type' => 'text'
+//        );
+//        $this->data['injury_txt'] = array(
+//            'name' => 'injury_txt',
+//            'id' => 'injury_txt',
+//            'type' => 'text'
+//        );
+//        $this->data['medication_txt'] = array(
+//            'name' => 'medication_txt',
+//            'id' => 'medication_txt',
+//            'type' => 'text'
+//        );
+//        $this->data['medicalcondition_txt'] = array(
+//            'name' => 'medicalcondition_txt',
+//            'id' => 'medicalcondition_txt',
+//            'type' => 'text'
+//        );
+//        $this->data['height'] = array(
+//            'name' => 'height',
+//            'id' => 'height',
+//            'type' => 'text'
+//        );
+//        $this->data['reseting_heart_rate'] = array(
+//            'name' => 'reseting_heart_rate',
+//            'id' => 'reseting_heart_rate',
+//            'type' => 'text'
+//        );
+//        $this->data['blood_pressure'] = array(
+//            'name' => 'blood_pressure',
+//            'id' => 'blood_pressure',
+//            'type' => 'text'
+//        );
         
         
 //        NOTES
@@ -246,15 +310,20 @@ class Gympro extends CI_Controller{
         );
         
         
-        $this->data['submit_button'] = array(
-            'name' => 'submit_button',
-            'id' => 'submit_button',
+        $this->data['btnSubmit'] = array(
+            'name' => 'btnSubmit',
+            'id' => 'btnSubmit',
             'type' => 'submit',
-            'value' => 'Create Client'
+            'value' => 'Save'
         );
         
+        
+        
+        
+        
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();;
+        $this->data['gender_info'] = $this->gympro_library->get_all_gender_info()->result_array();
+        $this->data['status_info'] = $this->gympro_library->get_all_status_info()->result_array();
         $this->template->load(null,'applications/gympro/client/create_client', $this->data);
     }
     public function update_client($client_id = 1)
@@ -266,14 +335,45 @@ class Gympro extends CI_Controller{
         $this->data['message'] = ''; 
         $this->form_validation->set_rules('first_name', 'First Name', 'xss_clean|required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'xss_clean');
+        
+        $question_list = $this->gympro_library->get_all_health_questions()->result_array();
+        $this->data['question_list'] = $question_list;
+        $question_list_length = count($question_list);        
+        $answer_list = [];
         if ($this->input->post())
         {
+            $result = array();
+            $result['message'] = '';
+            $picture = "";
+            if (isset($_FILES["userfile"]))
+            {
+                $result = $this->utils->upload_image($_FILES["userfile"], CLIENT_PROFILE_PIC_IMAGEPATH);
+                if($result['status'] == 1)
+                {
+                    $source_path = CLIENT_PROFILE_PIC_IMAGEPATH.$result['upload_data']['file_name'];
+                    $destination_path = CLIENT_PROFILE_PICTURE_PATH_W50_H50.$result['upload_data']['file_name'];
+                    
+                    $this->utils->resize_image($source_path, $destination_path, CLIENT_PROFILE_PICTURE_H50, CLIENT_PROFILE_PICTURE_W50);
+                    $picture = $result['upload_data']['file_name'];
+                }                
+            }
+            
+            for($i = 0; $i < $question_list_length; $i++)
+            {
+                $answer_list[$i] = array(
+                    'id' => $this->input->post('question_additional_info_'.$i),
+                    'answer' => $this->input->post('question_radio_'.$i),
+//                    'additional_info' => (isset($this->input->post('question_additional_info_'.$i)) ? $this->input->post('question_additional_info_'.$i) : NULL),
+                    'additional_info' => $this->input->post('question_additional_info_'.$i)
+                );
+            }
+            
             if($this->form_validation->run() == true)
             {
                 $data = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
-//                    'gender_id' => $this->input->post('gender_id'),
+                    'gender_id' => $this->input->post('gender_id'),
                     'email' => $this->input->post('email'),
                     'start_date' => $this->input->post('start_date'),
                     'end_date' => $this->input->post('end_date'),
@@ -287,12 +387,12 @@ class Gympro extends CI_Controller{
                     'address' => $this->input->post('address'),
                     'emergyncy_contact' => $this->input->post('emergyncy_contact'),
                     'emergyncy_phone' => $this->input->post('emergyncy_phone'),
-                    'qestion_list' => $this->input->post('qestion_list'),
                     'height' => $this->input->post('height'),
                     'reseting_heart_rate' => $this->input->post('reseting_heart_rate'),
                     'blood_pressure' => $this->input->post('blood_pressure'),
                     'notes' => $this->input->post('notes'),
-                    'user_id' => $this->session->userdata('user_id')
+                    'user_id' => $this->session->userdata('user_id'),
+                    'qestion_list' => serialize($answer_list)
                 );
                 $client_create_id = $this->gympro_library->update_client($data);
                 if ($client_create_id !== FALSE) {
@@ -479,7 +579,8 @@ class Gympro extends CI_Controller{
         );
         
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();
+        $this->data['gender_info'] = $this->gympro_library->get_all_gender_info()->result_array();
+        $this->data['status_info'] = $this->gympro_library->get_all_status_info()->result_array();
         $this->template->load(null,'applications/gympro/client/edit_client', $this->data);
     }
     //----------------------------------- Group Module ---------------------------------//

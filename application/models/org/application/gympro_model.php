@@ -194,6 +194,18 @@ class Gympro_model extends Ion_auth_model {
                     ->from($this->tables['app_gympro_health_questions'])
                     ->get();
     }
+    public function get_all_gender_info()
+    {
+        return $this->db->select($this->tables['gender'].'.*')
+                    ->from($this->tables['gender'])
+                    ->get();
+    }
+    public function get_all_status_info()
+    {
+        return $this->db->select($this->tables['app_gympro_client_statuses'].'.*')
+                    ->from($this->tables['app_gympro_client_statuses'])
+                    ->get();
+    }
     /*
      * This method will update client info
      * @param $client_id, client id
