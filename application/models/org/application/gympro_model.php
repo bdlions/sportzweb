@@ -368,6 +368,57 @@ class Gympro_model extends Ion_auth_model {
         return TRUE;
     }
     
+    //-------------------------------- Assessment Module -------------------------------------//
+    /*
+     * This method will return all assessments of a gympro user
+     * @param $user_id, gympro user id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_assessments($user_id = 0)
+    {
+        
+    }
+    /*
+     * This method will return all assessment info
+     * @param $assessment_id, assessment id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_assessment_info($assessment_id = 0)
+    {
+        
+    }
+    /*
+     * This method will create a new assessment
+     * @param $additional_data, assessment data to be inserted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function create_assessment($additional_data)
+    {
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_assessments'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_assessments'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    } 
+    /*
+     * This method will update assessment info
+     * @param $assessment_id, assessment id to be updated
+     * @param $additional_data, assessment data to be updated
+     * @Author Nazmul on 7th December 2014
+     */
+    public function update_assessment($assessment_id, $additional_data)
+    {
+        
+    }
+    /*
+     * This method will delete an assessment
+     * @param $assessment_id, assessment id to be deleted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_assessment($assessment_id)
+    {
+        
+    }
 
 }
 

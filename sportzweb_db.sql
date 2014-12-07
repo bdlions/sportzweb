@@ -2211,6 +2211,7 @@ INSERT INTO `app_gympro_reassess` (`title`) VALUES
 ('10 weeks');
 CREATE TABLE IF NOT EXISTS `app_gympro_assessments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
   `reassess_id` int(11) unsigned NOT NULL,
   `date` varchar(50),
   `weight` varchar(100),
@@ -2240,10 +2241,12 @@ CREATE TABLE IF NOT EXISTS `app_gympro_assessments` (
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `app_gympro_assessments_u1_idx` (`user_id`),
   KEY `app_gympro_assessments_reassess1_idx` (`reassess_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `app_gympro_assessments`
-	ADD CONSTRAINT `app_gympro_assessments_reassess1` FOREIGN KEY(`reassess_id`) REFERENCES `app_gympro_reassess` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+	ADD CONSTRAINT `app_gympro_assessments_reassess1` FOREIGN KEY(`reassess_id`) REFERENCES `app_gympro_reassess` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_gympro_assessments_u1` FOREIGN KEY(`user_id`) REFERENCES `app_gympro_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE IF NOT EXISTS `app_gympro_assessments_groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `assessment_id` int(11) unsigned NOT NULL,
