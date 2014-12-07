@@ -17,22 +17,16 @@
                         <tbody>
                             <tr>
                                 <th>CREATED</th>
-                                <th>CLIENT</th>
                                 <th>LABEL</th>
                                 <th>EDIT</th>
                             </tr>
+                            <?php foreach($mission_list as $mission_info){?>
                             <tr>
-                                <td>20th Nov 2014</td>
-                                <td>Shem Haye</td>
-                                <td>Label1</td>
-                                <td><a>Edit</a></td>
-                            </tr>
-                            <tr>
-                                <td>20th Nov 2014</td>
-                                <td>Shem Haye</td>
-                                <td>Label2</td>
-                                <td><a>Edit</a></td>
-                            </tr>
+                                <td><?php echo $mission_info['created_on']?></td>
+                                <td><?php echo $mission_info['label']?></td>
+                                <td><a href="<?php echo base_url()."applications/gympro/edit_mission/".$mission_info['mission_id']?>">Edit</a></td>
+                            </tr>    
+                            <?php } ?>                           
                         </tbody>
                     </table>
                 </div>                

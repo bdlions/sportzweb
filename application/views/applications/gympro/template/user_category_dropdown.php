@@ -6,46 +6,19 @@
 
         <optgroup label="Active" style="background-color: lightgreen">
             <option>
-                tanveer
-            </option>
-            <option>
-                ahmed
-            </option>
-            <option>
-                test
+                Shem Haye
             </option>
         </optgroup>
         <optgroup label="Inactive" style="background-color: lightgray">
             <option>
-                potato
-            </option>
-            <option>
-                tanveer
-            </option>
-            <option>
-                ahmed
-            </option>
-            <option>
-                test
-            </option>
-            <option>
-                Inactive
+                Nazmul Hasan
             </option>
         </optgroup>
-<!--        <optgroup label="Potential" style="background-color: lightpink">
+        <optgroup label="Potential" style="background-color: lightpink">
             <option>
-                potato
+                Alamgir Kabir
             </option>
-            <option>
-                tanveer
-            </option>
-            <option>
-                ahmed
-            </option>
-            <option>
-                test
-            </option>
-        </optgroup>-->
+        </optgroup>
     </select>
 </div>
 

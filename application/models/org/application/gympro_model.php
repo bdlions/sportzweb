@@ -9,7 +9,7 @@ if (!defined('BASEPATH'))
  * Requirements: PHP5 or above
  */
 class Gympro_model extends Ion_auth_model {
-
+    
     public function __construct() {
         parent::__construct();
     }
@@ -299,11 +299,13 @@ class Gympro_model extends Ion_auth_model {
     
     //----------------------------------Mission Module--------------------------------------//
     /*
-     * This method will return all meal times
+     * This method will return alll mission of a gympro user
+     * @param $user_id, user id of gympro user
+     * @Author Nazmul on 7th December 2014
      */
-    public function get_all_missions()
+    public function get_all_missions($user_id)
     {
-        return $this->db->select($this->tables['app_gympro_missions'].'.id as id,'.$this->tables['app_gympro_missions'].'.*')
+        return $this->db->select($this->tables['app_gympro_missions'].'.id as mission_id,'.$this->tables['app_gympro_missions'].'.*')
                     ->from($this->tables['app_gympro_missions'])
                     ->get();
     }
@@ -348,16 +350,14 @@ class Gympro_model extends Ion_auth_model {
    
     public function update_missions($missions_id, $additional_data)
     {
-      // var_dump($additional_data);        exit();
-        //var_dump($missions_id);        exit();
-        $missions_info = $this->get_missions_info($missions_id)->row();
+        //$missions_info = $this->get_missions_info($missions_id)->row();
         $additional_data['modified_on'] = now();
         
-        if (array_key_exists($this->app_gympro_missions_identity_column, $additional_data) && $this->missions_identity_check($additional_data[$this->app_gympro_missions_identity_column]) && $missions_info->{$this->app_gympro_missions_identity_column} !== $additional_data[$this->app_gympro_missions_identity_column])
+        /*if (array_key_exists($this->app_gympro_missions_identity_column, $additional_data) && $this->missions_identity_check($additional_data[$this->app_gympro_missions_identity_column]) && $missions_info->{$this->app_gympro_missions_identity_column} !== $additional_data[$this->app_gympro_missions_identity_column])
         {
             $this->set_error('update_missions_duplicate_' . $this->app_gympro_missions_identity_column);
             return FALSE;
-        }
+        }*/
         $data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data);
         $this->db->update($this->tables['app_gympro_missions'], $data, array('id' => $missions_id));
         if ($this->db->trans_status() === FALSE) {

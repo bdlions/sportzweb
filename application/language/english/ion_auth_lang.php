@@ -296,3 +296,5 @@ $lang['update_client_statuses_fail']                       = "Failed to update C
 $lang['update_gympro_user_successful']                 = "Account is updated successfully.";
 $lang['update_gympro_user_fail']                       = "Failed to update account info.";
 
+$lang['update_missions_successful']                    = "Mission is updated successfully.";
+$lang['update_missions_fail']                          = "Failed to update mission info.";

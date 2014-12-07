@@ -15,7 +15,7 @@ class Gympro_library {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
-        
+        $this->load->library('org/utility/Utils');
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
             $this->load->library('session');
@@ -60,6 +60,22 @@ class Gympro_library {
      */
     public function __get($var) {
         return get_instance()->$var;
+    }
+    
+    /*
+     * This method will return all mission after converting date format
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_missions($user_id = 0)
+    {
+        $mission_list = array();
+        $missions_array = $this->gympro_model->get_all_missions($user_id)->result_array();
+        foreach($missions_array as $mission_info)
+        {
+            $mission_info['created_on'] = $this->utils->get_unix_to_human_date($mission_info['created_on']);
+            $mission_list[] = $mission_info;
+        }
+        return $mission_list;
     }
 }
 

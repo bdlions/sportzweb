@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Gympro extends CI_Controller{
+class Gympro extends Role_Controller{
     function __construct() {
         parent::__construct();
         $this->lang->load('auth');
@@ -924,14 +924,17 @@ class Gympro extends CI_Controller{
     
     
     //-----------------------------------------Mission Module------------------------------------//
-    public function missions()
+    public function manage_missions()
     {
+        $mission_list = $this->gympro_library->get_all_missions($this->session->userdata('user_id'));
+        $this->data['mission_list'] = $mission_list;
         $this->data['message'] = '';        
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/missions', $this->data);
     }
     public function create_mission()
     {    
+        $this->data['message'] = '';
         $this->form_validation->set_rules('label', 'label', 'xss_clean|required');
         if ($this->input->post()) 
         {
@@ -951,14 +954,19 @@ class Gympro extends CI_Controller{
                     'user_id' => $this->session->userdata('user_id')
                 );
                 $value = $this->gympro_library->create_mission($additional_data);
-                if ($value) 
+                if ($value !== FALSE) 
                 {
-                    $this->data['message'] = $this->gympro_library->messages();
+                    $this->session->set_flashdata('message', $this->gympro_library->messages());
+                    redirect('applications/gympro/create_mission', 'refresh');
                 } else 
                 {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
             }
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
         }
 
         $this->data['label'] = array(
@@ -1033,17 +1041,16 @@ class Gympro extends CI_Controller{
             'type' => 'submit',
             'value' => 'Save'
         );
-
-
-
-        $this->data['message'] = '';
         $this->template->load(null, 'applications/gympro/mission_create', $this->data);
 }
     
     
-    public function edit_mission($missions_id = 1)
+    public function edit_mission($mission_id = 0)
     {    
-        
+        if($mission_id == 0)
+        {
+            redirect('applications/gympro/manage_missions', 'refresh');
+        }
         $this->data['message'] = ''; 
         $this->form_validation->set_rules('label', 'label', 'xss_clean|required');
         if ($this->input->post()) 
@@ -1062,8 +1069,8 @@ class Gympro extends CI_Controller{
                     'friday' => $this->input->post('friday'),
                     'saturday' => $this->input->post('saturday')
                 );
-                $value = $this->gympro_library->update_missions($missions_id, $additional_data);
-                if ($value) 
+                $value = $this->gympro_library->update_missions($mission_id, $additional_data);
+                if($value === TRUE) 
                 {
                     $this->data['message'] = $this->gympro_library->messages();
                 } else 
@@ -1072,40 +1079,38 @@ class Gympro extends CI_Controller{
                 }
             }
         }
-        $mission=array();
-        $mission_array = $this->gympro_library->get_missions_info($missions_id)->result_array();
+        $mission_info = array();
+        $mission_array = $this->gympro_library->get_missions_info($mission_id)->result_array();
         if(!empty($mission_array))
         {
-            $mission=$mission_array[0];
-            
+            $mission_info = $mission_array[0];            
         }
-
         $this->data['label'] = array(
             'name' => 'label',
             'id' => 'label',
             'type' => 'text',
-            'value' => $mission['label']
+            'value' => $mission_info['label']
         );
 
         $this->data['end_date'] = array(
             'name' => 'end_date',
             'id' => 'end_date',
             'type' => 'text',
-            'value' => $mission['end_date']
+            'value' => $mission_info['end_date']
         );
 
         $this->data['start_date'] = array(
             'name' => 'start_date',
             'id' => 'start_date',
             'type' => 'text',
-            'value' => $mission['start_date']
+            'value' => $mission_info['start_date']
         );
 
         $this->data['start_data'] = array(
             'name' => 'start_data',
             'id' => 'start_data',
             'type' => 'text',
-            'value' => $mission['start_date']
+            'value' => $mission_info['start_date']
         );
 
         $this->data['sunday'] = array(
@@ -1113,49 +1118,49 @@ class Gympro extends CI_Controller{
             'id' => 'sunday',
             'type' => 'text',
             'rows' => '4',
-            'value' => $mission['sunday']
+            'value' => $mission_info['sunday']
         );
         $this->data['monday'] = array(
             'name' => 'monday',
             'id' => 'monday',
             'type' => 'text',
             'rows' => '4',
-            'value' => $mission['monday']
+            'value' => $mission_info['monday']
         );
         $this->data['tuesday'] = array(
             'name' => 'tuesday',
             'id' => 'tuesday',
             'type' => 'text',
             'rows' => '4',
-            'value' => $mission['tuesday']
+            'value' => $mission_info['tuesday']
         );
         $this->data['wednesday'] = array(
             'name' => 'wednesday',
             'id' => 'wednesday',
             'type' => 'text',
             'rows' => '4',
-            'value' => $mission['wednesday']
+            'value' => $mission_info['wednesday']
         );
         $this->data['thursday'] = array(
             'name' => 'thursday',
             'id' => 'thursday',
             'type' => 'text',
             'rows' => '4',
-            'value' => $mission['thursday']
+            'value' => $mission_info['thursday']
         );
         $this->data['friday'] = array(
             'name' => 'friday',
             'id' => 'friday',
             'type' => 'text',
             'rows' => '4',
-            'value' => $mission['friday']
+            'value' => $mission_info['friday']
         );
         $this->data['saturday'] = array(
             'name' => 'saturday',
             'id' => 'saturday',
             'type' => 'text',
             'rows' => '4',
-            'value' => $mission['saturday']
+            'value' => $mission_info['saturday']
         );
         $this->data['submit_button'] = array(
             'name' => 'submit_button',
@@ -1163,11 +1168,7 @@ class Gympro extends CI_Controller{
             'type' => 'submit',
             'value' => 'Save'
         );
-
-
-
-        $this->data['missions_id'] = $missions_id;
-        $this->data['message'] = '';
+        $this->data['mission_id'] = $mission_id;
         $this->template->load(null, 'applications/gympro/mission_edit', $this->data);
     }
     //-----------------------------------------Earnings Module------------------------------------//
