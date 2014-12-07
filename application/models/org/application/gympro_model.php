@@ -369,6 +369,12 @@ class Gympro_model extends Ion_auth_model {
     }
     
     //-------------------------------- Assessment Module -------------------------------------//
+    public function get_all_reassess()
+    {
+        return $this->db->select($this->tables['app_gympro_reassess'].'.*')
+                    ->from($this->tables['app_gympro_reassess'])
+                    ->get();
+    }
     /*
      * This method will return all assessments of a gympro user
      * @param $user_id, gympro user id
