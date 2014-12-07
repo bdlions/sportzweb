@@ -15,7 +15,7 @@
                     <label class="col-sm-2 control-label">Label: </label>
                     <div class="col-sm-4">
                         <!--<input class="form-control">-->
-                        <?php echo form_input($lable + array('class' => 'form-control')) ?>
+                        <?php echo form_input($label + array('class' => 'form-control')) ?>
                     </div>
                 </div>
                 <div class="row form-group">

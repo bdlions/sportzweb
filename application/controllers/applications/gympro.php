@@ -859,6 +859,7 @@ class Gympro extends CI_Controller{
             'type' => 'text'
         );
 
+        
         $this->data['description'] = array(
             'name' => 'description',
             'id' => 'description',
@@ -875,6 +876,7 @@ class Gympro extends CI_Controller{
         $this->data['message'] = '';
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null, 'applications/gympro/exercise_create', $this->data);
+
     }
     //----------------------------------------Assessment Module------------------------------------//
     public function assessments()
@@ -930,13 +932,13 @@ class Gympro extends CI_Controller{
     }
     public function create_mission()
     {    
-        $this->form_validation->set_rules('lable', 'Lable', 'xss_clean|required');
+        $this->form_validation->set_rules('label', 'label', 'xss_clean|required');
         if ($this->input->post()) 
         {
             if ($this->form_validation->run() == true) 
             {
                 $additional_data = array(
-                    'lable' => $this->input->post('lable'),
+                    'label' => $this->input->post('label'),
                     'start_date' => $this->input->post('start_date'),
                     'end_date' => $this->input->post('end_date'),
                     'sunday' => $this->input->post('sunday'),
@@ -945,7 +947,8 @@ class Gympro extends CI_Controller{
                     'wednesday' => $this->input->post('wednesday'),
                     'thursday' => $this->input->post('thursday'),
                     'friday' => $this->input->post('friday'),
-                    'saturday' => $this->input->post('saturday')
+                    'saturday' => $this->input->post('saturday'),
+                    'user_id' => $this->session->userdata('user_id')
                 );
                 $value = $this->gympro_library->create_mission($additional_data);
                 if ($value) 
@@ -958,9 +961,9 @@ class Gympro extends CI_Controller{
             }
         }
 
-        $this->data['lable'] = array(
-            'name' => 'lable',
-            'id' => 'lable',
+        $this->data['label'] = array(
+            'name' => 'label',
+            'id' => 'label',
             'type' => 'text'
         );
 
@@ -1038,6 +1041,135 @@ class Gympro extends CI_Controller{
 }
     
     
+    public function edit_mission($missions_id = 1)
+    {    
+        
+        $this->data['message'] = ''; 
+        $this->form_validation->set_rules('label', 'label', 'xss_clean|required');
+        if ($this->input->post()) 
+        {
+            if ($this->form_validation->run() == true) 
+            {
+                $additional_data = array(
+                    'label' => $this->input->post('label'),
+                    'start_date' => $this->input->post('start_date'),
+                    'end_date' => $this->input->post('end_date'),
+                    'sunday' => $this->input->post('sunday'),
+                    'monday' => $this->input->post('monday'),
+                    'tuesday' => $this->input->post('tuesday'),
+                    'wednesday' => $this->input->post('wednesday'),
+                    'thursday' => $this->input->post('thursday'),
+                    'friday' => $this->input->post('friday'),
+                    'saturday' => $this->input->post('saturday')
+                );
+                $value = $this->gympro_library->update_missions($missions_id, $additional_data);
+                if ($value) 
+                {
+                    $this->data['message'] = $this->gympro_library->messages();
+                } else 
+                {
+                    $this->data['message'] = $this->gympro_library->errors();
+                }
+            }
+        }
+        $mission=array();
+        $mission_array = $this->gympro_library->get_missions_info($missions_id)->result_array();
+        if(!empty($mission_array))
+        {
+            $mission=$mission_array[0];
+            
+        }
+
+        $this->data['label'] = array(
+            'name' => 'label',
+            'id' => 'label',
+            'type' => 'text',
+            'value' => $mission['label']
+        );
+
+        $this->data['end_date'] = array(
+            'name' => 'end_date',
+            'id' => 'end_date',
+            'type' => 'text',
+            'value' => $mission['end_date']
+        );
+
+        $this->data['start_date'] = array(
+            'name' => 'start_date',
+            'id' => 'start_date',
+            'type' => 'text',
+            'value' => $mission['start_date']
+        );
+
+        $this->data['start_data'] = array(
+            'name' => 'start_data',
+            'id' => 'start_data',
+            'type' => 'text',
+            'value' => $mission['start_date']
+        );
+
+        $this->data['sunday'] = array(
+            'name' => 'sunday',
+            'id' => 'sunday',
+            'type' => 'text',
+            'rows' => '4',
+            'value' => $mission['sunday']
+        );
+        $this->data['monday'] = array(
+            'name' => 'monday',
+            'id' => 'monday',
+            'type' => 'text',
+            'rows' => '4',
+            'value' => $mission['monday']
+        );
+        $this->data['tuesday'] = array(
+            'name' => 'tuesday',
+            'id' => 'tuesday',
+            'type' => 'text',
+            'rows' => '4',
+            'value' => $mission['tuesday']
+        );
+        $this->data['wednesday'] = array(
+            'name' => 'wednesday',
+            'id' => 'wednesday',
+            'type' => 'text',
+            'rows' => '4',
+            'value' => $mission['wednesday']
+        );
+        $this->data['thursday'] = array(
+            'name' => 'thursday',
+            'id' => 'thursday',
+            'type' => 'text',
+            'rows' => '4',
+            'value' => $mission['thursday']
+        );
+        $this->data['friday'] = array(
+            'name' => 'friday',
+            'id' => 'friday',
+            'type' => 'text',
+            'rows' => '4',
+            'value' => $mission['friday']
+        );
+        $this->data['saturday'] = array(
+            'name' => 'saturday',
+            'id' => 'saturday',
+            'type' => 'text',
+            'rows' => '4',
+            'value' => $mission['saturday']
+        );
+        $this->data['submit_button'] = array(
+            'name' => 'submit_button',
+            'id' => 'submit_button',
+            'type' => 'submit',
+            'value' => 'Save'
+        );
+
+
+
+        $this->data['missions_id'] = $missions_id;
+        $this->data['message'] = '';
+        $this->template->load(null, 'applications/gympro/mission_edit', $this->data);
+    }
     //-----------------------------------------Earnings Module------------------------------------//
     public function earnings()
     {

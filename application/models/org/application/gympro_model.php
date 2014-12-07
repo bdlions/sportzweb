@@ -286,7 +286,7 @@ class Gympro_model extends Ion_auth_model {
     
     
     //----------------------------------Exercise Module--------------------------------------//
-    
+
     public function create_exercise($additional_data)
     {
         $additional_data['created_on'] = now();
@@ -336,19 +336,23 @@ class Gympro_model extends Ion_auth_model {
         $this->db->insert($this->tables['app_gympro_missions'], $additional_data);
         $insert_id = $this->db->insert_id();
         return (isset($insert_id)) ? $insert_id : FALSE;
-    }    
-//    public function get_missions_info($missions_id)
-//    {
-//        $this->db->where($this->tables['app_gympro_missions'].'.id', $missions_id);
-//        return $this->db->select($this->tables['app_gympro_missions'].'.id as id,'.$this->tables['app_gympro_missions'].'.*')
-//                    ->from($this->tables['app_gympro_missions'])
-//                    ->get();
-//    }
+    }   
+    
+     public function get_missions_info($missions_id)
+    {         
+        $this->db->where($this->tables['app_gympro_missions'].'.id', $missions_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_missions'])
+                    ->get();
+    }
+   
     public function update_missions($missions_id, $additional_data)
     {
+      // var_dump($additional_data);        exit();
+        //var_dump($missions_id);        exit();
         $missions_info = $this->get_missions_info($missions_id)->row();
         $additional_data['modified_on'] = now();
-
+        
         if (array_key_exists($this->app_gympro_missions_identity_column, $additional_data) && $this->missions_identity_check($additional_data[$this->app_gympro_missions_identity_column]) && $missions_info->{$this->app_gympro_missions_identity_column} !== $additional_data[$this->app_gympro_missions_identity_column])
         {
             $this->set_error('update_missions_duplicate_' . $this->app_gympro_missions_identity_column);
@@ -363,8 +367,8 @@ class Gympro_model extends Ion_auth_model {
         $this->set_message('update_missions_successful');
         return TRUE;
     }
-
     
+
 }
 
 
