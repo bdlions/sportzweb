@@ -27,9 +27,16 @@
                             </tr>
                             <tr>
                                 <td>20th Nov 2014</td>
-                                <td>Shem Haye</td>
+                                <td>This table is partially dynamic</td>
                                 <td><a>Edit</a></td>
                             </tr>
+                            <?php foreach ($assessments_array as $assessment):?>
+                            <tr>
+                                <td><?php echo $assessment['created_on']?></td>
+                                <td><?php echo $assessment['client_name']?></td>
+                                <td><a href="<?php echo base_url().'applications/gympro/'.$assessment['assessment_id'];?>"></a></td>
+                            </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>                

@@ -841,6 +841,7 @@ class Gympro extends Role_Controller{
             if ($this->form_validation->run() == true) {
                 $additional_data = array(
                     'category_id' => $this->input->post('category_id'),
+                    'picture' => $this->input->post('picture'),
                     'name' => $this->input->post('name'),
                     'description' => $this->input->post('description')
                 );
@@ -853,6 +854,8 @@ class Gympro extends Role_Controller{
                 }
             }
         }
+        $this->data['category'] = $this->gympro_library->get_all_exercise_categories()->result_array();
+        
         $this->data['name'] = array(
             'name' => 'name',
             'id' => 'name',
@@ -962,11 +965,7 @@ class Gympro extends Role_Controller{
             'id' => 'chest',
             'type' => 'text'
         );
-//        $this->data['reassess_id'] = array(
-//            'name' => 'reassess_id',
-//            'id' => 'reassess_id',
-//            'type' => 'text'
-//        );
+
         $this->data['body_fat'] = array(
             'name' => 'body_fat',
             'id' => 'body_fat',
@@ -1076,6 +1075,231 @@ class Gympro extends Role_Controller{
         
         $this->data['message'] = '';       
         $this->template->load(null,'applications/gympro/assessment_create', $this->data);
+    }
+    
+    
+    public function edit_assessment($assessment_id=0)
+    {
+            
+        $assessment_info = array();
+        $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
+        if(!empty($assessment_array))
+        {
+            $assessment_info = $assessment_array[0];            
+        } 
+            
+        var_dump($additional_data);        exit();
+        $this->form_validation->set_rules('date', 'date', 'xss_clean|required');
+        if ($this->input->post()) {
+            
+            if ($this->form_validation->run() == true) {
+                
+                $additional_data = array(
+                    'date' => $this->input->post('date'),
+                    'weight' => $this->input->post('weight'),
+                    'head' => $this->input->post('head'),
+                    'neck' => $this->input->post('neck'),
+                    'chest' => $this->input->post('chest'),
+                    'reassess_id' => $this->input->post('reassess_list'),
+                    'body_fat' => $this->input->post('body_fat'),
+                    'abdominal' => $this->input->post('abdominal'),
+                    'waist' => $this->input->post('waist'),
+                    'hip' => $this->input->post('hip'),
+                    'user_id' => $this->session->userdata('user_id'),
+                    'ls_arm_relaxed' => $this->input->post('ls_arm_relaxed'),
+                    'ls_arm_flexed' => $this->input->post('ls_arm_flexed'),
+                    'ls_forearm' => $this->input->post('ls_forearm'),
+                    'ls_wrist' => $this->input->post('ls_wrist'),
+                    'ls_thigh_gluteal' => $this->input->post('ls_thigh_gluteal'),
+                    'ls_thigh_mid' => $this->input->post('ls_thigh_mid'),
+                    'ls_calf' => $this->input->post('ls_calf'),
+                    'ls_ankle' => $this->input->post('ls_ankle'),
+                    'rs_arm_relaxed' => $this->input->post('rs_arm_relaxed'),
+                    'rs_arm_flexed' => $this->input->post('rs_arm_flexed'),
+                    'rs_forearm' => $this->input->post('rs_forearm'),
+                    'rs_wrist' => $this->input->post('rs_wrist'),
+                    'rs_thigh_gluteal' => $this->input->post('rs_thigh_gluteal'),
+                    'rs_thigh_mid' => $this->input->post('rs_thigh_mid'),
+                    'rs_calf' => $this->input->post('rs_calf'),
+                    'rs_ankle' => $this->input->post('rs_ankle')
+                   
+                );
+                
+                $newValue = $this->gympro_library->update_assessment($assessment_id, $additional_data);
+                if ($newValue) {
+                    $this->data['message'] = $this->gympro_library->messages();
+                    redirect('applications/gympro/create_assessment', 'refresh');
+                } else {
+                    $this->data['message'] = $this->gympro_library->errors();
+                }
+            }
+        }
+        $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
+        $this->data['reassess_list'] = array();
+        foreach ($reassess_array as $reassess_info) {
+            $this->data['reassess_list'][$reassess_info['id']] = $reassess_info['title'];
+        }
+        
+        $this->data['date'] = array(
+            'name' => 'date',
+            'id' => 'date',
+            'type' => 'text',
+            'value' => $assessment_info['date']
+        );
+        $this->data['weight'] = array(
+            'name' => 'weight',
+            'id' => 'weight',
+            'type' => 'text',
+            'value' => $assessment_info['weight']
+        );
+        $this->data['head'] = array(
+            'name' => 'head',
+            'id' => 'head',
+            'type' => 'text',
+            'value' => $assessment_info['head']
+        );
+        $this->data['neck'] = array(
+            'name' => 'neck',
+            'id' => 'neck',
+            'type' => 'text',
+            'value' => $assessment_info['neck']
+        );
+        $this->data['chest'] = array(
+            'name' => 'chest',
+            'id' => 'chest',
+            'type' => 'text',
+            'value' => $assessment_info['chest']
+        );
+
+        $this->data['body_fat'] = array(
+            'name' => 'body_fat',
+            'id' => 'body_fat',
+            'type' => 'text',
+            'value' => $assessment_info['body_fat']
+        );
+        $this->data['abdominal'] = array(
+            'name' => 'abdominal',
+            'id' => 'abdominal',
+            'type' => 'text',
+            'value' => $assessment_info['abdominal']
+        );
+        $this->data['waist'] = array(
+            'name' => 'waist',
+            'id' => 'waist',
+            'type' => 'text',
+            'value' => $assessment_info['waist']
+        );
+        $this->data['hip'] = array(
+            'name' => 'hip',
+            'id' => 'hip',
+            'type' => 'text',
+            'value' => $assessment_info['hip']
+        );
+        $this->data['ls_arm_relaxed'] = array(
+            'name' => 'ls_arm_relaxed',
+            'id' => 'ls_arm_relaxed',
+            'type' => 'text',
+            'value' => $assessment_info['ls_arm_relaxed']
+        );
+        $this->data['ls_arm_flexed'] = array(
+            'name' => 'ls_arm_flexed',
+            'id' => 'ls_arm_flexed',
+            'type' => 'text',
+            'value' => $assessment_info['ls_arm_flexed']
+        );
+        $this->data['ls_forearm'] = array(
+            'name' => 'ls_forearm',
+            'id' => 'ls_forearm',
+            'type' => 'text',
+            'value' => $assessment_info['ls_forearm']
+        );
+        $this->data['ls_wrist'] = array(
+            'name' => 'ls_wrist',
+            'id' => 'ls_wrist',
+            'type' => 'text',
+            'value' => $assessment_info['ls_wrist']
+        );
+        $this->data['ls_thigh_gluteal'] = array(
+            'name' => 'ls_thigh_gluteal',
+            'id' => 'ls_thigh_gluteal',
+            'type' => 'text',
+            'value' => $assessment_info['ls_thigh_gluteal']
+        );
+        $this->data['ls_thigh_mid'] = array(
+            'name' => 'ls_thigh_mid',
+            'id' => 'ls_thigh_mid',
+            'type' => 'text',
+            'value' => $assessment_info['ls_thigh_mid']
+        );
+        $this->data['ls_calf'] = array(
+            'name' => 'ls_calf',
+            'id' => 'ls_calf',
+            'type' => 'text',
+            'value' => $assessment_info['ls_calf']
+        );
+        $this->data['ls_ankle'] = array(
+            'name' => 'ls_ankle',
+            'id' => 'ls_ankle',
+            'type' => 'text',
+            'value' => $assessment_info['ls_ankle']
+        );
+        $this->data['rs_arm_relaxed'] = array(
+            'name' => 'rs_arm_relaxed',
+            'id' => 'rs_arm_relaxed',
+            'type' => 'text',
+            'value' => $assessment_info['rs_arm_relaxed']
+        );
+        $this->data['rs_arm_flexed'] = array(
+            'name' => 'rs_arm_flexed',
+            'id' => 'rs_arm_flexed',
+            'type' => 'text',
+            'value' => $assessment_info['rs_arm_flexed']
+        );
+        $this->data['rs_forearm'] = array(
+            'name' => 'rs_forearm',
+            'id' => 'rs_forearm',
+            'type' => 'text',
+            'value' => $assessment_info['rs_forearm']
+        );
+        $this->data['rs_wrist'] = array(
+            'name' => 'rs_wrist',
+            'id' => 'rs_wrist',
+            'type' => 'text',
+            'value' => $assessment_info['rs_wrist']
+        );
+        $this->data['rs_thigh_gluteal'] = array(
+            'name' => 'rs_thigh_gluteal',
+            'id' => 'rs_thigh_gluteal',
+            'type' => 'text',
+            'value' => $assessment_info['rs_thigh_gluteal']
+        );
+        $this->data['rs_thigh_mid'] = array(
+            'name' => 'rs_thigh_mid',
+            'id' => 'rs_thigh_mid',
+            'type' => 'text',
+            'value' => $assessment_info['rs_thigh_mid']
+        );
+        $this->data['rs_calf'] = array(
+            'name' => 'rs_calf',
+            'id' => 'rs_calf',
+            'type' => 'text',
+            'value' => $assessment_info['rs_calf']
+        );
+        $this->data['rs_ankle'] = array(
+            'name' => 'rs_ankle',
+            'id' => 'rs_ankle',
+            'type' => 'text',
+            'value' => $assessment_info['rs_ankle']
+        );
+        $this->data['submit_button'] = array(
+            'name' => 'submit_button',
+            'id' => 'submit_button',
+            'type' => 'submit',
+            'value' => 'Save'
+        );
+        
+        $this->data['message'] = '';       
+        $this->template->load(null,'applications/gympro/assessment_edit', $this->data);
     }
     //-----------------------------------------Nutrition Module------------------------------------//
     public function nutrition()

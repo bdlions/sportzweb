@@ -21,19 +21,19 @@
                     <label class="col-sm-2 control-label">Label: </label>
                     <div class="col-sm-4">
                         <!--<input class="form-control">-->
-                        <?php echo form_input($label + array('class' => 'form-control')) ?>
+                        <?php echo form_input($lable + array('class' => 'form-control', 'value' => $exercise['lable'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Mission Starts: </label>
                     <div class="col-sm-2">
-                        <?php echo form_input($start_date + array('class' => 'form-control')) ?>
+                        <?php echo form_input($start_date + array('class' => 'form-control', 'value' => $exercise['start_date'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Mission Ends: </label>
                     <div class="col-sm-2">
-                        <?php echo form_input($end_date + array('class' => 'form-control')) ?>
+                        <?php echo form_input($end_date + array('class' => 'form-control', 'value' => $exercise['end_date'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -45,43 +45,43 @@
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Monday: </label>
                     <div class="col-sm-6">
-                        <?php echo form_textarea($monday + array('class' => 'form-control')) ?>
+                        <?php echo form_textarea($monday + array('class' => 'form-control', 'value' => $exercise['monday'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Tuesday: </label>
                     <div class="col-sm-6">
-                        <?php echo form_textarea($tuesday + array('class' => 'form-control')) ?>
+                        <?php echo form_textarea($tuesday + array('class' => 'form-control', 'value' => $exercise['tuesday'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Wednesday: </label>
                     <div class="col-sm-6">
-                        <?php echo form_textarea($wednesday + array('class' => 'form-control')) ?>
+                        <?php echo form_textarea($wednesday + array('class' => 'form-control', 'value' => $exercise['wednesday'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Thursday: </label>
                     <div class="col-sm-6">
-                        <?php echo form_textarea($thursday + array('class' => 'form-control')) ?>
+                        <?php echo form_textarea($thursday + array('class' => 'form-control', 'value' => $exercise['thursday'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Friday: </label>
                     <div class="col-sm-6">
-                        <?php echo form_textarea($friday + array('class' => 'form-control')) ?>
+                        <?php echo form_textarea($friday + array('class' => 'form-control', 'value' => $exercise['friday'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Saturday: </label>
                     <div class="col-sm-6">
-                        <?php echo form_textarea($saturday + array('class' => 'form-control')) ?>
+                        <?php echo form_textarea($saturday + array('class' => 'form-control', 'value' => $exercise['saturday'])) ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Sunday: </label>
                     <div class="col-sm-6">
-                        <?php echo form_textarea($sunday + array('class' => 'form-control')) ?>
+                        <?php echo form_textarea($sunday + array('class' => 'form-control', 'value' => $exercise['sunday'])) ?>
                     </div>
                 </div>
             </div>
@@ -91,5 +91,4 @@
             <?php echo form_close();?>
         </div>
     </div>
-
 </div>

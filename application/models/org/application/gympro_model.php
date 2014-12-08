@@ -295,6 +295,13 @@ class Gympro_model extends Ion_auth_model {
         $insert_id = $this->db->insert_id();
         return (isset($insert_id)) ? $insert_id : FALSE;
     }
+    public function get_all_exercise_categories()
+    {
+        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.*')
+                    ->from($this->tables['app_gympro_exercise_categories'])
+                    ->get();
+    }
+    
     
     
     //----------------------------------Mission Module--------------------------------------//
