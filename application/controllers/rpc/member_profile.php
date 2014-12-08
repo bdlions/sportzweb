@@ -78,4 +78,18 @@ class Member_profile extends JsonRPCServer {
         //echo json_encode($response);
         return json_encode($response);
     }
+    
+    public function get_member_profile_info($user_id)
+    {
+        $response = array();
+        $member_profile_info = array();
+        $member_profile_info_array = $this->basic_profile->get_member_profile_info($user_id)->result_array();
+        if(!empty($member_profile_info_array))
+        {
+            $member_profile_info = $member_profile_info_array[0];
+        }
+        $response['member_profile_info'] = $member_profile_info;
+        //echo json_encode($response);
+        return json_encode($response);
+    }
 }

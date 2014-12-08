@@ -191,5 +191,16 @@ class Basic_Profile_model extends Ion_auth_model {
         return $result;
     }
     
+    //RPC Methods
+    public function get_member_profile_info($user_id)
+    {
+        $this->db->where($this->tables['users'].'.id', $user_id);
+        $this->response = $this->db->select($this->tables['users'].'.first_name,'.$this->tables['users'].'.last_name,'.$this->tables['basic_profile'].'.occupation,'.$this->tables['basic_profile'].'.home_town,'.$this->tables['basic_profile'].'.photo,'.$this->tables['countries'].'.country_name')
+            ->from($this->tables['users'])
+            ->join($this->tables['basic_profile'], $this->tables['users'].'.id='.$this->tables['basic_profile'].'.user_id')
+            ->join($this->tables['countries'], $this->tables['countries'].'.id='.$this->tables['basic_profile'].'.country_id')
+            ->get();
+        return $this;
+    }
     
 }
