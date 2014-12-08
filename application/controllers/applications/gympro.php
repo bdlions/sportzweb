@@ -101,7 +101,7 @@ class Gympro extends Role_Controller{
         $question_list = $this->gympro_library->get_all_health_questions()->result_array();
         $this->data['question_list'] = $question_list;
         $question_list_length = count($question_list);        
-        $answer_list = [];
+        $answer_list = array();
         
         if ($this->input->post())
         {
@@ -339,7 +339,7 @@ class Gympro extends Role_Controller{
         $question_list = $this->gympro_library->get_all_health_questions()->result_array();
         $this->data['question_list'] = $question_list;
         $question_list_length = count($question_list);        
-        $answer_list = [];
+        $answer_list = array();
         if ($this->input->post())
         {
             $result = array();
@@ -1367,12 +1367,14 @@ class Gympro extends Role_Controller{
     }
     public function create_session()
     {
-        $this->data['message'] = '';        
+        $this->data['message'] = ''; 
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/session_create', $this->data);
     }
     public function earnings_summary()
     {
-        $this->data['message'] = '';        
+        $this->data['message'] = ''; 
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/earnings_summary', $this->data);
     }
 }
