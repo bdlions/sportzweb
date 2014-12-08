@@ -7,7 +7,7 @@
 /*UNIVARSAL*/
 *
 {
-    font-size: 16px;
+    /*font-size: 16px;*/
 }
 li
 {
@@ -90,6 +90,7 @@ a:hover
 }
 .ln_item
 {
+    font-size: 15px;
     line-height: 26px;
     color: darkgray;
 }
@@ -130,6 +131,7 @@ a:hover
 }
 .pad_title, .pad_body, .pad_footer
 {
+    font-size: 15px;
     background-color: #E4E4E4; 
 /*    display: inline-block; 
     width: 100%;*/

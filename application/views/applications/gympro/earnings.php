@@ -34,6 +34,13 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <span style="font-size: 20px">October</span>
+                    <div class="pull-right">
+                        View: 
+                        <select>
+                            <option selected="">Month</option>
+                            <option>Week</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="row form-group">
@@ -46,9 +53,9 @@
                                         7 Calender cell
                                     </div>
                                 <?php endfor; ?>
-                            <?php endfor; ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php endfor; ?>
                 </div>
             </div>
         </div>
