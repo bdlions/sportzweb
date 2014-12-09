@@ -8,7 +8,7 @@
         <div class="col-md-7">
             <div class="row form-group">
                 <div class="col-md-2">
-                    <a href="<?php echo base_url() ?>applications/gympro/create_nutrition"><button class="btn button-custom btn_gympro">New Nutrition Plan</button></a>
+                    <a href="<?php echo base_url()?>applications/gympro/create_exercise"><button class="btn button-custom btn_gympro">New Exercise</button></a>
                 </div>
             </div>
             <div class="row form-group">
@@ -20,18 +20,17 @@
                                 <th>EDIT</th>
                                 <th>DELETE</th>
                             </tr>
-                            <?php foreach ($nutrition_list as $nutrition): ?>
-                                <tr>
-                                    <td><?php echo $nutrition['created_on'] ?></td>
-                                    <td><a href="<?php echo base_url() . 'applications/gympro/edit_nutrition/' . $nutrition['nutrition_id']; ?>">Edit</a></td>
-                                    <td style="text-align: center">
-                                        <a href="" onclick="open_modal_delete_confirm(<?php echo $nutrition['id'] ?>)" >
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
-
-                            <?php endforeach; ?>
+                            <?php foreach ($exercise_list as $exercise):?>
+                            <tr>
+                                <td><?php echo $exercise['created_on']?></td>
+                                <td><a href="<?php echo base_url().'applications/gympro/edit_exercise/'.$exercise['exercise_id'];?>">Edit</a></td>
+                                <td style="text-align: center">
+                                    <a href="" onclick="open_modal_delete_confirm(<?php echo $exercise['id']?>)" >
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>                
@@ -40,4 +39,6 @@
     </div>
 
 </div>
-<?php $this->load->view("applications/gympro/modal/nutrition_delete_confirm"); ?>
+
+
+<?php $this->load->view("applications/gympro/modal/exercise_delete_confirm");?>

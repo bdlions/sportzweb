@@ -287,6 +287,12 @@ class Gympro_model extends Ion_auth_model {
      * @param $additional_data, mission data to be inserted
      * @Author Nazmul on 7th December 2014
      */
+    public function get_all_reviews()
+    {
+        return $this->db->select($this->tables['app_gympro_reviews'].'.*')
+                    ->from($this->tables['app_gympro_reviews'])
+                    ->get();
+    }
     public function create_program($additional_data)
     {
         $additional_data['created_on'] = now();

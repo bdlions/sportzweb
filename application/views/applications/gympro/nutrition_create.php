@@ -10,6 +10,7 @@
             <div class="pad_title">
                 NEW NUTRITION PLAN
             </div>
+            <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>            
             <div class="pad_body">
                 <div style="background-color: #fff; margin-bottom: 1px; padding: 10px; display: inline-block; width: 100%">
                     <select style=" margin-right: 15px; width: 100px;">
@@ -30,31 +31,31 @@
                     <div>
                         <div class="col-md-5" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Label</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="label"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Quantity</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%"  name="quan"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Qty.Unit</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="unit"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Calories</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="cal"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Protin</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="prot"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Carbs</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="carb"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Fats</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="fats"></div>
                         </div>
                     </div>
                 </div>
@@ -67,8 +68,9 @@
             </div>
             
             <div class="pad_footer">
-                <button>Save Changes</button> or <a href="<?php echo base_url()?>applications/gympro/nutrition">Go Back</a>
+                <button type="submit">Save Changes</button> or <a href="<?php echo base_url()?>applications/gympro/nutrition">Go Back</a>
             </div>
+            <?php echo form_close();?>
         </div>
     </div>
 

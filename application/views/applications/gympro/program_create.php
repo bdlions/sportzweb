@@ -1,7 +1,23 @@
+<script type="text/javascript">
+    $(function() {
+        $('#start_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#start_date').text($('#start_date').data('date'));
+            $('#start_date').datepicker('hide');
+        });
+        
+    });
+    
+</script>
+
+
+
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 
 <div class="container-fluid">
-    
+
     <div class="row top_margin">
         <div class="col-md-2">
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
@@ -10,92 +26,85 @@
             <div class="pad_title">
                 CREATE PROGRAMME
             </div>
+            <?php echo form_open("applications/gympro/create_program", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>
             <div class="pad_body">
-                <form class="form-horizontal" role="form">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Programme Focus: </label>
-                                <div class="col-sm-6">
-                                    <input class="form-control">
-                                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Programme Focus: </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name="focus">
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Start date: </label>
-                                <div class="col-sm-4">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Review In: </label>
-                                <div class="col-sm-5">
-                                    <select style=" margin-right: 15px; width: 100px;">
-                                        <option> </option>
-                                        <option>TIME</option>
-                                        <option>oajsodjaosc</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Description: </label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <!--                            <div class="form-group">
-                                                            <div class="col-sm-offset-2 col-sm-10">
-                                                                <button type="submit" class="btn btn-default">Sign in</button>
-                                                            </div>
-                                                        </div>-->
                         </div>
-                        <div class="col-md-5">
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Warm Up: </label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control"></textarea>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Start date: </label>
+                            <div class="col-sm-4">
+                                <input class="form-control" name="start_date" id="start_date">
                             </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Cooldown: </label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control"></textarea>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Review In: </label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="review_id">
+                                    <?php foreach ($review_array as $review): ?>
+                                        <option value="<?php echo $review['id']; ?>"><?php echo $review['title']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Description: </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="description"></textarea>
                             </div>
                         </div>
                     </div>
-                </form>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Warm Up: </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="warm_up"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Cooldown: </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="cool_down"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div style="background-color: #fff; margin-bottom: 1px; padding: 10px; display: inline-block; width: 100%">
                     <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
-                    <input style="width: 40%; min-width: 150px;">
-                    <img onclick="open_modal_browse_exercise()" src="<?php echo base_url();?>resources/images/browse.png" style="margin: 4px">
+                    <input style="width: 40%; min-width: 150px;" name="ex_name">
+                    <img onclick="open_modal_browse_exercise()" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                 </div>
                 <div style="background-color: #fff; margin-bottom: 1px; padding: 10px; display: inline-block; width: 100%">
                     <div>
                         <div class="col-md-6" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Description</div>
-                            <div><textarea style="width: 100%; min-height: 50px;"></textarea></div>
+                            <div><textarea style="width: 100%; min-height: 50px;" name="ex_description"></textarea></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Sets</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="ex_sets"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Reps</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="ex_reps"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Weights</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="ex_weights"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Reps</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="ex_reps2"></div>
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Tempo</div>
-                            <div><input style="width: 100%"></div>
+                            <div><input style="width: 100%" name="ex_tempo"></div>
                         </div>
                     </div>
                 </div>
@@ -106,8 +115,9 @@
                 </div>
             </div>
             <div class="pad_footer">
-                <button>Save Changes</button> or <a href="<?php echo base_url()?>applications/gympro/programs">Go Back</a>
+                <input type="submit" name="submitButton" value="Save Changes"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Go Back</a>
             </div>
+            <?php echo form_close();?>
         </div>
     </div>
 
