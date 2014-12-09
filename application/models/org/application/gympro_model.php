@@ -654,11 +654,11 @@ class Gympro_model extends Ion_auth_model {
      * @param $additional_data, mission data to be updated
      * @Author Nazmul on 7th December 2014
      */
-    public function update_mission($missions_id, $additional_data)
+    public function update_mission($mission_id, $additional_data)
     {
         $additional_data['modified_on'] = now();
         $data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data);
-        $this->db->update($this->tables['app_gympro_missions'], $data, array('id' => $missions_id));
+        $this->db->update($this->tables['app_gympro_missions'], $data, array('id' => $mission_id));
         if ($this->db->trans_status() === FALSE) {
             $this->set_error('update_mission_fail');
             return FALSE;

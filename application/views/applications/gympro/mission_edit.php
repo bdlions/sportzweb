@@ -1,3 +1,28 @@
+<script type="text/javascript">
+    $(function() {
+        $('#start_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#start_date').text($('#start_date').data('date'));
+            $('#start_date').datepicker('hide');
+        });
+        
+        $('#end_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#end_date').text($('#end_date').data('date'));
+            $('#end_date').datepicker('hide');
+        });
+    });
+    
+</script>
+
+
+
+
+
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 
 <div class="container-fluid">
@@ -6,15 +31,16 @@
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-10">
+            <?php if (isset($message) && ($message != NULL)): ?>
+                <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
+            <?php endif; ?>
             <div class="pad_title">
                 EDIT MISSION
                 <div class="col-md-3 pull-right">
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>
             </div>
-            <?php if (isset($message) && ($message != NULL)): ?>
-                <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
-            <?php endif; ?>
+            
             <?php echo form_open("applications/gympro/edit_mission/".$mission_id, array('id' => '', 'class' => 'form-horizontal')); ?>
             <div class="pad_body">
                 <div class="row form-group">

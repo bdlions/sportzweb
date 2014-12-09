@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="pad_footer">
-                <button>Save Exercise</button> or <a href="<?php echo base_url()?>applications/gympro/exercises">Cancel</a>
+                <?php echo form_input($submit_button) ?>  or <a href="<?php echo base_url()?>applications/gympro/exercises">Cancel</a>
             </div>
                 <?php echo form_close(); ?>
         </div>

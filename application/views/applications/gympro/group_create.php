@@ -109,7 +109,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Notes: </label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" name="notes" id="notes"></textarea>
+                                <?php echo form_textarea($notes + array('class' => 'form-control'));?>
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                     
             </div>
             <div class="pad_footer">
-                <button>Save Changes</button> or <a href="<?php echo base_url()?>applications/gympro/programs">Go Back</a>
+                <?php echo form_input($submit_button);?> or <a href="<?php echo base_url()?>applications/gympro/programs">Go Back</a>
             </div>
             <?php echo form_close();?>
         </div>

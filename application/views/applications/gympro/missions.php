@@ -19,13 +19,21 @@
                                 <th>CREATED</th>
                                 <th>LABEL</th>
                                 <th>EDIT</th>
+                                <th>DELETE</th>
+                                
                             </tr>
                             <?php foreach($mission_list as $mission_info){?>
                             <tr>
                                 <td><?php echo $mission_info['created_on']?></td>
                                 <td><?php echo $mission_info['label']?></td>
                                 <td><a href="<?php echo base_url()."applications/gympro/edit_mission/".$mission_info['mission_id']?>">Edit</a></td>
-                            </tr>    
+                                <td style="text-align: center">
+                                <a href="" onclick="open_modal_delete_confirm(<?php echo $mission_info['id'] ?>)" >
+                                    Delete
+                                </a>
+                            </td>
+                            </tr>
+                            
                             <?php } ?>                           
                         </tbody>
                     </table>
@@ -35,3 +43,4 @@
     </div>
 
 </div>
+<?php $this->load->view("applications/gympro/modal/mission_delete_confirm");?>

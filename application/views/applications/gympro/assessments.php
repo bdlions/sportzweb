@@ -18,12 +18,19 @@
                             <tr>
                                 <th>CREATED</th>
                                 <th>EDIT</th>
+                                <th>DELETE</th>
                             </tr>
                             <?php foreach ($assessment_list as $assessment):?>
                             <tr>
                                 <td><?php echo $assessment['created_on']?></td>
                                 <td><a href="<?php echo base_url().'applications/gympro/edit_assessment/'.$assessment['assessment_id'];?>">Edit</a></td>
+                                <td style="text-align: center">
+                                <a href="" onclick="open_modal_delete_confirm(<?php echo $assessment['id'] ?>)" >
+                                    Delete
+                                </a>
+                            </td>
                             </tr>
+                            
                             <?php endforeach;?>
                         </tbody>
                     </table>
@@ -33,3 +40,4 @@
     </div>
 
 </div>
+<?php $this->load->view("applications/gympro/modal/assessment_delete_confirm");?>

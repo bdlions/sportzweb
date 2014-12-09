@@ -235,7 +235,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Notes: </label>
                                 <div class="col-sm-8">
-                                    <textarea class="form-control"></textarea>
+                                    <?php echo form_textarea($notes + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                         </div>
