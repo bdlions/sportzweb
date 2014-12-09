@@ -296,5 +296,27 @@ $lang['update_client_statuses_fail']                       = "Failed to update C
 $lang['update_gympro_user_successful']                 = "Account is updated successfully.";
 $lang['update_gympro_user_fail']                       = "Failed to update account info.";
 
-$lang['update_missions_successful']                    = "Mission is updated successfully.";
-$lang['update_missions_fail']                          = "Failed to update mission info.";
+$lang['update_program_successful']                     = "Program is updated successfully.";
+$lang['update_program_fail']                           = "Failed to update program info.";
+$lang['delete_program_successful']                     = "Program is deleted successfully.";
+$lang['delete_program_fail']                           = "Failed to delete program info.";
+
+$lang['update_exercise_successful']                    = "Exercise is updated successfully.";
+$lang['update_exercise_fail']                          = "Failed to update exercise info.";
+$lang['delete_exercise_successful']                    = "Exercise is deleted successfully.";
+$lang['delete_exercise_fail']                          = "Failed to delete exercise info.";
+
+$lang['update_nutrition_successful']                   = "Nutrition is updated successfully.";
+$lang['update_nutrition_fail']                         = "Failed to update nutrition info.";
+$lang['delete_nutrition_successful']                   = "Nutrition is deleted successfully.";
+$lang['delete_nutrition_fail']                         = "Failed to delete nutrition info.";
+
+$lang['update_assessment_successful']                  = "Assessment is updated successfully.";
+$lang['update_assessment_fail']                        = "Failed to update Assessment info.";
+$lang['delete_assessment_successful']                  = "Assessment is deleted successfully.";
+$lang['delete_assessment_fail']                         = "Failed to delete Assessment info.";
+
+$lang['update_mission_successful']                     = "Mission is updated successfully.";
+$lang['update_mission_fail']                           = "Failed to update mission info.";
+$lang['delete_mission_successful']                     = "Mission is deleted successfully.";
+$lang['delete_mission_fail']                           = "Failed to delete mission info.";

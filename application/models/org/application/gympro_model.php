@@ -257,10 +257,172 @@ class Gympro_model extends Ion_auth_model {
                     ->from($this->tables['app_gympro_groups'])
                     ->get();
     }
-
-    
-    
-    
+    //----------------------------------Program Module---------------------------------------//
+    /*
+     * This method will return all programs of a gympro user
+     * @param $user_id, user id of gympro user
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_programs($user_id)
+    {
+        $this->db->where('user_id', $user_id);
+        return $this->db->select($this->tables['app_gympro_programs'].'.id as program_id,'.$this->tables['app_gympro_programs'].'.*')
+                    ->from($this->tables['app_gympro_programs'])
+                    ->get();
+    }
+    /*
+     * This method will return program info
+     * @param $program_id, program id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_program_info($program_id)
+    {         
+        $this->db->where($this->tables['app_gympro_programs'].'.id', $program_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_programs'])
+                    ->get();
+    }
+    /*
+     * This method will create a new program
+     * @param $additional_data, mission data to be inserted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function create_program($additional_data)
+    {
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_programs'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_programs'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }   
+    /*
+     * This method will update program info
+     * @param $program_id, program id to be updated
+     * @param $additional_data, program data to be updated
+     * @Author Nazmul on 7th December 2014
+     */
+    public function update_program($program_id, $additional_data)
+    {
+        $additional_data['modified_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_programs'], $additional_data);
+        $this->db->update($this->tables['app_gympro_programs'], $data, array('id' => $program_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_program_fail');
+            return FALSE;
+        }
+        $this->set_message('update_program_successful');
+        return TRUE;
+    }
+    /*
+     * This method will delete a program
+     * @param $program_id, program id to be deleted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_program($program_id)
+    {
+        if(!isset($program_id) || $program_id <= 0)
+        {
+            $this->set_error('delete_program_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $program_id);
+        $this->db->delete($this->tables['app_gympro_programs']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_program_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_program_successful');
+        return TRUE;
+    }
+    //----------------------------------Exercise Module--------------------------------------//
+    /*
+     * This method will return all exercise categories
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_exercise_categories()
+    {
+        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.*')
+                    ->from($this->tables['app_gympro_exercise_categories'])
+                    ->get();
+    }
+    /*
+     * This method will return all exercises of a gympro user
+     * @param $user_id, user id of gympro user
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_exercises($user_id)
+    {
+        $this->db->where('user_id', $user_id);
+        return $this->db->select($this->tables['app_gympro_exercises'].'.id as exercise_id,'.$this->tables['app_gympro_exercises'].'.*')
+                    ->from($this->tables['app_gympro_exercises'])
+                    ->get();
+    }
+    /*
+     * This method will return exercise info
+     * @param $exercise_id, exercise id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_exercise_info($exercise_id)
+    {         
+        $this->db->where($this->tables['app_gympro_exercises'].'.id', $exercise_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_exercises'])
+                    ->get();
+    }
+    /*
+     * This method will create a new exercise
+     * @param $additional_data, exercise data to be inserted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function create_exercise($additional_data)
+    {
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_exercises'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_exercises'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }   
+    /*
+     * This method will update exercise info
+     * @param $exercise_id, exercise id to be updated
+     * @param $additional_data, exercise data to be updated
+     * @Author Nazmul on 7th December 2014
+     */
+    public function update_exercise($exercise_id, $additional_data)
+    {
+        $additional_data['modified_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_exercises'], $additional_data);
+        $this->db->update($this->tables['app_gympro_exercises'], $data, array('id' => $exercise_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_exercise_fail');
+            return FALSE;
+        }
+        $this->set_message('update_exercise_successful');
+        return TRUE;
+    }
+    /*
+     * This method will delete an exercise
+     * @param $exercise_id, exercise id to be deleted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_exercise($exercise_id)
+    {
+        if(!isset($exercise_id) || $exercise_id <= 0)
+        {
+            $this->set_error('delete_exercise_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $exercise_id);
+        $this->db->delete($this->tables['app_gympro_exercises']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_exercise_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_exercise_successful');
+        return TRUE;
+    }
     //----------------------------------Nutrition Module--------------------------------------//
     /*
      * This method will return all meal times
@@ -282,100 +444,88 @@ class Gympro_model extends Ion_auth_model {
                     ->from($this->tables['app_gympro_workouts'])
                     ->get();
     }
-    
-    
-    
-    //----------------------------------Exercise Module--------------------------------------//
-
-    public function create_exercise($additional_data)
-    {
-        $additional_data['created_on'] = now();
-        $additional_data = $this->_filter_data($this->tables['app_gympro_exercises'], $additional_data); 
-        $this->db->insert($this->tables['app_gympro_exercises'], $additional_data);
-        $insert_id = $this->db->insert_id();
-        return (isset($insert_id)) ? $insert_id : FALSE;
-    }
-    public function get_all_exercise_categories()
-    {
-        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.*')
-                    ->from($this->tables['app_gympro_exercise_categories'])
-                    ->get();
-    }
-    
-    
-    
-    //----------------------------------Mission Module--------------------------------------//
     /*
-     * This method will return alll mission of a gympro user
+     * This method will return all nutritions of a gympro user
      * @param $user_id, user id of gympro user
      * @Author Nazmul on 7th December 2014
      */
-    public function get_all_missions($user_id)
+    public function get_all_nutritions($user_id)
     {
-        return $this->db->select($this->tables['app_gympro_missions'].'.id as mission_id,'.$this->tables['app_gympro_missions'].'.*')
-                    ->from($this->tables['app_gympro_missions'])
+        $this->db->where('user_id', $user_id);
+        return $this->db->select($this->tables['app_gympro_nutritions'].'.id as nutrition_id,'.$this->tables['app_gympro_nutritions'].'.*')
+                    ->from($this->tables['app_gympro_nutritions'])
                     ->get();
     }
-    
-    public function delete_mission($mission_id)
-    {
-        if(!isset($mission_id) || $mission_id <= 0)
-        {
-            $this->set_error('delete_missions_fail');
-            return FALSE;
-        }
-        $this->db->where('id', $mission_id);
-        $this->db->delete($this->tables['app_gympro_missions']);
-        
-        if ($this->db->affected_rows() == 0) {
-            $this->set_error('delete_missions_fail');
-            return FALSE;
-        }
-        $this->set_message('delete_missions_successful');
-        return TRUE;
+    /*
+     * This method will return nutrition info
+     * @param $nutrition_id, nutrition id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_nutrition_info($nutrition_id)
+    {         
+        $this->db->where($this->tables['app_gympro_nutritions'].'.id', $nutrition_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_nutritions'])
+                    ->get();
     }
-    
-    
-    
-
-    public function create_mission($additional_data)
+    /*
+     * This method will create a new nutrition
+     * @param $additional_data, nutrition data to be inserted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function create_nutrition($additional_data)
     {
         $additional_data['created_on'] = now();
-        $additional_data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data); 
-        $this->db->insert($this->tables['app_gympro_missions'], $additional_data);
+        $additional_data = $this->_filter_data($this->tables['app_gympro_nutritions'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_nutritions'], $additional_data);
         $insert_id = $this->db->insert_id();
         return (isset($insert_id)) ? $insert_id : FALSE;
     }   
-    
-     public function get_missions_info($missions_id)
-    {         
-        $this->db->where($this->tables['app_gympro_missions'].'.id', $missions_id);
-        return $this->db->select('*')
-                    ->from($this->tables['app_gympro_missions'])
-                    ->get();
-    }
-   
-    public function update_missions($missions_id, $additional_data)
+    /*
+     * This method will update nutrition info
+     * @param $nutrition_id, nutrition id to be updated
+     * @param $additional_data, nutrition data to be updated
+     * @Author Nazmul on 7th December 2014
+     */
+    public function update_nutrition($nutrition_id, $additional_data)
     {
-        //$missions_info = $this->get_missions_info($missions_id)->row();
         $additional_data['modified_on'] = now();
-        
-        /*if (array_key_exists($this->app_gympro_missions_identity_column, $additional_data) && $this->missions_identity_check($additional_data[$this->app_gympro_missions_identity_column]) && $missions_info->{$this->app_gympro_missions_identity_column} !== $additional_data[$this->app_gympro_missions_identity_column])
-        {
-            $this->set_error('update_missions_duplicate_' . $this->app_gympro_missions_identity_column);
-            return FALSE;
-        }*/
-        $data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data);
-        $this->db->update($this->tables['app_gympro_missions'], $data, array('id' => $missions_id));
+        $data = $this->_filter_data($this->tables['app_gympro_nutritions'], $additional_data);
+        $this->db->update($this->tables['app_gympro_nutritions'], $data, array('id' => $nutrition_id));
         if ($this->db->trans_status() === FALSE) {
-            $this->set_error('update_missions_fail');
+            $this->set_error('update_nutrition_fail');
             return FALSE;
         }
-        $this->set_message('update_missions_successful');
+        $this->set_message('update_nutrition_successful');
         return TRUE;
     }
-    
+    /*
+     * This method will delete a nutrition
+     * @param $nutrition_id, nutrition id to be deleted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_nutrition($nutrition_id)
+    {
+        if(!isset($nutrition_id) || $nutrition_id <= 0)
+        {
+            $this->set_error('delete_nutrition_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $nutrition_id);
+        $this->db->delete($this->tables['app_gympro_nutritions']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_nutrition_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_nutrition_successful');
+        return TRUE;
+    }
     //-------------------------------- Assessment Module -------------------------------------//
+    /*
+     * This method will return reassess list of assessment
+     * @Author Nazmul on 7th December 2014
+     */
     public function get_all_reassess()
     {
         return $this->db->select($this->tables['app_gympro_reassess'].'.*')
@@ -389,7 +539,10 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_assessments($user_id = 0)
     {
-        
+        $this->db->where('user_id', $user_id);
+        return $this->db->select($this->tables['app_gympro_assessments'].'.id as assessment_id,'.$this->tables['app_gympro_assessments'].'.*')
+                    ->from($this->tables['app_gympro_assessments'])
+                    ->get();
     }
     /*
      * This method will return all assessment info
@@ -398,7 +551,10 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_assessment_info($assessment_id = 0)
     {
-        
+        $this->db->where($this->tables['app_gympro_assessments'].'.id', $assessment_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_assessments'])
+                    ->get();
     }
     /*
      * This method will create a new assessment
@@ -421,7 +577,15 @@ class Gympro_model extends Ion_auth_model {
      */
     public function update_assessment($assessment_id, $additional_data)
     {
-        
+        $additional_data['modified_on'] = now();        
+        $data = $this->_filter_data($this->tables['app_gympro_assessments'], $additional_data);
+        $this->db->update($this->tables['app_gympro_assessments'], $data, array('id' => $assessment_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_assessment_fail');
+            return FALSE;
+        }
+        $this->set_message('update_assessment_successful');
+        return TRUE;
     }
     /*
      * This method will delete an assessment
@@ -430,97 +594,98 @@ class Gympro_model extends Ion_auth_model {
      */
     public function delete_assessment($assessment_id)
     {
-        
-    }
-
-}
-
-
-
-    
-    //====================================TEMPLATE===========================================
-    /*
-    
-    
-    
-    public function module_name_identity_check($identity = '')
-    {
-        if(empty($identity))
+        if(!isset($assessment_id) || $assessment_id <= 0)
         {
+            $this->set_error('delete_assessment_fail');
             return FALSE;
         }
-        $this->db->where($this->app_gympro_module_name_identity_column, $identity);
-        return $this->db->count_all_results($this->tables['app_gympro_module_name']) > 0;
-    }
-    
-    public function get_all_module_name()
-    {
-        return $this->db->select($this->tables['app_gympro_module_name'].'.id as id,'.$this->tables['app_gympro_module_name'].'.*')
-                    ->from($this->tables['app_gympro_module_name'])
-                    ->get();
-    }
-    
-    public function delete_module_name($module_name_id)
-    {
-        if(!isset($module_name_id) || $module_name_id <= 0)
-        {
-            $this->set_error('delete_module_name_fail');
-            return FALSE;
-        }
-        $this->db->where('id', $module_name_id);
-        $this->db->delete($this->tables['app_gympro_module_name']);
+        $this->db->where('id', $assessment_id);
+        $this->db->delete($this->tables['app_gympro_assessments']);
         
         if ($this->db->affected_rows() == 0) {
-            $this->set_error('delete_module_name_fail');
+            $this->set_error('delete_assessment_fail');
             return FALSE;
         }
-        $this->set_message('delete_module_name_successful');
+        $this->set_message('delete_assessment_successful');
         return TRUE;
     }
     
-    public function create_module_name($additional_data)
+    //----------------------------------Mission Module--------------------------------------//
+    /*
+     * This method will return alll mission of a gympro user
+     * @param $user_id, user id of gympro user
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_missions($user_id)
     {
-        if ( array_key_exists($this->app_gympro_module_name_identity_column, $additional_data) && $this->module_name_identity_check($additional_data[$this->app_gympro_module_name_identity_column]) )
-        {
-            $this->set_error('create_module_name_duplicate_' . $this->app_gympro_module_name_identity_column);
-            return FALSE;
-        }
-        $additional_data['created_on'] = now();
-        $additional_data = $this->_filter_data($this->tables['app_gympro_module_name'], $additional_data); 
-        $this->db->insert($this->tables['app_gympro_module_name'], $additional_data);
-        $insert_id = $this->db->insert_id();
-        $this->set_message('create_module_name_successful');
-        return (isset($insert_id)) ? $insert_id : FALSE;
-    }    
-    public function get_module_name_info($module_name_id)
-    {
-        $this->db->where($this->tables['app_gympro_module_name'].'.id', $module_name_id);
-        return $this->db->select($this->tables['app_gympro_module_name'].'.id as id,'.$this->tables['app_gympro_module_name'].'.*')
-                    ->from($this->tables['app_gympro_module_name'])
+        $this->db->where('user_id', $user_id);
+        return $this->db->select($this->tables['app_gympro_missions'].'.id as mission_id,'.$this->tables['app_gympro_missions'].'.*')
+                    ->from($this->tables['app_gympro_missions'])
                     ->get();
     }
-    public function update_module_name($module_name_id, $additional_data)
+    /*
+     * This method will return mission info
+     * @param $missions_id, missions id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_mission_info($missions_id)
+    {         
+        $this->db->where($this->tables['app_gympro_missions'].'.id', $missions_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_missions'])
+                    ->get();
+    }
+    /*
+     * This method will create a new mission
+     * @param $additional_data, mission data to be inserted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function create_mission($additional_data)
     {
-        $module_name_info = $this->get_module_name_info($module_name_id)->row();
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_missions'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }   
+    /*
+     * This method will update mission info
+     * @param $mission_id, mission id to be updated
+     * @param $additional_data, mission data to be updated
+     * @Author Nazmul on 7th December 2014
+     */
+    public function update_mission($missions_id, $additional_data)
+    {
         $additional_data['modified_on'] = now();
-
-        if (array_key_exists($this->app_gympro_module_name_identity_column, $additional_data) && $this->module_name_identity_check($additional_data[$this->app_gympro_module_name_identity_column]) && $module_name_info->{$this->app_gympro_module_name_identity_column} !== $additional_data[$this->app_gympro_module_name_identity_column])
-        {
-            $this->set_error('update_module_name_duplicate_' . $this->app_gympro_module_name_identity_column);
-            return FALSE;
-        }
-        $data = $this->_filter_data($this->tables['app_gympro_module_name'], $additional_data);
-        $this->db->update($this->tables['app_gympro_module_name'], $data, array('id' => $module_name_id));
+        $data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data);
+        $this->db->update($this->tables['app_gympro_missions'], $data, array('id' => $missions_id));
         if ($this->db->trans_status() === FALSE) {
-            $this->set_error('update_module_name_fail');
+            $this->set_error('update_mission_fail');
             return FALSE;
         }
-        $this->set_message('update_module_name_successful');
+        $this->set_message('update_mission_successful');
         return TRUE;
     }
-
-    
-    
-    
+    /*
+     * This method will delete a mission
+     * @param $mission_id, mission id to be deleted
+     * @Author Nazmul on 7th December 2014
      */
-    
+    public function delete_mission($mission_id)
+    {
+        if(!isset($mission_id) || $mission_id <= 0)
+        {
+            $this->set_error('delete_mission_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $mission_id);
+        $this->db->delete($this->tables['app_gympro_missions']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_mission_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_mission_successful');
+        return TRUE;
+    }   
+}

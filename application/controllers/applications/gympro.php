@@ -816,24 +816,63 @@ class Gympro extends Role_Controller{
         );
         $this->template->load(null,'applications/gympro/preference', $this->data);
     }
-    //---------------------------------------Program Module---------------------------------------//
+    //-----------------------------------------Program Module------------------------------------//
+    /*
+     * This method will show all programs of this gympro user
+     * @Author Nazmul on 7th December 2014
+     */
     public function programs()
     {
+        $program_list = $this->gympro_library->get_all_programs($this->session->userdata('user_id'));
+        $this->data['program_list'] = $program_list;
         $this->data['message'] = '';        
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/programs', $this->data);
     }
+    /*
+     * This method will creae a new nutrition
+     * @Author Nazmul on 7th December 2014
+     */
     public function create_program()
     {
         $this->data['message'] = '';       
         $this->template->load(null,'applications/gympro/program_create', $this->data);
     }
+    /*
+     * This method will edit program
+     * @param $program_id, program id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function edit_program($program_id = 0)
+    {
+        
+    }
+    /*
+     * Ajax call to delete program
+     * @param $program_id, program id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_program($program_id = 0)
+    {
+        
+    }
+    //---------------------------------------Exercise Module---------------------------------------//
+    /*
+     * This method will show all exercises of this gympro user
+     * @Author Nazmul on 7th December 2014
+     */
     public function exercises()
     {
+        $exercise_list = $this->gympro_library->get_all_exercises($this->session->userdata('user_id'));
+        $this->data['exercise_list'] = $exercise_list;
         $this->data['message'] = '';        
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/exercises', $this->data);
     }
+    /*
+     * This method will creae a new exercise
+     * @Author Nazmul on 7th December 2014
+     */
     public function create_exercise()
     {
         $this->form_validation->set_rules('name', 'Catagory', 'xss_clean|required');
@@ -881,13 +920,95 @@ class Gympro extends Role_Controller{
         $this->template->load(null, 'applications/gympro/exercise_create', $this->data);
 
     }
+    /*
+     * This method will edit exercise
+     * @param $exercise_id, exercise id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function edit_exercise($exercise_id = 0)
+    {
+        
+    }
+    /*
+     * Ajax call to delete exercise
+     * @param $exercise_id, exercise id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_exercise($exercise_id = 0)
+    {
+        
+    }
+    //-----------------------------------------Nutrition Module------------------------------------//
+    /*
+     * This method will show all nutritions of this gympro user
+     * @Author Nazmul on 7th December 2014
+     */
+    public function nutrition()
+    {
+        $nutrition_list = $this->gympro_library->get_all_nutritions($this->session->userdata('user_id'));
+        $this->data['nutrition_list'] = $nutrition_list;
+        $this->data['message'] = '';        
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
+        $this->template->load(null,'applications/gympro/nutrition', $this->data);
+    }
+    /*
+     * This method will creae a new nutrition
+     * @Author Nazmul on 7th December 2014
+     */
+    public function create_nutrition()
+    {
+        $meal_time_list = array();
+        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
+        foreach($meal_time_array as $meal_time)
+        {
+            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
+        }
+        $this->data['meal_time_list'] =$meal_time_list;
+        
+        $workout_list = array();
+        $workout_array = $this->gympro_library->get_all_workouts()->result_array();
+        foreach($workout_array as $workout)
+        {
+            $workout_list[$workout['workout_id']] =  $workout['title'];
+        }
+        $this->data['workout_list'] =$workout_list;
+        
+        $this->template->load(null,'applications/gympro/nutrition_create', $this->data);
+    }
+    /*
+     * This method will edit nutrition
+     * @param $nutrition_id, nutrition id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function edit_nutritition($nutrition_id = 0)
+    {
+        
+    }
+    /*
+     * Ajax call to delete nutrition
+     * @param $nutrition_id, nutrition id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_nutrition($nutrition_id = 0)
+    {
+        
+    }
     //----------------------------------------Assessment Module------------------------------------//
+     /*
+     * This method will show all assessments of this gympro user
+     * @Author Nazmul on 7th December 2014
+     */
     public function assessments()
     {
-        $this->data['message'] = '';        
+        $assessment_list = $this->gympro_library->get_all_assessments($this->session->userdata('user_id'));
+        $this->data['assessment_list'] = $assessment_list;
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/assessments', $this->data);
     }
+    /*
+     * This method will create an assessment
+     * @Author Nazmul on 7th December 2014
+     */
     public function create_assessment()
     {
         $this->form_validation->set_rules('date', 'date', 'xss_clean|required');
@@ -1077,21 +1198,15 @@ class Gympro extends Role_Controller{
         $this->template->load(null,'applications/gympro/assessment_create', $this->data);
     }
     
-    
-    public function edit_assessment($assessment_id=0)
-    {
-            
-        $assessment_info = array();
-        $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
-        if(!empty($assessment_array))
-        {
-            $assessment_info = $assessment_array[0];            
-        } 
-            
-        var_dump($additional_data);        exit();
+    /*
+     * This method will edit an assessment
+     * @param $assessment_id, assessment id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function edit_assessment($assessment_id = 0)
+    {            
         $this->form_validation->set_rules('date', 'date', 'xss_clean|required');
-        if ($this->input->post()) {
-            
+        if ($this->input->post()) {            
             if ($this->form_validation->run() == true) {
                 
                 $additional_data = array(
@@ -1128,7 +1243,7 @@ class Gympro extends Role_Controller{
                 $newValue = $this->gympro_library->update_assessment($assessment_id, $additional_data);
                 if ($newValue) {
                     $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/create_assessment', 'refresh');
+                    redirect('applications/gympro/edit_assessment/'.$assessment_id, 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
@@ -1139,6 +1254,12 @@ class Gympro extends Role_Controller{
         foreach ($reassess_array as $reassess_info) {
             $this->data['reassess_list'][$reassess_info['id']] = $reassess_info['title'];
         }
+        $assessment_info = array();
+        $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
+        if(!empty($assessment_array))
+        {
+            $assessment_info = $assessment_array[0];            
+        }          
         
         $this->data['date'] = array(
             'name' => 'date',
@@ -1298,43 +1419,23 @@ class Gympro extends Role_Controller{
             'value' => 'Save'
         );
         
-        $this->data['message'] = '';       
+        $this->data['assessment_id'] = $assessment_id;       
         $this->template->load(null,'applications/gympro/assessment_edit', $this->data);
     }
-    //-----------------------------------------Nutrition Module------------------------------------//
-    public function nutrition()
+    /*
+     * Ajax call to delete an assessment
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_assessment($assessment_id = 0)
     {
-        $this->data['message'] = '';        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
-        $this->template->load(null,'applications/gympro/nutrition', $this->data);
-    }
-    public function create_nutrition()
-    {
-        $meal_time_list = array();
-        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
-        foreach($meal_time_array as $meal_time)
-        {
-            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
-        }
-        $this->data['meal_time_list'] =$meal_time_list;
         
-        $workout_list = array();
-        $workout_array = $this->gympro_library->get_all_workouts()->result_array();
-        foreach($workout_array as $workout)
-        {
-            $workout_list[$workout['workout_id']] =  $workout['title'];
-        }
-        $this->data['workout_list'] =$workout_list;
-        
-        $this->template->load(null,'applications/gympro/nutrition_create', $this->data);
     }
     
     //-----------------------------------------Mission Module------------------------------------//
-    
-    
-    
-    
-    //-----------------------------------------Mission Module------------------------------------//
+    /*
+     * This method will show all missions of this gympro user
+     * @Author Nazmul on 7th December 2014
+     */
     public function manage_missions()
     {
         $mission_list = $this->gympro_library->get_all_missions($this->session->userdata('user_id'));
@@ -1343,6 +1444,10 @@ class Gympro extends Role_Controller{
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/missions', $this->data);
     }
+    /*
+     * This method will create a mission
+     * @Author Nazmul on 7th December 2014
+     */
     public function create_mission()
     {    
         $this->data['message'] = '';
@@ -1453,9 +1558,12 @@ class Gympro extends Role_Controller{
             'value' => 'Save'
         );
         $this->template->load(null, 'applications/gympro/mission_create', $this->data);
-}
-    
-    
+    }    
+    /*
+     * This method will edit a mission
+     * @param $mission_id, mission id
+     * @Author Nazmul on 7th December 2014
+     */
     public function edit_mission($mission_id = 0)
     {    
         if($mission_id == 0)
@@ -1480,7 +1588,7 @@ class Gympro extends Role_Controller{
                     'friday' => $this->input->post('friday'),
                     'saturday' => $this->input->post('saturday')
                 );
-                $value = $this->gympro_library->update_missions($mission_id, $additional_data);
+                $value = $this->gympro_library->update_mission($mission_id, $additional_data);
                 if($value === TRUE) 
                 {
                     $this->data['message'] = $this->gympro_library->messages();
@@ -1491,7 +1599,7 @@ class Gympro extends Role_Controller{
             }
         }
         $mission_info = array();
-        $mission_array = $this->gympro_library->get_missions_info($mission_id)->result_array();
+        $mission_array = $this->gympro_library->get_mission_info($mission_id)->result_array();
         if(!empty($mission_array))
         {
             $mission_info = $mission_array[0];            
@@ -1581,6 +1689,14 @@ class Gympro extends Role_Controller{
         );
         $this->data['mission_id'] = $mission_id;
         $this->template->load(null, 'applications/gympro/mission_edit', $this->data);
+    }
+    /*
+     * Ajax call to delete mission
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_mission($mission_id = 0)
+    {
+        
     }
     //-----------------------------------------Earnings Module------------------------------------//
     public function earnings()

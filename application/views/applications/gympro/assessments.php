@@ -17,24 +17,12 @@
                         <tbody>
                             <tr>
                                 <th>CREATED</th>
-                                <th>CLIENT</th>
                                 <th>EDIT</th>
                             </tr>
-                            <tr>
-                                <td>20th Nov 2014</td>
-                                <td>Shem Haye</td>
-                                <td><a>Edit</a></td>
-                            </tr>
-                            <tr>
-                                <td>20th Nov 2014</td>
-                                <td>This table is partially dynamic</td>
-                                <td><a>Edit</a></td>
-                            </tr>
-                            <?php foreach ($assessments_array as $assessment):?>
+                            <?php foreach ($assessment_list as $assessment):?>
                             <tr>
                                 <td><?php echo $assessment['created_on']?></td>
-                                <td><?php echo $assessment['client_name']?></td>
-                                <td><a href="<?php echo base_url().'applications/gympro/'.$assessment['assessment_id'];?>"></a></td>
+                                <td><a href="<?php echo base_url().'applications/gympro/edit_assessment/'.$assessment['assessment_id'];?>">Edit</a></td>
                             </tr>
                             <?php endforeach;?>
                         </tbody>

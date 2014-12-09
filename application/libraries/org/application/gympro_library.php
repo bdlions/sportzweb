@@ -61,7 +61,66 @@ class Gympro_library {
     public function __get($var) {
         return get_instance()->$var;
     }
-    
+    /*
+     * This method will return all programs after converting date format
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_programs($user_id = 0)
+    {
+        $program_list = array();
+        $programs_array = $this->gympro_model->get_all_programs($user_id)->result_array();
+        foreach($programs_array as $program_info)
+        {
+            $program_info['created_on'] = $this->utils->get_unix_to_human_date($program_info['created_on']);
+            $program_list[] = $program_info;
+        }
+        return $program_list;
+    }
+    /*
+     * This method will return all exercises after converting date format
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_exercises($user_id = 0)
+    {
+        $exercise_list = array();
+        $exercises_array = $this->gympro_model->get_all_exercises($user_id)->result_array();
+        foreach($exercises_array as $exercise_info)
+        {
+            $exercise_info['created_on'] = $this->utils->get_unix_to_human_date($exercise_info['created_on']);
+            $exercise_list[] = $exercise_info;
+        }
+        return $exercise_list;
+    }
+    /*
+     * This method will return all nutritions after converting date format
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_nutritions($user_id = 0)
+    {
+        $nutrition_list = array();
+        $nutritions_array = $this->gympro_model->get_all_nutritions($user_id)->result_array();
+        foreach($nutritions_array as $nutrition_info)
+        {
+            $nutrition_info['created_on'] = $this->utils->get_unix_to_human_date($nutrition_info['created_on']);
+            $nutrition_list[] = $nutrition_info;
+        }
+        return $nutrition_list;
+    }
+    /*
+     * This method will return all assessments after converting date format
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_assessments($user_id = 0)
+    {
+        $assessment_list = array();
+        $assessments_array = $this->gympro_model->get_all_assessments($user_id)->result_array();
+        foreach($assessments_array as $assessment_info)
+        {
+            $assessment_info['created_on'] = $this->utils->get_unix_to_human_date($assessment_info['created_on']);
+            $assessment_list[] = $assessment_info;
+        }
+        return $assessment_list;
+    }
     /*
      * This method will return all mission after converting date format
      * @Author Nazmul on 7th December 2014
@@ -78,5 +137,3 @@ class Gympro_library {
         return $mission_list;
     }
 }
-
-?>

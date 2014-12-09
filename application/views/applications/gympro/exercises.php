@@ -17,22 +17,14 @@
                         <tbody>
                             <tr>
                                 <th>CREATED</th>
-                                <th>CLIENT</th>
-                                <th>LABEL</th>
                                 <th>EDIT</th>
                             </tr>
+                            <?php foreach ($exercise_list as $exercise):?>
                             <tr>
-                                <td>20th Nov 2014</td>
-                                <td>Shem Haye</td>
-                                <td>Label1</td>
-                                <td><a>Edit</a></td>
+                                <td><?php echo $exercise['created_on']?></td>
+                                <td><a href="<?php echo base_url().'applications/gympro/edit_exercise/'.$exercise['exercise_id'];?>">Edit</a></td>
                             </tr>
-                            <tr>
-                                <td>20th Nov 2014</td>
-                                <td>Shem Haye</td>
-                                <td>Label2</td>
-                                <td><a>Edit</a></td>
-                            </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>                
