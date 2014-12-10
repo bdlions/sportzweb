@@ -588,19 +588,14 @@ class Gympro extends Role_Controller{
     public function manage_groups()
     {
         $this->data['message'] = '';
-        $this->data['group_list'] = $this->gympro_library->get_all_group_info()->result_array();
+        $this->data['group_list'] = $this->gympro_library->get_all_groups();
         
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/groups', $this->data);
     }
     public function create_group()
     {
-        $this->data['message'] = '';
-//        $this->form_validation->set_rules('title', 'First Name', 'xss_clean|required');
-//        $this->form_validation->set_rules('phone', 'First Name', 'xss_clean|required');
-//        $this->form_validation->set_rules('mobile', 'First Name', 'xss_clean|required');
-//        $this->form_validation->set_rules('notes', 'First Name', 'xss_clean|required');
-        
+        $this->data['message'] = '';        
         if ($this->input->post())
         {
             $this->form_validation->set_rules('title', 'title', 'xss_clean|required'); 
@@ -661,6 +656,16 @@ class Gympro extends Role_Controller{
         
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/group_create', $this->data);
+    }
+    
+    public function update_group($group_id = 0)
+    {
+        
+    }
+    
+    public function delete_group()
+    {
+        
     }
     
     //-----------------------------------Account Type Module-------------------------------//

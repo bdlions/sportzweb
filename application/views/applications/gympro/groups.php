@@ -16,26 +16,18 @@
                     <table class="table table-condensed table-responsive gympro_table">
                         <tbody>
                             <tr>
-                                <th>Group Name</th>
-                                <th>Number of Clients</th>
-                                <th>Group Created</th>
+                                <th>Created</th>
+                                <th>Title</th>
                                 <th>Edit</th>
                             </tr>
-                            <?php foreach ($group_list as $group):?>
+                            <?php foreach($group_list as $group_info){?>
                             <tr>
-                                <td><?php echo $group['name'];?></td>
-                                <td><?php echo $group['name'];?></td>
-                                <td><?php echo $group['name'];?></td>
-                                <td><a>Edit</a></td>
-                            </tr>                            
-                            <?php endforeach;?>
-                            
-                            <tr>
-                                <td>acsaasdc</td>
-                                <td>acsaasdc</td>
-                                <td>acsaasdc</td>
-                                <td><a>Edit</a></td>                                
+                                <td><?php echo $group_info['created_on']?></td>
+                                <td><?php echo $group_info['title']?></td>
+                                <td><a href="<?php echo base_url()."applications/gympro/edit_group/".$group_info['group_id']?>">Edit</a></td>
                             </tr>
+                            
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

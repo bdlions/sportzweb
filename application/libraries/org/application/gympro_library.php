@@ -62,6 +62,21 @@ class Gympro_library {
         return get_instance()->$var;
     }
     /*
+     * This method will return all groups after converting date format
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_groups($user_id = 0)
+    {
+        $group_list = array();
+        $groups_array = $this->gympro_model->get_all_groups($user_id)->result_array();
+        foreach($groups_array as $group_info)
+        {
+            $group_info['created_on'] = $this->utils->get_unix_to_human_date($group_info['created_on']);
+            $group_list[] = $group_info;
+        }
+        return $group_list;
+    }
+    /*
      * This method will return all programs after converting date format
      * @Author Nazmul on 7th December 2014
      */

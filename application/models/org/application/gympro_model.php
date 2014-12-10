@@ -250,12 +250,82 @@ class Gympro_model extends Ion_auth_model {
     }
     
     //----------------------------------Group Module--------------------------------------//
-
-    public function get_all_group_info()
+    /*
+     * This method will return all groups of a gympro user
+     * @param $user_id, user id of gympro user
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_groups($user_id)
     {
+        $this->db->where('user_id', $user_id);
         return $this->db->select($this->tables['app_gympro_groups'].'.id as group_id,'.$this->tables['app_gympro_groups'].'.*')
                     ->from($this->tables['app_gympro_groups'])
                     ->get();
+    }
+    /*
+     * This method will return group info
+     * @param $group_id, group id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_group_info($group_id)
+    {         
+        $this->db->where($this->tables['app_gympro_groups'].'.id', $group_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_groups'])
+                    ->get();
+    }
+    /*
+     * This method will create a new group
+     * @param $additional_data, group data to be inserted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function create_group($additional_data)
+    {
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_groups'], $additional_data); 
+        $this->db->insert($this->tables['app_gympro_groups'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }   
+    /*
+     * This method will update group info
+     * @param $group_id, group id to be updated
+     * @param $additional_data, group data to be updated
+     * @Author Nazmul on 7th December 2014
+     */
+    public function update_group($group_id, $additional_data)
+    {
+        $additional_data['modified_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_groups'], $additional_data);
+        $this->db->update($this->tables['app_gympro_groups'], $data, array('id' => $group_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_group_fail');
+            return FALSE;
+        }
+        $this->set_message('update_group_successful');
+        return TRUE;
+    }
+    /*
+     * This method will delete a group
+     * @param $group_id, group id to be deleted
+     * @Author Nazmul on 7th December 2014
+     */
+    public function delete_group($group_id)
+    {
+        if(!isset($group_id) || $group_id <= 0)
+        {
+            $this->set_error('delete_group_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $group_id);
+        $this->db->delete($this->tables['app_gympro_groups']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_group_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_group_successful');
+        return TRUE;
     }
     //----------------------------------Program Module---------------------------------------//
     /*
