@@ -722,6 +722,7 @@ class Gympro extends Role_Controller{
             'value' => 'Save Changes'
         );
         
+        $this->data['group_id'] = $group_id;
         $this->data['gr_notes'] = $group_data['notes'];
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/group_edit', $this->data);

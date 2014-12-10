@@ -23,9 +23,9 @@
         </div>
         <div class="col-md-8">
             <div class="pad_title">
-                NEW CLIENT GROUP
+                EDIT GROUP
             </div>
-            <?php echo form_open("applications/gympro/create_group", array('id' => 'form_group', 'class' => 'form-horizontal')); ?>
+            <?php echo form_open("applications/gympro/edit_group/".$group_id, array('id' => 'form_group', 'class' => 'form-horizontal')); ?>
             <div class="pad_body">
                 <div class="row hidden_tab" id="group_details_tab" style="display: block">
                     <div class="col-md-9">
