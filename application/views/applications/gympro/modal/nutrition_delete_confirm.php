@@ -1,4 +1,4 @@
-<script type="text/javascript">
+s<cript type="text/javascript">
     $(function() {
         $("#button_delete").on("click", function() {
             $.ajax({

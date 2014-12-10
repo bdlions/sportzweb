@@ -28,7 +28,7 @@
                                     <td><?php echo $program['created_on'] ?></td>
                                     <td><a href="<?php echo base_url() . 'applications/gympro/edit_program/' . $program['program_id']; ?>">Edit</a></td>
                                     <td>
-                                        <a href="" onclick="open_modal_delete_confirm(<?php echo $program['id'] ?>)" >
+                                        <a onclick="open_modal_delete_confirm(<?php echo $program['id'] ?>)" >
                                             Delete
                                         </a>
                                     </td>

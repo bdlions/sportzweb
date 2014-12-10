@@ -147,13 +147,13 @@
                                         <div class="form-group">
                                             <div class="col-md-5">Arm Relaxed:</div>
                                             <div class="col-md-6">
-                                                <?php echo form_input($ls_ankle + array('class' => 'form-control')) ?>
+                                                <?php echo form_input($rs_arm_relaxed + array('class' => 'form-control')) ?>
                                             </div>cm
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-5">Arm Flexed:</div>
                                             <div class="col-md-6">
-                                                <?php echo form_input($rs_arm_relaxed + array('class' => 'form-control')) ?>
+                                                <?php echo form_input($rs_arm_flexed + array('class' => 'form-control')) ?>
                                             </div>cm
                                         </div>
                                         <div class="form-group">

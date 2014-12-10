@@ -25,7 +25,7 @@
                                 <td><?php echo $assessment['created_on']?></td>
                                 <td><a href="<?php echo base_url().'applications/gympro/edit_assessment/'.$assessment['assessment_id'];?>">Edit</a></td>
                                 <td style="text-align: center">
-                                <a href="" onclick="open_modal_delete_confirm(<?php echo $assessment['id'] ?>)" >
+                                <a onclick="open_modal_delete_confirm(<?php echo $assessment['id'] ?>)" >
                                     Delete
                                 </a>
                             </td>

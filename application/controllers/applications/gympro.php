@@ -965,9 +965,19 @@ class Gympro extends Role_Controller{
      * @param $program_id, program id
      * @Author Nazmul on 7th December 2014
      */
-    public function delete_program($program_id = 0)
+    public function delete_program()
     {
-        
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if($this->gympro_library->delete_program($delete_id))
+        {
+            $result['message'] = $this->gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     //---------------------------------------Exercise Module---------------------------------------//
     /*
@@ -1065,7 +1075,7 @@ class Gympro extends Role_Controller{
                 $newValue = $this->gympro_library->update_exercise($exercise_id, $additional_data);
                 if ($newValue) {
                     $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/create_exercise', 'refresh');
+                    redirect('applications/gympro/exercises', 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
@@ -1102,9 +1112,19 @@ class Gympro extends Role_Controller{
 
     }
     
-    public function delete_exercise($exercise_id = 0)
+    public function delete_exercise()
     {
-        
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if($this->gympro_library->delete_exercise($delete_id))
+        {
+            $result['message'] = $this->gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     //-----------------------------------------Nutrition Module------------------------------------//
     /*
@@ -1447,7 +1467,7 @@ class Gympro extends Role_Controller{
                 $newValue = $this->gympro_library->update_assessment($assessment_id, $additional_data);
                 if ($newValue) {
                     $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/edit_assessment/'.$assessment_id, 'refresh');
+                    redirect('applications/gympro/assessments/', 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
@@ -1630,9 +1650,19 @@ class Gympro extends Role_Controller{
      * Ajax call to delete an assessment
      * @Author Nazmul on 7th December 2014
      */
-    public function delete_assessment($assessment_id = 0)
-    {
-        
+    public function delete_assessment()
+       {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if($this->gympro_library->delete_assessment($delete_id))
+        {
+            $result['message'] = $this->gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     //-----------------------------------------Mission Module------------------------------------//
@@ -1802,7 +1832,7 @@ class Gympro extends Role_Controller{
                 if($value === TRUE) 
                 {
                     $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/edit_mission/'.$mission_id, 'refresh');
+                    redirect('applications/gympro/manage_missions/', 'refresh');
                 } else 
                 {
                     $this->data['message'] = $this->gympro_library->errors();
@@ -1892,9 +1922,19 @@ class Gympro extends Role_Controller{
      * Ajax call to delete mission
      * @Author Nazmul on 7th December 2014
      */
-    public function delete_mission($mission_id = 0)
-    {
-        
+    public function delete_mission()
+   {
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if($this->gympro_library->delete_mission($delete_id))
+        {
+            $result['message'] = $this->gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     //-----------------------------------------Earnings Module------------------------------------//
     public function earnings()

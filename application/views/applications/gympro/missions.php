@@ -28,7 +28,7 @@
                                 <td><?php echo $mission_info['label']?></td>
                                 <td><a href="<?php echo base_url()."applications/gympro/edit_mission/".$mission_info['mission_id']?>">Edit</a></td>
                                 <td style="text-align: center">
-                                <a href="" onclick="open_modal_delete_confirm(<?php echo $mission_info['id'] ?>)" >
+                                <a onclick="open_modal_delete_confirm(<?php echo $mission_info['id'] ?>)" >
                                     Delete
                                 </a>
                             </td>

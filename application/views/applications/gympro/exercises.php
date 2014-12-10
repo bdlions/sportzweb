@@ -25,7 +25,7 @@
                                 <td><?php echo $exercise['created_on']?></td>
                                 <td><a href="<?php echo base_url().'applications/gympro/edit_exercise/'.$exercise['exercise_id'];?>">Edit</a></td>
                                 <td style="text-align: center">
-                                    <a href="" onclick="open_modal_delete_confirm(<?php echo $exercise['id']?>)" >
+                                    <a onclick="open_modal_delete_confirm(<?php echo $exercise['id']?>)" >
                                         Delete
                                     </a>
                                 </td>
