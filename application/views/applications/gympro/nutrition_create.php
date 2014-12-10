@@ -13,15 +13,15 @@
             <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>            
             <div class="pad_body">
                 <div style="background-color: #fff; margin-bottom: 1px; padding: 10px; display: inline-block; width: 100%">
-                    <select style=" margin-right: 15px; width: 100px;">
-                        <option>MEAL TIME</option>
-                        <option>MEAL TIME MEAL TIME MEAL TIME MEAL TIME MEAL TIME</option>
-                        <option>kada</option>
+                    <select name="meal_time" style="margin-right: 15px; width: 100px;">
+                        <?php foreach ($meal_time_list as $key=>$meal_time): ?>
+                        <option value="<?php echo $key;?>"><?php echo $meal_time;?></option>
+                        <?php endforeach; ?>
                     </select>
-                    <select style="margin-right: 15px; width: 100px;">
-                        <option>Pre workout</option>
-                        <option>kada</option>
-                        <option>kada</option>
+                    <select name="work_out" style="margin-right: 15px; width: 100px;">
+                        <?php foreach ($workout_list as $key=>$meal_time): ?>
+                        <option value="<?php echo $key;?>"><?php echo $meal_time;?></option>
+                        <?php endforeach; ?>
                     </select>
                     <img class="pull-right" onclick="alert('Cross pressed')" src="<?php echo base_url();?>resources/images/cross.png" style="margin: 4px">
                     <img class="pull-right" onclick="alert('asdas')" src="<?php echo base_url();?>resources/images/add.png" style="margin: 4px">

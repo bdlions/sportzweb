@@ -25,7 +25,7 @@
                                     <td><?php echo $nutrition['created_on'] ?></td>
                                     <td><a href="<?php echo base_url() . 'applications/gympro/edit_nutrition/' . $nutrition['nutrition_id']; ?>">Edit</a></td>
                                     <td style="text-align: center">
-                                        <a href="" onclick="open_modal_delete_confirm(<?php echo $nutrition['id'] ?>)" >
+                                        <a onclick="open_modal_delete_confirm(<?php echo $nutrition['id'] ?>)" >
                                             Delete
                                         </a>
                                     </td>

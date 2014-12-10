@@ -83,7 +83,7 @@
             <div class="user_prof">
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
-                        <img class="img-circle img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/uploads/client_profile_pics/50x50/feat3.jpg">
+                        <img class="img-circle img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/uploads/client_profile_pics/50x50/<?php echo $client_info['picture']?>">
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-8">
                         <a href=""><?php echo $client_info['first_name'].' '.$client_info['last_name']?></a>

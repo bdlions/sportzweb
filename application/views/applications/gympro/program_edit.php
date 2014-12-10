@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-md-1" style="padding: 0px; margin: 2px;">
                             <div style="font-size: 14px;">Tempo</div>
-                            <div><input style="width: 100%" name="ex_tempo" value="<?php echo $program['focus'];?>"></div>
+                            <div><input style="width: 100%" name="ex_tempo" value="<?php echo $program['ex_tempo'];?>"></div>
                         </div>
                     </div>
                 </div>

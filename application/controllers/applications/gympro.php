@@ -572,11 +572,11 @@ class Gympro extends Role_Controller{
         );
         
         
-        $this->data['submit_button'] = array(
-            'name' => 'submit_button',
-            'id' => 'submit_button',
+        $this->data['btnSubmit'] = array(
+            'name' => 'btnSubmit',
+            'id' => 'btnSubmit',
             'type' => 'submit',
-            'value' => 'Create Client'
+            'value' => 'Save'
         );
         
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
@@ -588,7 +588,7 @@ class Gympro extends Role_Controller{
     public function manage_groups()
     {
         $this->data['message'] = '';
-        $this->data['group_list'] = $this->gympro_library->get_all_groups();
+        $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
         
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/groups', $this->data);
@@ -609,7 +609,7 @@ class Gympro extends Role_Controller{
                     'user_id' => $this->session->userdata('user_id')
                     
                 );
-                $create_id = $this->gympro_library->create_client_group($data);
+                $create_id = $this->gympro_library->create_group($data);
                 if ($create_id !== FALSE) {
                     $this->data['message'] = "Client group is created successfully.";
                     redirect('applications/gympro/create_group','refresh');
@@ -658,14 +658,88 @@ class Gympro extends Role_Controller{
         $this->template->load(null,'applications/gympro/group_create', $this->data);
     }
     
-    public function update_group($group_id = 0)
+    public function edit_group($group_id = 0)
     {
+        $this->data['message'] = '';        
+        if ($this->input->post())
+        {
+            $this->form_validation->set_rules('title', 'title', 'xss_clean|required'); 
+            if($this->form_validation->run() == true)
+            {
+                $data = array(
+                    'title' => $this->input->post('title'),
+                    'phone' => $this->input->post('phone'),
+                    'mobile' => $this->input->post('mobile'),
+                    'notes' => $this->input->post('notes'),
+                    'user_id' => $this->session->userdata('user_id')
+                    
+                );
+                $create_id = $this->gympro_library->update_group($group_id, $data);
+                if ($create_id !== FALSE) {
+                    $this->data['message'] = "Client group is created successfully.";
+                    redirect('applications/gympro/manage_groups','refresh');
+                } else {
+                    $this->data['message'] = $this->gympro_library->errors();
+                }
+            } else {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        $group_data = $this->gympro_library->get_group_info($group_id)->result_array();
+        $group_data = $group_data[0];
         
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text',
+            'value' => $group_data['title']
+        );
+        $this->data['phone'] = array(
+            'name' => 'phone',
+            'id' => 'phone',
+            'type' => 'text',
+            'value' => $group_data['phone']
+        );
+        $this->data['mobile'] = array(
+            'name' => 'mobile',
+            'id' => 'mobile',
+            'type' => 'text',
+            'value' => $group_data['mobile']
+        );
+        $this->data['notes'] = array(
+            'name' => 'notes',
+            'id' => 'notes',
+            'type' => 'text'
+        );
+        $this->data['submit_button'] = array(
+            'name' => 'submit_button',
+            'id' => 'submit_button',
+            'type' => 'submit',
+            'value' => 'Save Changes'
+        );
+        
+        $this->data['gr_notes'] = $group_data['notes'];
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
+        $this->template->load(null,'applications/gympro/group_edit', $this->data);
     }
     
     public function delete_group()
     {
-        
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if($this->gympro_library->delete_group($delete_id))
+        {
+            $result['message'] = $this->gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     //-----------------------------------Account Type Module-------------------------------//
@@ -1011,7 +1085,7 @@ class Gympro extends Role_Controller{
                 $newValue = $this->gympro_library->create_exercise($additional_data);
                 if ($newValue) {
                     $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/create_exercise', 'refresh');
+                    redirect('applications/gympro/exercises', 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
@@ -1153,6 +1227,8 @@ class Gympro extends Role_Controller{
             if($this->form_validation->run() == true)
             {
                 $meal_list = array(
+                    'meal_time' => $this->input->post('meal_time'),
+                    'work_out' => $this->input->post('work_out'),
                     'label' => $this->input->post('label'),
                     'quan' => $this->input->post('quan'),
                     'unit' => $this->input->post('unit'),
@@ -1205,9 +1281,67 @@ class Gympro extends Role_Controller{
      * @param $nutrition_id, nutrition id
      * @Author Nazmul on 7th December 2014
      */
-    public function edit_nutritition($nutrition_id = 0)
+    public function edit_nutrition($nutrition_id = 0)
     {
+        $this->form_validation->set_rules('label', 'Focus', 'xss_clean|required');
+        $this->form_validation->set_rules('quan', 'Start Date', 'xss_clean');
         
+        if ($this->input->post())
+        {
+            if($this->form_validation->run() == true)
+            {
+                $meal_list = array(
+                    'meal_time' => $this->input->post('meal_time'),
+                    'work_out' => $this->input->post('work_out'),
+                    'label' => $this->input->post('label'),
+                    'quan' => $this->input->post('quan'),
+                    'unit' => $this->input->post('unit'),
+                    'cal' => $this->input->post('cal'),
+                    'prot' => $this->input->post('prot'),
+                    'carb' => $this->input->post('carb'),
+                    'fats' => $this->input->post('fats')
+                );
+
+                $data = array(
+                    'user_id' => $this->session->userdata('user_id'),
+                    
+                    'meal_list' => json_encode($meal_list)
+                );
+                $update_id = $this->gympro_library->update_nutrition($nutrition_id, $data);
+                if ($update_id !== FALSE) {
+                    $result['message'] = 'Nutrition is updated successfully.';
+                    redirect('applications/gympro/nutrition', 'refresh');
+                    } else {
+                    $result['message'] = $this->gympro_library->errors_alert();
+                }
+            } else {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        
+        $meal_time_list = array();
+        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
+        foreach($meal_time_array as $meal_time)
+        {
+            $meal_time_list[$meal_time['meal_time_id']] = $meal_time['title'];
+        }
+        $this->data['meal_time_list'] = $meal_time_list;
+        
+        $workout_list = array();
+        $workout_array = $this->gympro_library->get_all_workouts()->result_array();
+        foreach($workout_array as $workout)
+        {
+            $workout_list[$workout['workout_id']] = $workout['title'];
+        }
+        
+        $nutrition_info = $this->gympro_library->get_nutrition_info($nutrition_id)->result_array();
+        $this->data['nutrition'] = json_decode($nutrition_info[0]['meal_list'], TRUE);
+        $this->data['workout_list'] = $workout_list;
+        $this->template->load(null,'applications/gympro/nutrition_edit', $this->data);
     }
     /*
      * Ajax call to delete nutrition
@@ -1216,7 +1350,17 @@ class Gympro extends Role_Controller{
      */
     public function delete_nutrition($nutrition_id = 0)
     {
-        
+        $result = array();
+        $delete_id = $this->input->post('delete_id');
+        if($this->gympro_library->delete_nutrition($delete_id))
+        {
+            $result['message'] = $this->gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     //----------------------------------------Assessment Module------------------------------------//
      /*
