@@ -6,7 +6,7 @@
         <meta name="author" content="Nazmul Hasan, Alamgir Kabir, Noor Alam, Ziaur Rahman">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
         <meta name="keywords" content=""/>
-        <title>Sportzweb</title>
+        <title>Sonuto</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/property.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/newsfeed.css">
