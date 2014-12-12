@@ -61,6 +61,35 @@ class Gympro_library {
     public function __get($var) {
         return get_instance()->$var;
     }
+    
+    /*
+     * This method will return answers of questions of a client
+     * @param $client_id, client id
+     * @Author Nazmul on 11th December 2014
+     */
+    public function get_question_answers($client_id)
+    {
+        $question_id_answer_map = array();
+        $client_info_array = $this->gympro_model->get_client_info($client_id)->result_array();
+        if(!empty($client_info_array))
+        {
+            $question_list = $client_info_array[0]['question_answer_list'];
+            if( $question_list != "" && $question_list != NULL )
+            {
+                $answers_array = json_decode($question_list);   
+                foreach($answers_array as $answer_info)
+                {
+                    $answer = array(
+                        'answer' => $answer_info->answer,
+                        'additional_info' => $answer_info->additional_info
+                    );  
+                    $question_id_answer_map[$answer_info->id] = $answer;
+                }
+            }
+        }
+        return $question_id_answer_map;
+    }
+    
     /*
      * This method will return all groups after converting date format
      * @Author Nazmul on 7th December 2014

@@ -174,6 +174,36 @@ class Gympro_model extends Ion_auth_model {
     }
     //------------------------------------ Client Module ------------------------------//
     /*
+     * This method will return all genders
+     * @Author Nazmul on 10th December 2014
+     */
+    public function get_all_genders()
+    {
+        return $this->db->select($this->tables['gender'].'.id as gender_id,'.$this->tables['gender'].'.*')
+                    ->from($this->tables['gender'])
+                    ->get();
+    }
+    /*
+     * This method will return all client statuses
+     * @Author Nazmul on 10th December 2014
+     */
+    public function get_all_client_statuses()
+    {
+        return $this->db->select($this->tables['app_gympro_client_statuses'].'.id as client_status_id,'.$this->tables['app_gympro_client_statuses'].'.*')
+                    ->from($this->tables['app_gympro_client_statuses'])
+                    ->get();
+    }
+    /*
+     * This method will return all health questions
+     * @Author Nazmul on 10th December 2014
+     */
+    public function get_all_health_questions()
+    {
+        return $this->db->select($this->tables['app_gympro_health_questions'].'.id as question_id,'.$this->tables['app_gympro_health_questions'].'.*')
+                    ->from($this->tables['app_gympro_health_questions'])
+                    ->get();
+    }
+    /*
      * This method will create a new client
      * @param $additional_data, client data to be created
      * @Author Nazmul on 17th November 2014
@@ -184,27 +214,15 @@ class Gympro_model extends Ion_auth_model {
         $additional_data = $this->_filter_data($this->tables['app_gympro_clients'], $additional_data); 
         $this->db->insert($this->tables['app_gympro_clients'], $additional_data);
         $insert_id = $this->db->insert_id();
-        $this->set_message('create_client_statuses_successful');
+        if($insert_id > 0)
+        {
+            $this->set_message('create_client_successful');
+        }
+        else
+        {
+            $this->set_error('create_client_fail');
+        }
         return (isset($insert_id)) ? $insert_id : FALSE;
-    }
-    
-    public function get_all_health_questions()
-    {
-        return $this->db->select($this->tables['app_gympro_health_questions'].'.id as question_id,'.$this->tables['app_gympro_health_questions'].'.*')
-                    ->from($this->tables['app_gympro_health_questions'])
-                    ->get();
-    }
-    public function get_all_gender_info()
-    {
-        return $this->db->select($this->tables['gender'].'.*')
-                    ->from($this->tables['gender'])
-                    ->get();
-    }
-    public function get_all_status_info()
-    {
-        return $this->db->select($this->tables['app_gympro_client_statuses'].'.*')
-                    ->from($this->tables['app_gympro_client_statuses'])
-                    ->get();
     }
     /*
      * This method will update client info
@@ -214,15 +232,14 @@ class Gympro_model extends Ion_auth_model {
      */
     public function update_client($client_id, $additional_data)
     {
-        //incomplete
         $additional_data['modified_on'] = now();
-//        $data = $this->_filter_data($this->tables['app_gympro_users'], $additional_data);
-        $this->db->update($this->tables['app_gympro_clients'], $data, array('user_id' => $client_id));
+        $data = $this->_filter_data($this->tables['app_gympro_clients'], $additional_data);
+        $this->db->update($this->tables['app_gympro_clients'], $data, array('id' => $client_id));
         if ($this->db->trans_status() === FALSE) {
-            $this->set_error('update_gympro_user_fail');
+            $this->set_error('update_client_fail');
             return FALSE;
         }
-        $this->set_message('update_gympro_user_successful');
+        $this->set_message('update_client_successful');
         return TRUE;
     }
     /*
@@ -244,7 +261,7 @@ class Gympro_model extends Ion_auth_model {
     public function get_client_info($client_id)
     {
         $this->db->where($this->tables['app_gympro_clients'].'.id', $client_id);
-        return $this->db->select($this->tables['app_gympro_clients'].'.id as id,'.$this->tables['app_gympro_clients'].'.*')
+        return $this->db->select($this->tables['app_gympro_clients'].'.id as client_id,'.$this->tables['app_gympro_clients'].'.*')
                     ->from($this->tables['app_gympro_clients'])
                     ->get();
     }

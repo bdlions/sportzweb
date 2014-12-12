@@ -1,7 +1,5 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
-
-<div class="container-fluid">
-    
+<div class="container-fluid">    
     <div class="row top_margin">
         <div class="col-md-2">
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
@@ -13,58 +11,7 @@
                         <button class="btn button-custom btn_gympro">New Client</button>
                     </a>
                 </div>
-                <div class="col-md-4 pull-right">
-                    <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
-                </div>
             </div>
-<!--            <div class="row top_margin">
-                <div class="col-md-4 right_padding_zero">
-                    <div class="user_prof">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <img class="img-circle img-responsive" src="<?php echo base_url() ?>resources/images/face.jpg">
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8">
-                                <a href="">Shemai Khan</a>
-                            </div>
-                        </div>
-                        <div class="pull-right">
-                            <a href=""><span>Edit</span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 right_padding_zero">
-                    <div class="user_prof">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <img class="img-circle img-responsive" src="<?php echo base_url() ?>resources/images/face.jpg">
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8">
-                                <a href="">Shemai Khan</a>
-                            </div>
-                        </div>
-                        <div class="pull-right">
-                            <a href=""><span>Edit</span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 right_padding_zero">
-                    <div class="user_prof">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <img class="img-circle img-responsive" src="<?php echo base_url() ?>resources/images/face.jpg">
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8">
-                                <a href="">Shemai Khan</a>
-                            </div>
-                        </div>
-                        <div class="pull-right">
-                            <a href=""><span>Edit</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-<!--            <div class="row top_margin">-->
             <?php
             $total_clients = count($client_list);
             $counter = 0;
@@ -83,14 +30,18 @@
             <div class="user_prof">
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
-                        <img class="img-circle img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/uploads/client_profile_pics/50x50/<?php echo $client_info['picture']?>">
+                        <?php if(isset($client_info['picture']) && $client_info['picture'] != ''){ ?>
+                        <img class="img-circle img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$client_info['picture'] ?>"/>
+                        <?php }else{?>
+                        <img class="img-circle img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.CLIENT_DEFAULT_PROFILE_PICTURE_NAME ?>"/>
+                        <?php } ?>
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-8">
                         <a href=""><?php echo $client_info['first_name'].' '.$client_info['last_name']?></a>
                     </div>
                 </div>
                 <div class="pull-right">
-                    <a href="<?php echo base_url().'applications/gympro/update_client/'.$client_info['id']?>"><span>Edit</span></a>
+                    <a href="<?php echo base_url().'applications/gympro/edit_client/'.$client_info['id']?>"><span>Edit</span></a>
                 </div>
             </div>
         </div>

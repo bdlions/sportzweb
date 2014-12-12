@@ -54,6 +54,10 @@ class Gympro extends Role_Controller{
         }
     }
     //----------------------------------- Client Module --------------------------------//
+    /*
+     * This method will show client list of gympro user
+     * @Author Nazmul on 10th December 2014
+     */
     public function manage_clients()
     {
         $client_list = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
@@ -62,111 +66,80 @@ class Gympro extends Role_Controller{
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/client/clients', $this->data);
     }
-    
-//    public function image_upload($file_info) {
-//        $data = null;
-//        if (isset($file_info)) {
-//            $config['image_library'] = 'gd2';
-//            $config['upload_path'] = CLIENT_PROFILE_PIC_IMAGEPATH;
-//            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-//            $config['max_size'] = '10240';
-//            $config['maintain_ratio'] = FALSE;
-//            $config['width'] = 120;
-//            $config['height'] = 120;
-//            $config['create_thumb'] = TRUE;
-//
-//            $this->load->library('upload', $config);
-//
-//            if (!$this->upload->do_upload()) {
-//                $error = array('error' => $this->upload->display_errors());
-//                return $data = $error;
-//            } else {
-//                $upload_data = $this->upload->data();
-//                $data = array('upload_data' => $upload_data);
-//                return $data;
-//            }
-//        }
-//        return $data;
-//    }
 
+    /*
+     * This method will create a new client under the gympro user
+     * @Author Nazmul on 10th December 2014
+     */
     public function create_client()
     {
         //CHECK IF THE CLIENT CREATE LIMIT HAS EXCEED
-        
-        
         $this->data['message'] = '';
         $this->form_validation->set_rules('first_name', 'First Name', 'xss_clean|required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'xss_clean');
         
         $question_list = $this->gympro_library->get_all_health_questions()->result_array();
         $this->data['question_list'] = $question_list;
-        $question_list_length = count($question_list);        
-        $answer_list = array();
         
         if ($this->input->post())
         {
             $result = array();
-            $result['message'] = '';
-            $picture = "";
-            if (isset($_FILES["userfile"]))
-            {
-                $result = $this->utils->upload_image($_FILES["userfile"], CLIENT_PROFILE_PIC_IMAGEPATH);
-                if($result['status'] == 1)
-                {
-//                    RESIZE IMAGE
-                    $source_path = CLIENT_PROFILE_PIC_IMAGEPATH.$result['upload_data']['file_name'];
-                    $destination_path = CLIENT_PROFILE_PICTURE_PATH_W50_H50.$result['upload_data']['file_name'];
-                    
-                    $this->utils->resize_image($source_path, $destination_path, CLIENT_PROFILE_PICTURE_H50, CLIENT_PROFILE_PICTURE_W50);
-                    $picture = $result['upload_data']['file_name'];
-                }                
-            }
-            
-            for($i = 0; $i < $question_list_length; $i++)
-            {
-                $answer_list[$i] = array(
-                    'id' => $this->input->post('question_additional_info_'.$i),
-                    'answer' => $this->input->post('question_radio_'.$i),
-//                    'additional_info' => (isset($this->input->post('question_additional_info_'.$i)) ? $this->input->post('question_additional_info_'.$i) : NULL),
-                    'additional_info' => $this->input->post('question_additional_info_'.$i)
-                );
-            }
-            
+            $result['message'] = '';                      
             if($this->form_validation->run() == true)
             {
+                $picture = "";
+                if (isset($_FILES["userfile"]))
+                {
+                    $result = $this->utils->upload_image($_FILES["userfile"], CLIENT_PROFILE_PIC_IMAGEPATH);
+                    if($result['status'] == 1)
+                    {
+                        $source_path = CLIENT_PROFILE_PIC_IMAGEPATH.$result['upload_data']['file_name'];
+                        $destination_path = CLIENT_PROFILE_PICTURE_PATH_W50_H50.$result['upload_data']['file_name'];
+                        $this->utils->resize_image($source_path, $destination_path, CLIENT_PROFILE_PICTURE_H50, CLIENT_PROFILE_PICTURE_W50);
+                        $picture = $result['upload_data']['file_name'];
+                    }                
+                }     
+                $answer_list = array();
+                foreach($question_list as $question_info)
+                {
+                    $answer_list[] = array(
+                        'id' => $question_info['question_id'],
+                        'answer' => $this->input->post('question_radio_'.$question_info['question_id']),
+                        'additional_info' => $this->input->post('question_additional_info_'.$question_info['question_id'])
+                    );
+                }  
                 $data = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
-                    'gender_id' => $this->input->post('gender_id'),
+                    'gender_id' => $this->input->post('gender_list'),
                     'email' => $this->input->post('email'),
                     'start_date' => $this->input->post('start_date'),
                     'end_date' => $this->input->post('end_date'),
                     'birth_date' => $this->input->post('birth_date'),
-                    'status_id' => $this->input->post('status_id'),
+                    'status_id' => $this->input->post('client_status_list'),
                     'occupation' => $this->input->post('occupation'),
                     'company_name' => $this->input->post('company_name'),
                     'picture' => $picture,
                     'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'address' => $this->input->post('address'),
-                    'emergyncy_contact' => $this->input->post('emergyncy_contact'),
-                    'emergyncy_phone' => $this->input->post('emergyncy_phone'),
+                    'emergency_contact' => $this->input->post('emergency_contact'),
+                    'emergency_phone' => $this->input->post('emergency_phone'),
                     'height' => $this->input->post('height'),
-                    'reseting_heart_rate' => $this->input->post('reseting_heart_rate'),
+                    'resting_heart_rate' => $this->input->post('resting_heart_rate'),
                     'blood_pressure' => $this->input->post('blood_pressure'),
                     'notes' => $this->input->post('notes'),
-                    'user_id' => $this->session->userdata('user_id'),
-                    
-                    'question_list' => serialize($answer_list)
+                    'user_id' => $this->session->userdata('user_id'),                    
+                    'question_answer_list' => json_encode($answer_list)
                 );
-                $client_create_id = $this->gympro_library->create_client($data);
-                if ($client_create_id !== FALSE) {
-                    $result['message'] = 'Client is added successfully.';
+                $client_id = $this->gympro_library->create_client($data);
+                if ($client_id !== FALSE) {
+                    $result['message'] = $this->gympro_library->messages_alert();
                 } else {
                     $result['message'] = $this->gympro_library->errors_alert();
                 }
             } else {
-                $this->data['message'] = validation_errors();
+                $result['message'] = validation_errors();
             }
             echo json_encode($result);
             return;
@@ -175,8 +148,16 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
-        
-//        CLIENT INFO
+        $gender_array = $this->gympro_library->get_all_genders()->result_array();
+        $this->data['gender_list'] = array();
+        foreach ($gender_array as $gender_info) {
+            $this->data['gender_list'][$gender_info['gender_id']] = $gender_info['gender_name'];
+        }
+        $client_status_array = $this->gympro_library->get_all_client_statuses()->result_array();
+        $this->data['client_status_list'] = array();
+        foreach ($client_status_array as $client_status_info) {
+            $this->data['client_status_list'][$client_status_info['client_status_id']] = $client_status_info['title'];
+        }
         $this->data['first_name'] = array(
             'name' => 'first_name',
             'id' => 'first_name',
@@ -232,8 +213,6 @@ class Gympro extends Role_Controller{
             'id' => 'picture',
             'type' => 'file'
         );
-        
-//        CONTACT DETAILS
         $this->data['phone'] = array(
             'name' => 'phone',
             'id' => 'phone',
@@ -259,329 +238,261 @@ class Gympro extends Role_Controller{
             'id' => 'emergency_phone',
             'type' => 'text'
         );
-        
-//        HEALTH Q
-//        $this->data['smoker_txt'] = array(
-//            'name' => 'smoker_txt',
-//            'id' => 'smoker_txt',
-//            'type' => 'text'
-//        );
-//        $this->data['cardiov_txt'] = array(
-//            'name' => 'cardiov_txt',
-//            'id' => 'cardiov_txt',
-//            'type' => 'text'
-//        );
-//        $this->data['injury_txt'] = array(
-//            'name' => 'injury_txt',
-//            'id' => 'injury_txt',
-//            'type' => 'text'
-//        );
-//        $this->data['medication_txt'] = array(
-//            'name' => 'medication_txt',
-//            'id' => 'medication_txt',
-//            'type' => 'text'
-//        );
-//        $this->data['medicalcondition_txt'] = array(
-//            'name' => 'medicalcondition_txt',
-//            'id' => 'medicalcondition_txt',
-//            'type' => 'text'
-//        );
-//        $this->data['height'] = array(
-//            'name' => 'height',
-//            'id' => 'height',
-//            'type' => 'text'
-//        );
-//        $this->data['reseting_heart_rate'] = array(
-//            'name' => 'reseting_heart_rate',
-//            'id' => 'reseting_heart_rate',
-//            'type' => 'text'
-//        );
-//        $this->data['blood_pressure'] = array(
-//            'name' => 'blood_pressure',
-//            'id' => 'blood_pressure',
-//            'type' => 'text'
-//        );
-        
-        
-//        NOTES
+        $this->data['height'] = array(
+            'name' => 'height',
+            'id' => 'height',
+            'type' => 'text'
+        );
+        $this->data['resting_heart_rate'] = array(
+            'name' => 'resting_heart_rate',
+            'id' => 'resting_heart_rate',
+            'type' => 'text'
+        );
+        $this->data['blood_pressure'] = array(
+            'name' => 'blood_pressure',
+            'id' => 'blood_pressure',
+            'type' => 'text'
+        );
         $this->data['notes'] = array(
             'name' => 'notes',
             'id' => 'notes',
             'type' => 'text'
-        );
-        
-        
-        $this->data['btnSubmit'] = array(
-            'name' => 'btnSubmit',
-            'id' => 'btnSubmit',
+        );        
+        $this->data['submit_create_client'] = array(
+            'name' => 'submit_create_client',
+            'id' => 'submit_create_client',
             'type' => 'submit',
             'value' => 'Save'
         );
-        
-        
-        
-        
-        
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->data['gender_info'] = $this->gympro_library->get_all_gender_info()->result_array();
-        $this->data['status_info'] = $this->gympro_library->get_all_status_info()->result_array();
         $this->template->load(null,'applications/gympro/client/create_client', $this->data);
     }
-    public function update_client($client_id = 1)
-    {
-        $client = $this->gympro_library->get_client_info($client_id)->result_array();
-        $client = $client[0];
-//        var_dump($client);
-//        exit();
+    
+    /*
+     * This method will update a client
+     * @param $client_id, client id
+     * @Author Nazmul on 10th December 2014
+     */
+    public function edit_client($client_id = 0)
+    {        
         $this->data['message'] = ''; 
         $this->form_validation->set_rules('first_name', 'First Name', 'xss_clean|required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'xss_clean');
-        
+        //getting health question list
         $question_list = $this->gympro_library->get_all_health_questions()->result_array();
         $this->data['question_list'] = $question_list;
-        $question_list_length = count($question_list);        
-        $answer_list = array();
         if ($this->input->post())
         {
             $result = array();
-            $result['message'] = '';
-            $picture = "";
-            if (isset($_FILES["userfile"]))
-            {
-                $result = $this->utils->upload_image($_FILES["userfile"], CLIENT_PROFILE_PIC_IMAGEPATH);
-                if($result['status'] == 1)
-                {
-                    $source_path = CLIENT_PROFILE_PIC_IMAGEPATH.$result['upload_data']['file_name'];
-                    $destination_path = CLIENT_PROFILE_PICTURE_PATH_W50_H50.$result['upload_data']['file_name'];
-                    
-                    $this->utils->resize_image($source_path, $destination_path, CLIENT_PROFILE_PICTURE_H50, CLIENT_PROFILE_PICTURE_W50);
-                    $picture = $result['upload_data']['file_name'];
-                }                
-            }
-            
-            for($i = 0; $i < $question_list_length; $i++)
-            {
-                $answer_list[$i] = array(
-                    'id' => $this->input->post('question_additional_info_'.$i),
-                    'answer' => $this->input->post('question_radio_'.$i),
-//                    'additional_info' => (isset($this->input->post('question_additional_info_'.$i)) ? $this->input->post('question_additional_info_'.$i) : NULL),
-                    'additional_info' => $this->input->post('question_additional_info_'.$i)
-                );
-            }
-            
+            $result['message'] = '';                        
             if($this->form_validation->run() == true)
-            {
+            {                
                 $data = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
-                    'gender_id' => $this->input->post('gender_id'),
+                    'gender_id' => $this->input->post('gender_list'),
                     'email' => $this->input->post('email'),
                     'start_date' => $this->input->post('start_date'),
                     'end_date' => $this->input->post('end_date'),
                     'birth_date' => $this->input->post('birth_date'),
-                    'status_id' => $this->input->post('status_id'),
+                    'status_id' => $this->input->post('client_status_list'),
                     'occupation' => $this->input->post('occupation'),
                     'company_name' => $this->input->post('company_name'),
-                    'picture' => $this->input->post('picture'),
                     'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'address' => $this->input->post('address'),
                     'emergyncy_contact' => $this->input->post('emergyncy_contact'),
                     'emergyncy_phone' => $this->input->post('emergyncy_phone'),
                     'height' => $this->input->post('height'),
-                    'reseting_heart_rate' => $this->input->post('reseting_heart_rate'),
+                    'resting_heart_rate' => $this->input->post('resting_heart_rate'),
                     'blood_pressure' => $this->input->post('blood_pressure'),
                     'notes' => $this->input->post('notes'),
-                    'user_id' => $this->session->userdata('user_id'),
-                    'qestion_list' => serialize($answer_list)
+                    'user_id' => $this->session->userdata('user_id')
                 );
-                $client_create_id = $this->gympro_library->update_client($data);
-                if ($client_create_id !== FALSE) {
-                    $this->data['message'] = "Client is created successfully.";
-                    redirect('applications/gympro/create_client','refresh');
+                $picture = "";
+                if (isset($_FILES["userfile"]))
+                {
+                    $result = $this->utils->upload_image($_FILES["userfile"], CLIENT_PROFILE_PIC_IMAGEPATH);
+                    if($result['status'] == 1)
+                    {
+                        $source_path = CLIENT_PROFILE_PIC_IMAGEPATH.$result['upload_data']['file_name'];
+                        $destination_path = CLIENT_PROFILE_PICTURE_PATH_W50_H50.$result['upload_data']['file_name'];
+                        $this->utils->resize_image($source_path, $destination_path, CLIENT_PROFILE_PICTURE_H50, CLIENT_PROFILE_PICTURE_W50);
+                        $picture = $result['upload_data']['file_name'];
+                        $data['picture'] = $picture;
+                    }                
+                }  
+                $answer_list = array();
+                foreach($question_list as $question_info)
+                {
+                    $answer_list[] = array(
+                        'id' => $question_info['question_id'],
+                        'answer' => $this->input->post('question_radio_'.$question_info['question_id']),
+                        'additional_info' => $this->input->post('question_additional_info_'.$question_info['question_id'])
+                    );
+                }
+                $data['question_answer_list'] = json_encode($answer_list);
+                if ($this->gympro_library->update_client($client_id, $data)) {
+                    $result['message'] = $this->gympro_library->messages_alert();
                 } else {
-                    $this->data['message'] = $this->gympro_library->errors();
+                    $result['message'] = $this->gympro_library->errors_alert();
                 }
             } else {
-                $this->data['message'] = validation_errors();
+                $result['message'] = validation_errors();
             }
+            echo json_encode($result);
+            return;
         }
         else
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
+        $client_info = array();
+        $client_info_array = $this->gympro_library->get_client_info($client_id)->result_array();
+        if(!empty($client_info_array))
+        {
+           $client_info =  $client_info_array[0];
+        }
+        else
+        {
+            redirect('applications/gympro/manage_clients','refresh');
+        }
+        $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id); 
         
-//        CLIENT INFO
+        $gender_array = $this->gympro_library->get_all_genders()->result_array();
+        $this->data['gender_list'] = array();
+        foreach ($gender_array as $gender_info) {
+            $this->data['gender_list'][$gender_info['gender_id']] = $gender_info['gender_name'];
+        }
+        $this->data['selected_gender_id'] = $client_info['gender_id'];
+        $client_status_array = $this->gympro_library->get_all_client_statuses()->result_array();
+        $this->data['client_status_list'] = array();
+        foreach ($client_status_array as $client_status_info) {
+            $this->data['client_status_list'][$client_status_info['client_status_id']] = $client_status_info['title'];
+        }
+        $this->data['selected_status_id'] = $client_info['status_id'];
         $this->data['first_name'] = array(
             'name' => 'first_name',
             'id' => 'first_name',
             'type' => 'text',
-            'value' => $client['first_name']
-            
+            'value' => $client_info['first_name']            
         );
         $this->data['last_name'] = array(
             'name' => 'last_name',
             'id' => 'last_name',
             'type' => 'text',
-            'value' => $client['last_name']
+            'value' => $client_info['last_name']
         );
         $this->data['gender_id'] = array(
             'name' => 'gender_id',
             'id' => 'gender_id',
             'type' => 'text',
-            'value' => $client['gender_id']
+            'value' => $client_info['gender_id']
         );
         $this->data['email'] = array(
             'name' => 'email',
             'id' => 'email',
             'type' => 'text',
-            'value' => $client['email']
+            'value' => $client_info['email']
         );
         $this->data['start_date'] = array(
             'name' => 'start_date',
             'id' => 'start_date',
             'type' => 'text',
-            'value' => $client['start_date']
+            'value' => $client_info['start_date']
         );
         $this->data['end_date'] = array(
             'name' => 'end_date',
             'id' => 'end_date',
             'type' => 'text',
-            'value' => $client['end_date']
+            'value' => $client_info['end_date']
         );
         $this->data['birth_date'] = array(
             'name' => 'birth_date',
             'id' => 'birth_date',
             'type' => 'text',
-            'value' => $client['birth_date']
+            'value' => $client_info['birth_date']
         );
         $this->data['status_id'] = array(
             'name' => 'status_id',
             'id' => 'status_id',
             'type' => 'text',
-            'value' => $client['status_id']
+            'value' => $client_info['status_id']
         );
         $this->data['occupation'] = array(
             'name' => 'occupation',
             'id' => 'occupation',
             'type' => 'text',
-            'value' => $client['occupation']
+            'value' => $client_info['occupation']
         );
         $this->data['company_name'] = array(
             'name' => 'company_name',
             'id' => 'company_name',
             'type' => 'text',
-            'value' => $client['company_name']
+            'value' => $client_info['company_name']
         );
-        $this->data['picture'] = array(
-            'name' => 'picture',
-            'id' => 'picture',
-            'type' => 'file',
-            'value' => $client['picture']
-        );
-        
-//        CONTACT DETAILS
         $this->data['phone'] = array(
             'name' => 'phone',
             'id' => 'phone',
             'type' => 'text',
-            'value' => $client['phone']
+            'value' => $client_info['phone']
         );
         $this->data['mobile'] = array(
             'name' => 'mobile',
             'id' => 'mobile',
             'type' => 'text',
-            'value' => $client['mobile']
+            'value' => $client_info['mobile']
         );
         $this->data['address'] = array(
             'name' => 'address',
             'id' => 'address',
             'type' => 'text',
-            'value' => $client['address']
+            'value' => $client_info['address']
         );
         $this->data['emergency_contact'] = array(
             'name' => 'emergency_contact',
             'id' => 'emergency_contact',
             'type' => 'text',
-//            'value' => $client['emergency_contact']
+            'value' => $client_info['emergency_contact']
         );
         $this->data['emergency_phone'] = array(
             'name' => 'emergency_phone',
             'id' => 'emergency_phone',
             'type' => 'text',
-//            'value' => $client['emergency_phone']
-        );
-        
-//        HEALTH Q
-        $this->data['smoker_txt'] = array(
-            'name' => 'smoker_txt',
-            'id' => 'smoker_txt',
-            'type' => 'text',
-//            'value' => $client['smoker_txt']
-        );
-        $this->data['cardiov_txt'] = array(
-            'name' => 'cardiov_txt',
-            'id' => 'cardiov_txt',
-            'type' => 'text',
-//            'value' => $client['cardiov_txt']
-        );
-        $this->data['injury_txt'] = array(
-            'name' => 'injury_txt',
-            'id' => 'injury_txt',
-            'type' => 'text',
-//            'value' => $client['injury_txt']
-        );
-        $this->data['medication_txt'] = array(
-            'name' => 'medication_txt',
-            'id' => 'medication_txt',
-            'type' => 'text',
-//            'value' => $client['medication_txt']
-        );
-        $this->data['medicalcondition_txt'] = array(
-            'name' => 'medicalcondition_txt',
-            'id' => 'medicalcondition_txt',
-            'type' => 'text',
-//            'value' => $client['medicalcondition_txt']
+            'value' => $client_info['emergency_phone']
         );
         $this->data['height'] = array(
             'name' => 'height',
             'id' => 'height',
             'type' => 'text',
-            'value' => $client['height']
+            'value' => $client_info['height']
         );
-        $this->data['reseting_heart_rate'] = array(
-            'name' => 'reseting_heart_rate',
-            'id' => 'reseting_heart_rate',
+        $this->data['resting_heart_rate'] = array(
+            'name' => 'resting_heart_rate',
+            'id' => 'resting_heart_rate',
             'type' => 'text',
-            'value' => $client['reseting_heart_rate']
+            'value' => $client_info['resting_heart_rate']
         );
         $this->data['blood_pressure'] = array(
             'name' => 'blood_pressure',
             'id' => 'blood_pressure',
             'type' => 'text',
-            'value' => $client['blood_pressure']
+            'value' => $client_info['blood_pressure']
         );
-        
-        
-//        NOTES
         $this->data['notes'] = array(
             'name' => 'notes',
             'id' => 'notes',
             'type' => 'text',
-            'value' => $client['notes']
+            'value' => $client_info['notes']
         );
-        
-        
-        $this->data['btnSubmit'] = array(
-            'name' => 'btnSubmit',
-            'id' => 'btnSubmit',
+        $this->data['submit_edit_client'] = array(
+            'name' => 'submit_edit_client',
+            'id' => 'submit_edit_client',
             'type' => 'submit',
             'value' => 'Save'
         );
-        
+        $this->data['client_info'] = $client_info; 
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->data['gender_info'] = $this->gympro_library->get_all_gender_info()->result_array();
-        $this->data['status_info'] = $this->gympro_library->get_all_status_info()->result_array();
         $this->template->load(null,'applications/gympro/client/edit_client', $this->data);
     }
     //----------------------------------- Group Module ---------------------------------//
@@ -595,10 +506,10 @@ class Gympro extends Role_Controller{
     }
     public function create_group()
     {
-        $this->data['message'] = '';        
+        $this->data['message'] = '';  
+        $this->form_validation->set_rules('title', 'title', 'xss_clean|required');             
         if ($this->input->post())
         {
-            $this->form_validation->set_rules('title', 'title', 'xss_clean|required'); 
             if($this->form_validation->run() == true)
             {
                 $data = array(
@@ -606,8 +517,7 @@ class Gympro extends Role_Controller{
                     'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'notes' => $this->input->post('notes'),
-                    'user_id' => $this->session->userdata('user_id')
-                    
+                    'user_id' => $this->session->userdata('user_id')                    
                 );
                 $create_id = $this->gympro_library->create_group($data);
                 if ($create_id !== FALSE) {

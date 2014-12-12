@@ -296,6 +296,11 @@ $lang['update_client_statuses_fail']                       = "Failed to update C
 $lang['update_gympro_user_successful']                 = "Account is updated successfully.";
 $lang['update_gympro_user_fail']                       = "Failed to update account info.";
 
+$lang['create_client_successful']                      = "Client is created successfully.";
+$lang['create_client_fail']                            = "Failed to create a client.";
+$lang['update_client_successful']                      = "Client is updated successfully.";
+$lang['update_client_fail']                            = "Failed to update client info.";
+
 $lang['update_group_successful']                       = "Group is updated successfully.";
 $lang['update_group_fail']                             = "Failed to update group info.";
 $lang['delete_group_successful']                       = "Group is deleted successfully.";

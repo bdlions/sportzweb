@@ -1,5 +1,29 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
-
+<script type="text/javascript">
+    $(function() {
+        $('#start_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#start_date').text($('#start_date').data('date'));
+            $('#start_date').datepicker('hide');
+        });        
+        $('#end_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#end_date').text($('#end_date').data('date'));
+            $('#end_date').datepicker('hide');
+        });
+        $('#birth_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#birth_date').text($('#birth_date').data('date'));
+            $('#birth_date').datepicker('hide');
+        });
+    });    
+</script>
 <div class="container-fluid">
 
     <div class="row top_margin">
@@ -7,22 +31,21 @@
             <!--left nav custom for this page-->
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#add_client').show();">Client Info</a>
+                <a onclick="$('.hidden_tab').hide();$('#add_client').show();">Personal details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();">Contact Details</a>
+                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();">Contact details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#health').show();">Health Questions</a>
+                <a onclick="$('.hidden_tab').hide();$('#health').show();">Health details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#notes').show();">Notes</a>
             </div>
         </div>
-
         <!--ADDING CLIENT-->
         <div class="col-md-7">
             <div class="pad_title">
@@ -32,8 +55,8 @@
                 <?php if (isset($message) && ($message != NULL)): ?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
                 <?php endif; ?>
-                <?php echo form_open("applications/gympro/create_client", array('id' => 'form_add_image', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
-                    <!--<div class="row" style="display: none">-->
+                <?php echo form_open("applications/gympro/create_client", array('id' => 'form_create_client', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
+                    <!--Personal details-->
                     <div class="row hidden_tab" id="add_client" style="display: block">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -51,16 +74,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Gender </label>
                                 <div class="col-sm-4">
-                                    <select name="gender_id" class="form-control">
-                                        <?php foreach ($gender_info as $gender): ?>
-                                        <option value="<?php echo $gender['id']; ?>">
-                                            <?php echo $gender['gender_name']; ?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
-<!--                                    <input type="radio" checked="" name="gender_id" value="1"> Male
-                                    <br>
-                                    <input type="radio" name="gender_id" value="2"> Female -->
+                                    <?php echo form_dropdown('gender_list', $gender_list, '', 'class=form-control id=gender_list'); ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -90,18 +104,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Client Status </label>
                                 <div class="col-sm-4">
-                                    <select name="status_id" class="form-control">
-                                        <?php foreach ($status_info as $status): ?>
-                                        <option value="<?php echo $status['id']; ?>">
-                                            <?php echo $status['title']; ?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
-<!--                                    <input type="radio" checked="" name="status_id"> Active
-                                    <br>
-                                    <input type="radio" name="status_id"> Inactive 
-                                    <br>
-                                    <input type="radio" name="status_id"> Potential -->
+                                    <?php echo form_dropdown('client_status_list', $client_status_list, '', 'class=form-control id=client_status_list'); ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -116,12 +119,6 @@
                                     <?php echo form_input($company_name + array('class' => 'form-control'));?>
                                 </div>
                             </div>
-<!--                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Photo: </label>
-                                <div class="col-sm-4">
-                                    <?php // echo form_input($picture);?>
-                                </div>
-                            </div>-->
                             <div class="form-group">
                                 <label for="website" class="col-md-4 control-label requiredField">
                                     Set picture
@@ -142,16 +139,11 @@
                                             </div>
                                         </div>
                                     </div>
-
-<!--                                    <div class="col-md-offset-8 col-md-4 disable_padding_right" id="upload">
-                                        <input id="btnSubmit" type="submit" value="Save" class="btn button-custom pull-right"/>
-                                    </div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--CONTACT DETAILS-->
+                    <!--Contact details-->
                     <div class="row hidden_tab" id="contact_details">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -164,23 +156,6 @@
                                 <label class="col-sm-4 control-label">Mobile: </label>
                                 <div class="col-sm-6">
                                     <?php echo form_input($mobile + array('class' => 'form-control'));?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-4"></div>
-                                <div class="col-sm-8">
-                                    <p>
-                                    If sending SMS reminders please use an international format and include both country and area code and avoid spaces. <br>For example: <br>New Zealand: 64212614687<br>Australia: 61407142657
-                                    </p>
-                                    <a>See a list of supported mobile networks worldwide.</a>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Receive SMS alerts </label>
-                                <div class="col-sm-4">
-                                    <input type="radio" checked="" name="rcv_sms" value="yes"> Yes
-                                    <br>
-                                    <input type="radio" name="rcv_sms" value="no"> No 
                                 </div>
                             </div>
                             <div class="form-group">
@@ -203,33 +178,49 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--HEALTH QUESTIONS-->
+                    <!--Health details-->
                     <div class="row hidden_tab" id="health">
                         <div class="col-md-12">
-                            <?php foreach ($question_list as $key =>  $question):?>
+                            <?php foreach ($question_list as $question_info){?>
                             <div class="form-group pad_lines">
                                 <div class="col-sm-4">
-                                    <input type="radio" checked="" name="question_radio_<?php echo $key?>" value="yes"> Yes
+                                    <input type="radio" checked="" name="question_radio_<?php echo $question_info['question_id']?>" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" name="question_radio_<?php echo $key?>" value="no"> No 
-                                    <input type="hidden" value="question_id_<?php echo $question['id']?>">
+                                    <input type="radio" name="question_radio_<?php echo $question_info['question_id']?>" value="no"> No 
+                                    <input type="hidden" value="question_id_<?php echo $question_info['question_id']?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <label class="patapota"><?php echo $question['title']?></label>
+                                        <label class="patapota"><?php echo $question_info['title']?></label>
                                     </div>
-                                    <div style="display: <?php echo($question['show_additional_info']==1) ? 'block' : 'none' ;?>" style="float: left">
+                                    <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" style="float: left">
                                         Additional info: 
                                     </div>
-                                    <?php //echo form_input($smoker_txt + array('class' => 'form-control'));?>
-                                    <input style="display: <?php echo($question['show_additional_info']==1) ? 'block' : 'none' ;?>" class="form-control" type="text" id="question_additional_info_<?php echo $key?>" name="question_additional_info_<?php echo $key?>">
+                                    <input style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id']?>" name="question_additional_info_<?php echo $question_info['question_id']?>">
                                 </div>
                             </div>
-                            <?php endforeach;?>
+                            <?php } ?>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Height (cm): </label>
+                                <div class="col-sm-6">
+                                    <?php echo form_input($height + array('class' => 'form-control'));?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Resting Heart Rate: </label>
+                                <div class="col-sm-6">
+                                    <?php echo form_input($resting_heart_rate + array('class' => 'form-control'));?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Blood Pressure: </label>
+                                <div class="col-sm-6">
+                                    <?php echo form_input($blood_pressure + array('class' => 'form-control'));?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!--NOTES-->
+                    <!--Notes-->
                     <div class="row hidden_tab" id="notes">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -242,7 +233,7 @@
                     </div>
                 <div>
                     <div id="upload">
-                        <?php echo form_input($btnSubmit);?>
+                        <?php echo form_input($submit_create_client);?>
                         or <a href="<?php echo base_url().'applications/gympro/manage_clients'?>" style="font-size: 16px; line-height: 22px;">Cancel</a>
                     </div>
                 </div>
@@ -254,6 +245,18 @@
 
 <script>
 $(function () {
+    $("#submit_create_client").on("click", function(){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url();?>applications/gympro/create_client',
+            data: $("#form_create_client").serializeArray(),
+            success: function(data) {
+                alert(data.message);
+                window.location = '<?php echo base_url();?>applications/gympro/create_client';
+            }
+        });
+    });
     // Change this to the location of your server-side upload handler:
     var url = "<?php echo base_url();?>applications/gympro/create_client",
     uploadButton = $('<input type="submit" value="Save"/>').text('Confirm').
@@ -267,11 +270,10 @@ $(function () {
             $this.remove();
         });
     });
-
     $('#fileupload').fileupload({
         url: url,
         dataType: 'json',
-        formData: $("#form_add_image").serializeArray(),
+        formData: $("#form_create_client").serializeArray(),
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         maxFileSize: 5000000, // 5 MB
@@ -313,7 +315,7 @@ $(function () {
         alert(data.result.message);
         window.location = '<?php echo base_url();?>applications/gympro/create_client';
     }).on('fileuploadsubmit', function(e, data){
-        data.formData = $('#form_add_image').serializeArray();
+        data.formData = $('#form_create_client').serializeArray();
     }).on('fileuploadfail', function(e, data) {
         alert(data.message);
         $.each(data.files, function(index, file) {
