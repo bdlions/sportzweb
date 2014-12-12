@@ -16,11 +16,12 @@ class Gympro extends Role_Controller{
             redirect('auth/login', 'refresh');
         }
     }
-    
+    /*
+     * Gympro home page 
+     * @Author Nazmul on 11th December 2014
+     */
     public function index()
     {
-        //$this->data['message'] = '';        
-        //$this->template->load(null,'applications/gympro/index', $this->data);
         $user_id = $this->session->userdata('user_id');
         $gympro_user_info = array();
         $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
@@ -496,45 +497,57 @@ class Gympro extends Role_Controller{
         $this->template->load(null,'applications/gympro/client/edit_client', $this->data);
     }
     //----------------------------------- Group Module ---------------------------------//
+    /* This method will show all groups of a gympro user
+     * @Author Nazmul on 11th December 2014
+     */
     public function manage_groups()
     {
         $this->data['message'] = '';
         $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
-        
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->template->load(null,'applications/gympro/groups', $this->data);
+        $this->template->load(null,'applications/gympro/group/groups', $this->data);
     }
+    /*
+     * Ajax Call
+     * This method will create a group under a gympro user
+     * @Author Nazmul on 11th December 2014
+     */
     public function create_group()
     {
         $this->data['message'] = '';  
+        $user_id = $this->session->userdata('user_id');
         $this->form_validation->set_rules('title', 'title', 'xss_clean|required');             
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
         if ($this->input->post())
         {
+            $result = array();
+            $result['message'] = '';  
             if($this->form_validation->run() == true)
             {
+                $client_id_list = explode(",", $this->input->post('selected_client_list'));
                 $data = array(
                     'title' => $this->input->post('title'),
                     'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'notes' => $this->input->post('notes'),
-                    'user_id' => $this->session->userdata('user_id')                    
+                    'user_id' => $user_id                    
                 );
-                $create_id = $this->gympro_library->create_group($data);
-                if ($create_id !== FALSE) {
-                    $this->data['message'] = "Client group is created successfully.";
-                    redirect('applications/gympro/create_group','refresh');
+                $group_id = $this->gympro_library->create_group($data, $client_id_list);
+                if ($group_id !== FALSE) {
+                    $result['message'] = $this->gympro_library->messages_alert();
                 } else {
-                    $this->data['message'] = $this->gympro_library->errors();
+                    $result['message'] = $this->gympro_library->errors_alert();
                 }
             } else {
-                $this->data['message'] = validation_errors();
+                $result['message'] = validation_errors();
             }
+            echo json_encode($result);
+            return;
         }
         else
         {
             $this->data['message'] = $this->session->flashdata('message'); 
-        }
-        
+        }        
         $this->data['title'] = array(
             'name' => 'title',
             'id' => 'title',
@@ -555,94 +568,113 @@ class Gympro extends Role_Controller{
             'id' => 'notes',
             'type' => 'text'
         );
-        $this->data['submit_button'] = array(
-            'name' => 'submit_button',
-            'id' => 'submit_button',
+        $this->data['submit_create_group'] = array(
+            'name' => 'submit_create_group',
+            'id' => 'submit_create_group',
             'type' => 'submit',
             'value' => 'Save Changes'
-        );
-        
-        
-        
+        );        
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->template->load(null,'applications/gympro/group_create', $this->data);
-    }
-    
+        $this->template->load(null,'applications/gympro/group/group_create', $this->data);
+    }    
+    /*
+     * Ajax Call
+     * This method will edit a group
+     * @param $group_id, group id
+     * @Author Nazmul on 11th December 2014
+     */
     public function edit_group($group_id = 0)
     {
-        $this->data['message'] = '';        
+        $this->data['message'] = '';   
+        $user_id = $this->session->userdata('user_id');
+        $this->form_validation->set_rules('title', 'title', 'xss_clean|required');    
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
+        $this->data['selected_client_id_list'] = $this->gympro_library->get_client_id_list_in_group($group_id);
         if ($this->input->post())
         {
-            $this->form_validation->set_rules('title', 'title', 'xss_clean|required'); 
+            $result = array();
+            $result['message'] = ''; 
             if($this->form_validation->run() == true)
             {
+                $client_id_list = explode(",", $this->input->post('selected_client_list'));
                 $data = array(
                     'title' => $this->input->post('title'),
                     'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'notes' => $this->input->post('notes'),
-                    'user_id' => $this->session->userdata('user_id')
-                    
+                    'user_id' => $user_id                 
                 );
-                $create_id = $this->gympro_library->update_group($group_id, $data);
-                if ($create_id !== FALSE) {
-                    $this->data['message'] = "Client group is created successfully.";
-                    redirect('applications/gympro/manage_groups','refresh');
+                if ($this->gympro_library->update_group($group_id, $data, $client_id_list)) {
+                    $result['message'] = $this->gympro_library->messages_alert();
                 } else {
-                    $this->data['message'] = $this->gympro_library->errors();
+                     $result['message'] = $this->gympro_library->errors_alert();
                 }
             } else {
-                $this->data['message'] = validation_errors();
+                $result['message'] = validation_errors();
             }
+            echo json_encode($result);
+            return;
         }
         else
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
-        $group_data = $this->gympro_library->get_group_info($group_id)->result_array();
-        $group_data = $group_data[0];
+        $group_info = array();
+        $group_info_array = $this->gympro_library->get_group_info($group_id)->result_array();
+        if(!empty($group_info_array))
+        {
+            $group_info = $group_info_array[0];
+        }
+        else
+        {
+            redirect('application/gympro/manage_groups','refresh');
+        }
         
         $this->data['title'] = array(
             'name' => 'title',
             'id' => 'title',
             'type' => 'text',
-            'value' => $group_data['title']
+            'value' => $group_info['title']
         );
         $this->data['phone'] = array(
             'name' => 'phone',
             'id' => 'phone',
             'type' => 'text',
-            'value' => $group_data['phone']
+            'value' => $group_info['phone']
         );
         $this->data['mobile'] = array(
             'name' => 'mobile',
             'id' => 'mobile',
             'type' => 'text',
-            'value' => $group_data['mobile']
+            'value' => $group_info['mobile']
         );
         $this->data['notes'] = array(
             'name' => 'notes',
             'id' => 'notes',
-            'type' => 'text'
+            'type' => 'text',
+            'value' => $group_info['notes']
         );
-        $this->data['submit_button'] = array(
-            'name' => 'submit_button',
-            'id' => 'submit_button',
+        $this->data['submit_edit_group'] = array(
+            'name' => 'submit_edit_group',
+            'id' => 'submit_edit_group',
             'type' => 'submit',
             'value' => 'Save Changes'
         );
-        
-        $this->data['group_id'] = $group_id;
-        $this->data['gr_notes'] = $group_data['notes'];
+        $this->data['group_info'] = $group_info;
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->template->load(null,'applications/gympro/group_edit', $this->data);
+        $this->template->load(null,'applications/gympro/group/group_edit', $this->data);
     }
     
+    /*
+     * Ajax call
+     * This method will delete a group
+     * @Author Nazmul on 11th December 2014
+     */
     public function delete_group()
     {
         $result = array();
-        $delete_id = $this->input->post('delete_id');
-        if($this->gympro_library->delete_group($delete_id))
+        $group_id = $this->input->post('group_id');
+        if($this->gympro_library->delete_group($group_id))
         {
             $result['message'] = $this->gympro_library->messages_alert();
         }

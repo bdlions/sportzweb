@@ -106,6 +106,21 @@ class Gympro_library {
         return $group_list;
     }
     /*
+     * This method will return client id list of a group
+     * @param $group_id, group id
+     * @Author Nazmul on 11th December 2014
+     */
+    public function get_client_id_list_in_group($group_id)
+    {
+        $client_id_list = array();
+        $group_clients_array = $this->gympro_model->get_group_clients_info($group_id)->result_array();
+        foreach($group_clients_array as $group_client_info)
+        {
+            $client_id_list[] = $group_client_info['client_id'];
+        }
+        return $client_id_list;
+    }
+    /*
      * This method will return all programs after converting date format
      * @Author Nazmul on 7th December 2014
      */

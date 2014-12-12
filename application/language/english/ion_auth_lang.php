@@ -301,10 +301,12 @@ $lang['create_client_fail']                            = "Failed to create a cli
 $lang['update_client_successful']                      = "Client is updated successfully.";
 $lang['update_client_fail']                            = "Failed to update client info.";
 
+$lang['create_group_successful']                       = "Group is created successfully.";
+$lang['create_group_fail']                             = "Failed to create a group.";
 $lang['update_group_successful']                       = "Group is updated successfully.";
 $lang['update_group_fail']                             = "Failed to update group info.";
 $lang['delete_group_successful']                       = "Group is deleted successfully.";
-$lang['delete_group_fail']                             = "Failed to delete group info.";
+$lang['delete_group_fail']                             = "Failed to delete the group.";
 
 $lang['update_program_successful']                     = "Program is updated successfully.";
 $lang['update_program_fail']                           = "Failed to update program info.";

@@ -52,9 +52,9 @@
                 ADDING CLIENT
             </div>
             <div class="pad_body">
-                <?php if (isset($message) && ($message != NULL)): ?>
+                <?php if (isset($message) && ($message != NULL)){?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
-                <?php endif; ?>
+                <?php } ?>
                 <?php echo form_open("applications/gympro/create_client", array('id' => 'form_create_client', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
                     <!--Personal details-->
                     <div class="row hidden_tab" id="add_client" style="display: block">

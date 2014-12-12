@@ -287,7 +287,7 @@ class Gympro_model extends Ion_auth_model {
     public function get_group_info($group_id)
     {         
         $this->db->where($this->tables['app_gympro_groups'].'.id', $group_id);
-        return $this->db->select('*')
+        return $this->db->select($this->tables['app_gympro_groups'].'.id as group_id, '.$this->tables['app_gympro_groups'].'.*')
                     ->from($this->tables['app_gympro_groups'])
                     ->get();
     }
@@ -296,12 +296,38 @@ class Gympro_model extends Ion_auth_model {
      * @param $additional_data, group data to be inserted
      * @Author Nazmul on 7th December 2014
      */
-    public function create_group($additional_data)
+    public function create_group($additional_data, $client_id_list)
     {
-        $additional_data['created_on'] = now();
+        $current_time = now();
+        $this->db->trans_begin();
+        $additional_data['created_on'] = $current_time;
         $additional_data = $this->_filter_data($this->tables['app_gympro_groups'], $additional_data); 
         $this->db->insert($this->tables['app_gympro_groups'], $additional_data);
         $insert_id = $this->db->insert_id();
+        if($insert_id > 0)
+        {
+            $this->set_message('create_group_successful');
+            if(!empty($client_id_list))
+            {
+                $group_client_array = array();
+                foreach($client_id_list as $client_id)
+                {
+                    $group_client_info = array(
+                        'group_id' => $insert_id,
+                        'client_id' => $client_id,
+                        'created_on' => $current_time
+                    );
+                    $group_client_array[] = $group_client_info;
+                }
+                $this->db->insert_batch($this->tables['app_gympro_groups_clients'], $group_client_array);
+            }            
+        }
+        else
+        {
+            $this->db->trans_rollback();
+            $this->set_error('create_group_fail');
+        }
+        $this->db->trans_commit();
         return (isset($insert_id)) ? $insert_id : FALSE;
     }   
     /*
@@ -310,15 +336,40 @@ class Gympro_model extends Ion_auth_model {
      * @param $additional_data, group data to be updated
      * @Author Nazmul on 7th December 2014
      */
-    public function update_group($group_id, $additional_data)
+    public function update_group($group_id, $additional_data, $client_id_list)
     {
-        $additional_data['modified_on'] = now();
+        $current_time = now();
+        $this->db->trans_begin();
+        $additional_data['modified_on'] = $current_time;
         $data = $this->_filter_data($this->tables['app_gympro_groups'], $additional_data);
         $this->db->update($this->tables['app_gympro_groups'], $data, array('id' => $group_id));
         if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
             $this->set_error('update_group_fail');
             return FALSE;
         }
+        else
+        {
+            //removing current clients of this group
+            $this->db->where($this->tables['app_gympro_groups_clients'].'.group_id', $group_id);
+            $this->db->delete($this->tables['app_gympro_groups_clients']);
+            //adding clients under this group
+            if(!empty($client_id_list))
+            {
+                $group_client_array = array();
+                foreach($client_id_list as $client_id)
+                {
+                    $group_client_info = array(
+                        'group_id' => $group_id,
+                        'client_id' => $client_id,
+                        'created_on' => $current_time
+                    );
+                    $group_client_array[] = $group_client_info;
+                }
+                $this->db->insert_batch($this->tables['app_gympro_groups_clients'], $group_client_array);
+            } 
+        }
+        $this->db->trans_commit();
         $this->set_message('update_group_successful');
         return TRUE;
     }
@@ -343,6 +394,18 @@ class Gympro_model extends Ion_auth_model {
         }
         $this->set_message('delete_group_successful');
         return TRUE;
+    }
+    /*
+     * This method will return client list of a group
+     * @param $group_id, group id
+     * @Author Nazmul on 11th December 2014
+     */
+    public function get_group_clients_info($group_id)
+    {
+        $this->db->where($this->tables['app_gympro_groups_clients'].'.group_id', $group_id);
+        return $this->db->select($this->tables['app_gympro_groups_clients'].'.*')
+                    ->from($this->tables['app_gympro_groups_clients'])
+                    ->get();
     }
     //----------------------------------Program Module---------------------------------------//
     /*
