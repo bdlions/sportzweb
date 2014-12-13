@@ -249,8 +249,10 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_clients($user_id)
     {
-        return $this->db->select($this->tables['app_gympro_clients'].'.id as client_id,'.$this->tables['app_gympro_clients'].'.*')
+        $this->db->where($this->tables['app_gympro_clients'].'.user_id', $user_id);
+        return $this->db->select($this->tables['app_gympro_clients'].'.id as client_id,'.$this->tables['app_gympro_clients'].'.*,'.$this->tables['app_gympro_client_statuses'].'.title as status_title')
                     ->from($this->tables['app_gympro_clients'])
+                    ->join($this->tables['app_gympro_client_statuses'], $this->tables['app_gympro_client_statuses'] . '.id=' . $this->tables['app_gympro_clients'] . '.status_id')
                     ->get();
     }
     /*
@@ -802,6 +804,14 @@ class Gympro_model extends Ion_auth_model {
         $additional_data = $this->_filter_data($this->tables['app_gympro_missions'], $additional_data); 
         $this->db->insert($this->tables['app_gympro_missions'], $additional_data);
         $insert_id = $this->db->insert_id();
+        if($insert_id > 0)
+        {
+            $this->set_message('create_mission_successful');
+        }
+        else
+        {
+            $this->set_error('create_mission_fail');
+        }
         return (isset($insert_id)) ? $insert_id : FALSE;
     }   
     /*

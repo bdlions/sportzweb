@@ -1,3 +1,4 @@
+<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <script type="text/javascript">
     $(function() {
         $('#start_date').datepicker({
@@ -15,29 +16,25 @@
             $('#end_date').text($('#end_date').data('date'));
             $('#end_date').datepicker('hide');
         });
-    });
-    
+    });    
 </script>
-
-<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
-
 <div class="container-fluid">
     <div class="row top_margin">
         <div class="col-md-2">
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-10">
+            <?php echo form_open("applications/gympro/create_mission", array('id' => '', 'class' => 'form-horizontal')); ?>
             <div class="pad_title">
                 NEW MISSION
                 <div class="col-md-3 pull-right">
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>
-            </div>
-            <?php if (isset($message) && ($message != NULL)): ?>
-                <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
-            <?php endif; ?>
-            <?php echo form_open("applications/gympro/create_mission", array('id' => '', 'class' => 'form-horizontal')); ?>
+            </div>                       
             <div class="pad_body">
+                <?php if (isset($message) && ($message != NULL)){ ?>
+                    <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
+                <?php } ?> 
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Label: </label>
                     <div class="col-sm-4">
@@ -112,5 +109,4 @@
             <?php echo form_close();?>
         </div>
     </div>
-
 </div>

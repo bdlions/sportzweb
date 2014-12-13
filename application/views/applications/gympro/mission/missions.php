@@ -1,5 +1,4 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
-
 <div class="container-fluid">
     <div class="row top_margin">
         <div class="col-md-2">
@@ -19,8 +18,7 @@
                                 <th>CREATED</th>
                                 <th>LABEL</th>
                                 <th>EDIT</th>
-                                <th>DELETE</th>
-                                
+                                <th>DELETE</th>                                
                             </tr>
                             <?php foreach($mission_list as $mission_info){?>
                             <tr>
@@ -28,12 +26,11 @@
                                 <td><?php echo $mission_info['label']?></td>
                                 <td><a href="<?php echo base_url()."applications/gympro/edit_mission/".$mission_info['mission_id']?>">Edit</a></td>
                                 <td style="text-align: center">
-                                <a onclick="open_modal_delete_confirm(<?php echo $mission_info['id'] ?>)" >
+                                <a onclick="open_modal_delete_confirm(<?php echo $mission_info['mission_id'] ?>)" >
                                     Delete
                                 </a>
                             </td>
-                            </tr>
-                            
+                            </tr>                            
                             <?php } ?>                           
                         </tbody>
                     </table>
@@ -41,6 +38,5 @@
             </div>
         </div>
     </div>
-
 </div>
-<?php $this->load->view("applications/gympro/modal/mission_delete_confirm");?>
+<?php $this->load->view("applications/gympro/mission/mission_delete_confirm_modal");

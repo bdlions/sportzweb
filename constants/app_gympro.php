@@ -9,4 +9,7 @@ define("EXERCISE_IMAGES_PICTURE_W50",                        "50");
 define("CLIENT_PROFILE_PICTURE_H50",                        "50");
 define("EXERCISE_IMAGES_PICTURE_H50",                        "50");
 define("CLIENT_DEFAULT_PROFILE_PICTURE_NAME",               "client_default_image.jpg");
-?>
+
+define("CLIENT_STATUS_ACTIVE_ID",                           "1");
+define("CLIENT_STATUS_INACTIVE_ID",                         "2");
+define("CLIENT_STATUS_POTENTIAL_ID",                        "3");

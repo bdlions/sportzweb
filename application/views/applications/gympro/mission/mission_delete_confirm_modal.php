@@ -6,7 +6,7 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>' + "applications/gympro/delete_mission",
                 data: {
-                    delete_id: $("#input_delete_id").val()
+                    mission_id: $("#input_mission_id").val()
                 },
                 success: function(data) {
                     alert(data['message']);
@@ -16,8 +16,8 @@
             });
         });
     });
-    function open_modal_delete_confirm(delete_id) {
-        $('#input_delete_id').val(delete_id);
+    function open_modal_delete_confirm(mission_id) {
+        $('#input_mission_id').val(mission_id);
         $("#modal_delete_confirm").modal('show');
     }
 </script>
@@ -33,7 +33,7 @@
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-10 control-label">Are you sure to delete this Mission?</label>
-                        <input id="input_delete_id" name="input_delete_id" value="" type="hidden" class="form-control"/>
+                        <input id="input_mission_id" name="input_mission_id" value="" type="hidden" class="form-control"/>
                     </div>
                 </div>                
             </div>

@@ -328,6 +328,8 @@ $lang['update_assessment_fail']                        = "Failed to update Asses
 $lang['delete_assessment_successful']                  = "Assessment is deleted successfully.";
 $lang['delete_assessment_fail']                         = "Failed to delete Assessment info.";
 
+$lang['create_mission_successful']                     = "Mission is created successfully.";
+$lang['create_mission_fail']                           = "Failed to create a mission.";
 $lang['update_mission_successful']                     = "Mission is updated successfully.";
 $lang['update_mission_fail']                           = "Failed to update mission info.";
 $lang['delete_mission_successful']                     = "Mission is deleted successfully.";
