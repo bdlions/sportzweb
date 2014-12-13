@@ -323,6 +323,8 @@ $lang['update_nutrition_fail']                         = "Failed to update nutri
 $lang['delete_nutrition_successful']                   = "Nutrition is deleted successfully.";
 $lang['delete_nutrition_fail']                         = "Failed to delete nutrition info.";
 
+$lang['create_assessment_successful']                  = "Assessment is created successfully.";
+$lang['create_assessment_fail']                        = "Failed to create an Assessment.";
 $lang['update_assessment_successful']                  = "Assessment is updated successfully.";
 $lang['update_assessment_fail']                        = "Failed to update Assessment info.";
 $lang['delete_assessment_successful']                  = "Assessment is deleted successfully.";

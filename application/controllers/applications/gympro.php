@@ -15,6 +15,7 @@ class Gympro extends Role_Controller{
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         }
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
     }
     /*
      * Gympro home page 
@@ -1334,11 +1335,12 @@ class Gympro extends Role_Controller{
      * This method will show all assessments of this gympro user
      * @Author Nazmul on 7th December 2014
      */
-    public function assessments()
+    public function manage_assessments()
     {
+        $this->data['message'] = ''; 
         $this->data['assessment_list'] = $this->gympro_library->get_all_assessments($this->session->userdata('user_id'));
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
-        $this->template->load(null,'applications/gympro/assessments', $this->data);
+        $this->template->load(null,'applications/gympro/assessment/assessments', $this->data);
     }
     /*
      * This method will create an assessment
@@ -1346,11 +1348,11 @@ class Gympro extends Role_Controller{
      */
     public function create_assessment()
     {
+        $this->data['message'] = '';
+        $user_id = $this->session->userdata('user_id');
         $this->form_validation->set_rules('date', 'date', 'xss_clean|required');
-        if ($this->input->post()) {
-            
-            if ($this->form_validation->run() == true) {
-                
+        if ($this->input->post()) {            
+            if ($this->form_validation->run() == true) {                
                 $additional_data = array(
                     'date' => $this->input->post('date'),
                     'weight' => $this->input->post('weight'),
@@ -1362,7 +1364,7 @@ class Gympro extends Role_Controller{
                     'abdominal' => $this->input->post('abdominal'),
                     'waist' => $this->input->post('waist'),
                     'hip' => $this->input->post('hip'),
-                    'user_id' => $this->session->userdata('user_id'),
+                    'user_id' => $user_id,
                     'ls_arm_relaxed' => $this->input->post('ls_arm_relaxed'),
                     'ls_arm_flexed' => $this->input->post('ls_arm_flexed'),
                     'ls_forearm' => $this->input->post('ls_forearm'),
@@ -1378,24 +1380,32 @@ class Gympro extends Role_Controller{
                     'rs_thigh_gluteal' => $this->input->post('rs_thigh_gluteal'),
                     'rs_thigh_mid' => $this->input->post('rs_thigh_mid'),
                     'rs_calf' => $this->input->post('rs_calf'),
-                    'rs_ankle' => $this->input->post('rs_ankle')
-                   
+                    'rs_ankle' => $this->input->post('rs_ankle')                   
                 );
-                $newValue = $this->gympro_library->create_assessment($additional_data);
-                if ($newValue) {
-                    $this->data['message'] = $this->gympro_library->messages();
+                $client_id = $this->input->post('client_list');
+                if($client_id > 0)
+                {
+                    $additional_data['client_id'] = $client_id;
+                }
+                $assessment_id = $this->gympro_library->create_assessment($additional_data);
+                if ($assessment_id !== FALSE) {
+                    $this->session->set_flashdata('message', $this->gympro_library->messages());
                     redirect('applications/gympro/create_assessment', 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
             }
         }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
         $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
         $this->data['reassess_list'] = array();
         foreach ($reassess_array as $reassess_info) {
             $this->data['reassess_list'][$reassess_info['id']] = $reassess_info['title'];
-        }
-        
+        }        
         $this->data['date'] = array(
             'name' => 'date',
             'id' => 'date',
@@ -1421,7 +1431,6 @@ class Gympro extends Role_Controller{
             'id' => 'chest',
             'type' => 'text'
         );
-
         $this->data['body_fat'] = array(
             'name' => 'body_fat',
             'id' => 'body_fat',
@@ -1528,9 +1537,9 @@ class Gympro extends Role_Controller{
             'type' => 'submit',
             'value' => 'Save'
         );
-        
-        $this->data['message'] = '';       
-        $this->template->load(null,'applications/gympro/assessment_create', $this->data);
+        $this->data['selected_client_id'] = 0;
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
+        $this->template->load(null,'applications/gympro/assessment/assessment_create', $this->data);
     }
     
     /*
@@ -1540,7 +1549,12 @@ class Gympro extends Role_Controller{
      */
     public function edit_assessment($assessment_id = 0)
     {            
-        $this->form_validation->set_rules('date', 'date', 'xss_clean|required');
+        if($assessment_id == 0)
+        {
+            redirect('applications/gympro/manage_assessments', 'refresh');
+        }
+        $user_id = $this->session->userdata('user_id');
+        $this->form_validation->set_rules('date', 'Date', 'xss_clean|required');
         if ($this->input->post()) {            
             if ($this->form_validation->run() == true) {
                 
@@ -1571,19 +1585,30 @@ class Gympro extends Role_Controller{
                     'rs_thigh_gluteal' => $this->input->post('rs_thigh_gluteal'),
                     'rs_thigh_mid' => $this->input->post('rs_thigh_mid'),
                     'rs_calf' => $this->input->post('rs_calf'),
-                    'rs_ankle' => $this->input->post('rs_ankle')
-                   
-                );
-                
-                $newValue = $this->gympro_library->update_assessment($assessment_id, $additional_data);
-                if ($newValue) {
-                    $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/assessments/', 'refresh');
+                    'rs_ankle' => $this->input->post('rs_ankle')                   
+                ); 
+                $client_id = $this->input->post('client_list');
+                if($client_id > 0)
+                {
+                    $additional_data['client_id'] = $client_id;
+                }
+                else
+                {
+                    $additional_data['client_id'] = NULL;
+                }
+                if ($this->gympro_library->update_assessment($assessment_id, $additional_data)) {
+                    $this->session->set_flashdata('message', $this->gympro_library->messages());
+                    redirect('applications/gympro/edit_assessment/'.$assessment_id, 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
             }
         }
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
         $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
         $this->data['reassess_list'] = array();
         foreach ($reassess_array as $reassess_info) {
@@ -1753,9 +1778,16 @@ class Gympro extends Role_Controller{
             'type' => 'submit',
             'value' => 'Save'
         );
-        
+        if($assessment_info['client_id'] > 0)
+        {
+            $this->data['selected_client_id'] = $assessment_info['client_id'];
+        }
+        else
+        {
+            $this->data['selected_client_id'] = 0;
+        }
         $this->data['assessment_id'] = $assessment_id;       
-        $this->template->load(null,'applications/gympro/assessment_edit', $this->data);
+        $this->template->load(null,'applications/gympro/assessment/assessment_edit', $this->data);
     }
     /*
      * Ajax call to delete an assessment
@@ -1764,8 +1796,8 @@ class Gympro extends Role_Controller{
     public function delete_assessment()
        {
         $result = array();
-        $delete_id = $this->input->post('delete_id');
-        if($this->gympro_library->delete_assessment($delete_id))
+        $assessment_id = $this->input->post('assessment_id');
+        if($this->gympro_library->delete_assessment($assessment_id))
         {
             $result['message'] = $this->gympro_library->messages_alert();
         }

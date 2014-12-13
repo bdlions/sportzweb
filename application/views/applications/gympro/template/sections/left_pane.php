@@ -23,7 +23,7 @@
     </div>    
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/assesments.png">
-        <a href="<?php echo base_url()?>applications/gympro/assessments">Assesments</a>
+        <a href="<?php echo base_url()?>applications/gympro/manage_assessments">Assesments</a>
     </div>
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/missions.png">

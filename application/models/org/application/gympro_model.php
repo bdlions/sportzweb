@@ -725,6 +725,14 @@ class Gympro_model extends Ion_auth_model {
         $additional_data = $this->_filter_data($this->tables['app_gympro_assessments'], $additional_data); 
         $this->db->insert($this->tables['app_gympro_assessments'], $additional_data);
         $insert_id = $this->db->insert_id();
+        if($insert_id > 0)
+        {
+            $this->set_message('create_assessment_successful');
+        }
+        else
+        {
+            $this->set_error('create_assessment_fail');
+        }
         return (isset($insert_id)) ? $insert_id : FALSE;
     } 
     /*
