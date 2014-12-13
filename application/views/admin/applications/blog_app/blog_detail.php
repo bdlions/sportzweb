@@ -61,7 +61,7 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-            <?php $this->load->view("admin/applications/comments", $this->data); ?>
+            <?php //$this->load->view("admin/applications/comments", $this->data); ?>
         </div>
     </div>
 </div>

@@ -31,3 +31,4 @@ define("ADMIN_ACCESS_LEVEL_APPROVE",                                            
 define("ADMIN_ACCESS_LEVEL_EDIT",                                               5);
 define("ADMIN_ACCESS_LEVEL_DELETE",                                             6);
 define("ADMIN_ACCESS_LEVEL_CONFIGURATION",                                      7);
+define("ADMIN_ACCESS_LEVEL_WRITING",                                            8);

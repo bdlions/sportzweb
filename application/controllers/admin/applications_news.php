@@ -37,7 +37,8 @@ class Applications_news extends CI_Controller{
         $this->data['allow_approve'] = FALSE;
         $this->data['allow_edit'] = FALSE;
         $this->data['allow_delete'] = FALSE;
-        $this->data['allow_configuration'] = FALSE; 
+        $this->data['allow_configuration'] = FALSE;
+        $this->data['allow_writing'] = FALSE;
         
         $selected_user_group = $this->session->userdata('user_type');
         if(isset($selected_user_group ) && $selected_user_group != ""){
@@ -56,6 +57,7 @@ class Applications_news extends CI_Controller{
             $this->data['allow_edit'] = TRUE;
             $this->data['allow_delete'] = TRUE;
             $this->data['allow_configuration'] = TRUE;   
+            $this->data['allow_writing'] = TRUE;   
         }
         else
         {
@@ -89,6 +91,10 @@ class Applications_news extends CI_Controller{
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
             {
                 $this->data['allow_configuration'] = TRUE;  
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING, $access_level_mapping))
+            {
+                $this->data['allow_writing'] = TRUE;  
             }
             if(!$this->data['allow_view'])
             {

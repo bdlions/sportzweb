@@ -48,6 +48,17 @@ class Access_level extends CI_Controller{
             );
             $user_id = $this->ion_auth->register($username, $password, $email, $additional_data, $group_id);
             if ($user_id !== FALSE) {
+                //Adding default data under this user
+                $default_group_list = array();
+                $default_group_list[] = 3;
+                $profile_data = array(
+                    'user_id' => $user_id,
+                    'gender_id' => 1,
+                    'country_id' => 223
+                );
+                $this->ion_auth->add_user_default_data_from_admin_panel($user_id, $profile_data, $default_group_list);
+                
+                
                 $form_post_array = $this->input->post();
                 $access_level_mapping = $this->access_level_input_process($form_post_array);
                 
@@ -293,7 +304,16 @@ class Access_level extends CI_Controller{
         {
             $result['overview_configuration']['checked'] = 'checked';
         }
-        
+        $result['overview_writing'] = array(
+            'name' => $accesss_map['overview_writing_map_id'],
+            'id' => $accesss_map['overview_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['overview_writing_map_id'], $access_level_mapping))
+        {
+            $result['overview_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         $result['user_overview_view'] = array(
             'name' => $accesss_map['user_overview_view_map_id'],
             'id' => $accesss_map['user_overview_view_map_id'],
@@ -357,7 +377,16 @@ class Access_level extends CI_Controller{
         {
             $result['user_overview_configuration']['checked'] = 'checked';
         }
-        
+        $result['user_overview_writing'] = array(
+            'name' => $accesss_map['user_overview_writing_map_id'],
+            'id' => $accesss_map['user_overview_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['user_overview_writing_map_id'], $access_level_mapping))
+        {
+            $result['user_overview_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         $result['user_manage_view'] = array(
             'name' => $accesss_map['user_manage_view_map_id'],
             'id' => $accesss_map['user_manage_view_map_id'],
@@ -421,7 +450,16 @@ class Access_level extends CI_Controller{
         {
             $result['user_manage_configuration']['checked'] = 'checked';
         }
-        
+        $result['user_manage_writing'] = array(
+            'name' => $accesss_map['user_manage_writing_map_id'],
+            'id' => $accesss_map['user_manage_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['user_manage_writing_map_id'], $access_level_mapping))
+        {
+            $result['user_manage_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //xstream_banter checkbox
         $result['xstream_banter_view'] = array(
             'name' => $accesss_map['xstream_banter_view_map_id'],
@@ -486,7 +524,16 @@ class Access_level extends CI_Controller{
         {
             $result['xstream_banter_configuration']['checked'] = 'checked';
         }
-        
+        $result['xstream_banter_writing'] = array(
+            'name' => $accesss_map['xstream_banter_writing_map_id'],
+            'id' => $accesss_map['xstream_banter_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['xstream_banter_writing_map_id'], $access_level_mapping))
+        {
+            $result['xstream_banter_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //Healthy Recipe checkbox
         $result['healthy_recipes_view'] = array(
             'name' => $accesss_map['healthy_recipes_view_map_id'],
@@ -551,7 +598,16 @@ class Access_level extends CI_Controller{
         {
             $result['healthy_recipes_configuration']['checked'] = 'checked';
         }
-        
+        $result['healthy_recipes_writing'] = array(
+            'name' => $accesss_map['healthy_recipes_writing_map_id'],
+            'id' => $accesss_map['healthy_recipes_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['healthy_recipes_writing_map_id'], $access_level_mapping))
+        {
+            $result['healthy_recipes_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //Service Directory checkbox
         $result['service_directory_view'] = array(
             'name' => $accesss_map['service_directory_view_map_id'],
@@ -616,7 +672,16 @@ class Access_level extends CI_Controller{
         {
             $result['service_directory_configuration']['checked'] = 'checked';
         }
-        
+        $result['service_directory_writing'] = array(
+            'name' => $accesss_map['service_directory_writing_map_id'],
+            'id' => $accesss_map['service_directory_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['service_directory_writing_map_id'], $access_level_mapping))
+        {
+            $result['service_directory_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //News checkbox
         $result['news_view'] = array(
             'name' => $accesss_map['news_view_map_id'],
@@ -681,7 +746,16 @@ class Access_level extends CI_Controller{
         {
             $result['news_configuration']['checked'] = 'checked';
         }
-        
+        $result['news_writing'] = array(
+            'name' => $accesss_map['news_writing_map_id'],
+            'id' => $accesss_map['news_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['news_writing_map_id'], $access_level_mapping))
+        {
+            $result['news_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //Blogs checkbox
         $result['blogs_view'] = array(
             'name' => $accesss_map['blogs_view_map_id'],
@@ -746,7 +820,16 @@ class Access_level extends CI_Controller{
         {
             $result['blogs_configuration']['checked'] = 'checked';
         }
-        
+        $result['blogs_writing'] = array(
+            'name' => $accesss_map['blogs_writing_map_id'],
+            'id' => $accesss_map['blogs_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['blogs_writing_map_id'], $access_level_mapping))
+        {
+            $result['blogs_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //BMI calculator checkbox
         $result['bmi_calculator_view'] = array(
             'name' => $accesss_map['bmi_calculator_view_map_id'],
@@ -811,7 +894,16 @@ class Access_level extends CI_Controller{
         {
             $result['bmi_calculator_configuration']['checked'] = 'checked';
         }
-        
+        $result['bmi_calculator_writing'] = array(
+            'name' => $accesss_map['bmi_calculator_writing_map_id'],
+            'id' => $accesss_map['bmi_calculator_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['bmi_calculator_writing_map_id'], $access_level_mapping))
+        {
+            $result['bmi_calculator_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //Photography checkbox
         $result['photography_view'] = array(
             'name' => $accesss_map['photography_view_map_id'],
@@ -876,7 +968,16 @@ class Access_level extends CI_Controller{
         {
             $result['photography_configuration']['checked'] = 'checked';
         }
-        
+        $result['photography_writing'] = array(
+            'name' => $accesss_map['photography_writing_map_id'],
+            'id' => $accesss_map['photography_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['photography_writing_map_id'], $access_level_mapping))
+        {
+            $result['photography_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //Business Profile checkbox
         $result['business_profile_view'] = array(
             'name' => $accesss_map['business_profile_view_map_id'],
@@ -941,7 +1042,16 @@ class Access_level extends CI_Controller{
         {
             $result['business_profile_configuration']['checked'] = 'checked';
         }
-        
+        $result['business_profile_writing'] = array(
+            'name' => $accesss_map['business_profile_writing_map_id'],
+            'id' => $accesss_map['business_profile_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['business_profile_writing_map_id'], $access_level_mapping))
+        {
+            $result['business_profile_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //visitor pages checkbox
         $result['visitor_page_view'] = array(
             'name' => $accesss_map['visitor_page_view_map_id'],
@@ -1006,7 +1116,16 @@ class Access_level extends CI_Controller{
         {
             $result['visitor_page_configuration']['checked'] = 'checked';
         }
-        
+        $result['visitor_page_writing'] = array(
+            'name' => $accesss_map['visitor_page_writing_map_id'],
+            'id' => $accesss_map['visitor_page_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['visitor_page_writing_map_id'], $access_level_mapping))
+        {
+            $result['visitor_page_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //visitor Applications checkbox
         $result['visitor_applications_view'] = array(
             'name' => $accesss_map['visitor_applications_view_map_id'],
@@ -1071,7 +1190,16 @@ class Access_level extends CI_Controller{
         {
             $result['visitor_applications_configuration']['checked'] = 'checked';
         }
-        
+        $result['visitor_applications_writing'] = array(
+            'name' => $accesss_map['visitor_applications_writing_map_id'],
+            'id' => $accesss_map['visitor_applications_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['visitor_applications_writing_map_id'], $access_level_mapping))
+        {
+            $result['visitor_applications_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //visitor business_profile checkbox
         $result['visitor_business_profile_view'] = array(
             'name' => $accesss_map['visitor_business_profile_view_map_id'],
@@ -1136,7 +1264,16 @@ class Access_level extends CI_Controller{
         {
             $result['visitor_business_profile_configuration']['checked'] = 'checked';
         }
-        
+        $result['visitor_business_profile_writing'] = array(
+            'name' => $accesss_map['visitor_business_profile_writing_map_id'],
+            'id' => $accesss_map['visitor_business_profile_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['visitor_business_profile_writing_map_id'], $access_level_mapping))
+        {
+            $result['visitor_business_profile_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //visitor log checkbox
         $result['log_view'] = array(
             'name' => $accesss_map['log_view_map_id'],
@@ -1201,8 +1338,16 @@ class Access_level extends CI_Controller{
         {
             $result['log_configuration']['checked'] = 'checked';
         }
-        
-        
+        $result['log_writing'] = array(
+            'name' => $accesss_map['log_writing_map_id'],
+            'id' => $accesss_map['log_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['log_writing_map_id'], $access_level_mapping))
+        {
+            $result['log_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//        
         //Footer about us checkbox
         $result['about_us_view'] = array(
             'name' => $accesss_map['about_us_view_map_id'],
@@ -1267,7 +1412,16 @@ class Access_level extends CI_Controller{
         {
             $result['about_us_configuration']['checked'] = 'checked';
         }
-        
+        $result['about_us_writing'] = array(
+            'name' => $accesss_map['about_us_writing_map_id'],
+            'id' => $accesss_map['about_us_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['about_us_writing_map_id'], $access_level_mapping))
+        {
+            $result['about_us_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //Footer Contact us checkbox
         $result['contact_us_view'] = array(
             'name' => $accesss_map['contact_us_view_map_id'],
@@ -1332,7 +1486,16 @@ class Access_level extends CI_Controller{
         {
             $result['contact_us_configuration']['checked'] = 'checked';
         }
-       
+        $result['contact_us_writing'] = array(
+            'name' => $accesss_map['contact_us_writing_map_id'],
+            'id' => $accesss_map['contact_us_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['contact_us_writing_map_id'], $access_level_mapping))
+        {
+            $result['contact_us_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         return $result;
     }
     
@@ -1346,7 +1509,8 @@ class Access_level extends CI_Controller{
         $accesss_map['overview_edit_map_id'] = ADMIN_ACCESS_LEVEL_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['overview_delete_map_id'] = ADMIN_ACCESS_LEVEL_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['overview_configuration_map_id'] = ADMIN_ACCESS_LEVEL_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-        
+        $accesss_map['overview_writing_map_id'] = ADMIN_ACCESS_LEVEL_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['user_overview_view_map_id'] = ADMIN_ACCESS_LEVEL_USERS_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['user_overview_access_map_id'] = ADMIN_ACCESS_LEVEL_USERS_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['user_overview_write_map_id'] = ADMIN_ACCESS_LEVEL_USERS_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1354,8 +1518,8 @@ class Access_level extends CI_Controller{
         $accesss_map['user_overview_edit_map_id'] = ADMIN_ACCESS_LEVEL_USERS_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['user_overview_delete_map_id'] = ADMIN_ACCESS_LEVEL_USERS_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['user_overview_configuration_map_id'] = ADMIN_ACCESS_LEVEL_USERS_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-        
-        
+        $accesss_map['user_overview_writing_map_id'] = ADMIN_ACCESS_LEVEL_USERS_OVERVIEW_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['user_manage_view_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['user_manage_access_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['user_manage_write_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1363,8 +1527,8 @@ class Access_level extends CI_Controller{
         $accesss_map['user_manage_edit_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['user_manage_delete_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['user_manage_configuration_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['user_manage_writing_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['xstream_banter_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['xstream_banter_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['xstream_banter_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1372,8 +1536,8 @@ class Access_level extends CI_Controller{
         $accesss_map['xstream_banter_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['xstream_banter_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['xstream_banter_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['xstream_banter_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['healthy_recipes_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['healthy_recipes_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['healthy_recipes_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1381,8 +1545,8 @@ class Access_level extends CI_Controller{
         $accesss_map['healthy_recipes_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['healthy_recipes_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['healthy_recipes_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['healthy_recipes_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['service_directory_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['service_directory_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['service_directory_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1390,8 +1554,8 @@ class Access_level extends CI_Controller{
         $accesss_map['service_directory_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['service_directory_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['service_directory_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['service_directory_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['news_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['news_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['news_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1399,8 +1563,8 @@ class Access_level extends CI_Controller{
         $accesss_map['news_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['news_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['news_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['news_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['blogs_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['blogs_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['blogs_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1408,8 +1572,8 @@ class Access_level extends CI_Controller{
         $accesss_map['blogs_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['blogs_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['blogs_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['blogs_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['bmi_calculator_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['bmi_calculator_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['bmi_calculator_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1417,8 +1581,8 @@ class Access_level extends CI_Controller{
         $accesss_map['bmi_calculator_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['bmi_calculator_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['bmi_calculator_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['bmi_calculator_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['photography_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['photography_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['photography_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1426,8 +1590,8 @@ class Access_level extends CI_Controller{
         $accesss_map['photography_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['photography_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['photography_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['photography_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['business_profile_view_map_id'] = ADMIN_ACCESS_LEVEL_BUSINESS_PROFILES_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['business_profile_access_map_id'] = ADMIN_ACCESS_LEVEL_BUSINESS_PROFILES_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['business_profile_write_map_id'] = ADMIN_ACCESS_LEVEL_BUSINESS_PROFILES_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1435,8 +1599,8 @@ class Access_level extends CI_Controller{
         $accesss_map['business_profile_edit_map_id'] = ADMIN_ACCESS_LEVEL_BUSINESS_PROFILES_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['business_profile_delete_map_id'] = ADMIN_ACCESS_LEVEL_BUSINESS_PROFILES_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['business_profile_configuration_map_id'] = ADMIN_ACCESS_LEVEL_BUSINESS_PROFILES_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['business_profile_writing_map_id'] = ADMIN_ACCESS_LEVEL_BUSINESS_PROFILES_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['visitor_page_view_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_PAGES_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['visitor_page_access_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_PAGES_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['visitor_page_write_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_PAGES_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1444,8 +1608,8 @@ class Access_level extends CI_Controller{
         $accesss_map['visitor_page_edit_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_PAGES_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['visitor_page_delete_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_PAGES_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['visitor_page_configuration_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_PAGES_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['visitor_page_writing_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_PAGES_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['visitor_applications_view_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['visitor_applications_access_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['visitor_applications_write_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1453,8 +1617,8 @@ class Access_level extends CI_Controller{
         $accesss_map['visitor_applications_edit_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['visitor_applications_delete_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['visitor_applications_configuration_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['visitor_applications_writing_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['visitor_business_profile_view_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['visitor_business_profile_access_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['visitor_business_profile_write_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1462,8 +1626,8 @@ class Access_level extends CI_Controller{
         $accesss_map['visitor_business_profile_edit_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['visitor_business_profile_delete_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['visitor_business_profile_configuration_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['visitor_business_profile_writing_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['log_view_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['log_access_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['log_write_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1471,8 +1635,8 @@ class Access_level extends CI_Controller{
         $accesss_map['log_edit_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['log_delete_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['log_configuration_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['log_writing_map_id'] = ADMIN_ACCESS_LEVEL_LOG_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['about_us_view_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['about_us_access_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['about_us_write_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1480,8 +1644,8 @@ class Access_level extends CI_Controller{
         $accesss_map['about_us_edit_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['about_us_delete_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['about_us_configuration_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['about_us_writing_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         $accesss_map['contact_us_view_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['contact_us_access_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
         $accesss_map['contact_us_write_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
@@ -1489,8 +1653,8 @@ class Access_level extends CI_Controller{
         $accesss_map['contact_us_edit_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
         $accesss_map['contact_us_delete_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['contact_us_configuration_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
-       
-        
+        $accesss_map['contact_us_writing_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
         return $accesss_map;
     }
     
@@ -1526,7 +1690,11 @@ class Access_level extends CI_Controller{
         {
             $access_level_mapping[$accesss_map['overview_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['overview_writing_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['overview_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['user_overview_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['user_overview_view_map_id']] = 1;
@@ -1555,7 +1723,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['user_overview_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['user_overview_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['user_overview_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['user_manage_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['user_manage_view_map_id']] = 1;
@@ -1584,7 +1756,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['user_manage_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['user_manage_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['user_manage_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['xstream_banter_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['xstream_banter_view_map_id']] = 1;
@@ -1613,7 +1789,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['xstream_banter_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['xstream_banter_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['xstream_banter_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['healthy_recipes_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['healthy_recipes_view_map_id']] = 1;
@@ -1642,7 +1822,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['healthy_recipes_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['healthy_recipes_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['healthy_recipes_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['service_directory_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['service_directory_view_map_id']] = 1;
@@ -1671,7 +1855,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['service_directory_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['service_directory_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['service_directory_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['news_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['news_view_map_id']] = 1;
@@ -1700,7 +1888,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['news_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['news_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['news_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['blogs_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['blogs_view_map_id']] = 1;
@@ -1729,7 +1921,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['blogs_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['blogs_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['blogs_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['bmi_calculator_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['bmi_calculator_view_map_id']] = 1;
@@ -1758,7 +1954,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['bmi_calculator_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['bmi_calculator_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['bmi_calculator_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['photography_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['photography_view_map_id']] = 1;
@@ -1787,7 +1987,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['photography_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['photography_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['photography_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['business_profile_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['business_profile_view_map_id']] = 1;
@@ -1816,7 +2020,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['business_profile_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['business_profile_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['business_profile_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['visitor_page_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['visitor_page_view_map_id']] = 1;
@@ -1845,7 +2053,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['visitor_page_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['visitor_page_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['visitor_page_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['visitor_applications_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['visitor_applications_view_map_id']] = 1;
@@ -1874,7 +2086,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['visitor_applications_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['visitor_applications_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['visitor_applications_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['visitor_business_profile_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['visitor_business_profile_view_map_id']] = 1;
@@ -1903,7 +2119,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['visitor_business_profile_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['visitor_business_profile_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['visitor_business_profile_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['log_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['log_view_map_id']] = 1;
@@ -1932,7 +2152,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['log_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['log_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['log_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['about_us_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['about_us_view_map_id']] = 1;
@@ -1961,7 +2185,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['about_us_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['about_us_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['about_us_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['contact_us_view_map_id'], $form_post_array))
         {
             $access_level_mapping[$accesss_map['contact_us_view_map_id']] = 1;
@@ -1990,7 +2218,11 @@ class Access_level extends CI_Controller{
         {
                 $access_level_mapping[$accesss_map['contact_us_configuration_map_id']] = 1;
         }
-        
+        if(array_key_exists($accesss_map['contact_us_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['contact_us_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
         return $access_level_mapping;
     }
     

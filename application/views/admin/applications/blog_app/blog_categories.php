@@ -64,7 +64,17 @@
                     </div>
                 <?php } ?>
             </div>
-
+            <div class="row form-group">
+                <?php if($allow_writing){ ?>
+                <div class ="col-sm-2">
+                    <a href="<?php echo base_url()."admin/applications_blogs/create_blog" ?>" >
+                        <button id="" value="" class="form-control btn button-custom pull-right">
+                            Create Blog
+                        </button>
+                    </a> 
+                </div>
+                <?php } ?>
+            </div>
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered" style="text-align: center;">
@@ -107,7 +117,6 @@
                         <tbody id="tbody_custom_blog_category_list">
                             <?php foreach ($custom_category_list as $row): ?>
                                 <tr>
-                                    <td><a href="<?php echo base_url() . 'admin/applications_blogs/blog_list/' . $row['id'] ?>"><?php echo $row['id']; ?></a></td>
                                     <td><div id="custom_blog_desc_<?php echo $row['id']; ?>"><?php echo $row['title']; ?></div></td>
                                     <?php if ($allow_edit) { ?>
                                         <td>                                            

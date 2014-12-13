@@ -10,7 +10,9 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Description</th>
+                                <?php if ($allow_edit) { ?>
                                 <th>Edit</th>
+                                <?php } ?>   
                                 <th>View</th>
                             </tr>
                         </thead>
@@ -20,7 +22,9 @@
                                     <tr>
                                         <td><?php echo html_entity_decode(html_entity_decode($news['headline']));?></td>
                                         <td><?php echo substr(html_entity_decode(html_entity_decode($news['summary'])),0,100)." ....."; ?></td>
+                                        <?php if ($allow_edit) { ?>
                                         <td><a href="<?php echo base_url().'admin/applications_news/edit_news/'.$news['id']; ?>">Edit</a></td>
+                                        <?php } ?>   
                                         <td><a href="<?php echo base_url().'admin/applications_news/news_details/'.$news['id']; ?>">View</a></td>
                                     </tr>
                                 <?php endforeach;?>

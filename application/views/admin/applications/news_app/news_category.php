@@ -46,10 +46,26 @@
                     </a>
                 </div>
                 <div class ="col-sm-2">
+                    <a href="<?php echo base_url();?>admin/applications_news/page_import_news">
+                        <button class="btn button-custom ">Import News</button>  
+                    </a>
+                </div>                 
+            </div>            
+            <?php } ?>
+            <div class="row form-group">
+                <div class ="col-sm-2">
+                    <a href="<?php echo base_url();?>admin/applications_news/news_list">
+                        <button class="btn button-custom ">New List</button>  
+                    </a>
+                </div>
+                <?php if($allow_write){ ?>
+                <div class ="col-sm-2">
                     <button id="button_create_news_category" value="" class="btn button-custom">
                         Create News Category
                     </button>  
                 </div>
+                <?php } ?>
+                <?php if($allow_writing){ ?>
                 <div class ="col-sm-2">
                     <a href="<?php echo base_url().'admin/applications_news/create_news'?>" >
                         <button class="btn button-custom">
@@ -57,22 +73,8 @@
                         </button>
                     </a>
                 </div>
-                
-                
-                <div class ="col-sm-2">
-                    <a href="<?php echo base_url();?>admin/applications_news/page_import_news">
-                        <button class="btn button-custom ">Import News</button>  
-                    </a>
-                </div>                            
-            </div>
-            <div class="row form-group">
-                <div class ="col-sm-2">
-                    <a href="<?php echo base_url();?>admin/applications_news/news_list">
-                        <button class="btn button-custom ">New List</button>  
-                    </a>
-                </div>
-            </div>
-            <?php } ?>
+                <?php } ?>
+            </div>            
             <div class="row form-group">
             <div class="row">
                 <div class="table-responsive table-left-padding">

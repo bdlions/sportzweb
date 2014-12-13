@@ -2003,6 +2003,23 @@ class Ion_auth_model extends CI_Model {
         return $this;
     }
     
-    // RPC MODULE
+    /*
+     * If a new user is created from admin panel then basic profile and member group is stored for that user
+     * @param $user_id, user id
+     * @param $profile_data, basic profile data
+     * @param $gourps, group list of that user
+     * @Author Nazmul on 14th December 2014
+     */
+    public function add_user_default_data_from_admin_panel($user_id, $profile_data, $groups = array())
+    {        
+        $profile_data = $this->_filter_data($this->tables['basic_profile'], $profile_data);
+        $this->db->insert($this->tables['basic_profile'], $profile_data);
+        if (!empty($groups)) {
+            //add to groups
+            foreach ($groups as $group) {
+                $this->add_to_group($group, $user_id);
+            }
+        }
+    }
     
 }

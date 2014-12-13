@@ -60,7 +60,8 @@
                             <td><div class="form-group">Approve</div></td>
                             <td><div class="form-group">Edit</div></td>
                             <td><div class="form-group">Delete</div></td>
-                            <td><div class="form-group">Configuration</div></td>
+                            <td><div class="form-group">Configure</div></td>
+                            <td><div class="form-group">Writing</div></td>
                         </thead>
 
                         <tbody>
@@ -98,11 +99,17 @@
                                        <?php echo form_input($overview_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($overview_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="success">
                                 <td>
                                     Users
                                 </td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -144,6 +151,11 @@
                                        <?php echo form_input($user_overview_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_overview_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -179,11 +191,17 @@
                                        <?php echo form_input($user_manage_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($user_manage_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="success">
                                 <td>
                                     Applications
                                 </td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -225,6 +243,11 @@
                                        <?php echo form_input($xstream_banter_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($xstream_banter_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             
                             <tr>
@@ -261,6 +284,11 @@
                                        <?php echo form_input($healthy_recipes_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($healthy_recipes_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -294,6 +322,11 @@
 				<td>
                                     <div class="form-group">
                                        <?php echo form_input($service_directory_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($service_directory_writing); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -332,6 +365,11 @@
                                        <?php echo form_input($news_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($news_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -365,6 +403,11 @@
 				<td>
                                     <div class="form-group">
                                        <?php echo form_input($blogs_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($blogs_writing); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -402,6 +445,11 @@
                                        <?php echo form_input($bmi_calculator_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($bmi_calculator_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td_text_color">
@@ -435,6 +483,11 @@
 				<td>
                                     <div class="form-group">
                                        <?php echo form_input($photography_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($photography_writing); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -472,11 +525,17 @@
                                        <?php echo form_input($business_profile_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($business_profile_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="success">
                                 <td>
                                     Visitors
                                 </td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -518,6 +577,11 @@
                                        <?php echo form_input($visitor_page_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_page_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -551,6 +615,11 @@
 				<td>
                                     <div class="form-group">
                                        <?php echo form_input($visitor_applications_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_applications_writing); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -588,6 +657,11 @@
                                        <?php echo form_input($visitor_business_profile_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($visitor_business_profile_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="success">
                                 <td>
@@ -623,12 +697,18 @@
                                        <?php echo form_input($log_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($log_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             
                             <tr class="success">
                                 <td>
                                     Footer
                                 </td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -670,6 +750,11 @@
                                        <?php echo form_input($about_us_configuration); ?>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($about_us_writing); ?>
+                                    </div>
+                                </td>
                             </tr>
                             
                             <tr>
@@ -704,6 +789,11 @@
 				<td>
                                     <div class="form-group">
                                        <?php echo form_input($contact_us_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($contact_us_writing); ?>
                                     </div>
                                 </td>
                             </tr>

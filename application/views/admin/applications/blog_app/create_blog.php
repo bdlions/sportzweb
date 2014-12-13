@@ -97,7 +97,7 @@ window.onload = function()
     <div class="panel-heading">Create Blog</div>
     <div class="panel-body">
         <div class="row form-horizontal form-background top-bottom-padding">  
-            <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/applications_blogs/create_blog/<?php echo $blog_category_id; ?>" onsubmit="return false;">
+            <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/applications_blogs/create_blog" onsubmit="return false;">
             <div class="row">
                 <div class ="col-md-10 margin-top-bottom">
                     <div class ="row">

@@ -615,7 +615,7 @@ class Applications_servicedirectory extends CI_Controller{
         if(empty($service_info_array))
         {
             $this->session->set_flashdata('error_message', 'For this service no data fount');
-            redirect("admin/servicedirectory/service_category","refresh");
+            redirect("admin/applications_servicedirectory","refresh");
         }
         else
         {

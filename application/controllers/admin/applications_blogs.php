@@ -35,7 +35,8 @@ class Applications_blogs extends CI_Controller{
         $this->data['allow_approve'] = FALSE;
         $this->data['allow_edit'] = FALSE;
         $this->data['allow_delete'] = FALSE;
-        $this->data['allow_configuration'] = FALSE; 
+        $this->data['allow_configuration'] = FALSE;
+        $this->data['allow_writing'] = FALSE;
         
         $selected_user_group = $this->session->userdata('user_type');
         if(isset($selected_user_group ) && $selected_user_group != ""){
@@ -54,6 +55,7 @@ class Applications_blogs extends CI_Controller{
             $this->data['allow_edit'] = TRUE;
             $this->data['allow_delete'] = TRUE;
             $this->data['allow_configuration'] = TRUE;
+            $this->data['allow_writing'] = TRUE;
         }
         else
         {
@@ -87,6 +89,10 @@ class Applications_blogs extends CI_Controller{
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
             {
                 $this->data['allow_configuration'] = TRUE;  
+            }
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING, $access_level_mapping))
+            {
+                $this->data['allow_writing'] = TRUE;  
             }
             if(!$this->data['allow_view'])
             {
@@ -290,7 +296,7 @@ class Applications_blogs extends CI_Controller{
 
     }
     
-    function create_blog($category_id = 0)
+    function create_blog()
     {
         $this->data['message'] = '';
         
@@ -388,7 +394,6 @@ class Applications_blogs extends CI_Controller{
         $selected_blog_data_array = array();
         $this->data['selected_blog_data_array'] = $selected_blog_data_array;
         
-        $this->data['blog_category_id'] = $category_id;
         $this->template->load($this->tmpl, "admin/applications/blog_app/create_blog", $this->data);
     }
     
@@ -1130,7 +1135,7 @@ class Applications_blogs extends CI_Controller{
     {
         $blog_id = $_POST['blog_id'];
         $blog = $this->admin_blog->get_blog_info($blog_id)->result_array();
-        
+       
         if(!empty($blog))
         {
             $blog = $blog[0];
@@ -1138,8 +1143,10 @@ class Applications_blogs extends CI_Controller{
         
         if($blog['blog_status_id']==PENDING)
         {
-            $blog['blog_status_id'] = APPROVED;
-            $flag = $this->admin_blog->update_blog($blog_id,$blog);
+            $blog_info = array(
+                'blog_status_id' => APPROVED
+            );
+            $flag = $this->admin_blog->update_blog($blog_id,$blog_info);
         }
         else if($blog['blog_status_id']==RE_APPROVAL)
         {
