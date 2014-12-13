@@ -12,7 +12,31 @@
                 <h4 class="modal-title" id="myModalLabel">Browse Exercise</h4>
             </div>
             <div class="modal-body">
-                iojuhiuohoh
+               
+                <div class="row form-group">
+                    <div class="col-md-4">
+                            <select class="form-control">
+                                <option class="form-control">
+                                    name
+                                </option>
+                            </select>
+                    </div>
+                    <div class="col-md-8">
+                        <span>right side</span>
+                    </div>
+
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        first 
+                    </div>
+                    <div class="col-md-4">
+                        second
+                    </div>
+                    <div class="col-md-4">
+                        3rd
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class ="col-md-9">
