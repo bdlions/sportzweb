@@ -1763,7 +1763,7 @@ class Gympro extends Role_Controller{
         $this->data['mission_list'] = $mission_list;
         $this->data['message'] = '';        
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
-        $this->template->load(null,'applications/gympro/missions', $this->data);
+        $this->template->load(null,'applications/gympro/mission/missions', $this->data);
     }
     /*
      * This method will create a mission
@@ -1772,6 +1772,7 @@ class Gympro extends Role_Controller{
     public function create_mission()
     {    
         $this->data['message'] = '';
+        $user_id = $this->session->userdata('user_id');
         $this->form_validation->set_rules('label', 'label', 'xss_clean|required');
         if ($this->input->post()) 
         {
@@ -1788,8 +1789,13 @@ class Gympro extends Role_Controller{
                     'thursday' => $this->input->post('thursday'),
                     'friday' => $this->input->post('friday'),
                     'saturday' => $this->input->post('saturday'),
-                    'user_id' => $this->session->userdata('user_id')
+                    'user_id' => $user_id
                 );
+                $client_id = $this->input->post('client_list');
+                if($client_id > 0)
+                {
+                    $additional_data['client_id'] = $client_id;
+                }
                 $value = $this->gympro_library->create_mission($additional_data);
                 if ($value !== FALSE) 
                 {
@@ -1805,7 +1811,7 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
-
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
         $this->data['label'] = array(
             'name' => 'label',
             'id' => 'label',
@@ -1878,7 +1884,9 @@ class Gympro extends Role_Controller{
             'type' => 'submit',
             'value' => 'Save'
         );
-        $this->template->load(null, 'applications/gympro/mission_create', $this->data);
+        $this->data['selected_client_id'] = 0;
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
+        $this->template->load(null, 'applications/gympro/mission/mission_create', $this->data);
     }    
     /*
      * This method will edit a mission
@@ -1891,6 +1899,7 @@ class Gympro extends Role_Controller{
         {
             redirect('applications/gympro/manage_missions', 'refresh');
         }
+        $user_id = $this->session->userdata('user_id');
         $mission_info = array();
         $mission_array = $this->gympro_library->get_mission_info($mission_id)->result_array();
         if(!empty($mission_array))
@@ -1915,18 +1924,30 @@ class Gympro extends Role_Controller{
                     'friday' => $this->input->post('friday'),
                     'saturday' => $this->input->post('saturday')
                 );
-                $value = $this->gympro_library->update_mission($mission_id, $additional_data);
-                if($value === TRUE) 
+                $client_id = $this->input->post('client_list');
+                if($client_id > 0)
                 {
-                    $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/manage_missions/', 'refresh');
+                    $additional_data['client_id'] = $client_id;
+                }
+                else
+                {
+                    $additional_data['client_id'] = NULL;
+                }
+                if($this->gympro_library->update_mission($mission_id, $additional_data)) 
+                {
+                    $this->session->set_flashdata('message', $this->gympro_library->messages());
+                    redirect('applications/gympro/edit_mission/'.$mission_id, 'refresh');
                 } else 
                 {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
             }
         }
-        
+        else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
         $this->data['label'] = array(
             'name' => 'label',
             'id' => 'label',
@@ -2002,18 +2023,27 @@ class Gympro extends Role_Controller{
             'type' => 'submit',
             'value' => 'Save'
         );
+        if($mission_info['client_id'] > 0)
+        {
+            $this->data['selected_client_id'] = $mission_info['client_id'];
+        }
+        else
+        {
+            $this->data['selected_client_id'] = 0;
+        }        
+        $this->data['mission_info'] = $mission_info;
         $this->data['mission_id'] = $mission_id;
-        $this->template->load(null, 'applications/gympro/mission_edit', $this->data);
+        $this->template->load(null, 'applications/gympro/mission/mission_edit', $this->data);
     }
     /*
      * Ajax call to delete mission
      * @Author Nazmul on 7th December 2014
      */
-    public function delete_mission()
+   public function delete_mission()
    {
         $result = array();
-        $delete_id = $this->input->post('delete_id');
-        if($this->gympro_library->delete_mission($delete_id))
+        $mission_id = $this->input->post('mission_id');
+        if($this->gympro_library->delete_mission($mission_id))
         {
             $result['message'] = $this->gympro_library->messages_alert();
         }
