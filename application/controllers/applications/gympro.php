@@ -1216,6 +1216,7 @@ class Gympro extends Role_Controller{
         {
             $workout_list[$workout['workout_id']] =  $workout['title'];
         }
+        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->data['workout_list'] =$workout_list;
         $this->template->load(null,'applications/gympro/nutrition_create', $this->data);
     }
