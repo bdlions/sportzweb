@@ -45,7 +45,7 @@
                     </a>
                 </div>
                 <div class ="col-sm-3" style="padding-right: 0px;">
-                    <button id="button_create_recipe_category" value="" class="btn button-custom " style="margin-left: -10px;">Create Recipes Category</button>  
+                    <button id="button_create_recipe_category" value="" class="btn button-custom " style="margin-left: -10px;">Create Recipe Category</button>  
                 </div>
             </div>
             <?php } ?>

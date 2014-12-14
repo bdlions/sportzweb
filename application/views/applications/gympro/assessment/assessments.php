@@ -17,12 +17,14 @@
                         <tbody>
                             <tr>
                                 <th>CREATED</th>
+                                <th>DATE</th>
                                 <th>EDIT</th>
                                 <th>DELETE</th>
                             </tr>
                             <?php foreach ($assessment_list as $assessment):?>
                             <tr>
                                 <td><?php echo $assessment['created_on']?></td>
+                                <td><a href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['date']?></a></td>
                                 <td><a href="<?php echo base_url().'applications/gympro/edit_assessment/'.$assessment['assessment_id'];?>">Edit</a></td>
                                 <td style="text-align: center">
                                 <a onclick="open_modal_delete_confirm(<?php echo $assessment['assessment_id'] ?>)" >

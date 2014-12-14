@@ -9,7 +9,7 @@
                 data: $("#form_create_exercise").serializeArray(),
                 success: function(data) {
                     alert(data.message);
-                    window.location = '<?php echo base_url(); ?>applications/gympro/create_exercise';
+                    window.location = '<?php echo base_url(); ?>applications/gympro/manage_exercises';
                 }
             });
         });

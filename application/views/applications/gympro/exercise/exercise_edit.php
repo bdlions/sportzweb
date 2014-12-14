@@ -9,23 +9,23 @@
                 data: $("#form_exercise_edit").serializeArray(),
                 success: function(data) {
                     alert(data.message);
-                    window.location = '<?php echo base_url() . 'applications/gympro/edit_exercise/' . $exercise_info['exercise_id']; ?>';
+                    window.location = '<?php echo base_url() . 'applications/gympro/manage_exercises'; ?>';
                 }
             });
         });
         // Change this to the location of your server-side upload handler:
         var url = "<?php echo base_url() . 'applications/gympro/edit_exercise/' . $exercise_info['exercise_id']; ?>",
-                uploadButton = $('<input type="submit" value="Save"/>').text('Confirm').
-                on('click', function() {
-                    var $this = $(this), data = $this.data();
-                    $this.off('click').text('Abort').on('click', function() {
-                        $this.remove();
-                        data.abort();
-                    });
-                    data.submit().always(function() {
-                        $this.remove();
-                    });
-                });
+        uploadButton = $('<input type="submit" value="Save"/>').text('Confirm').
+        on('click', function() {
+            var $this = $(this), data = $this.data();
+            $this.off('click').text('Abort').on('click', function() {
+                $this.remove();
+                data.abort();
+            });
+            data.submit().always(function() {
+                $this.remove();
+            });
+        });
         $('#fileupload').fileupload({
             url: url,
             dataType: 'json',
@@ -69,7 +69,7 @@
             $('#progress .progress-bar').css('width', progress + '%');
         }).on('fileuploaddone', function(e, data) {
             alert(data.result.message);
-            window.location = '<?php echo base_url() . 'applications/gympro/edit_exercise/' . $exercise_info['exercise_id']; ?>';
+            window.location = '<?php echo base_url() . 'applications/gympro/manage_exercises'; ?>';
         }).on('fileuploadsubmit', function(e, data) {
             data.formData = $('#form_exercise_edit').serializeArray();
         }).on('fileuploadfail', function(e, data) {

@@ -267,6 +267,20 @@ class Gympro_model extends Ion_auth_model {
                     ->from($this->tables['app_gympro_clients'])
                     ->get();
     }
+    /*
+     * This method will return client info
+     * @param $client_id, client id
+     * @Author Nazmul on 17th November 2014
+     */
+    public function get_client_detail($client_id)
+    {
+        $this->db->where($this->tables['app_gympro_clients'].'.id', $client_id);
+        return $this->db->select($this->tables['app_gympro_clients'].'.id as client_id,'.$this->tables['app_gympro_clients'].'.*,'.$this->tables['app_gympro_client_statuses'].'.title as status_title,'.$this->tables['gender'].'.gender_name')
+                    ->from($this->tables['app_gympro_clients'])
+                    ->join($this->tables['app_gympro_client_statuses'], $this->tables['app_gympro_client_statuses'] . '.id=' . $this->tables['app_gympro_clients'] . '.status_id')
+                    ->join($this->tables['gender'], $this->tables['gender'] . '.id=' . $this->tables['app_gympro_clients'] . '.gender_id')
+                    ->get();
+    }
     
     //----------------------------------Group Module--------------------------------------//
     /*

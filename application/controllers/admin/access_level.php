@@ -48,17 +48,6 @@ class Access_level extends CI_Controller{
             );
             $user_id = $this->ion_auth->register($username, $password, $email, $additional_data, $group_id);
             if ($user_id !== FALSE) {
-                //Adding default data under this user
-                $default_group_list = array();
-                $default_group_list[] = 3;
-                $profile_data = array(
-                    'user_id' => $user_id,
-                    'gender_id' => 1,
-                    'country_id' => 223
-                );
-                $this->ion_auth->add_user_default_data_from_admin_panel($user_id, $profile_data, $default_group_list);
-                
-                
                 $form_post_array = $this->input->post();
                 $access_level_mapping = $this->access_level_input_process($form_post_array);
                 
@@ -177,7 +166,7 @@ class Access_level extends CI_Controller{
                 $this->admin_access_level_library->remove_from_group($user_info['group_id'], $user_info['user_id']);
                 $this->admin_access_level_library->add_to_group($group_id, $user_info['user_id']);
             }
-            
+          
             $this->session->set_flashdata('message', $this->ion_auth->messages());
             redirect('admin/access_level/show_users','refresh');
         }

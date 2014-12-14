@@ -2,20 +2,6 @@
     <div class="panel-heading">Blog List</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            
-            <div class="row form-group">
-                <div class ="col-sm-9"></div>
-                <?php if($allow_write){ ?>
-                <div class ="col-sm-3">
-                    <a href="<?php echo base_url()."admin/applications_blogs/create_blog/".$category_id ?>" >
-                        <button id="" value="" class="form-control btn button-custom pull-right">
-                            Create Blog
-                        </button>
-                    </a> 
-                </div>
-                <?php } ?>
-            </div>
-            
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered">

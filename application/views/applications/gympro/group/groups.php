@@ -23,7 +23,7 @@
                             <?php foreach($group_list as $group_info){?>
                             <tr>
                                 <td><?php echo $group_info['created_on']?></td>
-                                <td><?php echo $group_info['title']?></td>
+                                <td><a href="<?php echo base_url()."applications/gympro/show_group/".$group_info['group_id']?>"><?php echo $group_info['title']?></a></td>
                                 <td><a href="<?php echo base_url()."applications/gympro/edit_group/".$group_info['group_id']?>">Edit</a></td>
                                 <td style="text-align: center">
                                     <a onclick="open_modal_delete_confirm(<?php echo $group_info['group_id']?>)" >

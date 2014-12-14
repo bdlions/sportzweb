@@ -47,20 +47,20 @@
                 </div> 
                 <div class="form-group">
                     <label for="" class="col-md-4 control-label requiredField">
-                        Hourly rate: 
-                    </label>
-                    <div class ="col-md-6">
-                        <?php echo form_dropdown('hourly_rate_list', $hourly_rate_list, $selected_hourly_rate_id, 'class=form-control id=hourly_rate_list'); ?>
-                    </div>
-                </div> 
-                <div class="form-group">
-                    <label for="" class="col-md-4 control-label requiredField">
                         Currency: 
                     </label>
                     <div class ="col-md-6">
                         <?php echo form_dropdown('currency_list', $currency_list, $selected_currency_id, 'class=form-control id=currency_list'); ?>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="" class="col-md-4 control-label requiredField">
+                        Hourly rate: 
+                    </label>
+                    <div class ="col-md-6">
+                        <?php echo form_dropdown('hourly_rate_list', $hourly_rate_list, $selected_hourly_rate_id, 'class=form-control id=hourly_rate_list'); ?>
+                    </div>
+                </div>                 
                 <div class="form-group">
                     <label for="submit_update_preference" class="col-md-4 control-label requiredField">
 

@@ -23,7 +23,7 @@
                             <?php foreach($mission_list as $mission_info){?>
                             <tr>
                                 <td><?php echo $mission_info['created_on']?></td>
-                                <td><?php echo $mission_info['label']?></td>
+                                <td><a href="<?php echo base_url()."applications/gympro/show_mission/".$mission_info['mission_id']?>"><?php echo $mission_info['label']?></a></td>
                                 <td><a href="<?php echo base_url()."applications/gympro/edit_mission/".$mission_info['mission_id']?>">Edit</a></td>
                                 <td style="text-align: center">
                                 <a onclick="open_modal_delete_confirm(<?php echo $mission_info['mission_id'] ?>)" >

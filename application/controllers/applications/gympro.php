@@ -267,7 +267,7 @@ class Gympro extends Role_Controller{
             'value' => 'Save'
         );
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->template->load(null,'applications/gympro/client/create_client', $this->data);
+        $this->template->load(null,'applications/gympro/client/client_create', $this->data);
     }
     
     /*
@@ -495,7 +495,36 @@ class Gympro extends Role_Controller{
         );
         $this->data['client_info'] = $client_info; 
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->template->load(null,'applications/gympro/client/edit_client', $this->data);
+        $this->template->load(null,'applications/gympro/client/client_edit', $this->data);
+    }    
+    /*
+     * This method will show client info
+     * @param @client_id, client id
+     * @Author Nazmul on 14th December 2014
+     */
+    public function show_client($client_id)
+    {
+        $client_info = array();
+        $client_info_array = $this->gympro_library->get_client_detail($client_id)->result_array();
+        if(!empty($client_info_array))
+        {
+           $client_info =  $client_info_array[0];
+        }
+        else
+        {
+            redirect('applications/gympro/manage_clients','refresh');
+        }
+        $this->data['client_info'] = $client_info;
+        $this->template->load(null,'applications/gympro/client/client_show', $this->data);
+    }
+    /*
+     * This method will delete a client
+     * @param @client_id, client id
+     * @Author Nazmul on 14th December 2014
+     */
+    public function delete_client($client_id)
+    {
+        
     }
     //----------------------------------- Group Module ---------------------------------//
     /* This method will show all groups of a gympro user
@@ -664,6 +693,25 @@ class Gympro extends Role_Controller{
         $this->data['group_info'] = $group_info;
         $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/group/group_edit', $this->data);
+    }
+    /*
+     * This method will show a group
+     * @param $group_id, group id
+     * @Author Nazmul on 14th December 2014
+     */
+    public function show_group($group_id)
+    {
+        $group_info = array();
+        $group_info_array = $this->gympro_library->get_group_info($group_id)->result_array();
+        if(!empty($group_info_array))
+        {
+            $group_info = $group_info_array[0];
+        }
+        else
+        {
+            redirect('application/gympro/manage_groups','refresh');
+        }
+        $this->template->load(null,'applications/gympro/group/group_show', $this->data);
     }
     
     /*
@@ -1193,7 +1241,26 @@ class Gympro extends Role_Controller{
         $this->data['exercise_info'] = $exercise_info;   
         $this->template->load(null, 'applications/gympro/exercise/exercise_edit', $this->data);
     }
-    
+    /*
+     * This method will show an exercise
+     * @param $exercise_id, exercise id
+     * @Author Nazmul on 14th December 2014
+     */
+    public function show_exercise($exercise_id)
+    {
+        $exercise_info = array();
+        $exercise_array = $this->gympro_library->get_exercise_info($exercise_id)->result_array();
+        if(!empty($exercise_array))
+        {
+            $exercise_info = $exercise_array[0];            
+        }
+        else
+        {
+            redirect('applications/gympro/manage_exercises','refresh');
+        }
+        $this->data['exercise_info'] = $exercise_info;
+        $this->template->load(null,'applications/gympro/exercise/exercise_show', $this->data);
+    }
     /*
      * This method will delete an exercise
      * @Author Nazmul on 14th December 2014
@@ -1435,7 +1502,7 @@ class Gympro extends Role_Controller{
                 $assessment_id = $this->gympro_library->create_assessment($additional_data);
                 if ($assessment_id !== FALSE) {
                     $this->session->set_flashdata('message', $this->gympro_library->messages());
-                    redirect('applications/gympro/create_assessment', 'refresh');
+                    redirect('applications/gympro/manage_assessments', 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
@@ -1643,7 +1710,7 @@ class Gympro extends Role_Controller{
                 }
                 if ($this->gympro_library->update_assessment($assessment_id, $additional_data)) {
                     $this->session->set_flashdata('message', $this->gympro_library->messages());
-                    redirect('applications/gympro/edit_assessment/'.$assessment_id, 'refresh');
+                    redirect('applications/gympro/manage_assessments', 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors();
                 }
@@ -1835,6 +1902,26 @@ class Gympro extends Role_Controller{
         $this->template->load(null,'applications/gympro/assessment/assessment_edit', $this->data);
     }
     /*
+     * This method will show an assessment
+     * @param $assessment_id, assessment id
+     * @Author Nazmul on 14th December 2014
+     */
+    public function show_assessment($assessment_id)
+    {
+        $assessment_info = array();
+        $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
+        if(!empty($assessment_array))
+        {
+            $assessment_info = $assessment_array[0];            
+        } 
+        else
+        {
+            redirect('applications/gympro/manage_assessments','refresh');
+        }
+        $this->data['assessment_info'] = $assessment_info;
+        $this->template->load(null, 'applications/gympro/assessment/assessment_show', $this->data);
+    }
+    /*
      * Ajax call to delete an assessment
      * @Author Nazmul on 7th December 2014
      */
@@ -1901,7 +1988,7 @@ class Gympro extends Role_Controller{
                 if ($value !== FALSE) 
                 {
                     $this->session->set_flashdata('message', $this->gympro_library->messages());
-                    redirect('applications/gympro/create_mission', 'refresh');
+                    redirect('applications/gympro/manage_missions', 'refresh');
                 } else 
                 {
                     $this->data['message'] = $this->gympro_library->errors();
@@ -2037,7 +2124,7 @@ class Gympro extends Role_Controller{
                 if($this->gympro_library->update_mission($mission_id, $additional_data)) 
                 {
                     $this->session->set_flashdata('message', $this->gympro_library->messages());
-                    redirect('applications/gympro/edit_mission/'.$mission_id, 'refresh');
+                    redirect('applications/gympro/manage_missions', 'refresh');
                 } else 
                 {
                     $this->data['message'] = $this->gympro_library->errors();
@@ -2135,6 +2222,26 @@ class Gympro extends Role_Controller{
         $this->data['mission_info'] = $mission_info;
         $this->data['mission_id'] = $mission_id;
         $this->template->load(null, 'applications/gympro/mission/mission_edit', $this->data);
+    }
+    /*
+     * This method will show a mission
+     * @param $mission_id, mission id
+     * @Author Nazmul on 14th December 2014
+     */
+    public function show_mission($mission_id)
+    {
+        $mission_info = array();
+        $mission_array = $this->gympro_library->get_mission_info($mission_id)->result_array();
+        if(!empty($mission_array))
+        {
+            $mission_info = $mission_array[0];            
+        }
+        else
+        {
+            redirect('applications/gympro/manage_missions','refresh');
+        }
+        $this->data['mission_info'] = $mission_info;
+        $this->template->load(null, 'applications/gympro/mission/mission_show', $this->data);
     }
     /*
      * Ajax call to delete mission

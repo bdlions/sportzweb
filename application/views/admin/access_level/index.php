@@ -56,11 +56,11 @@
                         <thead>
                             <td></td>
                             <td><div class="form-group">View</div></td>
-                            <td><div class="form-group">Write</div></td>
+                            <td><div class="form-group">Add</div></td>
                             <td><div class="form-group">Approve</div></td>
                             <td><div class="form-group">Edit</div></td>
                             <td><div class="form-group">Delete</div></td>
-                            <td><div class="form-group">Configure</div></td>
+                            <td><div class="form-group">Manage</div></td>
                             <td><div class="form-group">Writing</div></td>
                         </thead>
 

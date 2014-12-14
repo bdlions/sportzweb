@@ -1,17 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Name:  Ion Auth Lang - English
-*
-* Author: Ben Edmunds
-* 		  ben.edmunds@gmail.com
-*         @benedmunds
-*
-* Location: http://github.com/benedmunds/ion_auth/
-*
-* Created:  03.14.2010
-*
+* Author: Nazmul Hasan
 * Description:  English language file for Ion Auth messages and errors
-*
 */
 
 // Account Creation
@@ -296,45 +287,45 @@ $lang['update_client_statuses_fail']                       = "Failed to update C
 $lang['update_gympro_user_successful']                 = "Account is updated successfully.";
 $lang['update_gympro_user_fail']                       = "Failed to update account info.";
 
-$lang['create_client_successful']                      = "Client is created successfully.";
+$lang['create_client_successful']                      = "Client created successfully.";
 $lang['create_client_fail']                            = "Failed to create a client.";
-$lang['update_client_successful']                      = "Client is updated successfully.";
+$lang['update_client_successful']                      = "Client updated successfully.";
 $lang['update_client_fail']                            = "Failed to update client info.";
 
-$lang['create_group_successful']                       = "Group is created successfully.";
+$lang['create_group_successful']                       = "Group created successfully.";
 $lang['create_group_fail']                             = "Failed to create a group.";
-$lang['update_group_successful']                       = "Group is updated successfully.";
+$lang['update_group_successful']                       = "Group updated successfully.";
 $lang['update_group_fail']                             = "Failed to update group info.";
-$lang['delete_group_successful']                       = "Group is deleted successfully.";
+$lang['delete_group_successful']                       = "Group deleted successfully.";
 $lang['delete_group_fail']                             = "Failed to delete the group.";
 
-$lang['update_program_successful']                     = "Program is updated successfully.";
+$lang['update_program_successful']                     = "Program updated successfully.";
 $lang['update_program_fail']                           = "Failed to update program info.";
-$lang['delete_program_successful']                     = "Program is deleted successfully.";
+$lang['delete_program_successful']                     = "Program deleted successfully.";
 $lang['delete_program_fail']                           = "Failed to delete program info.";
 
-$lang['create_exercise_successful']                    = "Exercise is created successfully.";
+$lang['create_exercise_successful']                    = "Exercise created successfully.";
 $lang['create_exercise_fail']                          = "Failed to create an exercise.";
-$lang['update_exercise_successful']                    = "Exercise is updated successfully.";
+$lang['update_exercise_successful']                    = "Exercise updated successfully.";
 $lang['update_exercise_fail']                          = "Failed to update exercise info.";
-$lang['delete_exercise_successful']                    = "Exercise is deleted successfully.";
+$lang['delete_exercise_successful']                    = "Exercise deleted successfully.";
 $lang['delete_exercise_fail']                          = "Failed to delete exercise info.";
 
-$lang['update_nutrition_successful']                   = "Nutrition is updated successfully.";
+$lang['update_nutrition_successful']                   = "Nutrition updated successfully.";
 $lang['update_nutrition_fail']                         = "Failed to update nutrition info.";
-$lang['delete_nutrition_successful']                   = "Nutrition is deleted successfully.";
+$lang['delete_nutrition_successful']                   = "Nutrition deleted successfully.";
 $lang['delete_nutrition_fail']                         = "Failed to delete nutrition info.";
 
-$lang['create_assessment_successful']                  = "Assessment is created successfully.";
+$lang['create_assessment_successful']                  = "Assessment created successfully.";
 $lang['create_assessment_fail']                        = "Failed to create an Assessment.";
-$lang['update_assessment_successful']                  = "Assessment is updated successfully.";
+$lang['update_assessment_successful']                  = "Assessment updated successfully.";
 $lang['update_assessment_fail']                        = "Failed to update Assessment info.";
-$lang['delete_assessment_successful']                  = "Assessment is deleted successfully.";
+$lang['delete_assessment_successful']                  = "Assessment deleted successfully.";
 $lang['delete_assessment_fail']                         = "Failed to delete Assessment info.";
 
-$lang['create_mission_successful']                     = "Mission is created successfully.";
+$lang['create_mission_successful']                     = "Mission created successfully.";
 $lang['create_mission_fail']                           = "Failed to create a mission.";
-$lang['update_mission_successful']                     = "Mission is updated successfully.";
+$lang['update_mission_successful']                     = "Mission updated successfully.";
 $lang['update_mission_fail']                           = "Failed to update mission info.";
-$lang['delete_mission_successful']                     = "Mission is deleted successfully.";
+$lang['delete_mission_successful']                     = "Mission deleted successfully.";
 $lang['delete_mission_fail']                           = "Failed to delete mission info.";
