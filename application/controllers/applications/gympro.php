@@ -1002,15 +1002,14 @@ class Gympro extends Role_Controller{
      * This method will show all exercises of this gympro user
      * @Author Nazmul on 7th December 2014
      */
-    public function exercises()
+    public function manage_exercises()
     {
-        $exercise_list = $this->gympro_library->get_all_exercises($this->session->userdata('user_id'));
-        $this->data['exercise_list'] = $exercise_list;
-        $this->data['message'] = '';        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
-        $this->template->load(null,'applications/gympro/exercises', $this->data);
+        $this->data['message'] = '';
+        $this->data['exercise_list'] = $this->gympro_library->get_all_exercises($this->session->userdata('user_id'));
+        $this->template->load(null,'applications/gympro/exercise/exercises', $this->data);
     }
     /*
+     * Ajax call
      * This method will creae a new exercise
      * @Author Nazmul on 7th December 2014
      */
@@ -1023,8 +1022,6 @@ class Gympro extends Role_Controller{
             $result['message'] = '';
             if ($this->form_validation->run() == true) {
                 $picture = "";
-//                var_dump($picture);
-//                                exit();
                 if (isset($_FILES["userfile"])) {
                     $result = $this->utils->upload_image($_FILES["userfile"], EXERCISE_IMAGEPATH);
                     if ($result['status'] == 1) {
@@ -1034,20 +1031,18 @@ class Gympro extends Role_Controller{
                         $picture = $result['upload_data']['file_name'];
                     }
                 }
-
                 $additional_data = array(
-                    'category_id' => $this->input->post('category_id'),
+                    'category_id' => $this->input->post('exercise_category_list'),
                     'picture' => $picture,
                     'name' => $this->input->post('name'),
                     'description' => $this->input->post('description'),
                     'user_id' => $this->session->userdata('user_id')
                 );
-                $newValue = $this->gympro_library->create_exercise($additional_data);
-                if ($newValue) {
-                    $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/exercises', 'refresh');
+                $exercise_id = $this->gympro_library->create_exercise($additional_data);
+                if ($exercise_id !== FALSE) {
+                    $result['message'] = $this->gympro_library->messages_alert();
                 } else {
-                    $this->data['message'] = $this->gympro_library->errors();
+                    $result['message'] = $this->gympro_library->errors_alert();
                 }
             } else {
                 $result['message'] = validation_errors();
@@ -1055,8 +1050,11 @@ class Gympro extends Role_Controller{
             echo json_encode($result);
             return;
         }
-        $this->data['category_array'] = $this->gympro_library->get_all_exercise_categories()->result_array();
-
+        $exercise_categories_array = $this->gympro_library->get_all_exercise_categories()->result_array();
+        $this->data['exercise_category_list'] = array();
+        foreach ($exercise_categories_array as $exercise_category_info) {
+            $this->data['exercise_category_list'][$exercise_category_info['exercise_category_id']] = $exercise_category_info['title'];
+        }
         $this->data['name'] = array(
             'name' => 'name',
             'id' => 'name',
@@ -1072,46 +1070,31 @@ class Gympro extends Role_Controller{
             'id' => 'picture',
             'type' => 'file'
         );
-
         $this->data['submit_create_exercise'] = array(
             'name' => 'submit_create_exercise',
             'id' => 'submit_create_exercise',
             'type' => 'submit',
             'value' => 'Save'
         );
-
-        $this->data['message'] = '';
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
-        $this->template->load(null, 'applications/gympro/exercise_create', $this->data);
+        $this->template->load(null, 'applications/gympro/exercise/exercise_create', $this->data);
     }
 
     /*
-     * This method will edit exercise
+     * This method will edit an exercise
      * @param $exercise_id, exercise id
      * @Author Nazmul on 7th December 2014
      */
-    public function edit_exercise($exercise_id = 0)
+    public function edit_exercise($exercise_id)
     {   
-        if($exercise_id == 0)
-        {
-            redirect('applications/gympro/exercise_edit', 'refresh');
-        }
-        $exercise_info = array();
-        $exercise_array = $this->gympro_library->get_exercise_info($exercise_id)->result_array();
-        if(!empty($exercise_array))
-        {
-            $exercise_info = $exercise_array[0];            
-        }
-       
         $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
         if ($this->input->post())
-            {
+        {
             $result = array();
             $result['message'] = ''; 
             if ($this->form_validation->run() == true) 
-                {
+            {
                 $additional_data = array(
-                    'category_id' => $this->input->post('category_id'),
+                    'category_id' => $this->input->post('exercise_category_list'),
                     'name' => $this->input->post('name'),
                     'description' => $this->input->post('description'),
                     'user_id' => $this->session->userdata('user_id')
@@ -1126,16 +1109,15 @@ class Gympro extends Role_Controller{
                         $destination_path = EXERCISE_IMAGES_PATH_W50_H50.$result['upload_data']['file_name'];
                         $this->utils->resize_image($source_path, $destination_path, EXERCISE_IMAGES_PICTURE_H50, EXERCISE_IMAGES_PICTURE_W50);
                         $picture = $result['upload_data']['file_name'];
-                        $data['picture'] = $picture;
+                        $additional_data['picture'] = $picture;
                     }                
                 }
                 
                 $newValue = $this->gympro_library->update_exercise($exercise_id, $additional_data);
                 if ($newValue) {
-                    $this->data['message'] = $this->gympro_library->messages();
-                    redirect('applications/gympro/exercises', 'refresh');
+                    $result['message'] = $this->gympro_library->messages_alert();
                 } else {
-                    $this->data['message'] = $this->gympro_library->errors();
+                    $result['message'] = $this->gympro_library->errors_alert();
                 }
             }
             else {
@@ -1148,7 +1130,18 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
-        $this->data['category_array'] = $this->gympro_library->get_all_exercise_categories()->result_array();
+        $exercise_info = array();
+        $exercise_array = $this->gympro_library->get_exercise_info($exercise_id)->result_array();
+        if(!empty($exercise_array))
+        {
+            $exercise_info = $exercise_array[0];            
+        }
+        $exercise_categories_array = $this->gympro_library->get_all_exercise_categories()->result_array();
+        $this->data['exercise_category_list'] = array();
+        foreach ($exercise_categories_array as $exercise_category_info) {
+            $this->data['exercise_category_list'][$exercise_category_info['exercise_category_id']] = $exercise_category_info['title'];
+        }
+        $this->data['selected_exercise_category_id'] = $exercise_info['category_id'];
         
         $this->data['name'] = array(
             'name' => 'name',
@@ -1156,35 +1149,31 @@ class Gympro extends Role_Controller{
             'type' => 'text',
             'value' => $exercise_info['name']
         );
-
-        
         $this->data['description'] = array(
             'name' => 'description',
             'id' => 'description',
             'type' => 'text',
             'value' => $exercise_info['description']
         );
-
-        $this->data['submit_button'] = array(
-            'name' => 'submit_button',
-            'id' => 'submit_button',
+        $this->data['submit_edit_exercise'] = array(
+            'name' => 'submit_edit_exercise',
+            'id' => 'submit_edit_exercise',
             'type' => 'submit',
             'value' => 'Save'
         );
-
-        $this->data['message'] = '';
-        $this->data['exercise_info'] = $exercise_info;
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
-        $this->data['exercise_id'] = $exercise_id;        
-        $this->template->load(null, 'applications/gympro/exercise_edit', $this->data);
-
+        $this->data['exercise_info'] = $exercise_info;   
+        $this->template->load(null, 'applications/gympro/exercise/exercise_edit', $this->data);
     }
     
+    /*
+     * This method will delete an exercise
+     * @Author Nazmul on 14th December 2014
+     */
     public function delete_exercise()
     {
         $result = array();
-        $delete_id = $this->input->post('delete_id');
-        if($this->gympro_library->delete_exercise($delete_id))
+        $exercise_id = $this->input->post('exercise_id');
+        if($this->gympro_library->delete_exercise($exercise_id))
         {
             $result['message'] = $this->gympro_library->messages_alert();
         }

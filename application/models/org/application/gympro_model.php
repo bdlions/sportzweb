@@ -500,7 +500,7 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_exercise_categories()
     {
-        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.*')
+        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.id as exercise_category_id,'.$this->tables['app_gympro_exercise_categories'].'.*')
                     ->from($this->tables['app_gympro_exercise_categories'])
                     ->get();
     }
@@ -524,7 +524,7 @@ class Gympro_model extends Ion_auth_model {
     public function get_exercise_info($exercise_id)
     {         
         $this->db->where($this->tables['app_gympro_exercises'].'.id', $exercise_id);
-        return $this->db->select('*')
+        return $this->db->select($this->tables['app_gympro_exercises'].'.id as exercise_id,'.$this->tables['app_gympro_exercises'].'.*')
                     ->from($this->tables['app_gympro_exercises'])
                     ->get();
     }
@@ -539,6 +539,14 @@ class Gympro_model extends Ion_auth_model {
         $additional_data = $this->_filter_data($this->tables['app_gympro_exercises'], $additional_data); 
         $this->db->insert($this->tables['app_gympro_exercises'], $additional_data);
         $insert_id = $this->db->insert_id();
+        if($insert_id > 0)
+        {
+            $this->set_message('create_exercise_successful');
+        }
+        else
+        {
+            $this->set_error('create_exercise_fail');
+        }
         return (isset($insert_id)) ? $insert_id : FALSE;
     }   
     /*

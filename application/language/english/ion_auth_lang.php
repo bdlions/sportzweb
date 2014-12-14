@@ -313,6 +313,8 @@ $lang['update_program_fail']                           = "Failed to update progr
 $lang['delete_program_successful']                     = "Program is deleted successfully.";
 $lang['delete_program_fail']                           = "Failed to delete program info.";
 
+$lang['create_exercise_successful']                    = "Exercise is created successfully.";
+$lang['create_exercise_fail']                          = "Failed to create an exercise.";
 $lang['update_exercise_successful']                    = "Exercise is updated successfully.";
 $lang['update_exercise_fail']                          = "Failed to update exercise info.";
 $lang['delete_exercise_successful']                    = "Exercise is deleted successfully.";
