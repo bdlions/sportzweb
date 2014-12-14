@@ -1,3 +1,92 @@
+<script>
+$(function () {
+    $("#submit_button").on("click", function(){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url().'applications/gympro/edit_exercise/'.$exercise_info['exercise_id'];?>',
+            data: $("#form_exercise_edit").serializeArray(),
+            success: function(data) {
+                alert(data.message);
+                window.location = '<?php echo base_url().'applications/gympro/edit_exercise/'.$exercise_info['exercise_id'];?>';
+            }
+        });
+    });
+    // Change this to the location of your server-side upload handler:
+    var url = "<?php echo base_url().'applications/gympro/edit_exercise/'.$exercise_info['exercise_id'];?>",
+    uploadButton = $('<input type="submit" value="Save"/>').text('Confirm').
+    on('click', function() {
+        var $this = $(this),data = $this.data();
+        $this.off('click').text('Abort').on('click', function() {
+            $this.remove();
+            data.abort();
+        });
+        data.submit().always(function() {
+            $this.remove();
+        });
+    });
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        formData: $("#form_exercise_edit").serializeArray(),
+        autoUpload: false,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        maxFileSize: 5000000, // 5 MB
+        // Enable image resizing, except for Android and Opera,
+        // which actually support image resizing, but fail to
+        // send Blob objects via XHR requests:
+        disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator.userAgent),
+        previewMaxWidth: 120,
+        maxNumberOfFiles: 1,
+        previewMaxHeight: 120,
+        previewCrop: true
+    }).on('fileuploadadd', function(e, data) {
+        $("#files").empty();
+        data.context = $('<div/>').appendTo('#files');
+        $("div#upload").empty();
+        $("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
+        $.each(data.files, function(index, file) {
+            var node = $('<p/>');
+            node.appendTo(data.context);
+        });
+    }).on('fileuploadprocessalways', function(e, data) {
+        var index = data.index,
+                file = data.files[index],
+                node = $(data.context.children()[index]);
+        if (file.preview) {
+            node.prepend('<br>').prepend(file.preview);
+        }
+        if (file.error) {
+            $("div#header").append('<br>').append($('<span class="text-danger"/>').text(file.error));
+        }
+        if (index + 1 === data.files.length) {
+            data.context.find('button').text('Upload').prop('disabled', !!data.files.error);
+        }
+    }).on('fileuploadprogressall', function(e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .progress-bar').css('width',progress + '%');
+    }).on('fileuploaddone', function(e, data) {
+        alert(data.result.message);
+        window.location = '<?php echo base_url().'applications/gympro/edit_exercise/'.$exercise_info['exercise_id'];?>';
+    }).on('fileuploadsubmit', function(e, data){
+        data.formData = $('#form_exercise_edit').serializeArray();
+    }).on('fileuploadfail', function(e, data) {
+        alert(data.message);
+        $.each(data.files, function(index, file) {
+            var error = $('<span class="text-danger"/>').text('File upload failed.');
+            $(data.context.children()[index]).append('<br>').append(error);
+        });
+    }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+});
+</script>
+
+
+
+
+
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <div class="container-fluid">
     
@@ -9,7 +98,7 @@
             <div class="pad_title">
                 EDITING EXERCISE
             </div>
-            <?php echo form_open("applications/gympro/edit_exercise/".$exercise_id, array('id' => '', 'class' => 'form-horizontal')); ?>
+            <?php echo form_open("applications/gympro/edit_exercise/".$exercise_id,  array('id' => 'form_exercise_edit', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')) ?>
             <div class="pad_body">
                 <div class="row">
                     <div class="col-md-8">
@@ -41,14 +130,31 @@
                                 <?php echo form_textarea($description + array('class' => 'form-control')) ?>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col-md-4">
-                                Upload a photo:
+                        <div class="form-group">
+                                <label for="website" class="col-md-4 control-label requiredField">
+                                    Set picture
+                                </label>
+                                <div class ="col-md-8">
+                                    <div class="col-md-9">
+                                        <div class="row fileinput-button">
+                                            <button class="btn button-custom">Upload a photo</button>
+                                            <input id="fileupload" type="file" name="userfile">
+                                        </div>
+                                        <div id="progress" class="row progress" style="margin-top: 8px;">
+                                            <div class="progress-bar progress-bar-success"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="profile-picture-box" >
+                                            <div id="files" class="files">
+                                                <?php if(!empty($exercise_info['picture'])): ?>
+                                                    <img style="width: 50px; height: 50px;" src="<?php echo base_url() . EXERCISE_IMAGES_PATH_W50_H50. $exercise_info['picture']; ?>" class="img-responsive"/>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="file">
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -60,3 +166,9 @@
     </div>
 
 </div>
+
+
+
+
+
+
