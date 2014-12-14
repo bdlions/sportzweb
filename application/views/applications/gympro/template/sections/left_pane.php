@@ -41,10 +41,5 @@
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/preference.png">
         <a href="<?php echo base_url().'applications/gympro/preference'?>">Preferences</a>
     </div>
-    <div class="ln_item" >
-        <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/settings.png">
-        <a href="">Settings</a>
-    </div>
-
 </div>
 

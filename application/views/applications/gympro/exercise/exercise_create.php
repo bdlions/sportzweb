@@ -89,10 +89,13 @@
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-10">
+            <?php echo form_open("applications/gympro/create_exercise", array('id' => 'form_create_exercise', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
             <div class="pad_title">
                 ADDING EXERCISE
+                <div class="col-md-3 pull-right">
+                    <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
+                </div>
             </div>
-            <?php echo form_open("applications/gympro/create_exercise", array('id' => 'form_create_exercise', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
             <div class="pad_body">
                 <div class="row">
                     <div class="col-md-8">

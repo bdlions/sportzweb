@@ -1015,6 +1015,7 @@ class Gympro extends Role_Controller{
      */
     public function create_exercise() {
         $this->data['message'] = '';
+        $user_id = $this->session->userdata('user_id');
         $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
         if ($this->input->post()) 
             {
@@ -1036,8 +1037,13 @@ class Gympro extends Role_Controller{
                     'picture' => $picture,
                     'name' => $this->input->post('name'),
                     'description' => $this->input->post('description'),
-                    'user_id' => $this->session->userdata('user_id')
+                    'user_id' => $user_id
                 );
+                $client_id = $this->input->post('client_list');
+                if($client_id > 0)
+                {
+                    $additional_data['client_id'] = $client_id;
+                }
                 $exercise_id = $this->gympro_library->create_exercise($additional_data);
                 if ($exercise_id !== FALSE) {
                     $result['message'] = $this->gympro_library->messages_alert();
@@ -1050,6 +1056,8 @@ class Gympro extends Role_Controller{
             echo json_encode($result);
             return;
         }
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
+        $this->data['selected_client_id'] = 0;
         $exercise_categories_array = $this->gympro_library->get_all_exercise_categories()->result_array();
         $this->data['exercise_category_list'] = array();
         foreach ($exercise_categories_array as $exercise_category_info) {
@@ -1086,6 +1094,7 @@ class Gympro extends Role_Controller{
      */
     public function edit_exercise($exercise_id)
     {   
+        $user_id = $this->session->userdata('user_id');
         $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
         if ($this->input->post())
         {
@@ -1099,6 +1108,15 @@ class Gympro extends Role_Controller{
                     'description' => $this->input->post('description'),
                     'user_id' => $this->session->userdata('user_id')
                 );
+                $client_id = $this->input->post('client_list');
+                if($client_id > 0)
+                {
+                    $additional_data['client_id'] = $client_id;
+                }
+                else
+                {
+                    $additional_data['client_id'] = NULL;
+                }
                 $picture = "";
                 if (isset($_FILES["userfile"]))
                 {
@@ -1136,6 +1154,17 @@ class Gympro extends Role_Controller{
         {
             $exercise_info = $exercise_array[0];            
         }
+        
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
+        if($exercise_info['client_id'] > 0)
+        {
+            $this->data['selected_client_id'] = $exercise_info['client_id'];
+        }
+        else
+        {
+            $this->data['selected_client_id'] = 0;
+        }
+        
         $exercise_categories_array = $this->gympro_library->get_all_exercise_categories()->result_array();
         $this->data['exercise_category_list'] = array();
         foreach ($exercise_categories_array as $exercise_category_info) {

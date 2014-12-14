@@ -300,7 +300,7 @@
                     </div>
                 </div>
             </div>
-            <div id="meal_box_template">
+            <div id="meal_box_template" style="display:none">
                 <div class="pad_white">
                     <select name="meal_time" style="margin-right: 15px; width: 100px;">
                         <?php foreach ($meal_time_list as $key => $meal_time): ?>
