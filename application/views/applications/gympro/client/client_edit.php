@@ -1,29 +1,113 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <script type="text/javascript">
-    $(function() {
-        $('#start_date').datepicker({
-            dateFormat: 'dd-mm-yy',
-            startDate: '-3d'
-        }).on('changeDate', function(ev) {
-            $('#start_date').text($('#start_date').data('date'));
-            $('#start_date').datepicker('hide');
-        });        
-        $('#end_date').datepicker({
-            dateFormat: 'dd-mm-yy',
-            startDate: '-3d'
-        }).on('changeDate', function(ev) {
-            $('#end_date').text($('#end_date').data('date'));
-            $('#end_date').datepicker('hide');
+$(function() {
+    $('#start_date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        startDate: '-3d'
+    }).on('changeDate', function(ev) {
+        $('#start_date').text($('#start_date').data('date'));
+        $('#start_date').datepicker('hide');
+    });        
+    $('#end_date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        startDate: '-3d'
+    }).on('changeDate', function(ev) {
+        $('#end_date').text($('#end_date').data('date'));
+        $('#end_date').datepicker('hide');
+    });
+    $('#birth_date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        startDate: '-3d'
+    }).on('changeDate', function(ev) {
+        $('#birth_date').text($('#birth_date').data('date'));
+        $('#birth_date').datepicker('hide');
+    });
+});    
+
+$(function () {
+    $("#submit_edit_client").on("click", function(){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url().'applications/gympro/edit_client/'.$client_info['client_id'];?>',
+            data: $("#form_edit_client").serializeArray(),
+            success: function(data) {
+                alert(data.message);
+                window.location = '<?php echo base_url().'applications/gympro/manage_clients';?>';
+            }
         });
-        $('#birth_date').datepicker({
-            dateFormat: 'dd-mm-yy',
-            startDate: '-3d'
-        }).on('changeDate', function(ev) {
-            $('#birth_date').text($('#birth_date').data('date'));
-            $('#birth_date').datepicker('hide');
+    });
+    // Change this to the location of your server-side upload handler:
+    var url = "<?php echo base_url().'applications/gympro/edit_client/'.$client_info['client_id'];?>",
+    uploadButton = $('<input type="submit" value="Save"/>').text('Confirm').
+    on('click', function() {
+        var $this = $(this),data = $this.data();
+        $this.off('click').text('Abort').on('click', function() {
+            $this.remove();
+            data.abort();
         });
-    });    
+        data.submit().always(function() {
+            $this.remove();
+        });
+    });
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        formData: $("#form_edit_client").serializeArray(),
+        autoUpload: false,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        maxFileSize: 5000000, // 5 MB
+        // Enable image resizing, except for Android and Opera,
+        // which actually support image resizing, but fail to
+        // send Blob objects via XHR requests:
+        disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator.userAgent),
+        previewMaxWidth: 120,
+        maxNumberOfFiles: 1,
+        previewMaxHeight: 120,
+        previewCrop: true
+    }).on('fileuploadadd', function(e, data) {
+        $("#files").empty();
+        data.context = $('<div/>').appendTo('#files');
+        $("div#upload").empty();
+        $("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
+        $.each(data.files, function(index, file) {
+            var node = $('<p/>');
+            node.appendTo(data.context);
+        });
+    }).on('fileuploadprocessalways', function(e, data) {
+        var index = data.index,
+                file = data.files[index],
+                node = $(data.context.children()[index]);
+        if (file.preview) {
+            node.prepend('<br>').prepend(file.preview);
+        }
+        if (file.error) {
+            $("div#header").append('<br>').append($('<span class="text-danger"/>').text(file.error));
+        }
+        if (index + 1 === data.files.length) {
+            data.context.find('button').text('Upload').prop('disabled', !!data.files.error);
+        }
+    }).on('fileuploadprogressall', function(e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .progress-bar').css('width',progress + '%');
+    }).on('fileuploaddone', function(e, data) {
+        alert(data.result.message);
+        window.location = '<?php echo base_url().'applications/gympro/manage_clients';?>';
+    }).on('fileuploadsubmit', function(e, data){
+        data.formData = $('#form_edit_client').serializeArray();
+    }).on('fileuploadfail', function(e, data) {
+        alert(data.message);
+        $.each(data.files, function(index, file) {
+            var error = $('<span class="text-danger"/>').text('File upload failed.');
+            $(data.context.children()[index]).append('<br>').append(error);
+        });
+    }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+});
 </script>
+
 <div class="container-fluid">
     <div class="row top_margin">
         <div class="col-md-2">
@@ -48,6 +132,9 @@
         <div class="col-md-7">
             <div class="pad_title">
                 EDIT CLIENT
+                <div class="pull-right">
+                    <button class="btn button-custom" onclick="open_modal_delete_confirm(<?php echo $client_info['client_id'];?>)">Delete Client</button>
+                </div>
             </div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)): ?>
@@ -244,87 +331,4 @@
     </div>
 </div>
 
-<script>
-$(function () {
-    $("#submit_edit_client").on("click", function(){
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: '<?php echo base_url().'applications/gympro/edit_client/'.$client_info['client_id'];?>',
-            data: $("#form_edit_client").serializeArray(),
-            success: function(data) {
-                alert(data.message);
-                window.location = '<?php echo base_url().'applications/gympro/manage_clients';?>';
-            }
-        });
-    });
-    // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url().'applications/gympro/edit_client/'.$client_info['client_id'];?>",
-    uploadButton = $('<input type="submit" value="Save"/>').text('Confirm').
-    on('click', function() {
-        var $this = $(this),data = $this.data();
-        $this.off('click').text('Abort').on('click', function() {
-            $this.remove();
-            data.abort();
-        });
-        data.submit().always(function() {
-            $this.remove();
-        });
-    });
-    $('#fileupload').fileupload({
-        url: url,
-        dataType: 'json',
-        formData: $("#form_edit_client").serializeArray(),
-        autoUpload: false,
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-        maxFileSize: 5000000, // 5 MB
-        // Enable image resizing, except for Android and Opera,
-        // which actually support image resizing, but fail to
-        // send Blob objects via XHR requests:
-        disableImageResize: /Android(?!.*Chrome)|Opera/
-                .test(window.navigator.userAgent),
-        previewMaxWidth: 120,
-        maxNumberOfFiles: 1,
-        previewMaxHeight: 120,
-        previewCrop: true
-    }).on('fileuploadadd', function(e, data) {
-        $("#files").empty();
-        data.context = $('<div/>').appendTo('#files');
-        $("div#upload").empty();
-        $("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
-        $.each(data.files, function(index, file) {
-            var node = $('<p/>');
-            node.appendTo(data.context);
-        });
-    }).on('fileuploadprocessalways', function(e, data) {
-        var index = data.index,
-                file = data.files[index],
-                node = $(data.context.children()[index]);
-        if (file.preview) {
-            node.prepend('<br>').prepend(file.preview);
-        }
-        if (file.error) {
-            $("div#header").append('<br>').append($('<span class="text-danger"/>').text(file.error));
-        }
-        if (index + 1 === data.files.length) {
-            data.context.find('button').text('Upload').prop('disabled', !!data.files.error);
-        }
-    }).on('fileuploadprogressall', function(e, data) {
-        var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .progress-bar').css('width',progress + '%');
-    }).on('fileuploaddone', function(e, data) {
-        alert(data.result.message);
-        window.location = '<?php echo base_url().'applications/gympro/manage_clients';?>';
-    }).on('fileuploadsubmit', function(e, data){
-        data.formData = $('#form_edit_client').serializeArray();
-    }).on('fileuploadfail', function(e, data) {
-        alert(data.message);
-        $.each(data.files, function(index, file) {
-            var error = $('<span class="text-danger"/>').text('File upload failed.');
-            $(data.context.children()[index]).append('<br>').append(error);
-        });
-    }).prop('disabled', !$.support.fileInput)
-            .parent().addClass($.support.fileInput ? undefined : 'disabled');
-
-});
-</script>
+<?php $this->load->view("applications/gympro/client/client_delete_confirm_modal"); ?>

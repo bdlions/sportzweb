@@ -668,8 +668,19 @@ class Gympro extends Role_Controller{
      * @Author Nazmul on 14th December 2014
      */
 
-    public function delete_client($client_id) {
-        
+    public function delete_client()
+    {
+        $result = array();
+        $client_id = $this->input->post('delete_id');
+        if($this->gympro_library->delete_client($client_id))
+        {
+            $result['message'] = $this->gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
 
     //----------------------------------- Group Module ---------------------------------//

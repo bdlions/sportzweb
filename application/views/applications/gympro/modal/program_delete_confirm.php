@@ -26,13 +26,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Delete Account Type</h4>
+                <h4 class="modal-title" id="myModalLabel">Delete Program</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
-                        <label class="col-sm-10 control-label">Are you sure to delete this Account Type?</label>
+                        <label class="col-sm-10 control-label">Are you sure to delete this Program?</label>
                         <input id="input_delete_id" name="input_delete_id" value="" type="hidden" class="form-control"/>
                     </div>
                 </div>                

@@ -284,13 +284,15 @@ $lang['update_client_statuses_successful']                 = "Client Status is u
 $lang['update_client_statuses_fail']                       = "Failed to update Client Status.";
 
 
-$lang['update_gympro_user_successful']                 = "Account is updated successfully.";
-$lang['update_gympro_user_fail']                       = "Failed to update account info.";
+$lang['update_gympro_user_successful']                  = "Account is updated successfully.";
+$lang['update_gympro_user_fail']                        = "Failed to update account info.";
 
-$lang['create_client_successful']                      = "Client created successfully.";
-$lang['create_client_fail']                            = "Failed to create a client.";
-$lang['update_client_successful']                      = "Client updated successfully.";
-$lang['update_client_fail']                            = "Failed to update client info.";
+$lang['create_client_successful']                       = "Client created successfully.";
+$lang['create_client_fail']                             = "Failed to create a client.";
+$lang['update_client_successful']                       = "Client updated successfully.";
+$lang['update_client_fail']                             = "Failed to update client info.";
+$lang['delete_client_successful']                       = "Client deleted successfully.";
+$lang['delete_client_fail']                             = "Failed to delete the client.";
 
 $lang['create_group_successful']                       = "Group created successfully.";
 $lang['create_group_fail']                             = "Failed to create a group.";

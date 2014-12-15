@@ -242,6 +242,23 @@ class Gympro_model extends Ion_auth_model {
         $this->set_message('update_client_successful');
         return TRUE;
     }
+    public function delete_client($client_id)
+    {
+        if(!isset($client_id) || $client_id <= 0)
+        {
+            $this->set_error('delete_client_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $client_id);
+        $this->db->delete($this->tables['app_gympro_clients']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_client_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_client_successful');
+        return TRUE;
+    }
     /*
      * This method will return all clients of a user
      * @param $user id, userid
