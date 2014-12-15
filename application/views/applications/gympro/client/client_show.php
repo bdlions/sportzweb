@@ -35,9 +35,10 @@
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">First Name: </label>
-                                <div class="col-sm-6">
+                                <div class="col-sm-8 info_view"><?php echo $client_info['first_name'];?></div>
+<!--                                <div class="col-sm-6">
                                     <?php echo form_input($first_name + array('class' => 'form-control'));?>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Last Name: </label>

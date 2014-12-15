@@ -23,6 +23,11 @@ a:hover
 }
 
 /*PAGE*/
+.info_view
+{
+    line-height: 35px;
+    font-size: 18px;
+}
 .cursor_pointer
 {
     cursor: pointer;
