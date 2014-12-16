@@ -1,8 +1,6 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Gympro extends Role_Controller{
     function __construct() {
         parent::__construct();
@@ -65,7 +63,6 @@ class Gympro extends Role_Controller{
         $client_list = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
         $this->data['client_list'] = $client_list;
         $this->data['message'] = '';        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/client/clients', $this->data);
     }
 
@@ -266,7 +263,6 @@ class Gympro extends Role_Controller{
             'type' => 'submit',
             'value' => 'Save'
         );
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/client/client_create', $this->data);
     }
     
@@ -303,8 +299,8 @@ class Gympro extends Role_Controller{
                     'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'address' => $this->input->post('address'),
-                    'emergyncy_contact' => $this->input->post('emergyncy_contact'),
-                    'emergyncy_phone' => $this->input->post('emergyncy_phone'),
+                    'emergency_contact' => $this->input->post('emergency_contact'),
+                    'emergency_phone' => $this->input->post('emergency_phone'),
                     'height' => $this->input->post('height'),
                     'resting_heart_rate' => $this->input->post('resting_heart_rate'),
                     'blood_pressure' => $this->input->post('blood_pressure'),
@@ -494,7 +490,6 @@ class Gympro extends Role_Controller{
             'value' => 'Save'
         );
         $this->data['client_info'] = $client_info; 
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/client/client_edit', $this->data);
     }    
     /*
@@ -511,9 +506,9 @@ class Gympro extends Role_Controller{
         } else {
             redirect('applications/gympro/manage_clients', 'refresh');
         }
-      
+        $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();
+        $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id); 
         $this->data['client_info'] = $client_info;
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null, 'applications/gympro/client/client_show', $this->data);
     }
 
@@ -526,7 +521,7 @@ class Gympro extends Role_Controller{
     public function delete_client()
     {
         $result = array();
-        $client_id = $this->input->post('delete_id');
+        $client_id = $this->input->post('client_id');
         if($this->gympro_library->delete_client($client_id))
         {
             $result['message'] = $this->gympro_library->messages_alert();
@@ -545,7 +540,6 @@ class Gympro extends Role_Controller{
     public function manage_groups() {
         $this->data['message'] = '';
         $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null, 'applications/gympro/group/groups', $this->data);
     }
 
@@ -566,7 +560,11 @@ class Gympro extends Role_Controller{
             $result['message'] = '';  
             if($this->form_validation->run() == true)
             {
-                $client_id_list = explode(",", $this->input->post('selected_client_list'));
+                $client_id_list = array();
+                if($this->input->post('selected_client_list'))
+                {
+                    $client_id_list = explode(",", $this->input->post('selected_client_list'));
+                }
                 $data = array(
                     'title' => $this->input->post('title'),
                     'phone' => $this->input->post('phone'),
@@ -616,7 +614,6 @@ class Gympro extends Role_Controller{
             'type' => 'submit',
             'value' => 'Save Changes'
         );        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/group/group_create', $this->data);
     }    
     /*
@@ -638,7 +635,11 @@ class Gympro extends Role_Controller{
             $result['message'] = ''; 
             if($this->form_validation->run() == true)
             {
-                $client_id_list = explode(",", $this->input->post('selected_client_list'));
+                $client_id_list = array();
+                if($this->input->post('selected_client_list'))
+                {
+                    $client_id_list = explode(",", $this->input->post('selected_client_list'));
+                }                
                 $data = array(
                     'title' => $this->input->post('title'),
                     'phone' => $this->input->post('phone'),
@@ -703,7 +704,6 @@ class Gympro extends Role_Controller{
             'value' => 'Save Changes'
         );
         $this->data['group_info'] = $group_info;
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/group/group_edit', $this->data);
     }
     /*
@@ -757,7 +757,6 @@ class Gympro extends Role_Controller{
         );
 
         $this->data['group_info'] = $group_info;
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null, 'applications/gympro/group/group_show', $this->data);
     }
 
@@ -793,7 +792,6 @@ class Gympro extends Role_Controller{
             $user_id = $this->session->userdata('user_id');
         }
         $this->data['message'] = '';   
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         if($this->input->post('submit_update_account'))
         {
             $data = array(
@@ -841,7 +839,6 @@ class Gympro extends Role_Controller{
      */
     public function preference($user_id = 0)
     {
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID; 
         if($user_id == 0)
         {
             $user_id = $this->session->userdata('user_id');
@@ -954,7 +951,6 @@ class Gympro extends Role_Controller{
         $program_list = $this->gympro_library->get_all_programs($this->session->userdata('user_id'));
         $this->data['program_list'] = $program_list;
         $this->data['message'] = '';        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/programs', $this->data);
     }
     /*
@@ -1008,7 +1004,6 @@ class Gympro extends Role_Controller{
         }
         
         $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->data['message'] = '';       
         $this->template->load(null,'applications/gympro/program_create', $this->data);
     }
@@ -1069,7 +1064,6 @@ class Gympro extends Role_Controller{
         $this->data['exercise'] = json_decode( $program_info[0]['exercise_list'], TRUE );
         $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
         $this->data['program_id'] = $program_id;
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->data['message'] = '';       
         $this->template->load(null,'applications/gympro/program_edit', $this->data);
     }
@@ -1336,7 +1330,6 @@ class Gympro extends Role_Controller{
         $nutrition_list = $this->gympro_library->get_all_nutritions($this->session->userdata('user_id'));
         $this->data['nutrition_list'] = $nutrition_list;
         $this->data['message'] = '';        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/nutrition', $this->data);
     }
     /*
@@ -1399,7 +1392,6 @@ class Gympro extends Role_Controller{
         {
             $workout_list[$workout['workout_id']] =  $workout['title'];
         }
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->data['workout_list'] =$workout_list;
         $this->template->load(null,'applications/gympro/nutrition_create', $this->data);
     }
@@ -1498,7 +1490,6 @@ class Gympro extends Role_Controller{
     {
         $this->data['message'] = ''; 
         $this->data['assessment_list'] = $this->gympro_library->get_all_assessments($this->session->userdata('user_id'));
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/assessment/assessments', $this->data);
     }
     /*
@@ -1697,7 +1688,6 @@ class Gympro extends Role_Controller{
             'value' => 'Save'
         );
         $this->data['selected_client_id'] = 0;
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/assessment/assessment_create', $this->data);
     }
     
@@ -1997,7 +1987,6 @@ class Gympro extends Role_Controller{
         $mission_list = $this->gympro_library->get_all_missions($this->session->userdata('user_id'));
         $this->data['mission_list'] = $mission_list;
         $this->data['message'] = '';        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/mission/missions', $this->data);
     }
     /*
@@ -2120,7 +2109,6 @@ class Gympro extends Role_Controller{
             'value' => 'Save'
         );
         $this->data['selected_client_id'] = 0;
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null, 'applications/gympro/mission/mission_create', $this->data);
     }    
     /*
@@ -2312,19 +2300,16 @@ class Gympro extends Role_Controller{
     public function earnings()
     {
         $this->data['message'] = '';        
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;        
         $this->template->load(null,'applications/gympro/earnings', $this->data);
     }
     public function create_session()
     {
         $this->data['message'] = ''; 
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/session_create', $this->data);
     }
     public function earnings_summary()
     {
         $this->data['message'] = ''; 
-        $this->data['application_id'] = APPLICATION_GYMPRO_ID;
         $this->template->load(null,'applications/gympro/earnings_summary', $this->data);
     }
 }

@@ -17,6 +17,7 @@ class Blog_app_library {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
+        $this->load->library('basic_profile');
         $this->load->library('org/utility/utils');
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
@@ -61,6 +62,31 @@ class Blog_app_library {
      */
     public function __get($var) {
         return get_instance()->$var;
+    }
+    
+    /*
+     * This method will return blog info indicating a parameter whether creator of the blog has member 
+     * profile or not
+     * @param $blog_id , blog id
+     * @Author Nazmul on 15th December 2014
+     */
+    public function get_blog_info($blog_id)
+    {
+        $blog_info = array();
+        $blog_info_array = $this->blog_app_model->get_blog_info($blog_id)->result_array();
+        if(!empty($blog_info_array))
+        {
+            $blog_info = $blog_info_array[0];
+            if($this->basic_profile->is_basic_profile_exist($blog_info['user_id']))
+            {
+                $blog_info['is_user_member'] = 1;
+            }
+            else
+            {
+                $blog_info['is_user_member'] = 0;
+            }
+        }
+        return $blog_info;
     }
     
     /*

@@ -1,36 +1,18 @@
 <?php
-
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 /**
- * Name:  Ion Auth
- *
- * Author: Ben Edmunds
- * 		  ben.edmunds@gmail.com
- *         @benedmunds
- *
- * Added Awesomeness: Phil Sturgeon
- *
- * Location: http://github.com/benedmunds/CodeIgniter-Ion-Auth
- *
- * Created:  10.01.2009
- *
- * Description:  Modified auth system based on redux_auth with extensive customization.  This is basically what Redux Auth 2 should be.
- * Original Author name has been kept but that does not mean that the method has not been modified.
- *
+ * Name:  Admin blog
+ * Author: Nazmul
  * Requirements: PHP5 or above
- *
  */
-
 class Admin_blog{
     
     public function __construct() {
         $this->load->config('ion_auth',TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
-        
+        $this->load->library('basic_profile');
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
             $this->load->library('session');
@@ -74,6 +56,128 @@ class Admin_blog{
      */
     public function __get($var) {
         return get_instance()->$var;
+    }
+    
+    /*
+     * This method will add blog info under blog category
+     * @param $blog_category_id, blog category id
+     * @param $blog_id, blog id
+     * @Author Nazmul on 15th December 2014
+     */
+    public function add_blog_in_blog_category($blog_category_id, $blog_id)
+    {
+        $blogs_array = array();
+        $blog_info = new stdClass();
+        $blog_info->blog_id = $blog_id;
+        $blog_category_info_array = $this->admin_blog_model->get_blog_category_info($blog_category_id)->result_array();
+        if(!empty($blog_category_info_array)){
+            $blog_list = $blog_category_info_array[0]['blog_list'];
+            if($blog_list != '' && $blog_list != NULL)
+            {
+                $blog_list_array = json_decode($blog_list);
+                foreach($blog_list_array as $blog_info)
+                {
+                    if($blog_info->blog_id != $blog_id){
+                        $blogs_array[] = $blog_info;
+                    }
+                }
+            }
+        }
+        $blogs_array[] = $blog_info;
+        $additional_data = array(
+            'blog_list' => json_encode($blogs_array)
+        );
+        $this->admin_blog_model->update_blog_categroy($blog_category_id, $additional_data);
+    }
+    
+    /*
+     * This method will return blog category id list of a blog
+     * @param $blog_id, blog id
+     * @Author Nazmul on 15th December 2014
+     */
+    public function get_category_id_list_of_blog($blog_id) {
+        $blog_category_id_list = array();
+        $blog_category_info_array = $this->admin_blog_model->get_all_blog_category()->result_array();
+        foreach($blog_category_info_array as $blog_category_info){
+            $blog_category_id = $blog_category_info['blog_category_id'];
+            $blog_list = $blog_category_info['blog_list'];
+            if($blog_list != '' && $blog_list != NULL)
+            {
+                $blog_list_array = json_decode($blog_list);
+                foreach($blog_list_array as $blog_info)
+                {
+                    if($blog_info->blog_id == $blog_id && !in_array($blog_category_id, $blog_category_id_list)){
+                        $blog_category_id_list[] = $blog_category_id;
+                    }
+                }
+            }
+        }
+        return $blog_category_id_list;
+    }
+    
+    /*
+     * This method will update blog reference in category based to given blog category list
+     * @param $blog_id, blog id
+     * @Author Nazmul on 15th December 2014
+     */
+    public function update_blog_in_blog_categories($blog_id, $selected_blog_category_id_list)
+    {
+        $blog_categories_array = $this->admin_blog_model->get_all_blog_category()->result_array();
+        foreach ($blog_categories_array as $blog_category_info) {
+            $blog_list = $blog_category_info['blog_list'];
+            $blog_category_id = $blog_category_info['blog_category_id'];
+            $blog_info = new stdClass();
+            $blog_info->blog_id = $blog_id;
+            $blogs_array = array();  
+            $is_update_required = 0;
+            $is_blog_exist = 0;                
+            if($blog_list != '' && $blog_list != NULL)
+            {
+                $blog_list_array = json_decode($blog_list);
+                foreach($blog_list_array as $blog_info)
+                {
+                    if($blog_info->blog_id != $blog_id){
+                        $blogs_array[] = $blog_info;
+                    }
+                    else
+                    {
+                        if(!in_array($blog_category_id, $selected_blog_category_id_list))
+                        {
+                            //remove the blog from blog category
+                            $is_update_required = 1;
+                        }
+                        else
+                        {
+                            //no change
+                            $blogs_array[] = $blog_info;
+                        }
+                        $is_blog_exist = 1;
+                    }
+                }
+                if(!$is_blog_exist && in_array($blog_category_id, $selected_blog_category_id_list))
+                {
+                    //add the blog in blog category                    
+                    $blogs_array[] = $blog_info;
+                    $is_update_required = 1;                    
+                }                
+            }
+            else
+            {
+                //add the blog in blog category 
+                if(in_array($blog_category_id, $selected_blog_category_id_list))
+                {
+                    $blogs_array[] = $blog_info;
+                    $is_update_required = 1;
+                }
+            }
+            if($is_update_required)
+            {
+                $additional_data = array(
+                    'blog_list' => json_encode($blogs_array)
+                );
+                $this->admin_blog_model->update_blog_categroy($blog_category_id, $additional_data);
+            }
+        }
     }
     
      /*
@@ -437,6 +541,31 @@ class Admin_blog{
                 $this->admin_blog_model->update_blog_categroy($blog_category_id, $additional_data);
             }
         }
+    }
+    
+    /*
+     * This method will return blog info indicating a parameter whether creator of the blog has member 
+     * profile or not
+     * @param $blog_id , blog id
+     * @Author Nazmul on 15th December 2014
+     */
+    public function get_blog_info($blog_id)
+    {
+        $blog_info = array();
+        $blog_info_array = $this->admin_blog_model->get_blog_info($blog_id)->result_array();
+        if(!empty($blog_info_array))
+        {
+            $blog_info = $blog_info_array[0];
+            if($this->basic_profile->is_basic_profile_exist($blog_info['user_id']))
+            {
+                $blog_info['is_user_member'] = 1;
+            }
+            else
+            {
+                $blog_info['is_user_member'] = 0;
+            }
+        }
+        return $blog_info;
     }
 }
 ?>

@@ -330,5 +330,4 @@ $(function () {
         </div>
     </div>
 </div>
-
-<?php $this->load->view("applications/gympro/client/client_delete_confirm_modal"); ?>
+<?php $this->load->view("applications/gympro/client/client_delete_confirm_modal");

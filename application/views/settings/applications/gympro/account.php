@@ -1,13 +1,10 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <div class="container-fluid">    
     <div class="row top_margin">
-        <div class="col-md-2">
-            <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
-        </div>
-        <div class="col-md-7">
+        <div class="col-md-10">
             <div class="row pad_body">
                 <div class ="col-md-10 margin-top-bottom">
-                    <?php echo form_open("applications/gympro/account/".$user_id, array('id' => 'form_account', 'class' => 'form-horizontal')); ?>
+                    <?php echo form_open("settings/applications_gympro_account/".$user_id, array('id' => 'form_account', 'class' => 'form-horizontal')); ?>
                         <div class ="row">
                             <div class="col-md-12">
                                 <?php if(isset($message) && ($message != NULL)): ?>

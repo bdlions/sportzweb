@@ -7,11 +7,13 @@
         <div class="col-md-12 blog_post_subtitle_bar">
             <span class="blog_post_body_text">
                 By 
-                <?php if(isset($blog['user_id'])): ?>
+                <?php if($blog['is_user_member'] == 1){ ?>
                     <a href="<?php echo base_url(); ?>admin/users_usermanage/display_user_info/<?php echo $blog['user_id']; ?>">
                         <?php echo isset($blog['first_name']) ? $blog['first_name'].' '.$blog['last_name'] : '';?>
                     </a>
-                <?php endif; ?>
+                <?php }else{
+                    echo $blog['first_name'].' '.$blog['last_name'];
+                } ?>
             </span>
             <div id="total_comments">
                 <span class="pull-right">

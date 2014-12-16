@@ -89,16 +89,12 @@
                 <div class="col-md-2">
                     <div class="left-nav">
                         <ul id="left-nav">
-                            <li id="account">
-                                <a href="<?php echo base_url()?>settings?menu=account&sub_menu=general_info">Account Settings</a>
+                            <li id="gympro">
+                                <a href="<?php echo base_url()?>settings/applications_gympro_account">Gympro</a>
                                 <ul>
-                                    <li id="account-general_info"><a href="<?php echo base_url()?>settings?menu=account&sub_menu=general_info">General Information</a></li>
-                                    <li id="account-account_info"><a href="<?php echo base_url()?>settings?menu=account&sub_menu=account_info">Account information</a></li>
-                                    <li id="account-interests"><a href="<?php echo base_url()?>settings?menu=account&sub_menu=interests">Interests</a></li>
+                                    <li id="account-general_info"><a href="<?php echo base_url()?>settings/applications_gympro_account">Account</a></li>
+                                    <li id="account-account_info"><a href="<?php echo base_url()?>settings/applications_gympro_preferences">Preferences</a></li>
                                 </ul>
-                            </li>
-                            <li id="privacy">
-                                <a href="<?php echo base_url()?>settings?menu=privacy">Privacy Settings</a>
                             </li>
                         </ul>
                     </div>

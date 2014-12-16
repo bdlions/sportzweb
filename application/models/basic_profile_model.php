@@ -191,6 +191,20 @@ class Basic_Profile_model extends Ion_auth_model {
         return $result;
     }
     
+    /*
+     * This method will checks whether basic profile exists or not for the user
+     * @param $user_id, user id
+     * @Aurhor Nazmul on 14th Decemer 2014
+     */
+    public function is_basic_profile_exist($user_id = 0)
+    {
+        if($user_id == 0){
+            $user_id = $this->session->userdata('user_id');
+        }
+        $this->db->where('user_id', $user_id);
+        return $this->db->count_all_results($this->tables['basic_profile']) > 0;
+    }
+    
     //RPC Methods
     public function get_member_profile_info($user_id)
     {
@@ -202,5 +216,5 @@ class Basic_Profile_model extends Ion_auth_model {
             ->get();
         return $this;
     }
-    
+   
 }

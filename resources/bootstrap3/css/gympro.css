@@ -141,7 +141,7 @@ a:hover
 .pad_title, .pad_body, .pad_footer
 {
     font-size: 15px;
-    background-color: #E4E4E4; 
+    /*background-color: #E4E4E4; */
 /*    display: inline-block; 
     width: 100%;*/
 }

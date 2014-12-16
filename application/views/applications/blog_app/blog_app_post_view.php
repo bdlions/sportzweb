@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 <script>
     $(function(){
         $("#button_share_blog").on("click", function() {
@@ -18,8 +19,6 @@
         });
     });
 </script>
-
-
 <!-- Modal -->
 <div class="modal fade" id="modal_share_news" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -44,10 +43,6 @@
         </div>
     </div>
 </div>
-
-
-
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 <?php $this->load->view("applications/blog_app/templates/header_menu"); ?>
 <div class="col-md-9" style="background-color: #F5F5F5">
     <div class="col-md-12" style="padding-bottom: 8px;">
@@ -57,11 +52,13 @@
         <div class="col-md-12 blog_post_subtitle_bar">
             <span class="blog_post_body_text">
                 By
-                <?php if(isset($blog['user_id'])): ?>
+                <?php if($blog['is_user_member'] == 1){ ?>
                     <a href="<?php echo base_url(); ?>member_profile/show/<?php echo $blog['user_id']; ?>">
                         <?php echo isset($blog['first_name']) ? $blog['first_name'].' '.$blog['last_name'] : '';?>
                     </a>
-                <?php endif; ?>
+                <?php }else{
+                    echo $blog['first_name'].' '.$blog['last_name'];
+                } ?>
             </span>
             <div id="total_comments">
                 <span class="pull-right">

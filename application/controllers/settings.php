@@ -7,6 +7,7 @@ class Settings extends Role_Controller{
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->helper('url');
+        $this->load->library('org/application/gympro_library');
         $this->load->library("org/profile/business/business_profile_library");
         $this->load->library("basic_profile");
         $this->load->library("org/interest/special_interest");
@@ -346,6 +347,168 @@ class Settings extends Role_Controller{
     
     
     /******All business settings completed*******/
-    
+    //---------------------------------------Application Settings----------------------------------//
+    public function applications()
+    {
+        $this->applications_gympro_account();
+    }
+    public function applications_gympro_account($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');        
+        }
+        $this->data['message'] = '';   
+        if($this->input->post('submit_update_account'))
+        {
+            $data = array(
+                'account_type_id' => $this->input->post('account_type_list')
+            );
+            $status = $this->gympro_library->update_gympro_user_info($user_id, $data);
+            if($status)
+            {
+                $this->data['message'] = $this->gympro_library->messages();   
+            }
+            else
+            {
+                $this->data['message'] = $this->gympro_library->errors();  
+            }
+        }
+        $account_type_list = array();
+        $account_types_array = $this->gympro_library->get_all_account_types()->result_array();
+        foreach($account_types_array as $account_type)
+        {
+            $account_type_list[$account_type['account_type_id']] =  $account_type['title'];
+        }
+        $this->data['account_type_list'] = $account_type_list; 
+        $gympro_user_info = array();
+        $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
+        if(empty($gympro_user_info_array))
+        {
+            $data = array(
+                'user_id' => $user_id,
+                'account_type_id' => APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT
+            );
+            $this->gympro_library->create_gympro_user($data);  
+            $this->data['selected_account_type'] = APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT;
+        }
+        else
+        {
+            $gympro_user_info = $gympro_user_info_array[0];
+            $this->data['selected_account_type'] = $gympro_user_info['account_type_id'];
+        }
+        $this->data['submit_update_account'] = array(
+            'name' => 'submit_update_account',
+            'id' => 'submit_update_account',
+            'type' => 'submit',
+            'value' => 'Update',
+        );
+        $this->data['user_id'] = $user_id; 
+        $this->template->load("templates/settings_app_tmpl", "settings/applications/gympro/account", $this->data);
+    }
+    public function applications_gympro_preferences($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $this->data['message'] = ''; 
+        if($this->input->post('submit_update_preference'))
+        {
+            $data = array(
+                'height_unit_id' => $this->input->post('height_unit_list'),
+                'weight_unit_id' => $this->input->post('weight_unit_list'),
+                'girth_unit_id' => $this->input->post('girth_unit_list'),
+                'time_zone_id' => $this->input->post('time_zone_list'),
+                'hourly_rate_id' => $this->input->post('hourly_rate_list'),
+                'currency_id' => $this->input->post('currency_list')
+            );
+            $status = $this->gympro_library->update_gympro_user_info($user_id, $data);
+            if($status)
+            {
+                $this->data['message'] = $this->gympro_library->messages();   
+            }
+            else
+            {
+                $this->data['message'] = $this->gympro_library->errors();  
+            }
+        }
+        $height_unit_list = array();
+        $height_unit_array = $this->gympro_library->get_all_height_units()->result_array();
+        foreach($height_unit_array as $height_unit)
+        {
+            $height_unit_list[$height_unit['height_unit_id']] =  $height_unit['title'];
+        }
+        $this->data['height_unit_list'] =$height_unit_list; 
+        
+        $weight_unit_list = array();
+        $weight_unit_array = $this->gympro_library->get_all_weight_units()->result_array();
+        foreach($weight_unit_array as $weight_unit)
+        {
+            $weight_unit_list[$weight_unit['weight_unit_id']] =  $weight_unit['title'];
+        }
+        $this->data['weight_unit_list'] =$weight_unit_list;
+        
+        $girth_unit_list = array();
+        $girth_unit_array = $this->gympro_library->get_all_girth_units()->result_array();
+        foreach($girth_unit_array as $girth_unit)
+        {
+            $girth_unit_list[$girth_unit['girth_unit_id']] =  $girth_unit['title'];
+        }
+        $this->data['girth_unit_list'] =$girth_unit_list;
+        
+        //$this->data['time_zone_list'] = array(); 
+        $time_zone_list = array();
+        $time_zone_array = $this->gympro_library->get_all_time_zones()->result_array();
+        foreach($time_zone_array as $time_zone)
+        {
+            $time_zone_list[$time_zone['time_zone_id']] =  $time_zone['title'];
+        }
+        $this->data['time_zone_list'] =$time_zone_list;
+        
+        $hourly_rate_list = array();
+        $hourly_rate_array = $this->gympro_library->get_all_hourly_rates()->result_array();
+        foreach($hourly_rate_array as $hourly_rate)
+        {
+            $hourly_rate_list[$hourly_rate['hourly_rate_id']] =  $hourly_rate['title'];
+        }
+        $this->data['hourly_rate_list'] =$hourly_rate_list;
+        
+        $currency_list = array();
+        $currency_array = $this->gympro_library->get_all_hourly_currencies()->result_array();
+        foreach($currency_array as $currency)
+        {
+            $currency_list[$currency['currency_id']] =  $currency['title'];
+        }
+        $this->data['currency_list'] =$currency_list;
+        
+        $this->data['selected_height_unit_id'] = '';
+        $this->data['selected_weight_unit_id'] = '';
+        $this->data['selected_girth_unit_id'] = '';
+        $this->data['selected_time_zone_id'] = '';
+        $this->data['selected_hourly_rate_id'] = '';
+        $this->data['selected_currency_id'] = '';
+        $gympro_user_info = array();
+        $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
+        if(!empty($gympro_user_info_array))
+        {
+            $gympro_user_info = $gympro_user_info_array[0];
+            $this->data['selected_height_unit_id'] = $gympro_user_info['height_unit_id'];
+            $this->data['selected_weight_unit_id'] = $gympro_user_info['weight_unit_id'];
+            $this->data['selected_girth_unit_id'] = $gympro_user_info['girth_unit_id'];
+            $this->data['selected_time_zone_id'] = $gympro_user_info['time_zone_id'];
+            $this->data['selected_hourly_rate_id'] = $gympro_user_info['hourly_rate_id'];
+            $this->data['selected_currency_id'] = $gympro_user_info['currency_id'];
+        }
+        
+        $this->data['user_id'] = $user_id; 
+        $this->data['submit_update_preference'] = array(
+            'name' => 'submit_update_preference',
+            'id' => 'submit_update_preference',
+            'type' => 'submit',
+            'value' => 'Update',
+        );
+        $this->template->load("templates/settings_app_tmpl", "settings/applications/gympro/preferences", $this->data);
+    }
 }
 ?>

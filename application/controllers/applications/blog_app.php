@@ -202,24 +202,18 @@ class Blog_app extends Role_Controller {
     function view_blog_post($blog_id) {
         $this->data['message'] = '';
         
-        $blog_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
-        if(empty($blog_array)){
+        $blog = $this->blog_app_library->get_blog_info($blog_id);
+        if(empty($blog)){
             redirect('applications/blog_app', 'refresh');
         }
         
-        $blog = array();
         $related_blogs = array();
-        $related_blogs_id = null;
-        if (count($blog_array) > 0) {
-            $blog = $blog_array[0];
-            if (!empty($blog['related_posts'])) {
-                $related_blogs_id = json_decode($blog['related_posts']);
-                $related_blogs = $this->blog_app_library->get_relate_blog_list($related_blogs_id)->result_array();
-            }
+        $related_blogs_id = null;        
+        if (!empty($blog['related_posts'])) {
+            $related_blogs_id = json_decode($blog['related_posts']);
+            $related_blogs = $this->blog_app_library->get_relate_blog_list($related_blogs_id)->result_array();
         }
-
         $this->data['related_blogs'] = $related_blogs;
-
         $comments = $this->blog_app_library->get_all_comments($blog_id, NEWEST_FIRST);
         $total_comments = count($comments);
         $temp_array = array();
@@ -231,15 +225,13 @@ class Blog_app extends Role_Controller {
         
             if($i==DEFAULT_VIEW_PER_PAGE) break;
         }
-        $comments = $temp_array;
-        
+        $comments = $temp_array;        
         $this->data['have_my_blogs'] = 0;
         $user_blog_list = $this->blog_app_library->get_all_blogs_by_user();
         if(!empty($user_blog_list))
         {
             $this->data['have_my_blogs'] = 1;
         }
-
         $this->data['blog'] = $blog;
         $this->data['comments'] = $comments;
         $this->data['user_info'] = $this->ion_auth->get_user_info();
@@ -648,13 +640,101 @@ class Blog_app extends Role_Controller {
         $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
         
         $blog_info = array();
-        $blog_info_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
+        $blog_info_array = $this->blog_app_model->get_blog_info($blog_id)->result_array();
         if(!empty($blog_info_array)) {
             $blog_info = $blog_info_array[0];
         }
         if($this->input->post())
         {
-            $uploaded_image_data = array();
+            $data = array(
+                'title' => trim(htmlentities($this->input->post('title_editortext'))),
+                'description' => trim(htmlentities($this->input->post('description_editortext'))),
+                'picture_description' => trim(htmlentities($this->input->post('image_description_editortext'))),
+                'user_id' => $user_id
+            );
+            if (isset($_FILES["userfile"])) {
+                $file_info = $_FILES["userfile"];
+                $result = $this->utils->upload_image($file_info, BLOG_POST_IMAGE_PATH);
+                if($result['status'] == 1)
+                {
+                    $path = BLOG_POST_IMAGE_PATH.$result['upload_data']['file_name'];
+                    $this->utils->resize_image($path, $path, BLOG_IMAGE_HEIGHT, BLOG_IMAGE_WIDTH);
+                }
+                $data['picture'] = $result['upload_data']['file_name'];
+            } 
+            $blog_category_id_list = array();
+            foreach ($this->input->post('category_name') as $category_id)
+            {
+                $blog_category_id_list[] = $category_id;
+            }
+            if($blog_info['blog_status_id'] == APPROVED)
+            {
+                $data['blog_status_id'] = RE_APPROVAL;
+                $data['reference_id'] = $blog_id;
+                $new_blog_id = $this->blog_app_library->create_blog($data);
+                if($new_blog_id === FALSE)
+                {
+                    $result['status'] = false;
+                    $result['message'] = $this->blog_app_library->errors();
+                    $result['blog_info'] = $blog_info;
+                    echo json_encode($result);
+                    return;
+                }
+                else
+                {
+                    $this->blog_app_library->add_blog_under_blog_category($new_blog_id, $blog_category_id_list);
+                }
+            } 
+            else if($blog_info['blog_status_id'] == PENDING || $blog_info['blog_status_id'] == RE_APPROVAL)
+            {
+                $flag = $this->blog_app_library->update_blog($blog_id,$data);
+                if($flag === FALSE)
+                {
+                    $result['status']=FALSE;
+                    $result['message'] = $this->blog_app_library->errors();
+                }
+                else
+                {
+                    $this->blog_app_library->remove_blog_from_blog_category($blog_id);
+                    $this->blog_app_library->add_blog_under_blog_category($blog_id, $blog_category_id_list);
+                }
+            }
+            else if($blog_info['blog_status_id'] == DELETION_PENDING)
+            {
+                //implement case 4 and case 7
+                $reference_blog = $this->blog_app_model->get_blog_info($blog_info['reference_id'])->result_array();
+                if(!empty($reference_blog))
+                {
+                    $reference_blog = $reference_blog[0];
+                }
+                
+                if($reference_blog['blog_status_id']== PENDING)
+                {
+                    $flag = $this->blog_app_library->update_blog($reference_blog['blog_id'],$data);
+                    if($flag === FALSE)
+                    {
+                        $result['status']=FALSE;
+                        $result['message'] = $this->blog_app_library->errors();
+                    }
+                    else
+                    {
+                        $this->blog_app_library->remove_blog_from_blog_category($reference_blog['blog_id']);
+                        $this->blog_app_library->add_blog_under_blog_category($reference_blog['blog_id'], $blog_category_id_list);
+                    }
+                }
+                
+                    
+                $data['blog_status_id'] = RE_APPROVAL;
+
+                $flag = $this->blog_app_library->update_blog($blog_id,$data);
+
+                if($flag == FALSE)
+                {
+                    $result['status']=FALSE;
+                    $result['message'] = $this->blog_app_library->errors();
+                }   
+            }
+            /*$uploaded_image_data = array();
             if (isset($_FILES["userfile"]))
             {
                 $file_info = $_FILES["userfile"];
@@ -685,9 +765,6 @@ class Blog_app extends Role_Controller {
             );
             
 
-            /*if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
-                $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
-            }*/
             if($blog_info['blog_status_id'] == APPROVED)
             {
                 $data['blog_status_id'] = RE_APPROVAL;
@@ -754,41 +831,12 @@ class Blog_app extends Role_Controller {
             }  
             $result['blog_info'] = $edited_blog_info;
             echo json_encode($result);
+            return;*/
             return;
         }
         
-        
-        $populated_blog_category_array = array();
-        $category_list = $this->blog_app_library->get_all_blog_category()->result_array();
-        $blog_category_list_array_map = $this->blog_app_library->get_all_category_of_this_blog($blog_id);
-
-        if(!empty($category_list)){
-            foreach ($category_list as $key => $category) {
-                $category_list[$key]['checked'] = 0;
-            }
-            foreach ($category_list as $key => $category) {
-                if(!empty($blog_category_list_array_map)){
-                   foreach ($blog_category_list_array_map as $k => $blog_category){
-                        if($blog_category->blog_id == $category['id']) {
-                            $category_list[$key]['checked'] = 1;
-                            $populated_blog_category_array[$category['id']] = $category;
-                        }
-                    } 
-                }
-            }
-        }
-        
-        //$this->data['category_list'] = $populated_blog_category_array;
-        $this->data['category_list'] = $category_list;
-        
-        /*$this->data['selected_category_id']=$blog_info['blog_category_id'];
-        $category_list = $this->blog_app_library->get_all_blog_category()->result_array();
-        $this->data['category_id'] = array();
-        if (!empty($category_list)) {
-            foreach ($category_list as $category) {
-                $this->data['category_id'][$category['id']] = $category['title'];
-            }
-        }*/
+        $this->data['blog_category_list'] = $this->blog_app_library->get_all_blog_categories()->result_array();
+        $this->data['blog_category_id_list_of_blog'] = $this->blog_app_library->get_blog_category_id_list_of_blog($blog_id);
         
         $this->data['title'] = array(
             'name' => 'title',
@@ -859,7 +907,7 @@ class Blog_app extends Role_Controller {
 
         $blog_id = $_POST['blog_id'];
         $blog_info = array();
-        $blog_info_array = $this->blog_app_library->get_blog_info($blog_id)->result_array();
+        $blog_info_array = $this->blog_app_model->get_blog_info($blog_id)->result_array();
         if(!empty($blog_info_array)) {
             $blog_info = $blog_info_array[0];
         }
@@ -891,42 +939,6 @@ class Blog_app extends Role_Controller {
         }
         echo json_encode($response);
     }
-    
-    /*public function remove_request_for_blog()
-    {
-        $response = array();
-        $blog_id = $_POST['blog_id'];
-        $blog = $this->blog_app_library->get_blog_info($blog_id)->result_array();
-        if(!empty($blog))
-        {
-            $blog = $blog[0];
-        }
-        if($blog['blog_status_id']==DELETION_PENDING && $blog['reference_id']!=NULL)
-        {
-            $response['status'] = 0;
-            $response['message'] = 'You have already given a request to delete';
-            echo json_encode($response);
-            return;
-        }
-        
-        unset($blog['id']);
-        $blog['reference_id'] = $blog_id;
-        $blog['blog_status_id'] = DELETION_PENDING;
-        $id = $this->blog_app_library->create_blog($blog);
-        
-        if($id != FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'Your delete request is on process';
-        }else
-        {
-            $response['status'] = 0;
-            $response['message'] = 'Your delete request is not successful';
-        }
-        
-        echo json_encode($response);
-    }*/
-
 }
 
 ?>
