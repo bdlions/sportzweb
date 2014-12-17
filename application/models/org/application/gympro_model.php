@@ -442,6 +442,28 @@ class Gympro_model extends Ion_auth_model {
     }
     //----------------------------------Program Module---------------------------------------//
     /*
+     * This method will return all exercise categories
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_exercise_categories()
+    {
+        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.id as exercise_category_id,'.$this->tables['app_gympro_exercise_categories'].'.*')
+                    ->from($this->tables['app_gympro_exercise_categories'])
+                    ->get();
+    }
+    /*
+     * This method will return exercise subcategories
+     * @param $category_id, exercise category id
+     * @Author Nazmul on 17th December 2014
+     */
+    public function get_all_exercise_subcategories($category_id)
+    {
+        $this->db->where('category_id', $category_id);
+        return $this->db->select($this->tables['app_gympro_exercise_subcategories'].'.id as exercise_subcategory_id,'.$this->tables['app_gympro_exercise_subcategories'].'.*')
+                    ->from($this->tables['app_gympro_exercise_subcategories'])
+                    ->get();
+    }
+    /*
      * This method will return all programs of a gympro user
      * @param $user_id, user id of gympro user
      * @Author Nazmul on 7th December 2014
@@ -525,16 +547,7 @@ class Gympro_model extends Ion_auth_model {
         return TRUE;
     }
     //----------------------------------Exercise Module--------------------------------------//
-    /*
-     * This method will return all exercise categories
-     * @Author Nazmul on 7th December 2014
-     */
-    public function get_all_exercise_categories()
-    {
-        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.id as exercise_category_id,'.$this->tables['app_gympro_exercise_categories'].'.*')
-                    ->from($this->tables['app_gympro_exercise_categories'])
-                    ->get();
-    }
+    
     /*
      * This method will return all exercises of a gympro user
      * @param $user_id, user id of gympro user
