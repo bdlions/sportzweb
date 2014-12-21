@@ -23,9 +23,9 @@
         </div>
         <div class="col-md-8">
             <div class="pad_title">
-               SHOW GROUP
+            Group Info
             </div>
-            <?php echo form_open("applications/gympro/edit_group/".$group_info['group_id'], array('id' => 'form_edit_group', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
+           
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)){?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
@@ -34,9 +34,7 @@
                     <div class="col-md-9">
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Title: </label>
-                            <div class="col-sm-8">
-                                <?php echo form_input($title + array('class' => 'form-control'));?>
-                            </div>
+                            <label class="col-md-8 control-label"><?php echo $group_info['title'];?></label>
                         </div>
                     </div>
                 </div>
@@ -44,66 +42,31 @@
                     <div class="col-md-9">
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Phone Number: </label>
-                            <div class="col-sm-6">
-                                <?php echo form_input($phone + array('class' => 'form-control'));?>
-                            </div>
+                            <label class="col-md-8 control-label"><?php echo $group_info['phone'];?></label>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Mobile Number: </label>
-                            <div class="col-sm-6">
-                                <?php echo form_input($mobile + array('class' => 'form-control'));?>
-                            </div>
+                            <label class="col-md-8 control-label"><?php echo $group_info['mobile'];?></label>
                         </div>
                     </div>
                 </div>
                 <div class="row hidden_tab" id="group_clients_tab">
                     <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-6" style="padding: 0px;">
-                                    <div class="pad_white" style="min-height: 300px;">
-                                        <div id="unselected_clients">
-                                            <?php foreach($client_list as $client_info){
-                                            if(!in_array($client_info['client_id'], $selected_client_id_list)){ ?>
-                                                <div class="clientrow">
-                                                    <input type="hidden" id="<?php echo $client_info['client_id']?>">
-                                                    <input class="clientgroups_checkbox" type="checkbox">
-                                                    <?php echo $client_info['first_name'].' '.$client_info['last_name']?>
-                                                </div>    
-                                            <?php }} ?>                                              
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6" style="padding: 0px;">
-                                    <div class="pad_white" style="min-height: 300px;">
-                                        <div id="selected_clients">
-                                            <?php foreach($client_list as $client_info){
-                                            if(in_array($client_info['client_id'], $selected_client_id_list)){ ?>
-                                                <div class="clientrow_added">
-                                                    <input type="hidden" id="<?php echo $client_info['client_id']?>">
-                                                    <input class="clientgroups_checkbox" type="checkbox" checked="">
-                                                    <?php echo $client_info['first_name'].' '.$client_info['last_name']?>
-                                                </div>    
-                                            <?php }} ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--<label class="control-label"><?php echo $group_info['first_name'].' '.$group_info['last_name']?></label>-->
+                        incomplete 
+                   
                     </div>
                 </div>
                 <div class="row hidden_tab" id="notes_tab">
                     <div class="col-md-9">
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Notes: </label>
-                            <div class="col-sm-8">
-                                <?php echo form_textarea($notes + array('class' => 'form-control'));?>                                
-                            </div>
+                            <label class="col-md-8 control-label"><?php echo $group_info['notes'];?></label>
                         </div>
                     </div>
                 </div>                    
             </div>
-              <?php echo form_close();?>
+              
         </div>
     </div>
 </div>

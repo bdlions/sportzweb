@@ -4,14 +4,14 @@
     {
         $.ajax({
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "applications/gympro/create_program",
+                url: '<?php echo base_url(); ?>' + "applications/gympro/subcategory_get",
                 data: {
-                    category_id: $("#subcategry_select").val()
+                    category_id: $("#exercise_category_list").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
-                    $("#modal_delete_confirm").modal('hide');
-                    window.location.reload();
+                    
+                    //todo database info plm
+//                   $("#tbody_subcategory_list").html(tmpl("tmpl_subcategory_list", subcategory_info));
                 }
             });
     }
@@ -19,6 +19,20 @@
         $("#modal_exercise").modal('show');
     }
     
+</script>
+<script type="text/x-tmpl" id="tmpl_subcategory_list">
+    {% var i=0, subcategory_info = ((o instanceof Array) ? o[i++] : o); %}
+    {% while(subcategory_info){ %}
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-4">image="<?php echo '{%= subcategory_info.picture%}'; ?>"</div>
+            <div class="col-md-8">name="<?php echo '{%= subcategory_info.name%}'; ?>"</div>
+        </div>
+    </div>
+    
+
+    {% subcategory_info = ((o instanceof Array) ? o[i++] : null); %}
+    {% } %}
 </script>
 
 <div class="modal fade" id="modal_exercise" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -32,15 +46,7 @@
 
                 <div class="row form-group">
                     <div class="col-md-4">
-                        <?php // echo form_dropdown('exercise_category_list', $exercise_category_list, '', 'class=form-control id=exercise_category_list'); ?>
-                        <select onchange="subcategry_select()" name="category_list" class="" id="subcategry_select">
-                            <option value="blue">
-                                blueback
-                            </option>
-                            <option value="light">
-                                lighted
-                            </option>
-                        </select>
+                        <?php echo form_dropdown('exercise_category_list', $exercise_category_list, '', 'class=form-control id=exercise_category_list onchange=subcategry_select()'); ?>
                     </div>
                     <div class="col-md-8">
                         <span>right side</span>

@@ -587,7 +587,14 @@ class Gympro extends Role_Controller{
         else
         {
             $this->data['message'] = $this->session->flashdata('message'); 
-        }        
+        } 
+        $exercise_categories_array = $this->gympro_library->get_all_exercise_categories()->result_array();
+        $this->data['exercise_category_list'] = array();
+        foreach ($exercise_categories_array as $exercise_category_info) {
+            $this->data['exercise_category_list'][$exercise_category_info['exercise_category_id']] = $exercise_category_info['title'];
+        }
+        
+        
         $this->data['title'] = array(
             'name' => 'title',
             'id' => 'title',
@@ -715,47 +722,15 @@ class Gympro extends Role_Controller{
 
         $group_info = array();
         $group_info_array = $this->gympro_library->get_group_info($group_id)->result_array();
-        $user_id = $this->session->userdata('user_id');
-        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
-        $this->data['selected_client_id_list'] = $this->gympro_library->get_client_id_list_in_group($group_id);
+        
+//        $user_id = $this->session->userdata('user_id');
+//        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
+//        $this->data['selected_client_id_list'] = $this->gympro_library->get_client_id_list_in_group($group_id);
         if (!empty($group_info_array)) {
             $group_info = $group_info_array[0];
         } else {
             redirect('application/gympro/manage_groups', 'refresh');
         }
-        $group_info = array();
-        $group_info_array = $this->gympro_library->get_group_info($group_id)->result_array();
-        if (!empty($group_info_array)) {
-            $group_info = $group_info_array[0];
-        } else {
-            redirect('application/gympro/manage_groups', 'refresh');
-        }
-
-        $this->data['title'] = array(
-            'name' => 'title',
-            'id' => 'title',
-            'type' => 'text',
-            'value' => $group_info['title']
-        );
-        $this->data['phone'] = array(
-            'name' => 'phone',
-            'id' => 'phone',
-            'type' => 'text',
-            'value' => $group_info['phone']
-        );
-        $this->data['mobile'] = array(
-            'name' => 'mobile',
-            'id' => 'mobile',
-            'type' => 'text',
-            'value' => $group_info['mobile']
-        );
-        $this->data['notes'] = array(
-            'name' => 'notes',
-            'id' => 'notes',
-            'type' => 'text',
-            'value' => $group_info['notes']
-        );
-
         $this->data['group_info'] = $group_info;
         $this->template->load(null, 'applications/gympro/group/group_show', $this->data);
     }
@@ -778,6 +753,12 @@ class Gympro extends Role_Controller{
             $result['message'] = $this->gympro_library->errors_alert();
         }
         echo json_encode($result);
+    }
+    public function subcategory_get($category_id)
+    {
+        $category_id=$this->input->post('category_id');
+        $subcategory_info = $this->gympro_library->get_all_exercise_subcategories($category_id)->result_array();
+//        var_dump($subcategory_info);        exit();
     }
     
     //-----------------------------------Account Type Module-------------------------------//
@@ -1173,6 +1154,7 @@ class Gympro extends Role_Controller{
         foreach ($exercise_categories_array as $exercise_category_info) {
             $this->data['exercise_category_list'][$exercise_category_info['exercise_category_id']] = $exercise_category_info['title'];
         }
+        
         $this->data['name'] = array(
             'name' => 'name',
             'id' => 'name',
