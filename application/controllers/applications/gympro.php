@@ -754,11 +754,12 @@ class Gympro extends Role_Controller{
         }
         echo json_encode($result);
     }
-    public function subcategory_get($category_id)
+    public function program_subcategory_list()
     {
-        $category_id=$this->input->post('category_id');
-        $subcategory_info = $this->gympro_library->get_all_exercise_subcategories($category_id)->result_array();
-//        var_dump($subcategory_info);        exit();
+        $result = array();
+        $category_id = $this->input->post('category_id');
+        $result['subcategory_list'] = $this->gympro_library->get_all_exercise_subcategories($category_id)->result_array();
+        echo json_encode($result);
     }
     
     //-----------------------------------Account Type Module-------------------------------//
@@ -983,8 +984,10 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
+        $this->data['exercise_category_list'] = array(
+            0 => '---SELECT A CATEGORY---'
+        );
         $exercise_categories_array = $this->gympro_library->get_all_exercise_categories()->result_array();
-        $this->data['exercise_category_list'] = array();
         foreach ($exercise_categories_array as $exercise_category_info) {
             $this->data['exercise_category_list'][$exercise_category_info['exercise_category_id']] = $exercise_category_info['title'];
         }

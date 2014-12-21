@@ -15,8 +15,10 @@
 </script>
 
 
-<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
-
+<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css"/>
+<?php
+$this->load->view("applications/gympro/program/modal_exercise_program");
+?>
 <div class="container-fluid">
     <div class="row top_margin">
         <div class="col-md-2">
@@ -192,6 +194,3 @@
     </div>
 </div>
 </div>
-<?php
-$this->load->view("applications/gympro/program/modal_browse_program");
-?>
