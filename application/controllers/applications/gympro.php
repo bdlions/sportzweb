@@ -984,6 +984,7 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
+        
         $this->data['exercise_category_list'] = array(
             0 => '---SELECT A CATEGORY---'
         );

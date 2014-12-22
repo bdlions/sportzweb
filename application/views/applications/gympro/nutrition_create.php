@@ -233,9 +233,96 @@
 </script>-->
 
 <script>
+    var meal=0;
     $(function(){
-        $("#meal_boxes").append($("#meal_box_template").html());
+        //$("#meal_boxes").append($("#meal_box_template").html());
+        //meal++;
+        $("#meal_boxes").append(tmpl("tmpl_nutrition_meal",meal));
     });
+    
+    function add_nutrition_meal()
+    {
+        meal++;
+        $("#meal_boxes").append(tmpl("tmpl_nutrition_meal",meal));
+    }
+    function add_meals_row()
+    {
+        meals_row++;
+        $("#tmpl_nutrition_meal").append(tmpl("tmpl_meals_row",meals_row));
+    }
+</script>
+<script type="text/x-tmpl" id="tmpl_nutrition_meal">
+    {% var i=0, nutrition_meal_num = ((o instanceof Array) ? o[i++] : o); %}
+            
+                <div class="pad_white">
+                    <img class="pull-right" onclick="add_meals_row(nutrition_meal_num)" src="<?php echo base_url(); ?>resources/images/add.png" style="margin: 4px">
+                </div>
+                <div class="pad_white">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-5" style="padding: 0px; margin: 2px;">
+                                <div style="font-size: 14px;">Label</div>
+                                <div><input style="width: 100%" name="label_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
+                            </div>
+                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                                <div style="font-size: 14px;">Quantity</div>
+                                <div><input style="width: 100%"  name="quan_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
+                            </div>
+                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                                <div style="font-size: 14px;">Qty.Unit</div>
+                                <div><input style="width: 100%" name="unit_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
+                            </div>
+                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                                <div style="font-size: 14px;">Calories</div>
+                                <div><input style="width: 100%" name="cal_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
+                            </div>
+                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                                <div style="font-size: 14px;">Protin</div>
+                                <div><input style="width: 100%" name="prot_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
+                            </div>
+                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                                <div style="font-size: 14px;">Carbs</div>
+                                <div><input style="width: 100%" name="carb_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
+                            </div>
+                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                                <div style="font-size: 14px;">Fats</div>
+                                <div><input style="width: 100%" name="fats_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+</script>
+<script type="text/x-tmpl" id="tmpl_meals_row">
+    
+                <div class="row meals">
+                    <div class="col-md-12">
+                        <div class="col-md-5" style="padding: 0px; margin: 2px;">
+                            <div><input style="width: 100%" name="label"></div>
+                        </div>
+                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                            <div><input style="width: 100%"  name="quan"></div>
+                        </div>
+                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                            <div><input style="width: 100%" name="unit"></div>
+                        </div>
+                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                            <div><input style="width: 100%" name="cal"></div>
+                        </div>
+                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                            <div><input style="width: 100%" name="prot"></div>
+                        </div>
+                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                            <div><input style="width: 100%" name="carb"></div>
+                        </div>
+                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                            <div><input style="width: 100%" name="fats"></div>
+                        </div>
+                        <img class="pull-right" onclick="" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
+                    </div>
+                </div>
+            </div>
+    
 </script>
 
 
@@ -259,7 +346,7 @@
                 
                 <!--ADD MEAL-->
                 <div>
-                    <a class="cursor_pointer" onclick="$('#meal_boxes').append($('#meal_box_template').html())" style="font-size: 16px; line-height: 33px;">+Add another meal</a>
+                    <a class="cursor_pointer" onclick="add_nutrition_meal()" style="font-size: 16px; line-height: 33px;">+Add another meal</a>
                 </div>
             </div>
             <div class="pad_footer">
