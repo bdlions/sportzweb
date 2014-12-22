@@ -56,7 +56,7 @@
                         <thead>
                             <td></td>
                             <td><div class="form-group">View</div></td>
-                            <td><div class="form-group">Add</div></td>
+                            <td><div class="form-group">Create</div></td>
                             <td><div class="form-group">Approve</div></td>
                             <td><div class="form-group">Edit</div></td>
                             <td><div class="form-group">Delete</div></td>

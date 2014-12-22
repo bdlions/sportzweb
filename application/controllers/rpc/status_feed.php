@@ -63,7 +63,6 @@ class Status_feed extends JsonRPCServer {
     function post_status($status_data = '')
     {
         $result = array();
-        
         $data = json_decode($status_data);
         /*$data = new stdClass();
         $data->user_id = 4;
@@ -89,6 +88,11 @@ class Status_feed extends JsonRPCServer {
         if( $status_id !== FALSE)
         {
             $result['status'] = 1;
+			$newsfeeds = $this->statuses->get_statuses(0, 0, 0, 0, $status_id);
+			if(!empty($newsfeeds))
+			{
+				$result['status_info'] = $newsfeeds[0];
+			}
         }
         else
         {
