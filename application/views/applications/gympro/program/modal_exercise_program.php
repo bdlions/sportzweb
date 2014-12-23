@@ -16,7 +16,6 @@
                     category_id: $("#exercise_category_list").val()
                 },
                 success: function(data) {
-//                    alert(data.sample_id);
                     $("#subcategory_view").html(tmpl("tmpl_subcategory_list", data.subcategory_list));
                 }
             });
@@ -26,10 +25,16 @@
     }
     
 </script>
+
 <script type="text/x-tmpl" id="tmpl_subcategory_list">
     {% var i=0, subcategory_list = ((o instanceof Array) ? o[i++] : o); %}
+    {% var count=0;  %}
+    <div class="row">
     {% while(subcategory_list){ %}
-
+    {% if( count%3 == 0 ){ %}
+    </div>
+    <div class="row">
+    {% } %}
     <div class="col-md-4">
         <div class="row form-group">
             <div class="col-md-4">
@@ -40,7 +45,7 @@
             </div>
         </div>
     </div>
-    
+    {%  count++;  %}
     {% subcategory_list = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
@@ -55,14 +60,14 @@
 
                 <div class="row form-group">
                     <div class="col-md-4">
-                        <?php echo form_dropdown('exercise_category_list', $exercise_category_list, '', 'class=form-control id=exercise_category_list onchange=subcategry_select()'); ?>
+                        <?php echo form_dropdown('exercise_category_list', $exercise_category_list, '0', 'class=form-control id=exercise_category_list onchange=subcategry_select()'); ?>
                     </div>
                     <div class="col-md-8">
-                        <span>right side</span>
+                        <span>Click on an exercise below to add it to the programme</span>
                     </div>
 
                 </div>
-                <div class="row form-group">
+                <div class="form-group">
                     
                     <div id="subcategory_view">
                         

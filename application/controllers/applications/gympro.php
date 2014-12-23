@@ -948,16 +948,37 @@ class Gympro extends Role_Controller{
         {
             if($this->form_validation->run() == true)
             {
-                $exercise_list = array(
-                    'ex_name' => $this->input->post('ex_name'),
-                    'ex_description' => $this->input->post('ex_description'),
-                    'ex_sets' => $this->input->post('ex_sets'),
-                    'ex_reps' => $this->input->post('ex_reps'),
-                    'ex_weights' => $this->input->post('ex_weights'),
-                    'ex_reps2' => $this->input->post('ex_reps2'),
-                    'ex_tempo' => $this->input->post('ex_tempo')
-                );
-
+                $exercise_list = array();
+//                $counter=$this->input->post('weight_counter');
+                $counter=$this->input->post('counter');
+                for ( $i=1; $i<=$counter; $i++ )
+                {
+                    if ( ($this->input->post('weight_is_present_'.$i) ) != NULL )
+                    {
+                        $exercise_list[] = array(
+                            'type' => "weight",
+                            'name' => $this->input->post('ex_name_'.$i),
+                            'description' => $this->input->post('ex_description_'.$i),
+                            'sets' => $this->input->post('ex_sets_'.$i),
+                            'reps' => $this->input->post('ex_reps_'.$i),
+                            'weights' => $this->input->post('ex_weights_'.$i),
+                            'reps2' => $this->input->post('ex_reps2_'.$i),
+                            'tempo' => $this->input->post('ex_tempo_'.$i)
+                        );
+                        continue;
+                    }
+                    elseif ( ($this->input->post('cardio_is_present_'.$i) ) != NULL )
+                    {
+                        $exercise_list[] = array(
+                            'type' => "cardio",
+                            'description' => $this->input->post('ex_description_'.$i),
+                            'level' => $this->input->post('ex_level_'.$i),
+                            'speed' => $this->input->post('ex_speed_'.$i),
+                            'time' => $this->input->post('ex_time_'.$i),
+                            'target' => $this->input->post('ex_target_'.$i)
+                        );
+                    }
+                }
                 $data = array(
                     'user_id' => $this->session->userdata('user_id'),
                     'focus' => $this->input->post('focus'),
@@ -970,11 +991,11 @@ class Gympro extends Role_Controller{
                     'exercise_list' => json_encode($exercise_list)
                 );
                 $create_program_id = $this->gympro_library->create_program($data);
-                if ($create_program_id !== FALSE) {
-                    $result['message'] = 'Programme is added successfully.';
-                    redirect('applications/gympro/program/programs', 'refresh');
-                    } else {
-                    $result['message'] = $this->gympro_library->errors_alert();
+                if ($create_program_id !== FALSE)
+                {
+                    $this->data['message'] = 'Programme is added successfully.';
+                } else {
+                    $this->data['message'] = $this->gympro_library->errors_alert();
                 }
             } else {
                 $this->data['message'] = validation_errors();

@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    var weight = 1;
+    var counter = 1;
     $(function() {
         $('#start_date').datepicker({
             dateFormat: 'dd-mm-yy',
@@ -8,22 +8,23 @@
             $('#start_date').text($('#start_date').data('date'));
             $('#start_date').datepicker('hide');
         });
-        
-        $("#exercise_box").append(tmpl("tmpl_weight_exercise",weight));
+        $("#counter").val(counter);
+        $("#exercise_box").append(tmpl("tmpl_weight_exercise",counter));
         
             
     });
     
     function add_weight_exercise()
     {
-        weight++;
-        $("#exercise_box").append(tmpl("tmpl_weight_exercise",weight));
+        counter++;
+        $("#counter").val(counter);
+        $("#exercise_box").append(tmpl("tmpl_weight_exercise",counter));
     }
-    var cardio=0;
     function add_cardio_exercise()
     {
-        cardio++;
-        $("#exercise_box").append(tmpl("tmpl_cardio_exercise",cardio));
+        counter++;
+        $("#counter").val(counter);        
+        $("#exercise_box").append(tmpl("tmpl_cardio_exercise",counter));
     }
     
 
@@ -45,6 +46,9 @@
                 <div class="pad_white">
                     <div class="row">
                         <div class="col-md-12">
+                             <div>
+                             <input type=hidden class="form-control" name="weight_is_present_<?php echo '{%= weight_num%}'; ?>" value="1">
+                            </div>
                             <div class="col-md-6" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Description</div>
                                 <div><textarea style="width: 100%; min-height: 50px;" name="ex_description_<?php echo '{%= weight_num%}'; ?>"></textarea></div>
@@ -94,25 +98,28 @@
                 <div class="pad_white">
                     <div class="row">
                         <div class="col-md-12">
+                        <div>
+                             <input type=hidden class="form-control" name="cardio_is_present_<?php echo '{%= cardio_num%}'; ?>" value="1">
+                            </div>
                             <div class="col-md-6" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Description</div>
                                 <div><textarea style="width: 100%; min-height: 50px;" name="ex_description_<?php echo '{%= cardio_num%}'; ?>"></textarea></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Level</div>
-                                <div><input style="width: 100%" name="ex_reps2_<?php echo '{%= cardio_num%}'; ?>"></div>
+                                <div><input style="width: 100%" name="ex_level_<?php echo '{%= cardio_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Speed</div>
-                                <div><input style="width: 100%" name="ex_sets_<?php echo '{%= cardio_num%}'; ?>"></div>
+                                <div><input style="width: 100%" name="ex_speed_<?php echo '{%= cardio_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Time</div>
-                                <div><input style="width: 100%" name="ex_reps_<?php echo '{%= cardio_num%}'; ?>"></div>
+                                <div><input style="width: 100%" name="ex_time_<?php echo '{%= cardio_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Target H.R</div>
-                                <div><input style="width: 100%" name="ex_weights_<?php echo '{%= cardio_num%}'; ?>"></div>
+                                <div><input style="width: 100%" name="ex_target_<?php echo '{%= cardio_num%}'; ?>"></div>
                             </div>
                         </div>
                     </div>
@@ -138,8 +145,12 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
             <div class="pad_title">
                 CREATE PROGRAMME
             </div>
+            
             <?php echo form_open("applications/gympro/create_program", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>
             <div class="pad_body">
+                <div>
+                    <input type=hidden class="form-control" name="counter" id="counter">
+                </div>
                 <div class="row">
                     <div class="col-md-7">
                         <div class="form-group">
@@ -185,6 +196,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                                 <textarea class="form-control" name="cool_down"></textarea>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 
