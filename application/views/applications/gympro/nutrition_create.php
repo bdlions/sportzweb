@@ -232,101 +232,119 @@
 )
 </script>-->
 
+<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <script>
-    var meal=0;
+    var group_counter = 0;
+    var row_counter = 0;
     $(function(){
-        //$("#meal_boxes").append($("#meal_box_template").html());
-        //meal++;
-        $("#meal_boxes").append(tmpl("tmpl_nutrition_meal",meal));
+        add_meal_group();
     });
-    
-    function add_nutrition_meal()
+    function delete_meal_row(current_row)
     {
-        meal++;
-        $("#meal_boxes").append(tmpl("tmpl_nutrition_meal",meal));
+        $(current_row).closest('.meal_row').remove();
     }
-    function add_meals_row()
+    function add_meal_row(current_group)
     {
-        meals_row++;
-        $("#tmpl_nutrition_meal").append(tmpl("tmpl_meals_row",meals_row));
+        var oo = [];
+        oo[0] = $(current_group).siblings('.group_number').val();
+        oo[1] = ++row_counter;
+        
+        $(current_group).parent().next().find('.meal_row_place').append(tmpl('meal_row_tmpl', oo));
     }
+    function add_meal_group()
+    {
+        var oo = [];
+        oo[0] = ++group_counter;
+        oo[1] = ++row_counter;
+        $('#meal_group_place').append(tmpl('meal_group_tmpl', oo));
+    }
+//    function delete_meal_group()
+//    {
+//        ;
+//    }
+
 </script>
-<script type="text/x-tmpl" id="tmpl_nutrition_meal">
-    {% var i=0, nutrition_meal_num = ((o instanceof Array) ? o[i++] : o); %}
-            
-                <div class="pad_white">
-                    <img class="pull-right" onclick="add_meals_row(nutrition_meal_num)" src="<?php echo base_url(); ?>resources/images/add.png" style="margin: 4px">
+<script type="text/x-tmpl" id="meal_row_tmpl">
+        <div class="row meal_row">
+            <div class="col-md-12">
+                <div class="col-md-5" style="padding: 0px; margin: 2px;">
+                    <div><input style="width: 100%" name="label_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                 </div>
-                <div class="pad_white">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-5" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Label</div>
-                                <div><input style="width: 100%" name="label_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Quantity</div>
-                                <div><input style="width: 100%"  name="quan_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Qty.Unit</div>
-                                <div><input style="width: 100%" name="unit_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Calories</div>
-                                <div><input style="width: 100%" name="cal_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Protin</div>
-                                <div><input style="width: 100%" name="prot_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Carbs</div>
-                                <div><input style="width: 100%" name="carb_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Fats</div>
-                                <div><input style="width: 100%" name="fats_<?php echo '{%= nutrition_meal_num%}'; ?>"></div>
-                            </div>
-                        </div>
+                <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                    <div><input style="width: 100%" name="quan_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                </div>
+                <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                    <div><input style="width: 100%" name="unit_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                </div>
+                <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                    <div><input style="width: 100%" name="cal_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                </div>
+                <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                    <div><input style="width: 100%" name="prot_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                </div>
+                <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                    <div><input style="width: 100%" name="carb_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                </div>
+                <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                    <div><input style="width: 100%" name="fats_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                </div>
+                <img class="pull-right" onclick="delete_meal_row(this)" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
+            </div>
+        </div>
+</script>
+<script type="text/x-tmpl" id="meal_group_tmpl">
+        <div class="pad_white">
+            <select name="meal_time" style="margin-right: 15px; width: 100px;">
+                <?php foreach ($meal_time_list as $key => $meal_time): ?>
+                    <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <select name="work_out" style="margin-right: 15px; width: 100px;">
+                <?php foreach ($workout_list as $key => $meal_time): ?>
+                    <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <input type="hidden" value="<?php echo '{%=o[0]%}'; ?>" class="group_number">
+            <img class="pull-right" onclick="add_meal_row(this)" src="<?php echo base_url(); ?>resources/images/add.png" style="margin: 4px">
+        </div>
+        <div class="pad_white">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-5" style="padding: 0px; margin: 2px;">
+                        <div style="font-size: 14px;">Label</div>
+                        <div><input style="width: 100%" name="label_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                     </div>
-                </div>
-              
-</script>
-<script type="text/x-tmpl" id="tmpl_meals_row">
-    
-                <div class="row meals">
-                    <div class="col-md-12">
-                        <div class="col-md-5" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="label"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%"  name="quan"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="unit"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="cal"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="prot"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="carb"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="fats"></div>
-                        </div>
-                        <img class="pull-right" onclick="" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
+                    <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                        <div style="font-size: 14px;">Quantity</div>
+                        <div><input style="width: 100%"  name="quan_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    </div>
+                    <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                        <div style="font-size: 14px;">Qty.Unit</div>
+                        <div><input style="width: 100%" name="unit_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    </div>
+                    <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                        <div style="font-size: 14px;">Calories</div>
+                        <div><input style="width: 100%" name="cal_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    </div>
+                    <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                        <div style="font-size: 14px;">Protin</div>
+                        <div><input style="width: 100%" name="prot_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    </div>
+                    <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                        <div style="font-size: 14px;">Carbs</div>
+                        <div><input style="width: 100%" name="carb_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    </div>
+                    <div class="col-md-1" style="padding: 0px; margin: 2px;">
+                        <div style="font-size: 14px;">Fats</div>
+                        <div><input style="width: 100%" name="fats_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                     </div>
                 </div>
             </div>
-    
+            <!--MEALS ARE ADDED HERE-->
+            <div class="meal_row_place"> </div>
+        </div>
+        <div class="form-group"></div>
 </script>
-
-
-<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 
 <div class="container-fluid">
     <div class="row top_margin">
@@ -341,107 +359,18 @@
             <div class="pad_body">
                 
                 <!--MEAL BOXES ARE ADDED HERE-->
-                <div id="meal_boxes"></div>
+                <div id="meal_group_place"></div>
                 
                 
-                <!--ADD MEAL-->
+                <!--ADD MEAL BUTTON-->
                 <div>
-                    <a class="cursor_pointer" onclick="add_nutrition_meal()" style="font-size: 16px; line-height: 33px;">+Add another meal</a>
+                    <a class="cursor_pointer" onclick="add_meal_group()" style="font-size: 16px; line-height: 33px;">+Add another meal</a>
                 </div>
             </div>
             <div class="pad_footer">
                 <button type="submit">Save Changes</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Go Back</a>
             </div>
             <?php echo form_close(); ?>
-            
-            
-            
-            
-            
-            <!--TEMPLATES-->
-            <div id="meals_row_template" style="display: none">
-                <div class="row meals">
-                    <div class="col-md-12">
-                        <div class="col-md-5" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="label"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%"  name="quan"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="unit"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="cal"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="prot"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="carb"></div>
-                        </div>
-                        <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                            <div><input style="width: 100%" name="fats"></div>
-                        </div>
-                        <img class="pull-right" onclick="$(this).closest('.meals').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
-                    </div>
-                </div>
-            </div>
-            <div id="meal_box_template" style="display:none">
-                <div class="pad_white">
-                    <select name="meal_time" style="margin-right: 15px; width: 100px;">
-                        <?php foreach ($meal_time_list as $key => $meal_time): ?>
-                            <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <select name="work_out" style="margin-right: 15px; width: 100px;">
-                        <?php foreach ($workout_list as $key => $meal_time): ?>
-                            <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <img class="pull-right" onclick="$(this).parent().next().find('.meals_row').append($('#meals_row_template').html())" src="<?php echo base_url(); ?>resources/images/add.png" style="margin: 4px">
-                </div>
-                <div class="pad_white">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-5" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Label</div>
-                                <div><input style="width: 100%" name="label"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Quantity</div>
-                                <div><input style="width: 100%"  name="quan"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Qty.Unit</div>
-                                <div><input style="width: 100%" name="unit"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Calories</div>
-                                <div><input style="width: 100%" name="cal"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Protin</div>
-                                <div><input style="width: 100%" name="prot"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Carbs</div>
-                                <div><input style="width: 100%" name="carb"></div>
-                            </div>
-                            <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Fats</div>
-                                <div><input style="width: 100%" name="fats"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--MEALS ARE ADDED HERE-->
-                    <div class="meals_row"> </div>
-                </div>
-                <div class="form-group"></div>
-            </div>
-            <!--TEMPLATES-->
-            
-            
             
         </div>
     </div>
