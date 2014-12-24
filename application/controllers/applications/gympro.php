@@ -1350,40 +1350,60 @@ class Gympro extends Role_Controller{
      */
     public function create_nutrition()
     {
-        $this->form_validation->set_rules('label', 'Focus', 'xss_clean|required');
-        $this->form_validation->set_rules('quan', 'Start Date', 'xss_clean');
+//        TODO FORM VALIDATION
+//        $this->form_validation->set_rules('label', 'Focus', 'xss_clean|required');
+//        $this->form_validation->set_rules('quan', 'Start Date', 'xss_clean');
         
         if ($this->input->post())
         {
-            if($this->form_validation->run() == true)
+            //if($this->form_validation->run() == true)
             {
-                $meal_list = array(
-                    'meal_time' => $this->input->post('meal_time'),
-                    'work_out' => $this->input->post('work_out'),
-                    'label' => $this->input->post('label'),
-                    'quan' => $this->input->post('quan'),
-                    'unit' => $this->input->post('unit'),
-                    'cal' => $this->input->post('cal'),
-                    'prot' => $this->input->post('prot'),
-                    'carb' => $this->input->post('carb'),
-                    'fats' => $this->input->post('fats')
-                );
-
+                $meal_list = array();
+                $index_gr = 0;
+                $index_rw = 0;
+                $group_counter = $this->input->post('group_counter');
+                $row_counter = $this->input->post('row_counter');
+                for ($i = 1; $i <= $group_counter; $i++)
+                {
+                    if (($this->input->post('group_is_present_' . $i) ) != NULL)
+                    {
+                        for ($j = 1; $j <= $row_counter; $j++)
+                        {
+                            if (($this->input->post('row_is_present_' . $i . '_' . $j) ) != NULL)
+                            {
+                                $meal_list[$index_gr][$index_rw] = array(
+                                    'meal_time' => $this->input->post('meal_time_' . $i . '_' . $j),
+                                    'work_out' => $this->input->post('work_out_' . $i . '_' . $j),
+                                    'label' => $this->input->post('label_' . $i . '_' . $j),
+                                    'quan' => $this->input->post('quan_' . $i . '_' . $j),
+                                    'unit' => $this->input->post('unit_' . $i . '_' . $j),
+                                    'cal' => $this->input->post('cal_' . $i . '_' . $j),
+                                    'prot' => $this->input->post('prot_' . $i . '_' . $j),
+                                    'carb' => $this->input->post('carb_' . $i . '_' . $j),
+                                    'fats' => $this->input->post('fats_' . $i . '_' . $j)
+                                );
+                                $index_rw++;
+                            }
+                        }
+                        $index_gr++;
+                    }
+                }
                 $data = array(
                     'user_id' => $this->session->userdata('user_id'),
-                    
                     'meal_list' => json_encode($meal_list)
                 );
                 $create_program_id = $this->gympro_library->create_nutrition($data);
                 if ($create_program_id !== FALSE) {
                     $result['message'] = 'Nutrition is added successfully.';
                     redirect('applications/gympro/nutrition', 'refresh');
-                    } else {
+                } else {
                     $result['message'] = $this->gympro_library->errors_alert();
                 }
-            } else {
-                $this->data['message'] = validation_errors();
-            }
+            } 
+//            else 
+//                {
+//                $this->data['message'] = validation_errors();
+//            }
         }
         else
         {
