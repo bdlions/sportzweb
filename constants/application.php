@@ -30,6 +30,10 @@
     define("APPLICATION_DIRECTORY_IMAGE1_TYPE_ID",                           1);
     define("APPLICATION_DIRECTORY_IMAGE2_TYPE_ID",                           2);
     define("APPLICATION_DIRECTORY_IMAGE_GALLERY_TYPE_ID",                    3);
+    define("APPLICATION_DIRECTORY_GALLERY_IMAGE1_ID",                        4);
+    define("APPLICATION_DIRECTORY_GALLERY_IMAGE2_ID",                        5);
+    define("APPLICATION_DIRECTORY_GALLERY_IMAGE3_ID",                        6);
+    define("APPLICATION_DIRECTORY_GALLERY_IMAGE4_ID",                        7);
     define("APPLICATION_DIRECTORY_IMAGE1_WIDTH",                             75);
     define("APPLICATION_DIRECTORY_IMAGE1_HEIGHT",                            75);
     define("APPLICATION_DIRECTORY_IMAGE2_WIDTH",                             690);

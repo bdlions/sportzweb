@@ -227,7 +227,11 @@ class Applications_directory extends CI_Controller{
         $this->data['image_type_list'] = array(
             APPLICATION_DIRECTORY_IMAGE1_TYPE_ID => 'Icon',
             APPLICATION_DIRECTORY_IMAGE2_TYPE_ID => 'Slider',
-            APPLICATION_DIRECTORY_IMAGE_GALLERY_TYPE_ID => 'Gallery',
+            //APPLICATION_DIRECTORY_IMAGE_GALLERY_TYPE_ID => 'Gallery',
+            APPLICATION_DIRECTORY_GALLERY_IMAGE1_ID => 'Gallery Image1',
+            APPLICATION_DIRECTORY_GALLERY_IMAGE2_ID => 'Gallery Image2',
+            APPLICATION_DIRECTORY_GALLERY_IMAGE3_ID => 'Gallery Image3',
+            APPLICATION_DIRECTORY_GALLERY_IMAGE4_ID => 'Gallery Image4'
         );
         $this->template->load($this->tmpl, "admin/applications/directory/update_application", $this->data);
     }
@@ -265,12 +269,13 @@ class Applications_directory extends CI_Controller{
                     );
                     $this->admin_application_directory_library->update_application($application_id,$data);
                 }
-                else if($image_type_list_id == APPLICATION_DIRECTORY_IMAGE_GALLERY_TYPE_ID)
+                else
                 {
                     $this->utils->resize_image(APPLICATION_DIRECTORY_IMAGE_PATH.$image_name, APPLICATION_DIRECTORY_GALLERY_SMALL_IMAGE_PATH.$img, APPLICATION_DIRECTORY_GALLERY_IMAGE_SMALL_HEIGHT, APPLICATION_DIRECTORY_GALLERY_IMAGE_SMALL_WIDTH);
                     $this->utils->resize_image(APPLICATION_DIRECTORY_IMAGE_PATH.$image_name, APPLICATION_DIRECTORY_GALLERY_LARGE_IMAGE_PATH.$img, APPLICATION_DIRECTORY_GALLERY_IMAGE_LARGE_HEIGHT, APPLICATION_DIRECTORY_GALLERY_IMAGE_LARGE_WIDTH);
                     
                     $data = array(
+                        'id' => $image_type_list_id,
                         'img' => $img
                     );
                     $this->admin_application_directory_library->add_gallery_image($application_id, $data);                    

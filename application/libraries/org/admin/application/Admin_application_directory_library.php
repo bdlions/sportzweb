@@ -70,9 +70,10 @@ class Admin_application_directory_library {
         if(!empty($application_info_array) && isset($data['img']) )
         {
             $image_info = new stdClass();
+            $image_info->id = $data['id'];
             $image_info->img = $data['img'];
             $image_list = array();
-            $image_list[] = $image_info;
+            $image_list[$data['id']] = $image_info;
             $image_counter = 1;
             $application_info = $application_info_array[0];
             $img_gallery = $application_info['img_gallery'];
@@ -81,16 +82,25 @@ class Admin_application_directory_library {
                 $img_gallery_array = json_decode($img_gallery); 
                 foreach($img_gallery_array as $img_gallery_info)
                 {
-                    $image_list[] = $img_gallery_info;
-                    $image_counter++;
+                    if($img_gallery_info->id != $image_info->id )
+                    {
+                        $image_list[$img_gallery_info->id] = $img_gallery_info;  
+                        $image_counter++;
+                    }
                     if($image_counter == APPLICATION_DIRECTORY_IMAGE_GALLERY_TOTAL_IMAGES)
                     {
                         break;
                     }
                 }
             }
+            ksort($image_list);
+            $gallery_image_list = array();
+            foreach($image_list as $gallery_image_info)
+            {
+                $gallery_image_list[] = $gallery_image_info;
+            }
             $additional_data = array(
-                'img_gallery' => json_encode($image_list)
+                'img_gallery' => json_encode($gallery_image_list)
             );
             return $this->admin_application_directory_model->update_application($application_id, $additional_data);
         }
