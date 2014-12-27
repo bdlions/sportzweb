@@ -183,6 +183,28 @@ a:hover
     padding-bottom: 8px;
 }
 
+/*PAGE-INDEX.PHP
+ .over_image_caption
+ {
+     position: absolute;
+     top: 20px;
+     left: 30px;
+     background-color: whitesmoke;
+     padding: 8px;
+     width: 300px
+ }*/
+/*DROPDOWN*/
+.user_category_dropdown_optgroup
+{
+    padding: 5px;
+    font-size: 16px;
+}
+.user_category_dropdown_option
+{
+    font-size: 16px;
+}
+
+
 /*PAGE-CREATE-NUTRITION*/
 #meal_template
 {

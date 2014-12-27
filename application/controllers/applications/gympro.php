@@ -22,36 +22,40 @@ class Gympro extends Role_Controller{
     public function index()
     {
         $user_id = $this->session->userdata('user_id');
-        $gympro_user_info = array();
-        $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
-        if(!empty($gympro_user_info_array))
-        {
-            $gympro_user_info = $gympro_user_info_array[0];
-            if(!isset($gympro_user_info['account_type_id']) || $gympro_user_info['account_type_id'] < 0)
-            {
-                $this->account($gympro_user_info['user_id']);
-            }
-            else if(!isset($gympro_user_info['height_unit_id']) || $gympro_user_info['height_unit_id'] < 0)
-            {
-                $this->preference($gympro_user_info['user_id']);
-            }
-            else
-            {
-                $this->manage_clients();
-            }            
-        }
-        else
-        {
-            $data = array(
-                'user_id' => $user_id,
-                'account_type_id' => APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT
-            );
-            $gympro_user_id = $this->gympro_library->create_gympro_user($data);
-            if($gympro_user_id !== FALSE)
-            {
-                $this->account($user_id);
-            }
-        }
+//        $gympro_user_info = array();
+//        $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
+//        if(!empty($gympro_user_info_array))
+//        {
+//            $gympro_user_info = $gympro_user_info_array[0];
+//            if(!isset($gympro_user_info['account_type_id']) || $gympro_user_info['account_type_id'] < 0)
+//            {
+//                $this->account($gympro_user_info['user_id']);
+//            }
+//            else if(!isset($gympro_user_info['height_unit_id']) || $gympro_user_info['height_unit_id'] < 0)
+//            {
+//                $this->preference($gympro_user_info['user_id']);
+//            }
+//            else
+//            {
+//                $this->manage_clients();
+//            }            
+//        }
+//        else
+//        {
+//            $data = array(
+//                'user_id' => $user_id,
+//                'account_type_id' => APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT
+//            );
+//            $gympro_user_id = $this->gympro_library->create_gympro_user($data);
+//            if($gympro_user_id !== FALSE)
+//            {
+//                $this->account($user_id);
+//            }
+//        }
+        $client_list = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
+        $this->data['client_list'] = $client_list;
+        $this->data['selected_client_id'] = 0;
+        $this->template->load(null,'applications/gympro/index', $this->data);
     }
     //----------------------------------- Client Module --------------------------------//
     /*
