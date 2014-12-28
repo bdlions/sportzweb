@@ -145,7 +145,7 @@
             <div class="pad_title">
                 NEW NUTRITION PLAN
             </div>
-            <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>            
+            <?php echo form_open("applications/gympro/create_nutrition/".$nutrition_id, array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>            
             <div class="pad_body">
                 <input type="hidden" name="group_counter" id="group_counter">
                 <input type="hidden" name="row_counter" id="row_counter">
