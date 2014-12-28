@@ -1203,6 +1203,18 @@ class Gympro extends Role_Controller{
         }
         echo json_encode($result);
     }
+    public function show_program($program_id)
+    {
+        $program_info=array();
+        $program_info = $this->gympro_library->get_program_info($program_id)->result_array();
+        $this->data['program_info'] = $program_info[0];
+        $this->data['exercise'] = json_decode( $program_info[0]['exercise_list'], TRUE );
+        $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
+        $this->data['program_id'] = $program_id;
+        $this->data['message'] = '';   
+        $this->template->load(null,'applications/gympro/program/program_show', $this->data);   
+        
+    }
     //---------------------------------------Exercise Module---------------------------------------//
     /*
      * This method will show all exercises of this gympro user
