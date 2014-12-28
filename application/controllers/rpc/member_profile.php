@@ -92,4 +92,48 @@ class Member_profile extends JsonRPCServer {
         //echo json_encode($response);
         return json_encode($response);
     }
+    
+    /*
+     * This method will store special interest of a member
+     * @param user id ad int and special interest id as array
+     */
+    function store_special_interests()
+    {
+        $user_id = 4;
+        $special_interest_id_list = array(2);
+        
+        $response = array(
+            'message' => ''
+        );
+        
+        $selected_special_interest_list = array();
+        $special_interest_list = $this->special_interest->get_special_interest_list();
+        foreach($special_interest_list as $special_interest_info)
+        {
+            if(in_array($special_interest_info['special_interest_id'], $special_interest_id_list))
+            {
+                foreach($special_interest_info['sub_category_list'] as $subcategory)
+                {
+                    $selected_special_interest_list[] = array('interest_id'=>$special_interest_info['special_interest_id'], 'sub_interest_id' => $subcategory['id']);
+                }
+            }
+        }
+        $profile_data = array(
+            'user_id' => $user_id,
+            'special_interests' => json_encode($selected_special_interest_list)
+        );
+        $profile_id = $this->basic_profile->get_profile_id();
+        if($profile_id > 0){
+            //update profile
+           $this->basic_profile->update_profile($profile_data);
+           $response['message'] = 'Interest is updated successfully.';
+        }
+        else{
+            //insert profile for the first time
+            $this->basic_profile->create_profile($profile_data);
+            $response['message'] = 'Interest is stored successfully.';
+        }
+        //echo json_encode($response);
+        return json_encode($response);
+    }
 }

@@ -561,4 +561,12 @@ class Special_interest_model extends CI_Model {
         }
         return $interests;
     }
+    
+    // rpc module
+    public function get_special_interest_list()
+    {
+        return $this->db->select($this->tables['special_interests_types'].'.id as special_interest_id,'.$this->tables['special_interests_types'].'.*')
+                ->from($this->tables['special_interests_types'])
+                ->get();
+    }
 }

@@ -74,4 +74,32 @@ class Special_interest {
     public function __get($var) {
         return get_instance()->$var;
     }
+    
+    // rpc module
+    public function get_special_interest_list()
+    {
+        $special_interest_list = array();
+        $special_interests_array = $this->special_interest_model->get_special_interest_list()->result_array();
+        foreach($special_interests_array as $special_interest_info)
+        {
+            $subcategories = array();                
+            $sub_category_list = $special_interest_info['sub_category_list'];
+            if( $sub_category_list != "" && $sub_category_list != NULL )
+            {
+                $asub_category_list_array = json_decode($sub_category_list);   
+                foreach($asub_category_list_array as $asub_category_info)
+                {
+                    $subcategory = array(
+                        'id' => $asub_category_info->id,
+                        'description' => $asub_category_info->description
+                    );  
+                    $subcategories[] = $subcategory;
+                }
+            }
+            $special_interest_info['sub_category_list'] = $subcategories;
+            $special_interest_list[] = $special_interest_info;
+        }
+        return $special_interest_list;
+    }
+   
 }
