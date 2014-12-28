@@ -94,6 +94,27 @@ class Member_profile extends JsonRPCServer {
     }
     
     /*
+     * This method will return special interest list
+     */
+    public function get_special_interests()
+    {
+        $response = array();
+        $special_interest_list = array();
+        $special_interests_array = $this->special_interest->get_special_interest_list();
+        foreach($special_interests_array as $special_interest_info)
+        {
+            $interest = array(
+                'special_interest_id' => $special_interest_info['special_interest_id'],
+                'description' => $special_interest_info['description'],
+            );
+            $special_interest_list[] = $interest;
+        }
+        $response['special_interest_list'] = $special_interest_list;
+        //echo json_encode($response);
+        return json_encode($response);
+    }
+    
+    /*
      * This method will store special interest of a member
      * @param user id ad int and special interest id as array
      */
