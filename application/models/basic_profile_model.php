@@ -216,5 +216,21 @@ class Basic_Profile_model extends Ion_auth_model {
             ->get();
         return $this;
     }
+    /*
+     * This method will return special interests of a user
+     * @param $user_id , user id
+     * @Author Nazmul on 29th December 2014
+     */
+    public function get_member_profile_special_interests($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $this->db->where($this->tables['basic_profile'].'.user_id', $user_id);
+        return $this->db->select($this->tables['basic_profile'].'.special_interests')
+            ->from($this->tables['basic_profile'])
+            ->get();
+    }
    
 }

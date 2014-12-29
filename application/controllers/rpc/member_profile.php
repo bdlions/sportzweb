@@ -96,9 +96,10 @@ class Member_profile extends JsonRPCServer {
     /*
      * This method will return special interest list
      */
-    public function get_special_interests()
+    public function get_special_interests($user_id = 0)
     {
         $response = array();
+        $user_special_interest_id_list = $this->special_interest->get_user_special_interest_id_list($user_id);
         $special_interest_list = array();
         $special_interests_array = $this->special_interest->get_special_interest_list();
         foreach($special_interests_array as $special_interest_info)
@@ -107,6 +108,14 @@ class Member_profile extends JsonRPCServer {
                 'special_interest_id' => $special_interest_info['special_interest_id'],
                 'description' => $special_interest_info['description'],
             );
+            if(in_array($special_interest_info['special_interest_id'], $user_special_interest_id_list))
+            {
+                $interest['is_selected'] = 1;
+            }
+            else
+            {
+                $interest['is_selected'] = 0;
+            }
             $special_interest_list[] = $interest;
         }
         $response['special_interest_list'] = $special_interest_list;
@@ -115,14 +124,15 @@ class Member_profile extends JsonRPCServer {
     }
     
     /*
-     * This method will store special interest of a member
-     * @param user id ad int and special interest id as array
+     * This method will store special interests of a member
+     * @param $user_id, user id
+     * @param $interest_data, special interest id list
+     * @Author Nazmul on 29th December 2014
      */
-    function store_special_interests()
+    function store_special_interests($user_id = 0,$interest_data = '')
     {
-        $user_id = 4;
-        $special_interest_id_list = array(2);
-        
+        $interest_data = '[1,2,3]';
+        $special_interest_id_list = json_decode($interest_data);    
         $response = array(
             'message' => ''
         );
@@ -143,10 +153,10 @@ class Member_profile extends JsonRPCServer {
             'user_id' => $user_id,
             'special_interests' => json_encode($selected_special_interest_list)
         );
-        $profile_id = $this->basic_profile->get_profile_id();
+        $profile_id = $this->basic_profile->get_profile_id($user_id);
         if($profile_id > 0){
             //update profile
-           $this->basic_profile->update_profile($profile_data);
+           $this->basic_profile->update_profile($profile_data, $profile_id);
            $response['message'] = 'Interest is updated successfully.';
         }
         else{

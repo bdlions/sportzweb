@@ -26,6 +26,7 @@ class Special_interest {
     public function __construct() {
         $this->load->config('ion_auth', TRUE);
         $this->load->library('email');
+        $this->load->library('basic_profile');
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
         
@@ -100,6 +101,33 @@ class Special_interest {
             $special_interest_list[] = $special_interest_info;
         }
         return $special_interest_list;
+    }
+    
+    public function get_user_special_interest_id_list($user_id = 0)
+    {
+        $special_interest_id_list = array();
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $special_interest_info_array = $this->basic_profile->get_member_profile_special_interests($user_id)->result_array();
+        if(!empty($special_interest_info_array))
+        {
+            $special_interest_info = $special_interest_info_array[0];
+            $special_interests = $special_interest_info['special_interests'];
+            if( $special_interests != "" && $special_interests != NULL )
+            {
+                $special_interests_array = json_decode($special_interests);   
+                foreach($special_interests_array as $special_interest)
+                {
+                    if(!in_array($special_interest->interest_id, $special_interest_id_list))
+                    {
+                        $special_interest_id_list[] = $special_interest->interest_id;
+                    }
+                }
+            }
+        }
+        return $special_interest_id_list;
     }
    
 }
