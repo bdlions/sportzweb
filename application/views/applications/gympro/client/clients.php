@@ -32,14 +32,30 @@
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <a href="<?php echo base_url().'applications/gympro/show_client/'.$client_info['client_id']?>">
                             <?php if(isset($client_info['picture']) && $client_info['picture'] != ''){ ?>
-                            <img class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$client_info['picture'] ?>"/>
+                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$client_info['picture'] ?>"/>
                             <?php }else{?>
-                            <img class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.CLIENT_DEFAULT_PROFILE_PICTURE_NAME ?>"/>
+                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.CLIENT_DEFAULT_PROFILE_PICTURE_NAME ?>"/>
                             <?php } ?>
                         </a>
                     </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                        <a href="<?php echo base_url().'applications/gympro/show_client/'.$client_info['client_id']?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']?></a>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_client/'.$client_info['client_id']?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']?></a>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <div class="dropdown friends-satus-dropdown">
+                            <a id="friends_status" data-toggle="dropdown" href="#" >
+                                <img style="float: left; padding-top: 4px" src="<?php echo base_url() ?>resources/images/friends_status.png" alt=""/>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="friends_status">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="<?php echo base_url().'applications/gympro/edit_client/'.$client_info['client_id']?>" >Edit</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="">Delete</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 <!--                <div class="pull-right">

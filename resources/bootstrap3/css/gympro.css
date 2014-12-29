@@ -40,10 +40,7 @@ a:hover
 {
     margin-top: 20px;
 }
-.user_prof img
-{
-    width: 100%;
-}
+
 /*.user_prof:after { 
    content: " ";
    display: block; 
@@ -54,14 +51,10 @@ a:hover
 {
     text-decoration: none;
 }
-.user_prof a span
-{
-    color: #007AA3;
-}
+
 .user_prof a
 {
     color: #880015;
-    font-size: 18px;
 }
 .user_prof
 {
