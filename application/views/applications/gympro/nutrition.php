@@ -22,7 +22,7 @@
                             </tr>
                             <?php foreach ($nutrition_list as $nutrition): ?>
                                 <tr>
-                                    <td><?php echo $nutrition['created_on'] ?></td>
+                                    <td><a href="<?php echo base_url() . 'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>"><?php echo $nutrition['created_on'] ?></a></td>
                                     <td><a href="<?php echo base_url() . 'applications/gympro/edit_nutrition/' . $nutrition['nutrition_id']; ?>">Edit</a></td>
                                     <td style="text-align: center">
                                         <a onclick="open_modal_delete_confirm(<?php echo $nutrition['id'] ?>)" >

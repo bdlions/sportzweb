@@ -20,12 +20,18 @@
                 }
             });
     }
-    function open_modal_browse_exercise() {
+    function open_modal_browse_exercise(number) {
+        $("#hf_numb").val(number);
         $("#modal_exercise").modal('show');
+    }
+    function set_subcategory_name(value){
+        var position = $("#hf_numb").val();
+        $( "input[name='name_" + position + "']" ).val(value);
+        $("#modal_exercise").modal('hide');
     }
     
 </script>
-
+<img onclick="set_subcategory_name(<?php echo '{%= subcategory_list.title%}'; ?>)">
 <script type="text/x-tmpl" id="tmpl_subcategory_list">
     {% var i=0, subcategory_list = ((o instanceof Array) ? o[i++] : o); %}
     {% var count=0;  %}
@@ -38,7 +44,7 @@
     <div class="col-md-4">
         <div class="row form-group">
             <div class="col-md-4">
-                <img src="<?php echo base_url().PROGRAM_EXERCISE_SUBCATEGORY_PICTURE_PATH_W50_H50.'{%= subcategory_list.picture%}';?>">
+                <img onclick="set_subcategory_name('<?php echo "{%= subcategory_list.title%}"; ?>')" src="<?php echo base_url().PROGRAM_EXERCISE_SUBCATEGORY_PICTURE_PATH_W50_H50.'{%= subcategory_list.picture%}';?>">
             </div>
             <div class="col-md-8">
                 <?php echo '{%= subcategory_list.title%}'; ?>
@@ -65,6 +71,7 @@
                     <div class="col-md-8">
                         <span>Click on an exercise below to add it to the programme</span>
                     </div>
+                    <input type=hidden id="hf_numb" >
 
                 </div>
                 <div class="form-group">

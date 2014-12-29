@@ -1630,6 +1630,30 @@ class Gympro extends Role_Controller{
         }
         echo json_encode($result);
     }
+    public function show_nutrition($nutrition_id)
+    {
+        $meal_time_list = array();
+        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
+        foreach($meal_time_array as $meal_time)
+        {
+            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
+        }
+        $this->data['meal_time_list'] =$meal_time_list;
+        
+        $workout_list = array();
+        $workout_array = $this->gympro_library->get_all_workouts()->result_array();
+        foreach($workout_array as $workout)
+        {
+            $workout_list[$workout['workout_id']] =  $workout['title'];
+        }
+        $nutrition_info = $this->gympro_library->get_nutrition_info($nutrition_id)->result_array();
+        $this->data['nutrition_info'] = json_decode($nutrition_info[0]['meal_list'], TRUE);
+        $this->data['workout_list'] =$workout_list;
+        $this->data['nutrition_id'] =$nutrition_id;
+        $this->template->load(null,'applications/gympro/nutrition_show', $this->data);
+        
+    }
+
     //----------------------------------------Assessment Module------------------------------------//
      /*
      * This method will show all assessments of this gympro user

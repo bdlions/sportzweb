@@ -25,7 +25,8 @@
                             </tr>
                             <?php foreach ($program_list as $program): ?>
                                 <tr>
-                                    <td><?php echo $program['created_on'] ?></td>
+                                    <td><a href="<?php echo base_url().'applications/gympro/show_program/'.$program['program_id']?>"><?php echo $program['created_on'] ?></a>
+                                    </td>
                                     <td><a href="<?php echo base_url() . 'applications/gympro/edit_program/' . $program['program_id']; ?>">Edit</a></td>
                                     <td>
                                         <a onclick="open_modal_delete_confirm(<?php echo $program['id'] ?>)" >
