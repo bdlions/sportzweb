@@ -8,7 +8,7 @@
     {
         $(current_row).closest('.meal_row').remove();
     }
-    function add_meal_group_by_loop( meal, workout )
+    function add_meal_group_by_loop( )
     {
         ++group_counter;
         $("#group_counter").val(group_counter);
@@ -16,8 +16,6 @@
         oo[0] = group_counter;
         oo[1] = row_counter;
         $('#meal_group_place').append(tmpl('meal_group_tmpl', oo));
-        $( "input[name='meal_time_" + group_counter + "']" ).val(meal);
-        $( "input[name='work_out_" + group_counter + "']" ).val(workout);
     }
     function add_meal_row_to_latest_group()
     {
@@ -51,6 +49,8 @@
     }
     function row_value_set( qq, ww, ee, rr, tt, yy, uu )
     {
+        $( "input[name='meal_time_" + group_counter + "']" ).val(meal);
+        $( "input[name='work_out_" + group_counter + "']" ).val(workout);
         $( "input[name='label_" + group_counter + "_" + row_counter + "']" ).val(qq);
         $( "input[name='quan_" + group_counter + "_" + row_counter + "']" ).val(ww);
         $( "input[name='unit_" + group_counter + "_" + row_counter + "']" ).val(ee);
@@ -145,7 +145,7 @@
             <div class="pad_title">
                 NEW NUTRITION PLAN
             </div>
-            <?php echo form_open("applications/gympro/create_nutrition/".$nutrition_id, array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>            
+            <?php var_dump($nutrition_info); echo form_open("applications/gympro/create_nutrition/".$nutrition_id, array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>            
             <div class="pad_body">
                 <input type="hidden" name="group_counter" id="group_counter">
                 <input type="hidden" name="row_counter" id="row_counter">

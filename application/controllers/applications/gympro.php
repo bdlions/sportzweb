@@ -961,13 +961,13 @@ class Gympro extends Role_Controller{
                     {
                         $exercise_list[] = array(
                             'type' => "weight",
-                            'name' => $this->input->post('ex_name_'.$i),
-                            'description' => $this->input->post('ex_description_'.$i),
-                            'sets' => $this->input->post('ex_sets_'.$i),
-                            'reps' => $this->input->post('ex_reps_'.$i),
-                            'weights' => $this->input->post('ex_weights_'.$i),
-                            'reps2' => $this->input->post('ex_reps2_'.$i),
-                            'tempo' => $this->input->post('ex_tempo_'.$i)
+                            'name' => $this->input->post('name_'.$i),
+                            'description' => $this->input->post('description_'.$i),
+                            'sets' => $this->input->post('sets_'.$i),
+                            'reps' => $this->input->post('reps_'.$i),
+                            'weights' => $this->input->post('weights_'.$i),
+                            'reps2' => $this->input->post('reps2_'.$i),
+                            'tempo' => $this->input->post('tempo_'.$i)
                         );
                         continue;
                     }
@@ -975,11 +975,12 @@ class Gympro extends Role_Controller{
                     {
                         $exercise_list[] = array(
                             'type' => "cardio",
-                            'description' => $this->input->post('ex_description_'.$i),
-                            'level' => $this->input->post('ex_level_'.$i),
-                            'speed' => $this->input->post('ex_speed_'.$i),
-                            'time' => $this->input->post('ex_time_'.$i),
-                            'target' => $this->input->post('ex_target_'.$i)
+                            'name' => $this->input->post('name_'.$i),
+                            'description' => $this->input->post('description_'.$i),
+                            'level' => $this->input->post('level_'.$i),
+                            'speed' => $this->input->post('speed_'.$i),
+                            'time' => $this->input->post('time_'.$i),
+                            'target' => $this->input->post('target_'.$i)
                         );
                     }
                 }
@@ -998,6 +999,7 @@ class Gympro extends Role_Controller{
                 if ($create_program_id !== FALSE)
                 {
                     $this->data['message'] = 'Programme is added successfully.';
+                    redirect('applications/gympro/programs', 'refresh');
                 } else {
                     $this->data['message'] = $this->gympro_library->errors_alert();
                 }
@@ -1125,66 +1127,6 @@ class Gympro extends Role_Controller{
     }
     
     /*
-     * This method will edit program
-     * @param $program_id, program id
-     * @Author Nazmul on 7th December 2014
-     */
-    public function edit_program_prev($program_id = 0)
-    {
-        $this->form_validation->set_rules('focus', 'First Name', 'xss_clean|required');
-        $this->form_validation->set_rules('start_date', 'Last Name', 'xss_clean');
-        
-        if ($this->input->post())
-        {
-            if($this->form_validation->run() == true)
-            {
-                $exercise_list = array(
-                    'ex_name' => $this->input->post('ex_name'),
-                    'ex_description' => $this->input->post('ex_description'),
-                    'ex_sets' => $this->input->post('ex_sets'),
-                    'ex_reps' => $this->input->post('ex_reps'),
-                    'ex_weights' => $this->input->post('ex_weights'),
-                    'ex_reps2' => $this->input->post('ex_reps2'),
-                    'ex_tempo' => $this->input->post('ex_tempo')
-                );
-
-                $data = array(
-                    'user_id' => $this->session->userdata('user_id'),
-                    'focus' => $this->input->post('focus'),
-                    'start_date' => $this->input->post('start_date'),
-                    'review_id' => $this->input->post('review_id'),
-                    'description' => $this->input->post('description'),
-                    'warm_up' => $this->input->post('warm_up'),
-                    'cool_down' => $this->input->post('cool_down'),
-                    'warm_up' => $this->input->post('warm_up'),
-                    
-                    'exercise_list' => json_encode($exercise_list)
-                );
-                $update_program_id = $this->gympro_library->update_program($program_id, $data);
-                if ($update_program_id !== FALSE) {
-                    $result['message'] = 'Programme is updated successfully.';
-                    redirect('applications/gympro/program/programs', 'refresh');
-                } else {
-                    $result['message'] = $this->gympro_library->errors_alert();
-                }
-            } else {
-                $this->data['message'] = validation_errors();
-            }
-        }
-        else
-        {
-            $this->data['message'] = $this->session->flashdata('message'); 
-        }
-        
-        $program_info = $this->gympro_library->get_program_info($program_id)->result_array();
-        $this->data['program'] = $program_info[0];
-        $this->data['exercise'] = json_decode( $program_info[0]['exercise_list'], TRUE );
-        $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
-        $this->data['program_id'] = $program_id;
-        $this->data['message'] = '';       
-        $this->template->load(null,'applications/gympro/program/program_edit', $this->data);
-    }
-    /*
      * Ajax call to delete program
      * @param $program_id, program id
      * @Author Nazmul on 7th December 2014
@@ -1208,7 +1150,7 @@ class Gympro extends Role_Controller{
         $program_info=array();
         $program_info = $this->gympro_library->get_program_info($program_id)->result_array();
         $this->data['program_info'] = $program_info[0];
-        $this->data['exercise'] = json_decode( $program_info[0]['exercise_list'], TRUE );
+        $this->data['exercise_list'] = json_decode( $program_info[0]['exercise_list'], TRUE );
         $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
         $this->data['program_id'] = $program_id;
         $this->data['message'] = '';   

@@ -14,20 +14,20 @@
 
 <div class="ln_wide_portion">
     <div class="ln_item" >
-        <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-        <a href="<?php echo base_url().'applications/gympro/programs'?>">Programme</a>
-    </div>
-    <div class="ln_item" >
-        <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/nutrition.png">
-        <a href="<?php echo base_url().'applications/gympro/nutrition'?>">Nutrition</a>
-    </div>    
-    <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/assesments.png">
         <a href="<?php echo base_url()?>applications/gympro/manage_assessments">Assesments</a>
     </div>
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/missions.png">
         <a href="<?php echo base_url().'applications/gympro/manage_missions'?>">Missions</a>
+    </div>
+    <div class="ln_item" >
+        <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/nutrition.png">
+        <a href="<?php echo base_url().'applications/gympro/nutrition'?>">Nutrition</a>
+    </div>    
+    <div class="ln_item" >
+        <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
+        <a href="<?php echo base_url().'applications/gympro/programs'?>">Programme</a>
     </div>
     <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/earnings.png">

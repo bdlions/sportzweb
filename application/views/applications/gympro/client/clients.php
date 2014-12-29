@@ -20,11 +20,11 @@
                 if($counter%APP_GYMPRO_MANAGE_CLIENTS_CLIENTS_PER_ROW == 0)
                 {
                     echo '<div class="row top_margin">';
-                    echo '<div class="col-md-4 right_padding_zero">';
+                    echo '<div class="col-md-6 right_padding_zero">';
                 }
                 else
                 {
-                    echo '<div class="col-md-4 right_padding_zero">';
+                    echo '<div class="col-md-6 right_padding_zero">';
                 }
                 ?>
             <div class="user_prof">
@@ -32,9 +32,9 @@
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <a href="<?php echo base_url().'applications/gympro/show_client/'.$client_info['client_id']?>">
                             <?php if(isset($client_info['picture']) && $client_info['picture'] != ''){ ?>
-                            <img class="img-circle img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$client_info['picture'] ?>"/>
+                            <img class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$client_info['picture'] ?>"/>
                             <?php }else{?>
-                            <img class="img-circle img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.CLIENT_DEFAULT_PROFILE_PICTURE_NAME ?>"/>
+                            <img class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.CLIENT_DEFAULT_PROFILE_PICTURE_NAME ?>"/>
                             <?php } ?>
                         </a>
                     </div>
@@ -42,9 +42,9 @@
                         <a href="<?php echo base_url().'applications/gympro/show_client/'.$client_info['client_id']?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']?></a>
                     </div>
                 </div>
-                <div class="pull-right">
+<!--                <div class="pull-right">
                     <a href="<?php echo base_url().'applications/gympro/edit_client/'.$client_info['client_id']?>"><span>Edit</span></a>
-                </div>
+                </div>-->
             </div>
         </div>
         <?php
@@ -56,12 +56,6 @@
         $counter++;
             }
             ?>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-8">
-                    </div>
-                </div>
             </div>
         </div>
     </div>

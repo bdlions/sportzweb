@@ -60,11 +60,13 @@ a:hover
 }
 .user_prof a
 {
-    color: black;
+    color: #880015;
+    font-size: 18px;
 }
 .user_prof
 {
-    background-color: #E4E4E4;
+    /*background-color: #E4E4E4;*/
+    border: 1px solid gray;
 }
 .user_prof, .ln_item
 {
