@@ -7,11 +7,11 @@
         </div>
         <div class="col-md-7">
             <div class="row form-group">
-                <div class="col-md-2">
-                    <a href="<?php echo base_url() ?>applications/gympro/manage_exercises"><button class="btn button-custom btn_gympro">Exercises</button></a>
+                <div class="col-md-2" style="font-size: 20px; color: maroon">
+                    <span>Programs</span>
                 </div>
-                <div class="col-md-2">
-                    <a href="<?php echo base_url() ?>applications/gympro/create_program"><button class="btn button-custom btn_gympro">New Program</button></a>
+                <div class="col-md-3 pull-right right_padding_zero">
+                    <a href="<?php echo base_url() ?>applications/gympro/create_program"><button class="pull-right btn button-custom btn_gympro">New Program</button></a>
                 </div>
             </div>
             <?php

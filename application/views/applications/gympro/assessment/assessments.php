@@ -7,8 +7,11 @@
         </div>
         <div class="col-md-7">
             <div class="row form-group">
-                <div class="col-md-2">
-                    <a href="<?php echo base_url()?>applications/gympro/create_assessment"><button class="btn button-custom btn_gympro">New Assessment</button></a>
+                <div class="col-md-2" style="font-size: 20px; color: maroon">
+                    <span>Assessments</span>
+                </div>
+                <div class="col-md-3 pull-right right_padding_zero">
+                    <a href="<?php echo base_url()?>applications/gympro/create_assessment"><button class="pull-right btn button-custom btn_gympro">New Assessment</button></a>
                 </div>
             </div>
             <?php

@@ -30,6 +30,10 @@
         <a href="<?php echo base_url().'applications/gympro/programs'?>">Programme</a>
     </div>
     <div class="ln_item" >
+        <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
+        <a href="<?php echo base_url().'applications/gympro/manage_exercises'?>">Exercise</a>
+    </div>
+    <div class="ln_item" >
         <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/earnings.png">
         <a href="<?php echo base_url().'applications/gympro/earnings'?>">Earnings</a>
     </div>

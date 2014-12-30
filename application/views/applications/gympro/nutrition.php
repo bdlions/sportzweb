@@ -7,8 +7,11 @@
         </div>
         <div class="col-md-7">
             <div class="row form-group">
-                <div class="col-md-2">
-                    <a href="<?php echo base_url() ?>applications/gympro/create_nutrition"><button class="btn button-custom btn_gympro">New Nutrition Plan</button></a>
+                <div class="col-md-2" style="font-size: 20px; color: maroon">
+                    <span>Nutritions</span>
+                </div>
+                <div class="col-md-3 pull-right right_padding_zero">
+                    <a href="<?php echo base_url() ?>applications/gympro/create_nutrition"><button class="pull-right btn button-custom btn_gympro">New Nutrition Plan</button></a>
                 </div>
             </div>
             

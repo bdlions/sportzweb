@@ -6,8 +6,11 @@
         </div>
         <div class="col-md-7">
             <div class="row form-group">
-                <div class="col-md-2">
-                    <a href="<?php echo base_url()?>applications/gympro/create_group"><button class="btn button-custom btn_gympro">New Group</button></a>
+                <div class="col-md-2" style="font-size: 20px; color: maroon">
+                    <span>Groups</span>
+                </div>
+                <div class="col-md-3 pull-right right_padding_zero">
+                    <a href="<?php echo base_url()?>applications/gympro/create_group"><button class="pull-right btn button-custom btn_gympro">New Group</button></a>
                 </div>
             </div>
             <?php
