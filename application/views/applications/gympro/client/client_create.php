@@ -22,7 +22,7 @@
             $('#birth_date').text($('#birth_date').data('date'));
             $('#birth_date').datepicker('hide');
         });
-    });    
+    });
 </script>
 <script>
 $(function () {
@@ -47,7 +47,7 @@ $(function () {
             $this.remove();
             data.abort();
         });
-        data.submit().always(function() {
+        data.submit().always(function(){
             $this.remove();
         });
     });

@@ -11,6 +11,8 @@ define("CLIENT_PROFILE_PICTURE_H50",                        "50");
 define("PROGRAM_EXERCISE_SUBCATEGORY_PICTURE_PATH_W50_H50", "resources/images/applications/gympro/uploads/exercise_subcategory/50x50/");
 define("CLIENT_PROFILE_PICTURE_PATH_W50_H50",               "resources/images/applications/gympro/uploads/client_profile_picture/50x50/");
 define("CLIENT_DEFAULT_PROFILE_PICTURE_NAME",               "client_default_image.jpg");
+define("GYMPRO_DEFAULT_PICTURE_NAME",                       "gympro_logo.png");
+define("GYMPRO_IMAGES_DEFAULT_PATH",                        "resources/images/applications/gympro/");
 define("EXERCISE_IMAGEPATH",                                "resources/images/applications/gympro/uploads/exercise_images/");
 define("EXERCISE_IMAGES_PATH_W50_H50",                      "resources/images/applications/gympro/uploads/exercise_images/50x50/");
 define("EXERCISE_IMAGES_PICTURE_W50",                        "50");

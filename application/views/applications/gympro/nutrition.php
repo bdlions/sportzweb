@@ -37,7 +37,7 @@
                             <?php if(isset($nutrition['picture']) && $nutrition['picture'] != ''){ ?>
                             <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$nutrition['picture'] ?>"/>
                             <?php }else{?>
-                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.CLIENT_DEFAULT_PROFILE_PICTURE_NAME ?>"/>
+                            <img style="background-color: #76B4E7; width: 100%" class="img-responsive" src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_DEFAULT_PICTURE_NAME ?>"/>
                             <?php } ?>
                         </a>
                     </div>
