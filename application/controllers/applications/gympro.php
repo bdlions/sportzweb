@@ -273,6 +273,82 @@ class Gympro extends Role_Controller{
     {
         $this->template->load(null,'applications/gympro/client_home', $this->data);
     }
+    public function my_programmes()
+    {
+        $this->template->load(null,'applications/gympro/client/my_programmes', $this->data);
+    }
+    public function my_nutritions()
+    {
+        $this->template->load(null,'applications/gympro/client/my_nutritions', $this->data);
+    }
+    public function my_assessments()
+    {
+        $assessment_list = $this->gympro_library->get_all_client_assessments($this->session->userdata('user_id'))->result_array();
+        $this->data['assessment_list'] = $assessment_list;
+        $this->template->load(null,'applications/gympro/client/my_assessments', $this->data);
+    }
+    public function show_my_assessment($assessment_id = 0)
+    {
+        //CHECK WHETHER THIS USE HAS PERMISSION OF THIS ASSESSMENT     
+        $assessment_info = array();
+        $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
+        if(!empty($assessment_array))
+        {
+            $assessment_info = $assessment_array[0];            
+        } 
+        else
+        {
+            redirect('applications/gympro/my_assessments','refresh');
+        }
+        $this->data['assessment_info'] = $assessment_info;
+        $this->template->load(null, 'applications/gympro/client/show_my_assessment', $this->data);
+    }
+    public function my_missions()
+    {
+        $mission_list = $this->gympro_library->get_all_client_missions($this->session->userdata('user_id'))->result_array();
+        $this->data['mission_list'] = $mission_list;
+        $this->template->load(null,'applications/gympro/client/my_missions', $this->data);
+    }
+    public function show_my_mission($mission_id = 0)
+    {
+        //CHECK WHETHER THIS USE HAS PERMISSION OF THIS MISSION        
+        $mission_info = array();
+        $mission_array = $this->gympro_library->get_mission_info($mission_id)->result_array();
+        if(!empty($mission_array))
+        {
+            $mission_info = $mission_array[0];            
+        }
+        else
+        {
+            redirect('applications/gympro/my_missions','refresh');
+        }
+        $this->data['mission_info'] = $mission_info;
+        $this->template->load(null, 'applications/gympro/client/show_my_mission', $this->data);
+    }
+    
+    public function my_exercises()
+    {
+        $exercise_list = $this->gympro_library->get_all_client_exercises($this->session->userdata('user_id'))->result_array();
+        $this->data['exercise_list'] = $exercise_list;
+        $this->template->load(null,'applications/gympro/client/my_exercises', $this->data);
+    }
+    public function show_my_exercise($exercise_id = 0)
+    {
+        //CHECK WHETHER THIS USE HAS PERMISSION OF THIS EXERCISE   
+        $exercise_info = array();
+        $exercise_array = $this->gympro_library->get_exercise_details($exercise_id)->result_array();
+        if(!empty($exercise_array))
+        {
+            $exercise_info = $exercise_array[0];            
+        }
+        else
+        {
+            redirect('applications/gympro/my_exercises','refresh');
+        }
+        
+        $this->data['exercise_info'] = $exercise_info;
+        $this->template->load(null,'applications/gympro/client/show_my_exercise', $this->data);
+    }
     /*
      * This method will show client list of gympro user
      * @Author Nazmul on 10th December 2014

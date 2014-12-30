@@ -364,7 +364,7 @@ class Settings extends Role_Controller{
             $data = array(
                 'account_type_id' => $this->input->post('account_type_list')
             );
-            $status = $this->gympro_library->update_gympro_user_info($user_id, $data);
+            $status = $this->gympro_library->store_gympro_user_info($user_id, $data);
             if($status)
             {
                 $this->data['message'] = $this->gympro_library->messages();   
@@ -381,18 +381,11 @@ class Settings extends Role_Controller{
             $account_type_list[$account_type['account_type_id']] =  $account_type['title'];
         }
         $this->data['account_type_list'] = $account_type_list; 
+        $this->data['selected_account_type'] = APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT;
+        
         $gympro_user_info = array();
         $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
-        if(empty($gympro_user_info_array))
-        {
-            $data = array(
-                'user_id' => $user_id,
-                'account_type_id' => APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT
-            );
-            $this->gympro_library->create_gympro_user($data);  
-            $this->data['selected_account_type'] = APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT;
-        }
-        else
+        if(!empty($gympro_user_info_array))
         {
             $gympro_user_info = $gympro_user_info_array[0];
             $this->data['selected_account_type'] = $gympro_user_info['account_type_id'];
@@ -423,7 +416,7 @@ class Settings extends Role_Controller{
                 'hourly_rate_id' => $this->input->post('hourly_rate_list'),
                 'currency_id' => $this->input->post('currency_list')
             );
-            $status = $this->gympro_library->update_gympro_user_info($user_id, $data);
+            $status = $this->gympro_library->store_gympro_user_info($user_id, $data);
             if($status)
             {
                 $this->data['message'] = $this->gympro_library->messages();   

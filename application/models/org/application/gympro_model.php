@@ -547,7 +547,19 @@ class Gympro_model extends Ion_auth_model {
         return TRUE;
     }
     //----------------------------------Exercise Module--------------------------------------//
-    
+    /*
+     * This method will return all exercises of a gympro client
+     * @param $member_id, member id of a client
+     * @Author Nazmul on 30th December 2014
+     */
+    public function get_all_client_exercises($member_id)
+    {
+        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        return $this->db->select($this->tables['app_gympro_exercises'].'.id as exercise_id,'.$this->tables['app_gympro_exercises'].'.*')
+                    ->from($this->tables['app_gympro_exercises'])
+                    ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_exercises'] . '.client_id')
+                    ->get();
+    }
     /*
      * This method will return all exercises of a gympro user
      * @param $user_id, user id of gympro user
@@ -756,6 +768,19 @@ class Gympro_model extends Ion_auth_model {
                     ->get();
     }
     /*
+     * This method will return all assessments of a gympro client
+     * @param $member_id, member id of a client
+     * @Author Nazmul on 30th December 2014
+     */
+    public function get_all_client_assessments($member_id)
+    {
+        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        return $this->db->select($this->tables['app_gympro_assessments'].'.id as assessment_id,'.$this->tables['app_gympro_assessments'].'.*')
+                    ->from($this->tables['app_gympro_assessments'])
+                    ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_assessments'] . '.client_id')
+                    ->get();
+    }
+    /*
      * This method will return all assessments of a gympro user
      * @param $user_id, gympro user id
      * @Author Nazmul on 7th December 2014
@@ -852,6 +877,19 @@ class Gympro_model extends Ion_auth_model {
         $this->db->where('user_id', $user_id);
         return $this->db->select($this->tables['app_gympro_missions'].'.id as mission_id,'.$this->tables['app_gympro_missions'].'.*')
                     ->from($this->tables['app_gympro_missions'])
+                    ->get();
+    }
+    /*
+     * This method will return alll mission of a gympro client
+     * @param $member_id, member id of a client
+     * @Author Nazmul on 30th December 2014
+     */
+    public function get_all_client_missions($member_id)
+    {
+        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        return $this->db->select($this->tables['app_gympro_missions'].'.id as mission_id,'.$this->tables['app_gympro_missions'].'.*')
+                    ->from($this->tables['app_gympro_missions'])
+                    ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_missions'] . '.client_id')
                     ->get();
     }
     /*
