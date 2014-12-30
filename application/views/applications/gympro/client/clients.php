@@ -6,9 +6,12 @@
         </div>
         <div class="col-md-7">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2" style="font-size: 20px; color: maroon">
+                    Clients
+                </div>
+                <div class="col-md-3 pull-right right_padding_zero">
                     <a href="<?php echo base_url().'applications/gympro/create_client'?>">
-                        <button class="btn button-custom btn_gympro">New Client</button>
+                        <button class="btn button-custom btn_gympro pull-right">New Client</button>
                     </a>
                 </div>
             </div>

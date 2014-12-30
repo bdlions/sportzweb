@@ -47,10 +47,10 @@
         $('#meal_group_place').append(tmpl('meal_group_tmpl', oo));
         add_meal_row_to_latest_group();
     }
-    function row_value_set( qq, ww, ee, rr, tt, yy, uu )
+    function row_value_set( meal_time, work_out, qq, ww, ee, rr, tt, yy, uu )
     {
-        $( "input[name='meal_time_" + group_counter + "']" ).val(meal);
-        $( "input[name='work_out_" + group_counter + "']" ).val(workout);
+        $( "select[name='meal_time_" + group_counter + "']" ).val(meal_time);
+        $( "select[name='work_out_" + group_counter + "']" ).val(work_out);
         $( "input[name='label_" + group_counter + "_" + row_counter + "']" ).val(qq);
         $( "input[name='quan_" + group_counter + "_" + row_counter + "']" ).val(ww);
         $( "input[name='unit_" + group_counter + "_" + row_counter + "']" ).val(ee);
@@ -145,7 +145,6 @@
             <div class="pad_title">
                 NEW NUTRITION PLAN
             </div>
-            <?php var_dump($nutrition_info); echo form_open("applications/gympro/create_nutrition/".$nutrition_id, array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>            
             <div class="pad_body">
                 <input type="hidden" name="group_counter" id="group_counter">
                 <input type="hidden" name="row_counter" id="row_counter">
@@ -167,7 +166,7 @@
             <script> add_meal_group_by_loop();</script>
                 <?php foreach ($meal_group as $meal_row) { ?>
                 <script> add_meal_row_to_latest_group();</script>
-                <script>  row_value_set("<?php echo $meal_row["label"]?>", "<?php echo $meal_row["quan"]?>", "<?php echo $meal_row["unit"]?>", "<?php echo $meal_row["cal"]?>", "<?php echo $meal_row["prot"]?>", "<?php echo $meal_row["carb"]?>", "<?php echo $meal_row["fats"]?>") </script>
+                <script>  row_value_set("<?php echo $meal_row["meal_time"]?>", "<?php echo $meal_row["work_out"]?>", "<?php echo $meal_row["label"]?>", "<?php echo $meal_row["quan"]?>", "<?php echo $meal_row["unit"]?>", "<?php echo $meal_row["cal"]?>", "<?php echo $meal_row["prot"]?>", "<?php echo $meal_row["carb"]?>", "<?php echo $meal_row["fats"]?>") </script>
                 <?php }?>
             <?php }?>
         </div>

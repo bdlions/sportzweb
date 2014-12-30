@@ -19,6 +19,9 @@
                         '<div class="col-md-9">'+
                             '<div class="row col-md-12 profile-name">'+
                                 '{{first_name}} {{last_name}}'+
+                                '<div class="pull-right">'+
+                                    '<div style="background-color: yellow; color: maroon; font-size: 16px; padding: 2px">&nbsp;PT&nbsp;</div>'+
+                                '</div>'+
                             '</div>'+  
                             '<div class="row col-md-12">'+
                                 '{{country_name}} {{home_town}}'+

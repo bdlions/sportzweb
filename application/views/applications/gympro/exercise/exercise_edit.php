@@ -109,7 +109,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-4">
-                                Name:*
+                                Title:*
                             </div>
                             <div class="col-md-6">
                                 <?php echo form_input($name + array('class' => 'form-control')) ?>

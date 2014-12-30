@@ -1,6 +1,6 @@
-
+<!--atleast one person should be selected; otherwise there should be a warning amessage-->
     <select id="client_list" name="client_list" class="form-control">        
-        <option value="0" <?php echo($selected_client_id == 0) ? 'selected="selected"' : '' ;?> >Everyone</option>
+        <option value="0" <?php echo($selected_client_id == 0) ? 'selected="selected"' : '' ;?> >-- SELECT --</option>
         <optgroup class="user_category_dropdown_optgroup" label="Active" style="background-color: lightgreen">
             <?php foreach($client_list as $client_info){
              if($client_info['status_id'] == CLIENT_STATUS_ACTIVE_ID){?>
