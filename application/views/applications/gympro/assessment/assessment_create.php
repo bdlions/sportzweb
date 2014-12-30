@@ -1,6 +1,23 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <script type="text/javascript">
     $(function() {
+        $("#submit_button").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select a client.");
+                return false;
+            }
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url(); ?>applications/gympro/create_assessment',
+                data: $("#form_assesment").serializeArray(),
+                success: function(data) {
+                    alert(data.message);
+                    window.location = '<?php echo base_url(); ?>applications/gympro/manage_assessments';
+                }
+            });
+        });
         $('#date').datepicker({
             dateFormat: 'dd-mm-yy',
             startDate: '-3d'
@@ -8,6 +25,7 @@
             $('#date').text($('#date').data('date'));
             $('#date').datepicker('hide');
         });
+        
     });    
 </script>
 <div class="container-fluid">
@@ -16,7 +34,7 @@
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-8">
-            <?php echo form_open("applications/gympro/create_assessment/", array('id' => 'form_assesment', 'class' => 'form-horizontal')); ?>
+            <?php echo form_open("applications/gympro/create_assessment/", array('id' => 'form_assesment', 'class' => 'form-horizontal','onsubmit' => 'return false;')); ?>
             <div class="pad_title">
                 NEW ASSESSMENT
                 <div class="col-md-3 pull-right">

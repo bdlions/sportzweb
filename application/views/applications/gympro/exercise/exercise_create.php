@@ -2,6 +2,11 @@
 <script>
     $(function() {
         $("#submit_create_exercise").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select a client.");
+                return false;
+            }
             $.ajax({
                 dataType: 'json',
                 type: "POST",

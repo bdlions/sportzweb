@@ -1,6 +1,23 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <script type="text/javascript">
     $(function() {
+        $("#submit_button").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select a client.");
+                return false;
+            }
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url(); ?>applications/gympro/create_mission',
+                data: $("#form_assesment").serializeArray(),
+                success: function(data) {
+                    alert(data.message);
+                    window.location = '<?php echo base_url(); ?>applications/gympro/manage_missions';
+                }
+            });
+        });
         $('#start_date').datepicker({
             dateFormat: 'dd-mm-yy',
             startDate: '-3d'
@@ -24,7 +41,7 @@
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-10">
-            <?php echo form_open("applications/gympro/create_mission", array('id' => '', 'class' => 'form-horizontal')); ?>
+            <?php echo form_open("applications/gympro/create_mission", array('id' => 'form_create_mission', 'class' => 'form-horizontal')); ?>
             <div class="pad_title">
                 NEW MISSION
                 <div class="col-md-3 pull-right">
