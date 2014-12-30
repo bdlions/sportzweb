@@ -22,9 +22,7 @@
                     <div style="position: relative">
                         <div style="position: absolute; top: 15px; left: 25px; background-color: whitesmoke; padding: 5px;">
                             <?php echo form_open("applications/gympro/account/".$user_id, array('id' => 'form_account', 'class' => 'form-horizontal')); ?>
-                                <div class ="row col-md-12">
-                                    <?php echo form_dropdown('account_type_list', array('0' => 'Select')+$account_type_list, '', 'class=form-control id=account_type_list'); ?>
-                                </div>
+                                <?php echo form_dropdown('account_type_list', array('0' => 'Select')+$account_type_list, '', 'class=form-control id=account_type_list'); ?>
                             <?php echo form_close(); ?>
                         </div>
                         <img class="img-responsive" src="<?php echo base_url(); ?>resources/images/applications/gympro/personal-trainers.jpg">

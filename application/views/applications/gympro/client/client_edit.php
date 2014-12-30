@@ -144,30 +144,54 @@ $(function () {
                     <!--Personal details-->
                     <div class="row hidden_tab" id="add_client" style="display: block">
                         <div class="col-md-9">
+                            
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">First Name: </label>
+                                <label class="col-sm-4 control-label">Name: </label>
                                 <div class="col-sm-6">
-                                    <?php echo form_input($first_name + array('class' => 'form-control'));?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Last Name: </label>
-                                <div class="col-sm-6">
-                                    <?php echo form_input($last_name + array('class' => 'form-control'));?>
+                                    <label class="control-label"><?php echo $member_info['first_name'];?> <?php echo $member_info['last_name'];?></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Gender </label>
                                 <div class="col-sm-4">
-                                    <?php echo form_dropdown('gender_list', $gender_list, $selected_gender_id, 'class=form-control id=gender_list'); ?>
+                                    <label class="control-label">
+                                        <?php if( $member_info['gender_id'] == GENDER_MALE )
+                                                echo "Male";
+                                                else echo 'Female';?>
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Email: </label>
                                 <div class="col-sm-6">
-                                    <?php echo form_input($email + array('class' => 'form-control'));?>
+                                    <label class="control-label"><?php echo $member_info['email'];?></label>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Birth Date: </label>
+                                <div class="col-sm-4">
+                                    <label class="control-label"><?php echo $member_info['dob'];?></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Occupation: </label>
+                                <div class="col-sm-4">
+                                    <label class="control-label"><?php echo $member_info['occupation'];?></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Company Name: </label>
+                                <div class="col-sm-4">
+                                    <label class="control-label"><?php echo $member_info['company'];?></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Client Status </label>
+                                <div class="col-sm-4">
+                                    <?php echo form_dropdown('client_status_list', $client_status_list, $selected_status_id, 'class=form-control id=client_status_list'); ?>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Start Date: </label>
                                 <div class="col-sm-4">
@@ -180,31 +204,7 @@ $(function () {
                                     <?php echo form_input($end_date + array('class' => 'form-control'));?>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Birth Date: </label>
-                                <div class="col-sm-4">
-                                    <?php echo form_input($birth_date + array('class' => 'form-control'));?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Client Status </label>
-                                <div class="col-sm-4">
-                                    <?php echo form_dropdown('client_status_list', $client_status_list, $selected_status_id, 'class=form-control id=client_status_list'); ?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Occupation: </label>
-                                <div class="col-sm-4">
-                                    <?php echo form_input($occupation + array('class' => 'form-control'));?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Company Name: </label>
-                                <div class="col-sm-4">
-                                    <?php echo form_input($company_name + array('class' => 'form-control'));?>
-                                </div>
-                            </div>
-                            <div class="form-group">
+<!--                            <div class="form-group">
                                 <label for="website" class="col-md-4 control-label requiredField">
                                     Set picture
                                 </label>
@@ -228,7 +228,7 @@ $(function () {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <!--Contact details-->

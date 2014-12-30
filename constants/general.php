@@ -30,4 +30,8 @@
     define("LOGOUT_PAGE_IMAGE_HEIGHT",                   "432");
     define("LOGOUT_PAGE_IMAGE_PATH",                     "resources/uploads/configure/logout_page/");
     
+//  GENDER
+    define("GENDER_MALE",                           "1");
+    define("GENDER_FEMALE",                         "2");
+    
 ?>

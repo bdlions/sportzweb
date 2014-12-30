@@ -42,7 +42,7 @@
                         <div class="row form-group">
                             <div class="col-md-4">Reassess in:</div>
                             <div class ="col-md-5">
-                              dsdsf
+                              <?php echo $reassess_in;?>
                             </div> 
                         </div>
                         <div class="row form-group">

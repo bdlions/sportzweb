@@ -302,8 +302,7 @@ class Gympro extends Role_Controller{
         //CHECK IF THE CLIENT CREATE LIMIT HAS EXCEED
         //CHECK IF THE CLIENT IS PREVIOUSLY ADDED OR NOT
         $this->data['message'] = '';
-        $this->form_validation->set_rules('first_name', 'First Name', 'xss_clean|required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'xss_clean');
+        $this->form_validation->set_rules('notes', 'Note', 'xss_clean');
         
         $question_list = $this->gympro_library->get_all_health_questions()->result_array();
         $this->data['question_list'] = $question_list;
@@ -598,6 +597,19 @@ class Gympro extends Role_Controller{
             redirect('applications/gympro/manage_clients','refresh');
         }
         $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id); 
+        
+        $member_id = $client_info['client_id'];
+        $member_info = array();
+        $member_info_array = $this->ion_auth_model->get_users(array($member_id))->result_array();
+        if(!empty($member_info_array))
+        {
+            $member_info = $member_info_array[0];
+        }
+        else
+        {
+            redirect('applications/gympro/manage_clients', 'refresh');
+        }
+        $this->data['member_info'] = $member_info;
         
         $gender_array = $this->gympro_library->get_all_genders()->result_array();
         $this->data['gender_list'] = array();
@@ -2222,6 +2234,14 @@ class Gympro extends Role_Controller{
         else
         {
             $this->data['selected_client_id'] = 0;
+        }
+        $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
+        foreach ($reassess_array as $reassess_info) {
+            if($reassess_info['id'] == $assessment_info['reassess_id'])
+            {
+                $this->data['reassess_in'] = $reassess_info['title'];
+                break;
+            }
         }
         $this->data['assessment_info'] = $assessment_info;
         $this->template->load(null, 'applications/gympro/assessment/assessment_show', $this->data);
