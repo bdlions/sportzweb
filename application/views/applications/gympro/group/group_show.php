@@ -33,35 +33,33 @@
                 <div class="row hidden_tab" id="group_details_tab" style="display: block">
                     <div class="col-md-9">
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">Title: </label>
-                            <label class="col-md-8 control-label"><?php echo $group_info['title'];?></label>
+                            <label class="col-sm-4 control-label">Title:</label>
+                            <label class="col-md-8 control-label">&nbsp;<?php echo $group_info['title'];?></label>
                         </div>
                     </div>
                 </div>
                 <div class="row hidden_tab" id="group_contacts_tab">
                     <div class="col-md-9">
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">Phone Number: </label>
-                            <label class="col-md-8 control-label"><?php echo $group_info['phone'];?></label>
+                            <label class="col-sm-4 control-label">Phone Number:</label>
+                            <label class="col-md-8 control-label">&nbsp;<?php echo $group_info['phone'];?></label>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">Mobile Number: </label>
-                            <label class="col-md-8 control-label"><?php echo $group_info['mobile'];?></label>
+                            <label class="col-sm-4 control-label">Mobile Number:</label>
+                            <label class="col-md-8 control-label">&nbsp;<?php echo $group_info['mobile'];?></label>
                         </div>
                     </div>
                 </div>
                 <div class="row hidden_tab" id="group_clients_tab">
                     <div class="col-md-12">
-                        <!--<label class="control-label"><?php echo $group_info['first_name'].' '.$group_info['last_name']?></label>-->
-                        incomplete 
-                   
+                                           
                     </div>
                 </div>
                 <div class="row hidden_tab" id="notes_tab">
                     <div class="col-md-9">
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">Notes: </label>
-                            <label class="col-md-8 control-label"><?php echo $group_info['notes'];?></label>
+                            <label class="col-sm-4 control-label">Notes:</label>
+                            <label class="col-md-8 control-label">&nbsp;<?php echo $group_info['notes'];?></label>
                         </div>
                     </div>
                 </div>                    

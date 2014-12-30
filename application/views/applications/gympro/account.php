@@ -2,7 +2,16 @@
 <div class="container-fluid">    
     <div class="row top_margin">
         <div class="col-md-2">
-            <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
+        <?php 
+            if($selected_account_type == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+            {
+                $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+            }
+            else
+            {
+                $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+            }            
+        ?>
         </div>
         <div class="col-md-7">
             <div class="row pad_body">

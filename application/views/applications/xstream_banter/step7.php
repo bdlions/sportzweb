@@ -32,7 +32,7 @@ $(function(){
     });
     socket.on('updatemessages', function (data) {
         //$("#chatHistory").append(username + " " +data + "<br/>");
-        console.log(data);
+        //console.log(data);
         data = JSON.parse(data);
         $("#chat_messages").html(tmpl("tmpl_message_list",  data['messageInfo']) +  $("#chat_messages").html());
     });    

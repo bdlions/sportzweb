@@ -30,7 +30,7 @@ $(function () {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url();?>applications/gympro/create_client',
+            url: '<?php echo base_url().'applications/gympro/create_client/'.$$member_info['user_id'];?>',
             data: $("#form_create_client").serializeArray(),
             success: function(data) {
                 alert(data.message);

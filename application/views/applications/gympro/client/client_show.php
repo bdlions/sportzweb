@@ -29,49 +29,48 @@
                 <?php if (isset($message) && ($message != NULL)){?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
                 <?php } ?>
-                <?php echo form_open("applications/gympro/create_client", array('id' => 'form_create_client', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
                     <!--Personal details-->
                     <div class="row hidden_tab" id="add_client" style="display: block">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">First Name: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['first_name'];?></label>
+                                <label class="col-sm-4 control-label">First Name:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['first_name'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Last Name: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['last_name'];?></label>
+                                <label class="col-sm-4 control-label">Last Name:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['last_name'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Gender </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['gender_name'];?></label>
+                                <label class="col-sm-4 control-label">Gender:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['gender_name'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Email: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['email'];?></label>
+                                <label class="col-sm-4 control-label">Email:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['email'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Start Date: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['start_date'];?></label>
+                                <label class="col-sm-4 control-label">Start Date:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['start_date'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">End Date: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['end_date'];?></label>
+                                <label class="col-sm-4 control-label">End Date:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['end_date'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Birth Date: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['birth_date'];?></label>
+                                <label class="col-sm-4 control-label">Birth Date:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['birth_date'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Client Status </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['status_title'];?></label>
+                                <label class="col-sm-4 control-label">Client Status:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['status_title'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Occupation: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['occupation'];?></label>
+                                <label class="col-sm-4 control-label">Occupation:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['occupation'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Company Name: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['company_name'];?></label>
+                                <label class="col-sm-4 control-label">Company Name:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['company_name'];?></label>
                             </div>
                             <div class="form-group">
                                 <label for="website" class="col-md-4 control-label requiredField">
@@ -95,24 +94,24 @@
                     <div class="row hidden_tab" id="contact_details">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Phone: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['phone'];?></label>
+                                <label class="col-sm-4 control-label">Phone:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['phone'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Mobile: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['mobile'];?></label>
+                                <label class="col-sm-4 control-label">Mobile:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['mobile'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Address: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['address'];?></label>
+                                <label class="col-sm-4 control-label">Address:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['address'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Emergency contact: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['emergency_contact'];?></label>                                
+                                <label class="col-sm-4 control-label">Emergency contact:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['emergency_contact'];?></label>                                
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Emergency phone: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['emergency_phone'];?></label>
+                                <label class="col-sm-4 control-label">Emergency phone:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['emergency_phone'];?></label>
                             </div>
                         </div>
                     </div>
@@ -120,7 +119,7 @@
                     <div class="row hidden_tab" id="health">
                         <div class="col-md-12">
                             <?php foreach ($question_list as $question_info){ ?>
-                                <div class="form-group pad_lines">
+                                <div class="row form-group">
                                     <div class="col-sm-6">
                                         <div>
                                             <label class="patapota"><?php echo $question_info['title'].' '.$question_id_answer_map[$question_info['question_id']]['answer']?></label>
@@ -137,17 +136,17 @@
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Height (cm): </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['height'];?></label>
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Height (cm):</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['height'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Resting Heart Rate: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['resting_heart_rate'];?></label>
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Resting Heart Rate:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['resting_heart_rate'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Blood Pressure: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['blood_pressure'];?></label>
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Blood Pressure:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['blood_pressure'];?></label>
                             </div>
                         </div>
                     </div>
@@ -155,12 +154,11 @@
                     <div class="row hidden_tab" id="notes">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Notes: </label>
-                                <label class="col-sm-6 control-label"><?php echo $client_info['notes'];?></label>
+                                <label class="col-sm-4 control-label">Notes:</label>
+                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['notes'];?></label>
                             </div>
                         </div>
                     </div>
-                <?php echo form_close();?>
             </div>
         </div>
     </div>

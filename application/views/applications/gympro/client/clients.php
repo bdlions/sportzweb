@@ -10,7 +10,7 @@
                     Clients
                 </div>
                 <div class="col-md-3 pull-right right_padding_zero">
-                    <a href="<?php echo base_url().'applications/gympro/create_client'?>">
+                    <a href="<?php echo base_url().'applications/gympro/search_client'?>">
                         <button class="btn button-custom btn_gympro pull-right">New Client</button>
                     </a>
                 </div>

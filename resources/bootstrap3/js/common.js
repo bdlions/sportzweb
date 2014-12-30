@@ -35,7 +35,7 @@ function validateNumberAllowDecimal(event, isDecimal) {
 function set_question_list(q_list)
 {
     question_list = q_list; 
-    console.log(question_list);
+    //console.log(question_list);
 }
 
 function get_question_list()

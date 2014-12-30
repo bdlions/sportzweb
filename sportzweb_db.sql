@@ -1830,9 +1830,10 @@ CREATE TABLE IF NOT EXISTS `app_gympro_account_types` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 INSERT INTO `app_gympro_account_types` (`title`, `price`, `total_user`) VALUES
-('Lightweight (FREE) up to 5 clients', 0, 5),
-('Middleweight ($10/month)', 10, 30),
-('Heavyweight ($25/month)', 25, 100000);
+('Client', 0, 0),
+('Personal Trainer Lightweight', 0, 5),
+('Personal Trainer Middleweight', 10, 30),
+('Personal Trainer Heavyweight', 25, 100000);
 CREATE TABLE IF NOT EXISTS `app_gympro_height_unit_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -2018,6 +2019,7 @@ INSERT INTO `app_gympro_client_statuses` (`title`) VALUES
 CREATE TABLE IF NOT EXISTS `app_gympro_clients` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
+  `member_id` int(11) unsigned NOT NULL,
   `first_name` varchar(200),
   `last_name` varchar(200),
   `gender_id` int(11) unsigned DEFAULT NULL,
@@ -2043,10 +2045,12 @@ CREATE TABLE IF NOT EXISTS `app_gympro_clients` (
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `app_gympro_clients_u1_idx` (`user_id`),
+  KEY `app_gympro_clients_u2_idx` (`member_id`),
   KEY `app_gympro_clients_gender1_idx` (`gender_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `app_gympro_clients`
 	ADD CONSTRAINT `app_gympro_clients_u1` FOREIGN KEY(`user_id`) REFERENCES `app_gympro_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_gympro_clients_u2` FOREIGN KEY(`member_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	ADD CONSTRAINT `app_gympro_clients_gender1` FOREIGN KEY(`gender_id`) REFERENCES `gender` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE IF NOT EXISTS `app_gympro_groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

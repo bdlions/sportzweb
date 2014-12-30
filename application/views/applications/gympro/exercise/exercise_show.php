@@ -15,7 +15,7 @@
                             <div class="col-md-4">
                                 Category:
                             </div>
-                             <label class="col-md-8 control-label"><?php echo $exercise_info['category_id'];?></label>
+                             <label class="col-md-8 control-label"><?php echo $exercise_info['exercise_category'];?></label>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-4">

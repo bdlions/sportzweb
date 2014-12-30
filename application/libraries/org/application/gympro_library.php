@@ -61,7 +61,25 @@ class Gympro_library {
     public function __get($var) {
         return get_instance()->$var;
     }
-    
+    //------------------------Gympro User ------------------------------//
+    /*
+     * This method will store gympro user info
+     * @param $addition_data, user info data
+     * @param $user_id, gympro user id
+     * @Author Nazmul on 30th December 2014
+     */
+    public function store_gympro_user_info($user_id, $additional_data)
+    {
+        if($this->gympro_model->is_gympro_user_exist($user_id))
+        {
+            return $this->gympro_model->update_gympro_user_info($user_id, $additional_data);
+        }
+        else
+        {
+            $additional_data['user_id'] = $user_id;
+            return $this->gympro_model->create_gympro_user($additional_data);
+        }
+    }
     /*
      * This method will return answers of questions of a client
      * @param $client_id, client id

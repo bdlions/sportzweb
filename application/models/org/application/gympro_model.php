@@ -19,7 +19,7 @@ class Gympro_model extends Ion_auth_model {
      * @param $user_id, user id
      * @Author Nazmul on 19th November 2014
      */
-    public function is_gympro_user_exist($user_id)
+    public function is_gympro_user_exist($user_id = 0)
     {
         if($user_id == 0)
         {
@@ -570,6 +570,19 @@ class Gympro_model extends Ion_auth_model {
         $this->db->where($this->tables['app_gympro_exercises'].'.id', $exercise_id);
         return $this->db->select($this->tables['app_gympro_exercises'].'.id as exercise_id,'.$this->tables['app_gympro_exercises'].'.*')
                     ->from($this->tables['app_gympro_exercises'])
+                    ->get();
+    }
+    /*
+     * This method will return exercise info including exercise category
+     * @param $exercise_id, exercise id
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_exercise_details($exercise_id)
+    {         
+        $this->db->where($this->tables['app_gympro_exercises'].'.id', $exercise_id);
+        return $this->db->select($this->tables['app_gympro_exercises'].'.id as exercise_id,'.$this->tables['app_gympro_exercises'].'.*,'.$this->tables['app_gympro_exercise_categories'].'.title as exercise_category')
+                    ->from($this->tables['app_gympro_exercises'])
+                    ->join($this->tables['app_gympro_exercise_categories'], $this->tables['app_gympro_exercise_categories'] . '.id=' . $this->tables['app_gympro_exercises'] . '.category_id')
                     ->get();
     }
     /*

@@ -8,9 +8,9 @@
            
             <div class="pad_title">
               MISSION INFO
-<!--                <div class="col-md-3 pull-right">
+                <div class="col-md-3 pull-right">
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
-                </div>-->
+                </div>
             </div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)): ?>

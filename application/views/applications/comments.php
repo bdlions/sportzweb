@@ -89,9 +89,9 @@
     });
     function slidin(id) {
         $("#effect_" + id).show("clip", {}, 400);
-        console.log('input[name=comment_nature'+id+']');
+        //console.log('input[name=comment_nature'+id+']');
         $('input[name=comment_nature'+id+']').on("click",function(){
-            console.log($('input[name=comment_nature'+id+']:checked').val());
+            //console.log($('input[name=comment_nature'+id+']:checked').val());
         });
     }
     
