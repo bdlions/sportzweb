@@ -4,7 +4,7 @@
         $("#submit_create_exercise").on("click", function() {
             if($("#client_list").val() == 0)
             {
-                alert("Please select a client.");
+                alert("Please select the person you are assessing from the drop menu.");
                 return false;
             }
             $.ajax({

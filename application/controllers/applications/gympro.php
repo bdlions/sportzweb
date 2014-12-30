@@ -291,7 +291,7 @@ class Gympro extends Role_Controller{
     }
     public function my_nutritions()
     {
-        $nutrition_list = $this->gympro_library->get_all_client_nutritions($this->session->userdata('user_id'))->result_array();
+        $nutrition_list = $this->gympro_library->get_all_client_nutritions($this->session->userdata('user_id'));
         $this->data['nutrition_list'] = $nutrition_list;
         $this->template->load(null,'applications/gympro/client/my_nutritions', $this->data);
     }
@@ -627,8 +627,7 @@ class Gympro extends Role_Controller{
     public function edit_client($client_id = 0)
     {        
         $this->data['message'] = ''; 
-        $this->form_validation->set_rules('first_name', 'First Name', 'xss_clean|required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'xss_clean');
+        $this->form_validation->set_rules('note', 'Note', 'xss_clean');
         //getting health question list
         $question_list = $this->gympro_library->get_all_health_questions()->result_array();
         $this->data['question_list'] = $question_list;
@@ -710,7 +709,7 @@ class Gympro extends Role_Controller{
         }
         $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id); 
         
-        $member_id = $client_info['client_id'];
+        $member_id = $client_info['member_id'];
         $member_info = array();
         $member_info_array = $this->ion_auth_model->get_users(array($member_id))->result_array();
         if(!empty($member_info_array))
@@ -866,7 +865,7 @@ class Gympro extends Role_Controller{
     public function show_client($client_id) {
         $client_info = array();
         $client_info_array = $this->gympro_library->get_client_detail($client_id)->result_array();
-       
+        
         if (!empty($client_info_array)) {
             $client_info = $client_info_array[0];
         } else {
@@ -1897,6 +1896,8 @@ class Gympro extends Role_Controller{
         $user_id = $this->session->userdata('user_id');
         $this->form_validation->set_rules('date', 'date', 'xss_clean|required');
         if ($this->input->post()) {            
+            $result = array();
+            $result['message'] = '';
             if ($this->form_validation->run() == true) {                
                 $additional_data = array(
                     'date' => $this->input->post('date'),
@@ -1934,12 +1935,19 @@ class Gympro extends Role_Controller{
                 }
                 $assessment_id = $this->gympro_library->create_assessment($additional_data);
                 if ($assessment_id !== FALSE) {
-                    $this->session->set_flashdata('message', $this->gympro_library->messages());
-                    redirect('applications/gympro/manage_assessments', 'refresh');
+                    //$this->session->set_flashdata('message', $this->gympro_library->messages());
+                    //redirect('applications/gympro/manage_assessments', 'refresh');
+                    $result['message'] = $this->gympro_library->messages_alert();
                 } else {
-                    $this->data['message'] = $this->gympro_library->errors();
+                    $result['message'] = $this->gympro_library->errors_alert();
                 }
             }
+            else
+            {
+                $result['message'] = validation_errors();
+            }
+            echo json_encode($result);
+            return;
         }
         else
         {

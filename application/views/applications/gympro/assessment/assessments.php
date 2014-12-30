@@ -41,7 +41,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['created_on']?></a>
+                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['date']?></a>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2">
                         <div class="dropdown friends-satus-dropdown">
