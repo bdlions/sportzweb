@@ -398,26 +398,26 @@ class Gympro extends Role_Controller{
         foreach ($client_status_array as $client_status_info) {
             $this->data['client_status_list'][$client_status_info['client_status_id']] = $client_status_info['title'];
         }
-        $this->data['first_name'] = array(
-            'name' => 'first_name',
-            'id' => 'first_name',
-            'type' => 'text'
-        );
-        $this->data['last_name'] = array(
-            'name' => 'last_name',
-            'id' => 'last_name',
-            'type' => 'text'
-        );
-        $this->data['gender_id'] = array(
-            'name' => 'gender_id',
-            'id' => 'gender_id',
-            'type' => 'text'
-        );
-        $this->data['email'] = array(
-            'name' => 'email',
-            'id' => 'email',
-            'type' => 'text'
-        );
+//        $this->data['first_name'] = array(
+//            'name' => 'first_name',
+//            'id' => 'first_name',
+//            'type' => 'text'
+//        );
+//        $this->data['last_name'] = array(
+//            'name' => 'last_name',
+//            'id' => 'last_name',
+//            'type' => 'text'
+//        );
+//        $this->data['gender_id'] = array(
+//            'name' => 'gender_id',
+//            'id' => 'gender_id',
+//            'type' => 'text'
+//        );
+//        $this->data['email'] = array(
+//            'name' => 'email',
+//            'id' => 'email',
+//            'type' => 'text'
+//        );
         $this->data['start_date'] = array(
             'name' => 'start_date',
             'id' => 'start_date',
@@ -428,26 +428,26 @@ class Gympro extends Role_Controller{
             'id' => 'end_date',
             'type' => 'text'
         );
-        $this->data['birth_date'] = array(
-            'name' => 'birth_date',
-            'id' => 'birth_date',
-            'type' => 'text'
-        );
+//        $this->data['birth_date'] = array(
+//            'name' => 'birth_date',
+//            'id' => 'birth_date',
+//            'type' => 'text'
+//        );
         $this->data['status_id'] = array(
             'name' => 'status_id',
             'id' => 'status_id',
             'type' => 'text'
         );
-        $this->data['occupation'] = array(
-            'name' => 'occupation',
-            'id' => 'occupation',
-            'type' => 'text'
-        );
-        $this->data['company_name'] = array(
-            'name' => 'company_name',
-            'id' => 'company_name',
-            'type' => 'text'
-        );
+//        $this->data['occupation'] = array(
+//            'name' => 'occupation',
+//            'id' => 'occupation',
+//            'type' => 'text'
+//        );
+//        $this->data['company_name'] = array(
+//            'name' => 'company_name',
+//            'id' => 'company_name',
+//            'type' => 'text'
+//        );
         $this->data['picture'] = array(
             'name' => 'picture',
             'id' => 'picture',
@@ -623,30 +623,30 @@ class Gympro extends Role_Controller{
             $this->data['client_status_list'][$client_status_info['client_status_id']] = $client_status_info['title'];
         }
         $this->data['selected_status_id'] = $client_info['status_id'];
-        $this->data['first_name'] = array(
-            'name' => 'first_name',
-            'id' => 'first_name',
-            'type' => 'text',
-            'value' => $client_info['first_name']            
-        );
-        $this->data['last_name'] = array(
-            'name' => 'last_name',
-            'id' => 'last_name',
-            'type' => 'text',
-            'value' => $client_info['last_name']
-        );
-        $this->data['gender_id'] = array(
-            'name' => 'gender_id',
-            'id' => 'gender_id',
-            'type' => 'text',
-            'value' => $client_info['gender_id']
-        );
-        $this->data['email'] = array(
-            'name' => 'email',
-            'id' => 'email',
-            'type' => 'text',
-            'value' => $client_info['email']
-        );
+//        $this->data['first_name'] = array(
+//            'name' => 'first_name',
+//            'id' => 'first_name',
+//            'type' => 'text',
+//            'value' => $client_info['first_name']            
+//        );
+//        $this->data['last_name'] = array(
+//            'name' => 'last_name',
+//            'id' => 'last_name',
+//            'type' => 'text',
+//            'value' => $client_info['last_name']
+//        );
+//        $this->data['gender_id'] = array(
+//            'name' => 'gender_id',
+//            'id' => 'gender_id',
+//            'type' => 'text',
+//            'value' => $client_info['gender_id']
+//        );
+//        $this->data['email'] = array(
+//            'name' => 'email',
+//            'id' => 'email',
+//            'type' => 'text',
+//            'value' => $client_info['email']
+//        );
         $this->data['start_date'] = array(
             'name' => 'start_date',
             'id' => 'start_date',
@@ -659,30 +659,30 @@ class Gympro extends Role_Controller{
             'type' => 'text',
             'value' => $client_info['end_date']
         );
-        $this->data['birth_date'] = array(
-            'name' => 'birth_date',
-            'id' => 'birth_date',
-            'type' => 'text',
-            'value' => $client_info['birth_date']
-        );
+//        $this->data['birth_date'] = array(
+//            'name' => 'birth_date',
+//            'id' => 'birth_date',
+//            'type' => 'text',
+//            'value' => $client_info['birth_date']
+//        );
         $this->data['status_id'] = array(
             'name' => 'status_id',
             'id' => 'status_id',
             'type' => 'text',
             'value' => $client_info['status_id']
         );
-        $this->data['occupation'] = array(
-            'name' => 'occupation',
-            'id' => 'occupation',
-            'type' => 'text',
-            'value' => $client_info['occupation']
-        );
-        $this->data['company_name'] = array(
-            'name' => 'company_name',
-            'id' => 'company_name',
-            'type' => 'text',
-            'value' => $client_info['company_name']
-        );
+//        $this->data['occupation'] = array(
+//            'name' => 'occupation',
+//            'id' => 'occupation',
+//            'type' => 'text',
+//            'value' => $client_info['occupation']
+//        );
+//        $this->data['company_name'] = array(
+//            'name' => 'company_name',
+//            'id' => 'company_name',
+//            'type' => 'text',
+//            'value' => $client_info['company_name']
+//        );
         $this->data['phone'] = array(
             'name' => 'phone',
             'id' => 'phone',
