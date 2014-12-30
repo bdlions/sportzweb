@@ -122,10 +122,13 @@
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-10">
+            <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>
             <div class="pad_title">
                 NEW NUTRITION PLAN
-            </div>
-            <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>            
+                <div class="col-md-3 pull-right">
+                    <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
+                </div>
+            </div>            
             <div class="pad_body">
                 <input type="hidden" name="group_counter" id="group_counter">
                 <input type="hidden" name="row_counter" id="row_counter">

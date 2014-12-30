@@ -140,11 +140,14 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-10">
+            <?php echo form_open("applications/gympro/create_program", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>
             <div class="pad_title">
                 CREATE PROGRAMME
+                <div class="col-md-3 pull-right">
+                    <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
+                </div>
             </div>
             
-            <?php echo form_open("applications/gympro/create_program", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>
             <div class="pad_body">
                 <div>
                     <input type=hidden class="form-control" name="counter" id="counter">
@@ -152,7 +155,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                 <div class="row">
                     <div class="col-md-7">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Programme Focus: </label>
+                            <label class="col-sm-3 control-label">Programme Title: </label>
                             <div class="col-sm-6">
                                 <input class="form-control" name="focus">
                             </div>

@@ -275,11 +275,47 @@ class Gympro extends Role_Controller{
     }
     public function my_programmes()
     {
+        $program_list = $this->gympro_library->get_all_client_programs($this->session->userdata('user_id'))->result_array();
+        $this->data['program_list'] = $program_list;
         $this->template->load(null,'applications/gympro/client/my_programmes', $this->data);
+    }
+    public function show_my_program($program_id = 0)
+    {
+        $program_info = $this->gympro_library->get_program_info($program_id)->result_array();
+        $this->data['program_info'] = $program_info[0];
+        $this->data['exercise_list'] = json_decode( $program_info[0]['exercise_list'], TRUE );
+        $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
+        $this->data['program_id'] = $program_id;
+        $this->data['message'] = '';   
+        $this->template->load(null,'applications/gympro/client/show_my_program', $this->data); 
     }
     public function my_nutritions()
     {
+        $nutrition_list = $this->gympro_library->get_all_client_nutritions($this->session->userdata('user_id'))->result_array();
+        $this->data['nutrition_list'] = $nutrition_list;
         $this->template->load(null,'applications/gympro/client/my_nutritions', $this->data);
+    }
+    public function show_my_nutrition($nutrition_id = 0)
+    {
+        $meal_time_list = array();
+        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
+        foreach($meal_time_array as $meal_time)
+        {
+            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
+        }
+        $this->data['meal_time_list'] =$meal_time_list;
+        
+        $workout_list = array();
+        $workout_array = $this->gympro_library->get_all_workouts()->result_array();
+        foreach($workout_array as $workout)
+        {
+            $workout_list[$workout['workout_id']] =  $workout['title'];
+        }
+        $nutrition_info = $this->gympro_library->get_nutrition_info($nutrition_id)->result_array();
+        $this->data['nutrition_info'] = json_decode($nutrition_info[0]['meal_list'], TRUE);
+        $this->data['workout_list'] =$workout_list;
+        $this->data['nutrition_id'] =$nutrition_id;
+        $this->template->load(null,'applications/gympro/client/show_my_nutrition', $this->data);
     }
     public function my_assessments()
     {
@@ -1110,6 +1146,7 @@ class Gympro extends Role_Controller{
      */
     public function create_program()
     {
+        $user_id = $this->session->userdata('user_id');
         $this->form_validation->set_rules('focus', 'Focus', 'xss_clean|required');
         $this->form_validation->set_rules('start_date', 'Start Date', 'xss_clean');
         
@@ -1160,6 +1197,11 @@ class Gympro extends Role_Controller{
                     
                     'exercise_list' => json_encode($exercise_list)
                 );
+                $client_id = $this->input->post('client_list');
+                if($client_id > 0)
+                {
+                    $data['client_id'] = $client_id;
+                }
                 $create_program_id = $this->gympro_library->create_program($data);
                 if ($create_program_id !== FALSE)
                 {
@@ -1176,7 +1218,8 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
-        
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
+        $this->data['selected_client_id'] = 0;
         $this->data['exercise_category_list'] = array(
             0 => '---SELECT A CATEGORY---'
         );
@@ -1570,7 +1613,7 @@ class Gympro extends Role_Controller{
 //        TODO FORM VALIDATION
 //        $this->form_validation->set_rules('label', 'Focus', 'xss_clean|required');
 //        $this->form_validation->set_rules('quan', 'Start Date', 'xss_clean');
-        
+        $user_id = $this->session->userdata('user_id');
         if ($this->input->post())
         {
             //if($this->form_validation->run() == true)
@@ -1609,6 +1652,11 @@ class Gympro extends Role_Controller{
                     'user_id' => $this->session->userdata('user_id'),
                     'meal_list' => json_encode($meal_list)
                 );
+                $client_id = $this->input->post('client_list');
+                if($client_id > 0)
+                {
+                    $data['client_id'] = $client_id;
+                }
                 $create_program_id = $this->gympro_library->create_nutrition($data);
                 if ($create_program_id !== FALSE) {
                     $result['message'] = 'Nutrition is added successfully.';
@@ -1626,7 +1674,8 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
-        
+        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
+        $this->data['selected_client_id'] = 0;
         $meal_time_list = array();
         $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
         foreach($meal_time_array as $meal_time)

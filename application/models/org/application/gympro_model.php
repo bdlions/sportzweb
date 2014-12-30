@@ -476,6 +476,19 @@ class Gympro_model extends Ion_auth_model {
                     ->get();
     }
     /*
+     * This method will return alll programs of a gympro client
+     * @param $member_id, member id of a client
+     * @Author Nazmul on 30th December 2014
+     */
+    public function get_all_client_programs($member_id)
+    {
+        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        return $this->db->select($this->tables['app_gympro_programs'].'.id as program_id,'.$this->tables['app_gympro_programs'].'.*')
+                    ->from($this->tables['app_gympro_programs'])
+                    ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_programs'] . '.client_id')
+                    ->get();
+    }
+    /*
      * This method will return program info
      * @param $program_id, program id
      * @Author Nazmul on 7th December 2014
@@ -689,6 +702,19 @@ class Gympro_model extends Ion_auth_model {
         $this->db->where('user_id', $user_id);
         return $this->db->select($this->tables['app_gympro_nutritions'].'.id as nutrition_id,'.$this->tables['app_gympro_nutritions'].'.*')
                     ->from($this->tables['app_gympro_nutritions'])
+                    ->get();
+    }
+    /*
+     * This method will return alll nutritions of a gympro client
+     * @param $member_id, member id of a client
+     * @Author Nazmul on 30th December 2014
+     */
+    public function get_all_client_nutritions($member_id)
+    {
+        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        return $this->db->select($this->tables['app_gympro_nutritions'].'.id as nutrition_id,'.$this->tables['app_gympro_nutritions'].'.*')
+                    ->from($this->tables['app_gympro_nutritions'])
+                    ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_nutritions'] . '.client_id')
                     ->get();
     }
     /*
