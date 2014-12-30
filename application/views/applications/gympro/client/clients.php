@@ -52,7 +52,7 @@
                                     <a role="menuitem" tabindex="-1" href="<?php echo base_url().'applications/gympro/edit_client/'.$client_info['client_id']?>" >Edit</a>
                                 </li>
                                 <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="">Delete</a>
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_delete_confirm(<?php echo $client_info['client_id'] ?>)">Delete</a>
                                 </li>
                             </ul>
                         </div>
@@ -74,6 +74,4 @@
             ?>
             </div>
         </div>
-    </div>
-
-</div>
+ <?php $this->load->view("applications/gympro/client/client_delete_confirm_modal");
