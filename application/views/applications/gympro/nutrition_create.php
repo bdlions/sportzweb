@@ -3,6 +3,23 @@
     var group_counter = 0;
     var row_counter = 0;
     $(function(){
+        $("#submit_button").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select the person you are assessing from the drop menu.");
+                return false;
+            }
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url(); ?>applications/gympro/create_nutrition',
+                data: $("#form_create_nutrition").serializeArray(),
+                success: function(data) {
+                    alert(data.message);
+                    window.location = '<?php echo base_url(); ?>applications/gympro/nutrition';
+                }
+            });
+        });
         add_meal_group();
     });
     function delete_meal_row(current_row)
@@ -122,7 +139,7 @@
             <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
         </div>
         <div class="col-md-10">
-            <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>
+            <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_nutrition', 'class' => 'form-horizontal')) ?>
             <div class="pad_title">
                 NEW NUTRITION PLAN
                 <div class="col-md-3 pull-right">
@@ -141,7 +158,7 @@
                 </div>
             </div>
             <div class="pad_footer">
-                <button type="submit">Save Changes</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Go Back</a>
+                <button type="submit" id="submit_button">Save Changes</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Go Back</a>
             </div>
             <?php echo form_close(); ?>
         </div>

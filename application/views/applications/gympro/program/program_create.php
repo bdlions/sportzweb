@@ -2,6 +2,23 @@
 <script type="text/javascript">
     var counter = 1;
     $(function() {
+         $("#submit_button").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select the person you are assessing from the drop menu.");
+                return false;
+            }
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url(); ?>applications/gympro/create_program',
+                data: $("#form_create_program").serializeArray(),
+                success: function(data) {
+                    alert(data.message);
+                    window.location = '<?php echo base_url(); ?>applications/gympro/programs';
+                }
+            });
+        });
         $('#start_date').datepicker({
             dateFormat: 'dd-mm-yy',
             startDate: '-3d'
@@ -212,7 +229,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                 </div>
             </div>
             <div class="pad_footer">
-                <input type="submit" name="submitButton" value="Save Changes"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Go Back</a>
+                <input type="submit" name="submitButton" value="Save Changes" id="submit_button"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Go Back</a>
             </div>
             <?php echo form_close();?>
         </div>

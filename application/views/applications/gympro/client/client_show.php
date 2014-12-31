@@ -23,8 +23,17 @@
         <!--ADDING CLIENT-->
         <div class="col-md-7">
             <div class="pad_title">
-                Client Info
+                <div class="row">
+                    <div class="col-md-8">
+                        <span>Client Info</span>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="<?php echo base_url() ?>applications/gympro/"><button class="">Previous</button></a>
+                        <a href="<?php echo base_url() ?>applications/gympro/"><button class="">Next</button></a>
+                    </div> 
+                </div>
             </div>
+            <div style="border-top: 1px solid gray; margin-left: 20px"></div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)){?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
@@ -33,47 +42,47 @@
                     <div class="row hidden_tab" id="add_client" style="display: block">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">First Name:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['first_name'];?></label>
+                                <label class="col-sm-4 ">First Name:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['first_name'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Last Name:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['last_name'];?></label>
+                                <label class="col-sm-4 ">Last Name:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['last_name'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Gender:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['gender_name'];?></label>
+                                <label class="col-sm-4 ">Gender:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['gender_name'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Email:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['email'];?></label>
+                                <label class="col-sm-4 ">Email:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['email'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Start Date:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['start_date'];?></label>
+                                <label class="col-sm-4 ">Start Date:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['start_date'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">End Date:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['end_date'];?></label>
+                                <label class="col-sm-4 ">End Date:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['end_date'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Birth Date:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['birth_date'];?></label>
+                                <label class="col-sm-4 ">Birth Date:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['birth_date'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Client Status:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['status_title'];?></label>
+                                <label class="col-sm-4 ">Client Status:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['status_title'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Occupation:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['occupation'];?></label>
+                                <label class="col-sm-4 ">Occupation:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['occupation'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Company Name:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['company_name'];?></label>
+                                <label class="col-sm-4 ">Company Name:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['company_name'];?></label>
                             </div>
                             <div class="form-group">
-                                <label for="website" class="col-md-4 control-label requiredField">
+                                <label for="website" class="col-md-4  requiredField">
                                     Picture: 
                                 </label>
                                 <div class ="col-md-6">                                    
@@ -94,24 +103,24 @@
                     <div class="row hidden_tab" id="contact_details">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Phone:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['phone'];?></label>
+                                <label class="col-sm-4 ">Phone:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['phone'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Mobile:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['mobile'];?></label>
+                                <label class="col-sm-4 ">Mobile:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['mobile'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Address:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['address'];?></label>
+                                <label class="col-sm-4 ">Address:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['address'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Emergency contact:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['emergency_contact'];?></label>                                
+                                <label class="col-sm-4 ">Emergency contact:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['emergency_contact'];?></label>                                
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Emergency phone:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['emergency_phone'];?></label>
+                                <label class="col-sm-4 ">Emergency phone:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['emergency_phone'];?></label>
                             </div>
                         </div>
                     </div>
@@ -137,16 +146,16 @@
                                 </div>
                             <?php } ?>
                             <div class="row form-group">
-                                <label class="col-sm-4 control-label">Height (cm):</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['height'];?></label>
+                                <label class="col-sm-4 ">Height (cm):</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['height'];?></label>
                             </div>
                             <div class="row form-group">
-                                <label class="col-sm-4 control-label">Resting Heart Rate:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['resting_heart_rate'];?></label>
+                                <label class="col-sm-4 ">Resting Heart Rate:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['resting_heart_rate'];?></label>
                             </div>
                             <div class="row form-group">
-                                <label class="col-sm-4 control-label">Blood Pressure:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['blood_pressure'];?></label>
+                                <label class="col-sm-4 ">Blood Pressure:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['blood_pressure'];?></label>
                             </div>
                         </div>
                     </div>
@@ -154,8 +163,8 @@
                     <div class="row hidden_tab" id="notes">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Notes:</label>
-                                <label class="col-sm-6 control-label">&nbsp;<?php echo $client_info['notes'];?></label>
+                                <label class="col-sm-4 ">Notes:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['notes'];?></label>
                             </div>
                         </div>
                     </div>

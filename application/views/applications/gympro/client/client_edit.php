@@ -131,11 +131,17 @@ $(function () {
         </div>
         <div class="col-md-7">
             <div class="pad_title">
-                EDIT CLIENT
-                <div class="pull-right">
-                    <button class="btn button-custom" onclick="open_modal_delete_confirm(<?php echo $client_info['client_id'];?>)">Delete Client</button>
+                <div class="row">
+                    <div class="col-md-8">
+                        <span>Edit Client</span>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="<?php echo base_url() ?>applications/gympro/"><button class="">Previous</button></a>
+                        <a href="<?php echo base_url() ?>applications/gympro/"><button class="">Next</button></a>
+                    </div> 
                 </div>
             </div>
+            <div style="border-top: 1px solid gray; margin-left: 20px"></div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)): ?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
@@ -146,15 +152,15 @@ $(function () {
                         <div class="col-md-9">
                             
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Name: </label>
+                                <label class="col-sm-4 ">Name: </label>
                                 <div class="col-sm-6">
-                                    <label class="control-label"><?php echo $member_info['first_name'];?> <?php echo $member_info['last_name'];?></label>
+                                    <label class=""><?php echo $member_info['first_name'];?> <?php echo $member_info['last_name'];?></label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Gender </label>
+                                <label class="col-sm-4 ">Gender </label>
                                 <div class="col-sm-4">
-                                    <label class="control-label">
+                                    <label class="">
                                         <?php if( $member_info['gender_id'] == GENDER_MALE )
                                                 echo "Male";
                                                 else echo 'Female';?>
@@ -162,50 +168,50 @@ $(function () {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Email: </label>
+                                <label class="col-sm-4 ">Email: </label>
                                 <div class="col-sm-6">
-                                    <label class="control-label"><?php echo $member_info['email'];?></label>
+                                    <label class=""><?php echo $member_info['email'];?></label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Birth Date: </label>
+                                <label class="col-sm-4 ">Birth Date: </label>
                                 <div class="col-sm-4">
-                                    <label class="control-label"><?php echo $member_info['dob'];?></label>
+                                    <label class=""><?php echo $member_info['dob'];?></label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Occupation: </label>
+                                <label class="col-sm-4 ">Occupation: </label>
                                 <div class="col-sm-4">
-                                    <label class="control-label"><?php echo $member_info['occupation'];?></label>
+                                    <label class=""><?php echo $member_info['occupation'];?></label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Company Name: </label>
+                                <label class="col-sm-4 ">Company Name: </label>
                                 <div class="col-sm-4">
-                                    <label class="control-label"><?php echo $member_info['company'];?></label>
+                                    <label class=""><?php echo $member_info['company'];?></label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Client Status </label>
+                                <label class="col-sm-4 ">Client Status </label>
                                 <div class="col-sm-4">
                                     <?php echo form_dropdown('client_status_list', $client_status_list, $selected_status_id, 'class=form-control id=client_status_list'); ?>
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Start Date: </label>
+                                <label class="col-sm-4 ">Start Date: </label>
                                 <div class="col-sm-4">
                                     <?php echo form_input($start_date + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">End Date: </label>
+                                <label class="col-sm-4 ">End Date: </label>
                                 <div class="col-sm-4">
                                     <?php echo form_input($end_date + array('class' => 'form-control'));?>
                                 </div>
                             </div>
 <!--                            <div class="form-group">
-                                <label for="website" class="col-md-4 control-label requiredField">
+                                <label for="website" class="col-md-4  requiredField">
                                     Set picture
                                 </label>
                                 <div class ="col-md-8">
@@ -235,31 +241,31 @@ $(function () {
                     <div class="row hidden_tab" id="contact_details">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Phone: </label>
+                                <label class="col-sm-4 ">Phone: </label>
                                 <div class="col-sm-6">
                                     <?php echo form_input($phone + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Mobile: </label>
+                                <label class="col-sm-4 ">Mobile: </label>
                                 <div class="col-sm-6">
                                     <?php echo form_input($mobile + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Address: </label>
+                                <label class="col-sm-4 ">Address: </label>
                                 <div class="col-sm-8">
                                     <?php echo form_textarea($address);?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Emergency contact: </label>
+                                <label class="col-sm-4 ">Emergency contact: </label>
                                 <div class="col-sm-6">
                                     <?php echo form_input($emergency_contact + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Emergency phone: </label>
+                                <label class="col-sm-4 ">Emergency phone: </label>
                                 <div class="col-sm-6">
                                     <?php echo form_input($emergency_phone + array('class' => 'form-control'));?>
                                 </div>
@@ -289,19 +295,19 @@ $(function () {
                             </div>
                             <?php } ?>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Height (cm): </label>
+                                <label class="col-sm-4 ">Height (cm): </label>
                                 <div class="col-sm-6">
                                     <?php echo form_input($height + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Resting Heart Rate: </label>
+                                <label class="col-sm-4 ">Resting Heart Rate: </label>
                                 <div class="col-sm-6">
                                     <?php echo form_input($resting_heart_rate + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Blood Pressure: </label>
+                                <label class="col-sm-4 ">Blood Pressure: </label>
                                 <div class="col-sm-6">
                                     <?php echo form_input($blood_pressure + array('class' => 'form-control'));?>
                                 </div>
@@ -312,7 +318,7 @@ $(function () {
                     <div class="row hidden_tab" id="notes">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Notes: </label>
+                                <label class="col-sm-4 ">Notes: </label>
                                 <div class="col-sm-8">
                                     <?php echo form_textarea($notes + array('class' => 'form-control'));?>
                                 </div>
