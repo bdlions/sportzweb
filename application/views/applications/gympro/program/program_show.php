@@ -66,7 +66,7 @@
                                 <th>Sets</th>
                                 <th>Reps</th>
                                 <th>Weights</th>
-                                <th>Reps</th>
+                                <th>Rest</th>
                                 <th>Tempo</th>
                             </tr>
                             <tr>

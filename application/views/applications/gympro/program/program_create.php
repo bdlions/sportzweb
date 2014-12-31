@@ -84,7 +84,7 @@
                                 <div><input style="width: 100%" name="weights_<?php echo '{%= weight_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                                <div style="font-size: 14px;">Reps</div>
+                                <div style="font-size: 14px;">Rest</div>
                                 <div><input style="width: 100%" name="reps2_<?php echo '{%= weight_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
