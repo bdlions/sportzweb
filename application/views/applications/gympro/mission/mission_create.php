@@ -37,9 +37,16 @@
 </script>
 <div class="container-fluid">
     <div class="row top_margin">
-        <div class="col-md-2">
-            <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
-        </div>
+        <?php 
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        }
+        else
+        {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+        }            
+        ?>
         <div class="col-md-10">
             <?php echo form_open("applications/gympro/create_mission", array('id' => 'form_create_mission', 'class' => 'form-horizontal')); ?>
             <div class="pad_title">

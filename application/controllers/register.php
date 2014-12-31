@@ -200,13 +200,32 @@ class Register extends CI_Controller {
      */
     function step2(){
         $profile_id = $this->basic_profile->get_profile_id();
+        $dbo = "";
+        if($this->input->post('birthday_day') > 9)
+        {
+            $dbo = $this->input->post('birthday_day')."-";
+        }
+        else
+        {
+            $dbo = "0".$this->input->post('birthday_day')."-";
+        }
+        if($this->input->post('birthday_day') > 9)
+        {
+            $dbo = $dbo.$this->input->post('birthday_month')."-";
+        }
+        else
+        {
+            $dbo = $dbo."0".$this->input->post('birthday_month')."-";
+        }
+        $dbo = $dbo.$this->input->post('birthday_year');
         $profile_data = array(
                 'user_id' => $this->ion_auth->get_user_id(),
                 'home_town' => $this->input->post('home_town'),
                 'clg_or_uni'=>  $this->input->post('college'),
                 'employer'=>$this->input->post('employer'),
                 'gender_id'=>$this->input->post('gender_list'),
-                'dob'=>date('Y-m-d',strtotime($this->input->post('birthday_day')."-".$this->input->post('birthday_month')."-".$this->input->post('birthday_year'))),
+                //'dob'=>date('Y-m-d',strtotime($this->input->post('birthday_day')."-".$this->input->post('birthday_month')."-".$this->input->post('birthday_year'))),
+                'dob'=> $dbo,
                 'country_id'=>$this->input->post('country_list'),
                 'occupation'=>$this->input->post('occupation')
             );

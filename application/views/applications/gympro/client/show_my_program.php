@@ -2,9 +2,16 @@
 <div class="container-fluid">
 
     <div class="row top_margin">
-        <div class="col-md-3">
-            <?php $this->load->view("applications/gympro/template/sections/client_left_pane"); ?>
-        </div>
+        <?php 
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        }
+        else
+        {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+        }            
+        ?>
         <div class="col-md-9">
             <div class="pad_title">
                 Program info 
@@ -65,7 +72,7 @@
                                 <th>Sets</th>
                                 <th>Reps</th>
                                 <th>Weights</th>
-                                <th>Reps</th>
+                                <th>Rest</th>
                                 <th>Tempo</th>
                             </tr>
                             <tr>

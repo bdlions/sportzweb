@@ -396,19 +396,11 @@ class Gympro extends Role_Controller{
                     );
                 }  
                 $data = array(
+                    'user_id' => $this->session->userdata('user_id'),  
                     'member_id' => $member_id,
-                    //'first_name' => $this->input->post('first_name'),
-                    //'last_name' => $this->input->post('last_name'),
-                    //'gender_id' => $this->input->post('gender_list'),
-                    //'email' => $this->input->post('email'),
                     'start_date' => $this->input->post('start_date'),
                     'end_date' => $this->input->post('end_date'),
-                    //'birth_date' => $this->input->post('birth_date'),
                     'status_id' => $this->input->post('client_status_list'),
-                    //'occupation' => $this->input->post('occupation'),
-                    //'company_name' => $this->input->post('company_name'),
-                    //'picture' => $picture,
-                    'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'address' => $this->input->post('address'),
                     'emergency_contact' => $this->input->post('emergency_contact'),
@@ -416,8 +408,7 @@ class Gympro extends Role_Controller{
                     'height' => $this->input->post('height'),
                     'resting_heart_rate' => $this->input->post('resting_heart_rate'),
                     'blood_pressure' => $this->input->post('blood_pressure'),
-                    'notes' => $this->input->post('notes'),
-                    'user_id' => $this->session->userdata('user_id'),                    
+                    'notes' => $this->input->post('notes'),                                      
                     'question_answer_list' => json_encode($answer_list)
                 );
                 $client_id = $this->gympro_library->create_client($data);
@@ -459,26 +450,6 @@ class Gympro extends Role_Controller{
         foreach ($client_status_array as $client_status_info) {
             $this->data['client_status_list'][$client_status_info['client_status_id']] = $client_status_info['title'];
         }
-//        $this->data['first_name'] = array(
-//            'name' => 'first_name',
-//            'id' => 'first_name',
-//            'type' => 'text'
-//        );
-//        $this->data['last_name'] = array(
-//            'name' => 'last_name',
-//            'id' => 'last_name',
-//            'type' => 'text'
-//        );
-//        $this->data['gender_id'] = array(
-//            'name' => 'gender_id',
-//            'id' => 'gender_id',
-//            'type' => 'text'
-//        );
-//        $this->data['email'] = array(
-//            'name' => 'email',
-//            'id' => 'email',
-//            'type' => 'text'
-//        );
         $this->data['start_date'] = array(
             'name' => 'start_date',
             'id' => 'start_date',
@@ -489,35 +460,15 @@ class Gympro extends Role_Controller{
             'id' => 'end_date',
             'type' => 'text'
         );
-//        $this->data['birth_date'] = array(
-//            'name' => 'birth_date',
-//            'id' => 'birth_date',
-//            'type' => 'text'
-//        );
         $this->data['status_id'] = array(
             'name' => 'status_id',
             'id' => 'status_id',
             'type' => 'text'
         );
-//        $this->data['occupation'] = array(
-//            'name' => 'occupation',
-//            'id' => 'occupation',
-//            'type' => 'text'
-//        );
-//        $this->data['company_name'] = array(
-//            'name' => 'company_name',
-//            'id' => 'company_name',
-//            'type' => 'text'
-//        );
         $this->data['picture'] = array(
             'name' => 'picture',
             'id' => 'picture',
             'type' => 'file'
-        );
-        $this->data['phone'] = array(
-            'name' => 'phone',
-            'id' => 'phone',
-            'type' => 'text'
         );
         $this->data['mobile'] = array(
             'name' => 'mobile',
@@ -563,7 +514,7 @@ class Gympro extends Role_Controller{
             'name' => 'submit_create_client',
             'id' => 'submit_create_client',
             'type' => 'submit',
-            'value' => 'Save'
+            'value' => 'Save Client'
         );
         $this->template->load(null,'applications/gympro/client/client_create', $this->data);
     }
@@ -587,17 +538,9 @@ class Gympro extends Role_Controller{
             if($this->form_validation->run() == true)
             {                
                 $data = array(
-                    //'first_name' => $this->input->post('first_name'),
-                    //'last_name' => $this->input->post('last_name'),
-                    //'gender_id' => $this->input->post('gender_list'),
-                    //'email' => $this->input->post('email'),
                     'start_date' => $this->input->post('start_date'),
                     'end_date' => $this->input->post('end_date'),
-                    //'birth_date' => $this->input->post('birth_date'),
                     'status_id' => $this->input->post('client_status_list'),
-                    //'occupation' => $this->input->post('occupation'),
-                    //'company_name' => $this->input->post('company_name'),
-                    'phone' => $this->input->post('phone'),
                     'mobile' => $this->input->post('mobile'),
                     'address' => $this->input->post('address'),
                     'emergency_contact' => $this->input->post('emergency_contact'),
@@ -683,30 +626,6 @@ class Gympro extends Role_Controller{
             $this->data['client_status_list'][$client_status_info['client_status_id']] = $client_status_info['title'];
         }
         $this->data['selected_status_id'] = $client_info['status_id'];
-//        $this->data['first_name'] = array(
-//            'name' => 'first_name',
-//            'id' => 'first_name',
-//            'type' => 'text',
-//            'value' => $client_info['first_name']            
-//        );
-//        $this->data['last_name'] = array(
-//            'name' => 'last_name',
-//            'id' => 'last_name',
-//            'type' => 'text',
-//            'value' => $client_info['last_name']
-//        );
-//        $this->data['gender_id'] = array(
-//            'name' => 'gender_id',
-//            'id' => 'gender_id',
-//            'type' => 'text',
-//            'value' => $client_info['gender_id']
-//        );
-//        $this->data['email'] = array(
-//            'name' => 'email',
-//            'id' => 'email',
-//            'type' => 'text',
-//            'value' => $client_info['email']
-//        );
         $this->data['start_date'] = array(
             'name' => 'start_date',
             'id' => 'start_date',
@@ -719,30 +638,12 @@ class Gympro extends Role_Controller{
             'type' => 'text',
             'value' => $client_info['end_date']
         );
-//        $this->data['birth_date'] = array(
-//            'name' => 'birth_date',
-//            'id' => 'birth_date',
-//            'type' => 'text',
-//            'value' => $client_info['birth_date']
-//        );
         $this->data['status_id'] = array(
             'name' => 'status_id',
             'id' => 'status_id',
             'type' => 'text',
             'value' => $client_info['status_id']
         );
-//        $this->data['occupation'] = array(
-//            'name' => 'occupation',
-//            'id' => 'occupation',
-//            'type' => 'text',
-//            'value' => $client_info['occupation']
-//        );
-//        $this->data['company_name'] = array(
-//            'name' => 'company_name',
-//            'id' => 'company_name',
-//            'type' => 'text',
-//            'value' => $client_info['company_name']
-//        );
         $this->data['phone'] = array(
             'name' => 'phone',
             'id' => 'phone',

@@ -90,7 +90,7 @@
                     <div class="left-nav">
                         <ul id="left-nav">
                             <li id="gympro">
-                                <a href="<?php echo base_url()?>settings/applications_gympro_account">Gympro</a>
+                                <a href="<?php echo base_url()?>applications/gympro">Gympro</a>
                                 <ul>
                                     <li id="account-general_info"><a href="<?php echo base_url()?>settings/applications_gympro_account">Account</a></li>
                                     <li id="account-account_info"><a href="<?php echo base_url()?>settings/applications_gympro_preferences">Preferences</a></li>

@@ -14,11 +14,6 @@
         <div class="col-md-9">
             <div class="row form-group">
                 <div class="col-md-12">
-                    <span style="color: maroon; font-size: 16px">The smarter way to fiend sports buddies and personal trainers</span>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-md-12">
                     <div style="position: relative">
                         <img class="img-responsive" src="<?php echo base_url(); ?>resources/images/applications/gympro/personal-trainers.jpg">
                     </div>

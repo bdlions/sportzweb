@@ -703,9 +703,11 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_nutritions($user_id)
     {
-        $this->db->where('user_id', $user_id);
-        return $this->db->select($this->tables['app_gympro_nutritions'].'.id as nutrition_id,'.$this->tables['app_gympro_nutritions'].'.*')
+        $this->db->where($this->tables['app_gympro_nutritions'].'.user_id', $user_id);
+        return $this->db->select($this->tables['app_gympro_nutritions'].'.id as nutrition_id,'.$this->tables['app_gympro_nutritions'].'.*,'.$this->tables['users'].'.*')
                     ->from($this->tables['app_gympro_nutritions'])
+                    ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_nutritions'] . '.client_id')
+                    ->join($this->tables['users'], $this->tables['users'] . '.id'. '=' . $this->tables['app_gympro_clients'] . '.member_id')
                     ->get();
     }
     /*
@@ -817,9 +819,11 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_assessments($user_id = 0)
     {
-        $this->db->where('user_id', $user_id);
-        return $this->db->select($this->tables['app_gympro_assessments'].'.id as assessment_id,'.$this->tables['app_gympro_assessments'].'.*')
+        $this->db->where($this->tables['app_gympro_assessments'].'.user_id', $user_id);
+        return $this->db->select($this->tables['app_gympro_assessments'].'.id as assessment_id,'.$this->tables['app_gympro_assessments'].'.*,'.$this->tables['users'].'.*')
                     ->from($this->tables['app_gympro_assessments'])
+                    ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_assessments'] . '.client_id')
+                    ->join($this->tables['users'], $this->tables['users'] . '.id'. '=' . $this->tables['app_gympro_clients'] . '.member_id')
                     ->get();
     }
     /*

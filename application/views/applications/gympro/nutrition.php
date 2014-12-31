@@ -2,9 +2,16 @@
 
 <div class="container-fluid">
     <div class="row top_margin">
-        <div class="col-md-2">
-            <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
-        </div>
+        <?php 
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        }
+        else
+        {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+        }            
+        ?>
         <div class="col-md-7">
             <div class="row form-group">
                 <div class="col-md-2" style="font-size: 20px; color: maroon">
@@ -42,7 +49,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>"><?php echo $nutrition['created_on'] ?></a>
+                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>"><?php echo $nutrition['first_name'].' '.$nutrition['last_name'] ?></a>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2">
                         <div class="dropdown friends-satus-dropdown">

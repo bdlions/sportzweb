@@ -26,14 +26,10 @@
                 <div class="row">
                     <div class="col-md-8">
                         <span>Client Info</span>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="<?php echo base_url() ?>applications/gympro/"><button class="">Previous</button></a>
-                        <a href="<?php echo base_url() ?>applications/gympro/"><button class="">Next</button></a>
-                    </div> 
+                    </div>                     
                 </div>
             </div>
-            <div style="border-top: 1px solid gray; margin-left: 20px"></div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)){?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
@@ -66,8 +62,8 @@
                                 <label class="col-sm-6 ">&nbsp;<?php echo $client_info['end_date'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 ">Birth Date:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['birth_date'];?></label>
+                                <label class="col-sm-4 ">Date of birth:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['dob'];?></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 ">Client Status:</label>
@@ -78,8 +74,8 @@
                                 <label class="col-sm-6 ">&nbsp;<?php echo $client_info['occupation'];?></label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 ">Company Name:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['company_name'];?></label>
+                                <label class="col-sm-4 ">Employer:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['employer'];?></label>
                             </div>
                             <div class="form-group">
                                 <label for="website" class="col-md-4  requiredField">
@@ -89,8 +85,8 @@
                                     <div class="col-md-12">
                                         <div class="profile-picture-box pull-right" >
                                             <div id="files" class="files">
-                                                <?php if(!empty($client_info['picture'])): ?>
-                                                    <img style="width: 50px; height: 50px;" src="<?php echo base_url() . CLIENT_PROFILE_PICTURE_PATH_W50_H50 . $client_info['picture']; ?>" class="img-responsive"/>
+                                                <?php if(!empty($client_info['photo'])): ?>
+                                                    <img style="width: 50px; height: 50px;" src="<?php echo base_url() . PROFILE_PICTURE_PATH_W50_H50 . $client_info['photo']; ?>" class="img-responsive"/>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -103,8 +99,8 @@
                     <div class="row hidden_tab" id="contact_details">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label class="col-sm-4 ">Phone:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['phone'];?></label>
+                                <label class="col-sm-4 ">Telephone:</label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['telephone'];?></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 ">Mobile:</label>
