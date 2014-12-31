@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-10">
             <div class="pad_title">
-                Program info 
+                PROGRAMME INFO
             </div>
             <div class="pad_body">
                 <div class="row">

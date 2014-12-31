@@ -1,20 +1,18 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <div class="container-fluid">    
     <div class="row top_margin">
-        <div class="col-md-3">
         <?php 
-            if($selected_account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
-            {
-                $this->load->view("applications/gympro/template/sections/client_left_pane"); 
-            }
-            else
-            {
-                $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
-            }            
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        }
+        else
+        {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+        }            
         ?>
-        </div>
         <div class="col-md-7">
-            <?php echo form_open("applications/gympro/preference/".$user_id, array('id' => 'form_preference', 'class' => 'form-horizontal')); ?>
+            <?php echo form_open("applications/gympro/preference/".$gympro_user_info['user_id'], array('id' => 'form_preference', 'class' => 'form-horizontal')); ?>
                 <div class ="row">
                     <div class="col-md-12">
                         <?php if (isset($message) && ($message != NULL)): ?>
@@ -27,7 +25,7 @@
                         Height unit: 
                     </label>
                     <div class ="col-md-6">
-                        <?php echo form_dropdown('height_unit_list', $height_unit_list, $selected_height_unit_id, 'class=form-control id=height_unit_list'); ?>
+                        <?php echo form_dropdown('height_unit_list', $height_unit_list, $gympro_user_info['height_unit_id'], 'class=form-control id=height_unit_list'); ?>
                     </div>
                 </div> 
                 <div class="form-group">
@@ -35,7 +33,7 @@
                         Weight unit: 
                     </label>
                     <div class ="col-md-6">
-                        <?php echo form_dropdown('weight_unit_list', $weight_unit_list, $selected_weight_unit_id, 'class=form-control id=weight_unit_list'); ?>
+                        <?php echo form_dropdown('weight_unit_list', $weight_unit_list, $gympro_user_info['weight_unit_id'], 'class=form-control id=weight_unit_list'); ?>
                     </div>
                 </div> 
                 <div class="form-group">
@@ -43,7 +41,7 @@
                         Girth unit: 
                     </label>
                     <div class ="col-md-6">
-                        <?php echo form_dropdown('girth_unit_list', $girth_unit_list, $selected_girth_unit_id, 'class=form-control id=girth_unit_list'); ?>
+                        <?php echo form_dropdown('girth_unit_list', $girth_unit_list, $gympro_user_info['girth_unit_id'], 'class=form-control id=girth_unit_list'); ?>
                     </div>
                 </div> 
                 <div class="form-group">
@@ -51,7 +49,7 @@
                         Time zone: 
                     </label>
                     <div class ="col-md-6">
-                        <?php echo form_dropdown('time_zone_list', $time_zone_list, $selected_time_zone_id, 'class=form-control id=time_zone_list'); ?>
+                        <?php echo form_dropdown('time_zone_list', $time_zone_list, $gympro_user_info['time_zone_id'], 'class=form-control id=time_zone_list'); ?>
                     </div>
                 </div> 
                 <div class="form-group">
@@ -59,7 +57,7 @@
                         Currency: 
                     </label>
                     <div class ="col-md-6">
-                        <?php echo form_dropdown('currency_list', $currency_list, $selected_currency_id, 'class=form-control id=currency_list'); ?>
+                        <?php echo form_dropdown('currency_list', $currency_list, $gympro_user_info['currency_id'], 'class=form-control id=currency_list'); ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -67,7 +65,7 @@
                         Hourly rate: 
                     </label>
                     <div class ="col-md-6">
-                        <?php echo form_dropdown('hourly_rate_list', $hourly_rate_list, $selected_hourly_rate_id, 'class=form-control id=hourly_rate_list'); ?>
+                        <?php echo form_dropdown('hourly_rate_list', $hourly_rate_list, $gympro_user_info['hourly_rate_id'], 'class=form-control id=hourly_rate_list'); ?>
                     </div>
                 </div>                 
                 <div class="form-group">

@@ -143,7 +143,7 @@
         </div>
         <div class="col-md-10">
             <div class="pad_title">
-                NEW NUTRITION PLAN
+                EDIT NUTRITION
             </div>
             <div class="pad_body">
                 <input type="hidden" name="group_counter" id="group_counter">

@@ -96,7 +96,7 @@
         <div class="col-md-10">
             <?php echo form_open("applications/gympro/create_exercise", array('id' => 'form_create_exercise', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
             <div class="pad_title">
-                ADDING EXERCISE
+                NEW EXERCISE
                 <div class="col-md-3 pull-right">
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>

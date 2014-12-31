@@ -1,4 +1,5 @@
 <?php
+define("APP_GYMPRO_ACCOUNT_TYPE_ID_EXTERNAL",               0);
 define("APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT",                 1);
 define("APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT",            2);
 define("APP_GYMPRO_ACCOUNT_TYPE_ID_MIDDLEWEIGHT",           3);

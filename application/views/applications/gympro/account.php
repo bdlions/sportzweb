@@ -1,18 +1,16 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <div class="container-fluid">    
     <div class="row top_margin">
-        <div class="col-md-2">
         <?php 
-            if($selected_account_type == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
-            {
-                $this->load->view("applications/gympro/template/sections/client_left_pane"); 
-            }
-            else
-            {
-                $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
-            }            
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        }
+        else
+        {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+        }            
         ?>
-        </div>
         <div class="col-md-7">
             <div class="row pad_body">
                 <div class ="col-md-10 margin-top-bottom">

@@ -213,4 +213,21 @@ class Gympro_library {
         }
         return $mission_list;
     }
+    
+    /*
+     * This method will return all nutrition after converting date format
+     * @param $member_id, user id of the site
+     * @Author Nazmul on 7th December 2014
+     */
+    public function get_all_client_nutritions($member_id)
+    {
+        $nutrition_list = array();
+        $nutritions_array = $this->gympro_model->get_all_client_nutritions($member_id)->result_array();
+        foreach($nutritions_array as $nutrition_info)
+        {
+            $nutrition_info['created_on'] = $this->utils->get_unix_to_human_date($nutrition_info['created_on']);
+            $nutrition_list[] = $nutrition_info;
+        }
+        return $nutrition_list;
+    }
 }
