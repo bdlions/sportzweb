@@ -279,13 +279,27 @@ $(function () {
                         <div class="col-md-12">
                             <?php foreach ($question_list as $question_info){?>
                             <div class="form-group pad_lines">
-                                <div class="col-sm-4">
+                                <div class="col-md-4">
                                     <input type="radio" name="question_radio_<?php echo $question_info['question_id']?>" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="radio" name="question_radio_<?php echo $question_info['question_id']?>" value="no"> No 
                                     <input type="hidden" value="question_id_<?php echo $question_info['question_id']?>">
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="">
+                                                    <label class="patapota"><?php echo $question_info['title'] ?></label>
+                                                </div>
+                                            <div class="">
+                                                <label class="col-md-5">Additional info: </label>
+                                                <div class="col-md-7">
+                                                    <input style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+<!--                                <div class="col-sm-6">
                                     <div>
                                         <label class="patapota"><?php echo $question_info['title']?></label>
                                     </div>
@@ -293,24 +307,24 @@ $(function () {
                                         Additional info: 
                                     </div>
                                     <input style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id']?>" name="question_additional_info_<?php echo $question_info['question_id']?>">
-                                </div>
+                                </div>-->
                             </div>
                             <?php } ?>
                             <div class="form-group">
-                                <label class="col-sm-4 ">Height (cm): </label>
-                                <div class="col-sm-6">
+                                <label class="col-md-4 ">Height (cm): </label>
+                                <div class="col-md-8">
                                     <?php echo form_input($height + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 ">Resting Heart Rate: </label>
-                                <div class="col-sm-6">
+                                <label class="col-md-4 ">Resting Heart Rate: </label>
+                                <div class="col-md-8">
                                     <?php echo form_input($resting_heart_rate + array('class' => 'form-control'));?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 ">Blood Pressure: </label>
-                                <div class="col-sm-6">
+                                <label class="col-md-4 ">Blood Pressure: </label>
+                                <div class="col-md-8">
                                     <?php echo form_input($blood_pressure + array('class' => 'form-control'));?>
                                 </div>
                             </div>
