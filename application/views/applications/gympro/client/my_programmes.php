@@ -38,7 +38,7 @@
             <div class="user_prof">
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
-                        <a href="<?php echo base_url().'applications/gympro/show_my_program/'.$program['program_id']?>">
+                        <a href="<?php echo base_url().'applications/gympro/show_program/'.$program['program_id']?>">
                             <?php if(isset($program['picture']) && $program['picture'] != ''){ ?>
                             <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$program['picture'] ?>"/>
                             <?php }else{?>
@@ -47,7 +47,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_my_program/'.$program['program_id']?>"><?php echo $program['focus'] ?></a>
+                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_program/'.$program['program_id']?>"><?php echo $program['focus'] ?></a>
                     </div>
                 </div>
             </div>

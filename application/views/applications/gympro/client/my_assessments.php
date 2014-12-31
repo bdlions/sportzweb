@@ -35,7 +35,7 @@
             <div class="user_prof">
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
-                        <a href="<?php echo base_url().'applications/gympro/show_my_assessment/'.$assessment['assessment_id'];?>">
+                        <a href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>">
                             <?php if(isset($assessment['picture']) && $assessment['picture'] != ''){ ?>
                             <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$assessment['picture'] ?>"/>
                             <?php }else{?>
@@ -44,7 +44,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_my_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['date']?></a>
+                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['first_name'].' '.$assessment['last_name'].'</br>'.$assessment['date']?></a>
                     </div>
                 </div>
             </div>

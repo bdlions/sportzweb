@@ -177,7 +177,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                 <div class="row">
                     <div class="col-md-7">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Programme Focus: </label>
+                            <label class="col-sm-3 control-label">Programme Title: </label>
                             <div class="col-sm-6">
                                 <input class="form-control" name="focus" value="<?php echo $program['focus'];?>">
                             </div>

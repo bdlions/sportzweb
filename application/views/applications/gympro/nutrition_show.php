@@ -11,14 +11,22 @@
             $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
         }            
         ?>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="pad_title">
                 NUTRITION INFO
+                <div class="col-md-3 pull-right">
+                    <?php 
+                    if($account_type_id != APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+                    {
+                        echo $nutrition_info['first_name'].' '.$nutrition_info['last_name'];
+                    }         
+                    ?>
+                </div>
             </div>
-
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <?php $count=1;?>
-                <?php foreach ($nutrition_info as $meal_group) { ?>
+                <?php foreach ($meal_list as $meal_group) { ?>
                 <div class="row form-group"></div>
                 Meal: <?php echo $count++;?>
                 <div class="row form-group"></div>

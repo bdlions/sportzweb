@@ -11,10 +11,19 @@
             $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
         }            
         ?>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="pad_title">
              EXERCISE INFO
+                <div class="col-md-3 pull-right">
+                    <?php 
+                    if($account_type_id != APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+                    {
+                        echo $exercise_info['first_name'].' '.$exercise_info['last_name'];
+                    }         
+                    ?>
+                </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <div class="row">
                     <div class="col-md-8">

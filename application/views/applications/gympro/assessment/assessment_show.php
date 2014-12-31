@@ -11,13 +11,19 @@
             $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
         }            
         ?>
-        <div class="col-md-8">           
+        <div class="col-md-9">           
             <div class="pad_title">
             ASSESSMENT INFO
-               <div class="col-md-3 pull-right">
-                    <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
+                <div class="col-md-3 pull-right">
+                    <?php 
+                    if($account_type_id != APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+                    {
+                        echo $assessment_info['first_name'].' '.$assessment_info['last_name'];
+                    }         
+                    ?>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)){ ?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>

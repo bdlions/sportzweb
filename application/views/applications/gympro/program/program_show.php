@@ -13,15 +13,24 @@
             $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
         }            
         ?>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="pad_title">
                 PROGRAMME INFO
+                <div class="col-md-3 pull-right">
+                    <?php 
+                    if($account_type_id != APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+                    {
+                        echo $program_info['first_name'].' '.$program_info['last_name'];
+                    }         
+                    ?>
+                </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <div class="row">
                     <div class="col-md-7">
                         <div class=" row form-group">
-                            <label class="col-sm-3 control-label">Programme Focus: </label>
+                            <label class="col-sm-3 control-label">Programme Title: </label>
                             <div class="col-md-9 "><?php echo $program_info['focus']; ?></div>
                         </div>
 

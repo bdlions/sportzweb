@@ -228,43 +228,12 @@ class Gympro extends Role_Controller{
         $this->data['program_list'] = $program_list;
         $this->template->load(null,'applications/gympro/client/my_programmes', $this->data);
     }
-    public function show_my_program($program_id = 0)
-    {
-        $program_info = $this->gympro_library->get_program_info($program_id)->result_array();
-        $this->data['program_info'] = $program_info[0];
-        $this->data['exercise_list'] = json_decode( $program_info[0]['exercise_list'], TRUE );
-        $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
-        $this->data['program_id'] = $program_id;
-        $this->data['message'] = '';   
-        $this->template->load(null,'applications/gympro/client/show_my_program', $this->data); 
-    }
+    
     public function my_nutritions()
     {
         $nutrition_list = $this->gympro_library->get_all_client_nutritions($this->session->userdata('user_id'));
         $this->data['nutrition_list'] = $nutrition_list;
         $this->template->load(null,'applications/gympro/client/my_nutritions', $this->data);
-    }
-    public function show_my_nutrition($nutrition_id = 0)
-    {
-        $meal_time_list = array();
-        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
-        foreach($meal_time_array as $meal_time)
-        {
-            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
-        }
-        $this->data['meal_time_list'] =$meal_time_list;
-        
-        $workout_list = array();
-        $workout_array = $this->gympro_library->get_all_workouts()->result_array();
-        foreach($workout_array as $workout)
-        {
-            $workout_list[$workout['workout_id']] =  $workout['title'];
-        }
-        $nutrition_info = $this->gympro_library->get_nutrition_info($nutrition_id)->result_array();
-        $this->data['nutrition_info'] = json_decode($nutrition_info[0]['meal_list'], TRUE);
-        $this->data['workout_list'] =$workout_list;
-        $this->data['nutrition_id'] =$nutrition_id;
-        $this->template->load(null,'applications/gympro/client/show_my_nutrition', $this->data);
     }
     public function my_assessments()
     {
@@ -272,43 +241,12 @@ class Gympro extends Role_Controller{
         $this->data['assessment_list'] = $assessment_list;
         $this->template->load(null,'applications/gympro/client/my_assessments', $this->data);
     }
-    public function show_my_assessment($assessment_id = 0)
-    {
-        //CHECK WHETHER THIS USE HAS PERMISSION OF THIS ASSESSMENT     
-        $assessment_info = array();
-        $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
-        if(!empty($assessment_array))
-        {
-            $assessment_info = $assessment_array[0];            
-        } 
-        else
-        {
-            redirect('applications/gympro/my_assessments','refresh');
-        }
-        $this->data['assessment_info'] = $assessment_info;
-        $this->template->load(null, 'applications/gympro/client/show_my_assessment', $this->data);
-    }
+    
     public function my_missions()
     {
         $mission_list = $this->gympro_library->get_all_client_missions($this->session->userdata('user_id'))->result_array();
         $this->data['mission_list'] = $mission_list;
         $this->template->load(null,'applications/gympro/client/my_missions', $this->data);
-    }
-    public function show_my_mission($mission_id = 0)
-    {
-        //CHECK WHETHER THIS USE HAS PERMISSION OF THIS MISSION        
-        $mission_info = array();
-        $mission_array = $this->gympro_library->get_mission_info($mission_id)->result_array();
-        if(!empty($mission_array))
-        {
-            $mission_info = $mission_array[0];            
-        }
-        else
-        {
-            redirect('applications/gympro/my_missions','refresh');
-        }
-        $this->data['mission_info'] = $mission_info;
-        $this->template->load(null, 'applications/gympro/client/show_my_mission', $this->data);
     }
     
     public function my_exercises()
@@ -316,23 +254,6 @@ class Gympro extends Role_Controller{
         $exercise_list = $this->gympro_library->get_all_client_exercises($this->session->userdata('user_id'))->result_array();
         $this->data['exercise_list'] = $exercise_list;
         $this->template->load(null,'applications/gympro/client/my_exercises', $this->data);
-    }
-    public function show_my_exercise($exercise_id = 0)
-    {
-        //CHECK WHETHER THIS USE HAS PERMISSION OF THIS EXERCISE   
-        $exercise_info = array();
-        $exercise_array = $this->gympro_library->get_exercise_details($exercise_id)->result_array();
-        if(!empty($exercise_array))
-        {
-            $exercise_info = $exercise_array[0];            
-        }
-        else
-        {
-            redirect('applications/gympro/my_exercises','refresh');
-        }
-        
-        $this->data['exercise_info'] = $exercise_info;
-        $this->template->load(null,'applications/gympro/client/show_my_exercise', $this->data);
     }
     /*
      * This method will show client list of gympro user
@@ -1202,15 +1123,31 @@ class Gympro extends Role_Controller{
         }
         echo json_encode($result);
     }
-    public function show_program($program_id)
+    /*
+     * This method will show program info
+     * @param $program_id, program id
+     * @Author Nazmul on 31st December 2014
+     */
+    public function show_program($program_id = 0)
     {
-        $program_info=array();
-        $program_info = $this->gympro_library->get_program_info($program_id)->result_array();
-        $this->data['program_info'] = $program_info[0];
-        $this->data['exercise_list'] = json_decode( $program_info[0]['exercise_list'], TRUE );
+        if($program_id == 0)
+        {
+            redirect('applications/gympro', 'refresh');
+        }
+        $program_info = array();
+        $program_info_array = $this->gympro_library->get_program_info($program_id)->result_array();
+        if(!empty($program_info_array))
+        {
+            $program_info = $program_info_array[0];
+        }
+        else
+        {
+            redirect('applications/gympro', 'refresh');
+        }
+        $this->data['program_info'] = $program_info;
+        $this->data['exercise_list'] = json_decode( $program_info['exercise_list'], TRUE );
         $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
         $this->data['program_id'] = $program_id;
-        $this->data['message'] = '';   
         $this->template->load(null,'applications/gympro/program/program_show', $this->data);   
         
     }
@@ -1407,8 +1344,12 @@ class Gympro extends Role_Controller{
      * @param $exercise_id, exercise id
      * @Author Nazmul on 14th December 2014
      */
-    public function show_exercise($exercise_id)
+    public function show_exercise($exercise_id = 0)
     {
+        if($exercise_id == 0)
+        {
+            redirect('applications/gympro','refresh');
+        }
         $exercise_info = array();
         $exercise_array = $this->gympro_library->get_exercise_details($exercise_id)->result_array();
         if(!empty($exercise_array))
@@ -1417,7 +1358,7 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro/manage_exercises','refresh');
+            redirect('applications/gympro','refresh');
         }
         
         $this->data['exercise_info'] = $exercise_info;
@@ -1701,8 +1642,18 @@ class Gympro extends Role_Controller{
         }
         echo json_encode($result);
     }
-    public function show_nutrition($nutrition_id)
+    
+    /*
+     * This method will show nutrition info
+     * @param $nutrition_id, nutrition id
+     * @Author Nazmul on 31st December 2014
+     */
+    public function show_nutrition($nutrition_id = 0)
     {
+        if($nutrition_id == 0)
+        {
+            redirect('applications/gympro', 'refresh');
+        }
         $meal_time_list = array();
         $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
         foreach($meal_time_array as $meal_time)
@@ -1717,10 +1668,20 @@ class Gympro extends Role_Controller{
         {
             $workout_list[$workout['workout_id']] =  $workout['title'];
         }
-        $nutrition_info = $this->gympro_library->get_nutrition_info($nutrition_id)->result_array();
-        $this->data['nutrition_info'] = json_decode($nutrition_info[0]['meal_list'], TRUE);
-        $this->data['workout_list'] =$workout_list;
-        $this->data['nutrition_id'] =$nutrition_id;
+        $nutrition_info = array();
+        $nutrition_info_array = $this->gympro_library->get_nutrition_info($nutrition_id)->result_array();
+        if(!empty($nutrition_info_array))
+        {
+            $nutrition_info = $nutrition_info_array[0];
+        }
+        else
+        {
+            redirect('applications/gympro', 'refresh');
+        }    
+        $this->data['nutrition_info'] = $nutrition_info;
+        $this->data['meal_list'] = json_decode($nutrition_info['meal_list'], TRUE);
+        $this->data['workout_list'] = $workout_list;
+        $this->data['nutrition_id'] = $nutrition_id;
         $this->template->load(null,'applications/gympro/nutrition_show', $this->data);
         
     }
@@ -2196,9 +2157,12 @@ class Gympro extends Role_Controller{
      * @param $assessment_id, assessment id
      * @Author Nazmul on 14th December 2014
      */
-    public function show_assessment($assessment_id)
+    public function show_assessment($assessment_id = 0)
     {
-        $user_id = $this->session->userdata('user_id');
+        if($assessment_id == 0)
+        {
+            redirect('applications/gympro','refresh');
+        }
         $assessment_info = array();
         $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
         if(!empty($assessment_array))
@@ -2207,16 +2171,7 @@ class Gympro extends Role_Controller{
         } 
         else
         {
-            redirect('applications/gympro/manage_assessments','refresh');
-        }
-        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
-        if($assessment_info['client_id'] > 0)
-        {
-            $this->data['selected_client_id'] = $assessment_info['client_id'];
-        }
-        else
-        {
-            $this->data['selected_client_id'] = 0;
+            redirect('applications/gympro','refresh');
         }
         $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
         foreach ($reassess_array as $reassess_info) {
@@ -2534,9 +2489,9 @@ class Gympro extends Role_Controller{
      * @param $mission_id, mission id
      * @Author Nazmul on 14th December 2014
      */
-    public function show_mission($mission_id)
+    public function show_mission($mission_id = 0)
     {
-        $user_id = $this->session->userdata('user_id');
+        //CHECK WHETHER THIS USEr HAS PERMISSION OF THIS MISSION    
         $mission_info = array();
         $mission_array = $this->gympro_library->get_mission_info($mission_id)->result_array();
         if(!empty($mission_array))
@@ -2545,16 +2500,7 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro/manage_missions','refresh');
-        }
-        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
-        if($mission_info['client_id'] > 0)
-        {
-            $this->data['selected_client_id'] = $mission_info['client_id'];
-        }
-        else
-        {
-            $this->data['selected_client_id'] = 0;
+            redirect('applications/gympro','refresh');
         }
         $this->data['mission_info'] = $mission_info;
         $this->template->load(null, 'applications/gympro/mission/mission_show', $this->data);
