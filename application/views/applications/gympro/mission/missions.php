@@ -20,6 +20,7 @@
                     <a href="<?php echo base_url()?>applications/gympro/create_mission"><button class="pull-right btn button-custom btn_gympro">New Mission</button></a>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_missions = count($mission_list);
             $counter = 0;

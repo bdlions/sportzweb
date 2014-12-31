@@ -20,6 +20,7 @@
                     <a href="<?php echo base_url()?>applications/gympro/create_exercise"><button class="pull-right btn button-custom btn_gympro">New Exercise</button></a>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_exercise = count($exercise_list);
             $counter = 0;

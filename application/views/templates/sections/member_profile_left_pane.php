@@ -23,7 +23,7 @@
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/20.gif"/><a href="<?php echo base_url()?>user_album/photos/<?php echo (isset($user_id)?  $user_id :  ''); ?>">My Photos</a>
                 </li>
                 <li class="list-group-item left-panel-item">
-                    <img class="list-icon" src="<?php echo base_url() ?>resources/images/2.gif"/><a href="<?php echo base_url().'followers/'. (isset($user_id)?  'show/'.$user_id :  '')?>">Following</a>
+                    <img class="list-icon" src="<?php echo base_url() ?>resources/images/2.gif" height="16px" width="16px"/><a href="<?php echo base_url().'followers/'. (isset($user_id)?  'show/'.$user_id :  '')?>">Following</a>
                 </li>
             </ul>
         </div>

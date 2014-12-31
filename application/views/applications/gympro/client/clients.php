@@ -22,6 +22,7 @@
                     </a>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px; margin-top:10px;"></div>
             <?php
             $total_clients = count($client_list);
             $counter = 0;

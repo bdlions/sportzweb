@@ -1,6 +1,23 @@
 <script type="text/javascript">
     var counter = 0;
     $(function() {
+        $("#button_program_edit").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select the person you are assessing from the drop menu.");
+                return false;
+            }
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url().'applications/gympro/edit_program/'.$program_id; ?>',
+                data: $("#form_edit_program").serializeArray(),
+                success: function(data) {
+                    alert(data.message);
+                    window.location = '<?php echo base_url(); ?>applications/gympro/programs';
+                }
+            });
+        });
         $('#start_date').datepicker({
             dateFormat: 'dd-mm-yy',
             startDate: '-3d'
@@ -165,11 +182,14 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
         }            
         ?>
         <div class="col-md-10">
+            <?php echo form_open("applications/gympro/edit_program/" . $program_id, array('id' => 'form_edit_program', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')) ?>
             <div class="pad_title">
                 EDIT PROGRAMME
-            </div>
-            
-            <?php echo form_open("applications/gympro/edit_program/" . $program_id, array('id' => 'form_edit_program', 'class' => 'form-horizontal')) ?>
+                <div class="col-md-3 pull-right">
+                    <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
+                </div>
+            </div> 
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <div>
                     <input type=hidden class="form-control" name="counter" id="counter">
@@ -233,7 +253,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                 </div>
             </div>
             <div class="pad_footer">
-                <input type="submit" name="submitButton" value="Save Changes"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Go Back</a>
+                <input type="submit" id="button_program_edit" name="button_program_edit" value="Save Changes"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Go Back</a>
             </div>
             <?php echo form_close();?>
             

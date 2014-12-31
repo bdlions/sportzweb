@@ -26,7 +26,7 @@
                     <img class="list-icon" src="<?php echo base_url() ?>resources/images/17.gif"/><a href="<?php echo base_url()?>messages">Message</a>
                 </li>
                 <li class="list-group-item left-panel-item">
-                    <img class="list-icon" src="<?php echo base_url() ?>resources/images/2.gif"/><a href="<?php echo base_url()?>followers">Followers</a>
+                    <img class="list-icon" src="<?php echo base_url() ?>resources/images/2.gif" height="16px" width="16px"/><a href="<?php echo base_url()?>followers">Followers</a>
                 </li>
             </ul>
         </div>
@@ -84,22 +84,10 @@
                     <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/photography' ?>"></i>Photography</a>
                 </li>
                 <?php 
-                }if(in_array(APPLICATION_SCORE_PREDICTION_ID, $app_id_list))
-                {?>
-                <li class="list-group-item left-panel-item list-icon">
-                    <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/score_prediction' ?>"></i>Score Prediction</a>
-                </li>
-                <?php 
-                }if(in_array(APPLICATION_SHOP_ID, $app_id_list))
-                {?>
-                <li class="list-group-item left-panel-item list-icon">
-                    <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/shop' ?>"></i>Shop</a>
-                </li>
-                <?php 
                 }if(in_array(APPLICATION_GYMPRO_ID, $app_id_list))
                 {?>
                 <li class="list-group-item left-panel-item list-icon">
-                    <img class="list-icon" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/gympro' ?>"></i>Gympro</a>
+                    <img class="list-icon" src="<?php echo base_url(); ?>resources/images/ptpro.png" height="16px" width="16px"/><a href="<?php echo base_url().'applications/gympro' ?>"></i>PT Pro</a>
                 </li>
                 <?php 
                 }if(in_array(100, $app_id_list))

@@ -3,6 +3,23 @@
     var group_counter = 0;
     var row_counter = 0;
     $(function(){
+        $("#button_edit_nutrition").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select the person you are assessing from the drop menu.");
+                return false;
+            }
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url().'applications/gympro/edit_nutrition/'.$nutrition_id; ?>',
+                data: $("#form_edit_nutrition").serializeArray(),
+                success: function(data) {
+                    alert(data.message);
+                    window.location = '<?php echo base_url(); ?>applications/gympro/nutrition';
+                }
+            });
+        });
     });
     function delete_meal_row(current_row)
     {
@@ -149,9 +166,14 @@
         }            
         ?>
         <div class="col-md-10">
+             <?php echo form_open("applications/gympro/edit_nutrition/".$nutrition_id, array('id' => 'form_edit_nutrition', 'class' => 'form-horizontal','onsubmit' => 'return false;')); ?>
             <div class="pad_title">
                 EDIT NUTRITION
+                <div class="col-md-3 pull-right">
+                    <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
+                </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <input type="hidden" name="group_counter" id="group_counter">
                 <input type="hidden" name="row_counter" id="row_counter">
@@ -164,7 +186,7 @@
                 </div>
             </div>
             <div class="pad_footer">
-                <button type="submit">Save Changes</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Go Back</a>
+                <button id="button_edit_nutrition" name="button_edit_nutrition" type="submit">Save Changes</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Go Back</a>
             </div>
             <?php echo form_close(); ?>
             <?php ?>

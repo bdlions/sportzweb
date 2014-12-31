@@ -2,7 +2,7 @@
 <script type="text/javascript">
     var counter = 1;
     $(function() {
-         $("#submit_button").on("click", function() {
+         $("#button_create_program").on("click", function() {
             if($("#client_list").val() == 0)
             {
                 alert("Please select the person you are assessing from the drop menu.");
@@ -164,14 +164,14 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
         }            
         ?>
         <div class="col-md-10">
-            <?php echo form_open("applications/gympro/create_program", array('id' => 'form_create_program', 'class' => 'form-horizontal')) ?>
+            <?php echo form_open("applications/gympro/create_program", array('id' => 'form_create_program', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')) ?>
             <div class="pad_title">
                 CREATE PROGRAMME
                 <div class="col-md-3 pull-right">
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>
             </div>
-            
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <div>
                     <input type=hidden class="form-control" name="counter" id="counter">
@@ -236,7 +236,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                 </div>
             </div>
             <div class="pad_footer">
-                <input type="submit" name="submitButton" value="Save Changes" id="submit_button"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Go Back</a>
+                <input type="submit" id="button_create_program" name="button_create_program" value="Save Changes"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Go Back</a>
             </div>
             <?php echo form_close();?>
         </div>

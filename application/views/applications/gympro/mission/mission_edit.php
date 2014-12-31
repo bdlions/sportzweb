@@ -1,6 +1,23 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <script type="text/javascript">
     $(function() {
+        $("#submit_button").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select the person you are assessing from the drop menu.");
+                return false;
+            }
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url().'applications/gympro/edit_mission/'.$mission_id; ?>',
+                data: $("#form_edit_mission").serializeArray(),
+                success: function(data) {
+                    alert(data.message);
+                    window.location = '<?php echo base_url(); ?>applications/gympro/manage_missions';
+                }
+            });
+        });
         $('#start_date').datepicker({
             dateFormat: 'dd-mm-yy',
             startDate: '-3d'
@@ -31,13 +48,14 @@
         }            
         ?>
         <div class="col-md-10">
-            <?php echo form_open("applications/gympro/edit_mission/".$mission_id, array('id' => '', 'class' => 'form-horizontal')); ?>
+            <?php echo form_open("applications/gympro/edit_mission/".$mission_id, array('id' => 'form_edit_mission', 'class' => 'form-horizontal','onsubmit' => 'return false;')); ?>
             <div class="pad_title">
                 EDIT MISSION
                 <div class="col-md-3 pull-right">
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)): ?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>

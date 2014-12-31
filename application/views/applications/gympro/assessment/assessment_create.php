@@ -48,6 +48,7 @@
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)){ ?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>

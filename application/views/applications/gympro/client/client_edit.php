@@ -133,7 +133,7 @@ $(function () {
             <div class="pad_title">
                 <div class="row">
                     <div class="col-md-8">
-                        <span>Edit Client</span>
+                        <span>EDIT CLIENT</span>
                     </div>                    
                 </div>
             </div>

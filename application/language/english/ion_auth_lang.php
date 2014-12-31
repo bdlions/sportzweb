@@ -301,6 +301,8 @@ $lang['update_group_fail']                             = "Failed to update group
 $lang['delete_group_successful']                       = "Group deleted successfully.";
 $lang['delete_group_fail']                             = "Failed to delete the group.";
 
+$lang['create_program_successful']                     = "Program created successfully.";
+$lang['create_program_fail']                           = "Failed to create a program.";
 $lang['update_program_successful']                     = "Program updated successfully.";
 $lang['update_program_fail']                           = "Failed to update program info.";
 $lang['delete_program_successful']                     = "Program deleted successfully.";
@@ -313,6 +315,8 @@ $lang['update_exercise_fail']                          = "Failed to update exerc
 $lang['delete_exercise_successful']                    = "Exercise deleted successfully.";
 $lang['delete_exercise_fail']                          = "Failed to delete exercise info.";
 
+$lang['create_nutrition_successful']                   = "Nutrition creaed successfully.";
+$lang['create_nutrition_fail']                         = "Failed to create a nutrition.";
 $lang['update_nutrition_successful']                   = "Nutrition updated successfully.";
 $lang['update_nutrition_fail']                         = "Failed to update nutrition info.";
 $lang['delete_nutrition_successful']                   = "Nutrition deleted successfully.";

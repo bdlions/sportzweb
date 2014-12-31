@@ -16,10 +16,8 @@
                 <div class="col-md-2" style="font-size: 20px; color: maroon">
                     <span>Programs</span>
                 </div>
-                <div class="col-md-3 pull-right right_padding_zero">
-                    <a href="<?php echo base_url() ?>applications/gympro/create_program"><button class="pull-right btn button-custom btn_gympro">New Program</button></a>
-                </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_clients = count($program_list);
             $counter = 0;
@@ -63,7 +61,4 @@
             ?>
         </div>
     </div>
-
 </div>
-
-<?php $this->load->view("applications/gympro/modal/program_delete_confirm");?>

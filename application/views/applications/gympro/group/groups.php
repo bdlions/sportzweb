@@ -1,9 +1,16 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <div class="container-fluid">
     <div class="row top_margin">
-        <div class="col-md-2">
-            <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
-        </div>
+        <?php 
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        }
+        else
+        {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+        }            
+        ?>
         <div class="col-md-7">
             <div class="row form-group">
                 <div class="col-md-2" style="font-size: 20px; color: maroon">
@@ -13,6 +20,7 @@
                     <a href="<?php echo base_url()?>applications/gympro/create_group"><button class="pull-right btn button-custom btn_gympro">New Group</button></a>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_clients = count($group_list);
             $counter = 0;

@@ -21,6 +21,7 @@
                     <a href="<?php echo base_url() ?>applications/gympro/create_program"><button class="pull-right btn button-custom btn_gympro">New Program</button></a>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_clients = count($program_list);
             $counter = 0;

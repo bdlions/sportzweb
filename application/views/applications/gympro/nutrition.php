@@ -21,7 +21,7 @@
                     <a href="<?php echo base_url() ?>applications/gympro/create_nutrition"><button class="pull-right btn button-custom btn_gympro">New Nutrition Plan</button></a>
                 </div>
             </div>
-            
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_nutrition = count($nutrition_list);
             $counter = 0;
@@ -62,7 +62,7 @@
                                     <a role="menuitem" tabindex="-1" href="<?php echo base_url().'applications/gympro/edit_nutrition/' . $nutrition['nutrition_id']; ?>" >Edit</a>
                                 </li>
                                 <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_delete_confirm(<?php echo $nutrition['id'] ?>)">Delete</a>
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_delete_confirm(<?php echo $nutrition['nutrition_id'] ?>)">Delete</a>
                                 </li>
                             </ul>
                         </div>
@@ -79,35 +79,6 @@
         $counter++;
             }
             ?>
-            
-            
-            
-            
-<!--            <div class="row form-group">
-                <div class="col-md-12">
-                    <table class="table table-condensed table-responsive gympro_table">
-                        <tbody>
-                            <tr>
-                                <th>CREATED</th>
-                                <th>EDIT</th>
-                                <th>DELETE</th>
-                            </tr>
-                            <?php foreach ($nutrition_list as $nutrition): ?>
-                                <tr>
-                                    <td><a href="<?php echo base_url() . 'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>"><?php echo $nutrition['created_on'] ?></a></td>
-                                    <td><a href="<?php echo base_url() . 'applications/gympro/edit_nutrition/' . $nutrition['nutrition_id']; ?>">Edit</a></td>
-                                    <td style="text-align: center">
-                                        <a onclick="open_modal_delete_confirm(<?php echo $nutrition['id'] ?>)" >
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
-
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>                
-            </div>-->
         </div>
     </div>
 

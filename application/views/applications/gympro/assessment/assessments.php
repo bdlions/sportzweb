@@ -21,6 +21,7 @@
                     <a href="<?php echo base_url()?>applications/gympro/create_assessment"><button class="pull-right btn button-custom btn_gympro">New Assessment</button></a>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_assessments = count($assessment_list);
             $counter = 0;

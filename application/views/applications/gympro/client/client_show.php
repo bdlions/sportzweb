@@ -17,6 +17,22 @@
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
+                <a onclick="$('.hidden_tab').hide();$('#programmes').show();">Programmes</a>
+            </div>
+            <div class="ln_item" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
+                <a onclick="$('.hidden_tab').hide();$('#assessments').show();">Assessments</a>
+            </div>
+            <div class="ln_item" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
+                <a onclick="$('.hidden_tab').hide();$('#missions').show();">Missions</a>
+            </div>
+            <div class="ln_item" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
+                <a onclick="$('.hidden_tab').hide();$('#nutrition').show();">Nutrition</a>
+            </div>
+            <div class="ln_item" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#notes').show();">Notes</a>
             </div>
         </div>
@@ -25,7 +41,7 @@
             <div class="pad_title">
                 <div class="row">
                     <div class="col-md-8">
-                        <span>Client Info</span>
+                        <span>CLIENT INFO</span>
                     </div>                     
                 </div>
             </div>
@@ -154,6 +170,181 @@
                                 <label class="col-sm-6 ">&nbsp;<?php echo $client_info['blood_pressure'];?></label>
                             </div>
                         </div>
+                    </div>
+                    <!--Programmes-->
+                    <div class="row hidden_tab" id="programmes">
+                        <?php
+                            $total_programs = count($program_list);
+                            $program_counter = 0;
+                            foreach($program_list as $program)
+                            {
+                                if($program_counter%APP_GYMPRO_PROGRAMMES_PER_ROW == 0)
+                                {
+                                    //echo '<div class="row top_margin">';
+                                    echo '<div class="col-md-6 right_padding_zero">';
+                                }
+                                else
+                                {
+                                    echo '<div class="col-md-6 right_padding_zero">';
+                                }
+                                ?>
+                                <div class="user_prof">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <a href="<?php echo base_url().'applications/gympro/show_program/'.$program['program_id']?>">
+                                                <?php if(isset($program['picture']) && $program['picture'] != ''){ ?>
+                                                <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$program['picture'] ?>"/>
+                                                <?php }else{?>
+                                                <img style="background-color: #76B4E7; width: 100%" class="img-responsive" src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_DEFAULT_PICTURE_NAME ?>"/>
+                                                <?php } ?>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_program/'.$program['program_id']?>"><?php echo $program['focus'] ?></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php echo '</div>'?>
+                            <?php
+                            if($program_counter%APP_GYMPRO_PROGRAMMES_PER_ROW == (APP_GYMPRO_PROGRAMMES_PER_ROW-1) || $program_counter == $total_programs)
+                            {
+                                //echo '</div>';
+                            }  
+                            $program_counter++;
+                            }
+                        ?>
+                    </div>
+                    <!--Assessments-->
+                    <div class="row hidden_tab" id="assessments">
+                        <?php
+                        $total_assessments = count($assessment_list);
+                        $assessment_counter = 0;
+                        foreach($assessment_list as $assessment)
+                        {
+                            if($assessment_counter%APP_GYMPRO_ASSESSMENTS_PER_ROW == 0)
+                            {
+                                //echo '<div class="row top_margin">';
+                                echo '<div class="col-md-6 right_padding_zero">';
+                            }
+                            else
+                            {
+                                echo '<div class="col-md-6 right_padding_zero">';
+                            }
+                            ?>
+                            <div class="user_prof">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <a href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>">
+                                            <?php if(isset($assessment['picture']) && $assessment['picture'] != ''){ ?>
+                                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$assessment['picture'] ?>"/>
+                                            <?php }else{?>
+                                            <img style="background-color: #76B4E7; width: 100%" class="img-responsive" src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_DEFAULT_PICTURE_NAME ?>"/>
+                                            <?php } ?>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['first_name'].' '.$assessment['last_name'].'</br>'.$assessment['date']?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php echo '</div>'?>
+                        <?php
+
+                        if($assessment_counter%APP_GYMPRO_ASSESSMENTS_PER_ROW == (APP_GYMPRO_ASSESSMENTS_PER_ROW-1) || $assessment_counter == $total_assessments)
+                        {
+                            //echo '</div>';
+                        }  
+                        $assessment_counter++;
+                        }
+                        ?>
+                    </div>
+                    <!--Missions-->
+                    <div class="row hidden_tab" id="missions">
+                        <?php
+                        $total_missions = count($mission_list);
+                        $mission_counter = 0;
+                        foreach($mission_list as $mission_info)
+                        {
+                            if($mission_counter%APP_GYMPRO_MISSIONS_PER_ROW == 0)
+                            {
+                                //echo '<div class="row top_margin">';
+                                echo '<div class="col-md-6 right_padding_zero">';
+                            }
+                            else
+                            {
+                                echo '<div class="col-md-6 right_padding_zero">';
+                            }
+                            ?>
+                            <div class="user_prof">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <a href="<?php echo base_url().'applications/gympro/show_mission/'.$mission_info['mission_id']?>">
+                                            <?php if(isset($mission_info['picture']) && $mission_info['picture'] != ''){ ?>
+                                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$mission_info['picture'] ?>"/>
+                                            <?php }else{?>
+                                            <img style="background-color: #76B4E7; width: 100%" class="img-responsive" src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_DEFAULT_PICTURE_NAME ?>"/>
+                                            <?php } ?>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_mission/'.$mission_info['mission_id']?>"><?php echo $mission_info['label']?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php echo '</div>'?>
+                        <?php
+
+                        if($mission_counter%APP_GYMPRO_MISSIONS_PER_ROW == (APP_GYMPRO_MISSIONS_PER_ROW-1) || $mission_counter == $total_missions)
+                        {
+                            //echo '</div>';
+                        }  
+                        $mission_counter++;
+                        }
+                        ?>
+                    </div>
+                    <!--Nutrition-->
+                    <div class="row hidden_tab" id="nutrition">
+                        <?php
+                        $total_nutrition = count($nutrition_list);
+                        $nutrition_counter = 0;
+                        foreach($nutrition_list as $nutrition)
+                        {
+                            if($nutrition_counter%APP_GYMPRO_NUTRITION_PER_ROW == 0)
+                            {
+                                //echo '<div class="row top_margin">';
+                                echo '<div class="col-md-6 right_padding_zero">';
+                            }
+                            else
+                            {
+                                echo '<div class="col-md-6 right_padding_zero">';
+                            }
+                            ?>
+                            <div class="user_prof">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <a href="<?php echo base_url().'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>">
+                                            <?php if(isset($nutrition['picture']) && $nutrition['picture'] != ''){ ?>
+                                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$nutrition['picture'] ?>"/>
+                                            <?php }else{?>
+                                            <img style="background-color: #76B4E7; width: 100%" class="img-responsive" src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_DEFAULT_PICTURE_NAME ?>"/>
+                                            <?php } ?>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>"><?php echo $nutrition['first_name'].' '.$nutrition['last_name'] ?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php echo '</div>'?>
+                        <?php
+
+                        if($nutrition_counter%APP_GYMPRO_NUTRITION_PER_ROW == (APP_GYMPRO_NUTRITION_PER_ROW-1) || $nutrition_counter == $total_nutrition)
+                        {
+                            //echo '</div>';
+                        }  
+                        $nutrition_counter++;
+                        }
+                        ?>
                     </div>
                     <!--Notes-->
                     <div class="row hidden_tab" id="notes">

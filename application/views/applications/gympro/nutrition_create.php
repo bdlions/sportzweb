@@ -3,7 +3,7 @@
     var group_counter = 0;
     var row_counter = 0;
     $(function(){
-        $("#submit_button").on("click", function() {
+        $("#submit_create_nutrition").on("click", function() {
             if($("#client_list").val() == 0)
             {
                 alert("Please select the person you are assessing from the drop menu.");
@@ -146,13 +146,14 @@
         }            
         ?>
         <div class="col-md-10">
-            <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_nutrition', 'class' => 'form-horizontal')) ?>
+            <?php echo form_open("applications/gympro/create_nutrition/", array('id' => 'form_create_nutrition', 'class' => 'form-horizontal','onsubmit' => 'return false;')) ?>
             <div class="pad_title">
                 NEW NUTRITION PLAN
                 <div class="col-md-3 pull-right">
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>
-            </div>            
+            </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <input type="hidden" name="group_counter" id="group_counter">
                 <input type="hidden" name="row_counter" id="row_counter">
@@ -165,7 +166,7 @@
                 </div>
             </div>
             <div class="pad_footer">
-                <button type="submit" id="submit_button">Save Changes</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Go Back</a>
+                <button type="submit" id="submit_create_nutrition" name="submit_create_nutrition">Save Changes</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Go Back</a>
             </div>
             <?php echo form_close(); ?>
         </div>

@@ -17,6 +17,7 @@
                     <span>Assessments</span>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_assessments = count($assessment_list);
             $counter = 0;

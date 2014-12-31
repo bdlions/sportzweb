@@ -23,9 +23,9 @@
         </div>
         <div class="col-md-8">
             <div class="pad_title">
-            Group Info
+            GROUP INFO
             </div>
-           
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)){?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>

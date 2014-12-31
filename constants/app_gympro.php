@@ -6,6 +6,10 @@ define("APP_GYMPRO_ACCOUNT_TYPE_ID_MIDDLEWEIGHT",           3);
 define("APP_GYMPRO_ACCOUNT_TYPE_ID_HEAVYWEIGHT",            4);
 
 define("APP_GYMPRO_MANAGE_CLIENTS_CLIENTS_PER_ROW",         2);
+define("APP_GYMPRO_PROGRAMMES_PER_ROW",                     2);
+define("APP_GYMPRO_ASSESSMENTS_PER_ROW",                    2);
+define("APP_GYMPRO_MISSIONS_PER_ROW",                       2);
+define("APP_GYMPRO_NUTRITION_PER_ROW",                      2);
 define("CLIENT_PROFILE_PIC_IMAGEPATH",                      "resources/images/applications/gympro/uploads/client_profile_picture/");
 define("CLIENT_PROFILE_PICTURE_W50",                        "50");
 define("CLIENT_PROFILE_PICTURE_H50",                        "50");

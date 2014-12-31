@@ -2,6 +2,11 @@
 <script>
     $(function() {
         $("#submit_edit_exercise").on("click", function() {
+            if($("#client_list").val() == 0)
+            {
+                alert("Please select the person you are assessing from the drop menu.");
+                return false;
+            }
             $.ajax({
                 dataType: 'json',
                 type: "POST",
@@ -103,6 +108,7 @@
                     <?php $this->load->view("applications/gympro/template/user_category_dropdown"); ?>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <div class="row">
                     <div class="col-md-8">

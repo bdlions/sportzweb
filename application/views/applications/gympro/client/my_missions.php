@@ -17,6 +17,7 @@
                     <span>Missions</span>
                 </div>
             </div>
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_missions = count($mission_list);
             $counter = 0;

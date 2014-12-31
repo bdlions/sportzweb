@@ -14,9 +14,10 @@
         <div class="col-md-7">
             <div class="row form-group">
                 <div class="col-md-2" style="font-size: 20px; color: maroon">
-                    <span>Nutritions</span>
+                    <span>Nutrition</span>
                 </div>
-            </div>            
+            </div>    
+            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <?php
             $total_nutrition = count($nutrition_list);
             $counter = 0;
@@ -44,7 +45,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>"><?php echo $nutrition['created_on'] ?></a>
+                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>"><?php echo $nutrition['first_name'].' '.$nutrition['last_name'] ?></a>
                     </div>
                 </div>
             </div>

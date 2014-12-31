@@ -78,6 +78,7 @@
             <div class="pad_title">
                 EDIT GROUP
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <?php echo form_open("applications/gympro/edit_group/".$group_info['group_id'], array('id' => 'form_edit_group', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)){?>

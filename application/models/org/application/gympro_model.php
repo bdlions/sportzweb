@@ -174,6 +174,21 @@ class Gympro_model extends Ion_auth_model {
     }
     //------------------------------------ Client Module ------------------------------//
     /*
+     * This method will check whether gympro user exists or not
+     * @param $user_id, user id
+     * @Author Nazmul on 19th November 2014
+     */
+    public function is_client_exist($user_id = 0, $member_id =0)
+    {
+        if($user_id == 0 || $member_id ==0)
+        {
+            return FALSE;
+        }
+        $this->db->where('user_id', $user_id);
+        $this->db->where('member_id', $member_id);
+        return $this->db->count_all_results($this->tables['app_gympro_clients']) > 0;
+    }
+    /*
      * This method will return all genders
      * @Author Nazmul on 10th December 2014
      */
@@ -482,11 +497,19 @@ class Gympro_model extends Ion_auth_model {
     /*
      * This method will return alll programs of a gympro client
      * @param $member_id, member id of a client
+     * @param $cllient_id, client id of a client
      * @Author Nazmul on 30th December 2014
      */
-    public function get_all_client_programs($member_id)
+    public function get_all_client_programs($member_id = 0, $client_id = 0)
     {
-        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        if($member_id != 0)
+        {
+            $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        }
+        if($client_id != 0)
+        {
+            $this->db->where($this->tables['app_gympro_clients'].'.id', $client_id);
+        }
         return $this->db->select($this->tables['app_gympro_programs'].'.id as program_id,'.$this->tables['app_gympro_programs'].'.*')
                     ->from($this->tables['app_gympro_programs'])
                     ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_programs'] . '.client_id')
@@ -523,6 +546,14 @@ class Gympro_model extends Ion_auth_model {
         $additional_data = $this->_filter_data($this->tables['app_gympro_programs'], $additional_data); 
         $this->db->insert($this->tables['app_gympro_programs'], $additional_data);
         $insert_id = $this->db->insert_id();
+        if($insert_id > 0)
+        {
+            $this->set_message('create_program_successful');
+        }
+        else
+        {
+            $this->set_error('create_program_fail');
+        }
         return (isset($insert_id)) ? $insert_id : FALSE;
     }   
     /*
@@ -717,14 +748,23 @@ class Gympro_model extends Ion_auth_model {
     /*
      * This method will return alll nutritions of a gympro client
      * @param $member_id, member id of a client
+     * @param $client_id, client id of a client
      * @Author Nazmul on 30th December 2014
      */
-    public function get_all_client_nutritions($member_id)
+    public function get_all_client_nutritions($member_id = 0, $client_id = 0)
     {
-        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
-        return $this->db->select($this->tables['app_gympro_nutritions'].'.id as nutrition_id,'.$this->tables['app_gympro_nutritions'].'.*')
+        if($member_id != 0)
+        {
+            $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        }
+        if($client_id != 0)
+        {
+            $this->db->where($this->tables['app_gympro_clients'].'.id', $client_id);
+        }
+        return $this->db->select($this->tables['app_gympro_nutritions'].'.id as nutrition_id,'.$this->tables['app_gympro_nutritions'].'.*,'.$this->tables['users'].'.*')
                     ->from($this->tables['app_gympro_nutritions'])
                     ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_nutritions'] . '.client_id')
+                    ->join($this->tables['users'], $this->tables['users'] . '.id'. '=' . $this->tables['app_gympro_clients'] . '.member_id')
                     ->get();
     }
     /*
@@ -752,6 +792,14 @@ class Gympro_model extends Ion_auth_model {
         $additional_data = $this->_filter_data($this->tables['app_gympro_nutritions'], $additional_data); 
         $this->db->insert($this->tables['app_gympro_nutritions'], $additional_data);
         $insert_id = $this->db->insert_id();
+        if($insert_id > 0)
+        {
+            $this->set_message('create_nutrition_successful');
+        }
+        else
+        {
+            $this->set_error('create_nutrition_fail');
+        }
         return (isset($insert_id)) ? $insert_id : FALSE;
     }   
     /*
@@ -810,9 +858,16 @@ class Gympro_model extends Ion_auth_model {
      * @param $member_id, member id of a client
      * @Author Nazmul on 30th December 2014
      */
-    public function get_all_client_assessments($member_id)
+    public function get_all_client_assessments($member_id = 0, $client_id = 0)
     {
-        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        if($member_id != 0)
+        {
+            $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        }
+        if($client_id != 0)
+        {
+            $this->db->where($this->tables['app_gympro_clients'].'.id', $client_id);
+        }
         return $this->db->select($this->tables['app_gympro_assessments'].'.id as assessment_id,'.$this->tables['app_gympro_assessments'].'.*,'.$this->tables['users'].'.*')
                     ->from($this->tables['app_gympro_assessments'])
                     ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_assessments'] . '.client_id')
@@ -925,11 +980,19 @@ class Gympro_model extends Ion_auth_model {
     /*
      * This method will return alll mission of a gympro client
      * @param $member_id, member id of a client
+     * @param $client_id, client id of a client
      * @Author Nazmul on 30th December 2014
      */
-    public function get_all_client_missions($member_id)
+    public function get_all_client_missions($member_id = 0, $client_id = 0)
     {
-        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        if($member_id != 0)
+        {
+            $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
+        }
+        if($client_id != 0)
+        {
+            $this->db->where($this->tables['app_gympro_clients'].'.id', $client_id);
+        }
         return $this->db->select($this->tables['app_gympro_missions'].'.id as mission_id,'.$this->tables['app_gympro_missions'].'.*')
                     ->from($this->tables['app_gympro_missions'])
                     ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id'. '=' . $this->tables['app_gympro_missions'] . '.client_id')

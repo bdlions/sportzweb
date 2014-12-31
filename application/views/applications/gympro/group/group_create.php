@@ -79,6 +79,7 @@
             <div class="pad_title">
                 NEW CLIENT GROUP
             </div>
+            <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <?php echo form_open("applications/gympro/create_group", array('id' => 'form_create_group', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
             <div class="pad_body">
                 <?php if (isset($message) && ($message != NULL)){?>
