@@ -107,34 +107,60 @@ $(function () {
 
 });
 </script>
-
+<style>
+    #health input{
+        height: 20px;
+        font-size: 14px;
+        padding: 0 8px;
+        vertical-align: bottom;
+    }
+    #health{
+        font-size: 14px;
+    }
+</style>
 <div class="container-fluid">
     <div class="row top_margin">
         <div class="col-md-2">
             <!--left nav custom for this page-->
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#add_client').show();">Client Info</a>
+                <a onclick="$('.hidden_tab').hide();$('#add_client').show();$('#add_client_btn').show();">Personal details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();">Contact Details</a>
+                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();$('#contact_details_btn').show();">Contact details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#health').show();">Health Questions</a>
+                <a onclick="$('.hidden_tab').hide();$('#health').show();$('#health_btn').show();">Health details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#notes').show();">Notes</a>
+                <a onclick="$('.hidden_tab').hide();$('#notes').show();$('#notes_btn').show();">Notes</a>
             </div>
         </div>
         <div class="col-md-7">
             <div class="pad_title">
                 <div class="row">
                     <div class="col-md-8">
-                        <span>EDIT CLIENT</span>
-                    </div>                    
+                        <span>ADDING CLIENT</span>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="hidden_tab" id="add_client_btn" style="display: block">
+                            <button onclick="$('.hidden_tab').hide();$('#contact_details').show();$('#contact_details_btn').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="contact_details_btn">
+                            <button onclick="$('.hidden_tab').hide();$('#add_client').show();$('#add_client_btn').show();">Previous</button>
+                            <button onclick="$('.hidden_tab').hide();$('#health').show();$('#health_btn').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="health_btn">
+                            <button onclick="$('.hidden_tab').hide();$('#contact_details_btn').show();$('#contact_details').show();">Previous</button>
+                            <button onclick="$('.hidden_tab').hide();$('#notes_btn').show();$('#notes').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="notes_btn">
+                            <button onclick="$('.hidden_tab').hide();$('#health_btn').show();$('#health').show();">Previous</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
@@ -272,21 +298,23 @@ $(function () {
                     <div class="row hidden_tab" id="health">
                         <div class="col-md-12">
                             <?php foreach ($question_list as $question_info){ ?>
-                            <div class="form-group pad_lines">
-                                <div class="col-sm-2">
+                            <div class="row">
+                                <div class="col-md-3">
                                     <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'yes') ? 'checked=""' : '' ;?> name="question_radio_<?php echo $question_info['question_id']?>" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'no') ? 'checked=""' : '' ;?> name="question_radio_<?php echo $question_info['question_id']?>" value="no"> No 
                                     <input type="hidden" value="question_id_<?php echo $question_info['question_id']?>">
                                 </div>
-                                <div class="col-sm-10">
-                                    <div>
-                                        <label class="patapota"><?php echo $question_info['title']?></label>
-                                    </div>
-                                    <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" style="float: left">
-                                        <label class="col-md-3">Additional info: </label>
-                                        <div class="col-md-9">
-                                            <input value="<?php echo $question_id_answer_map[$question_info['question_id']]['additional_info']?>" style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id']?>" name="question_additional_info_<?php echo $question_info['question_id']?>">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div>
+                                            <label class="patapota"><?php echo $question_info['title']?></label>
+                                        </div>
+                                        <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" style="float: left">
+                                            <label class="col-md-3">Additional info: </label>
+                                            <div class="col-md-9">
+                                                <input value="<?php echo $question_id_answer_map[$question_info['question_id']]['additional_info']?>" style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id']?>" name="question_additional_info_<?php echo $question_info['question_id']?>">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

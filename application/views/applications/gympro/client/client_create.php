@@ -108,6 +108,17 @@ $(function () {
 
 });
 </script>
+<style>
+    #health input{
+        height: 20px;
+        font-size: 14px;
+        padding: 0 8px;
+        vertical-align: bottom;
+    }
+    #health{
+        font-size: 14px;
+    }
+</style>
 <div class="container-fluid">
     <div class="row top_margin">
         <div class="col-md-2">
@@ -287,36 +298,26 @@ $(function () {
                     <div class="row hidden_tab" id="health">
                         <div class="col-md-12">
                             <?php foreach ($question_list as $question_info){?>
-                            <div class="form-group pad_lines">
-                                <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-3">
                                     <input type="radio" name="question_radio_<?php echo $question_info['question_id']?>" value="yes"> Yes
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="radio" name="question_radio_<?php echo $question_info['question_id']?>" value="no"> No 
                                     <input type="hidden" value="question_id_<?php echo $question_info['question_id']?>">
                                 </div>
-                                <div class="col-md-10">
-                                        <div class="row">
-                                            <div class="">
-                                                    <label class="patapota"><?php echo $question_info['title'] ?></label>
-                                                </div>
-                                            <div class="">
-                                                <label class="col-md-3">Additional info: </label>
-                                                <div class="col-md-9">
-                                                    <input style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
-                                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div>
+                                            <label class="patapota"><?php echo $question_info['title'] ?></label>
+                                        </div>
+                                        <div class="" style="display: <?php echo ($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" >
+                                            <label class="col-md-3">Additional info: </label>
+                                            <div class="col-md-9">
+                                                <input class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
                                             </div>
-
                                         </div>
                                     </div>
-<!--                                <div class="col-sm-6">
-                                    <div>
-                                        <label class="patapota"><?php echo $question_info['title']?></label>
-                                    </div>
-                                    <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" style="float: left">
-                                        Additional info: 
-                                    </div>
-                                    <input style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id']?>" name="question_additional_info_<?php echo $question_info['question_id']?>">
-                                </div>-->
+                                </div>
                             </div>
                             <?php } ?>
                             <div class="form-group">
