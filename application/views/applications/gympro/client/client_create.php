@@ -114,19 +114,19 @@ $(function () {
             <!--left nav custom for this page-->
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#add_client').show();">Personal details</a>
+                <a onclick="$('.hidden_tab').hide();$('#add_client').show();$('#add_client_btn').show();">Personal details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();">Contact details</a>
+                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();$('#contact_details_btn').show();">Contact details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#health').show();">Health details</a>
+                <a onclick="$('.hidden_tab').hide();$('#health').show();$('#health_btn').show();">Health details</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#notes').show();">Notes</a>
+                <a onclick="$('.hidden_tab').hide();$('#notes').show();$('#notes_btn').show();">Notes</a>
             </div>
         </div>
         <!--ADDING CLIENT-->
@@ -136,6 +136,22 @@ $(function () {
                     <div class="col-md-8">
                         <span>ADDING CLIENT</span>
                     </div>
+                    <div class="col-md-4">
+                        <div class="hidden_tab" id="add_client_btn" style="display: block">
+                            <button onclick="$('.hidden_tab').hide();$('#contact_details').show();$('#contact_details_btn').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="contact_details_btn">
+                            <button onclick="$('.hidden_tab').hide();$('#add_client').show();$('#add_client_btn').show();">Previous</button>
+                            <button onclick="$('.hidden_tab').hide();$('#health').show();$('#health_btn').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="health_btn">
+                            <button onclick="$('.hidden_tab').hide();$('#contact_details_btn').show();$('#contact_details').show();">Previous</button>
+                            <button onclick="$('.hidden_tab').hide();$('#notes_btn').show();$('#notes').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="notes_btn">
+                            <button onclick="$('.hidden_tab').hide();$('#health_btn').show();$('#health').show();">Previous</button>
+                        </div>
+                    </div> 
                 </div>
             </div>
             <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
