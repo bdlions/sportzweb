@@ -200,6 +200,9 @@
   right:220px;
   cursor:pointer;
 }
+.carousel-caption{
+    left:0px;
+}
     </style>
 
 <!--NEW CAROUSEL-->
@@ -214,6 +217,11 @@
             <?php foreach ($app_data as $application):?>
             <div class="carousel-feature">
                 <img class="carousel-image" onclick="showmodal('<?php echo $application["id"];?>')" src="<?php echo base_url().APPLICATION_DIRECTORY_IMAGE_PATH.$application['img2'];?>" alt="image not found">
+                <div class="carousel-caption">
+                    <p>
+                      Caption here
+                    </p>
+              </div>
             </div>
             <?php endforeach;?>
         </div>
