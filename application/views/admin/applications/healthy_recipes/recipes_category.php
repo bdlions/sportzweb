@@ -28,15 +28,17 @@
 <div class="panel panel-default">
     <div class="panel-heading">Healthy Recipes</div>
     <div class="panel-body">
-        <div class="row col-md-12">
-            <?php if($allow_configuration){ ?>
+        <div class="row col-md-12">            
             <div class="row form-group">
+                <?php if($allow_writing){ ?>
                 <div class ="col-sm-5">
                     <a href="<?php echo base_url();?>admin/applications_healthyrecipes/page_import_recipe">
                         <button class="btn button-custom pull-right">Import Recipes
                         </button>
                     </a>
                 </div>
+                <?php } ?>
+                <?php if($allow_configuration){ ?>
                 <div class =" col-sm-4">
                     <a href="<?php echo base_url().'admin/applications_healthyrecipes/all_recipe_list' ?>">
                         <button id="button_manage_recipe_for_home_page" value="" class="btn button-custom " style="margin-left: -10px;">
@@ -44,11 +46,13 @@
                         </button>
                     </a>
                 </div>
+                <?php } ?>
+                <?php if($allow_write){ ?>
                 <div class ="col-sm-3" style="padding-right: 0px;">
                     <button id="button_create_recipe_category" value="" class="btn button-custom " style="margin-left: -10px;">Create Recipe Category</button>  
                 </div>
-            </div>
-            <?php } ?>
+                <?php } ?>
+            </div>            
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered" style="text-align: center;">

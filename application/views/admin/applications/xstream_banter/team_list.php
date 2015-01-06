@@ -17,8 +17,12 @@
                             <tr>
                                 <th style="text-align: right">Id</th>
                                 <th style="text-align: center">Title</th>
+                                <?php if($allow_edit){ ?>
                                 <th style="text-align: center">Edit</th>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <th style="text-align: center">Delete</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody id="tbody_team_list">                

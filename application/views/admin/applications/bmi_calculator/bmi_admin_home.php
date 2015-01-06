@@ -1,13 +1,15 @@
 <div class="panel panel-default">
     <div class="panel-heading">All Questions</div>
     <div class="panel-body">
-        <?php if($allow_configuration){ ?>
+        
         <div class="row form-group col-md-12">
+            <?php if($allow_writing){ ?>
             <div class="col-sm-3">
                 <a href="<?php echo base_url();?>admin/applications_bmicalculator/add_question">
                     <button class="btn button-custom pull-right" value="" id="">Create Question</button>  
                 </a>
             </div>
+            <?php } ?>
             <div class="col-sm-3">
 <!--                <a href="javascript:void(0)">
                     <button class="btn button-custom pull-left">Import Questions</button>
@@ -16,14 +18,15 @@
             <div class="col-sm-3">
                 <!--<button class="btn button-custom" value="" id="button_create_blog_category">another button</button>-->  
             </div>
-            
-                <div class="col-sm-3">
-                    <a href="<?php echo base_url();?>admin/applications_bmicalculator/manage_homepage">
-                        <button class="btn button-custom" value="" id="">Manage Home Page</button>  
-                    </a>
-                </div>            
+            <?php if($allow_configuration){ ?>
+            <div class="col-sm-3">
+                <a href="<?php echo base_url();?>admin/applications_bmicalculator/manage_homepage">
+                    <button class="btn button-custom" value="" id="">Manage Home Page</button>  
+                </a>
+            </div>   
+            <?php } ?>
         </div>
-        <?php } ?>
+        
         
         <table class="table table-bordered table-responsive">
             <thead>

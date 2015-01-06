@@ -8,7 +8,7 @@
                     <button onclick="open_modal_sports_create()" value="" class="form-control btn button-custom pull-right">Create Sports</button>  
                 </div>
                 <?php } ?>
-                <?php if($allow_write){ ?>
+                <?php if($allow_writing){ ?>
                 <div class ="col-md-2 pull-left">
                     <a href="<?php echo base_url()."admin/applications_xstreambanter/import_matches"; ?>">
                         <button id="button_import_matches" value="" class="form-control btn button-custom pull-right">Import Matches</button>  

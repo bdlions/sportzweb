@@ -33,7 +33,7 @@ function openModal(val,id) {
     $.ajax({
         dataType: 'json',
         type: "POST",
-        url: '<?php echo base_url(); ?>' + "admin/healthyrecipes/get_recipe_data",
+        url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/get_recipe_data",
         data: {
             recipe_category_id: id
         },

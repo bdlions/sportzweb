@@ -29,12 +29,10 @@ class Applications_servicedirectory extends CI_Controller{
         }
         
         $this->data['allow_view'] = FALSE;
-        $this->data['allow_access'] = FALSE;
         $this->data['allow_write'] = FALSE;
-        $this->data['allow_approve'] = FALSE;
         $this->data['allow_edit'] = FALSE;
         $this->data['allow_delete'] = FALSE;
-        $this->data['allow_configuration'] = FALSE;
+        $this->data['allow_writing'] = FALSE;
         
         $selected_user_group = $this->session->userdata('user_type');
         if(isset($selected_user_group ) && $selected_user_group != ""){
@@ -47,12 +45,10 @@ class Applications_servicedirectory extends CI_Controller{
         if (in_array(ADMIN, $this->user_group_array)) {
             $this->tmpl = ADMIN_DASHBOARD_TEMPLATE;
             $this->data['allow_view'] = TRUE;
-            $this->data['allow_access'] = TRUE;
             $this->data['allow_write'] = TRUE;
-            $this->data['allow_approve'] = TRUE;
             $this->data['allow_edit'] = TRUE;
             $this->data['allow_delete'] = TRUE;
-            $this->data['allow_configuration'] = TRUE; 
+            $this->data['allow_writing'] = TRUE;
         }
         else
         {
@@ -64,17 +60,9 @@ class Applications_servicedirectory extends CI_Controller{
             {
                 $this->data['allow_view'] = TRUE;
             }
-            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS, $access_level_mapping))
-            {
-                $this->data['allow_access'] = TRUE;
-            }
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE, $access_level_mapping))
             {
                 $this->data['allow_write'] = TRUE;
-            }
-            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE, $access_level_mapping))
-            {
-                $this->data['allow_approve'] = TRUE;
             }
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
             {
@@ -83,9 +71,9 @@ class Applications_servicedirectory extends CI_Controller{
             {
                 $this->data['allow_delete'] = TRUE;
             }
-            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION, $access_level_mapping))
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING, $access_level_mapping))
             {
-                $this->data['allow_configuration'] = TRUE;  
+                $this->data['allow_writing'] = TRUE;  
             }
             if(!$this->data['allow_view'])
             {

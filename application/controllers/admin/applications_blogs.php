@@ -30,7 +30,6 @@ class Applications_blogs extends CI_Controller{
         }
         
         $this->data['allow_view'] = FALSE;
-        $this->data['allow_access'] = FALSE;
         $this->data['allow_write'] = FALSE;
         $this->data['allow_approve'] = FALSE;
         $this->data['allow_edit'] = FALSE;
@@ -49,7 +48,6 @@ class Applications_blogs extends CI_Controller{
         if (in_array(ADMIN, $this->user_group_array)) {
             $this->tmpl = ADMIN_DASHBOARD_TEMPLATE;
             $this->data['allow_view'] = TRUE;
-            $this->data['allow_access'] = TRUE;
             $this->data['allow_write'] = TRUE;
             $this->data['allow_approve'] = TRUE;
             $this->data['allow_edit'] = TRUE;
@@ -66,10 +64,6 @@ class Applications_blogs extends CI_Controller{
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
             {
                 $this->data['allow_view'] = TRUE;
-            }
-            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS, $access_level_mapping))
-            {
-                $this->data['allow_access'] = TRUE;
             }
             if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE, $access_level_mapping))
             {

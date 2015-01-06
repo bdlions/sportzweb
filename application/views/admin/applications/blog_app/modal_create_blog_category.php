@@ -14,7 +14,7 @@
                     blog_category_name: $("#input_blog_category_name").val()
                 },
                 success: function(data) {
-                    console.log(data);
+                    //console.log(data);
                     alert(data['message']);
                     if (data['status'] === 1)
                     {                        

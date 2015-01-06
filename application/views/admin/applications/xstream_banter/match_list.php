@@ -3,7 +3,7 @@
     <div class="panel-body">
         <div class="row col-md-12">            
             <div class="row form-group" style="padding-left: 10px;">
-                <?php if($allow_write){ ?>
+                <?php if($allow_writing){ ?>
                 <div class ="col-md-2 pull-left">
                     <a href="<?php echo base_url()."admin/applications_xstreambanter/create_match/".$tournament_id;?>">
                         <button value="" class="form-control btn button-custom pull-right">Create Match</button>  
@@ -24,8 +24,12 @@
                                 <th style="text-align: center">Away</th>
                                 <th style="text-align: center">Date</th>
                                 <th style="text-align: center">Time</th>
+                                <?php if($allow_edit){ ?>
                                 <th style="text-align: center">Edit</th>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <th style="text-align: center">Delete</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody id="tbody_sports_list">                
@@ -38,11 +42,13 @@
                                 <td style="text-align: center"><?php echo $match['away_team_name']?></td>
                                 <td style="text-align: center"><?php echo $match['date']?></td>
                                 <td style="text-align: center"><?php echo $match['time']?></td>
+                                <?php if($allow_edit){ ?>
                                 <td style="text-align: center">
                                     <a href="<?php echo base_url()."admin/applications_xstreambanter/update_match/".$match['match_id'];?>">
                                         Edit
                                     </a>
                                 </td>
+                                <?php } ?>
                                 <?php if($allow_delete){ ?> 
                                 <td style="text-align: center">
                                     <button onclick="open_modal_match_delete_confirm('<?php echo $match['match_id']; ?>')" value="" class="form-control btn pull-right">

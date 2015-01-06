@@ -143,7 +143,7 @@ $(function () {
             <div class="pad_title">
                 <div class="row">
                     <div class="col-md-8">
-                        <span>ADDING CLIENT</span>
+                        <span>EDIT CLIENT</span>
                     </div>
                     <div class="col-md-4">
                         <div class="hidden_tab" id="add_client_btn" style="display: block">
@@ -311,7 +311,7 @@ $(function () {
                                             <label class="patapota"><?php echo $question_info['title']?></label>
                                         </div>
                                         <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" style="float: left">
-                                            <label class="col-md-3">Additional info: </label>
+                                            <label style="padding-left:0px;" class="col-md-3">Additional info: </label>
                                             <div class="col-md-9">
                                                 <input value="<?php echo $question_id_answer_map[$question_info['question_id']]['additional_info']?>" style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id']?>" name="question_additional_info_<?php echo $question_info['question_id']?>">
                                             </div>

@@ -33,7 +33,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Photography</div>
     <div class="panel-body">
-        <?php if($allow_configuration){ ?>
+        <?php if($allow_write){ ?>
         <div class ="row col-md-2 pull-left" style="margin-bottom: 10px">
             <a href="<?php echo base_url(); ?>admin/applications_photography/add_image">
                 <button id="button_add_image" value="" class="form-control btn button-custom pull-right">Add Image</button>  

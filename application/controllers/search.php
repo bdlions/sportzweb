@@ -96,7 +96,8 @@ class Search extends CI_Controller {
         
         $blog_list = $this->searches_model->get_blogs()->result();
         foreach ($blog_list as  $blog) {
-            $blog -> value = $blog -> title ;
+            $blog -> value = strip_tags(html_entity_decode(html_entity_decode($blog -> title)));
+            $blog -> title = strip_tags(html_entity_decode(html_entity_decode($blog -> title)));
             $blog -> picture = base_url() . BLOG_POST_IMAGE_PATH .$blog -> picture ;
             $blog -> type = 'page';
             $blog -> url = base_url() . 'applications/blog_app/view_blog_post/'.$blog -> id;

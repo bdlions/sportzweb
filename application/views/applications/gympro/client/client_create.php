@@ -311,7 +311,7 @@ $(function () {
                                             <label class="patapota"><?php echo $question_info['title'] ?></label>
                                         </div>
                                         <div class="" style="display: <?php echo ($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" >
-                                            <label class="col-md-3">Additional info: </label>
+                                            <label style="padding-left:0px;" class="col-md-3">Additional info: </label>
                                             <div class="col-md-9">
                                                 <input class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
                                             </div>

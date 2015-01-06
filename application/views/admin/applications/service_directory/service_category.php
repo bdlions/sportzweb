@@ -20,18 +20,20 @@
     <div class="panel-heading">Service Directory</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_configuration){ ?>
             <div class="row form-group">
+                <?php if($allow_write){ ?>
                 <div class ="col-sm-3" style="padding-right: 0px;">
                     <a href="<?php echo base_url();?>admin/applications_servicedirectory/create_service_category"><button id="button_create_service_category" value="" class="form-control btn button-custom pull-right">Create Service Category</button></a>
                 </div>
+                <?php } ?>
+                <?php if($allow_writing){ ?>
                 <div class ="col-sm-2 pull-right" style="padding-right: 0px;">
                     <a href="<?php echo base_url();?>admin/applications_servicedirectory/page_import_service">
                         <button class="form-control btn button-custom">Import services</button>
                     </a>
                 </div>
-            </div>
-            <?php } ?>
+                <?php } ?>
+            </div>            
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered" style="text-align: center;">
@@ -41,6 +43,8 @@
                                 <th style="text-align: center;">Name</th>
                                 <?php if($allow_edit){ ?>
                                 <th style="text-align: center;">Edit</th>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <th style="text-align: center;">Delete</th>
                                 <?php } ?>
                             </tr>
@@ -56,6 +60,8 @@
                                         Edit
                                     </a>
                                 </td>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <td>
                                     <a role="button" tabindex="0" onclick="confirmation_delete(<?php echo $service_category['id'];?>)" >Delete</a>
                                 </td>

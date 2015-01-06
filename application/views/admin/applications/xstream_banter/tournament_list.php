@@ -23,8 +23,12 @@
                                 <th style="text-align: center">Id</th>
                                 <th style="text-align: center">Title</th>
                                 <th style="text-align: center">Season</th>
+                                <?php if($allow_edit){ ?>
                                 <th style="text-align: center">Edit</th>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <th style="text-align: center">Delete</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody id="tbody_tournament_list">                

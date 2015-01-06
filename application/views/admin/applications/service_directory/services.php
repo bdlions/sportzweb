@@ -2,7 +2,7 @@
     <div class="panel-heading">Service List</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_configuration){ ?>
+            <?php if($allow_writing){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
                 <div class ="col-sm-2">
@@ -24,8 +24,10 @@
                                 <th>View</th>
                                 <th>Comments</th>
                                 <th>Pictures</th>  
-                                <?php if($allow_configuration){ ?>
+                                <?php if($allow_edit){ ?>
                                 <th>Edit</th>
+                                <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <th>Delete</th>
                                 <?php } ?>
                             </tr>
@@ -38,11 +40,13 @@
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_show/'.$service['id']?>">view</a></td>
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_comments/'.$service['id']?>">comments</a></td>
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_pictures/'.$service['id']?>">pictures</a></td>
-                                <?php if($allow_configuration){ ?>
+                                <?php if($allow_edit){ ?>
                                 <td><a href="<?php echo base_url().'admin/applications_servicedirectory/service_edit/'.$service['id']?>">Edit</a></td>
+                                 <?php } ?>
+                                <?php if($allow_delete){ ?>
                                 <td><a role="button" tabindex="0" onclick="confirmation_delete(<?php echo $service['id'];?>)" >Delete</a></td>
                                 <?php } ?>
-                               </tr>
+                                </tr>
                             <?php endforeach; ?>                       
                         </tbody>
                     </table>

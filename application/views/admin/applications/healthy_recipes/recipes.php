@@ -28,12 +28,9 @@
     <div class="panel-heading">Recipes List</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_configuration){ ?>
+            <?php if($allow_writing){ ?>
             <div class="row form-group">
                 <div class ="col-sm-10"></div>
-                <!--<div class ="col-sm-2">
-                    <button id="button_create_recipe" value="" class="form-control btn button-custom pull-right">Create Recipe</button>  
-                </div>-->
                 <div class ="col-sm-2">
                     <a href="<?php echo base_url()."admin/applications_healthyrecipes/create_recipe/".$recipe_category_id ?>" >
                         <button id="" value="" class="btn button-custom" style="margin-left: -10px;">

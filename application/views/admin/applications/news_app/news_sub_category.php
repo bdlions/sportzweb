@@ -23,7 +23,7 @@
     <div class="panel-heading">News Sub Category List</div>
     <div class="panel-body">
         <div class="row col-md-12">
-            <?php if($allow_configuration){ ?>
+            <?php if($allow_write){ ?>
             <div class="row form-group">
                 <div class ="col-sm-9"></div>
                 

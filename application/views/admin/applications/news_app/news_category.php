@@ -21,9 +21,9 @@
 <div class="panel panel-default">
     <div class="panel-heading">News Category</div>
     <div class="panel-body">
-        <div class="row col-sm-12">
-            <?php if($allow_configuration){ ?>
+        <div class="row col-sm-12">            
             <div class="row form-group">
+                <?php if($allow_configuration){ ?>
                 <div class ="col-sm-2">
                     <a href="<?php echo base_url();?>admin/applications_news/config_news">
                         <button id="button_manage_recipe_for_home_page" value="" class="btn button-custom ">
@@ -45,17 +45,20 @@
                         </button>  
                     </a>
                 </div>
+                <?php } ?>
+                <?php if($allow_writing){ ?>
                 <div class ="col-sm-2">
                     <a href="<?php echo base_url();?>admin/applications_news/page_import_news">
                         <button class="btn button-custom ">Import News</button>  
                     </a>
-                </div>                 
-            </div>            
-            <?php } ?>
+                </div> 
+                <?php } ?>
+            </div>           
+            
             <div class="row form-group">
                 <div class ="col-sm-2">
                     <a href="<?php echo base_url();?>admin/applications_news/news_list">
-                        <button class="btn button-custom ">New List</button>  
+                        <button class="btn button-custom ">News List</button>  
                     </a>
                 </div>
                 <?php if($allow_write){ ?>

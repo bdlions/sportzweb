@@ -141,7 +141,7 @@ $(function () {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
-            console.log(data);
+            //console.log(data);
             alert(data.result.message);
             window.location = '<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>';
             //console.log(data);

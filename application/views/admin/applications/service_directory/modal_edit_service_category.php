@@ -17,7 +17,7 @@
                 },
                 success: function(data) {
                     alert(data['message']);
-                    console.log(data);
+                    //console.log(data);
                     if (data['status'] === 1)
                     {
                         $("#service_desc_" + data['service_category_info']['id']).text(data['service_category_info']['description']);
