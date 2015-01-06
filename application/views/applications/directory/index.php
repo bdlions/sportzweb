@@ -200,8 +200,13 @@
   right:220px;
   cursor:pointer;
 }
+.carousel-feature .carousel-caption p {
+    padding: 0px;
+}
 .carousel-caption{
     left:0px;
+    height: 20px;
+    padding-bottom: 40px;
 }
     </style>
 
@@ -219,7 +224,7 @@
                 <img class="carousel-image" onclick="showmodal('<?php echo $application["id"];?>')" src="<?php echo base_url().APPLICATION_DIRECTORY_IMAGE_PATH.$application['img2'];?>" alt="image not found">
                 <div class="carousel-caption">
                     <p>
-                      Caption here
+                      Caption here Caption here Caption here Caption here Caption here 
                     </p>
               </div>
             </div>
