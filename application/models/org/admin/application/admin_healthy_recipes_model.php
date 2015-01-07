@@ -97,6 +97,24 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
         $this->set_message('recipe_category_update_successful');
         return true;
     }
+    
+    public function delete_recipe_category($recipe_category_id)
+    {
+        if(!isset($recipe_category_id) || $recipe_category_id <= 0)
+        {
+            $this->set_error('recipe_delete_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $recipe_category_id);
+        $this->db->delete($this->tables['recipe_category']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('recipe_delete_fail');
+            return FALSE;
+        }
+        $this->set_message('recipe_delete_success');
+        return TRUE;
+    }
     /*-----------------------------Recipe------------------------*/
     /*-------------------------Recipe written by Omar-----------*/
     public function get_all_recipes($recipe_category_id = 0)
@@ -138,6 +156,24 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
         
         $this->trigger_events('post_create_recipe');
         return (isset($id)) ? $id : FALSE;
+    }
+    
+    public function delete_recipe($recipe_id)
+    {
+        if(!isset($recipe_id) || $recipe_id <= 0)
+        {
+            $this->set_error('recipe_delete_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $recipe_id);
+        $this->db->delete($this->tables['recipes']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('recipe_delete_fail');
+            return FALSE;
+        }
+        $this->set_message('recipe_delete_success');
+        return TRUE;
     }
     
     public function recipe_identity_check($identity)

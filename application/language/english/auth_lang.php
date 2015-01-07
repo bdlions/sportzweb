@@ -179,21 +179,23 @@ $lang['email_forgot_password_subheading'] = 'Please click this link to %s.';
 $lang['email_forgot_password_link']       = 'Reset Your Password';
 
 // New Password Email
-$lang['email_new_password_heading']    = 'New Password for %s';
-$lang['email_new_password_subheading'] = 'Your password has been reset to: %s';
-$lang['business_profile_insert_unsuccessful']           = 'Business profile creation unsuccessful.';
-$lang['update_profile_successful']      = "Profile update successful.";
-$lang['update_profile_unsuccessful']      = "Profile update unsuccessful.";
-$lang['create_profile_unsuccessful']      = "Profile creation unsuccessful.";
-$lang['sports_creation_duplicate_sports_name']             = "Sports name already used or invalid.";
+$lang['email_new_password_heading']                         = 'New Password for %s';
+$lang['email_new_password_subheading']                      = 'Your password has been reset to: %s';
+$lang['business_profile_insert_unsuccessful']               = 'Business profile creation unsuccessful.';
+$lang['update_profile_successful']                          = "Profile update successful.";
+$lang['update_profile_unsuccessful']                        = "Profile update unsuccessful.";
+$lang['create_profile_unsuccessful']                        = "Profile creation unsuccessful.";
+$lang['sports_creation_duplicate_sports_name']              = "Sports name already used or invalid.";
 $lang['tournament_creation_duplicate_tournament_name']      = "Tournament name already used or invalid.";
-$lang['team_creation_duplicate_team_name']      = "Team name already used or invalid.";
+$lang['team_creation_duplicate_team_name']                  = "Team name already used or invalid.";
 
 // for recipe
 $lang['recipe_category_creation_duplicate_recipe_category_name']    = "Recipe category name already used or invalid.";
 $lang['recipe_creation_duplicate_recipe_name']                      = "Recipe title is duplicate";
 $lang['recipe_update_duplicate_recipe']                             = "Recipe title is duplicate";
 $lang['recipe_category_update_duplicate_category']                  = "Recipe category name is duplicate";
+$lang['recipe_delete_fail']                                         = "Recipe delete failed.";
+$lang['recipe_delete_success']                                      = "Recipe delete successful.";
 
 // for recipe
 $lang['service_category_creation_duplicate_service_category_name']      = "Service category name already used or invalid.";

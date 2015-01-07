@@ -27,15 +27,15 @@
         });
     });
 </script>
-<!-- Written by Omar -->
+
 <script type="text/javascript">
-function openModal(val,id) {
+function open_modal_edit_recipe_category(recipe_category_id) {
     $.ajax({
         dataType: 'json',
         type: "POST",
         url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/get_recipe_data",
         data: {
-            recipe_category_id: id
+            recipe_category_id: recipe_category_id
         },
         success: function(data) {
             $('#input_recipe_category_id').val(data['id']);

@@ -62,6 +62,7 @@
                                 <th style="text-align: center;">Name</th>
                                 <?php if($allow_edit){ ?>
                                 <th style="text-align: center;">Edit</th> 
+                                <th style="text-align: center;">Delete</th> 
                                 <?php } ?>
                             </tr>
                         </thead>
@@ -71,7 +72,8 @@
                                 <td><a href="<?php echo base_url().'admin/applications_healthyrecipes/recipe_category/'.$recipes_category['id']?>"><?php echo $recipes_category['id']; ?></a></td>
                                 <td><div id="recipe_desc_<?php echo $recipes_category['id'];?>"><?php echo $recipes_category['description']?></div></td>
                                 <?php if($allow_edit){ ?>
-                                <td> <button id="button_edit_recipe_category_<?php echo $recipes_category['id'];?>" onclick="openModal('button_edit_recipe_category_<?php echo $recipes_category["id"];?>','<?php echo $recipes_category['id'];?>')" value="" class="form-control btn pull-right">Edit</button></td>
+                                <td> <button id="button_edit_recipe_category_<?php echo $recipes_category['id'];?>" onclick="open_modal_edit_recipe_category(<?php echo $recipes_category['id'];?>)" class="form-control btn pull-right">Edit</button></td>
+                                <td> <button onclick="open_modal_delete_recipe_category(<?php echo $recipes_category['id'];?>)" class="form-control btn pull-right">Delete</button></td>
                                 <?php } ?>
                             </tr>
                             <?php endforeach; ?>                            
@@ -87,3 +89,4 @@
 </div>
 <?php $this->load->view("admin/applications/healthy_recipes/modal_create_recipe_category"); ?>
 <?php $this->load->view("admin/applications/healthy_recipes/modal_edit_recipe_category"); ?>
+<?php $this->load->view("admin/applications/healthy_recipes/modal_delete_recipe_category"); ?>

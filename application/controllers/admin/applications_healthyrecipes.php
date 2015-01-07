@@ -357,6 +357,27 @@ class Applications_healthyrecipes extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/healthy_recipes/create_recipes", $this->data);
     }
     
+    
+    
+    /**
+     * Written by Tanveer Ahmed for delete recipe
+     */
+    public function delete_recipe(){
+        $result = array();
+        $recipe_id = $this->input->post('recipe_id');
+        if($this->admin_healthy_recipes->delete_recipe($recipe_id))
+        {
+            $result['message'] = $this->admin_healthy_recipes->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_healthy_recipes->errors_alert();
+        }
+        echo json_encode($result);
+    }
+
+    
+
     /**
      * Written by Omar Faruk for image upload
      * @param type array $file_info 
@@ -673,6 +694,27 @@ class Applications_healthyrecipes extends CI_Controller{
             $response['message'] = $this->admin_healthy_recipes->errors_alert();
         }
         echo json_encode($response);
+    }
+    
+    
+    
+    
+    
+    /**
+     * Written by Tanveer Ahmed for delete recipe
+     */
+    public function delete_recipe_category(){
+        $result = array();
+        $recipe_category_id = $this->input->post('recipe_category_id');
+        if($this->admin_healthy_recipes->delete_recipe_category($recipe_category_id))
+        {
+            $result['message'] = $this->admin_healthy_recipes->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_healthy_recipes->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     public function all_recipe_list()
