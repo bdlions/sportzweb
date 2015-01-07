@@ -219,7 +219,6 @@ class Applications_photography extends CI_Controller{
         }
         $image_info = array();
         $image_info_array = $this->admin_photography->get_image_info($image_id)->result_array();
-
         if(!empty($image_info_array))
         {
             $image_info = $image_info_array[0];
@@ -259,8 +258,15 @@ class Applications_photography extends CI_Controller{
             'type' => 'text',
             'class'=>'form-control',
             'value' => $image_info['text6']
-        ); 
+        );
+        $this->data['submit_edit_image'] = array(
+            'name' => 'submit_edit_image',
+            'id' => 'submit_edit_image',
+            'type' => 'submit',
+            'value' => 'Update'
+        );
         $this->data['image_id'] = $image_id;
+        $this->data['image_file_name'] = $image_info['img'];
         $this->template->load($this->tmpl, "admin/applications/photography/edit_image", $this->data);
     }
     

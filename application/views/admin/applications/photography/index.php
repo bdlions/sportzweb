@@ -28,6 +28,25 @@
            //console.log($('.item.active').find('div').prop('id'));
     }
 </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("div.item").each(function() {
+            $(this).find('div').height($(window).height() - $("body nav").height() - 20);
+        });
+        $("#myCarousel").carousel({
+            interval: false,
+            pause: false
+        });
+        $('#myCarousel').bind('slid.bs.carousel', function (e) {
+            var current_img_id = $('.item.active').find('div').prop('id');
+            var edit_url = '<?php echo base_url(); ?>' +'admin/applications_photography/edit_image/'+current_img_id;
+            var delete_url = '<?php echo base_url(); ?>' +'admin/applications_photography/delete_image/'+current_img_id;
+            $("#edit_current_image").attr("href", ""+edit_url);
+            $("#delete_current_image").attr("href", ""+delete_url);
+            //console.log($('.item.active').find('div').prop('id'));
+        });
+    });
+</script>
 
 <?php //echo '<pre/>';print_r($image_list);exit(); ?>
 <div class="panel panel-default">
@@ -71,7 +90,8 @@
                     <a id="edit_current_image" href="<?php echo base_url().'admin/applications_photography/edit_image/'.$image_list[0]['id']; ?>">Edit</a> &nbsp;&nbsp;| &nbsp;&nbsp;
                     <?php } ?>
                     <?php if($allow_delete){ ?>
-                    <a id="delete_current_image" href="<?php echo base_url() . 'admin/applications_photography/delete_image/'.$image_list[0]['id']; ?>">Delete</a>
+                    <a onclick="open_modal_delete_confirm(<?php echo $image_list[0]['id']; ?>)">Delete</a>
+                    <!--<a id="delete_current_image" href="<?php echo base_url() . 'admin/applications_photography/delete_image/'.$image_list[0]['id']; ?>">Delete</a>-->
                     <?php } ?>
                 <?php endif; ?>
             </div>
@@ -81,22 +101,4 @@
 </div>
 
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("div.item").each(function() {
-            $(this).find('div').height($(window).height() - $("body nav").height() - 20);
-        });
-        $("#myCarousel").carousel({
-            interval: false,
-            pause: false
-        });
-        $('#myCarousel').bind('slid.bs.carousel', function (e) {
-            var current_img_id = $('.item.active').find('div').prop('id');
-            var edit_url = '<?php echo base_url(); ?>' +'admin/applications_photography/edit_image/'+current_img_id;
-            var delete_url = '<?php echo base_url(); ?>' +'admin/applications_photography/delete_image/'+current_img_id;
-            $("#edit_current_image").attr("href", ""+edit_url);
-            $("#delete_current_image").attr("href", ""+delete_url);
-            //console.log($('.item.active').find('div').prop('id'));
-        });
-    });
-</script>
+<?php $this->load->view("admin/applications/photography/photography_delete_confirm_modal");?>
