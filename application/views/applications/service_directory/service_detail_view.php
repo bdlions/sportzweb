@@ -83,7 +83,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-10">
-                        <h4 class="cus_service_detail_heading">Sportzweb profile</h4>
+                        <h4 class="cus_service_detail_heading">Sonuto profile</h4>
                         <!-- echo text here-->
                         <a href="#"><?php echo $service_info['business_name']; ?></a>
                     </div>

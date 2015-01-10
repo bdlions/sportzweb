@@ -224,7 +224,7 @@
                 <img class="carousel-image" onclick="showmodal('<?php echo $application["id"];?>')" src="<?php echo base_url().APPLICATION_DIRECTORY_IMAGE_PATH.$application['img2'];?>" alt="image not found">
                 <div class="carousel-caption">
                     <p>
-                      Caption here Caption here Caption here Caption here Caption here 
+                      <?php echo $application["description"];?>
                     </p>
               </div>
             </div>

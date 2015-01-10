@@ -50,7 +50,7 @@ class Service_directory extends Role_Controller {
         }
             $this->data['services'] = $services_array;
         }
-        $service_category_list = $this->service_directory_library->get_service_categories()->result_array();
+        $service_category_list = $this->service_directory_library->get_all_service_categories()->result_array();
         
 //        $this->data['selected_services'] = $seled_service;
         

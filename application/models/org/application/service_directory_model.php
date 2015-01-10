@@ -29,41 +29,33 @@ class Service_directory_model extends Ion_auth_model {
                     ->from($this->tables['service_category'])
                     ->get();
     }
-    
-    /*
-     * This method will return all service categories
-     * @Author Nazmul Hasan
-     * @Created on 24th April 2014
-     */
-    public function get_service_categories()
-    {
-        return $this->db->select("*")
-                    ->from($this->tables['service_category'])
-                    ->get();
-    }
-    
     /*
      * This method will return services of a category or all services if there is no assigned service category
      * @param $$service_category_id, service category id
      * @Author Nazmul on 23rd November 2014
      */
-    public function get_all_services($service_category_id = 0)
+    public function get_all_services($service_category_id_list = array())
     {
-        if($service_category_id != 0)
+        if(!empty($service_category_id_list))
         {
-            $this->db->where_in($this->tables['services'].'.service_category_id',$service_category_id);
+            $this->db->where_in($this->tables['services'].'.service_category_id',$service_category_id_list);
         }        
         return $this->db->select("*")
                     ->from($this->tables['services'])
                     ->get();
     }
     
-    public function get_service_info($id)
+    /*
+     * This method will return service info including business profile name if exists
+     * @param $service_id, service id
+     * @Author Nazmul on 10th January 2015
+     */
+    public function get_service_info($service_id)
     {
-        $this->db->where($this->tables['services'].'.id',$id);
+        $this->db->where($this->tables['services'].'.id',$service_id);
         return $this->db->select($this->tables['services'].'.*,'.$this->tables['services'].'.id as service_id,'.$this->tables['business_profile'].'.business_name as business_name')
                     ->from($this->tables['services'])
-                    ->join($this->tables['business_profile'],  $this->tables['business_profile'].'.id='.$this->tables['services'].'.business_profile_id')
+                    ->join($this->tables['business_profile'],  $this->tables['business_profile'].'.id='.$this->tables['services'].'.business_profile_id', 'left outer')
                     ->get();
     }
     
