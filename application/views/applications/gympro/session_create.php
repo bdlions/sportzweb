@@ -13,9 +13,16 @@
 
 <div class="container-fluid">
     <div class="row top_margin">
-        <div class="col-md-2">
-            <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
-        </div>
+        <?php 
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        }
+        else
+        {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+        }            
+        ?>
         <div class="col-md-10">
             
             
@@ -34,7 +41,7 @@
                     <div class="col-md-6">
                         <div class="row form-group">
                             <div class="col-md-2 control-div">Title: </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input class="form-control">
                             </div>
                         </div>
@@ -42,9 +49,9 @@
                             <div class="col-md-2 control-div">Client</div>
                             <div class="col-md-4">
                                 <select class="form-control">
-                                    <option class="form-control">
-                                        test
-                                    </option>
+                                    <?php foreach ($client_list as $client_info): ?>
+                                        <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -52,9 +59,9 @@
                             <div class="col-md-2 control-div">Group</div>
                             <div class="col-md-4">
                                 <select class="form-control">
-                                    <option class="form-control">
-                                        test
-                                    </option>
+                                    <?php foreach ($group_list as $group_info): ?>
+                                        <option value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -68,23 +75,23 @@
                             <div class="col-md-2 control-div">Start:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
-                                    <option class="form-control">
-                                        strattest
-                                    </option>
+                                    <?php foreach ($meal_time_list as $key => $meal_time): ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="col-md-2 control-div">Finish:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
-                                    <option class="form-control">
-                                        strattest
-                                    </option>
+                                    <?php foreach ($meal_time_list as $key => $meal_time): ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-2 control-div">Location</div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input class="form-control"> 
                             </div>
                         </div>
@@ -92,9 +99,11 @@
                             <div class="col-md-2 control-div">Type:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
-                                    <option class="form-control">
-                                        type
-                                    </option>
+                                    <option>Single session</option>
+                                    <option>Repeated daily</option>
+                                    <option>Single weekly</option>
+                                    <option>Single biweekly</option>
+                                    <option>Single monthly</option>
                                 </select>
                             </div>
                         </div>
@@ -102,9 +111,12 @@
                             <div class="col-md-2 control-div">Cost:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
-                                    <option class="form-control">
-                                        cost
-                                    </option>
+                                    <?php
+                                    for($counter = 5; $counter <=200; $counter++)
+                                    {
+                                        echo '<option>'.$counter.'</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -112,17 +124,23 @@
                             <div class="col-md-2 control-div">Status:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
-                                    <option class="form-control">
-                                        Status
+                                    <option>
+                                        Prepaid
+                                    </option>
+                                    <option>
+                                        Paid
+                                    </option>
+                                    <option>
+                                        Cancelled
                                     </option>
                                 </select>
                             </div>
                         </div>
                         
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5 col-md-offset-1">
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Notes</div> 
+                            <div class="col-md-1 control-div">Notes</div> 
                             <div class="col-md-10">
                                 <textarea class="form-control" rows="10"></textarea>
                             </div>
@@ -139,5 +157,5 @@
 
 </div>
 <?php
-$this->load->view("applications/gympro/template/modal/browse_exercise");
+//$this->load->view("applications/gympro/template/modal/browse_exercise");
 ?>

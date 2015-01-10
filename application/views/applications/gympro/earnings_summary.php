@@ -13,9 +13,16 @@
 
 <div class="container-fluid">
     <div class="row top_margin">
-        <div class="col-md-2">
-            <?php $this->load->view("applications/gympro/template/sections/left_pane"); ?>
-        </div>
+        <?php 
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        }
+        else
+        {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
+        }            
+        ?>
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-12">
@@ -31,9 +38,9 @@
                         <div class="col-md-3 control-div">Client:</div>
                         <div class="col-md-7">
                             <select class="form-control">
-                                <option>
-                                    Client
-                                </option>
+                                <?php foreach ($client_list as $client_info): ?>
+                                    <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -121,9 +128,10 @@
                         </div>
                         <div class="col-md-3" style="padding-right: 0px">
                             <select class="form-control">
-                                <option>
-                                    Mark as
-                                </option>
+                                <option>Mark as</option>
+                                <option>Prepaid</option>
+                                <option>Paid</option>
+                                <option>Cancelled</option>
                             </select>
                         </div>
                     </div>
@@ -135,16 +143,16 @@
                     <div class="row form-group" style="border-bottom: 2px solid lightgray; padding-bottom: 10px">
                         <div class="row">
                             <div class="col-md-4">
-                                Time range 
+                                6:00am - 7:45am
                             </div>
                             <div class="col-md-3">
-                                name's
+                                Frank Lampard
                             </div>
                             <div class="col-md-2">
-                                dollar 
+                                60 
                             </div>
                             <div class="col-md-2">
-                                paid
+                                Paid
                             </div>
                             <div class="col-md-1">
                                 <input type="checkbox">
@@ -153,22 +161,22 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4" style="color: red; border-bottom: 2px solid darkred; padding: 0px 0px 5px 0px">
-                            Sunday, 23 November 2121
+                            Monday, 24 November 2014
                         </div>
                     </div>
                     <div class="row form-group" style="border-bottom: 2px solid lightgray; padding-bottom: 10px">
                         <div class="row">
                             <div class="col-md-4">
-                                Time range 
+                                9:00am - 10:30am
                             </div>
                             <div class="col-md-3">
-                                name's
+                                Dennis Wise
                             </div>
                             <div class="col-md-2">
-                                dollar 
+                                60 
                             </div>
                             <div class="col-md-2">
-                                paid
+                                Prepaid
                             </div>
                             <div class="col-md-1">
                                 <input type="checkbox">
@@ -178,16 +186,16 @@
                     <div class="row form-group" style="border-bottom: 2px solid lightgray; padding-bottom: 10px">
                         <div class="row">
                             <div class="col-md-4">
-                                Time range 
+                                11:00am - 1:00pm
                             </div>
                             <div class="col-md-3">
-                                name's
+                                John Terry
                             </div>
                             <div class="col-md-2">
-                                dollar 
+                                120 
                             </div>
                             <div class="col-md-2">
-                                paid
+                                Paid
                             </div>
                             <div class="col-md-1">
                                 <input type="checkbox">
@@ -200,5 +208,5 @@
     </div>
 </div>
 <?php
-$this->load->view("applications/gympro/template/modal/browse_exercise");
+//$this->load->view("applications/gympro/template/modal/browse_exercise");
 ?>
