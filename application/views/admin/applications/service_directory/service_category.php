@@ -25,6 +25,9 @@
                 <div class ="col-sm-3" style="padding-right: 0px;">
                     <a href="<?php echo base_url();?>admin/applications_servicedirectory/create_service_category"><button id="button_create_service_category" value="" class="form-control btn button-custom pull-right">Create Service Category</button></a>
                 </div>
+                <div class ="col-sm-4" style="padding-right: 0px;">
+                    <a href="<?php echo base_url();?>admin/applications_servicedirectory/auto_retrive_and_store_latlong"><button id="button_create_service_category" value="" class="form-control btn button-custom pull-right">Auto retrive and store Latitude Longitude</button></a>
+                </div>
                 <?php } ?>
                 <?php if($allow_writing){ ?>
                 <div class ="col-sm-2 pull-right" style="padding-right: 0px;">

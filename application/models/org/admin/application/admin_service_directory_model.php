@@ -143,7 +143,7 @@ class Admin_service_directory_model extends Ion_auth_model {
          return $this->db->select($this->tables['services'].".*,".$this->tables['countries'].'.country_name as country_name,'.$this->tables['business_profile'].'.business_name as business_name')
                     ->from($this->tables['services'])
                     ->join($this->tables['countries'],  $this->tables['services'].'.country_id='.$this->tables['countries'].'.id')
-                    ->join($this->tables['business_profile'],  $this->tables['services'].'.business_profile_id='.$this->tables['business_profile'].'.id')
+                    ->join($this->tables['business_profile'],  $this->tables['services'].'.business_profile_id='.$this->tables['business_profile'].'.id','left outer')
                     ->get();
     }
     

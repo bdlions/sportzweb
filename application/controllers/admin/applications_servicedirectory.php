@@ -913,41 +913,64 @@ class Applications_servicedirectory extends CI_Controller{
                 foreach ($arr_data as $result_data)
                 {
                     $i++;
-                    $flag = FALSE;
-                    foreach($header[1] as $key=>$row)
-                    {
-                        if(!array_key_exists($key, $result_data))
-                        {
-                            $result_array[$i] = 'row no ' . $i . ' contains empty field';
-                        
-                            $flag = TRUE;
-                            break;
-                        }
-                    }
-                    
-                    if($flag) continue;
-                    if(sizeof($result_data)!= $header_len || (array_key_exists('D', $result_data) && !$this->check_country_code_validity($result_data['D'])))
+                    if((array_key_exists('D', $result_data) && !$this->check_country_code_validity($result_data['D'])))
                     {
                         $result_array[$i] = 'row no ' . $i . ' contains invalid data';
                         continue;
                     }
 
                     $additional_data = array(
-                        'service_category_name' => strip_tags($result_data['J']),
-                        'name' => strip_tags($result_data['A']),
-                        'address' => strip_tags($result_data['B']),
-                        'city' => strip_tags($result_data['C']),
-                        'country_id' => $result_data['D'],
-                        'post_code' => strip_tags($result_data['E']),
-                        'opening_hours' => strip_tags($result_data['F']),
-                        'telephone' => strip_tags($result_data['G']),
-                        'website' => strip_tags($result_data['H']),
-                        'business_profile_id' => $result_data['I'],
-                        'latitude' => $result_data['K'],
-                        'longitude' => $result_data['L'],
                         'created_on' => now()
                     );
-
+                    if(array_key_exists('A', $result_data))
+                    {
+                        $additional_data['name'] = strip_tags($result_data['A']);
+                    }
+                    if(array_key_exists('B', $result_data))
+                    {
+                        $additional_data['address'] = strip_tags($result_data['B']);
+                    }
+                    if(array_key_exists('C', $result_data))
+                    {
+                        $additional_data['city'] = strip_tags($result_data['C']);
+                    }
+                    if(array_key_exists('D', $result_data))
+                    {
+                        $additional_data['country_id'] = strip_tags($result_data['D']);
+                    }
+                    if(array_key_exists('E', $result_data))
+                    {
+                        $additional_data['post_code'] = strip_tags($result_data['E']);
+                    }
+                    if(array_key_exists('F', $result_data))
+                    {
+                        $additional_data['opening_hours'] = strip_tags($result_data['F']);
+                    }
+                    if(array_key_exists('G', $result_data))
+                    {
+                        $additional_data['telephone'] = strip_tags($result_data['G']);
+                    }
+                    if(array_key_exists('H', $result_data))
+                    {
+                        $additional_data['website'] = strip_tags($result_data['H']);
+                    }
+                    if(array_key_exists('I', $result_data))
+                    {
+                        $additional_data['business_profile_id'] = $result_data['I'];
+                    }
+                    if(array_key_exists('J', $result_data))
+                    {
+                        $additional_data['service_category_name'] = strip_tags($result_data['J']);
+                    }
+                    if(array_key_exists('K', $result_data))
+                    {
+                        $additional_data['latitude'] = $result_data['K'];
+                    }
+                    if(array_key_exists('L', $result_data))
+                    {
+                        $additional_data['longitude'] = $result_data['L'];
+                    }
+                    
                     $flag = $this->admin_service_directory->add_imported_service_info($additional_data);
                     if($flag!=FALSE)
                     {
@@ -1027,6 +1050,32 @@ class Applications_servicedirectory extends CI_Controller{
         }
         
         echo '<pre/>';print_r($result_array); die();
+    }
+    public function auto_retrive_and_store_latlong(){
+        $services_blank = array();
+        $all_services = $this->admin_service_directory->get_all_services()->result_array();
+        foreach ($all_services as $service) {
+            if($service['latitude']==0 && $service['longitude']==0){
+                $services_blank[] = $service;
+            }
+        }
+        if($this->input->post()){
+            $id = $this->input->post('id');
+            $lat = $this->input->post('lat');
+            $long = $this->input->post('long');
+            foreach ($services_blank as $service){
+                if($service['id'] == $id){
+                    $service['latitude'] = $lat;
+                    $service['longitude'] = $long;
+                    $this->admin_service_directory->update_service($service['id'], $service);
+                }
+            }
+        }
+        else{
+            $this->data["services"] = $services_blank;
+            
+            $this->template->load($this->tmpl, "admin/applications/service_directory/retrive_latlong", $this->data);
+        }
     }
 }
 ?>
