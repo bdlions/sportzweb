@@ -1,5 +1,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
 <script>
+    var services = '<?php echo json_encode($services)?>';
+    console.log(services);
     var all_retrived_latlong = [];
     var num_completed = 0;
     function lat_long(id, post_code)
@@ -21,6 +23,7 @@
     }
     function submit_latlong()
     {
+        return;
         jQuery.each(all_retrived_latlong, function (i, retrived_latlong) {
 
             $.ajax({
@@ -38,7 +41,7 @@
                 }
             });
         });
-        $('#text_place').html('<div class="alert alert-danger alert-dismissible">'+num_completed+' entrie(s) updated successfully.</div>');
+        $('#text_place').html('<div class="alert alert-success alert-dismissible">'+num_completed+' entrie(s) updated successfully.</div>');
     }
 </script>
 <div class="panel panel-default">

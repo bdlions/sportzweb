@@ -481,3 +481,36 @@ div.status-box-menu div.div3{
     margin-top: 16px;
     padding: 12px;
 }
+
+/*------------------------------- LEFT MENU -----------------------------------*/
+.left_menu_item
+{
+    line-height: 16px;
+    padding: 7px 12px;
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+}
+.left_menu_item img
+{
+    float: left;
+    margin-right: 10px;
+    height: 16px;
+    width: 16px;
+}
+.left_menu_item:hover
+{
+    text-decoration: none;
+    background-color: #f4f4f4;
+}
+.menu_divider{
+    margin: 4px 0px; border-top: 1px solid lightgray;
+}
+
+
+*{
+    outline: none !important;
+}
+a:hover{
+    text-decoration: none;
+}
