@@ -1,33 +1,11 @@
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
 <script>
     var services = JSON.parse('<?php echo json_encode($services)?>');
-    
-    for( var prop in services ){
-        lat_long(services[prop].id, services[prop].post_code);
-    }
     var all_retrived_latlong = [];
     var num_completed = 0;
-    function lat_long(id, post_code)
-    {
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({'address': post_code}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK)
-            {
-                var serviceLat = results[0].geometry.location.lat();
-                var serviceLon = results[0].geometry.location.lng();
-                all_retrived_latlong.push([id, serviceLat, serviceLon]);
-                num_completed++;
-                if (num_completed == '<?php echo sizeof($services);?>')
-                {
-                    submit_latlong();
-                }
-            }
-        });
-    }
-    function submit_latlong()
-    {
-        jQuery.each(all_retrived_latlong, function (i, retrived_latlong) {
 
+    function submit_latlong(){
+        jQuery.each(all_retrived_latlong, function (i, retrived_latlong) {
             $.ajax({
                 dataType: 'json',
                 type: "POST",
@@ -45,6 +23,45 @@
         });
         $('#text_place').html('<div class="alert alert-success alert-dismissible">'+num_completed+' entrie(s) updated successfully.</div>');
     }
+    
+    function submit_latlong_each(sid, slat, slong){
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url(); ?>' + "admin/applications_servicedirectory/auto_retrive_and_store_latlong",
+                data: {
+                    id: sid,
+                    lat: slat,
+                    long: slong
+                },
+                success: function (data) {
+                    alert(data['message']);
+                }
+            });
+        $('#text_place').html('<div class="alert alert-success alert-dismissible">'+num_completed+' entrie(s) updated successfully.</div>');
+    }
+
+    function lat_long(id, post_code){
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': post_code}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK){
+                var serviceLat = results[0].geometry.location.lat();
+                var serviceLon = results[0].geometry.location.lng();
+
+                submit_latlong_each(id, serviceLat, serviceLon);
+//                all_retrived_latlong.push([id, serviceLat, serviceLon]);
+//                num_completed++;
+//                if (num_completed == '<?php echo sizeof($services);?>'){
+//                    submit_latlong();
+//                }
+            }
+        });
+    }
+    
+    $(document).ready(function() {
+        for (var prop in services) {
+            lat_long(services[prop].id, services[prop].post_code);
+        }});
 </script>
 <div class="panel panel-default">
     <div class="panel-heading">Auto retrieve and store latitude and longitude</div>

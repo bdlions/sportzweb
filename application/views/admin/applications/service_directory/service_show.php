@@ -70,6 +70,18 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
+                        <label class="col-sm-6"><div class="pull-right">Latitude : </div></label>
+                        <div class="col-sm-6"><?php echo $service_info['latitude']; ?></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-6"><div class="pull-right">Longitude : </div></label>
+                        <div class="col-sm-6"><?php echo $service_info['longitude']; ?></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
                         <label class="col-sm-6"><div class="pull-right">City : </div></label>
                         <div class="col-sm-6"><?php echo $service_info['city']; ?></div>
                     </div>
