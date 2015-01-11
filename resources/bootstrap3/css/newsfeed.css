@@ -483,10 +483,16 @@ div.status-box-menu div.div3{
 }
 
 /*------------------------------- LEFT MENU -----------------------------------*/
+.left_menu_item a:hover{
+    color: #222222;
+}
+.left_menu_item a{
+    color: #555555;
+}
 .left_menu_item
 {
-    line-height: 16px;
-    padding: 7px 12px;
+    line-height: 20px;
+    padding: 10px 0px 10px 5px;
     display: inline-block;
     width: 100%;
     font-size: 16px;
@@ -494,9 +500,9 @@ div.status-box-menu div.div3{
 .left_menu_item img
 {
     float: left;
-    margin-right: 10px;
-    height: 16px;
-    width: 16px;
+    margin-right: 8px;
+    height: 20px;
+    width: 20px;
 }
 .left_menu_item:hover
 {

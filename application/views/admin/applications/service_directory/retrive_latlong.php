@@ -1,6 +1,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
 <script>
-    var services = JSON.parse('<?php echo json_encode($services)?>');
+    var services = <?php echo json_encode($services)?>;
     var all_retrived_latlong = [];
     var num_completed = 0;
 
@@ -38,7 +38,7 @@
                     alert(data['message']);
                 }
             });
-        $('#text_place').html('<div class="alert alert-success alert-dismissible">'+num_completed+' entrie(s) updated successfully.</div>');
+        $('#text_place').html('<div class="alert alert-success alert-dismissible">Entries updated successfully.</div>');
     }
 
     function lat_long(id, post_code){
