@@ -653,8 +653,11 @@ class Gympro extends Role_Controller{
         if (!empty($client_info_array)) {
             $client_info = $client_info_array[0];
         } else {
-            redirect('applications/gympro/manage_clients', 'refresh');
+            $this->template->load(null, 'applications/gympro/client/client_show_validation', $this->data);
+            return;
+           // redirect('applications/gympro/manage_clients', 'refresh');
         }
+        if($client_info['user_id']==$this->my_user_id){
         $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();
         $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id); 
         $this->data['client_info'] = $client_info;
@@ -669,6 +672,9 @@ class Gympro extends Role_Controller{
         $this->data['nutrition_list'] = $nutrition_list;
         
         $this->template->load(null, 'applications/gympro/client/client_show', $this->data);
+        }  else {
+             $this->template->load(null, 'applications/gympro/client/client_show_validation', $this->data);
+        }
     }
 
     /*
@@ -893,10 +899,17 @@ class Gympro extends Role_Controller{
         if (!empty($group_info_array)) {
             $group_info = $group_info_array[0];
         } else {
-            redirect('application/gympro/manage_groups', 'refresh');
+            $this->template->load(null, 'applications/gympro/group/group_show_validation', $this->data);
+            return;
         }
+        if($group_info['user_id']==$this->my_user_id){
         $this->data['group_info'] = $group_info;
         $this->template->load(null, 'applications/gympro/group/group_show', $this->data);
+        
+        }else{
+          $this->template->load(null, 'applications/gympro/group/group_show_validation', $this->data);  
+        }
+            
     }
 
     /*
@@ -1209,13 +1222,18 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro', 'refresh');
+        $this->template->load(null,'applications/gympro/program/program_show_validation', $this->data);
+        return;
         }
+        if($program_info['user_id']==$this->my_user_id){
         $this->data['program_info'] = $program_info;
         $this->data['exercise_list'] = json_decode( $program_info['exercise_list'], TRUE );
         $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
         $this->data['program_id'] = $program_id;
-        $this->template->load(null,'applications/gympro/program/program_show', $this->data);   
+        $this->template->load(null,'applications/gympro/program/program_show', $this->data);  
+        }else{
+            $this->template->load(null,'applications/gympro/program/program_show_validation', $this->data);
+        }
         
     }
     //---------------------------------------Exercise Module---------------------------------------//
@@ -1432,11 +1450,15 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro','refresh');
+        $this->template->load(null,'applications/gympro/exercise/exercise_show_validation', $this->data);
+        return;
         }
-        
+        if($exercise_info['user_id']==$this->my_user_id){
         $this->data['exercise_info'] = $exercise_info;
         $this->template->load(null,'applications/gympro/exercise/exercise_show', $this->data);
+        }  else {
+        $this->template->load(null,'applications/gympro/exercise/exercise_show_validation', $this->data);
+        }
     }
     /*
      * This method will delete an exercise
@@ -1782,13 +1804,18 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro', 'refresh');
-        }    
+        $this->template->load(null,'applications/gympro/nutrition_show_validation', $this->data);
+        return;
+        } 
+        if($nutrition_info['user_id']==$this->my_user_id){
         $this->data['nutrition_info'] = $nutrition_info;
         $this->data['meal_list'] = json_decode($nutrition_info['meal_list'], TRUE);
         $this->data['workout_list'] = $workout_list;
         $this->data['nutrition_id'] = $nutrition_id;
         $this->template->load(null,'applications/gympro/nutrition_show', $this->data);
+        }  else {
+        $this->template->load(null,'applications/gympro/nutrition_show_validation', $this->data);
+        }
         
     }
 
@@ -2292,8 +2319,10 @@ class Gympro extends Role_Controller{
         } 
         else
         {
-            redirect('applications/gympro','refresh');
+         $this->template->load(null, 'applications/gympro/assessment/assessment_show_validation', $this->data);
+         return;
         }
+        if($assessment_info['user_id']==$this->my_user_id){
         $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
         foreach ($reassess_array as $reassess_info) {
             if($reassess_info['id'] == $assessment_info['reassess_id'])
@@ -2304,6 +2333,9 @@ class Gympro extends Role_Controller{
         }
         $this->data['assessment_info'] = $assessment_info;
         $this->template->load(null, 'applications/gympro/assessment/assessment_show', $this->data);
+        }else{
+            $this->template->load(null, 'applications/gympro/assessment/assessment_show_validation', $this->data);
+        }
     }
     /*
      * Ajax call to delete an assessment
@@ -2648,10 +2680,15 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro','refresh');
+        $this->template->load(null, 'applications/gympro/mission/mission_show_validation', $this->data);
+        return;
         }
+        if($mission_info['user_id']==$this->my_user_id ){
         $this->data['mission_info'] = $mission_info;
         $this->template->load(null, 'applications/gympro/mission/mission_show', $this->data);
+        }else{
+           $this->template->load(null, 'applications/gympro/mission/mission_show_validation', $this->data); 
+        }
     }
     /*
      * Ajax call to delete mission
