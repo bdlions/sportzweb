@@ -523,8 +523,11 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro/manage_clients','refresh');
+            $this->template->load(null,'applications/gympro/client/client_edit_validation', $this->data);
+            return;
         }
+        if($client_info['user_id']==$this->my_user_id){
+            
         $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id); 
         
         $member_id = $client_info['member_id'];
@@ -551,6 +554,7 @@ class Gympro extends Role_Controller{
         foreach ($client_status_array as $client_status_info) {
             $this->data['client_status_list'][$client_status_info['client_status_id']] = $client_status_info['title'];
         }
+        
         $this->data['selected_status_id'] = $client_info['status_id'];
         $this->data['start_date'] = array(
             'name' => 'start_date',
@@ -632,6 +636,10 @@ class Gympro extends Role_Controller{
         );
         $this->data['client_info'] = $client_info; 
         $this->template->load(null,'applications/gympro/client/client_edit', $this->data);
+        }  else {
+        $this->template->load(null,'applications/gympro/client/client_edit_validation', $this->data);
+            
+        }
     }    
     /*
      * This method will show client info
@@ -828,9 +836,10 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('application/gympro/manage_groups','refresh');
+            $this->template->load(null,'applications/gympro/group/group_edit_validation', $this->data);
+            return;
         }
-        
+        if($group_info['user_id']==$this->my_user_id){
         $this->data['title'] = array(
             'name' => 'title',
             'id' => 'title',
@@ -863,6 +872,10 @@ class Gympro extends Role_Controller{
         );
         $this->data['group_info'] = $group_info;
         $this->template->load(null,'applications/gympro/group/group_edit', $this->data);
+        }  else {
+        $this->template->load(null,'applications/gympro/group/group_edit_validation', $this->data);
+            
+        }
     }
     /*
      * This method will show a group
@@ -1102,6 +1115,7 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
+        
         $this->data['client_list'] = $this->gympro_library->get_all_clients($this->my_user_id)->result_array();
         $this->data['exercise_category_list'] = array(
             0 => '---SELECT A CATEGORY---'
@@ -1118,8 +1132,10 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro','refresh');
+            $this->template->load(null, 'applications/gympro/program/program_edit_validation', $this->data);
+            return;
         }
+        if($program_info['user_id']==$this->my_user_id){
         $this->data['program'] = $program_info;
         $this->data['exercise_list'] = json_decode( $program_info['exercise_list'], TRUE );
         $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
@@ -1134,6 +1150,9 @@ class Gympro extends Role_Controller{
             $this->data['selected_client_id'] = 0;
         }
         $this->template->load(null,'applications/gympro/program/program_edit', $this->data);
+        }  else {
+           $this->template->load(null, 'applications/gympro/program/program_edit_validation', $this->data); 
+        }
     }
     
     
@@ -1349,8 +1368,11 @@ class Gympro extends Role_Controller{
         if(!empty($exercise_array))
         {
             $exercise_info = $exercise_array[0];            
+        }  else {
+            $this->template->load(null, 'applications/gympro/exercise/exercise_edit_validation', $this->data);
+            return;
         }
-        
+        if($exercise_info['user_id']==$this->my_user_id){
         $exercise_categories_array = $this->gympro_library->get_all_exercise_categories()->result_array();
         $this->data['exercise_category_list'] = array();
         foreach ($exercise_categories_array as $exercise_category_info) {
@@ -1386,6 +1408,10 @@ class Gympro extends Role_Controller{
         }
         $this->data['exercise_info'] = $exercise_info;   
         $this->template->load(null, 'applications/gympro/exercise/exercise_edit', $this->data);
+        }  else {
+        $this->template->load(null, 'applications/gympro/exercise/exercise_edit_validation', $this->data);
+            
+        }
     }
     /*
      * This method will show an exercise
@@ -1618,8 +1644,10 @@ class Gympro extends Role_Controller{
         }
         else
         {
-            redirect('applications/gympro', 'refresh');
+            $this->template->load(null,'applications/gympro/nutrition_edit_validation', $this->data);
+            return;
         }
+        if($nutrition_info['user_id']==$this->my_user_id){
         $this->data['nutrition_info'] = json_decode($nutrition_info['meal_list'], TRUE);
         $this->data['workout_list'] =$workout_list;
         $this->data['nutrition_id'] =$nutrition_id;
@@ -1632,6 +1660,10 @@ class Gympro extends Role_Controller{
             $this->data['selected_client_id'] = 0;
         }
         $this->template->load(null,'applications/gympro/nutrition_edit', $this->data);
+        }  else {
+        $this->template->load(null,'applications/gympro/nutrition_edit_validation', $this->data);
+            
+        }
     }
     
     
@@ -2064,8 +2096,11 @@ class Gympro extends Role_Controller{
         if(!empty($assessment_array))
         {
             $assessment_info = $assessment_array[0];            
+        }  else {
+            $this->template->load(null, 'applications/gympro/assessment/assessment_edit_validation', $this->data);
+            return;
         }          
-        
+        if($assessment_info['user_id']==$this->my_user_id){
         $this->data['date'] = array(
             'name' => 'date',
             'id' => 'date',
@@ -2233,6 +2268,10 @@ class Gympro extends Role_Controller{
         }
         $this->data['assessment_id'] = $assessment_id;       
         $this->template->load(null,'applications/gympro/assessment/assessment_edit', $this->data);
+        }  else {
+        $this->template->load(null,'applications/gympro/assessment/assessment_edit_validation', $this->data);
+            
+        }
     }
     /*
      * This method will show an assessment
@@ -2444,7 +2483,12 @@ class Gympro extends Role_Controller{
         $mission_array = $this->gympro_library->get_mission_info($mission_id)->result_array();
         if(!empty($mission_array))
         {
-            $mission_info = $mission_array[0];            
+            $mission_info = $mission_array[0];
+            
+            
+        }  else {
+            $this->template->load(null, 'applications/gympro/mission/mission_edit_validation', $this->data);
+            return;
         }
         $this->data['message'] = ''; 
         $this->form_validation->set_rules('label', 'label', 'xss_clean|required');
@@ -2496,6 +2540,7 @@ class Gympro extends Role_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
+        if($mission_info['user_id']==$this->my_user_id){
         $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
         $this->data['label'] = array(
             'name' => 'label',
@@ -2583,6 +2628,9 @@ class Gympro extends Role_Controller{
         $this->data['mission_info'] = $mission_info;
         $this->data['mission_id'] = $mission_id;
         $this->template->load(null, 'applications/gympro/mission/mission_edit', $this->data);
+    }  else {
+        $this->template->load(null, 'applications/gympro/mission/mission_edit_validation', $this->data);
+    }
     }
     /*
      * This method will show a mission
