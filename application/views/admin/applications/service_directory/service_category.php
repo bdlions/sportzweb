@@ -3,28 +3,7 @@
         $("#button_create_service_category").on("click", function () {
             $('#modal_create_service_category').modal('show');
         });
-    });
-    var result_array = [];
-    var number = 1;
-    result_array.push([ "single pushed to result array"]);
-    result_array.push([ number++, "single pushed to result array" ]);
-    result_array.push([ number++, "single pushed to result array" ]);
-    result_array.push([ number++, "single pushed to result array" ]);
-    result_array.push([ number++, "single pushed to result array" ]);
-    result_array.push([ number++, "single pushed to result array" ]);
-    alert(result_array[0][1]);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    });    
     
 </script>
 <script type="text/x-tmpl" id="tmpl_service_category_list">

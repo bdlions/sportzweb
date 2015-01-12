@@ -53,7 +53,7 @@ class Healthy_recipes_model extends Ion_auth_model {
             }
             
         }
-          return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
+        return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
                     ->from($this->tables['recipes'])
                     ->join($this->tables['recipe_category'], $this->tables['recipe_category'].'.id='.$this->tables['recipes'].'.recipe_category_id','left')
                     ->get();
@@ -61,7 +61,7 @@ class Healthy_recipes_model extends Ion_auth_model {
     
     public function get_all_recipes_by_letter()
     {
-          return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
+        return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
                     ->from($this->tables['recipes'])
                     ->join($this->tables['recipe_category'], $this->tables['recipe_category'].'.id='.$this->tables['recipes'].'.recipe_category_id','left')
                     ->get();
