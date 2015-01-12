@@ -122,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row form-group" style="border-bottom: 2px solid lightgray; padding-bottom: 10px">
+                    <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
                         <div class="col-md-9" style="font-size: 15px; font-weight: bold; padding-left: 0px">
                             Schedule Session
                         </div>
@@ -140,7 +140,7 @@
                             Sunday, 23 November 2121
                         </div>
                     </div>
-                    <div class="row form-group" style="border-bottom: 2px solid lightgray; padding-bottom: 10px">
+                    <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
                         <div class="row">
                             <div class="col-md-4">
                                 6:00am - 7:45am
@@ -161,10 +161,10 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4" style="color: red; border-bottom: 2px solid darkred; padding: 0px 0px 5px 0px">
-                            Monday, 24 November 2014
+                            Sunday, 23 November 2014
                         </div>
                     </div>
-                    <div class="row form-group" style="border-bottom: 2px solid lightgray; padding-bottom: 10px">
+                    <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
                         <div class="row">
                             <div class="col-md-4">
                                 9:00am - 10:30am
@@ -183,7 +183,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row form-group" style="border-bottom: 2px solid lightgray; padding-bottom: 10px">
+                    <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
                         <div class="row">
                             <div class="col-md-4">
                                 11:00am - 1:00pm
@@ -193,6 +193,68 @@
                             </div>
                             <div class="col-md-2">
                                 120 
+                            </div>
+                            <div class="col-md-2">
+                                Paid
+                            </div>
+                            <div class="col-md-1">
+                                <input type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4" style="color: red; border-bottom: 2px solid darkred; padding: 0px 0px 5px 0px">
+                            Monday, 24 November 2014
+                        </div>
+                    </div>
+                    <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
+                        <div class="row">
+                            <div class="col-md-4">
+                                9:00am - 10:30am
+                            </div>
+                            <div class="col-md-3">
+                                Group 1
+                            </div>
+                            <div class="col-md-2">
+                                
+                            </div>
+                            <div class="col-md-2">
+                                
+                            </div>
+                            <div class="col-md-1">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
+                        <div class="row">
+                            <div class="col-md-4">
+                                
+                            </div>
+                            <div class="col-md-3">
+                                Jhon Terry
+                            </div>
+                            <div class="col-md-2">
+                                 £120.00
+                            </div>
+                            <div class="col-md-2">
+                                Paid
+                            </div>
+                            <div class="col-md-1">
+                                <input type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
+                        <div class="row">
+                            <div class="col-md-4">
+                                
+                            </div>
+                            <div class="col-md-3">
+                                Frank Lampart
+                            </div>
+                            <div class="col-md-2">
+                                 £60.00
                             </div>
                             <div class="col-md-2">
                                 Paid

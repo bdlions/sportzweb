@@ -423,7 +423,8 @@ float: left;
 }
 
 .member-name{
-    font-size:  15px;
+    font-size: 18px;
+    line-height: 30px;
 }
 
 .modal_liked_user_list_image{
@@ -483,19 +484,24 @@ div.status-box-menu div.div3{
 }
 
 /*------------------------------- LEFT MENU -----------------------------------*/
-.left_menu_item a:hover{
-    color: #222222;
-}
-.left_menu_item a{
-    color: #555555;
-}
 .left_menu_item
 {
+    font-size: 16px;
     line-height: 20px;
     padding: 10px 0px 10px 5px;
     display: inline-block;
     width: 100%;
-    font-size: 16px;
+}
+.left_menu_item:hover
+{
+    text-decoration: none;
+    background-color: #f4f4f4;
+}
+.left_menu_item a{
+    color: #555555;
+}
+.left_menu_item a:hover{
+    color: #222222;
 }
 .left_menu_item img
 {
@@ -504,13 +510,12 @@ div.status-box-menu div.div3{
     height: 20px;
     width: 20px;
 }
-.left_menu_item:hover
-{
-    text-decoration: none;
-    background-color: #f4f4f4;
-}
-.menu_divider{
-    margin: 4px 0px; border-top: 1px solid lightgray;
+.menu_section_header{
+    margin-top: 5px;
+    padding: 10px 0px 5px 5px;
+    border-top: 1px solid lightgray;
+    font-size: 18px;
+    line-height: 18px;
 }
 
 

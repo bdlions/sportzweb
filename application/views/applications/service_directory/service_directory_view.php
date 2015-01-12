@@ -3,6 +3,7 @@
 <script>
 
     $(function() {
+        var result_arr = [];
         var services = Array();
         var town_code = '<?php echo $towncode == "" ? "london_" : $towncode ?>';
         var another_town = '<?php echo $another_town ?>';
@@ -33,14 +34,15 @@
                             
                             var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.post_code + "," + service.city + "<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
                             $("#services_displayer").append(service_text);
+                            result_arr.push(service_text, hi);
+                            alert(hi);
+                            alert(result_arr[1][1]);
                         }
                     });
                 });
             }
         });
-
         var map_canvas = document.getElementById('map_canvas');
-
         geocoder.geocode({'address': another_town}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK)
             {

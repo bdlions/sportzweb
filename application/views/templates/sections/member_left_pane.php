@@ -5,14 +5,13 @@
                 <img alt="<?php echo $basic_profile->first_name[0] . $basic_profile->last_name[0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_PATH_W100_H100 . $basic_profile->photo ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
                 <p style="visibility:hidden"><?php echo $basic_profile->first_name[0] . $basic_profile->last_name[0] ?></p>
             </div>
-            <p class="member-name"><?php echo $basic_profile->first_name . " " . $basic_profile->last_name ?></p>
+            <div class="member-name"><?php echo $basic_profile->first_name . " " . $basic_profile->last_name ?></div>
         </a>
     </div>
 </div>
-<div class="menu_divider"></div>
 <div class="row">
     <div class="col-md-12">
-        <h4>Favourites</h4>
+        <div class="menu_section_header">Favourites</div>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>">
                 <img src="<?php echo base_url() ?>resources/images/Share.gif"> News Feed
@@ -36,68 +35,67 @@
         
     </div>
 </div>
-<div class="menu_divider"></div>
 <div class="row">
     <div class="col-md-12">
-        <h4>Applications</h4>
+        <div class="menu_section_header">Applications</div>
         <?php if (in_array(APPLICATION_XSTREAM_BANTER_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/xstream_banter">
-                <img src="<?php echo base_url() ?>resources/images/xb_icon.png"> Xstream Banter
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/xb.png"> Xstream Banter
             </a>
         </div>
         <?php } if (in_array(APPLICATION_HEALTYY_RECIPES_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/healthy_recipes">
-                <img src="<?php echo base_url() ?>resources/images/saddress_book.png"> Healthy Recipes
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/recipe.png"> Healthy Recipes
             </a>
         </div>
         <?php } if (in_array(APPLICATION_SERVICE_DIRECTORY_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/service_directory">
-                <img src="<?php echo base_url() ?>resources/images/mapservice16.png"> Service Directory
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/sd.png"> Service Directory
             </a>
         </div>
         <?php } if (in_array(100, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/service_directory">
-                <img src="<?php echo base_url() ?>resources/images/saddress_book.png"> Sports
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/sp.png"> Score Prediction
             </a>
         </div>
         <?php } if (in_array(APPLICATION_BLOG_APP_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/blog_app">
-                <img src="<?php echo base_url() ?>resources/images/045631686.gif"> Blogs
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/blog.png"> Blogs
             </a>
         </div>
         <?php } if (in_array(APPLICATION_NEWS_APP_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/news_app">
-                <img src="<?php echo base_url() ?>resources/images/newspaper.png"> News
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/news.png"> News
             </a>
         </div>
         <?php } if (in_array(APPLICATION_BMI_CALCULATOR_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/bmi_calculator">
-                <img src="<?php echo base_url() ?>resources/images/bmi_calculator.png"> BMI Calculator
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/bmi.png"> BMI Calculator
             </a>
         </div>
         <?php } if (in_array(APPLICATION_PHOTOGRAPHY_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/photography">
-                <img src="<?php echo base_url() ?>resources/images/camera-icon.png"> Photography
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/photo.png"> Photography
             </a>
         </div>
         <?php } if (in_array(APPLICATION_GYMPRO_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/gympro">
-                <img src="<?php echo base_url() ?>resources/images/ptpro.png"> PT Pro
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/ptpro.png"> PT Pro
             </a>
         </div>
         <?php } if (in_array(APPLICATION_SHOP_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/gympro">
-                <img src="<?php echo base_url() ?>resources/images/shop_16.png"> Shop
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/shop.png"> Shop
             </a>
         </div>
         <?php } ?>

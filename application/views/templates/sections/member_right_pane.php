@@ -230,37 +230,37 @@
                     <ul class="list-inline list-unstyled">
                         <li>
                             <a href="<?php echo base_url(); ?>applications/xstream_banter">
-                                <img alt="Xstream Banter" title="Xstream Banter" src="<?php echo base_url(); ?>resources/images/xb_icon.png" height="16px" width="16px"/>
+                                <img alt="Xstream Banter" title="Xstream Banter" src="<?php echo base_url(); ?>resources/images/applications/application_icons/xb.png" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>applications/healthy_recipes">
-                                <img alt="Healthy Recipes" title="Healthy Recipes" src="<?php echo base_url(); ?>resources/images/saddress_book.png" height="16px" width="16px"/>
+                                <img alt="Healthy Recipes" title="Healthy Recipes" src="<?php echo base_url(); ?>resources/images/applications/application_icons/recipe.png" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>applications/service_directory">
-                                <img alt="Service Directory" title="Service Directory" src="<?php echo base_url(); ?>resources/images/mapservice16.png" height="16px" width="16px"/>
+                                <img alt="Service Directory" title="Service Directory" src="<?php echo base_url(); ?>resources/images/applications/application_icons/sd.png" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>applications/blog_app">
-                                <img alt="Blogs" title="Blogs" src="<?php echo base_url(); ?>resources/images/045631686.gif" height="16px" width="16px"/>
+                                <img alt="Blogs" title="Blogs" src="<?php echo base_url(); ?>resources/images/applications/application_icons/blog.png" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>applications/news_app">
-                                <img alt="News" title="News" src="<?php echo base_url(); ?>resources/images/newspaper.png" height="16px" width="16px"/>
+                                <img alt="News" title="News" src="<?php echo base_url(); ?>resources/images/applications/application_icons/news.png" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>applications/bmi_calculator">
-                                <img alt="BMI" title="BMI Calculator" src="<?php echo base_url(); ?>resources/images/bmi_calculator.png" height="16px" width="16px"/>
+                                <img alt="BMI" title="BMI Calculator" src="<?php echo base_url(); ?>resources/images/applications/application_icons/bmi.png" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>applications/photography">
-                                <img alt="Photography" title="Photography" src="<?php echo base_url(); ?>resources/images/camera-icon.png" height="16px" width="16px"/>
+                                <img alt="Photography" title="Photography" src="<?php echo base_url(); ?>resources/images/applications/application_icons/photo.png" height="16px" width="16px"/>
                             </a>
                         </li>
                     </ul>
