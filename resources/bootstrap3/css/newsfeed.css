@@ -488,7 +488,7 @@ div.status-box-menu div.div3{
 {
     font-size: 16px;
     line-height: 20px;
-    padding: 10px 0px 10px 5px;
+    padding: 10px 0px 10px 0px;
     display: inline-block;
     width: 100%;
 }
@@ -512,7 +512,7 @@ div.status-box-menu div.div3{
 }
 .menu_section_header{
     margin-top: 5px;
-    padding: 10px 0px 5px 5px;
+    padding: 10px 0px 5px 0px;
     border-top: 1px solid lightgray;
     font-size: 18px;
     line-height: 18px;
