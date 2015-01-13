@@ -1385,7 +1385,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   `address` varchar(300) DEFAULT '',
   `city` varchar(100) DEFAULT '',
   `country_id` int(11) unsigned NOT NULL,
-  `post_code` varchar(30) NOT '', 
+  `post_code` varchar(30) DEFAULT '', 
   `opening_hours` varchar(300) DEFAULT '',
   `telephone` varchar(20) DEFAULT '',
   `website` varchar(300) DEFAULT '',
