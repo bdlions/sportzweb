@@ -235,7 +235,7 @@
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>applications/healthy_recipes">
-                                <img alt="Healthy Recipes" title="Healthy Recipes" src="<?php echo base_url(); ?>resources/images/applications/application_icons/recipe.png" height="16px" width="16px"/>
+                                <img alt="World Kitchen" title="World Kitchen" src="<?php echo base_url(); ?>resources/images/applications/application_icons/recipe.png" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>

@@ -47,7 +47,7 @@
         <?php } if (in_array(APPLICATION_HEALTYY_RECIPES_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/healthy_recipes">
-                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/recipe.png"> Healthy Recipes
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/recipe.png"> World Kitchen
             </a>
         </div>
         <?php } if (in_array(APPLICATION_SERVICE_DIRECTORY_ID, $app_id_list)) { ?>

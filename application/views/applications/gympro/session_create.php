@@ -50,7 +50,6 @@
                             <div class="col-md-4">
                                 <select class="form-control">
                                 <optgroup label="Groups">
-                                    <option>Group- Alpha</option>
                                     <?php foreach ($group_list as $group_info): ?>
                                     <option value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
                                 <?php endforeach; ?>

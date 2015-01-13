@@ -51,7 +51,6 @@
                         <div class="col-md-7">
                             <select class="form-control">
                                 <optgroup label="Groups">
-                                    <option>Group- Alpha</option>
                                     <?php foreach ($group_list as $group_info): ?>
                                     <option value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
                                 <?php endforeach; ?>
@@ -262,7 +261,7 @@
                                 Jhon Terry
                             </div>
                             <div class="col-md-2">
-                                 £120.00
+                                 60
                             </div>
                             <div class="col-md-2">
                                 Paid
@@ -281,7 +280,7 @@
                                 Frank Lampart
                             </div>
                             <div class="col-md-2">
-                                 £60.00
+                                 60
                             </div>
                             <div class="col-md-2">
                                 Paid
