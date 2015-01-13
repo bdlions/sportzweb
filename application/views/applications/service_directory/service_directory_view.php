@@ -13,110 +13,87 @@
         var another_town = '<?php echo $another_town ?>';
         var townLat;
         var townLon;
+		
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': town_code}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK)
             {
                 townLat = results[0].geometry.location.lat();
                 townLon = results[0].geometry.location.lng();
-                if (town_code != "london_")
-                {
-                    $("#services_displayer").append('<span style="color: limegreen">Services near: ' + '<?php echo $selected_services; ?></span>');
-                }
-                $.each(services, function(index, service) {
-                    geocoder.geocode({'address': service.post_code}, function(results, status) {
-                        if (status == google.maps.GeocoderStatus.OK)
+                        if (town_code != "london_")
                         {
-                            var serviceLat = results[0].geometry.location.lat();
-                            var serviceLon = results[0].geometry.location.lng();
+                            $("#services_displayer").append('<span style="color: limegreen">Services near: ' + '<?php echo $selected_services; ?></span>');
+                        }
+                        $.each(services, function(index, service) {
+                            var serviceLat = parseFloat(service.latitude);
+                            var serviceLon = parseFloat(service.longitude);
+
                             var hi = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(serviceLat, serviceLon), new google.maps.LatLng(townLat, townLon));
                             hi = hi / 1000;
                             hi = hi / 1.61;
-                            
+
                             var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.post_code + "," + service.city + "<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
 //                            $("#services_displayer").append(service_text);
-                            result_arr.push([ [service_text],[hi] ]);
-                            if( numof_services == (index+1) ){
-                                result_arr.sort(function(a, b){return a[1]-b[1]});
-                                $.each(result_arr, function(index, service_text){
-                                    $("#services_displayer").append(service_text[0]);
-                                });
-                            }
-                        }
-                    });
+                            result_arr.push([[service_text], [hi]]);
+                        });
+                        result_arr.sort(function(a, b) {
+                            return a[1] - b[1]
+                        });
+                        $.each(result_arr, function(index, service_text) {
+                            $("#services_displayer").append(service_text[0]);
+                        });
+                    }
                 });
-            }
-        });
+		
+		
         var map_canvas = document.getElementById('map_canvas');
         geocoder.geocode({'address': another_town}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK){
                 //map.setCenter(results[0].geometry.location);
                 var latitude = results[0].geometry.location.lat();
                 var longitude = results[0].geometry.location.lng();
-                var myCenter = new google.maps.LatLng(latitude, longitude);
-                var map_options = {
-                    center: new google.maps.LatLng(latitude, longitude),
-                    zoom: 12,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                }
-                var map = new google.maps.Map(map_canvas, map_options);
-                var serv;
-                if (town_code != "london_"){
-                    for (var x = 0; x < services.length; x++){
-                        $.ajax({
-                            url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + services[x]['address'] + '&sensor=false',
-                            dataType: 'json',
-                            async: false,
-                            data: null,
-                            success: function(data) {
-                                var p = data.results[0].geometry.location
-                                var latlng = new google.maps.LatLng(services[x]['latitude'], services[x]['longitude']);
-                                var markers = new google.maps.Marker({
-                                    position: latlng,
-                                    map: map
+                        var myCenter = new google.maps.LatLng(latitude, longitude);
+                        var map_options = {
+                            center: new google.maps.LatLng(latitude, longitude),
+                            zoom: 12,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        }
+                        var map = new google.maps.Map(map_canvas, map_options);
+                        var serv;
+                        if (town_code != "london_") {
+                            $.each(services, function(index, service) {
+
+                                var reference = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + service['address'].replace(/ /g, "+") + '&sensor=false';
+                                $.ajax({
+                                    url: reference,
+                                    dataType: 'json',
+                                    async: false,
+                                    data: null,
+                                    success: function(data) {
+                                        if (data.results != undefined && data.results.length > 0) {
+                                            var latlng = new google.maps.LatLng(service['latitude'], service['longitude']);
+                                            var markers = new google.maps.Marker({
+                                                position: latlng,
+                                                map: map
+                                            });
+                                            var infowindows = new google.maps.InfoWindow({
+                                                content: "<span style='color: limegreen'><h4>" + service['title'] + "</h4></span><h4>Address:</h4>" + service['address'] + "<h4>Phone:</h4>" + service['telephone']
+                                            });
+                                            google.maps.event.addListener(markers, 'click', function(event) {
+                                                infowindows.open(map, markers);
+                                            });
+                                        }
+
+                                    }
                                 });
-                                var infowindows = new google.maps.InfoWindow({
-                                    content: "<span style='color: limegreen'><h4>" + services[x]['title'] + "</h4></span><h4>Address:</h4>" + services[x]['address'] + "<h4>Phone:</h4>" + services[x]['telephone']
-                                });
-                                google.maps.event.addListener(markers, 'click', function(event) {
-                                    infowindows.open(map, markers);
-                                });
-                            }
-                        });
+                            });
+                        }
+                    }
+                    else {
+                        alert("Location is not found");
                     }
                 }
-
-//                //single markar code
-//                if (town_code != "london_")
-//                {
-//                    var marker = new google.maps.Marker({
-//                        position: myCenter,
-//                        map: map,
-//                    });
-//                    google.maps.event.addListener(marker, 'click', function(event)
-//                    {
-//                        var infowindow = new google.maps.InfoWindow({
-//                            content: "<span style='color: limegreen'><h4>" + services[0]['title'] + "</h4></span><h4>Address:</h4>" + services[0]['address'] + "<h4>Phone:</h4>" + services[0]['telephone']
-//                        });
-//                        infowindow.open(map, marker);
-//                    }
-//                    );
-//                }
-//                
-//                
-//                
-//                var key = 0;
-//
-//                google.maps.event.addListener(markers[key], 'click', function(event) {
-//                    infowindows[key].open(map, markers[key]);
-//                    alert(key);
-//                });
-            }
-            else{
-                alert("Location is not found");
-            }
-        }
-        );
+                );
     });
 
 </script>
