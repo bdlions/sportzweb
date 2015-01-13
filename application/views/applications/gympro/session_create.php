@@ -40,23 +40,31 @@
                     
                     <div class="col-md-6">
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Title: </div>
-                            <div class="col-md-10">
+                            <div class="col-md-3 control-div">Title: </div>
+                            <div class="col-md-9">
                                 <input class="form-control">
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Client</div>
+                            <div class="col-md-3 control-div">Client and Group</div>
                             <div class="col-md-4">
                                 <select class="form-control">
+                                    <optgroup label="Clients">
                                     <?php foreach ($client_list as $client_info): ?>
                                         <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
                                     <?php endforeach; ?>
+                                        
+                                    </optgroup>
+                                    <optgroup label="Groups">
+                                        <?php foreach ($group_list as $group_info): ?>
+                                        <option value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                    <?php endforeach; ?>
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col-md-2 control-div">Group</div>
+<!--                        <div class="row form-group">
+                            <div class="col-md-3 control-div">Group</div>
                             <div class="col-md-4">
                                 <select class="form-control">
                                     <?php foreach ($group_list as $group_info): ?>
@@ -64,23 +72,15 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Date:</div>
+                            <div class="col-md-3 control-div">Date:</div>
                             <div class="col-md-6">
                                 <input class="" id="datepicker" >
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Start:</div>
-                            <div class="col-md-4">
-                                <select class="form-control">
-                                    <?php foreach ($meal_time_list as $key => $meal_time): ?>
-                                        <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="col-md-2 control-div">Finish:</div>
+                            <div class="col-md-3">Start:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
                                     <?php foreach ($meal_time_list as $key => $meal_time): ?>
@@ -90,13 +90,23 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Location</div>
-                            <div class="col-md-10">
+                            <div class="col-md-3 control-div">Finish:</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+                                    <?php foreach ($meal_time_list as $key => $meal_time): ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3 control-div">Location</div>
+                            <div class="col-md-9">
                                 <input class="form-control"> 
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Type:</div>
+                            <div class="col-md-3 control-div">Type:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
                                     <option>Single session</option>
@@ -108,9 +118,10 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Cost:</div>
+                            <div class="col-md-3 control-div">Cost:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
+                                    <option>Other</option>
                                     <?php
                                     for($counter = 5; $counter <=200; $counter++)
                                     {
@@ -121,7 +132,7 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-md-2 control-div">Status:</div>
+                            <div class="col-md-3 control-div">Status:</div>
                             <div class="col-md-4">
                                 <select class="form-control">
                                     <option>

@@ -75,7 +75,8 @@
                         </tbody>
                     </table>
                 </div>
-            </div></div>
+            </div>
+        </div>
         <div style="width: 100%">
             <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
         </div>

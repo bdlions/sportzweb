@@ -261,7 +261,7 @@ $(function () {
             data: $("#form_edit_recipe").serializeArray(),
             success: function(data) {
                 //alert(data.message);
-                alert(data);
+                alert(data.message);
                 window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/edit_recipe/<?php echo $recipes_info['id']; ?>';
             }
         });

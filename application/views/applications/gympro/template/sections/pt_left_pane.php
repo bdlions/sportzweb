@@ -17,7 +17,7 @@
             <a href="<?php echo base_url().'applications/gympro/programs'?>">Programmes</a>
         </div>
         <div class="ln_item" >
-            <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/assesments.png">
+            <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/earnings.png">
             <a href="<?php echo base_url()?>applications/gympro/manage_assessments">Assesments</a>
         </div>
         <div class="ln_item" >
@@ -33,8 +33,12 @@
             <a href="<?php echo base_url().'applications/gympro/nutrition'?>">Nutrition</a>
         </div>
         <div class="ln_item" >
+            <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/assesments.png">
+            <a href="<?php echo base_url().'applications/gympro/earnings'?>">Schedule</a>
+        </div>
+        <div class="ln_item" >
             <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/earnings.png">
-            <a href="<?php echo base_url().'applications/gympro/earnings'?>">Earnings</a>
+            <a href="<?php echo base_url().'applications/gympro/earnings_summary'?>">Earnings</a>
         </div>
         <div class="ln_item" >
             <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/account.png">

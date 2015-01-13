@@ -6,10 +6,11 @@
         var result_arr = [];
         var services = Array();
         var town_code = '<?php echo $towncode == "" ? "london_" : $towncode ?>';
-        var another_town = '<?php echo $another_town ?>';
         if (town_code != "london_") {
             services = <?php echo json_encode($services); ?>;
         }
+        var numof_services = services.length;
+        var another_town = '<?php echo $another_town ?>';
         var townLat;
         var townLon;
         var geocoder = new google.maps.Geocoder();
@@ -22,7 +23,7 @@
                 {
                     $("#services_displayer").append('<span style="color: limegreen">Services near: ' + '<?php echo $selected_services; ?></span>');
                 }
-                $.each(services, function(serviceId, service) {
+                $.each(services, function(index, service) {
                     geocoder.geocode({'address': service.post_code}, function(results, status) {
                         if (status == google.maps.GeocoderStatus.OK)
                         {
@@ -33,10 +34,14 @@
                             hi = hi / 1.61;
                             
                             var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.post_code + "," + service.city + "<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
-                            $("#services_displayer").append(service_text);
-                            result_arr.push(service_text, hi);
-                            alert(hi);
-                            alert(result_arr[1][1]);
+//                            $("#services_displayer").append(service_text);
+                            result_arr.push([ [service_text],[hi] ]);
+                            if( numof_services == (index+1) ){
+                                result_arr.sort(function(a, b){return a[1]-b[1]});
+                                $.each(result_arr, function(index, service_text){
+                                    $("#services_displayer").append(service_text[0]);
+                                });
+                            }
                         }
                     });
                 });
@@ -44,8 +49,7 @@
         });
         var map_canvas = document.getElementById('map_canvas');
         geocoder.geocode({'address': another_town}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK)
-            {
+            if (status == google.maps.GeocoderStatus.OK){
                 //map.setCenter(results[0].geometry.location);
                 var latitude = results[0].geometry.location.lat();
                 var longitude = results[0].geometry.location.lng();
@@ -56,12 +60,9 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 }
                 var map = new google.maps.Map(map_canvas, map_options);
-
                 var serv;
-                if (town_code != "london_")
-                {
-                    for (var x = 0; x < services.length; x++)
-                    {
+                if (town_code != "london_"){
+                    for (var x = 0; x < services.length; x++){
                         $.ajax({
                             url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + services[x]['address'] + '&sensor=false',
                             dataType: 'json',
@@ -111,8 +112,7 @@
 //                    alert(key);
 //                });
             }
-            else
-            {
+            else{
                 alert("Location is not found");
             }
         }

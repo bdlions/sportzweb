@@ -6,6 +6,18 @@
             buttonImageOnly: true,
             buttonText: "Select date"
         });
+        $("#st_date").datepicker({
+            showOn: "button",
+            buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
+            buttonImageOnly: true,
+            buttonText: "Select date"
+        });
+        $("#fin_date").datepicker({
+            showOn: "button",
+            buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
+            buttonImageOnly: true,
+            buttonText: "Select date"
+        });
     });
 </script>
 
@@ -38,38 +50,52 @@
                         <div class="col-md-3 control-div">Client:</div>
                         <div class="col-md-7">
                             <select class="form-control">
+                                <optgroup label="Clients">
+                                    <?php foreach ($client_list as $client_info): ?>
+                                        <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
+                                    <?php endforeach; ?>
+                                        
+                                </optgroup>
+                                <optgroup label="Groups">
+                                    <?php foreach ($group_list as $group_info): ?>
+                                    <option value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                <?php endforeach; ?>
+                                </optgroup>
+                                </select>
+<!--                            <select class="form-control">
                                 <?php foreach ($client_list as $client_info): ?>
                                     <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
                                 <?php endforeach; ?>
-                            </select>
+                            </select>-->
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Start:</div>
                         <div class="col-md-7">
-                            <select class="form-control">
-                                <option>
-                                    start
-                                </option>
-                            </select>
+                            <input id="st_date" style="margin-right: 5px;">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Finish:</div>
                         <div class="col-md-7">
-                            <select class="form-control">
-                                <option>
-                                    finish
-                                </option>
-                            </select>
+                            <input id="fin_date" style="margin-right: 5px;">
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Type:</div>
+                        <div class="col-md-3 control-div">Session:</div>
                         <div class="col-md-7">
                             <select class="form-control">
                                 <option>
-                                    type
+                                    Prepaid
+                                </option>
+                                <option>
+                                    Paid
+                                </option>
+                                <option>
+                                    Unpaid
+                                </option>
+                                <option>
+                                    Cancelled
                                 </option>
                             </select>
                         </div>
