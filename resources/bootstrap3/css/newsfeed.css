@@ -424,7 +424,8 @@ float: left;
 
 .member-name{
     font-size: 18px;
-    line-height: 30px;
+    line-height: 18px;
+    padding: 10px 0 8px 0;
 }
 
 .modal_liked_user_list_image{

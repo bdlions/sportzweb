@@ -46,21 +46,22 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-md-3 control-div">Client and Group</div>
+                            <div class="col-md-3 control-div">Group and Client</div>
                             <div class="col-md-4">
                                 <select class="form-control">
-                                    <optgroup label="Clients">
+                                <optgroup label="Groups">
+                                    <option>Group- Alpha</option>
+                                    <?php foreach ($group_list as $group_info): ?>
+                                    <option value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                <?php endforeach; ?>
+                                </optgroup>
+                                <optgroup label="Clients">
+                                    <option>Shem Haye</option>
                                     <?php foreach ($client_list as $client_info): ?>
                                         <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
                                     <?php endforeach; ?>
-                                        
-                                    </optgroup>
-                                    <optgroup label="Groups">
-                                        <?php foreach ($group_list as $group_info): ?>
-                                        <option value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
-                                    <?php endforeach; ?>
-                                    </optgroup>
-                                </select>
+                                </optgroup>
+                            </select>
                             </div>
                         </div>
 <!--                        <div class="row form-group">

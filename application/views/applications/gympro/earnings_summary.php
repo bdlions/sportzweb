@@ -47,21 +47,22 @@
                 </div>
                 <div class="col-md-4">
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Client:</div>
+                        <div class="col-md-4" style="padding-right: 0">Group and Client:</div>
                         <div class="col-md-7">
                             <select class="form-control">
-                                <optgroup label="Clients">
-                                    <?php foreach ($client_list as $client_info): ?>
-                                        <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
-                                    <?php endforeach; ?>
-                                        
-                                </optgroup>
                                 <optgroup label="Groups">
+                                    <option>Group- Alpha</option>
                                     <?php foreach ($group_list as $group_info): ?>
                                     <option value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
                                 <?php endforeach; ?>
                                 </optgroup>
-                                </select>
+                                <optgroup label="Clients">
+                                    <option>Shem Haye</option>
+                                    <?php foreach ($client_list as $client_info): ?>
+                                        <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            </select>
 <!--                            <select class="form-control">
                                 <?php foreach ($client_list as $client_info): ?>
                                     <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
@@ -70,19 +71,19 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Start:</div>
+                        <div class="col-md-4 control-div">Start:</div>
                         <div class="col-md-7">
                             <input id="st_date" style="margin-right: 5px;">
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Finish:</div>
+                        <div class="col-md-4 control-div">Finish:</div>
                         <div class="col-md-7">
                             <input id="fin_date" style="margin-right: 5px;">
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Session:</div>
+                        <div class="col-md-4 control-div">Session:</div>
                         <div class="col-md-7">
                             <select class="form-control">
                                 <option>
@@ -293,6 +294,12 @@
                 </div>
             </div>
         </div>
+        <div class="row form-group"></div>
+            <div class="row form-group"></div>
+            <div class="row form-group"></div>
+            <div class="row form-group"></div>
+            <div class="row form-group"></div>
+            <div class="row form-group"></div>
     </div>
 </div>
 <?php

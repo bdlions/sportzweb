@@ -2,7 +2,7 @@
     <div class="col-md-9">
         <a href='<?php echo base_url() . "member_profile/show/{$basic_profile->id}" ?>' class="profile-name"> 
             <div>
-                <img height="100" width="100" alt="<?php echo $basic_profile->first_name[0] . $basic_profile->last_name[0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_PATH_W100_H100 . $basic_profile->photo ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('span')[0].style.display='block'; " /> 
+                <img alt="<?php echo $basic_profile->first_name[0] . $basic_profile->last_name[0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_PATH_W100_H100 . $basic_profile->photo ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('span')[0].style.display='block'; " /> 
                 <span style="display: none"><?php echo $basic_profile->first_name[0] . $basic_profile->last_name[0] ?></span>
             </div>
             <div class="member-name"><?php echo $basic_profile->first_name . " " . $basic_profile->last_name ?></div>

@@ -34,9 +34,6 @@
                 <div class="col-md-2">
                     <a href="<?php echo base_url() ?>applications/gympro/create_session"><button class="btn button-custom btn_gympro">New Session</button></a>
                 </div>
-                <div class="col-md-2">
-                    <a href="<?php echo base_url() ?>applications/gympro/earnings_summary"><button class="btn button-custom btn_gympro">Earnings Summery</button></a>
-                </div>
             </div>
             <div class="row form-group">
                 <div class="col-md-12">
