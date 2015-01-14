@@ -42,14 +42,26 @@ class Admin_photography_model extends Ion_auth_model
         return true;
     }
     
+    /*
+     * This method will delete photo
+     * @param $image_id, photo id
+     * @Author Nazmul on 14th January 2015
+     */
     public function delete_image($image_id)
     {
-        $this->db->where($this->tables['photography'].'.id',$image_id);
+        if(!isset($image_id) || $image_id <= 0)
+        {
+            $this->set_error('delete_photo_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $image_id);
         $this->db->delete($this->tables['photography']);
         
         if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_photo_fail');
             return FALSE;
         }
+        $this->set_message('delete_photo_successful');
         return TRUE;
     }
 }
