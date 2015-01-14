@@ -123,6 +123,7 @@ class Healthy_recipes extends Role_Controller{
     {
         $recipe_item = array();
         $recipe_and_recommend_desserts_item = $this->healthy_recipes_library->get_recipe_item($recipe_id);
+        if (empty($recipe_and_recommend_desserts_item)) redirect('applications/healthy_recipes', 'refresh');
         $recipe_comments_array = $this->healthy_recipes_library->get_all_comments($recipe_id,NEWEST_FIRST,DEFAULT_VIEW_PER_PAGE);
         $this->data['comments'] = $recipe_comments_array;
         if(array_key_exists('recipe_item', $recipe_and_recommend_desserts_item)) {

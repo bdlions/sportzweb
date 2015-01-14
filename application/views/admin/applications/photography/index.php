@@ -90,7 +90,7 @@
                     <a id="edit_current_image" href="<?php echo base_url().'admin/applications_photography/edit_image/'.$image_list[0]['id']; ?>">Edit</a> &nbsp;&nbsp;| &nbsp;&nbsp;
                     <?php } ?>
                     <?php if($allow_delete){ ?>
-                    <a onclick="open_modal_delete_confirm(<?php echo $image_list[0]['id']; ?>)">Delete</a>
+                    <a onclick="open_modal_photo_delete_confirm(<?php echo $image_list[0]['id']; ?>)">Delete</a>
                     <!--<a id="delete_current_image" href="<?php echo base_url() . 'admin/applications_photography/delete_image/'.$image_list[0]['id']; ?>">Delete</a>-->
                     <?php } ?>
                 <?php endif; ?>

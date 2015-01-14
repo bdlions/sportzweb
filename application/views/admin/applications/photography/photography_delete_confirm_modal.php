@@ -4,24 +4,25 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "applications/photography/delete_image",
+                url: '<?php echo base_url(); ?>' + "admin/applications_photography/delete_image",
                 data: {
-                    exercise_id: $("#input_photography_id").val()
+                    image_id: $("#input_photography_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
-                    $("#modal_delete_confirm").modal('hide');
+                    console.log(data);
+                    alert(data.message);
+                    $("#modal_photo_delete_confirm").modal('hide');
                     window.location.reload();
                 }
             });
         });
     });
-    function open_modal_delete_confirm(image_list) {
-        $('#input_photography_id').val(image_list);
-        $("#modal_delete_confirm").modal('show');
+    function open_modal_photo_delete_confirm(image_id) {
+        $('#input_photography_id').val(image_id);
+        $("#modal_photo_delete_confirm").modal('show');
     }
 </script>
-<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_photo_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

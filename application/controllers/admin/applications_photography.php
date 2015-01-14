@@ -270,25 +270,19 @@ class Applications_photography extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/photography/edit_image", $this->data);
     }
     
-    public function delete_image($image_id)
+    public function delete_image()
     {
-        if(empty($image_id)) {
-            redirect("admin/applications_photography", "refresh");
-        }
-        
-        $image_info = array();
-        $image_info_array = $this->admin_photography->get_image_info($image_id)->result_array();
-
-        if(!empty($image_info_array))
+        $result = array();
+        $image_id = $this->input->post('image_id');
+        if($this->admin_photography->delete_image($image_id))
         {
-            $image_info = $image_info_array[0];
+            $result['message'] = $this->admin_photography->messages_alert();
         }
-        $id = $this->admin_photography->delete_image($image_id);
-        if($id !== FALSE)
+        else
         {
-           $this->utils->delete_image(PHOTOGRAPHY_IMAGE_PATH.$image_info['img']);           
+            $result['message'] = $this->admin_photography->errors_alert();
         }
-        redirect("admin/applications_photography", "refresh");
+        echo json_encode($result);
     }
 }
 

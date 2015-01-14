@@ -335,3 +335,10 @@ $lang['update_mission_successful']                     = "Mission updated succes
 $lang['update_mission_fail']                           = "Failed to update mission info.";
 $lang['delete_mission_successful']                     = "Mission deleted successfully.";
 $lang['delete_mission_fail']                           = "Failed to delete mission info.";
+
+$lang['create_photo_successful']                     = "Photo Uploaded successfully.";
+$lang['create_photo_fail']                           = "Failed to create a photo.";
+$lang['update_photo_successful']                     = "Photo updated successfully.";
+$lang['update_photo_fail']                           = "Failed to update photo info.";
+$lang['delete_photo_successful']                     = "Photo deleted successfully.";
+$lang['delete_photo_fail']                           = "Failed to delete photo.";
