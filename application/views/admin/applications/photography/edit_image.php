@@ -1,5 +1,18 @@
 <script>
+    
     $(function() {
+            var url = "<?php echo base_url() . 'admin/applications_photography/edit_image/' . $image_id;?>",
+                    uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
+                    on('click', function () {
+                        var $this = $(this), data = $this.data();
+                        $this.off('click').text('Abort').on('click', function () {
+                            $this.remove();
+                            data.abort();
+                        });
+                        data.submit().always(function () {
+                            $this.remove();
+                        });
+                    });
         $('#fileupload').fileupload({
             url: url,
             dataType: 'json',
@@ -56,8 +69,6 @@
                 .parent().addClass($.support.fileInput ? undefined : 'disabled');
 
     });
-    }
-
 </script>
 
 <div class="col-md-10" style="background-color: #F5F5F5">
@@ -66,11 +77,15 @@
             <div class="panel-heading">Edit Configuration</div>
             <div class ="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-9" style="padding-top: 10px;"><?php echo isset($message)? $message:""; ?></div>
+                <div class="col-md-6" style="padding-top: 10px;">
+                    <?php if (isset($message) && ($message != NULL)): ?>
+                        <div class="alert alert-info alert-dismissible"><?php echo $message; ?></div>
+                    <?php endif; ?>
+                </div>
             </div>
             <div class="panel-body">
                 <div class="row form-horizontal form-background top-bottom-padding">  
-                    <?php echo form_open("admin/applications_photography/edit_image/".$image_id, array('id' => 'form_edit_image', 'class' => 'form-horizontal'))?>
+                    <?php echo form_open("admin/applications_photography/", array('id' => 'form_edit_image', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
                     <div class="row">
                         <div class ="col-md-10 margin-top-bottom">                            
                             <div class="form-group">

@@ -1005,6 +1005,10 @@ class Applications_healthyrecipes extends CI_Controller{
         $recipe_item = array();
         $recipe_and_recommend_desserts_item = $this->admin_healthy_recipes->get_recipe_item($recipe_id);
         
+        if(empty($recipe_and_recommend_desserts_item)){
+            redirect("admin/healthyrecipes", "refresh");
+        }
+        
         $comments = $this->admin_healthy_recipes->get_all_comments($recipe_id,NEWEST_FIRST)->result_array();
         $temp_array = array();
         $i=0;

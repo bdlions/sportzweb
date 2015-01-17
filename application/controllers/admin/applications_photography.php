@@ -193,36 +193,46 @@ class Applications_photography extends CI_Controller{
     public function edit_image($image_id)
     {
         $this->data['message'] = '';
-        if(!$image_id) {
-            redirect("admin/applications_photography", "refresh");
-        }
-        if($this->input->post('btnEditImage'))
-        {
-            $additional_data = array(
-                'text1' => $this->input->post('text1'),
-                'text2' => $this->input->post('text2'),
-                'text3' => $this->input->post('text3'),
-                'text4' => $this->input->post('text4'),
-                'text5' => $this->input->post('text5'),
-                'text6' => $this->input->post('text6')
-            );
-            $id = $this->admin_photography->update_image($image_id, $additional_data);
-            
-            if($id !== FALSE)
-            {
-                $this->data['message'] = 'Successfully Updated';
-            }
-            else
-            {
-                $this->data['message'] = 'Error while updating information. Try again.';
-            }
-        }
         $image_info = array();
         $image_info_array = $this->admin_photography->get_image_info($image_id)->result_array();
-        if(!empty($image_info_array))
-        {
-            $image_info = $image_info_array[0];
+        if(!$image_id || empty($image_info_array)) {
+            redirect("admin/applications_photography", "refresh");
         }
+        $image_info = $image_info_array[0];
+        if($this->input->post())
+        {
+            $result = array();
+            if (isset($_FILES["userfile"])) {
+                $file_info = $_FILES["userfile"];
+                $result = $this->utils->upload_image($file_info, PHOTOGRAPHY_IMAGE_PATH);
+                if ($result['status'] == 1) {
+                    $path = PHOTOGRAPHY_IMAGE_PATH . $result['upload_data']['file_name'];
+                    $this->utils->resize_image($path, $path, PHOTOGRAPHY_IMAGE_HEIGHT, PHOTOGRAPHY_IMAGE_WIDTH);
+
+                    $additional_data = array(
+                        'img' => $result['upload_data']['file_name'],
+                        'text1' => $this->input->post('text1'),
+                        'text2' => $this->input->post('text2'),
+                        'text3' => $this->input->post('text3'),
+                        'text4' => $this->input->post('text4'),
+                        'text5' => $this->input->post('text5'),
+                        'text6' => $this->input->post('text6')
+                    );
+                    $id = $this->admin_photography->update_image($image_id, $additional_data);
+                    if ($id !== FALSE) {
+                        $result['message'] = 'Image is Updated successfully.';
+                    } else {
+                        $result['message'] = 'Error while storing Image.';
+                    }
+                }
+            } else{
+                $result['status'] = 0;
+                $result['message'] = 'Please select an image.';
+            }
+            echo json_encode($result);
+            return;
+        }
+        
         $this->data['text1'] = array('name' => 'text1',
             'id' => 'text1',
             'type' => 'text',
