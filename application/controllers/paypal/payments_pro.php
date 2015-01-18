@@ -33,7 +33,8 @@ class Payments_pro extends CI_Controller {
     }
 
     function index() {
-        $this->load->view('payments_pro_demo');
+        $this->template->load(NULL,'paypal/payments_page' );
+        //$this->load->view();
     }
 
     function Do_capture() {
@@ -438,7 +439,10 @@ class Payments_pro extends CI_Controller {
         } else {
             // Successful call.  Load view or whatever you need to do here.
             $data = array('PayPalResult' => $PayPalResult);
-            $this->load->view('do_direct_payment_demo', $data);
+//            $this->load->view('paypal/do_direct_payment_demo', $data);
+            $data['messg'] = "Payment Successfull.";
+//            $this->load->view('paypal/payments_page', $messg);
+            $this->template->load(NULL,'paypal/payments_page', $data );
         }
     }
 
@@ -960,7 +964,7 @@ class Payments_pro extends CI_Controller {
         } else {
             // Successful call.  Load view or whatever you need to do here.
             $data = array('PayPalResult' => $PayPalResult);
-            $this->load->view('get_balance', $data);
+            $this->load->view('paypal/get_balance', $data);
         }
     }
 
