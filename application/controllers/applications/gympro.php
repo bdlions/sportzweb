@@ -2711,7 +2711,12 @@ class Gympro extends Role_Controller{
     //-----------------------------------------Earnings Module------------------------------------//
     public function earnings()
     {
-        $this->data['message'] = '';        
+        $this->data['message'] = '';  
+        $json = file_get_contents(base_url() . 'resources/sample_json/full_calendar_events.json');
+        $input_arrays = json_decode($json, true);
+
+        $this->data['events'] = json_encode($input_arrays);
+        //$this->template->load(NULL, "calendar", $this->data);
         $this->template->load(null,'applications/gympro/earnings', $this->data);
     }
     public function create_session()
