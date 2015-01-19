@@ -22,7 +22,7 @@ class Test_calendar extends CI_Controller {
         $input_arrays = json_decode($json, true);
 
         $this->data['events'] = json_encode($input_arrays);
-        $this->template->load(NULL, "calendar", $this->data);
+        $this->template->load("templates/profile_setting_tmpl", "calendar", $this->data);
     }
 
 }

@@ -1,14 +1,7 @@
-<div class="container-fluid">
-    <form class="form-horizontal"> </form>
+<div class ="form-horizontal">
+    <?php echo form_open("paypal/payments_pro/Do_direct_payment_demo", array('id' => 'form_create_shop', 'class' => 'form-horizontal')); ?>
     <div class="row">
-        <div class="col-sm-12">
-            <div class="row form-group">
-                <div class="col-sm-4">
-                    <?php if (isset($messg) && ($messg != NULL)): ?>
-                        <div class="alert alert-danger alert-dismissible"><?php echo $messg; ?></div>
-                    <?php endif; ?>
-                </div>
-            </div>
+        
             <div class="row form-group">
                 <div class="col-sm-4">
                     <label>Payment Type:</label>
@@ -16,7 +9,7 @@
                         <option>Credit / Debit Card</option>
                     </select>
                 </div>
-            </div>
+            </div>   
             <div class="row form-group">
                 <div class="col-sm-4">
                     <label>Card Number:</label>
@@ -78,14 +71,15 @@
             <div class="row form-group">
                 <div class="col-sm-4">
                     <label>Amount:</label>
-                    <input class="form-control">
+                    <input name="amount" class="form-control">
                 </div>
             </div>
-        </div>
+            <div class="row form-group">
+                <div class="col-sm-4">
+                    <input type="submit" class="btn btn-success" value="Submit">
+                </div>
+            </div>
+        
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <a href="<?php echo base_url(); ?>paypal/payments_pro/Do_direct_payment_demo"><button>Payments</button></a>
-        </div>
-    </div>
+    <?php echo form_close(); ?>
 </div>

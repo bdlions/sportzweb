@@ -33,7 +33,7 @@ class Payments_pro extends CI_Controller {
     }
 
     function index() {
-        $this->template->load(NULL,'paypal/payments_page' );
+        $this->template->load("templates/profile_setting_tmpl",'paypal/payments_page' );
         //$this->load->view();
     }
 
@@ -332,6 +332,7 @@ class Payments_pro extends CI_Controller {
     }
 
     function Do_direct_payment_demo() {
+        $amount = $this->input->post('amount');
         $DPFields = array(
             'paymentaction' => 'Sale', // How you want to obtain payment.  Authorization indidicates the payment is a basic auth subject to settlement with Auth & Capture.  Sale indicates that this is a final sale for which you are requesting payment.  Default is Sale.
             'ipaddress' => $_SERVER['REMOTE_ADDR'], // Required.  IP address of the payer's browser.
@@ -384,9 +385,10 @@ class Payments_pro extends CI_Controller {
         );
 
         $PaymentDetails = array(
-            'amt' => '100.00', // Required.  Total amount of order, including shipping, handling, and tax.  
+            //'amt' => '100.00', // Required.  Total amount of order, including shipping, handling, and tax.  
+            'amt' => $amount, // Required.  Total amount of order, including shipping, handling, and tax.  
             'currencycode' => 'USD', // Required.  Three-letter currency code.  Default is USD.
-            'itemamt' => '95.00', // Required if you include itemized cart details. (L_AMTn, etc.)  Subtotal of items not including S&H, or tax.
+            'itemamt' => ($amount-5), // Required if you include itemized cart details. (L_AMTn, etc.)  Subtotal of items not including S&H, or tax.
             'shippingamt' => '5.00', // Total shipping costs for the order.  If you specify shippingamt, you must also specify itemamt.
             'shipdiscamt' => '', // Shipping discount for the order, specified as a negative number.  
             'handlingamt' => '', // Total handling costs for the order.  If you specify handlingamt, you must also specify itemamt.
@@ -442,7 +444,7 @@ class Payments_pro extends CI_Controller {
 //            $this->load->view('paypal/do_direct_payment_demo', $data);
             $data['messg'] = "Payment Successfull.";
 //            $this->load->view('paypal/payments_page', $messg);
-            $this->template->load(NULL,'paypal/payments_page', $data );
+            $this->template->load("templates/profile_setting_tmpl",'paypal/message', $data );
         }
     }
 
@@ -612,7 +614,7 @@ class Payments_pro extends CI_Controller {
             $this->load->view('paypal_error', $errors);
         } else {
             // Successful call.  Load view or whatever you need to do here.	
-        }
+        }        
     }
 
     function Get_express_checkout_details($token) {
@@ -964,7 +966,7 @@ class Payments_pro extends CI_Controller {
         } else {
             // Successful call.  Load view or whatever you need to do here.
             $data = array('PayPalResult' => $PayPalResult);
-            $this->load->view('paypal/get_balance', $data);
+            $this->template->load("templates/profile_setting_tmpl",'paypal/get_balance', $data);
         }
     }
 
