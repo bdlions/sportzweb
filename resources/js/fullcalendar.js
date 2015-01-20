@@ -446,7 +446,7 @@
             var newHeight = minOffset - (naturalOffset - naturalHeight); // subtract the margin/padding
 
             if (naturalOffset < minOffset) { // we check this again because redistribution might have changed things
-                $(el).height(newHeight - 60);
+                $(el).height(newHeight);
             }
         });
     }

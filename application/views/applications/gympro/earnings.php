@@ -36,7 +36,11 @@
             editable: true,
             eventLimit: true, // allow "more" link when too many events
             events: JSON.parse('<?php echo $events ?>'),
-            firstDay: 0,
+            firstDay: 1,
+            selectable: true,
+            selectHelper: true,
+            slotMinutes: 60,
+            aspectRatio: 2.5,
             eventClick: function(event, jsEvent, view) {
                 $('#modalTitle').html(event.title);
                 $('#modalBody').html(event.description);
