@@ -101,7 +101,7 @@
                                 <td><div id="news_title_<?php echo $category['id'];?>"><?php echo $category['title'];?></div></td>
                                 <?php if($allow_edit){ ?>
                                 <td>                                   
-                                    <button id="button_edit_news_category_<?php echo $category['id'];?>" onclick="openModal('button_edit_news_category_<?php echo $category["id"];?>','<?php echo $category['id'];?>')" value="" class="form-control btn pull-right">
+                                    <button id="button_edit_news_category_<?php echo $category['id'];?>" onclick="openModal('<?php echo $category['id'];?>')" value="" class="form-control btn pull-right">
                                         Edit
                                     </button>                                    
                                 </td>

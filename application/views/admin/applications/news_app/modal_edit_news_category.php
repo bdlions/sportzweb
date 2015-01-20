@@ -17,11 +17,12 @@
                 },
                 success: function(data) {
                     alert(data['message']);
-                    if (data['status'] === 1)
-                    {
-                        $("#news_title_" + data['news_category_info']['id']).text(data['news_category_info']['title']);
-                        $("#modal_edit_news_category").modal('hide');
-                    }
+                    window.location.reload();
+//                    if (data['status'] === 1)
+//                    {
+//                        $("#news_title_" + data['news_category_info']['id']).text(data['news_category_info']['title']);
+//                        $("#modal_edit_news_category").modal('hide');
+//                    }
                 }
             });
         });
@@ -29,7 +30,7 @@
 </script>
 <!-- Written by Omar -->
 <script type="text/javascript">
-function openModal(val,id) {
+function openModal(id) {
     $.ajax({
         dataType: 'json',
         type: "POST",

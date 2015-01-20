@@ -134,20 +134,19 @@ class Applications_news extends CI_Controller{
     public function get_news_data()
     {
         $response = array();
-        $news_category_id = $_POST['news_category_id'];
+        $news_category_id = $this->input->post('news_category_id');
         
-        $news_category_array = $this->admin_news->get_news_category_info($news_category_id);
+        $news_category_array = $this->admin_news->get_news_category_info($news_category_id)->result_array();
         if(!empty($news_category_array))
         {
-            $response = $news_category_array;
+            $response = $news_category_array[0];
         }
         echo json_encode($response);
     }
     
     //Ajax call for create recipe category
     //Written by Omar Faruk
-    function edit_news_category()
-    {
+    function edit_news_category() {
         $response = array();
         $news_category_id = $_POST['news_category_id'];
         $news_category_name = $_POST['news_category_name'];
@@ -156,24 +155,20 @@ class Applications_news extends CI_Controller{
             'application_id' => APPLICATION_NEWS_APP_ID
         );
         $id = $this->admin_news->update_news_category($news_category_id, $additional_data);
-        if($id !== FALSE)
-        {
+        if ($id !== FALSE) {
             $response['status'] = 1;
             $response['message'] = 'News Category is Update successfully.';
-            $news_category_info_array = $this->admin_news->get_news_category_info($news_category_id);
-            if(!empty($news_category_info_array))
-            {
-                $response['news_category_info'] = $news_category_info_array;
-            }             
-        }
-        else
-        {
+//            $news_category_info_array = $this->admin_news->get_news_category_info($news_category_id);
+//            if (!empty($news_category_info_array)) {
+//                $response['news_category_info'] = $news_category_info_array;
+//            }
+        } else {
             $response['status'] = 0;
             $response['message'] = $this->admin_healthy_recipes->errors_alert();
         }
         echo json_encode($response);
     }
-    
+
     function news_sub_category($sub_category_id)
     {
         $this->data['message'] = '';
