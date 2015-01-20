@@ -142,6 +142,9 @@
                             </li>
                             <li id="log">
                                 <a href="<?php echo base_url()?>admin/log_view">Log</a>
+                                <ul>
+                                    <li id="log_login_attempt"><a href="<?php echo base_url()?>admin/login_attempt">Login Attempts</a></li>                                    
+                                </ul>
                             </li>
                             <li id="manage">
                                 <a href="#">Access</a>
