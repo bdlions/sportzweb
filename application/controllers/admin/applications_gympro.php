@@ -1155,8 +1155,61 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    
-    
+    // -------------------------------- Session Module ----------------------------//
+    /*
+     * This method will show session home page of admin panel
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function manage_sessions()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/session/index", $this->data);
+    }
+    /*
+     * This method will show session repeat list
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function session_repeat_list()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/session/repeat_list", $this->data);
+    }
+    /*
+     * This method will show session type list
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function session_type_list()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/session/type_list", $this->data);
+    }
+    /*
+     * This method will show session time list
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function session_time_list()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/session/time_list", $this->data);
+    }
+    /*
+     * This method will show session cost list
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function session_cost_list()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/session/cost_list", $this->data);
+    }
+    /*
+     * This method will show session status list
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function session_status_list()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/applications/gympro/session/status_list", $this->data);
+    }
     
     
     

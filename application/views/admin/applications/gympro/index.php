@@ -18,7 +18,10 @@
             </div>
             <div class ="col-md-2">
                 <a href="<?php echo base_url()?>admin/applications_gympro/manage_nutritions"><button class="form-control btn button-custom">Nutrition</button></a>
-            </div>            
+            </div>
+            <div class ="col-md-2">
+                <a href="<?php echo base_url()?>admin/applications_gympro/manage_sessions"><button class="form-control btn button-custom">Session</button></a>
+            </div>
         </div>
     </div>
 </div>

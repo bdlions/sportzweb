@@ -1626,6 +1626,49 @@ class Admin_gympro_model extends Ion_auth_model
         $this->set_message('update_workouts_successful');
         return TRUE;
     }
+    
+    // -----------------------------------Session Module ---------------------------------------//
+    /*
+     * This method will return all sesssion times
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_times()
+    {
+        
+    }
+    /*
+     * This method will return all sesssion types
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_types()
+    {
+        
+    }
+    /*
+     * This method will return all sesssion repeats
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_repeats()
+    {
+        
+    }
+    /*
+     * This method will return all sesssion costs
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_costs()
+    {
+        
+    }
+    /*
+     * This method will return all sesssion statuses
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_statuses()
+    {
+        
+    } 
+    
 ////    ======================== ACCOUNT TYPE ========================
 //    
 //    
