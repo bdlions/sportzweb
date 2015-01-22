@@ -180,6 +180,12 @@ $config['tables']['app_gympro_nutritions_clients']          = 'app_gympro_nutrit
 $config['tables']['app_gympro_missions']                    = 'app_gympro_missions';
 $config['tables']['app_gympro_missions_groups']             = 'app_gympro_missions_groups';
 $config['tables']['app_gympro_missions_clients']            = 'app_gympro_missions_clients';
+$config['tables']['app_gympro_session_repeats']             = 'app_gympro_session_repeats';
+$config['tables']['app_gympro_session_types']               = 'app_gympro_session_types';
+$config['tables']['app_gympro_session_times']               = 'app_gympro_session_times';
+$config['tables']['app_gympro_session_costs']               = 'app_gympro_session_costs';
+$config['tables']['app_gympro_session_statuses']            = 'app_gympro_session_statuses';
+$config['tables']['app_gympro_sessions']                    = 'app_gympro_sessions';
 
 
 

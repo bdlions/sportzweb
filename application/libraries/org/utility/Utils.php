@@ -5,21 +5,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Name:  Ion Auth
- *
- * Author: Ben Edmunds
- * 		  ben.edmunds@gmail.com
- *         @benedmunds
- *
- * Added Awesomeness: Phil Sturgeon
- *
- * Location: http://github.com/benedmunds/CodeIgniter-Ion-Auth
- *
- * Created:  10.01.2009
- *
- * Description:  Modified auth system based on redux_auth with extensive customization.  This is basically what Redux Auth 2 should be.
- * Original Author name has been kept but that does not mean that the method has not been modified.
- *
+ * Name:  Utils
  * Requirements: PHP5 or above
  *
  */
@@ -54,6 +40,12 @@ class Utils {
         return get_instance()->$var;
     }
     
+    /*
+     * This method will return human time of a unix time
+     * @param $unix_time, unix time
+     * @param $user_info, user info
+     * @Author Nazmul on 22nd January 2015
+     */
     public function get_unix_to_human_local($unix_time, $user_info = array())
     {
         if(empty($user_info))

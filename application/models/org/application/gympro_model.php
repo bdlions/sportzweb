@@ -1072,5 +1072,87 @@ class Gympro_model extends Ion_auth_model {
         }
         $this->set_message('delete_mission_successful');
         return TRUE;
-    }   
+    }  
+    
+    // ----------------------------------- Session Module --------------------------------//
+    /*
+     * This method will return all sesssion times
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_times()
+    {
+        
+    }
+    /*
+     * This method will return all sesssion types
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_types()
+    {
+        
+    }
+    /*
+     * This method will return all sesssion repeats
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_repeats()
+    {
+        
+    }
+    /*
+     * This method will return all sesssion costs
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_costs()
+    {
+        
+    }
+    /*
+     * This method will return all sesssion statuses
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_all_session_statuses()
+    {
+        
+    }
+    /*
+     * This method will create a session
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function create_session()
+    {
+        
+    }
+    /*
+     * This method will update a session
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function update_session()
+    {
+        
+    }
+    /*
+     * This method will return sessions
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function get_sessions()
+    {
+        
+    }
+    /*
+     * This method will update sessions
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function upddate_sessions()
+    {
+        
+    }
+    /*
+     * This method will delete a session
+     * @Author Nazmul on 22nd January 2015
+     */
+    public function delete_session($session_id)
+    {
+        
+    }
 }

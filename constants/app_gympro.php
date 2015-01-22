@@ -26,3 +26,7 @@ define("EXERCISE_IMAGES_PICTURE_H50",                        "50");
 define("CLIENT_STATUS_ACTIVE_ID",                           "1");
 define("CLIENT_STATUS_INACTIVE_ID",                         "2");
 define("CLIENT_STATUS_POTENTIAL_ID",                        "3");
+
+//Sesstion
+define("SESSION_CREATED_FOR_GROUP_TYPE_ID",                  1);
+define("SESSION_CREATED_FOR_CLIENT_TYPE_ID",                 2);

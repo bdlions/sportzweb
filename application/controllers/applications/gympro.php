@@ -2709,7 +2709,7 @@ class Gympro extends Role_Controller{
         echo json_encode($result);
     }
     //-----------------------------------------Earnings Module------------------------------------//
-    public function earnings()
+    public function schedule()
     {
         $this->data['message'] = '';  
         $json = file_get_contents(base_url() . 'resources/sample_json/full_calendar_events.json');
@@ -2717,7 +2717,7 @@ class Gympro extends Role_Controller{
 
         $this->data['events'] = json_encode($input_arrays);
         //$this->template->load(NULL, "calendar", $this->data);
-        $this->template->load(null,'applications/gympro/earnings', $this->data);
+        $this->template->load(null,'applications/gympro/schedules', $this->data);
     }
     public function create_session()
     {
