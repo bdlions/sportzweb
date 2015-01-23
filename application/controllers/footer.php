@@ -1,17 +1,11 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 class Footer extends CI_Controller {
-
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
-        $this->load->library('follower');
-        $this->load->library('likes');
-        $this->load->library('shares');
         $this->load->library("org/utility/utils");
         $this->load->library("org/footer/about_us");
         $this->load->library("org/footer/contact_us_library");
@@ -30,7 +24,7 @@ class Footer extends CI_Controller {
     }
 
     public function index() {
-        die('here');
+        //add your logic if required
     }
     
     public function about_us() {
@@ -218,6 +212,10 @@ class Footer extends CI_Controller {
         }
     }
     
+    /*
+     * This method will forward non member feed back to the admin
+     * @Author Nazmul on 23rd January 2015
+     */
     public function contact_us()
     {
         $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
@@ -231,7 +229,7 @@ class Footer extends CI_Controller {
         {
             if ($this->form_validation->run() == true) 
             {
-                $additional_data = array(
+                /*$additional_data = array(
                     'topic_id' => $this->input->post('topic_list'),
                     'os_id' => $this->input->post('os_list'),
                     'browser_id' => $this->input->post('browser_list'),
@@ -241,7 +239,7 @@ class Footer extends CI_Controller {
                     'description' => $this->input->post('description'),
                     'created_on' => now()
                 );
-                $this->contact_us_library->add_feedback($additional_data);
+                $this->contact_us_library->add_feedback($additional_data);*/
                 $this->session->set_flashdata('message', 'Your message is sent successfully');
                 redirect('footer/contact_us', 'refresh');
             }
@@ -253,33 +251,7 @@ class Footer extends CI_Controller {
         else
         {
             $this->data['message'] = $this->session->flashdata('message');
-        }
-        
-        
-        $topic_list = array();
-        $os_list = array();
-        $browser_list = array();
-        $topic_list_array = $this->contact_us_library->get_all_topics()->result_array();
-        foreach($topic_list_array as $topic_info)
-        {
-            $topic_list[$topic_info['id']] = $topic_info['title'];
-        }
-        $this->data['topic_list'] = $topic_list;
-        
-        $os_list_array = $this->contact_us_library->get_all_operating_systems()->result_array();
-        foreach($os_list_array as $os_info)
-        {
-            $os_list[$os_info['id']] = $os_info['title'];
-        }
-        $this->data['os_list'] = $os_list;
-        
-        $browser_list_array = $this->contact_us_library->get_all_browers()->result_array();
-        foreach($browser_list_array as $browser_info)
-        {
-            $browser_list[$browser_info['id']] = $browser_info['title'];
-        }
-        $this->data['browser_list'] = $browser_list;
-        
+        }        
         $this->data['name'] = array(
             'name' => 'name',
             'id' => 'name',
@@ -311,6 +283,6 @@ class Footer extends CI_Controller {
             'type' => 'submit',
             'value' => 'Submit',
         );
-        $this->template->load("templates/contact_us_tmpl", "footer/contact_us", $this->data);
+        $this->template->load("templates/non_member_tmpl", "footer/contact_us/non_member", $this->data);
     }
 }

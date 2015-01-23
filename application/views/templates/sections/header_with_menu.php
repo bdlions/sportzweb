@@ -151,6 +151,9 @@
                                         <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>settings/applications">Application settings</a>
                                     </li>
                                     <li role="presentation">
+                                        <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>member_general/contact_us">Support</a>
+                                    </li>
+                                    <li role="presentation">
                                         <a role="menuitem" tabindex="-1" href="<?php echo base_url() ?>auth/logout">Log out</a>
                                     </li>
                                 </ul>

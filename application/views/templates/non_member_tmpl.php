@@ -48,7 +48,7 @@
         <script src="<?php echo base_url() ?>resources/js/jquery.fileupload-validate.js"></script>
     </head>
     <body>
-        <?php $this->load->view("templates/sections/contact_us");?>
+        <?php $this->load->view("templates/sections/header_with_logo");?>
         <div class="container">
             <div class="row">
                 <?php echo $contents?>

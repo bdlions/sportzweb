@@ -71,11 +71,33 @@ class Contact_us extends CI_Controller{
         }
     }
     
+    /*
+     * Thie method will load home page of contact us at admin panel
+     * @Author Nazmul on 23rd January 2015
+     */
     public function index()
     {        
         $feedback_list = $this->admin_contact_us_library->get_all_feedbacks();
         $this->data['feedback_list'] = $feedback_list;
-        $this->template->load($this->tmpl, "admin/footer/contact_us/customers_feedback", $this->data);
+        $this->template->load($this->tmpl, "admin/footer/contact_us/index", $this->data);
+    }
+    /*
+     * Thie method will load member feedback list
+     * @Author Nazmul on 23rd January 2015
+     */
+    public function member_feedback()
+    {
+        $this->data['feedback_list'] = array();
+        $this->template->load($this->tmpl, "admin/footer/contact_us/feedback_member", $this->data);
+    }
+    /*
+     * Thie method will load non member feedback list
+     * @Author Nazmul on 23rd January 2015
+     */
+    public function non_member_feedback()
+    {
+        $this->data['feedback_list'] = array();
+        $this->template->load($this->tmpl, "admin/footer/contact_us/feedback_non_member", $this->data);
     }
     
     
