@@ -1140,6 +1140,16 @@ class Gympro_model extends Ion_auth_model {
         
     }
     /*
+     * This method will return all sessions
+     * @Author Nazmul on 24th January 2015
+     */
+    public function get_all_sessions()
+    {
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_sessions'])
+                    ->get();
+    }
+    /*
      * This method will update sessions
      * @Author Nazmul on 22nd January 2015
      */

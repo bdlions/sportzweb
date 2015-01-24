@@ -2712,10 +2712,13 @@ class Gympro extends Role_Controller{
     public function schedule()
     {
         $this->data['message'] = '';  
-        $json = file_get_contents(base_url() . 'resources/sample_json/full_calendar_events.json');
-        $input_arrays = json_decode($json, true);
-
-        $this->data['events'] = json_encode($input_arrays);
+        
+        $sessions_array = $this->gympro_library->get_sessions_in_calendar();
+        
+        //$json = file_get_contents(base_url() . 'resources/sample_json/full_calendar_events.json');
+        //$input_arrays = json_decode($json, true);
+        //$this->data['events'] = json_encode($input_arrays);
+        $this->data['events'] = json_encode($sessions_array);
         //$this->template->load(NULL, "calendar", $this->data);
         $this->template->load(null,'applications/gympro/schedules', $this->data);
     }
