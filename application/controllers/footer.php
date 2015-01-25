@@ -285,4 +285,22 @@ class Footer extends CI_Controller {
         );
         $this->template->load("templates/non_member_tmpl", "footer/contact_us/non_member", $this->data);
     }
+    /*
+     * This method will load terms page
+     * @Author Nazmul on 25th January 2015
+     */
+    public function terms()
+    {
+        $this->data['message'] = '';
+        $this->template->load("templates/non_member_tmpl", "footer/terms", $this->data);
+    }
+        /*
+     * This method will load privacy page
+     * @Author Nazmul on 25th January 2015
+     */
+    public function privacy()
+    {
+        $this->data['message'] = '';
+        $this->template->load("templates/non_member_tmpl", "footer/privacy", $this->data);
+    }
 }

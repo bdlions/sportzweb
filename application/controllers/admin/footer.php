@@ -379,7 +379,42 @@ class Footer extends CI_Controller{
         return $data;
 
     }
-    
+    /*
+     * This method will show terms page
+     * @Author Nazmul on 25th January 2015
+     */
+    public function terms()
+    {
+        $this->data['terms'] = 'sample terms';
+        $this->template->load($this->tmpl, "admin/footer/terms/index", $this->data);
+    }
+    /*
+     * This method will update terms
+     * @Author Nazmul on 25th January 2015
+     */
+    public function update_terms()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/footer/terms/update_terms", $this->data);
+    }
+    /*
+     * This method will show privacy page
+     * @Author Nazmul on 25th January 2015
+     */
+    public function privacy()
+    {
+        $this->data['terms'] = 'sample privacy';
+        $this->template->load($this->tmpl, "admin/footer/privacy/index", $this->data);
+    }
+    /*
+     * This method will update privacy
+     * @Author Nazmul on 25th January 2015
+     */
+    public function update_privacy()
+    {
+        $this->data['message'] = '';
+        $this->template->load($this->tmpl, "admin/footer/terms/update_privacy", $this->data);
+    }
     
 }
 

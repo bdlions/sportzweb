@@ -80,6 +80,8 @@ $config['tables']['footer_cu_topics']                       = 'footer_cu_topics'
 $config['tables']['footer_cu_operating_systems']            = 'footer_cu_operating_systems';
 $config['tables']['footer_cu_browsers']                     = 'footer_cu_browsers';
 $config['tables']['footer_cu_feedbacks']                    = 'footer_cu_feedbacks';
+$config['tables']['footer_terms']                           = 'footer_terms';
+$config['tables']['footer_privacy']                         = 'footer_privacy';
 
 /*
  * Applications

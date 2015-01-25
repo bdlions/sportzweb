@@ -3298,7 +3298,24 @@ ALTER TABLE `footer_cu_feedbacks`
     ADD CONSTRAINT `fk_footer_cu_feedbacks_os1` FOREIGN KEY(`os_id`) REFERENCES `footer_cu_operating_systems` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `footer_cu_feedbacks`
     ADD CONSTRAINT `fk_footer_cu_feedbacks_browsers1` FOREIGN KEY(`browser_id`) REFERENCES `footer_cu_browsers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+CREATE TABLE IF NOT EXISTS `footer_terms` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `description` text,
+  `created_on` int(11) DEFAULT NULL,
+  `modified_on` int(11) DEFAULT NULL,
+  PRIMARY KEY(`id`) 
+);
+INSERT INTO `footer_terms` (`description`) VALUES
+('Sample terms');
+CREATE TABLE IF NOT EXISTS `footer_privacy` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `description` text,
+  `created_on` int(11) DEFAULT NULL,
+  `modified_on` int(11) DEFAULT NULL,
+  PRIMARY KEY(`id`) 
+);
+INSERT INTO `footer_privacy` (`description`) VALUES
+('Sample privacy');
 -- trending feature
 CREATE TABLE IF NOT EXISTS `hashtags` (
   `hashtag` varchar(300),

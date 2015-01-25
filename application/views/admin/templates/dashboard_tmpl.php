@@ -159,6 +159,8 @@
                                 <ul>
                                     <li id="manage_new_user"><a href="<?php echo base_url()?>admin/footer/about_us">About Us</a></li>     
                                     <li id="manage_contact_us"><a href="<?php echo base_url()?>admin/contact_us">Contact Us</a></li>
+                                    <li id="manage_privacy"><a href="<?php echo base_url()?>admin/footer/privacy">Privacy</a></li>
+                                    <li id="manage_terms"><a href="<?php echo base_url()?>admin/footer/terms">Terms</a></li>
                                 </ul>
                             </li>
                             <li id="settings">
