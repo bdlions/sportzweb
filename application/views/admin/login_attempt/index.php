@@ -33,3 +33,5 @@
         </div>
     </div>
 </div>
+<?php
+$this->load->view('admin/login_attempt/modal_delete_login_attempt_confirm');
