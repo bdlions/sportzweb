@@ -22,7 +22,7 @@
                                     <td><?php echo $login_attempt['ip_address']?></td>
                                     <td><?php echo $login_attempt['login']?></td>
                                     <td><?php echo $login_attempt['time']?></td>
-                                    <td></td>
+                                    <td><a onclick="open_modal_delete_confirm(<?php echo $login_attempt['id'] ?>)">Delete</a></td>
                                 </tr>
                                 <?php } ?>
                             </table>

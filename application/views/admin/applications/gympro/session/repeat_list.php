@@ -11,10 +11,12 @@
                             <th>ID</th>
                             <th>TITLE</th>
                         </tr>
+                        <?php foreach($session_repeat_list as $repeat_list){?>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td><?php echo $repeat_list['id']?></td>
+                            <td><?php echo $repeat_list['title']?></td>
                         </tr>
+                        <?php } ?>
                     </table>
                 </div>
             </div>

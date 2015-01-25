@@ -9,6 +9,7 @@ class Footer extends CI_Controller{
         $this->load->library('ion_auth');
         $this->load->library('org/admin/access_level/admin_access_level_library');
         $this->load->library('org/admin/footer/admin_about_us');
+        $this->load->library('org/admin/footer/admin_terms_library');
         $this->load->library('org/utility/Utils');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
@@ -385,7 +386,14 @@ class Footer extends CI_Controller{
      */
     public function terms()
     {
-        $this->data['terms'] = 'sample terms';
+        $this->data['message'] = '';
+        $terms_list = array();
+        $terms_list_array = $this->admin_terms_library->get_terms_info()->result_array();
+        if(!empty($terms_list_array))
+        {
+          $terms_list= $terms_list_array; 
+        }
+        $this->data['terms_list'] = $terms_list;
         $this->template->load($this->tmpl, "admin/footer/terms/index", $this->data);
     }
     /*
@@ -395,6 +403,46 @@ class Footer extends CI_Controller{
     public function update_terms()
     {
         $this->data['message'] = '';
+       
+        if ($this->input->post())
+        {
+            $result = array();
+            $result['message'] = ''; 
+              $data = array(
+                    'description' => $this->input->post('description'),
+                  );
+               if ($this->admin_terms_library->update_terms_info($data)) {
+                   redirect('admin/footer/terms','refresh');
+                   return;
+                } else {
+                    redirect('admin/footer/update_terms','refresh');
+                }
+        }else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        
+        $terms_list = array();
+        $terms_list_array = $this->admin_terms_library->get_terms_info()->result_array();
+        if(!empty($terms_list_array))
+        {
+          $terms_list = $terms_list_array[0]; 
+        }
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text',
+            'value' => $terms_list['description']
+        );
+        $this->data['submit_update_terms'] = array(
+            'name' => 'submit_update_terms',
+            'id' => 'submit_update_terms',
+            'type' => 'submit',
+            'value' => "Update"
+        );
+
+        $this->data['terms_list'] = $terms_list;
+        
         $this->template->load($this->tmpl, "admin/footer/terms/update_terms", $this->data);
     }
     /*

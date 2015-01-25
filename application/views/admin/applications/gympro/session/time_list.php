@@ -11,10 +11,12 @@
                             <th>ID</th>
                             <th>TITLE</th>
                         </tr>
+                        <?php foreach($session_time_list as $time_list){?>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td><?php echo $time_list['id']?></td>
+                            <td><?php echo $time_list['title']?></td>
                         </tr>
+                        <?php } ?>
                     </table>
                 </div>
             </div>

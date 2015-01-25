@@ -1,3 +1,3 @@
-<div class="row">
-    <?php echo $terms;?>
-</div>
+<?php foreach($terms_list as $terms){?>
+               <?php echo $terms['description']?>
+               <?php } ?>

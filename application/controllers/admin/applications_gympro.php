@@ -1172,6 +1172,13 @@ class Applications_gympro extends CI_Controller{
     public function session_repeat_list()
     {
         $this->data['message'] = '';
+        $session_repeat_list = array();
+        $session_repeat_list_array = $this->admin_gympro_library->get_all_session_repeats()->result_array();
+        if(!empty($session_repeat_list_array))
+        {
+          $session_repeat_list= $session_repeat_list_array; 
+        }
+        $this->data['session_repeat_list'] = $session_repeat_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/repeat_list", $this->data);
     }
     /*
@@ -1180,7 +1187,15 @@ class Applications_gympro extends CI_Controller{
      */
     public function session_type_list()
     {
+      
         $this->data['message'] = '';
+        $session_type_list = array();
+        $session_type_list_array = $this->admin_gympro_library->get_all_session_types()->result_array();
+        if(!empty($session_type_list_array))
+        {
+          $session_type_list= $session_type_list_array; 
+        }
+        $this->data['session_type_list'] = $session_type_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/type_list", $this->data);
     }
     /*
@@ -1190,6 +1205,13 @@ class Applications_gympro extends CI_Controller{
     public function session_time_list()
     {
         $this->data['message'] = '';
+        $session_time_list = array();
+        $session_time_list_array = $this->admin_gympro_library->get_all_session_times()->result_array();
+        if(!empty($session_time_list_array))
+        {
+          $session_time_list= $session_time_list_array; 
+        }
+        $this->data['session_time_list'] = $session_time_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/time_list", $this->data);
     }
     /*
@@ -1199,6 +1221,13 @@ class Applications_gympro extends CI_Controller{
     public function session_cost_list()
     {
         $this->data['message'] = '';
+        $session_cost_list = array();
+        $session_cost_list_array = $this->admin_gympro_library->get_all_session_costs()->result_array();
+        if(!empty($session_cost_list_array))
+        {
+          $session_cost_list= $session_cost_list_array; 
+        }
+        $this->data['session_cost_list'] = $session_cost_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/cost_list", $this->data);
     }
     /*
@@ -1208,6 +1237,13 @@ class Applications_gympro extends CI_Controller{
     public function session_status_list()
     {
         $this->data['message'] = '';
+        $session_status_list = array();
+        $session_status_list_array = $this->admin_gympro_library->get_all_session_statuses()->result_array();
+        if(!empty($session_status_list_array))
+        {
+          $session_status_list= $session_status_list_array; 
+        }
+        $this->data['session_status_list'] = $session_status_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/status_list", $this->data);
     }
     

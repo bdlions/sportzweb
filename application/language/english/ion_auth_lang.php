@@ -349,3 +349,11 @@ $lang['update_photo_successful']                     = "Photo updated successful
 $lang['update_photo_fail']                           = "Failed to update photo info.";
 $lang['delete_photo_successful']                     = "Photo deleted successfully.";
 $lang['delete_photo_fail']                           = "Failed to delete photo.";
+
+$lang['create_login_attempts_successful']                     = "Login attempts Uploaded successfully.";
+$lang['create_login_attempts_fail']                           = "Failed to create a login_attempts.";
+$lang['update_login_attempts_successful']                     = "Login attempts updated successfully.";
+$lang['update_login_attempts_fail']                           = "Failed to update login_attempts info.";
+$lang['delete_login_attempts_successful']                     = "Login attempts deleted successfully.";
+$lang['delete_login_attempts_fail']                           = "Failed to delete login_attempts.";
+

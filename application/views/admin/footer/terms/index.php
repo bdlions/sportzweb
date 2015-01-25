@@ -11,8 +11,11 @@
                     </a>
                 </div>                
             </div>
+            
             <div class="row" style="padding-left:15px;padding-bottom:15px;">
-               <?php echo $terms?>
+               <?php foreach($terms_list as $terms){?>
+               <?php echo $terms['description']?>
+               <?php } ?>
             </div>
             <div class="row form-group">
                 <div class ="col-md-3">

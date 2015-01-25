@@ -21,7 +21,9 @@ class Admin_login_attempts_model extends Ion_auth_model {
      */
     public function get_all_login_attempts()
     {
-        
+          return $this->db->select($this->tables['login_attempts'].'.*')
+                    ->from($this->tables['login_attempts'])
+                    ->get(); 
     }
     
     /*
@@ -29,8 +31,21 @@ class Admin_login_attempts_model extends Ion_auth_model {
      * @param $id, login attemtps id
      * @Author Nazmul on 25th January 2015
      */
-    public function delete_login_attempt($id)
+    public function delete_login_attempt($delete_id)
     {
+     if(!isset($delete_id) || $delete_id <= 0)
+        {
+            $this->set_error('delete_login_attempt_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $delete_id);
+        $this->db->delete($this->tables['login_attempts']);
         
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_login_attempts_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_login_attempts_successful');
+        return TRUE;   
     }
 }

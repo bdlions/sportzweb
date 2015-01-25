@@ -1634,7 +1634,7 @@ class Admin_gympro_model extends Ion_auth_model
      */
     public function get_all_session_times()
     {
-        return $this->db->select($this->tables['app_gympro_session_times'] . "id as session_times_id, " . $this->tables['app_gympro_session_times'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_times'] . ".*")
                 ->from($this->tables['app_gympro_session_times'])
                 ->get();
     }
@@ -1644,7 +1644,7 @@ class Admin_gympro_model extends Ion_auth_model
      */
     public function get_all_session_types()
     {
-        return $this->db->select($this->tables['app_gympro_session_types'] . "id as session_type_id, " . $this->tables['app_gympro_session_types'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_types'] . ".*")
                 ->from($this->tables['app_gympro_session_types'])
                 ->get();
     }
@@ -1654,7 +1654,7 @@ class Admin_gympro_model extends Ion_auth_model
      */
     public function get_all_session_repeats()
     {
-        return $this->db->select($this->tables['app_gympro_session_repeats'] . "id as session_repeat_id, " . $this->tables['app_gympro_session_repeats'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_repeats'] . ".*")
                 ->from($this->tables['app_gympro_session_repeats'])
                 ->get();
     }
@@ -1664,7 +1664,7 @@ class Admin_gympro_model extends Ion_auth_model
      */
     public function get_all_session_costs()
     {
-        return $this->db->select($this->tables['app_gympro_session_costs'] . "id as session_cost_id, " . $this->tables['app_gympro_session_costs'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_costs'] . ".*")
                 ->from($this->tables['app_gympro_session_costs'])
                 ->get();
     }
@@ -1674,7 +1674,7 @@ class Admin_gympro_model extends Ion_auth_model
      */
     public function get_all_session_statuses()
     {
-        return $this->db->select($this->tables['app_gympro_session_statuses'] . "id as session_statuses_id, " . $this->tables['app_gympro_session_statuses'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_statuses'] . ".*")
                 ->from($this->tables['app_gympro_session_statuses'])
                 ->get();
     } 

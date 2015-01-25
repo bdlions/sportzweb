@@ -8,7 +8,8 @@ class Footer extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library("org/utility/utils");
         $this->load->library("org/footer/about_us");
-        $this->load->library("org/footer/contact_us_library");
+        $this->load->library("org/footer/about_us");
+        $this->load->library("org/footer/terms_library");
         $this->load->helper('url');
 
         // Load MongoDB library instead of native db driver if required
@@ -289,12 +290,18 @@ class Footer extends CI_Controller {
      * This method will load terms page
      * @Author Nazmul on 25th January 2015
      */
-    public function terms()
-    {
-        $this->data['terms'] = 'Sample terms';
+    public function terms() {
+        $this->data['message'] = '';
+        $terms_list = array();
+        $terms_list_array = $this->terms_library->get_terms_info()->result_array();
+        if (!empty($terms_list_array)) {
+            $terms_list = $terms_list_array;
+        }
+        $this->data['terms_list'] = $terms_list;
         $this->template->load("templates/non_member_tmpl", "footer/terms", $this->data);
     }
-        /*
+
+    /*
      * This method will load privacy page
      * @Author Nazmul on 25th January 2015
      */

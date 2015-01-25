@@ -11,10 +11,12 @@
                             <th>ID</th>
                             <th>TITLE</th>
                         </tr>
+                        <?php foreach($session_type_list as $type_list){?>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td><?php echo $type_list['id']?></td>
+                            <td><?php echo $type_list['title']?></td>
                         </tr>
+                        <?php } ?>
                     </table>
                 </div>
             </div>

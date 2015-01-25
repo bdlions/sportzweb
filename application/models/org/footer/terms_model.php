@@ -17,8 +17,10 @@ class Terms_model extends Ion_auth_model {
      * This method will return terms info
      * @Author Nazmul on 25th January 2015
      */
-    public function get_terms_info()
-    {
-        
+    public function get_terms_info() {
+        return $this->db->select($this->tables['footer_terms'] . '.*')
+                        ->from($this->tables['footer_terms'])
+                        ->get();
     }
+
 }
