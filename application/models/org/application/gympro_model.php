@@ -1081,7 +1081,10 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_session_times()
     {
-        
+//        return $this->db->select($this->tables['app_gympro_session_times'] . "id as session_times_id, " . $this->tables['app_gympro_session_times'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_times'] . ".*")
+                ->from($this->tables['app_gympro_session_times'])
+                ->get();
     }
     /*
      * This method will return all sesssion types
@@ -1089,7 +1092,10 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_session_types()
     {
-        
+//        return $this->db->select($this->tables['app_gympro_session_types'] . "id as session_type_id, " . $this->tables['app_gympro_session_types'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_types'] . ".*")
+                ->from($this->tables['app_gympro_session_types'])
+                ->get();
     }
     /*
      * This method will return all sesssion repeats
@@ -1097,7 +1103,10 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_session_repeats()
     {
-        
+//        return $this->db->select($this->tables['app_gympro_session_repeats'] . "id as session_repeat_id, " . $this->tables['app_gympro_session_repeats'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_repeats'] . ".*")
+                ->from($this->tables['app_gympro_session_repeats'])
+                ->get();
     }
     /*
      * This method will return all sesssion costs
@@ -1105,7 +1114,10 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_session_costs()
     {
-        
+//        return $this->db->select($this->tables['app_gympro_session_costs'] . "id as session_cost_id, " . $this->tables['app_gympro_session_costs'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_costs'] . ".*")
+                ->from($this->tables['app_gympro_session_costs'])
+                ->get();
     }
     /*
      * This method will return all sesssion statuses
@@ -1113,23 +1125,52 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_session_statuses()
     {
-        
+//        return $this->db->select($this->tables['app_gympro_session_statuses'] . "id as session_statuses_id, " . $this->tables['app_gympro_session_statuses'] . ".*")
+        return $this->db->select($this->tables['app_gympro_session_statuses'] . ".*")
+                ->from($this->tables['app_gympro_session_statuses'])
+                ->get();
     }
     /*
      * This method will create a session
      * @Author Nazmul on 22nd January 2015
      */
-    public function create_session()
+    public function create_session($additional_data)
     {
-        
+        $additional_data['created_on'] = now();
+        $additional_data = $this->_filter_data($this->tables['app_gympro_sessions'], $additional_data);
+        $this->db->insert($this->tables['app_gympro_sessions'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        if ($insert_id > 0) {
+            $this->set_message('create_session_successful');
+        } else {
+            $this->set_error('create_session_fail');
+        }
+        return (isset($insert_id)) ? $insert_id : FALSE;
     }
+
     /*
      * This method will update a session
      * @Author Nazmul on 22nd January 2015
      */
-    public function update_session()
+    public function update_session($session_id, $additional_data)
     {
-        
+        $additional_data['modified_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_sessions'], $additional_data);
+        $this->db->update($this->tables['app_gympro_sessions'], $data, array('id' => $session_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_session_fail');
+            return FALSE;
+        }
+        $this->set_message('update_session_successful');
+        return TRUE;
+    }
+    
+    public function get_session_info($session_id)
+    {
+        $this->db->where('id', $session_id);
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_sessions'])
+                    ->get();
     }
     /*
      * This method will return sessions
@@ -1153,7 +1194,7 @@ class Gympro_model extends Ion_auth_model {
      * This method will update sessions
      * @Author Nazmul on 22nd January 2015
      */
-    public function upddate_sessions()
+    public function update_sessions()
     {
         
     }
@@ -1163,6 +1204,19 @@ class Gympro_model extends Ion_auth_model {
      */
     public function delete_session($session_id)
     {
+        if(!isset($session_id) || $session_id <= 0)
+        {
+            $this->set_error('delete_session_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $session_id);
+        $this->db->delete($this->tables['app_gympro_sessions']);
         
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_session_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_session_successful');
+        return TRUE;
     }
 }
