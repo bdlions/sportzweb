@@ -91,8 +91,8 @@
                         <div class="col-md-3">Start:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="start">
-                                <?php foreach ($meal_time_list as $key => $meal_time): ?>
-                                    <option <?php echo ($key+1 == $session_info['start'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $meal_time; ?></option>
+                                <?php foreach ($session_times as $key => $meal_time): ?>
+                                    <option value="<?php echo $meal_time['title_24']; ?>"><?php echo $meal_time['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -101,8 +101,8 @@
                         <div class="col-md-3 control-div">Finish:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="end">
-                                <?php foreach ($meal_time_list as $key => $meal_time): ?>
-                                    <option <?php echo ($key+1 == $session_info['end'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $meal_time; ?></option>
+                                <?php foreach ($session_times as $key => $meal_time): ?>
+                                    <option value="<?php echo $meal_time['title_24']; ?>"><?php echo $meal_time['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -130,7 +130,6 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Cost:</div>

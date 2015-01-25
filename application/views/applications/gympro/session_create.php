@@ -86,10 +86,11 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3">Start:</div>
+                            <?php // var_dump($meal_time_list)?>
                         <div class="col-md-4">
                             <select class="form-control" name="start">
-                                <?php foreach ($meal_time_list as $key => $meal_time): ?>
-                                    <option value="<?php echo $key; ?>"><?php echo $meal_time; ?></option>
+                                <?php foreach ($session_times as $key => $meal_time): ?>
+                                    <option value="<?php echo $meal_time['title_24']; ?>"><?php echo $meal_time['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -98,8 +99,8 @@
                         <div class="col-md-3 control-div">Finish:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="end">
-                                <?php foreach ($meal_time_list as $key => $meal_time): ?>
-                                    <option value="<?php echo $key+1; ?>"><?php echo $meal_time; ?></option>
+                                <?php foreach ($session_times as $key => $meal_time): ?>
+                                    <option value="<?php echo $meal_time['title_24']; ?>"><?php echo $meal_time['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

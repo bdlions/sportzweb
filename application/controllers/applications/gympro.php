@@ -2786,12 +2786,12 @@ class Gympro extends Role_Controller{
         $this->data['session_costs']    = $this->gympro_library->get_all_session_costs()->result_array();
         $this->data['client_list']      = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
         $this->data['group_list']       = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
-        $meal_time_list = array();
-        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
-        foreach($meal_time_array as $meal_time)
-        {
-            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
-        }
+//        $meal_time_list = array();
+//        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
+//        foreach($meal_time_array as $meal_time)
+//        {
+//            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
+//        }
         $this->data['meal_time_list'] = $meal_time_list;
         $this->template->load(null,'applications/gympro/session_create', $this->data);
     }
@@ -2871,12 +2871,12 @@ class Gympro extends Role_Controller{
         $this->data['session_costs']    = $this->gympro_library->get_all_session_costs()->result_array();
         $this->data['client_list']      = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
         $this->data['group_list']       = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
-        $meal_time_list = array();
-        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
-        foreach($meal_time_array as $meal_time)
-        {
-            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
-        }
+//        $meal_time_list = array();
+//        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
+//        foreach($meal_time_array as $meal_time)
+//        {
+//            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
+//        }
         $this->data['meal_time_list'] = $meal_time_list;
         $this->template->load(null,'applications/gympro/session_edit', $this->data);
     }
