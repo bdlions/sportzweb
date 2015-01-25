@@ -1,19 +1,19 @@
 <div class ="form-horizontal">
-    <?php echo form_open("paypal/payments_pro/Do_direct_payment_demo", array('id' => 'form_create_shop', 'class' => 'form-horizontal')); ?>
+    <?php //echo form_open("paypal/payments_pro/Do_direct_payment_demo", array('id' => 'form_create_shop', 'class' => 'form-horizontal')); ?>
     <div class="row">
         
             <div class="row form-group">
                 <div class="col-sm-4">
                     <label>Payment Type:</label>
                     <select class="form-control">
-                        <option>Credit / Debit Card</option>
+                        <option>Visa</option>
                     </select>
                 </div>
             </div>   
             <div class="row form-group">
                 <div class="col-sm-4">
                     <label>Card Number:</label>
-                    <input class="form-control">
+                    <input class="form-control" value="4032032716273062">
                 </div>
             </div>
             <div class="row">
@@ -29,7 +29,7 @@
                     <select class="form-control">
                         <option value="">Month</option>
                         <option value="01">01-January</option>
-                        <option value="02">02-February</option>
+                        <option value="02"  selected>02-February</option>
                         <option value="03">03-March</option>
                         <option value="04">04-April</option>
                         <option value="05">05-May</option>
@@ -50,7 +50,7 @@
                         <option value="2017">2017</option>
                         <option value="2018">2018</option>
                         <option value="2019">2019</option>
-                        <option value="2020">2020</option>
+                        <option value="2020" selected>2020</option>
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
@@ -65,21 +65,25 @@
                     </select>
                 </div>
                 <div class="col-sm-1">
-                    <input class="form-control">
+                    <input class="form-control" value="123">
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">
                     <label>Amount:</label>
-                    <input name="amount" class="form-control">
+                    <input name="amount" class="form-control" value="100">
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">
-                    <input type="submit" class="btn btn-success" value="Submit">
+                    <?php $payPalURL = 'https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token=' . $token;?>
+                    <a href="<?php echo $payPalURL;?>">
+                        <input type="submit" class="btn btn-success" value="Submit">
+                    </a>
+                    
                 </div>
             </div>
         
     </div>
-    <?php echo form_close(); ?>
+    <?php //echo form_close(); ?>
 </div>

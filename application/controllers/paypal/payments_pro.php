@@ -120,8 +120,8 @@ class Payments_pro extends CI_Controller {
 
     function Mass_pay() {
         $MPFields = array(
-            'emailsubject' => '', // The subject line of the email that PayPal sends when the transaction is completed.  Same for all recipients.  255 char max.
-            'currencycode' => '', // Three-letter currency code.
+            'emailsubject' => 'Transaction test', // The subject line of the email that PayPal sends when the transaction is completed.  Same for all recipients.  255 char max.
+            'currencycode' => 'USD', // Three-letter currency code.
             'receivertype' => ''       // Indicates how you identify the recipients of payments in this call to MassPay.  Must be EmailAddress or UserID
         );
 
@@ -131,23 +131,25 @@ class Payments_pro extends CI_Controller {
         // In most cases you'll be looping through records in a data source to generate the $MPItems array below.
 
         $Item1 = array(
+            'l_email' => 'ptpro@sportzweb.com', // Required.  Email address of recipient.  You must specify either L_EMAIL or L_RECEIVERID but you must not mix the two.
+            'l_receiverid' => '', // Required.  ReceiverID of recipient.  Must specify this or email address, but not both.
+            'l_amt' => '100', // Required.  Payment amount.
+            'l_uniqueid' => '', // Transaction-specific ID number for tracking in an accounting system.
+            'l_note' => ''         // Custom note for each recipient.
+        );
+
+        /*$Item2 = array(
             'l_email' => '', // Required.  Email address of recipient.  You must specify either L_EMAIL or L_RECEIVERID but you must not mix the two.
             'l_receiverid' => '', // Required.  ReceiverID of recipient.  Must specify this or email address, but not both.
             'l_amt' => '', // Required.  Payment amount.
             'l_uniqueid' => '', // Transaction-specific ID number for tracking in an accounting system.
             'l_note' => ''         // Custom note for each recipient.
-        );
+        );*/
 
-        $Item2 = array(
-            'l_email' => '', // Required.  Email address of recipient.  You must specify either L_EMAIL or L_RECEIVERID but you must not mix the two.
-            'l_receiverid' => '', // Required.  ReceiverID of recipient.  Must specify this or email address, but not both.
-            'l_amt' => '', // Required.  Payment amount.
-            'l_uniqueid' => '', // Transaction-specific ID number for tracking in an accounting system.
-            'l_note' => ''         // Custom note for each recipient.
-        );
+        //$MPItems = array($Item1, $Item2);
 
-        $MPItems = array($Item1, $Item2);
-
+        $MPItems = array($Item1);
+        
         $PayPalRequestData = array(
             'MPFields' => $MPFields,
             'MPItems' => $MPItems
@@ -157,9 +159,12 @@ class Payments_pro extends CI_Controller {
 
         if (!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])) {
             $errors = array('Errors' => $PayPalResult['ERRORS']);
-            $this->load->view('paypal_error', $errors);
+            $this->data['errors'] = $errors;
+            $this->template->load("templates/profile_setting_tmpl",'paypal/paypal_error', $this->data );
         } else {
-            // Successful call.  Load view or whatever you need to do here.	
+            // Successful call.  Load view or whatever you need to do here.
+            $data = array('PayPalResult' => $PayPalResult);
+            $this->template->load("templates/profile_setting_tmpl",'paypal/message', $data );
         }
     }
 
@@ -357,9 +362,9 @@ class Payments_pro extends CI_Controller {
 
         $PayerName = array(
             'salutation' => 'Mr.', // Payer's salutation.  20 char max.
-            'firstname' => 'Fakir', // Payer's first name.  25 char max.
+            'firstname' => 'Alamgir', // Payer's first name.  25 char max.
             'middlename' => '', // Payer's middle name.  25 char max.
-            'lastname' => 'Manus', // Payer's last name.  25 char max.
+            'lastname' => 'Kabir', // Payer's last name.  25 char max.
             'suffix' => ''        // Payer's suffix.  12 char max.
         );
 
@@ -437,23 +442,24 @@ class Payments_pro extends CI_Controller {
 
         if (!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])) {
             $errors = array('Errors' => $PayPalResult['ERRORS']);
-            $this->load->view('paypal_error', $errors);
+            $this->data['errors'] = $errors;
+            $this->template->load("templates/profile_setting_tmpl",'paypal/paypal_error', $this->data );
         } else {
-            // Successful call.  Load view or whatever you need to do here.
-            $data = array('PayPalResult' => $PayPalResult);
-//            $this->load->view('paypal/do_direct_payment_demo', $data);
-            $data['messg'] = "Payment Successfull.";
-//            $this->load->view('paypal/payments_page', $messg);
-            $this->template->load("templates/profile_setting_tmpl",'paypal/message', $data );
+            redirect('paypal/payments_pro/Mass_pay','refresh');
+            //redirect("paypal/payments_pro/Set_express_checkout", 'refresh');
+            //print_r($PayPalResult);
         }
     }
 
     function Set_express_checkout() {
+        $this->session->unset_userdata('paypal_token');
+        $this->session->unset_userdata('paypal_payer_id');
+        
         $SECFields = array(
             'token' => '', // A timestamped token, the value of which was returned by a previous SetExpressCheckout call.
             'maxamt' => '', // The expected maximum total amount the order will be, including S&H and sales tax.
-            'returnurl' => '', // Required.  URL to which the customer will be returned after returning from PayPal.  2048 char max.
-            'cancelurl' => '', // Required.  URL to which the customer will be returned if they cancel payment on PayPal's site.
+            'returnurl' => 'http://localhost/sportzweb/paypal/payments_pro/Get_express_checkout_details', // Required.  URL to which the customer will be returned after returning from PayPal.  2048 char max.
+            'cancelurl' => 'http://localhost/sportzweb/paypal/payments_pro/', // Required.  URL to which the customer will be returned if they cancel payment on PayPal's site.
             'callback' => '', // URL to which the callback request from PayPal is sent.  Must start with https:// for production.
             'callbacktimeout' => '', // An override for you to request more or less time to be able to process the callback request and response.  Acceptable range for override is 1-6 seconds.  If you specify greater than 6 PayPal will use default value of 3 seconds.
             'callbackversion' => '', // The version of the Instant Update API you're using.  The default is the current version.							
@@ -503,9 +509,9 @@ class Payments_pro extends CI_Controller {
         // so don't get confused along the way.
         $Payments = array();
         $Payment = array(
-            'amt' => '', // Required.  The total cost of the transaction to the customer.  If shipping cost and tax charges are known, include them in this value.  If not, this value should be the current sub-total of the order.
+            'amt' => '100.0', // Required.  The total cost of the transaction to the customer.  If shipping cost and tax charges are known, include them in this value.  If not, this value should be the current sub-total of the order.
             'currencycode' => '', // A three-character currency code.  Default is USD.
-            'itemamt' => '', // Required if you specify itemized L_AMT fields. Sum of cost of all items in this order.  
+            'itemamt' => '100.0', // Required if you specify itemized L_AMT fields. Sum of cost of all items in this order.  
             'shippingamt' => '', // Total shipping costs for this order.  If you specify SHIPPINGAMT you mut also specify a value for ITEMAMT.
             'shipdiscamt' => '', // Shipping discount for this order, specified as a negative number.
             'insuranceoptionoffered' => '', // If true, the insurance drop-down on the PayPal review page displays the string 'Yes' and the insurance amount.  If true, the total shipping insurance for this order must be a positive number.
@@ -521,8 +527,8 @@ class Payments_pro extends CI_Controller {
             'shiptocity' => '', // Required if shipping is included.  Name of city.  40 char max.
             'shiptostate' => '', // Required if shipping is included.  Name of state or province.  40 char max.
             'shiptozip' => '', // Required if shipping is included.  Postal code of shipping address.  20 char max.
-            'shiptocountrycode' => '', // Required if shipping is included.  Country code of shipping address.  2 char max.
-            'shiptophonenum' => '', // Phone number for shipping address.  20 char max.
+            'shiptocountry' => '', // Required if shipping is included.  Country code of shipping address.  2 char max.
+            'shiptophonenum' => '' , // Phone number for shipping address.  20 char max.
             'notetext' => '', // Note to the merchant.  255 char max.  
             'allowedpaymentmethod' => '', // The payment method type.  Specify the value InstantPaymentOnly.
             'allowpushfunding' => '', // Whether the merchant can accept push funding:  0 - Merchant can accept push funding.  1 - Merchant cannot accept push funding.  This will override the setting in the merchant's PayPal account.
@@ -539,30 +545,33 @@ class Payments_pro extends CI_Controller {
         // collection of all items in $OrderItems.
 
         $PaymentOrderItems = array();
-        $Item = array(
-            'name' => '', // Item name. 127 char max.
-            'desc' => '', // Item description. 127 char max.
-            'amt' => '', // Cost of item.
-            'number' => '', // Item number.  127 char max.
-            'qty' => '', // Item qty on order.  Any positive integer.
-            'taxamt' => '', // Item sales tax
-            'itemurl' => '', // URL for the item.
-            'itemweightvalue' => '', // The weight value of the item.
-            'itemweightunit' => '', // The weight unit of the item.
-            'itemheightvalue' => '', // The height value of the item.
-            'itemheightunit' => '', // The height unit of the item.
-            'itemwidthvalue' => '', // The width value of the item.
-            'itemwidthunit' => '', // The width unit of the item.
-            'itemlengthvalue' => '', // The length value of the item.
-            'itemlengthunit' => '', // The length unit of the item.
-            'itemurl' => '', // URL for the item.
-            'itemcategory' => '', // Must be one of the following values:  Digital, Physical
-            'ebayitemnumber' => '', // Auction item number.  
-            'ebayitemauctiontxnid' => '', // Auction transaction ID number.  
-            'ebayitemorderid' => '', // Auction order ID number.
-            'ebayitemcartid' => ''      // The unique identifier provided by eBay for this order from the buyer. These parameters must be ordered sequentially beginning with 0 (for example L_EBAYITEMCARTID0, L_EBAYITEMCARTID1). Character length: 255 single-byte characters
-        );
-        array_push($PaymentOrderItems, $Item);
+        for($i = 1; $i <= 10; $i ++){
+            $Item = array(
+                'name' => 'Product '.$i, // Item name. 127 char max.
+                'desc' => 'this is a product '.$i, // Item description. 127 char max.
+                'amt' => '10', // Cost of item.
+                'number' => $i, // Item number.  127 char max.
+                'qty' => '1', // Item qty on order.  Any positive integer.
+                'taxamt' => '', // Item sales tax
+                'itemurl' => '', // URL for the item.
+                'itemweightvalue' => '', // The weight value of the item.
+                'itemweightunit' => '', // The weight unit of the item.
+                'itemheightvalue' => '', // The height value of the item.
+                'itemheightunit' => '', // The height unit of the item.
+                'itemwidthvalue' => '', // The width value of the item.
+                'itemwidthunit' => '', // The width unit of the item.
+                'itemlengthvalue' => '', // The length value of the item.
+                'itemlengthunit' => '', // The length unit of the item.
+                'itemurl' => '', // URL for the item.
+                'itemcategory' => '', // Must be one of the following values:  Digital, Physical
+                'ebayitemnumber' => '', // Auction item number.  
+                'ebayitemauctiontxnid' => '', // Auction transaction ID number.  
+                'ebayitemorderid' => '', // Auction order ID number.
+                'ebayitemcartid' => ''      // The unique identifier provided by eBay for this order from the buyer. These parameters must be ordered sequentially beginning with 0 (for example L_EBAYITEMCARTID0, L_EBAYITEMCARTID1). Character length: 255 single-byte characters
+            );
+            array_push($PaymentOrderItems, $Item);
+        }
+        
 
         // Now we've got our OrderItems for this individual payment, 
         // so we'll load them into the $Payment array
@@ -611,27 +620,42 @@ class Payments_pro extends CI_Controller {
 
         if (!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])) {
             $errors = array('Errors' => $PayPalResult['ERRORS']);
-            $this->load->view('paypal_error', $errors);
+            $this->data['errors'] = $errors;
+            $this->template->load("templates/profile_setting_tmpl",'paypal/paypal_error', $this->data );
         } else {
-            // Successful call.  Load view or whatever you need to do here.	
+            //$this->Get_express_checkout_details($PayPalResult['TOKEN']);
+            //$this->Do_express_checkout_payment($PayPalResult['TOKEN']);
+            $this->data['token'] = $PayPalResult['TOKEN'];
+            $this->session->set_userdata(array('paypal_token' => $PayPalResult['TOKEN']));
+            $this->template->load("templates/profile_setting_tmpl",'paypal/payments_page' , $this->data);
+            //$this->template->load("templates/profile_setting_tmpl",'paypal/after_checkout', $this->data );
         }        
     }
 
-    function Get_express_checkout_details($token) {
+    function Get_express_checkout_details() {
+        $token = $this->session->userdata('paypal_token');;
         $PayPalResult = $this->paypal_pro->GetExpressCheckoutDetails($token);
 
         if (!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])) {
             $errors = array('Errors' => $PayPalResult['ERRORS']);
-            $this->load->view('paypal_error', $errors);
+            $this->data['errors'] = $errors;
+            $this->template->load("templates/profile_setting_tmpl",'paypal/paypal_error', $this->data );
         } else {
-            // Successful call.  Load view or whatever you need to do here.	
+            // Successful call.  Load view or whatever you need to do here.
+            $this->session->set_userdata(array('paypal_token' => $PayPalResult['TOKEN'], 'paypal_payer_id' => $PayPalResult['PAYERID']));
+            //$this->data['token'] = $PayPalResult['TOKEN'];
+            //$this->template->load("templates/profile_setting_tmpl",'paypal/after_checkout', $this->data );
+            redirect('paypal/payments_pro/Do_express_checkout_payment','refresh');
         }
     }
 
     function Do_express_checkout_payment() {
+        $token = $this->session->userdata('paypal_token');
+        $payerId = $this->session->userdata('paypal_payer_id');
+        
         $DECPFields = array(
-            'token' => '', // Required.  A timestamped token, the value of which was returned by a previous SetExpressCheckout call.
-            'payerid' => '', // Required.  Unique PayPal customer id of the payer.  Returned by GetExpressCheckoutDetails, or if you used SKIPDETAILS it's returned in the URL back to your RETURNURL.
+            'token' => $token, // Required.  A timestamped token, the value of which was returned by a previous SetExpressCheckout call.
+            'payerid' => $payerId, // Required.  Unique PayPal customer id of the payer.  Returned by GetExpressCheckoutDetails, or if you used SKIPDETAILS it's returned in the URL back to your RETURNURL.
             'returnfmfdetails' => '', // Flag to indiciate whether you want the results returned by Fraud Management Filters or not.  1 or 0.
             'giftmessage' => '', // The gift message entered by the buyer on the PayPal Review page.  150 char max.
             'giftreceiptenable' => '', // Pass true if a gift receipt was selected by the buyer on the PayPal Review page. Otherwise pass false.
@@ -651,9 +675,9 @@ class Payments_pro extends CI_Controller {
 
         $Payments = array();
         $Payment = array(
-            'amt' => '', // Required.  The total cost of the transaction to the customer.  If shipping cost and tax charges are known, include them in this value.  If not, this value should be the current sub-total of the order.
+            'amt' => '100.0', // Required.  The total cost of the transaction to the customer.  If shipping cost and tax charges are known, include them in this value.  If not, this value should be the current sub-total of the order.
             'currencycode' => '', // A three-character currency code.  Default is USD.
-            'itemamt' => '', // Required if you specify itemized L_AMT fields. Sum of cost of all items in this order.  
+            'itemamt' => '100.0', // Required if you specify itemized L_AMT fields. Sum of cost of all items in this order.  
             'shippingamt' => '', // Total shipping costs for this order.  If you specify SHIPPINGAMT you mut also specify a value for ITEMAMT.
             'shipdiscamt' => '', // Shipping discount for this order, specified as a negative number.
             'insuranceoptionoffered' => '', // If true, the insurance drop-down on the PayPal review page displays the string 'Yes' and the insurance amount.  If true, the total shipping insurance for this order must be a positive number.
@@ -669,17 +693,16 @@ class Payments_pro extends CI_Controller {
             'shiptocity' => '', // Required if shipping is included.  Name of city.  40 char max.
             'shiptostate' => '', // Required if shipping is included.  Name of state or province.  40 char max.
             'shiptozip' => '', // Required if shipping is included.  Postal code of shipping address.  20 char max.
-            'shiptocountrycode' => '', // Required if shipping is included.  Country code of shipping address.  2 char max.
-            'shiptophonenum' => '', // Phone number for shipping address.  20 char max.
+            'shiptocountry' => '', // Required if shipping is included.  Country code of shipping address.  2 char max.
+            'shiptophonenum' => '' , // Phone number for shipping address.  20 char max.
             'notetext' => '', // Note to the merchant.  255 char max.  
             'allowedpaymentmethod' => '', // The payment method type.  Specify the value InstantPaymentOnly.
+            'allowpushfunding' => '', // Whether the merchant can accept push funding:  0 - Merchant can accept push funding.  1 - Merchant cannot accept push funding.  This will override the setting in the merchant's PayPal account.
             'paymentaction' => '', // How you want to obtain the payment.  When implementing parallel payments, this field is required and must be set to Order. 
             'paymentrequestid' => '', // A unique identifier of the specific payment request, which is required for parallel payments. 
             'sellerid' => '', // The unique non-changing identifier for the seller at the marketplace site.  This ID is not displayed.
-            'sellerusername' => '', // The current name of the seller or business at the marketplace site.  This name be shown to the buyer.
-            'sellerregistrationdate' => '', // Date when the seller registered with the marketplace.
-            'softdescriptor' => '', // A per transaction description of the payment that is passed to the buyer's credit card statement.
-            'transactionid' => ''     // Tranaction identification number of the tranasction that was created.  NOTE:  This field is only returned after a successful transaction for DoExpressCheckout has occurred. 
+            'sellerusername' => '', // The current name of the seller or business at the marketplace site.  This name may be shown to the buyer.
+            'sellerpaypalaccountid' => ''   // A unique identifier for the merchant.  For parallel payments, this field is required and must contain the Payer ID or the email address of the merchant.
         );
 
         // For order items you populate a nested array with multiple $Item arrays.  
@@ -688,30 +711,32 @@ class Payments_pro extends CI_Controller {
         // collection of all items in $OrderItems.
 
         $PaymentOrderItems = array();
-        $Item = array(
-            'name' => '', // Item name. 127 char max.
-            'desc' => '', // Item description. 127 char max.
-            'amt' => '', // Cost of item.
-            'number' => '', // Item number.  127 char max.
-            'qty' => '', // Item qty on order.  Any positive integer.
-            'taxamt' => '', // Item sales tax
-            'itemurl' => '', // URL for the item.
-            'itemweightvalue' => '', // The weight value of the item.
-            'itemweightunit' => '', // The weight unit of the item.
-            'itemheightvalue' => '', // The height value of the item.
-            'itemheightunit' => '', // The height unit of the item.
-            'itemwidthvalue' => '', // The width value of the item.
-            'itemwidthunit' => '', // The width unit of the item.
-            'itemlengthvalue' => '', // The length value of the item.
-            'itemlengthunit' => '', // The length unit of the item.
-            'itemurl' => '', // The URL for the item.
-            'itemcategory' => '', // Must be one of the following:  Digital, Physical
-            'ebayitemnumber' => '', // Auction item number.  
-            'ebayitemauctiontxnid' => '', // Auction transaction ID number.  
-            'ebayitemorderid' => '', // Auction order ID number.
-            'ebayitemcartid' => ''      // The unique identifier provided by eBay for this order from the buyer. These parameters must be ordered sequentially beginning with 0 (for example L_EBAYITEMCARTID0, L_EBAYITEMCARTID1). Character length: 255 single-byte characters
-        );
-        array_push($PaymentOrderItems, $Item);
+        for($i = 1; $i <= 10; $i ++){
+            $Item = array(
+                'name' => 'Product '.$i, // Item name. 127 char max.
+                'desc' => 'this is a product '.$i, // Item description. 127 char max.
+                'amt' => '10', // Cost of item.
+                'number' => $i, // Item number.  127 char max.
+                'qty' => '1', // Item qty on order.  Any positive integer.
+                'taxamt' => '', // Item sales tax
+                'itemurl' => '', // URL for the item.
+                'itemweightvalue' => '', // The weight value of the item.
+                'itemweightunit' => '', // The weight unit of the item.
+                'itemheightvalue' => '', // The height value of the item.
+                'itemheightunit' => '', // The height unit of the item.
+                'itemwidthvalue' => '', // The width value of the item.
+                'itemwidthunit' => '', // The width unit of the item.
+                'itemlengthvalue' => '', // The length value of the item.
+                'itemlengthunit' => '', // The length unit of the item.
+                'itemurl' => '', // URL for the item.
+                'itemcategory' => '', // Must be one of the following values:  Digital, Physical
+                'ebayitemnumber' => '', // Auction item number.  
+                'ebayitemauctiontxnid' => '', // Auction transaction ID number.  
+                'ebayitemorderid' => '', // Auction order ID number.
+                'ebayitemcartid' => ''      // The unique identifier provided by eBay for this order from the buyer. These parameters must be ordered sequentially beginning with 0 (for example L_EBAYITEMCARTID0, L_EBAYITEMCARTID1). Character length: 255 single-byte characters
+            );
+            array_push($PaymentOrderItems, $Item);
+        }
 
         // Now we've got our OrderItems for this individual payment, 
         // so we'll load them into the $Payment array
@@ -738,9 +763,10 @@ class Payments_pro extends CI_Controller {
 
         if (!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])) {
             $errors = array('Errors' => $PayPalResult['ERRORS']);
-            $this->load->view('paypal_error', $errors);
+            $this->data['errors'] = $errors;
+            $this->template->load("templates/profile_setting_tmpl",'paypal/paypal_error', $this->data );
         } else {
-            // Successful call.  Load view or whatever you need to do here.	
+            echo "Transaction successful.";
         }
     }
 
