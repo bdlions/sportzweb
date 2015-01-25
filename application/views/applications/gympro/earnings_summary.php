@@ -248,7 +248,7 @@
                                 
                             </div>
                             <div class="col-md-1">
-                                
+                                <input type="checkbox">
                             </div>
                         </div>
                     </div>
@@ -267,7 +267,7 @@
                                 Paid
                             </div>
                             <div class="col-md-1">
-                                <input type="checkbox">
+                                
                             </div>
                         </div>
                     </div>
@@ -286,7 +286,7 @@
                                 Paid
                             </div>
                             <div class="col-md-1">
-                                <input type="checkbox">
+                                
                             </div>
                         </div>
                     </div>

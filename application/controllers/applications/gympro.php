@@ -2744,7 +2744,6 @@ class Gympro extends Role_Controller{
                 $cf = str_split($cf);
                 $created_for_type_id = $cf[0];
                 $reference_id = $cf[2];
-                var_dump($cf); exit();
                 $repeat =  $this->input->post('repeat');
                 $type_id = $this->input->post('type_id');
                 if ($type_id == '1') $repeat = NULL;
@@ -2823,17 +2822,18 @@ class Gympro extends Role_Controller{
             if ($this->form_validation->run() == true) {
 //                fix these
 //                $created_for = $this->input->post('group_client');
-                $cf = $this->input->post('created_for');
-                $created_for = '1';
-                $reference = '1';
+                $cf = $this->input->post('group_client');
+                $cf = str_split($cf);
+                $created_for_type_id = $cf[0];
+                $reference_id = $cf[2];
                 $repeat =  $this->input->post('repeat');
                 $type_id = $this->input->post('type_id');
                 if ($type_id == '1') $repeat = NULL;
                 $additional_data = array(
                     'title' => $this->input->post('title'),
                     'user_id' => $user_id,
-                    'created_for_type_id' => $created_for,
-                    'reference_id' => $reference,
+                    'created_for_type_id' => $created_for_type_id,
+                    'reference_id' => $reference_id,
                     'date' => $this->input->post('datepicker'),
                     'start' => $this->input->post('start'),
                     'end' => $this->input->post('end'),

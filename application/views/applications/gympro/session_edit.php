@@ -125,7 +125,7 @@
                         </div>
                         <div class="col-md-4">
                             <select class="form-control" id="dd_rep" name="repeat" style="display: none">
-                                <?php foreach ($session_repeat as $key => $repeat): ?>
+                                <?php foreach ($session_repeats as $key => $repeat): ?>
                                     <option <?php echo ($key+1 == $session_info['type_id'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $repeat['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -137,7 +137,7 @@
                         <div class="col-md-4">
                             <select class="form-control" name="cost">
                                 <?php foreach ($session_costs as $key => $cost): ?>
-                                    <option <?php echo ($key+1 == $session_info['cost'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $cost['title']; ?></option>
+                                    <option <?php echo ($key+1 == $session_info['cost'])? 'selected': NULL ;?> value="<?php echo $cost['title']; ?>"><?php echo $cost['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
