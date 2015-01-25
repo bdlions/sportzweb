@@ -413,7 +413,7 @@ class Footer extends CI_Controller{
     public function update_privacy()
     {
         $this->data['message'] = '';
-        $this->template->load($this->tmpl, "admin/footer/terms/update_privacy", $this->data);
+        $this->template->load($this->tmpl, "admin/footer/privacy/update_privacy", $this->data);
     }
     
 }

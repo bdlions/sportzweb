@@ -291,7 +291,7 @@ class Footer extends CI_Controller {
      */
     public function terms()
     {
-        $this->data['message'] = '';
+        $this->data['terms'] = 'Sample terms';
         $this->template->load("templates/non_member_tmpl", "footer/terms", $this->data);
     }
         /*
@@ -300,7 +300,7 @@ class Footer extends CI_Controller {
      */
     public function privacy()
     {
-        $this->data['message'] = '';
+        $this->data['privacy'] = 'Sample privacy';
         $this->template->load("templates/non_member_tmpl", "footer/privacy", $this->data);
     }
 }
