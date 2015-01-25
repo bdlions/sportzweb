@@ -458,8 +458,10 @@ class Payments_pro extends CI_Controller {
         $SECFields = array(
             'token' => '', // A timestamped token, the value of which was returned by a previous SetExpressCheckout call.
             'maxamt' => '', // The expected maximum total amount the order will be, including S&H and sales tax.
-            'returnurl' => 'http://localhost/sportzweb/paypal/payments_pro/Get_express_checkout_details', // Required.  URL to which the customer will be returned after returning from PayPal.  2048 char max.
-            'cancelurl' => 'http://localhost/sportzweb/paypal/payments_pro/', // Required.  URL to which the customer will be returned if they cancel payment on PayPal's site.
+            //'returnurl' => 'http://localhost/sportzweb/paypal/payments_pro/Get_express_checkout_details', // Required.  URL to which the customer will be returned after returning from PayPal.  2048 char max.
+            //'cancelurl' => 'http://localhost/sportzweb/paypal/payments_pro/', // Required.  URL to which the customer will be returned if they cancel payment on PayPal's site.
+            'returnurl' => base_url().'paypal/payments_pro/Get_express_checkout_details', // Required.  URL to which the customer will be returned after returning from PayPal.  2048 char max.
+            'cancelurl' => base_url().'paypal/payments_pro/', // Required.  URL to which the customer will be returned if they cancel payment on PayPal's site.
             'callback' => '', // URL to which the callback request from PayPal is sent.  Must start with https:// for production.
             'callbacktimeout' => '', // An override for you to request more or less time to be able to process the callback request and response.  Acceptable range for override is 1-6 seconds.  If you specify greater than 6 PayPal will use default value of 3 seconds.
             'callbackversion' => '', // The version of the Instant Update API you're using.  The default is the current version.							
