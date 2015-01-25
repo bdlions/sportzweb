@@ -19,6 +19,8 @@ class Privacy_model extends Ion_auth_model {
      */
     public function get_privacy_info()
     {
-        
+     return $this->db->select($this->tables['footer_privacy'] . '.*')
+                        ->from($this->tables['footer_privacy'])
+                        ->get();
     }
 }

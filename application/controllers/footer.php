@@ -10,6 +10,7 @@ class Footer extends CI_Controller {
         $this->load->library("org/footer/about_us");
         $this->load->library("org/footer/about_us");
         $this->load->library("org/footer/terms_library");
+        $this->load->library("org/footer/privacy_library");
         $this->load->helper('url');
 
         // Load MongoDB library instead of native db driver if required
@@ -307,7 +308,13 @@ class Footer extends CI_Controller {
      */
     public function privacy()
     {
-        $this->data['privacy'] = 'Sample privacy';
+        $this->data['message'] = '';
+        $privacy_list = array();
+        $privacy_list_array = $this->privacy_library->get_privacy_info()->result_array();
+        if (!empty($privacy_list_array)) {
+            $privacy_list = $privacy_list_array;
+        }
+        $this->data['privacy_list'] = $privacy_list;
         $this->template->load("templates/non_member_tmpl", "footer/privacy", $this->data);
     }
 }

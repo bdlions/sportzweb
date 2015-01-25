@@ -10,6 +10,7 @@ class Footer extends CI_Controller{
         $this->load->library('org/admin/access_level/admin_access_level_library');
         $this->load->library('org/admin/footer/admin_about_us');
         $this->load->library('org/admin/footer/admin_terms_library');
+        $this->load->library('org/admin/footer/admin_privacy_library');
         $this->load->library('org/utility/Utils');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
@@ -451,7 +452,15 @@ class Footer extends CI_Controller{
      */
     public function privacy()
     {
-        $this->data['terms'] = 'sample privacy';
+        $this->data['message'] = '';
+        $privacy_list = array();
+        $privacy_list_array = $this->admin_privacy_library->get_privacy_info()->result_array();
+        
+        if(!empty($privacy_list_array))
+        {
+          $privacy_list= $privacy_list_array; 
+        }
+        $this->data['privacy_list'] = $privacy_list;
         $this->template->load($this->tmpl, "admin/footer/privacy/index", $this->data);
     }
     /*
@@ -460,7 +469,46 @@ class Footer extends CI_Controller{
      */
     public function update_privacy()
     {
-        $this->data['message'] = '';
+           $this->data['message'] = '';
+       
+        if ($this->input->post())
+        {
+            $result = array();
+            $result['message'] = ''; 
+              $data = array(
+                    'description' => $this->input->post('description'),
+                  );
+               if ($this->admin_privacy_library->update_privacy_info($data)) {
+                   redirect('admin/footer/privacy','refresh');
+                   return;
+                } else {
+                    redirect('admin/footer/update_privacy','refresh');
+                }
+        }else
+        {
+            $this->data['message'] = $this->session->flashdata('message'); 
+        }
+        
+        $privacy_list = array();
+        $privacy_list_array = $this->admin_privacy_library->get_privacy_info()->result_array();
+        if(!empty($privacy_list_array))
+        {
+          $privacy_list = $privacy_list_array[0]; 
+        }
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text',
+            'value' => $privacy_list['description']
+        );
+        $this->data['submit_update_privacy'] = array(
+            'name' => 'submit_update_privacy',
+            'id' => 'submit_update_privacy',
+            'type' => 'submit',
+            'value' => "Update"
+        );
+
+        $this->data['privacy_list'] = $privacy_list;
         $this->template->load($this->tmpl, "admin/footer/privacy/update_privacy", $this->data);
     }
     
