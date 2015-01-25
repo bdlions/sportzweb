@@ -64,21 +64,19 @@
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Group and Client</div>
                         <div class="col-md-4">
-                            
-                            <!--INCOMPLETE !!!!!!!!!!!!!! -->
                             <select class="form-control" name="group_client">
-                            <optgroup label="Groups">
-                                <?php foreach ($group_list as $group_info): ?>
-                                <option <?php echo ($group_info['group_id'] == $session_info['group_id'])? 'selected': NULL ;?> value="<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
-                                <?php endforeach; ?>
-                            </optgroup>
-                            <optgroup label="Clients">
-                                <option>Shem Haye</option>
-                                <?php foreach ($client_list as $client_info): ?>
-                                <option <?php echo ($group_info['client_id'] == $session_info['reference_id'])? 'selected': NULL ;?> value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
-                                <?php endforeach; ?>
-                            </optgroup>
-                        </select>
+                                <optgroup label="Groups">
+                                    <?php foreach ($group_list as $group_info): ?>
+                                        <option <?php echo ('1' == $session_info['created_for_type_id'] && $session_info['reference_id'] == $group_info['group_id']) ? 'selected' : NULL; ?> value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                                <optgroup label="Clients">
+                                    <option>Shem Haye</option>
+                                    <?php foreach ($client_list as $client_info): ?>
+                                        <option <?php echo ('2' == $session_info['created_for_type_id'] && $session_info['reference_id'] == $client_info['client_id']) ? 'selected' : NULL; ?> value="2_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            </select>
                         </div>
                     </div>
                     <div class="row form-group">

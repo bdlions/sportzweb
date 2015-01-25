@@ -2792,7 +2792,7 @@ class Gympro extends Role_Controller{
 //        {
 //            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
 //        }
-        $this->data['meal_time_list'] = $meal_time_list;
+//        $this->data['meal_time_list'] = $meal_time_list;
         $this->template->load(null,'applications/gympro/session_create', $this->data);
     }
     public function update_session( $session_id = 0 )
@@ -2877,7 +2877,7 @@ class Gympro extends Role_Controller{
 //        {
 //            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
 //        }
-        $this->data['meal_time_list'] = $meal_time_list;
+//        $this->data['meal_time_list'] = $meal_time_list;
         $this->template->load(null,'applications/gympro/session_edit', $this->data);
     }
     public function earnings_summary()

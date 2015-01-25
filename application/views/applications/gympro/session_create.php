@@ -66,13 +66,13 @@
                             <select class="form-control" name="group_client">
                                 <optgroup label="Groups">
                                     <?php foreach ($group_list as $group_info): ?>
-                                    <option value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                        <option value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                                 <optgroup label="Clients">
-                                    <option value="2_<?php echo '3';?>">Shem Haye</option>
+                                    <option value="2_<?php echo '3'; ?>">Shem Haye</option>
                                     <?php foreach ($client_list as $client_info): ?>
-                                    <option value="2_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
+                                        <option value="2_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                             </select>
