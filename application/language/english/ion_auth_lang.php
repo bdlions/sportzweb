@@ -301,6 +301,13 @@ $lang['update_group_fail']                             = "Failed to update group
 $lang['delete_group_successful']                       = "Group deleted successfully.";
 $lang['delete_group_fail']                             = "Failed to delete the group.";
 
+$lang['create_session_successful']                       = "Session created successfully.";
+$lang['create_session_fail']                             = "Failed to create a session.";
+$lang['update_session_successful']                       = "Session updated successfully.";
+$lang['update_session_fail']                             = "Failed to update session info.";
+$lang['delete_session_successful']                       = "Session deleted successfully.";
+$lang['delete_session_fail']                             = "Failed to delete the session.";
+
 $lang['create_program_successful']                     = "Program created successfully.";
 $lang['create_program_fail']                           = "Failed to create a program.";
 $lang['update_program_successful']                     = "Program updated successfully.";
