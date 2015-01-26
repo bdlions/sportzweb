@@ -1181,6 +1181,42 @@ class Applications_gympro extends CI_Controller{
         $this->data['session_repeat_list'] = $session_repeat_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/repeat_list", $this->data);
     }
+    public function get_repeat_info() {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_repeat_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+    public function update_repeat() {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_repeat($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    public function delete_session_repeat()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_gympro_library->delete_session_repeat($id))
+        {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
     /*
      * This method will show session type list
      * @Author Nazmul on 22nd January 2015
@@ -1198,6 +1234,43 @@ class Applications_gympro extends CI_Controller{
         $this->data['session_type_list'] = $session_type_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/type_list", $this->data);
     }
+    public function get_type_info() {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_type_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+    public function update_type() {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_type($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    public function delete_session_type()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_gympro_library->delete_session_type($id))
+        {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
     /*
      * This method will show session time list
      * @Author Nazmul on 22nd January 2015
@@ -1213,6 +1286,20 @@ class Applications_gympro extends CI_Controller{
         }
         $this->data['session_time_list'] = $session_time_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/time_list", $this->data);
+    }
+    public function delete_session_time()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_gympro_library->delete_session_time($id))
+        {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     /*
      * This method will show session cost list
@@ -1230,6 +1317,21 @@ class Applications_gympro extends CI_Controller{
         $this->data['session_cost_list'] = $session_cost_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/cost_list", $this->data);
     }
+    public function delete_session_cost()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_gympro_library->delete_session_cost($id))
+        {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
     /*
      * This method will show session status list
      * @Author Nazmul on 22nd January 2015
@@ -1245,6 +1347,20 @@ class Applications_gympro extends CI_Controller{
         }
         $this->data['session_status_list'] = $session_status_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/status_list", $this->data);
+    }
+    public function delete_session_status()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        if($this->admin_gympro_library->delete_session_status($id))
+        {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     

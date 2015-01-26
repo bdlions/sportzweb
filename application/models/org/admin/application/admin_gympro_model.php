@@ -1638,6 +1638,24 @@ class Admin_gympro_model extends Ion_auth_model
                 ->from($this->tables['app_gympro_session_times'])
                 ->get();
     }
+    public function delete_session_time($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_time_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_gympro_session_times']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_time_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_time_successful');
+        return TRUE;
+    }
+    
     /*
      * This method will return all sesssion types
      * @Author Nazmul on 22nd January 2015
@@ -1647,6 +1665,43 @@ class Admin_gympro_model extends Ion_auth_model
         return $this->db->select($this->tables['app_gympro_session_types'] . ".*")
                 ->from($this->tables['app_gympro_session_types'])
                 ->get();
+    }
+    public function get_type_info($id)
+    {
+        $this->db->where($this->tables['app_gympro_session_types'].'.id', $id);
+        return $this->db->select($this->tables['app_gympro_session_types'].'.id as id,'.$this->tables['app_gympro_session_types'].'.*')
+                    ->from($this->tables['app_gympro_session_types'])
+                    ->get();
+    }
+    public function update_type($id, $additional_data)
+    {
+       
+        $data = $this->_filter_data($this->tables['app_gympro_session_types'], $additional_data);
+        $this->db->where($this->tables['app_gympro_session_types'].'.id', $id);
+        $this->db->update($this->tables['app_gympro_session_types'], $data);
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_type_fail');
+            return FALSE;
+        }
+        $this->set_message('update_type_successful');
+        return TRUE;
+    }
+    public function delete_session_type($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_type_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_gympro_session_types']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_type_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_type_successful');
+        return TRUE;
     }
     /*
      * This method will return all sesssion repeats
@@ -1658,6 +1713,43 @@ class Admin_gympro_model extends Ion_auth_model
                 ->from($this->tables['app_gympro_session_repeats'])
                 ->get();
     }
+    public function get_repeat_info($id)
+    {
+        $this->db->where($this->tables['app_gympro_session_repeats'].'.id', $id);
+        return $this->db->select($this->tables['app_gympro_session_repeats'].'.id as id,'.$this->tables['app_gympro_session_repeats'].'.*')
+                    ->from($this->tables['app_gympro_session_repeats'])
+                    ->get();
+    }
+    public function update_repeat($id, $additional_data)
+    {
+       
+        $data = $this->_filter_data($this->tables['app_gympro_session_repeats'], $additional_data);
+        $this->db->where($this->tables['app_gympro_session_repeats'].'.id', $id);
+        $this->db->update($this->tables['app_gympro_session_repeats'], $data);
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_repeats_fail');
+            return FALSE;
+        }
+        $this->set_message('update_repeats_successful');
+        return TRUE;
+    }
+    public function delete_session_repeat($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_repeats_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_gympro_session_repeats']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_repeats_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_repeats_successful');
+        return TRUE;
+    }
     /*
      * This method will return all sesssion costs
      * @Author Nazmul on 22nd January 2015
@@ -1668,6 +1760,24 @@ class Admin_gympro_model extends Ion_auth_model
                 ->from($this->tables['app_gympro_session_costs'])
                 ->get();
     }
+    public function delete_session_cost($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_cost_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_gympro_session_costs']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_cost_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_cost_successful');
+        return TRUE;
+    }
+    
     /*
      * This method will return all sesssion statuses
      * @Author Nazmul on 22nd January 2015
@@ -1677,7 +1787,24 @@ class Admin_gympro_model extends Ion_auth_model
         return $this->db->select($this->tables['app_gympro_session_statuses'] . ".*")
                 ->from($this->tables['app_gympro_session_statuses'])
                 ->get();
-    } 
+    }
+    public function delete_session_status($id)
+    {
+        if(!isset($id) || $id <= 0)
+        {
+            $this->set_error('delete_status_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $id);
+        $this->db->delete($this->tables['app_gympro_session_statuses']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_status_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_status_successful');
+        return TRUE;
+    }
     
 ////    ======================== ACCOUNT TYPE ========================
 //    
