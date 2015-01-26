@@ -12,9 +12,7 @@
                 </div>                
             </div>
             <div class="row" style="padding-left:15px;padding-bottom:15px;">
-                <?php foreach($privacy_list as $list){?>
-               <?php echo $list['description']?>
-               <?php } ?>
+               <?php echo $privacy_info['description']?>
             </div>
             <div class="row form-group">
                 <div class ="col-md-3">

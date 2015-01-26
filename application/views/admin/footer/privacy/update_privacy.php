@@ -34,16 +34,18 @@ window.onload = function()
 }
 </script>
 
-<?php echo form_open("admin/footer/update_privacy", array('id' => '', 'class' => 'form-horizontal')); ?>
+<?php echo form_open("admin/footer/update_terms", array('id' => '', 'class' => 'form-horizontal')); ?>
 <div class="row form-group">
-    <label class="col-md-2">Description:</label>
-    <div class="col-md-5">
+    <label class="col-md-offset-1 col-md-2"><span style="font-size: 18px">Description:</span></label>
+</div>
+<div class="row form-group">
+    <div class="col-md-offset-2 col-md-6">
         <?php echo form_textarea($description + array('class' => 'form-control')); ?> 
     </div>
 </div>
 <div class="row form-group">
-    <div class="col-md-offset-5 col-md-2">
-        <?php echo form_input($submit_update_privacy + array('class' => 'form-control')) ?> 
+    <div class="col-md-offset-6 col-md-2">
+        <?php echo form_input($submit_update_privacy + array('class' => 'btn btn-warning form-control')) ?> 
     </div>
 </div>
 <?php echo form_close();?>

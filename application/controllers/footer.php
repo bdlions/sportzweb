@@ -293,12 +293,12 @@ class Footer extends CI_Controller {
      */
     public function terms() {
         $this->data['message'] = '';
-        $terms_list = array();
-        $terms_list_array = $this->terms_library->get_terms_info()->result_array();
-        if (!empty($terms_list_array)) {
-            $terms_list = $terms_list_array;
+        $terms_info = array();
+        $terms_info_array = $this->terms_library->get_terms_info()->result_array();
+        if (!empty($terms_info_array)) {
+            $terms_info = $terms_info_array[0];
         }
-        $this->data['terms_list'] = $terms_list;
+        $this->data['terms_info'] = $terms_info;
         $this->template->load("templates/non_member_tmpl", "footer/terms", $this->data);
     }
 
@@ -309,12 +309,12 @@ class Footer extends CI_Controller {
     public function privacy()
     {
         $this->data['message'] = '';
-        $privacy_list = array();
-        $privacy_list_array = $this->privacy_library->get_privacy_info()->result_array();
-        if (!empty($privacy_list_array)) {
-            $privacy_list = $privacy_list_array;
+        $privacy_info = array();
+        $privacy_info_array = $this->privacy_library->get_privacy_info()->result_array();
+        if (!empty($privacy_info_array)) {
+            $privacy_info = $privacy_info_array[0];
         }
-        $this->data['privacy_list'] = $privacy_list;
+        $this->data['privacy_info'] = $privacy_info;
         $this->template->load("templates/non_member_tmpl", "footer/privacy", $this->data);
     }
 }

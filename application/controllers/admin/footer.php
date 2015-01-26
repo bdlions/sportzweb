@@ -388,13 +388,13 @@ class Footer extends CI_Controller{
     public function terms()
     {
         $this->data['message'] = '';
-        $terms_list = array();
-        $terms_list_array = $this->admin_terms_library->get_terms_info()->result_array();
-        if(!empty($terms_list_array))
+        $terms_info = array();
+        $terms_info_array = $this->admin_terms_library->get_terms_info()->result_array();
+        if(!empty($terms_info_array))
         {
-          $terms_list= $terms_list_array; 
+          $terms_info= $terms_info_array[0]; 
         }
-        $this->data['terms_list'] = $terms_list;
+        $this->data['terms_info'] = $terms_info;
         $this->template->load($this->tmpl, "admin/footer/terms/index", $this->data);
     }
     /*
@@ -423,17 +423,17 @@ class Footer extends CI_Controller{
             $this->data['message'] = $this->session->flashdata('message'); 
         }
         
-        $terms_list = array();
-        $terms_list_array = $this->admin_terms_library->get_terms_info()->result_array();
-        if(!empty($terms_list_array))
+        $terms_info = array();
+        $terms_info_array = $this->admin_terms_library->get_terms_info()->result_array();
+        if(!empty($terms_info_array))
         {
-          $terms_list = $terms_list_array[0]; 
+          $terms_info = $terms_info_array[0]; 
         }
         $this->data['description'] = array(
             'name' => 'description',
             'id' => 'description',
             'type' => 'text',
-            'value' => $terms_list['description']
+            'value' => $terms_info['description']
         );
         $this->data['submit_update_terms'] = array(
             'name' => 'submit_update_terms',
@@ -442,7 +442,7 @@ class Footer extends CI_Controller{
             'value' => "Update"
         );
 
-        $this->data['terms_list'] = $terms_list;
+        $this->data['terms_info'] = $terms_info;
         
         $this->template->load($this->tmpl, "admin/footer/terms/update_terms", $this->data);
     }
@@ -453,14 +453,14 @@ class Footer extends CI_Controller{
     public function privacy()
     {
         $this->data['message'] = '';
-        $privacy_list = array();
-        $privacy_list_array = $this->admin_privacy_library->get_privacy_info()->result_array();
+        $privacy_info = array();
+        $privacy_info_array = $this->admin_privacy_library->get_privacy_info()->result_array();
         
-        if(!empty($privacy_list_array))
+        if(!empty($privacy_info_array))
         {
-          $privacy_list= $privacy_list_array; 
+          $privacy_info= $privacy_info_array[0]; 
         }
-        $this->data['privacy_list'] = $privacy_list;
+        $this->data['privacy_info'] = $privacy_info;
         $this->template->load($this->tmpl, "admin/footer/privacy/index", $this->data);
     }
     /*
@@ -489,17 +489,17 @@ class Footer extends CI_Controller{
             $this->data['message'] = $this->session->flashdata('message'); 
         }
         
-        $privacy_list = array();
-        $privacy_list_array = $this->admin_privacy_library->get_privacy_info()->result_array();
-        if(!empty($privacy_list_array))
+        $privacy_info = array();
+        $privacy_info_array = $this->admin_privacy_library->get_privacy_info()->result_array();
+        if(!empty($privacy_info_array))
         {
-          $privacy_list = $privacy_list_array[0]; 
+          $privacy_info = $privacy_info_array[0]; 
         }
         $this->data['description'] = array(
             'name' => 'description',
             'id' => 'description',
             'type' => 'text',
-            'value' => $privacy_list['description']
+            'value' => $privacy_info['description']
         );
         $this->data['submit_update_privacy'] = array(
             'name' => 'submit_update_privacy',
@@ -508,7 +508,7 @@ class Footer extends CI_Controller{
             'value' => "Update"
         );
 
-        $this->data['privacy_list'] = $privacy_list;
+        $this->data['privacy_info'] = $privacy_info;
         $this->template->load($this->tmpl, "admin/footer/privacy/update_privacy", $this->data);
     }
     
