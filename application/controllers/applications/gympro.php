@@ -2743,7 +2743,7 @@ class Gympro extends Role_Controller{
                 $cf = $this->input->post('group_client');
                 $cf = str_split($cf);
                 $created_for_type_id = $cf[0];
-                $reference_id = $cf[2];
+                $reference_id = substr($cf, 2);
                 $repeat =  $this->input->post('repeat');
                 $type_id = $this->input->post('type_id');
                 if ($type_id == '1') $repeat = NULL;
@@ -2809,6 +2809,7 @@ class Gympro extends Role_Controller{
         if(!empty($session_info))
         {
             $session_info = $session_info[0];
+            $session_info['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session_info['date']);
         }
         else{
             redirect('applications/gympro/schedule', 'refresh');
@@ -2825,7 +2826,7 @@ class Gympro extends Role_Controller{
                 $cf = $this->input->post('group_client');
                 $cf = str_split($cf);
                 $created_for_type_id = $cf[0];
-                $reference_id = $cf[2];
+                $reference_id = substr($cf, 2);
                 $repeat =  $this->input->post('repeat');
                 $type_id = $this->input->post('type_id');
                 if ($type_id == '1') $repeat = NULL;
@@ -2885,5 +2886,73 @@ class Gympro extends Role_Controller{
         $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
         $this->data['client_list'] = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
         $this->template->load(null,'applications/gympro/earnings_summary', $this->data);
+    }
+    
+    public function get_earning_summery_for_group( $group_id = 0 )
+    {
+        
+    }
+    public function get_earning_summery_for_client( $client_id = 0 )
+    {
+        $sessions[] = array(
+            'id' => '2',
+            'name' => '21Dennis Wise ',
+            'time' => '9:00am - 10:30am',
+            'cost' => '50',
+            'status' => 'prePaid'
+        );
+        $sessions[] = array(
+            'id' => '3',
+            'name' => '22Shem Haye',
+            'time' => '6:00am - 7:45am ',
+            'cost' => 'Shem Haye',
+            'status' => 'Paid'
+        );
+        $client_data[] = array(
+            'date' => 'Sunday, 23 November 2121 ',
+            'sessions' => $sessions
+        );
+        
+        $sessions = NULL;
+        ///////////////another group of sessions on a different date
+        $sessions[] = array(
+            'id' => '1',
+            'name' => '11Tanveer Ahmed',
+            'time' => '6:00am - 7:45am ',
+            'cost' => '66',
+            'status' => 'Notpaid'
+        );
+        $client_data[] = array(
+            'date' => 'Monday, 24 November 2014',
+            'sessions' => $sessions
+        );
+        
+        
+        
+        
+        
+        $sessions = NULL;
+        ///////////////another group of sessions on a different date
+        $sessions[] = array(
+            'id' => '2',
+            'name' => '21Dennis Wise ',
+            'time' => '9:00am - 10:30am',
+            'cost' => '50',
+            'status' => 'prePaid'
+        );
+        $sessions[] = array(
+            'id' => '3',
+            'name' => '22Shem Haye',
+            'time' => '6:00am - 7:45am ',
+            'cost' => 'Shem Haye',
+            'status' => 'Paid'
+        );
+        $client_data[] = array(
+            'date' => 'Sunday, 23 November 2121 ',
+            'sessions' => $sessions
+        );
+    
+        echo json_encode($client_data);
+        return;
     }
 }

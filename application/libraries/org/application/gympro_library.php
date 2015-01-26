@@ -244,6 +244,7 @@ class Gympro_library {
         foreach($session_list_array as $session_info)
         {
             $calendar_session_info = array(
+                'session_info' => $session_info,
                 'title' => $session_info['title'],
                 'start' => $session_info['date'].'T'.$session_info['start'],
                 'end' => $session_info['date'].'T'.$session_info['end']

@@ -53,7 +53,6 @@
             </div>
             <?php echo form_open('applications/gympro/update_session/'. $session_id, array('class'=>'form-horizontal'));?>
             <div class="row">
-                <?php var_dump($session_info);?>
                 <div class="col-md-6">
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Title: </div>

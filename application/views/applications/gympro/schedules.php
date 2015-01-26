@@ -41,9 +41,13 @@
             selectHelper: true,
             slotMinutes: 60,
             aspectRatio: 2.5,
-            eventClick: function(event, jsEvent, view) {
-                $('#modalTitle').html(event.title);
-                $('#modalBody').html(event.description);
+            eventClick: function(event, jsEvent, view) { 
+                $('#modalTitle').html(event.session_info.title);
+                $('#session_title').html(event.session_info.title);
+                $('#session_location').html(event.session_info.location);
+                var edit_href = document.getElementById('session_edit');
+                edit_href.href += event.session_info.id;
+                
                 $('#fullCalModal').modal();
             },
             dayClick: function(date, jsEvent, view) {
@@ -81,11 +85,40 @@
                                     <h4 id="modalTitle" class="modal-title"></h4>
                                 </div>
                                 <div id="modalBody" class="modal-body">
-                                    <a href="#">Edit</a>
+                                    <div class="row">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-8" style="font-size: 16px;">
+                                            <div class="row form-group">
+                                                <div class="col-sm-4">
+                                                    Title:
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div id="session_title"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-sm-4">
+                                                    Location:
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div id="session_location"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-sm-4"></div>
+                                                <div class="col-sm-8">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+                                    <div id="modal_body_text"></div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-success">Save</button>
-                                    <button class="btn btn-default">Delete</button>
+                                    <a id="session_edit" href="<?php echo base_url().'applications/gympro/update_session/';?>"><button class="btn btn-info">Edit Session</button></a>
+                                    <button class="btn btn-danger">Delete Session</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
