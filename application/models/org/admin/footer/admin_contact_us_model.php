@@ -178,19 +178,34 @@ class Admin_contact_us_model extends Ion_auth_model {
         $this->db->where($this->tables['footer_cu_browsers'].'.id', $browser_id);
         $this->db->delete($this->tables['footer_cu_browsers']);
     }
-    
     /*
-     * This method will return all feedbacks of users 
-     * @Author Nazmul on 14th October 2014
+     * This method will return member feedback list
+     * @Author Nazmul on 27th January 2015
      */
-    public function get_all_feedbacks()
+    public function get_member_feedbacks()
     {
+        $this->db->where($this->tables['users'].'.id > ',0);
         $this->db->order_by($this->tables['footer_cu_feedbacks'].'.created_on','desc');
         return $this->db->select($this->tables['footer_cu_topics'].'.title as topic,'.$this->tables['footer_cu_operating_systems'].'.title as operating_system,'.$this->tables['footer_cu_browsers'].'.title as browser,'.$this->tables['footer_cu_feedbacks'].'.*')
+                ->from($this->tables['footer_cu_feedbacks'])
+                ->join($this->tables['users'], $this->tables['users'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.user_id')
                 ->join($this->tables['footer_cu_topics'], $this->tables['footer_cu_topics'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.topic_id')
                 ->join($this->tables['footer_cu_operating_systems'], $this->tables['footer_cu_operating_systems'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.os_id')
                 ->join($this->tables['footer_cu_browsers'], $this->tables['footer_cu_browsers'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.browser_id')
-                ->get($this->tables['footer_cu_feedbacks']);
+                ->get();
+    }
+    
+    /*
+     * This method will return non member feedback list
+     * @Author Nazmul on 27th January 2015
+     */
+    public function get_non_member_feedbacks()
+    {
+        $this->db->where($this->tables['users'].'.id ',NULL);
+        $this->db->order_by($this->tables['footer_cu_feedbacks'].'.created_on','desc');
+        return $this->db->select($this->tables['footer_cu_topics'].'.*')
+                ->from($this->tables['footer_cu_feedbacks'])
+                ->get();
     }
     
     /*

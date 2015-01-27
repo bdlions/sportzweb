@@ -8,7 +8,7 @@ class Footer extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library("org/utility/utils");
         $this->load->library("org/footer/about_us");
-        $this->load->library("org/footer/about_us");
+        $this->load->library("org/footer/contact_us_library");
         $this->load->library("org/footer/terms_library");
         $this->load->library("org/footer/privacy_library");
         $this->load->helper('url');
@@ -232,9 +232,6 @@ class Footer extends CI_Controller {
             if ($this->form_validation->run() == true) 
             {
                 /*$additional_data = array(
-                    'topic_id' => $this->input->post('topic_list'),
-                    'os_id' => $this->input->post('os_list'),
-                    'browser_id' => $this->input->post('browser_list'),
                     'name' => $this->input->post('name'),
                     'email' => $this->input->post('email'),
                     'phone' => $this->input->post('phone'),

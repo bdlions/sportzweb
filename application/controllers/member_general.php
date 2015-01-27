@@ -42,6 +42,7 @@ class Member_general extends Role_Controller {
             if ($this->form_validation->run() == true) 
             {
                 /*$additional_data = array(
+                    'user_id' => $this->session->userdata('user_id),
                     'topic_id' => $this->input->post('topic_list'),
                     'os_id' => $this->input->post('os_list'),
                     'browser_id' => $this->input->post('browser_list'),

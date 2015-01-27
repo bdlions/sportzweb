@@ -65,10 +65,29 @@ class Admin_contact_us_library {
         return get_instance()->$var;
     } 
     
-    public function get_all_feedbacks()
+    /*
+     * This method will return member feedback list
+     * @Author Nazmul on 27th January 2015
+     */
+    public function get_member_feedbacks()
     {
         $feedback_list = array();
-        $feedbacks_array = $this->admin_contact_us_model->get_all_feedbacks()->result_array();
+        $feedbacks_array = $this->admin_contact_us_model->get_member_feedbacks()->result_array();
+        foreach($feedbacks_array as $feedback)
+        {
+            $feedback['created_on'] = $this->utils->get_unix_to_human_date($feedback['created_on'], 1);
+            $feedback_list[] = $feedback;
+        }
+        return $feedback_list;
+    }
+    /*
+     * This method will return non member feedback list
+     * @Author Nazmul on 27th January 2015
+     */
+    public function get_nonmember_feedbacks()
+    {
+        $feedback_list = array();
+        $feedbacks_array = $this->admin_contact_us_model->get_non_member_feedbacks()->result_array();
         foreach($feedbacks_array as $feedback)
         {
             $feedback['created_on'] = $this->utils->get_unix_to_human_date($feedback['created_on'], 1);
