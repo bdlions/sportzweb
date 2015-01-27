@@ -3,7 +3,7 @@
         $("#button_update").on("click", function() {
             if ($("#input_update_a").val().length == 0)
             {
-                alert("Please assign reassess name");
+                alert("Please assign session type");
                 return;
             }
             $.ajax({
@@ -43,7 +43,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Update Repeat</h4>
+                <h4 class="modal-title" id="myModalLabel">Update Type</h4>
             </div>
             <div class="modal-body">
                 <div class="row">

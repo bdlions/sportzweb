@@ -1632,12 +1632,44 @@ class Admin_gympro_model extends Ion_auth_model
      * This method will return all sesssion times
      * @Author Nazmul on 22nd January 2015
      */
+    public function create_time($data)
+    {
+        $data['created_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_session_times'], $data); 
+        $this->db->insert($this->tables['app_gympro_session_times'], $data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+    
     public function get_all_session_times()
     {
         return $this->db->select($this->tables['app_gympro_session_times'] . ".*")
                 ->from($this->tables['app_gympro_session_times'])
                 ->get();
     }
+    
+    public function get_time_info($id)
+    {
+        $this->db->where($this->tables['app_gympro_session_times'].'.id', $id);
+        return $this->db->select($this->tables['app_gympro_session_times'].'.id as id,'.$this->tables['app_gympro_session_times'].'.*')
+                    ->from($this->tables['app_gympro_session_times'])
+                    ->get();
+    }
+    
+    public function update_time($id, $additional_data)
+    {
+       
+        $data = $this->_filter_data($this->tables['app_gympro_session_times'], $additional_data);
+        $this->db->where($this->tables['app_gympro_session_times'].'.id', $id);
+        $this->db->update($this->tables['app_gympro_session_times'], $data);
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_time_fail');
+            return FALSE;
+        }
+        $this->set_message('update_time_successful');
+        return TRUE;
+    }
+    
     public function delete_session_time($id)
     {
         if(!isset($id) || $id <= 0)
@@ -1660,12 +1692,22 @@ class Admin_gympro_model extends Ion_auth_model
      * This method will return all sesssion types
      * @Author Nazmul on 22nd January 2015
      */
+    public function create_type($data)
+    {
+        $data['created_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_session_types'], $data); 
+        $this->db->insert($this->tables['app_gympro_session_types'], $data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+    
     public function get_all_session_types()
     {
         return $this->db->select($this->tables['app_gympro_session_types'] . ".*")
                 ->from($this->tables['app_gympro_session_types'])
                 ->get();
     }
+    
     public function get_type_info($id)
     {
         $this->db->where($this->tables['app_gympro_session_types'].'.id', $id);
@@ -1673,6 +1715,7 @@ class Admin_gympro_model extends Ion_auth_model
                     ->from($this->tables['app_gympro_session_types'])
                     ->get();
     }
+    
     public function update_type($id, $additional_data)
     {
        
@@ -1686,6 +1729,7 @@ class Admin_gympro_model extends Ion_auth_model
         $this->set_message('update_type_successful');
         return TRUE;
     }
+    
     public function delete_session_type($id)
     {
         if(!isset($id) || $id <= 0)
@@ -1707,12 +1751,22 @@ class Admin_gympro_model extends Ion_auth_model
      * This method will return all sesssion repeats
      * @Author Nazmul on 22nd January 2015
      */
+    public function create_repeat($data)
+    {
+        $data['created_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_session_repeats'], $data); 
+        $this->db->insert($this->tables['app_gympro_session_repeats'], $data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+
     public function get_all_session_repeats()
     {
         return $this->db->select($this->tables['app_gympro_session_repeats'] . ".*")
                 ->from($this->tables['app_gympro_session_repeats'])
                 ->get();
     }
+    
     public function get_repeat_info($id)
     {
         $this->db->where($this->tables['app_gympro_session_repeats'].'.id', $id);
@@ -1720,6 +1774,7 @@ class Admin_gympro_model extends Ion_auth_model
                     ->from($this->tables['app_gympro_session_repeats'])
                     ->get();
     }
+    
     public function update_repeat($id, $additional_data)
     {
        
@@ -1733,6 +1788,7 @@ class Admin_gympro_model extends Ion_auth_model
         $this->set_message('update_repeats_successful');
         return TRUE;
     }
+    
     public function delete_session_repeat($id)
     {
         if(!isset($id) || $id <= 0)
@@ -1754,12 +1810,44 @@ class Admin_gympro_model extends Ion_auth_model
      * This method will return all sesssion costs
      * @Author Nazmul on 22nd January 2015
      */
+    public function create_cost($data)
+    {
+        $data['created_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_session_costs'], $data); 
+        $this->db->insert($this->tables['app_gympro_session_costs'], $data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+    
     public function get_all_session_costs()
     {
         return $this->db->select($this->tables['app_gympro_session_costs'] . ".*")
                 ->from($this->tables['app_gympro_session_costs'])
                 ->get();
     }
+    
+    public function get_cost_info($id)
+    {
+        $this->db->where($this->tables['app_gympro_session_costs'].'.id', $id);
+        return $this->db->select($this->tables['app_gympro_session_costs'].'.id as id,'.$this->tables['app_gympro_session_costs'].'.*')
+                    ->from($this->tables['app_gympro_session_costs'])
+                    ->get();
+    }
+    
+    public function update_cost($id, $additional_data)
+    {
+       
+        $data = $this->_filter_data($this->tables['app_gympro_session_costs'], $additional_data);
+        $this->db->where($this->tables['app_gympro_session_costs'].'.id', $id);
+        $this->db->update($this->tables['app_gympro_session_costs'], $data);
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_cost_fail');
+            return FALSE;
+        }
+        $this->set_message('update_cost_successful');
+        return TRUE;
+    }
+    
     public function delete_session_cost($id)
     {
         if(!isset($id) || $id <= 0)
@@ -1782,12 +1870,44 @@ class Admin_gympro_model extends Ion_auth_model
      * This method will return all sesssion statuses
      * @Author Nazmul on 22nd January 2015
      */
+    public function create_status($data)
+    {
+        $data['created_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_session_statuses'], $data); 
+        $this->db->insert($this->tables['app_gympro_session_statuses'], $data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
+    }
+    
     public function get_all_session_statuses()
     {
         return $this->db->select($this->tables['app_gympro_session_statuses'] . ".*")
                 ->from($this->tables['app_gympro_session_statuses'])
                 ->get();
     }
+    
+    public function get_status_info($id)
+    {
+        $this->db->where($this->tables['app_gympro_session_statuses'].'.id', $id);
+        return $this->db->select($this->tables['app_gympro_session_statuses'].'.id as id,'.$this->tables['app_gympro_session_statuses'].'.*')
+                    ->from($this->tables['app_gympro_session_statuses'])
+                    ->get();
+    }
+    
+    public function update_status($id, $additional_data)
+    {
+       
+        $data = $this->_filter_data($this->tables['app_gympro_session_statuses'], $additional_data);
+        $this->db->where($this->tables['app_gympro_session_statuses'].'.id', $id);
+        $this->db->update($this->tables['app_gympro_session_statuses'], $data);
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_status_fail');
+            return FALSE;
+        }
+        $this->set_message('update_status_successful');
+        return TRUE;
+    }
+    
     public function delete_session_status($id)
     {
         if(!isset($id) || $id <= 0)

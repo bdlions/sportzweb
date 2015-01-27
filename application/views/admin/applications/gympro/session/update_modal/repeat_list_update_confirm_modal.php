@@ -3,7 +3,7 @@
         $("#button_update").on("click", function() {
             if ($("#input_update_a").val().length == 0)
             {
-                alert("Please assign reassess name");
+                alert("Please assign session repeat");
                 return;
             }
             $.ajax({

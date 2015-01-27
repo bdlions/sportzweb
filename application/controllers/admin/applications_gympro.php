@@ -1155,7 +1155,7 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    // -------------------------------- Session Module ----------------------------//
+// ----------------------------------- Session Module ----------------------------------------//
     /*
      * This method will show session home page of admin panel
      * @Author Nazmul on 22nd January 2015
@@ -1169,6 +1169,47 @@ class Applications_gympro extends CI_Controller{
      * This method will show session repeat list
      * @Author Nazmul on 22nd January 2015
      */
+        // -------------------------------- Session repeat Module ----------------------------//
+    public function create_session_repeat()
+    {
+        $this->data['message'] = '';
+        $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        if($this->input->post('create_repeat_button'))
+        {
+            if ($this->form_validation->run() == true) 
+            {
+                $data = array(
+                    'title' => $this->input->post('title'),
+                );
+                $repeat_id = $this->admin_gympro_library->create_repeat($data);
+                if($repeat_id!=FALSE)
+                {
+                    $this->data['message'] = 'Repeat is added successfully';
+                }
+                else
+                {
+                    $this->data['message'] = 'Repeat add is unsuccessful';
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text'
+        );
+         $this->data['create_repeat_button'] = array(
+            'name' => 'create_repeat_button',
+            'id' => 'create_repeat_button',
+            'type' => 'submit',
+            'value' => 'Submit'
+        );
+     $this->template->load(null,'admin/applications/gympro/session/create_repeat',$this->data);   
+    }
+
     public function session_repeat_list()
     {
         $this->data['message'] = '';
@@ -1181,7 +1222,9 @@ class Applications_gympro extends CI_Controller{
         $this->data['session_repeat_list'] = $session_repeat_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/repeat_list", $this->data);
     }
-    public function get_repeat_info() {
+    
+    public function get_repeat_info() 
+    {
         $result['data_info'] = array();
         $data_id = $this->input->post('id');
         $data_info_array = $this->admin_gympro_library->get_repeat_info($data_id)->result_array();
@@ -1190,7 +1233,9 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
-    public function update_repeat() {
+    
+    public function update_repeat() 
+    {
         $result = array();
         $id = $this->input->post('id');
         $additional_data = array(
@@ -1203,6 +1248,7 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
+    
     public function delete_session_repeat()
     {
         $result = array();
@@ -1221,6 +1267,47 @@ class Applications_gympro extends CI_Controller{
      * This method will show session type list
      * @Author Nazmul on 22nd January 2015
      */
+    // -------------------------------- Session Type Module ----------------------------//
+    public function create_session_type()
+    {
+        $this->data['message'] = '';
+        $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        if($this->input->post('create_type_button'))
+        {
+            if ($this->form_validation->run() == true) 
+            {
+                $data = array(
+                    'title' => $this->input->post('title'),
+                );
+                $type_id = $this->admin_gympro_library->create_type($data);
+                if($type_id!=FALSE)
+                {
+                    $this->data['message'] = 'Type is added successfully';
+                }
+                else
+                {
+                    $this->data['message'] = 'Type add is unsuccessful';
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text'
+        );
+         $this->data['create_type_button'] = array(
+            'name' => 'create_type_button',
+            'id' => 'create_type_button',
+            'type' => 'submit',
+            'value' => 'Submit'
+        );
+     $this->template->load(null,'admin/applications/gympro/session/create_type',$this->data);   
+    }
+    
     public function session_type_list()
     {
       
@@ -1234,7 +1321,9 @@ class Applications_gympro extends CI_Controller{
         $this->data['session_type_list'] = $session_type_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/type_list", $this->data);
     }
-    public function get_type_info() {
+    
+    public function get_type_info() 
+    {
         $result['data_info'] = array();
         $data_id = $this->input->post('id');
         $data_info_array = $this->admin_gympro_library->get_type_info($data_id)->result_array();
@@ -1243,7 +1332,9 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
-    public function update_type() {
+    
+    public function update_type()
+    {
         $result = array();
         $id = $this->input->post('id');
         $additional_data = array(
@@ -1256,6 +1347,7 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
+    
     public function delete_session_type()
     {
         $result = array();
@@ -1275,6 +1367,53 @@ class Applications_gympro extends CI_Controller{
      * This method will show session time list
      * @Author Nazmul on 22nd January 2015
      */
+   // -------------------------------- Session Time Module ----------------------------//
+    public function create_session_time()
+    {
+        $this->data['message'] = '';
+        $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        if($this->input->post('create_time_button'))
+        {
+            if ($this->form_validation->run() == true) 
+            {
+                $data = array(
+                    'title' => $this->input->post('title'),
+                    'title_24' => $this->input->post('title_24'),
+                );
+                $time_id = $this->admin_gympro_library->create_time($data);
+                if($time_id!=FALSE)
+                {
+                    $this->data['message'] = 'Time is added successfully';
+                }
+                else
+                {
+                    $this->data['message'] = 'Time add is unsuccessful';
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text'
+        );
+        $this->data['title_24'] = array(
+            'name' => 'title_24',
+            'id' => 'title_24',
+            'type' => 'text'
+        );
+         $this->data['create_time_button'] = array(
+            'name' => 'create_time_button',
+            'id' => 'create_time_button',
+            'type' => 'submit',
+             'value' => 'Submit'
+        );
+     $this->template->load(null,'admin/applications/gympro/session/create_time', $this->data);   
+    }
+    
     public function session_time_list()
     {
         $this->data['message'] = '';
@@ -1287,6 +1426,34 @@ class Applications_gympro extends CI_Controller{
         $this->data['session_time_list'] = $session_time_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/time_list", $this->data);
     }
+    
+    public function get_time_info() 
+    {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_time_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+    
+    public function update_time() 
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a'),
+            'title_24' => $this->input->post('input_update_24')
+        );
+        if ($this->admin_gympro_library->update_time($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
     public function delete_session_time()
     {
         $result = array();
@@ -1305,6 +1472,47 @@ class Applications_gympro extends CI_Controller{
      * This method will show session cost list
      * @Author Nazmul on 22nd January 2015
      */
+    // -------------------------------- Session Cost Module ----------------------------//
+    public function create_session_cost()
+    {
+        $this->data['message'] = '';
+        $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        if($this->input->post('create_cost_button'))
+        {
+            if ($this->form_validation->run() == true) 
+            {
+                $data = array(
+                    'title' => $this->input->post('title'),
+                );
+                $cost_id = $this->admin_gympro_library->create_cost($data);
+                if($cost_id!=FALSE)
+                {
+                    $this->data['message'] = 'Cost is added successfully';
+                }
+                else
+                {
+                    $this->data['message'] = 'Cost add is unsuccessful';
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text'
+        );
+         $this->data['create_cost_button'] = array(
+            'name' => 'create_cost_button',
+            'id' => 'create_cost_button',
+            'type' => 'submit',
+             'value' => 'Submit'
+        );
+     $this->template->load(null,'admin/applications/gympro/session/create_cost', $this->data);   
+    }
+    
     public function session_cost_list()
     {
         $this->data['message'] = '';
@@ -1317,6 +1525,33 @@ class Applications_gympro extends CI_Controller{
         $this->data['session_cost_list'] = $session_cost_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/cost_list", $this->data);
     }
+    
+    public function get_cost_info() 
+    {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_cost_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+    
+    public function update_cost()
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_cost($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
     public function delete_session_cost()
     {
         $result = array();
@@ -1336,6 +1571,47 @@ class Applications_gympro extends CI_Controller{
      * This method will show session status list
      * @Author Nazmul on 22nd January 2015
      */
+    // -------------------------------- Session Status  Module ----------------------------//
+    public function create_session_status()
+    {
+        $this->data['message'] = '';
+        $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        if($this->input->post('create_status_button'))
+        {
+            if ($this->form_validation->run() == true) 
+            {
+                $data = array(
+                    'title' => $this->input->post('title'),
+                );
+                $status_id = $this->admin_gympro_library->create_status($data);
+                if($status_id!=FALSE)
+                {
+                    $this->data['message'] = 'Status is added successfully';
+                }
+                else
+                {
+                    $this->data['message'] = 'Status add is unsuccessful';
+                }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+            }
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text'
+        );
+         $this->data['create_status_button'] = array(
+            'name' => 'create_status_button',
+            'id' => 'create_status_button',
+            'type' => 'submit',
+             'value' => 'Submit'
+        );
+     $this->template->load(null,'admin/applications/gympro/session/create_status', $this->data);   
+    }
+    
     public function session_status_list()
     {
         $this->data['message'] = '';
@@ -1348,6 +1624,33 @@ class Applications_gympro extends CI_Controller{
         $this->data['session_status_list'] = $session_status_list;
         $this->template->load($this->tmpl, "admin/applications/gympro/session/status_list", $this->data);
     }
+    
+    public function get_status_info()
+    {
+        $result['data_info'] = array();
+        $data_id = $this->input->post('id');
+        $data_info_array = $this->admin_gympro_library->get_status_info($data_id)->result_array();
+        if (!empty($data_info_array)) {
+            $result['data_info'] = $data_info_array[0];
+        }
+        echo json_encode($result);
+    }
+    
+    public function update_status() 
+    {
+        $result = array();
+        $id = $this->input->post('id');
+        $additional_data = array(
+            'title' => $this->input->post('input_update_a')
+        );
+        if ($this->admin_gympro_library->update_status($id, $additional_data)) {
+            $result['message'] = $this->admin_gympro_library->messages_alert();
+        } else {
+            $result['message'] = $this->admin_gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
     public function delete_session_status()
     {
         $result = array();

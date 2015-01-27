@@ -3,13 +3,13 @@
         $("#button_update").on("click", function() {
             if ($("#input_update_a").val().length == 0)
             {
-                alert("Please assign reassess name");
+                alert("Please assign session cost");
                 return;
             }
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/applications_gympro/update_repeat",
+                url: '<?php echo base_url(); ?>' + "admin/applications_gympro/update_cost",
                 data: {
                     id: $("#input_update_id").val(),
                     input_update_a: $("#input_update_a").val(),
@@ -26,7 +26,7 @@
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/applications_gympro/get_repeat_info",
+            url: '<?php echo base_url(); ?>' + "admin/applications_gympro/get_cost_info",
             data: {
                 id: id
             },
@@ -43,7 +43,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Update Repeat</h4>
+                <h4 class="modal-title" id="myModalLabel">Update Cost</h4>
             </div>
             <div class="modal-body">
                 <div class="row">

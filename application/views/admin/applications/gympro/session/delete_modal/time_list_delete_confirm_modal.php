@@ -26,13 +26,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Delete Type </h4>
+                <h4 class="modal-title" id="myModalLabel">Delete Time </h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
-                        <label class="col-sm-10 control-label">Are you sure to delete this Type?</label>
+                        <label class="col-sm-10 control-label">Are you sure to delete this Time?</label>
                         <input id="input_mission_id" name="input_mission_id" value="" type="hidden" class="form-control"/>
                     </div>
                 </div>                
