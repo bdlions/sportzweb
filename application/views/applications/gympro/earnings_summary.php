@@ -1,52 +1,73 @@
 <script>
     $(function () {
         $("#group_client").on('change', function(){
-            var gr_or_cl = $("#group_client").val();
-            alert(gr_or_cl);
-            if(gr_or_cl.charAt(0)==2)//change to 1
+            var st_date = $('#st_date').val();
+            var fin_date = $('#fin_date').val();
+            var status_id = $('#status_id').val();
+            if( fin_date=='' || st_date=='' )
             {
-                var earnings_data;
+                alert("Please select the dates"); return;
+            }
+            var gr_or_cl = $("#group_client").val();
+//            alert(gr_or_cl);
+            if(gr_or_cl.charAt(0)==1)
+            {
+//                alert('Group selected');
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: "<?php echo base_url().'applications/gympro/get_earning_summery_for_client/';?>" + gr_or_cl.substring(2),
-                    data: gr_or_cl,
+                    url: "<?php echo base_url().'applications/gympro/get_earning_summary_for_group';?>",
+                    data: {
+                        gr_cl_id: gr_or_cl.substring(2),
+                        start: st_date,
+                        end: fin_date,
+                        status_id: status_id
+                    },
                     success: function(data) {
-                        earnings_data = data;
-                        console.log(data);
-                        alert(data[0].date);
+//                        alert(data[0].date);
                         $("#sessions_tmpl_place").html(tmpl("tmpl_group", data));
-    //                    make o
-    //                    o has: date, sessions_array-with all session data
-        //                alert(data.message);
                     }
                 });
-            }else if(gr_or_cl.charAt(0)==2)
+            }
+            else if(gr_or_cl.charAt(0)==2)
             {
-            
+//                alert('Client selected');
+                $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: "<?php echo base_url().'applications/gympro/get_earning_summary_for_client';?>",
+                    data: gr_or_cl.substring(2),
+                    success: function(data) {
+//                        alert(data[0].date);
+                        $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
+                    }
+                });
             }
         });
         $("#datepicker").datepicker({
             showOn: "button",
             buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
             buttonImageOnly: true,
-            buttonText: "Select date"
+            buttonText: "Select date",
+            dateFormat: 'dd-mm-yy'
         });
         $("#st_date").datepicker({
             showOn: "button",
             buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
             buttonImageOnly: true,
-            buttonText: "Select date"
+            buttonText: "Select date",
+            dateFormat: 'dd-mm-yy'
         });
         $("#fin_date").datepicker({
             showOn: "button",
             buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
             buttonImageOnly: true,
-            buttonText: "Select date"
+            buttonText: "Select date",
+            dateFormat: 'dd-mm-yy'
         });
     });
 </script>
-<script type="text/x-tmpl" id="tmpl_group">
+<script type="text/x-tmpl" id="tmpl_client">
     {% var i=0, sessions_array = ((o instanceof Array) ? o[i++] : o); %}
     {% while(sessions_array){ %}
     
@@ -71,6 +92,51 @@
             {% session = ((sessions instanceof Array) ? sessions[j++] : sessions); %}
         {% } %}
         {% sessions_array = ((o instanceof Array) ? o[i++] : null); %}
+    {% } %}
+</script>
+<script type="text/x-tmpl" id="tmpl_group">
+    {% var i=0, data_by_date = ((o instanceof Array) ? o[i++] : o); %}
+    {% while(data_by_date){ %}
+    
+        <div class="row form-group">
+            <div class="col-md-4" style="color: red; border-bottom: 2px solid darkred; padding: 0px 0px 5px 0px">
+                {%=data_by_date['date']%}
+            </div>
+        </div>
+    
+        {% var groups = data_by_date['groups']; %}
+        
+        {% var mid_i=0, each_group = ((groups instanceof Array) ? groups[mid_i++] : groups); %}
+        {% while(each_group){ %}
+
+            <div class="row form-group" style="border-bottom: 2px solid gray; padding-bottom: 10px">
+                <div class="row">
+                    <div class="col-md-4">{%= each_group['time']%}</div>
+                    <div class="col-md-3">{%= each_group['title']%}</div>
+                    <div class="col-md-2"> </div>
+                    <div class="col-md-2"> </div>
+                    <div class="col-md-1"> <input name="session_select_<?php echo '{%= each_group["id"]%}';?>" type="checkbox"> </div>
+                </div>
+            </div>            
+            
+            {% var sessions = each_group['sessions']; %}
+            
+            {% var j=0, session = ((sessions instanceof Array) ? sessions[j++] : sessions); %}
+            {% while(session){ %}
+                <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-3">{%= session['name']%}</div>
+                        <div class="col-md-2">{%= session['cost']%}</div>
+                        <div class="col-md-2">{%= session['status']%}</div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                {% session = ((sessions instanceof Array) ? sessions[j++] : sessions); %}
+            {% } %}
+            {% each_group = ((groups instanceof Array) ? groups[mid_i++] : groups); %}
+        {% } %}
+        {% data_by_date = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
 
@@ -101,7 +167,11 @@
                         <div class="col-md-4" style="padding-right: 0">Group and Client:</div>
                         <div class="col-md-7">
                             <select class="form-control" id="group_client">
+                                <option>-- Select --</option>
                                 <optgroup label="Groups">
+                                    <option value="1_1">gri 1</option>
+                                    <option value="1_2">Shem Haye</option>
+                                    <option value="1_3">gr 3</option>
                                     <?php foreach ($group_list as $group_info): ?>
                                     <option value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
                                 <?php endforeach; ?>
@@ -136,7 +206,7 @@
                     <div class="row form-group">
                         <div class="col-md-4 control-div">Session:</div>
                         <div class="col-md-7">
-                            <select class="form-control">
+                            <select class="form-control" id="status_id">
                                 <option>
                                     Prepaid
                                 </option>

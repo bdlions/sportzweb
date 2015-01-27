@@ -1178,7 +1178,15 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_sessions()
     {
-        
+        if (isset($this->_ion_where)) {
+            foreach ($this->_ion_where as $where) {
+                $this->db->where($where);
+            }
+            $this->_ion_where = array();
+        }
+        return $this->db->select('*')
+                    ->from($this->tables['app_gympro_sessions'])
+                    ->get();
     }
     /*
      * This method will return all sessions

@@ -2741,9 +2741,10 @@ class Gympro extends Role_Controller{
 //                fix these
 //                $created_for = $this->input->post('group_client');
                 $cf = $this->input->post('group_client');
+                $group_client = $cf;
                 $cf = str_split($cf);
                 $created_for_type_id = $cf[0];
-                $reference_id = substr($cf, 2);
+                $reference_id = substr($group_client, 2);
                 $repeat =  $this->input->post('repeat');
                 $type_id = $this->input->post('type_id');
                 if ($type_id == '1') $repeat = NULL;
@@ -2881,6 +2882,20 @@ class Gympro extends Role_Controller{
 //        $this->data['meal_time_list'] = $meal_time_list;
         $this->template->load(null,'applications/gympro/session_edit', $this->data);
     }
+    
+    public function delete_session()
+    {
+        $result = array();
+        $session_id = $this->input->post('session_id');
+        if($this->gympro_library->delete_session($session_id)){
+            $result['message'] = $this->gympro_library->messages_alert();
+        }else{
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
+        return;
+    }
+
     public function earnings_summary()
     {
         $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
@@ -2888,11 +2903,93 @@ class Gympro extends Role_Controller{
         $this->template->load(null,'applications/gympro/earnings_summary', $this->data);
     }
     
-    public function get_earning_summery_for_group( $group_id = 0 )
+    public function get_earning_summary_for_group( $group_id = 0 )
     {
+        $sessions[] = array(
+            'name' => 'Tanveer',
+            'cost' => '60',
+            'status' => 'Paid'
+        );
+        $sessions[] = array(
+            'name' => 'Imam',
+            'cost' => '160',
+            'status' => 'Pending'
+        );
+        $groups[] = array(
+            'id' => '3',
+            'time' => '6:00am - 7:45am ',
+            'title' => 'tantas',
+            'status' => 'Paid',
+            'sessions' => $sessions
+        );
+        $sessions = NULL;
         
+        
+        
+        
+        $sessions[] = array(
+            'name' => 'naz',
+            'cost' => '60a',
+            'status' => 'Paid'
+        );
+        $sessions[] = array(
+            'name' => 'pur',
+            'cost' => '160',
+            'status' => 'Pening'
+        );
+        $groups[] = array(
+            'id' => '3',
+            'time' => '6:00am - 7:45am ',
+            'title' => 'Group 1',
+            'status' => 'Paid',
+            'sessions' => $sessions
+        );
+        $sessions = NULL;
+        
+        $group_data[] = array(
+            'date' => 'Sunday, 23 November 2121 ',
+            'groups' => $groups
+        );
+        $groups = NULL;
+        
+        
+        
+        
+        $sessions[] = array(
+            'name' => '22Shem Haye',
+            'cost' => 'Shem Haye',
+            'status' => 'Paid'
+        );
+        $groups[] = array(
+            'id' => '3',
+            'time' => '6:00am - 7:45am ',
+            'title' => 'Group 1',
+            'status' => 'Paid',
+            'sessions' => $sessions
+        );
+        $sessions = NULL;
+        
+        $group_data[] = array(
+            'date' => 'Sunday, 23 November 2121 ',
+            'groups' => $groups
+        );
+        $groups = NULL;
+        
+        echo json_encode($group_data);
+        return;
+        
+//        $start_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('start'));
+//        $end_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('end'));
+//        $where = array(
+//            'start' => $start_date,
+//            'end' => $end_date,
+//            'status_id' => $this->input->post('status_id'),
+//            'id' => $this->input->post('gr_cl_id'),
+//        );
+//        $get_sessions_id = $this->gympro_library->where($where)->get_sessions()->result_array();
+//        var_dump($get_sessions_id); exit;
     }
-    public function get_earning_summery_for_client( $client_id = 0 )
+    public function get_earning_summary_for_client( $client_id = 0 )
     {
         $sessions[] = array(
             'id' => '2',
@@ -2912,8 +3009,8 @@ class Gympro extends Role_Controller{
             'date' => 'Sunday, 23 November 2121 ',
             'sessions' => $sessions
         );
-        
         $sessions = NULL;
+        
         ///////////////another group of sessions on a different date
         $sessions[] = array(
             'id' => '1',
@@ -2926,12 +3023,11 @@ class Gympro extends Role_Controller{
             'date' => 'Monday, 24 November 2014',
             'sessions' => $sessions
         );
-        
-        
-        
-        
-        
         $sessions = NULL;
+        
+        
+        
+        
         ///////////////another group of sessions on a different date
         $sessions[] = array(
             'id' => '2',
@@ -2951,7 +3047,8 @@ class Gympro extends Role_Controller{
             'date' => 'Sunday, 23 November 2121 ',
             'sessions' => $sessions
         );
-    
+        $sessions = NULL;
+        
         echo json_encode($client_data);
         return;
     }

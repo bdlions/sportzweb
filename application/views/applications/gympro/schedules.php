@@ -47,15 +47,34 @@
                 $('#session_location').html(event.session_info.location);
                 var edit_href = document.getElementById('session_edit');
                 edit_href.href += event.session_info.id;
-                
-                $('#fullCalModal').modal();
+                $("#selected_session").val(event.session_info.id);
+                $('#session_view_modal').modal();
             },
             dayClick: function(date, jsEvent, view) {
                 $('#calendar').fullCalendar('changeView', 'agendaDay');
                 $('#calendar').fullCalendar('gotoDate', date);
             }
         });
-
+        
+        $("#delete_prompt_btn").on('click', function(){
+            $('#session_view_modal').modal('hide');
+            $('#delete_confirm_modal').modal();
+        });
+        $("#delete_confirmed_btn").on('click', function(){
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: "<?php echo base_url().'applications/gympro/delete_session';?>",
+                data: {
+                    session_id : $("#selected_session").val()
+                },
+                success: function(data) {
+                    alert(data['message']);
+                    window.location.reload();
+                }
+            });
+        });
+        
     });
 
 </script>
@@ -77,54 +96,73 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <div id='calendar'></div>
-                    <div id="fullCalModal" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                    <h4 id="modalTitle" class="modal-title"></h4>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    <div class="row">
-                                        <div class="col-sm-2"></div>
-                                        <div class="col-sm-8" style="font-size: 16px;">
-                                            <div class="row form-group">
-                                                <div class="col-sm-4">
-                                                    Title:
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <div id="session_title"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-sm-4">
-                                                    Location:
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <div id="session_location"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-sm-4"></div>
-                                                <div class="col-sm-8">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2"></div>
-                                    </div>
-                                    <div id="modal_body_text"></div>
-                                </div>
-                                <div class="modal-footer">
-                                    <a id="session_edit" href="<?php echo base_url().'applications/gympro/update_session/';?>"><button class="btn btn-info">Edit Session</button></a>
-                                    <button class="btn btn-danger">Delete Session</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div id="session_view_modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                <h4 id="modalTitle" class="modal-title"></h4>
+            </div>
+            <div id="modalBody" class="modal-body">
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-8" style="font-size: 16px;">
+                        <div class="row form-group">
+                            <div class="col-sm-4">Title:</div>
+                            <div class="col-sm-8">
+                                <div id="session_title"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">Location:</div>
+                            <div class="col-sm-8">
+                                <div id="session_location"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-8"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="session_edit" href="<?php echo base_url() . 'applications/gympro/update_session/'; ?>"><button class="btn btn-info">Edit Session</button></a>
+                <button id="delete_prompt_btn" class="btn btn-danger">Delete Session</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="delete_confirm_modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Delete Session</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+            </div>
+            <div id="modalBody" class="modal-body">
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-8" style="font-size: 16px;">
+                        <h3>Are you sure?</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="selected_session">
+                <button id="delete_confirmed_btn" class="btn btn-danger">Delete Session</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
