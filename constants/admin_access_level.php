@@ -23,6 +23,8 @@ define("ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID",                       
 define("ADMIN_ACCESS_LEVEL_LOG_ID",                                             15);
 define("ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID",                                 16);
 define("ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID",                               17);
+define("ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID",                                    22);
+define("ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID",                                  23);
 
 define("ADMIN_ACCESS_LEVEL_VIEW",                                               1);
 define("ADMIN_ACCESS_LEVEL_ACCESS",                                             2);
