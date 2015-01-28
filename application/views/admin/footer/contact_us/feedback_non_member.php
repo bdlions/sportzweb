@@ -16,16 +16,16 @@
                             </tr>
                         </thead>
                         <tbody id="tbody_feedback_list">
-                            <?php //foreach($feedback_list as $feedback){?>
+                            <?php foreach($feedback_list as $feedback){?>
                             <tr>
-                                <td>Nazmul Hasan</td>
-                                <td>bdlions@gmail.com</td>
-                                <td>+8801678112509</td>
-                                <td>Test feedback</td>
-                                <td>23-01-2015</td>   
-                                <td>Delete</td>   
+                                <td><?php echo $feedback['name'];?></td>
+                                <td><?php echo $feedback['email'];?></td>
+                                <td><?php echo $feedback['phone'];?></td>
+                                <td><?php echo $feedback['description'];?></td>
+                                <td><?php echo $feedback['created_on'];?></td> 
+                                <td><a onclick="open_modal_delete_confirm(<?php echo $feedback['id']?>)" >Delete</a></td>   
                             </tr> 
-                            <?php //} ?>                            
+                            <?php } ?>                            
                         </tbody>
                     </table>
                 </div>
@@ -36,3 +36,4 @@
         </div>        
     </div>
 </div>
+<?php $this->load->view("admin/footer/contact_us/modal_delete_member_feedback_confirm")?>

@@ -184,9 +184,8 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function get_member_feedbacks()
     {
-        $this->db->where($this->tables['users'].'.id > ',0);
         $this->db->order_by($this->tables['footer_cu_feedbacks'].'.created_on','desc');
-        return $this->db->select($this->tables['footer_cu_topics'].'.title as topic,'.$this->tables['footer_cu_operating_systems'].'.title as operating_system,'.$this->tables['footer_cu_browsers'].'.title as browser,'.$this->tables['footer_cu_feedbacks'].'.*')
+        return $this->db->select($this->tables['footer_cu_topics'].'.title as topic,'.$this->tables['footer_cu_operating_systems'].'.title as operating_system,'.$this->tables['footer_cu_browsers'].'.title as browser,'.$this->tables['users'].'.email as user_email,'.$this->tables['users'].'.username as user_name,'.$this->tables['users'].'.phone as user_phone,'.$this->tables['footer_cu_feedbacks'].'.*')
                 ->from($this->tables['footer_cu_feedbacks'])
                 ->join($this->tables['users'], $this->tables['users'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.user_id')
                 ->join($this->tables['footer_cu_topics'], $this->tables['footer_cu_topics'] . '.id' . '=' . $this->tables['footer_cu_feedbacks'] . '.topic_id')
@@ -201,9 +200,9 @@ class Admin_contact_us_model extends Ion_auth_model {
      */
     public function get_non_member_feedbacks()
     {
-        $this->db->where($this->tables['users'].'.id ',NULL);
+        $this->db->where($this->tables['footer_cu_feedbacks'].'.user_id ',NULL);
         $this->db->order_by($this->tables['footer_cu_feedbacks'].'.created_on','desc');
-        return $this->db->select($this->tables['footer_cu_topics'].'.*')
+        return $this->db->select($this->tables['footer_cu_feedbacks'].'.*')
                 ->from($this->tables['footer_cu_feedbacks'])
                 ->get();
     }
@@ -222,7 +221,20 @@ class Admin_contact_us_model extends Ion_auth_model {
      * @Author Nazmul on 14th October 2014
      */
     public function delete_feedback($feedback_id)
-    {
+     {
+        if(!isset($feedback_id) || $feedback_id <= 0)
+        {
+            $this->set_error('delete_feedback_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $feedback_id);
+        $this->db->delete($this->tables['footer_cu_feedbacks']);
         
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_feedback_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_feedback_successful');
+        return TRUE;
     }
 }

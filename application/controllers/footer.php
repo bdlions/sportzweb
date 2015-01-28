@@ -231,14 +231,14 @@ class Footer extends CI_Controller {
         {
             if ($this->form_validation->run() == true) 
             {
-                /*$additional_data = array(
+                $additional_data = array(
                     'name' => $this->input->post('name'),
                     'email' => $this->input->post('email'),
                     'phone' => $this->input->post('phone'),
                     'description' => $this->input->post('description'),
                     'created_on' => now()
                 );
-                $this->contact_us_library->add_feedback($additional_data);*/
+                $this->contact_us_library->add_feedback($additional_data);
                 $this->session->set_flashdata('message', 'Your message is sent successfully');
                 redirect('footer/contact_us', 'refresh');
             }

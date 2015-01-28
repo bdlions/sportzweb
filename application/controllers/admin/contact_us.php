@@ -77,8 +77,8 @@ class Contact_us extends CI_Controller{
      */
     public function index()
     {        
-        $feedback_list = $this->admin_contact_us_library->get_all_feedbacks();
-        $this->data['feedback_list'] = $feedback_list;
+//        $feedback_list = $this->admin_contact_us_library->get_all_feedbacks();
+        $this->data['feedback_list'] = array();
         $this->template->load($this->tmpl, "admin/footer/contact_us/index", $this->data);
     }
     /*
@@ -87,16 +87,43 @@ class Contact_us extends CI_Controller{
      */
     public function member_feedback()
     {
-        $this->data['feedback_list'] = array();
+        $feedback_list = array();
+        $feedback_list_array = $this->admin_contact_us_library->get_member_feedbacks();
+        if (!empty($feedback_list_array)) {
+            $feedback_list = $feedback_list_array;
+        }
+        $this->data['feedback_list'] = $feedback_list;
         $this->template->load($this->tmpl, "admin/footer/contact_us/feedback_member", $this->data);
     }
+    
+    public function delete_feedback()
+    {
+        $result = array();
+        $feedback_id = $this->input->post('id');
+        if($this->admin_contact_us_library->delete_feedback($feedback_id))
+        {
+            $result['message'] = $this->admin_contact_us_library->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_contact_us_library->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    
+
     /*
      * Thie method will load non member feedback list
      * @Author Nazmul on 23rd January 2015
      */
     public function non_member_feedback()
     {
-        $this->data['feedback_list'] = array();
+        $feedback_list = array();
+        $feedback_list_array = $this->admin_contact_us_library->get_non_member_feedbacks();
+        if (!empty($feedback_list_array)) {
+            $feedback_list = $feedback_list_array;
+        }
+        $this->data['feedback_list'] = $feedback_list;
         $this->template->load($this->tmpl, "admin/footer/contact_us/feedback_non_member", $this->data);
     }
     

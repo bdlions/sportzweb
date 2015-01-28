@@ -41,15 +41,15 @@ class Member_general extends Role_Controller {
         {
             if ($this->form_validation->run() == true) 
             {
-                /*$additional_data = array(
-                    'user_id' => $this->session->userdata('user_id),
+                $additional_data = array(
+                    'user_id' => $this->session->userdata('user_id'),
                     'topic_id' => $this->input->post('topic_list'),
                     'os_id' => $this->input->post('os_list'),
                     'browser_id' => $this->input->post('browser_list'),
                     'description' => $this->input->post('description'),
                     'created_on' => now()
                 );
-                $this->contact_us_library->add_feedback($additional_data);*/
+                $this->contact_us_library->add_feedback($additional_data);
                 $this->session->set_flashdata('message', 'Your message is sent successfully');
                 redirect('member_general/contact_us', 'refresh');
             }

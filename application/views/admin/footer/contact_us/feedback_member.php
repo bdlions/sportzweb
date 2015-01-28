@@ -19,19 +19,19 @@
                             </tr>
                         </thead>
                         <tbody id="tbody_feedback_list">
-                            <?php //foreach($feedback_list as $feedback){?>
+                            <?php foreach($feedback_list as $feedback){?>
                             <tr>
-                                <td>Recent Activity</td>
-                                <td>Windows 8</td>
-                                <td>Google Crome</td>
-                                <td>Shem Haye</td>
-                                <td>shem@webalatic.com</td>
-                                <td>020 3397 8425</td>
-                                <td>Sample Feedback</td>
-                                <td>23-01-2015</td> 
-                                <td>Delete</td>   
+                                <td><?php echo $feedback['topic'];?></td>
+                                <td><?php echo $feedback['operating_system'];?></td>
+                                <td><?php echo $feedback['browser'];?></td>
+                                <td><?php echo $feedback['user_name'];?></td>
+                                <td><?php echo $feedback['user_email'];?></td>
+                                <td><?php echo $feedback['user_phone'];?></td>
+                                <td><?php echo $feedback['description'];?></td>
+                                <td><?php echo $feedback['created_on'];?></td> 
+                                <td><a onclick="open_modal_delete_confirm(<?php echo $feedback['id']?>)" >Delete</a></td>   
                             </tr> 
-                            <?php //} ?>                            
+                            <?php } ?>                            
                         </tbody>
                     </table>
                 </div>
@@ -42,3 +42,4 @@
         </div>        
     </div>
 </div>
+<?php $this->load->view("admin/footer/contact_us/modal_delete_member_feedback_confirm")?>

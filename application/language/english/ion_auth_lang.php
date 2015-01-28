@@ -382,3 +382,8 @@ $lang['update_status_fail']                           = "Failed to update status
 $lang['delete_status_successful']                     = "Status deleted successfully.";
 $lang['delete_status_fail']                           = "Failed to delete status.";
 
+$lang['update_feedback_successful']                     = "Feedback updated successfully.";
+$lang['update_feedback_fail']                           = "Failed to update feedback info.";
+$lang['delete_feedback_successful']                     = "Feedback deleted successfully.";
+$lang['delete_feedback_fail']                           = "Failed to delete feedback.";
+

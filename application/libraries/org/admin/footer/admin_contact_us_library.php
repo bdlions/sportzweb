@@ -84,7 +84,7 @@ class Admin_contact_us_library {
      * This method will return non member feedback list
      * @Author Nazmul on 27th January 2015
      */
-    public function get_nonmember_feedbacks()
+    public function get_non_member_feedbacks()
     {
         $feedback_list = array();
         $feedbacks_array = $this->admin_contact_us_model->get_non_member_feedbacks()->result_array();
