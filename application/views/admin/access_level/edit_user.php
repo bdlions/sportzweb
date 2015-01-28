@@ -790,6 +790,86 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="td_text_color">
+                                    Privacy
+                                </td>
+                                 <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($privacy_view); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($privacy_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($privacy_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($privacy_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($privacy_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($privacy_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($privacy_writing); ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td_text_color">
+                                    Terms
+                                </td>
+                                 <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($terms_view); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($terms_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($terms_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($terms_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($terms_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($terms_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($terms_writing); ?>
+                                    </div>
+                                </td>
+                            </tr>
                             
                         </tbody>
                     </table>

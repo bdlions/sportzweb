@@ -215,7 +215,10 @@
                                     }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
                                     {?>
                                     <li id="manage_contact_us"><a href="<?php echo base_url()?>admin/contact_us">Contact Us</a></li>
-                                    <?php } ?>
+                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                                    {?>
+                                    <li id="manage_contact_us"><a href="<?php echo base_url()?>admin/footer/privacy">Privacy</a></li>
+                                    <?php } ?> ?>
                                 </ul>
                             </li>
                             <?php 

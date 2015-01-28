@@ -1484,6 +1484,153 @@ class Access_level extends CI_Controller{
         {
             $result['contact_us_writing']['checked'] = 'checked';
         }
+        //Footer Privacy us checkbox
+        $result['privacy_view'] = array(
+            'name' => $accesss_map['privacy_view_map_id'],
+            'id' => $accesss_map['privacy_view_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['privacy_view_map_id'], $access_level_mapping))
+        {
+            $result['privacy_view']['checked'] = 'checked';
+        }        
+        $result['privacy_access'] = array(
+            'name' => $accesss_map['privacy_access_map_id'],
+            'id' => $accesss_map['privacy_access_map_id'],
+            'type' => 'checkbox'
+        );        
+        if(array_key_exists($accesss_map['privacy_access_map_id'], $access_level_mapping))
+        {
+            $result['privacy_access']['checked'] = 'checked';
+        }
+        $result['privacy_write'] = array(
+            'name' => $accesss_map['privacy_write_map_id'],
+            'id' => $accesss_map['privacy_write_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['privacy_write_map_id'], $access_level_mapping))
+        {
+            $result['privacy_write']['checked'] = 'checked';
+        }
+	$result['privacy_approve'] = array(
+            'name' => $accesss_map['privacy_approve_map_id'],
+            'id' => $accesss_map['privacy_approve_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['privacy_approve_map_id'], $access_level_mapping))
+        {
+            $result['privacy_approve']['checked'] = 'checked';
+        }
+	$result['privacy_edit'] = array(
+            'name' => $accesss_map['privacy_edit_map_id'],
+            'id' => $accesss_map['privacy_edit_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['privacy_edit_map_id'], $access_level_mapping))
+        {
+            $result['privacy_edit']['checked'] = 'checked';
+        }
+	$result['privacy_delete'] = array(
+            'name' => $accesss_map['privacy_delete_map_id'],
+            'id' => $accesss_map['privacy_delete_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['privacy_delete_map_id'], $access_level_mapping))
+        {
+            $result['privacy_delete']['checked'] = 'checked';
+        }
+	$result['privacy_configuration'] = array(
+            'name' => $accesss_map['privacy_configuration_map_id'],
+            'id' => $accesss_map['privacy_configuration_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['privacy_configuration_map_id'], $access_level_mapping))
+        {
+            $result['privacy_configuration']['checked'] = 'checked';
+        }
+        $result['privacy_writing'] = array(
+            'name' => $accesss_map['privacy_writing_map_id'],
+            'id' => $accesss_map['privacy_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['privacy_writing_map_id'], $access_level_mapping))
+        {
+            $result['privacy_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
+        //Footer Terms us checkbox
+        $result['terms_view'] = array(
+            'name' => $accesss_map['terms_view_map_id'],
+            'id' => $accesss_map['terms_view_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['terms_view_map_id'], $access_level_mapping))
+        {
+            $result['terms_view']['checked'] = 'checked';
+        }        
+        $result['terms_access'] = array(
+            'name' => $accesss_map['terms_access_map_id'],
+            'id' => $accesss_map['terms_access_map_id'],
+            'type' => 'checkbox'
+        );        
+        if(array_key_exists($accesss_map['terms_access_map_id'], $access_level_mapping))
+        {
+            $result['terms_access']['checked'] = 'checked';
+        }
+        $result['terms_write'] = array(
+            'name' => $accesss_map['terms_write_map_id'],
+            'id' => $accesss_map['terms_write_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['terms_write_map_id'], $access_level_mapping))
+        {
+            $result['terms_write']['checked'] = 'checked';
+        }
+	$result['terms_approve'] = array(
+            'name' => $accesss_map['terms_approve_map_id'],
+            'id' => $accesss_map['terms_approve_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['terms_approve_map_id'], $access_level_mapping))
+        {
+            $result['terms_approve']['checked'] = 'checked';
+        }
+	$result['terms_edit'] = array(
+            'name' => $accesss_map['terms_edit_map_id'],
+            'id' => $accesss_map['terms_edit_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['terms_edit_map_id'], $access_level_mapping))
+        {
+            $result['terms_edit']['checked'] = 'checked';
+        }
+	$result['terms_delete'] = array(
+            'name' => $accesss_map['terms_delete_map_id'],
+            'id' => $accesss_map['terms_delete_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['terms_delete_map_id'], $access_level_mapping))
+        {
+            $result['terms_delete']['checked'] = 'checked';
+        }
+	$result['terms_configuration'] = array(
+            'name' => $accesss_map['terms_configuration_map_id'],
+            'id' => $accesss_map['terms_configuration_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['terms_configuration_map_id'], $access_level_mapping))
+        {
+            $result['terms_configuration']['checked'] = 'checked';
+        }
+        $result['terms_writing'] = array(
+            'name' => $accesss_map['terms_writing_map_id'],
+            'id' => $accesss_map['terms_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['terms_writing_map_id'], $access_level_mapping))
+        {
+            $result['terms_writing']['checked'] = 'checked';
+        }
         //--------------------------------------------------------------------------//
         return $result;
     }
@@ -1643,6 +1790,24 @@ class Access_level extends CI_Controller{
         $accesss_map['contact_us_delete_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['contact_us_configuration_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
         $accesss_map['contact_us_writing_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
+        $accesss_map['privacy_view_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
+        $accesss_map['privacy_access_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
+        $accesss_map['privacy_write_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
+        $accesss_map['privacy_approve_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE;
+        $accesss_map['privacy_edit_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
+        $accesss_map['privacy_delete_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
+        $accesss_map['privacy_configuration_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
+        $accesss_map['privacy_writing_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
+        $accesss_map['terms_view_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
+        $accesss_map['terms_access_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
+        $accesss_map['terms_write_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
+        $accesss_map['terms_approve_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE;
+        $accesss_map['terms_edit_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
+        $accesss_map['terms_delete_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
+        $accesss_map['terms_configuration_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
+        $accesss_map['terms_writing_map_id'] = ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
         //--------------------------------------------------------------------------//
         return $accesss_map;
     }
@@ -2210,6 +2375,72 @@ class Access_level extends CI_Controller{
         if(array_key_exists($accesss_map['contact_us_writing_map_id'], $form_post_array))
         {
                 $access_level_mapping[$accesss_map['contact_us_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
+        if(array_key_exists($accesss_map['privacy_view_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['privacy_view_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['privacy_access_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['privacy_access_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['privacy_write_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['privacy_write_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['privacy_approve_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['privacy_approve_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['privacy_edit_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['privacy_edit_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['privacy_delete_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['privacy_delete_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['privacy_configuration_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['privacy_configuration_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['privacy_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['privacy_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
+        if(array_key_exists($accesss_map['terms_view_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['terms_view_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['terms_access_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['terms_access_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['terms_write_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['terms_write_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['terms_approve_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['terms_approve_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['terms_edit_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['terms_edit_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['terms_delete_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['terms_delete_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['terms_configuration_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['terms_configuration_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['terms_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['terms_writing_map_id']] = 1;
         }
         //--------------------------------------------------------------------------//
         return $access_level_mapping;
