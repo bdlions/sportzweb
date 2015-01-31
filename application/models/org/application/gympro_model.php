@@ -1184,8 +1184,9 @@ class Gympro_model extends Ion_auth_model {
             }
             $this->_ion_where = array();
         }
-        return $this->db->select('*')
+        return $this->db->select($this->tables['app_gympro_sessions'].'.*, '. $this->tables['app_gympro_session_statuses'] . '.title as status_title')
                     ->from($this->tables['app_gympro_sessions'])
+                    ->join($this->tables['app_gympro_session_statuses'], $this->tables['app_gympro_sessions'] . '.status_id = ' . $this->tables['app_gympro_session_statuses'] . '.id')
                     ->get();
     }
     /*

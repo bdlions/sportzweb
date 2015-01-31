@@ -18,7 +18,10 @@
                     type: "POST",
                     url: "<?php echo base_url().'applications/gympro/get_earning_summary_for_group';?>",
                     data: {
-                        gr_cl_id: gr_or_cl.substring(2),
+                        created_for_type_id: '1',
+//                        created_for_type_id: '1',
+                        gr_cl_id: '3',
+//                        gr_cl_id: gr_or_cl.substring(2),
                         start: st_date,
                         end: fin_date,
                         status_id: status_id
@@ -36,8 +39,18 @@
                     dataType: 'json',
                     type: "POST",
                     url: "<?php echo base_url().'applications/gympro/get_earning_summary_for_client';?>",
-                    data: gr_or_cl.substring(2),
+//                    data: gr_or_cl.substring(2),
+                    data: {
+                        created_for_type_id: '2',
+//                        created_for_type_id: '1',
+//                        gr_cl_id: '3',//for test
+                        gr_cl_id: gr_or_cl.substring(2),
+                        start: st_date,
+                        end: fin_date,
+                        status_id: status_id
+                    },
                     success: function(data) {
+                        console.log(data);
 //                        alert(data[0].date);
                         $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
                     }
@@ -82,10 +95,10 @@
         {% while(session){ %}
             <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
                 <div class="row">
-                    <div class="col-md-4">{%= session['time']%}</div>
-                    <div class="col-md-3">{%= session['name']%}</div>
+                    <div class="col-md-4">{%= session['start']%} - {%= session['end']%}</div>
+                    <div class="col-md-3">{%= session['title']%}</div>
                     <div class="col-md-2">{%= session['cost']%}</div>
-                    <div class="col-md-2">{%= session['status']%}</div>
+                    <div class="col-md-2">{%= session['status_title']%}</div>
                     <div class="col-md-1"><input name="session_select_<?php echo '{%= session["id"]%}';?>" type="checkbox"></div>
                 </div>
             </div>
@@ -177,8 +190,8 @@
                                 <?php endforeach; ?>
                                 </optgroup>
                                 <optgroup label="Clients">
-                                    <option value="2_1">Shem Haye</option>
-                                    <option value="2_2">Tan Haye</option>
+<!--                                    <option value="2_1">Shem Haye</option>
+                                    <option value="2_2">Tan Haye</option>-->
                                     <?php foreach ($client_list as $client_info): ?>
                                         <option value="2_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']; ?></option>
                                     <?php endforeach; ?>
@@ -207,18 +220,9 @@
                         <div class="col-md-4 control-div">Session:</div>
                         <div class="col-md-7">
                             <select class="form-control" id="status_id">
-                                <option>
-                                    Prepaid
-                                </option>
-                                <option>
-                                    Paid
-                                </option>
-                                <option>
-                                    Unpaid
-                                </option>
-                                <option>
-                                    Cancelled
-                                </option>
+                                <?php foreach ($status_list as $status): ?>
+                                    <option value="<?php echo $status['id']; ?>"><?php echo $status['title']?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>                        

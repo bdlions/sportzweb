@@ -70,7 +70,6 @@
                                     <?php endforeach; ?>
                                 </optgroup>
                                 <optgroup label="Clients">
-                                    <option value="2_<?php echo '3'; ?>">Shem Haye</option>
                                     <?php foreach ($client_list as $client_info): ?>
                                         <option value="2_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
                                     <?php endforeach; ?>
