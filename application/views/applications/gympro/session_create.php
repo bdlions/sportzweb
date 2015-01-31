@@ -43,6 +43,9 @@
         }
         ?>
         <div class="col-md-10">
+            <?php if(isset($message) && ($message != NULL)): ?>
+            <div class="alert alert-info alert-dismissible"><?php echo $message; ?></div>
+            <?php endif; ?>
             <div class="row">
                 <div class="col-md-12">
                     Adding new session
@@ -168,7 +171,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4 pull-right">
-                    <button class="btn btn-success" type="submit" >Create Session</button>
+                    <button class="btn button-custom btn_gympro pull-right" type="submit" >Create Session</button>
                 </div>
             </div>
             <?php echo form_close();?>

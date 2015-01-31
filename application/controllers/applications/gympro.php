@@ -2824,10 +2824,10 @@ class Gympro extends Role_Controller{
             if ($this->form_validation->run() == true) {
 //                fix these
 //                $created_for = $this->input->post('group_client');
-                $cf = $this->input->post('group_client');
-                $cf = str_split($cf);
-                $created_for_type_id = $cf[0];
-                $reference_id = substr($cf, 2);
+                $group_client = $this->input->post('group_client');
+//                $cf = str_split($cf);
+                $created_for_type_id = substr($group_client, 0, 1);
+                $reference_id = substr($group_client, 2);
                 $repeat =  $this->input->post('repeat');
                 $type_id = $this->input->post('type_id');
                 if ($type_id == '1') $repeat = NULL;
@@ -2864,6 +2864,8 @@ class Gympro extends Role_Controller{
             $this->data['message'] = $this->session->flashdata('message'); 
         }
         
+        $this->data['session_id']    = $session_id;
+        $this->data['session_id']    = $session_id;
         $this->data['session_id']    = $session_id;
         $this->data['session_info']    = $session_info;
         $this->data['session_statuses']    = $this->gympro_library->get_all_session_statuses()->result_array();
