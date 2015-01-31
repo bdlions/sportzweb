@@ -564,7 +564,6 @@
                                     </div>
                                 </td>
                             </tr>
-                            
                             <tr class="success">
                                 <td>
                                     Business profile
