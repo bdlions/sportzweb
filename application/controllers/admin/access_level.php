@@ -449,6 +449,80 @@ class Access_level extends CI_Controller{
             $result['user_manage_writing']['checked'] = 'checked';
         }
         //--------------------------------------------------------------------------//
+        //directory checkbox
+        $result['directory_view'] = array(
+            'name' => $accesss_map['directory_view_map_id'],
+            'id' => $accesss_map['directory_view_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['directory_view_map_id'], $access_level_mapping))
+        {
+            $result['directory_view']['checked'] = 'checked';
+        }        
+        $result['directory_access'] = array(
+            'name' => $accesss_map['directory_access_map_id'],
+            'id' => $accesss_map['directory_access_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['directory_access_map_id'], $access_level_mapping))
+        {
+            $result['directory_access']['checked'] = 'checked';
+        }
+        $result['directory_write'] = array(
+            'name' => $accesss_map['directory_write_map_id'],
+            'id' => $accesss_map['directory_write_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['directory_write_map_id'], $access_level_mapping))
+        {
+            $result['directory_write']['checked'] = 'checked';
+        }
+	$result['directory_approve'] = array(
+            'name' => $accesss_map['directory_approve_map_id'],
+            'id' => $accesss_map['directory_approve_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['directory_approve_map_id'], $access_level_mapping))
+        {
+            $result['directory_approve']['checked'] = 'checked';
+        }
+	$result['directory_edit'] = array(
+            'name' => $accesss_map['directory_edit_map_id'],
+            'id' => $accesss_map['directory_edit_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['directory_edit_map_id'], $access_level_mapping))
+        {
+            $result['directory_edit']['checked'] = 'checked';
+        }
+	$result['directory_delete'] = array(
+            'name' => $accesss_map['directory_delete_map_id'],
+            'id' => $accesss_map['directory_delete_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['directory_delete_map_id'], $access_level_mapping))
+        {
+            $result['directory_delete']['checked'] = 'checked';
+        }
+	$result['directory_configuration'] = array(
+            'name' => $accesss_map['directory_configuration_map_id'],
+            'id' => $accesss_map['directory_configuration_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['directory_configuration_map_id'], $access_level_mapping))
+        {
+            $result['directory_configuration']['checked'] = 'checked';
+        }
+        $result['directory_writing'] = array(
+            'name' => $accesss_map['directory_writing_map_id'],
+            'id' => $accesss_map['directory_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['directory_writing_map_id'], $access_level_mapping))
+        {
+            $result['directory_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         //xstream_banter checkbox
         $result['xstream_banter_view'] = array(
             'name' => $accesss_map['xstream_banter_view_map_id'],
@@ -1484,7 +1558,7 @@ class Access_level extends CI_Controller{
         {
             $result['contact_us_writing']['checked'] = 'checked';
         }
-        //Footer Privacy us checkbox
+        //Footer Privacy  checkbox
         $result['privacy_view'] = array(
             'name' => $accesss_map['privacy_view_map_id'],
             'id' => $accesss_map['privacy_view_map_id'],
@@ -1558,7 +1632,7 @@ class Access_level extends CI_Controller{
             $result['privacy_writing']['checked'] = 'checked';
         }
         //--------------------------------------------------------------------------//
-        //Footer Terms us checkbox
+        //Footer Terms  checkbox
         $result['terms_view'] = array(
             'name' => $accesss_map['terms_view_map_id'],
             'id' => $accesss_map['terms_view_map_id'],
@@ -1632,6 +1706,80 @@ class Access_level extends CI_Controller{
             $result['terms_writing']['checked'] = 'checked';
         }
         //--------------------------------------------------------------------------//
+        //gympro_applications application  checkbox
+        $result['gympro_applications_view'] = array(
+            'name' => $accesss_map['gympro_applications_view_map_id'],
+            'id' => $accesss_map['gympro_applications_view_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['gympro_applications_view_map_id'], $access_level_mapping))
+        {
+            $result['gympro_applications_view']['checked'] = 'checked';
+        }        
+        $result['gympro_applications_access'] = array(
+            'name' => $accesss_map['gympro_applications_access_map_id'],
+            'id' => $accesss_map['gympro_applications_access_map_id'],
+            'type' => 'checkbox'
+        );        
+        if(array_key_exists($accesss_map['gympro_applications_access_map_id'], $access_level_mapping))
+        {
+            $result['gympro_applications_access']['checked'] = 'checked';
+        }
+        $result['gympro_applications_write'] = array(
+            'name' => $accesss_map['gympro_applications_write_map_id'],
+            'id' => $accesss_map['gympro_applications_write_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['gympro_applications_write_map_id'], $access_level_mapping))
+        {
+            $result['gympro_applications_write']['checked'] = 'checked';
+        }
+	$result['gympro_applications_approve'] = array(
+            'name' => $accesss_map['gympro_applications_approve_map_id'],
+            'id' => $accesss_map['gympro_applications_approve_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['gympro_applications_approve_map_id'], $access_level_mapping))
+        {
+            $result['gympro_applications_approve']['checked'] = 'checked';
+        }
+	$result['gympro_applications_edit'] = array(
+            'name' => $accesss_map['gympro_applications_edit_map_id'],
+            'id' => $accesss_map['gympro_applications_edit_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['gympro_applications_edit_map_id'], $access_level_mapping))
+        {
+            $result['gympro_applications_edit']['checked'] = 'checked';
+        }
+	$result['gympro_applications_delete'] = array(
+            'name' => $accesss_map['gympro_applications_delete_map_id'],
+            'id' => $accesss_map['gympro_applications_delete_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['gympro_applications_delete_map_id'], $access_level_mapping))
+        {
+            $result['gympro_applications_delete']['checked'] = 'checked';
+        }
+	$result['gympro_applications_configuration'] = array(
+            'name' => $accesss_map['gympro_applications_configuration_map_id'],
+            'id' => $accesss_map['gympro_applications_configuration_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['gympro_applications_configuration_map_id'], $access_level_mapping))
+        {
+            $result['gympro_applications_configuration']['checked'] = 'checked';
+        }
+        $result['gympro_applications_writing'] = array(
+            'name' => $accesss_map['gympro_applications_writing_map_id'],
+            'id' => $accesss_map['gympro_applications_writing_map_id'],
+            'type' => 'checkbox'
+        );
+        if(array_key_exists($accesss_map['gympro_applications_writing_map_id'], $access_level_mapping))
+        {
+            $result['gympro_applications_writing']['checked'] = 'checked';
+        }
+        //--------------------------------------------------------------------------//
         return $result;
     }
     
@@ -1664,6 +1812,15 @@ class Access_level extends CI_Controller{
         $accesss_map['user_manage_delete_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['user_manage_configuration_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
         $accesss_map['user_manage_writing_map_id'] = ADMIN_ACCESS_LEVEL_USERS_USER_MANAGE_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
+        $accesss_map['directory_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
+        $accesss_map['directory_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
+        $accesss_map['directory_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
+        $accesss_map['directory_approve_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE;
+        $accesss_map['directory_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
+        $accesss_map['directory_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
+        $accesss_map['directory_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
+        $accesss_map['directory_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
         //--------------------------------------------------------------------------//
         $accesss_map['xstream_banter_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['xstream_banter_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
@@ -1754,6 +1911,15 @@ class Access_level extends CI_Controller{
         $accesss_map['visitor_applications_delete_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
         $accesss_map['visitor_applications_configuration_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
         $accesss_map['visitor_applications_writing_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_APPLICATIONS_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
+        //--------------------------------------------------------------------------//
+        $accesss_map['gympro_applications_view_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
+        $accesss_map['gympro_applications_access_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
+        $accesss_map['gympro_applications_write_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_WRITE;
+        $accesss_map['gympro_applications_approve_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_APPROVE;
+        $accesss_map['gympro_applications_edit_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT;
+        $accesss_map['gympro_applications_delete_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE;
+        $accesss_map['gympro_applications_configuration_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_CONFIGURATION;
+        $accesss_map['gympro_applications_writing_map_id'] = ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_WRITING;
         //--------------------------------------------------------------------------//
         $accesss_map['visitor_business_profile_view_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW;
         $accesss_map['visitor_business_profile_access_map_id'] = ADMIN_ACCESS_LEVEL_VISITORS_BUSINESS_PROFILE_ID.'_'.ADMIN_ACCESS_LEVEL_ACCESS;
@@ -1913,6 +2079,39 @@ class Access_level extends CI_Controller{
         if(array_key_exists($accesss_map['user_manage_writing_map_id'], $form_post_array))
         {
                 $access_level_mapping[$accesss_map['user_manage_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
+        if(array_key_exists($accesss_map['directory_view_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['directory_view_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['directory_access_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['directory_access_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['directory_write_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['directory_write_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['directory_approve_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['directory_approve_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['directory_edit_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['directory_edit_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['directory_delete_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['directory_delete_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['directory_configuration_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['directory_configuration_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['directory_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['directory_writing_map_id']] = 1;
         }
         //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['xstream_banter_view_map_id'], $form_post_array))
@@ -2243,6 +2442,39 @@ class Access_level extends CI_Controller{
         if(array_key_exists($accesss_map['visitor_applications_writing_map_id'], $form_post_array))
         {
                 $access_level_mapping[$accesss_map['visitor_applications_writing_map_id']] = 1;
+        }
+        //--------------------------------------------------------------------------//
+        if(array_key_exists($accesss_map['gympro_applications_view_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['gympro_applications_view_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['gympro_applications_access_map_id'], $form_post_array))
+        {
+            $access_level_mapping[$accesss_map['gympro_applications_access_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['gympro_applications_write_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['gympro_applications_write_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['gympro_applications_approve_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['gympro_applications_approve_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['gympro_applications_edit_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['gympro_applications_edit_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['gympro_applications_delete_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['gympro_applications_delete_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['gympro_applications_configuration_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['gympro_applications_configuration_map_id']] = 1;
+        }
+        if(array_key_exists($accesss_map['gympro_applications_writing_map_id'], $form_post_array))
+        {
+                $access_level_mapping[$accesss_map['gympro_applications_writing_map_id']] = 1;
         }
         //--------------------------------------------------------------------------//
         if(array_key_exists($accesss_map['visitor_business_profile_view_map_id'], $form_post_array))

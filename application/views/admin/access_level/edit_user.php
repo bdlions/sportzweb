@@ -203,6 +203,46 @@
                             </tr>
                             <tr>
                                 <td class="td_text_color">
+                                    App directory
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($directory_view); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($directory_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($directory_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($directory_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($directory_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($directory_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($directory_writing); ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td_text_color">
                                     Xstream Banter
                                 </td>
                                 <td>
@@ -484,6 +524,47 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="td_text_color">
+                                    Gympro
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($gympro_applications_view); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($gympro_applications_write); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($gympro_applications_approve); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($gympro_applications_edit); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($gympro_applications_delete); ?>
+                                    </div>
+                                </td>
+				<td>
+                                    <div class="form-group">
+                                       <?php echo form_input($gympro_applications_configuration); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                       <?php echo form_input($gympro_applications_writing); ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            
                             <tr class="success">
                                 <td>
                                     Business profile

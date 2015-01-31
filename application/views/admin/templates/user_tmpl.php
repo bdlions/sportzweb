@@ -129,7 +129,8 @@
                                     || array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) 
                                     || array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) 
                                     || array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) 
-                                    || array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                                    || array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)
+                                    || array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
                             {?>                            
                             <li id="applications">
                                 <a href="#">Applications</a>
@@ -166,6 +167,10 @@
                                     }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
                                     {?>
                                     <li id="applications_photography"><a href="<?php echo base_url()?>admin/applications_photography">Photography</a></li>
+                                    <?php 
+                                    }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                                    {?>
+                                    <li id="applications_photography"><a href="<?php echo base_url()?>admin/applications_gympro">Gympro</a></li>
                                     <?php } ?>
                                 </ul>
                             </li>
@@ -202,7 +207,9 @@
                             <?php 
                             }if(
                                     array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_ABOUT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)
-                                    || array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                                    || array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)
+                                    || array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)
+                                    || array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
                             {?>
                             <li id="footer">
                                 <a href="#">Footer</a>
@@ -215,10 +222,17 @@
                                     }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
                                     {?>
                                     <li id="manage_contact_us"><a href="<?php echo base_url()?>admin/contact_us">Contact Us</a></li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                                    <?php
+                                    }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_PRIVACY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
                                     {?>
-                                    <li id="manage_contact_us"><a href="<?php echo base_url()?>admin/footer/privacy">Privacy</a></li>
-                                    <?php } ?> ?>
+                                    <li id="manage_privacy"><a href="<?php echo base_url()?>admin/footer_privacy">Privacy</a></li>
+                                    <?php
+                                    }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_TERMS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping))
+                                    {?>
+                                    <li id="manage_trems"><a href="<?php echo base_url()?>admin/footer_terms">Terms</a></li>
+                                    <?php
+                                    } 
+                                    ?>
                                 </ul>
                             </li>
                             <?php 

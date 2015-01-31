@@ -10,7 +10,8 @@ class Applications_gympro extends CI_Controller{
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
-        $this->load->library('org/admin/application/admin_gympro_library.php');
+        $this->load->library('org/admin/access_level/admin_access_level_library');
+        $this->load->library('org/admin/application/admin_gympro_library');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
         // Load MongoDB library instead of native db driver if required
