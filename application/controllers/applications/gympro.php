@@ -2898,132 +2898,191 @@ class Gympro extends Role_Controller{
 
     public function earnings_summary()
     {
+        $current_date = $this->utils->get_current_date_yyyymmdd( 'BD' );
+        $this->data['current_date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($current_date);
         $this->data['status_list'] = $this->gympro_library->get_all_session_statuses()->result_array();
         $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
         $this->data['client_list'] = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
         $this->template->load(null,'applications/gympro/earnings_summary', $this->data);
     }
     
-    public function get_earning_summary_for_group( $group_id = 0 )
-    {
-        $sessions[] = array(
-            'name' => 'Tanveer',
-            'cost' => '60',
-            'status' => 'Paid'
+    public function update_sessions(){
+        $result = array();
+        $session_id_array = $this->input->post('session_id_array');
+        $session_status = $this->input->post('status_id');
+        $additional_data = array(
+            'status_id' =>  $session_status
         );
-        $sessions[] = array(
-            'name' => 'Imam',
-            'cost' => '160',
-            'status' => 'Pending'
-        );
-        $groups[] = array(
-            'id' => '3',
-            'time' => '6:00am - 7:45am ',
-            'title' => 'tantas',
-            'status' => 'Paid',
-            'sessions' => $sessions
-        );
-        $sessions = NULL;
-        
-        
-        
-        
-        $sessions[] = array(
-            'name' => 'naz',
-            'cost' => '60a',
-            'status' => 'Paid'
-        );
-        $sessions[] = array(
-            'name' => 'pur',
-            'cost' => '160',
-            'status' => 'Pening'
-        );
-        $groups[] = array(
-            'id' => '3',
-            'time' => '6:00am - 7:45am ',
-            'title' => 'Group 1',
-            'status' => 'Paid',
-            'sessions' => $sessions
-        );
-        $sessions = NULL;
-        
-        $group_data[] = array(
-            'date' => 'Sunday, 23 November 2121 ',
-            'groups' => $groups
-        );
-        $groups = NULL;
-        
-        
-        
-        
-        $sessions[] = array(
-            'name' => '22Shem Haye',
-            'cost' => 'Shem Haye',
-            'status' => 'Paid'
-        );
-        $groups[] = array(
-            'id' => '3',
-            'time' => '6:00am - 7:45am ',
-            'title' => 'Group 1',
-            'status' => 'Paid',
-            'sessions' => $sessions
-        );
-        $sessions = NULL;
-        
-        $group_data[] = array(
-            'date' => 'Sunday, 23 November 2121 ',
-            'groups' => $groups
-        );
-        $groups = NULL;
-        
-        echo json_encode($group_data);
+        if($this->gympro_library->update_sessions($session_id_array, $additional_data)){
+            $result['message'] = $this->gympro_library->messages_alert();
+        }else{
+            $result['message'] = $this->gympro_library->errors_alert();
+        }
+        echo json_encode($result);
         return;
-        
-        $start_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('start'));
-        $end_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('end'));
-        
+    }
+    public function get_earning_summary(){
+        $gr_cl_data = $this->input->post();
+        $start_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($gr_cl_data['start']);
+        $end_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($gr_cl_data['end']);
         $where = array(
             'date >=' => $start_date,
             'date <=' => $end_date,
-            'status_id' => $this->input->post('status_id'),
-            'reference_id' => $this->input->post('gr_cl_id'),
-            'created_for_type_id' => $this->input->post('created_for_type_id'),
+            'status_id' => $gr_cl_data['status_id'],
+            'reference_id' => $gr_cl_data['gr_cl_id'],
+            'created_for_type_id' => $gr_cl_data['created_for_type_id'],
         );
         $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
         
-        foreach ($get_sessions as $session)
-        {
-            
+        //group view can change, so two cases:
+        if ($gr_cl_data['created_for_type_id'] == '1') {    //for group
+            foreach ($get_sessions as $session) {
+                $group_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
+                $group_data[$session['date']]['sessions'][] = $session;
+            }
+            foreach ($group_data as $data) {
+                $result[] = $data;
+            }
+            $group_data = $result;
+            echo json_encode($group_data);
+            return;
+        } else if ($gr_cl_data['created_for_type_id'] == '2') { //for client
+            foreach ($get_sessions as $session) {
+                $client_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
+                $client_data[$session['date']]['sessions'][] = $session;
+            }
+            foreach ($client_data as $data) {
+                $result[] = $data;
+            }
+            $client_data = $result;
+            echo json_encode($client_data);
+            return;
         }
-        
-        var_dump($get_sessions);
-        exit;
     }
-    public function get_earning_summary_for_client( $client_id = 0 )
-    {
-        $start_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('start'));
-        $end_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('end'));
-        
-        $where = array(
-            'date >=' => $start_date,
-            'date <=' => $end_date,
-            'status_id' => $this->input->post('status_id'),
-            'reference_id' => $this->input->post('gr_cl_id'),
-            'created_for_type_id' => $this->input->post('created_for_type_id'),
-        );
-        $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
-        foreach ($get_sessions as $session)
-        {
-            $client_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);;
-            $client_data[$session['date']]['sessions'][] = $session;
-        }
-        foreach ($client_data as $data)
-        {
-            $result[] = $data;
-        }
-        $client_data = $result;
-        
-        echo json_encode($client_data);
-        return;
-    }
+    
+    
+//    public function get_earning_summary_for_group( $group_id = 0 )
+//    {
+//        $sessions[] = array(
+//            'name' => 'Tanveer',
+//            'cost' => '60',
+//            'status' => 'Paid'
+//        );
+//        $sessions[] = array(
+//            'name' => 'Imam',
+//            'cost' => '160',
+//            'status' => 'Pending'
+//        );
+//        $groups[] = array(
+//            'id' => '3',
+//            'time' => '6:00am - 7:45am ',
+//            'title' => 'tantas',
+//            'status' => 'Paid',
+//            'sessions' => $sessions
+//        );
+//        $sessions = NULL;
+//        
+//        
+//        
+//        
+//        $sessions[] = array(
+//            'name' => 'naz',
+//            'cost' => '60a',
+//            'status' => 'Paid'
+//        );
+//        $sessions[] = array(
+//            'name' => 'pur',
+//            'cost' => '160',
+//            'status' => 'Pening'
+//        );
+//        $groups[] = array(
+//            'id' => '3',
+//            'time' => '6:00am - 7:45am ',
+//            'title' => 'Group 1',
+//            'status' => 'Paid',
+//            'sessions' => $sessions
+//        );
+//        $sessions = NULL;
+//        
+//        $group_data[] = array(
+//            'date' => 'Sunday, 23 November 2121 ',
+//            'groups' => $groups
+//        );
+//        $groups = NULL;
+//        
+//        
+//        
+//        
+//        $sessions[] = array(
+//            'name' => '22Shem Haye',
+//            'cost' => 'Shem Haye',
+//            'status' => 'Paid'
+//        );
+//        $groups[] = array(
+//            'id' => '3',
+//            'time' => '6:00am - 7:45am ',
+//            'title' => 'Group 1',
+//            'status' => 'Paid',
+//            'sessions' => $sessions
+//        );
+//        $sessions = NULL;
+//        
+//        $group_data[] = array(
+//            'date' => 'Sunday, 23 November 2121 ',
+//            'groups' => $groups
+//        );
+//        $groups = NULL;
+//        
+//        echo json_encode($group_data);
+//        return;
+//        
+//        $start_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('start'));
+//        $end_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('end'));
+//        
+//        $where = array(
+//            'date >=' => $start_date,
+//            'date <=' => $end_date,
+//            'status_id' => $this->input->post('status_id'),
+//            'reference_id' => $this->input->post('gr_cl_id'),
+//            'created_for_type_id' => $this->input->post('created_for_type_id'),
+//        );
+//        $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
+//        
+//        foreach ($get_sessions as $session)
+//        {
+//            
+//        }
+//        
+//        var_dump($get_sessions);
+//        exit;
+//    }
+//    public function get_earning_summary_for_client( $client_id = 0 )
+//    {
+//        $start_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('start'));
+//        $end_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($this->input->post('end'));
+//        
+//        $where = array(
+//            'date >=' => $start_date,
+//            'date <=' => $end_date,
+//            'status_id' => $this->input->post('status_id'),
+//            'reference_id' => $this->input->post('gr_cl_id'),
+//            'created_for_type_id' => $this->input->post('created_for_type_id'),
+//        );
+//        $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
+//        foreach ($get_sessions as $session)
+//        {
+//            $client_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);;
+//            $client_data[$session['date']]['sessions'][] = $session;
+//        }
+//        foreach ($client_data as $data)
+//        {
+//            $result[] = $data;
+//        }
+//        $client_data = $result;
+//        
+//        echo json_encode($client_data);
+//        return;
+//    }
+    
+
 }

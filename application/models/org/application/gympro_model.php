@@ -1203,10 +1203,34 @@ class Gympro_model extends Ion_auth_model {
      * This method will update sessions
      * @Author Nazmul on 22nd January 2015
      */
-    public function update_sessions()
+    public function update_sessions( $session_id_array, $additional_data )
     {
-        
+        $data = $this->_filter_data($this->tables['app_gympro_sessions'], $additional_data);
+        $this->db->where_in('id', $session_id_array);
+        $this->db->update($this->tables['app_gympro_sessions'], $data);
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('update_status_null');
+            return FALSE;
+        }
+        $this->set_message('update_status_successful');
+        return TRUE;
     }
+//    public function update_sessions( $session_id_array, $additional_data )
+//    {
+//        if(!isset($session_id_array) || $session_id_array <= 0 || !isset($session_status) || $session_status <= 0){
+//            $this->set_error('update_status_fail');
+//            return FALSE;
+//        }
+//        $data = $this->_filter_data($this->tables['app_gympro_sessions'], $additional_data);
+//        $this->db->where_in('status_id', $session_id_array);
+//        $this->db->update($this->tables['app_gympro_sessions'], $data);
+//        if ($this->db->affected_rows() == 0) {
+//            $this->set_error('update_status_null');
+//            return FALSE;
+//        }
+//        $this->set_message('update_status_successful');
+//        return TRUE;
+//    }
     /*
      * This method will delete a session
      * @Author Nazmul on 22nd January 2015

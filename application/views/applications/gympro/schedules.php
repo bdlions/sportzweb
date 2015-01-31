@@ -132,9 +132,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a id="session_edit" href="<?php echo base_url() . 'applications/gympro/update_session/'; ?>"><button class="btn btn-info">Edit Session</button></a>
-                <button id="delete_prompt_btn" class="btn btn-danger">Delete Session</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a id="session_edit" href="<?php echo base_url() . 'applications/gympro/update_session/'; ?>"><button class="btn btn_gympro button-custom">Edit Session</button></a>
+                <button id="delete_prompt_btn" class="btn btn_gympro button-custom">Delete Session</button>
+                <button type="button" class="btn btn_gympro button-custom" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -157,8 +157,8 @@
             </div>
             <div class="modal-footer">
                 <input type="hidden" id="selected_session">
-                <button id="delete_confirmed_btn" class="btn btn-danger">Delete Session</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button id="delete_confirmed_btn" class="btn btn_gympro button-custom">Delete Session</button>
+                <button type="button" class="btn btn_gympro button-custom" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>

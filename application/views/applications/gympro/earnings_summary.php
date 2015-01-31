@@ -1,62 +1,65 @@
 <script>
+    function fetch_session_data()
+    {
+        $("#sessions_tmpl_place").html(null);
+        var st_date = $('#st_date').val();
+        var fin_date = $('#fin_date').val();
+        var status_id = $('#status_id').val();
+        if( fin_date=='' || st_date=='' ){
+            alert("Please select the dates."); return;
+        }
+        var gr_or_cl = $("#group_client").val();
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: "<?php echo base_url().'applications/gympro/get_earning_summary';?>",
+            data: {
+                created_for_type_id: gr_or_cl.charAt(0),
+                gr_cl_id: gr_or_cl.substring(2),
+                start: st_date,
+                end: fin_date,
+                status_id: status_id
+            },
+            success: function(data) {
+                if(gr_or_cl.charAt(0)=='1'){
+                    $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
+                }else if(gr_or_cl.charAt(0)=='2'){
+                    $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
+//                        $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
+                }
+            }
+        });
+    }
     $(function () {
-        $("#group_client").on('change', function(){
-            var st_date = $('#st_date').val();
-            var fin_date = $('#fin_date').val();
-            var status_id = $('#status_id').val();
-            if( fin_date=='' || st_date=='' )
-            {
-                alert("Please select the dates"); return;
-            }
-            var gr_or_cl = $("#group_client").val();
-//            alert(gr_or_cl);
-            if(gr_or_cl.charAt(0)==1)
-            {
-//                alert('Group selected');
+        $("#mark_status_dropdown").on('change', function(){
+        var session_id_array = Array();
+        var cb_name;
+            $('input[name^="session_select_"]:checked').each(function(){
+                cb_name = $(this).prop( "name" );
+                cb_name = cb_name.substring(15);
+                session_id_array.push( cb_name );
+            });
+            if( $(this).val() != '0' ){
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: "<?php echo base_url().'applications/gympro/get_earning_summary_for_group';?>",
+                    url: "<?php echo base_url().'applications/gympro/update_sessions';?>",
                     data: {
-                        created_for_type_id: '1',
-//                        created_for_type_id: '1',
-                        gr_cl_id: '3',
-//                        gr_cl_id: gr_or_cl.substring(2),
-                        start: st_date,
-                        end: fin_date,
-                        status_id: status_id
+                        session_id_array: session_id_array,
+                        status_id: $("#mark_status_dropdown").val()
                     },
                     success: function(data) {
-//                        alert(data[0].date);
-                        $("#sessions_tmpl_place").html(tmpl("tmpl_group", data));
-                    }
-                });
-            }
-            else if(gr_or_cl.charAt(0)==2)
-            {
-//                alert('Client selected');
-                $.ajax({
-                    dataType: 'json',
-                    type: "POST",
-                    url: "<?php echo base_url().'applications/gympro/get_earning_summary_for_client';?>",
-//                    data: gr_or_cl.substring(2),
-                    data: {
-                        created_for_type_id: '2',
-//                        created_for_type_id: '1',
-//                        gr_cl_id: '3',//for test
-                        gr_cl_id: gr_or_cl.substring(2),
-                        start: st_date,
-                        end: fin_date,
-                        status_id: status_id
-                    },
-                    success: function(data) {
-                        console.log(data);
-//                        alert(data[0].date);
-                        $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
+                        alert(data['message']);
+                        $('#mark_status_dropdown>option:eq(0)').prop('selected', true);
+                        fetch_session_data();
                     }
                 });
             }
         });
+        $("#group_client, #fin_date, #st_date, #status_id").on('change', function(){
+            fetch_session_data();
+        });
+        
         $("#datepicker").datepicker({
             showOn: "button",
             buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
@@ -68,14 +71,14 @@
             showOn: "button",
             buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
             buttonImageOnly: true,
-            buttonText: "Select date",
+            buttonText: "Select start date",
             dateFormat: 'dd-mm-yy'
         });
         $("#fin_date").datepicker({
             showOn: "button",
             buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
             buttonImageOnly: true,
-            buttonText: "Select date",
+            buttonText: "Select end date",
             dateFormat: 'dd-mm-yy'
         });
     });
@@ -180,14 +183,11 @@
                         <div class="col-md-4" style="padding-right: 0">Group and Client:</div>
                         <div class="col-md-7">
                             <select class="form-control" id="group_client">
-                                <option>-- Select --</option>
+                                <!--<option>-- Select --</option>-->
                                 <optgroup label="Groups">
-                                    <option value="1_1">gri 1</option>
-                                    <option value="1_2">Shem Haye</option>
-                                    <option value="1_3">gr 3</option>
                                     <?php foreach ($group_list as $group_info): ?>
-                                    <option value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
-                                <?php endforeach; ?>
+                                        <option value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                    <?php endforeach; ?>
                                 </optgroup>
                                 <optgroup label="Clients">
 <!--                                    <option value="2_1">Shem Haye</option>
@@ -207,13 +207,13 @@
                     <div class="row form-group">
                         <div class="col-md-4 control-div">Start:</div>
                         <div class="col-md-7">
-                            <input id="st_date" style="margin-right: 5px;">
+                            <input id="st_date" style="margin-right: 5px;" value="<?php echo $current_date;?>">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4 control-div">Finish:</div>
                         <div class="col-md-7">
-                            <input id="fin_date" style="margin-right: 5px;">
+                            <input id="fin_date" style="margin-right: 5px;" value="<?php echo $current_date;?>">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -279,34 +279,29 @@
                             Schedule Session
                         </div>
                         <div class="col-md-3" style="padding-right: 0px">
-                            <select class="form-control">
-                                <option>Mark as</option>
-                                <option>Prepaid</option>
+                            <select class="form-control" id="mark_status_dropdown">
+                                <option value="0">Mark as</option>
+                                <?php foreach ($status_list as $status): ?>
+                                    <option value="<?php echo $status['id']; ?>"><?php echo $status['title']?></option>
+                                <?php endforeach; ?>
+<!--                                <option>Prepaid</option>
                                 <option>Paid</option>
-                                <option>Cancelled</option>
+                                <option>Cancelled</option>-->
                             </select>
                         </div>
                     </div>
                     
-                    
                     <div class="form-group" id="sessions_tmpl_place"></div>
-                    
-                   
-                    
-                    
-                    
-                    
-                    <!--groupppp-->
                     
                 </div>
             </div>
         </div>
         <div class="row form-group"></div>
-            <div class="row form-group"></div>
-            <div class="row form-group"></div>
-            <div class="row form-group"></div>
-            <div class="row form-group"></div>
-            <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
     </div>
 </div>
 <?php
