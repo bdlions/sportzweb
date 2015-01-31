@@ -39,6 +39,10 @@
                 cb_name = cb_name.substring(15);
                 session_id_array.push( cb_name );
             });
+            if(session_id_array.length ==0)
+            {
+                alert('Please select atlest 1 session'); return;
+            }
             if( $(this).val() != '0' ){
                 $.ajax({
                     dataType: 'json',

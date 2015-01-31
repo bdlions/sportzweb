@@ -164,8 +164,8 @@
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-5 pull-right">
-                    <button class="btn button-custom btn_gympro pull-right" type="submit" >Update Session</button>
+                <div class="col-sm-4 pull-right">
+                    <button class="btn button-custom btn_gympro" type="submit" >Update Session</button>
                 </div> 
             </div>
             <?php echo form_close();?>

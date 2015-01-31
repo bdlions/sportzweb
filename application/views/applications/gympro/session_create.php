@@ -171,7 +171,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4 pull-right">
-                    <button class="btn button-custom btn_gympro pull-right" type="submit" >Create Session</button>
+                    <button class="btn button-custom btn_gympro" type="submit" >Create Session</button>
                 </div>
             </div>
             <?php echo form_close();?>
