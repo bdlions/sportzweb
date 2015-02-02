@@ -34,7 +34,7 @@ window.onload = function()
 }
 </script>
 
-<?php echo form_open("admin/footer/update_terms", array('id' => '', 'class' => 'form-horizontal')); ?>
+<?php echo form_open("admin/footer/update_privacy", array('id' => '', 'class' => 'form-horizontal')); ?>
 <div class="row form-group">
     <label class="col-md-offset-1 col-md-2"><span style="font-size: 18px">Description:</span></label>
 </div>
@@ -45,7 +45,7 @@ window.onload = function()
 </div>
 <div class="row form-group">
     <div class="col-md-offset-6 col-md-2">
-        <?php echo form_input($submit_update_privacy + array('class' => 'btn btn-warning form-control')) ?> 
+        <?php echo form_input($submit_update_privacy + array('class' => 'btn button-custom form-control')) ?> 
     </div>
 </div>
 <?php echo form_close();?>

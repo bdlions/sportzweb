@@ -45,7 +45,7 @@ window.onload = function()
 </div>
 <div class="row form-group">
     <div class="col-md-offset-6 col-md-2">
-        <?php echo form_input($submit_update_terms + array('class' => 'btn btn-warning form-control')) ?> 
+        <?php echo form_input($submit_update_terms + array('class' => 'btn button-custom form-control')) ?> 
     </div>
 </div>
 <?php echo form_close();?>
