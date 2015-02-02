@@ -63,4 +63,25 @@ class Score_prediction_library {
     public function __get($var) {
         return get_instance()->$var;
     }
+    
+    public function get_home_page_configuration($date)
+    {
+        $sports_id = 0;
+        $configuration_array = $this->score_prediction_model->get_home_page_configuration_info($date)->result_array();
+        if(!empty($configuration_array))
+        {
+            $configuration_info = $configuration_array[0];
+            $sports_id = $configuration_info['sports_id'];
+        }
+        else
+        {
+            $sports_list = $this->score_prediction_model->get_all_sports()->result_array();
+            if(!empty($sports_list))
+            {
+                $sports_info = $sports_list[0];
+                $sports_id = $sports_info['sports_id'];
+            }
+        }
+        return $sports_id;
+    }
 }
