@@ -50,7 +50,7 @@ class Messages extends Role_Controller{
         $message_list_array = $this->chat_model->get_messages( $user_id );
         foreach($message_list_array as $message_info)
         {
-            $message_info->received_date = $this->utils->get_unix_to_human_local($message_info->received_date, $user_info);
+            $message_info->received_date = $this->utils->get_unix_to_human_local($message_info->received_date, $user_info['country_code']);
             $message_list[] = $message_info;
         }
         $this->data['messages'] = $message_list;
@@ -70,7 +70,7 @@ class Messages extends Role_Controller{
         $message_list_array = $this->chat_model->get_messages( $user_id );
         foreach($message_list_array as $message_info)
         {
-            $message_info->received_date = $this->utils->get_unix_to_human_local($message_info->received_date, $user_info);
+            $message_info->received_date = $this->utils->get_unix_to_human_local($message_info->received_date, $user_info['country_code']);
             $message_list[] = $message_info;
         }
         $this->data['messages'] = $message_list;
