@@ -208,6 +208,10 @@ $lang['news_category_creation_duplicate_news_category_name']            = "News 
 $lang['news_category_duplicate']                                        = "News category title is duplicate";
 $lang['news_category_update_successful']                                = "News category title is Update successfully";
 $lang['news_category_update_duplicate_category']                        = "News category name is duplicate";
+$lang['latest_news_configuration_successful']                           = "Latest news configured successfully.";
+$lang['latest_news_configuration_fail']                                 = "Error while configuring latest news.";
+$lang['breaking_news_configuration_successful']                         = "Breaking news configured successfully.";
+$lang['breaking_news_configuration_fail']                               = "Error while configuring breaking news.";
 
 // for blog
 $lang['blog_category_creation_duplicate_blog_category_name']            = "Blog category name is duplicate";

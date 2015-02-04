@@ -4,13 +4,9 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Name:  Service Directory Model
- *
+ * Name:  News app Model
  * Author:  Nazmul Hasan
- *
- *
  * Requirements: PHP5 or above
- *
  */
 
 class News_app_model extends Ion_auth_model {
@@ -32,6 +28,30 @@ class News_app_model extends Ion_auth_model {
         }
         return $this->db->select($this->tables['news'].'.id as news_id,'.$this->tables['news'].'.*')
                     ->from($this->tables['news'])
+                    ->get();
+    }
+    
+    /*
+     * This method will return breaking news configuration list
+     * @Author Nazmul on 4th February 2015
+     */
+    public function get_breaking_news_configuration_list()
+    {
+       return $this->db->select("*")
+                    ->from($this->tables['app_news_breaking_news_configuration'])
+                    ->order_by($this->tables['app_news_breaking_news_configuration'].'.id','desc')
+                    ->get();
+    }
+    
+    /*
+     * This method will return latest news configuration list
+     * @Author Nazmul on 4th February 2015
+     */
+    public function get_latest_news_configuration_list()
+    {
+       return $this->db->select("*")
+                    ->from($this->tables['app_news_latest_news_configuration'])
+                    ->order_by($this->tables['app_news_latest_news_configuration'].'.id','desc')
                     ->get();
     }
     
@@ -91,40 +111,7 @@ class News_app_model extends Ion_auth_model {
                     ->from($this->tables['users'])
                     ->get();
     }
-    
-    public function get_latest_news()
-    {
-        return $this->db->select("*")
-                    ->from($this->tables['latest_news'])
-                    ->order_by($this->tables['latest_news'].'.id','desc')
-                    ->get();
-    }
-    
-    
-    public function get_all_latest_news()
-    {
-        return $this->db->select($this->tables['latest_news'].'.*,'.$this->tables['news'].'.headline as headline')
-                    ->from($this->tables['latest_news'])
-                    ->join($this->tables['news'],  $this->tables['news'].'.id='.$this->tables['latest_news'].'.news_id')
-                    ->get();
-        
-    }
-    
-    public function get_all_breaking_news()
-    {
-        return $this->db->select($this->tables['breaking_news'].'.*,'.$this->tables['news'].'.headline as headline')
-                    ->from($this->tables['breaking_news'])
-                    ->join($this->tables['news'],  $this->tables['news'].'.id='.$this->tables['breaking_news'].'.news_id')
-                    ->get();
-    }
-    
-    public function get_breaking_news()
-    {
-       return $this->db->select("*")
-                    ->from($this->tables['breaking_news'])
-                    ->order_by($this->tables['breaking_news'].'.id','desc')
-                    ->get();
-    }
+
     
     /*-----------------------------News related query for front end------------------------*/
     /*-------------------------written by Omar-----------*/

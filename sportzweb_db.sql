@@ -1529,31 +1529,28 @@ CREATE TABLE `news_comments`(
 ALTER TABLE `news_comments`
     ADD CONSTRAINT `fk_news_comments_users1` FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_news_comments_news1` FOREIGN KEY(`news_id`) REFERENCES `news`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
-CREATE TABLE `latest_news`(
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `news_list` text,
-  `created_on` int(11) DEFAULT NULL,
-  `date`  date NULL,
-  PRIMARY KEY(`id`)
-)AUTO_INCREMENT=1;
-
-CREATE TABLE `breaking_news`(
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `news_list` text,
-  `created_on` int(11) DEFAULT NULL,
-  `date` date NULL,
-  PRIMARY KEY(`id`)
-)AUTO_INCREMENT=1;
-
 CREATE TABLE `news_home_page`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `news_list` text,
   `date` varchar(50) DEFAULT NULL,
   PRIMARY KEY(`id`) 
 )AUTO_INCREMENT=1;
-
+CREATE TABLE `app_news_latest_news_configuration`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `news_list` text,
+  `created_on` int(11) DEFAULT NULL,
+  `modified_on` int(11) DEFAULT NULL,
+  `selected_date` varchar(25) NOT NULL,
+  PRIMARY KEY(`id`)
+)AUTO_INCREMENT=1;
+CREATE TABLE `app_news_breaking_news_configuration`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `news_list` text,
+  `created_on` int(11) DEFAULT NULL,
+  `modified_on` int(11) DEFAULT NULL,
+  `selected_date` varchar(25) NOT NULL,
+  PRIMARY KEY(`id`)
+)AUTO_INCREMENT=1;
 -- blog application
 CREATE TABLE `blog_custom_category`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

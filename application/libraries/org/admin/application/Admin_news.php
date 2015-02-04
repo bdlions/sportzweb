@@ -5,21 +5,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Name:  Ion Auth
- *
- * Author: Ben Edmunds
- * 		  ben.edmunds@gmail.com
- *         @benedmunds
- *
- * Added Awesomeness: Phil Sturgeon
- *
- * Location: http://github.com/benedmunds/CodeIgniter-Ion-Auth
- *
- * Created:  10.01.2009
- *
- * Description:  Modified auth system based on redux_auth with extensive customization.  This is basically what Redux Auth 2 should be.
- * Original Author name has been kept but that does not mean that the method has not been modified.
- *
+ * Name:  Admin news library
  * Requirements: PHP5 or above
  *
  */
@@ -76,17 +62,22 @@ class Admin_news{
     public function __get($var) {
         return get_instance()->$var;
     }
-    
-//    public function get_news_category_info($id)
-//    {
-//        $news_category = $this->admin_news_model->get_news_category_info($id)->result_array();
-//        if(count($news_category)>0) {
-//           $news_category = $news_category[0]; 
-//        }
-//        
-//        
-//        return $news_category;
-//    }
+    /*
+     * This method will return news list converting news data to user displayed format
+     * @param $news_id_list, news id list
+     * @Author Nazmul on 4th February 2015
+     */
+    public function get_news_list($news_id_list = array())
+    {
+        $news_list = array();
+        $news_list_array = $this->admin_news_model->get_news_list()->result_array($news_id_list);
+        foreach($news_list_array as $news_info)
+        {
+            $news_info['news_date'] = $this->utils->convert_date_from_db_to_user($news_info['news_date']);
+            $news_list[] = $news_info;
+        }
+        return $news_list;
+    }
     
     public function get_news_category_info_for_update($news_category_id,$news_id)
     {

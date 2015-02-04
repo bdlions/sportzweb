@@ -24,6 +24,64 @@ class Admin_news_model extends Ion_auth_model
         
     }
     
+    /*
+     * This method will return news list
+     * @param @news_id_list, news id list
+     * @Author Nazmul on 4th February 2015
+     */
+    public function get_news_list($news_id_list = array())
+    {
+        if(!empty($news_id_list)){
+            $this->db->where_in('id',$news_id_list);
+        }
+        return $this->db->select($this->tables['news'].'.id as news_id,'.$this->tables['news'].'.*')
+                    ->from($this->tables['news'])
+                    ->get();
+    }
+    
+    /*
+     * This method will store latest news configuration
+     * @param $data, latest news configuration data
+     * @Author Nazmul on 4th february 2015
+     */
+    public function add_latest_news_configuration($data)
+    {
+        $data['created_on'] = now();
+        $data = $this->_filter_data($this->tables['app_news_latest_news_configuration'], $data);        
+        $this->db->insert($this->tables['app_news_latest_news_configuration'],$data);
+        $id = $this->db->insert_id();    
+        if(isset($id))
+        {
+            $this->set_message('latest_news_configuration_successful');
+        }
+        else
+        {
+            $this->set_error('latest_news_configuration_fail');
+        }
+        return isset($id)? $id: False;
+    }
+    
+    /*
+     * This method will store breaking news configuration
+     * @param $data, breaking news configuration data
+     * @Author Nazmul on 4th february 2015
+     */
+    public function add_breaking_news_configuration($data)
+    {
+        $data['created_on'] = now();
+        $data = $this->_filter_data($this->tables['app_news_breaking_news_configuration'], $data);        
+        $this->db->insert($this->tables['app_news_breaking_news_configuration'],$data);
+        $id = $this->db->insert_id();    
+        if(isset($id))
+        {
+            $this->set_message('breaking_news_configuration_successful');
+        }
+        else
+        {
+            $this->set_error('breaking_news_configuration_fail');
+        }
+        return isset($id)? $id: False;
+    }
     
     /*----------------------------------*/
     
@@ -369,58 +427,6 @@ class Admin_news_model extends Ion_auth_model
                     ->get();
     }
     
-    public function create_latest_news($data)
-    {
-        $data = $this->_filter_data($this->tables['latest_news'], $data);
-        
-        $this->db->insert($this->tables['latest_news'],$data);
-        $id = $this->db->insert_id();
-        
-        return isset($id)? $id: False;
-    }
-    
-    public function create_breaking_news($data)
-    {
-        $data = $this->_filter_data($this->tables['breaking_news'], $data);
-        
-        $this->db->insert($this->tables['breaking_news'],$data);
-        $id = $this->db->insert_id();
-        
-        return isset($id)? $id: False;
-    }
-    
-    public function get_all_latest_news()
-    {
-        return $this->db->select("*")
-                    ->from($this->tables['latest_news'])
-                    ->get();
-   
-    }
-    
-    public function get_all_breaking_news()
-    {
-        return $this->db->select($this->tables['breaking_news'].'.*,'.$this->tables['news'].'.headline as headline')
-                    ->from($this->tables['breaking_news'])
-                    ->join($this->tables['news'],  $this->tables['news'].'.id='.$this->tables['breaking_news'].'.news_id')
-                    ->get();
-    }
-    
-    public function get_latest_news()
-    {
-        return $this->db->select("*")
-                    ->from($this->tables['latest_news'])
-                    ->order_by($this->tables['latest_news'].'.id','desc')
-                    ->get();
-    }
-    
-    public function get_breaking_news()
-    {
-       return $this->db->select("*")
-                    ->from($this->tables['breaking_news'])
-                    ->order_by($this->tables['breaking_news'].'.id','desc')
-                    ->get();
-    }
-    
     public function config_news_for_home_page($data)
     {
         $data = $this->_filter_data($this->tables['news_home_page'],$data);
@@ -439,16 +445,6 @@ class Admin_news_model extends Ion_auth_model
         }
         return $this->db->select("*")
                     ->from($this->tables['news_home_page'])
-                    ->get();
-    }
-    
-    public function get_news_list($news_id_list = array())
-    {
-        if(!empty($news_id_list)){
-            $this->db->where_in('id',$news_id_list);
-        }
-        return $this->db->select($this->tables['news'].'.id as news_id,'.$this->tables['news'].'.*')
-                    ->from($this->tables['news'])
                     ->get();
     }
     

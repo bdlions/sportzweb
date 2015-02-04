@@ -15,9 +15,9 @@
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/applications_news/latest_news_for_home_page",
+                    url: '<?php echo base_url(); ?>' + "admin/applications_news/add_latest_news_configuration",
                     data: {
-                        selected_news_array_list: JSON.stringify(selected_news_array)
+                        news_id_list: JSON.stringify(selected_news_array)
                     },
                     success: function(data) {
                     alert(data['message']);
@@ -54,7 +54,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>News Title</th>
-                                <th>Created On</th>
+                                <th>Date</th>
                                 <th>Select News Item</th>
                             </tr>
                         </thead>
@@ -79,7 +79,6 @@
             <div class="btn-group" style="padding-left: 10px;">
                 <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
             </div>
-        </div>
-        
+        </div>        
     </div>
 </div>

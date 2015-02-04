@@ -840,73 +840,6 @@ class Applications_news extends CI_Controller{
         }
         echo json_encode($response);
     }
-    
-    public function config_latest_news()
-    {
-        $this->data['message'] = '';
-        $date = date("Y-m-d");
-        $news_list = $this->admin_news->get_all_news($date)->result_array();
-        $news_list = $this->admin_news->config_news($news_list);
-        $this->data['news_list'] = $news_list;
-        //echo '<pre/>';print_r($news_list);exit('heere');
-        $this->template->load($this->tmpl,"admin/applications/news_app/manage_latest_news",  $this->data);
-    }
-    
-    public function latest_news_for_home_page()
-    {
-        $response = array();
-        $news_items_id = $_POST['selected_news_array_list']; 
-        $data = array(
-                'news_list' => $news_items_id,
-                'created_on' => now()
-            );
-       
-        $id = $this->admin_news->create_latest_news($data);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'News list as a latest news is added successfully.';        
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_news->errors_alert();
-        }
-        echo json_encode($response);
-    }
-    
-    public function config_breaking_news()
-    {
-        $this->data['message'] = '';
-        $date = date("Y-m-d");
-        $news_list = $this->admin_news->get_all_news($date)->result_array();
-        $news_list = $this->admin_news->config_news($news_list);
-        $this->data['news_list'] = $news_list;
-        $this->template->load($this->tmpl,"admin/applications/news_app/manage_breaking_news",  $this->data);
-    }
-    
-    function manage_breaking_news()
-    {
-        $response = array();
-        $news_items_id = $_POST['selected_news_array_list']; 
-        $data = array(
-                'news_list' => $news_items_id,
-                'created_on' => now()
-            );
-       
-        $id = $this->admin_news->create_breaking_news($data);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'News list as a breaking news is added successfully.';        
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_news->errors_alert();
-        }
-        echo json_encode($response);
-    }
     function all_comments($news_id)
     {
         $comment_list = $this->admin_news->get_all_comments($news_id)->result_array();
@@ -1128,5 +1061,79 @@ class Applications_news extends CI_Controller{
         $this->data['news_lists'] = $news_lists;
         $this->template->load($this->tmpl, "admin/applications/news_app/news_list", $this->data);
     }
+    
+    /*
+     * This method will configure latest news
+     * @Author Nazmul on 4th February 2015
+     */
+    public function configure_latest_news()
+    {
+        $this->data['message'] = '';
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        $this->template->load($this->tmpl,"admin/applications/news_app/manage_latest_news",  $this->data);
+    }
+    
+    /*
+     * Ajax Call
+     * $this method will store configuration of latest news
+     * @Author Nazmul on 4th February 2015
+     */
+    public function add_latest_news_configuration()
+    {
+        $response = array();
+        $news_id_list = $this->input->post('news_id_list'); 
+        $data = array(
+            'news_list' => $news_id_list,
+            'selected_date' => $this->utils->get_current_date_db()
+        );       
+        $id = $this->admin_news->add_latest_news_configuration($data);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = $this->admin_news->messages_alert();        
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($response);
+    }
+    /*
+     * This method will configure breaking news
+     * @Author Nazmul on 4th February 2015
+     */
+    public function configure_breaking_news()
+    {
+        $this->data['message'] = '';
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        $this->template->load($this->tmpl,"admin/applications/news_app/manage_breaking_news",  $this->data);
+    }
+    
+    /*
+     * Ajax Call
+     * $this method will store configuration of breaking news
+     * @Author Nazmul on 4th February 2015
+     */
+    public function add_breaking_news_configuration()
+    {
+        $response = array();
+        $news_id_list = $this->input->post('news_id_list'); 
+        $data = array(
+            'news_list' => $news_id_list,
+            'selected_date' => $this->utils->get_current_date_db()
+        );       
+        $id = $this->admin_news->add_breaking_news_configuration($data);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = $this->admin_news->messages_alert();        
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($response);
+    }
 }
-?>

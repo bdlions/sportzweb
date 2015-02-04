@@ -1,38 +1,54 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/customStyles.css" />
+<script src="<?php echo base_url(); ?>resources/bootstrap3/js/tmpl.js"></script>
 <script type="text/javascript">
     $(function() {
-        var latestNews = <?php echo json_encode($latest_news) ?>;
-        var breakingNews = <?php echo json_encode($breaking_news) ?>;
-        var totalNews = latestNews.length + breakingNews.length;
-        var count = 1;
-        for (var i = 0; i < latestNews.length; i++) {
-            var content = latestNews[ i ]['headline'];
-            var text = $(content).text();
-            $("#news").append("<div class='col-md-12 cus_news_flyer cus_news_flyer_latest' style='display:none;' id = 'news_" + count + "'><a href='<?php echo base_url().'applications/news_app/news_item/';?>"+latestNews[ i ]['id']+"'>Latest News: " + text + "</a> </div>");
-            count++;
-        }
-
-        for (var i = 0; i < breakingNews.length; i++) {
-            var content  = breakingNews[ i ]['headline'];
-            var text = $(content).text();
-            $("#news").append("<div class='col-md-12 cus_news_flyer cus_news_flyer_breaking' style='display:none;' id = 'news_" + count + "'><a href='<?php echo base_url()."applications/news_app/news_item/"; ?>"+breakingNews[ i ]['id']+"'>Breaking News: " + text + "</a> </div>");
-            count++;
-        }
-        var randomNewsNumber = Math.floor(Math.random() * totalNews) + 1;
-        $("#news_" + randomNewsNumber).show();
-        setInterval(function() {
-            var randomNewsNumber = Math.floor(Math.random() * totalNews) + 1;
-
-            for (var i = 1; i <= totalNews; i++) {
-                $("#news_" + i).hide();
+        var news_id_list = Array();
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "applications/news_app/get_breaking_latest_news_list",
+            data: {
+            },
+            success: function(data) {
+                $("#news").html(tmpl("tmpl_breaking_news_list", data['breaking_news_list']));
+                $("#news").html($("#news").html()+tmpl("tmpl_latest_news_list", data['latest_news_list']));
+                var news_counter = 0;
+                for(var counter = 0; counter < data['breaking_news_list'].length; counter++)
+                {
+                    news_id_list[news_counter++] = data['breaking_news_list'][counter]['news_id'];
+                }
+                for(var counter = 0; counter < data['latest_news_list'].length; counter++)
+                {
+                    news_id_list[news_counter++] = data['latest_news_list'][counter]['news_id'];
+                }
+                var randomNewsNumber = Math.floor(Math.random() * news_id_list.length);
+                $("#news_" + randomNewsNumber).show();
+                setInterval(function() {
+                    var randomNewsNumber = Math.floor(Math.random() * news_id_list.length);
+                    console.log(news_id_list[randomNewsNumber]);
+                    for (var i = 0; i < news_id_list.length; i++) {
+                        $("#news_" + news_id_list[i]).hide();
+                    }
+                    $("#news_" + news_id_list[randomNewsNumber]).show();
+                }, 6000);
             }
-            $("#news_" + randomNewsNumber).show();
-
-        }, 6000);
-
+        });
     });
 </script>
-
+<script type="text/x-tmpl" id="tmpl_breaking_news_list">
+    {% var i=0, breaking_news = ((o instanceof Array) ? o[i++] : o); %}
+    {% while(breaking_news){ %}
+        <div class="col-md-12 cus_news_flyer cus_news_flyer_breaking" style="display:none;" id = "news_{%= breaking_news.news_id%}"><a href="<?php echo base_url().'applications/news_app/news_item/{%= breaking_news.news_id%}';?>"><?php echo '{%= breaking_news.headline%}'; ?></a></div>
+    {% breaking_news = ((o instanceof Array) ? o[i++] : null); %}
+    {% } %}
+</script>
+<script type="text/x-tmpl" id="tmpl_latest_news_list">
+    {% var i=0, latest_news = ((o instanceof Array) ? o[i++] : o); %}
+    {% while(latest_news){ %}
+        <div class="col-md-12 cus_news_flyer cus_news_flyer_latest" style="display:none;" id = "news_{%= latest_news.news_id%}"><a href="<?php echo base_url().'applications/news_app/news_item/{%= latest_news.news_id%}';?>"><?php echo '{%= latest_news.headline%}'; ?></a></div>
+    {% latest_news = ((o instanceof Array) ? o[i++] : null); %}
+    {% } %}
+</script>
 <h1>News</h1>
 <?php $this->load->view("applications/news_app/templates/header_menu"); ?>
 <div class="col-md-9" style="padding-left: 0px; padding-right: 30px;">

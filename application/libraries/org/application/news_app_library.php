@@ -4,7 +4,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Name:  Service Directory Library
+ * Name:  News app library
  *
  * Author: Nazmul Hasan
  *
@@ -63,7 +63,50 @@ class News_app_library {
     public function __get($var) {
         return get_instance()->$var;
     }
-    
+    /*
+     * This method will return breaking news configuration for home page
+     * @Author Nazmul on 4th February 2015
+     */
+    public function get_breaking_news_list()
+    {
+        $result = array();
+        $breaking_news_list_array = $this->news_app_model->get_breaking_news_configuration_list()->result_array();
+        if(!empty($breaking_news_list_array)) {
+            $breaking_news_list = $breaking_news_list_array[0];
+            $news_id_list = json_decode($breaking_news_list['news_list']);
+            $news_list = $this->news_app_model->get_news_list($news_id_list)->result_array();
+            foreach ($news_list as $news_info) {
+                $temp_news_info = array(
+                    'news_id' => $news_info['news_id'],
+                    'headline' => $news_info['headline']
+                );
+                $result[] = $temp_news_info;
+            }
+        }
+        return $result;
+    }
+    /*
+     * This method will return latest news configuration for home page
+     * @Author Nazmul on 4th February 2015
+     */
+    public function get_latest_news_list()
+    {
+        $result = array();
+        $latest_news_list_array = $this->news_app_model->get_latest_news_configuration_list()->result_array();
+        if(!empty($latest_news_list_array)) {
+            $latest_news_list = $latest_news_list_array[0];
+            $news_id_list = json_decode($latest_news_list['news_list']);
+            $news_list = $this->news_app_model->get_news_list($news_id_list)->result_array();
+            foreach ($news_list as $news_info) {
+                $temp_news_info = array(
+                    'news_id' => $news_info['news_id'],
+                    'headline' => $news_info['headline']
+                );
+                $result[] = $temp_news_info;
+            }
+        }
+        return $result;
+    }
     /*
      * This method will return news list to be displayed on home page
      * @Author Nazmul
@@ -87,166 +130,6 @@ class News_app_library {
         }
         
         return $news_list_array;
-    }
-    
-//    public function get_news_category_info($news_category_id)
-//    {
-//        $region_id_news_info_map = array();
-//        $news_id_news_info_map = array();
-//        $news_id_list = array();
-//        $news_list = array();
-//        $news_config_list = array();
-//        $news_category_info_array = $this->news_app_model->get_news_category_info($news_category_id)->result_array();
-//        if(!empty($news_category_info_array) && $news_category_info_array[0]['news_list'] != NULL && $news_category_info_array[0]['news_list'] != '' )
-//        {
-//            $news_config_list = json_decode($news_category_info_array[0]['news_list']);
-//            foreach($news_config_list as $news)
-//            {
-//                if($news->news_id!=0)
-//                {
-//                    array_push($news_id_list,$news->news_id);
-//                }
-//            }
-//            $news_list = $this->news_app_model->get_news_list_info($news_id_list)->result_array();
-//        }
-//        
-//        foreach($news_list as $news_info)
-//        {
-//            $news_id_news_info_map[$news_info['id']] = $news_info;
-//        }
-//        
-//        if(!empty($news_config_list) && $news_config_list != NULL)
-//        {
-//            foreach($news_config_list as $news)
-//            {
-//                if($news->news_id!=0){
-//                    $region_id_news_info_map[$news->region_id] = $news_id_news_info_map[$news->news_id];
-//                }else{
-//                    $region_id_news_info_map[$news->region_id] = array();
-//                }
-//            }
-//        }   
-//        
-//        $data['news_category_info'] = $news_category_info_array;
-//        $data['region_id_news_info_map'] = $region_id_news_info_map;
-//        return $data;
-//    }
-    
-//    public function get_news_sub_category_info($news_sub_category_id)
-//    {
-//        $region_id_news_info_map = array();
-//        $news_id_news_info_map = array();
-//        $news_id_list = array();
-//        $news_list = array();
-//        $news_config_list = array();
-//        $news_sub_category_info_array = $this->news_app_model->get_news_sub_category_info($news_sub_category_id)->result_array();
-//        
-//        if(!empty($news_sub_category_info_array) && $news_sub_category_info_array[0]['news_list'] != NULL && $news_sub_category_info_array[0]['news_list'] != '' )
-//        {
-//            $news_config_list = json_decode($news_sub_category_info_array[0]['news_list']);
-//            foreach($news_config_list as $news)
-//            {
-//                if($news->news_id!=0)
-//                {
-//                    array_push($news_id_list,$news->news_id);
-//                }
-//            }
-//            $news_list = $this->news_app_model->get_news_list_info($news_id_list)->result_array();
-//        }
-//        foreach($news_list as $news_info)
-//        {
-//            $news_id_news_info_map[$news_info['id']] = $news_info;
-//        }
-//        
-//        if(!empty($news_config_list) && $news_config_list != NULL)
-//        {
-//            foreach($news_config_list as $news)
-//            {
-//                if($news->news_id!=0){
-//                    $region_id_news_info_map[$news->region_id] = $news_id_news_info_map[$news->news_id];
-//                }else{
-//                    $region_id_news_info_map[$news->region_id] = array();
-//                }
-//            }
-//        }
-//        
-//        $data['news_category_info'] = $news_sub_category_info_array;
-//        $data['region_id_news_info_map'] = $region_id_news_info_map;
-//        
-//        return $data;
-//    }
-    
-    /*public function get_all_comments($news_id)
-    {
-        $comment_list = $this->news_app_model->get_all_comments($news_id)->result_array();
-        
-        $length = count($comment_list);
-        
-        for($i=0;$i<$length;$i++)
-        {
-            if(!empty($comment_list[$i]['liked_user_list']))
-            {
-                
-                $comment_list[$i]['liked_user_list'] = json_decode($comment_list[$i]['liked_user_list']);
-            
-                    for($j=0;$j<count($comment_list[$i]['liked_user_list']);$j++)
-                    {
-                        $value = $comment_list[$i]['liked_user_list'][$j];
-                        $value = $this->news_app_model->get_username($value)->result_array();
-                        $comment_list[$i]['liked_user_list'][$j] = $value[0];
-                    }
-            }
-        }
-        
-        return $comment_list;
-    }*/
-    
-    //written by omar faruk
-    public function get_breaking_news()
-    {
-        $result = array();
-        $populated_array = array();
-        $breaking_news_list = $this->news_app_model->get_breaking_news()->result_array();
-        if(count($breaking_news_list)>0) {
-            $breaking_news_list = $breaking_news_list[0];
-            $breaking_news_lists_id = json_decode($breaking_news_list['news_list']);
-            $results = $this->news_app_model->get_news_list_info($breaking_news_lists_id)->result_array();
-            foreach ($results as $key => $value) {
-                $data_array = array(
-                    'id' => $value['id'],
-                    'headline' => html_entity_decode(html_entity_decode($value['headline'])),
-                    'summary' => html_entity_decode(html_entity_decode($value['summary'])),
-                    'description' => html_entity_decode(html_entity_decode($value['description']))
-                );
-               $populated_array[$key] = $data_array;
-            }
-            return $populated_array;
-        }
-        return $populated_array;
-    }
-    
-    //written by omar faruk
-    public function get_latest_news()
-    {
-        $results = array();
-        $populated_array = array();
-        $latest_news_list = $this->news_app_model->get_latest_news()->result_array();
-        if(count($latest_news_list)>0) {
-            $latest_news_list = $latest_news_list[0];
-            $latest_news_lists_id = json_decode($latest_news_list['news_list']);
-            $results = $this->news_app_model->get_news_list_info($latest_news_lists_id)->result_array();
-            foreach ($results as $key => $value) {
-                $data_array = array(
-                    'id' => $value['id'],
-                    'headline' => html_entity_decode(html_entity_decode($value['headline'])),
-                    'summary' => html_entity_decode(html_entity_decode($value['summary'])),
-                    'description' => html_entity_decode(html_entity_decode($value['description']))
-                );
-               $populated_array[$key] = $data_array;
-            }
-            return $populated_array;
-        }
-        return $populated_array;
     }
     
     public function get_all_sub_category()

@@ -32,14 +32,14 @@
                     </a>
                 </div>
                 <div class ="col-sm-2">
-                    <a href="<?php echo base_url();?>admin/applications_news/config_latest_news">
+                    <a href="<?php echo base_url();?>admin/applications_news/configure_latest_news">
                         <button id="" value="" class="btn button-custom ">
                             Manage Latest News
                         </button>  
                     </a>
                 </div>
                 <div class ="col-sm-2">
-                    <a href="<?php echo base_url();?>admin/applications_news/config_breaking_news">
+                    <a href="<?php echo base_url();?>admin/applications_news/configure_breaking_news">
                         <button id="" value="" class="btn button-custom ">
                             Manage Breaking News
                         </button>  

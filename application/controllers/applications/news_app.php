@@ -7,8 +7,7 @@ class News_app extends Role_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->lang->load('auth');
-        
+        $this->lang->load('auth');        
         $this->load->helper('language');
         $this->load->helper('url');
         $this->load->library('visitors');
@@ -19,7 +18,6 @@ class News_app extends Role_Controller {
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         }
-
     }
 
     /*
@@ -30,15 +28,24 @@ class News_app extends Role_Controller {
     function index() {
 
         $this->data['message'] = '';
-        
         $this->data = array_merge($this->data, $this->news_app_library->get_news_home_page_configuration());
-        
-        //$this->data['news_list'] = $this->news_app_library->get_home_page_news_list();
-        //echo '<pre/>';print_r($this->data['news_list']);exit;
-        $this->data['latest_news'] = $this->news_app_library->get_breaking_news();
-        $this->data['breaking_news'] = $this->news_app_library->get_latest_news();
         $visit_success = $this->visitors->store_application_visitor(APPLICATION_NEWS_APP_ID);
         $this->template->load(null, "applications/news_app/news_app_home_view", $this->data);
+    }
+    /*
+     * Ajax Call
+     * This method will return breaking and latest news list
+     * @Author Nazmul on 4th February 2015
+     */
+    function get_breaking_latest_news_list()
+    {
+        $breaking_news_list = $this->news_app_library->get_breaking_news_list();
+        $latest_news_list = $this->news_app_library->get_latest_news_list();
+        $result = array(
+            'breaking_news_list' => $breaking_news_list,
+            'latest_news_list' => $latest_news_list
+        );
+        echo json_encode($result);        
     }
 
     public function news_category($news_category_id)
