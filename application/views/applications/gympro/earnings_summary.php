@@ -227,6 +227,7 @@
                                 <?php foreach ($status_list as $status): ?>
                                     <option value="<?php echo $status['id']; ?>"><?php echo $status['title']?></option>
                                 <?php endforeach; ?>
+                                <option value="0">All</option>
                             </select>
                         </div>
                     </div>                        

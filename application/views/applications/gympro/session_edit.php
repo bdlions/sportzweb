@@ -17,7 +17,6 @@
             }
         });
         if( '<?php echo $session_info['type_id']?>' !='1' ){$("#dd_rep").show();}
-        $("#inp_cost").show();
         $("#dd_cost").change(function() {
             if($("#dd_cost").val()=='other'){
                 $("#inp_cost").show();
@@ -124,7 +123,7 @@
                         <div class="col-md-4">
                             <select class="form-control" id="dd_rep" name="repeat" style="display: none">
                                 <?php foreach ($session_repeats as $key => $repeat): ?>
-                                    <option <?php echo ($key+1 == $session_info['type_id'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $repeat['title']; ?></option>
+                                    <option <?php echo ($key+1 == $session_info['repeat'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $repeat['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -135,12 +134,12 @@
                             <select class="form-control" name="cost" id="dd_cost">
                                     <option value="other" >Other</option>
                                 <?php foreach ($session_costs as $key => $cost): ?>
-                                    <option value="<?php echo $cost['title']; ?>"><?php echo $cost['title']; ?></option>
+                                    <option <?php echo ($cost['title'] == $session_info['cost'])? 'selected': NULL ;?>  value="<?php echo $cost['title']; ?>"><?php echo $cost['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input value="<?php echo $session_info['cost'];?>" type="text" id="inp_cost" name="cost" style="display: none" placeholder="Enter cost">
+                            <input value="<?php echo $session_info['cost'];?>" type="text" id="inp_cost" name="cost" <?php if($dont_show_cost_text==1){echo 'style="display: none"';}?> placeholder="Enter cost">
                         </div>
                     </div>
                     <div class="row form-group">
