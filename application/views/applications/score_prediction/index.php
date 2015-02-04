@@ -1,3 +1,20 @@
+<script type="text/javascript">
+    $(function() {
+        $( "#tournament_list" ).change(function() {
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url(); ?>' + "applications/score_prediction",
+                data: {
+                    tournament_id: $("#tournament_list").val()
+                },
+                success: function(data) {
+                    
+                }
+            });
+        });
+    });
+</script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 <div class="container-fluid">
     <div class="row">
@@ -63,18 +80,18 @@
         </div>
         
         <div class="col-md-4 pull-right">
-            <div class="heading blue_banner" style="padding: 5px; font-size: 20px;">
+            <div class="row heading blue_banner" style="padding: 5px; font-size: 20px;">
                 League Table
             </div>
-            <div style="height: 40px; padding: 10px">
-                <span style="font-size: 15px; padding-right: 15px">Show me: </span>
-                <select>
-                    <option>Premier League</option>
-                    <option>Premier League</option>
-                    <option>Premier League</option>
-                </select>
+            <div class="row form-group" style="padding-top:10px;padding-bottom:10px;">
+                <label for="phone" class="col-md-3 control-label requiredField">
+                    Show me:
+                </label>
+                <div class ="col-md-9">
+                    <?php echo form_dropdown('tournament_list', array('0'=> 'Select a Tournament')+$tournament_list, '0', 'class=form-control id=tournament_list'); ?>
+                </div> 
             </div>
-            <div >
+            <div class="row">
                 <table class="table-condensed table-responsive table">
                     <tr style="font-size: 15px; color: whitesmoke; background-color: #000">
                         <th>POS</th>

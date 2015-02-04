@@ -2734,7 +2734,6 @@ class Gympro extends Role_Controller{
         $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
         if ($this->input->post())
         {
-//            var_dump($this->input->post()); exit();
             $result = array();
             $result['message'] = '';
             if ($this->form_validation->run() == true) {
@@ -2772,7 +2771,7 @@ class Gympro extends Role_Controller{
             } else {
                 $result['message'] = validation_errors();
             }
-            redirect('applications/gympro/create_session', 'refresh');
+            redirect('applications/gympro/schedule', 'refresh');
 //            echo json_encode($result);
 //            return;
         }
@@ -2787,13 +2786,6 @@ class Gympro extends Role_Controller{
         $this->data['session_costs']    = $this->gympro_library->get_all_session_costs()->result_array();
         $this->data['client_list']      = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
         $this->data['group_list']       = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
-//        $meal_time_list = array();
-//        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
-//        foreach($meal_time_array as $meal_time)
-//        {
-//            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
-//        }
-//        $this->data['meal_time_list'] = $meal_time_list;
         $this->template->load(null,'applications/gympro/session_create', $this->data);
     }
     public function update_session( $session_id = 0 )
@@ -2801,14 +2793,11 @@ class Gympro extends Role_Controller{
         $this->data['message'] = '';
         $user_id = $this->session->userdata('user_id');
         $is_user = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
-        if($is_user == NULL)
-        {
+        if($is_user == NULL){
             redirect('applications/gympro/pt_home','refresh');
         }
         $session_info = $this->gympro_library->get_session_info($session_id)->result_array();
-//        var_dump($session_info); exit();
-        if(!empty($session_info))
-        {
+        if(!empty($session_info)){
             $session_info = $session_info[0];
             $session_info['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session_info['date']);
         }
@@ -2816,16 +2805,11 @@ class Gympro extends Role_Controller{
             redirect('applications/gympro/schedule', 'refresh');
         }
         $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
-        if ($this->input->post())
-        {
-//            var_dump($this->input->post()); exit();
+        if ($this->input->post()){
             $result = array();
             $result['message'] = '';
             if ($this->form_validation->run() == true) {
-//                fix these
-//                $created_for = $this->input->post('group_client');
                 $group_client = $this->input->post('group_client');
-//                $cf = str_split($cf);
                 $created_for_type_id = substr($group_client, 0, 1);
                 $reference_id = substr($group_client, 2);
                 $repeat =  $this->input->post('repeat');
@@ -2846,8 +2830,8 @@ class Gympro extends Role_Controller{
                     'status_id' => $this->input->post('status'),
                     'note' => $this->input->post('note')
                 );
-                $session_id = $this->gympro_library->update_session($session_id, $additional_data);
-                if ($session_id !== FALSE) {
+                $session_update_id = $this->gympro_library->update_session($session_id, $additional_data);
+                if ($session_update_id !== FALSE) {
                     $result['message'] = $this->gympro_library->messages_alert();
                 } else {
                     $result['message'] = $this->gympro_library->errors_alert();
@@ -2856,16 +2840,11 @@ class Gympro extends Role_Controller{
                 $result['message'] = validation_errors();
             }
             redirect('applications/gympro/update_session/'.$session_id, 'refresh');
-//            echo json_encode($result);
-//            return;
         }
         else
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
-        
-        $this->data['session_id']    = $session_id;
-        $this->data['session_id']    = $session_id;
         $this->data['session_id']    = $session_id;
         $this->data['session_info']    = $session_info;
         $this->data['session_statuses']    = $this->gympro_library->get_all_session_statuses()->result_array();
@@ -2875,13 +2854,10 @@ class Gympro extends Role_Controller{
         $this->data['session_costs']    = $this->gympro_library->get_all_session_costs()->result_array();
         $this->data['client_list']      = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
         $this->data['group_list']       = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
-//        $meal_time_list = array();
-//        $meal_time_array = $this->gympro_library->get_all_meal_times()->result_array();
-//        foreach($meal_time_array as $meal_time)
-//        {
-//            $meal_time_list[$meal_time['meal_time_id']] =  $meal_time['title'];
-//        }
-//        $this->data['meal_time_list'] = $meal_time_list;
+        $this->data['dont_show_cost_text']=0;
+        foreach ($this->data['session_costs'] as $cost) {
+            if($cost['title'] == $session_info['cost']){$this->data['dont_show_cost_text']=1;}
+        }
         $this->template->load(null,'applications/gympro/session_edit', $this->data);
     }
     
@@ -2900,8 +2876,9 @@ class Gympro extends Role_Controller{
 
     public function earnings_summary()
     {
-        $current_date = $this->utils->get_current_date_yyyymmdd( 'BD' );
-        $this->data['current_date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($current_date);
+        $u_data = $this->ion_auth_model->get_users($this->session->userdata('user_id'))->result_array();
+        $current_date = $this->utils->get_current_date( $u_data[0]['country_code'] );
+        $this->data['current_date'] = $current_date;
         $this->data['status_list'] = $this->gympro_library->get_all_session_statuses()->result_array();
         $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
         $this->data['client_list'] = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
@@ -2927,13 +2904,23 @@ class Gympro extends Role_Controller{
         $gr_cl_data = $this->input->post();
         $start_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($gr_cl_data['start']);
         $end_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($gr_cl_data['end']);
-        $where = array(
-            'date >=' => $start_date,
-            'date <=' => $end_date,
-            'status_id' => $gr_cl_data['status_id'],
-            'reference_id' => $gr_cl_data['gr_cl_id'],
-            'created_for_type_id' => $gr_cl_data['created_for_type_id'],
-        );
+        if($gr_cl_data['status_id']==0) {
+            $where = array(
+                'date >=' => $start_date,
+                'date <=' => $end_date,
+                'reference_id' => $gr_cl_data['gr_cl_id'],
+                'created_for_type_id' => $gr_cl_data['created_for_type_id'],
+            );
+        }
+        elseif ($gr_cl_data['status_id']!=0) {
+            $where = array(
+                'date >=' => $start_date,
+                'date <=' => $end_date,
+                'status_id' => $gr_cl_data['status_id'],
+                'reference_id' => $gr_cl_data['gr_cl_id'],
+                'created_for_type_id' => $gr_cl_data['created_for_type_id'],
+            );
+        }
         $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
         
         //group view can change, so two cases:

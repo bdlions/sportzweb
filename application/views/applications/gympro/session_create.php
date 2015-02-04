@@ -141,7 +141,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input value="1" type="text" id="inp_cost" name="cost" style="display: none" placeholder="Enter cost">
+                            <input value="<?php echo $session_costs[0]['title'];?>" type="text" id="inp_cost" name="cost" style="display: none" placeholder="Enter cost">
                         </div>
                     </div>
                     <div class="row form-group">
