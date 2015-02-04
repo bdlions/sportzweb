@@ -266,6 +266,7 @@
 </script>
 <script type="text/javascript">
     function submit_setting() {
+        var date_for_show_item = $('#date_for_show_item').val();
         var value_top_left = $('#position_of_recipe_1').val();
         var value_top_right = $('#position_of_recipe_2').val();
         var value_bottom_left = $('#position_of_recipe_3').val();
@@ -305,6 +306,7 @@
             type: "POST",
             url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/save_selected_recipe",
             data: {
+                date_for_show_item:date_for_show_item,
                 value_top_left: value_top_left,
                 value_top_right: value_top_right,
                 value_bottom_left: value_bottom_left,
@@ -334,6 +336,7 @@
     function panel_change(){
         var id = $('#panel').val();
         if(id==3) $('#side_panel').hide();
+        if(id==2) $('#side_panel').hide();
         if(id==1) $('#side_panel').show();
     }
 </script>

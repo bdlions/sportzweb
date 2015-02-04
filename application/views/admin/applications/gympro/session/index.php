@@ -19,5 +19,10 @@
                 <a href="<?php echo base_url()?>admin/applications_gympro/session_status_list"><button class="form-control btn button-custom">Manage Statuses</button></a>
             </div>
         </div>
+        <div class="row ">
+            <div class="col-md-offset-1 col-md-2" style="padding-left: 15px;">
+                <input type="button"  value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
+            </div>
+        </div>
     </div>
 </div>
