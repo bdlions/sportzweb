@@ -357,34 +357,48 @@ $lang['update_login_attempts_fail']                           = "Failed to updat
 $lang['delete_login_attempts_successful']                     = "Login attempts deleted successfully.";
 $lang['delete_login_attempts_fail']                           = "Failed to delete login_attempts.";
 
+$lang['create_repeats_successful']      = "Repeat create successfully.";
+$lang['create_repeats_fail']            = "Failed to create repeats info .";
 $lang['update_repeats_successful']      = "Repeat updated successfully.";
 $lang['update_repeats_fail']            = "Failed to update repeats info.";
 $lang['delete_repeats_successful']      = "Repeat deleted successfully.";
 $lang['delete_repeats_fail']            = "Failed to delete repeats.";
 
+$lang['create_type_successful']         = "Type create successfully.";
+$lang['create_type_fail']               = "Failed to create type info.";
 $lang['update_type_successful']         = "Type updated successfully.";
 $lang['update_type_fail']               = "Failed to update type info.";
 $lang['delete_type_successful']         = "Type deleted successfully.";
 $lang['delete_type_fail']               = "Failed to delete type.";
 
+$lang['create_time_successful']         = "Time create successfully.";
+$lang['create_time_fail']               = "Failed to create time info.";
 $lang['update_time_successful']         = "Time updated successfully.";
 $lang['update_time_fail']               = "Failed to update time info.";
 $lang['delete_time_successful']         = "Time deleted successfully.";
 $lang['delete_time_fail']               = "Failed to delete time.";
 
+$lang['create_cost_successful']         = "Cost create successfully.";
+$lang['create_cost_fail']               = "Failed to create cost info.";
 $lang['update_cost_successful']         = "Cost updated successfully.";
 $lang['update_cost_fail']               = "Failed to update cost info.";
 $lang['delete_cost_successful']         = "Cost deleted successfully.";
 $lang['delete_cost_fail']               = "Failed to delete cost.";
 
+$lang['create_status_successful']       = "Status create successfully.";
+$lang['create_status_fail']             = "Failed to create status info.";
 $lang['update_status_null']             = "No status has been updated.";
 $lang['update_status_successful']       = "Status updated successfully.";
 $lang['update_status_fail']             = "Failed to update status info.";
 $lang['delete_status_successful']       = "Status deleted successfully.";
 $lang['delete_status_fail']             = "Failed to delete status.";
 
+$lang['create_feedback_successful']     = "Feedback create successfully.";
+$lang['create_feedback_fail']           = "Failed to create feedback info.";
 $lang['update_feedback_successful']     = "Feedback updated successfully.";
 $lang['update_feedback_fail']           = "Failed to update feedback info.";
 $lang['delete_feedback_successful']     = "Feedback deleted successfully.";
 $lang['delete_feedback_fail']           = "Failed to delete feedback.";
+$lang['message_has_been_sent_successful']  = "Message has been send  successfully.";
+$lang['message_sent_fail']                 = "Failed to send Message.";
 

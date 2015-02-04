@@ -30,8 +30,10 @@
                     </table>
                 </div>
             </div>
-            <div class="btn-group" style="padding-left: 10px;">
-                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
+            <div class="col-md-2" style="padding-left: 10px;">
+                <a href="<?php echo base_url(); ?>admin/contact_us">
+                        <input type="button" value="Back" id="back_button" class="form-control btn button-custom">
+                    </a>
             </div>
         </div>        
     </div>

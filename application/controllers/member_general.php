@@ -49,9 +49,15 @@ class Member_general extends Role_Controller {
                     'description' => $this->input->post('description'),
                     'created_on' => now()
                 );
-                $this->contact_us_library->add_feedback($additional_data);
-                $this->session->set_flashdata('message', 'Your message is sent successfully');
-                redirect('member_general/contact_us', 'refresh');
+               $result= $this->contact_us_library->add_feedback($additional_data);
+                 if($result!=FALSE)
+                {
+                    $this->data['message'] = $this->contact_us_library->messages();
+                }
+                else
+                {
+                    $this->data['message'] = $this->contact_us_library->messages();
+                }
             }
             else
             {

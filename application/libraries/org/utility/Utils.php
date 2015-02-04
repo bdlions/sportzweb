@@ -131,6 +131,20 @@ class Utils {
     }
     
     /*
+     * This method will return current date in YYYY-MM-DD format
+     * @Author rashida on 2nd  february 2015
+     */
+    public function get_current_date_db($country_code = 'GB')
+    {
+        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
+        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
+        $dateTime = new DateTime("now", $dateTimeZone);
+        $unix_current_time = now() + $dateTime->getOffset();
+        $human_current_time = unix_to_human($unix_current_time);
+        $human_current_time_array= explode(" ", $human_current_time);
+        return  $human_current_time_array[0];
+    }
+    /*
      * This method will convert unix time into human date dd-mm-yyyy format
      * @param $unix_time, time in unix format
      * @param $show_minute, whether minute will be showed or not

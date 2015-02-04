@@ -6,7 +6,7 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>' + "admin/applications_gympro/delete_session_type",
                 data: {
-                    id: $("#input_mission_id").val()
+                    type_id: $("#input_type_id").val()
                 },
                 success: function(data) {
                     alert(data['message']);
@@ -17,7 +17,7 @@
         });
     });
     function open_modal_delete_confirm(id) {
-        $('#input_mission_id').val(id);
+        $('#input_type_id').val(id);
         $("#modal_delete_confirm").modal('show');
     }
 </script>
@@ -33,7 +33,7 @@
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-10 control-label">Are you sure to delete this Type?</label>
-                        <input id="input_mission_id" name="input_mission_id" value="" type="hidden" class="form-control"/>
+                        <input id="input_type_id" name="input_type_id" value="" type="hidden" class="form-control"/>
                     </div>
                 </div>                
             </div>

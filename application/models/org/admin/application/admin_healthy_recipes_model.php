@@ -212,13 +212,13 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
         return isset($id)? $id: FALSE;
     }
 
-
+/*
+ * Written by rashida 2nd february 2015
+ */
     public function get_recipe_selection($date = 0)
     {
-        if($date != 0) {
-           $this->db->where($this->tables['recipe_selection'].'.selected_date',$date);
-        }
-        $this->db->order_by('id', 'desc');
+        $this->db->where($this->tables['recipe_selection'].'.selected_date <=',$date);
+//        $this->db->order_by('selected_date', 'desc');
         
         return $this->db->select("*")
                     ->from($this->tables['recipe_selection'])
@@ -244,28 +244,21 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
                 ->from($this->tables['recipes'])
                 ->get();
     }
-    
-     /*-------------------------written by Omar-----------*/
+    /* 
+     * written by Rashida Sultana 2nd february
+     */
    //this function is to retrive specific recipes or only four recipes
-    public function get_all_recipes_for_home($recipes_id = null)
+    
+    public function get_all_recipes_for_home($recipe_id_list = array())
     {
-        //echo '<pre/>';print_r($recipes_id);exit;
-        if(count($recipes_id)>0) {
-            $list = implode (", ", array_filter($recipes_id));
+        if(!empty($recipe_id_list)>0) {
+            $list = implode (", ", array_filter($recipe_id_list));
             $this->db->_protect_identifiers = FALSE;
-            $this->db->where_in($this->tables['recipes'].'.id', $recipes_id);
+            $this->db->where_in($this->tables['recipes'].'.id', $recipe_id_list);
             $this->db->order_by("FIELD (recipes.id, " . $list . ")");
             $this->db->_protect_identifiers = TRUE;
         } else {
-            $all_recipies = $this->get_all_recipes()->result_array();
-            $total_no_of_record = count($all_recipies);
-            if($total_no_of_record > 14) {
-                $random_no = rand(0,$total_no_of_record-7);
-                $this->db->limit(7, $random_no);
-            } else {
                 $this->db->limit(7, 0);
-            }
-            
         }
           return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
                     ->from($this->tables['recipes'])

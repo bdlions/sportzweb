@@ -44,8 +44,13 @@ window.onload = function()
     </div>
 </div>
 <div class="row form-group">
-    <div class="col-md-offset-6 col-md-2">
-        <?php echo form_input($submit_update_privacy + array('class' => 'btn btn-warning form-control')) ?> 
+    <div class="col-md-offset-2 col-md-2">
+        <a href="<?php echo base_url(); ?>admin/footer_privacy">
+            <input type="button" value="Back" id="back_button" class="form-control btn button-custom">
+        </a>
+    </div>
+    <div class="col-md-offset-2 col-md-2">
+        <?php echo form_input($submit_update_privacy + array('class' => 'btn button-custom form-control')) ?> 
     </div>
 </div>
 <?php echo form_close();?>

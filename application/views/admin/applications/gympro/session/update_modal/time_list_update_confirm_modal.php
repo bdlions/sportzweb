@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(function() {
         $("#button_update").on("click", function() {
-            if ($("#input_update_a").val().length == 0)
+            if ($("#input_update_title").val().length == 0)
             {
                 alert("Please assign session time");
                 return;
@@ -9,11 +9,11 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/applications_gympro/update_time",
+                url: '<?php echo base_url(); ?>' + "admin/applications_gympro/update_session_time",
                 data: {
-                    id: $("#input_update_id").val(),
-                    input_update_a: $("#input_update_a").val(),
-                    input_update_24: $("#input_update_24").val(),
+                    time_id: $("#input_update_id").val(),
+                    input_update_title: $("#input_update_title").val(),
+                    input_update_title_24: $("#input_update_title_24").val(),
                 },
                 success: function(data) {
                     alert(data['message']);
@@ -27,14 +27,14 @@
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/applications_gympro/get_time_info",
+            url: '<?php echo base_url(); ?>' + "admin/applications_gympro/get_session_time_info",
             data: {
-                id: id
+                time_id: id
             },
             success: function(data) {
-                $('#input_update_id').val(data.data_info['id']);
-                $('#input_update_a').val(data.data_info['title']);
-                $('#input_update_24').val(data.data_info['title_24']);
+                $('#input_update_id').val(data.time_info['id']);
+                $('#input_update_title').val(data.time_info['title']);
+                $('#input_update_title_24').val(data.time_info['title_24']);
                 $("#modal_update").modal('show');
             }
         });
@@ -53,7 +53,7 @@
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Title:</label>
                         <div class ="col-sm-4">
-                            <input id="input_update_a" name="input_update_a" value="" type="text" class="form-control"/>
+                            <input id="input_update_title" name="input_update_title" value="" type="text" class="form-control"/>
                             <input id="input_update_id" name="input_update_id" value="" type="hidden" class="form-control"/>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Title(24hr):</label>
                         <div class ="col-sm-4">
-                            <input id="input_update_24" name="input_update_24" value="" type="text" class="form-control"/>
+                            <input id="input_update_title_24" name="input_update_title_24" value="" type="text" class="form-control"/>
                         </div>
                     </div>
                     <div class="row form-group">

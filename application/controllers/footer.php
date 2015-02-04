@@ -238,9 +238,15 @@ class Footer extends CI_Controller {
                     'description' => $this->input->post('description'),
                     'created_on' => now()
                 );
-                $this->contact_us_library->add_feedback($additional_data);
-                $this->session->set_flashdata('message', 'Your message is sent successfully');
-                redirect('footer/contact_us', 'refresh');
+                $result=$this->contact_us_library->add_feedback($additional_data);
+                if($result!=FALSE)
+                {
+                    $this->data['message'] = $this->contact_us_library->messages();
+                }
+                else
+                {
+                    $this->data['message'] = $this->contact_us_library->messages();
+                }
             }
             else
             {

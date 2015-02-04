@@ -14,6 +14,7 @@ class Applications_healthyrecipes extends CI_Controller{
         $this->load->library('excel');
         $this->load->library('image_lib');
         $this->load->library('org/admin/access_level/admin_access_level_library');
+        $this->load->library('org/utility/Utils');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
         // Load MongoDB library instead of native db driver if required
@@ -161,6 +162,7 @@ class Applications_healthyrecipes extends CI_Controller{
     {
         $response = array();
         $save_id = $this->input->post('save_id');
+        $selected_date = $this->input->post('date_for_show_item');
         $positon_array = array(
                     $this->input->post('value_top_left'),
                     $this->input->post('value_top_right'),
@@ -170,6 +172,7 @@ class Applications_healthyrecipes extends CI_Controller{
                     $this->input->post('value_bottom_down_extra'),
                     $this->input->post('value_bottom_down'),
                 );
+        $recipes_list = $this->input->post('recipes_list');
         
         if($save_id==1){
             $show_advertise = 0;
@@ -177,12 +180,12 @@ class Applications_healthyrecipes extends CI_Controller{
             $show_advertise = 1;
         }
         
-        $recipes_list = $this->input->post('recipes_list');
+        $formated_selected_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($selected_date);
               
         $data = array(
                 'recipe_view_list' => json_encode($positon_array),
                 'recipe_list'   => $recipes_list,
-                'selected_date' => date("d-m-Y"),
+                'selected_date' => $formated_selected_date,
                 'show_advertise_home_page' => $show_advertise
             );
        
@@ -716,7 +719,10 @@ class Applications_healthyrecipes extends CI_Controller{
         }
         echo json_encode($result);
     }
-    
+     /**
+     * Written by Rashida Sultana for delete recipe
+      * 2nd february2015
+     */
     public function all_recipe_list()
     {
         $this->data['message'] = '';
@@ -727,18 +733,15 @@ class Applications_healthyrecipes extends CI_Controller{
             $recipes_list = $recipe_list_array;
         }
         $this->data['recipes_list'] = $recipes_list;
-        
-        $present_date = date("d-m-Y");
+        $present_date = $this->utils->get_current_date_db();
         $result = $this->admin_healthy_recipes->get_selected_recipe_for_home_page($present_date );
-        //echo '<pre/>';print_r($result);exit;
-        
-        if(count($result) > 0) {
+        if(!empty($result)) {
             $this->data['recipe_view_list_item'] = $result['recipe_view_list_item'];
             $this->data['recipe_list_item'] =  $result['recipe_list_item'];
             $this->data['show_advertise'] = $result['show_advertise_home_page'];
+
         } else {
             $result = $this->admin_healthy_recipes->get_random_recipe_for_home_page();
-            //echo '<pre/>';print_r($result);exit;
             $this->data['recipe_view_list_item'] = $result['recipe_view_list_item'];
             $this->data['recipe_list_item'] =  $result['recipe_list_item'];
             $this->data['show_advertise'] = 1;

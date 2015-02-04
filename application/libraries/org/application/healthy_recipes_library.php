@@ -62,15 +62,14 @@ class Healthy_recipes_library {
     // written by Omar faruk
     public function get_selected_recipe_for_home_page($present_date) {
         $result_with_date = $this->healthy_recipes_model->get_recipe_selection($present_date)->result_array();
-        if(count($result_with_date) > 0) {
-            $result = $result_with_date;
-            $show_advertise = $result_with_date[0]['show_advertise_home_page'];
-        } else {
-            $result = $this->healthy_recipes_model->get_recipe_selection()->result_array();
-            $show_advertise = 0;
-        }
-        if (count($result) > 0) {
-            $selected_recipe_list = $result[0];
+        $arranged_select_recipe_list;
+        if (!empty($result)) {
+            foreach($result as $result_array){
+                $arranged_select_recipe_list[ $result_array['selected_date'] ][] = $result_array;
+            }
+            ksort($arranged_select_recipe_list);
+            $selected_recipe_list = end($arranged_select_recipe_list);
+            $selected_recipe_list = end($selected_recipe_list);
             $selected_recipe_view_list = json_decode($selected_recipe_list['recipe_view_list']);
             $selected_recipe_item_list = json_decode($selected_recipe_list['recipe_list']);
 

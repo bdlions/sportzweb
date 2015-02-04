@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(function() {
         $("#button_update").on("click", function() {
-            if ($("#input_update_a").val().length == 0)
+            if ($("#input_update_title").val().length == 0)
             {
                 alert("Please assign session type");
                 return;
@@ -9,10 +9,10 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/applications_gympro/update_type",
+                url: '<?php echo base_url(); ?>' + "admin/applications_gympro/update_session_type",
                 data: {
-                    id: $("#input_update_id").val(),
-                    input_update_a: $("#input_update_a").val(),
+                    type_id: $("#input_update_id").val(),
+                    type_title: $("#input_update_title").val(),
                 },
                 success: function(data) {
                     alert(data['message']);
@@ -26,13 +26,13 @@
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/applications_gympro/get_type_info",
+            url: '<?php echo base_url(); ?>' + "admin/applications_gympro/get_session_type_info",
             data: {
-                id: id
+                type_id: id
             },
             success: function(data) {
-                $('#input_update_id').val(data.data_info['id']);
-                $('#input_update_a').val(data.data_info['title']);
+                $('#input_update_id').val(data.type_info['id']);
+                $('#input_update_title').val(data.type_info['title']);
                 $("#modal_update").modal('show');
             }
         });
@@ -51,7 +51,7 @@
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Title:</label>
                         <div class ="col-sm-4">
-                            <input id="input_update_a" name="input_update_a" value="" type="text" class="form-control"/>
+                            <input id="input_update_title" name="input_update_title" value="" type="text" class="form-control"/>
                             <input id="input_update_id" name="input_update_id" value="" type="hidden" class="form-control"/>
                         </div>
                     </div>

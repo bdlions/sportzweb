@@ -74,20 +74,21 @@ class Admin_healthy_recipes {
     public function __get($var) {
         return get_instance()->$var;
     }    
-    
-    // written by Omar faruk
+    /*
+     * @Author rashida on 2nd  february 2015
+     */
     public function get_selected_recipe_for_home_page($present_date) {
-        $result_with_date = $this->admin_healthy_recipes_model->get_recipe_selection($present_date)->result_array();
-        if(count($result_with_date) > 0) {
-            $result = $result_with_date;
-        } else {
-            $result = $this->admin_healthy_recipes_model->get_recipe_selection()->result_array();
-        }
-        if (count($result) > 0) {
-            $selected_recipe_list = $result[0];
+        $result = $this->admin_healthy_recipes_model->get_recipe_selection($present_date)->result_array();
+        $arranged_select_recipe_list;
+        if (!empty($result)) {
+            foreach($result as $result_array){
+                $arranged_select_recipe_list[ $result_array['selected_date'] ][] = $result_array;
+            }
+            ksort($arranged_select_recipe_list);
+            $selected_recipe_list = end($arranged_select_recipe_list);
+            $selected_recipe_list = end($selected_recipe_list);
             $selected_recipe_view_list = json_decode($selected_recipe_list['recipe_view_list']);
             $selected_recipe_item_list = json_decode($selected_recipe_list['recipe_list']);
-
             $recipe_view_list_item = $this->admin_healthy_recipes_model->get_all_recipes_for_home($selected_recipe_view_list)->result_array();
             $recipe_list_item = $this->admin_healthy_recipes_model->get_all_recipes_for_home($selected_recipe_item_list)->result_array();
 
@@ -106,11 +107,10 @@ class Admin_healthy_recipes {
     // written by Omar faruk
     public function get_random_recipe_for_home_page() {
         $recipe_view_list_item = $this->admin_healthy_recipes_model->get_all_recipes_for_home()->result_array();
-        if (count($recipe_view_list_item) <= 7) {
-            $recipe_list_item = $this->admin_healthy_recipes_model->get_all_recipes_for_home()->result_array();
+        if (!empty($recipe_view_list_item)) {
             $data_array = array(
                 'recipe_view_list_item' => $recipe_view_list_item,
-                'recipe_list_item' => $recipe_list_item
+                'recipe_list_item' => $recipe_view_list_item
             );
             return $data_array;
         } else {
