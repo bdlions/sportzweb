@@ -63,7 +63,7 @@
         $("#group_client, #fin_date, #st_date, #status_id").on('change', function(){
             fetch_session_data();
         });
-        
+        fetch_session_data();
         $("#datepicker").datepicker({
             showOn: "button",
             buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
@@ -224,10 +224,10 @@
                         <div class="col-md-4 control-div">Session:</div>
                         <div class="col-md-7">
                             <select class="form-control" id="status_id">
+                                <option value="0">All</option>
                                 <?php foreach ($status_list as $status): ?>
                                     <option value="<?php echo $status['id']; ?>"><?php echo $status['title']?></option>
                                 <?php endforeach; ?>
-                                <option value="0">All</option>
                             </select>
                         </div>
                     </div>                        
