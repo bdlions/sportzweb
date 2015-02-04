@@ -26,7 +26,7 @@
                   url: '<?php echo base_url() ?>messages/send_message/',
                   data: $("#postMessage").serialize(),
                   dataType: 'json',
-                  success: function(data) {console.log(data);
+                  success: function(data) {//console.log(data);
                       if(data == true){
                           window.location.reload();
                       }

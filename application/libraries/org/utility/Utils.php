@@ -41,21 +41,114 @@ class Utils {
     }
     
     /*
+     * This method will return current date for user end in DD-MM-YYYY format
+     * @Author Nazmul on 14 June 2014
+     */
+    public function get_current_date($country_code = 'GB')
+    {
+        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
+        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
+        $dateTime = new DateTime("now", $dateTimeZone);
+        $unix_current_time = now() + $dateTime->getOffset();
+        $human_current_time = unix_to_human($unix_current_time);
+        $human_current_time_array= explode(" ", $human_current_time);
+        $human_current_date = $human_current_time_array[0];
+        $splited_date_content = explode("-", $human_current_date);
+        return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0];
+    }
+    
+    /*
+     * This method will return current date for database purpose in YYYY-MM-DD format
+     * @Author rashida on 2nd  february 2015
+     */
+    public function get_current_date_db($country_code = 'GB')
+    {
+        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
+        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
+        $dateTime = new DateTime("now", $dateTimeZone);
+        $unix_current_time = now() + $dateTime->getOffset();
+        $human_current_time = unix_to_human($unix_current_time);
+        $human_current_time_array= explode(" ", $human_current_time);
+        return  $human_current_time_array[0];
+    }
+    
+    /*
+     * This method will convert date from user end format to database format i.e. dd-mm-yyyy to yyyy-mm-dd format
+     * If date is invalide then this method will return invalid date
+     * @param $date, date to be converted
+     * @Author Nazmul on 24 September 2014
+     */
+    public function convert_date_from_user_to_db($date)
+    {
+        $splited_date_content = explode("-", $date);
+        if(count($splited_date_content) == 3)
+        {
+            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0];
+        }
+        else
+        {
+            return $date;
+        }        
+    }
+    /*
+     * This method will convert date from database format to user end format i.e. yyyy-mm-dd to dd-mm-yyyy format
+     * If date is invalide then this method will return invalid date
+     * @param $date, date to be converted
+     * @Author Nazmul on 24 September 2014
+     */
+    public function convert_date_from_db_to_user($date)
+    {
+        $splited_date_content = explode("-", $date);
+        if(count($splited_date_content) == 3)
+        {
+            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0];
+        }
+        else
+        {
+            return $date;
+        }        
+    }
+    
+    /*
      * This method will return human time of a unix time
      * @param $unix_time, unix time
      * @param $user_info, user info
      * @Author Nazmul on 22nd January 2015
      */
-    public function get_unix_to_human_local($unix_time, $user_info = array())
+    public function get_unix_to_human_local($unix_time, $country_code = 'GB')
     {
-        if(empty($user_info))
-        {
-            $user_info = $this->ion_auth->get_user_info();
-        }        
-        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $user_info['country_code']);
+        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code = 'GB');
         $dateTimeZone = new DateTimeZone($time_zone_array[0]);
         $dateTime = new DateTime("now", $dateTimeZone);
         return unix_to_human($unix_time + $dateTime->getOffset());
+        
+    }
+    
+    /*
+     * This method will convert unix time into human date dd-mm-yyyy format
+     * @param $unix_time, time in unix format
+     * @param $show_minute, whether minute will be showed or not
+     * @param $country_code, country code of this user
+     * @Author Nazmul on 17 June 2014
+     */
+    public function get_unix_to_human_date($unix_time, $show_minute = 0, $country_code = 'GB')
+    {
+        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
+        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
+        $dateTime = new DateTime("now", $dateTimeZone);
+        $relative_unix_time = $unix_time + $dateTime->getOffset();
+        $human_current_time = unix_to_human($relative_unix_time);
+        $human_current_time_array= explode(" ", $human_current_time);
+        $human_current_date = $human_current_time_array[0];
+        $splited_date_content = explode("-", $human_current_date);
+        if($show_minute == 1)
+        {
+            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0].' '.$human_current_time_array[1];
+        }
+        else
+        {
+            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0];
+        }
         
     }
     
@@ -111,65 +204,6 @@ class Utils {
         {
             return $date;
         }        
-    }
-    
-    /*
-     * This method will return current date in DD-MM-YYYY format
-     * @Author Nazmul on 14 June 2014
-     */
-    public function get_current_date($country_code = 'GB')
-    {
-        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
-        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
-        $dateTime = new DateTime("now", $dateTimeZone);
-        $unix_current_time = now() + $dateTime->getOffset();
-        $human_current_time = unix_to_human($unix_current_time);
-        $human_current_time_array= explode(" ", $human_current_time);
-        $human_current_date = $human_current_time_array[0];
-        $splited_date_content = explode("-", $human_current_date);
-        return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0];
-    }
-    
-    /*
-     * This method will return current date in YYYY-MM-DD format
-     * @Author rashida on 2nd  february 2015
-     */
-    public function get_current_date_db($country_code = 'GB')
-    {
-        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
-        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
-        $dateTime = new DateTime("now", $dateTimeZone);
-        $unix_current_time = now() + $dateTime->getOffset();
-        $human_current_time = unix_to_human($unix_current_time);
-        $human_current_time_array= explode(" ", $human_current_time);
-        return  $human_current_time_array[0];
-    }
-    /*
-     * This method will convert unix time into human date dd-mm-yyyy format
-     * @param $unix_time, time in unix format
-     * @param $show_minute, whether minute will be showed or not
-     * @param $country_code, country code of this user
-     * @Author Nazmul on 17 June 2014
-     */
-    public function get_unix_to_human_date($unix_time, $show_minute = 0, $country_code = 'GB')
-    {
-        $time_zone_array = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country_code);
-        $dateTimeZone = new DateTimeZone($time_zone_array[0]);
-        $dateTime = new DateTime("now", $dateTimeZone);
-        $relative_unix_time = $unix_time + $dateTime->getOffset();
-        $human_current_time = unix_to_human($relative_unix_time);
-        $human_current_time_array= explode(" ", $human_current_time);
-        $human_current_date = $human_current_time_array[0];
-        $splited_date_content = explode("-", $human_current_date);
-        if($show_minute == 1)
-        {
-            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0].' '.$human_current_time_array[1];
-        }
-        else
-        {
-            return $splited_date_content[2].'-'.$splited_date_content[1].'-'.$splited_date_content[0];
-        }
-        
     }
     
     /*

@@ -53,7 +53,7 @@ class Welcome extends CI_Controller {
         //$now = now();
         $user_info = $this->ion_auth->get_user_info();
         echo(unix_to_human(1394128850));
-        echo($this->utils->get_unix_to_human_local(1394128850, $user_info));
+        echo($this->utils->get_unix_to_human_local(1394128850, $user_info['country_code']));
     }
 
 }
