@@ -237,10 +237,14 @@ class Gympro_library {
      * This method will convert session into calendar displayed format
      * @Author Nazmul on 24th January 2015
      */
-    public function get_sessions_in_calendar()
+    public function get_sessions_in_calendar($user_id = 0)
     {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
         $session_list = array();
-        $session_list_array = $this->gympro_model->get_all_sessions()->result_array();
+        $session_list_array = $this->gympro_model->get_all_sessions($user_id)->result_array();
         foreach($session_list_array as $session_info)
         {
             $calendar_session_info = array(

@@ -2709,10 +2709,15 @@ class Gympro extends Role_Controller{
         echo json_encode($result);
     }
     //-----------------------------------------Earnings Module------------------------------------//
-    public function schedule(){
+    /*
+     * This method will load session list in calendar
+     * @Author Nazmul on 4th February 2015
+     */
+    public function schedule()
+    {
         $this->data['message'] = '';  
-        $sessions_array = $this->gympro_library->get_sessions_in_calendar();
-        
+        $user_id = $this->session->userdata('user_id');
+        $sessions_array = $this->gympro_library->get_sessions_in_calendar($user_id);
         $this->data['events'] = json_encode($sessions_array);
         $this->template->load(null,'applications/gympro/schedules', $this->data);
     }
