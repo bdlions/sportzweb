@@ -720,8 +720,8 @@ class Applications_healthyrecipes extends CI_Controller{
         echo json_encode($result);
     }
      /**
-     * Written by Rashida Sultana for delete recipe
-      * 2nd february2015
+     * Written by Rashida Sultana on 7th february 2015
+      * this method select random recipes or selected recipes at a given day
      */
     public function all_recipe_list()
     {

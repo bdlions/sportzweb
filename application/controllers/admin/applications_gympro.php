@@ -1166,13 +1166,15 @@ class Applications_gympro extends CI_Controller{
         $this->data['message'] = '';
         $this->template->load($this->tmpl, "admin/applications/gympro/session/index", $this->data);
     }
-    /*
-     * @Author Rashida on 4th february 2015
-     */
+    
     // -------------------------------- Session repeat Module ----------------------------//
    
     
-    // this method create session repeat by from submit
+    /*
+     * From submit
+     * @Author Rashida on 7th february 2015
+     * this method create session repeat
+     */
     
     public function create_session_repeat()
     {
@@ -1214,7 +1216,10 @@ class Applications_gympro extends CI_Controller{
      $this->template->load($this->tmpl,'admin/applications/gympro/session/create_repeat',$this->data);   
     }
     
-    // this method return session all repeats
+    /*
+     * @Author Rashida on 7th february 2015
+     * this method return session all repeats
+     */
     
     public function session_repeat_list()
     {
@@ -1229,7 +1234,10 @@ class Applications_gympro extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/gympro/session/repeat_list", $this->data);
     }
     
-    // this method return session repeat by repeat id
+    /*
+     * @Author Rashida on 7th february 2015
+     * this method return session repeat by repeat id
+     */
     
     public function get_session_repeat_info() 
     {
@@ -1242,7 +1250,11 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    // this method update a session repeat
+     /*
+     * Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method update a session repeat
+     */
     
     public function update_session_repeat() 
     {
@@ -1259,7 +1271,11 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    // this method delete a session repeat
+     /*
+     * Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method delete a session repeat
+     */
     
     public function delete_session_repeat()
     {
@@ -1276,15 +1292,16 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    /*
-     * @Author Rashida on 4th february 2015
-     */
+    
     
     // -------------------------------- Session Type Module ----------------------------//
     
     
-    // this method create session type by from submit
-    
+    /*
+     * From Submit
+     * @Author Rashida on 7th february 2015
+     * this method create session type
+     */
     public function create_session_type()
     {
         $this->data['message'] = '';
@@ -1325,7 +1342,10 @@ class Applications_gympro extends CI_Controller{
      $this->template->load($this->tmpl,'admin/applications/gympro/session/create_type',$this->data);   
     }
     
-    // this method return session all types
+     /*
+     * @Author Rashida on 7th february 2015
+     * this method return session all types
+     */
     
     public function session_type_list()
     {
@@ -1340,7 +1360,10 @@ class Applications_gympro extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/gympro/session/type_list", $this->data);
     }
     
-    // this method return session type by repeat id
+     /*
+     * @Author Rashida on 7th february 2015
+     * this method return session type by repeat id 
+     */
     
     public function get_session_type_info() 
     {
@@ -1353,8 +1376,11 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    // this method update a session type
-    
+     /*
+     * Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method update a session type 
+     */
     public function update_session_type()
     {
         $result = array();
@@ -1370,7 +1396,11 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    // this method delete a sessiopn type
+    /*
+     * Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method delete a sessiopn type 
+     */
     
     public function delete_session_type()
     {
@@ -1387,12 +1417,13 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    /*
-     * @Author Rashida on 4th February 2015
-     */
    // -------------------------------- Session Time Module ----------------------------//
     
-    // this method create session time by from submit
+    /*
+     * From submit
+     * @Author Rashida on 7th february 2015
+     * this method create session time 
+     */
     
     public function create_session_time()
     {
@@ -1440,7 +1471,10 @@ class Applications_gympro extends CI_Controller{
      $this->template->load($this->tmpl,'admin/applications/gympro/session/create_time', $this->data);   
     }
     
-    // this method return session all times
+    /*
+     * @Author Rashida on 7th february 2015
+     * this method return session all times
+     */
     
     public function session_time_list()
     {
@@ -1455,7 +1489,10 @@ class Applications_gympro extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/gympro/session/time_list", $this->data);
     }
     
-    // this method return session time by time id
+     /*
+     * @Author Rashida on 7th february 2015
+     * this method return session time by time id
+     */
     
     public function get_session_time_info() 
     {
@@ -1468,8 +1505,11 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    // this method update a session time
-    
+     /*
+     *Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method update a session time
+     */
     public function update_session_time() 
     {
         $result = array();
@@ -1486,7 +1526,12 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    //this method delete a session time
+    
+    /*
+     *Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method delete a session time
+     */
     
     public function delete_session_time()
     {
@@ -1502,12 +1547,14 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
-    /*
-     * @Author Rashida on 4th february 2015
-     */
+    
     // -------------------------------- Session Cost Module ----------------------------//
     
-    // this method create session cost by from submit
+    /*
+     *From submit 
+     * @Author Rashida on 7th february 2015
+     * this method create session cost
+     */
     
     public function create_session_cost()
     {
@@ -1549,7 +1596,10 @@ class Applications_gympro extends CI_Controller{
      $this->template->load($this->tmpl,'admin/applications/gympro/session/create_cost', $this->data);   
     }
     
-    // this method return session all costs
+     /*
+     * @Author Rashida on 7th february 2015
+     * this method return session all costs
+     */
     
     public function session_cost_list()
     {
@@ -1564,8 +1614,10 @@ class Applications_gympro extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/gympro/session/cost_list", $this->data);
     }
     
-    // this method return session cost by cost id
-    
+     /*
+     * @Author Rashida on 7th february 2015
+     * this method return session cost by cost id 
+     */
     
     public function get_session_cost_info() 
     {
@@ -1578,7 +1630,11 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    //this method update a session cost
+     /*
+     *Ajax call 
+     * @Author Rashida on 7th february 2015
+     * this method update a session cost 
+     */
     
     public function update_session_cost()
     {
@@ -1594,7 +1650,13 @@ class Applications_gympro extends CI_Controller{
         }
         echo json_encode($result);
     }
-    //this method delete a session cost 
+    
+    /*
+     * Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method delete a session cost 
+     */
+    
     public function delete_session_cost()
     {
         $result = array();
@@ -1610,12 +1672,13 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    /*
-     * @Author Rashida on 4th February 2015
-     */
     // -------------------------------- Session Status  Module ----------------------------//
     
-    // this method create session ststus by from submit
+    /*
+     * form submit
+     * @Author Rashida on 7th february 2015
+     * this method create session ststus 
+     */
     
     public function create_session_status()
     {
@@ -1657,7 +1720,10 @@ class Applications_gympro extends CI_Controller{
      $this->template->load($this->tmpl,'admin/applications/gympro/session/create_status', $this->data);   
     }
     
-    // this method return session all statuses
+    /*
+     * @Author Rashida on 7th february 2015
+     * this method return session all statuses
+     */
     
     public function session_status_list()
     {
@@ -1672,8 +1738,10 @@ class Applications_gympro extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/gympro/session/status_list", $this->data);
     }
     
-    // this method return session status by status id
-    
+    /*
+     * @Author Rashida on 7th february 2015
+     * this method return session status by status id
+     */
     public function get_session_status_info()
     {
         $result['status_info'] = array();
@@ -1685,7 +1753,11 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    //this method update a session status
+    /*
+     * Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method update a session status
+     */
     
     public function update_session_status() 
     {
@@ -1702,7 +1774,11 @@ class Applications_gympro extends CI_Controller{
         echo json_encode($result);
     }
     
-    //this method delete a sessiom status
+    /*
+     * Ajax call
+     * @Author Rashida on 7th february 2015
+     * this method delete a session status
+     */
     
     public function delete_session_status()
     {
