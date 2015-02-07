@@ -8,12 +8,13 @@
             dateFormat: 'dd-mm-yy'
         });
         
-        $("#dd_start_date").change(function() {
-            var start_index = document.getElementById("dd_start_date").selectedIndex;
-            var dd_length      = document.getElementById("dd_start_date").length;
-            var end_index = (start_index>=dd_length-1)? dd_length-1 : start_index+1;
-            document.getElementById("dd_end_date").selectedIndex = (end_index);
-        });
+//        // may not be useful for editing, hence commented
+//        $("#dd_start_date").change(function() {
+//            var start_index = document.getElementById("dd_start_date").selectedIndex;
+//            var dd_length      = document.getElementById("dd_start_date").length;
+//            var end_index = (start_index>=dd_length-1)? dd_length-1 : start_index+1;
+//            document.getElementById("dd_end_date").selectedIndex = (end_index);
+//        });
         $("#dd_type").change(function() {
             if($("#dd_type").val()!='1'){
                 $("#dd_rep").show();

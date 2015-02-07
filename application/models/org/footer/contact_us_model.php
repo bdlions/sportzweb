@@ -60,10 +60,10 @@ class Contact_us_model extends Ion_auth_model {
         $data = $this->_filter_data($this->tables['footer_cu_feedbacks'], $additional_data);
         $this->db->insert($this->tables['footer_cu_feedbacks'], $data);
         if ($this->db->trans_status() === FALSE) {
-            $this->set_error('message_sent_fail');
+            $this->set_error('contactus_msg_sent_fail');
             return FALSE;
         }
-        $this->set_message('message_has_been_sent_successful');
+        $this->set_message('contactus_msg_sent_successful');
         return TRUE;
         
     }

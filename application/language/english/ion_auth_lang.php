@@ -399,6 +399,7 @@ $lang['update_feedback_successful']     = "Feedback updated successfully.";
 $lang['update_feedback_fail']           = "Failed to update feedback info.";
 $lang['delete_feedback_successful']     = "Feedback deleted successfully.";
 $lang['delete_feedback_fail']           = "Failed to delete feedback.";
-$lang['message_has_been_sent_successful']  = "Message has been send  successfully.";
-$lang['message_sent_fail']                 = "Failed to send Message.";
+
+$lang['contactus_msg_sent_successful']  = "Your message has been sent successfully.";
+$lang['contactus_msg_sent_fail']        = "Failed to send Message.";
 
