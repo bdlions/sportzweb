@@ -73,10 +73,13 @@ class Admin_healthy_recipes {
      */
     public function __get($var) {
         return get_instance()->$var;
-    }    
+    }   
+    
     /*
-     * @Author rashida on 2nd  february 2015
+     * @Author rashida on 7th  february 2015
+     * this method return latest selected  recipe for latest date
      */
+    
     public function get_selected_recipe_for_home_page($present_date) {
         $result = $this->admin_healthy_recipes_model->get_recipe_selection($present_date)->result_array();
         $arranged_select_recipe_list;
@@ -104,7 +107,12 @@ class Admin_healthy_recipes {
         }
     }
     
-    // written by Omar faruk
+    
+   /*
+    *  written by Rashida on 7th february
+    * this method return random selected recipes for home page
+    */
+    
     public function get_random_recipe_for_home_page() {
         $recipe_view_list_item = $this->admin_healthy_recipes_model->get_all_recipes_for_home()->result_array();
         if (!empty($recipe_view_list_item)) {

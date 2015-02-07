@@ -10,6 +10,7 @@ class Healthy_recipes extends Role_Controller{
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->library('org/application/healthy_recipes_library');
+         $this->load->library('org/utility/Utils');
         $this->load->library('visitors');
         
         // Load MongoDB library instead of native db driver if required
@@ -28,23 +29,18 @@ class Healthy_recipes extends Role_Controller{
     }   
     
     /*
-    * Writen by Omar faruk
+    * @Author Rashida on 7th February
+    * this method return recipe for a day randomly or a selected day 
     */
     function index()
     {
-        $present_date = date("d-m-Y");
-        
+        $present_date = $this->utils->get_current_date_db();
         $result = $this->healthy_recipes_library->get_selected_recipe_for_home_page($present_date);
-        //echo '<pre/>';print_r($result);exit;
-        if(count($result) > 0) {
+        if(!empty($result)) {
             $this->data['recipe_view_list_item'] = $result['recipe_view_list_item'];
             $this->data['recipe_list_item'] =  $result['recipe_list_item'];
             $this->data['show_advertise'] = $result['show_advertise'];
         } else {
-            /**
-            * for random selection but if you want to config from admin panel then
-            *  it should not be like random selection
-            */
             $results = $this->healthy_recipes_library->get_random_recipe_for_home_page();
             $this->data['recipe_view_list_item'] = $results['recipe_view_list_item'];
             $this->data['recipe_list_item'] =  $results['recipe_list_item'];

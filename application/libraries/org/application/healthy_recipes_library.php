@@ -59,9 +59,12 @@ class Healthy_recipes_library {
         return call_user_func_array(array($this->healthy_recipes_model, $method), $arguments);
     }
 
-    // written by Omar faruk
+ /*
+  * @author rashida on 7th february
+  * this method return selected recipe for latest date in database
+  */
     public function get_selected_recipe_for_home_page($present_date) {
-        $result_with_date = $this->healthy_recipes_model->get_recipe_selection($present_date)->result_array();
+        $result = $this->healthy_recipes_model->get_recipe_selection($present_date)->result_array();
         $arranged_select_recipe_list;
         if (!empty($result)) {
             foreach($result as $result_array){
@@ -72,14 +75,13 @@ class Healthy_recipes_library {
             $selected_recipe_list = end($selected_recipe_list);
             $selected_recipe_view_list = json_decode($selected_recipe_list['recipe_view_list']);
             $selected_recipe_item_list = json_decode($selected_recipe_list['recipe_list']);
-
-            $recipe_view_list_item = $this->healthy_recipes_model->get_all_recipes($selected_recipe_view_list)->result_array();
-            $recipe_list_item = $this->healthy_recipes_model->get_all_recipes($selected_recipe_item_list)->result_array();
+            $recipe_view_list_item = $this->healthy_recipes_model->get_all_recipes_for_home($selected_recipe_view_list)->result_array();
+            $recipe_list_item = $this->healthy_recipes_model->get_all_recipes_for_home($selected_recipe_item_list)->result_array();
 
             $data_array = array(
                 'recipe_view_list_item' => $recipe_view_list_item,
                 'recipe_list_item' => $recipe_list_item,
-                'show_advertise' => $show_advertise
+                 'show_advertise' => $selected_recipe_list['show_advertise_home_page']
             );
 
             return $data_array;
@@ -88,23 +90,21 @@ class Healthy_recipes_library {
         }
     }
 
-    // written by Omar faruk
+   /*
+    * @Author Rashida Sultana on 7th February
+    * This method return Random 7 recipes for home page
+    */
+    
     public function get_random_recipe_for_home_page() {
-        $recipe_view_list_item = $this->healthy_recipes_model->get_all_recipes()->result_array();
-        if (count($recipe_view_list_item) <= 4) {
-            $recipe_list_item = $this->healthy_recipes_model->get_all_recipes()->result_array();
+        $recipe_view_list_item = $this->healthy_recipes_model->get_all_recipes_for_home()->result_array();
+        if (!empty($recipe_view_list_item)) {
             $data_array = array(
                 'recipe_view_list_item' => $recipe_view_list_item,
-                'recipe_list_item' => $recipe_list_item
+                'recipe_list_item' => $recipe_view_list_item
             );
             return $data_array;
         } else {
-            $recipe_list_item = $this->healthy_recipes_model->get_all_recipes()->result_array();
-            $data_array = array(
-                'recipe_view_list_item' => $recipe_view_list_item,
-                'recipe_list_item' => $recipe_list_item
-            );
-            return $data_array;
+            return $data_array = array();
         }
     }
 

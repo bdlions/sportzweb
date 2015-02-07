@@ -17,5 +17,5 @@
     define("HEALTHY_RECIPES_IMAGE_LIST_WIDTH", 450);
     define("HEALTHY_RECIPES_IMAGE_LIST_HEIGHT", 250);
     define("NEWEST_FIRST",1);
-    define("DEFAULT_VIEW_PER_PAGE",4);
+    define("DEFAULT_VIEW_PER_PAGE",7);
 ?>

@@ -300,11 +300,16 @@
             return;
         }
         
+        if (date_for_show_item === '') {
+            alert('Please select a date.');
+            return;
+        }
+        
         var id = $('#panel').val();
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/save_selected_recipe",
+            url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/create_selected_recipe",
             data: {
                 date_for_show_item:date_for_show_item,
                 value_top_left: value_top_left,

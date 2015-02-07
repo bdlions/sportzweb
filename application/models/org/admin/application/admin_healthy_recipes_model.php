@@ -116,7 +116,12 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
         return TRUE;
     }
     /*-----------------------------Recipe------------------------*/
-    /*-------------------------Recipe written by Omar-----------*/
+    
+    /*
+     * @Author rashida on 7th february
+     * this method select all recipes or a specific recipe by category id
+     */
+    
     public function get_all_recipes($recipe_category_id = 0)
     {
         if($recipe_category_id != 0)
@@ -201,25 +206,33 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
         return true;
         
     }
+    
+    /*
+     * @Author Rashida on 7th february
+     * this method create recipe selection 
+     */
 
     public function create_recipe_selection($data)
     {
 
         $data = $this->_filter_data($this->tables['recipe_selection'],$data);
         $this->db->insert($this->tables['recipe_selection'],$data);
-        $id = $this->db->insert_id();
-
-        return isset($id)? $id: FALSE;
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('create_recipe_selection_fail');
+            return FALSE;
+        }
+        $this->set_message('create_recipe_selection_successful');
+        return TRUE;
     }
 
-/*
- * Written by rashida 2nd february 2015
- */
+    /*
+     * @Author Rashida on 7th February
+     * this method return selected recipes less then or equal to current date 
+     */
+    
     public function get_recipe_selection($date = 0)
     {
         $this->db->where($this->tables['recipe_selection'].'.selected_date <=',$date);
-//        $this->db->order_by('selected_date', 'desc');
-        
         return $this->db->select("*")
                     ->from($this->tables['recipe_selection'])
                     ->get();
@@ -246,8 +259,8 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
     }
     /* 
      * written by Rashida Sultana 2nd february
+     *this function is to retrive specific recipes or only seven recipes
      */
-   //this function is to retrive specific recipes or only four recipes
     
     public function get_all_recipes_for_home($recipe_id_list = array())
     {
@@ -258,13 +271,14 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
             $this->db->order_by("FIELD (recipes.id, " . $list . ")");
             $this->db->_protect_identifiers = TRUE;
         } else {
-                $this->db->limit(7, 0);
+                $this->db->limit(DEFAULT_VIEW_PER_PAGE, 0);
         }
           return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
                     ->from($this->tables['recipes'])
                     ->join($this->tables['recipe_category'], $this->tables['recipe_category'].'.id='.$this->tables['recipes'].'.recipe_category_id','left')
                     ->get();
     }
+    
     
     public function get_all_comments($recipe_id,$sorted=0,$limit_no=0, $comment_id = 0)
     {

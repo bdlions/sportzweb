@@ -1627,12 +1627,12 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    /*
-     * @Author Rashida on 2nd February 2015
-     */
     // -----------------------------------Session Module ---------------------------------------//
     
-    // This method will create session time 
+     /*
+     * @Author Rashida on 7th february 2015
+     *  This method will create session time 
+     */
     
     public function create_session_time($data) {
         $data['created_on'] = now();
@@ -1646,7 +1646,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-   // This method will return all session times 
+    /*
+     * @Author Rashida on 7th february 2015
+     *  This method will return all session times
+     */
     
     public function get_all_session_times()
     {
@@ -1655,7 +1658,10 @@ class Admin_gympro_model extends Ion_auth_model
                 ->get();
     }
     
-    // This method will return all session time by session time id 
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will return all session time by session time id
+     */
     
     public function get_session_time_info($time_id)
     {
@@ -1665,7 +1671,10 @@ class Admin_gympro_model extends Ion_auth_model
                     ->get();
     }
     
-    // This method will update a session time
+     /*
+     * @Author Rashida on 7th february 2015
+     * This method will update a session time
+     */
     
     public function update_session_time($time_id, $additional_data)
     {
@@ -1681,7 +1690,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    // This method will delete a session time
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will delete a session time 
+     */
     
     public function delete_session_time($time_id)
     {
@@ -1702,7 +1714,10 @@ class Admin_gympro_model extends Ion_auth_model
     }
     
     
-   // This method will create session type
+     /*
+     * @Author Rashida on 7th february 2015
+     * This method will create session type 
+     */
     
     public function create_session_type($data)
     {
@@ -1717,7 +1732,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    // This method will return all session types 
+     /*
+     * @Author Rashida on 7th february 2015
+     *  This method will return all session types 
+     */
     
     public function get_all_session_types()
     {
@@ -1726,7 +1744,10 @@ class Admin_gympro_model extends Ion_auth_model
                 ->get();
     }
     
-    // This method will return all session type by session type id 
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will return all session type by session type id 
+     */
     
     public function get_session_type_info($type_id)
     {
@@ -1736,7 +1757,10 @@ class Admin_gympro_model extends Ion_auth_model
                     ->get();
     }
     
-    // This method will update a session type
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will update a session type 
+     */
     
     public function update_session_type($type_id, $additional_data)
     {
@@ -1752,7 +1776,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    // This method will delete a session type
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will delete a session type 
+     */
     
     public function delete_session_type($type_id)
     {
@@ -1772,8 +1799,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    
-    // This method will create session repeat
+     /*
+     * @Author Rashida on 7th february 2015
+     * This method will create session repeat 
+     */
     
     public function create_session_repeat($data)
     {
@@ -1788,7 +1817,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    // This method will return all session repeats
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will return all session repeats  
+     */
     
     public function get_all_session_repeats()
     {
@@ -1797,7 +1829,10 @@ class Admin_gympro_model extends Ion_auth_model
                 ->get();
     }
     
-    // This method will return all session repeat by session repeat id 
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will return all session repeat by session repeat id  
+     */
     
     public function get_session_repeat_info($repeat_id)
     {
@@ -1807,7 +1842,10 @@ class Admin_gympro_model extends Ion_auth_model
                     ->get();
     }
     
-    // This method will update a session repeat
+     /*
+     * @Author Rashida on 7th february 2015
+     * This method will update a session repeat 
+     */
     
     public function update_session_repeat($repeat_id, $additional_data)
     {
@@ -1823,7 +1861,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    // This method will delete a session repeat
+     /*
+     * @Author Rashida on 7th february 2015
+     * This method will delete a session repeat 
+     */
     
     public function delete_session_repeat($repeat_id)
     {
@@ -1843,9 +1884,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    
-    
-    // This method will create session cost
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will create session cost 
+     */
     
     public function create_session_cost($data)
     {
@@ -1860,8 +1902,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    // This method will return all session costs
-    
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will return all session costs 
+     */
     public function get_all_session_costs()
     {
         return $this->db->select($this->tables['app_gympro_session_costs'] . ".*")
@@ -1869,8 +1913,10 @@ class Admin_gympro_model extends Ion_auth_model
                 ->get();
     }
     
-    // This method will return all session cost by session cost id 
-    
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will return all session cost by session cost id 
+     */
     public function get_session_cost_info($cost_id)
     {
         $this->db->where($this->tables['app_gympro_session_costs'].'.id', $cost_id);
@@ -1879,7 +1925,10 @@ class Admin_gympro_model extends Ion_auth_model
                     ->get();
     }
     
-    // This method will update a session cost
+    /*
+     * @Author Rashida on 7th february 2015
+     *This method will update a session cost
+     */
     
     public function update_session_cost($cost_id, $additional_data)
     {
@@ -1895,7 +1944,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    // This method will delete a session cost
+    /*
+     * @Author Rashida on 7th february 2015
+     *This method will delete a session cost
+     */
     
     public function delete_session_cost($cost_id)
     {
@@ -1917,8 +1969,10 @@ class Admin_gympro_model extends Ion_auth_model
     
     
     
-   // This method will create session status 
-    
+    /*
+     * @Author Rashida on 7th february 2015
+     *This method will create session status
+     */
     public function create_session_status($data)
     {
         $data['created_on'] = now();
@@ -1932,7 +1986,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-     // This method will return all session statuses
+    /*
+     * @Author Rashida on 7th february 2015
+     *This method will return all session statuses
+     */
     
     public function get_all_session_statuses()
     {
@@ -1941,7 +1998,10 @@ class Admin_gympro_model extends Ion_auth_model
                 ->get();
     }
     
-    // This method will return all session status by session status id 
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will return all session status by session status id
+     */
     
     public function get_session_status_info($status_id)
     {
@@ -1951,7 +2011,10 @@ class Admin_gympro_model extends Ion_auth_model
                     ->get();
     }
     
-    // This method will update a session status
+     /*
+     * @Author Rashida on 7th february 2015
+     * This method will update a session status
+     */
     
     public function update_session_status($status_id, $additional_data)
     {
@@ -1967,7 +2030,10 @@ class Admin_gympro_model extends Ion_auth_model
         return TRUE;
     }
     
-    // This method will delete a session status
+    /*
+     * @Author Rashida on 7th february 2015
+     * This method will delete a session status
+     */
     
     public function delete_session_status($status_id)
     {

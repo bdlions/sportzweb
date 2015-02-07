@@ -162,6 +162,8 @@ $lang['delete_health_questions_fail']                       = "Failed to delete 
 $lang['update_health_questions_duplicate_title']            = "Health Question title already used.";
 $lang['update_health_questions_successful']                 = "Health Question is updated successfully.";
 $lang['update_health_questions_fail']                       = "Failed to update Health Question.";
+$lang['create_recipe_selection_fail']                       = "Failed to create recipe selection.";
+$lang['create_recipe_selection_successful']                 = "Recipe selection is created successfully.";
 
 
 $lang['create_height_unit_types_duplicate_title']            = "Height unit type title already used.";
@@ -402,4 +404,3 @@ $lang['delete_feedback_fail']           = "Failed to delete feedback.";
 
 $lang['contactus_msg_sent_successful']  = "Your message has been sent successfully.";
 $lang['contactus_msg_sent_fail']        = "Failed to send Message.";
-

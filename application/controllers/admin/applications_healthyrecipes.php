@@ -158,12 +158,23 @@ class Applications_healthyrecipes extends CI_Controller{
         echo json_encode($response);
     }
     
-    public function save_selected_recipe()
+    /*
+     * @Author Rashida on 7th february 
+     * this method create recipe selection for a date
+     */
+    
+    public function create_selected_recipe()
     {
-        $response = array();
-        $save_id = $this->input->post('save_id');
-        $selected_date = $this->input->post('date_for_show_item');
-        $positon_array = array(
+    $this->form_validation->set_rules('date_for_show_item', 'Date', 'xss_clean|required');
+        if ($this->input->post()) 
+            {
+            if ($this->form_validation->run() == true) 
+                {
+
+                $response = array();
+                $save_id = $this->input->post('save_id');
+                $selected_date = $this->input->post('date_for_show_item');
+                $positon_array = array(
                     $this->input->post('value_top_left'),
                     $this->input->post('value_top_right'),
                     $this->input->post('value_bottom_left'),
@@ -172,39 +183,40 @@ class Applications_healthyrecipes extends CI_Controller{
                     $this->input->post('value_bottom_down_extra'),
                     $this->input->post('value_bottom_down'),
                 );
-        $recipes_list = $this->input->post('recipes_list');
-        
-        if($save_id==1){
-            $show_advertise = 0;
-        }else{
-            $show_advertise = 1;
+                $recipes_list = $this->input->post('recipes_list');
+                if ($save_id == 1) {
+                    $show_advertise = 0;
+                } else {
+                    $show_advertise = 1;
+                }
+
+                $formated_selected_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($selected_date);
+
+                $data = array(
+                    'recipe_view_list' => json_encode($positon_array),
+                    'recipe_list' => $recipes_list,
+                    'selected_date' => $formated_selected_date,
+                    'show_advertise_home_page' => $show_advertise
+                );
+
+                $id = $this->admin_healthy_recipes->create_recipe_selection($data);
+
+                if ($id !== FALSE) {
+                    $response['status'] = 1;
+                    $response['message'] = $this->admin_healthy_recipes->messages_alert();
+                } else {
+                    $response['status'] = 0;
+                    $response['message'] = $this->admin_healthy_recipes->errors_alert();
+                }
+            } else {
+                $response['message'] = validation_errors();
+            }
+            echo json_encode($response);
+            return;
         }
-        
-        $formated_selected_date = $this->utils->convert_date_from_ddmmyyyy_to_yyyymmdd($selected_date);
-              
-        $data = array(
-                'recipe_view_list' => json_encode($positon_array),
-                'recipe_list'   => $recipes_list,
-                'selected_date' => $formated_selected_date,
-                'show_advertise_home_page' => $show_advertise
-            );
-       
-        $id = $this->admin_healthy_recipes->create_recipe_selection($data);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'Recipe item list is added successfully.';        
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_healthy_recipes->errors_alert();
-        }
-        echo json_encode($response);
     }
 
-
-    //Written by Omar Faruk add recipe  
+//Written by Omar Faruk add recipe  
     function create_recipe($recipe_category_id = 0)
     {
         $this->data['message'] = '';
@@ -699,13 +711,10 @@ class Applications_healthyrecipes extends CI_Controller{
         echo json_encode($response);
     }
     
-    
-    
-    
-    
-    /**
+    /*
      * Written by Tanveer Ahmed for delete recipe
      */
+    
     public function delete_recipe_category(){
         $result = array();
         $recipe_category_id = $this->input->post('recipe_category_id');
@@ -719,10 +728,12 @@ class Applications_healthyrecipes extends CI_Controller{
         }
         echo json_encode($result);
     }
-     /**
+    
+     /*
      * Written by Rashida Sultana on 7th february 2015
-      * this method select random recipes or selected recipes at a given day
+     * this method select random recipes or selected recipes at a given day
      */
+    
     public function all_recipe_list()
     {
         $this->data['message'] = '';
@@ -750,6 +761,11 @@ class Applications_healthyrecipes extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/healthy_recipes/all_recipe_list", $this->data);
     }
     
+    /*
+     * @Author rashida on 7th february
+     * Ajax call
+     * this method create recipe selection
+     */
     public function recipe_list_for_home_page()
     {
         $response = array();
@@ -767,7 +783,7 @@ class Applications_healthyrecipes extends CI_Controller{
         if($id !== FALSE)
         {
             $response['status'] = 1;
-            $response['message'] = 'Recipe item list is added successfully.';        
+            $response['message'] = $this->admin_healthy_recipes->messages_alert();        
         }
         else
         {
@@ -776,6 +792,7 @@ class Applications_healthyrecipes extends CI_Controller{
         }
         echo json_encode($response);
     }
+    
     
     
     //----------------------------Importing data for healthy recipes----------------------------------

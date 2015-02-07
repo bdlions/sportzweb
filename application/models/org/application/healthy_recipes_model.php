@@ -19,41 +19,37 @@ class Healthy_recipes_model extends Ion_auth_model {
     }
     
     /*-----------------------------Recipe related query for front end------------------------*/
-    /*-------------------------written by Omar-----------*/
-    public function get_recipe_selection($date = 0)
+    
+    /*
+     * @Author Rashida on 7th February
+     * this method return selected recipes less then or equal to current date 
+     */
+    
+   public function get_recipe_selection($date = 0)
     {
-        if($date != 0) {
-           $this->db->where($this->tables['recipe_selection'].'.selected_date',$date);
-        }
-        $this->db->order_by('id', 'desc');
-        
+        $this->db->where($this->tables['recipe_selection'].'.selected_date <=',$date);
         return $this->db->select("*")
                     ->from($this->tables['recipe_selection'])
                     ->get();
     }
+
+    /* 
+     * written by Rashida Sultana 2nd february
+     *this function is to retrive specific recipes or only seven recipes
+     */
     
-    /*-------------------------written by Omar-----------*/
-   //this function is to retrive specific recipes or only four recipes
-    public function get_all_recipes($recipes_id = null)
+    public function get_all_recipes_for_home($recipe_id_list = array())
     {
-        if(count($recipes_id)>0) {
-            $list = implode (", ", array_filter($recipes_id));
+        if(!empty($recipe_id_list)>0) {
+            $list = implode (", ", array_filter($recipe_id_list));
             $this->db->_protect_identifiers = FALSE;
-            $this->db->where_in($this->tables['recipes'].'.id', $recipes_id);
+            $this->db->where_in($this->tables['recipes'].'.id', $recipe_id_list);
             $this->db->order_by("FIELD (recipes.id, " . $list . ")");
             $this->db->_protect_identifiers = TRUE;
         } else {
-            $all_recipies = $this->get_total_recipes()->result_array();
-            $total_no_of_record = count($all_recipies);
-            if($total_no_of_record > 8) {
-                $random_no = rand(0,$total_no_of_record-4);
-                $this->db->limit(4, $random_no);
-            } else {
-                $this->db->limit(3, 0);
-            }
-            
+                $this->db->limit(DEFAULT_VIEW_PER_PAGE, 0);
         }
-        return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
+          return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
                     ->from($this->tables['recipes'])
                     ->join($this->tables['recipe_category'], $this->tables['recipe_category'].'.id='.$this->tables['recipes'].'.recipe_category_id','left')
                     ->get();
@@ -65,7 +61,6 @@ class Healthy_recipes_model extends Ion_auth_model {
                     ->from($this->tables['recipes'])
                     ->join($this->tables['recipe_category'], $this->tables['recipe_category'].'.id='.$this->tables['recipes'].'.recipe_category_id','left')
                     ->get();
-         //echo $this->db->last_query();exit;
     }
     
     /*-------------------------Recipe written by Omar-----------*/
