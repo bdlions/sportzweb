@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        $("#datepicker").datepicker({
+        $("#session_date").datepicker({
             showOn: "button",
             buttonImage: "<?php echo base_url();?>resources/images/calendar.png",
             buttonImageOnly: true,
@@ -8,6 +8,12 @@
             dateFormat: 'dd-mm-yy'
         });
         
+        $("#dd_start_date").change(function() {
+            var start_index = document.getElementById("dd_start_date").selectedIndex;
+            var dd_length      = document.getElementById("dd_start_date").length;
+            var end_index = (start_index>=dd_length-1)? dd_length-1 : start_index+1;
+            document.getElementById("dd_end_date").selectedIndex = (end_index);
+        });
         $("#dd_type").change(function() {
             if($("#dd_type").val()!='1'){
                 $("#dd_rep").show();
@@ -39,9 +45,7 @@
         }
         ?>
         <div class="col-md-10">
-            <?php if(isset($message) && ($message != NULL)): ?>
-            <div class="alert alert-info alert-dismissible"><?php echo $message; ?></div>
-            <?php endif; ?>
+            
             <div class="row">
                 <div class="col-md-12">
                     Edit session
@@ -50,6 +54,9 @@
                     </div>
                 </div>
             </div>
+            <?php if(isset($message) && ($message != NULL)): ?>
+            <div class="alert alert-info alert-dismissible"><?php echo $message; ?></div>
+            <?php endif; ?>
             <?php echo form_open('applications/gympro/update_session/'. $session_id, array('class'=>'form-horizontal'));?>
             <div class="row">
                 <div class="col-md-6">
@@ -79,15 +86,13 @@
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Date:</div>
                         <div class="col-md-6">
-                            <input class="" id="datepicker" name="datepicker" value="<?php echo $session_info['date'];?>" >
+                            <input class="" id="session_date" name="session_date" value="<?php echo $session_info['date'];?>" >
                         </div>
                     </div>
                     <div class="row form-group">
-                        <?php // var_dump($session_info);?>
-                        <?php // var_dump($session_times);?>
                         <div class="col-md-3">Start:</div>
                         <div class="col-md-4">
-                            <select class="form-control" name="start">
+                            <select class="form-control" name="start" id="dd_start_date">
                                 <?php foreach ($session_times as $key => $session_time): ?>
                                     <option <?php echo ( (string)$session_time['title_24'] == (string)$session_info['start']) ? 'selected': NULL ;?> value="<?php echo $session_time['title_24']; ?>"><?php echo $session_time['title']; ?></option>
                                 <?php endforeach; ?>
@@ -97,7 +102,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Finish:</div>
                         <div class="col-md-4">
-                            <select class="form-control" name="end">
+                            <select class="form-control" name="end" id="dd_end_date">
                                 <?php foreach ($session_times as $key => $session_time): ?>
                                     <option <?php echo ( (string)$session_time['title_24'] == (string)$session_info['end']) ? 'selected': NULL ;?> value="<?php echo $session_time['title_24']; ?>"><?php echo $session_time['title']; ?></option>
                                 <?php endforeach; ?>
@@ -171,6 +176,3 @@
         </div>
     </div>
 </div>
-<?php
-//$this->load->view("applications/gympro/template/modal/browse_exercise");
-?>

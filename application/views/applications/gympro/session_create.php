@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        $("#datepicker").datepicker({
+        $("#session_date").datepicker({
             showOn: "button",
             buttonImage: "<?php echo base_url();?>resources/images/calendar.png",
             buttonImageOnly: true,
@@ -8,24 +8,26 @@
             dateFormat: 'dd-mm-yy'
         });
         
+        $("#dd_start_date").change(function() {
+            var start_index = document.getElementById("dd_start_date").selectedIndex;
+            var dd_length      = document.getElementById("dd_start_date").length;
+            var end_index = (start_index>=dd_length-1)? dd_length-1 : start_index+1;
+            document.getElementById("dd_end_date").selectedIndex = (end_index);
+        });
         $("#dd_type").change(function() {
-            if($("#dd_type").val()!='1')
-            {
+            if($("#dd_type").val()!='1'){
                 $("#dd_rep").show();
             }
-            else if($("#dd_type").val()=='1')
-            {
+            else if($("#dd_type").val()=='1'){
                 $("#dd_rep").hide();
             }
         });
-        $("#dd_cost").change(function() {
             
-            if($("#dd_cost").val()=='other')
-            {
+        $("#dd_cost").change(function() {
+            if($("#dd_cost").val()=='other'){
                 $("#inp_cost").show();
             }
-            else if($("#dd_cost").val()!='other')
-            {
+            else if($("#dd_cost").val()!='other'){
                 $("#inp_cost").hide();
                 $("#inp_cost").val( $("#dd_cost").val() );
             }
@@ -43,9 +45,6 @@
         }
         ?>
         <div class="col-md-10">
-            <?php if(isset($message) && ($message != NULL)): ?>
-            <div class="alert alert-info alert-dismissible"><?php echo $message; ?></div>
-            <?php endif; ?>
             <div class="row">
                 <div class="col-md-12">
                     Adding new session
@@ -54,6 +53,10 @@
                     </div>
                 </div>
             </div>
+            <?php if(isset($message) && ($message != NULL)): ?>
+            <div class="alert alert-info alert-dismissible"><?php echo $message; ?></div>
+            <?php endif; ?>
+            
             <?php echo form_open('applications/gympro/create_session', array('class'=>'form-horizontal'));?>
             <div class="row">
                 <div class="col-md-6">
@@ -83,14 +86,13 @@
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Date:</div>
                         <div class="col-md-6">
-                            <input class="" id="datepicker" name="datepicker" >
+                            <input class="" id="session_date" name="session_date" >
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3">Start:</div>
-                            <?php // var_dump($meal_time_list)?>
                         <div class="col-md-4">
-                            <select class="form-control" name="start">
+                            <select class="form-control" name="start" id="dd_start_date">
                                 <?php foreach ($session_times as $key => $meal_time): ?>
                                     <option value="<?php echo $meal_time['title_24']; ?>"><?php echo $meal_time['title']; ?></option>
                                 <?php endforeach; ?>
@@ -100,7 +102,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Finish:</div>
                         <div class="col-md-4">
-                            <select class="form-control" name="end">
+                            <select class="form-control" name="end" id="dd_end_date">
                                 <?php foreach ($session_times as $key => $meal_time): ?>
                                     <option value="<?php echo $meal_time['title_24']; ?>"><?php echo $meal_time['title']; ?></option>
                                 <?php endforeach; ?>
@@ -117,9 +119,9 @@
                         <div class="col-md-3 control-div">Type:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="type_id" id="dd_type">
-                                <?php foreach ($session_types as $key => $type): ?>
+                                <?php foreach ($session_types as $key => $type){ ?>
                                     <option value="<?php echo $key+1; ?>"><?php echo $type['title']; ?></option>
-                                <?php endforeach; ?>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -152,11 +154,6 @@
                                     <option value="<?php echo $key+1; ?>"><?php echo $status['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
-<!--                            <select class="form-control" name="status">
-                                <option value="1">Prepaid</option>
-                                <option value="2">Paid</option>
-                                <option value="3">Cancelled</option>
-                            </select>-->
                         </div>
                     </div>
                 </div>
@@ -178,6 +175,3 @@
         </div>
     </div>
 </div>
-<?php
-//$this->load->view("applications/gympro/template/modal/browse_exercise");
-?>

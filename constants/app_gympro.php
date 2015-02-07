@@ -27,6 +27,10 @@ define("CLIENT_STATUS_ACTIVE_ID",                           "1");
 define("CLIENT_STATUS_INACTIVE_ID",                         "2");
 define("CLIENT_STATUS_POTENTIAL_ID",                        "3");
 
-//Sesstion
-define("SESSION_CREATED_FOR_GROUP_TYPE_ID",                  1);
-define("SESSION_CREATED_FOR_CLIENT_TYPE_ID",                 2);
+//Session
+define("SESSION_CREATED_FOR_GROUP_TYPE_ID",                     1);
+define("SESSION_CREATED_FOR_CLIENT_TYPE_ID",                    2);
+define("SESSION_CREATED_FOR_TYPE_EXPLODER",                     "_");
+
+
+define("GYMPRO_SINGLE_SESSION_TYPE_ID",                         "1");
