@@ -404,3 +404,6 @@ $lang['delete_feedback_fail']           = "Failed to delete feedback.";
 
 $lang['contactus_msg_sent_successful']  = "Your message has been sent successfully.";
 $lang['contactus_msg_sent_fail']        = "Failed to send Message.";
+
+$lang['session_id_doesnt_exist']        = "Sorry, Session ID does not exist.";
+$lang['user_sessionid_mismatch']        = "Sorry, you do not have permission to view this page.";

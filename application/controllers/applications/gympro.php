@@ -13,6 +13,7 @@ class Gympro extends Role_Controller{
         $this->load->library('org/utility/Utils');
         $this->load->helper('language');
         $this->load->helper('url');
+        $this->lang->load('ion_auth');
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         }
@@ -2798,6 +2799,12 @@ class Gympro extends Role_Controller{
         $session_info = $this->gympro_library->get_session_info($session_id)->result_array();
         if(!empty($session_info)){
             $session_info = $session_info[0];
+            if($session_info['user_id']!=$user_id)
+            {
+                $this->data['message']= $this->lang->line('user_sessionid_mismatch');
+                $this->template->load(null,'applications/gympro/display_message', $this->data);
+                return;
+            }
             $session_info['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session_info['date']);
         }
         else{
