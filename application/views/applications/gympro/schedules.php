@@ -33,7 +33,7 @@
                 right: 'month,basicWeek,basicDay'
             },
             eventColor: '#75B3E6',
-            timeFormat: 'h.mm a',
+            timeFormat: 'h:mm a',
             defaultDate: moment().format("YYYY-MM-DD"),
             editable: true,
             eventLimit: true, // allow "more" link when too many events

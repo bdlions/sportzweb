@@ -73,12 +73,12 @@
                             <select class="form-control" name="group_client">
                                 <optgroup label="Groups">
                                     <?php foreach ($group_list as $group_info): ?>
-                                        <option <?php echo ('1' == $session_info['created_for_type_id'] && $session_info['reference_id'] == $group_info['group_id']) ? 'selected' : NULL; ?> value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                        <option <?php echo ('1' == $session_info['created_for_type_id'] && $session_info['reference_id'] == $group_info['group_id']) ? 'selected' : NULL; ?> value="<?php echo SESSION_CREATED_FOR_GROUP_TYPE_ID.SESSION_CREATED_FOR_TYPE_EXPLODER.$group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                                 <optgroup label="Clients">
                                     <?php foreach ($client_list as $client_info): ?>
-                                        <option <?php echo ('2' == $session_info['created_for_type_id'] && $session_info['reference_id'] == $client_info['client_id']) ? 'selected' : NULL; ?> value="2_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
+                                        <option <?php echo ('2' == $session_info['created_for_type_id'] && $session_info['reference_id'] == $client_info['client_id']) ? 'selected' : NULL; ?> value="<?php echo SESSION_CREATED_FOR_CLIENT_TYPE_ID.SESSION_CREATED_FOR_TYPE_EXPLODER.$client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                             </select>
@@ -94,7 +94,7 @@
                         <div class="col-md-3">Start:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="start" id="dd_start_date">
-                                <?php foreach ($session_times as $key => $session_time): ?>
+                                <?php foreach ($session_times as $session_time): ?>
                                     <option <?php echo ( (string)$session_time['title_24'] == (string)$session_info['start']) ? 'selected': NULL ;?> value="<?php echo $session_time['title_24']; ?>"><?php echo $session_time['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -104,7 +104,7 @@
                         <div class="col-md-3 control-div">Finish:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="end" id="dd_end_date">
-                                <?php foreach ($session_times as $key => $session_time): ?>
+                                <?php foreach ($session_times as $session_time): ?>
                                     <option <?php echo ( (string)$session_time['title_24'] == (string)$session_info['end']) ? 'selected': NULL ;?> value="<?php echo $session_time['title_24']; ?>"><?php echo $session_time['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -121,26 +121,32 @@
                         
                         <div class="col-md-4">
                             <select class="form-control" name="type_id" id="dd_type">
-                                <?php foreach ($session_types as $key => $type): ?>
-                                    <option <?php echo ($key+1 == $session_info['type_id'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $type['title']; ?></option>
+                                <?php foreach ($session_types as $type): ?>
+                                    <option <?php echo ($type['id'] == $session_info['type_id'])? 'selected': NULL ;?> value="<?php echo $type['id']; ?>"><?php echo $type['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <select class="form-control" id="dd_rep" name="repeat" style="display: none">
-                                <?php foreach ($session_repeats as $key => $repeat): ?>
-                                    <option <?php echo ($key+1 == $session_info['repeat'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $repeat['title']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                        <div class="col-md-5">
+                            <div class="row" id="dd_rep" style="display: none">
+                                <div class="col-sm-3"> For</div>
+                                <div class="col-sm-6">
+                                    <select class="form-control" name="repeat">
+                                        <?php foreach ($session_repeats as $repeat): ?>
+                                            <option value="<?php echo $repeat['id']; ?>"><?php echo $repeat['title']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3"> sessions</div>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Cost:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="cost" id="dd_cost">
-                                    <option value="other" >Other</option>
-                                <?php foreach ($session_costs as $key => $cost): ?>
-                                    <option <?php echo ($cost['title'] == $session_info['cost'])? 'selected': NULL ;?>  value="<?php echo $cost['title']; ?>"><?php echo $cost['title']; ?></option>
+                                <option value="other" >Other</option>
+                                <?php foreach ($session_costs as $cost): ?>
+                                <option <?php echo ($cost['title'] == $session_info['cost'])? 'selected': NULL ;?>  value="<?php echo $cost['title']; ?>"><?php echo $cost['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -152,8 +158,8 @@
                         <div class="col-md-3 control-div">Status:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="status">
-                                <?php foreach ($session_statuses as $key => $status): ?>
-                                    <option <?php echo ($key+1 == $session_info['status_id'])? 'selected': NULL ;?> value="<?php echo $key+1; ?>"><?php echo $status['title']; ?></option>
+                                <?php foreach ($session_statuses as $status): ?>
+                                    <option <?php echo ($status['id'] == $session_info['status_id'])? 'selected': NULL ;?> value="<?php echo $status['id']; ?>"><?php echo $status['title']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

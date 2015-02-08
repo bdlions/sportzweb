@@ -9,6 +9,7 @@ class Login_attempt extends CI_Controller{
         $this->load->library('form_validation');
         $this->load->library('org/admin/admin_login_attemtps_library');
         $this->load->helper('url');
+        $this->load->library('org/utility/Utils');
         
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
@@ -37,6 +38,9 @@ class Login_attempt extends CI_Controller{
         if(!empty($login_attempt_list_array))
         {
           $login_attempt_list= $login_attempt_list_array; 
+        }
+        foreach ($login_attempt_list as $key => $value) {
+            $login_attempt_list[$key]['time'] = $this->utils->get_unix_to_human_date($value['time'], 1);
         }
         $this->data['login_attempt_list'] = $login_attempt_list;
         $this->template->load($this->tmpl, "admin/login_attempt/index", $this->data);

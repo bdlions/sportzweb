@@ -975,3 +975,7 @@ be a descendant of the grid when it is being dragged.
 .fc-time-grid-event .fc-resizer:after {
     content: "=";
 }
+/*CUSTOME CSS*/
+.fc-time, .fc-title{
+    font-size: 12px;
+}
