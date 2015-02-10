@@ -175,7 +175,7 @@
                     <input type="checkbox" id='checkbox_7' <?php echo $region_id_is_news_ignored_map[6]==1?'checked':''?>/>
                     <input type="hidden" name="position_of_news_7" id="position_of_news_7" value="<?php echo (array_key_exists(6, $region_id_news_id_map)) ? $news_id_news_info_map[$region_id_news_id_map[6]]['news_id'] : ''; ?>">
                     <?php //if (array_key_exists(6, $region_id_news_id_map)) : ?>
-                        <a href="<?php echo base_url()?>applications/applications_news/news_item/<?php if (array_key_exists(6, $region_id_news_id_map)){ echo $news_id_news_info_map[$region_id_news_id_map[6]]['news_id']; }?>">
+                        <a href="<?php echo base_url()?>admin/applications/applications_news/news_item/<?php if (array_key_exists(6, $region_id_news_id_map)){ echo $news_id_news_info_map[$region_id_news_id_map[6]]['news_id']; }?>">
                             <img id="image_position_7" style="width:150px;height:100px;" class="img-responsive" src="<?php if (array_key_exists(6, $region_id_news_id_map)){ echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[6]]['picture'];} ?>"/>
                         </a>
                     <?php //endif; ?>

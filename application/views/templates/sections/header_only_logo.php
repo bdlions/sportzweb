@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 logo-text">
-                    <a href="<?php echo base_url(); ?>" > <img class="logo" src="<?php echo base_url() ?>/resources/images/logo1.png" />Sonuto </a>
+                    <img class="logo" src="<?php echo base_url() ?>/resources/images/logo1.png" />Sonuto
                 </div>
             </div>
         </div>

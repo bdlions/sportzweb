@@ -34,15 +34,17 @@ class Login_attempt extends CI_Controller{
     {
         $this->data['message'] = '';
         $login_attempt_list = array();
+        $login_attempts = array();
         $login_attempt_list_array = $this->admin_login_attemtps_library->get_all_login_attempts()->result_array();
         if(!empty($login_attempt_list_array))
         {
-          $login_attempt_list= $login_attempt_list_array; 
+            $login_attempt_list = $login_attempt_list_array; 
         }
-        foreach ($login_attempt_list as $key => $value) {
-            $login_attempt_list[$key]['time'] = $this->utils->get_unix_to_human_date($value['time'], 1);
+        foreach ($login_attempt_list as $value) {
+            $value['time'] = $this->utils->get_unix_to_human_date($value['time'], 1);
+            $login_attempts[] = $value;
         }
-        $this->data['login_attempt_list'] = $login_attempt_list;
+        $this->data['login_attempt_list'] = $login_attempts;
         $this->template->load($this->tmpl, "admin/login_attempt/index", $this->data);
     }
     

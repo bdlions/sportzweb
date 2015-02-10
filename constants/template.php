@@ -34,6 +34,6 @@ define('BUSINESSMAN_LOGIN_SUCCESS_TEMPLATE', 'templates/member_tmpl');
 define('BUSINESSMAN_LOGIN_SUCCESS_VIEW', 'business_man/index');
 
 define('NON_MEMBER_TEMPLATE', 'templates/home_tmpl');
-define('WRONG_ATTEMPT_TEMPLATE', 'templates/profile_setting_tmpl');
+define('WRONG_ATTEMPT_TEMPLATE', 'templates/wrong_attempt_tmpl');
 define('WRONG_ATTEMPT_VIEW', 'nonmember/wrong_attempt');
 ?>
