@@ -2887,7 +2887,7 @@ class Gympro extends Role_Controller{
     public function earnings_summary()
     {
         $u_data = $this->ion_auth_model->get_users($this->session->userdata('user_id'))->result_array();
-        $current_date = $this->utils->get_current_date( $u_data[0]['country_code'] );
+        if(!empty($u_data)){$current_date = $this->utils->get_current_date( $u_data[0]['country_code'] );}
         $this->data['current_date'] = $current_date;
         $this->data['status_list'] = $this->gympro_library->get_all_session_statuses()->result_array();
         $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));

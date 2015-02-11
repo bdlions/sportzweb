@@ -1771,6 +1771,8 @@ CREATE TABLE IF NOT EXISTS `app_sp_matches` (
   `time` varchar(200),
   `score_home` varchar(200) default '',
   `score_away` varchar(200) default '',
+  `point_home` varchar(200) default '',
+  `point_away` varchar(200) default '',
   `status_id` int(11) unsigned DEFAULT 1,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
@@ -1785,25 +1787,21 @@ ALTER TABLE `app_sp_matches`
 	ADD CONSTRAINT `fk_app_sp_matches_teams1` FOREIGN KEY(`team_id_home`) REFERENCES `app_sp_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	ADD CONSTRAINT `fk_app_sp_matches_teams2` FOREIGN KEY(`team_id_away`) REFERENCES `app_sp_teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	ADD CONSTRAINT `fk_app_sp_matches_statuses1` FOREIGN KEY(`status_id`) REFERENCES `app_sp_match_statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-INSERT INTO `app_sp_matches` (`id`, `tournament_id`, `team_id_home`, `team_id_away`, `date`, `time`) VALUES
-(1, 1, 1, 2, '2014-06-17', '09:00'),
-(2, 1, 3, 4, '2014-06-17', '11:00');
+INSERT INTO `app_sp_matches` (`id`, `tournament_id`, `team_id_home`, `team_id_away`, `date`, `time`, `point_home`, `point_away`, `status_id`) VALUES
+(1, 1, 1, 2, '2014-06-17', '09:00', '3', '0', '2'),
+(2, 1, 3, 4, '2014-06-17', '11:00', '1', '1', '4'),
+(3, 1, 3, 2, '2014-06-27', '12:00', '3', '0', '2');
 CREATE TABLE IF NOT EXISTS `app_sp_match_predictions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `match_id` int(11) unsigned NOT NULL,
-  `user_id` int(11) unsigned NOT NULL,
-  `status_id` int(11) unsigned DEFAULT NULL,
+  `prediction_list` text NOT NULL,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `app_sp_match_predictions_matches1_idx` (`match_id`),
-  KEY `app_sp_match_predictions_users1_idx` (`user_id`),
-  KEY `app_sp_match_predictions_statuses1_idx` (`status_id`)
+  KEY `app_sp_match_predictions_matches1_idx` (`match_id`)
   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `app_sp_match_predictions`
 	ADD CONSTRAINT `app_sp_match_predictions_matches1` FOREIGN KEY(`match_id`) REFERENCES `app_sp_matches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-	ADD CONSTRAINT `app_sp_match_predictions_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-	ADD CONSTRAINT `app_sp_match_predictions_statuses1` FOREIGN KEY(`status_id`) REFERENCES `app_sp_match_statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE IF NOT EXISTS `app_sp_configure_homepage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sports_id` int(11) unsigned NOT NULL,

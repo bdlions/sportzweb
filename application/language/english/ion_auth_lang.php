@@ -387,13 +387,13 @@ $lang['update_cost_fail']               = "Failed to update cost info.";
 $lang['delete_cost_successful']         = "Cost deleted successfully.";
 $lang['delete_cost_fail']               = "Failed to delete cost.";
 
-$lang['create_status_successful']       = "Status create successfully.";
-$lang['create_status_fail']             = "Failed to create status info.";
-$lang['update_status_null']             = "No status has been updated.";
-$lang['update_status_successful']       = "Status updated successfully.";
-$lang['update_status_fail']             = "Failed to update status info.";
-$lang['delete_status_successful']       = "Status deleted successfully.";
-$lang['delete_status_fail']             = "Failed to delete status.";
+$lang['create_sessions_successful']       = "Sessions create successfully.";
+$lang['create_sessions_fail']             = "Failed to create sessions info.";
+$lang['update_sessions_fail']             = "No sessions has been updated.";
+$lang['update_sessions_successful']       = "Sessions updated successfully.";
+$lang['update_sessions_fail']             = "Failed to update sessions info.";
+$lang['delete_sessions_successful']       = "Sessions deleted successfully.";
+$lang['delete_sessions_fail']             = "Failed to delete sessions.";
 
 $lang['create_feedback_successful']     = "Feedback create successfully.";
 $lang['create_feedback_fail']           = "Failed to create feedback info.";

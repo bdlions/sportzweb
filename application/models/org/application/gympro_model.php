@@ -1214,10 +1214,10 @@ class Gympro_model extends Ion_auth_model {
         $this->db->where_in('id', $session_id_array);
         $this->db->update($this->tables['app_gympro_sessions'], $data);
         if ($this->db->affected_rows() == 0) {
-            $this->set_error('update_status_null');
+            $this->set_error('update_sessions_fail');
             return FALSE;
         }
-        $this->set_message('update_status_successful');
+        $this->set_message('update_sessions_successful');
         return TRUE;
     }
     /*
