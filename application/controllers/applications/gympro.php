@@ -2935,7 +2935,7 @@ class Gympro extends Role_Controller{
         $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
         
         //group view can change, so two cases:
-        if ($group_client_data['created_for_type_id'] == '1') {    //for group
+        if ($group_client_data['created_for_type_id'] == SESSION_CREATED_FOR_GROUP_TYPE_ID) {    //for group
             foreach ($get_sessions as $session) {
                 $group_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
                 $group_data[$session['date']]['sessions'][] = $session;
@@ -2946,7 +2946,7 @@ class Gympro extends Role_Controller{
             $group_data = $result;
             echo json_encode($group_data);
             return;
-        } else if ($group_client_data['created_for_type_id'] == '2') { //for client
+        } else if ($group_client_data['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID) { //for client
             foreach ($get_sessions as $session) {
                 $client_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
                 $client_data[$session['date']]['sessions'][] = $session;
