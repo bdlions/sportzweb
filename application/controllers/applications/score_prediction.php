@@ -244,14 +244,27 @@ class Score_prediction extends Role_Controller{
      */
     public function get_predictions_for_month()
     {
-        $tournament_id = $this->input->post('tournament_id');
-        $month = $this->input->post('date');
+        $tournament_id  = $this->input->post('tournament_id');
+        $current_month  = $this->input->post('current_month');
+        $next_month     = $this->input->post('next_month');
+        
+//        $where = array(   //test purpose
+//            'date >=' => "2013-01-01",
+//            'date <' => "2016-03-01"
+//        ); $tournament_id = 1;
+        
         $where = array(
-            'date >=' => "2013-01-01",
-            'date <=' => "2016-03-01"
+            'date >=' => $current_month,
+            'date <' => $next_month
         );
         $match_prediction_data = $this->score_prediction_library->where($where)->get_predictions_matches_for_tournament($tournament_id)->result_array();
-        echo json_encode($match_prediction_data); return;
+        $predictions_by_date = array();
+        foreach ($match_prediction_data as $value) {
+            $predictions_by_date[$value['date']][] = $value;
+        }
+        ksort($predictions_by_date);
+//        var_dump($predictions_by_date);exit;
+        echo json_encode($predictions_by_date); return;
 
     } 
     

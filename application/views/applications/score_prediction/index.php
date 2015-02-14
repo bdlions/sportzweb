@@ -8,6 +8,7 @@
                 tournament_id: $("#dd_tournaments").val()
             },
             success: function(data) {
+                $('#pred_table_title').html( $("#dd_tournaments option:selected").text() );
                 $('#tbl_team_standings').html( tmpl('tmpl_table_header') );
                 $('#tbl_team_standings').append( tmpl( 'tmpl_team_standings', data.team_standings) );
             }
@@ -20,10 +21,11 @@
             url: '<?php echo base_url(); ?>' + "applications/score_prediction/get_predictions_for_month",
             data: {
                 tournament_id: $("#dd_tournaments").val(),
-                date: $('#current_month').val()
+                current_month: $('#current_month').val(),
+                next_month: $('#next_month').val()
             },
             success: function(data) {
-                $('#tbl_predictions').html( tmpl('tmpl_predictions'), data );
+                $('#tbl_predictions').html( tmpl('tmpl_predictions', data) );
             }
         });
     }
@@ -32,19 +34,23 @@
     "July", "August", "September", "October", "November", "December" ];
     function month_incrim(){
         var in_date = $('#current_month').val();
-        var out_date;
         var date = new Date(in_date);
         var dd = date.getDate();
         var mm = date.getMonth();
         var yyyy = date.getFullYear();
         mm++;//increment
         if(mm>11){mm=0;yyyy++}
-        $('#current_month_heading').html(monthNames[mm]);
+        $('#current_month_heading').html(monthNames[mm]+", "+yyyy);
         mm++;//inc for date
         if(dd<10){ dd='0'+dd; } 
         if(mm<10){ mm='0'+mm; } 
         var out_date = yyyy+'-'+mm+'-'+dd;
         $('#current_month').val(out_date);
+        mm++;//inc for next month
+        if(mm>12){mm=1;yyyy++;}
+        if(mm<10){mm='0'+mm;} 
+        var out_date = yyyy+'-'+mm+'-'+dd;
+        $('#next_month').val(out_date);
         bring_prediction_info();
     }
     function month_decrim(){
@@ -56,12 +62,17 @@
         var yyyy = date.getFullYear();
         mm--;
         if(mm<0){mm=11;yyyy--}
-        $('#current_month_heading').html(monthNames[mm]);
+        $('#current_month_heading').html(monthNames[mm]+", "+yyyy);
         mm++;
         if(dd<10){ dd='0'+dd; } 
         if(mm<10){ mm='0'+mm; } 
         var out_date = yyyy+'-'+mm+'-'+dd;
         $('#current_month').val(out_date);
+        mm++;//inc for next month
+        if(mm>12){mm=1;yyyy++;}
+        if(mm<10){mm='0'+mm;} 
+        var out_date = yyyy+'-'+mm+'-'+dd;
+        $('#next_month').val(out_date);
         bring_prediction_info();
     }
     function date_manage(){
@@ -69,12 +80,17 @@
         var dd = today.getDate();
         var mm = today.getMonth()+1;
         var yyyy = today.getFullYear();
-        $('#current_month_heading').html(monthNames[mm-1]);
+        $('#current_month_heading').html(monthNames[mm-1]+", "+yyyy);
         dd=1;
         if(dd<10){ dd='0'+dd; } 
         if(mm<10){ mm='0'+mm; } 
         var today = yyyy+'-'+mm+'-'+dd;
         $('#current_month').val(today);
+        mm++;//inc for next month
+        if(mm>12){mm=1;yyyy++;}
+        if(mm<10){mm='0'+mm;} 
+        var out_date = yyyy+'-'+mm+'-'+dd;
+        $('#next_month').val(out_date);
     }
     
     function confirmation_vote(match_id, team_id){
@@ -101,26 +117,34 @@
         bring_tournament_info();
         $( "#dd_tournaments" ).change(function() {
             bring_tournament_info();
+            bring_prediction_info();
         });
     });    
 </script>
 <script type="text/x-tmpl" id="tmpl_predictions">
+{% for(var date in o){
+    var date_group = o[date];
+%}
     <tr style="background-color: #EAEAEA">
-        <th class="title" colspan="4">tadaaa table header 26 September</th>
+        <th class="title" colspan="4">{%= date%}</th>
     </tr>
-    {% var i=0, prediction = ((o instanceof Array) ? o[i++] : o); %}
-    {% while(prediction){ %}
+{%  for(var index in date_group){  
+        var prediction = date_group[index];
+%}
         <tr>
-            <td style="text-align: right">{%= prediction['team_id_home']%}</td>
+            <td style="text-align: right">{%= prediction['team_title_home']%}</td>
             <td style="text-align: center"> {%= prediction['time']%}</td>
-            <td style="text-align: left">{%= prediction['team_id_away']%}</td>
+            <td style="text-align: left">{%= prediction['team_title_away']%}</td>
             <td>
                 <a style="float: right"><img src="<?php echo base_url();?>resources/images/predict_button.png"></a>
             </td>
         </tr>
-        {% prediction = ((o instanceof Array) ? o[i++] : null); %}
-    {% } %}
-    <tr><td>asdasdasd</td></tr>
+
+{%
+        }
+    }
+%}
+
 </script>
 <script type="text/x-tmpl" id="tmpl_table_header">
 <tr style="font-size: 15px; color: whitesmoke; background-color: #000">
@@ -171,29 +195,17 @@
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>
         <div class="col-md-7 pull-left">
             <div class="heading blue_banner">
-                Barclay premier league 2014
+                <span id="pred_table_title"></span>
             </div>
             <div style="height: 50px">
                 <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url();?>resources/images/caret_l20.png">
-                <span class="heading" id="current_month_heading"></span><input type="hidden" id="current_month">
+                <span class="heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
                 <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url();?>resources/images/caret_r20.png">
             </div>
             <div>
                 <table class="table-responsive table ">
                     <tbody id="tbl_predictions">
                         
-                    <tr style="background-color: #EAEAEA">
-                        <th class="title" colspan="4">table header 26 September</th>
-                    </tr>
-                    
-                    <tr>
-                        <td style="text-align: right">liverpool</td>
-                        <td style="text-align: center"> 12.33</td>
-                        <td>Everton</td>
-                        <td>
-                            <a style="float: right"><img src="<?php echo base_url();?>resources/images/predict_button.png"></a>
-                        </td>
-                    </tr>
                     
                     <tr>
                         <td colspan="4">
