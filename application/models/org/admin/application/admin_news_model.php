@@ -137,22 +137,25 @@ class Admin_news_model extends Ion_auth_model
         $this->db->where($this->news_category_identity_column,$identity);
         return $this->db->count_all_results($this->tables['news_category']) > 0;
     }
-
-    public function remove_news_category($id)
+/*
+ * @Author Rashida Sultana
+ * this method delete news category
+ */
+    public function remove_news_category($category_id)
     {
-        $this->db->trans_begin();
-        $this->db->where('id',$id);
+       if(!isset($category_id) || $category_id <= 0)
+        {
+            $this->set_error('delete_news_category_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $category_id);
         $this->db->delete($this->tables['news_category']);
         
         if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_news_category_fail');
             return FALSE;
         }
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->db->trans_rollback();
-            return FALSE;
-        }
-        $this->db->trans_commit();
+        $this->set_message('delete_news_category_successful');
         return TRUE;
     }
     
@@ -237,22 +240,25 @@ class Admin_news_model extends Ion_auth_model
         
         return True;
     }
-    
+/*
+ * @Author Rashida Sultana
+ * this method delete news sub category
+ */
     public function remove_news_sub_category($sub_category_id)
     {
-        $this->db->trans_begin();
-        $this->db->where('id',$sub_category_id);
+       if(!isset($sub_category_id) || $sub_category_id <= 0)
+        {
+            $this->set_error('delete_news_sub_category_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $sub_category_id);
         $this->db->delete($this->tables['news_sub_category']);
         
         if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_news_sub_category_fail');
             return FALSE;
         }
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->db->trans_rollback();
-            return FALSE;
-        }
-        $this->db->trans_commit();
+        $this->set_message('delete_news_sub_category_successful');
         return TRUE;
     }
     
@@ -331,22 +337,25 @@ class Admin_news_model extends Ion_auth_model
         $this->db->trans_commit();
         return TRUE;
     }
-    
-    public function remove_news($id)
+    /*
+     * Author Rashida on 14th february 2015
+     * this method delete news 
+     */
+    public function remove_news($news_id)
     {
-        $this->db->trans_begin();
-        $this->db->where('id',$id);
+       if(!isset($news_id) || $news_id <= 0)
+        {
+            $this->set_error('delete_news_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $news_id);
         $this->db->delete($this->tables['news']);
         
         if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_news_fail');
             return FALSE;
         }
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->db->trans_rollback();
-            return FALSE;
-        }
-        $this->db->trans_commit();
+        $this->set_message('delete_news_successful');
         return TRUE;
     }
     

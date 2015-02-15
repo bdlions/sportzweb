@@ -260,7 +260,11 @@ class Admin_news{
             
             for($region_counter = 0; $region_counter < NEWS_CONFIGURATION_COUNTER ; $region_counter++)
             {
+                if(isset($news_list_array[$region_counter])){
                 $region_id_news_id_map[$region_counter] = $news_list_array[$region_counter]['news_id'];
+                }  else {
+                    $region_id_news_id_map[$region_counter]=null;
+                }
             }
         }
         

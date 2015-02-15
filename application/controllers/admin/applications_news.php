@@ -116,7 +116,7 @@ class Applications_news extends CI_Controller{
         {
             $response['status'] = 1;
             $response['message'] = 'News Category is added successfully.';
-            $news_category_info_array = $this->admin_news->get_news_category_info($id);
+            $news_category_info_array = $this->admin_news->get_news_category_info($id)->result_array();
             if(!empty($news_category_info_array))
             {
                 $response['news_category_info'] = $news_category_info_array;
@@ -129,6 +129,7 @@ class Applications_news extends CI_Controller{
             $response['message'] = $this->admin_news->errors_alert();
         }
         echo json_encode($response);
+        return;
     }
     
     public function get_news_data()
@@ -167,6 +168,25 @@ class Applications_news extends CI_Controller{
             $response['message'] = $this->admin_healthy_recipes->errors_alert();
         }
         echo json_encode($response);
+    }
+    /*
+     * Ajax call
+     * @Author Rashida sultana on 14th february
+     * this method delete news category 
+     */
+     public function delete_news_category()
+    {
+        $result = array();
+        $category_id = $this->input->post('category_id');
+        if($this->admin_news->remove_news_category($category_id))
+        {
+            $result['message'] = $this->admin_news->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($result);
     }
 
     function news_sub_category($sub_category_id)
@@ -433,6 +453,26 @@ class Applications_news extends CI_Controller{
         
         $this->template->load($this->tmpl,"admin/applications/news_app/create_news",  $this->data);
     }
+    /*
+     * Ajax call
+     * @Author Rashida Sultana on 14th february2015
+     * this method delete news
+     * 
+     */
+      public function delete_news()
+    {
+        $result = array();
+        $news_id = $this->input->post('news_id');
+        if($this->admin_news->remove_news($news_id))
+        {
+            $result['message'] = $this->admin_news->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($result);
+    }
     
     public function image_upload($file_info)
     {
@@ -477,10 +517,10 @@ class Applications_news extends CI_Controller{
         {
             $response['status'] = 1;
             $response['message'] = 'News Sub Category is added successfully.';
-            $news_sub_category_info_array = $this->admin_news->get_news_sub_category_info($id);
+            $news_sub_category_info_array = $this->admin_news->get_news_sub_category_info($id)->result_array();
             if(!empty($news_sub_category_info_array))
             {
-                $response['news_sub_category_info'] = $news_sub_category_info_array;
+                $response['news_sub_category_info'] = $news_sub_category_info_array[0];
                 
             }       
         }
@@ -489,7 +529,7 @@ class Applications_news extends CI_Controller{
             $response['status'] = 0;
             $response['message'] = $this->admin_news->errors_alert();
         }
-        echo json_encode($response);
+         echo json_encode($response); return;
     }
     
     public function get_news_sub_category_data()
@@ -533,6 +573,25 @@ class Applications_news extends CI_Controller{
             $response['message'] = $this->admin_news->errors_alert();
         }
         echo json_encode($response);
+    }
+    /*
+     * Ajax call
+     * Author Rashida on 14th february 2015
+     * this method delete news sub category 
+     */
+      public function delete_news_sub_category()
+    {
+        $result = array();
+        $sub_category_id = $this->input->post('sub_category_id');
+        if($this->admin_news->remove_news_sub_category($sub_category_id))
+        {
+            $result['message'] = $this->admin_news->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($result);
     }
     
     function update_news()

@@ -407,3 +407,12 @@ $lang['contactus_msg_sent_fail']        = "Failed to send Message.";
 
 $lang['session_id_doesnt_exist']        = "Sorry, Session ID does not exist.";
 $lang['user_sessionid_mismatch']        = "Sorry, you do not have permission to view this page.";
+
+$lang['delete_news_category_successful']       = "News Category deleted successfully.";
+$lang['delete_news_category_fail']             = "Failed to delete news category.";
+
+$lang['delete_news_sub_category_successful']   = "News sub category deleted successfully.";
+$lang['delete_news_sub_category_fail']         = "Failed to delete news sub category.";
+
+$lang['delete_news_successful']   = "News deleted successfully.";
+$lang['delete_news_fail']         = "Failed to delete news .";

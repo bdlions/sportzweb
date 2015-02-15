@@ -15,12 +15,11 @@
                 },
                 success: function(data) {
                     alert(data['message']);
-                    
-                    if (data['status'] === 1)
+                   if (data['status'] === 1)
                     {
-                        $("#tbody_news_category_list").html($("#tbody_news_category_list").html()+tmpl("tmpl_news_category_list",  data['news_category_info']));
-                        $("#modal_create_news_category").modal('hide');
-                    }
+                     $("#tbody_news_category_list").html($("#tbody_news_category_list").html()+tmpl("tmpl_news_category_list",  data['news_category_info']));
+                    $("#modal_create_news_category").modal('hide');
+                   }
                 }
             });
         });

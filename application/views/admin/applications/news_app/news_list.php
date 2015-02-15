@@ -14,6 +14,9 @@
                                 <th>Edit</th>
                                 <?php } ?>   
                                 <th>View</th>
+                                <?php if ($allow_delete) { ?>
+                                <th>Delete</th>
+                                <?php } ?>   
                             </tr>
                         </thead>
                         <tbody id="tbody_blog_list_category">
@@ -26,6 +29,9 @@
                                         <td><a href="<?php echo base_url().'admin/applications_news/edit_news/'.$news['id']; ?>">Edit</a></td>
                                         <?php } ?>   
                                         <td><a href="<?php echo base_url().'admin/applications_news/news_details/'.$news['id']; ?>">View</a></td>
+                                        <?php if($allow_delete){ ?>
+                                        <td><button id="button_delete_news_category_<?php echo $news['id'];?>" onclick="open_modal_delete_confirm('<?php echo $news['id'];?>')" value="" class="form-control btn pull-right">Delete</button></td>
+                                       <?php } ?>
                                     </tr>
                                 <?php endforeach;?>
                             <?php else: ?>
@@ -49,6 +55,7 @@
         
     </div>
 </div>
+<?php $this->load->view("admin/applications/news_app/modal_delete_news"); ?>
 
 <!-- Delete confirmation modal -->
 

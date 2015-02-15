@@ -13,6 +13,8 @@
         <td><a href="<?php echo base_url()."admin/applications_news/sub_category_news_list/{%= news_sub_category_info.id%}"; ?>">{%= news_sub_category_info.id%}</td>
         <td><div id="news_title_{%= news_sub_category_info.id%}">{%= news_sub_category_info.title%}</div></td>
         <td><button id="button_edit_news_sub_category_{%= news_sub_category_info.id%}" onclick="openModal('button_edit_news_sub_category_{%= news_sub_category_info.id%}','{%= news_sub_category_info.id%}')" value="" class="form-control btn pull-right">Edit</button></td>
+        <td><button id="button_delete_news_sub_category_{%= news_sub_category_info.id%}" onclick="open_modal_delete_confirm('{%= news_sub_category_info.id%}')" value="" class="form-control btn pull-right">Delete</button></td>
+                    
         <td><a href="<?php echo base_url()."admin/applications_news/config_news_for_sub_category/{%=news_sub_category_info.id%}";?>">Config</a></td>
     </tr>
     {% news_sub_category_info = ((o instanceof Array) ? o[i++] : null); %}
@@ -42,6 +44,9 @@
                                 <?php if($allow_edit){ ?>
                                 <th style="text-align: center;">Edit</th>  
                                 <?php } ?>
+                                <?php if($allow_delete){ ?>
+                                <th style="text-align: center;">Delete</th>  
+                                <?php } ?>
                                 <?php if($allow_configuration){ ?>
                                 <th style="text-align: center;">Config</th> 
                                 <?php } ?>
@@ -54,6 +59,9 @@
                                     <td><div id="news_title_<?php echo $sub_category['id'];?>"><?php echo $sub_category['title']?></div></td>
                                     <?php if($allow_edit){ ?>
                                     <td><button id="button_edit_news_category_<?php echo $sub_category['id'];?>" onclick="openModal('button_edit_news_sub_category_<?php echo $sub_category["id"];?>','<?php echo $sub_category['id'];?>')" value="" class="form-control btn pull-right">Edit</button></td>
+                                    <?php } ?>
+                                    <?php if($allow_delete){ ?>
+                                    <td><button id="button_delete_news_category_<?php echo $sub_category['id'];?>" onclick="open_modal_delete_confirm('<?php echo $sub_category['id'];?>')" value="" class="form-control btn pull-right">Delete</button></td>
                                     <?php } ?>
                                     <?php if($allow_configuration){ ?>
                                     <td><a href="<?php echo base_url().'admin/applications_news/config_news_for_sub_category/'.$sub_category['id']?>">Config</a></td>
@@ -123,3 +131,4 @@
 </div>-->
 <?php $this->load->view("admin/applications/news_app/modal_create_news_sub_category"); ?>
 <?php $this->load->view("admin/applications/news_app/modal_edit_news_sub_category"); ?>
+<?php $this->load->view("admin/applications/news_app/modal_delete_news_sub_category"); ?>
