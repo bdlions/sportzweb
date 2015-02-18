@@ -286,6 +286,9 @@ class Gympro_library {
                                 :NULL)));
 //                var_dump($session_info['type_id'].': '.$repeat_text.'-------------------------- times: '.$session_info['repeat']);
                 for( $repeat_times = $session_info['repeat']; $repeat_times>0; $repeat_times-- ){
+                    $new_date = new DateTime($rep_date);
+                    $new_date->modify($repeat_text);
+                    $rep_date = $new_date->format('Y-m-d');
 //                    var_dump('rep date--------'.$rep_date);
                     $calendar_session_info = array(
                         'session_info' => $session_info,
@@ -294,9 +297,6 @@ class Gympro_library {
                         'end' => $rep_date.'T'.$session_info['end']
                     );
                     $session_list[] = $calendar_session_info;
-                    $new_date = new DateTime($rep_date);
-                    $new_date->modify($repeat_text);
-                    $rep_date = $new_date->format('Y-m-d');
                 }
             }
         }

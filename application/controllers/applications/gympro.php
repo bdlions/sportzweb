@@ -2736,6 +2736,7 @@ class Gympro extends Role_Controller{
         }
         $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('session_date', 'Date', 'xss_clean|required');
+        $this->form_validation->set_rules('location', 'Location', 'xss_clean');
         if ($this->input->post()){
             $result = array();
             $result['message'] = '';

@@ -63,7 +63,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Title: </div>
                         <div class="col-md-9">
-                            <input class="form-control" name="title">
+                            <input class="form-control" name="title" value="<?php echo set_value('title'); ?>" >
                         </div>
                     </div>
                     <div class="row form-group">
@@ -86,7 +86,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Date:</div>
                         <div class="col-md-6">
-                            <input class="" id="session_date" name="session_date" >
+                            <input class="" id="session_date" name="session_date" value="<?php echo set_value('session_date'); ?>" >
                         </div>
                     </div>
                     <div class="row form-group">
@@ -112,7 +112,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 control-div">Location</div>
                         <div class="col-md-9">
-                            <input class="form-control" name="location"> 
+                            <input class="form-control" name="location" value="<?php echo set_value('location'); ?>" > 
                         </div>
                     </div>
                     <div class="row form-group">
