@@ -237,7 +237,7 @@ class Gympro_library {
      * This method will convert session into calendar displayed format
      * @Author Nazmul on 24th January 2015
      */
-    public function get_sessions_in_calendar($user_id = 0)
+    public function old_get_sessions_in_calendar($user_id = 0)
     {
         if($user_id == 0)
         {
@@ -257,4 +257,51 @@ class Gympro_library {
         }
         return $session_list;
     }
+    /*
+     * This method will convert session into calendar displayed format
+     * @Author Nazmul on 24th January 2015
+     * modified by Tanveer Ahmed on 16 Feb 2015 (implemented repeat processing)
+     */
+    public function get_sessions_in_calendar($user_id = 0)
+    {
+        if($user_id == 0){
+            $user_id = $this->session->userdata('user_id');
+        }
+        $session_list = array();
+        $session_list_array = $this->gympro_model->get_all_sessions($user_id)->result_array();
+        foreach($session_list_array as $session_info){
+            $rep_date = $session_info['date'];
+            $calendar_session_info = array(
+                'session_info' => $session_info,
+                'title' => $session_info['title'],
+                'start' => $rep_date.'T'.$session_info['start'],
+                'end' => $rep_date.'T'.$session_info['end']
+            );
+            $session_list[] = $calendar_session_info;
+            if($session_info['type_id'] != GYMPRO_SINGLE_SESSION_TYPE_ID) {
+                $repeat_text =  $session_info['type_id']    == GYMPRO_REPEATED_DAILY_TYPE_ID    ?'+1 Day'
+                                :($session_info['type_id']  == GYMPRO_REPEATED_WEEKLY_TYPE_ID   ?'+1 Week'
+                                :($session_info['type_id']  == GYMPRO_REPEATED_BIWEEKLY_TYPE_ID ?'+2 Week'
+                                :($session_info['type_id']  == GYMPRO_REPEATED_MONTHLY_TYPE_ID  ?'+1 Month'
+                                :NULL)));
+//                var_dump($session_info['type_id'].': '.$repeat_text.'-------------------------- times: '.$session_info['repeat']);
+                for( $repeat_times = $session_info['repeat']; $repeat_times>0; $repeat_times-- ){
+//                    var_dump('rep date--------'.$rep_date);
+                    $calendar_session_info = array(
+                        'session_info' => $session_info,
+                        'title' => $session_info['title'],
+                        'start' => $rep_date.'T'.$session_info['start'],
+                        'end' => $rep_date.'T'.$session_info['end']
+                    );
+                    $session_list[] = $calendar_session_info;
+                    $new_date = new DateTime($rep_date);
+                    $new_date->modify($repeat_text);
+                    $rep_date = $new_date->format('Y-m-d');
+                }
+            }
+        }
+//        var_dump($session_list);exit;
+        return $session_list;
+    }
+    
 }

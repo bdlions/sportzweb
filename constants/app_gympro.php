@@ -33,4 +33,8 @@ define("SESSION_CREATED_FOR_CLIENT_TYPE_ID",                    2);
 define("SESSION_CREATED_FOR_TYPE_EXPLODER",                     "_");
 
 
-define("GYMPRO_SINGLE_SESSION_TYPE_ID",                         "1");
+define("GYMPRO_SINGLE_SESSION_TYPE_ID",                     "1");
+define("GYMPRO_REPEATED_DAILY_TYPE_ID",                     "2");
+define("GYMPRO_REPEATED_WEEKLY_TYPE_ID",                    "3");
+define("GYMPRO_REPEATED_BIWEEKLY_TYPE_ID",                  "4");
+define("GYMPRO_REPEATED_MONTHLY_TYPE_ID",                   "5");

@@ -30,8 +30,7 @@
         });
     }
     
-    var monthNames = [ "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December" ];
+    var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
     function month_incrim(){
         var in_date = $('#current_month').val();
         var date = new Date(in_date);
@@ -139,6 +138,37 @@
                 <a style="float: right"><img src="<?php echo base_url();?>resources/images/predict_button.png"></a>
             </td>
         </tr>
+        <tr style="display: none" id="prediction_{%= prediction['match_id']%}">
+            <td colspan="4">
+                <div class="col-md-4">
+                    <div class="title">Manchester</div>
+                    <div onclick="confirmation_vote(1, 1)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
+                        <div style="background-color: white; height: 44px">
+                            <div class="title" style="padding-top: 25%">10%</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id=""value="">
+                </div>
+                <div class="col-md-4">
+                    <div class="title">Manchester</div>
+                    <div onclick="confirmation_vote(1, 1)"  style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
+                        <div style="background-color: white; height: 40px">
+                            <div class="title" style="padding-top: 25%">adasd</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id=""value="">
+                </div>
+                <div class="col-md-4">
+                    <div class="title">Manchester</div>
+                    <div onclick="confirmation_vote(1, 1)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
+                        <div style="background-color: white; height: 14px">
+                            <div class="title" style="padding-top: 25%">adasd</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id=""value="">
+                </div>
+            </td>
+        </tr>
 
 {%
         }
@@ -207,37 +237,7 @@
                     <tbody id="tbl_predictions">
                         
                     
-                    <tr>
-                        <td colspan="4">
-                            <div class="col-md-4">
-                                <div class="title">Manchester</div>
-                                <div onclick="confirmation_vote(1, 1)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
-                                    <div style="background-color: white; height: 44px">
-                                        <div class="title" style="padding-top: 25%">10%</div>
-                                    </div>
-                                </div>
-                                <input type="hidden" id=""value="">
-                            </div>
-                            <div class="col-md-4">
-                                <div class="title">Manchester</div>
-                                <div onclick="confirmation_vote(1, 1)"  style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
-                                    <div style="background-color: white; height: 40px">
-                                        <div class="title" style="padding-top: 25%">adasd</div>
-                                    </div>
-                                </div>
-                                <input type="hidden" id=""value="">
-                            </div>
-                            <div class="col-md-4">
-                                <div class="title">Manchester</div>
-                                <div onclick="confirmation_vote(1, 1)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
-                                    <div style="background-color: white; height: 14px">
-                                        <div class="title" style="padding-top: 25%">adasd</div>
-                                    </div>
-                                </div>
-                                <input type="hidden" id=""value="">
-                            </div>
-                        </td>
-                    </tr>
+                    
                     </tbody>
                 </table>
             </div>
