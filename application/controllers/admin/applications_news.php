@@ -90,14 +90,381 @@ class Applications_news extends CI_Controller{
             }
         }
 
-    }    
+    } 
+    /*
+     * This method will load home page of news application at admin panel
+     * @Author Nazmul on 20th February 2015
+     */
     function index()
     {
         $this->data['message'] = '';
-        $news_category = $this->admin_news->get_all_news_category()->result_array();
-        
-        $this->data['news_category'] = $news_category;
+        $news_category_list = $this->admin_news->get_all_news_categories()->result_array();        
+        $this->data['news_category_list'] = $news_category_list;
         $this->template->load($this->tmpl, "admin/applications/news_app/news_category", $this->data);
+    }
+    //-----------------------------------News home page module---------------------//
+    /*
+     * This method will load a page to configure news home page
+     * @Author Nazmul on 20th February 2015
+     */
+    public function configure_news_home_page()
+    {
+        $this->data['message'] = '';
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        $this->data = array_merge($this->data, $this->admin_news->get_news_home_page_configuration());
+        $this->template->load($this->tmpl,"admin/applications/news_app/config_news_for_home_page",  $this->data);
+    }
+    /*
+     * Ajax call
+     * This method will save news home page configuration
+     * @Author Nazmul on 20th February 2015
+     */
+    public function save_news_home_page_configuration()
+    {
+        $response = array();
+        $show_advertise = $this->input->post('show_advertise');
+        $region_id_news_id_map = $this->input->post('region_id_news_id_map');
+        
+        $position_array = array();
+        for($i=0;$i<NEWS_CONFIGURATION_COUNTER;$i++)
+        {
+            $object = new stdClass();
+            $object->region_id = $i;
+            if(array_key_exists('position_'.($i+1), $region_id_news_id_map))
+            {
+                $object->news_id = $region_id_news_id_map['position_'.($i+1)];
+            }
+            else
+            {
+                $object->news_id = 0;
+            }
+            $position_array[] = $object;
+        } 
+        $selected_date = $this->utils->convert_date_from_user_to_db($this->input->post('configuration_date'));
+        $data = array(
+            'news_list' => json_encode($position_array),
+            'selected_date' => $selected_date,
+            'show_advertise' => $show_advertise
+        );        
+        $id = $this->admin_news->add_news_home_page_configuration($data);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = $this->admin_news->messages_alert();       
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($response);
+    }
+    //-------------------------- Latest News Module -------------------------------//
+    /*
+     * This method will configure latest news
+     * @Author Nazmul on 4th February 2015
+     */
+    public function configure_latest_news()
+    {
+        $this->data['message'] = '';
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        $this->template->load($this->tmpl,"admin/applications/news_app/manage_latest_news",  $this->data);
+    }
+    
+    /*
+     * Ajax Call
+     * $this method will store configuration of latest news
+     * @Author Nazmul on 4th February 2015
+     */
+    public function add_latest_news_configuration()
+    {
+        $response = array();
+        $news_id_list = $this->input->post('news_id_list'); 
+        $data = array(
+            'news_list' => $news_id_list,
+            'selected_date' => $this->utils->get_current_date_db()
+        );       
+        $id = $this->admin_news->add_latest_news_configuration($data);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = $this->admin_news->messages_alert();        
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($response);
+    }
+    //-------------------------- Breaking News Module -------------------------------//
+    /*
+     * This method will configure breaking news
+     * @Author Nazmul on 4th February 2015
+     */
+    public function configure_breaking_news()
+    {
+        $this->data['message'] = '';
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        $this->template->load($this->tmpl,"admin/applications/news_app/manage_breaking_news",  $this->data);
+    }
+    
+    /*
+     * Ajax Call
+     * $this method will store configuration of breaking news
+     * @Author Nazmul on 4th February 2015
+     */
+    public function add_breaking_news_configuration()
+    {
+        $response = array();
+        $news_id_list = $this->input->post('news_id_list'); 
+        $data = array(
+            'news_list' => $news_id_list,
+            'selected_date' => $this->utils->get_current_date_db()
+        );       
+        $id = $this->admin_news->add_breaking_news_configuration($data);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = $this->admin_news->messages_alert();        
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($response);
+    }
+    //------------------------------ News Category Module ----------------------------------//
+    /*
+     * Ajax call
+     * @Author Rashida sultana on 14th february
+     * this method delete news category 
+     */
+    public function delete_news_category()
+    {
+        $result = array();
+        $category_id = $this->input->post('category_id');
+        if($this->admin_news->remove_news_category($category_id))
+        {
+            $result['message'] = $this->admin_news->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    /*
+     * This method will confirure news category page
+     * @param $news_category_id, news category id
+     * @Author Nazmul on 20th February 2015
+     */
+    public function configure_news_category_page($news_category_id)
+    {
+        $this->data['message'] = '';
+        $news_category_info = array();
+        $news_category_info_array = $this->admin_news->get_news_category_info($news_category_id)->result_array();
+        if(!empty($news_category_info_array))
+        {
+            $news_category_info = $news_category_info_array[0];
+        }
+        else
+        {
+            redirect('admin/applications_news','refresh');
+        }
+        $this->data['news_category_info'] = $news_category_info;
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        $this->data = array_merge($this->data, $this->admin_news->get_news_category_page_configuration($news_category_id));
+        $this->template->load($this->tmpl,"admin/applications/news_app/config_news_for_catagory_page",  $this->data);
+    }
+    /*
+     * Ajax call
+     * This method will save news category page configuration
+     * @Author Nazmul on 20th February 2015
+     */
+    public function save_news_category_page_configuration()
+    {
+        $response = array();
+        $region_id_news_id_map = $this->input->post('region_id_news_id_map');
+        $region_id_is_ignored_map = $this->input->post('region_id_is_ignored_map');
+        $show_advertise = $this->input->post('show_advertise');
+        $news_category_id = $this->input->post('news_category_id');
+        
+        $position_array = array();
+        for($i=0;$i<NEWS_CONFIGURATION_COUNTER;$i++)
+        {
+            $object = new stdClass();
+            $object->region_id = $i;
+            if(array_key_exists('position_'.($i+1), $region_id_news_id_map))
+            {
+                $object->news_id = $region_id_news_id_map['position_'.($i+1)];
+            }
+            else
+            {
+                $object->news_id = 0;
+            }
+            if(array_key_exists('position_'.($i+1), $region_id_is_ignored_map))
+            {
+                $object->is_ignored = $region_id_is_ignored_map['position_'.($i+1)];
+            }
+            else
+            {
+                $object->is_ignored = 1;
+            } 
+            $position_array[] = $object;
+        }
+        $selected_date = $this->utils->convert_date_from_user_to_db($this->input->post('selected_date'));
+        $data = array(
+          'news_list' => json_encode($position_array),
+          'show_advertise' => $show_advertise,
+          'news_category_id' => $news_category_id,
+          'selected_date' => $selected_date
+        );
+        
+        $id = $this->admin_news->add_news_category_page_configuration($data);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = $this->admin_news->messages_alert();   
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($response);
+    }
+    //------------------------------ News Sub Category Module ---------------------------//
+    /*
+     * Ajax call
+     * Author Rashida on 14th february 2015
+     * this method delete news sub category 
+     */
+    public function delete_news_sub_category()
+    {
+        $result = array();
+        $sub_category_id = $this->input->post('sub_category_id');
+        if($this->admin_news->remove_news_sub_category($sub_category_id))
+        {
+            $result['message'] = $this->admin_news->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    /*
+     * This method will confirure news subcategory page
+     * @param $news_sub_category_id, new sub category id
+     * @Author Nazmul on 20th February 2015
+     */
+    public function configure_news_subcategory_page($news_sub_category_id)
+    {
+        $this->data['message'] = '';
+        $news_sub_category_info = array();
+        $news_sub_category_info_array = $this->admin_news->get_news_sub_category_info($news_sub_category_id)->result_array();
+        if(!empty($news_sub_category_info_array))
+        {
+            $news_sub_category_info = $news_sub_category_info_array[0];
+        }
+        else
+        {
+            redirect('admin/applications_news','refresh');
+        }
+        $this->data['news_sub_category_info'] = $news_sub_category_info;
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        $this->data = array_merge($this->data, $this->admin_news->get_news_sub_category_page_configuration($news_sub_category_id));
+        $this->template->load($this->tmpl,"admin/applications/news_app/config_news_for_sub_category_page",  $this->data);
+    }
+    /*
+     * Ajax call
+     * This method will save news sub category page configuration
+     * @Author Nazmul on 20th February 2015
+     */
+    public function save_news_subcategory_page_configuration()
+    {
+        $response = array();
+        $region_id_news_id_map = $this->input->post('region_id_news_id_map');
+        $region_id_is_ignored_map = $this->input->post('region_id_is_ignored_map');
+        $show_advertise = $this->input->post('show_advertise');
+        $news_sub_category_id = $this->input->post('news_sub_category_id');
+        
+        $position_array = array();
+        for($i=0;$i<NEWS_CONFIGURATION_COUNTER;$i++)
+        {
+            $object = new stdClass();
+            $object->region_id = $i;
+            if(array_key_exists('position_'.($i+1), $region_id_news_id_map))
+            {
+                $object->news_id = $region_id_news_id_map['position_'.($i+1)];
+            }
+            else
+            {
+                $object->news_id = 0;
+            }
+            if(array_key_exists('position_'.($i+1), $region_id_is_ignored_map))
+            {
+                $object->is_ignored = $region_id_is_ignored_map['position_'.($i+1)];
+            }
+            else
+            {
+                $object->is_ignored = 1;
+            } 
+            $position_array[] = $object;
+        }
+        $selected_date = $this->utils->convert_date_from_user_to_db($this->input->post('selected_date'));
+        $data = array(
+          'news_list' => json_encode($position_array),
+          'show_advertise' => $show_advertise,
+          'news_sub_category_id' => $news_sub_category_id,
+          'selected_date' => $selected_date
+        );
+        
+        $id = $this->admin_news->add_news_sub_category_page_configuration($data);
+        if($id !== FALSE)
+        {
+            $response['status'] = 1;
+            $response['message'] = $this->admin_news->messages_alert();   
+        }
+        else
+        {
+            $response['status'] = 0;
+            $response['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($response);
+    }
+    /*
+     * Ajax call
+     * @Author Rashida Sultana on 14th february2015
+     * this method delete news
+     * 
+     */
+    public function delete_news()
+    {
+        $result = array();
+        $news_id = $this->input->post('news_id');
+        if($this->admin_news->remove_news($news_id))
+        {
+            $result['message'] = $this->admin_news->messages_alert();
+        }
+        else
+        {
+            $result['message'] = $this->admin_news->errors_alert();
+        }
+        echo json_encode($result);
+    }
+    /*
+     * This method will load a page to diplay news list
+     * @Author Nazmul on 20th February 2015
+     */
+    function news_list()
+    {
+        $this->data['message'] = '';
+        $news_lists = $this->admin_news->get_news_list();
+        $this->data['news_lists'] = $news_lists;
+        $this->template->load($this->tmpl, "admin/applications/news_app/news_list", $this->data);
     }
     
     //Ajax call for create news category
@@ -169,26 +536,7 @@ class Applications_news extends CI_Controller{
         }
         echo json_encode($response);
     }
-    /*
-     * Ajax call
-     * @Author Rashida sultana on 14th february
-     * this method delete news category 
-     */
-     public function delete_news_category()
-    {
-        $result = array();
-        $category_id = $this->input->post('category_id');
-        if($this->admin_news->remove_news_category($category_id))
-        {
-            $result['message'] = $this->admin_news->messages_alert();
-        }
-        else
-        {
-            $result['message'] = $this->admin_news->errors_alert();
-        }
-        echo json_encode($result);
-    }
-
+    
     function news_sub_category($sub_category_id)
     {
         $this->data['message'] = '';
@@ -453,27 +801,6 @@ class Applications_news extends CI_Controller{
         
         $this->template->load($this->tmpl,"admin/applications/news_app/create_news",  $this->data);
     }
-    /*
-     * Ajax call
-     * @Author Rashida Sultana on 14th february2015
-     * this method delete news
-     * 
-     */
-      public function delete_news()
-    {
-        $result = array();
-        $news_id = $this->input->post('news_id');
-        if($this->admin_news->remove_news($news_id))
-        {
-            $result['message'] = $this->admin_news->messages_alert();
-        }
-        else
-        {
-            $result['message'] = $this->admin_news->errors_alert();
-        }
-        echo json_encode($result);
-    }
-    
     public function image_upload($file_info)
     {
         $data = null;
@@ -573,25 +900,6 @@ class Applications_news extends CI_Controller{
             $response['message'] = $this->admin_news->errors_alert();
         }
         echo json_encode($response);
-    }
-    /*
-     * Ajax call
-     * Author Rashida on 14th february 2015
-     * this method delete news sub category 
-     */
-      public function delete_news_sub_category()
-    {
-        $result = array();
-        $sub_category_id = $this->input->post('sub_category_id');
-        if($this->admin_news->remove_news_sub_category($sub_category_id))
-        {
-            $result['message'] = $this->admin_news->messages_alert();
-        }
-        else
-        {
-            $result['message'] = $this->admin_news->errors_alert();
-        }
-        echo json_encode($result);
     }
     
     function update_news()
@@ -865,16 +1173,6 @@ class Applications_news extends CI_Controller{
         $this->template->load($this->tmpl,"admin/applications/news_app/create_sub_news",  $this->data);
     }
     
-
-    public function config_news()
-    {
-        $this->data['message'] = '';
-        $news_list = $this->admin_news->config_news();//print_r($news_list);exit;
-        $this->data['news_list_old'] = $news_list;
-        $this->data = array_merge($this->data, $this->admin_news->get_news_home_page_configuration());
-        $this->template->load($this->tmpl,"admin/applications/news_app/config_news_for_home_page",  $this->data);
-    }
-    
     public function news_list_for_home_page()
     {
         $response = array();
@@ -945,49 +1243,6 @@ class Applications_news extends CI_Controller{
             $response = $news_array[0];
         }
         
-        echo json_encode($response);
-    }
-    
-    public function save_selected_news()
-    {
-        $response = array();
-        $is_hide_advertisement = 0;
-        $selected_date = $_POST['selected_date_for_item'];
-        $region_id_news_id_map = $_POST['region_id_news_id_map'];
-        $is_hide_advertisement = $_POST['is_hide_advertisement'];
-        
-        $position_array = array();
-        for($i=0;$i<NEWS_CONFIGURATION_COUNTER;$i++)
-        {
-            $object = new stdClass();
-            $object->region_id = $i;
-            $object->news_id = $region_id_news_id_map['position_'.($i+1)];
-            $position_array[] = $object;
-        }
-        
-
-        //store into news_home_page_configuration table
-
-        if($is_hide_advertisement==1)
-                $is_hide_advertisement = 1;
-        
-        $data = array(
-                'news_list' => json_encode($position_array),
-                'selected_date' => $selected_date,
-                'show_advertise' => $is_hide_advertisement
-            );
-        
-        $id = $this->admin_news->add_news_home_page_configuration($data);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = 'News list is added successfully for home page.';        
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_news->errors_alert();
-        }
         echo json_encode($response);
     }
     
@@ -1110,89 +1365,6 @@ class Applications_news extends CI_Controller{
             $response['message'] = $this->admin_news->errors_alert();
         }
         
-        echo json_encode($response);
-    }
-    
-    function news_list()
-    {
-        $this->data['message'] = '';
-        $news_lists = $this->admin_news->get_all_news()->result_array();
-        $this->data['news_lists'] = $news_lists;
-        $this->template->load($this->tmpl, "admin/applications/news_app/news_list", $this->data);
-    }
-    
-    /*
-     * This method will configure latest news
-     * @Author Nazmul on 4th February 2015
-     */
-    public function configure_latest_news()
-    {
-        $this->data['message'] = '';
-        $this->data['news_list'] = $this->admin_news->get_news_list();
-        $this->template->load($this->tmpl,"admin/applications/news_app/manage_latest_news",  $this->data);
-    }
-    
-    /*
-     * Ajax Call
-     * $this method will store configuration of latest news
-     * @Author Nazmul on 4th February 2015
-     */
-    public function add_latest_news_configuration()
-    {
-        $response = array();
-        $news_id_list = $this->input->post('news_id_list'); 
-        $data = array(
-            'news_list' => $news_id_list,
-            'selected_date' => $this->utils->get_current_date_db()
-        );       
-        $id = $this->admin_news->add_latest_news_configuration($data);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = $this->admin_news->messages_alert();        
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_news->errors_alert();
-        }
-        echo json_encode($response);
-    }
-    /*
-     * This method will configure breaking news
-     * @Author Nazmul on 4th February 2015
-     */
-    public function configure_breaking_news()
-    {
-        $this->data['message'] = '';
-        $this->data['news_list'] = $this->admin_news->get_news_list();
-        $this->template->load($this->tmpl,"admin/applications/news_app/manage_breaking_news",  $this->data);
-    }
-    
-    /*
-     * Ajax Call
-     * $this method will store configuration of breaking news
-     * @Author Nazmul on 4th February 2015
-     */
-    public function add_breaking_news_configuration()
-    {
-        $response = array();
-        $news_id_list = $this->input->post('news_id_list'); 
-        $data = array(
-            'news_list' => $news_id_list,
-            'selected_date' => $this->utils->get_current_date_db()
-        );       
-        $id = $this->admin_news->add_breaking_news_configuration($data);
-        if($id !== FALSE)
-        {
-            $response['status'] = 1;
-            $response['message'] = $this->admin_news->messages_alert();        
-        }
-        else
-        {
-            $response['status'] = 0;
-            $response['message'] = $this->admin_news->errors_alert();
-        }
         echo json_encode($response);
     }
 }

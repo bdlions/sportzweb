@@ -115,13 +115,13 @@
                 <li class="dropdown">
                     <a style="padding-left:0px;" href="<?php echo base_url() . 'applications/news_app' ?>" class="dropdown-toggle" data-hover="dropdown">Home</a>
                 </li> 
-                <?php foreach ($news_header_menu as $key => $menu_item) : ?>
+                <?php foreach ($news_header_menu as $news_category_id => $menu_item) : ?>
                     <li class="dropdown">
-                        <a href="<?php echo base_url() . 'applications/news_app/news_category/' . $menu_item['category_id']; ?>" class="dropdown-toggle" data-hover="dropdown"><?php echo $key; ?></a>
-                        <?php if (!empty($menu_item['sub_list'])): ?>
+                        <a href="<?php echo base_url() . 'applications/news_app/news_category/' .$news_category_id ; ?>" class="dropdown-toggle" data-hover="dropdown"><?php echo $menu_item['news_category_title']; ?></a>
+                        <?php if (!empty($menu_item['sub_category_list'])): ?>
                             <ul class="dropdown-menu dropdown-menu-news" style="background-color: #75B3E6;">
-                                <?php foreach ($menu_item['sub_list'] as $item): ?>
-                                    <li><a href="<?php echo base_url() . 'applications/news_app/sub_category/' . $item['id']; ?>"><?php echo $item['title']; ?></a></li>
+                                <?php foreach ($menu_item['sub_category_list'] as $sub_category_info): ?>
+                                    <li><a href="<?php echo base_url() . 'applications/news_app/sub_category/' . $sub_category_info['news_sub_category_id']; ?>"><?php echo $sub_category_info['news_sub_category_title']; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
@@ -131,18 +131,3 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
-<!--
-<li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Dropdown</a>
-    <ul class="dropdown-menu" style="background-color: #00A2E8;">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Separated link</a></li>
-        <li class="divider"></li>
-        <li><a href="#">One more separated link</a></li>
-    </ul>
-</li>
--->

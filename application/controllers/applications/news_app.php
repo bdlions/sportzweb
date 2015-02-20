@@ -4,7 +4,6 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class News_app extends Role_Controller {
-
     function __construct() {
         parent::__construct();
         $this->lang->load('auth');        
@@ -14,17 +13,15 @@ class News_app extends Role_Controller {
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
         $this->load->library('org/application/news_app_library');
-        $this->data['news_header_menu'] = $this->get_all_menu_item();
+        $this->data['news_header_menu'] = $this->news_app_library->get_menu_items();
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         }
     }
-
     /*
-     * Writen by Tanveer
-     * Modified by omar  
+     * This method will load news application home page
+     * @Author Nazmul on 20th February 2015 
      */
-
     function index() {
 
         $this->data['message'] = '';
@@ -47,39 +44,53 @@ class News_app extends Role_Controller {
         );
         echo json_encode($result);        
     }
-
+    /*
+     * This method will load news category page
+     * @param $news_category_id, news category id
+     * @Author Nazmul on 20th Feburary 2015
+     */
     public function news_category($news_category_id)
     {
-        $result = $this->news_app_library->get_news_category_info($news_category_id)->result_array();
-        if(!empty($result))
+        $news_category_info = array();
+        $news_category_info_array = $this->news_app_library->get_news_category_info($news_category_id)->result_array();
+        if(!empty($news_category_info_array))
         {
-            $result = $result[0];
+            $news_category_info = $news_category_info_array[0];
         }
-        $this->data['title'] = $result['title'];
+        else
+        {
+            redirect('applications/news_app','refresh');
+        }
+        $this->data['title'] = $news_category_info['title'];
         $this->data = array_merge($this->data, $this->news_app_library->get_news_category_configuration($news_category_id));
-        //echo '<pre/>';print_r($this->data);exit;
         $this->template->load(null, "applications/news_app/news_catagory_sub_category_news_list", $this->data);        
     }
-    
+    /*
+     * This method will load news sub category page
+     * @param $sub_category_id, sub category id
+     * @Author Nazmul on 20th Feburary 2015
+     */
     public function sub_category($sub_category_id)
     {
-        $result = $this->news_app_library->get_news_sub_category_info($sub_category_id)->result_array();
-        if(!empty($result))
+        $news_sub_category_info = array();
+        $news_sub_category_info_array = $this->news_app_library->get_news_sub_category_info($sub_category_id)->result_array();
+        if(!empty($news_sub_category_info_array))
         {
-            $result = $result[0];
+            $news_sub_category_info = $news_sub_category_info_array[0];
+        }   
+        else
+        {
+            redirect('applications/news_app','refresh');
         }
-        
-        $this->data['title'] = $result['title'];
+        $this->data['title'] = $news_sub_category_info['title'];
         $this->data = array_merge($this->data, $this->news_app_library->get_news_sub_category_configuration($sub_category_id));
         $this->template->load(null, "applications/news_app/news_catagory_sub_category_news_list", $this->data);  
-    }    
-    public function get_all_menu_item()
-    {
-        $result = $this->news_app_library->get_all_news_category()->result_array();
-        $sub_menu_results = $this->news_app_library->get_all_sub_category();
-        return $sub_menu_results;
-    }
-    
+    } 
+    /*
+     * This method will dispaly a news item
+     * @param $news_id, news id
+     * @Author Nazmul on 20th Feburary 2015
+     */
     function news_item($news_id)
     {
         $comment_list = $this->news_app_library->get_all_comments($news_id, NEWEST_FIRST,DEFAULT_VIEW_PER_PAGE);
@@ -88,8 +99,7 @@ class News_app extends Role_Controller {
         $news = $this->news_app_library->get_news_info($news_id);
         if(empty($news))
         {
-            //show a page to display that this news is invalid. i.e. news doesnot exist
-            return;
+            redirect('applications/news_app','refresh');
         }
         $this->data['news'] = $news;
         $this->data['application_id'] = APPLICATION_NEWS_APP_ID;
@@ -215,5 +225,3 @@ class News_app extends Role_Controller {
        echo json_encode($response);
     }
 }
-
-?>

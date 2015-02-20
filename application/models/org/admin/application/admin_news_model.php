@@ -4,9 +4,9 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /*
- * Name: Dataprovider Model
+ * Name: Admin News Model
  * 
- * Author: Redwan
+ * Author: Nazmul
  * 
  * Requirement: PHP 5 and more
  */
@@ -23,7 +23,162 @@ class Admin_news_model extends Ion_auth_model
         $this->news_sub_category_identity_column = $this->config->item('news_sub_category_identity_column','ion_auth');
         
     }
-    
+    /*
+     * This method will return news category list
+     * @Author Nazmul on 20th February 2015
+     */
+    public function get_all_news_categories()
+    {
+        return $this->db->select("*")
+                ->from( $this->tables['news_category'])
+                ->get();
+    }
+    /*
+     * this method will return news category info
+     * @param $news_category_id, news category id
+     * @Author Nazmul on 20th February 2015
+     */
+    public function get_news_category_info($news_category_id)
+    {
+        $this->db->where('id',$news_category_id);
+        return $this->db->select($this->tables['news_category'].".id as news_category_id,".$this->tables['news_category'].'.*')
+                ->from($this->tables['news_category'])
+                ->get();
+    }
+    /*
+     * @Author Rashida Sultana
+     * this method delete news category
+     */
+    public function remove_news_category($category_id)
+    {
+       if(!isset($category_id) || $category_id <= 0)
+        {
+            $this->set_error('delete_news_category_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $category_id);
+        $this->db->delete($this->tables['news_category']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_news_category_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_news_category_successful');
+        return TRUE;
+    }
+    /*
+     * This method will return last inserted news category configuration of a date
+     * If the entry doesnot exist then it will return latest entry of previous date if exists
+     * @parameter $news_category_id, news category id
+     * @param $date, news category configuration date of news category id
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_category_page_configuration($news_category_id, $date)
+    {
+        $this->db->where('selected_date <=',$date);
+        $this->db->where('news_category_id',$news_category_id);        
+        return $this->db->select('*')
+                    ->from($this->tables['news_category_configuration'])
+                    ->order_by('id','desc')
+                    ->limit(1)
+                    ->get();
+    }
+        /*
+     * This method will add configuration of a news category page
+     * @Author Nazmul on 14th June 2014
+     * news_list column of news_category_configuration table is a json object with the following attributes
+     * region_id, id of a region
+     * news_id, id of a news
+     * is_ignored, a flag indicating whether that news is ignored or not for that region
+     */
+    public function add_news_category_page_configuration($data)
+    {
+        $data = $this->_filter_data($this->tables['news_category_configuration'], $data);        
+        $this->db->insert($this->tables['news_category_configuration'],$data);        
+        $id = $this->db->insert_id(); 
+        if($id > 0)
+        {
+            $this->set_message('news_category_page_configuration_successful');
+        }
+        else
+        {
+            $this->set_error('news_category_page_configuration_fail');
+        }
+        return isset($id)?$id:FALSE;
+    }
+    /*
+     * this method will return news sub category info
+     * @param $sub_category_id, sub category id
+     * @Author Nazmul on 20th February 2015
+     */
+    public function get_news_sub_category_info($sub_category_id)
+    {
+        $this->db->where($this->tables['news_sub_category'].'.id',$sub_category_id);
+        return $this->db->select($this->tables['news_sub_category'].'.id as news_sub_category_id,'.$this->tables['news_sub_category'].'.*,'.$this->tables['news_category'].'.title as news_category_title')
+                    ->from($this->tables['news_sub_category'])
+                    ->join($this->tables['news_category'],  $this->tables['news_sub_category'].'.news_category_id='.$this->tables['news_category'].'.id')
+                    ->get();
+    }
+    /*
+     * @Author Rashida Sultana
+     * this method delete news sub category
+     */
+    public function remove_news_sub_category($sub_category_id)
+    {
+       if(!isset($sub_category_id) || $sub_category_id <= 0)
+        {
+            $this->set_error('delete_news_sub_category_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $sub_category_id);
+        $this->db->delete($this->tables['news_sub_category']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_news_sub_category_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_news_sub_category_successful');
+        return TRUE;
+    }
+    /*
+     * This method will return last inserted news sub category page configuration of a date
+     * If the entry doesnot exist then it will return latest entry of previous date if exists
+     * @parameter $news_sub_category_id, news sub category id
+     * @param $date, news sub category configuration date of news sub category id
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_sub_category_page_configuration($news_sub_category_id, $date)
+    {
+        $this->db->where('selected_date <=',$date);
+        $this->db->where('news_sub_category_id',$news_sub_category_id);        
+        return $this->db->select('*')
+                    ->from($this->tables['news_sub_category_configuration'])
+                    ->order_by('id','desc')
+                    ->get();
+    }
+    /*
+     * This method will add configuration page of a news sub category
+     * @Author Nazmul on 14th June 2014
+     * news_list column of news_category_configuration table is a json object with the following attributes
+     * region_id, id of a region
+     * news_id, id of a news
+     * is_ignored, a flag indicating whether that news is ignored or not for that region
+     */
+    public function add_news_sub_category_page_configuration($data)
+    {
+        $data = $this->_filter_data($this->tables['news_sub_category_configuration'], $data);        
+        $this->db->insert($this->tables['news_sub_category_configuration'],$data);        
+        $id = $this->db->insert_id(); 
+        if($id > 0)
+        {
+            $this->set_message('news_sub_category_page_configuration_successful');
+        }
+        else
+        {
+            $this->set_error('news_sub_category_page_configuration_fail');
+        }
+        return isset($id)?$id:FALSE;
+    }
     /*
      * This method will return news list
      * @param @news_id_list, news id list
@@ -38,7 +193,79 @@ class Admin_news_model extends Ion_auth_model
                     ->from($this->tables['news'])
                     ->get();
     }
+    /*
+     * Author Rashida on 14th february 2015
+     * this method delete news 
+     */
+    public function remove_news($news_id)
+    {
+       if(!isset($news_id) || $news_id <= 0)
+        {
+            $this->set_error('delete_news_fail');
+            return FALSE;
+        }
+        $this->db->where('id', $news_id);
+        $this->db->delete($this->tables['news']);
+        
+        if ($this->db->affected_rows() == 0) {
+            $this->set_error('delete_news_fail');
+            return FALSE;
+        }
+        $this->set_message('delete_news_successful');
+        return TRUE;
+    }
+    /*
+     * This method will return last inserted news home page configuration of a date
+     * If the entry doesnot exist then it will return latest entry of previous date if exists
+     * @param $date, news home page configuration date
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_home_page_configuration($date)
+    {
+        $this->db->where('selected_date <=',$date);
+        $result = $this->db->select('*')
+                        ->from($this->tables['news_home_page_configuration'])
+                        ->order_by('id', 'desc')
+                        ->limit(1)
+                        ->get();
+        return $result;
+                
+    }
+    /*
+     * This method will return first NEWS_CONFIGURATION_COUNTER number of news
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_list_initial_configuration()
+    {
+        $this->db->order_by('id','asc');
+        return $this->db->select($this->tables['news'].'.id as news_id, '.$this->tables['news'].'.*')
+                    ->from($this->tables['news'])
+                    ->limit(NEWS_CONFIGURATION_COUNTER)
+                    ->get();
+    }
     
+    /*
+     * This method will add configuration of a news home page
+     * @Author Nazmul on 14th June 2014
+     * news_list column of news_category_configuration table is a json object with the following attributes
+     * region_id, id of a region
+     * news_id, id of a news
+     */
+    public function add_news_home_page_configuration($data)
+    {
+        $data = $this->_filter_data($this->tables['news_home_page_configuration'], $data);        
+        $this->db->insert($this->tables['news_home_page_configuration'],$data);        
+        $id = $this->db->insert_id();
+        if($id > 0)
+        {
+            $this->set_message('news_home_page_configuration_successful');
+        }
+        else
+        {
+            $this->set_error('news_home_page_configuration_fail');
+        }
+        return isset($id)?$id:FALSE;
+    }    
     /*
      * This method will store latest news configuration
      * @param $data, latest news configuration data
@@ -137,42 +364,13 @@ class Admin_news_model extends Ion_auth_model
         $this->db->where($this->news_category_identity_column,$identity);
         return $this->db->count_all_results($this->tables['news_category']) > 0;
     }
-/*
- * @Author Rashida Sultana
- * this method delete news category
- */
-    public function remove_news_category($category_id)
-    {
-       if(!isset($category_id) || $category_id <= 0)
-        {
-            $this->set_error('delete_news_category_fail');
-            return FALSE;
-        }
-        $this->db->where('id', $category_id);
-        $this->db->delete($this->tables['news_category']);
-        
-        if ($this->db->affected_rows() == 0) {
-            $this->set_error('delete_news_category_fail');
-            return FALSE;
-        }
-        $this->set_message('delete_news_category_successful');
-        return TRUE;
-    }
+    
     
     public function get_all_news_category()
     {
         return $this->db->select("*")
                 ->from( $this->tables['news_category'])
                 ->get();
-    }
-    
-    public function get_news_category_info($id)
-    {
-        $this->db->where($this->tables['news_category'].'.id',$id);
-        
-        return $this->db->select("*")
-                    ->from($this->tables['news_category'])
-                    ->get();
     }
     
     //written by omar faruk
@@ -240,27 +438,6 @@ class Admin_news_model extends Ion_auth_model
         
         return True;
     }
-/*
- * @Author Rashida Sultana
- * this method delete news sub category
- */
-    public function remove_news_sub_category($sub_category_id)
-    {
-       if(!isset($sub_category_id) || $sub_category_id <= 0)
-        {
-            $this->set_error('delete_news_sub_category_fail');
-            return FALSE;
-        }
-        $this->db->where('id', $sub_category_id);
-        $this->db->delete($this->tables['news_sub_category']);
-        
-        if ($this->db->affected_rows() == 0) {
-            $this->set_error('delete_news_sub_category_fail');
-            return FALSE;
-        }
-        $this->set_message('delete_news_sub_category_successful');
-        return TRUE;
-    }
     
     public function get_all_news_sub_category($news_category_id = 0)
     {
@@ -274,15 +451,6 @@ class Admin_news_model extends Ion_auth_model
                     ->join($this->tables['news_category'],  $this->tables['news_sub_category'].'.news_category_id='.$this->tables['news_category'].'.id')
                     ->get();
         
-    }
-    
-    public function get_news_sub_category_info($sub_category_id)
-    {
-        $this->db->where($this->tables['news_sub_category'].'.id',$sub_category_id);
-        return $this->db->select($this->tables['news_sub_category'].'.*,'.$this->tables['news_category'].'.title as news_category_title')
-                    ->from($this->tables['news_sub_category'])
-                    ->join($this->tables['news_category'],  $this->tables['news_sub_category'].'.news_category_id='.$this->tables['news_category'].'.id')
-                    ->get();
     }
     
     /******News********/
@@ -335,27 +503,6 @@ class Admin_news_model extends Ion_auth_model
             return FALSE;
         }
         $this->db->trans_commit();
-        return TRUE;
-    }
-    /*
-     * Author Rashida on 14th february 2015
-     * this method delete news 
-     */
-    public function remove_news($news_id)
-    {
-       if(!isset($news_id) || $news_id <= 0)
-        {
-            $this->set_error('delete_news_fail');
-            return FALSE;
-        }
-        $this->db->where('id', $news_id);
-        $this->db->delete($this->tables['news']);
-        
-        if ($this->db->affected_rows() == 0) {
-            $this->set_error('delete_news_fail');
-            return FALSE;
-        }
-        $this->set_message('delete_news_successful');
         return TRUE;
     }
     
@@ -464,129 +611,6 @@ class Admin_news_model extends Ion_auth_model
         return $this->db->select($this->tables['news'].'.id as news_id,'.$this->tables['news'].'.*')
                     ->from($this->tables['news'])
                     ->get();
-    }
-    
-    /*
-     * This method will add configuration of a news category
-     * @Author Nazmul on 14th June 2014
-     * news_list column of news_category_configuration table is a json object with the following attributes
-     * region_id, id of a region
-     * news_id, id of a news
-     * is_ignored, a flag indicating whether that news is ignored or not for that region
-     */
-    public function add_news_category_configuration($data)
-    {
-        $data = $this->_filter_data($this->tables['news_category_configuration'], $data);
-        
-        $this->db->insert($this->tables['news_category_configuration'],$data);
-        
-        $id = $this->db->insert_id();
-        
-        return isset($id)?$id:FALSE;
-    }
-    
-    /*
-     * This method will return last inserted news category configuration of a date
-     * If the entry doesnot exist then it will return latest entry of previous date if exists
-     * @parameter $news_category_id, news category id
-     * @param $date, news category configuration date of news category id
-     * @Author Nazmul on 14th June 2014
-     */
-    public function get_news_category_configuration($news_category_id, $date)
-    {
-        $this->db->where('selected_date <=',$date);
-        $this->db->where('news_category_id',$news_category_id);
-        
-        return $this->db->select('*')
-                    ->from($this->tables['news_category_configuration'])
-                    ->order_by('id','desc')
-                    ->limit(1)
-                    ->get();
-    }
-    
-    /*
-     * This method will add configuration of a news sub category
-     * @Author Nazmul on 14th June 2014
-     * news_list column of news_category_configuration table is a json object with the following attributes
-     * region_id, id of a region
-     * news_id, id of a news
-     * is_ignored, a flag indicating whether that news is ignored or not for that region
-     */
-    public function add_news_sub_category_configuration($data)
-    {
-        $data = $this->_filter_data($this->tables['news_sub_category_configuration'], $data);
-        
-        $this->db->insert($this->tables['news_sub_category_configuration'],$data);
-        
-        $id = $this->db->insert_id();
-        
-        return isset($id)?$id:FALSE;
-    }
-    
-    /*
-     * This method will return last inserted news sub category configuration of a date
-     * If the entry doesnot exist then it will return latest entry of previous date if exists
-     * @parameter $news_sub_category_id, news sub category id
-     * @param $date, news sub category configuration date of news sub category id
-     * @Author Nazmul on 14th June 2014
-     */
-    public function get_news_sub_category_configuration($news_sub_category_id, $date)
-    {
-        $this->db->where('selected_date <=',$date);
-        $this->db->where('news_sub_category_id',$news_sub_category_id);
-        
-        return $this->db->select('*')
-                    ->from($this->tables['news_sub_category_configuration'])
-                    ->order_by('id','desc')
-                    ->get();
-    }
-    
-    /*
-     * This method will return first NEWS_CONFIGURATION_COUNTER number of news
-     * @Author Nazmul on 14th June 2014
-     */
-    public function get_news_list_initial_configuration()
-    {
-        return $this->db->select($this->tables['news'].'.id as news_id, '.$this->tables['news'].'.*')
-                    ->from($this->tables['news'])
-                    ->limit(NEWS_CONFIGURATION_COUNTER)
-                    ->get();
-    }
-    
-    /*
-     * This method will add configuration of a news home page
-     * @Author Nazmul on 14th June 2014
-     * news_list column of news_category_configuration table is a json object with the following attributes
-     * region_id, id of a region
-     * news_id, id of a news
-     */
-    public function add_news_home_page_configuration($data)
-    {
-        $data = $this->_filter_data($this->tables['news_home_page_configuration'], $data);
-        
-        $this->db->insert($this->tables['news_home_page_configuration'],$data);
-        
-        $id = $this->db->insert_id();
-        
-        return isset($id)?$id:FALSE;
-    }
-    
-    /*
-     * This method will return last inserted news home page configuration of a date
-     * If the entry doesnot exist then it will return latest entry of previous date if exists
-     * @param $date, news home page configuration date
-     * @Author Nazmul on 14th June 2014
-     */
-    public function get_news_home_page_configuration($date)
-    {
-        $this->db->where('selected_date <=',$date);
-        $result = $this->db->select('*')
-                        ->from($this->tables['news_home_page_configuration'])
-                        ->order_by('id', 'desc')
-                        ->limit(1)
-                        ->get();
-        return $result;
-                
     }
     
     /*

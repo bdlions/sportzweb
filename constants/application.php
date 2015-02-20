@@ -13,7 +13,7 @@
     define("APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH",                       "admin/application/xstream_banter");
     define("APPLICATION_HEALTHY_RECIPES_HOME_PAGE_PATH",                      "admin/healthyrecipes");
     define("APPLICATION_SERVICE_DIRECTORY_HOME_PAGE_PATH",                    "admin/servicedirectory");
-    define("APPLICATION_NEWS_HOME_PAGE_PATH",                                 "admin/newsapp");
+    define("APPLICATION_NEWS_HOME_PAGE_PATH",                                 "admin/applications_news");
     define("APPLICATION_BLOG_HOME_PAGE_PATH",                                 "admin/blogapp");
     define("APPLICATION_BMI_CALCULATOR_HOME_PAGE_PATH",                       "admin/bmicalculator");
     define("APPLICATION_PHOTOGRAPHY_HOME_PAGE_PATH",                          "admin/photography");

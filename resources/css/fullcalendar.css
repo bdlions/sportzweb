@@ -976,6 +976,11 @@ be a descendant of the grid when it is being dragged.
     content: "=";
 }
 /*CUSTOME CSS*/
-.fc-time, .fc-title{
+/*.fc-time, .fc-title{
     font-size: 12px;
+}*/
+
+.fc-time, .fc-more, .fc-title, .fc-day-number, .fc-content, .fc-day-header
+{ 
+    font-size: 15px !important 
 }

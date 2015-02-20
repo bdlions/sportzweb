@@ -26,7 +26,7 @@
             <div class="row form-group">
                 <?php if($allow_configuration){ ?>
                 <div class ="col-sm-2">
-                    <a href="<?php echo base_url();?>admin/applications_news/config_news">
+                    <a href="<?php echo base_url();?>admin/applications_news/configure_news_home_page">
                         <button id="button_manage_recipe_for_home_page" value="" class="btn button-custom ">
                             Manage Home Page
                         </button>
@@ -100,7 +100,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody_news_category_list">
-                            <?php foreach($news_category as $category):?>
+                            <?php foreach($news_category_list as $category){?>
                             <tr>
                                 <td><a href="<?php echo base_url().'admin/applications_news/news_sub_category/'.$category['id']?>"><?php echo $category['id'];?></a></td>
                                 <td><div id="news_title_<?php echo $category['id'];?>"><?php echo $category['title'];?></div></td>
@@ -120,23 +120,25 @@
                                 <?php } ?>
                                 <?php if($allow_configuration){ ?>
                                 <td>                                   
-                                    <a href="<?php echo base_url().'admin/applications_news/config_news_for_category/'.$category['id']?>">
+                                    <a href="<?php echo base_url().'admin/applications_news/configure_news_category_page/'.$category['id']?>">
                                         Config
                                     </a>
                                 </td>
                                 <?php } ?>
                             </tr>
-                            <?php endforeach ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="btn-group" style="padding-left: 10px;">
-                <input type="button" style="width:120px;" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
+            <div class="row col-md-12">
+                <div class="col-md-2 btn-group">
+                    <input type="button" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
+                </div>
             </div>
         </div>        
     </div>
 </div>
 <?php $this->load->view("admin/applications/news_app/modal_create_news_category"); ?>
 <?php $this->load->view("admin/applications/news_app/modal_edit_news_category"); ?>
-<?php $this->load->view("admin/applications/news_app/modal_delete_news_category"); ?>
+<?php $this->load->view("admin/applications/news_app/modal_delete_news_category");

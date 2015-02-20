@@ -30,6 +30,60 @@ class News_app_model extends Ion_auth_model {
                     ->from($this->tables['news'])
                     ->get();
     }
+    /*
+     * This method will return last inserted news home page configuration of a date
+     * If the entry doesnot exist then it will return latest entry of previous date if exists
+     * @param $date, news home page configuration date
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_home_page_configuration($date)
+    {
+        $this->db->where('selected_date <=',$date);
+        $result = $this->db->select('*')
+                        ->from($this->tables['news_home_page_configuration'])
+                        ->order_by('id', 'desc')
+                        ->limit(1)
+                        ->get();
+        return $result;
+    }
+    /*
+     * This method will return last inserted news category configuration of a date
+     * If the entry doesnot exist then it will return latest entry of previous date if exists
+     * @parameter $news_category_id, news category id
+     * @param $date, news category configuration date of news category id
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_category_configuration($news_category_id, $date)
+    {
+        $this->db->where('selected_date <=',$date);
+        $this->db->where('news_category_id',$news_category_id);
+        
+        return $this->db->select('*')
+                    ->from($this->tables['news_category_configuration'])
+                    ->order_by('id','desc')
+                    ->limit(1)
+                    ->get();
+    }
+    /*
+     * This method will return last inserted news sub category configuration of a date
+     * If the entry doesnot exist then it will return latest entry of previous date if exists
+     * @parameter $news_sub_category_id, news sub category id
+     * @param $date, news sub category configuration date of news sub category id
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_sub_category_configuration($news_sub_category_id, $date)
+    {
+        $this->db->where('selected_date <=',$date);
+        $this->db->where('news_sub_category_id',$news_sub_category_id);
+        
+        return $this->db->select('*')
+                    ->from($this->tables['news_sub_category_configuration'])
+                    ->order_by('id','desc')
+                    ->limit(1)
+                    ->get();
+    }
+    
+    
     
     /*
      * This method will return breaking news configuration list
@@ -54,25 +108,51 @@ class News_app_model extends Ion_auth_model {
                     ->order_by($this->tables['app_news_latest_news_configuration'].'.id','desc')
                     ->get();
     }
-    
     /*
-     * This method will return all service categories
-     * @Author Redwan Khaled
-     * @Created on 27th April 2014
-     */
-    
-    public function get_all_news_category()
+     * This method will return all news categories
+     * @Author Nazmul on 20th February 2015
+     */    
+    public function get_news_categories()
     {
-        return $this->db->select("*")
+        return $this->db->select($this->tables['news_category'].".id as news_category_id,".$this->tables['news_category'].'.*')
                     ->from($this->tables['news_category'])
                     ->get();
     }
-    
+    /*
+     * This method will return all news sub categories
+     * @Author Nazmul on 20th February 2015
+     */
+    public function get_news_sub_categories($news_category_id = 0)
+    {
+        if($news_category_id != 0)
+        {
+            $this->db->where($this->tables['news_sub_category'].'.news_category_id',$news_category_id);
+        }
+        
+        return $this->db->select($this->tables['news_sub_category'].'.id as news_sub_category_id,'.$this->tables['news_sub_category'].'.*,'.$this->tables['news_category'].'.title as news_category_title,'.$this->tables['news_sub_category'].'.title as news_sub_category_title')
+                    ->from($this->tables['news_sub_category'])
+                    ->join($this->tables['news_category'],  $this->tables['news_sub_category'].'.news_category_id='.$this->tables['news_category'].'.id')
+                    ->get();
+        
+    }
+    /*
+     * This method will return news info
+     * @param $news_id, news id
+     * @Author Nazmul on 20th February 2015
+     */
     public function get_news_info($news_id)
     {
         $this->db->where($this->tables['news'].'.id',$news_id);
         return $this->db->select($this->tables['news'].'.*,'.$this->tables['news'].'.id as news_id')
                     ->from($this->tables['news'])
+                    ->get();
+    }
+    
+
+    public function get_all_news_category()
+    {
+        return $this->db->select("*")
+                    ->from($this->tables['news_category'])
                     ->get();
     }
     
@@ -93,16 +173,6 @@ class News_app_model extends Ion_auth_model {
                     ->from($this->tables['news_sub_category'])
                     ->get();
     }
-    
-    /*public function get_all_comments($news_id)
-    {
-        $this->db->where($this->tables['news_comments'].'.news_id',$news_id);
-        return $this->db->select($this->tables['news_comments'].'.*,'.$this->tables['news_comments'].'.id as comment_id,'.$this->tables['users'].'.id as user_id,'.$this->tables['users'].'.*,'.$this->tables['basic_profile'].'.*')
-                    ->from($this->tables['news_comments'])
-                    ->join($this->tables['users'],  $this->tables['users'].'.id='.$this->tables['news_comments'].'.user_id')
-                    ->join($this->tables['basic_profile'],  $this->tables['users'].'.id='.$this->tables['basic_profile'].'.user_id')
-                    ->get();
-    }*/
     
     public function get_username($id)
     {
@@ -226,66 +296,6 @@ class News_app_model extends Ion_auth_model {
                     ->get();
     }
     
-    /*
-     * This method will return last inserted news home page configuration of a date
-     * If the entry doesnot exist then it will return latest entry of previous date if exists
-     * @param $date, news home page configuration date
-     * @Author Nazmul on 14th June 2014
-     */
-    public function get_news_home_page_configuration($date)
-    {
-        $this->db->where('selected_date <=',$date);
-        $result = $this->db->select('*')
-                        ->from($this->tables['news_home_page_configuration'])
-                        ->order_by('id', 'desc')
-                        ->limit(1)
-                        ->get();
-        return $result;
-    }
-    
-    /*
-     * This method will return last inserted news sub category configuration of a date
-     * If the entry doesnot exist then it will return latest entry of previous date if exists
-     * @parameter $news_sub_category_id, news sub category id
-     * @param $date, news sub category configuration date of news sub category id
-     * @Author Nazmul on 14th June 2014
-     */
-    public function get_news_sub_category_configuration($news_sub_category_id, $date)
-    {
-        $this->db->where('selected_date <=',$date);
-        $this->db->where('news_sub_category_id',$news_sub_category_id);
-        
-        return $this->db->select('*')
-                    ->from($this->tables['news_sub_category_configuration'])
-                    ->order_by('id','desc')
-                    ->limit(1)
-                    ->get();
-    }
-    
-    /*
-     * This method will return last inserted news category configuration of a date
-     * If the entry doesnot exist then it will return latest entry of previous date if exists
-     * @parameter $news_category_id, news category id
-     * @param $date, news category configuration date of news category id
-     * @Author Nazmul on 14th June 2014
-     */
-    public function get_news_category_configuration($news_category_id, $date)
-    {
-        $this->db->where('selected_date <=',$date);
-        $this->db->where('news_category_id',$news_category_id);
-        
-        return $this->db->select('*')
-                    ->from($this->tables['news_category_configuration'])
-                    ->order_by('id','desc')
-                    ->limit(1)
-                    ->get();
-    }
-    
-    
-    /*
-     * This method will return first NEWS_CONFIGURATION_COUNTER number of news
-     * @Author Nazmul on 14th June 2014
-     */
     public function get_news_list_initial_configuration()
     {
         return $this->db->select($this->tables['news'].'.id as news_id, '.$this->tables['news'].'.*')
@@ -293,13 +303,4 @@ class News_app_model extends Ion_auth_model {
                     ->limit(NEWS_CONFIGURATION_COUNTER)
                     ->get();
     }
-    
-    
-//    public function get_news_sub_category_info($sub_category_id)
-//    {
-//        $this->db->where('id',$sub_category_id);
-//        return $this->db->select('*')
-//                    ->from($this->tables['news_sub_category'])
-//                    ->get();
-//    }
 }

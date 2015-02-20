@@ -79,6 +79,215 @@ class Admin_news{
         return $news_list;
     }
     
+        /*
+     * This method will return news home page configuration info
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_home_page_configuration()
+    {
+        $show_advertise = 0;
+        $region_id_news_id_map = array();
+        $news_id_news_info_map = array();      
+        $present_date = $this->utils->get_current_date_db();
+        $news_id_list = array();
+        $result = $this->admin_news_model->get_news_home_page_configuration($present_date)->result_array();
+        if(!empty($result)) {
+            $result = $result[0];            
+            $show_advertise = $result['show_advertise'];
+            $news_list = json_decode($result['news_list']);            
+            foreach($news_list as $news)
+            {
+                if(!in_array($news->news_id, $news_id_list))
+                {
+                    $news_id_list[] = $news->news_id;
+                }
+                $region_id_news_id_map[$news->region_id] = $news->news_id;
+            }
+            $news_list_array = $this->admin_news_model->get_news_list($news_id_list)->result_array();
+        }
+        else 
+        {
+            $news_list_array = $this->admin_news_model->get_news_list_initial_configuration()->result_array();
+            for($region_counter = 0; $region_counter < NEWS_CONFIGURATION_COUNTER ; $region_counter++)
+            {
+                if(isset($news_list_array[$region_counter])){
+                    $region_id_news_id_map[$region_counter] = $news_list_array[$region_counter]['news_id'];
+                }  else {
+                    $region_id_news_id_map[$region_counter] = null;
+                }
+            }
+        }        
+        foreach($news_list_array as $news_info)
+        {
+             $news_id_news_info_map[$news_info['news_id']] = $news_info;
+        }        
+        $response = array(
+            'region_id_news_id_map' => $region_id_news_id_map,
+            'news_id_news_info_map' => $news_id_news_info_map,
+            'show_advertise' => $show_advertise
+        );        
+        return $response;
+    }
+    
+    /*
+     * This method will return news category page configuration info
+     * @param $news_category_id, news category id
+     * @Author Nazmul on 20th February 2015
+     */
+    public function get_news_category_page_configuration($news_category_id)
+    {
+        $show_advertise = 0;
+        $region_id_news_id_map = array();
+        $region_id_is_news_ignored_map = array();
+        $news_id_news_info_map = array();
+        $present_date = $this->utils->get_current_date_db();
+        $news_id_list = array();
+        $result = $this->admin_news_model->get_news_category_page_configuration($news_category_id,$present_date)->result_array();
+        if(!empty($result)) {
+            $result = $result[0];            
+            $show_advertise = $result['show_advertise'];
+            $news_list = json_decode($result['news_list']);            
+            foreach($news_list as $news)
+            {
+                if(!in_array($news->news_id, $news_id_list))
+                {
+                    $news_id_list[] = $news->news_id;
+                }                
+                $region_id_news_id_map[$news->region_id] = $news->news_id;
+                $region_id_is_news_ignored_map[$news->region_id] = $news->is_ignored;
+            }
+            $news_list_array = $this->admin_news_model->get_news_list($news_id_list)->result_array();
+        }
+        else 
+        {
+            $news_list_array = $this->admin_news_model->get_news_home_page_configuration($present_date)->result_array();
+            if(!empty($news_list_array))
+            {
+                $news_list_array = $news_list_array[0];                
+                $show_advertise = $news_list_array['show_advertise'];
+                $news_list = json_decode($news_list_array['news_list']);            
+                foreach($news_list as $news)
+                {
+                    if(!in_array($news->news_id, $news_id_list))
+                    {
+                        $news_id_list[] = $news->news_id;
+                    }                
+                    $region_id_news_id_map[$news->region_id] = $news->news_id;
+                }
+                $news_list_array = $this->admin_news_model->get_news_list($news_id_list)->result_array();                
+            }
+            else
+            {
+                $news_list_array = $this->admin_news_model->get_news_list_initial_configuration()->result_array();
+            }
+            for($region_counter = 0; $region_counter < NEWS_CONFIGURATION_COUNTER ; $region_counter++)
+            {
+                if(isset($news_list_array[$region_counter])){
+                    $region_id_news_id_map[$region_counter] = $news_list_array[$region_counter]['news_id'];
+                    $region_id_is_news_ignored_map[$region_counter] = 0;
+                }  
+                else {
+                    $region_id_news_id_map[$region_counter] = null;
+                    $region_id_is_news_ignored_map[$region_counter] = 1;
+                }                
+            }
+        }        
+        foreach($news_list_array as $news_info)
+        {
+             $news_id_news_info_map[$news_info['news_id']] = $news_info;
+        }
+        $response = array(
+            'region_id_news_id_map' => $region_id_news_id_map,
+            'region_id_is_news_ignored_map' => $region_id_is_news_ignored_map,
+            'news_id_news_info_map' => $news_id_news_info_map,
+            'show_advertise' => $show_advertise
+        );
+        return $response;
+    }
+    /*
+     * This method will return news sub category page configuration info
+     * @param $news_sub_category_id, news sub category id
+     * @Author Nazmul on 14th June 2014
+     */
+    public function get_news_sub_category_page_configuration($news_sub_category_id)
+    {
+        $show_advertise = 0;
+        $region_id_news_id_map = array();
+        $region_id_is_news_ignored_map = array();
+        $news_id_news_info_map = array();
+        $present_date = $this->utils->get_current_date();
+        $news_id_list = array();
+        $result = $this->admin_news_model->get_news_sub_category_page_configuration($news_sub_category_id,$present_date)->result_array();
+        if(!empty($result)) {
+            $result = $result[0];
+            
+            $show_advertise = $result['show_advertise'];
+            $news_list = json_decode($result['news_list']);
+            
+            foreach($news_list as $news)
+            {
+                if(!in_array($news->news_id, $news_id_list))
+                {
+                    $news_id_list[] = $news->news_id;
+                }                
+                $region_id_news_id_map[$news->region_id] = $news->news_id;
+                $region_id_is_news_ignored_map[$news->region_id] = $news->is_ignored;
+            }
+            $news_list_array = $this->admin_news_model->get_news_list($news_id_list)->result_array();
+        }
+        else 
+        {
+            $news_list_array = $this->admin_news_model->get_news_home_page_configuration($present_date)->result_array();
+            if(!empty($news_list_array))
+            {
+                $news_list_array = $news_list_array[0];
+                
+                $show_advertise = $news_list_array['show_advertise'];
+                $news_list = json_decode($news_list_array['news_list']);
+            
+                foreach($news_list as $news)
+                {
+                    if(!in_array($news->news_id, $news_id_list))
+                    {
+                        $news_id_list[] = $news->news_id;
+                    }                
+                    $region_id_news_id_map[$news->region_id] = $news->news_id;
+                }
+                $news_list_array = $this->admin_news_model->get_news_list($news_id_list)->result_array();
+                
+            }
+            else
+            {
+                $news_list_array = $this->admin_news_model->get_news_list_initial_configuration()->result_array();
+            }
+
+            for($region_counter = 0; $region_counter < NEWS_CONFIGURATION_COUNTER ; $region_counter++)
+            {
+                if(isset($news_list_array[$region_counter])){
+                    $region_id_news_id_map[$region_counter] = $news_list_array[$region_counter]['news_id'];
+                    $region_id_is_news_ignored_map[$region_counter] = 0;
+                }  
+                else {
+                    $region_id_news_id_map[$region_counter] = null;
+                    $region_id_is_news_ignored_map[$region_counter] = 1;
+                }
+            }
+        }
+        
+        foreach($news_list_array as $news_info)
+        {
+             $news_id_news_info_map[$news_info['news_id']] = $news_info;
+        }
+
+        $result = array(
+            'region_id_news_id_map' => $region_id_news_id_map,
+            'region_id_is_news_ignored_map' => $region_id_is_news_ignored_map,
+            'news_id_news_info_map' => $news_id_news_info_map,
+            'show_advertise' => $show_advertise
+        );
+        return $result;
+    }
+    
     public function get_news_category_info_for_update($news_category_id,$news_id)
     {
         $news_category = $this->admin_news_model->get_news_category_info($news_category_id)->result_array();
@@ -98,21 +307,6 @@ class Admin_news{
         return $value;
     }
     
-//    public function get_news_sub_category_info($id)
-//    {
-//        $sub_category = $this->admin_news_model->get_news_sub_category_info($id)->result_array();
-//        $sub_category = $sub_category[0];
-//        
-//        $news = json_decode($sub_category['news_list']);
-//        
-//        for($i=0;$i<count($news);$i++)
-//        {
-//            $news[$i] = $this->admin_news_model->get_news_info($news[$i])->result_array();
-//        }
-//        $sub_category['news_list'] = $news;
-//        return $sub_category;
-//    }
-    
     public function get_news_sub_category_info_for_update($news_sub_category_id,$news_id)
     {
         $news_sub_category = $this->admin_news_model->get_news_sub_category_info($news_sub_category_id)->result_array();
@@ -131,23 +325,7 @@ class Admin_news{
         }
         return $value;
     }
-    
-    public function config_news($news_list = 0)
-    {
-        
-        if($news_list == 0){
-            $news_list = $this->admin_news_model->get_all_news()->result_array();
-        }
 
-        return $news_list;
-    }
-    
-    /*
-     * This method will return news list to be displayed on home page
-     * @Author Nazmul
-     * @Created on 30 April 2014
-     * modifoed by Omar faRUK
-     */
     public function get_home_page_news_list()
     {
         $present_date = $this->utils->get_current_date();
@@ -220,73 +398,7 @@ class Admin_news{
         
         return $region_id_news_info_map;
     }
-    
-    /*
-     * This method will return news home page configuration info
-     * @Author Nazmul on 14th June 2014
-     */
-    public function get_news_home_page_configuration()
-    {
-        $show_advertise = 0;
-        $region_id_news_id_map = array();
-        $news_id_news_info_map = array();
-        //read news_home_page_configuration table
-        //if not then get first NEWS_CONFIGURATION_COUNTER number of entries
-        //fill up $result array based on any one from the above 2 points
-        
-        $present_date = $this->utils->get_current_date();
-        $news_id_list = array();
-        $result = $this->admin_news_model->get_news_home_page_configuration($present_date)->result_array();
-        
-        if(!empty($result)) {
-            $result = $result[0];
-            
-            $show_advertise = $result['show_advertise'];
-            $news_list = json_decode($result['news_list']);
-            
-            foreach($news_list as $news)
-            {
-                if(!in_array($news->news_id, $news_id_list))
-                {
-                    $news_id_list[] = $news->news_id;
-                }
-                $region_id_news_id_map[$news->region_id] = $news->news_id;
-            }
-            $news_list_array = $this->admin_news_model->get_news_list($news_id_list)->result_array();
-        }
-        else 
-        {
-            $news_list_array = $this->admin_news_model->get_news_list_initial_configuration()->result_array();
-            
-            for($region_counter = 0; $region_counter < NEWS_CONFIGURATION_COUNTER ; $region_counter++)
-            {
-                if(isset($news_list_array[$region_counter])){
-                $region_id_news_id_map[$region_counter] = $news_list_array[$region_counter]['news_id'];
-                }  else {
-                    $region_id_news_id_map[$region_counter]=null;
-                }
-            }
-        }
-        
-        foreach($news_list_array as $news_info)
-        {
-             $news_id_news_info_map[$news_info['news_id']] = $news_info;
-        }
-        
-        $result = array(
-            'region_id_news_id_map' => $region_id_news_id_map,
-            'news_id_news_info_map' => $news_id_news_info_map,
-            'show_advertise' => $show_advertise
-        );
-        
-        return $result;
-    }
-    
-    /*
-     * This method will return news category configuration info
-     * @param $news_category_id, news category id
-     * @Author Nazmul on 14th June 2014
-     */
+
     public function get_news_category_configuration($news_category_id)
     {
         $show_advertise = true;
@@ -365,11 +477,6 @@ class Admin_news{
         return $result;
     }
     
-    /*
-     * This method will return news sub category configuration info
-     * @param $news_sub_category_id, news sub category id
-     * @Author Nazmul on 14th June 2014
-     */
     public function get_news_sub_category_configuration($news_sub_category_id)
     {
         $show_advertise = true;

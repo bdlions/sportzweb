@@ -85,7 +85,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Recipe List</h4>
+                <h4 class="modal-title" id="myModalLabel">News List</h4>
             </div>
             <div class="modal-body" style="max-height: 300px; overflow-y: auto;">
                 <div class="row">
@@ -99,7 +99,7 @@
                             </thead>
                             
                             <tbody id="tbody_news_list">
-                            <?php foreach ($news_list_old as $key => $news) :?>
+                            <?php foreach ($news_list as $key => $news) :?>
                                 <tr>
                                     <td><input id="<?php echo $news['id'] ?>" name="checkbox[]" class="" type="checkbox" /></td>
                                     <td id="<?php echo $news['id'] ?>"><?php echo html_entity_decode(html_entity_decode($news['headline'])); ?></td>

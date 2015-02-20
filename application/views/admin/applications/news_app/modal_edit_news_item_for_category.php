@@ -104,7 +104,7 @@
                             </thead>
                             
                             <tbody id="tbody_news_list">
-                            <?php foreach ($news_list_old as $key => $news) :?>
+                            <?php foreach ($news_list as $key => $news) :?>
                                 <tr>
                                     <td><input id="<?php echo $news['id'] ?>" name="checkbox[]" class="" type="checkbox" /></td>
                                     <td id="<?php echo $news['id'] ?>"><?php echo html_entity_decode(html_entity_decode($news['headline'])); ?></td>

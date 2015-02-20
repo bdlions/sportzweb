@@ -64,7 +64,7 @@
                                     <td><button id="button_delete_news_category_<?php echo $sub_category['id'];?>" onclick="open_modal_delete_confirm('<?php echo $sub_category['id'];?>')" value="" class="form-control btn pull-right">Delete</button></td>
                                     <?php } ?>
                                     <?php if($allow_configuration){ ?>
-                                    <td><a href="<?php echo base_url().'admin/applications_news/config_news_for_sub_category/'.$sub_category['id']?>">Config</a></td>
+                                    <td><a href="<?php echo base_url().'admin/applications_news/configure_news_subcategory_page/'.$sub_category['id']?>">Config</a></td>
                                     <?php } ?>
                                 </tr>
                             <?php endforeach;?>
