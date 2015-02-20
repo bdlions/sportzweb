@@ -1801,7 +1801,7 @@ CREATE TABLE IF NOT EXISTS `app_sp_match_predictions` (
   KEY `app_sp_match_predictions_matches1_idx` (`match_id`)
   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `app_sp_match_predictions`
-	ADD CONSTRAINT `app_sp_match_predictions_matches1` FOREIGN KEY(`match_id`) REFERENCES `app_sp_matches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_sp_match_predictions_matches1` FOREIGN KEY(`match_id`) REFERENCES `app_sp_matches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE IF NOT EXISTS `app_sp_configure_homepage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sports_id` int(11) unsigned NOT NULL,
