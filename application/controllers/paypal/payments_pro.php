@@ -63,8 +63,8 @@ class Payments_pro extends CI_Controller {
 
     function Do_authorization() {
         $DAFields = array(
-            'transactionid' => '', // Required.  The value of the order's transaction ID number returned by PayPal.  
-            'amt' => '', // Required. Must have two decimal places.  Decimal separator must be a period (.) and optional thousands separator must be a comma (,)
+            'transactionid' => '0P4099584P0758723', // Required.  The value of the order's transaction ID number returned by PayPal.  
+            'amt' => '100', // Required. Must have two decimal places.  Decimal separator must be a period (.) and optional thousands separator must be a comma (,)
             'transactionentity' => '', // Type of transaction to authorize.  The only allowable value is Order, which means that the transaction represents a customer order that can be fulfilled over 29 days.
             'currencycode' => '', // Three-character currency code.
             'msgsubid' => ''      // A message ID used for idempotence to uniquely identify a message.
@@ -75,9 +75,11 @@ class Payments_pro extends CI_Controller {
 
         if (!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])) {
             $errors = array('Errors' => $PayPalResult['ERRORS']);
-            $this->load->view('paypal_error', $errors);
+            //$this->load->view('paypal_error', $errors);
+            var_dump($errors);
         } else {
             // Successful call.  Load view or whatever you need to do here.	
+            print_r($PayPalResult);
         }
     }
 
@@ -337,7 +339,9 @@ class Payments_pro extends CI_Controller {
     }
 
     function Do_direct_payment_demo() {
-        $amount = $this->input->post('amount');
+        //$amount = $this->input->post('amount');
+        $amount = 100;
+        
         $DPFields = array(
             'paymentaction' => 'Sale', // How you want to obtain payment.  Authorization indidicates the payment is a basic auth subject to settlement with Auth & Capture.  Sale indicates that this is a final sale for which you are requesting payment.  Default is Sale.
             'ipaddress' => $_SERVER['REMOTE_ADDR'], // Required.  IP address of the payer's browser.
@@ -346,7 +350,7 @@ class Payments_pro extends CI_Controller {
 
         $CCDetails = array(
             'creditcardtype' => 'Visa', // Required. Type of credit card.  Visa, MasterCard, Discover, Amex, Maestro, Solo.  If Maestro or Solo, the currency code must be GBP.  In addition, either start date or issue number must be specified.
-            'acct' => '4032032716273062', // Required.  Credit card number.  No spaces or punctuation.  
+            'acct' => '4032033755297152', // Required.  Credit card number.  No spaces or punctuation.  
             'expdate' => '012020', // Required.  Credit card expiration date.  Format is MMYYYY
             'cvv2' => '123', // Requirements determined by your PayPal account settings.  Security digits for credit card.
             'startdate' => '', // Month and year that Maestro or Solo card was issued.  MMYYYY
@@ -354,7 +358,7 @@ class Payments_pro extends CI_Controller {
         );
 
         $PayerInfo = array(
-            'email' => 'alamgirkabir7-buyer@gmail.com', // Email address of payer.
+            'email' => 'member@sportzweb.com', // Email address of payer.
             'payerid' => '', // Unique PayPal customer ID for payer.
             'payerstatus' => '', // Status of payer.  Values are verified or unverified
             'business' => 'Testers, LLC'        // Payer's business name.
@@ -445,9 +449,10 @@ class Payments_pro extends CI_Controller {
             $this->data['errors'] = $errors;
             $this->template->load("templates/profile_setting_tmpl",'paypal/paypal_error', $this->data );
         } else {
-            redirect('paypal/payments_pro/Mass_pay','refresh');
+            //redirect('paypal/payments_pro/Mass_pay','refresh');
             //redirect("paypal/payments_pro/Set_express_checkout", 'refresh');
-            //print_r($PayPalResult);
+            print_r($PayPalResult);
+            //$this->Do_authorization( $PayPalResult['TRANSACTIONID']);
         }
     }
 
