@@ -144,30 +144,6 @@ class Score_prediction extends Role_Controller{
 
     }
     
-    public function post_vote() {
-        $match_id = $this->input->post('match_id');
-        $user_prediction = $this->input->post('team_id');
-        
-        //get vote
-        $prediction_info = $this->score_prediction_library->get_prediction_info_for_match($match_id)->result_array();
-        $predictions = json_decode($prediction_info['prediction_list']);
-        
-        //checking pending
-        
-        //append
-        $predictions[] = array(
-            'user_id' => $this->session->userdata('user_id'),
-            'prediction' => $user_prediction
-        );
-        
-        //update vote
-        $update_info = $this->score_prediction_library->update_prediction_info_for_match($match_id, $predictions);
-        if($update_info !== FALSE){
-            $response['message'] = $this->score_prediction_library->messages_alert();
-        }else{
-            $response['message'] = $this->score_prediction_library->errors_alert();
-        }
-    } 
 
     public function get_match_prediction_list(){
         $tournament_id = $this->input->post('tournament_id');
@@ -237,35 +213,60 @@ class Score_prediction extends Role_Controller{
         echo json_encode($result_data); return;
     }
     
+    
+    
+    
+    public function post_vote() {
+        $predictions = array();
+        $user_id = $this->session->userdata('user_id');
+//        $match_id = 6;
+//        $user_prediction = (string)MATCH_STATUS_CANCEL;
+        $match_id = $this->input->post('match_id');
+        $user_prediction = $this->input->post('match_status_id');
+        $prediction_info = $this->score_prediction_library->get_prediction_info_for_match($match_id)->result_array();
+        if(isset($prediction_info['prediction_list'])){
+            $predictions = json_decode($prediction_info['prediction_list']);
+            if(!isset($predictions[$user_id])){$predictions[$user_id] = $user_prediction;}
+        }else{
+            $predictions[$user_id] = $user_prediction;
+        }
+        $predictions = json_encode($predictions);
+        $update_info = $this->score_prediction_library->update_prediction_info_for_match($match_id, $predictions);
+        if($update_info !== FALSE){
+            $response['message'] = $this->score_prediction_library->messages_alert();
+        }else{
+            $response['message'] = $this->score_prediction_library->errors_alert();
+        }
+        echo json_encode($response); return;
+    } 
+    
+    
     /*
      * Author Tanveer ahmed
      * @param tournament_id, month
      * responds to ajax call
      */
-    public function get_predictions_for_month()
-    {
+    public function get_predictions_for_month(){
+        $user_id = $this->session->userdata('user_id');
         $tournament_id  = $this->input->post('tournament_id');
         $current_month  = $this->input->post('current_month');
         $next_month     = $this->input->post('next_month');
-        
-//        $where = array(   //test purpose
-//            'date >=' => "2013-01-01",
-//            'date <' => "2016-03-01"
-//        ); $tournament_id = 1;
-        
         $where = array(
             'date >=' => $current_month,
             'date <' => $next_month
         );
         $match_prediction_data = $this->score_prediction_library->where($where)->get_predictions_matches_for_tournament($tournament_id)->result_array();
+        foreach ($match_prediction_data as $key=>$match_data) {
+            if(isset($match_data['prediction_list'][$user_id])){
+                $match_prediction_data[$key]['can_predict'] = 0;
+            } else {$match_prediction_data[$key]['can_predict'] = 1;}
+        }
         $predictions_by_date = array();
         foreach ($match_prediction_data as $value) {
             $predictions_by_date[$value['date']][] = $value;
         }
         ksort($predictions_by_date);
-//        var_dump($predictions_by_date);exit;
         echo json_encode($predictions_by_date); return;
-
     } 
     
     /*
@@ -294,6 +295,9 @@ class Score_prediction extends Role_Controller{
                 'win_home_chance'  =>  $win_home_chance,
                 'draw_game_chance'  =>  $draw_game_chance,
             );
+            
+            //score assign should be done with config gile
+            
             if( $match['status_id'] ==  MATCH_STATUS_UPCOMING || $match['status_id'] ==  MATCH_STATUS_CANCEL  ) {continue;}
             $point_home; $point_away;
             if($match['status_id']==MATCH_STATUS_WIN_HOME){$point_home=3;} elseif ($match['status_id']==MATCH_STATUS_WIN_AWAY){$point_home=0;} elseif ($match['status_id']==MATCH_STATUS_DRAW){$point_home=1;}

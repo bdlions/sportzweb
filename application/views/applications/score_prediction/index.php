@@ -92,28 +92,35 @@
         $('#next_month').val(out_date);
     }
     
-    function confirmation_vote(match_id, team_id){
+    function confirmation_vote(match_id, match_status_id){
         $("#match_id").val(match_id);
-        $("#team_id").val(team_id);
+        $("#match_status_id").val(match_status_id);
         $("#confirmModal").modal("show");
     }
     function post_vote(){
-        var team_id = $("#team_id").val();
+        var match_status_id = $("#match_status_id").val();
         $.ajax({
             type: 'POST',
             url: '<?php echo base_url(); ?>' + "applications/score_prediction/post_vote",
             dataType: 'json',
             data: {
-                team_id: team_id
+                match_status_id: match_status_id
             },
             success: function(data) {
+                alert(data['message']);
                 location.reload();
             }
         });
     }
+    function pred_pressed(pred_butn){
+        var match_id =  ($(pred_butn).data('match_id'));
+        $(pred_butn).parent().parent().siblings('tr[id=prediction_'+match_id+']').toggle("fade", {}, 600);
+//        alert('asdasd');
+    }
     $(function() {
         date_manage();
         bring_tournament_info();
+        bring_prediction_info();
         $( "#dd_tournaments" ).change(function() {
             bring_tournament_info();
             bring_prediction_info();
@@ -135,14 +142,16 @@
             <td style="text-align: center"> {%= prediction['time']%}</td>
             <td style="text-align: left">{%= prediction['team_title_away']%}</td>
             <td>
-                <a style="float: right"><img src="<?php echo base_url();?>resources/images/predict_button.png"></a>
+                {% if (prediction['can_predict'] == 1){ %}
+                <a data-match_id="{%= prediction['match_id']%}" class="prediction_button" onclick="pred_pressed(this)" style="float: right"><img src="<?php echo base_url();?>resources/images/predict_button.png"></a>
+                {% } %}
             </td>
         </tr>
         <tr style="display: none" id="prediction_{%= prediction['match_id']%}">
             <td colspan="4">
                 <div class="col-md-4">
-                    <div class="title">Manchester</div>
-                    <div onclick="confirmation_vote(1, 1)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
+                    <div class="title">{%= prediction['team_title_home']%}</div>
+                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_WIN_HOME?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
                         <div style="background-color: white; height: 44px">
                             <div class="title" style="padding-top: 25%">10%</div>
                         </div>
@@ -150,8 +159,8 @@
                     <input type="hidden" id=""value="">
                 </div>
                 <div class="col-md-4">
-                    <div class="title">Manchester</div>
-                    <div onclick="confirmation_vote(1, 1)"  style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
+                    <div class="title">Draw</div>
+                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_DRAW?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
                         <div style="background-color: white; height: 40px">
                             <div class="title" style="padding-top: 25%">adasd</div>
                         </div>
@@ -159,8 +168,8 @@
                     <input type="hidden" id=""value="">
                 </div>
                 <div class="col-md-4">
-                    <div class="title">Manchester</div>
-                    <div onclick="confirmation_vote(1, 1)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
+                    <div class="title">{%= prediction['team_title_away']%}</div>
+                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_WIN_AWAY?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
                         <div style="background-color: white; height: 14px">
                             <div class="title" style="padding-top: 25%">adasd</div>
                         </div>
@@ -296,7 +305,7 @@
                 <button onclick="post_vote()" type="button" class="btn btn-primary">Yes</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                 <input id="match_id" name="match_id" type="hidden">
-                <input id="team_id" name="team_id" type="hidden">
+                <input id="match_status_id" name="match_status_id" type="hidden">
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

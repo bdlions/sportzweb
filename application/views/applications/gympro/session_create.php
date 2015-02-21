@@ -130,7 +130,7 @@
                                 <div class="col-sm-6">
                                     <select class="form-control" name="repeat">
                                         <?php foreach ($session_repeats as $repeat){ ?>
-                                            <option value="<?php echo $repeat['id']; ?>"><?php echo $repeat['title']; ?></option>
+                                            <option value="<?php echo $repeat['title']; ?>"><?php echo $repeat['title']; ?></option>
                                         <?php }; ?>
                                     </select>
                                 </div>

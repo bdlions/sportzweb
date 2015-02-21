@@ -264,6 +264,14 @@ class Gympro_library {
                     $new_date->modify($repeat_text);
                     $rep_date = $new_date->format('Y-m-d');
                 }
+            } elseif ($session_info['type_id'] == GYMPRO_SINGLE_SESSION_TYPE_ID) {
+                $calendar_session_info = array(
+                    'session_info' => $session_info,
+                    'title' => $session_info['title'],
+                    'start' => $rep_date.'T'.$session_info['start'],
+                    'end' => $rep_date.'T'.$session_info['end']
+                );
+                $session_list[] = $calendar_session_info;
             }
         }
         return $session_list;
