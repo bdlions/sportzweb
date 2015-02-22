@@ -57,15 +57,20 @@ class Score_prediction_model extends Ion_auth_model
         return $result;
     }
     
-
-    ////////////////////////////////////////////////
-    //controller
-    public function test_get_all_teams() {
+    /*
+     * Returns all team names from app_sp_teams
+     * @Author Tanveer Ahmed
+     */
+    public function get_all_teams() {
         return $this->db->select('*')
                         ->from($this->tables['app_sp_teams'])
                         ->get();
     }
-    public function test_get_matches() {
+    
+    /*
+     * Selectively returns matches from app_sp_matches
+     */
+    public function get_matches() {
         if (isset($this->_ion_where)) {
             foreach ($this->_ion_where as $where) {
                 $this->db->where($where);
@@ -77,14 +82,40 @@ class Score_prediction_model extends Ion_auth_model
                         ->get();
     }
     
-    
+    /*
+     * Returns prediction info for a match
+     * @Author Tanveer Ahmed
+     */
     public function get_prediction_info_for_match( $match_id ) {
         $this->db->where('match_id', $match_id);
         return $this->db->select('*')
                         ->from($this->tables['app_sp_match_predictions'])
                         ->get();
     }
-    public function update_prediction_info_for_match($match_id, $prediction_list) {
+    
+    /*
+     * Called when no predictions is under a match
+     * @Aythor Tanveer Ahmed on 22-02-15
+     */
+    public function add_prediction( $additional_data )
+    {
+        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
+        $this->db->insert($this->tables['app_sp_match_predictions'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        if($insert_id > 0){
+            $this->set_message('sp_vote_successful');
+        } else {
+            $this->set_error('sp_vote_fail');
+        }
+        return (isset($insert_id)) ? $insert_id : FALSE;
+        
+    }
+    
+    /*
+     * Appends user predicitons to already existing predictions
+     * @Author Tanveer Ahmed
+     */
+    public function update_prediction($match_id, $prediction_list) {
         $additional_data = array(
             'match_id' => $match_id,
             'prediction_list' => $prediction_list
@@ -92,10 +123,17 @@ class Score_prediction_model extends Ion_auth_model
         $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
         $this->db->update($this->tables['app_sp_match_predictions'], $data, array('match_id' => $match_id));
         if ($this->db->trans_status() === FALSE) {
+            $this->set_error('sp_vote_fail');
             return FALSE;
         }
+        $this->set_message('sp_vote_successful');
         return TRUE;
     }
+    
+    /*
+     * Gets match informations + prediction informations under match
+     * @Author Tanveer Ahmed
+     */
     public function get_predictions_matches_for_tournament( $tournament_id='1' )
     {
         if (isset($this->_ion_where)) {
@@ -111,22 +149,5 @@ class Score_prediction_model extends Ion_auth_model
                         ->join($this->tables['app_sp_teams'].' as home_team_table', 'home_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_home', 'left')
                         ->join($this->tables['app_sp_teams'].' as away_team_table', 'away_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_away', 'left')
                         ->get();
-    }
-    
-    //this method needs re-evaluation
-    public function add_prediction_for_match( $match_id, $prediction )
-    {
-        $all_predictions_under_match = $this->get_predictions_matches_for_tournament($match_id);
-        $all_predictions_under_match = $all_predictions_under_match['prediction_list'];
-        $additional_data = array(
-            'match_id' => $match_id,
-            'prediction_list' => $all_predictions_under_match
-        );
-        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
-        $this->db->update($this->tables['app_gympro_users'], $data, array('match_id' => $match_id));
-        if ($this->db->trans_status() === FALSE) {
-            return FALSE;
-        }
-        return TRUE;
     }
 }

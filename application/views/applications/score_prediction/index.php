@@ -11,6 +11,7 @@
                 $('#pred_table_title').html( $("#dd_tournaments option:selected").text() );
                 $('#tbl_team_standings').html( tmpl('tmpl_table_header') );
                 $('#tbl_team_standings').append( tmpl( 'tmpl_team_standings', data.team_standings) );
+                bring_prediction_info();
             }
         });
     }
@@ -26,6 +27,7 @@
             },
             success: function(data) {
                 $('#tbl_predictions').html( tmpl('tmpl_predictions', data) );
+                console.log(data);
             }
         });
     }
@@ -98,16 +100,18 @@
         $("#confirmModal").modal("show");
     }
     function post_vote(){
+        var match_id = $("#match_id").val();
         var match_status_id = $("#match_status_id").val();
         $.ajax({
             type: 'POST',
             url: '<?php echo base_url(); ?>' + "applications/score_prediction/post_vote",
             dataType: 'json',
             data: {
+                match_id: match_id,
                 match_status_id: match_status_id
             },
             success: function(data) {
-                alert(data['message']);
+                alert(data.message);
                 location.reload();
             }
         });
@@ -115,7 +119,10 @@
     function pred_pressed(pred_butn){
         var match_id =  ($(pred_butn).data('match_id'));
         $(pred_butn).parent().parent().siblings('tr[id=prediction_'+match_id+']').toggle("fade", {}, 600);
-//        alert('asdasd');
+    }
+    function result_pred_pressed(pred_butn){
+        $(pred_butn).parent().parent().next().toggle("fade", {}, 600);
+//        $(pred_butn).parent().parent().siblings('tr[class=result_prediction]').toggle("fade", {}, 600);
     }
     $(function() {
         date_manage();
@@ -145,33 +152,69 @@
                 {% if (prediction['can_predict'] == 1){ %}
                 <a data-match_id="{%= prediction['match_id']%}" class="prediction_button" onclick="pred_pressed(this)" style="float: right"><img src="<?php echo base_url();?>resources/images/predict_button.png"></a>
                 {% } %}
+                {% if (prediction['can_predict'] == 0){ %}
+                <a class="prediction_button" onclick="result_pred_pressed(this)" style="float: right"><img src="<?php echo base_url();?>resources/images/predict_result_button.png"></a>
+                {% } %}
             </td>
         </tr>
         <tr style="display: none" id="prediction_{%= prediction['match_id']%}">
             <td colspan="4">
                 <div class="col-md-4">
                     <div class="title">{%= prediction['team_title_home']%}</div>
-                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_WIN_HOME?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
-                        <div style="background-color: white; height: 44px">
-                            <div class="title" style="padding-top: 25%">10%</div>
+                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_WIN_HOME?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
+                        <div style="background-color: white; height: {%= (1 - prediction['win_home_chance'])*100 %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((prediction['win_home_chance'])*100).toFixed(2)  %} %</div>
                         </div>
                     </div>
                     <input type="hidden" id=""value="">
                 </div>
                 <div class="col-md-4">
                     <div class="title">Draw</div>
-                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_DRAW?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
-                        <div style="background-color: white; height: 40px">
-                            <div class="title" style="padding-top: 25%">adasd</div>
+                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_DRAW?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
+                        <div style="background-color: white; height: {%= (1-prediction['draw_game_chance'])*100 %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((prediction['draw_game_chance'])*100).toFixed(2)  %}%</div>
                         </div>
                     </div>
                     <input type="hidden" id=""value="">
                 </div>
                 <div class="col-md-4">
                     <div class="title">{%= prediction['team_title_away']%}</div>
-                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_WIN_AWAY?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: lightgray">
-                        <div style="background-color: white; height: 14px">
-                            <div class="title" style="padding-top: 25%">adasd</div>
+                    <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_WIN_AWAY?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
+                        <div style="background-color: white; height: {%= (prediction['win_home_chance'])*100 %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((1-prediction['win_home_chance'])*100).toFixed(2)  %}%</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id=""value="">
+                </div>
+            </td>
+        </tr>
+
+        <!--RESULT SHOW-->
+        <tr style="display: none" class="result_prediction">
+            <td colspan="4">
+                <div class="col-md-4">
+                    <div class="title">{%= prediction['team_title_home']%}</div>
+                    <div style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
+                        <div style="background-color: white; height: {%= (1-prediction['win_home_chance'])*100 %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((1-prediction['win_home_chance'])*100).toFixed(2) %} %</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id=""value="">
+                </div>
+                <div class="col-md-4">
+                    <div class="title">Draw</div>
+                    <div style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
+                        <div style="background-color: white; height: {%= (1-prediction['draw_game_chance'])*100 %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((1-prediction['win_home_chance'])*100).toFixed(2) %}%</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id=""value="">
+                </div>
+                <div class="col-md-4">
+                    <div class="title">{%= prediction['team_title_away']%}</div>
+                    <div style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
+                        <div style="background-color: white; height: {%= (prediction['win_home_chance'])*100 %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((1-prediction['win_home_chance'])*100).toFixed(2) %}%</div>
                         </div>
                     </div>
                     <input type="hidden" id=""value="">
@@ -244,9 +287,6 @@
             <div>
                 <table class="table-responsive table ">
                     <tbody id="tbl_predictions">
-                        
-                    
-                    
                     </tbody>
                 </table>
             </div>
@@ -267,22 +307,6 @@
             <div class="row">
                 <table class="table-condensed table-responsive table" id="">
                     <tbody id="tbl_team_standings">
-                    <tr style="font-size: 15px; color: whitesmoke; background-color: #000">
-                        <th>POS</th>
-                        <th>Team </th>
-                        <th>P</th>
-                        <th>GD</th>
-                        <th>Pts</th>
-                    </tr>
-                    <?php if(true){ foreach ($team_standings as $key => $team_info) {?>
-                    <tr style="background-color: whitesmoke">
-                        <td><?php echo $key+1;?></td>
-                        <td><?php echo $team_info['team_name'];?></td>
-                        <td><?php echo $team_info['played'];?></td>
-                        <td><?php echo $team_info['gd'];?></td>
-                        <td><?php echo $team_info['point'];?></td>
-                    </tr>
-                    <?php }}?>
                     </tbody>
                 </table>
             </div>

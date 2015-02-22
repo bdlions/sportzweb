@@ -416,3 +416,6 @@ $lang['delete_news_sub_category_fail']         = "Failed to delete news sub cate
 
 $lang['delete_news_successful']   = "News deleted successfully.";
 $lang['delete_news_fail']         = "Failed to delete news .";
+
+$lang['sp_vote_successful']   = "Vote posted successfully.";
+$lang['sp_vote_fail']         = "Failed to post vote.";
