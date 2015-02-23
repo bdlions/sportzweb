@@ -27,7 +27,7 @@
             },
             success: function(data) {
                 $('#tbl_predictions').html( tmpl('tmpl_predictions', data) );
-                console.log(data);
+//                console.log(data);
             }
         });
     }
@@ -121,7 +121,7 @@
         $(pred_butn).parent().parent().siblings('tr[id=prediction_'+match_id+']').toggle("fade", {}, 600);
     }
     function result_pred_pressed(pred_butn){
-        $(pred_butn).parent().parent().next().toggle("fade", {}, 600);
+        $(pred_butn).parent().parent().next().next().toggle("fade", {}, 600);
 //        $(pred_butn).parent().parent().siblings('tr[class=result_prediction]').toggle("fade", {}, 600);
     }
     $(function() {
@@ -139,7 +139,15 @@
     var date_group = o[date];
 %}
     <tr style="background-color: #EAEAEA">
-        <th class="title" colspan="4">{%= date%}</th>
+        <th class="title" colspan="4">
+        {% 
+            var ddate = new Date(date),
+            yr = ddate.getFullYear(),
+            month = +ddate.getMonth() < 10 ? '0' + ddate.getMonth() : ddate.getMonth() ,
+            day = +ddate.getDate() < 10 ? '0' + ddate.getDate() : ddate.getDate(),
+            newDate = day + ' ' + monthNames[month-0] + ', ' + yr;
+        %}{%=newDate%}
+        </th>
     </tr>
 {%  for(var index in date_group){  
         var prediction = date_group[index];
@@ -162,7 +170,7 @@
                 <div class="col-md-4">
                     <div class="title">{%= prediction['team_title_home']%}</div>
                     <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_WIN_HOME?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
-                        <div style="background-color: white; height: {%= (1 - prediction['win_home_chance'])*100 %}%">
+                        <div style="background-color: white; height: {%= ((1 - prediction['win_home_chance'])*100).toFixed(1) %}%">
                             <div class="title" style="padding-top: 25%">{%= ((prediction['win_home_chance'])*100).toFixed(2)  %} %</div>
                         </div>
                     </div>
@@ -171,7 +179,7 @@
                 <div class="col-md-4">
                     <div class="title">Draw</div>
                     <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_DRAW?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
-                        <div style="background-color: white; height: {%= (1-prediction['draw_game_chance'])*100 %}%">
+                        <div style="background-color: white; height: {%= ((1 - prediction['draw_game_chance'])*100).toFixed(1) %}%">
                             <div class="title" style="padding-top: 25%">{%= ((prediction['draw_game_chance'])*100).toFixed(2)  %}%</div>
                         </div>
                     </div>
@@ -180,8 +188,8 @@
                 <div class="col-md-4">
                     <div class="title">{%= prediction['team_title_away']%}</div>
                     <div onclick="confirmation_vote({%= prediction['match_id']%}, <?php echo MATCH_STATUS_WIN_AWAY?>)" style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
-                        <div style="background-color: white; height: {%= (prediction['win_home_chance'])*100 %}%">
-                            <div class="title" style="padding-top: 25%">{%= ((1-prediction['win_home_chance'])*100).toFixed(2)  %}%</div>
+                        <div style="background-color: white; height: {%= ((1 - prediction['win_away_chance'])*100).toFixed(1) %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((prediction['win_away_chance'])*100).toFixed(2)  %}%</div>
                         </div>
                     </div>
                     <input type="hidden" id=""value="">
@@ -195,8 +203,8 @@
                 <div class="col-md-4">
                     <div class="title">{%= prediction['team_title_home']%}</div>
                     <div style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
-                        <div style="background-color: white; height: {%= (1-prediction['win_home_chance'])*100 %}%">
-                            <div class="title" style="padding-top: 25%">{%= ((1-prediction['win_home_chance'])*100).toFixed(2) %} %</div>
+                        <div style="background-color: white; height: {%= ((1-prediction['win_home_chance'])*100).toFixed(1) %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((prediction['win_home_chance'])*100).toFixed(2) %} %</div>
                         </div>
                     </div>
                     <input type="hidden" id=""value="">
@@ -204,8 +212,8 @@
                 <div class="col-md-4">
                     <div class="title">Draw</div>
                     <div style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
-                        <div style="background-color: white; height: {%= (1-prediction['draw_game_chance'])*100 %}%">
-                            <div class="title" style="padding-top: 25%">{%= ((1-prediction['win_home_chance'])*100).toFixed(2) %}%</div>
+                        <div style="background-color: white; height: {%= ((1-prediction['draw_game_chance'])*100).toFixed(1) %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((prediction['draw_game_chance'])*100).toFixed(2) %}%</div>
                         </div>
                     </div>
                     <input type="hidden" id=""value="">
@@ -213,8 +221,8 @@
                 <div class="col-md-4">
                     <div class="title">{%= prediction['team_title_away']%}</div>
                     <div style="height: 100px; border: 1px solid blue; margin: 20px; background-color: #75B3E6">
-                        <div style="background-color: white; height: {%= (prediction['win_home_chance'])*100 %}%">
-                            <div class="title" style="padding-top: 25%">{%= ((1-prediction['win_home_chance'])*100).toFixed(2) %}%</div>
+                        <div style="background-color: white; height: {%= ((1-prediction['win_away_chance'])*100).toFixed(1) %}%">
+                            <div class="title" style="padding-top: 25%">{%= ((prediction['win_away_chance'])*100).toFixed(2) %}%</div>
                         </div>
                     </div>
                     <input type="hidden" id=""value="">

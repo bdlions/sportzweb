@@ -318,18 +318,21 @@ class Score_prediction extends Role_Controller{
         );
         $match_prediction_data = $this->score_prediction_library->where($where)->get_predictions_matches_for_tournament($tournament_id)->result_array();
         foreach ($match_prediction_data as $match_data_key=>$match_data) {
-            $match_prediction_data[$match_data_key]['win_home_chance']  = 0.5;
+            if($match_data['status_id'] == MATCH_STATUS_CANCEL) {unset($match_prediction_data[$match_data_key]); continue;} //to be updated according to client
+            $match_prediction_data[$match_data_key]['win_home_chance']  = 0;
+            $match_prediction_data[$match_data_key]['win_away_chance']  = 0;
             $match_prediction_data[$match_data_key]['draw_game_chance'] = 0;
-            if(isset($match_data['prediction_list'][$user_id])){
-                $match_prediction_data[$match_data_key]['can_predict'] = 0;
-            } else {$match_prediction_data[$match_data_key]['can_predict'] = 1;}
+            $match_prediction_data[$match_data_key]['can_predict'] = 1;
             if(isset($match_data['prediction_list'])){
                 $match_predictions = json_decode($match_data['prediction_list'], TRUE);
                 $prediction_length = sizeof($match_predictions);
                 foreach($match_predictions as $prediction){
-                    if      ($prediction == MATCH_STATUS_WIN_HOME)  {$match_prediction_data[$match_data_key]['win_home_chance']     += (1/($prediction_length*2));}
-                    elseif  ($prediction == MATCH_STATUS_WIN_AWAY)  {$match_prediction_data[$match_data_key]['win_home_chance']     -= (1/($prediction_length*2));}
+                    if      ($prediction == MATCH_STATUS_WIN_HOME)  {$match_prediction_data[$match_data_key]['win_home_chance']     += (1/($prediction_length));}
+                    elseif  ($prediction == MATCH_STATUS_WIN_AWAY)  {$match_prediction_data[$match_data_key]['win_away_chance']     += (1/($prediction_length));}
                     elseif  ($prediction == MATCH_STATUS_DRAW)      {$match_prediction_data[$match_data_key]['draw_game_chance']    += (1/($prediction_length));}
+                }
+                if(isset($match_data['prediction_list'][$user_id])){
+                    $match_prediction_data[$match_data_key]['can_predict'] = 0;
                 }
             }
         }
