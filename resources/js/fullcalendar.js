@@ -8858,7 +8858,7 @@ $.extend(ListView.prototype, {
                     if (!didAddDayHeader) {
                         tbody.append('\
                                 <tr>\
-                                    <th colspan="4">\
+                                    <th colspan="6">\
                                         <span class="fc-header-day">' + this.calendar.formatDate(currentDayStart, 'dddd') + '</span>\
                                         <span class="fc-header-date">' + this.calendar.formatDate(currentDayStart, this.opt('columnFormat')) + '</span>\
                                     </th>\
@@ -8874,7 +8874,9 @@ $.extend(ListView.prototype, {
                             </td>\
                             <td class="fc-time">' + (e.allDay ? this.opt('allDayText') : this.getEventTimeText(e)) + '</td>\
                             <td class="fc-title">' + e.title + '</td>\
-                            <td class="fc-location">' + e.location || '' + '</td>\
+                            <td class="fc-location">' + e.session_info.cost + '</td>\
+                            <td class="fc-location">' + e.session_info.status_id + '</td>\
+                            <td class="fc-location"><img src="../../resources/images/add.png" style="margin-right: 4px; float: right;"><img src="../../resources/images/cross.png" style="margin-right: 4px; float: right;"></td>\
                         </tr>');
                     tbody.append(segEl);
 

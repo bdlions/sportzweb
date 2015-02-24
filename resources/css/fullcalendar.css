@@ -736,7 +736,6 @@ a.fc-more:hover {
     padding: 0.5em 1em; /* cell padding */
 
     border-width: 0 0 1px 0;
-    border-bottom: 1px solid #cbcbcb;
 }
 .fc-Tasks-view td:first-child,
 .fc-Tasks-view th:first-child {
@@ -745,9 +744,10 @@ a.fc-more:hover {
 
 .fc-Tasks-view th {
 	line-height: 27px;
-    background: #ddd;
+    /*background: #ddd;*/
     text-align: left;
     vertical-align: bottom;
+    border-bottom: 2px solid #880015;
 }
 
 
@@ -763,6 +763,7 @@ a.fc-more:hover {
     width: 10px;
     height: 10px;
     display: inline-block;
+    background-color: #880015;
 }
 
 .fc-Tasks-view .fc-event-handle {
@@ -770,18 +771,22 @@ a.fc-more:hover {
 }
 
 .fc-Tasks-view .fc-title {
-	width: 99%;
+	/*width: 99%;*/
 }
 
 .fc-Tasks-view .fc-time,
 .fc-Tasks-view .fc-location {
-	white-space: nowrap;
-    width: 1px;
+/*	white-space: nowrap;
+    width: 1px;*/
 }
 
+.fc-Tasks-view .fc-header-day ,
 .fc-Tasks-view .fc-header-date {
-    float: right;
-    color: #666;
+    /*float: right;*/
+    /*color: #666;*/
+    color: #880015;
+    font-size: 15px;
+    line-height: 10px;
 }
 
 .fc-Tasks-view .fc-scroller {

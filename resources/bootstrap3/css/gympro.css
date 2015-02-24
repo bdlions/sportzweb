@@ -212,3 +212,9 @@ a:hover
 {
     display: none;
 }
+
+/*FULLCALENDER CUSTOME CSS*/
+.fc-time, .fc-more, .fc-title, .fc-day-number, .fc-content, .fc-day-header
+{ 
+    font-size: 15px !important 
+}
