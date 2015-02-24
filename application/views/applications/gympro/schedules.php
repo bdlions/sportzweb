@@ -30,7 +30,7 @@
             header: {
                 left: 'prev,next',
                 center: 'title',
-                right: 'month,basicWeek,basicDay'
+                right: 'month,basicWeek,basicDay,Tasks'
             },
             eventColor: '#75B3E6',
             timeFormat: 'h:mm a',
