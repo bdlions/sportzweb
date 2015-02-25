@@ -439,12 +439,15 @@ display:none;
 input{
 background:#fff !important;
 }
-@media screen and (-webkit-min-device-pixel-ratio:0){#login_btn
-        {        padding: 12px !important;    }
+@media screen and (-webkit-min-device-pixel-ratio:0){
+    #login_btn{
+        padding: 12px !important;
+    }
 }
-@-moz-document url-prefix() 
-{    
-  #login_btn{        padding: 2px !important;    }
+@-moz-document url-prefix(){
+    #login_btn{
+        padding: 2px !important;
+    }
 }
 #infoMessage{
     color:red;

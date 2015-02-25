@@ -388,6 +388,8 @@ class Applications_scoreprediction extends CI_Controller{
         $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
         $this->form_validation->set_rules('score_home', 'Home Score', 'xss_clean');
         $this->form_validation->set_rules('score_away', 'Away Score', 'xss_clean');
+        $this->form_validation->set_rules('point_home', 'Home Point', 'xss_clean');
+        $this->form_validation->set_rules('point_away', 'Away Point', 'xss_clean');
 
         if ($this->input->post('submit_create_match'))
         {            
@@ -401,6 +403,8 @@ class Applications_scoreprediction extends CI_Controller{
                     'time' => $this->input->post('match_time'),
                     'score_home' => $this->input->post('score_home'),
                     'score_away' => $this->input->post('score_away'),
+                    'point_home' => $this->input->post('point_home'),
+                    'point_away' => $this->input->post('point_away'),
                     'status_id' => $this->input->post('match_status_list')
                 );
                 $match_id = $this->admin_score_prediction_library->create_match($additional_data);
@@ -473,6 +477,18 @@ class Applications_scoreprediction extends CI_Controller{
             'type' => 'text',
             'value' => $this->form_validation->set_value('score_away'),
         );
+        $this->data['point_home'] = array(
+            'name' => 'point_home',
+            'id' => 'point_home',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('point_home'),
+        );
+        $this->data['point_away'] = array(
+            'name' => 'point_away',
+            'id' => 'point_away',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('point_away'),
+        );
         $this->data['submit_create_match'] = array(
             'name' => 'submit_create_match',
             'id' => 'submit_create_match',
@@ -500,6 +516,8 @@ class Applications_scoreprediction extends CI_Controller{
         $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
         $this->form_validation->set_rules('score_home', 'Home Score', 'xss_clean');
         $this->form_validation->set_rules('score_away', 'Away Score', 'xss_clean');
+        $this->form_validation->set_rules('point_home', 'Home Point', 'xss_clean');
+        $this->form_validation->set_rules('point_away', 'Away Point', 'xss_clean');
         
         if ($this->input->post('submit_update_match'))
         {            
@@ -512,6 +530,8 @@ class Applications_scoreprediction extends CI_Controller{
                     'time' => $this->input->post('match_time'),
                     'score_home' => $this->input->post('score_home'),
                     'score_away' => $this->input->post('score_away'),
+                    'point_home' => $this->input->post('point_home'),
+                    'point_away' => $this->input->post('point_away'),
                     'status_id' => $this->input->post('match_status_list'),
                     'modified_on' => now()
                 );
@@ -590,6 +610,18 @@ class Applications_scoreprediction extends CI_Controller{
             'id' => 'score_away',
             'type' => 'text',
             'value' => $match_info['score_away'],
+        );
+        $this->data['point_home'] = array(
+            'name' => 'point_home',
+            'id' => 'point_home',
+            'type' => 'text',
+            'value' => $match_info['point_home'],
+        );
+        $this->data['point_away'] = array(
+            'name' => 'point_away',
+            'id' => 'point_away',
+            'type' => 'text',
+            'value' => $match_info['point_away'],
         );
         $this->data['submit_update_match'] = array(
             'name' => 'submit_update_match',

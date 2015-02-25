@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <label for="match_time" class="col-md-6 control-label requiredField">
-                                Time:
+                                Time (24HR):
                             </label>
                             <div class ="col-md-6">
                                 <?php echo form_input($match_time + array('class' => 'form-control')); ?>
@@ -67,6 +67,22 @@
                             </label>
                             <div class ="col-md-6">
                                 <?php echo form_input($score_away + array('class' => 'form-control')); ?>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <label for="point_home" class="col-md-6 control-label requiredField">
+                                Home Point:
+                            </label>
+                            <div class ="col-md-6">
+                                <?php echo form_input($point_home + array('class' => 'form-control')); ?>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <label for="point_away" class="col-md-6 control-label requiredField">
+                                Away Point:
+                            </label>
+                            <div class ="col-md-6">
+                                <?php echo form_input($point_away + array('class' => 'form-control')); ?>
                             </div> 
                         </div>
                         <div class="form-group">

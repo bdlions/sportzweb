@@ -8858,25 +8858,31 @@ $.extend(ListView.prototype, {
                     if (!didAddDayHeader) {
                         tbody.append('\
                                 <tr>\
-                                    <th colspan="6">\
-                                        <span class="fc-header-day">' + this.calendar.formatDate(currentDayStart, 'dddd') + '</span>\
+                                    <th colspan="5">\
+                                        <span class="fc-header-day">' + this.calendar.formatDate(currentDayStart, 'dddd') + ', </span>\
                                         <span class="fc-header-date">' + this.calendar.formatDate(currentDayStart, this.opt('columnFormat')) + '</span>\
                                     </th>\
-                                </tr>');
+                                </tr>\
+                                <tr class="fc-row fc-header-date" >\
+                                    <td class="fc-time">TIME</td>\
+                                    <td class="fc-title">TITLE</td>\
+                                    <td class="fc-location">COST</td>\
+                                    <td class="fc-location">STATUS</td>\
+                                    <td class="fc-location">ACTIONS</td>\
+                                </tr>\
+                                '
+                                );
 
                         didAddDayHeader = true;
                     }
 
                     var segEl = $('\
                         <tr class="fc-row fc-event-container fc-content">\
-                            <td class="fc-event-handle">\
-                                <span class="fc-event"></span>\
-                            </td>\
                             <td class="fc-time">' + (e.allDay ? this.opt('allDayText') : this.getEventTimeText(e)) + '</td>\
                             <td class="fc-title">' + e.title + '</td>\
-                            <td class="fc-location">' + e.session_info.cost + '</td>\
-                            <td class="fc-location">' + e.session_info.status_id + '</td>\
-                            <td class="fc-location"><img src="../../resources/images/add.png" style="margin-right: 4px; float: right;"><img src="../../resources/images/cross.png" style="margin-right: 4px; float: right;"></td>\
+                            <td class="fc-title">' + e.session_info.cost + '</td>\
+                            <td class="fc-title">' + e.session_info.status_title + '</td>\
+                            <td class="fc-title"><img src="../../resources/images/browse.png"></td>\
                         </tr>');
                     tbody.append(segEl);
 

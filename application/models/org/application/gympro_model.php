@@ -1192,6 +1192,7 @@ class Gympro_model extends Ion_auth_model {
     /*
      * This method will return all sessions
      * @Author Nazmul on 24th January 2015
+     * edited by Tanveer Ahmed 25 feb
      */
     public function get_all_sessions($user_id = 0)
     {
@@ -1200,8 +1201,9 @@ class Gympro_model extends Ion_auth_model {
             $user_id = $this->session->userdata('user_id');
         }
         $this->db->where('user_id', $user_id);
-        return $this->db->select('*')
+        return $this->db->select($this->tables['app_gympro_sessions'].'.*, '. $this->tables['app_gympro_session_statuses'] . '.title as status_title')
                     ->from($this->tables['app_gympro_sessions'])
+                    ->join($this->tables['app_gympro_session_statuses'], $this->tables['app_gympro_sessions'] . '.status_id = ' . $this->tables['app_gympro_session_statuses'] . '.id')
                     ->get();
     }
     /*

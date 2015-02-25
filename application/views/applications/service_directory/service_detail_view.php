@@ -78,7 +78,7 @@
                     <div class="col-md-12">
                         <h4 class="cus_service_detail_heading">Website</h4>
                         <!-- echo text here-->
-                        <a href="http://<?php echo $service_info['website']; ?>" target="_blank"><?php echo $service_info['website']; ?></a>
+                        <a href="<?php echo $service_info['website']; ?>" target="_blank"><?php echo $service_info['website']; ?></a>
                     </div>
                 </div>
                 <div class="row">
@@ -92,7 +92,12 @@
                         </button>
                     </div>
                 </div>
-                <img src="<?php echo base_url() . SERVICE_IMAGE_PATH .$service_info['picture']; ?>" height="256px;"/>
+                <?php if(isset($service_info['picture'])){
+                    $image_path = SERVICE_IMAGE_PATH .$service_info['picture'];
+                } else {
+                    $image_path =  SERVICE_DEFAULT_IMAGE;
+                }?>
+                <img src="<?php echo base_url() . $image_path; ?>" style="height: 256px; background: skyblue"/>
             </div>
         </div>
     </div>
