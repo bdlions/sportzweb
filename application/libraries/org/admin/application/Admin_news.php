@@ -90,7 +90,7 @@ class Admin_news{
         $news_id_news_info_map = array();      
         $present_date = $this->utils->get_current_date_db();
         $news_id_list = array();
-        /*$result = $this->admin_news_model->get_news_home_page_configuration($present_date)->result_array();
+        $result = $this->admin_news_model->get_news_home_page_configuration($present_date)->result_array();
         if(!empty($result)) {
             $result = $result[0];            
             $show_advertise = $result['show_advertise'];
@@ -106,7 +106,7 @@ class Admin_news{
             $news_list_array = $this->admin_news_model->get_news_list($news_id_list)->result_array();
         }
         else 
-        {*/
+        {
             $news_list_array = $this->admin_news_model->get_news_list_initial_configuration()->result_array();
             for($region_counter = 0; $region_counter < NEWS_CONFIGURATION_COUNTER ; $region_counter++)
             {
@@ -116,7 +116,7 @@ class Admin_news{
                     $region_id_news_id_map[$region_counter] = null;
                 }
             }
-        /*}*/        
+        }      
         foreach($news_list_array as $news_info)
         {
              $news_id_news_info_map[$news_info['news_id']] = $news_info;
@@ -142,7 +142,7 @@ class Admin_news{
         $news_id_news_info_map = array();
         $present_date = $this->utils->get_current_date_db();
         $news_id_list = array();
-        /*$result = $this->admin_news_model->get_news_category_page_configuration($news_category_id,$present_date)->result_array();
+        $result = $this->admin_news_model->get_news_category_page_configuration($news_category_id,$present_date)->result_array();
         if(!empty($result)) {
             $result = $result[0];            
             $show_advertise = $result['show_advertise'];
@@ -177,9 +177,9 @@ class Admin_news{
                 $news_list_array = $this->admin_news_model->get_news_list($news_id_list)->result_array();                
             }
             else
-            {*/
+            {
                 $news_list_array = $this->admin_news_model->get_news_list_initial_configuration()->result_array();
-            /*}*/
+            }
             for($region_counter = 0; $region_counter < NEWS_CONFIGURATION_COUNTER ; $region_counter++)
             {
                 if(isset($news_list_array[$region_counter])){
@@ -191,7 +191,7 @@ class Admin_news{
                     $region_id_is_news_ignored_map[$region_counter] = 1;
                 }                
             }
-        /*}*/        
+        }      
         foreach($news_list_array as $news_info)
         {
              $news_id_news_info_map[$news_info['news_id']] = $news_info;
@@ -217,7 +217,7 @@ class Admin_news{
         $news_id_news_info_map = array();
         $present_date = $this->utils->get_current_date();
         $news_id_list = array();
-        /*$result = $this->admin_news_model->get_news_sub_category_page_configuration($news_sub_category_id,$present_date)->result_array();
+        $result = $this->admin_news_model->get_news_sub_category_page_configuration($news_sub_category_id,$present_date)->result_array();
         if(!empty($result)) {
             $result = $result[0];
             
@@ -257,9 +257,9 @@ class Admin_news{
                 
             }
             else
-            {*/
+            {
                 $news_list_array = $this->admin_news_model->get_news_list_initial_configuration()->result_array();
-            /*}*/
+            }
 
             for($region_counter = 0; $region_counter < NEWS_CONFIGURATION_COUNTER ; $region_counter++)
             {
@@ -272,7 +272,7 @@ class Admin_news{
                     $region_id_is_news_ignored_map[$region_counter] = 1;
                 }
             }
-        /*}*/
+        }
         
         foreach($news_list_array as $news_info)
         {
