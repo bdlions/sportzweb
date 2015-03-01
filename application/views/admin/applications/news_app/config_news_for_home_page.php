@@ -68,26 +68,28 @@
     <div class="panel-body">
         <div class="row col-md-9">
             <?php if(array_key_exists(0, $region_id_news_id_map) && array_key_exists($region_id_news_id_map[0], $news_id_news_info_map)) : ?>
-                <div class="row" style="padding-bottom: 20px"><!--Greatest news-->
-                    <div class="col-md-6 col-lg-6">
-                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>">
+            <div class="row" style="padding-bottom: 20px"><!--Greatest news-->
+                    <div class="col-md-5 col-lg-5">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/' . $news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>">
                             <img id="image_position_1" style="width:280px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_TOP_LEFT_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[0]]['picture'] ?>"/>
                         </a>
                     </div>
-                    <button style="z-index: 500;" id="button_edit_news_<?php echo $news_id_news_info_map[$region_id_news_id_map[0]]['news_id'];?>" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_news_<?php echo $news_id_news_info_map[$region_id_news_id_map[0]]['news_id'];?>','1')">
-                        Edit
-                    </button>
-                        <input type="hidden" name="position_of_news_1" id="position_of_news_1" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[0]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[0]]['news_id']:'';?>">
-                        <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
+                    <input type="hidden" name="position_of_news_1" id="position_of_news_1" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[0]]['news_id']) ? $news_id_news_info_map[$region_id_news_id_map[0]]['news_id'] : ''; ?>">
+                    <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
                     <div class="col-md-6 col-lg-6">
-                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/' . $news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>">
                             <span class="cus_news_headline">
-                                <p id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline']));?></p>
+                                <p id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline'])); ?></p>
                             </span>
                         </a>
                         <span class="cus_news_descr">
-                            <p id="summary_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['summary']));?></p>
+                            <p id="summary_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['summary'])); ?></p>
                         </span>
+                    </div>
+                    <div class="col-md-1 col-lg-1"> 
+                        <button style="z-index: 500;" id="button_edit_news_<?php echo $news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_news_<?php echo $news_id_news_info_map[$region_id_news_id_map[0]]['news_id']; ?>','1')">
+                            Edit
+                        </button> 
                     </div>
                 </div>
             <?php endif; ?>
@@ -384,4 +386,4 @@
         </div>
     </div>
 </div>
-<?php $this->load->view("admin/applications/news_app/modal_edit_news_item_home_page");
+<?php $this->load->view("admin/applications/news_app/modal_edit_news_items_common");

@@ -475,6 +475,24 @@ class Admin_news_model extends Ion_auth_model
                     ->get();
     }
     
+    public function get_search_news_info($search_news_type=null,$search_news_start_date=0,$search_news_end_date=0)
+    {
+        if($search_news_type != null)
+        {
+          $this->db->like($this->tables['news'].'.headline',$search_news_type);  
+        }
+       
+        if($search_news_start_date != 0 && $search_news_end_date != 0)
+        {
+        $this->db->where($this->tables['news'].'.news_date >=',$search_news_start_date);
+        $this->db->where($this->tables['news'].'.news_date <=',$search_news_end_date);
+        }
+        return $this->db->select("*")
+                    ->from($this->tables['news'])
+                    ->get();
+    }
+
+
     public function create_news($data)
     {
         $data = $this->_filter_data($this->tables['news'], $data);

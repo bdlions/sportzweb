@@ -1245,6 +1245,24 @@ class Applications_news extends CI_Controller{
         
         echo json_encode($response);
     }
+    public function search_news_items()
+    {
+        $response = array();
+        $search_news_type = $this->input->post('search_news_type');
+        $search_news_type =$search_news_type."%";
+        $search_news_start_date = $this->input->post('search_news_start_date');
+        $search_news_end_date = $this->input->post('search_news_end_date');
+        $search_news_start_date = $this->utils->convert_date_from_user_to_db($search_news_start_date);
+        $search_news_end_date = $this->utils->convert_date_from_user_to_db($search_news_end_date);
+        $search_news_result_array = $this->admin_news->get_search_news_info($search_news_type,$search_news_start_date,$search_news_end_date)->result_array();
+        
+        if(!empty($search_news_result_array))
+        {
+            $response = $search_news_result_array;
+        }
+        
+        echo json_encode($response);
+    }
     
     public function config_news_for_category($news_category_id)
     {
