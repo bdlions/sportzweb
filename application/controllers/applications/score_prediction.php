@@ -89,7 +89,7 @@ class Score_prediction extends Role_Controller{
         );
         $match_prediction_data = $this->score_prediction_library->where($where)->get_predictions_matches_for_tournament($tournament_id)->result_array();
         foreach ($match_prediction_data as $match_data_key=>$match_data) {
-            if($match_data['status_id'] == MATCH_STATUS_CANCEL) {unset($match_prediction_data[$match_data_key]); continue;} //to be updated according to client
+            if($match_data['status_id'] != MATCH_STATUS_UPCOMING) {unset($match_prediction_data[$match_data_key]); continue;} //to be updated according to client
             $match_prediction_data[$match_data_key]['win_home_chance']  = 0;
             $match_prediction_data[$match_data_key]['win_away_chance']  = 0;
             $match_prediction_data[$match_data_key]['draw_game_chance'] = 0;

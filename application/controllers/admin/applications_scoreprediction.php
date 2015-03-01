@@ -391,8 +391,8 @@ class Applications_scoreprediction extends CI_Controller{
         $this->form_validation->set_rules('point_home', 'Home Point', 'xss_clean');
         $this->form_validation->set_rules('point_away', 'Away Point', 'xss_clean');
 
-        if ($this->input->post('submit_create_match'))
-        {            
+        if ($this->input->post('match_date'))
+        {   
             if($this->form_validation->run() == true)
             {
                 $additional_data = array(
@@ -408,19 +408,22 @@ class Applications_scoreprediction extends CI_Controller{
                     'status_id' => $this->input->post('match_status_list')
                 );
                 $match_id = $this->admin_score_prediction_library->create_match($additional_data);
+                
                 if($match_id !== FALSE)
                 {
-                    $this->session->set_flashdata('message', $this->admin_score_prediction_library->messages());
-                    redirect('admin/applications_scoreprediction/create_match/'.$tournament_id,'refresh');
+                    $result['message'] = $this->admin_score_prediction_library->messages_alert();
+                    echo json_encode($result);exit;
                 }
                 else
                 {
-                    $this->data['message'] = 'Error while creating a match.';
+                    $result['message'] = 'Error while creating a match.';
+                    echo json_encode($result);exit;
                 }
             }
             else
             {
-                $this->data['message'] = validation_errors();
+                $result['message'] = validation_errors();
+                echo json_encode($result);exit;
             }            
         }
         else
@@ -519,7 +522,7 @@ class Applications_scoreprediction extends CI_Controller{
         $this->form_validation->set_rules('point_home', 'Home Point', 'xss_clean');
         $this->form_validation->set_rules('point_away', 'Away Point', 'xss_clean');
         
-        if ($this->input->post('submit_update_match'))
+        if ($this->input->post('match_date'))
         {            
             if($this->form_validation->run() == true)
             {
@@ -537,17 +540,20 @@ class Applications_scoreprediction extends CI_Controller{
                 );
                 if($this->admin_score_prediction_library->update_match($match_id, $additional_data))
                 {
-                    $this->session->set_flashdata('message', $this->admin_score_prediction_library->messages());
-                    redirect('admin/applications_scoreprediction/update_match/'.$match_id,'refresh');
+                    $result['message'] = $this->admin_score_prediction_library->messages_alert();
+                    echo json_encode($result);exit;
+//                    redirect('admin/applications_scoreprediction/update_match/'.$match_id,'refresh');
                 }
                 else
                 {
-                    $this->data['message'] = $this->admin_score_prediction_library->errors();
+                    $result['message'] = $this->admin_score_prediction_library->errors_alert();
+                    echo json_encode($result);exit;
                 }
             }
             else
             {
-                $this->data['message'] = validation_errors();
+                $result['message'] = validation_errors();
+                echo json_encode($result);exit;
             }            
         }
         else

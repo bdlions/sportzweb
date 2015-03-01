@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    var today_ymd_str;
     function bring_tournament_info(){
         $.ajax({
             dataType: 'json',
@@ -11,7 +12,6 @@
                 $('#pred_table_title').html( $("#dd_tournaments option:selected").text() );
                 $('#tbl_team_standings').html( tmpl('tmpl_table_header') );
                 $('#tbl_team_standings').append( tmpl( 'tmpl_team_standings', data.team_standings) );
-                bring_prediction_info();
             }
         });
     }
@@ -85,13 +85,13 @@
         dd=1;
         if(dd<10){ dd='0'+dd; } 
         if(mm<10){ mm='0'+mm; } 
-        var today = yyyy+'-'+mm+'-'+dd;
-        $('#current_month').val(today);
+        today_ymd_str = yyyy+'-'+mm+'-'+dd;
+        $('#current_month').val(today_ymd_str);
         mm++;//inc for next month
         if(mm>12){mm=1;yyyy++;}
         if(mm<10){mm='0'+mm;} 
-        var out_date = yyyy+'-'+mm+'-'+dd;
-        $('#next_month').val(out_date);
+//        today_ymd_str = yyyy+'-'+mm+'-'+dd;
+        $('#next_month').val(yyyy+'-'+mm+'-'+dd);
     }
     
     function confirmation_vote(match_id, match_status_id){
@@ -157,10 +157,17 @@
             <td style="text-align: center"> {%= prediction['time']%}</td>
             <td style="text-align: left">{%= prediction['team_title_away']%}</td>
             <td>
-                {% if (prediction['can_predict'] == 1){ %}
+                {%
+                    var mch_date = Date.parse(prediction['date']),
+                    tdy_date = Date.parse(today_ymd_str),
+                    match_over = (mch_date<tdy_date) ? 1 : 0,
+                    mch_time = prediction['time'],
+                    now_time = new Date().getHours() + ":" + new Date().getMinutes();
+                    match_over = (match_over == 0 && mch_time > now_time)? 0 : 1;
+                %}
+                {% if ( (prediction['can_predict'] == 1) && (match_over==0) ){ %}
                 <a data-match_id="{%= prediction['match_id']%}" class="prediction_button" onclick="pred_pressed(this)" style="float: right"><img src="<?php echo base_url();?>resources/images/predict_button.png"></a>
-                {% } %}
-                {% if (prediction['can_predict'] == 0){ %}
+                {% } else { %}
                 <a class="prediction_button" onclick="result_pred_pressed(this)" style="float: right"><img src="<?php echo base_url();?>resources/images/predict_result_button.png"></a>
                 {% } %}
             </td>

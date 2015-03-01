@@ -7,8 +7,25 @@
             $('#match_date').text($('#match_date').data('date'));
             $('#match_date').datepicker('hide');
         });
+        $('#submit_create_match').click(function(){
+            var match_time = $('#match_time').val();
+            if(/^([01][0-9]|2[0-3]):[0-5][0-9]$/.test(match_time)){
+                $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: '<?php echo base_url().'admin/applications_scoreprediction/create_match/'.$tournament_id;?>',
+                    data: $("#form_create_match").serializeArray(),
+                    success: function(data) {
+                        alert(data.message);
+                        location.reload();
+                    }
+                });
+            }else{
+                alert('Invalid match time, use the time format (HH:MM)');
+                return;
+            }
+        });
     });
-    
 </script>
 <div class="panel panel-default">
     <div class="panel-heading">Create Match</div>
@@ -16,10 +33,9 @@
         <div class="form-background top-bottom-padding">
             <div class="row">
                 <div class ="col-md-8 margin-top-bottom">
-                    <?php echo form_open("admin/applications_scoreprediction/create_match/".$tournament_id, array('id' => 'form_create_match', 'class' => 'form-horizontal')); ?>
+                    <?php echo form_open("admin/applications_scoreprediction/create_match/".$tournament_id, array('id' => 'form_create_match', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
                         <div class ="row">
                             <div class="col-md-4"></div>
-                            <div class="col-md-8"><?php echo $message; ?></div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-6 control-label requiredField">
@@ -47,7 +63,7 @@
                         </div>
                         <div class="form-group">
                             <label for="match_time" class="col-md-6 control-label requiredField">
-                                Time (24HR format):
+                                Time HH:MM (24HR format):
                             </label>
                             <div class ="col-md-6">
                                 <?php echo form_input($match_time + array('class' => 'form-control')); ?>
@@ -98,6 +114,7 @@
 
                             </label>
                             <div class ="col-md-3 pull-right">
+                                <!--<input type="button" value="Create" name="submit_create_match" id="submit_create_match" class="form-control button-custom"/>-->
                                 <?php echo form_input($submit_create_match+array('class'=>'form-control button-custom')); ?>
                             </div> 
                         </div>

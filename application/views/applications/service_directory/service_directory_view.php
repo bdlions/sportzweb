@@ -72,8 +72,15 @@
                                     success: function(data) {
                                         if (data.results != undefined && data.results.length > 0) {
                                             var latlng = new google.maps.LatLng(service['latitude'], service['longitude']);
+                                            
+//                                            var pinColor = "cc5533";
+//                                            var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+//                                                new google.maps.Size(21, 34),
+//                                                new google.maps.Point(0,0),
+//                                                new google.maps.Point(10, 34));
                                             var markers = new google.maps.Marker({
                                                 position: latlng,
+//                                                icon: pinImage,
                                                 map: map
                                             });
                                             var infowindows = new google.maps.InfoWindow({
