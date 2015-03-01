@@ -373,7 +373,7 @@ class Applications_servicedirectory extends CI_Controller{
                     'telephone' => $this->input->post('telephone'),
                     'service_category_id'  => $service_category_id,
                     'business_profile_id'   => $this->input->post('business_profile_id'),
-                    'website' => $this->input->post('website'),
+                    'website' => $this->utils->process_url($this->input->post('website')),
                     'picture' => empty($uploaded_image_data['upload_data']['file_name'])? '' : $uploaded_image_data['upload_data']['file_name'],
                     'created_on' => now(),
                 );
@@ -643,7 +643,7 @@ class Applications_servicedirectory extends CI_Controller{
                     'telephone' => $this->input->post('telephone'),
                     'service_category_id'  => $this->input->post('service_category_id'),
                     'business_profile_id'   => $this->input->post('business_profile_id'),
-                    'website' => $this->input->post('website'),
+                    'website' => $this->utils->process_url($this->input->post('website')),
                     'modified_on' => now(),
                 );
                 

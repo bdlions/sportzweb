@@ -54,10 +54,10 @@ else
     </div>
     <div class="col-md-8">
         <div class="row col-md-12">
-            <a href="<?php echo base_url().APPLICATION_NEWS_PATH.$newsfeed['reference_info']['id']?>"><h4><?php echo $newsfeed['reference_info']['headline']; ?></h4></a>
+            <a href="<?php echo base_url().APPLICATION_NEWS_PATH.$newsfeed['reference_info']['id']?>"><h4><?php echo html_entity_decode(html_entity_decode($newsfeed['reference_info']['headline'])); ?></h4></a>
         </div>
         <div class="row col-md-12">
-            <?php echo $newsfeed['reference_info']['summary']; ?>
+            <?php echo html_entity_decode(html_entity_decode($newsfeed['reference_info']['summary'])); ?>
         </div>
     </div>
 </div> 

@@ -60,7 +60,11 @@ class Service_directory extends Role_Controller {
         $visit_success = $this->visitors->store_application_visitor(APPLICATION_SERVICE_DIRECTORY_ID);
         $this->template->load(null, "applications/service_directory/service_directory_view", $this->data);
     }
-    
+    /*
+     * This method will display details of a service
+     * @param $service_id, service id
+     * @Author Nazmul on 1st March 2015
+     */
     public function show_service_detail($service_id = 0)
     {
         
@@ -77,7 +81,6 @@ class Service_directory extends Role_Controller {
         
         $this->template->load(NULL, "applications/service_directory/service_detail_view", $this->data);
     }
-    
     //Ajax call to save comment
     //Written by Omar Faruk
     function post_comment()

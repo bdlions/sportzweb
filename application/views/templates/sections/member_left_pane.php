@@ -92,6 +92,12 @@
                 <img src="<?php echo base_url() ?>resources/images/applications/application_icons/ptpro.png"> PT Pro
             </a>
         </div>
+        <?php } if (in_array(APPLICATION_SCORE_PREDICTION_ID, $app_id_list)) { ?>
+        <div class="left_menu_item" >
+            <a href="<?php echo base_url()?>applications/score_prediction">
+                <img src="<?php echo base_url() ?>resources/images/applications/application_icons/shop.png"> Score Prediction
+            </a>
+        </div>
         <?php } if (in_array(APPLICATION_SHOP_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
             <a href="<?php echo base_url()?>applications/gympro">

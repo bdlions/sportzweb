@@ -434,6 +434,33 @@ class Utils {
            RETURN 1;
         }
     }
+    
+    /*
+     * This method will create a valid url
+     * @param $url, url 
+     * @author Nazmul on 1st March 2015
+     */
+    public function process_url($url)
+    {
+        $regex = "((https?|ftp)\:\/\/)?"; // SCHEME
+        $regex .= "([a-zA-Z0-9+!*(),;?&=\$_.-]+(\:[a-zA-Z0-9+!*(),;?&=\$_.-]+)?@)?"; // User and Pass
+        $regex .= "([a-zA-Z0-9-.]*)\.([a-zA-Z]{2,3})"; // Host or IP
+        $regex .= "(\:[0-9]{2,5})?"; // Port
+        $regex .= "(\/([a-zA-Z0-9+\$_-]\.?)+)*\/?"; // Path
+        $regex .= "(\?[a-zA-Z+&\$_.-][a-zA-Z0-9;:@&%=+\/\$_.-]*)?"; // GET Query
+        $regex .= "(#[a-zA-Z_.-][a-zA-Z0-9+\$_.-]*)?"; // Anchor
+    
+        $text = preg_replace_callback(
+        "/$regex/", 
+        function($matches) {
+            $scheme_regex = "#^(https?|ftp)://#";
+            $output = $matches[0];
+            if ( !preg_match("$scheme_regex", $matches[0]) ) {
+                    $output = "http://".$matches[0];
+            } 
+            return str_replace($matches[0], $output, $matches[0]);
+        },
+        $url);
+        return nl2br($text);
+    }
 }
-
-?>
