@@ -51,7 +51,9 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-10">
+                        <?php if(!empty($service_info['title'])){ ?>
                         <h3><?php echo $service_info['title']; ?></h3>
+                        <?php }?>
                     </div>
                     <div class="col-md-2">
                         <img onclick="javascript:history.back();" src="<?php echo base_url(); ?>resources/images/button-back-mapservice.png"/>
@@ -59,45 +61,52 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
+                        <?php if(!empty($service_info['address'])){ ?>
                         <h4 class="cus_service_detail_heading">Store Address</h4>
                         <!-- echo address here-->
                         <?php echo $service_info['address']; ?>
+                        <?php }?>
                     </div>
                     <div class="col-md-4">
+                        <?php if(!empty($service_info['opening_hours'])){ ?>
                         <h4 class="cus_service_detail_heading">Opening hours</h4>
                         <!-- echo text here-->
                         <?php echo $service_info['opening_hours']; ?>
+                        <?php }?>
                     </div>
                     <div class="col-md-4">
+                        <?php if(!empty($service_info['telephone'])){ ?>
                         <h4 class="cus_service_detail_heading">Telephone</h4>
                         <!-- echo text here-->
                         <?php echo $service_info['telephone']; ?>
+                        <?php }?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <?php if(!empty($service_info['website'])){ ?>
                         <h4 class="cus_service_detail_heading">Website</h4>
                         <!-- echo text here-->
                         <a href="<?php echo $service_info['website']; ?>" target="_blank"><?php echo $service_info['website']; ?></a>
+                        <?php }?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-10">
+                        <?php if(!empty($service_info['business_name'])){ ?>
                         <h4 class="cus_service_detail_heading">Sonuto profile</h4>
                         <!-- echo text here-->
                         <a href="#"><?php echo $service_info['business_name']; ?></a>
+                        <?php }?>
                     </div>
                     <div class="col-md-2">
                         <button class="btn" style="background: #AEADAD;" data-toggle="modal" data-target="#modal_share_service"><span style="color: #E01B1B;">Recommend</span>
                         </button>
                     </div>
                 </div>
-                <?php if(isset($service_info['picture'])){
-                    $image_path = SERVICE_IMAGE_PATH .$service_info['picture'];
-                } else {
-                    $image_path =  SERVICE_DEFAULT_IMAGE;
-                }?>
-                <img src="<?php echo base_url() . $image_path; ?>" style="height: 256px; background: skyblue"/>
+                <?php if(!empty($service_info['picture'])){?>
+                <img src="<?php echo base_url() .SERVICE_IMAGE_PATH .$service_info['picture'] ; ?>" style="height: 256px; background: skyblue"/>
+                <?php }?>
             </div>
         </div>
     </div>

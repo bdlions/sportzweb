@@ -229,38 +229,38 @@
                     
                     <ul class="list-inline list-unstyled">
                         <li>
-                            <a href="<?php echo base_url(); ?>applications/xstream_banter">
-                                <img alt="Xstream Banter" title="Xstream Banter" src="<?php echo base_url(); ?>resources/images/applications/application_icons/xb.png" height="16px" width="16px"/>
+                            <a href="<?php echo base_url().XSTREAM_BANTER_HOME_PAGE?>">
+                                <img alt="Xstream Banter" title="<?php echo XSTREAM_BANTER_NAME; ?>" src="<?php echo base_url().XSTREAM_BANTER_ICON ?>" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>applications/healthy_recipes">
-                                <img alt="World Kitchen" title="World Kitchen" src="<?php echo base_url(); ?>resources/images/applications/application_icons/recipe.png" height="16px" width="16px"/>
+                            <a href="<?php echo base_url().HEALTHY_RECIPE_HOME_PAGE?>">
+                                <img alt="Xstream Banter" title="<?php echo HEALTHY_RECIPE_NAME; ?>" src="<?php echo base_url().HEALTHY_RECIPE_ICON ?>" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>applications/service_directory">
-                                <img alt="Service Directory" title="Service Directory" src="<?php echo base_url(); ?>resources/images/applications/application_icons/sd.png" height="16px" width="16px"/>
+                            <a href="<?php echo base_url().SERVICE_DIRECTORY_HOME_PAGE?>">
+                                <img alt="Xstream Banter" title="<?php echo SERVICE_DIRECTORY_NAME; ?>" src="<?php echo base_url().SERVICE_DIRECTORY_ICON ?>" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>applications/blog_app">
-                                <img alt="Blogs" title="Blogs" src="<?php echo base_url(); ?>resources/images/applications/application_icons/blog.png" height="16px" width="16px"/>
+                            <a href="<?php echo base_url().BLOG_HOME_PAGE?>">
+                                <img alt="Xstream Banter" title="<?php echo BLOG_NAME; ?>" src="<?php echo base_url().BLOG_ICON?>" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>applications/news_app">
-                                <img alt="News" title="News" src="<?php echo base_url(); ?>resources/images/applications/application_icons/news.png" height="16px" width="16px"/>
+                            <a href="<?php echo base_url().NEWS_HOME_PAGE?>">
+                                <img alt="Xstream Banter" title="<?php echo NEWS_NAME; ?>" src="<?php echo base_url().NEWS_ICON ?>" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>applications/bmi_calculator">
-                                <img alt="BMI" title="BMI Calculator" src="<?php echo base_url(); ?>resources/images/applications/application_icons/bmi.png" height="16px" width="16px"/>
+                            <a href="<?php echo base_url().BMI_HOME_PAGE?>">
+                                <img alt="Xstream Banter" title="<?php echo BMI_NAME; ?>" src="<?php echo base_url().BMI_ICON ?>" height="16px" width="16px"/>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>applications/photography">
-                                <img alt="Photography" title="Photography" src="<?php echo base_url(); ?>resources/images/applications/application_icons/photo.png" height="16px" width="16px"/>
+                            <a href="<?php echo base_url().PHOTOGRAPHY_HOME_PAGE?>">
+                                <img alt="Xstream Banter" title="<?php echo PHOTOGRAPHY_NAME; ?>" src="<?php echo base_url().PHOTOGRAPHY_ICON ?>" height="16px" width="16px"/>
                             </a>
                         </li>
                     </ul>

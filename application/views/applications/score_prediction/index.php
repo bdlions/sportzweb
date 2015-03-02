@@ -159,16 +159,19 @@
             <td>
                 {%
                     var mch_date = Date.parse(prediction['date']),
-                    tdy_date = Date.parse(today_ymd_str),
-                    match_over = (mch_date<tdy_date) ? 1 : 0,
+                    tdy_date = Date.parse(new Date()),
+                    match_over = (mch_date>=tdy_date) ? 0 : 1,
                     mch_time = prediction['time'],
-                    now_time = new Date().getHours() + ":" + new Date().getMinutes();
-                    match_over = (match_over == 0 && mch_time > now_time)? 0 : 1;
+                    now_time = new Date().getHours() + ":" + new Date().getMinutes(),match_over;
+                    if(mch_date>tdy_date){match_over=0}
+                    else if(mch_date<tdy_date){match_over=1}
+                    else if(mch_date==tdy_date){if(mch_time > now_time){match_over=0}else{match_over=1}}
+//                    match_over = 0;
                 %}
                 {% if ( (prediction['can_predict'] == 1) && (match_over==0) ){ %}
-                <a data-match_id="{%= prediction['match_id']%}" class="prediction_button" onclick="pred_pressed(this)" style="float: right"><img src="<?php echo base_url();?>resources/images/predict_button.png"></a>
+                    {%=mch_date %} {%="T"+tdy_date %} {%=mch_time %} {%=now_time %}<a data-match_id="{%= prediction['match_id']%}" class="prediction_button" onclick="pred_pressed(this)" style="float: right">Predict<!--<img src="<?php echo base_url();?>resources/images/predict_button.png">--></a>
                 {% } else { %}
-                <a class="prediction_button" onclick="result_pred_pressed(this)" style="float: right"><img src="<?php echo base_url();?>resources/images/predict_result_button.png"></a>
+                {%=mch_date %} {%="t"+tdy_date %} {%=mch_time %} {%=now_time %}<a class="prediction_button" onclick="result_pred_pressed(this)" style="float: right"><img src="<?php echo base_url();?>resources/images/predict_result_button.png"></a>
                 {% } %}
             </td>
         </tr>
