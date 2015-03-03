@@ -86,3 +86,11 @@ and open the template in the editor.
     width: 64px;
     font-size: 14px;
 }
+.sd_business_profile_image{
+    max-height: 256px;
+    background: skyblue;
+}
+.sd_recommend_btn{
+    background: #AEADAD;
+    color: #E01B1B;
+}

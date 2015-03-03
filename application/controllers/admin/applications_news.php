@@ -302,7 +302,13 @@ class Applications_news extends CI_Controller{
              $response = $result;
         }
         echo json_encode($response);
-      
+    }
+    //------------------------------ News Style Module ----------------------------------//
+    public function configure_news_styles()
+    {
+        $this->data['message'] = '';
+//        $this->data['news_list'] = $this->admin_news->get_news_style();
+        $this->template->load($this->tmpl,"admin/applications/news_app/news_style/manage_style",  $this->data);
     }
     //------------------------------ News Category Module ----------------------------------//
     /*

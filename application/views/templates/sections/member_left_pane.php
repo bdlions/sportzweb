@@ -40,62 +40,62 @@
         <div class="menu_section_header">Applications</div>
         <?php if (in_array(APPLICATION_XSTREAM_BANTER_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().XSTREAM_BANTER_HOME_PAGE?>">
-                <img src="<?php echo base_url().XSTREAM_BANTER_ICON ?>"> <?php echo XSTREAM_BANTER_NAME; ?>
+            <a href="<?php echo base_url().XSTREAM_BANTER_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.XSTREAM_BANTER_ICON ?>"> <?php echo $applications_info[APPLICATION_XSTREAM_BANTER_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_HEALTYY_RECIPES_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().HEALTHY_RECIPE_HOME_PAGE?>">
-                <img src="<?php echo base_url().HEALTHY_RECIPE_ICON ?>"> <?php echo HEALTHY_RECIPE_NAME; ?>
+            <a href="<?php echo base_url().HEALTHY_RECIPE_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.HEALTHY_RECIPE_ICON ?>"> <?php echo $applications_info[APPLICATION_HEALTYY_RECIPES_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_SERVICE_DIRECTORY_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().SERVICE_DIRECTORY_HOME_PAGE?>">
-                <img src="<?php echo base_url().SERVICE_DIRECTORY_ICON?>"> <?php echo SERVICE_DIRECTORY_NAME; ?>
+            <a href="<?php echo base_url().SERVICE_DIRECTORY_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.SERVICE_DIRECTORY_ICON?>"> <?php echo $applications_info[APPLICATION_SERVICE_DIRECTORY_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_BLOG_APP_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().BLOG_HOME_PAGE?>">
-                <img src="<?php echo base_url().BLOG_ICON ?>"> <?php echo BLOG_NAME; ?>
+            <a href="<?php echo base_url().BLOG_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.BLOG_ICON ?>"> <?php echo $applications_info[APPLICATION_BLOG_APP_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_NEWS_APP_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().NEWS_HOME_PAGE?>">
-                <img src="<?php echo base_url().NEWS_ICON ?>"> <?php echo NEWS_NAME; ?>
+            <a href="<?php echo base_url().NEWS_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.NEWS_ICON ?>"> <?php echo $applications_info[APPLICATION_NEWS_APP_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_BMI_CALCULATOR_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().BMI_HOME_PAGE?>">
-                <img src="<?php echo base_url().BMI_ICON ?>"><?php echo BMI_NAME; ?>
+            <a href="<?php echo base_url().BMI_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.BMI_ICON ?>"><?php echo $applications_info[APPLICATION_BMI_CALCULATOR_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_PHOTOGRAPHY_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().PHOTOGRAPHY_HOME_PAGE?>">
-                <img src="<?php echo base_url().PHOTOGRAPHY_ICON ?>"> <?php echo PHOTOGRAPHY_NAME; ?>
+            <a href="<?php echo base_url().PHOTOGRAPHY_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.PHOTOGRAPHY_ICON ?>"> <?php echo $applications_info[APPLICATION_PHOTOGRAPHY_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_GYMPRO_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().GYMPRO_HOME_PAGE?>">
-                <img src="<?php echo base_url().GYMPRO_ICON ?>"> <?php echo GYMPRO_NAME; ?>
+            <a href="<?php echo base_url().GYMPRO_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.GYMPRO_ICON ?>"> <?php echo $applications_info[APPLICATION_GYMPRO_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_SCORE_PREDICTION_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().SCORE_PREDICTION_HOME_PAGE?>">
-                <img src="<?php echo base_url().SCORE_PREDICTION_ICON ?>"> <?php echo SCORE_PREDICTION_NAME; ?>
+            <a href="<?php echo base_url().SCORE_PREDICTION_HOME_PAGE_PATH?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.SCORE_PREDICTION_ICON ?>"> <?php echo $applications_info[APPLICATION_SCORE_PREDICTION_ID-1]['title']; ?>
             </a>
         </div>
         <?php } if (in_array(APPLICATION_SHOP_ID, $app_id_list)) { ?>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url().SHOP_HOME_PAGE ?>">
-                <img src="<?php echo base_url().SHOP_ICON ?>"> <?php echo SHOP_NAME; ?>
+            <a href="<?php echo base_url().SHOP_HOME_PAGE_PATH ?>">
+                <img src="<?php echo base_url().APPLICATION_ICON_PATH.SHOP_ICON ?>"> <?php echo $applications_info[APPLICATION_SHOP_ID-1]['title']; ?>
             </a>
         </div>
         <?php } ?>

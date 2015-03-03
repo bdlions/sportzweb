@@ -7,14 +7,13 @@ class Auth extends Role_Controller{
 
     function __construct() {
         parent::__construct();
+        $this->load->helper('url');
+        $this->load->helper('recaptcha');
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
         $this->load->library("statuses");
-        $this->load->helper('url');
-        $this->load->helper('recaptcha');
         $this->load->library("org/profile/business/business_profile_library");
         $this->load->library("basic_profile");
-        $this->load->model("dataprovider_model");
         $this->load->library("newsfeed");
         $this->load->library("follower");
         $this->load->library("visitors");
@@ -26,6 +25,7 @@ class Auth extends Role_Controller{
         $this->load->library('org/configure/login_page_library');
         $this->load->library('org/configure/logout_page_library');
         $this->load->library('org/question/security_question_library');
+        $this->load->model("dataprovider_model");
 
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
@@ -86,6 +86,7 @@ class Auth extends Role_Controller{
                         $this->data['recent_activities'] = $this->recent_activities->get_recent_activites();
                         $this->data['popular_trends'] = $this->trending_features->get_popular_trends()->result_array();
                         $this->data['app_id_list'] = $this->application_directory_library->get_user_application_id_list($user_id);
+                        $this->data['applications_info'] = $this->application_directory_library->get_all_applications();
                         $visit_success = $this->visitors->store_page_visitor(VISITOR_PAGE_NEWSFEED_ID);
                         $this->template->load(NULL, MEMBER_LOGIN_SUCCESS_VIEW, $this->data);
                     }

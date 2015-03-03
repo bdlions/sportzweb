@@ -10,28 +10,30 @@
     define("APPLICATION_SHOP_ID",                                             9);
     define("APPLICATION_GYMPRO_ID",                                           10);
     
-    define("XSTREAM_BANTER_HOME_PAGE",          "applications/xstream_banter");
-    define("SERVICE_DIRECTORY_HOME_PAGE",       "applications/service_directory");
-    define("NEWS_HOME_PAGE",                    "applications/news_app");
-    define("APPLICATION_DIRECTORY_HOME_PAGE",   "applications/application_directory");
-    define("HEALTHY_RECIPE_HOME_PAGE",          "applications/healthy_recipe");
-    define("BLOG_HOME_PAGE",                    "applications/blog_app");
-    define("BMI_HOME_PAGE",                     "applications/bmi_calculator");
-    define("PHOTOGRAPHY_HOME_PAGE",             "applications/photography");
-    define("SCORE_PREDICTION_HOME_PAGE",        "applications/score_prediction");
-    define("SHOP_HOME_PAGE",                    "applications/shop");
-    define("GYMPRO_HOME_PAGE",                  "applications/gympro");
+    define("XSTREAM_BANTER_HOME_PAGE_PATH",          "applications/xstream_banter");
+    define("SERVICE_DIRECTORY_HOME_PAGE_PATH",       "applications/service_directory");
+    define("NEWS_HOME_PAGE_PATH",                    "applications/news_app");
+    define("APPLICATION_DIRECTORY_HOME_PAGE_PATH",   "applications/application_directory");
+    define("HEALTHY_RECIPE_HOME_PAGE_PATH",          "applications/healthy_recipe");
+    define("BLOG_HOME_PAGE_PATH",                    "applications/blog_app");
+    define("BMI_HOME_PAGE_PATH",                     "applications/bmi_calculator");
+    define("PHOTOGRAPHY_HOME_PAGE_PATH",             "applications/photography");
+    define("SCORE_PREDICTION_HOME_PAGE_PATH",        "applications/score_prediction");
+    define("SHOP_HOME_PAGE_PATH",                    "applications/shop");
+    define("GYMPRO_HOME_PAGE_PATH",                  "applications/gympro");
     
-    define("XSTREAM_BANTER_ICON",          "resources/images/applications/application_icons/xb.png");
-    define("SERVICE_DIRECTORY_ICON",       "resources/images/applications/application_icons/sd.png");
-    define("NEWS_ICON",                    "resources/images/applications/application_icons/news.png");
-    define("HEALTHY_RECIPE_ICON",          "resources/images/applications/application_icons/recipe.png");
-    define("BLOG_ICON",                    "resources/images/applications/application_icons/blog.png");
-    define("BMI_ICON",                     "resources/images/applications/application_icons/bmi.png");
-    define("PHOTOGRAPHY_ICON",             "resources/images/applications/application_icons/photo.png");
-    define("SCORE_PREDICTION_ICON",        "resources/images/applications/application_icons/sp.png");
-    define("SHOP_ICON",                    "resources/images/applications/application_icons/shop.png");
-    define("GYMPRO_ICON",                  "resources/images/applications/application_icons/ptpro.png");
+    define("APPLICATION_ICON_PATH",         "resources/images/applications/application_icons/");
+    
+    define("XSTREAM_BANTER_ICON",          "xb.png");
+    define("SERVICE_DIRECTORY_ICON",       "sd.png");
+    define("NEWS_ICON",                    "news.png");
+    define("HEALTHY_RECIPE_ICON",          "recipe.png");
+    define("BLOG_ICON",                    "blog.png");
+    define("BMI_ICON",                     "bmi.png");
+    define("PHOTOGRAPHY_ICON",             "photo.png");
+    define("SCORE_PREDICTION_ICON",        "sp.png");
+    define("SHOP_ICON",                    "shop.png");
+    define("GYMPRO_ICON",                  "ptpro.png");
     
     define("XSTREAM_BANTER_NAME",          "Xstream Banter");
     define("SERVICE_DIRECTORY_NAME",       "Service Directory");

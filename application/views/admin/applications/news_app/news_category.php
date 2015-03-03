@@ -46,6 +46,13 @@
                         </button>  
                     </a>
                 </div>
+                <div class="col-sm-2">
+                    <a href="<?php echo base_url();?>admin/applications_news/configure_news_styles">
+                        <button class="btn button-custom ">
+                            Manage News Styles
+                        </button>  
+                    </a>
+                </div>
                 <?php } ?>
                 <?php if($allow_writing){ ?>
                 <div class ="col-sm-2">
