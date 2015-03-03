@@ -424,15 +424,16 @@
         </div>
         </div>
         <div class="row">
-            <div class ="col-md-3 pull-left">
+            <div class ="col-md-3 col-xs-2">
                 <input type="button" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
             </div>
-            <div class ="col-md-offset-4 col-md-5 pull-right">
+            <div class="col-md-4"></div>
+            <div class ="col-md-5">
                 <div class="row">
-                <div class ="col-md-8" style="z-index: 6">
+                <div class ="col-md-8 col-xs-5" style="z-index: 6">
                     <input type="text" class="form-control" id="input_configuration_date" name="input_configuration_date" value=""/>
                 </div>
-                <div class ="col-md-4">
+                <div class ="col-md-4 col-xs-5">
                     <button id="button_submit_sub_category_page_configuration" name="button_submit_sub_category_page_configuration" value="" class="form-control btn button-custom">
                         Submit
                     </button>    

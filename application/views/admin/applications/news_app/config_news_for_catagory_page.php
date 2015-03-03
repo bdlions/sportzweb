@@ -82,23 +82,24 @@
                     <a href="<?php echo base_url() ?>admin/applications_news/news_details/<?php echo $news_id_news_info_map[$region_id_news_id_map[0]]['news_id'];?>">
                         <img id="image_position_1" style="width:280px;" class="img-responsive" src="<?php echo base_url().NEWS_HOME_TOP_LEFT_IMAGE_PATH.$news_id_news_info_map[$region_id_news_id_map[0]]['picture'];?>"/>
                     </a>                    
-                <button style="z-index: 500;" id="button_edit_news_1" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_news_1', '1')">
-                    Edit
-                </button>
+                
                 </div>
+                <div class="col-md-6 col-lg-6"> 
                 <input type="checkbox" id="checkbox_1" <?php echo $region_id_is_news_ignored_map[0]==1?'checked':''?>/>
                 <input type="hidden" name="position_of_news_1" id="position_of_news_1" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[0]]['news_id']) ? $news_id_news_info_map[$region_id_news_id_map[0]]['news_id'] : ''; ?>">
                 <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
-                <div class="col-md-6 col-lg-6">                    
+                        <button style="z-index: 500;" id="button_edit_news_1" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_news_1', '1')">
+                            Edit
+                        </button>
                     <a href="<?php echo base_url()?>admin/applications_news/news_details/<?php echo $news_id_news_info_map[$region_id_news_id_map[0]]['news_id'];?>">
                         <span class="cus_news_headline">
-                            <p id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline']));?></p>
-                        </span>
-                    </a>
-                    <span class="cus_news_descr">
-                        <p id="summary_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['summary']));?></p>
-                    </span>                    
-                </div>
+                                <p id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline'])); ?></p>
+                            </span>
+                        </a>
+                        <span class="cus_news_descr">
+                            <p id="summary_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['summary'])); ?></p>
+                        </span>  
+                    </div>
             </div>
             <?php } ?>
             <div class="row" style="padding-bottom: 20px"><!--top news loop...3 news per row-->
@@ -424,15 +425,16 @@
         </div>
         </div>
         <div class="row">
-            <div class ="col-md-3 pull-left">
+            <div class ="col-md-3 col-xs-2">
                 <input type="button" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
             </div>
-            <div class ="col-md-offset-4 col-md-5">
+            <div class="col-md-4"></div>
+            <div class ="col-md-5">
                 <div class="row">
-                    <div class ="col-md-8" style="z-index: 6">
+                    <div class ="col-md-8 col-xs-5" style="z-index: 6">
                         <input type="text" class="form-control" id="input_configuration_date" name="input_configuration_date" value=""/>
                     </div>
-                    <div class ="col-md-4">
+                    <div class ="col-md-4 col-xs-5">
                         <button id="button_submit_category_page_configuration" name="button_submit_category_page_configuration" value="" class="form-control btn button-custom">
                             Submit
                         </button>    
