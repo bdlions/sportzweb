@@ -73,7 +73,8 @@
         </div>
     </div>
     <div class="panel-body">
-        <div class="row col-md-9">
+        <div class="row">
+        <div class="col-md-9">
             <?php if (array_key_exists(0, $region_id_news_id_map) && array_key_exists($region_id_news_id_map[0], $news_id_news_info_map)){?>
             <div class="row" style="padding-bottom: 20px"><!--Greatest news-->
                 <div class="col-md-6 col-lg-6">                    
@@ -391,7 +392,7 @@
                 </div>
             </div>            
         </div><!--main body end-->
-        <div class="row col-md-3" id="side_panel">
+        <div class="col-md-3" id="side_panel">
             <?php for($i=14;$i<18;$i++){?>
                 <?php if(array_key_exists($i-1, $region_id_news_id_map) && array_key_exists($region_id_news_id_map[$i-1], $news_id_news_info_map)) : ?>
                 <div class="col-md-12 col-lg-12">
@@ -420,11 +421,13 @@
                 <?php endif;  ?>
             <?php }?>
         </div>
-        <div class="row col-md-12">
+        </div>
+        <div class="row">
             <div class ="col-md-3 pull-left">
                 <input type="button" value="Back" id="back_button" onclick="javascript:history.back();" class="form-control btn button-custom">
             </div>
-            <div class ="row col-md-5 pull-right">
+            <div class ="col-md-offset-4 col-md-5 pull-right">
+                <div class="row">
                 <div class ="col-md-8" style="z-index: 6">
                     <input type="text" class="form-control" id="input_configuration_date" name="input_configuration_date" value=""/>
                 </div>
@@ -433,6 +436,7 @@
                         Submit
                     </button>    
                 </div>
+            </div>
             </div>
         </div>
     </div>    
