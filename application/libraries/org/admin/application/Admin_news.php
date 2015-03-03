@@ -398,7 +398,7 @@ class Admin_news{
         
         return $region_id_news_info_map;
     }
-
+   
     public function get_news_category_configuration($news_category_id)
     {
         $show_advertise = true;

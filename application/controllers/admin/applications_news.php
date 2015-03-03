@@ -114,6 +114,7 @@ class Applications_news extends CI_Controller{
         $this->data = array_merge($this->data, $this->admin_news->get_news_home_page_configuration());
         $this->template->load($this->tmpl,"admin/applications/news_app/config_news_for_home_page",  $this->data);
     }
+   
     /*
      * Ajax call
      * This method will save news home page configuration
@@ -171,6 +172,28 @@ class Applications_news extends CI_Controller{
         $this->template->load($this->tmpl,"admin/applications/news_app/manage_latest_news",  $this->data);
     }
     
+       /*
+     * Ajax call
+     * This method get latest news
+     * @Rashida on 4th march 2015
+     */
+     public function get_latest_news()
+    {
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        
+        $latest_news_list_info = $this->admin_news->get_latest_news_info()->result_array();
+        if(!empty($latest_news_list_info)){
+            $latest_news_list_info = $latest_news_list_info[0];
+           $news_id_list = json_decode($latest_news_list_info['news_list']);
+           $latest_news_list= $this->admin_news->get_selected_news_by_id($news_id_list)->result_array();
+           if(!empty($latest_news_list))
+               {
+                $this->data['latest_news_list']  = $latest_news_list;
+               }
+        }
+     $this->template->load($this->tmpl,"admin/applications/news_app/manage_latest_news",  $this->data);
+    }
+    
     /*
      * Ajax Call
      * $this method will store configuration of latest news
@@ -209,15 +232,44 @@ class Applications_news extends CI_Controller{
         $this->template->load($this->tmpl,"admin/applications/news_app/manage_breaking_news",  $this->data);
     }
     
+    
+    
+    
+     /*
+     * Ajax call
+     * This method get latest braking news
+     * @Rashida on 4th march 2015
+     */
+     public function get_latest_breaking_news()
+    {
+        $this->data['news_list'] = $this->admin_news->get_news_list();
+        
+        $breaking_news_list_info = $this->admin_news->get_breaking_news_info()->result_array();
+        if(!empty($breaking_news_list_info)){
+            $breaking_news_list_info = $breaking_news_list_info[0];
+           $news_id_list = json_decode($breaking_news_list_info['news_list']);
+           $breaking_news_list= $this->admin_news->get_selected_news_by_id($news_id_list)->result_array();
+           if(!empty($breaking_news_list))
+               {
+                $this->data['breaking_news_list']  = $breaking_news_list;
+               }
+        }
+     $this->template->load($this->tmpl,"admin/applications/news_app/manage_breaking_news",  $this->data);
+    }
+    
     /*
      * Ajax Call
      * $this method will store configuration of breaking news
      * @Author Nazmul on 4th February 2015
      */
+    
+    
+    
     public function add_breaking_news_configuration()
     {
         $response = array();
         $news_id_list = $this->input->post('news_id_list'); 
+        
         $data = array(
             'news_list' => $news_id_list,
             'selected_date' => $this->utils->get_current_date_db()
@@ -234,6 +286,23 @@ class Applications_news extends CI_Controller{
             $response['message'] = $this->admin_news->errors_alert();
         }
         echo json_encode($response);
+    }
+    /*
+     * Ajax call
+     * this method return selected news information
+     * @author rashida 4th march 2015
+     */
+    public function get_selected_news_by_id()
+    {
+      $response = array();
+      $news_id_list = $this->input->post('news_selected_id_list'); 
+      $result = $this->admin_news->get_selected_news_by_id($news_id_list)->result_array();
+      if(!empty($result)){
+             
+             $response = $result;
+        }
+        echo json_encode($response);
+      
     }
     //------------------------------ News Category Module ----------------------------------//
     /*
@@ -1245,16 +1314,20 @@ class Applications_news extends CI_Controller{
         
         echo json_encode($response);
     }
-    public function search_news_items()
+
+
+    /*
+     * This method search news items by date range 
+     * @Rashida 3rd March 2015
+     */
+    public function search_news_items_by_date()
     {
         $response = array();
-        $search_news_type = $this->input->post('search_news_type');
-        $search_news_type =$search_news_type."%";
         $search_news_start_date = $this->input->post('search_news_start_date');
         $search_news_end_date = $this->input->post('search_news_end_date');
-        $search_news_start_date = $this->utils->convert_date_from_user_to_db($search_news_start_date);
-        $search_news_end_date = $this->utils->convert_date_from_user_to_db($search_news_end_date);
-        $search_news_result_array = $this->admin_news->get_search_news_info($search_news_type,$search_news_start_date,$search_news_end_date)->result_array();
+        $start_date = $this->utils->convert_date_from_user_to_db($search_news_start_date);
+        $end_date = $this->utils->convert_date_from_user_to_db($search_news_end_date);
+        $search_news_result_array = $this->admin_news->get_selected_news_by_date_range($start_date,$end_date)->result_array();
         
         if(!empty($search_news_result_array))
         {
@@ -1263,7 +1336,24 @@ class Applications_news extends CI_Controller{
         
         echo json_encode($response);
     }
-    
+    /*
+     * Ajax call
+     * This method search news items by news type result
+     * @Rashida 3rd March 2015
+     */
+    public function search_items_by_news_type()
+    {
+        $response = array();
+        $search_news_type = $_GET['query'];
+         $search_news_result_array = $this->admin_news->get_search_news_info_by_type($search_news_type)->result_array();
+        
+        if(!empty($search_news_result_array))
+        {
+            $response = $search_news_result_array;
+        }
+        
+        echo json_encode($response);
+    }
     public function config_news_for_category($news_category_id)
     {
         $this->data['message'] = '';

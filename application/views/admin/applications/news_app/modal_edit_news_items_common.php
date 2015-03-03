@@ -14,18 +14,14 @@
             $('#search_news_end_date').text($('#search_news_end_date').data('date'));
             $('#search_news_end_date').datepicker('hide');
         });
-        
-        
-        
-        
+      
         $("#Search_news_items").on("click",function(){
             
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/applications_news/search_news_items?query=%QUERY",
+                url: '<?php echo base_url(); ?>' + "admin/applications_news/search_news_items_by_date",
                 data: {
-                    search_news_type: $('#search_news_type').val(),
                     search_news_start_date: $('#search_news_start_date').val(),
                     search_news_end_date: $('#search_news_end_date').val(),
                 },
@@ -34,11 +30,28 @@
                    
                }
             });
+        });
+        
+         $("#search_box").typeahead([
+            {
+                name:"search_news",
+                valuekey:"value",
+                remote:'<?php echo base_url(); ?>' + "admin/applications_news/search_items_by_news_type?query=%QUERY",
+                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">News</div>',
+                template: [
+                    '<div class="row"><div class="tt-suggestions col-md-11"><div class="form-horizontal"><span class="glyphicon glyphicon-user col-md-12">{{headline}}</span><span class="glyphicon glyphicon-phone col-md-12">{{news_date}}</span></div><div class="tt-suggestions col-md-12" style="border-top: 1px dashed #CCCCCC;margin: 6px 0;"></div></div>'
+                  ].join(''),
+                engine: Hogan
+            }
+    ]).on('typeahead:selected', function (obj, datum) {
+        if(datum.id)
+        {
+            $("#tbody_news_list").html(tmpl("tmpl_news_list", datum))
             
+        }
         });
         
         $("#button_save_news").on("click", function() {
-            
             var selected_array = Array();
             var news_id;
             $("#tbody_news_list tr").each(function() {
@@ -50,72 +63,28 @@
                     }
                 });
             });
-
-            if(selected_array.length == 1) {
-                
-                var present_value = $('#get_selected_id').val();
-                var id = '#position_of_news_'+present_value;  
-                var position = $(id+"").val(news_id);
-                var position_array = [];
-                var length = <?php echo NEWS_CONFIGURATION_COUNTER;?>;
-                var panel = $('#panel').val();
-                if(panel==3) length = length - 4;
-                for(var i=1;i<=length;i++)
-                {
-                    position_array[i] = $('#position_of_news_'+i).val();
-                }
-                
-                for(var i=1;i<=length;i++)
-                {
-                    if(i != present_value) continue;
-                    for(var j=1;j<=length;j++)
-                    {
-                        if(i == j) continue;
-                        if(news_id == position_array[j])
-                        {
-                            alert('This news already selected in one position');
-                            return;
-                        }
-                    }
-                }
-                 
-                
-                
-                $.ajax({
-                    dataType: 'json',
-                    type: "POST",
-                    url: '<?php echo base_url(); ?>' + "admin/applications_news/get_selected_news_data",
-                    data: {
-                        news_id: news_id
-                    },
-                    success: function(data) {
-                        var img_position = $("#image_position_" + present_value);
-                        
-                        if(img_position != undefined){
-                            img_position.attr("src", "<?php echo base_url().NEWS_IMAGE_PATH;?>" + data.picture.replace(/(\r\n|\n|\r)/gm,""));
-                        }
-                        
-                        var heading_ = $("#heading_" + present_value);
-                        if(heading_ != undefined){
-                            //alert($("<div/>").html($("<div/>").html(data.headline).text()).text());
-                            heading_.text($("<div/>").html($("<div/>").html(data.headline).text()).text().replace(/(<([^>]+)>)/ig, ""));
-                        }
-                        
-                        var summaray_ = $("#summary_" + present_value);
-                        if(summaray_ != undefined){
-                            //summaray_.text(data.summary);
-                            summaray_.text($("<div/>").html($("<div/>").html(data.summary).text()).text().replace(/(<([^>]+)>)/ig, ""));
-                        }
-                    }
-                });
-                $('#modal_edit_news_item_home_page').modal('hide');
-            } else {
-                alert('You can only select one news for this position');
-                return ;
+            
+            
+            if($('#hidden_field_for_key').val() == <?php echo NEWS_MANAGE_HOME_PAGE_KEY ?>)
+            {
+                selected_news_id_list(selected_array, news_id);
+            }else if($('#hidden_field_for_key').val() == <?php echo NEWS_CONFIG_CATEGORY_PAGE_KEY ?>)
+            {
+                selected_news_id_list(selected_array,news_id);
+            }else if($('#hidden_field_for_key').val() == <?php echo NEWS_CONFIG_SUB_CATEGORY_PAGE_KEY ?>)
+            {
+                selected_news_id_list(selected_array,news_id);
+            }else if($('#hidden_field_for_key').val() == <?php echo BREAKING_NEWS_SELECTION_KEY ?>)
+            {
+                selected_breaking_news_id_list(selected_array);
+            }else if($('#hidden_field_for_key').val() == <?php echo LATEST_NEWS_SELECTION_KEY ?>)
+            {
+                selected_latest_news_id_list(selected_array);
             }
-           
+            
         });
     });
+    
 </script>
 <script type="text/x-tmpl" id="tmpl_news_list">
     {% var i=0, news_list = ((o instanceof Array) ? o[i++] : o); %}
@@ -127,7 +96,7 @@
     {% news_list = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
-<div class="modal fade" id="modal_edit_news_item_home_page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="common_modal_edit_news_item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -137,16 +106,16 @@
             <div class="modal-body" style="max-height: 300px; overflow-y: auto;">
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <label>Type</label>
-                        <input type="text" id="search_news_type" name="shearch_text" class="form-control">
+                        <label>Type News</label>
+                    <div class="twitter-typeahead" style="position: relative;"><input type="text" disabled="" spellcheck="off" autocomplete="off" class="tt-hint form-control" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background: none repeat scroll 0% 0% transparent;"><input type="text" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;" spellcheck="false" autocomplete="off" id="search_box" class="form-control tt-query" placeholder="Search for News"><div style="position: absolute; left: -9999px; visibility: hidden; white-space: nowrap; font-family: Calibri,Arial,Helvetica,sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: optimizelegibility; text-transform: none;"></div><div class="tt-dropdown-menu dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></div></div>
                     </div>
                     <div class="col-md-3 form-group">
                         <label>Start Date</label>
-                        <input type="text" id="search_news_start_date" name="start_date" class="form-control">
+                        <input type="text" id="search_news_start_date" name="search_news_start_date" class="form-control">
                     </div>
                     <div class="col-md-3 form-group">
                         <label>End Date</label>
-                        <input type="text" id="search_news_end_date" name="end_date" class="form-control">
+                        <input type="text" id="search_news_end_date" name="search_news_end_date" class="form-control">
                     </div>
                     <div class="col-md-2 form-group">
                         <button type="button" id="Search_news_items" name="search_news_items" class="btn button-custom" style="margin-top: 22px">Search</button>
@@ -174,6 +143,7 @@
                     </div>
                 </div>                
             </div>
+            <input type="hidden" id="selected_news_id_array">
             <div class="modal-footer">
                 <button id="button_save_news" name="button_save_news" value="" class="btn button-custom">Save</button>
                 <button type="button" class="btn button-custom" data-dismiss="modal">Close</button>

@@ -52,9 +52,10 @@
             });
         });
     });
-    function openModal(val,id) {        
+    function openModal(val,id) { 
+        $('#hidden_field_for_key').val(<?php echo NEWS_CONFIG_SUB_CATEGORY_PAGE_KEY; ?> );
         $('#get_selected_id').val(id);
-        $('#modal_edit_news_item_for_sub_category').modal('show');
+        $('#common_modal_edit_news_item').modal('show');
     }
     function advertise_selection_option_change(){
         var advertise_option_selected_item = $('#advertise_selection_option').val();
@@ -439,6 +440,8 @@
             </div>
             </div>
         </div>
+        <input type="hidden" id="hidden_field_for_key">
     </div>    
 </div>
-<?php $this->load->view("admin/applications/news_app/modal_edit_news_item_for_sub_category"); ?>
+<?php $this->load->view("admin/applications/news_app/modal_edit_news_items_common"); ?>
+<?php $this->load->view("admin/applications/news_app/common_js_for_news"); ?>

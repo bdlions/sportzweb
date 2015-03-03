@@ -243,6 +243,19 @@ class Admin_news_model extends Ion_auth_model
                     ->limit(NEWS_CONFIGURATION_COUNTER)
                     ->get();
     }
+     /*
+     * This method return latest news configuration 
+     * @parameter news id
+     * @Rashida 3rd March 2015
+     */ 
+    
+    public function get_latest_news_info()
+    {
+        $this->db->order_by('id', 'desc');
+        return $this->db->select("*")
+                    ->from($this->tables['app_news_latest_news_configuration'])
+                    ->get();
+    }
     
     /*
      * This method will add configuration of a news home page
@@ -474,24 +487,58 @@ class Admin_news_model extends Ion_auth_model
                     ->from($this->tables['news'])
                     ->get();
     }
+    /*
+     * This method return latest breaking news configuration 
+     * @parameter news id
+     * @Rashida 3rd March 2015
+     */ 
     
-    public function get_search_news_info($search_news_type=null,$search_news_start_date=0,$search_news_end_date=0)
+    public function get_breaking_news_info()
     {
-        if($search_news_type != null)
-        {
-          $this->db->like($this->tables['news'].'.headline',$search_news_type);  
-        }
+        $this->db->order_by('id', 'desc');
+        return $this->db->select("*")
+                    ->from($this->tables['app_news_breaking_news_configuration'])
+                    ->get();
+    }
+    /*
+     * This method return selected breaking news items and latest news items 
+     * @parameter news id
+     * @Rashida 3rd March 2015
+     */ 
+    
+   function get_selected_news_by_id($news_id_list)
+    {
+       $this->db->where_in($this->tables['news'].'.id',$news_id_list);
+       return $this->db->select("*")
+                    ->from($this->tables['news'])
+                    ->get();
+    }
+    /*
+     * This method search news items by date range 
+     * @Rashida 3rd March 2015
+     */ 
+    public function get_selected_news_by_date_range($start_date,$end_date)
+    {
+     
+        $this->db->where($this->tables['news'].'.news_date >=',$start_date);
+        $this->db->where($this->tables['news'].'.news_date <=',$end_date);
        
-        if($search_news_start_date != 0 && $search_news_end_date != 0)
-        {
-        $this->db->where($this->tables['news'].'.news_date >=',$search_news_start_date);
-        $this->db->where($this->tables['news'].'.news_date <=',$search_news_end_date);
-        }
         return $this->db->select("*")
                     ->from($this->tables['news'])
                     ->get();
     }
-
+     /*
+     * This method search news items by  news type result
+     * @Rashida 3rd March 2015
+     */ 
+    public function get_search_news_info_by_type($search_news_type)
+    {
+        $this->db->like($this->tables['news'].'.headline',$search_news_type);
+        
+        return $this->db->select("*")
+                    ->from($this->tables['news'])
+                    ->get();
+    }
 
     public function create_news($data)
     {
