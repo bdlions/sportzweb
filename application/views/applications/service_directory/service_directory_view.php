@@ -1,7 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/customStyles.css" />
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
 <script>
-
     $(function() {
         var result_arr = [];
         var services = Array();
@@ -9,42 +8,37 @@
         if (town_code != "london_") {
             services = <?php echo json_encode($services); ?>;
         }
-        var numof_services = services.length;
         var another_town = '<?php echo $another_town ?>';
         var townLat;
         var townLon;
 		
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': town_code}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK)
-            {
+            if (status == google.maps.GeocoderStatus.OK){
                 townLat = results[0].geometry.location.lat();
                 townLon = results[0].geometry.location.lng();
-                        if (town_code != "london_")
-                        {
-                            $("#services_displayer").append('<span style="color: limegreen">Services near: ' + '<?php echo $selected_services; ?></span>');
-                        }
-                        $.each(services, function(index, service) {
-                            var serviceLat = parseFloat(service.latitude);
-                            var serviceLon = parseFloat(service.longitude);
+                if (town_code != "london_"){
+                    $("#services_displayer").append('<span style="color: limegreen">Services near: ' + '<?php echo $selected_services; ?></span>');
+                }
+                $.each(services, function(index, service) {
+                    var serviceLat = parseFloat(service.latitude);
+                    var serviceLon = parseFloat(service.longitude);
+                    var hi = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(serviceLat, serviceLon), new google.maps.LatLng(townLat, townLon));
+                    hi = hi / 1000;
+                    hi = hi / 1.61;
 
-                            var hi = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(serviceLat, serviceLon), new google.maps.LatLng(townLat, townLon));
-                            hi = hi / 1000;
-                            hi = hi / 1.61;
-
-                            var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.post_code + "," + service.city + "<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
+                    var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.post_code + "," + service.city + "<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
 //                            $("#services_displayer").append(service_text);
-                            result_arr.push([[service_text], [hi]]);
-                        });
-                        result_arr.sort(function(a, b) {
-                            return a[1] - b[1]
-                        });
-                        $.each(result_arr, function(index, service_text) {
-                            $("#services_displayer").append(service_text[0]);
-                        });
-                    }
+                    result_arr.push([[service_text], [hi]]);
                 });
-		
+                result_arr.sort(function(a, b) {
+                    return a[1] - b[1]
+                });
+                $.each(result_arr, function(index, service_text) {
+                    $("#services_displayer").append(service_text[0]);
+                });
+            }
+        });
 		
         var map_canvas = document.getElementById('map_canvas');
         geocoder.geocode({'address': another_town}, function(results, status) {
@@ -52,55 +46,52 @@
                 //map.setCenter(results[0].geometry.location);
                 var latitude = results[0].geometry.location.lat();
                 var longitude = results[0].geometry.location.lng();
-                        var myCenter = new google.maps.LatLng(latitude, longitude);
-                        var map_options = {
-                            center: new google.maps.LatLng(latitude, longitude),
-                            zoom: 12,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP
-                        }
-                        var map = new google.maps.Map(map_canvas, map_options);
-                        var serv;
-                        if (town_code != "london_") {
-                            $.each(services, function(index, service) {
-
-                                var reference = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + service['address'].replace(/ /g, "+") + '&sensor=false';
-                                $.ajax({
-                                    url: reference,
-                                    dataType: 'json',
-                                    async: false,
-                                    data: null,
-                                    success: function(data) {
-                                        if (data.results != undefined && data.results.length > 0) {
-                                            var latlng = new google.maps.LatLng(service['latitude'], service['longitude']);
-                                            
-//                                            var pinColor = "cc5533";
-//                                            var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-//                                                new google.maps.Size(21, 34),
-//                                                new google.maps.Point(0,0),
-//                                                new google.maps.Point(10, 34));
-                                            var markers = new google.maps.Marker({
-                                                position: latlng,
-//                                                icon: pinImage,
-                                                map: map
-                                            });
-                                            var infowindows = new google.maps.InfoWindow({
-                                                content: "<span style='color: limegreen'><h4>" + service['title'] + "</h4></span><h4>Address:</h4>" + service['address'] + "<h4>Phone:</h4>" + service['telephone']
-                                            });
-                                            google.maps.event.addListener(markers, 'click', function(event) {
-                                                infowindows.open(map, markers);
-                                            });
-                                        }
-
-                                    }
-                                });
-                            });
-                        }
-                    }
-                    else {
-                        alert("Location is not found");
-                    }
+                var map_options = {
+                    center: new google.maps.LatLng(latitude, longitude),
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
                 }
-                );
+                var map = new google.maps.Map(map_canvas, map_options);
+                if (town_code != "london_") {
+                    $.each(services, function(index, service) {
+                        var reference = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + service['address'].replace(/ /g, "+") + '&sensor=false';
+                        $.ajax({
+                            url: reference,
+                            dataType: 'json',
+                            async: false,
+                            data: null,
+                            success: function(data) {
+                                if (data.results != undefined && data.results.length > 0) {
+                                    var latlng = new google.maps.LatLng(service['latitude'], service['longitude']);
+
+//                                    var pinColor = "cc5533";
+//                                    var pinImage =  new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+//                                                    new google.maps.Size(21, 34),
+//                                                    new google.maps.Point(0,0),
+//                                                    new google.maps.Point(10, 34));
+                                    var markers = new google.maps.Marker({
+                                        position: latlng,
+//                                        icon: pinImage,
+//                                        icon: 'images/beachflag.png',
+                                        icon: '<?php echo base_url(). SERVICE_DIRECTORY_CATEGORY_IMAGE_PATH ?>'+service['picture'],
+                                        map: map
+                                    });
+                                    var infowindows = new google.maps.InfoWindow({
+                                        content: "<span style='color: limegreen'><h4>" + service['title'] + "</h4></span><h4>Address:</h4>" + service['address'] + "<h4>Phone:</h4>" + service['telephone']
+                                    });
+                                    google.maps.event.addListener(markers, 'click', function(event) {
+                                        infowindows.open(map, markers);
+                                    });
+                                }
+                            }
+                        });
+                    });
+                }
+            }
+            else {
+                alert("Location is not found");
+            }
+        });
     });
 
 </script>

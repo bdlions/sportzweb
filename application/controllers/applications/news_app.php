@@ -37,16 +37,12 @@ class News_app extends Role_Controller {
     function get_breaking_latest_news_list()
     {
         $breaking_news_list = $this->news_app_library->get_breaking_news_list();
-        if(count($breaking_news_list)!=0){
-            foreach ($breaking_news_list as $news_list_key => $breaking_news) {
-                $breaking_news_list[$news_list_key]['headline'] = strip_tags(html_entity_decode(html_entity_decode($breaking_news['headline'])));
-            }
+        foreach ($breaking_news_list as $news_list_key => $breaking_news) {
+            $breaking_news_list[$news_list_key]['headline'] = strip_tags(html_entity_decode(html_entity_decode($breaking_news['headline'])));
         }
         $latest_news_list = $this->news_app_library->get_latest_news_list();
-        if(count($latest_news_list)!=0){
-            foreach ($latest_news_list as $news_list_key => $breaking_news) {
-                $latest_news_list[$news_list_key]['headline'] = strip_tags(html_entity_decode(html_entity_decode($breaking_news['headline'])));
-            }
+        foreach ($latest_news_list as $news_list_key => $breaking_news) {
+            $latest_news_list[$news_list_key]['headline'] = strip_tags(html_entity_decode(html_entity_decode($breaking_news['headline'])));
         }
         $result = array(
             'breaking_news_list' => $breaking_news_list,
