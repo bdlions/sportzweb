@@ -55,7 +55,7 @@
     function openModal(val,id) { 
         $('#hidden_field_for_key').val(<?php echo NEWS_CONFIG_CATEGORY_PAGE_KEY; ?> );
         $('#get_selected_id').val(id);
-        $('#common_modal_edit_news_item').modal('show');
+        $('#common_modal_news_list').modal('show');
     }
     function advertise_selection_option_change(){
         var advertise_option_selected_item = $('#advertise_selection_option').val();
@@ -87,7 +87,7 @@
                 <div class="col-md-6 col-lg-6"> 
                 <input type="checkbox" id="checkbox_1" <?php echo $region_id_is_news_ignored_map[0]==1?'checked':''?>/>
                 <input type="hidden" name="position_of_news_1" id="position_of_news_1" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[0]]['news_id']) ? $news_id_news_info_map[$region_id_news_id_map[0]]['news_id'] : ''; ?>">
-                <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
+                
                         <button style="z-index: 500;" id="button_edit_news_1" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_news_1', '1')">
                             Edit
                         </button>
@@ -442,8 +442,9 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" id="get_selected_id" value="">
         <input type="hidden" id="hidden_field_for_key">
     </div>    
 </div>
-<?php $this->load->view("admin/applications/news_app/modal_edit_news_items_common"); ?>
+<?php $this->load->view("admin/applications/news_app/common_modal_for_news_items"); ?>
 <?php $this->load->view("admin/applications/news_app/common_js_for_news"); ?>

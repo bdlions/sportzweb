@@ -78,7 +78,7 @@ class Admin_news{
         }
         return $news_list;
     }
-    
+  
         /*
      * This method will return news home page configuration info
      * @Author Nazmul on 14th June 2014
@@ -607,6 +607,24 @@ class Admin_news{
         
         return $region_id_news_info_map;
     }
+    
+     /*
+     * This method will return news list converting news data to user displayed format
+     * @param $news_id_list, news id list
+     * @Author Rashida on 4th March 2015
+     */
+    public function get_selected_news_by_id($news_id_list)
+       {
+        $news_list = array();
+        $news_list_array= $this->admin_news_model->get_selected_news_by_id($news_id_list)->result_array();
+        foreach($news_list_array as $news_info)
+        {
+         $news_info['news_date'] = $this->utils->convert_date_from_db_to_user($news_info['news_date']);
+         $news_list[] = $news_info;   
+        }
+        return $news_list;
+     }
+    
 }
 
 ?>

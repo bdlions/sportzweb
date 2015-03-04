@@ -29,7 +29,6 @@ class Search extends CI_Controller {
     }
 
     public function get_users() {
-        //print_r($this->profile->get_users());
         $users = $this->profile->get_users();
         $temp_users = array();
         

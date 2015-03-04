@@ -501,7 +501,7 @@ class Admin_news_model extends Ion_auth_model
                     ->get();
     }
     /*
-     * This method return selected breaking news items and latest news items 
+     * This method return selected news items by id list
      * @parameter news id
      * @Rashida 3rd March 2015
      */ 
@@ -534,7 +534,6 @@ class Admin_news_model extends Ion_auth_model
     public function get_search_news_info_by_type($search_news_type)
     {
         $this->db->like($this->tables['news'].'.headline',$search_news_type);
-        
         return $this->db->select("*")
                     ->from($this->tables['news'])
                     ->get();

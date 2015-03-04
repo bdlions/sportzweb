@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div class ="col-sm-2">
-                    <a href="<?php echo base_url();?>admin/applications_news/get_latest_breaking_news">
+                    <a href="<?php echo base_url();?>admin/applications_news/get_current_breaking_news">
                         <button id="" value="" class="btn button-custom ">
                             Manage Breaking News
                         </button>  

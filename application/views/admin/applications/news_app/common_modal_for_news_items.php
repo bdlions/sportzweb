@@ -39,7 +39,7 @@
                 remote:'<?php echo base_url(); ?>' + "admin/applications_news/search_items_by_news_type?query=%QUERY",
                 header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">News</div>',
                 template: [
-                    '<div class="row"><div class="tt-suggestions col-md-11"><div class="form-horizontal"><span class="glyphicon glyphicon-user col-md-12">{{headline}}</span><span class="glyphicon glyphicon-phone col-md-12">{{news_date}}</span></div><div class="tt-suggestions col-md-12" style="border-top: 1px dashed #CCCCCC;margin: 6px 0;"></div></div>'
+                    '<div class="row"><div class=" col-lg-offset-1 col-md-11"><div class="form-horizontal"><span>{{headline}}</span></div></div></div>'
                   ].join(''),
                 engine: Hogan
             }
@@ -47,7 +47,6 @@
         if(datum.id)
         {
             $("#tbody_news_list").html(tmpl("tmpl_news_list", datum))
-            
         }
         });
         
@@ -67,19 +66,19 @@
             
             if($('#hidden_field_for_key').val() == <?php echo NEWS_MANAGE_HOME_PAGE_KEY ?>)
             {
-                selected_news_id_list(selected_array, news_id);
+                add_selected_news(selected_array,news_id);
             }else if($('#hidden_field_for_key').val() == <?php echo NEWS_CONFIG_CATEGORY_PAGE_KEY ?>)
             {
-                selected_news_id_list(selected_array,news_id);
+              add_selected_news(selected_array,news_id);  
             }else if($('#hidden_field_for_key').val() == <?php echo NEWS_CONFIG_SUB_CATEGORY_PAGE_KEY ?>)
             {
-                selected_news_id_list(selected_array,news_id);
+                add_selected_news(selected_array,news_id);
             }else if($('#hidden_field_for_key').val() == <?php echo BREAKING_NEWS_SELECTION_KEY ?>)
             {
-                selected_breaking_news_id_list(selected_array);
+                append_selected_breaking_news(selected_array);
             }else if($('#hidden_field_for_key').val() == <?php echo LATEST_NEWS_SELECTION_KEY ?>)
             {
-                selected_latest_news_id_list(selected_array);
+                append_selected_latest_news(selected_array);
             }
             
         });
@@ -96,7 +95,7 @@
     {% news_list = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
-<div class="modal fade" id="common_modal_edit_news_item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="common_modal_news_list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -143,7 +142,6 @@
                     </div>
                 </div>                
             </div>
-            <input type="hidden" id="selected_news_id_array">
             <div class="modal-footer">
                 <button id="button_save_news" name="button_save_news" value="" class="btn button-custom">Save</button>
                 <button type="button" class="btn button-custom" data-dismiss="modal">Close</button>

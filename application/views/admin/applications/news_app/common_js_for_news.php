@@ -1,11 +1,12 @@
 <script type="text/javascript">
     
-       function selected_news_id_list(selected_array,news_id){
+       function add_selected_news(selected_array,news_id){
             if(selected_array.length == 1) {
                 
                 var present_value = $('#get_selected_id').val();
                 var id = '#position_of_news_'+present_value;  
                 var position = $(id+"").val(news_id);
+                console.log(present_value);
                 var position_array = [];
                 var length = <?php echo NEWS_CONFIGURATION_COUNTER;?>;
                 var panel = $('#panel').val();
@@ -29,8 +30,6 @@
                     }
                 }
                  
-                
-                
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
@@ -39,8 +38,9 @@
                         news_id: news_id
                     },
                     success: function(data) {
+//                        console.log(data);
                         var img_position = $("#image_position_" + present_value);
-                        
+                        console.log(img_position);
                         if(img_position != undefined){
                             img_position.attr("src", "<?php echo base_url().NEWS_IMAGE_PATH;?>" + data.picture.replace(/(\r\n|\n|\r)/gm,""));
                         }
@@ -58,7 +58,7 @@
                         }
                     }
                 });
-                $('#common_modal_edit_news_item').modal('hide');
+                $('#common_modal_news_list').modal('hide');
             } else {
                 alert('You can only select one news for this position');
                 return ;

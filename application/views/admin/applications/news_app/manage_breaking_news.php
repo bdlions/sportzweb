@@ -41,9 +41,9 @@
     function open_modal_news_items()
     {
         $('#hidden_field_for_key').val(<?php echo BREAKING_NEWS_SELECTION_KEY; ?> );
-        $('#common_modal_edit_news_item').modal('show');
+        $('#common_modal_news_list').modal('show');
     }
-    function selected_breaking_news_id_list(selected_array){
+    function append_selected_breaking_news(selected_array){
          $.ajax({
                     dataType: 'json',
                     type: "POST",
@@ -55,7 +55,7 @@
                     $("#tbody_news_list_for_breaking_news_page").html($("#tbody_news_list_for_breaking_news_page").html()+tmpl("tmpl_braking_news_list", data)); 
                 }
                 });
-         $('#common_modal_edit_news_item').modal('hide');
+         $('#common_modal_news_list').modal('hide');
     }
     function delete_row(deleted_news_id){
        $(deleted_news_id).parents("tr").remove()  
@@ -123,4 +123,4 @@
         </div>        
     </div>
 </div>
-<?php $this->load->view("admin/applications/news_app/modal_edit_news_items_common");
+<?php $this->load->view("admin/applications/news_app/common_modal_for_news_items");

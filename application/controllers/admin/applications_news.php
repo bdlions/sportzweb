@@ -179,17 +179,20 @@ class Applications_news extends CI_Controller{
      */
      public function get_latest_news()
     {
+        $latest_news_list = array(); 
         $this->data['news_list'] = $this->admin_news->get_news_list();
         
         $latest_news_list_info = $this->admin_news->get_latest_news_info()->result_array();
         if(!empty($latest_news_list_info)){
-            $latest_news_list_info = $latest_news_list_info[0];
+           $latest_news_list_info = $latest_news_list_info[0];
            $news_id_list = json_decode($latest_news_list_info['news_list']);
-           $latest_news_list= $this->admin_news->get_selected_news_by_id($news_id_list)->result_array();
-           if(!empty($latest_news_list))
-               {
-                $this->data['latest_news_list']  = $latest_news_list;
-               }
+           $latest_news_list_array= $this->admin_news->get_selected_news_by_id($news_id_list);
+           foreach($latest_news_list_array as $news_info)
+             {
+              $news_info['headline']= html_entity_decode(html_entity_decode($news_info['headline']));
+              $latest_news_list[] = $news_info;   
+              $this->data['latest_news_list']  = $latest_news_list;
+             }
         }
      $this->template->load($this->tmpl,"admin/applications/news_app/manage_latest_news",  $this->data);
     }
@@ -240,20 +243,21 @@ class Applications_news extends CI_Controller{
      * This method get latest braking news
      * @Rashida on 4th march 2015
      */
-     public function get_latest_breaking_news()
+     public function get_current_breaking_news()
     {
         $this->data['news_list'] = $this->admin_news->get_news_list();
         
         $breaking_news_list_info = $this->admin_news->get_breaking_news_info()->result_array();
-        if(!empty($breaking_news_list_info)){
-            $breaking_news_list_info = $breaking_news_list_info[0];
+        if(!empty($breaking_news_list_info))
+           {
+           $breaking_news_list_info = $breaking_news_list_info[0];
            $news_id_list = json_decode($breaking_news_list_info['news_list']);
-           $breaking_news_list= $this->admin_news->get_selected_news_by_id($news_id_list)->result_array();
+           $breaking_news_list= $this->admin_news->get_selected_news_by_id($news_id_list);
            if(!empty($breaking_news_list))
                {
                 $this->data['breaking_news_list']  = $breaking_news_list;
                }
-        }
+            }
      $this->template->load($this->tmpl,"admin/applications/news_app/manage_breaking_news",  $this->data);
     }
     
@@ -296,7 +300,7 @@ class Applications_news extends CI_Controller{
     {
       $response = array();
       $news_id_list = $this->input->post('news_selected_id_list'); 
-      $result = $this->admin_news->get_selected_news_by_id($news_id_list)->result_array();
+      $result = $this->admin_news->get_selected_news_by_id($news_id_list);
       if(!empty($result)){
              
              $response = $result;
@@ -1350,15 +1354,15 @@ class Applications_news extends CI_Controller{
     public function search_items_by_news_type()
     {
         $response = array();
+        $news_list = array();
         $search_news_type = $_GET['query'];
-         $search_news_result_array = $this->admin_news->get_search_news_info_by_type($search_news_type)->result_array();
-        
-        if(!empty($search_news_result_array))
+        $search_news_result_array = $this->admin_news->get_search_news_info_by_type($search_news_type)->result_array();
+        foreach($search_news_result_array as $news_info)
         {
-            $response = $search_news_result_array;
+         $news_info['headline']= html_entity_decode(html_entity_decode($news_info['headline']));
+         $news_list[] = $news_info;   
         }
-        
-        echo json_encode($response);
+        echo json_encode($news_list);
     }
     public function config_news_for_category($news_category_id)
     {
