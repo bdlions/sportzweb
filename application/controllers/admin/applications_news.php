@@ -102,6 +102,211 @@ class Applications_news extends CI_Controller{
         $this->data['news_category_list'] = $news_category_list;
         $this->template->load($this->tmpl, "admin/applications/news_app/news_category", $this->data);
     }
+    //----------------------------------News Module--------------------------------//
+    /**
+     * This method will create a news item
+     * @author Nazmul on 4th March 2015
+     */
+    function create_news()
+    {
+        $this->data['message'] = '';
+        $this->form_validation->set_rules('headline_editortext', 'HeadLine', 'xss_clean|required');
+        $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
+        $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
+        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
+        if($this->input->post())
+        {
+            if($this->form_validation->run() == true)
+            {
+                $news_headline = trim(htmlentities($this->input->post('headline_editortext')));
+                $news_summary = trim(htmlentities($this->input->post('summary_editortext')));
+                $description = trim(htmlentities($this->input->post('description_editortext')));
+                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
+                $news_data = array(
+                    'headline' => $news_headline,
+                    'summary' => $news_summary,
+                    'description' => $description,
+                    'news_date' => $this->utils->get_current_date_db(),
+                    'picture' => '',
+                    'picture_description' => $this->utils->add_blank_target_in_anchor($picture_description),
+                    'created_on' => now()
+                );
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];                    
+                    $result = $this->utils->upload_image($file_info, NEWS_IMAGE_PATH);
+                    if($result['status'] == 1)
+                    {
+                        $news_data['picture'] = $result['upload_data']['file_name'];
+                        $path = NEWS_IMAGE_PATH.$result['upload_data']['file_name'];
+                        $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
+                    }
+                    else
+                    {
+                        $this->data['message'] = $result['message'];
+                        echo json_encode($this->data);
+                        return;
+                    }                  
+                }
+                $news_id = $this->admin_news->create_news($news_data);
+                if($news_id !== FALSE){
+                    $this->data['message'] = "News is created successfully";
+                    echo json_encode($this->data);
+                    return;                    
+                }else{
+                    $this->data['message'] = $this->admin_news->errors();
+                    echo json_encode($this->data);
+                    return;
+                }                
+            }  
+            else 
+            {
+                $this->data['message'] = "Check your every input";
+                echo json_encode($this->data);
+                return;
+            }
+        }        
+        $this->data['headline'] = array(
+            'name' => 'headline',
+            'id' => 'headline',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('headline'),
+            'rows'  => '4',
+            'cols'  => '10'
+        );        
+        $this->data['summary'] = array(
+            'name' => 'summary',
+            'id' => 'summary',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('summary'),
+            'rows'  => '4',
+            'cols'  => '10'
+        );        
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('description'),
+            'rows'  => '4',
+            'cols'  => '10'
+        );        
+        $this->data['image_description'] = array(
+            'name' => 'image_description',
+            'id' => 'image_description',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('image_description'),
+            'rows'  => '4',
+            'cols'  => '10'
+        );        
+        $this->template->load($this->tmpl,"admin/applications/news_app/create_news",  $this->data);
+    }
+    /**
+     * This method will update news item
+     * @author Nazmul on 4th March 2015
+     */
+    function edit_news($news_id)
+    {
+        $this->data['message'] = '';
+        $this->form_validation->set_rules('headline_editortext', 'HeadLine', 'xss_clean|required');
+        $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
+        $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
+        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
+        $news = $this->admin_news->get_news_info($news_id)->result_array();
+        if(!empty($news)) {
+            $news = $news[0];
+        }
+        else
+        {
+            redirect('admin/applications_news','refresh');
+        }
+        $this->data['news'] = $news;        
+        if($this->input->post())
+        {
+            if($this->form_validation->run() == true)
+            { 
+                $uploaded_image_data = array();
+                $news_headline = trim(htmlentities($this->input->post('headline_editortext')));
+                $summary_headline = trim(htmlentities($this->input->post('summary_editortext')));
+                $description = trim(htmlentities($this->input->post('description_editortext')));
+                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
+                $news_data = array(
+                    'headline' => $news_headline,
+                    'summary' => $summary_headline,
+                    'description' => $description,
+                    'picture_description' => $picture_description,
+                    'modified_on' => now(),
+                );
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];                    
+                    $result = $this->utils->upload_image($file_info, NEWS_IMAGE_PATH);
+                    if($result['status'] == 1)
+                    {
+                        $news_data['picture'] = $result['upload_data']['file_name'];
+                        $path = NEWS_IMAGE_PATH.$result['upload_data']['file_name'];
+                        $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
+                    }
+                    else
+                    {
+                        $this->data['message'] = $result['message'];
+                        echo json_encode($this->data);
+                        return;
+                    }
+                } 
+                else
+                {
+                    $path = NEWS_IMAGE_PATH.$news['picture'];
+                    $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
+                }
+                
+                $id = $this->admin_news->update_news($news['id'], $news_data);
+                if($id !== FALSE) {
+                    $this->data['message'] = 'News is updated successfully.';
+                    echo json_encode($this->data);
+                    return;
+                }
+                else {
+                    $this->data['message'] = strip_tags($this->admin_news->errors());
+                    echo json_encode($this->data);
+                    return;
+                }
+            }
+        }        
+        $this->data['headline'] = array(
+            'name' => 'headline',
+            'id' => 'headline',
+            'type' => 'text',
+            'value' => html_entity_decode(html_entity_decode($news['headline'])),
+            'rows'  => '4',
+            'cols'  => '10'
+        );        
+        $this->data['summary'] = array(
+            'name' => 'summary',
+            'id' => 'summary',
+            'type' => 'text',
+            'value' => html_entity_decode(html_entity_decode($news['summary'])),
+            'rows'  => '4',
+            'cols'  => '10'
+        );        
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text',
+            'rows'  => '4',
+            'cols'  => '10',
+            'value' => html_entity_decode(html_entity_decode($news['description'])),
+        );        
+        $this->data['image_description'] = array(
+            'name' => 'image_description',
+            'id' => 'image_description',
+            'type' => 'text',
+            'value' => isset($news['picture_description']) ? html_entity_decode(html_entity_decode($news['picture_description'])) : '',
+            'rows'  => '4',
+            'cols'  => '10'
+        );        
+        $this->data['news_id'] = $news_id;
+        $this->template->load($this->tmpl, "admin/applications/news_app/edit_news", $this->data);
+    }
     //-----------------------------------News home page module---------------------//
     /*
      * This method will load a page to configure news home page
@@ -638,117 +843,6 @@ class Applications_news extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/news_app/sub_category_news_list", $this->data);
     }
     
-    /**
-     * written by omar
-     * @param type $news_id
-     */
-    function edit_news($news_id)
-    {
-        $this->data['message'] = '';
-        $this->form_validation->set_rules('headline_editortext', 'HeadLine', 'xss_clean|required');
-        $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
-        $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
-        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
-        
-        
-        $news = $this->admin_news->get_news_info($news_id)->result_array();
-        if(count($news)>0) {
-            $news = $news[0];
-        }
-        $this->data['news'] = $news;
-        
-        if($this->input->post())
-        {
-            if($this->form_validation->run() == true)
-            { 
-                $uploaded_image_data = array();
-                if (isset($_FILES["userfile"]))
-                {
-                    $file_info = $_FILES["userfile"];
-                    $uploaded_image_data = $this->image_upload($file_info);
-                    if(isset($uploaded_image_data['error'])) {
-                        exit(' i mhere');
-                        $this->data['message'] = strip_tags($uploaded_image_data['error']);
-                        echo json_encode($this->data);
-                        return;
-                    }else if(!empty($uploaded_image_data['upload_data']['file_name'])){
-                        //$path = FCPATH.NEWS_IMAGE_PATH.$uploaded_image_data['upload_data']['file_name'];
-                        //unlink($path);
-                    }
-                }
-                
-                $news_headline = trim(htmlentities($this->input->post('headline_editortext')));
-                $summary_headline = trim(htmlentities($this->input->post('summary_editortext')));
-                $description = trim(htmlentities($this->input->post('description_editortext')));
-                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
-                $data = array(
-                    'headline' => $news_headline,
-                    'summary' => $summary_headline,
-                    'description' => $description,
-                    'picture_description' => $picture_description,
-                    'modified_on' => now(),
-                );
-                
-                if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
-                    $path = FCPATH.NEWS_IMAGE_PATH.$news['picture'];
-                    unlink($path);
-                    $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
-                }
-               
-                $id = $this->admin_news->update_news($news['id'], $data);
-                if($id !== FALSE) {
-                    $this->data['message'] = 'News is updated successfully.';
-                    echo json_encode($this->data);
-                    return;
-                }else {
-                    $this->data['message'] = strip_tags($this->admin_news->errors());
-                    echo json_encode($this->data);
-                    return;
-                }
-            }
-        }
-        
-        $this->data['headline'] = array(
-            'name' => 'headline',
-            'id' => 'headline',
-            'type' => 'text',
-            'value' => html_entity_decode(html_entity_decode($news['headline'])),
-            'rows'  => '4',
-            'cols'  => '10'
-        );
-        
-        $this->data['summary'] = array(
-            'name' => 'summary',
-            'id' => 'summary',
-            'type' => 'text',
-            'value' => html_entity_decode(html_entity_decode($news['summary'])),
-            'rows'  => '4',
-            'cols'  => '10'
-        );
-        
-        $this->data['description'] = array(
-            'name' => 'description',
-            'id' => 'description',
-            'type' => 'text',
-            'rows'  => '4',
-            'cols'  => '10',
-            'value' => html_entity_decode(html_entity_decode($news['description'])),
-        );
-        
-        $this->data['image_description'] = array(
-            'name' => 'image_description',
-            'id' => 'image_description',
-            'type' => 'text',
-            'value' => isset($news['picture_description']) ? html_entity_decode(html_entity_decode($news['picture_description'])) : '',
-            'rows'  => '4',
-            'cols'  => '10'
-        );
-        
-        $this->data['news_id'] = $news_id;
-        $this->template->load($this->tmpl, "admin/applications/news_app/edit_news", $this->data);
-    }
-    
-    
     function news_details($news_id)
     {
         $comment_list = $this->admin_news->get_all_comments($news_id, NEWEST_FIRST,DEFAULT_VIEW_PER_PAGE)->result_array();
@@ -765,121 +859,7 @@ class Applications_news extends CI_Controller{
         $this->template->load($this->tmpl, "admin/applications/news_app/news_details", $this->data);
     }
     
-    /**
-     * written by omar
-     * @param type $news_category_id
-     * @param type $news_sub_category_id
-     * @return type
-     */
-    function create_news($news_category_id=0)
-    {
-        $this->data['message'] = '';
-        $this->form_validation->set_rules('headline_editortext', 'HeadLine', 'xss_clean|required');
-        $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
-        $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
-        $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
-        
-        if($this->input->post())
-        {
-            if($this->form_validation->run() == true)
-            {
-                $news_category_id= $this->input->post('news_category_id');
-                if (isset($_FILES["userfile"]))
-                {
-                    $file_info = $_FILES["userfile"];
-                    $uploaded_image_data = $this->image_upload($file_info);
-                    if(isset($uploaded_image_data['error'])) {
-                        $this->data['message'] = strip_tags($uploaded_image_data['error']);
-                        echo json_encode($this->data);
-                        return;
-                    }else if(!empty($uploaded_image_data['upload_data']['file_name'])){
-                        //$path = FCPATH.NEWS_IMAGE_PATH.$uploaded_image_data['upload_data']['file_name'];
-                        //unlink($path);
-                    }
-                }
-                
-                $news_headline = trim(htmlentities($this->input->post('headline_editortext')));
-                $news_summary = trim(htmlentities($this->input->post('summary_editortext')));
-                $description = trim(htmlentities($this->input->post('description_editortext')));
-                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
-                
-                $data = array(
-                    'headline' => $news_headline,
-                    'summary' => $news_summary,
-                    'description' => $description,
-                    'news_date' => date('Y-m-d'),
-                    'picture' => empty($uploaded_image_data['upload_data']['file_name'])? '' : $uploaded_image_data['upload_data']['file_name'],
-                    'picture_description' => $this->utils->add_blank_target_in_anchor($picture_description),
-                    'created_on' => now()
-                );
-               
-                
-                $news_id = $this->admin_news->create_news($data);
-                if($news_id !== FALSE){
-                    //$id = $this->admin_news->get_news_category_info_for_update($news_category_id,$news_id);
-                    //if($id !== FALSE) {
-                        $this->data['message'] = "News is created successfully";
-                        echo json_encode($this->data);
-                        return;
-//                    } else {
-//                        $this->data['message'] = "News has been created but it's not under any category";
-//                        echo json_encode($this->data);
-//                        return;
-//                    }
-                    
-                }else{
-                    $this->data['message'] = $this->admin_news->errors();
-                    echo json_encode($this->data);
-                    return;
-                }
-                
-            }  else {
-                $this->data['message'] = "Check your every input";
-                echo json_encode($this->data);
-                return;
-            }
-        }
-        
-        $this->data['headline'] = array(
-            'name' => 'headline',
-            'id' => 'headline',
-            'type' => 'text',
-            'value' => $this->form_validation->set_value('headline'),
-            'rows'  => '4',
-            'cols'  => '10'
-        );
-        
-        $this->data['summary'] = array(
-            'name' => 'summary',
-            'id' => 'summary',
-            'type' => 'text',
-            'value' => $this->form_validation->set_value('summary'),
-            'rows'  => '4',
-            'cols'  => '10'
-        );
-        
-        $this->data['description'] = array(
-            'name' => 'description',
-            'id' => 'description',
-            'type' => 'text',
-            'value' => $this->form_validation->set_value('description'),
-            'rows'  => '4',
-            'cols'  => '10'
-        );
-        
-        $this->data['image_description'] = array(
-            'name' => 'image_description',
-            'id' => 'image_description',
-            'type' => 'text',
-            'value' => $this->form_validation->set_value('image_description'),
-            'rows'  => '4',
-            'cols'  => '10'
-        );
-        
-        $this->data['news_category_id'] = $news_category_id;
-        
-        $this->template->load($this->tmpl,"admin/applications/news_app/create_news",  $this->data);
-    }
+    
     public function image_upload($file_info)
     {
         $data = null;

@@ -125,7 +125,7 @@ window.onload = function()
     <div class="panel-heading">Create News</div>
     <div class="panel-body">
         <div class="row form-horizontal form-background top-bottom-padding">  
-            <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/applications_news/create_news/<?php echo $news_category_id; ?>" onsubmit="return false;">
+            <form id="formsubmit" method="post" action="<?php echo base_url();?>admin/applications_news/create_news" onsubmit="return false;">
             <div class="row">
                 <div class ="col-md-10 margin-top-bottom">
                     <div class ="row">
@@ -139,7 +139,6 @@ window.onload = function()
                         <div class ="col-md-9">
                             <?php echo form_textarea($headline + array('class' => 'form-control')); ?>
                             <input type="hidden" name="headline_editortext" id="headline_editortext">
-                            <input type="hidden" name="news_category_id" id="service_category_id" value="<?php echo $news_category_id;  ?>">
                         </div> 
                     </div>
                     
@@ -236,17 +235,17 @@ $(function () {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url();?>admin/applications_news/create_news/<?php echo $news_category_id;?>',
+            url: '<?php echo base_url();?>admin/applications_news/create_news',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/applications_news/create_news/<?php echo $news_category_id;?>';
+                window.location = '<?php echo base_url();?>admin/applications_news/create_news';
             }
         });
     });
     
     // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url();?>admin/applications_news/create_news/<?php echo $news_category_id; ?>",
+    var url = "<?php echo base_url();?>admin/applications_news/create_news",
                     uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
                                     $("#headline_editortext").val(jQuery('<div />').text(CKEDITOR.instances.headline.getData()).html());
@@ -320,7 +319,7 @@ $(function () {
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
             alert(data.result.message);
-            window.location = '<?php echo base_url();?>admin/applications_news/create_news/<?php echo $news_category_id; ?>';
+            window.location = '<?php echo base_url();?>admin/applications_news/create_news';
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {
