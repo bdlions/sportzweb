@@ -46,8 +46,10 @@ function firett(){
     var regex = null;
     var intext = $('#input_area').val();
     regex = $('#regex').val();
+//    regex = '<(?!\/?(p)|(img)|(a)(?=>|\s.*>))\/?.*?>';
     regex = new RegExp(regex, 'gi');
-    $('#output_area').val( intext.replace( regex, '#' ) );
+    $('#output_area').val( null );
+    $('#output_area').val( intext.replace( regex, '_' ) );
 }
 
 
