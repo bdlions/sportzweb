@@ -70,6 +70,7 @@ $lang['create_user_company_label']                     = 'Company Name:';
 $lang['create_user_email_label']                       = 'Email';
 $lang['create_user_email_required_tooltip_label']      = 'Email is required';
 $lang['create_user_email_invalid_tooltip_label']       = 'Provided email is incorrect';
+$lang['create_user_email_duplicate']                   = 'Email is already used or invalid';
 
 $lang['create_user_confirm_email_label']               = 'Confirm Email';
 $lang['create_user_confirm_email_match_tooltip_label'] = 'Confirm email doesn\'t match wtih email';

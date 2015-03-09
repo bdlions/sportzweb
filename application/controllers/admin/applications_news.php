@@ -159,9 +159,9 @@ class Applications_news extends CI_Controller{
                     return;
                 }                
             }  
-            else 
+            else
             {
-                $this->data['message'] = "Check your every input";
+                $this->data['message'] = validation_errors();
                 echo json_encode($this->data);
                 return;
             }
@@ -270,6 +270,12 @@ class Applications_news extends CI_Controller{
                     echo json_encode($this->data);
                     return;
                 }
+            }
+            else
+            {
+                $this->data['message'] = validation_errors();
+                echo json_encode($this->data);
+                return;
             }
         }        
         $this->data['headline'] = array(

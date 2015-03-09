@@ -70,7 +70,7 @@
                 <?php if (!empty($service_info['business_name'])) { ?>
                 <h4 class="cus_service_detail_heading">Sonuto profile</h4>
                 <!-- echo text here-->
-                <a href="#"><?php echo $service_info['business_name']; ?></a>
+                <a href="<?php echo base_url().'business_profile/show/'.$service_info['business_profile_id']?>"><?php echo $service_info['business_name']; ?></a>
                 <?php } ?>
             </div>
             <div class="col-md-2">

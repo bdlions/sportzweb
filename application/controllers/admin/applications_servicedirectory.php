@@ -780,7 +780,7 @@ class Applications_servicedirectory extends CI_Controller{
         
         $business_profiles_array = $this->admin_service_directory->get_all_business_profile()->result_array();
         foreach ($business_profiles_array as $profile) {
-            $this->data['business_profile_list'][$profile['id']] = $profile['business_description'];
+            $this->data['business_profile_list'][$profile['id']] = $profile['business_name'];
         }
         
         $this->data['service_id'] = $service_id;

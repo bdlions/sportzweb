@@ -77,7 +77,7 @@
                                         map: map
                                     });
                                     var infowindows = new google.maps.InfoWindow({
-                                        content: "<span style='color: limegreen'><h4>" + service['title'] + "</h4></span><h4>Address:</h4>" + service['address'] + "<h4>Phone:</h4>" + service['telephone']
+                                        content: "<a href='"+"<?php echo base_url()?>"+"applications/service_directory/show_service_detail/" + service['id'] +"'><h4 style='color: limegreen'>" + service['title'] + "</h4></a></span><h4>Address:</h4>" + service['address'] + "<h4>Phone:</h4>" + service['telephone']
                                     });
                                     google.maps.event.addListener(markers, 'click', function(event) {
                                         infowindows.open(map, markers);
