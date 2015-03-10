@@ -22,13 +22,13 @@
                                 <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['blog_id']; ?>">
                                     <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['picture']; ?>"/>
                                     <br>
-                                    <span class="blog_post_home_cards_heading"><!--card heading-->
+                                    <span class="heading_medium"><!--card heading-->
                                         <h2>
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['title'])); ?>
                                         </h2>
                                     </span>
                                 </a>
-                                <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
                                     <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
@@ -43,13 +43,13 @@
                                 <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['blog_id']; ?>">
                                     <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['picture']; ?>"/>
                                     <br>
-                                    <span class="blog_post_home_cards_heading"><!--card heading-->
+                                    <span class="heading_medium"><!--card heading-->
                                         <h2>
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['title'])); ?>
                                         </h2>
                                     </span>
                                 </a>
-                                <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
                                     <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
@@ -66,13 +66,13 @@
                                 <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['blog_id']; ?>">
                                     <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['picture']; ?>"/>
                                     <br>
-                                    <span class="blog_post_home_cards_heading"><!--card heading-->
+                                    <span class="heading_medium"><!--card heading-->
                                         <h2>
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['title'])); ?>
                                         </h2>
                                     </span>
                                 </a>
-                                <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
                                     <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
@@ -87,13 +87,13 @@
                                 <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['id']; ?>">
                                     <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['picture']; ?>"/>
                                     <br>
-                                    <span class="blog_post_home_cards_heading"><!--card heading-->
+                                    <span class="heading_medium"><!--card heading-->
                                         <h2>
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['title'])); ?>
                                         </h2>
                                     </span>
                                 </a>
-                                <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
                                     <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
@@ -110,13 +110,13 @@
                                 <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['id']; ?>">
                                     <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['picture']; ?>"/>
                                     <br>
-                                    <span class="blog_post_home_cards_heading"><!--card heading-->
+                                    <span class="heading_medium"><!--card heading-->
                                         <h2>
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['title'])); ?>
                                         </h2>
                                     </span>
                                 </a>
-                                <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
                                     <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
@@ -131,13 +131,13 @@
                                 <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['id']; ?>">
                                     <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['picture']; ?>"/>
                                     <br>
-                                    <span class="blog_post_home_cards_heading"><!--card heading-->
+                                    <span class="heading_medium"><!--card heading-->
                                         <h2>
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['title'])); ?>
                                         </h2>
                                     </span>
                                 </a>
-                                <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
                                     <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
@@ -158,13 +158,13 @@
                                 <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['id']; ?>">
                                     <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['picture']; ?>"/>
                                     <br>
-                                    <span class="blog_post_home_cards_heading"><!--card heading-->
+                                    <span class="heading_medium"><!--card heading-->
                                         <h2>
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['title'])); ?>
                                         </h2>
                                     </span>
                                 </a>
-                                <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
                                     <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>
@@ -179,13 +179,13 @@
                                 <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['id']; ?>">
                                     <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['picture']; ?>"/>
                                     <br>
-                                    <span class="blog_post_home_cards_heading"><!--card heading-->
+                                    <span class="heading_medium"><!--card heading-->
                                         <h2>
                                             <?php echo html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['title'])); ?>
                                         </h2>
                                     </span>
                                 </a>
-                                <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
                                     <!--line and below-->
                                     <hr>
                                     <div class="pull-left"><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on']; ?></div>

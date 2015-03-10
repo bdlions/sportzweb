@@ -20,13 +20,13 @@
                                     <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_col_1[$cardcount]['id']; ?>">
                                         <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_col_1[$cardcount]['picture']; ?>"/>
                                         <br>
-                                        <span class="blog_post_home_cards_heading"><!--card heading-->
+                                        <span class="heading_medium"><!--card heading-->
                                             <h2>
                                                 <?php echo html_entity_decode(html_entity_decode($blog_col_1[$cardcount]['title'])); ?>
                                             </h2>
                                         </span>
                                     </a>
-                                    <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_1[$cardcount]['description'])), 0, 256) . ' ...'; ?>
+                                    <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_1[$cardcount]['description'])), 0, 256) . ' ...'; ?>
                                         <!--line and below-->
                                         <hr>
                                         <div class="pull-left"><?php echo unix_to_human($blog_col_1[$cardcount]['created_on']); ?></div>
@@ -45,13 +45,13 @@
                                     <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_col_2[$cardcount]['id']; ?>">
                                         <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_col_2[$cardcount]['picture']; ?>"/>
                                         <br>
-                                        <span class="blog_post_home_cards_heading"><!--card heading-->
+                                        <span class="heading_medium"><!--card heading-->
                                             <h2>
                                                 <?php echo html_entity_decode(html_entity_decode($blog_col_2[$cardcount]['title'])); ?>
                                             </h2>
                                         </span>
                                     </a>
-                                    <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_2[$cardcount]['description'])), 0, 256) . ' ...'; ?>
+                                    <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_2[$cardcount]['description'])), 0, 256) . ' ...'; ?>
                                         <!--line and below-->
                                         <hr>
                                         <div class="pull-left"><?php echo unix_to_human($blog_col_2[$cardcount]['created_on']); ?></div>
@@ -71,13 +71,13 @@
                                     <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $blog_col_3[$cardcount]['id']; ?>">
                                         <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $blog_col_3[$cardcount]['picture']; ?>"/>
                                         <br>
-                                        <span class="blog_post_home_cards_heading"><!--card heading-->
+                                        <span class="heading_medium"><!--card heading-->
                                             <h2>
                                                 <?php echo html_entity_decode(html_entity_decode($blog_col_3[$cardcount]['title'])); ?>
                                             </h2>
                                         </span>
                                     </a>
-                                    <div class="blog_post_body_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_3[$cardcount]['description'])), 0, 256) . ' ...'; ?>
+                                    <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_3[$cardcount]['description'])), 0, 256) . ' ...'; ?>
                                         <!--line and below-->
                                         <hr>
                                         <div class="pull-left"><?php echo unix_to_human($blog_col_3[$cardcount]['created_on']); ?></div>

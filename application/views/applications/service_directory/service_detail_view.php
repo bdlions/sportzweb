@@ -36,41 +36,52 @@
         <div class="row">
             <div class="col-md-4">
                 <?php if (!empty($service_info['address'])) { ?>
-                <h4 class="cus_service_detail_heading">Store Address</h4>
+                <h3 class="cus_service_detail_heading">Store Address</h3>
                 <!-- echo address here-->
-                <?php echo $service_info['address']; ?>
+                <span class="content_text">
+                    <?php echo $service_info['address']; ?>
+                </span>
                 <?php } ?>
             </div>
             <div class="col-md-4">
                 <?php if (!empty($service_info['opening_hours'])) { ?>
-                <h4 class="cus_service_detail_heading">Opening hours</h4>
+                <h3 class="cus_service_detail_heading">Opening hours</h3>
                 <!-- echo text here-->
-                <?php echo $service_info['opening_hours']; ?>
+                <span class="content_text">
+                    <?php echo $service_info['opening_hours']; ?>
+                </span>
                 <?php } ?>
             </div>
             <div class="col-md-4">
                 <?php if (!empty($service_info['telephone'])) { ?>
-                <h4 class="cus_service_detail_heading">Telephone</h4>
+                <h3 class="cus_service_detail_heading">Telephone</h3>
                 <!-- echo text here-->
+                <span class="content_text">
                 <?php echo $service_info['telephone']; ?>
+                </span>
                 <?php } ?>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <?php if (!empty($service_info['website'])) { ?>
-                <h4 class="cus_service_detail_heading">Website</h4>
+                <h3 class="cus_service_detail_heading">Website</h3>
                 <!-- echo text here-->
+                <span class="content_text">
                 <a href="<?php echo $service_info['website']; ?>" target="_blank"><?php echo $service_info['website']; ?></a>
+                </span>
                 <?php } ?>
             </div>
         </div>
         <div class="row">
             <div class="col-md-10">
                 <?php if (!empty($service_info['business_name'])) { ?>
-                <h4 class="cus_service_detail_heading">Sonuto profile</h4>
+                <h3 class="cus_service_detail_heading">Sonuto profile</h3>
                 <!-- echo text here-->
+                
+                <span class="content_text">
                 <a href="<?php echo base_url().'business_profile/show/'.$service_info['business_profile_id']?>"><?php echo $service_info['business_name']; ?></a>
+                </span>
                 <?php } ?>
             </div>
             <div class="col-md-2">
@@ -110,7 +121,7 @@
                             />
                     </div>    
                     <div class="col-md-6">
-                        <h4><?php echo $service_info['title']; ?></h4>
+                        <h3><?php echo $service_info['title']; ?></h3>
                     </div>
                 </div>
                 <textarea id="text_share" name="text_share" class="form-control"></textarea>

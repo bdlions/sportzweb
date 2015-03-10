@@ -28,21 +28,21 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="news_item_box">
-                    <div class="news_item_headline">
+                    <div class="heading_big">
                         <?php echo html_entity_decode(html_entity_decode($news['headline'])); ?>
                     </div>
-                    <div class="news_item_subtitle">
+                    <div class="small_text_pale">
                         <?php echo $news['created_on'] ?>
                     </div>
                     <img style="width: 100%" class="img-responsive"
                          src="<?php echo base_url() . NEWS_IMAGE_PATH . $news['picture']; ?>"
                          alt="<?php echo strip_tags(html_entity_decode(html_entity_decode($news['headline']))); ?>"/>
-                    <div class="news_item_subtitle">
+                    <div class="small_text_pale">
                         <?php echo isset($news['picture_description'])
                         ? html_entity_decode(html_entity_decode($news['picture_description']))
                         : '';?>
                     </div>
-                    <div class="form-group cus_news_descr"><?php echo html_entity_decode(html_entity_decode($news['description'])); ?></div>
+                    <div class="form-group content_text"><?php echo html_entity_decode(html_entity_decode($news['description'])); ?></div>
                     <div class="row">
                         <div class="col-md-12">
                             <button data-toggle="modal" data-target="#modal_share_news" class="btn btn-default pull-right">Share</button>

@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <span class="grey_title">BMI Calculator</span>
+            <span class="heading_big">BMI Calculator</span>
         </div>
     </div>
     <div class="row col-md-12">
@@ -56,9 +56,9 @@
     <?php foreach($questions_list as $question):?>
     <div class="row col-md-12">
         
-        <span class="right_panel_heading" style="color: #4E8C03;"><?php echo $question['question'];?></span>
+        <span class="heading_medium" style="color: #4E8C03;"><?php echo $question['question'];?></span>
         <p></p>
-        <span class="right_panel_body"><?php echo $question['answer']?></span>
+        <span class="content_text"><?php echo $question['answer']?></span>
         <p></p><p></p>
     </div>
         

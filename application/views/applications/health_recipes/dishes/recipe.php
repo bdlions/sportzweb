@@ -58,7 +58,7 @@
 <?php $this->load->view("applications/health_recipes/templates/header_row"); ?>
 <div class="col-md-9">
     <div class="row grayborderbottom grayborderleft grayborderright" >
-        <span style="color: #5C5C5C;"><h1><?php echo $recipe_item['title']; ?></h1></span>
+        <div class="col-md-12 heading_big"><?php echo $recipe_item['title']; ?></div>
     </div>
     <div class="row grayborderbottom grayborderleft grayborderright">
         <div class="col-md-9 grayborderright">
@@ -74,18 +74,22 @@
                 </a>
             </div>
 
-            <h2 style="color: #333333;">Durations</h2>
-            <?php echo html_entity_decode(html_entity_decode($recipe_item['duration'])); ?>
+            <h2 class="heading_medium">Durations</h2>
+            <div class="content_text"><?php echo html_entity_decode(html_entity_decode($recipe_item['duration'])); ?></div>
         </div>
     </div>
     <div class="row grayborderbottom grayborderleft grayborderright">
         <div class="col-md-4 grayborderright">
-            <h2 style="color: #333333;">Ingredients</h2>
-            <?php echo html_entity_decode(html_entity_decode($recipe_item['ingredients'])); ?>
+            <h2  class="heading_medium">Ingredients</h2>
+            <div class="content_text">
+                <?php echo html_entity_decode(html_entity_decode($recipe_item['ingredients'])); ?>
+            </div>
         </div>
         <div class="col-md-8">
-            <h2 style="color: #333333;">Preparation method</h2>            
-            <?php echo html_entity_decode(html_entity_decode($recipe_item['preparation_method'])); ?> 
+            <h2  class="heading_medium">Preparation method</h2>            
+            <div class="content_text">
+                <?php echo html_entity_decode(html_entity_decode($recipe_item['preparation_method'])); ?> 
+            </div>
         </div>
     </div>
     <div class="row grayborderbottom grayborderleft grayborderright">
@@ -112,7 +116,7 @@
     </div>
     <div class="row grayborderbottom grayborderleft grayborderright">
         <div class="col-md-12">
-            <h2 style="color: #333333;">Alternative Recipes</h2>
+            <h2 class="heading_medium">Alternative Recipes</h2>
 
             <?php if (!empty($alternative_recipes_item)): ?>
                 <?php foreach ($alternative_recipes_item as $alternative_item): ?>

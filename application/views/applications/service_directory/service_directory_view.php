@@ -125,12 +125,10 @@
 <div class="col-md-9">
     <div class="row">
         <div class="col-md-12">
-            <span class="cus_service_directory_heading" style="font-size: 16px;">FIND SPORTS HEALTH AND FITNESS SERVICES</span>
+            <span class="heading_small" style="font-size: 16px;">FIND SPORTS HEALTH AND FITNESS SERVICES</span>
             <?php echo form_open("applications/service_directory", array('id' => 'form_service_directory', 'class' => 'form-vertical')); ?>
             <div class="form-group" style="padding-top: 16px">
-                <label for="towncode" class="control-label">
-                    <span style="font-size: 14px; font-weight: normal;">Enter your town or postcode</span> <?php echo form_input('towncode'); ?>
-                </label>
+                <span class="content_text">Enter your town or postcode: </span> <?php echo form_input('towncode'); ?>
             </div>
         </div>
     </div>
@@ -145,36 +143,36 @@
                         <table class="table">
                             <tbody id="tbody_service_category_list">
                                 <?php
-                                $column = 1;
-                                $nos_services = count($service_category_list);
-                                for ($counter = 0; $counter < $nos_services; $counter++) {
-                                    if (($counter % 3) == 0) {
-                                        $column = 1;
-                                        echo '<tr>';
-                                    }
-                                    ?>
+                                    $column = 1;
+                                    $nos_services = count($service_category_list);
+                                    for ($counter = 0; $counter < $nos_services; $counter++) {
+                                        if (($counter % 3) == 0) {
+                                            $column = 1;
+                                            echo '<tr>';
+                                        }
+                                ?>
                                 <td style="border: none;padding-bottom:0px;padding-top:0px;">
                                     <div class="input-group selector">
                                         <input id="<?php echo $service_category_list[$counter]['id']; ?>" type="checkbox" name="service[]" value="<?php echo $service_category_list[$counter]['id']; ?>">
                                         <img src="<?php echo base_url() . SERVICE_DIRECTORY_CATEGORY_IMAGE_PATH . $service_category_list[$counter]['picture'] ?>" /> <?php echo $service_category_list[$counter]['description']; ?>
                                     </div>
                                 </td>
-    <?php
-    if ($counter % 3 == 0 && $column == 3) {
-        echo '</tr>';
-    }
-}
-?>
+                                <?php
+                                    if ($counter % 3 == 0 && $column == 3) {
+                                        echo '</tr>';
+                                    }
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="col-md-2" style="position: relative;" id="destin">
                     <div class="form-group" style="position: absolute; bottom: 2px; width: 70px;">
-<?php echo form_input(array('name' => 'submit_service_directory', 'id' => 'submit_service_directory', 'type' => 'submit', 'style' => 'width:100%', 'class' => 'btn btn-success', 'value' => 'Find')); ?>
+                    <?php echo form_input(array('name' => 'submit_service_directory', 'id' => 'submit_service_directory', 'type' => 'submit', 'style' => 'width:100%', 'class' => 'btn btn-success', 'value' => 'Find')); ?>
                     </div>
                 </div>
-                        <?php echo form_close(); ?>
+                <?php echo form_close(); ?>
             </div>
             <div class="row">
                 <div class="col-md-12">

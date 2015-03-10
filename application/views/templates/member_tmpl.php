@@ -8,7 +8,7 @@
         <meta name="keywords" content=""/>
         <title>Sonuto</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/common.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/property.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/newsfeed.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/xstream_banter.css" />

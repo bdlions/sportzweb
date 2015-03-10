@@ -21,11 +21,11 @@
             <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
             <div class="col-md-6 col-lg-6">
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[0]]['id']; ?>">
-                    <span class="cus_news_headline">
+                    <span class="heading_big">
                         <p id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline'])); ?></p>
                     </span>
                 </a>
-                <span class="cus_news_descr">
+                <span class="content_text">
                     <p id="summary_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['summary'])); ?></p>
                 </span>
             </div>
@@ -40,11 +40,11 @@
                 </a>
                 <br>
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[1]]['id']; ?>">
-                    <span class="cus_news_subheadline">
+                    <span class="heading_medium">
                         <p id="heading_2"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[1]]['headline'])); ?></p>
                     </span>
                 </a>
-                <span class="cus_news_descr">
+                <span class="content_text">
                     <p id="summary_2"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[1]]['summary'])); ?></p>
                 </span>
             <?php endif; ?>
@@ -57,13 +57,13 @@
                 </a>
                 <br>
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[2]]['id']; ?>">
-                    <span class="cus_news_subheadline">
+                    <span class="heading_medium">
                         <p id="heading_3">
                             <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[2]]['headline'])) ?>
                         </p>
                     </span>
                 </a>
-                <span class="cus_news_descr">
+                <span class="content_text">
                     <p id="summary_3"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[2]]['summary'])); ?></p>
                 </span>
             <?php endif; ?>
@@ -76,13 +76,13 @@
                 </a>
                 <br>
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[3]]['id']; ?>">
-                    <span class="cus_news_subheadline">
+                    <span class="heading_medium">
                         <p id="heading_4">
                             <?php echo $news_id_news_info_map[$region_id_news_id_map[3]]['headline'] ?>
                         </p>
                     </span>
                 </a>
-                <span class="cus_news_descr">
+                <span class="content_text">
                     <p id="summary_4">
                         <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[3]]['summary'])); ?>
                     </p>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-md-6" style="padding-left: 0px;">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[4]]['id']; ?>">
-                        <span class="cus_news_subheadline">
+                        <span class="heading_medium">
                             <p id="heading_5">
                                 <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[4]]['headline'])); ?>
                             </p>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="col-md-6" style="padding-left: 0px;">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[5]]['id']; ?>">
-                        <span class="cus_news_subheadline">
+                        <span class="heading_medium">
                             <p id="heading_6">
                                 <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[5]]['headline'])); ?>
                             </p>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-md-6" style="padding-left: 0px;">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[6]]['id']; ?>">
-                        <span class="cus_news_subheadline">
+                        <span class="heading_medium">
                             <p id="heading_7"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[6]]['headline'])); ?></p>
                         </span>
                     </a>
@@ -158,7 +158,7 @@
                 </div>
                 <div class="col-md-6" style="padding-left: 0px;">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[7]]['id']; ?>">
-                        <span class="cus_news_subheadline">
+                        <span class="heading_medium">
                             <p id="heading_8"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[7]]['headline'])); ?></p>
                         </span>
                     </a>
@@ -179,7 +179,7 @@
                             </span>
                         </a>
                         <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[8]]['id']; ?>">
-                            <span class="cus_news_descr">
+                            <span class="content_text">
                                 <p id="summary_9"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[8]]['summary'])); ?></p>
                             </span>
                         </a>
@@ -195,7 +195,7 @@
                             </span>
                         </a>
                         <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[9]]['id']; ?>">
-                            <span  class="cus_news_descr">
+                            <span  class="content_text">
                                 <p id="summary_10"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[9]]['summary'])); ?></p>
                             </span>
                         </a>
@@ -212,7 +212,7 @@
                             </span>
                         </a>
                         <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[10]]['id']; ?>">
-                            <span class="cus_news_descr">
+                            <span class="content_text">
                                 <p id="summary_11"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[10]]['summary'])); ?></p>
                             </span>
                         </a>
@@ -227,7 +227,7 @@
                             </span>
                         </a>
                         <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[11]]['id']; ?>">
-                            <span class="cus_news_descr">
+                            <span class="content_text">
                                 <p id="summary_12"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[11]]['summary'])); ?></p>
                             </span>
                         </a>
@@ -242,7 +242,7 @@
                     <img style="min-width: 100%;" id="image_position_13" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[12]]['picture'] ?>"/>
                 </a>
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[12]]['id']; ?>">
-                    <span class="cus_news_subheadline" id="heading_13">
+                    <span class="heading_medium" id="heading_13">
                         <p>
                             <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[12]]['headline'])); ?>
                         </p>
@@ -259,8 +259,8 @@
                 <?php if ($region_id_is_news_ignored_map[13 + $fi] == 0) : ?>
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['id']; ?>"><img style="width:100%;height: 150px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['picture'] ?>"/></a>
                     <br>
-                    <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['id']; ?>"><span class="cus_news_subheadline"><p><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['headline'])); ?></p></span></a>
-            <!--                <span class="cus_news_descr"><p><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['summary'])); ?></p></span>-->
+                    <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['id']; ?>"><span class="heading_medium"><p><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['headline'])); ?></p></span></a>
+            <!--                <span class="content_text"><p><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['summary'])); ?></p></span>-->
                 <?php endif; ?>                
             </div>
         <?php endif; ?>

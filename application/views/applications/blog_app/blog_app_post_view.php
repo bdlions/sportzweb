@@ -44,74 +44,81 @@
     </div>
 </div>
 <?php $this->load->view("applications/blog_app/templates/header_menu"); ?>
-<div class="col-md-9" style="background-color: #F5F5F5">
-    <div class="col-md-12" style="padding-bottom: 8px;">
-        <div class="col-md-12">
-            <span class="blog_post_title"><?php echo isset($blog['title']) ? html_entity_decode(html_entity_decode($blog['title'])):''; ?></span>
-        </div>
-        <div class="col-md-12 blog_post_subtitle_bar">
-            <span class="blog_post_body_text">
-                By
-                <?php if($blog['is_user_member'] == 1){ ?>
-                    <a href="<?php echo base_url(); ?>member_profile/show/<?php echo $blog['user_id']; ?>">
-                        <?php echo isset($blog['first_name']) ? $blog['first_name'].' '.$blog['last_name'] : '';?>
-                    </a>
-                <?php }else{
-                    echo $blog['first_name'].' '.$blog['last_name'];
-                } ?>
-            </span>
-            <div id="total_comments">
-                <span class="pull-right">
-                    <a href="#">
-                        <?php
-                            if($total_comments<=1){
-                                echo '<span id="comment_counter">'.$total_comments.' comment</span>';
-                            }
-                            else
-                            {
-                                echo '<span id="comment_counter">'.$total_comments.' comments</span>';
-                            }
-                        ?>
-                    </a>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-12" style="padding:24px"><!--Images-->
-            <?php if(isset($blog['picture'])): ?>
-                <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH ?><?php echo $blog['picture']; ?>"/>
-            <?php endif; ?>
-                <div class="col-md-12" style="padding-top:20px;padding-right: 0px;padding-left: 0px;">
-                    <?php echo isset($blog['picture_description']) ? html_entity_decode(html_entity_decode($blog['picture_description'])) : '';?>
+
+
+    <div class="col-md-9" style="background-color: #F5F5F5">
+        <div class="row">
+            <div class="col-md-12" style="padding-bottom: 8px;">
+                <div class="row">
+                    <div class="row form-group"></div>
+                    <div class="col-md-12">
+                        <span class="heading_big"><?php echo isset($blog['title']) ? html_entity_decode(html_entity_decode($blog['title'])):''; ?></span>
+                    </div>
                 </div>
-        </div>
-        
-        <div class="blog_post_body_text">
-            <?php echo isset($blog['description']) ? html_entity_decode(html_entity_decode($blog['description'])) : ''; ?>
-        </div>
-        <div class="col-md-12 blog_post_subtitle_bar" style="text-align:center;">
-            <span class="blog_post_body_text" style="font-size: 24px; font-weight: normal;">Related Posts</span>
-        </div>
-        <div>
-            <div class="col-md-12" style="margin-top: 30px; margin-bottom: 30px;">
-                <?php if (count($related_blogs) > 0) : ?>
-                    <?php foreach ($related_blogs as $row): ?>
-                        <div class="col-md-4">
-                            <img width="200"  class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH ?><?php echo $row['picture']; ?>"/>
-                            <br>
-                            <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $row['id']; ?>"><?php echo html_entity_decode(html_entity_decode($row['title'])); ?></a>
+                <div class="row">
+                    <div class="col-md-12 blog_post_subtitle_bar">
+                        <span class="small_text_pale">
+                            By
+                            <?php if($blog['is_user_member'] == 1){ ?>
+                                <a href="<?php echo base_url(); ?>member_profile/show/<?php echo $blog['user_id']; ?>">
+                                    <?php echo isset($blog['first_name']) ? $blog['first_name'].' '.$blog['last_name'] : '';?>
+                                </a>
+                            <?php }else{
+                                echo $blog['first_name'].' '.$blog['last_name'];
+                            } ?>
+                        </span>
+                        <div id="total_comments">
+                            <span class="pull-right">
+                                <a href="#">
+                                    <?php if($total_comments<=1){
+                                            echo '<span id="comment_counter">'.$total_comments.' comment</span>';
+                                        } else {
+                                            echo '<span id="comment_counter">'.$total_comments.' comments</span>';
+                                        }?>
+                                </a>
+                            </span>
                         </div>
-                       
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="padding:24px"><!--Images-->
+                        <?php if(isset($blog['picture'])): ?>
+                            <img class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH ?><?php echo $blog['picture']; ?>"/>
+                        <?php endif; ?>
+                        <div class="col-md-12" style="padding-top:20px;padding-right: 0px;padding-left: 0px;">
+                            <?php echo isset($blog['picture_description']) ? html_entity_decode(html_entity_decode($blog['picture_description'])) : '';?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content_text">
+                    <?php echo isset($blog['description']) ? html_entity_decode(html_entity_decode($blog['description'])) : ''; ?>
+                </div>
+                <div class="col-md-12 blog_post_subtitle_bar" style="text-align:center;">
+                    <span class="content_text" style="font-size: 24px; font-weight: normal;">Related Posts</span>
+                </div>
+                <div>
+                    <div class="col-md-12" style="margin-top: 30px; margin-bottom: 30px;">
+                        <?php if (count($related_blogs) > 0) : ?>
+                            <?php foreach ($related_blogs as $row): ?>
+                                <div class="col-md-4">
+                                    <img width="200"  class="img-responsive" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH ?><?php echo $row['picture']; ?>"/>
+                                    <br>
+                                    <a href="<?php echo base_url(); ?>applications/blog_app/view_blog_post/<?php echo $row['id']; ?>"><?php echo html_entity_decode(html_entity_decode($row['title'])); ?></a>
+                                </div>
+
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-12"><button data-toggle="modal" data-target="#modal_share_news" style="float: right" class="btn btn-default">Share</button></div>
+                    </div>
+                    <?php $this->load->view("applications/comments", $this->data); ?>
+                </div>
             </div>
-            <br>
-           
-            <div class="row">
-                <div class="col-md-12"><button data-toggle="modal" data-target="#modal_share_news" style="float: right" class="btn btn-default">Share</button></div>
-            </div>
-            <?php $this->load->view("applications/comments", $this->data); ?>
         </div>
     </div>
-</div>
-<div class="col-md-3">
-</div>
+    <div class="col-md-3">
+    </div>
