@@ -62,8 +62,7 @@
                     <a href="<?php echo base_url().BLOG_HOME_PAGE_PATH?>">
                         <img src="<?php echo base_url().APPLICATION_ICON_PATH.BLOG_ICON ?>"> <?php echo $application_info['title']; ?>
                     </a>
-                </div>  
-        
+                </div>
             <?php } elseif ($application_info['id'] == APPLICATION_NEWS_APP_ID && in_array(APPLICATION_NEWS_APP_ID, $app_id_list)) {?>
                 <div class="left_menu_item" >
                     <a href="<?php echo base_url().NEWS_HOME_PAGE_PATH?>">
@@ -94,7 +93,7 @@
                         <img src="<?php echo base_url().APPLICATION_ICON_PATH.SCORE_PREDICTION_ICON ?>"> <?php echo $application_info['title']; ?>
                     </a>
                 </div>
-            <?php } elseif ($application_info['id'] == APPLICATION_SCORE_PREDICTION_ID && in_array(APPLICATION_SCORE_PREDICTION_ID, $app_id_list)) {?>
+            <?php } elseif ($application_info['id'] == APPLICATION_SHOP_ID && in_array(APPLICATION_SHOP_ID, $app_id_list)) {?>
                 <div class="left_menu_item" >
                     <a href="<?php echo base_url().SHOP_HOME_PAGE_PATH ?>">
                         <img src="<?php echo base_url().APPLICATION_ICON_PATH.SHOP_ICON ?>"> <?php echo $application_info['title']; ?>

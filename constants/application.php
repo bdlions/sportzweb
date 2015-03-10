@@ -34,18 +34,7 @@
     define("SCORE_PREDICTION_ICON",        "sp.png");
     define("SHOP_ICON",                    "shop.png");
     define("GYMPRO_ICON",                  "ptpro.png");
-    
-    define("XSTREAM_BANTER_NAME",          "Xstream Banter");
-    define("SERVICE_DIRECTORY_NAME",       "Service Directory");
-    define("NEWS_NAME",                    "Sports News");
-    define("HEALTHY_RECIPE_NAME",          "World Kitchen");
-    define("BLOG_NAME",                    "Blog");
-    define("BMI_NAME",                     "Bmi Calculator");
-    define("PHOTOGRAPHY_NAME",             "Photography");
-    define("SCORE_PREDICTION_NAME",        "Score Prediction");
-    define("SHOP_NAME",                    "Shop");
-    define("GYMPRO_NAME",                  "PT Pro");
-    
+        
     define("APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH",                       "admin/application/xstream_banter");
     define("APPLICATION_HEALTHY_RECIPES_HOME_PAGE_PATH",                      "admin/healthyrecipes");
     define("APPLICATION_SERVICE_DIRECTORY_HOME_PAGE_PATH",                    "admin/servicedirectory");
