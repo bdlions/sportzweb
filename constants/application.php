@@ -14,7 +14,7 @@
     define("SERVICE_DIRECTORY_HOME_PAGE_PATH",       "applications/service_directory");
     define("NEWS_HOME_PAGE_PATH",                    "applications/news_app");
     define("APPLICATION_DIRECTORY_HOME_PAGE_PATH",   "applications/application_directory");
-    define("HEALTHY_RECIPE_HOME_PAGE_PATH",          "applications/healthy_recipe");
+    define("HEALTHY_RECIPE_HOME_PAGE_PATH",          "applications/healthy_recipes");
     define("BLOG_HOME_PAGE_PATH",                    "applications/blog_app");
     define("BMI_HOME_PAGE_PATH",                     "applications/bmi_calculator");
     define("PHOTOGRAPHY_HOME_PAGE_PATH",             "applications/photography");
