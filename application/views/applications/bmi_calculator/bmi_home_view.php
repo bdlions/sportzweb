@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <span class="heading_big">BMI Calculator</span>
+            <span class="grey_title ">BMI Calculator</span>
         </div>
     </div>
     <div class="row col-md-12">

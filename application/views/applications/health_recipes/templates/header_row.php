@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>resources/bootstrap3/css/healthy_recipe.css">
 <div class="row top-row-padding  top-row-design">
-    <div class="col-md-12 reciepe-menu">
+    <div class="col-md-12 reciepe-menu heading_medium_thin">
         <a href="<?php echo base_url() . 'applications/healthy_recipes' ?>">Home</a>
         <?php if (count($recipe_menu) > 0) : ?>
             <?php foreach ($recipe_menu as $menu): ?>

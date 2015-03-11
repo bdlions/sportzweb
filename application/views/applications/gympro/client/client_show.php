@@ -3,35 +3,35 @@
     <div class="row top_margin">
         <div class="col-md-2">
             <!--left nav custom for this page-->
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#add_client').show();">Personal details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#contact_details').show();">Contact details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#health').show();">Health details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#programmes').show();">Programmes</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#assessments').show();">Assessments</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#missions').show();">Missions</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#nutrition').show();">Nutrition</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#notes').show();">Notes</a>
             </div>

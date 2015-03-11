@@ -385,13 +385,13 @@
         <div class="row">
             <div class="col-md-3 col-sm-3">
                 <img class="list-icon" src="<?php echo base_url(); ?>resources/images/echo.png"/>
-                <a href="#" class="anchor-undecorated">Update Status</a>
+                <a href="#" class="anchor-undecorated content_text">Update Status</a>
             </div>
             <div class="col-md-9 col-sm-9">
 <!--                <div class="row">
                     <div class="col-md-offset-6 col-md-4 pull-right">-->
                         <div class="fileinput-button pull-right">
-                            <img class="list-icon" src="<?php echo base_url() ?>resources/images/upload-doc.png"/>Add an image
+                            <img class="list-icon" src="<?php echo base_url() ?>resources/images/upload-doc.png"/><span class=" content_text">Add an image</span>
                             <input id="fileupload" type="file" name="userfile">
                         </div>
 <!--                    </div>
@@ -439,7 +439,7 @@
                             <div class="div1">
                                 <div id="status_selected_friends"></div>
                             </div>
-                            <div class="div2"><input id="chat_friends" class="form-control typeahead" type="text" placeholder="Tell specific people and groups" /></div>
+                            <div class="div2"><input id="chat_friends" class="form-control typeahead small_text_pale" type="text" placeholder="Tell specific people and groups" /></div>
                             <div class="div3">
                                 <button class="btn button-custom pull-right" id="button-post" style="background-color:skyblue">Post</button>
                             </div>

@@ -1,11 +1,8 @@
-<?php $this->load->view("shop/topnav"); ?>
-<?php $this->load->view("shop/breadcrumb"); ?>
+<?php $this->load->view("applications/shop/templates/topnav"); ?>
+<?php $this->load->view("applications/shop/templates/breadcrumb"); ?>
 
 <div class="container-fluid">
     <div class="row">
-        
-        
-        
         <div class="col-md-12">
             <div class="bag_big_header">
                 SHOPPING BAG  <span>1 item</span>
@@ -26,17 +23,17 @@
                 <div class="col-md-2">
                     <img src="<?php echo base_url(); ?>/resources/images/video.jpg" style="max-height: 100px;">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 small_text_dark">
                     <div>Womens classic canvas</div>
                     <div>size 22 33 44</div>
                     <div>Colour: RED</div>
                 </div>
-                <div class="col-md-2">$33.22</div>
-                <div class="col-md-2">
+                <div class="col-md-2 small_text_dark">$33.22</div>
+                <div class="col-md-2 small_text_dark">
                     <input class="bag_item_input" value="11">
                     <a href="">Remove</a>
                 </div>
-                <div class="col-md-2">asc</div>
+                <div class="col-md-2 small_text_dark">asc</div>
             </div>
         </div>
         

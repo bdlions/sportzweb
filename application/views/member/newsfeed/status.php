@@ -28,16 +28,18 @@
                 </div>
                 <div class="row col-md-12">
                     <?php //echo convert_time($newsfeed['status_created_on'])?> 
-                    <?php echo $newsfeed['status_created_on']?> 
+                    <span class="small_text_pale"><?php echo $newsfeed['status_created_on']?> </span>
                 </div>
                 <?php if(!empty($newsfeed['reference_list']) && !empty($newsfeed['reference_list']['user_list'])) {?>
-                <div class="row col-md-12">
+                <div class="row col-md-12 content_text">
                     <?php
                         $reference_size = count($newsfeed['reference_list']['user_list']);
                         $reference_counter = 1;
                         echo 'To ';
                         foreach($newsfeed['reference_list']['user_list'] as $reference_user_info){ ?>
-                            <a href='<?php echo base_url(). "member_profile/show/{$reference_user_info['user_id']}"?>' class="profile-name" ><?php echo $reference_user_info['first_name'] . " ". $reference_user_info['last_name'].' ' ?></a>
+                            <a href='<?php echo base_url(). "member_profile/show/{$reference_user_info['user_id']}"?>' class="profile-name" >
+                                <span class="content_text"><?php echo $reference_user_info['first_name'] . " ". $reference_user_info['last_name'].' ' ?></span>
+                            </a>
                     <?php 
                             if($reference_counter < $reference_size)
                             {
@@ -55,7 +57,7 @@
             <div class="col-md-12">
                 <?php if( !empty($newsfeed['description']) && isset($newsfeed['description']) ){?>
                 <div class="row col-md-12" style="padding-bottom:10px;font-size:15px;">
-                    <?php echo $newsfeed['description'] ?><br/>
+                    <span class="content_text"><?php echo $newsfeed['description'] ?></span><br/>
                 </div>
                 <?php } ?>
                 <?php if(!empty($newsfeed['attachments'])) {?>
@@ -82,7 +84,7 @@
                     $this->data['newsfeed'] = $newsfeed;  
                     $this->load->view("member/newsfeed/shared_status_content", $this->data); 
                 ?>
-                <div class="row col-md-12" id="newsfeed" style="padding-top: 10px; padding-bottom:10px;">
+                <div class="row col-md-12 small_text_dark" id="newsfeed" style="padding-top: 10px; padding-bottom:10px;">
                     <?php 
                         if(is_like_label($newsfeed['liked_user_list']))
                         { ?>
@@ -154,15 +156,27 @@
                         <?php foreach ($newsfeed['feedbacks'] as $feedback){?>
                             <div class="row form-group">
                                 <div class="col-md-2 feed-profile-picture">
-                                    <a href='<?php echo base_url(). "member_profile/show/{$feedback['user_info']['user_id']}"?>'>
+                                    <a
+                                        class="content_text"
+                                        href='<?php echo base_url(). "member_profile/show/{$feedback['user_info']['user_id']}"?>'>
                                         <div class="profile-background-comment">
-                                            <img alt="<?php echo $feedback['user_info']['first_name'][0] . $feedback['user_info']['last_name'][0]?>" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$feedback['user_info']['photo'] ?>?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background-comment'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
-                                            <p style="visibility:hidden"><?php echo $feedback['user_info']['first_name'][0].$feedback['user_info']['last_name'][0] ?></p>
+                                            <img
+                                                alt="<?php echo $feedback['user_info']['first_name'][0] . $feedback['user_info']['last_name'][0]?>"
+                                                src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$feedback['user_info']['photo'] ?>?>"
+                                                class="img-responsive profile-photo"
+                                                onError="this.style.display = 'none'; this.parentNode.className='profile-background-comment'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; "
+                                                />                     
+                                            <p style="visibility:hidden">
+                                                <?php echo $feedback['user_info']['first_name'][0].$feedback['user_info']['last_name'][0] ?>
+                                            </p>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="row col-md-10">
-                                    <a href='<?php echo base_url(). "member_profile/show/{$feedback['user_info']['user_id'] }"?>' class="profile-name" ><?php echo $feedback['user_info']['first_name'] . " ". $feedback['user_info']['last_name']?></a> <?php echo $feedback['description']?>
+                                    <a href='<?php echo base_url(). "member_profile/show/{$feedback['user_info']['user_id'] }"?>' class="profile-name" >
+                                        <?php echo $feedback['user_info']['first_name'] . " ". $feedback['user_info']['last_name']?>
+                                    </a>
+                                    <?php echo $feedback['description']?>
                                 </div>
                                 <div class="row col-md-10" id="feedback_created_date">
                                     <?php echo convert_time($feedback['created_on']) ?>
@@ -180,7 +194,7 @@
                                 </a>
                             </div>
                             <div class="row col-md-10">
-                                <input id="text_input_comment_<?php echo $newsfeed['status_id']?>" type="text" onkeyup="store_status_feedback(event, this, <?php echo $newsfeed['status_id']?>)" class="form-control" placeholder="Write a comment..."  name ="feedback" style="background-color: #EFE4B0"/>
+                                <input id="text_input_comment_<?php echo $newsfeed['status_id']?>" type="text" onkeyup="store_status_feedback(event, this, <?php echo $newsfeed['status_id']?>)" class="form-control small_text_pale" placeholder="Write a comment..."  name ="feedback" style="background-color: #EFE4B0"/>
                             </div>
                         </div>
                     </div>

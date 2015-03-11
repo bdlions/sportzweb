@@ -61,10 +61,10 @@
     <div class="col-md-12">
         <div class="right-panel-container">
             <div class="panel right-panel">
-                <div class="panel-heading right-panel-heading">Recent Activity</div>
+                <div class="panel-heading right-panel-heading content_text">Recent Activity</div>
                 <div class="panel-body right-panel-body">
                     <div class="container-fluid right-panel-list">
-                    <div style="padding-bottom: 30px">
+                        <div style="padding-bottom: 30px" class="small_text_pale">
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']) && !empty($recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info'])) { ?>
                             <div class="list-group-item right-panel-item">
                                 <div class="row">
@@ -217,10 +217,10 @@
                 <div class="panel-body right-panel-body" style="padding-bottom: 20px;">
                     <div class="panel-heading right-panel-heading">
                         <div class="row">
-                            <div class="col-md-8 pull-left">App Directory</div>
+                            <div class="col-md-8 pull-left content_text">App Directory</div>
                             <div class="col-md-4 pull-right">
                                 <a href="<?php echo base_url(); ?>applications/application_directory">
-                                    See all
+                                    <span class="small_text_dark">See all</span>
                                 </a>
                             </div>
                         </div>
@@ -325,8 +325,8 @@
     <div class="col-md-12" style="padding-top: 10px;">
         <div class="right-panel-container">
             <div class="panel right-panel">
-                <div class="panel-heading right-panel-heading">Trending</div>
-                <div class="panel-body right-panel-body">
+                <div class="panel-heading right-panel-heading content_text">Trending</div>
+                <div class="panel-body right-panel-body small_text_pale">
                     <ul class="list-group right-panel-list">
                         <?php foreach($popular_trends as $trend){?>
                         <li><a href="<?php echo base_url().'trending_feature/hashtag/'.$trend['hashtag']?>">#<?php echo $trend['hashtag']?></a></li>  

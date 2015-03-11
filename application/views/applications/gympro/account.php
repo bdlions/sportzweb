@@ -23,9 +23,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-md-4 control-label requiredField">
+                            <div class="col-md-4 heading_medium_thin requiredField">
                                 Account Type: 
-                            </label>
+                            </div>
                             <div class ="col-md-8">
                                 <?php echo form_dropdown('account_type_list', $account_type_list, $selected_account_type, 'class=form-control id=account_type_list'); ?>
                             </div>

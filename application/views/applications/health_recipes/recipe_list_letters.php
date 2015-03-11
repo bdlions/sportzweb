@@ -28,10 +28,10 @@
                 <?php for(;$i<='Z';$i++): ?>
                     <?php if(!empty($final_array[$i])):?>
                         <?php if($add == $length1) break;?>
-                        <h3><?php echo $i; $add++;?></h3>
+                        <h3 class="heading_medium_thin"><?php echo $i; $add++;?></h3>
                         <?php foreach ($final_array[$i] as $recipe): ?>
                             <li>
-                                <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe['id']; ?>"><?php echo $recipe['title']; ?></a>   
+                                <a class="content_text recipe_description" href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe['id']; ?>"><?php echo $recipe['title']; ?></a>
                             </li>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -43,10 +43,10 @@
             <ul style="list-style-type: none;">               
                 <?php for(;$i<='Z';$i++): ?>
                     <?php if(!empty($final_array[$i])): ?>
-                        <h3><?php echo $i;?></h3>
+                        <h3 class="heading_medium_thin"><?php echo $i;?></h3>
                         <?php foreach ($final_array[$i] as $recipe): ?>
                             <li>
-                                <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe['id']; ?>"><?php echo $recipe['title']; ?></a>   
+                                <a class="content_text recipe_description"  href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe['id']; ?>"><?php echo $recipe['title']; ?></a>   
                             </li>
                         <?php endforeach; ?>
                     <?php endif;?>

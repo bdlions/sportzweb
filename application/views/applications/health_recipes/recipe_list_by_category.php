@@ -14,11 +14,13 @@
                     </a>
                 </div>
                 <div class="col-md-9">
-                    <a style="font-size:16px;color:#B97A57;text-decoration:underline;" href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $result['id']; ?>">
+                    <div class="row form-group"></div>
+                    <a class="reciepe_title heading_small" href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $result['id']; ?>">
                         <?php echo $result['title']; ?>
                     </a>
-                    <div style="margin-top:10px;font-size:14px;line-height:120%;">
-                        <?php echo $result['description']; ?>
+                    <div class="row form-group"></div>
+                    <div class="content_text">
+                        <?php echo substr($result['description'], 0, RECIPE_BY_CATEGORY_DESCRIPTION_LENGTH); ?>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 
 <div id='mega_nav'>
     <ul>
-        <li><a href='<?php echo base_url() ?>test/shop_home'><span>HOME</span></a></li>
+        <li><a href='<?php echo base_url() ?>test/shop_home'>HOME</a></li>
         <li onmouseout="document.getElementById('tray_women').style.display = 'none';" onmouseover="document.getElementById('tray_women').style.display = 'block';" ><a href='#'>WOMEN</a></li>
         <li onmouseout="document.getElementById('tray_men').style.display = 'none';" onmouseover="document.getElementById('tray_men').style.display = 'block';" ><a href='#'>MEN</a></li>
         <li onmouseout="document.getElementById('tray_kids').style.display = 'none';" onmouseover="document.getElementById('tray_kids').style.display = 'block';" ><a href='#'>KIDS</a></li>

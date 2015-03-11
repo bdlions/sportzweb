@@ -42,19 +42,19 @@
     <div class="row top_margin">
         <div class="col-md-2">
             <!--left nav custom for this page-->
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="#">Personal details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="#">Contact details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="#">Health details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="#">Notes</a>
             </div>

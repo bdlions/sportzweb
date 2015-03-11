@@ -1,5 +1,5 @@
 <?php $this->load->view("applications/shop/templates/topnav"); ?>
-<?php //$this->load->view("shop/breadcrumb"); ?>
+<?php // $this->load->view("applications/shop/templates/breadcrumb"); ?>
 
 <div class="row">
     <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
@@ -64,7 +64,7 @@
 <!--BEST SELLERS-->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 page_section_heading" >
+        <div class="col-md-12 page_section_heading heading_medium" >
             BEST SELLERS
         </div>
     </div>

@@ -123,19 +123,19 @@ $(function () {
     <div class="row top_margin">
         <div class="col-md-2">
             <!--left nav custom for this page-->
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#add_client').show();$('#add_client_btn').show();">Personal details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#contact_details').show();$('#contact_details_btn').show();">Contact details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#health').show();$('#health_btn').show();">Health details</a>
             </div>
-            <div class="ln_item" >
+            <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
                 <a onclick="$('.hidden_tab').hide();$('#notes').show();$('#notes_btn').show();">Notes</a>
             </div>

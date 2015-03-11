@@ -10,7 +10,7 @@ and open the template in the editor.
 
 .image-caption
 {
-    font-size:18px;
+    /*font-size:18px;*/
     color:#7096C9;
     margin-top: 12px;
 }
@@ -26,25 +26,25 @@ a_hover_color
 .recipe_description
 {
     color: #7092BE; 
-    font-size: 17px;
+    /*font-size: 17px;*/
 }
 .reciepe_title
 {
     text-transform: uppercase;
-    font-size: 20px;
+    /*font-size: 20px;*/
     color: #B97A57;
     
 }
 .recipe_a_list
 {
     color: #B97A57;
-    font-size: 16px;
+    /*font-size: 16px;*/
 }
 .reciepe-menu
 {
     padding-top: 5px;
     padding-bottom: 5px;
-    font-size: 20px;
+    /*font-size: 20px;*/
     border-bottom: 1px solid #0044cc;
     border-top: 1px solid #7F7F7F;
 }
@@ -96,9 +96,10 @@ a_hover_color
     color: white; 
     background-color: #7092BE;
     padding-left: 11px;
+    padding-top: 2px;
     margin-bottom: 8px; 
     height: 32px;
-    font-size: 22px;
+    /*font-size: 22px;*/
 }
 .cus_command_buttons
 {
@@ -125,5 +126,16 @@ a_hover_color
 .cate .avtion {
     background-color: #FAFAFA;
     border: 1px solid #C0C0C0;
+}
+
+
+.image-caption,
+.recipe_description,
+.purp_style,
+.recipe_a_list,
+.reciepe-menu,
+.reciepe_title
+{
+    font-family: arial,helvetica,sans-serif !important;
 }
 

@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
-                        <label class="col-sm-10 control-label">Are you sure to delete this client?</label>
+                        <div class="col-sm-10 heading_medium_thin">Are you sure to delete this client?</div>
                         <input id="input_client_id" name="input_client_id" value="" type="hidden" class="form-control"/>
                     </div>
                 </div>                

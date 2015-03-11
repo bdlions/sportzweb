@@ -184,7 +184,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="row form-group">
-                        <div class="col-md-4" style="padding-right: 0">Group and Client:</div>
+                        <div class="col-md-4 content_text" style="padding-right: 0">Group and Client:</div>
                         <div class="col-md-7">
                             <select class="form-control" id="group_client">
                                 <!--<option>-- Select --</option>-->
@@ -209,19 +209,19 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-4 control-div">Start:</div>
+                        <div class="col-md-4 content_text">Start:</div>
                         <div class="col-md-7">
                             <input id="st_date" style="margin-right: 5px;" value="<?php echo $current_date;?>">
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-4 control-div">Finish:</div>
+                        <div class="col-md-4 content_text">Finish:</div>
                         <div class="col-md-7">
                             <input id="fin_date" style="margin-right: 5px;" value="<?php echo $current_date;?>">
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-4 control-div">Session:</div>
+                        <div class="col-md-4 content_text">Session:</div>
                         <div class="col-md-7">
                             <select class="form-control" id="status_id">
                                 <option value="0">All</option>

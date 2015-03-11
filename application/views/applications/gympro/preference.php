@@ -21,57 +21,57 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label requiredField">
+                    <div class="col-md-4 control-label content_text requiredField">
                         Height unit: 
-                    </label>
+                    </div>
                     <div class ="col-md-6">
                         <?php echo form_dropdown('height_unit_list', $height_unit_list, $gympro_user_info['height_unit_id'], 'class=form-control id=height_unit_list'); ?>
                     </div>
                 </div> 
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label requiredField">
+                    <div class="col-md-4 control-label content_text requiredField">
                         Weight unit: 
-                    </label>
+                    </div>
                     <div class ="col-md-6">
                         <?php echo form_dropdown('weight_unit_list', $weight_unit_list, $gympro_user_info['weight_unit_id'], 'class=form-control id=weight_unit_list'); ?>
                     </div>
                 </div> 
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label requiredField">
+                    <div class="col-md-4 control-label content_text requiredField">
                         Girth unit: 
-                    </label>
+                    </div>
                     <div class ="col-md-6">
                         <?php echo form_dropdown('girth_unit_list', $girth_unit_list, $gympro_user_info['girth_unit_id'], 'class=form-control id=girth_unit_list'); ?>
                     </div>
                 </div> 
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label requiredField">
+                    <div class="col-md-4 control-label content_text requiredField">
                         Time zone: 
-                    </label>
+                    </div>
                     <div class ="col-md-6">
                         <?php echo form_dropdown('time_zone_list', $time_zone_list, $gympro_user_info['time_zone_id'], 'class=form-control id=time_zone_list'); ?>
                     </div>
                 </div> 
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label requiredField">
+                    <div class="col-md-4 control-label content_text requiredField">
                         Currency: 
-                    </label>
+                    </div>
                     <div class ="col-md-6">
                         <?php echo form_dropdown('currency_list', $currency_list, $gympro_user_info['currency_id'], 'class=form-control id=currency_list'); ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-md-4 control-label requiredField">
+                    <div class="col-md-4 control-label content_text requiredField">
                         Hourly rate: 
-                    </label>
+                    </div>
                     <div class ="col-md-6">
                         <?php echo form_dropdown('hourly_rate_list', $hourly_rate_list, $gympro_user_info['hourly_rate_id'], 'class=form-control id=hourly_rate_list'); ?>
                     </div>
                 </div>                 
                 <div class="form-group">
-                    <label for="submit_update_preference" class="col-md-4 control-label requiredField">
+                    <div for="submit_update_preference" class="col-md-4 control-label content_text requiredField">
 
-                    </label>
+                    </div>
                     <div class ="col-md-offset-3 col-md-3">
                         <?php echo form_input($submit_update_preference+array('class'=>'form-control button-custom')); ?>
                     </div>

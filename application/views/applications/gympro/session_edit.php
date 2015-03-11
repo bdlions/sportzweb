@@ -48,11 +48,12 @@
         <div class="col-md-10">
             
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 heading_medium_thin">
                     Edit session
                     <div class="row form-group">
                         <div class="col-md-4" style="border-bottom: 1px solid #999999"></div>
                     </div>
+                    <div class="row form-group"></div>
                 </div>
             </div>
             <?php if(isset($message) && ($message != NULL)): ?>
@@ -62,13 +63,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Title: </div>
+                        <div class="col-md-3 content_text">Title: </div>
                         <div class="col-md-9">
                             <input class="form-control" name="title" value="<?php echo $session_info['title'];?>">
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Group and Client</div>
+                        <div class="col-md-3 content_text">Group and Client</div>
                         <div class="col-md-4">
                             <select class="form-control" name="group_client">
                                 <optgroup label="Groups">
@@ -85,13 +86,13 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Date:</div>
+                        <div class="col-md-3 content_text">Date:</div>
                         <div class="col-md-6">
                             <input class="" id="session_date" name="session_date" value="<?php echo $session_info['date'];?>" >
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3">Start:</div>
+                        <div class="col-md-3 content_text">Start:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="start" id="dd_start_date">
                                 <?php foreach ($session_times as $session_time): ?>
@@ -101,7 +102,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Finish:</div>
+                        <div class="col-md-3 content_text">Finish:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="end" id="dd_end_date">
                                 <?php foreach ($session_times as $session_time): ?>
@@ -111,13 +112,13 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Location</div>
+                        <div class="col-md-3 content_text">Location</div>
                         <div class="col-md-9">
                             <input class="form-control" name="location" value="<?php echo $session_info['location'];?>"> 
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Type:</div>
+                        <div class="col-md-3 content_text">Type:</div>
                         
                         <div class="col-md-4">
                             <select class="form-control" name="type_id" id="dd_type">
@@ -141,7 +142,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Cost:</div>
+                        <div class="col-md-3 content_text">Cost:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="cost" id="dd_cost">
                                 <option value="other" >Other</option>
@@ -155,7 +156,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-3 control-div">Status:</div>
+                        <div class="col-md-3 content_text">Status:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="status">
                                 <?php foreach ($session_statuses as $status): ?>
@@ -167,7 +168,8 @@
                 </div>
                 <div class="col-md-5 col-md-offset-1">
                     <div class="row form-group">
-                        <div class="col-md-1 control-div">Notes</div> 
+                        <div class="col-md-1 content_text">Notes</div> 
+                        <div class="col-md-1"></div>
                         <div class="col-md-10">
                             <textarea class="form-control" name="note" rows="10"><?php echo $session_info['note'];?></textarea>
                         </div>

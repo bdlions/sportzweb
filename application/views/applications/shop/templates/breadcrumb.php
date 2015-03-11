@@ -1,13 +1,15 @@
-<div class="container-fluid">
+
     <div class="row">
         <div class="col-md-12 shop_breadcrumb">
+        <div class="small_text_pale">
             <a href="#">TOMS</a>/
             <a href="#">Women</a>/
             <a href="#">Women's Shoes</a>/
-            <a href="#">Sandals</a>/
+            <a href="#">Sandalsa</a>/
+        </div>
         </div>
     </div>
-</div>
+
 
 <style>
     .shop_breadcrumb a

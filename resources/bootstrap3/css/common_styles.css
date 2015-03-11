@@ -11,14 +11,14 @@
 }
 .heading_big, .heading_medium, .heading_small{
     font-weight: bold;
-    color: #222;
+    /*color: #222;*/
 }
 .heading_big{
     font-family: helvetica, arial, sans-serif;
-    margin-bottom: 5px;
+    margin: 10px 0px;
     font-size: 30px;
 }
-.heading_medium{
+.heading_medium, .heading_medium_thin{
     font-size: 20px;
 }
 .heading_small{
@@ -35,7 +35,7 @@
 }
 .content_text{
     font-size: 14px;
-    color: #333;
+    /*color: #333;*/
 }
 
 

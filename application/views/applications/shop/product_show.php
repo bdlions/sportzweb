@@ -63,18 +63,22 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
-                <div class="page_section_subheading">
+                <div class="page_section_subheading heading_medium">
                     DETAILS
                 </div>
+                <div class="content_text">
+                    
                 e stitching
                 Denser EVA rubber outsole for traction
                 Perforated insole for breathability
                 Leather TOMS flag tongue logo
+                </div>
             </div>
             <div class="col-md-6">
-                <div class="page_section_subheading">
+                <div class="page_section_subheading heading_medium">
                     Sizing
                 </div>
+                <div class="content_text">
                 e stitching
                 Denser EVA rubber outsole for traction
                 Perforated insole for breathability
@@ -82,48 +86,49 @@
                 Denser EVA rubber outsole for traction
                 Perforated insole for breathability
                 Leather TOMS flag tongue logo
+                </div>
             </div>
         </div>
     </div>
     <div class="page_section"></div>
 
     <div class="row">
-        <div class="page_section_heading">
+        <div class="page_section_heading heading_medium">
             You might also like
-            <div class="row" style="padding-top: 30px">
-                <div class="col-md-3 col-xs-3 col-sm-3">
-                    <div class="row item_card">
-                        <div class="col-md-12" >
-                            <img class="" src="<?php echo base_url() ?>resources/images/video.jpg" />
-                        </div>
-                        <div class="col-md-12" >
-                            BEST SELLERS
-                            BEST SELLERS
-                            BEST SELLERS
-                            BEST SELLERS
-                            <span>BEST SELLERS</span>
-                        </div>
-                    </div>
+        </div>
+        <div class="row form-group"></div>
+        <div class="row form-group"></div>
+        <div class="col-md-3 col-xs-3 col-sm-3">
+            <div class="row item_card">
+                <div class="col-md-12" >
+                    <img class="" src="<?php echo base_url() ?>resources/images/video.jpg" />
                 </div>
-                <div class="col-md-3 col-xs-3 col-sm-3">
-                    <div class="row item_card">
-                        <div class="col-md-12" >
-                            <img class="" src="<?php echo base_url() ?>resources/images/video.jpg" />
-                        </div>
-                        <div class="col-md-12" >
-                            BEST SELLERS
-                            BEST SELLERS
-                            BEST SELLERS
-                            BEST SELLERS
-                            <span>BEST SELLERS</span>
-                        </div>
-                    </div>
+                <div class="col-md-12 content_text">
+                    BEST SELLERS
+                    BEST SELLERS
+                    BEST SELLERS
+                    BEST SELLERS
+                    <span>BEST SELLERS</span>
                 </div>
-
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-3 col-sm-3">
+            <div class="row item_card">
+                <div class="col-md-12" >
+                    <img class="" src="<?php echo base_url() ?>resources/images/video.jpg" />
+                </div>
+                <div class="col-md-12 content_text">
+                    BEST SELLERS
+                    BEST SELLERS
+                    BEST SELLERS
+                    BEST SELLERS
+                    <span>BEST SELLERS</span>
+                </div>
             </div>
         </div>
     </div>
-    
+    <div class="row form-group"></div>
+    <div class="row form-group"></div>
 </div>
 <script>
     $(document).ready(function(){
