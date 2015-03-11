@@ -235,7 +235,7 @@
             </div>
             <div class="row" id="div_comment_list">
             <?php foreach ($comments as $comment) { ?>
-                <div id="div_comment_<?php echo $comment['comment_id'] ?>" class="row" style="margin-bottom: 8px"><!--comments-->
+                <div id="div_comment_<?php echo $comment['comment_id'] ?>" class="row" style="margin-bottom: 8px;"><!--comments-->
                     <div class="col-md-12">
                         <table style="margin-right: 16px">
                             <tbody id="tbody_recipe_comments_list">
@@ -269,9 +269,12 @@
                                         <table style="width: 100%;">
                                             <tr>
                                                 <td style="width: 100%;"><!--actual comment-->
-                                                    <span id="commentfield" class="cus_comment_field_commenter"><?php echo $comment['first_name'] . ' ' . $comment['last_name']; ?></span>
-                                                    <br><?php echo $comment['comment']; ?><br>
-                                                    <div>
+                                                    <span id="commentfield" class="cus_comment_field_commenter">
+                                                        <span class="content_text"><?php echo $comment['first_name'] . ' ' . $comment['last_name']; ?></span>
+                                                    </span>
+                                                    <div style="padding: 10px;" class="small_text_pale">
+                                                        <?php echo $comment['comment']; ?><br>
+                                                        <!--<div class="row form-group"></div>-->
                                                         <?php echo$comment['comment_created_on']?>
                                                     </div>
                                                     <div id="effect_<?php echo $comment['comment_id']; ?>" style="display:none">
@@ -287,7 +290,6 @@
                                                             </b>
                                                         </div>
                                                     </div>
-                                                    <br>
                                                 </td>
                                                 <td align="right" style="vertical-align: top">
                                                     <?php if ($comment['user_id'] == $user_info['user_id']) { ?>
@@ -313,7 +315,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div id="like_counter_<?php echo $comment['comment_id'] ?>" value="<?php echo count($comment['liked_user_list']);?>">
+                                                    <div id="like_counter_<?php echo $comment['comment_id'] ?>" value="<?php echo count($comment['liked_user_list']);?>" class="small_text_pale">
                                                         <?php echo count($comment['liked_user_list']);?>
                                                     </div>
                                                 </td>
@@ -365,8 +367,8 @@
                                     <td style="width: 100%;"><!--actual comment-->
                                         <img src="<?php echo base_url() . "resources/images/comment_bubble/cmt-reply-write.png" ?>"/>
                                         <span class="cus_comment_field_commenter" style="color: #666666; font-weight: normal;">Comment</span>
-                                        <br><textarea name="comment" id="comment" style="width: 100%;"></textarea>
-                                        <br><br><button class="btn btn-default" id="save_comment" name="save_comment">Post</button>
+                                        <br><textarea name="comment" id="comment" style="width: 100%;margin: 5px 0px;"></textarea>
+                                        <br><button class="btn btn-default" id="save_comment" name="save_comment">Post</button>
                                         <div style="float: right;" class="small_text_pale">
                                             <b>
                                                 <input type="radio" name="comment_nature" value="Positive" style="margin-left: 8px;"> Positive

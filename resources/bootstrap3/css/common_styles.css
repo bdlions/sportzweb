@@ -2,7 +2,12 @@
     Created on : Mar 10, 2015, 5:34:03 PM
     Author     : Tanveer Ahmed
 */
-
+/*UNIVARSAL*/
+select, option{
+    font-size: 13px;
+    font-family: arial,helvetica,sans-serif;
+}
+/*UNIVARSAL*/
 
 .heading_medium, .heading_small,
 .small_text_dark, .small_text_pale,
