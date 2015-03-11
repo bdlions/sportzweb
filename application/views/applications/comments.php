@@ -210,19 +210,20 @@
 <div class="row" style="margin-top: 8px;">
     <div class="col-md-12 cus_comment_box"><!--main box-->
         <div class="row cus_comment_box_header">
-            <h3 class="col-md-12" style="padding-left: 16px"> Comments</h3>
+            <h3 class="col-md-12 heading_medium_thin" style="padding-left: 16px"> Comments</h3>
         </div>
         <div class="col-md-12" ><!--content-->
             <div class="col-md-12" style="border: 1px solid #cccccc; background-color: #EDEDED; padding: 8px; margin-bottom: 16px;"><!--order-->
-                Order by: <!--ajax reload 'comments'-->
+                <span class="content_text">Order by: <!--ajax reload 'comments'--></span>
                 <select id="comment_view" onchange="changeView()">
                     <option value="1">Newest first</option> 
                     <option value="2">Oldest first</option>
                 </select>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="checkbox" name="show_or_not_show" onchange="changeView()" id="expand_all" > Expand all
+                <input type="checkbox" name="show_or_not_show" onchange="changeView()" id="expand_all" >
+                <span class="small_text_dark">Expand all</span>
                 <div style="float: right;">
-                    Comments per page: 
+                    <span class="content_text">Comments per page: </span>
                     <select id="no_of_comment_show" onchange="changeView()">
                         <option value="4">4</option>
                         <option value="8">8</option>
@@ -366,7 +367,7 @@
                                         <span class="cus_comment_field_commenter" style="color: #666666; font-weight: normal;">Comment</span>
                                         <br><textarea name="comment" id="comment" style="width: 100%;"></textarea>
                                         <br><br><button class="btn btn-default" id="save_comment" name="save_comment">Post</button>
-                                        <div style="float: right;">
+                                        <div style="float: right;" class="small_text_pale">
                                             <b>
                                                 <input type="radio" name="comment_nature" value="Positive" style="margin-left: 8px;"> Positive
                                                 <input type="radio" name="comment_nature" value="Negative" style="margin-left: 8px;"> Negative
