@@ -28,6 +28,7 @@ class Statuses {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
+        $this->load->library('org/application/blog_app_library');
         $this->load->model('statuses_model');
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
@@ -85,12 +86,14 @@ class Statuses {
         $shared_recipe_id_list = array();
         $shared_service_id_list = array();
         $shared_news_id_list = array();
+        $shared_blog_id_list = array();
         
         $photo_id_list = array();
         $photo_id_photo_info_map = array();
         $recipe_id_info_map = array();
         $service_id_info_map = array();
         $news_id_info_map = array();
+        $blog_id_info_map = array();
         
         $user_id = $this->session->userdata('user_id');
         $filtered_user_id_list = array($user_id);
@@ -143,6 +146,13 @@ class Statuses {
                     if(!in_array($status['reference_id'], $shared_news_id_list))
                     {
                         $shared_news_id_list[] = $status['reference_id'];
+                    }
+                }
+                else if($status['shared_type_id'] == STATUS_SHARE_BLOG)
+                {
+                    if(!in_array($status['reference_id'], $shared_blog_id_list))
+                    {
+                        $shared_blog_id_list[] = $status['reference_id'];
                     }
                 }
                 else if($status['shared_type_id'] == STATUS_SHARE_PHOTO)
@@ -238,6 +248,14 @@ class Statuses {
                 foreach($news_info_array as $news_info)
                 {
                     $news_id_info_map[$news_info['id']] = $news_info;
+                }
+            }
+            if(!empty($shared_blog_id_list))
+            {
+                $blog_info_array = $this->blog_app_library->get_blogs($shared_blog_id_list)->result_array();
+                foreach($blog_info_array as $blog_info)
+                {
+                    $blog_id_info_map[$blog_info['blog_id']] = $blog_info;
                 }
             }
             if(!empty($photo_id_list))
@@ -351,6 +369,10 @@ class Statuses {
                 else if($status['shared_type_id'] == STATUS_SHARE_NEWS && isset($news_id_info_map[$status['reference_id']]) )
                 {
                     $status['reference_info'] = $news_id_info_map[$status['reference_id']];
+                }
+                else if($status['shared_type_id'] == STATUS_SHARE_BLOG && isset($blog_id_info_map[$status['reference_id']]) )
+                {
+                    $status['reference_info'] = $blog_id_info_map[$status['reference_id']];
                 }
                 else if($status['shared_type_id'] == STATUS_SHARE_PHOTO && isset($photo_id_photo_info_map[$status['reference_id']]) )
                 {

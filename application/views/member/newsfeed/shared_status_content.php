@@ -17,10 +17,10 @@ else
     </div>
     <div class="col-md-8">
         <div class="row col-md-12">
-            <a href="<?php echo base_url().APPLICATION_HEALTHY_RECIPE_PATH.$newsfeed['reference_info']['id']?>"><h4><?php echo $newsfeed['reference_info']['title']; ?></h4></a>
+            <a href="<?php echo base_url().APPLICATION_HEALTHY_RECIPE_PATH.$newsfeed['reference_info']['id']?>"><h4><?php echo html_entity_decode(html_entity_decode($newsfeed['reference_info']['title'])); ?></h4></a>
         </div>
         <div class="row col-md-12">
-            <?php echo $newsfeed['reference_info']['description']; ?>
+            <?php echo html_entity_decode(html_entity_decode($newsfeed['reference_info']['description'])); ?>
         </div>
     </div>
 </div> 
@@ -64,14 +64,14 @@ else
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_BLOG && isset($newsfeed['reference_info']) ){ ?>
 <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
     <div class="col-md-4" style="padding:0px;">
-        <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id']?>"><img class="img-responsive" style="height: 128px" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH0 . $newsfeed['reference_info']['picture']; ?>"></a>
+        <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id']?>"><img class="img-responsive" style="height: 128px" src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $newsfeed['reference_info']['picture']; ?>"></a>
     </div>
     <div class="col-md-8">
         <div class="row col-md-12">
-            <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id']?>"><h4><?php echo $newsfeed['reference_info']['title']; ?>By: <?php echo isset($newsfeed['reference_info']['first_name']) ? $newsfeed['reference_info']['first_name'].' '.$newsfeed['reference_info']['last_name'] : '';?></h4></a>
+            <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id']?>"><h4><?php echo html_entity_decode(html_entity_decode($newsfeed['reference_info']['title'])); ?></h4></a>
         </div>
         <div class="row col-md-12">
-            <?php echo $newsfeed['reference_info']['summary']; ?>
+            <?php echo substr(html_entity_decode(html_entity_decode($newsfeed['reference_info']['description'])), 0, NEWSFEED_BLOG_DESCRIPTION_TOTAL_CHARACTERS) . ' ...'; ?>
         </div>
     </div>
 </div> 

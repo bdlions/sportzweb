@@ -17,5 +17,5 @@
     define('BLOG_CATEGORY_TOTAL_COLUMNS',3);
     define('NO_OF_COLLUMN',3);
     
-    
+    define('NEWSFEED_BLOG_DESCRIPTION_TOTAL_CHARACTERS',200);
 ?>

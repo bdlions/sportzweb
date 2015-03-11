@@ -1,22 +1,29 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 /**
  * Name:  Blog App Model
- *
- * Author:  Redwan Khaled
- *
- *
+ * Author:  Nazmul Hasan
  * Requirements: PHP5 or above
- *
  */
 
 class Blog_app_model extends Ion_auth_model {
 
     public function __construct() {
         parent::__construct();
+    }
+    
+    /*
+     * This method will return blogs
+     * @param $blog_id_list, list of blog ids
+     * @author nazmul hasan on 11th March 2015
+     */
+    public function get_blogs($blog_id_list = array())
+    {
+        $this->db->where_in('id', $blog_id_list);
+        return $this->db->select($this->tables['blogs'].'.id as blog_id,'.$this->tables['blogs'].'.*')
+                    ->from($this->tables['blogs'])
+                    ->get();
     }
     
     /*

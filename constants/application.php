@@ -46,7 +46,7 @@
     define("APPLICATION_HEALTHY_RECIPE_PATH",                                 "applications/healthy_recipes/recipe/");
     define("APPLICATION_SERVICE_PATH",                                        "applications/service_directory/show_service_detail/");
     define("APPLICATION_NEWS_PATH",                                           "applications/news_app/news_item/");
-    define("APPLICATION_BLOG_PATH",                                           "applications/blog_app/view_blog_post");
+    define("APPLICATION_BLOG_PATH",                                           "applications/blog_app/view_blog_post/");
     
     define("APPLICATION_DIRECTORY_IMAGE_PATH",                               "resources/images/applications/application_directory/");
     define("APPLICATION_DIRECTORY_GALLERY_SMALL_IMAGE_PATH",                 "resources/images/applications/application_directory/gallery/small/");
