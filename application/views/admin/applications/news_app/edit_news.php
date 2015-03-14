@@ -210,30 +210,16 @@ window.onload = function()
     </div>
 </div>
 
+<?php $this->load->view("javascript_functions/html_tag_filter"); ?>
+
 <script>
 $(function () {
     $("#btnSubmit").on("click", function(){
-        var source_tags;
-        var regex = '<(?!\/?(p)|(img)|(a)(?=>|\s.*>))\/?.*?>';
-        regex = new RegExp(regex, 'gi');
 
-        source_tags = CKEDITOR.instances.headline.getData();
-        source_tags = source_tags.replace( regex, '' );
-        $("#headline_editortext")           .val(jQuery('<div />').text(source_tags).html());
-        source_tags = CKEDITOR.instances.summary.getData();
-        source_tags = source_tags.replace( regex, '' );
-        $("#summary_editortext")            .val(jQuery('<div />').text(source_tags).html());
-        source_tags = CKEDITOR.instances.description.getData();
-        source_tags = source_tags.replace( regex, '' );
-        $("#description_editortext")        .val(jQuery('<div />').text(source_tags).html());
-        source_tags = CKEDITOR.instances.image_description.getData();
-        source_tags = source_tags.replace( regex, '' );
-        $("#image_description_editortext")  .val(jQuery('<div />').text(source_tags).html());
-
-        //$("#headline_editortext").val(jQuery('<div />').text(CKEDITOR.instances.headline.getData()).html());
-        //$("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());
-        //$("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
-        //$("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
+        $("#headline_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.headline.getData())).html());
+        $("#summary_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.summary.getData())).html());
+        $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
+        $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
         if (CKEDITOR.instances.headline.getData() === "")
         {
             alert("News Heading is required.");
@@ -263,49 +249,33 @@ $(function () {
     var url = "<?php echo base_url();?>admin/applications_news/edit_news/<?php echo $news_id; ?>",
                     uploadButton = $('<input type="submit" value="Update"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
-                                    var source_tags;
-                                    var regex = '<(?!\/?(p)|(img)|(a)(?=>|\s.*>))\/?.*?>';
-                                    regex = new RegExp(regex, 'gi');
 
-                                    source_tags = CKEDITOR.instances.headline.getData();
-                                    source_tags = source_tags.replace( regex, '' );
-                                    $("#headline_editortext")           .val(jQuery('<div />').text(source_tags).html());
-                                    source_tags = CKEDITOR.instances.summary.getData();
-                                    source_tags = source_tags.replace( regex, '' );
-                                    $("#summary_editortext")            .val(jQuery('<div />').text(source_tags).html());
-                                    source_tags = CKEDITOR.instances.description.getData();
-                                    source_tags = source_tags.replace( regex, '' );
-                                    $("#description_editortext")        .val(jQuery('<div />').text(source_tags).html());
-                                    source_tags = CKEDITOR.instances.image_description.getData();
-                                    source_tags = source_tags.replace( regex, '' );
-                                    $("#image_description_editortext")  .val(jQuery('<div />').text(source_tags).html());
-
-                                    //$("#headline_editortext").val(jQuery('<div />').text(CKEDITOR.instances.headline.getData()).html());
-                                    //$("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());                            
-                                    //$("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
-                                    //$("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
-                                    if (CKEDITOR.instances.headline.getData() === "")
-                                    {
-                                        alert("News Heading is required.");
-                                        return;
-                                    }else if(CKEDITOR.instances.summary.getData() === "")
-                                    {
-                                        alert("News summary is required.");
-                                        return;
-                                    } else if(CKEDITOR.instances.description.getData() === "")
-                                    {
-                                        alert("News Description is required.");
-                                        return;
-                                    }
-                                    var $this = $(this),data = $this.data();
-                                    $this.off('click').text('Abort').on('click', function() {
-                                        $this.remove();
-                                        data.abort();
-                                    });
-                                    data.submit().always(function() {
-                                        $this.remove();
-                                    });
-                                });
+                        $("#headline_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.headline.getData())).html());
+                        $("#summary_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.summary.getData())).html());                            
+                        $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
+                        $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
+                        if (CKEDITOR.instances.headline.getData() === "")
+                        {
+                            alert("News Heading is required.");
+                            return;
+                        }else if(CKEDITOR.instances.summary.getData() === "")
+                        {
+                            alert("News summary is required.");
+                            return;
+                        } else if(CKEDITOR.instances.description.getData() === "")
+                        {
+                            alert("News Description is required.");
+                            return;
+                        }
+                        var $this = $(this),data = $this.data();
+                        $this.off('click').text('Abort').on('click', function() {
+                            $this.remove();
+                            data.abort();
+                        });
+                        data.submit().always(function() {
+                            $this.remove();
+                        });
+                    });
         
         $('#fileupload').fileupload({
             url: url,

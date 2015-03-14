@@ -230,15 +230,16 @@ window.onload = function()
     </div>
 </div>
 
+<?php $this->load->view("javascript_functions/html_tag_filter"); ?>
 
 <script>
 /*jslint unparam: true, regexp: true */
 /*global window, $ */
 $(function () {
     $("#btnSubmit").on("click", function(){
-        $("#duration_editortext").val(jQuery('<div />').text(CKEDITOR.instances.duration.getData()).html());
-        $("#ingredients_editortext").val(jQuery('<div />').text(CKEDITOR.instances.ingrediantes.getData()).html());
-        $("#preparation_method_editortext").val(jQuery('<div />').text(CKEDITOR.instances.preparation_method.getData()).html());
+        $("#duration_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.duration.getData())).html());
+        $("#ingredients_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.ingrediantes.getData())).html());
+        $("#preparation_method_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.preparation_method.getData())).html());
         if($("#title").val().length == 0)
         {
             alert("Name of recipe is required.");
@@ -277,42 +278,42 @@ $(function () {
     var url = "<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe//<?php echo $recipe_category_id?>",
                     uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
-                                $("#duration_editortext").val(jQuery('<div />').text(CKEDITOR.instances.duration.getData()).html());
-                                $("#ingredients_editortext").val(jQuery('<div />').text(CKEDITOR.instances.ingrediantes.getData()).html());
-                                $("#preparation_method_editortext").val(jQuery('<div />').text(CKEDITOR.instances.preparation_method.getData()).html()); 
-                                    
-                                    if($("#title").val().length == 0)
-                                    {
-                                        alert("Name of recipe is required.");
-                                        return;
-                                    }else if($("#description").val().length == 0)
-                                    {
-                                        alert("Recipe description is required.");
-                                        return;
-                                    }else if(CKEDITOR.instances.duration.getData() === "")
-                                    {
-                                        alert("Duration of recipe is required.");
-                                        return;
-                                    }else if(CKEDITOR.instances.ingrediantes.getData() === "")
-                                    {
-                                        alert("Ingrediantes of recipe is required.");
-                                        return;
-                                    }
-                                    else if(CKEDITOR.instances.preparation_method.getData() === "")
-                                    {
-                                        alert("Preparation method of recipe is required.");
-                                        return;
-                                    }
-                                        
-                                    var $this = $(this),data = $this.data();
-                                    $this.off('click').text('Abort').on('click', function() {
-                                        $this.remove();
-                                        data.abort();
-                                    });
-                                    data.submit().always(function() {
-                                        $this.remove();
-                                    });
-                                });
+                        $("#duration_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.duration.getData())).html());
+                        $("#ingredients_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.ingrediantes.getData())).html());
+                        $("#preparation_method_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.preparation_method.getData())).html()); 
+
+                        if($("#title").val().length == 0)
+                        {
+                            alert("Name of recipe is required.");
+                            return;
+                        }else if($("#description").val().length == 0)
+                        {
+                            alert("Recipe description is required.");
+                            return;
+                        }else if(CKEDITOR.instances.duration.getData() === "")
+                        {
+                            alert("Duration of recipe is required.");
+                            return;
+                        }else if(CKEDITOR.instances.ingrediantes.getData() === "")
+                        {
+                            alert("Ingrediantes of recipe is required.");
+                            return;
+                        }
+                        else if(CKEDITOR.instances.preparation_method.getData() === "")
+                        {
+                            alert("Preparation method of recipe is required.");
+                            return;
+                        }
+
+                        var $this = $(this),data = $this.data();
+                        $this.off('click').text('Abort').on('click', function() {
+                            $this.remove();
+                            data.abort();
+                        });
+                        data.submit().always(function() {
+                            $this.remove();
+                        });
+                    });
         
         $('#fileupload').fileupload({
             url: url,

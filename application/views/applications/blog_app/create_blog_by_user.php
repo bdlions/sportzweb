@@ -198,12 +198,14 @@ window.onload = function()
         </div>
     </div>
 </div>
+<?php $this->load->view("javascript_functions/html_tag_filter"); ?>
+
 <script>
 $(function () {
     $("#btnSubmit").on("click", function(){
-        $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
-        $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
-        $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
+        $("#title_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.title.getData())).html());
+        $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
+        $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
         if (!$('.category_id').is(':checked')) {
             alert("Checked atleast one blog category");
             return;
@@ -234,31 +236,31 @@ $(function () {
     var url = "<?php echo base_url();?>applications/blog_app/create_blog_by_user",
                     uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
-                                    $("#title_editortext").val(jQuery('<div />').text(CKEDITOR.instances.title.getData()).html());
-                                    $("#description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.description.getData()).html());
-                                    $("#image_description_editortext").val(jQuery('<div />').text(CKEDITOR.instances.image_description.getData()).html());
-                                    if (!$('.category_id').is(':checked')) {
-                                        alert("Checked atleast one blog category");
-                                        return;
-                                    }else if (CKEDITOR.instances.title.getData() === "")
-                                    {
-                                        alert("Blog heading is required.");
-                                        return;
-                                    }
-                                    else if(CKEDITOR.instances.description.getData() === "")
-                                    {
-                                        alert("BLog description is required.");
-                                        return;
-                                    }
-                                    var $this = $(this),data = $this.data();
-                                    $this.off('click').text('Abort').on('click', function() {
-                                        $this.remove();
-                                        data.abort();
-                                    });
-                                    data.submit().always(function() {
-                                        $this.remove();
-                                    });
-                                });
+                        $("#title_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.title.getData())).html());
+                        $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
+                        $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
+                        if (!$('.category_id').is(':checked')) {
+                            alert("Checked atleast one blog category");
+                            return;
+                        }else if (CKEDITOR.instances.title.getData() === "")
+                        {
+                            alert("Blog heading is required.");
+                            return;
+                        }
+                        else if(CKEDITOR.instances.description.getData() === "")
+                        {
+                            alert("BLog description is required.");
+                            return;
+                        }
+                        var $this = $(this),data = $this.data();
+                        $this.off('click').text('Abort').on('click', function() {
+                            $this.remove();
+                            data.abort();
+                        });
+                        data.submit().always(function() {
+                            $this.remove();
+                        });
+                    });
         
         $('#fileupload').fileupload({
             url: url,

@@ -223,14 +223,16 @@ window.onload = function()
     </div>
 </div>
 
+<?php $this->load->view("javascript_functions/html_tag_filter"); ?>
+
 <script>
 /*jslint unparam: true, regexp: true */
 /*global window, $ */
 $(function () {
     $("#btnSubmit").on("click", function(){
-        $("#duration_editortext").val(jQuery('<div />').text(CKEDITOR.instances.duration.getData()).html());
-        $("#ingredients_editortext").val(jQuery('<div />').text(CKEDITOR.instances.ingredients.getData()).html());
-        $("#preparation_method_editortext").val(jQuery('<div />').text(CKEDITOR.instances.preparation_method.getData()).html());
+        $("#duration_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.duration.getData())).html());
+        $("#ingredients_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.ingredients.getData())).html());
+        $("#preparation_method_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.preparation_method.getData())).html());
         if($("#title").val().length == 0)
         {
             alert("Name of recipe is required.");
@@ -271,9 +273,9 @@ $(function () {
     var url = "<?php echo base_url();?>admin/applications_healthyrecipes/edit_recipe//<?php echo $recipes_info['id'];?>",
                     uploadButton = $('<input type="submit" value="Update"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
-                                $("#duration_editortext").val(jQuery('<div />').text(CKEDITOR.instances.duration.getData()).html());
-                                $("#ingredients_editortext").val(jQuery('<div />').text(CKEDITOR.instances.ingredients.getData()).html());
-                                $("#preparation_method_editortext").val(jQuery('<div />').text(CKEDITOR.instances.preparation_method.getData()).html());
+                                $("#duration_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.duration.getData())).html());
+                                $("#ingredients_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.ingredients.getData())).html());
+                                $("#preparation_method_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.preparation_method.getData())).html());
                                     if($("#title").val().length == 0)
                                     {
                                         alert("Name of recipe is required.");
