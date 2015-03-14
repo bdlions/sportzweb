@@ -217,16 +217,16 @@ window.onload = function()
     </div>
 </div>
 <?php //$this->load->view("admin/applications/blog_app/modal_related_blogs"); ?>
-<?php $this->load->view("javascript_functions/html_tag_filter"); ?>
+<?php $this->load->view("common/ckeditor_customization"); ?>
 
 <script>
 $(function () {
     $("#btnSubmit").on("click", function(){
         //var blog_category_id = $('#dropdown').val();
         //$('#blog_category_id').val(blog_category_id);
-        $("#title_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.title.getData())).html());
-        $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
-        $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
+        $("#title_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.title.getData())).html());
+        $("#description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.description.getData())).html());
+        $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
         if (!$('.category_id').is(':checked')) {
             alert("Checked atleast one blog category");
             return;
@@ -260,9 +260,9 @@ $(function () {
     var url = "<?php echo base_url();?>applications/blog_app/edit_blog/<?php echo $blog_id; ?>",
                     uploadButton = $('<input type="submit" value="Update"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
-                        $("#title_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.title.getData())).html());
-                        $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
-                        $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
+                        $("#title_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.title.getData())).html());
+                        $("#description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.description.getData())).html());
+                        $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
                         if (!$('.category_id').is(':checked')) {
                             alert("Checked atleast one blog category");
                             return;

@@ -230,16 +230,16 @@ window.onload = function()
     </div>
 </div>
 
-<?php $this->load->view("javascript_functions/html_tag_filter"); ?>
+<?php $this->load->view("common/ckeditor_customization"); ?>
 
 <script>
 /*jslint unparam: true, regexp: true */
 /*global window, $ */
 $(function () {
     $("#btnSubmit").on("click", function(){
-        $("#duration_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.duration.getData())).html());
-        $("#ingredients_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.ingrediantes.getData())).html());
-        $("#preparation_method_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.preparation_method.getData())).html());
+        $("#duration_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.duration.getData())).html());
+        $("#ingredients_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.ingrediantes.getData())).html());
+        $("#preparation_method_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.preparation_method.getData())).html());
         if($("#title").val().length == 0)
         {
             alert("Name of recipe is required.");
@@ -278,9 +278,9 @@ $(function () {
     var url = "<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe//<?php echo $recipe_category_id?>",
                     uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
-                        $("#duration_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.duration.getData())).html());
-                        $("#ingredients_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.ingrediantes.getData())).html());
-                        $("#preparation_method_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.preparation_method.getData())).html()); 
+                        $("#duration_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.duration.getData())).html());
+                        $("#ingredients_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.ingrediantes.getData())).html());
+                        $("#preparation_method_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.preparation_method.getData())).html()); 
 
                         if($("#title").val().length == 0)
                         {

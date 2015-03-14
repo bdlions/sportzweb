@@ -210,16 +210,16 @@ window.onload = function()
     </div>
 </div>
 
-<?php $this->load->view("javascript_functions/html_tag_filter"); ?>
+<?php $this->load->view("common/ckeditor_customization"); ?>
 
 <script>
 $(function () {
     $("#btnSubmit").on("click", function(){
 
-        $("#headline_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.headline.getData())).html());
-        $("#summary_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.summary.getData())).html());
-        $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
-        $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
+        $("#headline_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.headline.getData())).html());
+        $("#summary_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.summary.getData())).html());
+        $("#description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.description.getData())).html());
+        $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
         if (CKEDITOR.instances.headline.getData() === "")
         {
             alert("News Heading is required.");
@@ -250,10 +250,10 @@ $(function () {
                     uploadButton = $('<input type="submit" value="Update"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
 
-                        $("#headline_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.headline.getData())).html());
-                        $("#summary_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.summary.getData())).html());                            
-                        $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
-                        $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
+                        $("#headline_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.headline.getData())).html());
+                        $("#summary_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.summary.getData())).html());                            
+                        $("#description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.description.getData())).html());
+                        $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
                         if (CKEDITOR.instances.headline.getData() === "")
                         {
                             alert("News Heading is required.");

@@ -85,14 +85,14 @@
         });
     }
 </script>
-<?php $this->load->view("javascript_functions/html_tag_filter"); ?>
+<?php $this->load->view("common/ckeditor_customization"); ?>
 
 <script>
     $(function() {
         $("#btnSubmit").on("click", function() {
-            $("#title_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.title.getData())).html());
-            $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
-            $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
+            $("#title_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.title.getData())).html());
+            $("#description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.description.getData())).html());
+            $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
             if (!$('.category_id').is(':checked')) {
                 alert("Checked atleast one blog category");
                 return;
@@ -122,9 +122,9 @@
         var url = "<?php echo base_url(); ?>admin/applications_blogs/edit_blog/<?php echo $blog_info['blog_id']; ?>",
         uploadButton = $('<input type="submit" value="Update"/>').addClass('btn button-custom pull-right').text('Confirm').
         on('click', function() {
-            $("#title_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.title.getData())).html());
-            $("#description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.description.getData())).html());
-            $("#image_description_editortext").val(jQuery('<div />').text( filter_except_anchor_para( CKEDITOR.instances.image_description.getData())).html());
+            $("#title_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.title.getData())).html());
+            $("#description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.description.getData())).html());
+            $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
             if (!$('.category_id').is(':checked')) {
                 alert("Checked atleast one blog category");
                 return;
