@@ -109,21 +109,74 @@
                             <li id="applications">
                                 <a href="#">Applications</a>
                                 <ul>
-                                    <li id="applications_directory"><a href="<?php echo base_url()?>admin/applications_directory">App Directory</a></li>
                                     <?php foreach($application_list as $application_info){ ?>
                                         <?php if($application_info['id'] == APPLICATION_XSTREAM_BANTER_ID) { ?>
-                                        <li id="applications_xstreambanter"><a href="<?php echo base_url().ADMIN_APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH?>"><?php echo $application_info['title']; ?></a></li>
-                                        <?php } ?>
+                                        <li id="applications_xstreambanter">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_HEALTYY_RECIPES_ID) { ?>
+                                        <li id="applications_healthyrecipes">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_HEALTHY_RECIPE_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_SERVICE_DIRECTORY_ID) { ?>
+                                        <li id="applications_servicedirectory">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_SERVICE_DIRECTORY_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_NEWS_APP_ID) { ?>
+                                        <li id="applications_news">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_NEWS_APP_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_BLOG_APP_ID) { ?>
+                                        <li id="applications_blogs">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_BLOG_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_BMI_CALCULATOR_ID) { ?>
+                                        <li id="applications_bmicalculator">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_BMI_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_PHOTOGRAPHY_ID) { ?>
+                                        <li id="applications_photography">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_PHOTOGRAPHY_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_SCORE_PREDICTION_ID) { ?>
+                                        <li id="applications_scoreprediction">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_SCORE_PREDICTION_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_SHOP_ID) { ?>
+                                        <li id="applications_shop">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_SHOP_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }elseif($application_info['id'] == APPLICATION_GYMPRO_ID) { ?>
+                                        <li id="applications_gympro">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_GYMPRO_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }?>
                                     <?php }?>                                                                        
-                                    <li id="applications_healthyrecipes"><a href="<?php echo base_url()?>admin/applications_healthyrecipes">Healthy Recipes</a></li>
-                                    <li id="applications_servicedirectory"><a href="<?php echo base_url()?>admin/applications_servicedirectory">Service Directory</a></li>
-                                    <li id="applications_news"><a href="<?php echo base_url()?>admin/applications_news">News</a></li>
-                                    <li id="applications_blogs"><a href="<?php echo base_url()?>admin/applications_blogs">Blogs</a></li>
-                                    <li id="applications_bmicalculator"><a href="<?php echo base_url()?>admin/applications_bmicalculator">BMI Calculator</a></li>
-                                    <li id="applications_photography"><a href="<?php echo base_url()?>admin/applications_photography">Photography</a></li>
-                                    <li id="applications_scoreprediction"><a href="<?php echo base_url()?>admin/applications_scoreprediction">Score Prediction</a></li>
-                                    <li id="shop"><a href="<?php echo base_url()?>admin/applications_shop">Shop</a></li>
-                                    <li id="applications_gympro"><a href="<?php echo base_url()?>admin/applications_gympro">Gympro</a></li>
+                                    <li id="applications_directory">
+                                        <a href="<?php echo base_url()?>admin/applications_directory">
+                                            App Directory
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li id="business_profiles">

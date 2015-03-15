@@ -288,6 +288,35 @@ class Test extends CI_Controller {
     }
     function run_test_page_in_view()
     {
+        $arrEMPTY = array();
+//        $arrEMPTY = NULL;
+        $arrFULL = array();
+        $arrFULL[] = array(
+            'name'=>'tanveer',
+            'id'=>'1'
+        );
+        $arrFULL[] = array(
+            'name'=>'qtanveer',
+            'id'=>'2'
+        );
+        $arrFULL[] = array(
+            'name'=>'atanveer',
+            'id'=>'3'
+        );
+        $arrFULL[] = array(
+            'name'=>'ztanveer',
+            'id'=>'4'
+        );
+        $this->data['arrFULL'] = $arrFULL;
+        $this->data['arrEMPTY'] = $arrEMPTY;
+        
+        
+        foreach ($arrEMPTY as $value) {
+            var_dump($value);
+            var_dump('---entered----');
+        }
+        
+        
         $this->template->load(null, "test", $this->data);
     }
     function run_toms_shoes()

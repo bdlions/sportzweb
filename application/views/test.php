@@ -11,12 +11,27 @@
         <div class="col-md-10">
             <input id="regex" class="form-control">
         </div>
-        <div class="col-md-1"><button onclick="firett()">fire</button></div>
+        <div class="col-md-1"><button onclick="firett()">Filter</button></div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <input id="output_area" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <?php var_dump($arrFULL);?>
+            <?php foreach ($arrFULL as $value) {
+                var_dump($value);
+            };?>
+            <?php var_dump('----------break-----------');?>
+            <?php var_dump($arrEMPTY);?>
+            <?php foreach ($arrEMPTY as $value) {
+                var_dump($value);
+                var_dump('---entered----');
+            };?>
         </div>
     </div>
 </div>

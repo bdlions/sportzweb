@@ -399,6 +399,7 @@ class Utils {
     function add_blank_target_in_anchor($content)
     {
         $doc = new DOMDocument();
+        if(empty($content)) return $content;
         $doc->loadHTML($content);
         $links = $doc->getElementsByTagName('a');
         foreach ($links as $item) {

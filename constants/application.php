@@ -23,6 +23,16 @@
     define("GYMPRO_HOME_PAGE_PATH",                  "applications/gympro");
     
     define("ADMIN_APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH",       "admin/applications_xstreambanter");
+    define("ADMIN_APPLICATION_HEALTHY_RECIPE_HOME_PAGE_PATH",       "admin/applications_healthyrecipes");
+    define("ADMIN_APPLICATION_SERVICE_DIRECTORY_HOME_PAGE_PATH",    "admin/applications_servicedirectory");
+    define("ADMIN_APPLICATION_NEWS_APP_HOME_PAGE_PATH",             "admin/applications_news");
+    define("ADMIN_APPLICATION_BLOG_HOME_PAGE_PATH",                 "admin/applications_blogs");
+    define("ADMIN_APPLICATION_BMI_HOME_PAGE_PATH",                  "admin/applications_bmicalculator");
+    define("ADMIN_APPLICATION_PHOTOGRAPHY_HOME_PAGE_PATH",          "admin/applications_photography");
+    define("ADMIN_APPLICATION_SCORE_PREDICTION_HOME_PAGE_PATH",     "admin/applications_scoreprediction");
+    define("ADMIN_APPLICATION_SHOP_HOME_PAGE_PATH",                 "admin/applications_shop");
+    define("ADMIN_APPLICATION_GYMPRO_HOME_PAGE_PATH",               "admin/applications_gympro");
+    define("ADMIN_APPLICATION_APPLICATION_DIRECTORY_HOME_PAGE_PATH","admin/applications_directory");
     
     define("APPLICATION_ICON_PATH",         "resources/images/applications/application_icons/");
     

@@ -18,9 +18,14 @@
         regex = new RegExp(regex, 'gi');
         source_tags = source_tags.replace( regex, '</p>' );
         
-        regex = '<a\s*[^>]*>';
+//        \sstyle=((["][^"]*["])|(['][^']*[']))
+        regex = 'style=((["][^"]*["])|(['+"'][^']*[']))";
         regex = new RegExp(regex, 'gi');
-        source_tags = source_tags.replace( regex, '<a>' );
+        source_tags = source_tags.replace( regex, '' );
+        
+        regex = 'class=((["][^"]*["])|(['+"'][^']*[']))";
+        regex = new RegExp(regex, 'gi');
+        source_tags = source_tags.replace( regex, '' );
         
         regex = '<\/a\s*[^>]*>';
         regex = new RegExp(regex, 'gi');

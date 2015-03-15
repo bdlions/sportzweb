@@ -251,7 +251,13 @@
                             </tr>
                             <tr>
                                 <td class="td_text_color">
-                                    Xstream Banter
+                                    
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_XSTREAM_BANTER_ID) { ?>
+                                            <?php echo $application_info['title']; ?>
+                                        <?php }?>
+                                    <?php }?>
+                                    
                                 </td>
                                 <td>
                                     <div class="form-group">
@@ -292,7 +298,11 @@
                             
                             <tr>
                                 <td class="td_text_color">
-                                    Healthy Recipes
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_HEALTYY_RECIPES_ID) { ?>
+                                            <?php echo $application_info['title']; ?>
+                                        <?php }?>
+                                    <?php }?>
                                 </td>
                                  <td>
                                     <div class="form-group">
@@ -332,7 +342,11 @@
                             </tr>
                             <tr>
                                 <td class="td_text_color">
-                                    Service Directory
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_SERVICE_DIRECTORY_ID) { ?>
+                                            <?php echo $application_info['title']; ?>
+                                        <?php }?>
+                                    <?php }?>
                                 </td>
                                 <td>
                                     <div class="form-group">
@@ -373,7 +387,11 @@
                             
                             <tr>
                                 <td class="td_text_color">
-                                    News
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_NEWS_APP_ID) { ?>
+                                            <?php echo $application_info['title']; ?>
+                                        <?php }?>
+                                    <?php }?>
                                 </td>
                                 <td>
                                     <div class="form-group">
@@ -413,7 +431,11 @@
                             </tr>
                             <tr>
                                 <td class="td_text_color">
-                                    Blogs
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_BLOG_APP_ID) { ?>
+                                            <?php echo $application_info['title']; ?>
+                                        <?php }?>
+                                    <?php }?>
                                 </td>
                                 <td>
                                     <div class="form-group">
@@ -453,7 +475,11 @@
                             </tr>
                             <tr>
                                 <td class="td_text_color">
-                                    BMI Calculator
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_BMI_CALCULATOR_ID) { ?>
+                                            <?php echo $application_info['title']; ?>
+                                        <?php }?>
+                                    <?php }?>
                                 </td>
                                 <td>
                                     <div class="form-group">
@@ -493,7 +519,11 @@
                             </tr>
                             <tr>
                                 <td class="td_text_color">
-                                    Photography
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_PHOTOGRAPHY_ID) { ?>
+                                            <?php echo $application_info['title']; ?>
+                                        <?php }?>
+                                    <?php }?>
                                 </td>
                                 <td>
                                     <div class="form-group">
@@ -533,7 +563,11 @@
                             </tr>
                             <tr>
                                 <td class="td_text_color">
-                                    Gympro
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_GYMPRO_ID) { ?>
+                                            <?php echo $application_info['title']; ?>
+                                        <?php }?>
+                                    <?php }?>
                                 </td>
                                 <td>
                                     <div class="form-group">
