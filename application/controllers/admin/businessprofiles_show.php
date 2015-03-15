@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Businessprofiles_show extends CI_Controller{
+class Businessprofiles_show extends Admin_Controller{
     public $tmpl = '';
     public $user_group_array = array();
     function __construct() {

@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Users extends Role_Controller{
+class Users extends Admin_Controller{
     public $user_group_array = array();
     public $allow_view = FALSE;
     public $allow_access = FALSE;

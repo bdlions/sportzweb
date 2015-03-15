@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Applications_photography extends CI_Controller{
+class Applications_photography extends Admin_Controller{
     public $tmpl = '';
     public $user_group_array = array();
     function __construct() {

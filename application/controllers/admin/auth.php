@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends Role_Controller{
+class Auth extends Admin_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');

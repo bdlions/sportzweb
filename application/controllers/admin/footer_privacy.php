@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Footer_privacy extends CI_Controller{
+class Footer_privacy extends Admin_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');

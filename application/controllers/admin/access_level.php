@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Access_level extends CI_Controller{
+class Access_level extends Admin_Controller{
     public $user_group_array = array();
     function __construct() {
         parent::__construct();

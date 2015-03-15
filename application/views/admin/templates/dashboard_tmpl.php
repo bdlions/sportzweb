@@ -110,7 +110,11 @@
                                 <a href="#">Applications</a>
                                 <ul>
                                     <li id="applications_directory"><a href="<?php echo base_url()?>admin/applications_directory">App Directory</a></li>
-                                    <li id="applications_xstreambanter"><a href="<?php echo base_url()?>admin/applications_xstreambanter">Xstream Banter</a></li>                                    
+                                    <?php foreach($application_list as $application_info){ ?>
+                                        <?php if($application_info['id'] == APPLICATION_XSTREAM_BANTER_ID) { ?>
+                                        <li id="applications_xstreambanter"><a href="<?php echo base_url().ADMIN_APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH?>"><?php echo $application_info['title']; ?></a></li>
+                                        <?php } ?>
+                                    <?php }?>                                                                        
                                     <li id="applications_healthyrecipes"><a href="<?php echo base_url()?>admin/applications_healthyrecipes">Healthy Recipes</a></li>
                                     <li id="applications_servicedirectory"><a href="<?php echo base_url()?>admin/applications_servicedirectory">Service Directory</a></li>
                                     <li id="applications_news"><a href="<?php echo base_url()?>admin/applications_news">News</a></li>

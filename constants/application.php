@@ -22,6 +22,8 @@
     define("SHOP_HOME_PAGE_PATH",                    "applications/shop");
     define("GYMPRO_HOME_PAGE_PATH",                  "applications/gympro");
     
+    define("ADMIN_APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH",       "admin/applications_xstreambanter");
+    
     define("APPLICATION_ICON_PATH",         "resources/images/applications/application_icons/");
     
     define("XSTREAM_BANTER_ICON",          "xb.png");

@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Users_usermanage extends CI_Controller{
+class Users_usermanage extends Admin_Controller{
     public $tmpl = '';
     public $user_group_array = array();
     function __construct() {

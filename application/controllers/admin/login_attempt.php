@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-class Login_attempt extends CI_Controller{
+class Login_attempt extends Admin_Controller{
     public $tmpl = '';
     function __construct() {
         parent::__construct();

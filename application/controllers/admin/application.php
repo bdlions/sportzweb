@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Application extends CI_Controller{
+class Application extends Admin_Controller{
     public $user_group_array = array();
     public $allow_view = FALSE;
     public $allow_access = FALSE;

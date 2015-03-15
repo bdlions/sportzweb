@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Configure_logout_page extends CI_Controller{
+class Configure_logout_page extends Admin_Controller{
     function __construct() 
     {
         parent::__construct();
