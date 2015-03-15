@@ -105,16 +105,18 @@
                         <?php if (count($recipe_view_list_item) > 1): ?>
                             <div class="col-md-8 grayborderbottom grayborderright">
                                 <?php if (array_key_exists(0, $recipe_view_list_item)) : ?>
-                                    <?php if (!empty($recipe_view_list_item[0]['main_picture'])): ?>
-                                        <button style="z-index: 500; position: relative;" id="button_edit_recipe_<?php echo $recipe_view_list_item[0]["id"]; ?>" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_recipe_<?php echo $recipe_view_list_item[0]["id"]; ?>', '1')">
+                                <button style="z-index: 500; position: relative;" id="button_edit_recipe_<?php echo $recipe_view_list_item[0]["id"]; ?>" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_recipe_<?php echo $recipe_view_list_item[0]["id"]; ?>', '1')">
                                             Edit
                                         </button>
+                                    <?php if (!empty($recipe_view_list_item[0]['main_picture'])): ?>
+                                        
                                         <input type="hidden" name="top_left" id="position_of_recipe_1" value="<?php echo $recipe_view_list_item[0]["id"]; ?>">
-                                        <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
+                                        
                                         <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[0]['id']; ?>">
                                             <img id="image_position_1" style="width: 480px;height: 200px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[0]['main_picture']; ?>" class="img-responsive" alt="<?php echo $recipe_view_list_item[0]['title']; ?>"/>
                                         </a>
                                     <?php endif; ?>
+                                        
                                     <span id="title_1" class="image-caption reciepe_title" style="color: #7092BE"><?php echo (!empty($recipe_view_list_item[0]['title'])) ? $recipe_view_list_item[0]['title'] : ''; ?></span>
                                 <?php endif; ?>
                             </div>
@@ -161,7 +163,7 @@
                             </div>
 
 
-                            <input type="hidden" name="recipes_list_after_select" id="recipes_list_after_select" value="">
+                            
                             <div id="show_recipes_after_select">
                                 <?php if (count($recipe_list_item) > 0): ?>
                                     <?php foreach ($recipe_list_item as $key => $value): ?>
@@ -245,7 +247,8 @@
             </div>
             <input type="button" style="width:120px; float: right" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url(); ?>admin/applications_healthyrecipes')" class="form-control btn button-custom">
         </div>
-                    
+          <input type="hidden" name="get_selected_id" id="get_selected_id" value=""> 
+          <input type="hidden" name="recipes_list_after_select" id="recipes_list_after_select" value="">
     </div>
 </div>
 <?php $this->load->view("admin/applications/healthy_recipes/modal_edit_recipe_item_home_page"); ?>

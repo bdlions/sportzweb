@@ -269,7 +269,7 @@ $(function () {
             data: $("#form_create_recipe").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe/<?php echo $recipe_category_id?>';
+                window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/recipe_category/<?php echo $recipe_category_id?>';
             }
         });
     });
@@ -359,7 +359,7 @@ $(function () {
         }).on('fileuploaddone', function(e, data) {
             //console.log(data);
             alert(data.result.message);
-            window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe/<?php echo $recipe_category_id?>';
+            window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/recipe_category/<?php echo $recipe_category_id?>';
             //console.log(data);
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();

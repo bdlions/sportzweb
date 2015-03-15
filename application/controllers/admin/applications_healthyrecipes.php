@@ -233,20 +233,6 @@ class Applications_healthyrecipes extends Admin_Controller{
         {            
             if($this->form_validation->run() == true)
             {
-                if (isset($_FILES["userfile"]))
-                {
-                    $file_info = $_FILES["userfile"];
-                    $uploaded_image_data = $this->image_upload($file_info);
-                    if(isset($uploaded_image_data['error'])) {
-                        $this->data['message'] = strip_tags($uploaded_image_data['error']);
-                        echo json_encode($this->data);
-                        return;
-                    }else if(!empty($uploaded_image_data['upload_data']['file_name'])){
-                        $path = FCPATH.HEALTHY_RECIPES_IMAGE_PATH.$uploaded_image_data['upload_data']['file_name'];
-                        //unlink($path);
-                    }
-                }
-                
                 $recipe_name = $this->input->post('title');
                 $recommend_desserts = explode(",",$this->input->post('recommend_resserts'));
                 $alternative_recipes = explode(",",$this->input->post('alternative_recipes'));
@@ -263,36 +249,44 @@ class Applications_healthyrecipes extends Admin_Controller{
                     'preparation_method' => $preparation_method,
                     'recommend_desserts' => json_encode($recommend_desserts),
                     'alternative_recipes' => json_encode($alternative_recipes),
-                    'main_picture' => empty($uploaded_image_data['upload_data']['file_name'])? '' : $uploaded_image_data['upload_data']['file_name'],
+                    'main_picture' => '',
                     'created_on' => now(),
                 );
-                
-                
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];
+                    
+                    $uploaded_image_data = $this->utils->upload_image($file_info,HEALTHY_RECIPES_IMAGE_PATH);
+                    if($uploaded_image_data['status'] == 1)
+                    {
+                        $data['main_picture'] = $uploaded_image_data['upload_data']['file_name'];
+                    }
+                    else
+                    {
+                        $this->data['message'] = $uploaded_image_data['message'];
+                        echo json_encode($this->data);
+                        return;
+                    }
+                }
                 $id = $this->admin_healthy_recipes->create_recipe($recipe_name, $data);
                 if($id !== FALSE) {
-                    //$this->session->set_flashdata('success_message', 'You have created a recipe sucessfully');
-                    //redirect("admin/healthyrecipes/recipe_category/".$recipe_category_id, 'refresh');
-                    $this->data['message'] = "You have created a recipe sucessfully";
+                    $this->data['message'] = "Recipe is created sucessfully";
                     echo json_encode($this->data);
                     return;
                 }else{
-                    $this->data['message'] = strip_tags($this->admin_healthy_recipes->errors());
+                     $this->data['message'] = $this->admin_healthy_recipes->errors_alert();
                     echo json_encode($this->data);
                     return;
                 }
             }
-            else 
-            { 
-                $this->data['message'] = strip_tags(validation_errors());
+            else
+            {
+                $this->data['message'] = validation_errors();
                 echo json_encode($this->data);
                 return;
             }            
         }
-        else
-        {
-            $this->data['message'] = $this->session->flashdata('message'); 
-        }
-        
+       
         $recipes_list = array();
         $recipe_list_array = $this->admin_healthy_recipes->get_all_recipes()->result_array();
         if(!empty($recipe_list_array))
@@ -420,8 +414,8 @@ class Applications_healthyrecipes extends Admin_Controller{
                 $config['new_image'] = HEALTHY_RECIPES_IMAGE_PATH.$file_name;
                 $config['overwrite'] = TRUE;
                 $config['maintain_ratio'] = FALSE;
-                $config['width'] = HEALTHY_RECIPES_IMAGE_WIDTH;
-                $config['height'] = HEALTHY_RECIPES_IMAGE_HEIGHT;
+//                $config['width'] = HEALTHY_RECIPES_IMAGE_WIDTH;
+//                $config['height'] = HEALTHY_RECIPES_IMAGE_HEIGHT;
                 $this->image_lib->clear();
                 $this->image_lib->initialize($config);
                 if (!$this->image_lib->resize()) return array( 'error' => $this->image_lib->display_errors());
@@ -497,22 +491,6 @@ class Applications_healthyrecipes extends Admin_Controller{
         {         
             if($this->form_validation->run() == true)
             {
-                $uploaded_image_data = array();
-                    if (isset($_FILES["userfile"]))
-                    {
-                        $userfile = $_FILES["userfile"];
-                        $uploaded_image_data = $this->image_upload($userfile);
-                        if(isset($uploaded_image_data['error'])) {
-                            $this->data['message'] = strip_tags($uploaded_image_data['error']);
-                            echo json_encode($this->data);
-                            return;
-                        } else if(!empty($uploaded_image_data['upload_data']['file_name'])){
-                            $path = FCPATH.HEALTHY_RECIPES_IMAGE_PATH.$uploaded_image_data['upload_data']['file_name'];
-                            //unlink($path);
-                        }
-                    }
-               
-
                 $recipe_name = $this->input->post('title');
                 $recommend_desserts = explode(",",$this->input->post('recommend_resserts'));
                 $alternative_recipes = explode(",",$this->input->post('alternative_recipes'));
@@ -531,10 +509,23 @@ class Applications_healthyrecipes extends Admin_Controller{
                     'recommend_desserts' => json_encode($recommend_desserts),
                     'alternative_recipes' => json_encode($alternative_recipes),
                     'modified_on' => now(),
+                    'main_picture' => '',
                 );
-                
-                if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
-                    $data['main_picture'] = $uploaded_image_data['upload_data']['file_name'];
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];
+                    
+                    $uploaded_image_data = $this->utils->upload_image($file_info,HEALTHY_RECIPES_IMAGE_PATH);
+                    if($uploaded_image_data['status'] == 1)
+                    {
+                        $data['main_picture'] = $uploaded_image_data['upload_data']['file_name'];
+                    }
+                    else
+                    {
+                        $this->data['message'] = $uploaded_image_data['message'];
+                        echo json_encode($this->data);
+                        return;
+                    }
                 }
                 
                 $id = $this->admin_healthy_recipes->update_recipe($recipes_info['id'], $data);
@@ -543,7 +534,7 @@ class Applications_healthyrecipes extends Admin_Controller{
                     echo json_encode($this->data);
                     return;
                 }else{
-                    $this->data['message'] = $this->admin_healthy_recipes->errors();
+                    $this->data['message'] = $this->admin_healthy_recipes->errors_alert();
                     echo json_encode($this->data);
                     return;
                 }

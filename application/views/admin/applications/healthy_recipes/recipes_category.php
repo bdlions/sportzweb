@@ -11,7 +11,8 @@
     <tr>
         <td><a href="<?php echo base_url()."admin/applications_healthyrecipes/recipe_category/{%= recipe_category_info.id%}"; ?>">{%= recipe_category_info.id%}</td>
         <td><div id="recipe_desc_{%= recipe_category_info.id%}">{%= recipe_category_info.description%}</div></td>
-        <td><button id="button_edit_recipe_category_{%= recipe_category_info.id%}" onclick="openModal('button_edit_recipe_category_{%= recipe_category_info.id%}','{%= recipe_category_info.id%}')" value="" class="form-control btn pull-right">Edit</button></td>
+        <td><button id="button_edit_recipe_category_{%= recipe_category_info.id%}" onclick="openModal('button_edit_recipe_category_{%= recipe_category_info.id%}','{%= recipe_category_info.id%}')" value="" class="form-control btn ">Edit</button></td>
+        <td><button  onclick="open_modal_delete_recipe_category('{%= recipe_category_info.id%}')" value="" class="form-control btn pull-right">Delete</button></td>
     </tr>
     {% recipe_category_info = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
