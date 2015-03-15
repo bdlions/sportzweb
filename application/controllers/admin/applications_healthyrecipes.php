@@ -414,18 +414,9 @@ class Applications_healthyrecipes extends Admin_Controller{
                 $config['new_image'] = HEALTHY_RECIPES_IMAGE_PATH.$file_name;
                 $config['overwrite'] = TRUE;
                 $config['maintain_ratio'] = FALSE;
-//                $config['width'] = HEALTHY_RECIPES_IMAGE_WIDTH;
-//                $config['height'] = HEALTHY_RECIPES_IMAGE_HEIGHT;
                 $this->image_lib->clear();
                 $this->image_lib->initialize($config);
                 if (!$this->image_lib->resize()) return array( 'error' => $this->image_lib->display_errors());
-                
-//                // to resize and copy in four folder
-//                $this->resize_uploaded_image($upload_data, HEALTHY_RECIPES_IMAGE_PATH_FOR_HOME_TOP_LEFT.$file_name, HEALTHY_RECIPES_HOME_TOP_LEFT_HEIGHT, HEALTHY_RECIPES_HOME_TOP_LEFT_WIDTH);
-//                $this->resize_uploaded_image($upload_data, HEALTHY_RECIPES_IMAGE_PATH_FOR_HOME_BOTTOM_RIGHT.$file_name, HEALTHY_RECIPES_HOME_BOTTOM_LEFT_HEIGHT, HEALTHY_RECIPES_HOME_BOTTOM_LEFT_WIDTH);
-//                $this->resize_uploaded_image($upload_data, HEALTHY_RECIPES_IMAGE_PATH_FOR_DETAILS.$file_name, HEALTHY_RECIPES_IMAGE_DETAILS_HEIGHT, HEALTHY_RECIPES_IMAGE_DETAILS_WIDTH);
-//                $this->resize_uploaded_image($upload_data, HEALTHY_RECIPES_IMAGE_PATH_FOR_LIST.$file_name, HEALTHY_RECIPES_IMAGE_LIST_HEIGHT, HEALTHY_RECIPES_IMAGE_LIST_WIDTH);
-                
                 $data = array('upload_data' => $upload_data);
                 return $data;
             }

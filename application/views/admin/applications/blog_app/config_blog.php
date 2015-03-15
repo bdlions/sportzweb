@@ -63,7 +63,7 @@
 </script>
 <div class="panel panel-default">
     <div class="panel-heading">
-        News List
+        Blog List
         <div class="pull-right">
             <form action="">
                 <select name="cars" onchange="panel_change()" id="panel_dd">
