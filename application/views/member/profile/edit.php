@@ -193,7 +193,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_dropdown("country_id", (array('' => 'Select country') + $country_list), $basic_profile->country_id, 'class="form-control"') ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -224,7 +224,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'home_town', 'id' => 'home_town', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -255,7 +255,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_textarea(array('name' => 'about_me', 'rows' => '4', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -283,7 +283,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'clg_or_uni', 'id' => 'clg_or_uni', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -312,7 +312,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'employer', 'id' => 'employer', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -342,7 +342,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'occupation', 'id' => 'occupation', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -373,7 +373,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'telephone', 'id' => 'telephone', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -402,7 +402,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'email', 'id' => 'email', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -429,7 +429,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'skype_name', 'id' => 'skype_name', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -457,7 +457,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'twitter_name', 'id' => 'twitter_name', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -485,7 +485,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'facebook_name', 'id' => 'facebook_name', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>
@@ -513,7 +513,7 @@
             <div class="row col-md-12" style="padding-top: 12px; padding-bottom: 12px;">
                 <?php echo form_input(array('name' => 'linkedin_name', 'id' => 'linkedin_name', 'class' => 'form-control', 'type' => 'text')); ?>
                 <div class="form-group row">
-                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your sportzweb password</div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;">To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password</div>
                     <label class="col-md-4">Password:</label>
                     <div class="col-md-8">
                         <?php echo form_input(array('name' => 'password', 'class' => 'form-control', 'type' => 'password')); ?>

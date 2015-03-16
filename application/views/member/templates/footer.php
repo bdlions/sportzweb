@@ -11,7 +11,7 @@
                     <li><a href="./contacts.php">CONTACT US</a></li>
                 </ul>
             </div>
-            <div class="copyright">COPYRIGHT @ 2012 <a href="./">SPORTZWEB</a> ALL RIGHT RESERVED.</div>
+            <div class="copyright">COPYRIGHT @ 2012 <a href="./"><?php echo WEBSITE_TITLE; ?></a> ALL RIGHT RESERVED.</div>
         </div>
     </div>
 </div>

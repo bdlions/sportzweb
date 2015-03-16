@@ -29,7 +29,9 @@ include './constants/app_gympro.php';
 //define("STATUS_POST_REFRESH",                                   3);
 //define("STATUS_POST_INSERTION_ERROR",                           4);
 
-
+//WEBSITE TITLE
+define("WEBSITE_TITLE",                           "Sonuto");
+//define("WEBSITE_TITLE",                           "Petrificus Totalus");
 /***************** Custom constant End **********************/
 /*
  *---------------------------------------------------------------

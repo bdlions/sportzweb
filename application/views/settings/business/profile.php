@@ -139,7 +139,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
-                                To save these settings please enter your sportzweb password
+                                To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                             </div>                        
                             <div class="form-group">
                                 <label class="col-md-4">Password:</label>
@@ -174,7 +174,7 @@
                                 <?php echo form_input(array('name' => 'business_name', 'value' => $profile_info->business_name, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">
@@ -242,7 +242,7 @@
                                 <?php echo form_input(array('name' => 'longitude', 'value' => $profile_info->longitude, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">
@@ -274,7 +274,7 @@
                                 <?php echo form_textarea(array('name' => 'business_description', 'value' => $profile_info->business_description, 'class' => 'form-control', 'rows' => '4')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">
@@ -305,7 +305,7 @@
                                 <?php echo form_input(array('name' => 'telephone', 'value' => $profile_info->telephone, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">
@@ -337,7 +337,7 @@
                                 <?php echo form_input(array('name' => 'business_email', 'value' => $profile_info->business_email, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">
@@ -370,7 +370,7 @@
                                 <?php echo form_input(array('name' => 'registered_company_number', 'value' => $profile_info->registered_company_number, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">
@@ -402,7 +402,7 @@
                                 <?php echo form_input(array('name' => 'website_address', 'value' => $profile_info->website_address, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">
@@ -434,7 +434,7 @@
                                 <?php echo form_input(array('name' => 'business_hour', 'value' => $profile_info->business_hour, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">

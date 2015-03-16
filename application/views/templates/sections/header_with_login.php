@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 logo-text">
-                    <a href="<?php echo base_url(); ?>" ><img class="logo" src="<?php echo base_url() ?>/resources/images/logo1.png" />Sonuto</a>
+                    <a href="<?php echo base_url(); ?>" ><img class="logo" src="<?php echo base_url() ?>/resources/images/logo1.png" /><?php echo WEBSITE_TITLE; ?></a>
                 </div>
                 <div class="col-md-8 login12">
                     <?php echo form_open("auth/login", array('class' => 'navbar-right', 'style' => 'min-width:590px;', 'id' => 'login_box')); ?>

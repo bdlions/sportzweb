@@ -118,7 +118,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-sm-6"><div class="pull-right">Sportzweb Profile : </div></label>
+                        <label class="col-sm-6"><div class="pull-right"><?php echo WEBSITE_TITLE; ?> Profile : </div></label>
                         <div class="col-sm-6"><?php echo $service_info['business_name']; ?></div>
                     </div>
                 </div>

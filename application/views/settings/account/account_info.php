@@ -200,7 +200,7 @@
                                 <?php echo form_input(array('name' => 'last_name', 'value' => $general_info->last_name, 'class' => 'form-control', 'type' => 'text')); ?>
                             </div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">
@@ -233,7 +233,7 @@
                             </div>
                             <div class="col-md-12">You will need to click the link inside your inbox to verify your new email account</div>
                         </div>
-                        To save these settings please enter your sportzweb password
+                        To save these settings please enter your <?php echo WEBSITE_TITLE; ?> password
                         <div class="form-group">
                             <label class="col-md-4">Password:</label>
                             <div class="col-md-8">

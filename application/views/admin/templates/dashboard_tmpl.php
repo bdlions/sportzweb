@@ -173,7 +173,7 @@
                                         <?php }?>
                                     <?php }?>                                                                        
                                     <li id="applications_directory">
-                                        <a href="<?php echo base_url()?>admin/applications_directory">
+                                        <a href="<?php echo base_url().ADMIN_APPLICATION_APPLICATION_DIRECTORY_HOME_PAGE_PATH ?>">
                                             App Directory
                                         </a>
                                     </li>

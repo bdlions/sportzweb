@@ -12,16 +12,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
-
-        </a>
+        <a class="navbar-brand" href="#"></a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 logo-text">
-                    <a href="<?php echo base_url(); ?>admin" ><img class="logo" src="<?php echo base_url() ?>/resources/images/logo1.png" />Sonuto</a>
+                    <a href="<?php echo base_url(); ?>admin" ><img class="logo" src="<?php echo base_url() ?>/resources/images/logo1.png" /><?php echo WEBSITE_TITLE; ?></a>
                 </div>
             </div>
         </div>
