@@ -138,8 +138,8 @@ class Applications_news extends Admin_Controller{
                     if($result['status'] == 1)
                     {
                         $news_data['picture'] = $result['upload_data']['file_name'];
-                        $path = NEWS_IMAGE_PATH.$result['upload_data']['file_name'];
-                        $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
+//                        $path = NEWS_IMAGE_PATH.$result['upload_data']['file_name'];
+//                        $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
                     }
                     else
                     {
@@ -243,8 +243,8 @@ class Applications_news extends Admin_Controller{
                     if($result['status'] == 1)
                     {
                         $news_data['picture'] = $result['upload_data']['file_name'];
-                        $path = NEWS_IMAGE_PATH.$result['upload_data']['file_name'];
-                        $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
+//                        $path = NEWS_IMAGE_PATH.$result['upload_data']['file_name'];
+//                        $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
                     }
                     else
                     {
@@ -255,8 +255,8 @@ class Applications_news extends Admin_Controller{
                 } 
                 else
                 {
-                    $path = NEWS_IMAGE_PATH.$news['picture'];
-                    $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
+//                    $path = NEWS_IMAGE_PATH.$news['picture'];
+//                    $this->utils->resize_image($path, NEWS_IMAGE_PATH_W300_H150, NEWS_IMAGE_H150, NEWS_IMAGE_W300);
                 }
                 
                 $id = $this->admin_news->update_news($news['id'], $news_data);

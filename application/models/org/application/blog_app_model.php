@@ -35,7 +35,10 @@ class Blog_app_model extends Ion_auth_model {
     {
         if(!empty($data))
         {
-            $this->db->update_batch($this->tables['blog_category'], $data, 'id');
+            foreach($data as $blog_category)
+            {
+                $this->db->update($this->tables['blog_category'], $blog_category, 'id');
+            }
             return true;
         }
         return false;

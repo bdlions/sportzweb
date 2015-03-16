@@ -250,7 +250,7 @@ $(function () {
                 alert(data.message);
                 if(data.status == true)
                 {
-                    window.location = '<?php echo base_url();?>applications/blog_app/edit_blog/'+data.blog_info.blog_id;
+                    window.location = '<?php echo base_url();?>applications/blog_app/users_blog/';
                 }                
             }
         });
@@ -330,7 +330,7 @@ $(function () {
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
             alert(data.result.message);
-            window.location = '<?php echo base_url();?>applications/blog_app/edit_blog/<?php echo $blog_id; ?>';
+            window.location = '<?php echo base_url();?>applications/blog_app/users_blog';
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {

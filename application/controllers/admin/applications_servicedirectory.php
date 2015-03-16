@@ -345,22 +345,7 @@ class Applications_servicedirectory extends Admin_Controller{
             if($this->form_validation->run() == true)
             {
                $service_category_id = $this->input->post('service_category_id');
-                
-                if (isset($_FILES["userfile"]))
-                {
-                    $file_info = $_FILES["userfile"];
-                    $uploaded_image_data = $this->image_upload($file_info,SERVICE_IMAGE_PATH);
-                    if(isset($uploaded_image_data['error'])) {
-                        $this->data['error_message'] = strip_tags($uploaded_image_data['error']);
-                        echo json_encode($this->data);
-                        return;
-                    }else if(!empty($uploaded_image_data['upload_data']['file_name'])){
-                        $path = FCPATH.SERVICE_IMAGE_UPLOAD_PATH.$uploaded_image_data['upload_data']['file_name'];
-                        //unlink($path);
-                    }
-                }
-                
-                $service_name = $this->input->post('title');
+               $service_name = $this->input->post('title');
                 $data = array(
                     'name' => $this->input->post('name'),
                     'latitude' => $this->input->post('latitude'),
@@ -374,9 +359,25 @@ class Applications_servicedirectory extends Admin_Controller{
                     'service_category_id'  => $service_category_id,
                     'business_profile_id'   => $this->input->post('business_profile_id'),
                     'website' => $this->utils->process_url($this->input->post('website')),
-                    'picture' => empty($uploaded_image_data['upload_data']['file_name'])? '' : $uploaded_image_data['upload_data']['file_name'],
+                    'picture' => '',
                     'created_on' => now(),
                 );
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];
+                    
+                    $uploaded_image_data = $this->utils->upload_image($file_info,SERVICE_IMAGE_PATH);
+                    if($uploaded_image_data['status'] == 1)
+                    {
+                        $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
+                    }
+                    else
+                    {
+                        $this->data['message'] = $uploaded_image_data['message'];
+                        echo json_encode($this->data);
+                        return;
+                    }
+                }
                 
                 $id = $this->admin_service_directory->create_service($service_name, $data);
                 if($id !== FALSE) {
@@ -615,20 +616,7 @@ class Applications_servicedirectory extends Admin_Controller{
             if($this->form_validation->run() == true)
             {  
                 $uploaded_image_data = array();
-                if (isset($_FILES["userfile"]))
-                {
-                    $file_info = $_FILES["userfile"];
-                    $uploaded_image_data = $this->image_upload($file_info, SERVICE_IMAGE_PATH);
-                    if(isset($uploaded_image_data['error'])) {
-                        $this->data['message'] = strip_tags($uploaded_image_data['error']);
-                        echo json_encode($this->data);
-                        return;
-                    }else if(!empty($uploaded_image_data['upload_data']['file_name'])){
-                        $path = FCPATH.SERVICE_IMAGE_UPLOAD_PATH.$uploaded_image_data['upload_data']['file_name'];
-                        //unlink($path);
-                    }
-                }
-                
+
                 $service_name = $this->input->post('title');
                 $data = array(
                     'name' => $this->input->post('name'),
@@ -644,15 +632,27 @@ class Applications_servicedirectory extends Admin_Controller{
                     'service_category_id'  => $this->input->post('service_category_id'),
                     'business_profile_id'   => $this->input->post('business_profile_id'),
                     'website' => $this->utils->process_url($this->input->post('website')),
+                    'picture' => '',
                     'modified_on' => now(),
                 );
-                
-                if(!empty($uploaded_image_data) && ($uploaded_image_data['upload_data']['file_name'] != null)) {
-                    $path = FCPATH.SERVICE_IMAGE_PATH.$service_info['picture'];
-                    unlink($path);
-                    $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];
+                    
+                    $uploaded_image_data = $this->utils->upload_image($file_info,SERVICE_IMAGE_PATH);
+                    if($uploaded_image_data['status'] == 1)
+                    {
+                        $data['picture'] = $uploaded_image_data['upload_data']['file_name'];
+                    }
+                    else
+                    {
+                        $this->data['message'] = $uploaded_image_data['message'];
+                        echo json_encode($this->data);
+                        return;
+                    }
                 }
                 
+
                 $id = $this->admin_service_directory->update_service($service_info['id'], $data);
                 if($id !== FALSE) {
                     $this->data['message'] = "Service is updated successfully";

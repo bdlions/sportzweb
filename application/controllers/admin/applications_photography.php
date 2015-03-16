@@ -93,8 +93,8 @@ class Applications_photography extends Admin_Controller{
                 $result = $this->utils->upload_image($file_info, PHOTOGRAPHY_IMAGE_PATH);
                 if($result['status'] == 1)
                 {
-                    $path = PHOTOGRAPHY_IMAGE_PATH.$result['upload_data']['file_name'];
-                    $this->utils->resize_image($path, $path, PHOTOGRAPHY_IMAGE_HEIGHT, PHOTOGRAPHY_IMAGE_WIDTH);
+//                    $path = PHOTOGRAPHY_IMAGE_PATH.$result['upload_data']['file_name'];
+//                    $this->utils->resize_image($path, $path, PHOTOGRAPHY_IMAGE_HEIGHT, PHOTOGRAPHY_IMAGE_WIDTH);
                 
                     $additional_data = array(
                         'img' => $result['upload_data']['file_name'],
@@ -206,8 +206,8 @@ class Applications_photography extends Admin_Controller{
                 $file_info = $_FILES["userfile"];
                 $result = $this->utils->upload_image($file_info, PHOTOGRAPHY_IMAGE_PATH);
                 if ($result['status'] == 1) {
-                    $path = PHOTOGRAPHY_IMAGE_PATH . $result['upload_data']['file_name'];
-                    $this->utils->resize_image($path, $path, PHOTOGRAPHY_IMAGE_HEIGHT, PHOTOGRAPHY_IMAGE_WIDTH);
+//                    $path = PHOTOGRAPHY_IMAGE_PATH . $result['upload_data']['file_name'];
+//                    $this->utils->resize_image($path, $path, PHOTOGRAPHY_IMAGE_HEIGHT, PHOTOGRAPHY_IMAGE_WIDTH);
 
                     $additional_data = array(
                         'img' => $result['upload_data']['file_name'],

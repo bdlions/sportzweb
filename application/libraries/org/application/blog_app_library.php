@@ -374,23 +374,24 @@ class Blog_app_library {
      * @Author Nazmul on 10th November 2014
      */
     public function get_blog_category_id_list_of_blog($blog_id)
-    {
+ {
         $blog_category_id_list = array();
         $blog_category_list_array = $this->blog_app_model->get_all_blog_categories()->result_array();
-        foreach ($blog_category_list_array as $blog_category_info) {            
+        foreach ($blog_category_list_array as $blog_category_info) {
             $blog_list_array = json_decode($blog_category_info['blog_list']);
-            foreach ($blog_list_array as $blog_info) {
-                if($blog_info->blog_id == $blog_id){
-                    if(!in_array($blog_category_info['id'], $blog_category_id_list))
-                    {
-                        $blog_category_id_list[] = $blog_category_info['id'];
+            if ($blog_list_array != null) {
+                foreach ($blog_list_array as $blog_info) {
+                    if ($blog_info->blog_id == $blog_id) {
+                        if (!in_array($blog_category_info['id'], $blog_category_id_list)) {
+                            $blog_category_id_list[] = $blog_category_info['id'];
+                        }
                     }
                 }
             }
         }
         return $blog_category_id_list;
     }
-    
+
     /*
      * This method will store blog id in blog category table
      * @param $blog_id, blog id
