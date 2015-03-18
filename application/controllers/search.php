@@ -38,7 +38,16 @@ class Search extends CI_Controller {
         $users = $this->searches_model->get_users($search_value);
         foreach ($users as  $user) {
             $user -> value = $user -> first_name . " ". $user -> last_name;
-            $user -> signature = $user -> first_name[0].$user -> last_name[0];
+            $user -> signature = "";
+            if($user -> first_name != NULL && $user -> first_name != "")
+            {
+                $user -> signature = $user -> first_name[0];
+            }
+            if($user -> last_name != NULL && $user -> last_name != "")
+            {
+                $user -> signature = $user -> signature.$user -> last_name[0];
+            }
+            //$user -> signature = $user -> first_name[0].$user -> last_name[0];
             array_push($temp_users, $user);
         }
         echo json_encode($temp_users);
@@ -51,7 +60,16 @@ class Search extends CI_Controller {
         
         foreach ($users as  $user) {
             $user -> value = $user -> first_name . " ". $user -> last_name;
-            $user -> signature = $user -> first_name[0].$user -> last_name[0];
+            $user -> signature = "";
+            if($user -> first_name != NULL && $user -> first_name != "")
+            {
+                $user -> signature = $user -> first_name[0];
+            }
+            if($user -> last_name != NULL && $user -> last_name != "")
+            {
+                $user -> signature = $user -> signature.$user -> last_name[0];
+            }
+            //$user -> signature = $user -> first_name[0].$user -> last_name[0];
             array_push($temp_users, $user);
         }
         echo json_encode($temp_users);
@@ -67,7 +85,12 @@ class Search extends CI_Controller {
         
         foreach ($business_names as  $business_name) {
             $business_name -> value = $business_name -> business_name ;
-            $business_name -> signature = $business_name -> business_name[0];
+            $business_name -> signature = "";
+            if($business_name -> business_name != NULL && $business_name -> business_name != "")
+            {
+                $business_name -> signature = $business_name -> business_name[0];
+            }
+            //$business_name -> signature = $business_name -> business_name[0];
         }
         echo json_encode($business_names);
     }

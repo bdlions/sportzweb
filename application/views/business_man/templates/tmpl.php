@@ -6,7 +6,7 @@
         <meta name="author" content="Nazmul Hasan, Alamgir Kabir, Noor Alam, Ziaur Rahman">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
         <meta name="keywords" content=""/>
-        <title>Sportzweb</title>
+        <title><?php echo WEBSITE_TITLE?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/style.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/master.css">

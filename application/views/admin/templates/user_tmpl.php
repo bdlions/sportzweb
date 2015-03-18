@@ -141,66 +141,69 @@
                                             App Directory
                                         </a>
                                     </li> 
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_xstreambanter">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_XSTREAM_BANTER_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_healthyrecipes">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_HEALTHY_RECIPE_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_HEALTYY_RECIPES_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_servicedirectory">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_SERVICE_DIRECTORY_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_SERVICE_DIRECTORY_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_news">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_NEWS_APP_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_NEWS_APP_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_blogs">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_BLOG_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_BLOG_APP_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_bmicalculator">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_BMI_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_BMI_CALCULATOR_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_photography">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_PHOTOGRAPHY_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_PHOTOGRAPHY_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_gympro">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_GYMPRO_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_GYMPRO_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SHOP_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_shop">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_SHOP_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_SHOP_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
-                                    <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SCORE_PREDICTION_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping)) {?>
-                                    <li id="applications_scoreprediction">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_SCORE_PREDICTION_HOME_PAGE_PATH ?>">
-                                            <?php foreach($application_list as $application_info){if($application_info['id'] == APPLICATION_SCORE_PREDICTION_ID){ echo $application_info['title']; break; } } ?>
-                                        </a>
-                                    </li>
+                                    <?php } ?>
+                                    <?php foreach($application_list as $application_info){?>                                    
+                                        <?php if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_XSTREAM_BANTER_ID) {?>
+                                        <li id="applications_xstreambanter">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_HEALTHY_RECIPES_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_HEALTYY_RECIPES_ID) {?>
+                                        <li id="applications_healthyrecipes">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_HEALTHY_RECIPE_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SERVICE_DIRECTORY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_SERVICE_DIRECTORY_ID) {?>
+                                        <li id="applications_servicedirectory">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_SERVICE_DIRECTORY_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_NEWS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_NEWS_APP_ID) {?>
+                                        <li id="applications_news">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_NEWS_APP_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BLOGS_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_BLOG_APP_ID) {?>
+                                        <li id="applications_blogs">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_BLOG_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_BMI_CALCULATOR_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_BMI_CALCULATOR_ID) {?>
+                                        <li id="applications_bmicalculator">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_BMI_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_PHOTOGRAPHY_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_PHOTOGRAPHY_ID) {?>
+                                        <li id="applications_photography">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_PHOTOGRAPHY_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_GYMPRO_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_GYMPRO_ID) {?>
+                                        <li id="applications_gympro">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_GYMPRO_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SHOP_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_SHOP_ID) {?>
+                                        <li id="applications_shop">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_SHOP_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_SCORE_PREDICTION_ID.'_'.ADMIN_ACCESS_LEVEL_VIEW, $access_level_mapping) && $application_info['id'] == APPLICATION_SCORE_PREDICTION_ID) {?>
+                                        <li id="applications_scoreprediction">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_SCORE_PREDICTION_HOME_PAGE_PATH ?>">
+                                                <?php echo $application_info['title']; ?>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
                                     <?php } ?>
                                 </ul>
                             </li>

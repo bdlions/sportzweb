@@ -6,7 +6,7 @@
         <meta name="author" content="Nazmul Hasan, Alamgir Kabir, Noor Alam, Ziaur Rahman,Omar Faruk">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
         <meta name="keywords" content=""/>
-        <title>Sportzweb</title>
+        <title><?php echo WEBSITE_TITLE?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/property.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/newsfeed.css">
@@ -109,6 +109,11 @@
                             <li id="applications">
                                 <a href="#">Applications</a>
                                 <ul>
+                                        <li id="applications_directory">
+                                            <a href="<?php echo base_url().ADMIN_APPLICATION_APPLICATION_DIRECTORY_HOME_PAGE_PATH ?>">
+                                                App Directory
+                                            </a>
+                                        </li>
                                     <?php foreach($application_list as $application_info){ ?>
                                         <?php if($application_info['id'] == APPLICATION_XSTREAM_BANTER_ID) { ?>
                                         <li id="applications_xstreambanter">
@@ -171,12 +176,7 @@
                                             </a>
                                         </li>
                                         <?php }?>
-                                    <?php }?>                                                                        
-                                    <li id="applications_directory">
-                                        <a href="<?php echo base_url().ADMIN_APPLICATION_APPLICATION_DIRECTORY_HOME_PAGE_PATH ?>">
-                                            App Directory
-                                        </a>
-                                    </li>
+                                    <?php }?>
                                 </ul>
                             </li>
                             <li id="business_profiles">

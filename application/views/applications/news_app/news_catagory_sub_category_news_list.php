@@ -14,7 +14,7 @@
         <div class="row" style="padding-bottom: 20px"><!--Greatest news-->
             <div class="col-md-6 col-lg-6">
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[0]]['id']; ?>">
-                    <img id="image_position_1" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_TOP_LEFT_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[0]]['picture'] ?>"/>
+                    <img id="image_position_1" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[0]]['picture'] ?>"/>
                 </a>
             </div>
             <input type="hidden" name="position_of_news_1" id="position_of_news_1" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[0]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[0]]['id'] : ''; ?>">
@@ -36,7 +36,7 @@
             <?php if (array_key_exists(1, $region_id_news_id_map) && array_key_exists(1, $region_id_is_news_ignored_map) && array_key_exists($region_id_news_id_map[1], $news_id_news_info_map) && $region_id_is_news_ignored_map[1] == 0) : ?>
                 <input type="hidden" name="position_of_news_2" id="position_of_news_2" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[1]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[1]]['id'] : ''; ?>">
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[1]]['id']; ?>">
-                    <img id="image_position_2" style="width:100%;height:130px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[1]]['picture'] ?>"/>
+                    <img id="image_position_2" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[1]]['picture'] ?>"/>
                 </a>
                 <br>
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[1]]['id']; ?>">
@@ -53,7 +53,7 @@
             <?php if (array_key_exists(2, $region_id_news_id_map) && array_key_exists(2, $region_id_is_news_ignored_map) && array_key_exists($region_id_news_id_map[2], $news_id_news_info_map) && $region_id_is_news_ignored_map[2] == 0) : ?>
                 <input type="hidden" name="position_of_news_3" id="position_of_news_3" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[2]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[2]]['id'] : ''; ?>">
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[2]]['id']; ?>">
-                    <img id="image_position_3" style="width:100%;height:130px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[2]]['picture'] ?>"/>
+                    <img id="image_position_3" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[2]]['picture'] ?>"/>
                 </a>
                 <br>
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[2]]['id']; ?>">
@@ -72,7 +72,7 @@
             <?php if (array_key_exists(3, $region_id_news_id_map) && array_key_exists(3, $region_id_is_news_ignored_map) && array_key_exists($region_id_news_id_map[3], $news_id_news_info_map) && $region_id_is_news_ignored_map[3] == 0) : ?>
                 <input type="hidden" name="position_of_news_4" id="position_of_news_4" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[3]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[3]]['id'] : ''; ?>">
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[3]]['id']; ?>">
-                    <img id="image_position_4" style="width:100%;height:130px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[3]]['picture'] ?>"/>
+                    <img id="image_position_4" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[3]]['picture'] ?>"/>
                 </a>
                 <br>
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[3]]['id']; ?>">
@@ -96,7 +96,7 @@
                 <div class="col-md-6">
                     <input type="hidden" name="position_of_news_5" id="position_of_news_5" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[4]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[4]]['id'] : ''; ?>">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[4]]['id']; ?>">
-                        <img id="image_position_5" style="width:100%;height:100px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[4]]['picture'] ?>"/>
+                        <img id="image_position_5" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[4]]['picture'] ?>"/>
                     </a>
                 </div>
                 <div class="col-md-6" style="padding-left: 0px;">
@@ -115,7 +115,7 @@
                 <div class="col-md-6">
                     <input type="hidden" name="position_of_news_6" id="position_of_news_6" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[5]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[5]]['id'] : ''; ?>">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[5]]['id']; ?>">
-                        <img id="image_position_6" style="width:100%;height:100px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[5]]['picture'] ?>"/>
+                        <img id="image_position_6" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[5]]['picture'] ?>"/>
                     </a>
                 </div>
                 <div class="col-md-6" style="padding-left: 0px;">
@@ -136,7 +136,7 @@
                 <div class="col-md-6">
                     <input type="hidden" name="position_of_news_7" id="position_of_news_7" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[6]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[6]]['id'] : ''; ?>">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[6]]['id']; ?>">
-                        <img id="image_position_7" style="width:100%;height:100px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[6]]['picture'] ?>"/>
+                        <img id="image_position_7" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[6]]['picture'] ?>"/>
                     </a>
                 </div>
                 <div class="col-md-6" style="padding-left: 0px;">
@@ -153,7 +153,7 @@
                 <div class="col-md-6">
                     <input type="hidden" name="position_of_news_8" id="position_of_news_8" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[7]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[7]]['id'] : ''; ?>">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[7]]['id']; ?>">
-                        <img id="image_position_8" style="width:100%;height:100px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[7]]['picture'] ?>"/>
+                        <img id="image_position_8" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[7]]['picture'] ?>"/>
                     </a>
                 </div>
                 <div class="col-md-6" style="padding-left: 0px;">
@@ -239,7 +239,7 @@
             <?php if (array_key_exists(12, $region_id_news_id_map) && array_key_exists(12, $region_id_is_news_ignored_map) && array_key_exists($region_id_news_id_map[12], $news_id_news_info_map) && $region_id_is_news_ignored_map[12] == 0) : ?>
                 <input type="hidden" name="position_of_news_13" id="position_of_news_13" value="<?php echo!empty($news_id_news_info_map[$region_id_news_id_map[12]]['id']) ? $news_id_news_info_map[$region_id_news_id_map[12]]['id'] : ''; ?>">
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[12]]['id']; ?>">
-                    <img style="min-width: 100%;" id="image_position_13" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_BOTTOM_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[12]]['picture'] ?>"/>
+                    <img style="min-width: 100%;" id="image_position_13" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[12]]['picture'] ?>"/>
                 </a>
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[12]]['id']; ?>">
                     <span class="heading_medium" id="heading_13">
@@ -255,7 +255,7 @@
 <div class="col-md-3" id="side_panel">
     <?php for ($fi = 0; $fi < 4; $fi++): ?>
         <?php if (array_key_exists(13+$fi, $region_id_news_id_map) && array_key_exists(13+$fi, $region_id_is_news_ignored_map) && array_key_exists($region_id_news_id_map[13+$fi], $news_id_news_info_map) && $region_id_is_news_ignored_map[13+$fi] == 0) : ?>
-            <div class="row" style="padding-bottom: 20px; min-height: 10px;"><!--top news loop...3 news per row-->
+            <div class="row" style="width:100%;padding-bottom: 20px;"><!--top news loop...3 news per row-->
                 <?php if ($region_id_is_news_ignored_map[13 + $fi] == 0) : ?>
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['id']; ?>"><img style="width:100%;height: 150px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[13 + $fi]]['picture'] ?>"/></a>
                     <br>
