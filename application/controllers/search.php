@@ -27,12 +27,15 @@ class Search extends CI_Controller {
         $this->load->library("profile");
 
     }
-
+/*
+ * This method return users info by search type
+ * Ajax call typeahead result
+ * @Rashida on 18th March
+ */
     public function get_users() {
-        $search_value = $_GET['query'];
-        $users = $this->profile->get_users_test($search_value);
         $temp_users = array();
-        
+        $search_value = $_GET['query'];
+        $users = $this->searches_model->get_users($search_value);
         foreach ($users as  $user) {
             $user -> value = $user -> first_name . " ". $user -> last_name;
             $user -> signature = $user -> first_name[0].$user -> last_name[0];
@@ -53,10 +56,14 @@ class Search extends CI_Controller {
         }
         echo json_encode($temp_users);
     }
-    
+/*
+ * This method return business info by search type
+ * Ajax call typeahead result
+ * @Rashida on 18th March
+ */
     public function get_business_names(){
         $search_value = $_GET['query'];
-        $business_names = $this->business_profile_library->get_all_business_profile_test($search_value);
+        $business_names = $this->searches_model->get_all_business_profile($search_value);
         
         foreach ($business_names as  $business_name) {
             $business_name -> value = $business_name -> business_name ;
@@ -64,7 +71,11 @@ class Search extends CI_Controller {
         }
         echo json_encode($business_names);
     }
-    
+/*
+ * This method return pages info by search type
+ * Ajax call typeahead result
+ * @Rashida on 18th March
+ */
     public function get_pages(){
         $search_value = $_GET['query'];
         $pages = array();
