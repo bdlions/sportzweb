@@ -29,7 +29,8 @@ class Search extends CI_Controller {
     }
 
     public function get_users() {
-        $users = $this->profile->get_users();
+        $search_value = $_GET['query'];
+        $users = $this->profile->get_users_test($search_value);
         $temp_users = array();
         
         foreach ($users as  $user) {
@@ -54,7 +55,8 @@ class Search extends CI_Controller {
     }
     
     public function get_business_names(){
-        $business_names = $this->business_profile_library->get_all_business_profile();
+        $search_value = $_GET['query'];
+        $business_names = $this->business_profile_library->get_all_business_profile_test($search_value);
         
         foreach ($business_names as  $business_name) {
             $business_name -> value = $business_name -> business_name ;
@@ -64,8 +66,9 @@ class Search extends CI_Controller {
     }
     
     public function get_pages(){
+        $search_value = $_GET['query'];
         $pages = array();
-        $healthy_recipes = $this->searches_model->get_healthy_recipes()->result();
+        $healthy_recipes = $this->searches_model->get_healthy_recipes($search_value)->result();
         foreach ($healthy_recipes as  $healthy_recipe) {
             $healthy_recipe -> value = $healthy_recipe -> title ;
             $healthy_recipe -> picture = base_url() . HEALTHY_RECIPES_IMAGE_PATH .$healthy_recipe -> main_picture ;
@@ -74,7 +77,7 @@ class Search extends CI_Controller {
             array_push($pages, $healthy_recipe);
         }
         
-        $services = $this->searches_model->get_services()->result();
+        $services = $this->searches_model->get_services($search_value)->result();
         foreach ($services as  $service) {
             $service -> value = $service -> title ;
             $service -> picture = base_url() . SERVICE_IMAGE_PATH .$service -> picture ;
@@ -83,7 +86,7 @@ class Search extends CI_Controller {
             array_push($pages, $service);
         }
         
-        $news_list = $this->searches_model->get_news()->result();
+        $news_list = $this->searches_model->get_news($search_value)->result();
         foreach ($news_list as  $news) {
             $news -> value = $news -> headline ;
             $news -> title = $news -> headline ;
@@ -93,7 +96,7 @@ class Search extends CI_Controller {
             array_push($pages, $news);
         }
         
-        $blog_list = $this->searches_model->get_blogs()->result();
+        $blog_list = $this->searches_model->get_blogs($search_value)->result();
         foreach ($blog_list as  $blog) {
             $blog -> value = strip_tags(html_entity_decode(html_entity_decode($blog -> title)));
             $blog -> title = strip_tags(html_entity_decode(html_entity_decode($blog -> title)));

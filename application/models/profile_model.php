@@ -94,6 +94,21 @@ class Profile_model extends Ion_auth_model {
         $this->db->delete($this->tables['user_profile_photos']);
     }
     
+    public function get_users_test($search_value)
+    {
+        $like = "(username LIKE '%".$search_value."%' OR first_name LIKE '%".$search_value."%' OR last_name LIKE '%".$search_value."%')";
+        $this->db->where($like);        
+        $query = $this->db->select("username, first_name, last_name, " . $this->tables['users']. ".id as user_id, ". $this->tables['basic_profile']. ".*")
+                ->join($this->tables['basic_profile'], $this->tables['users'] . '.id = ' . $this->tables['basic_profile'] . '.user_id')
+                ->join($this->tables['countries'], $this->tables['basic_profile'] . '.' . $this->join['countries'] . '=' . $this->tables['countries'] . '.id')
+                ->get($this->tables['users']);
+        if ($query->num_rows() >= 1) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+    
     
 
 }

@@ -44,6 +44,13 @@ class Business_profile_model extends Ion_auth_model {
                         ->get($this->tables['business_profile']);
         return $query->result();
     }
+    public function get_all_business_profile_test($search_value){
+        $like = "(business_name LIKE '%".$search_value."%')";
+        $this->db->where($like); 
+        $query = $this->db->select('*')
+                        ->get($this->tables['business_profile']);
+        return $query->result();
+    }
     public function get_business_types_profile(){
         $query = $this->db->select('*')
                 ->from($this->tables['business_profile_type'])

@@ -3,10 +3,7 @@
         $("#search_box").typeahead([
             {
                 name:"search_user",
-                prefetch:{
-                            url: '<?php echo base_url()?>search/get_users',
-                            ttl: 0
-                        },
+                remote:'<?php echo base_url()?>search/get_users?query=%QUERY',
                 header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">People</div>',
                 template: [
                     '<div class="row">'+
@@ -30,10 +27,7 @@
             },
             {
                 name:"search_business_names",
-                prefetch:{
-                            url: '<?php echo base_url()?>search/get_business_names',
-                            ttl: 0
-                        },
+                remote:'<?php echo base_url()?>search/get_business_names?query=%QUERY',
                 header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Businesses</div>',
                 template: [
                     '<div class="row">'+
@@ -50,10 +44,7 @@
             },
             {
                 name:"search_pages",
-                prefetch:{
-                            url: '<?php echo base_url()?>search/get_pages',
-                            ttl: 0
-                        },
+                remote:'<?php echo base_url()?>search/get_pages?query=%QUERY',
                 header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Pages</div>',
                 template: [
                     '<div class="row">'+
