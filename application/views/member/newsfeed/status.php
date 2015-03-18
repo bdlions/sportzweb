@@ -179,7 +179,8 @@
                                     <?php echo $feedback['description']?>
                                 </div>
                                 <div class="row col-md-10" id="feedback_created_date">
-                                    <?php echo convert_time($feedback['created_on']) ?>
+                                    <?php //echo convert_time($feedback['created_on']) ?>
+                                    <?php echo $feedback['created_on'];?>
                                 </div>
                             </div>
                         <?php }?>
