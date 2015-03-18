@@ -99,8 +99,8 @@ class Search extends CI_Controller {
         
         $news_list = $this->searches_model->get_news($search_value)->result();
         foreach ($news_list as  $news) {
-            $news -> value = $news -> headline ;
-            $news -> title = $news -> headline ;
+            $news -> value =strip_tags(html_entity_decode(html_entity_decode($news -> headline)));
+            $news -> title =strip_tags(html_entity_decode(html_entity_decode($news -> headline)));
             $news -> picture = base_url() . NEWS_IMAGE_PATH .$news -> picture ;
             $news -> type = 'page';
             $news -> url = base_url() . 'applications/news_app/news_item/'.$news -> id;
