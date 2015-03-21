@@ -99,27 +99,35 @@ class Search extends CI_Controller {
  * Ajax call typeahead result
  * @Rashida on 18th March
  */
-    public function get_pages(){
+    public function get_healthy_recipes(){
         $search_value = $_GET['query'];
-        $pages = array();
+        $temp_recipes = array();
         $healthy_recipes = $this->searches_model->get_healthy_recipes($search_value)->result();
         foreach ($healthy_recipes as  $healthy_recipe) {
             $healthy_recipe -> value = $healthy_recipe -> title ;
             $healthy_recipe -> picture = base_url() . HEALTHY_RECIPES_IMAGE_PATH .$healthy_recipe -> main_picture ;
             $healthy_recipe -> type = 'page';
             $healthy_recipe -> url = base_url() . 'applications/healthy_recipes/recipe/'.$healthy_recipe -> id;
-            array_push($pages, $healthy_recipe);
+            array_push($temp_recipes, $healthy_recipe);
         }
-        
+        echo json_encode($temp_recipes);
+    }
+    public function get_services(){ 
+        $search_value = $_GET['query'];
+        $temp_services = array();
         $services = $this->searches_model->get_services($search_value)->result();
         foreach ($services as  $service) {
             $service -> value = $service -> title ;
             $service -> picture = base_url() . SERVICE_IMAGE_PATH .$service -> picture ;
             $service -> type = 'page';
             $service -> url = base_url() . 'applications/service_directory/show_service_detail/'.$service -> id;
-            array_push($pages, $service);
+            array_push($temp_services, $service);
         }
-        
+        echo json_encode($temp_services);
+    }
+    public function get_news(){
+        $search_value = $_GET['query'];
+        $temp_news = array();
         $news_list = $this->searches_model->get_news($search_value)->result();
         foreach ($news_list as  $news) {
             $news -> value =strip_tags(html_entity_decode(html_entity_decode($news -> headline)));
@@ -127,9 +135,13 @@ class Search extends CI_Controller {
             $news -> picture = base_url() . NEWS_IMAGE_PATH .$news -> picture ;
             $news -> type = 'page';
             $news -> url = base_url() . 'applications/news_app/news_item/'.$news -> id;
-            array_push($pages, $news);
+            array_push($temp_news, $news);
         }
-        
+        echo json_encode($temp_news);
+    }
+     public function get_blogs(){ 
+        $search_value = $_GET['query'];
+        $temp_blogs = array();
         $blog_list = $this->searches_model->get_blogs($search_value)->result();
         foreach ($blog_list as  $blog) {
             $blog -> value = strip_tags(html_entity_decode(html_entity_decode($blog -> title)));
@@ -137,9 +149,9 @@ class Search extends CI_Controller {
             $blog -> picture = base_url() . BLOG_POST_IMAGE_PATH .$blog -> picture ;
             $blog -> type = 'page';
             $blog -> url = base_url() . 'applications/blog_app/view_blog_post/'.$blog -> id;
-            array_push($pages, $blog);
+            array_push($temp_blogs, $blog);
         }
-        echo json_encode($pages);
+        echo json_encode($temp_blogs);
     }
 }
 ?>

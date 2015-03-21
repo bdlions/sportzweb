@@ -26,6 +26,7 @@ class Searches_model extends Ion_auth_model {
     {
         $like = "(username LIKE '%".$search_value."%' OR first_name LIKE '%".$search_value."%' OR last_name LIKE '%".$search_value."%')";
         $this->db->where($like);        
+        $this->db->limit(3);        
         $query = $this->db->select("username, first_name, last_name, " . $this->tables['users']. ".id as user_id, ". $this->tables['basic_profile']. ".photo,home_town,country_name")
                 ->join($this->tables['basic_profile'], $this->tables['users'] . '.id = ' . $this->tables['basic_profile'] . '.user_id')
                 ->join($this->tables['countries'], $this->tables['basic_profile'] . '.' . $this->join['countries'] . '=' . $this->tables['countries'] . '.id')
@@ -40,7 +41,8 @@ class Searches_model extends Ion_auth_model {
     
     public function get_all_business_profile($search_value){
         $like = "(business_name LIKE '%".$search_value."%')";
-        $this->db->where($like); 
+        $this->db->where($like);
+        $this->db->limit(3); 
         $query = $this->db->select("business_name, id, logo, ")
                         ->from($this->tables['business_profile'])
                         ->get();
@@ -55,6 +57,7 @@ class Searches_model extends Ion_auth_model {
     {
         $like = "(title LIKE '%".$search_value."%')";
         $this->db->where($like);
+        $this->db->limit(3); 
         $query = $this->db->select("title, main_picture, id, ")
                         ->from($this->tables['recipes'])
                         ->get();
@@ -69,6 +72,7 @@ class Searches_model extends Ion_auth_model {
     {
         $like = "(title LIKE '%".$search_value."%')";
         $this->db->where($like);
+        $this->db->limit(3); 
         $query = $this->db->select("title, picture, id, ")
                         ->from($this->tables['services'])
                         ->get();
@@ -83,6 +87,7 @@ class Searches_model extends Ion_auth_model {
     {
         $like = "(headline LIKE '%".$search_value."%')";
         $this->db->where($like);
+        $this->db->limit(3); 
         $query = $this->db->select("headline, picture, id, ")
                         ->from($this->tables['news'])
                         ->get();
@@ -97,6 +102,7 @@ class Searches_model extends Ion_auth_model {
     {
         $like = "(title LIKE '%".$search_value."%')";
         $this->db->where($like);
+        $this->db->limit(3); 
         $query = $this->db->select("title, picture, id, ")
                         ->from($this->tables['blogs'])
                         ->get();
