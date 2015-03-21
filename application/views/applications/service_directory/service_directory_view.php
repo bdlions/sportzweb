@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/customStyles.css" />
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
 <script>
+    
+//GOOGLE MAP CODE START    
     $(function() {
         var result_arr = [];
         var services = Array();
@@ -27,7 +29,7 @@
                     hi = hi / 1000;
                     hi = hi / 1.61;
 
-                    var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.post_code + "," + service.city + "<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
+                    var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.city + ", " + service.post_code + ".<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
 //                            $("#services_displayer").append(service_text);
                     result_arr.push([[service_text], [hi]]);
                 });
@@ -83,6 +85,11 @@
                                     google.maps.event.addListener(markers, 'mouseover', function(event) {
                                         infowindows.open(map, markers);
                                     });
+                                    google.maps.event.addListener(markers, 'mouseout', function(event) {
+                                        setTimeout(function(){
+                                            infowindows.close();
+                                        }, <?php echo SERVICE_INFOWINDOW_TIMEOUT; ?>);
+                                    });
                                 }
                             }
                         });
@@ -94,7 +101,22 @@
             }
         });
     });
+//GOOGLE MAP CODE END
 
+
+
+
+//    $(function() {
+//        $("#div_more a").click(function(){
+//            $(this).hide();
+//        });
+//    });
+    $(window).bind("load", function() {
+//        var divh = document.getElementById('servicesTable').offsetHeight;
+//        document.getElementById('destin').style.height = divh + 'px';
+        $('#destin').height($('#servicesTable').height());
+        $('#services_displayer').height($('#services_and_maps').height()-15);
+    });
 </script>
 
 <style type="text/css">
@@ -104,39 +126,29 @@
     .selector img{
         margin-bottom: 8px;
     }
+    #services_displayer{
+        border-top: 1px solid #777777;
+        border-left: 1px solid #777777;
+        padding: 12px;
+        height: 70px;
+        overflow: scroll;
+    }
 </style>
-<script>
-    $(function() {
-        $("#div_more a").click(function()
-        {
-            $(this).hide();
-        });
-    });
-    $(function() {
-        var divh = document.getElementById('servicesTable').offsetHeight;
-        document.getElementById('destin').style.height = divh + 'px';
-    });
-
-    $(window).bind("load", function() {
-        var divh = document.getElementById('servicesTable').offsetHeight;
-        document.getElementById('destin').style.height = divh + 'px';
-    });
-</script>
 <div class="col-md-9">
     <div class="row">
         <div class="col-md-12">
             <span class="heading_small" style="font-size: 16px;">FIND SPORTS HEALTH AND FITNESS SERVICES</span>
-            <?php echo form_open("applications/service_directory", array('id' => 'form_service_directory', 'class' => 'form-vertical')); ?>
+            <?php echo form_open("applications/service_directory/service_directory_map", array('id' => 'form_service_directory', 'class' => 'form-vertical')); ?>
             <div class="form-group" style="padding-top: 16px">
-                <span class="content_text">Enter your town or postcode: </span> <?php echo form_input('towncode'); ?>
+                <span class="content_text">Enter your town or postcode: </span> <input id="towncode" name="towncode" value="<?php echo $towncode;?>"><?php // echo form_input('towncode'); ?>
             </div>
         </div>
     </div>
     <div class="row" style="padding-top: 16px;"><!--work here-->
-        <div class="col-md-3" style="border-left: 1px solid #777777; padding: 12px; height: 700px; overflow: scroll;" id="services_displayer">
+        <div class="col-md-3" id="services_displayer">
             <!-- addtess show -->
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" id="services_and_maps">
             <div class="row">
                 <div class="col-md-10" id="servicesTable">
                     <div class="table-responsive">
@@ -154,7 +166,8 @@
                                 <td style="border: none;padding-bottom:0px;padding-top:0px;">
                                     <div class="input-group selector">
                                         <input id="<?php echo $service_category_list[$counter]['id']; ?>" type="checkbox" name="service[]" value="<?php echo $service_category_list[$counter]['id']; ?>">
-                                        <img src="<?php echo base_url() . SERVICE_DIRECTORY_CATEGORY_IMAGE_PATH . $service_category_list[$counter]['picture'] ?>" /> <?php echo $service_category_list[$counter]['description']; ?>
+                                        <img height="13" width="13" src="<?php echo base_url() . SERVICE_DIRECTORY_CATEGORY_IMAGE_PATH . $service_category_list[$counter]['picture'] ?>" />
+                                        <span><?php echo $service_category_list[$counter]['description']; ?></span>
                                     </div>
                                 </td>
                                 <?php

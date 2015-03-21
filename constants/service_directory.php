@@ -4,5 +4,7 @@
     define("SERVICE_IMAGE_PATH",                        "resources/images/applications/service_directory/services/");
     define("SERVICE_DEFAULT_IMAGE",                     "resources/images/logo1.png");
     define("SERVICE_IMAGE_UPLOAD_PATH",                 "resources/images/applications/service_directory/");
+    define("SERVICE_HOME_LOGO_PATH",                    "resources/images/applications/service_directory/sd.png");
     define("TOTAL_COUNTRY_NUMBER",                      239);
+    define("SERVICE_INFOWINDOW_TIMEOUT",                      3000);
 ?>

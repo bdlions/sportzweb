@@ -26,6 +26,10 @@ class Service_directory extends Role_Controller {
 
     function index() {
         $this->data['message'] = '';
+        $this->template->load(null, "applications/service_directory/service_directory_home", $this->data);
+    }
+    function service_directory_map() {
+        $this->data['message'] = '';
         $this->data['another_town'] = 'london_';
         $this->form_validation->set_rules('towncode', '', 'xss_clean');
         $this->form_validation->set_rules('check', '', 'xss_clean');
@@ -34,13 +38,12 @@ class Service_directory extends Role_Controller {
         $this->data['services'] = "";
         if ($this->input->post('submit_service_directory')) {
             $towncode = $this->input->post('towncode');
-            $this->data['another_town'] = $this->input->post('towncode');
             $selected_services_id = $this->input->post('service');
-            $this->data['selected_services'] = $this->input->post('towncode');
+            $this->data['another_town'] = $towncode;
+            $this->data['selected_services'] = $towncode;
             $this->data['selected_services_id'] = $selected_services_id;
-            $this->data['towncode'] = $this->input->post('towncode');
+            $this->data['towncode'] = $towncode;
             $services_array = $this->service_directory_library->get_all_services($selected_services_id)->result_array();
-
             $this->data['services'] = $services_array;
         }
         $service_category_list = $this->service_directory_library->get_all_service_categories()->result_array();

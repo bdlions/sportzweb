@@ -2,10 +2,15 @@
     Created on : Mar 10, 2015, 5:34:03 PM
     Author     : Tanveer Ahmed
 */
+
 /*UNIVARSAL*/
 select, option{
     font-size: 13px;
     font-family: arial,helvetica,sans-serif;
+}
+body
+{
+    font-family: arial,helvetica,sans-serif !important;
 }
 /*UNIVARSAL*/
 
