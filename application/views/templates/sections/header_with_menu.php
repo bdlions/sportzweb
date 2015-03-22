@@ -58,24 +58,9 @@
                   ].join(''),
                 engine: Hogan
             },
-//            {
-//                name:"search_pages",
-//                remote:'<?php echo base_url()?>search/get_services?query=%QUERY',
-//                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Services</div>',
-//                template: [
-//                    '<div class="row">'+
-//                        '<div class="col-md-3">'+
-//                            '<div>'+
-//                                '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>'+
-//                            '</div>'+
-//                        '</div>'+
-//                        '<div class="col-md-9 profile-name">{{title}}</div>'+
-//                    '</div>'
-//                  ].join(''),
-//                engine: Hogan
-//            },
+
             {
-                name:"search_pages",
+                name:"search_news",
                 remote:'<?php echo base_url()?>search/get_news?query=%QUERY',
                 header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">News</div>',
                 template: [
@@ -91,7 +76,7 @@
                 engine: Hogan
             },
             {
-                name:"search_pages",
+                name:"search_blogs",
                 remote:'<?php echo base_url()?>search/get_blogs?query=%QUERY',
                 header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Blogs</div>',
                 template: [
