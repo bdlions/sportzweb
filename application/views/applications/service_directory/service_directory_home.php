@@ -3,10 +3,8 @@
     <div class="col-md-4">
         <div id="topPadding" class="row form-group"></div>
         <div class="form-group">
-            <!--<span>Service Directory</span>-->
             <img class="img-responsive" src="<?php echo base_url().SERVICE_HOME_LOGO_PATH?>" style="width: 100%">
         </div>
-<!--        <form action="<?php echo base_url();?>applications/service_directory/service_directory_map" name="form_service_directory" id="form_service_directory">-->
         <?php echo form_open("applications/service_directory/service_directory_map", array('id' => 'form_service_directory', 'class' => 'form-vertical')); ?>
             <div class="form-group">
                 <input placeholder="Enter your location here" class="sd_home_input" name="towncode">
@@ -15,7 +13,6 @@
                 <input class="sd_home_submit btn pull-right" name="submit_service_directory" type="submit" value="Find" id="submit_service_directory">
             </div>
         <?php echo form_close();?>
-        <!--</form>-->
     </div>
 </div>
 <style>

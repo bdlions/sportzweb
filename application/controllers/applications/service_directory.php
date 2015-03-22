@@ -35,13 +35,14 @@ class Service_directory extends Role_Controller {
         $this->form_validation->set_rules('check', '', 'xss_clean');
         $this->data['towncode'] = "";
         $this->data['selected_services'] = "";
+        $this->data['selected_services_id'] = array();
         $this->data['services'] = "";
         if ($this->input->post('submit_service_directory')) {
             $towncode = $this->input->post('towncode');
             $selected_services_id = $this->input->post('service');
             $this->data['another_town'] = $towncode;
             $this->data['selected_services'] = $towncode;
-            $this->data['selected_services_id'] = $selected_services_id;
+            $this->data['selected_services_id'] = (empty($selected_services_id))? array() :$selected_services_id;
             $this->data['towncode'] = $towncode;
             $services_array = $this->service_directory_library->get_all_services($selected_services_id)->result_array();
             $this->data['services'] = $services_array;

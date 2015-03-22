@@ -19,9 +19,6 @@
             if (status == google.maps.GeocoderStatus.OK){
                 townLat = results[0].geometry.location.lat();
                 townLon = results[0].geometry.location.lng();
-                if (town_code != "london_"){
-                    $("#services_displayer").append('<span style="color: limegreen">Services near: ' + '<?php echo $selected_services; ?></span>');
-                }
                 $.each(services, function(index, service) {
                     var serviceLat = parseFloat(service.latitude);
                     var serviceLon = parseFloat(service.longitude);
@@ -100,20 +97,16 @@
                 alert("Location is not found");
             }
         });
+        
+        $('#services_displayer').height($('#services_and_maps').height()-15);
+        
+        if (town_code != "london_"){
+            $("#services_disp").append(
+            '<span style="color: royalblue" class="heading_medium_thin">Services near: ' + '<?php echo $selected_services; ?></span>'
+            );
+        }
     });
 //GOOGLE MAP CODE END
-
-
-
-
-//    $(function() {
-//        $("#div_more a").click(function(){
-//            $(this).hide();
-//        });
-//    });
-    $(window).bind("load", function() {
-        $('#services_displayer').height($('#services_and_maps').height()-15);
-    });
 </script>
 
 <style type="text/css">
@@ -124,8 +117,7 @@
         margin-bottom: 8px;
     }
     #services_displayer{
-        border-top: 1px solid #777777;
-        border-left: 1px solid #777777;
+        border: 1px solid #bbb;
         padding: 12px;
         height: 500px;
         overflow: scroll;
@@ -152,8 +144,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="row">
-                
-            <img class="img-responsive" src="<?php echo base_url().SERVICE_HOME_LOGO_PATH?>" style="width: 100%">
+                <img class="img-responsive" src="<?php echo base_url().SERVICE_HOME_LOGO_PATH?>" style="width: 100%">
             </div>
         </div>
         <div class="col-sm-6">
@@ -165,7 +156,10 @@
             <input class="sd_home_submit btn pull-right" name="submit_service_directory" type="submit" value="Find" id="submit_service_directory">
         </div>
     </div>
-    <div class="row" style="padding-top: 16px;"><!--work here-->
+    <div class="row form-group" id="services_disp">
+        
+    </div>
+    <div class="row">
         <div class="col-md-3" id="services_displayer">
             <!-- addtess show -->
         </div>
@@ -186,7 +180,12 @@
                                 ?>
                                 <td style="border: none;padding-bottom:0px;padding-top:0px;">
                                     <div class="input-group selector">
-                                        <input id="<?php echo $service_category_list[$counter]['id']; ?>" type="checkbox" name="service[]" value="<?php echo $service_category_list[$counter]['id']; ?>">
+                                        <input id="service_category_<?php echo $service_category_list[$counter]['id']; ?>" 
+                                               type="checkbox" name="service[]" 
+                                               <?php if (in_array($service_category_list[$counter]['id'], $selected_services_id) ) {
+                                                    echo ' checked ';
+                                                }?>
+                                               value="<?php echo $service_category_list[$counter]['id']; ?>">
                                         <img height="13" width="13" src="<?php echo base_url() . SERVICE_DIRECTORY_CATEGORY_IMAGE_PATH . $service_category_list[$counter]['picture'] ?>" />
                                         <span><?php echo $service_category_list[$counter]['description']; ?></span>
                                     </div>
