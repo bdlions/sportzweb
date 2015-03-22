@@ -112,9 +112,6 @@
 //        });
 //    });
     $(window).bind("load", function() {
-//        var divh = document.getElementById('servicesTable').offsetHeight;
-//        document.getElementById('destin').style.height = divh + 'px';
-        $('#destin').height($('#servicesTable').height());
         $('#services_displayer').height($('#services_and_maps').height()-15);
     });
 </script>
@@ -130,18 +127,42 @@
         border-top: 1px solid #777777;
         border-left: 1px solid #777777;
         padding: 12px;
-        height: 70px;
+        height: 500px;
         overflow: scroll;
+    }
+    .sd_home_submit{
+        border-radius: 0; 
+        background-color: #FFC90E;
+        color: red;
+        font-size: 16px;
+        padding: 5px;
+        width: 100px;
+        height: 41px;
+    }
+    .sd_home_input{
+        border: 3px solid #888888;
+        padding: 10px;
+        width: 100%;
+        font-size: 16px;
+        line-height: 16px;
     }
 </style>
 <div class="col-md-9">
+    <?php echo form_open("applications/service_directory/service_directory_map", array('id' => 'form_service_directory', 'class' => 'form-vertical')); ?>
     <div class="row">
-        <div class="col-md-12">
-            <span class="heading_small" style="font-size: 16px;">FIND SPORTS HEALTH AND FITNESS SERVICES</span>
-            <?php echo form_open("applications/service_directory/service_directory_map", array('id' => 'form_service_directory', 'class' => 'form-vertical')); ?>
-            <div class="form-group" style="padding-top: 16px">
-                <span class="content_text">Enter your town or postcode: </span> <input id="towncode" name="towncode" value="<?php echo $towncode;?>"><?php // echo form_input('towncode'); ?>
+        <div class="col-sm-4">
+            <div class="row">
+                
+            <img class="img-responsive" src="<?php echo base_url().SERVICE_HOME_LOGO_PATH?>" style="width: 100%">
             </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <input placeholder="Enter your location here" class="sd_home_input" name="towncode" id="towncode" value="<?php echo $towncode;?>">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <input class="sd_home_submit btn pull-right" name="submit_service_directory" type="submit" value="Find" id="submit_service_directory">
         </div>
     </div>
     <div class="row" style="padding-top: 16px;"><!--work here-->
@@ -150,7 +171,7 @@
         </div>
         <div class="col-md-9" id="services_and_maps">
             <div class="row">
-                <div class="col-md-10" id="servicesTable">
+                <div class="col-md-12" id="servicesTable">
                     <div class="table-responsive">
                         <table class="table">
                             <tbody id="tbody_service_category_list">
@@ -180,13 +201,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-2" style="position: relative;" id="destin">
-                    <div class="form-group" style="position: absolute; bottom: 2px; width: 70px;">
-                    <?php echo form_input(array('name' => 'submit_service_directory', 'id' => 'submit_service_directory', 'type' => 'submit', 'style' => 'width:100%', 'class' => 'btn btn-success', 'value' => 'Find')); ?>
-                    </div>
-                </div>
-                <?php echo form_close(); ?>
             </div>
+            <?php echo form_close(); ?>
             <div class="row">
                 <div class="col-md-12">
                     <div id="map_canvas" style="width:100%; height: 450px;"></div>

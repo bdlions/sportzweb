@@ -2,28 +2,28 @@
 
 <div class="col-md-9" style="background-color: #F5F5F5">
     <div class="top-bottom-padding">
-        <h3>My Blogs</h3>
-    <table class="table table-bordered table-responsive table-condensed">
-        <tbody style="background-color: white">
-<!--            <tr style="background-color: lightblue">
-                <th>No.</th>
-                <th>Blog Title</th>
-                <th>Status</th>
-                <th>Edit Blog</th>
-                <th>Delete Blog</th>
-            </tr>-->
-            
-            <?php $i=1; foreach($blog_list as $blog): ?>
-            <tr>    
-                <td><?php echo $i++;?></td>
-                <td><?php echo html_entity_decode(html_entity_decode($blog['title']));?></td>
-                <td><?php echo $blog['status_title'];?></td>
-                <td><a href="<?php echo base_url().'applications/blog_app/edit_blog/'.$blog['id']?>">Edit</td>
-                <?php if($blog['blog_status_id']!=DELETION_PENDING){?><td><a href="javascript:void(0)" onclick="dlt_blog(<?php echo $blog['id']?>)">Delete</a></td><?php } ?>
-            </tr>
-            <?php endforeach;?>
-        </tbody>
-    </table>
+        <h3 class="heading_medium_thin">My Blogs</h3>
+        <table class="table table-bordered table-responsive table-condensed">
+            <tbody style="background-color: white">
+    <!--            <tr style="background-color: lightblue">
+                    <th>No.</th>
+                    <th>Blog Title</th>
+                    <th>Status</th>
+                    <th>Edit Blog</th>
+                    <th>Delete Blog</th>
+                </tr>-->
+
+                <?php $i=1; foreach($blog_list as $blog): ?>
+                <tr>    
+                    <td><?php echo $i++;?></td>
+                    <td><?php echo html_entity_decode(html_entity_decode($blog['title']));?></td>
+                    <td><?php echo $blog['status_title'];?></td>
+                    <td><a href="<?php echo base_url().'applications/blog_app/edit_blog/'.$blog['id']?>">Edit</td>
+                    <?php if($blog['blog_status_id']!=DELETION_PENDING){?><td><a href="javascript:void(0)" onclick="dlt_blog(<?php echo $blog['id']?>)">Delete</a></td><?php } ?>
+                </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
     </div>
 </div>
 <div class="col-md-3">
