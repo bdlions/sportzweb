@@ -217,7 +217,7 @@
         <?php echo form_close();?>
         </div>
     </div>
-    <!--PHOTOGRAPHY POST END-->
+    <!--SERVICE DIRECTORY POST END-->
     
     
     
