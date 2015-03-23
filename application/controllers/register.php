@@ -317,11 +317,8 @@ class Register extends CI_Controller {
             $this->template->load("templates/profile_setting_tmpl", "member/security_questions", $this->data);
         }
         else{
-            
             $this->security_question_library->insert_security_answer($question_answers);
             redirect("register");
         }
-        
-        
     }
 }

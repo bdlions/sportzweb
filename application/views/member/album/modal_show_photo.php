@@ -217,7 +217,7 @@
             <div class="col-md-2 feed-profile-picture">
                 <a href='<?php echo base_url(). "member_profile/show/{%= feedback_info.user_info.user_id%}"?>'>
                     <div class="profile-background-comment">
-                        <img alt="{%= feedback_info.user_info.first_name[0] %}{%= feedback_info.user_info.last_name[0] %}" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.'{%= feedback_info.user_info.photo%}' ?>?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background-comment'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+                        <img alt="{%= feedback_info.user_info.first_name[0] %}{%= feedback_info.user_info.last_name[0] %}" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.'{%= feedback_info.user_info.photo%}' ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background-comment'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
                         <p style="visibility:hidden">{%= feedback_info.user_info.first_name[0] %}{%= feedback_info.user_info.last_name[0] %}</p>
                     </div>
                 </a>

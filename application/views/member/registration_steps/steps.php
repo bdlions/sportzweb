@@ -38,5 +38,6 @@
                 <?php $this->load->view("member/registration_steps/step3") ?>
             </div>
         </div>
+        <div style="height: 70px; width: 100%;"></div>
     </div>
 </div>

@@ -219,27 +219,33 @@
 <div class="col-md-2 column">
 <?php $this->load->view("templates/sections/member_profile_left_pane"); ?>
 </div>
+<style>
+    .member_profile_banner_images li img{
+        border: 1px solid #ccc;
+        height: 100px; width: 100px;
+    }
+</style>
 <div class="col-md-7 column">
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-md-12" style="padding-right: 0px;">
-            <ul class="list-inline list-unstyled">
+            <ul class="list-inline list-unstyled member_profile_banner_images">
                 <li class="col-md-2" style="padding-left: 0px;">
-                    <img width="100px" height="100px" onclick="imgupload(0)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[0] ?>" alt="">
+                    <img onclick="imgupload(0)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[0] ?>" alt="">
                 </li>
                 <li class="col-md-2" style="padding-left: 0px;">
-                    <img width="100px" height="100px" onclick="imgupload(1)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[1] ?>" alt="">
+                    <img onclick="imgupload(1)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[1] ?>" alt="">
                 </li>
                 <li class="col-md-2" style="padding-left: 0px;">
-                    <img width="100px" height="100px" onclick="imgupload(2)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[2] ?>" alt="">
+                    <img onclick="imgupload(2)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[2] ?>" alt="">
                 </li>
                 <li class="col-md-2" style="padding-left: 0px;">
-                    <img width="100px" height="100px" onclick="imgupload(3)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[3] ?>" alt="">
+                    <img onclick="imgupload(3)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[3] ?>" alt="">
                 </li>
                 <li class="col-md-2" style="padding-left: 0px;">
-                    <img width="100px" height="100px" onclick="imgupload(4)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[4] ?>" alt="">
+                    <img onclick="imgupload(4)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[4] ?>" alt="">
                 </li>
                 <li class="col-md-2" style="padding-left: 0px;">
-                    <img width="100px" height="100px" onclick="imgupload(5)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[5] ?>" alt="">
+                    <img onclick="imgupload(5)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[5] ?>" alt="">
                 </li>
             </ul>
         </div>

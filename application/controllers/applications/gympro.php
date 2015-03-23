@@ -890,9 +890,10 @@ class Gympro extends Role_Controller{
      * @Author Nazmul on 14th December 2014
      */
     public function show_group($group_id) {
-
+        
         $group_info = array();
         $group_info_array = $this->gympro_library->get_group_info($group_id)->result_array();
+        $client_info_in_group = $this->gympro_library->get_clients_info_in_group($group_id);
         
 //        $user_id = $this->session->userdata('user_id');
 //        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
@@ -904,13 +905,13 @@ class Gympro extends Role_Controller{
             return;
         }
         if($group_info['user_id']==$this->my_user_id){
-        $this->data['group_info'] = $group_info;
-        $this->template->load(null, 'applications/gympro/group/group_show', $this->data);
-        
+            $this->data['group_info'] = $group_info;
+            $this->data['client_info_in_group'] = $client_info_in_group;
+            $this->template->load(null, 'applications/gympro/group/group_show', $this->data);
         }else{
-          $this->template->load(null, 'applications/gympro/group/group_show_validation', $this->data);  
+            $this->template->load(null, 'applications/gympro/group/group_show_validation', $this->data);  
         }
-            
+        
     }
 
     /*

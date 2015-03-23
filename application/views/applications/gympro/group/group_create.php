@@ -113,8 +113,8 @@
                 </div>
                 <div class="row hidden_tab" id="group_clients_tab">
                     <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
+                        
+                            
                                 <div class="col-md-6" style="padding: 0px;">
                                     <div class="pad_white" style="min-height: 300px;">
                                         <div id="unselected_clients">
@@ -134,8 +134,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            
+                        
                     </div>
                 </div>
                 <div class="row hidden_tab" id="notes_tab">

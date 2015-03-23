@@ -74,7 +74,12 @@
     });
     
 </script>
-<?php echo "<h3 class=\"questions_header\">Please complete the following security questions</h3>";?>
+<?php // echo "<h3 class=\"questions_header\">Please complete the following security questions</h3>";?>
+<div class="row form-group"></div>
+<div class="col-md-12 heading_medium_thin">
+    Please complete the following security questions
+</div>
+<div class="row form-group"></div>
 <div class="col-md-4">
     <?php
     

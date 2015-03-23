@@ -12,7 +12,7 @@
     <div class="col-md-2 feed-profile-picture">
         <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>'>
             <div>
-                <img alt="<?php echo $newsfeed['first_name'][0] . $newsfeed['last_name'][0]?>" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$newsfeed['photo'] ?>?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+                <img alt="<?php echo $newsfeed['first_name'][0] . $newsfeed['last_name'][0]?>" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$newsfeed['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
                 <p style="visibility:hidden"><?php echo $newsfeed['first_name'][0].$newsfeed['last_name'][0] ?></p>
             </div>
         </a>             
@@ -162,13 +162,13 @@
                                         <div class="profile-background-comment">
                                             <img
                                                 alt="<?php echo $feedback['user_info']['first_name'][0] . $feedback['user_info']['last_name'][0]?>"
-                                                src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$feedback['user_info']['photo'] ?>?>"
+                                                src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$feedback['user_info']['photo'] ?>"
                                                 class="img-responsive profile-photo"
-                                                onError="this.style.display = 'none'; this.parentNode.className='profile-background-comment'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; "
+                                                onError="this.style.display = 'none'; this.parentNode.className='profile-background-comment'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; "
                                                 />                     
-                                            <p style="visibility:hidden">
+                                            <div style="visibility:hidden; font-size: 15px">
                                                 <?php echo $feedback['user_info']['first_name'][0].$feedback['user_info']['last_name'][0] ?>
-                                            </p>
+                                            </div>
                                         </div>
                                     </a>
                                 </div>
@@ -189,8 +189,8 @@
                             <div class="col-md-2 feed-profile-picture">
                                 <a href='<?php echo base_url(). "member_profile/show/{$user_info['user_id']}"?>'>
                                     <div class="profile-background-comment">
-                                        <img alt="<?php echo $user_info['first_name'][0] . $user_info['last_name'][0]?>" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$user_info['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background-comment'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
-                                        <p style="visibility:hidden"><?php echo $user_info['first_name'][0].$user_info['last_name'][0] ?></p>
+                                        <img alt="<?php echo $user_info['first_name'][0] . $user_info['last_name'][0]?>" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$user_info['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background-comment'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; " /> 
+                                        <div style="visibility:hidden; font-size: 18px;"><?php echo $user_info['first_name'][0].$user_info['last_name'][0] ?></div>
                                     </div>
                                 </a>
                             </div>

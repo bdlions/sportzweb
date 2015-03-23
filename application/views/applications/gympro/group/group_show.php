@@ -52,7 +52,14 @@
                 </div>
                 <div class="row hidden_tab" id="group_clients_tab">
                     <div class="col-md-12">
-                                           
+                        <div class="heading_medium form-group col-sm-4">Clients: </div>
+                        <div class="content_text col-sm-8">
+                            <div class="form-group"></div>
+                            <?php // var_dump($client_info_in_group)?>
+                            <?php foreach ($client_info_in_group as $client){ ?>
+                            <div> <?php echo $client['first_name'].' '. $client['last_name']; ?> </div>
+                            <?php }?>
+                        </div>
                     </div>
                 </div>
                 <div class="row hidden_tab" id="notes_tab">

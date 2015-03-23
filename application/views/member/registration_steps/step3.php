@@ -1,5 +1,6 @@
 <div class="col-md-9">
 <div class="row">Set your Profile picture</div>
+<?php echo form_open(base_url())?>
 <div class="row">
     <div class="col-md-4">
         <div class="profile-picture-box" >
@@ -34,11 +35,10 @@
     </div>
 
     <div class="col-md-4 disable_padding_right" id="upload">
-        <?php echo form_open(base_url())?>
         <input type="submit" value="Save & Continue" class="btn button-custom pull-right"/>
-        <?php echo form_close();?>
     </div>
 </div>
+        <?php echo form_close();?>
 </div>
 <script>
 /*jslint unparam: true, regexp: true */

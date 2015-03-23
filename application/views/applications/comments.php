@@ -244,7 +244,7 @@
                                         <div class="col-md-2 feed-profile-picture">
                                             <a href='<?php echo base_url() . "member_profile/show/{$comment['user_id']}" ?>'>
                                                 <div>
-                                                    <img style="max-width:50px;" alt="<?php echo $comment['first_name'][0] . $comment['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $comment['photo'] ?>?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+                                                    <img style="max-width:50px;" alt="<?php echo $comment['first_name'][0] . $comment['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $comment['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
                                                     <p style="visibility:hidden"><?php echo $comment['first_name'][0] . $comment['last_name'][0] ?></p>
                                                 </div>
                                             </a>
@@ -352,7 +352,7 @@
                             <div class="col-md-2 feed-profile-picture">
                                 <a href='<?php echo base_url() . "member_profile/show/{$user_info['user_id']}" ?>'>
                                     <div>
-                                        <img style="max-width:50px;" alt="<?php echo $user_info['first_name'][0] . $user_info['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $user_info['photo'] ?>?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+                                        <img style="max-width:50px;" alt="<?php echo $user_info['first_name'][0] . $user_info['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $user_info['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
                                         <p style="visibility:hidden"><?php echo $user_info['first_name'][0] . $user_info['last_name'][0] ?></p>
                                     </div>
                                 </a>
@@ -406,7 +406,7 @@
                             <div class="col-md-2 feed-profile-picture">
                                 <a href='<?php echo base_url() . "member_profile/show/{%=application_comment_info.user_id %}" ?>'>
                                     <div>
-                                        <img style="max-width:50px;" alt="{%=application_comment_info.signature %}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . "{%=application_comment_info.photo %}" ?>?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+                                        <img style="max-width:50px;" alt="{%=application_comment_info.signature %}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . "{%=application_comment_info.photo %}" ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
                                         <p style="visibility:hidden">{%=application_comment_info.signature %}</p>
                                     </div>
                                 </a>
