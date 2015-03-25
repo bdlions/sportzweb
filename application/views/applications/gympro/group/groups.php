@@ -13,7 +13,7 @@
         ?>
         <div class="col-md-7">
             <div class="row form-group">
-                <div class="col-md-2" style="font-size: 20px; color: maroon">
+                <div class="col-md-8" style="font-size: 20px; color: maroon">
                     <span>Groups</span>
                 </div>
                 <div class="col-md-3 pull-right right_padding_zero">

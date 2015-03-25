@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/member.css">
+
 <script type="text/javascript">
     function open_modal_unfollow_confirm(follower_id){
         $.ajax({
@@ -138,7 +140,7 @@
             previewCrop: true
         }).on('fileuploadadd', function(e, data) {
             $("#files").empty();
-            data.context = $('<li class="col-md-3" style="padding-bottom:10px"/>').appendTo('#files');
+            data.context = $('<li class="col-md-3 form-group"/>').appendTo('#files');
             //$("div#upload").empty();
             //$("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
             $.each(data.files, function(index, file) {
@@ -219,38 +221,33 @@
 <div class="col-md-2 column">
 <?php $this->load->view("templates/sections/member_profile_left_pane"); ?>
 </div>
-<style>
-    .member_profile_banner_images li img{
-        border: 1px solid #ccc;
-        height: 100px; width: 100px;
-    }
-</style>
-<div class="col-md-7 column">
-    <div class="row" style="padding-bottom: 10px;">
-        <div class="col-md-12" style="padding-right: 0px;">
+
+<div class="col-md-7">
+    <div class="row form-group">
+        <div class="col-md-12" style="padding-right: 5px"><!-- style doesnt work if moved to css file -->
             <ul class="list-inline list-unstyled member_profile_banner_images">
-                <li class="col-md-2" style="padding-left: 0px;">
-                    <img onclick="imgupload(0)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[0] ?>" alt="">
+                <li class="col-md-2">
+                    <img class="img-responsive" onclick="imgupload(0)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[0] ?>" alt="">
                 </li>
-                <li class="col-md-2" style="padding-left: 0px;">
-                    <img onclick="imgupload(1)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[1] ?>" alt="">
+                <li class="col-md-2">
+                    <img class="img-responsive" onclick="imgupload(1)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[1] ?>" alt="">
                 </li>
-                <li class="col-md-2" style="padding-left: 0px;">
-                    <img onclick="imgupload(2)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[2] ?>" alt="">
+                <li class="col-md-2">
+                    <img class="img-responsive" onclick="imgupload(2)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[2] ?>" alt="">
                 </li>
-                <li class="col-md-2" style="padding-left: 0px;">
-                    <img onclick="imgupload(3)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[3] ?>" alt="">
+                <li class="col-md-2">
+                    <img class="img-responsive" onclick="imgupload(3)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[3] ?>" alt="">
                 </li>
-                <li class="col-md-2" style="padding-left: 0px;">
-                    <img onclick="imgupload(4)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[4] ?>" alt="">
+                <li class="col-md-2">
+                    <img class="img-responsive" onclick="imgupload(4)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[4] ?>" alt="">
                 </li>
-                <li class="col-md-2" style="padding-left: 0px;">
-                    <img onclick="imgupload(5)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[5] ?>" alt="">
+                <li class="col-md-2">
+                    <img class="img-responsive" onclick="imgupload(5)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[5] ?>" alt="">
                 </li>
             </ul>
         </div>
     </div>
-    <div class="row" style="padding-bottom: 10px;">
+    <div class="row form-group">
         <div class="col-md-9">
             <?php echo $basic_profile->about_me ?>
         </div>

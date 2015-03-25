@@ -32,17 +32,18 @@
     });
 </script>
 <div class="row">
+    <div class="col-md-1"></div>
     <div class="col-md-5">
         <div class="home-left-tit">
-            <h2 class="home-left-title home-left-title2">
+            <div class="heading_medium_thin">
                 <?php echo lang('forgot_password_heading'); ?>
-            </h2>
+            </div>
         </div>
-
-        <?php echo sprintf(lang('forgot_password_subheading'), $identity_label); ?>
-
+        <div class="form-group content_text">
+            <?php echo sprintf(lang('forgot_password_subheading'), $identity_label); ?>
+        </div>
         <?php echo form_open("auth/forgot_password", array('class' => 'spacer', 'role' => 'form', 'class' => 'form-horizontal', 'id' => 'form-forget-password')); ?>
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-2">
                 <label for="email" class="control-label">
                     <?php echo sprintf(lang('forgot_password_email_label'), $identity_label); ?>
@@ -54,7 +55,7 @@
 
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-2">
                 <label for="email" class="control-label">
                     Question:
@@ -64,7 +65,7 @@
                 <?php echo form_dropdown("question", $questions + array("" => "Select a Question"), "", "class='form-control'") ?>
             </div>
         </div>
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-2">
                 <label for="email" class="control-label">
                     Answer:
@@ -75,7 +76,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-12">
                 <?php echo form_submit(array('value' => lang('forgot_password_submit_btn'), 'class' => 'btn button-custom pull-right')); ?>
             </div>

@@ -80,3 +80,5 @@
     define("APPLICATION_DIRECTORY_GALLERY_IMAGE_LARGE_WIDTH",                539);
     define("APPLICATION_DIRECTORY_GALLERY_IMAGE_LARGE_HEIGHT",               347);
     
+    define("DEFAULT_LOGO",                  '/resources/images/logo1.png');
+    

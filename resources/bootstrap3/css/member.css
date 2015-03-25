@@ -1,0 +1,8 @@
+/*.member_profile_banner_images li:last-child,*/
+.member_profile_banner_images li{
+    padding: 0px;
+}
+.member_profile_banner_images li img{
+    border: 1px solid #ccc;
+    /*height: 100px; width: 100px;*/
+}

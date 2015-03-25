@@ -43,9 +43,9 @@
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <a href="<?php echo base_url().'applications/gympro/show_client/'.$client_info['client_id']?>">
                             <?php if(isset($client_info['picture']) && $client_info['picture'] != ''){ ?>
-                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().PROFILE_PICTURE_PATH_W50_H50.$client_info['picture'] ?>"/>
+                            <img onerror="this.src='<?php echo base_url().DEFAULT_LOGO ?>'" style="width: 100%; background-color: #75B3E6" class="img-responsive" src="<?php echo base_url().PROFILE_PICTURE_PATH_W50_H50.$client_info['picture'] ?>"/>
                             <?php }else{?>
-                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.CLIENT_DEFAULT_PROFILE_PICTURE_NAME ?>"/>
+                            <img onerror="this.src='<?php echo base_url().DEFAULT_LOGO ?>'" style="width: 100%; background-color: #75B3E6" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.CLIENT_DEFAULT_PROFILE_PICTURE_NAME ?>"/>
                             <?php } ?>
                         </a>
                     </div>

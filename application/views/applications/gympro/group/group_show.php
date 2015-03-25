@@ -52,14 +52,25 @@
                 </div>
                 <div class="row hidden_tab" id="group_clients_tab">
                     <div class="col-md-12">
-                        <div class="heading_medium form-group col-sm-4">Clients: </div>
-                        <div class="content_text col-sm-8">
-                            <div class="form-group"></div>
-                            <?php // var_dump($client_info_in_group)?>
-                            <?php foreach ($client_info_in_group as $client){ ?>
-                            <div> <?php echo $client['first_name'].' '. $client['last_name']; ?> </div>
-                            <?php }?>
+                        <div class="heading_medium_thin form-group">Clients: </div>
+                        <?php foreach ($client_info_in_group as $client){ ?>
+                        
+                        <div class="col-sm-6 form-group">
+                            <div class="user_prof">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <a href="<?php echo base_url().'applications/gympro/show_client/'.$client['client_id']?>">
+                                            <img onerror="this.src='<?php echo base_url().DEFAULT_LOGO ?>'" style="width: 100%; background-color: #75B3E6" class="img-responsive" src="<?php echo base_url().PROFILE_PICTURE_PATH_W50_H50.$client['picture'] ?>"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a href="http://localhost/sportzweb/applications/gympro/show_client/1" class="content_text"><?php echo $client['first_name'].' '. $client['last_name']; ?></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        
+                        <?php }?>
                     </div>
                 </div>
                 <div class="row hidden_tab" id="notes_tab">
