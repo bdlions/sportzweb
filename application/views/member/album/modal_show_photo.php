@@ -261,10 +261,10 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row col-md-12">
-                            <div class="row" id="image_panel">
+                            <div class="row form-group" id="image_panel">
                                 <center><img class="img-responsive" id="image-display"></center>
                             </div>
-                            <div class="row" style="padding-top:10px;">
+                            <div class="row">
                                 <input type="hidden" id="x" name="x" />
                                 <input type="hidden" id="y" name="y" />
                                 <input type="hidden" id="w" name="w" />

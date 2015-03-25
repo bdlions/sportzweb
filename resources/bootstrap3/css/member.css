@@ -6,3 +6,9 @@
     border: 1px solid #ccc;
     /*height: 100px; width: 100px;*/
 }
+.create_albam_files{
+    padding: 15px;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+}

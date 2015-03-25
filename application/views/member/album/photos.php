@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-md-5" style="padding: 0px;">
-        <?php $this->load->view('member/album/photo_header');?>
+    <div class="col-md-5">
+        <div class="row"><?php $this->load->view('member/album/photo_header');?></div>
     </div>
     <?php if($user_id == $current_user_id){ ?>
     <div class="col-md-4">

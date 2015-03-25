@@ -32,7 +32,7 @@
                 </div>
             </li>
             <?php foreach ($my_photos as $my_photo){?>
-            <li class="col-md-3" style="padding-bottom: 10px">
+            <li class="col-md-3 form-group">
                 <img  src="<?php echo base_url() ?>resources/uploads/albums/<?php echo $my_photo -> photo?>" class="img-responsive" onclick="mediaDisplay('<?php echo base_url() ?>resources/uploads/albums/<?php echo $my_photo -> photo?>', <?php echo $my_photo -> photo_id?>)" style="min-height: 208px; min-width: 208px;" />
             </li>
             <?php }?>
@@ -64,7 +64,7 @@
             previewCrop: true
         }).on('fileuploadadd', function(e, data) {
             //$("#files").empty();
-            data.context = $('<li class="col-md-3" style="padding-bottom:10px"/>').appendTo('#files');
+            data.context = $('<li class="col-md-3 form-group"/>').appendTo('#files');
             //$("div#upload").empty();
             //$("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
             $.each(data.files, function(index, file) {

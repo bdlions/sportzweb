@@ -38,6 +38,12 @@
                 <?php $this->load->view("member/registration_steps/step3") ?>
             </div>
         </div>
-        <div style="height: 70px; width: 100%;"></div>
+        <div class="row col-md-12">
+            <div class="row form-group"></div>
+            <div class="row form-group"></div>
+            <div class="row form-group"></div>
+            <div class="row form-group"></div>
+            <div class="row form-group"></div>
+        </div>
     </div>
 </div>

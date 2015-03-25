@@ -27,12 +27,14 @@
                 <h4 class="modal-title" id="myModalLabel">Share This Photo</h4>
             </div>
             <div class="modal-body">
-                <div class="row" style="padding-top:5px; padding-bottom: 5px; padding-left:15px; padding-right:15px;">
-                    <?php echo form_textarea( array("name" => "share_description", "class" =>'form-control', "placeholder" => "Write something...",  "id" => "share_description", "rows" => "2")) ?>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <?php echo form_textarea( array("name" => "share_description", "class" =>'form-control', "placeholder" => "Write something...",  "id" => "share_description", "rows" => "2")) ?>
+                    </div>
                 </div>
-                <div class="row" style="padding-top:5px; padding-bottom: 5px;">
-                    <div class="col-md-11"></div>
-                    <div class="col-md-1">
+                <div class="row form-group">
+                    <div class="col-md-10"></div>
+                    <div class="col-md-2">
                         <input id="share_photo_id" type="hidden"/>
                         <button class="btn button-custom pull-right" id="button_post_photo_share" name="button_post_photo_share">Share</button>
                     </div>

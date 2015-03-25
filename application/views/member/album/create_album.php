@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="row">
         <?php echo form_open_multipart(base_url()."user_album/complete_uploading_album/{$album_id}", "id=fileupload")?>
-            <div class="row" style="padding-bottom: 15px;">
+            <div class="row form-group">
                 <div class="col-md-4">
                     <input name="title" type="text" class="form-control" placeholder="Untitled Album..."/>
                 </div>
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <!-- don't remove this blank tag, all files will be stored here -->
-            <div class="row">
+            <div class="row form-group">
                 <div class="col-md-12">
                     <div class="row col-md-12" style="padding: 15px;border-bottom: 1px solid #CCCCCC; border-top: 1px solid #CCCCCC;">
                         <div id="files">
@@ -27,7 +27,7 @@
                 </div>
             </div>
             
-            <div class="row" style="padding-top: 15px;">
+            <div class="row">
                 <div class="col-md-12" id="upload">
                     <input type="submit" value="Save & Continue" class="btn button-custom pull-right"/>
                 </div>
