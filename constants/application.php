@@ -43,6 +43,7 @@
     define("BLOG_ICON",                    "blog.png");
     define("BMI_ICON",                     "bmi.png");
     define("PHOTOGRAPHY_ICON",             "photo.png");
+    define("PHOTOGRAPHY_ICON_512X512",     "photo_512_512.png");
     define("SCORE_PREDICTION_ICON",        "sp.png");
     define("SHOP_ICON",                    "shop.png");
     define("GYMPRO_ICON",                  "ptpro.png");

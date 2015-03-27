@@ -104,5 +104,55 @@ else
         </li>
     </div>
 </div> 
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_SERVICE_DIRECTORY){ ?>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+        <img class="img-responsive" src="<?php echo base_url().SERVICE_HOME_LOGO_PATH?>">
+    </div>
+    <?php echo form_open("applications/service_directory/service_directory_map", array('id' => 'form_service_directory', 'class' => 'form-vertical')); ?>
+        <div class="form-group">
+            <input placeholder="Enter your location here" class="sd_home_input" name="towncode">
+        </div>
+        <div class="form-group">
+            <input class="btn pull-right" name="submit_service_directory" type="submit" value="Find" id="submit_service_directory">
+        </div>
+    <?php echo form_close();?>
+    </div>
+</div> 
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_PTPRO){ ?>
+<div class="row">
+    <div class="col-sm-12">
+        <a href="<?php echo base_url().GYMPRO_HOME_PAGE_PATH?>">
+        <img class="img-responsive" style="width: 100%" 
+             src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_ADDVERT_PICTURE_NAME ?>"/>
+        </a>
+    </div>
+</div> 
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_BMI_CALCULATOR){ ?>
+<div class="row">
+</div> 
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_PHOTOGRAPHY){ ?>
+<div class="form-group">
+    <div class="row form-group">
+        <a href="<?php echo base_url().PHOTOGRAPHY_HOME_PAGE_PATH ?>">
+            <div class="col-sm-2">
+                <img class="img-responsive" style="width: 100%" 
+                     src="<?php echo base_url().APPLICATION_ICON_PATH.PHOTOGRAPHY_ICON_512X512 ?>">
+            </div>
+            <div class="col-sm-10">
+                <div class="form-group" style="color: black">
+                    <h3>
+                        <?php 
+                        //right now aplication title is hardcoded. Make it dynamic
+                        echo "Photography"; 
+                       ?>
+                    </h3>
+                </div>
+            </div>
+        </a>
+    </div>
+</div> 
 <?php }?>
+
 

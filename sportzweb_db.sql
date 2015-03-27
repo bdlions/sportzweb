@@ -152,10 +152,11 @@ ALTER TABLE `users_groups`
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 2, 3),
-(4, 3, 3),
-(5, 4, 2),
-(6, 4, 3);
+(3, 1, 3),
+(4, 2, 3),
+(5, 3, 3),
+(6, 4, 2),
+(7, 4, 3);
 
 CREATE TABLE IF NOT EXISTS `users_access` (
   `user_id` int(11) unsigned NOT NULL,
@@ -987,7 +988,12 @@ CREATE TABLE IF NOT EXISTS `statuses` (
 ALTER TABLE `statuses`
     ADD CONSTRAINT `fk_users_statuses1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_status_category_statuses1` FOREIGN KEY(`status_category_id`) REFERENCES `status_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+INSERT INTO `statuses` (`user_id`, `status_category_id`, `shared_type_id`, `description`, `created_on`, `modified_on`) VALUES
+(1, 1, 7, '', 1427345593, 1427345593),
+(1, 1, 8, '', 1427345593, 1427345593),
+(1, 1, 9, '', 1427345593, 1427345593),
+(1, 1, 10, '', 1427345593, 1427345593),
+(1, 1, 11, 'Welcome to Sonuto', 1304345593, 1304345593);
 	
 -- Applications --------------------
 CREATE TABLE IF NOT EXISTS `applications` (

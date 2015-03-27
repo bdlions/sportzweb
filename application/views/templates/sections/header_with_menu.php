@@ -45,7 +45,7 @@
             {
                 name:"search_healthy_recipe",
                 remote:'<?php echo base_url()?>search/get_healthy_recipes?query=%QUERY',
-                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Healthy Recipe</div>',
+                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Recipes</div>',
                 template: [
                     '<div class="row">'+
                         '<div class="col-md-3">'+

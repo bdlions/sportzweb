@@ -445,6 +445,27 @@ class Ion_auth {
         }
         return null;
     }
+    
+    /*
+     * This method will set current user type
+     * @param $user_typee, user type
+     * @Author Nazmul on 26th March 2015
+     */
+    public function set_current_user_type($user_type = '')
+    {
+        $session_data = array(
+            'user_type' => $user_type
+        );
+        $this->session->set_userdata($session_data);
+    }
+    /*
+     * This method will return current user type
+     * @Author Nazmul on 26th March 2015
+     */
+    public function get_current_user_type()
+    {
+        return $this->session->userdata('user_type');
+    }
 
     public function get_current_user_types(){
         $id = $this->session->userdata('user_id');

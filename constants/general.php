@@ -1,4 +1,7 @@
 <?php 
+    //if this id is updated then also update database schema
+    define("ADMIN_USER_ID",                             "1");
+    
     define("PROFILE_PICTURE_UPLOAD_PATH",                "resources/uploads/profile_picture/");
     define("PROFILE_PICTURE_PATH_W100_H100",             "resources/uploads/profile_picture/100x100/");
     define("PROFILE_PICTURE_DISPLAY_PATH",               "resources/uploads/profile_picture/50x50/");

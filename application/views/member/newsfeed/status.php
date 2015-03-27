@@ -28,7 +28,9 @@
                 </div>
                 <div class="row col-md-12">
                     <?php //echo convert_time($newsfeed['status_created_on'])?> 
-                    <span class="small_text_pale"><?php echo $newsfeed['status_created_on']?> </span>
+                    <span class="small_text_pale">
+                        <?php echo ($newsfeed['shared_type_id'] != STATUS_SHARE_ADMIN_WELCOME) ? $newsfeed['status_created_on'] : '';?> 
+                    </span>
                 </div>
                 <?php if(!empty($newsfeed['reference_list']) && !empty($newsfeed['reference_list']['user_list'])) {?>
                 <div class="row col-md-12 content_text">
@@ -57,7 +59,17 @@
             <div class="col-md-12">
                 <?php if( !empty($newsfeed['description']) && isset($newsfeed['description']) ){?>
                 <div class="row col-md-12" style="padding-bottom:10px;font-size:15px;">
-                    <span class="content_text"><?php echo $newsfeed['description'] ?></span><br/>
+                    <span class="content_text">
+                        <?php 
+                            echo $newsfeed['description'].' ';
+                            if($newsfeed['shared_type_id'] == STATUS_SHARE_ADMIN_WELCOME)
+                            {?>
+                                <a href='<?php echo base_url(). "member_profile/show/{$user_info['user_id']}"?>' class="profile-name" >
+                                    <span class="content_text"><?php echo $user_info['first_name'] . " ". $user_info['last_name'] ?></span>
+                                </a>
+                            <?php }
+                        ?>
+                    </span><br/>
                 </div>
                 <?php } ?>
                 <?php if(!empty($newsfeed['attachments'])) {?>
@@ -84,6 +96,7 @@
                     $this->data['newsfeed'] = $newsfeed;  
                     $this->load->view("member/newsfeed/shared_status_content", $this->data); 
                 ?>
+                <?php if ($newsfeed['shared_type_id'] != STATUS_SHARE_ADMIN_WELCOME){ ?>
                 <div class="row col-md-12 small_text_dark" id="newsfeed" style="padding-top: 10px; padding-bottom:10px;">
                     <?php 
                         if(is_like_label($newsfeed['liked_user_list']))
@@ -100,6 +113,7 @@
                     <a onclick="click_share_feed_post(<?php echo $newsfeed['status_id'];?>)" href="#">Share</a>
                     <?php //echo convert_time($newsfeed['status_created_on'])?>                        
                 </div>
+                <?php } ?>
                 <div class="row col-md-12" id="liked_message" style="padding-bottom:10px;">
                 <?php 
                     $total_liked_users = count($newsfeed['liked_user_list']);
@@ -185,6 +199,7 @@
                             </div>
                         <?php }?>
                         </div>
+                        <?php if ($newsfeed['shared_type_id'] != STATUS_SHARE_ADMIN_WELCOME){ ?>
                         <div class="row form-group">
                             <div class="col-md-2 feed-profile-picture">
                                 <a href='<?php echo base_url(). "member_profile/show/{$user_info['user_id']}"?>'>
@@ -198,6 +213,7 @@
                                 <input id="text_input_comment_<?php echo $newsfeed['status_id']?>" type="text" onkeyup="store_status_feedback(event, this, <?php echo $newsfeed['status_id']?>)" class="form-control small_text_pale" placeholder="Write a comment..."  name ="feedback" style="background-color: #EFE4B0"/>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

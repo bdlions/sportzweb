@@ -47,57 +47,52 @@ class Auth extends Role_Controller{
         );
     }
 
-    function index() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
+    function index() 
+    {
+        if (!$this->ion_auth->logged_in()) 
+        {
             redirect('auth/login', 'refresh');
-        } else {
-            //$user_group = $this->ion_auth->get_current_user_types();
-            //foreach ($user_group as $group) {
-                if ($this->ion_auth->is_user_type(ADMIN)) {
-                    //set the flash data error message if there is one
-                    $this->data['message'] = validation_errors() ? validation_errors() : $this->session->flashdata('message');
-
-                    //list the users
-                    $this->data['users'] = $this->ion_auth->users()->result();
-                    foreach ($this->data['users'] as $k => $user) {
-                        $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
-                    }
-                    //$this->_render_page('auth/index', $this->data);
-                    $this->template->load(NULL, ADMIN_LOGIN_SUCCESS_VIEW, $this->data);
-                } elseif ($this->ion_auth->is_user_type(BUSINESSMAN) || $this->ion_auth->is_user_type(MEMBER)) {
-                    if($this->basic_profile->get_profile_id() <= 0){
-                        redirect("register");
-                    }
-                    else if($this->business_profile_library->get_profile_id() <= 0 && $this->ion_auth->is_user_type(BUSINESSMAN)){
-                        redirect("register/business_profile");
-                    }
-                    else{
-                        $user_id = $this->session->userdata('user_id');
-                        $this->data['message'] = validation_errors() ? validation_errors() : $this->session->flashdata('message');
-                        $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
-                        $this->data['newsfeeds'] = $this->statuses->get_statuses();
-                        $this->data['followers'] = $this->follower->get_user_followers();
-                        $this->data['user_info'] = $this->ion_auth->get_user_info();
-                        $this->data['user_id'] = $this->ion_auth->get_user_id();
-                        $this->data['current_user_id'] = $this->data['user_id'];
-                        $this->data['status_list_id'] = STATUS_LIST_NEWSFEED;
-                        $this->data['mapping_id'] = $user_id;
-                        $this->data['recent_activities'] = $this->recent_activities->get_recent_activites();
-                        $this->data['popular_trends'] = $this->trending_features->get_popular_trends()->result_array();
-                        $this->data['app_id_list'] = $this->application_directory_library->get_user_application_id_list($user_id);
-                        $this->data['applications_info'] = $this->application_directory_library->get_all_applications();
-                        $visit_success = $this->visitors->store_page_visitor(VISITOR_PAGE_NEWSFEED_ID);
-                        $this->template->load(NULL, MEMBER_LOGIN_SUCCESS_VIEW, $this->data);
-                    }
-                } //elseif ($this->ion_auth->is_user_type(MEMBER)) {
-                    //$this->data['message'] = validation_errors() ? validation_errors() : $this->session->flashdata('message');
-                    //$this->template->load(NULL, MEMBER_LOGIN_SUCCESS_VIEW, $this->data);
-                //} 
-                else {
-                    echo "Non member";
+        } 
+        else 
+        {
+            if ($this->ion_auth->is_user_type(ADMIN)) 
+            {
+                //configuring the member profile for the admin
+                if($this->basic_profile->get_profile_id() <= 0){
+                    redirect("register");
                 }
-            //}
+                //admin is loggin as a member
+                $this->ion_auth->set_current_user_type(MEMBER);
+            } 
+            elseif ($this->ion_auth->is_user_type(BUSINESSMAN) || $this->ion_auth->is_user_type(MEMBER)) 
+            {
+                if($this->basic_profile->get_profile_id() <= 0)
+                {
+                    redirect("register");
+                }
+                else if($this->business_profile_library->get_profile_id() <= 0 && $this->ion_auth->is_user_type(BUSINESSMAN))
+                {
+                    redirect("register/business_profile");
+                }
+                //setting current user type as member
+                $this->ion_auth->set_current_user_type(MEMBER);
+            }
+            $user_id = $this->ion_auth->get_user_id();
+            $this->data['message'] = validation_errors() ? validation_errors() : $this->session->flashdata('message');
+            $this->data['basic_profile'] = $this->basic_profile->get_profile_info();
+            $this->data['newsfeeds'] = $this->statuses->get_statuses();
+            $this->data['followers'] = $this->follower->get_user_followers();
+            $this->data['user_info'] = $this->ion_auth->get_user_info();
+            $this->data['user_id'] = $user_id;
+            $this->data['current_user_id'] = $user_id;
+            $this->data['status_list_id'] = STATUS_LIST_NEWSFEED;
+            $this->data['mapping_id'] = $user_id;
+            $this->data['recent_activities'] = $this->recent_activities->get_recent_activites();
+            $this->data['popular_trends'] = $this->trending_features->get_popular_trends()->result_array();
+            $this->data['app_id_list'] = $this->application_directory_library->get_user_application_id_list($user_id);
+            $this->data['applications_info'] = $this->application_directory_library->get_all_applications();
+            $visit_success = $this->visitors->store_page_visitor(VISITOR_PAGE_NEWSFEED_ID);
+            $this->template->load(null, MEMBER_LOGIN_SUCCESS_VIEW, $this->data);
         }
     }
     

@@ -119,71 +119,6 @@
     }
 </script>
 <div id="feeds" class="scroll" data-ui="jscroll-default">
-    
-    
-    
-    
-    
-    
-    
-    
-    <!--PHOTOGRAPHY POST-->
-    <div class="form-group">
-        <div class="row form-group">
-            <a href="<?php echo base_url().PHOTOGRAPHY_HOME_PAGE_PATH ?>">
-                <div class="col-sm-2">
-                    <img class="img-responsive" style="width: 100%" 
-                         src="<?php echo base_url().APPLICATION_ICON_PATH.PHOTOGRAPHY_ICON ?>">
-                </div>
-                <div class="col-sm-10">
-                    <div class="form-group" style="color: black">
-                        <h3>
-                            <?php 
-                            foreach ($applications_info as $application_data) {
-                                if( $application_data['id'] == APPLICATION_PHOTOGRAPHY_ID ){
-                                    echo $application_data['title'];
-                                }
-                            } 
-                           ?>
-                        </h3>
-                    </div>
-                    <div class="form-group small_text_pale">
-                        Shemai - The Blue Car
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <img class="img-responsive" style="width: 100%" src="<?php echo base_url().APPLICATION_ICON_PATH.SERVICE_DIRECTORY_ICON ?>">
-            </div>
-        </div>
-    </div>
-    <!--PHOTOGRAPHY POST end-->
-    
-    
-    
-    <!--GYMPRO POST-->
-    <div class="row">
-        <div class="col-sm-12">
-            <a href="<?php echo base_url().GYMPRO_HOME_PAGE_PATH?>">
-                
-            <img class="img-responsive" style="width: 100%" 
-                 src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_ADDVERT_PICTURE_NAME ?>">
-            </a>
-        </div>
-    </div>
-    <!--GYMPRO POST-->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!--SERVICE DIRECTORY POST-->
 <style>
     .sd_home_input{
         border: 3px solid #888888;
@@ -201,36 +136,8 @@
         width: 100px;
     }
 </style>    
-    
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-            <img class="img-responsive" src="<?php echo base_url().SERVICE_HOME_LOGO_PATH?>">
-        </div>
-        <?php echo form_open("applications/service_directory/service_directory_map", array('id' => 'form_service_directory', 'class' => 'form-vertical')); ?>
-            <div class="form-group">
-                <input placeholder="Enter your location here" class="sd_home_input" name="towncode">
-            </div>
-            <div class="form-group">
-                <input class="btn pull-right" name="submit_service_directory" type="submit" value="Find" id="submit_service_directory">
-            </div>
-        <?php echo form_close();?>
-        </div>
-    </div>
-    <!--SERVICE DIRECTORY POST END-->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <?php foreach ($newsfeeds as $newsfeed) { 
-        $this->data['newsfeed'] = $newsfeed;  
+        $this->data['newsfeed'] = $newsfeed; 
         $this->load->view("member/newsfeed/status", $this->data); 
     } ?>
 </div>

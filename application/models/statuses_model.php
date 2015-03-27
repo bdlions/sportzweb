@@ -69,6 +69,8 @@ class Statuses_model extends Ion_auth_model {
             if($status_category_id == STATUS_LIST_NEWSFEED)
             {
                 $this->db->where_in($this->tables['statuses'].'.user_id',$filtered_user_id_list);
+                //by default adding admin statuses
+                $this->db->or_where($this->tables['statuses'].'.user_id', ADMIN_USER_ID);
             }
             else if($status_category_id == STATUS_LIST_USER_PROFILE)
             {
