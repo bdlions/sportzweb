@@ -76,8 +76,12 @@ class Messages extends Role_Controller{
         $this->data['messages'] = $message_list;
         $this->template->load("templates/member_tmpl", "member/messages/new_message", $this->data);
     }
-    
-    
+    public function find_message(){
+        
+        $message_list_array = $this->chat_model->get_messages( $user_id );
+    }
+
+
     public function send_message(){
         echo json_encode($this->chat_model->add_new_message($this->input->post()));
     }

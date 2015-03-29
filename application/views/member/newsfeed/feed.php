@@ -11,13 +11,13 @@
             },
             success: function(data) {
                 if(data == 1)
-                 {
-                     $("#status_id_"+status_id).slideUp();
-                 } 
-                 else
-                 {
-                     alert('Internal server error. Try again later.');
-                 }
+                {
+                    $("#status_id_"+status_id).slideUp();
+                } 
+                else
+                {
+                    alert('Internal server error. Try again later.');
+                }
             }
         });
     }
@@ -119,23 +119,6 @@
     }
 </script>
 <div id="feeds" class="scroll" data-ui="jscroll-default">
-<style>
-    .sd_home_input{
-        border: 3px solid #888888;
-        padding: 10px;
-        width: 100%;
-        font-size: 16px;
-        line-height: 16px;
-    }
-    #submit_service_directory{
-        border-radius: 0; 
-        background-color: #FFC90E;
-        color: red;
-        font-size: 16px;
-        padding: 5px;
-        width: 100px;
-    }
-</style>    
     <?php foreach ($newsfeeds as $newsfeed) { 
         $this->data['newsfeed'] = $newsfeed; 
         $this->load->view("member/newsfeed/status", $this->data); 

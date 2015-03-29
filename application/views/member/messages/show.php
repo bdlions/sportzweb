@@ -1,18 +1,17 @@
 <script type="text/javascript">
     $(function() {
-        $("#search_inbox").typeahead([{
+        $("#search_inbox").typeahead([
+            {
                 name: "inbox_user",
                 //local:[{"username":"Alamgir Kabir","first_name":"Alamgir","last_name":"Kabir","value":"alamgir", "user_id":"2"},{"username":"Nazmul Hasan","first_name":"Nazmul","last_name":"Hasan","value":"nazmul hasan", "user_id":"3"}],
-                prefetch:{
-                            url: '<?php echo base_url() ?>search/get_users/',
-                            ttl: 0
-                        },
+                remote:'<?php echo base_url()?>search/get_users?query=%QUERY',
                 template: [
                     '<div class="col-md-3"><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/c5.5.65.65/s56x56/65686_10201374763675922_1110161127_t.jpg"/></div>',
-                    '<div class="col-md-9">{{first_name}} {{last_name}}</div>'
+                    '<div class="col-md-9 content_text">{{first_name}} {{last_name}}</div>'
                 ].join(''),
                 engine: Hogan
-            }]).on('typeahead:selected', function(obj, datum) {
+            }
+            ]).on('typeahead:selected', function(obj, datum) {
             window.location = "<?php echo base_url() ?>member_profile/show/" + datum.user_id;
         });
 
@@ -44,16 +43,18 @@
     });
 </script>
 <div class="col-md-2">
-    <h3>Inbox</h3>
+    <div class="heading_medium_thin form-group">Inbox</div>
     <?php foreach ($followers as $follower) { ?>
-        <div class="row">
-            <a href="<?php echo base_url() ?>messages/user/<?php echo $follower->user_id ?>">
-                <div class="profile-background">
-                    <img alt="<?php echo $follower->first_name[0] . $follower->last_name[0]?>" src="<?php echo base_url() ?>resources/uploads/<?php echo $follower->photo?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
-                    <p style="visibility:hidden"><?php echo $follower->first_name[0].$follower->last_name[0] ?></p>
-                </div>
-                <div><?php echo $follower->first_name . " " . $follower->last_name ?></div>
-            </a>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <a href="<?php echo base_url() ?>messages/user/<?php echo $follower->user_id ?>">
+                    <div class="profile-background">
+                        <img alt="<?php echo $follower->first_name[0] . $follower->last_name[0]?>" src="<?php echo base_url() ?>resources/uploads/<?php echo $follower->photo?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
+                        <p style="visibility:hidden"><?php echo $follower->first_name[0].$follower->last_name[0] ?></p>
+                    </div>
+                    <div class="small_text_pale"><?php echo $follower->first_name . " " . $follower->last_name ?></div>
+                </a>
+            </div>
         </div>
     <?php } ?>
 </div>

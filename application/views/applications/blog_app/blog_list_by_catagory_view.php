@@ -29,7 +29,7 @@
                                     <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_1[$cardcount]['description'])), 0, 256) . ' ...'; ?>
                                         <!--line and below-->
                                         <hr>
-                                        <div class="pull-left"><?php echo unix_to_human($blog_col_1[$cardcount]['created_on']); ?></div>
+                                        <div class="pull-left"><?php // echo unix_to_human($blog_col_1[$cardcount]['created_on']); ?></div>
                                         <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_col_1[$cardcount]['counted_comment']; ?></div>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                     <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_2[$cardcount]['description'])), 0, 256) . ' ...'; ?>
                                         <!--line and below-->
                                         <hr>
-                                        <div class="pull-left"><?php echo unix_to_human($blog_col_2[$cardcount]['created_on']); ?></div>
+                                        <div class="pull-left"><?php // echo unix_to_human($blog_col_2[$cardcount]['created_on']); ?></div>
                                         <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_col_2[$cardcount]['counted_comment']; ?></div>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                     <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_col_3[$cardcount]['description'])), 0, 256) . ' ...'; ?>
                                         <!--line and below-->
                                         <hr>
-                                        <div class="pull-left"><?php echo unix_to_human($blog_col_3[$cardcount]['created_on']); ?></div>
+                                        <div class="pull-left"><?php // echo unix_to_human($blog_col_3[$cardcount]['created_on']); ?></div>
                                         <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_col_3[$cardcount]['counted_comment']; ?></div>
                                     </div>
                                 </div>

@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/home.css">
 <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
 <script type="text/javascript">
     $(document).ready(function() {
         $('#next_btn').on('click', function() {
@@ -136,13 +137,15 @@
             </div>
         </div>
         <div id="step2" class="security-captcha">
-            <div class="home-left-tit"><h2 class="home-left-title home-left-title2">Sign Up</h2></div>
-            <h1><?php echo lang('security_check_label'); ?></h1>
-            <?php echo lang('please_enter_the_characters_below_label'); ?>
-
-            <div class="form-group" id="captcha_div"> 
-                
+            <div class="home-left-tit">
+                <div class="home-left-title home-left-title2">Sign Up</div>
             </div>
+            <div class="heading_medium_thin"><?php echo lang('security_check_label'); ?></div>
+            <div class="row form-group"></div> 
+            <div class="form-group">
+                <?php echo lang('please_enter_the_characters_below_label'); ?>
+            </div> 
+            <div class="form-group" id="captcha_div"></div>
             <div class="form-group">
                 <?php echo form_input($register_btn + array('class' => 'btn button-custom')); ?>
             </div>

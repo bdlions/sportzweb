@@ -8,6 +8,7 @@
         <meta name="keywords" content=""/>
         <title><?php echo WEBSITE_TITLE; ?></title>
         <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/styles.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/bootstrap.css" />

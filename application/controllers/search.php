@@ -37,6 +37,8 @@ class Search extends CI_Controller {
         $search_value = $_GET['query'];
         $users = $this->searches_model->get_users($search_value);
         foreach ($users as  $user) {
+            $is_gympro = $this->searches_model->is_gympro_user($user -> user_id);
+            $user -> ptpro_display = ($is_gympro)? 'block' : 'none' ;
             $user -> value = $user -> first_name . " ". $user -> last_name;
             $user -> signature = "";
             if($user -> first_name != NULL && $user -> first_name != "")

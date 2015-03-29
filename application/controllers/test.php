@@ -357,4 +357,18 @@ class Test extends CI_Controller {
     {
         $this->template->load(null, "gympro/gympro_add_client", $this->data);
     }
+    function fileimageupload(){
+        if (isset($_FILES["userfile"])) {
+            $file_info = $_FILES["userfile"];
+            //uploading image
+            $result = $this->utils->upload_image($file_info, 'resources/images/test');
+            if ($result['status'] == 1) {
+                $data['picture'] = $result['upload_data']['file_name'];
+            } else {
+                $this->data['message'] = $result['message'];
+                echo json_encode($this->data);
+                return;
+            }
+        }
+    }
 }

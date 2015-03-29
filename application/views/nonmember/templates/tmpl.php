@@ -9,6 +9,7 @@
         <title><?php echo WEBSITE_TITLE; ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/styles.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
 
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/bootstrap.min.js"></script>

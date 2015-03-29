@@ -16,6 +16,9 @@
                         '<div class="col-md-9">'+
                             '<div class="row col-md-12 profile-name">'+
                                 '{{first_name}} {{last_name}}'+
+                                '<div class="pull-right" style="display: {{ptpro_display}}">'+
+                                    '<div style="background-color: yellow; color: maroon; font-size: 16px; padding: 2px">&nbsp;PT&nbsp;</div>'+
+                                '</div>'+
                             '</div>'+  
                             '<div class="row col-md-12">'+
                                 '{{country_name}} {{home_town}}'+
@@ -93,20 +96,19 @@
             }
         
     ]).on('typeahead:selected', function (obj, datum) {
-                if(datum.business_name)
-                {
-                    window.location = "<?php echo base_url()?>business_profile/show/" + datum.id;
-                }
-                else if(datum.username)
-                {
-                    window.location = "<?php echo base_url()?>member_profile/show/" + datum.user_id;
-                }
-                else if(datum.type == 'page')
-                {
-                    window.location = datum.url;
-                }
-            });
-        
+            if(datum.business_name)
+            {
+                window.location = "<?php echo base_url()?>business_profile/show/" + datum.id;
+            }
+            else if(datum.username)
+            {
+                window.location = "<?php echo base_url()?>member_profile/show/" + datum.user_id;
+            }
+            else if(datum.type == 'page')
+            {
+                window.location = datum.url;
+            }
+        });
     });
 </script>
 

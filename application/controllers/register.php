@@ -6,15 +6,16 @@ class Register extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
-        $this->load->model("dataprovider_model");
         $this->load->library("basic_profile");
-        $this->load->library("org/interest/special_interest");
+        $this->load->library("profile");
         $this->load->library('form_validation');
-        $this->load->helper('url');
+        $this->load->library('org/utility/Utils');
         $this->load->library('org/question/security_question_library');
         $this->load->library("org/profile/business/business_profile_library");
-        $this->load->library("profile");
         $this->load->library('org/utility/Utils');
+        $this->load->library("org/interest/special_interest");
+        $this->load->helper('url');
+        $this->load->model("dataprovider_model");
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->library('mongo_db') :
@@ -244,57 +245,51 @@ class Register extends CI_Controller {
      * return value of the id
      */
     function step3(){
-        //uploading picture
-        $config['image_library'] = 'gd2';
-        $config['upload_path'] = PROFILE_PICTURE_UPLOAD_PATH;
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = '10240';
-        $config['file_name'] = $this->utils->generateRandomString();
-        //$config['maintain_ratio'] = FALSE;
-        //$config['width'] = 120;
-        //$config['height'] = 120;
-        //$config['create_thumb'] = TRUE;
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload()) {
-            $error = array('error' => $this->upload->display_errors());
-            echo json_encode($error);
+        if (isset($_FILES["userfile"])) {
+            $file_info = $_FILES["userfile"];
+            //uploading image
+            $result = $this->utils->upload_image($file_info, PROFILE_PICTURE_UPLOAD_PATH);
+            if ($result['status'] == 1) {
+                $upload_data = $result['upload_data'];
+                $data = array('upload_data' => $upload_data);
+                $profile_data = array(
+                    'user_id' => $this->ion_auth->get_user_id(),
+                    'photo' => $upload_data['file_name']
+                );
+                $profile_id = $this->basic_profile->get_profile_id();
+                if ($profile_id > 0) {
+                    //update profile
+                    $this->basic_profile->update_profile($profile_data);
+                }
+                else {
+                    //insert profile for the first time
+                    $this->basic_profile->create_profile($profile_data);
+                }
+                $file_name = $upload_data['file_name'];
+                //creating profile picture with 50x50 resolution
+                $image_absolute_path = FCPATH.PROFILE_PICTURE_DISPLAY_PATH;
+                if( !is_dir($image_absolute_path) )
+                {
+                    mkdir($image_absolute_path, 0777, TRUE);
+                }
+                $config['image_library'] = 'gd2';
+                $config['source_image'] =PROFILE_PICTURE_UPLOAD_PATH.$file_name;
+                $config['new_image'] = PROFILE_PICTURE_DISPLAY_PATH.$file_name;
+                $config['maintain_ratio'] = FALSE;
+                $config['width'] = 50;
+                $config['height'] = 50;
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+                echo json_encode($data);
+            } else {
+                $this->data['message'] = $result['message'];
+                echo json_encode($this->data);
+                return;
+            }
         } else {
-            $upload_data = $this->upload->data();
-            
-            $data = array('upload_data' => $upload_data);
-            
-            $profile_data = array(
-                'user_id' => $this->ion_auth->get_user_id(),
-                'photo' => $upload_data['file_name']
-            );
-            $profile_id = $this->basic_profile->get_profile_id();
-            if ($profile_id > 0) {
-                //update profile
-                $this->basic_profile->update_profile($profile_data);
-            }
-            else {
-                //insert profile for the first time
-                $this->basic_profile->create_profile($profile_data);
-            }
-            $file_name = $upload_data['file_name'];
-            //creating profile picture with 50x50 resolution
-            $image_absolute_path = FCPATH.PROFILE_PICTURE_DISPLAY_PATH;
-            if( !is_dir($image_absolute_path) )
-            {
-                mkdir($image_absolute_path, 0777, TRUE);
-            }
-            $config['image_library'] = 'gd2';
-            $config['source_image'] =PROFILE_PICTURE_UPLOAD_PATH.$file_name;
-            $config['new_image'] = PROFILE_PICTURE_DISPLAY_PATH.$file_name;
-            $config['maintain_ratio'] = FALSE;
-            $config['width'] = 50;
-            $config['height'] = 50;
-            $this->load->library('image_lib', $config);
-            $this->image_lib->resize();
-            
-            echo json_encode($data);
+            $this->data['message'] = 'File not chosen';
+            echo json_encode($this->data);
+            return;
         }
     }
     

@@ -18,6 +18,22 @@ class Searches_model extends Ion_auth_model {
         parent::__construct();
     }
     
+    /*
+     * This function takes user id and tells if 
+     * he is PT Pro professionsal or not.
+     * @author Tanveer Ahmed 29 march '15
+     */
+    public function is_gympro_user($user_id = 0){
+        if($user_id == 0){
+            return FALSE;
+        }
+        $this->db->where('user_id', $user_id);
+        $this->db->where('account_type_id !=', APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT);
+        $this->db->where('account_type_id !=', APP_GYMPRO_ACCOUNT_TYPE_ID_EXTERNAL);
+        return $this->db->count_all_results($this->tables['app_gympro_users']) > 0;
+    }
+    
+    
      /* this method return users info
      *@Rashida on 18th march
      */
