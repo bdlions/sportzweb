@@ -2871,6 +2871,50 @@ class Gympro extends Role_Controller{
     }
     /*
      * @Author Tanveer Ahmed
+     * Loads view page and show ptpro session
+     */
+    public function show_session( $session_id = 0 )
+    {
+        $this->data['message'] = '';
+        $user_id = $this->session->userdata('user_id');
+        $gympro_user_data = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
+        if(empty($gympro_user_data)){
+            redirect('applications/gympro/pt_home','refresh');
+        }
+        $session_info = $this->gympro_library->get_session_info($session_id)->result_array();
+        if(!empty($session_info)){
+            $session_info = $session_info[0];
+            if($session_info['user_id']!=$user_id)
+            {
+                $this->data['message']= $this->lang->line('user_sessionid_mismatch');
+                $this->template->load(null,'applications/gympro/display_message', $this->data);
+                return;
+            }
+            $session_info['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session_info['date']);
+        }
+        else{
+            redirect('applications/gympro/schedule', 'refresh');
+        }
+        $this->data['session_id']       = $session_id;
+        $this->data['session_info']     = $session_info;
+        $this->data['session_statuses'] = $this->gympro_library->get_all_session_statuses()->result_array();
+        $this->data['session_times']    = $this->gympro_library->get_all_session_times()->result_array();
+        $this->data['session_types']    = $this->gympro_library->get_all_session_types()->result_array();
+        $this->data['session_repeats']  = $this->gympro_library->get_all_session_repeats()->result_array();
+        $this->data['session_costs']    = $this->gympro_library->get_all_session_costs()->result_array();
+        $this->data['client_list']      = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
+        $this->data['group_list']       = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
+        $this->data['dont_show_cost_text']  =0;
+        foreach ($this->data['session_costs'] as $cost) {
+            if($cost['title'] == $session_info['cost']){$this->data['dont_show_cost_text']=1;}
+        }
+        $this->template->load(null,'applications/gympro/session_show', $this->data);
+    }
+    
+    
+    
+    /*
+     * @Author Tanveer Ahmed
      * responds to ajax call of deleting session
      */
     public function delete_session()

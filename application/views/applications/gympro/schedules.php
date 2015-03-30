@@ -78,23 +78,40 @@
         });
         
     });
+    
+    function show_session(){
+        window.location.replace( "<?php echo base_url().'applications/gympro/show_session/';?>" + $("#selected_session").val() );
+    }
+    
+    function pay_session(){
+        alert('payment not linked');
+        window.location.replace(
+            "<?php echo base_url().'aasdasd/asdasd/asdasd/';?>"
+            + $("#selected_session").val());
+    }
 
 </script>
 <div class="container-fluid">
     <div class="row top_margin">
-        <?php
-        if ($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT) {
+        <?php if ($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT) {
             $this->load->view("applications/gympro/template/sections/client_left_pane");
+            echo
+        '<div class="col-md-9">';
         } else {
             $this->load->view("applications/gympro/template/sections/pt_left_pane");
+            echo
+        '<div class="col-md-10">'.
+            '<div class="row form-group">'.
+                '<div class="col-md-2">'.
+                    '<a href="'.base_url().'applications/gympro/create_session">'.
+                        '<button class="btn button-custom btn_gympro">New Session</button>'. 
+                    '</a>'. 
+                '</div>'. 
+            '</div>';
         }
         ?>
-        <div class="col-md-10">
-            <div class="row form-group">
-                <div class="col-md-2">
-                    <a href="<?php echo base_url() ?>applications/gympro/create_session"><button class="btn button-custom btn_gympro">New Session</button></a>
-                </div>
-            </div>
+                        
+                    
             <div class="row form-group">
                 <div class="col-md-12">
                     <div id='calendar'></div>
@@ -133,9 +150,18 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            
+            <!--FOR PTPRO-->
+            <div class="modal-footer" style="display: <?php echo ($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)? 'none' :'block'; ?>">
                 <a id="session_edit" href="<?php echo base_url() . 'applications/gympro/update_session/'; ?>"><button class="btn btn_gympro button-custom">Edit Session</button></a>
                 <button id="delete_prompt_btn" class="btn btn_gympro button-custom">Delete Session</button>
+                <button type="button" class="btn btn_gympro button-custom" data-dismiss="modal">Close</button>
+            </div>
+            
+            <!--FOR CLIENT-->
+            <div class="modal-footer" style="display: <?php echo ($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)? 'block' :'none'; ?>">
+                <button class="btn btn_gympro button-custom" onclick="show_session()">Show Session Details</button>
+                <button class="btn btn_gympro button-custom" onclick="pay_session()">Pay Session</button>
                 <button type="button" class="btn btn_gympro button-custom" data-dismiss="modal">Close</button>
             </div>
         </div>

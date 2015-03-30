@@ -13,6 +13,10 @@
             <a href="<?php echo base_url().'applications/gympro/my_assessments'?>">My Assessments</a>
         </div>
         <div class="ln_item content_text" >
+            <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/g.png">
+            <a href="<?php echo base_url().'applications/gympro/schedule'?>">My Sessions</a>
+        </div>
+        <div class="ln_item content_text" >
             <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
             <a href="<?php echo base_url().'applications/gympro/my_missions'?>">My Missions</a>
         </div>

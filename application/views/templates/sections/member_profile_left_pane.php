@@ -24,22 +24,22 @@
     <div class="col-md-12">
         <div style="margin: 5px 0px; border-top: 1px solid lightgray"></div>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url()?>member_profile">
+            <a href="<?php echo base_url().'member_profile/show/'.$basic_profile->id ?>">
                 <img src="<?php echo base_url() ?>resources/images/7.gif"> Profile
             </a>
         </div>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url()?>member_profile/info">
+            <a href="<?php echo base_url().'member_profile/info/'.$basic_profile->id ?>">
                 <img src="<?php echo base_url() ?>resources/images/17.gif"> Info
             </a>
         </div>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url()?>user_album/photos">
+            <a href="<?php echo base_url().'user_album/photos/'.$basic_profile->id ?>">
                 <img src="<?php echo base_url() ?>resources/images/20.gif"> My photos
             </a>
         </div>
         <div class="left_menu_item" >
-            <a href="<?php echo base_url()?>followers">
+            <a href="<?php echo base_url().'followers/show/'.$basic_profile->id ?>">
                 <img src="<?php echo base_url() ?>resources/images/2.gif"> Following
             </a>
         </div>

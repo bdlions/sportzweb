@@ -16,7 +16,7 @@
                 $("#chat_friends").val("");
                 $("#selected_friends").html('<span class="badge user-token"><input name="participant" type ="hidden" value="' + datum.user_id +'"/>'+ datum.first_name + ' '+ datum.last_name + '<span class="remove" onclick="removeSelectedUser(this)">&times;</span></span>');
                 $("input[name=participant]").each(function(){
-                    window.location = "<?php echo base_url()?>" + "messages/new_message/" + $(this).val();
+                    window.location = "<?php echo base_url()?>" + "messages/user/" + $(this).val();
                 });
         });
 
@@ -32,7 +32,7 @@
                   dataType: 'json',
                   success: function(data) {//console.log(data);
                       if(data == true){
-                          window.location.reload();
+                          window.location.replace('<?php echo base_url()."messages/user/".$to; ?>')();
                       }
                       else{
                           alert("error for following users.");
@@ -52,16 +52,18 @@
     }
 </script>
 <div class="col-md-2">
-    <h3>Inbox</h3>
+    <div class="heading_medium_thin form-group">Inbox</div>
     <?php foreach ($followers as $follower) { ?>
-        <div class="row">
-            <a href="<?php echo base_url() ?>messages/user/<?php echo $follower->user_id ?>">
-                <div class="profile-background">
-                    <img alt="<?php echo $follower->first_name[0] . $follower->last_name[0]?>" src="<?php echo base_url() ?>resources/uploads/<?php echo $follower->photo?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
-                    <p style="visibility:hidden"><?php echo $follower->first_name[0].$follower->last_name[0] ?></p>
-                </div>
-                <div><?php echo $follower->first_name . " " . $follower->last_name ?></div>
-            </a>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <a href="<?php echo base_url() ?>messages/user/<?php echo $follower->user_id ?>">
+                    <div class="profile-background">
+                        <img alt="<?php echo $follower->first_name[0] . $follower->last_name[0]?>" src="<?php echo base_url() ?>resources/uploads/<?php echo $follower->photo?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
+                        <p style="visibility:hidden"><?php echo $follower->first_name[0].$follower->last_name[0] ?></p>
+                    </div>
+                    <div class="small_text_pale"><?php echo $follower->first_name . " " . $follower->last_name ?></div>
+                </a>
+            </div>
         </div>
     <?php } ?>
 </div>
