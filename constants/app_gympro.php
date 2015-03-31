@@ -39,3 +39,7 @@ define("GYMPRO_REPEATED_DAILY_TYPE_ID",                     "2");
 define("GYMPRO_REPEATED_WEEKLY_TYPE_ID",                    "3");
 define("GYMPRO_REPEATED_BIWEEKLY_TYPE_ID",                  "4");
 define("GYMPRO_REPEATED_MONTHLY_TYPE_ID",                   "5");
+
+define("GYMPRO_SESSION_STATUS_PREPAID_ID",                   "1");
+define("GYMPRO_SESSION_STATUS_PAID_ID",                      "2");
+define("GYMPRO_SESSION_STATUS_CANCELLED_ID",                 "3");

@@ -1196,11 +1196,19 @@ class Gympro_model extends Ion_auth_model {
      */
     public function get_all_sessions($user_id = 0)
     {
-        if($user_id == 0)
-        {
-            $user_id = $this->session->userdata('user_id');
+        //run each where that was passed
+        if (isset($this->_ion_where) && !empty($this->_ion_where)) {
+            foreach ($this->_ion_where as $where) {
+                $this->db->where($where);
+            }
+
+            $this->_ion_where = array();
         }
-        $this->db->where('user_id', $user_id);
+//        if($user_id == 0)
+//        {
+//            $user_id = $this->session->userdata('user_id');
+//        }
+//        $this->db->where('user_id', $user_id);
         return $this->db->select($this->tables['app_gympro_sessions'].'.*, '. $this->tables['app_gympro_session_statuses'] . '.title as status_title')
                     ->from($this->tables['app_gympro_sessions'])
                     ->join($this->tables['app_gympro_session_statuses'], $this->tables['app_gympro_sessions'] . '.status_id = ' . $this->tables['app_gympro_session_statuses'] . '.id')

@@ -2719,7 +2719,7 @@ class Gympro extends Role_Controller{
     {
         $this->data['message'] = '';  
         $user_id = $this->session->userdata('user_id');
-        $sessions_array = $this->gympro_library->get_sessions_in_calendar($user_id);
+        $sessions_array = $this->gympro_library->get_sessions_in_calendar($user_id, $this->account_type_id);
         $this->data['events'] = json_encode($sessions_array);
         $this->template->load(null,'applications/gympro/schedules', $this->data);
     }
@@ -2886,9 +2886,9 @@ class Gympro extends Role_Controller{
             $session_info = $session_info[0];
             if($session_info['user_id']!=$user_id)
             {
-                $this->data['message']= $this->lang->line('user_sessionid_mismatch');
-                $this->template->load(null,'applications/gympro/display_message', $this->data);
-                return;
+//                $this->data['message']= $this->lang->line('user_sessionid_mismatch');
+//                $this->template->load(null,'applications/gympro/display_message', $this->data);
+//                return;
             }
             $session_info['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session_info['date']);
         }

@@ -12,6 +12,7 @@
                 $('#pred_table_title').html( $("#dd_tournaments option:selected").text() );
                 $('#tbl_team_standings').html( tmpl('tmpl_table_header') );
                 $('#tbl_team_standings').append( tmpl( 'tmpl_team_standings', data.team_standings) );
+                //bring_prediction_info();
             }
         });
     }

@@ -84,9 +84,8 @@
     }
     
     function pay_session(){
-        alert('payment not linked');
         window.location.replace(
-            "<?php echo base_url().'aasdasd/asdasd/asdasd/';?>"
+            "<?php echo base_url().'payment/pay_ptpro/';?>"
             + $("#selected_session").val());
     }
 

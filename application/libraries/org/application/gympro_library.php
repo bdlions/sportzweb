@@ -254,12 +254,30 @@ class Gympro_library {
      * @Author Nazmul on 24th January 2015
      * modified by Tanveer Ahmed on 16 Feb 2015 (implemented repeat processing)
      */
-    public function get_sessions_in_calendar($user_id = 0){
+    public function get_sessions_in_calendar($user_id = 0, $account_type_id = APP_GYMPRO_ACCOUNT_TYPE_ID_EXTERNAL ){
         if($user_id == 0){
             $user_id = $this->session->userdata('user_id');
         }
         $session_list = array();
-        $session_list_array = $this->gympro_model->get_all_sessions($user_id)->result_array();
+        $where = array();
+        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_EXTERNAL)
+        {
+            return array();
+        }
+        else if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
+        {
+            $where = array(
+                'created_for_type_id' => SESSION_CREATED_FOR_CLIENT_TYPE_ID,
+                'reference_id' => $user_id
+            );
+        }
+        else
+        {
+            $where = array(
+                'user_id' => $user_id
+            );
+        }
+        $session_list_array = $this->gympro_model->where($where)->get_all_sessions()->result_array();
         foreach($session_list_array as $session_info){
             $rep_date = $session_info['date'];
             if($session_info['type_id'] != GYMPRO_SINGLE_SESSION_TYPE_ID) {

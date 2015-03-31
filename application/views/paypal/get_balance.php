@@ -8,7 +8,7 @@
 <body>
 <?php
 echo '<pre />';
-print_r("Account Balance: ".$PayPalResult["BALANCERESULTS"][0]["L_AMT"]);
+print_r($PayPalResult);
 ?>
 </body>
 </html>

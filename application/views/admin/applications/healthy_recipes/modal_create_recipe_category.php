@@ -17,8 +17,9 @@
                     alert(data['message']);
                     if (data['status'] === 1)
                     {                        
-                        $("#tbody_recipes_category_list").html($("#tbody_recipes_category_list").html()+tmpl("tmpl_recipes_category_list",  data['recipe_category_info']));
-                        $('#modal_create_recipe_category').modal('hide');
+                        //$("#tbody_recipes_category_list").html($("#tbody_recipes_category_list").html()+tmpl("tmpl_recipes_category_list",  data['recipe_category_info']));
+                        //$('#modal_create_recipe_category').modal('hide');
+                        window.location.reload();
                     }
                     
                 }

@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>PayPal Error</title>
+<title>PayPal Get Balance</title>
 </head>
 
 <body>
 <?php
 echo '<pre />';
-print_r($Errors);
+print_r("Account Balance: ".$PayPalResult["BALANCERESULTS"][0]["L_AMT"]);
 ?>
 </body>
 </html>
