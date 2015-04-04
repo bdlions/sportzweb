@@ -7,8 +7,29 @@
 <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/d3.v2.js"></script>
 <script type="text/javascript">
     var special_interests = <?php echo $special_interests; ?>;
+    function check_all_boxes( chekbox, div_id ){
+        if(chekbox.checked){
+            $('#special_interest_'+div_id).find(':checkbox').each(function(){
+                $(this).prop('checked', true);
+            });
+        }else{
+            $('#special_interest_'+div_id).find(':checkbox').each(function(){
+                $(this).prop('checked', false);
+            });
+        }
+    }
     $(function() {
-        
+        $('.select_all_s1').change(function(){
+            if(this.checked){
+                $(this).parent().parent().find('input[name^=interest_]').each(function(){
+                    $(this).prop('checked', true);
+                });
+            }else{
+                $(this).parent().parent().find('input[name^=interest_]').each(function(){
+                    $(this).prop('checked', false);
+                });
+            }
+        });
         $('#submit_special_interest').on('click', function() {
             $.ajax({
                 type: 'POST',
@@ -37,12 +58,13 @@
             return false;
         });
         
-        var html_text = "";
+        var html_text = '';
         for(var i = 0; i < special_interests.length; i ++){
             var selected_special_interest = special_interests[i];
             var special_subcategory_interest = selected_special_interest.sub_interest;
             var selected_special_interests = <?php echo $selected_special_interest; ?>;
             var interest_html_text = "<div id='special_interest_" + selected_special_interest.id + "'>";
+            interest_html_text += '<div class="form-group small_text_dark"><input type="checkbox" onclick="check_all_boxes(this, ' + selected_special_interest.id + ')">Select all</div>'
             for (var j = 0; j < special_subcategory_interest.length; j++) {
                 var id = selected_special_interest.id+"_" + special_subcategory_interest[j].id;
                 var checked = $.inArray(id, selected_special_interests) > -1 == true?"checked":"";
@@ -126,7 +148,6 @@
         $("#special_interest_"+selected_special_interest.id).show();
     }
 </script>
-
 <form id="form-step1">
     <div style="margin-left:-25px;">Select Your Interests</div>
     <div class="row">
