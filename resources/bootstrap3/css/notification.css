@@ -1,0 +1,95 @@
+#mm_friend_request {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    height: 20px;
+    width: 20px;
+    background-image: url('../..//images/friends.png');
+}
+
+#mm_messages {
+    display: inline-block;
+    margin-bottom: 2px;
+    margin-left: 5px;
+    height: 30px;
+    width: 30px;
+    background-image: url('../..//images/inbox.png');
+}
+
+#mm_notification {
+    display: inline-block;
+    margin-top: -2px;
+    height: 30px;
+    width: 30px;
+    background-image: url('../..//images/bell.png');
+}
+#mm_setting {
+    display: inline-block;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+#mm_setting a img{
+    padding-bottom: 25px;
+}
+#mm_notification_box, #mm_message_box, #mm_friend_request_box{
+    position: absolute;
+    right: 1px;
+    display: none;
+    z-index: 101;
+    width: 350px;
+    height: 350px;
+    color: black;
+    background-color: #fff;
+}
+#mm_notification_box{
+    top: 38px;
+}
+#mm_message_box{
+    top: 40px;
+}
+#mm_friend_request_box{
+    top: 33px;
+}
+.pagelet{
+    background-color: white;
+    margin-bottom: 1px;
+    box-shadow: 0 0 1px #bbb;
+    padding: 10px 5px;
+}
+.pagelet_divider{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid lightgray;
+}
+
+.notification_box{
+    background-color: #fff;
+    font-size: 10px;
+    padding: 5px;
+}
+
+.notification_box:hover{
+    cursor: pointer;
+    background-color: #7AB6EA;
+}
+
+.scroll_box_style{
+max-height: 350px; 
+overflow-x:hidden; 
+overflow-y: scroll; 
+border-left: 1px solid lightgray; 
+border-right: 1px solid lightgray;
+}
+
+.see_all_anchor_style{
+    text-align: center;
+    font-weight: bold;
+}
+.follower_button_style{
+background-color: #87C1F3; 
+color: black;
+font-size: 9px;
+font-weight: bold;
+line-height: 18px;
+}
