@@ -2,85 +2,85 @@
     $(function() {
         $("#search_box").typeahead([
             {
-                name: "search_user",
-                remote: '<?php echo base_url() ?>search/get_users?query=%QUERY',
-                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">People</div>',
+                name:"search_user",
+                remote:'<?php echo base_url()?>search/get_users?query=%QUERY',
+                header: '<div style="font-size: 15px; font-weight:bold; width:33%">People</div>',
                 template: [
-                    '<div class="row">' +
-                            '<div class="col-md-3">' +
-                            '<div>' +
-                            '<img alt="{{signature}}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH ?>{{photo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>' +
-                            '<div style="visibility:hidden;height:0px">{{signature}}</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-md-9">' +
-                            '<div class="row col-md-12 profile-name">' +
-                            '{{first_name}} {{last_name}}' +
-                            '<div class="pull-right" style="display: {{ptpro_display}}">' +
-                            '<div style="background-color: yellow; color: maroon; font-size: 16px; padding: 2px">&nbsp;PT&nbsp;</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="row col-md-12">' +
-                            '{{country_name}} {{home_town}}' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>'
-                ].join(''),
+                        '<div class="row">'+
+                            '<div class="col-md-3">'+
+                                '<div>'+
+                                    '<img alt="{{signature}}" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH?>{{photo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>'+
+                                    '<div style="visibility:hidden;height:0px">{{signature}}</div>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="col-md-9">'+
+                                '<div class="row col-md-12 profile-name">'+
+                                    '{{first_name}} {{last_name}}'+
+                                    '<div class="pull-right" style="display: {{ptpro_display}}">'+
+                                        '<div style="background-color: yellow; color: maroon; font-size: 16px; padding: 2px">&nbsp;PT&nbsp;</div>'+
+                                    '</div>'+
+                                '</div>'+  
+                                '<div class="row col-md-12">'+
+                                    '{{country_name}} {{home_town}}'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
+                  ].join(''),
                 engine: Hogan
             },
             {
-                name: "search_business_names",
-                remote: '<?php echo base_url() ?>search/get_business_names?query=%QUERY',
-                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Businesses</div>',
+                name:"search_news",
+                remote:'<?php echo base_url()?>search/get_news?query=%QUERY',
+                header: '<div style="font-size: 15px; font-weight:bold">News</div>',
                 template: [
-                    '<div class="row">' +
-                            '<div class="col-md-3">' +
-                            '<div>' +
-                            '<img alt="{{signature}}" src="<?php echo base_url() ?>resources/uploads/business/{{logo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>' +
-                            '<div style="visibility:hidden;height:0px">{{signature}}</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-md-9 profile-name">{{business_name}}</div>' +
-                            '</div>'
-                ].join(''),
+                    '<div class="row">'+
+                        '<div class="col-md-3">'+
+                            '<div>'+
+                                '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="col-md-9 profile-name">{{title}}</div>'+
+                    '</div>'
+                  ].join(''),
+                engine: Hogan
+            },
+             {
+                name:"search_healthy_recipe",
+                remote:'<?php echo base_url()?>search/get_healthy_recipes?query=%QUERY',
+                header: '<div style="font-size: 15px; font-weight:bold">Recipes</div>',
+                template: [
+                     '<div class="row">'+
+                        '<div class="col-md-3">'+
+                            '<div>'+
+                                '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="col-md-9 profile-name">{{title}}</div>'+
+                    '</div>'
+                  ].join(''),
                 engine: Hogan
             },
             {
-                name: "search_healthy_recipe",
-                remote: '<?php echo base_url() ?>search/get_healthy_recipes?query=%QUERY',
-                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Recipes</div>',
+                name:"search_business_names",
+                remote:'<?php echo base_url()?>search/get_business_names?query=%QUERY',
+                header: '<div style="font-size: 15px; font-weight:bold;">Companies and Groups</div>',
                 template: [
-                    '<div class="row">' +
-                            '<div class="col-md-3">' +
-                            '<div>' +
-                            '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-md-9 profile-name">{{title}}</div>' +
-                            '</div>'
-                ].join(''),
+                    '<div class="row">'+
+                        '<div class="col-md-3">'+
+                            '<div>'+
+                                '<img alt="{{signature}}" src="<?php echo base_url()?>resources/uploads/business/{{logo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>'+
+                                '<div style="visibility:hidden;height:0px">{{signature}}</div>'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="col-md-9 profile-name">{{business_name}}</div>'+
+                    '</div>'
+                  ].join(''),
                 engine: Hogan
             },
             {
-                name: "search_news",
-                remote: '<?php echo base_url() ?>search/get_news?query=%QUERY',
-                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">News</div>',
-                template: [
-                    '<div class="row">' +
-                            '<div class="col-md-3">' +
-                            '<div>' +
-                            '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-md-9 profile-name">{{title}}</div>' +
-                            '</div>'
-                ].join(''),
-                engine: Hogan
-            },
-            {
-                name: "search_blogs",
-                remote: '<?php echo base_url() ?>search/get_blogs?query=%QUERY',
-                header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">Blogs</div>',
+                name:"search_blogs",
+                remote:'<?php echo base_url()?>search/get_blogs?query=%QUERY',
+                header: '<div style="font-size: 15px; font-weight:bold">Blogs</div>',
                 template: [
                     '<div class="row">' +
                             '<div class="col-md-3">' +
