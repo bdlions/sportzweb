@@ -47,6 +47,8 @@
                 $('#modalTitle').html(event.session_info.title);
                 $('#session_title').html(event.session_info.title);
                 $('#session_location').html(event.session_info.location);
+                $('#session_cost').html(event.session_info.cost);
+                $('#session_status').html(event.session_info.status_title);
                 var edit_href = document.getElementById('session_edit');
                 edit_href.href += event.session_info.id;
                 $("#selected_session").val(event.session_info.id);
@@ -140,6 +142,18 @@
                             <div class="col-sm-4">Location:</div>
                             <div class="col-sm-8">
                                 <div id="session_location"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">Cost:</div>
+                            <div class="col-sm-8">
+                                <div id="session_cost"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">Status:</div>
+                            <div class="col-sm-8">
+                                <div id="session_status"></div>
                             </div>
                         </div>
                         <div class="row form-group">

@@ -303,26 +303,17 @@ class Member_profile extends Role_Controller{
     function upload_photo_on_list()
     {
         $user_id = $this->session->userdata('user_id');
-
         $position_id = $this->input->post('img_place');
-        $config['image_library'] = 'gd2';
-        $config['upload_path'] = "resources/uploads/user_photo/";
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = '10240';
-        $config['maintain_ratio'] = FALSE;
-        $config['width'] = 120;
-        $config['height'] = 120;
-        $config['create_thumb'] = TRUE;
-        
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload()) {
-            $error = array('error' => $this->upload->display_errors());
-            echo json_encode($error);
+        $result = $this->utils->upload_image($position_id, USER_PHOTO_LIST_IMAGE_PATH);
+        if ($result['status'] == 1) {
+            $upload_data = $result['upload_data'];
+            $file_name = $upload_data['file_name'];
+            $this->utils->resize_image(USER_PHOTO_LIST_IMAGE_PATH . $file_name, USER_PHOTO_LIST_IMAGE_PATH_W100_H100 . $file_name, USER_PHOTO_LIST_IMAGE_H100, USER_PHOTO_LIST_IMAGE_W100);
         } else {
-            $upload_data = $this->upload->data();
+            $this->data['message'] = $result['message'];
+            echo json_encode($this->data);
+            return;
         }
-        
         $photo_list = $this->profile->get_photo_list($user_id)->result_array();
         if(empty($photo_list))
         {
@@ -376,6 +367,7 @@ class Member_profile extends Role_Controller{
             $data = array('upload_data' => $upload_data['file_name']);
             echo json_encode($data);
         }
+       
     }
 }
 ?>

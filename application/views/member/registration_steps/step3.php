@@ -1,71 +1,58 @@
 <div class="row">
-    <div class="col-md-9">
-        <div class="row form-group">
-            <div class="col-md-12 heading_medium_thin">
-                Set your Profile picture
+    <div class="col-md-9 ">
+        <div class="fileinput-button">
+            <div class="row form-group">
+                <div class="col-md-12 heading_medium_thin">
+                    Set your Profile picture
+                </div>
+            </div>
+            <form id="formsubmit" method="post" action="<?php echo base_url(); ?>register/step3" onsubmit="return false;">
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <div class="profile-picture-box " >
+                            <div id="files" class="files">
+                                <?php
+                                if ($photo != '') {
+                                    echo "<img src=" . base_url() . PROFILE_PICTURE_UPLOAD_PATH . "{$photo} class='profile-picture' />";
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <input id="fileupload" type="file" name="userfile">
+            </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <div class="row col-md-12"></div>
+                        <div class="row col-md-12">
+                            <div id="progress" class="progress">
+                                <div class="progress-bar progress-bar-success"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pull-right" id="upload">
+    <!--                            <input type="submit" value="Save & Continue" id="btnSubmit"  class="btn button-custom pull-right"/>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       
+        <div class="row">
+            <div class="col-md-4">
+                <img src="<?php echo base_url() ?>resources/images/back.png">
+                <a id="profile_picture_back" href="">Back</a>
+            </div>
+            <div class="col-md-5">
+                <a href="<?php echo base_url() ?>" id="skip_profile_picture" class="pull-right">Skip this step</a>
             </div>
         </div>
-        <form id="formsubmit" method="post" action="<?php echo base_url(); ?>register/step3" onsubmit="return false;">
-            <div class="row form-group">
-                <div class="col-md-4">
-                    <div class="profile-picture-box" >
-                        <div id="files" class="files">
-                            <?php
-                            if ($photo != '') {
-                                echo "<img src=" . base_url() . "resources/uploads/{$photo} class='profile-picture' />";
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="row fileinput-button form-group">
-                        <div class="col-md-12">
-                            <i class="glyphicon glyphicon-plus"></i>
-                            Upload a photo from your computer
-                            <input id="fileupload" type="file" name="userfile">
-                        </div>
-                    </div>
-                    <div id="progress" class="progress">
-                        <div class="progress-bar progress-bar-success"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 pull-right" id="upload">
-                            <input type="submit" value="Save & Continue" id="btnSubmit"  class="btn button-custom pull-right"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="<?php echo base_url() ?>resources/images/back.png">
-                    <a id="profile_picture_back" href="">Back</a>
-                </div>
-                <div class="col-md-5">
-                    <a href="<?php echo base_url() ?>" id="skip_profile_picture" class="pull-right">Skip this step</a>
-                </div>
-            </div>
         </form>
     </div>
 </div>
 <script>
-    /*jslint unparam: true, regexp: true */
-    /*global window, $ */
-    $(function () {
-        $("#btnSubmit").on("click", function () {
-            $.ajax({
-                dataType: 'json',
-                type: "POST",
-                url: '<?php echo base_url(); ?>register/step3',
-                data: $("#formsubmit").serializeArray(),
-                success: function (data) {
-                    alert('ajax  success');
-                    alert(data.message);
-                    window.location = '<?php echo base_url(); ?>';
-                }
-            });
-        });
-        $("#profile_picture_back").on("click", function () {
+
+        $("#profile_picture_back").on("click", function() {
             $("#member_profile_step1").removeClass("registration_steps_header_text");
             $("#member_profile_step3").removeClass("registration_steps_header_text");
             $("#member_profile_step2").addClass("registration_steps_header_text");
@@ -75,13 +62,13 @@
 
         // Change this to the location of your server-side upload handler:
         var url = '<?php echo base_url(); ?>register/step3',
-                uploadButton = $('<input type="submit" value="Save & Continue"/>').addClass('btn button-custom pull-right').text('Confirm').on('click', function () {
+                uploadButton = $('<input type="submit" value="Save & Continue"/>').addClass('btn button-custom pull-right').text('Confirm').on('click', function() {
             var $this = $(this), data = $this.data();
-            $this.off('click').text('Abort').on('click', function () {
+            $this.off('click').text('Abort').on('click', function() {
                 $this.remove();
                 data.abort();
             });
-            data.submit().always(function () {
+            data.submit().always(function() {
                 $this.remove();
             });
         });
@@ -101,16 +88,16 @@
             maxNumberOfFiles: 1,
             previewMaxHeight: 120,
             previewCrop: true
-        }).on('fileuploadadd', function (e, data) {
+        }).on('fileuploadadd', function(e, data) {
             $("#files").empty();
             data.context = $('<div/>').appendTo('#files');
             $("div#upload").empty();
             $("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
-            $.each(data.files, function (index, file) {
+            $.each(data.files, function(index, file) {
                 var node = $('<p/>');
                 node.appendTo(data.context);
             });
-        }).on('fileuploadprocessalways', function (e, data) {
+        }).on('fileuploadprocessalways', function(e, data) {
             var index = data.index,
                     file = data.files[index],
                     node = $(data.context.children()[index]);
@@ -123,12 +110,13 @@
             if (index + 1 === data.files.length) {
                 data.context.find('button').text('Upload').prop('disabled', !!data.files.error);
             }
-        }).on('fileuploadprogressall', function (e, data) {
+        }).on('fileuploadprogressall', function(e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css('width', progress + '%');
-        }).on('fileuploaddone', function (e, data) {
+        }).on('fileuploaddone', function(e, data) {
 //            alert('fileuploaddone');
             alert(data.result.message);
+            window.location = '<?php echo base_url(); ?>';
         }).on('fileuploadfail', function(e, data) {
             alert(data.message);
             $.each(data.files, function(index, file) {

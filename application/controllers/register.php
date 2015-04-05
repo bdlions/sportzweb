@@ -34,6 +34,13 @@ class Register extends CI_Controller {
         $this->data["message"] = "";
         $this->data["gender_list"] = $this->dataprovider_model->getGenderList()->dropDownList('id', 'gender_name');
         $this->data["country_list"] = $this->dataprovider_model->getCountryList()->dropDownList('id', 'country_name');
+        $this->data['month_list']  = $this->dataprovider_model->get_monthList();
+//        var_dump($months);exit;
+//        foreach ($months as $key => $month_info) {
+//                $this->data['month_list'][$month_info] = $month_info;
+//            }
+        
+        $date = $this->data["date_list"] = $this->dataprovider_model->get_dateList();
         $profile_info = $this->basic_profile->get_profile_info();
 
         $home_town = '';
@@ -225,8 +232,8 @@ class Register extends CI_Controller {
                 'clg_or_uni'=>  $this->input->post('college'),
                 'employer'=>$this->input->post('employer'),
                 'gender_id'=>$this->input->post('gender_list'),
-                //'dob'=>date('Y-m-d',strtotime($this->input->post('birthday_day')."-".$this->input->post('birthday_month')."-".$this->input->post('birthday_year'))),
-                'dob'=> $dbo,
+                'dob'=>date('Y-m-d',strtotime($this->input->post('birthday_day')."-".$this->input->post('birthday_month')."-".$this->input->post('birthday_year'))),
+//                'dob'=> $dbo,
                 'country_id'=>$this->input->post('country_list'),
                 'occupation'=>$this->input->post('occupation')
             );
@@ -259,28 +266,26 @@ class Register extends CI_Controller {
                 $profile_id = $this->basic_profile->get_profile_id();
                 if ($profile_id > 0) {
                     //update profile
-                    $this->basic_profile->update_profile($profile_data);
+                   $update_response = $this->basic_profile->update_profile($profile_data);
+                   
                 }
                 else {
                     //insert profile for the first time
-                    $this->basic_profile->create_profile($profile_data);
+                    $create_response = $this->basic_profile->create_profile($profile_data);
                 }
                 $file_name = $upload_data['file_name'];
-                //creating profile picture with 50x50 resolution
-                $image_absolute_path = FCPATH.PROFILE_PICTURE_DISPLAY_PATH;
-                if( !is_dir($image_absolute_path) )
-                {
-                    mkdir($image_absolute_path, 0777, TRUE);
+                //creating profile picture with all possible resolution
+                $this->utils->resize_image(PROFILE_PICTURE_UPLOAD_PATH.$file_name, PROFILE_PICTURE_PATH_W50_H50.$file_name, PROFILE_PICTURE_H50, PROFILE_PICTURE_W50);
+                $this->utils->resize_image(PROFILE_PICTURE_UPLOAD_PATH.$file_name, PROFILE_PICTURE_PATH_W100_H100.$file_name, PROFILE_PICTURE_H100, PROFILE_PICTURE_W100);
+                $this->utils->resize_image(PROFILE_PICTURE_UPLOAD_PATH.$file_name, PROFILE_PICTURE_PATH_W32_H32.$file_name, PROFILE_PICTURE_H32, PROFILE_PICTURE_W32);
+               if($update_response != FALSE){
+                  $this->data['message'] = $this->basic_profile->messages_alert();
+               }elseif ($create_response != FALSE) {
+                   $this->data['message'] = $this->basic_profile->messages_alert(); 
                 }
-                $config['image_library'] = 'gd2';
-                $config['source_image'] =PROFILE_PICTURE_UPLOAD_PATH.$file_name;
-                $config['new_image'] = PROFILE_PICTURE_DISPLAY_PATH.$file_name;
-                $config['maintain_ratio'] = FALSE;
-                $config['width'] = 50;
-                $config['height'] = 50;
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
-                echo json_encode($data);
+                echo json_encode($this->data);
+                return;
+
             } else {
                 $this->data['message'] = $result['message'];
                 echo json_encode($this->data);
