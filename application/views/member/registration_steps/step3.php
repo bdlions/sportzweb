@@ -62,7 +62,7 @@
 
         // Change this to the location of your server-side upload handler:
         var url = '<?php echo base_url(); ?>register/step3',
-                uploadButton = $('<input type="submit" value="Save & Continue"/>').addClass('btn button-custom pull-right').text('Confirm').on('click', function() {
+        uploadButton = $('<input type="submit" value="Save & Continue"/>').addClass('btn button-custom pull-right').text('Confirm').on('click', function() {
             var $this = $(this), data = $this.data();
             $this.off('click').text('Abort').on('click', function() {
                 $this.remove();
@@ -125,6 +125,5 @@
             });
         }).prop('disabled', !$.support.fileInput)
                 .parent().addClass($.support.fileInput ? undefined : 'disabled');
-
-    });
+    
 </script>
