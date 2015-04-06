@@ -227,22 +227,22 @@
         <div class="col-md-12" style="padding-right: 5px"><!-- style doesnt work if moved to css file -->
             <ul class="list-inline list-unstyled member_profile_banner_images">
                 <li class="col-md-2">
-                    <img class="img-responsive" onclick="imgupload(0)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[0] ?>" alt="">
+                    <img class="img-responsive" onclick="imgupload(0)" src="<?php echo base_url().USER_PHOTO_LIST_IMAGE_PATH_W100_H100.$photo_list[0] ?>" alt="">
                 </li>
                 <li class="col-md-2">
-                    <img class="img-responsive" onclick="imgupload(1)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[1] ?>" alt="">
+                    <img class="img-responsive" onclick="imgupload(1)" src="<?php echo base_url().USER_PHOTO_LIST_IMAGE_PATH_W100_H100.$photo_list[1] ?>" alt="">
                 </li>
                 <li class="col-md-2">
-                    <img class="img-responsive" onclick="imgupload(2)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[2] ?>" alt="">
+                    <img class="img-responsive" onclick="imgupload(2)" src="<?php echo base_url().USER_PHOTO_LIST_IMAGE_PATH_W100_H100.$photo_list[2] ?>" alt="">
                 </li>
                 <li class="col-md-2">
-                    <img class="img-responsive" onclick="imgupload(3)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[3] ?>" alt="">
+                    <img class="img-responsive" onclick="imgupload(3)" src="<?php echo base_url().USER_PHOTO_LIST_IMAGE_PATH_W100_H100.$photo_list[3] ?>" alt="">
                 </li>
                 <li class="col-md-2">
-                    <img class="img-responsive" onclick="imgupload(4)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[4] ?>" alt="">
+                    <img class="img-responsive" onclick="imgupload(4)" src="<?php echo base_url().USER_PHOTO_LIST_IMAGE_PATH_W100_H100.$photo_list[4] ?>" alt="">
                 </li>
                 <li class="col-md-2">
-                    <img class="img-responsive" onclick="imgupload(5)" src="<?php echo base_url(); ?>resources/uploads/user_photo/<?php echo $photo_list[5] ?>" alt="">
+                    <img class="img-responsive" onclick="imgupload(5)" src="<?php echo base_url().USER_PHOTO_LIST_IMAGE_PATH_W100_H100.$photo_list[5] ?>" alt="">
                 </li>
             </ul>
         </div>
