@@ -13,8 +13,8 @@
                 data: {
                     id: $("#input_update_id").val(),
                     title: $("#input_update_title").val(),
-                    price: $("#input_update_pricing").val(),
-                    total_user: $("#input_update_total_user").val()
+//                    price: $("#input_update_pricing").val(),
+//                    total_user: $("#input_update_total_user").val()
                 },
                 success: function(data) {
                     alert(data['message']);
@@ -35,8 +35,8 @@
             success: function(data) {
                 $('#input_update_id').val(data.account_types_info['id']);
                 $('#input_update_title').val(data.account_types_info['title']);
-                $('#input_update_pricing').val(data.account_types_info['price']);
-                $('#input_update_total_user').val(data.account_types_info['total_user']);
+//                $('#input_update_pricing').val(data.account_types_info['price']);
+//                $('#input_update_total_user').val(data.account_types_info['total_user']);
                 $("#modal_update").modal('show');
             }
         });
@@ -59,20 +59,20 @@
                             <input id="input_update_id" name="input_update_id" value="" type="hidden" class="form-control"/>
                         </div>
                     </div>
-                    <div class="row form-group">
+<!--                    <div class="row form-group">
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Pricing:</label>
                         <div class ="col-sm-4">
                             <input id="input_update_pricing" name="input_update_pricing" value="" type="text" class="form-control"/>
                         </div>
-                    </div>
-                    <div class="row form-group">
+                    </div>-->
+<!--                    <div class="row form-group">
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Pricing:</label>
                         <div class ="col-sm-4">
                             <input id="input_update_total_user" name="input_update_total_user" value="" type="text" class="form-control"/>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="row form-group">
                         <div class ="col-sm-6"></div>
                         <div class ="col-sm-3">

@@ -15,8 +15,8 @@
                         <tr>
                             <th style="text-align: center">ID</th>
                             <th style="text-align: center">TITLE</th>
-                            <th style="text-align: center">PRICE</th>
-                            <th style="text-align: center">TOTAL USER</th>
+<!--                            <th style="text-align: center">PRICE</th>
+                            <th style="text-align: center">TOTAL USER</th>-->
                             <th style="text-align: center">EDIT</th>
                             <th style="text-align: center">DELETE</th>
                         </tr>
@@ -26,8 +26,8 @@
                         <tr>
                             <td style="text-align: center"><?php echo $type_info['id'];?></td>
                             <td style="text-align: center"><?php echo $type_info['title'];?></td>
-                            <td style="text-align: center"><?php echo $type_info['price'];?></td>
-                            <td style="text-align: center"><?php echo $type_info['total_user'];?></td>
+<!--                            <td style="text-align: center"><?php echo $type_info['price'];?></td>
+                            <td style="text-align: center"><?php echo $type_info['total_user'];?></td>-->
                             <?php if($allow_edit){ ?>
                                 <td style="text-align: center">
                                     <button onclick="open_modal_update(<?php echo $type_info['id']?>)" value="" class="form-control btn">

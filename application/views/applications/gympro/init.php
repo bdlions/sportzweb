@@ -14,7 +14,7 @@
         <div class="col-md-9">
             <div class="row form-group">
                 <div class="col-md-12">
-                    <span>The smarter way to fiend sports buddies and personal trainers</span>
+                    <span>Please select if you are a client or personal trainer</span>
                 </div>
             </div>
             <div class="row form-group">

@@ -34,7 +34,8 @@ class Register extends CI_Controller {
         $this->data["message"] = "";
         $this->data["gender_list"] = $this->dataprovider_model->getGenderList()->dropDownList('id', 'gender_name');
         $this->data["country_list"] = $this->dataprovider_model->getCountryList()->dropDownList('id', 'country_name');
-        $this->data['month_list']  = $this->dataprovider_model->get_monthList();
+       $month = $this->data['month_list']  = $this->dataprovider_model->get_monthList();
+//       var_dump($month);exit;
         $this->data["date_list"] = $this->dataprovider_model->get_dateList();
         $year = $this->data["year_list"] = $this->dataprovider_model->get_yearList();
         $profile_info = $this->basic_profile->get_profile_info();
@@ -167,35 +168,29 @@ class Register extends CI_Controller {
      * return value of the id
      */
     function step1(){
-        //print_r($this->input->post());
         $interests = $this->input->post();
-        if(is_array($interests))
-        {
-            $special_interest_list = array();
-            foreach ($interests as $key => $value) {
-                $ids = explode("_", $key);
-                $category_id = $ids [ 1 ];
-                $sub_category_id = $ids [ 2 ];
-                $special_interest_list[] = array('interest_id'=>$category_id, 'sub_interest_id' => $sub_category_id);
-            }
-            $profile_data = array(
-                'user_id' => $this->ion_auth->get_user_id(),
-                'special_interests' => json_encode($special_interest_list)
-            );
-           $profile_id = $this->basic_profile->get_profile_id();
-            if($profile_id > 0){
-                //update profile
-                echo $this->basic_profile->update_profile($profile_data);
-            }
-            else{
-                //insert profile for the first time
-                echo $this->basic_profile->create_profile($profile_data);
-            }
-            
+        if(empty($interests )){
+            $interests = array();
         }
-        else
-        {
-            echo true;
+        $special_interest_list = array();
+        foreach ($interests as $key => $value) {
+            $ids = explode("_", $key);
+            $category_id = $ids [ 1 ];
+            $sub_category_id = $ids [ 2 ];
+            $special_interest_list[] = array('interest_id'=>$category_id, 'sub_interest_id' => $sub_category_id);
+        }
+        $profile_data = array(
+            'user_id' => $this->ion_auth->get_user_id(),
+            'special_interests' => json_encode($special_interest_list)
+        );
+       $profile_id = $this->basic_profile->get_profile_id();
+        if($profile_id > 0){
+            //update profile
+            echo $this->basic_profile->update_profile($profile_data);
+        }
+        else{
+            //insert profile for the first time
+            echo $this->basic_profile->create_profile($profile_data);
         }
     }
     /**
@@ -204,6 +199,7 @@ class Register extends CI_Controller {
      */
     function step2(){
         $profile_id = $this->basic_profile->get_profile_id();
+        $dob=$this->input->post('birthday_day')."_".$this->input->post('birthday_month')."_".$this->input->post('birthday_year');
         $profile_data = array(
                 'user_id' => $this->ion_auth->get_user_id(),
                 'home_town' => $this->input->post('home_town'),
@@ -214,7 +210,6 @@ class Register extends CI_Controller {
                 'country_id'=>$this->input->post('country_list'),
                 'occupation'=>$this->input->post('occupation')
             );
-            var_dump($profile_data);exit;
         if($profile_id > 0){
             //update profile
             echo $this->basic_profile->update_profile($profile_data);

@@ -138,12 +138,12 @@ class Applications_gympro extends Admin_Controller{
         $result = array();
         $id = $this->input->post('id');
         $title = $this->input->post('title');
-        $price = $this->input->post('price');
-        $total_user = $this->input->post('total_user');
+//        $price = $this->input->post('price');
+//        $total_user = $this->input->post('total_user');
         $additional_data = array(
             'title' => $title,
-            'price' => $price,
-            'total_user' => $total_user,
+//            'price' => $price,
+//            'total_user' => $total_user,
             'modified_on' => now()
         );
         if($this->admin_gympro_library->update_account_types($id, $additional_data))
@@ -160,12 +160,12 @@ class Applications_gympro extends Admin_Controller{
     {
         $result = array();
         $title = $this->input->post('title');
-        $price = $this->input->post('price');
-        $total_user = $this->input->post('total_user');
+//        $price = $this->input->post('price');
+//        $total_user = $this->input->post('total_user');
         $additional_data = array(
             'title' => $title,
-            'price' => $price,
-            'total_user' => $total_user
+//            'price' => $price,
+//            'total_user' => $total_user
         );
         if($this->admin_gympro_library->create_account_types($additional_data))
         {

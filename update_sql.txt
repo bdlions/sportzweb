@@ -1,0 +1,6 @@
+UPDATE app_gympro_session_statuses SET title = 'Unpaid' WHERE id = '1';
+UPDATE app_gympro_session_statuses SET title = 'Pay Cash' WHERE id = '2';
+UPDATE app_gympro_session_statuses SET title = 'Pay Pt pro' WHERE id = '3';
+
+add data:
+INSERT INTO app_gympro_session_statuses ( title )VALUES( "Cancelled ");
