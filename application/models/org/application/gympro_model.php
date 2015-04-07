@@ -1215,6 +1215,17 @@ class Gympro_model extends Ion_auth_model {
                     ->get();
     }
     /*
+     * This method will return client sessions
+     * @Author Nazmul on 7th April 2015
+     */
+    public function get_client_sessions()
+    {
+        return $this->db->select($this->tables['app_gympro_sessions'].'.*, '. $this->tables['app_gympro_session_statuses'] . '.title as status_title')
+                    ->from($this->tables['app_gympro_sessions'])
+                    ->join($this->tables['app_gympro_session_statuses'], $this->tables['app_gympro_sessions'] . '.status_id = ' . $this->tables['app_gympro_session_statuses'] . '.id')
+                    ->get();
+    }
+    /*
      * This method will update sessions
      * @Author Nazmul on 22nd January 2015
      */

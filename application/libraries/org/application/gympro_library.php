@@ -259,6 +259,7 @@ class Gympro_library {
             $user_id = $this->session->userdata('user_id');
         }
         $session_list = array();
+        $session_list_array = array();
         $where = array();
         if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_EXTERNAL)
         {
@@ -266,18 +267,15 @@ class Gympro_library {
         }
         else if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
         {
-            $where = array(
-                'created_for_type_id' => SESSION_CREATED_FOR_CLIENT_TYPE_ID,
-                'reference_id' => $user_id
-            );
+            $session_list_array = $this->gympro_model->get_client_sessions()->result_array();
         }
         else
         {
             $where = array(
                 'user_id' => $user_id
             );
-        }
-        $session_list_array = $this->gympro_model->where($where)->get_all_sessions()->result_array();
+            $session_list_array = $this->gympro_model->where($where)->get_all_sessions()->result_array();
+        }        
         foreach($session_list_array as $session_info){
             $rep_date = $session_info['date'];
             if($session_info['type_id'] != GYMPRO_SINGLE_SESSION_TYPE_ID) {
