@@ -12,7 +12,7 @@ class Register extends CI_Controller {
         $this->load->library('org/utility/Utils');
         $this->load->library('org/question/security_question_library');
         $this->load->library("org/profile/business/business_profile_library");
-        $this->load->library('org/utility/Utils');
+//        $this->load->library('org/utility/Utils');
         $this->load->library("org/interest/special_interest");
         $this->load->helper('url');
         $this->load->model("dataprovider_model");
@@ -34,10 +34,12 @@ class Register extends CI_Controller {
         $this->data["message"] = "";
         $this->data["gender_list"] = $this->dataprovider_model->getGenderList()->dropDownList('id', 'gender_name');
         $this->data["country_list"] = $this->dataprovider_model->getCountryList()->dropDownList('id', 'country_name');
-       $month = $this->data['month_list']  = $this->dataprovider_model->get_monthList();
-//       var_dump($month);exit;
-        $this->data["date_list"] = $this->dataprovider_model->get_dateList();
-        $year = $this->data["year_list"] = $this->dataprovider_model->get_yearList();
+        $month_list = $this->data['month_list']  = $this->utils->get_monthList();
+        var_dump($month_list);
+        $date_list = $this->data["date_list"] = $this->utils->get_dateList();
+        var_dump($date_list);
+        $year_list = $this->data["year_list"] = $this->utils->get_yearList();
+        var_dump($year_list);
         $profile_info = $this->basic_profile->get_profile_info();
 
         $home_town = '';
@@ -199,14 +201,35 @@ class Register extends CI_Controller {
      */
     function step2(){
         $profile_id = $this->basic_profile->get_profile_id();
-        $dob=$this->input->post('birthday_day')."_".$this->input->post('birthday_month')."_".$this->input->post('birthday_year');
+//        $dob=$this->input->post('birthday_day')."_".$this->input->post('birthday_month')."_".$this->input->post('birthday_year');
+//        print_r($dob);
+        $dob = "";
+        if($this->input->post('birthday_day') > 9)
+        {
+            $dob = $this->input->post('birthday_day')."-";
+        }
+        else
+        {
+            $dob = "0".$this->input->post('birthday_day')."-";
+        }
+        if($this->input->post('birthday_month') > 9)
+        {
+            $dob = $dob.$this->input->post('birthday_month')."-";
+        }
+        else
+        {
+            $dob = $dob."0".$this->input->post('birthday_month')."-";
+        }
+        $dob = $dob.$this->input->post('birthday_year');
+        var_dump($dob);
+        $dob = $this->utils->convert_date_from_user_to_db($dob);
         $profile_data = array(
                 'user_id' => $this->ion_auth->get_user_id(),
                 'home_town' => $this->input->post('home_town'),
                 'clg_or_uni'=>  $this->input->post('college'),
                 'employer'=>$this->input->post('employer'),
                 'gender_id'=>$this->input->post('gender_list'),
-                'dob'=>$this->input->post('birthday_day')."_".$this->input->post('birthday_month')."_".$this->input->post('birthday_year'),
+                'dob'=>$dob,
                 'country_id'=>$this->input->post('country_list'),
                 'occupation'=>$this->input->post('occupation')
             );

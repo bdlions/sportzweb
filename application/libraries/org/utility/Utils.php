@@ -464,4 +464,57 @@ class Utils {
         $url);
         return nl2br($text);
     }
+    
+     /*
+  * this method return list of month
+  * @Rashida 6th April 2015
+  *  
+  *  */
+    
+ public function get_monthList(){
+        $months = array(
+                        1 => 'Jan',
+                        2 => 'Feb',
+                        3 => 'Mar',
+                        4 => 'Apr',
+                        5 => 'May',
+                        6 => 'Jun',
+                        7 => 'Jul',
+                        8 => 'Aug',
+                        9 => 'Sep',
+                        10 => 'Oct',
+                        11 => 'Nov',
+                        12 => 'Dec'
+            );
+        return $months;
+    }
+ /*
+  * this method return list of month
+  * @Rashida 6th April 2015
+  *  
+  *  */
+ public function get_dateList(){
+        for($i=1; $i<=31; $i++){
+            if($i < 10)
+		{
+			$date_list["0".$i] = "0".$i;
+		}  else {
+                    $date_list["".$i] = "".$i;
+                }
+	
+            
+        }
+        return $date_list;
+    }
+ /*
+  * this method return list of year
+  * @Rashida 6th April 2015
+  *  
+  *  */
+ public function get_yearList(){
+        for($i=2011; $i>=1905; $i--){
+            $year_list[] = "".$i;
+        }
+        return $year_list;
+    }
 }

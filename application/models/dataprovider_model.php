@@ -55,43 +55,6 @@ class DataProvider_model extends Ion_auth_model {
                                    ->get($this->tables['countries'])->result();
         return $this;
     }
-    public function get_monthList(){
-        
-        $months = array(
-                        '01' => 'Jan',
-                        '02' => 'Feb',
-                        '03' => 'Mar',
-                        '04' => 'Apr',
-                        '05' => 'May',
-                        '06' => 'Jun',
-                        '07' => 'Jul',
-                        '08' => 'Aug',
-                        '09' => 'Sep',
-                        '10' => 'Oct',
-                        '11' => 'Nov',
-                        '12' => 'Dec'
-            );
-        return $months;
-    }
-    public function get_dateList(){
-        for($i=1; $i<=31; $i++){
-            if($i < 10)
-		{
-			$date_list[] = "0".$i;
-		}  else {
-                    $date_list[] = "".$i;
-                }
-	
-            
-        }
-        return $date_list;
-    }
-    public function get_yearList(){
-        for($i=2011; $i>=1905; $i--){
-            $year_list[] = "".$i;
-        }
-        return $year_list;
-    }
 
     public function dropDownList($label_field, $value_field){
         $resultList = array();

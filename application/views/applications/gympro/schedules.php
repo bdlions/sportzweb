@@ -26,6 +26,7 @@
 </style>
 <script>
     $(document).ready(function() {
+        
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next',
@@ -49,6 +50,10 @@
                 $('#session_location').html(event.session_info.location);
                 $('#session_cost').html(event.session_info.cost);
                 $('#session_status').html(event.session_info.status_title);
+                status_id = event.session_info.status_id;
+                if(status_id == '<?php echo GYMPRO_SESSION_STATUS_UNPAID_ID ?>'){
+                $('#pay_session_button').show();  
+                }
                 var edit_href = document.getElementById('session_edit');
                 edit_href.href += event.session_info.id;
                 $("#selected_session").val(event.session_info.id);
@@ -78,7 +83,7 @@
                 }
             });
         });
-        
+   
     });
     
     function show_session(){
@@ -174,7 +179,7 @@
             <!--FOR CLIENT-->
             <div class="modal-footer" style="display: <?php echo ($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)? 'block' :'none'; ?>">
                 <button class="btn btn_gympro button-custom" onclick="show_session()">Show Session Details</button>
-                <button class="btn btn_gympro button-custom" onclick="pay_session()">Pay Session</button>
+                <button id="pay_session_button" class="btn btn_gympro button-custom" onclick="pay_session()" style="display: none">Pay Session</button>
                 <button type="button" class="btn btn_gympro button-custom" data-dismiss="modal">Close</button>
             </div>
         </div>

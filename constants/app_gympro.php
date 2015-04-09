@@ -1,9 +1,8 @@
 <?php
 define("APP_GYMPRO_ACCOUNT_TYPE_ID_EXTERNAL",               0);
 define("APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT",                 1);
-define("APP_GYMPRO_ACCOUNT_TYPE_ID_LIGHTWEIGHT",            2);
-define("APP_GYMPRO_ACCOUNT_TYPE_ID_MIDDLEWEIGHT",           3);
-define("APP_GYMPRO_ACCOUNT_TYPE_ID_HEAVYWEIGHT",            4);
+define("APP_GYMPRO_ACCOUNT_TYPE_ID_PERSONAL_TRAINER",       2);
+
 
 define("APP_GYMPRO_MANAGE_CLIENTS_CLIENTS_PER_ROW",         2);
 define("APP_GYMPRO_PROGRAMMES_PER_ROW",                     2);
@@ -40,6 +39,7 @@ define("GYMPRO_REPEATED_WEEKLY_TYPE_ID",                    "3");
 define("GYMPRO_REPEATED_BIWEEKLY_TYPE_ID",                  "4");
 define("GYMPRO_REPEATED_MONTHLY_TYPE_ID",                   "5");
 
-define("GYMPRO_SESSION_STATUS_PREPAID_ID",                   "1");
-define("GYMPRO_SESSION_STATUS_PAID_ID",                      "2");
-define("GYMPRO_SESSION_STATUS_CANCELLED_ID",                 "3");
+define("GYMPRO_SESSION_STATUS_UNPAID_ID",                    "1");
+define("GYMPRO_SESSION_STATUS_PAY_CASH_ID",                  "2");
+define("GYMPRO_SESSION_STATUS_PAY_PT_PRO_ID",                "3");
+define("GYMPRO_SESSION_STATUS_CANCELLED_ID",                 "4");
