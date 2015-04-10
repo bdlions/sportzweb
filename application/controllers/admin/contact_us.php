@@ -57,10 +57,10 @@ class Contact_us extends Admin_Controller{
             {
                 $this->data['allow_write'] = TRUE;
             }
-            if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
+            if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_EDIT, $access_level_mapping))
             {
                 $this->data['allow_edit'] = TRUE;
-            }if(array_key_exists(ADMIN_ACCESS_LEVEL_APPLICATION_XSTREAM_BANTER_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE, $access_level_mapping))
+            }if(array_key_exists(ADMIN_ACCESS_LEVEL_FOOTER_CONTACT_US_ID.'_'.ADMIN_ACCESS_LEVEL_DELETE, $access_level_mapping))
             {
                 $this->data['allow_delete'] = TRUE;
             }

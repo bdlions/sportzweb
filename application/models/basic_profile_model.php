@@ -130,6 +130,9 @@ class Basic_Profile_model extends Ion_auth_model {
         $pg_info = new stdClass();
         $pg_info->id = APPLICATION_PHOTOGRAPHY_ID;        
         $app_list[] = $pg_info;
+        $ptpro_info = new stdClass();
+        $ptpro_info->id = APPLICATION_GYMPRO_ID;        
+        $app_list[] = $ptpro_info;
         $profile_data['application_list'] = json_encode($app_list);
         
         $profile_data = $this->_filter_data($this->tables['basic_profile'], $profile_data);

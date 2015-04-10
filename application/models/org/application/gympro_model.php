@@ -1199,21 +1199,15 @@ class Gympro_model extends Ion_auth_model {
      * @Author Nazmul on 24th January 2015
      * edited by Tanveer Ahmed 25 feb
      */
-    public function get_all_sessions($user_id = 0)
+    public function get_all_sessions()
     {
         //run each where that was passed
         if (isset($this->_ion_where) && !empty($this->_ion_where)) {
             foreach ($this->_ion_where as $where) {
                 $this->db->where($where);
             }
-
             $this->_ion_where = array();
         }
-//        if($user_id == 0)
-//        {
-//            $user_id = $this->session->userdata('user_id');
-//        }
-//        $this->db->where('user_id', $user_id);
         return $this->db->select($this->tables['app_gympro_sessions'].'.*, '. $this->tables['app_gympro_session_statuses'] . '.title as status_title')
                     ->from($this->tables['app_gympro_sessions'])
                     ->join($this->tables['app_gympro_session_statuses'], $this->tables['app_gympro_sessions'] . '.status_id = ' . $this->tables['app_gympro_session_statuses'] . '.id')
@@ -1221,13 +1215,20 @@ class Gympro_model extends Ion_auth_model {
     }
     /*
      * This method will return client sessions
+     * @param $member_id, user id of the main site
      * @Author Nazmul on 7th April 2015
      */
-    public function get_client_sessions()
+    public function get_client_sessions($member_id = 0)
     {
+        if($member_id == 0){
+            $member_id = $this->session->userdata('user_id');
+        }
+        $this->db->where($this->tables['app_gympro_sessions'].'.created_for_type_id', SESSION_CREATED_FOR_CLIENT_TYPE_ID);
+        $this->db->where($this->tables['app_gympro_clients'].'.member_id', $member_id);
         return $this->db->select($this->tables['app_gympro_sessions'].'.*, '. $this->tables['app_gympro_session_statuses'] . '.title as status_title')
                     ->from($this->tables['app_gympro_sessions'])
                     ->join($this->tables['app_gympro_session_statuses'], $this->tables['app_gympro_sessions'] . '.status_id = ' . $this->tables['app_gympro_session_statuses'] . '.id')
+                    ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id = ' . $this->tables['app_gympro_sessions'] . '.reference_id')
                     ->get();
     }
     /*

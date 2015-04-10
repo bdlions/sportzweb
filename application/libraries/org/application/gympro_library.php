@@ -268,7 +268,7 @@ class Gympro_library {
         }
         else if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
         {
-            $session_list_array = $this->gympro_model->get_client_sessions()->result_array();
+            $session_list_array = $this->gympro_model->get_client_sessions($user_id)->result_array();
         }
         else
         {
