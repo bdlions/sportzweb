@@ -138,6 +138,7 @@ class Gympro_library {
         }
         return $client_id_list;
     }
+
     /*
      * This method will return all client info of a group
      * @param $group_id, group id

@@ -34,14 +34,17 @@
                     <div class="row form-group">
                         <div class="col-md-4 content_text">Group / Client</div>
                         <div class="col-md-8">
-                            <?php foreach ($group_list as $group_info){
-                                if('1' == $session_info['created_for_type_id'] && $session_info['reference_id'] == $group_info['group_id']){
-                                    echo $group_info['title'].' (group)';
+                            <?php 
+                                if (($session_info['created_for_type_id']) == SESSION_CREATED_FOR_GROUP_TYPE_ID) {
+                                 foreach ($group_list as $group_info) {
+                                    echo $group_info['title'] . ' (group)';
                                     break;
                                 }
-                            } ?>
-                            <?php foreach ($client_list as $client_info){
-                                if('2' == $session_info['created_for_type_id'] && $session_info['reference_id'] == $client_info['client_id']){
+                            }
+                            ?>
+                            <?php 
+                                if (($session_info['created_for_type_id']) == SESSION_CREATED_FOR_CLIENT_TYPE_ID){
+                                  foreach ($client_list as $client_info){
                                     echo $client_info['first_name'].' (client)';
                                     break;
                                 }

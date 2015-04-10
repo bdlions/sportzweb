@@ -2881,18 +2881,17 @@ class Gympro extends Role_Controller{
         if(empty($gympro_user_data)){
             redirect('applications/gympro/pt_home','refresh');
         }
-        $session_info = $this->gympro_library->get_session_info($session_id)->result_array();
-        if(!empty($session_info)){
+         $session_info = $this->gympro_library->get_session_info($session_id)->result_array();
+        if (!empty($session_info)) {
             $session_info = $session_info[0];
-            if($session_info['user_id']!=$user_id)
-            {
-//                $this->data['message']= $this->lang->line('user_sessionid_mismatch');
-//                $this->template->load(null,'applications/gympro/display_message', $this->data);
-//                return;
+            $session_created_type_id = $session_info['reference_id'];
+            if (($session_info['created_for_type_id']) == SESSION_CREATED_FOR_CLIENT_TYPE_ID) {
+                $this->data['client_list'] = $this->gympro_library->get_client_info($session_created_type_id)->result_array();
+            } else if (($session_info['created_for_type_id']) == SESSION_CREATED_FOR_GROUP_TYPE_ID) {
+                $this->data['group_list'] = $this->gympro_library->get_group_info($session_created_type_id)->result_array();
             }
             $session_info['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session_info['date']);
-        }
-        else{
+        } else{
             redirect('applications/gympro/schedule', 'refresh');
         }
         $this->data['session_id']       = $session_id;
@@ -2902,8 +2901,6 @@ class Gympro extends Role_Controller{
         $this->data['session_types']    = $this->gympro_library->get_all_session_types()->result_array();
         $this->data['session_repeats']  = $this->gympro_library->get_all_session_repeats()->result_array();
         $this->data['session_costs']    = $this->gympro_library->get_all_session_costs()->result_array();
-        $this->data['client_list']      = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
-        $this->data['group_list']       = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
         $this->data['dont_show_cost_text']  =0;
         foreach ($this->data['session_costs'] as $cost) {
             if($cost['title'] == $session_info['cost']){$this->data['dont_show_cost_text']=1;}

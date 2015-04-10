@@ -291,16 +291,20 @@ class Gympro_model extends Ion_auth_model {
     }
     /*
      * This method will return client info
-     * @param $client_id, client id
-     * @Author Nazmul on 17th November 2014
+     * @param $client_id
+     * @Author Rashida on 10th April 2015
      */
     public function get_client_info($client_id)
     {
         $this->db->where($this->tables['app_gympro_clients'].'.id', $client_id);
-        return $this->db->select($this->tables['app_gympro_clients'].'.id as client_id,'.$this->tables['app_gympro_clients'].'.*')
+        return $this->db->select($this->tables['app_gympro_clients'].'.id as client_id,'.$this->tables['app_gympro_clients'].'.*,'.$this->tables['app_gympro_client_statuses'].'.title as status_title,'.$this->tables['users'].'.first_name,'.$this->tables['users'].'.last_name,'.$this->tables['basic_profile'].'.photo as picture')
                     ->from($this->tables['app_gympro_clients'])
+                    ->join($this->tables['app_gympro_client_statuses'], $this->tables['app_gympro_client_statuses'] . '.id=' . $this->tables['app_gympro_clients'] . '.status_id')
+                    ->join($this->tables['users'], $this->tables['users'] . '.id=' . $this->tables['app_gympro_clients'] . '.member_id')
+                    ->join($this->tables['basic_profile'], $this->tables['basic_profile'] . '.user_id=' . $this->tables['users'] . '.id')
                     ->get();
     }
+
     /*
      * This method will return client info
      * @param $client_id, client id
@@ -331,6 +335,7 @@ class Gympro_model extends Ion_auth_model {
                     ->from($this->tables['app_gympro_groups'])
                     ->get();
     }
+  
     /*
      * This method will return group info
      * @param $group_id, group id
