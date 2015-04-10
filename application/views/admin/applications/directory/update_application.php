@@ -54,8 +54,14 @@ window.onload = function()
                             <?php echo form_input($title + array('class' => 'form-control')); ?>
                         </div> 
                     </div>
-                    
-                    
+                    <div class="form-group">
+                        <label for="name" class="col-md-3 control-label requiredField">
+                            Application Order
+                        </label>
+                        <div class ="col-md-9">
+                            <?php echo form_input($app_order + array('class' => 'form-control')); ?>
+                        </div> 
+                    </div>
                     <div class="form-group">
                         <label for="description" class="col-md-3 control-label requiredField">
                             Description

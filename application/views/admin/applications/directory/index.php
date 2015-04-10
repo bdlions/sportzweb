@@ -18,6 +18,7 @@
                             <tr>
                                 <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Name</th>
+                                <th style="text-align: center;">Application Order</th>
                                 <th style="text-align: center;">Description</th> 
                                 <?php if ($allow_edit) { ?>
                                 <th style="text-align: center;">Edit</th> 
@@ -37,6 +38,9 @@
                                             <div id="app_title_<?php echo $row['id']; ?>">
                                                 <?php echo $row['title']; ?>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['applications_order']; ?>
                                         </td>
                                         <td>
                                             <?php echo $row['description']; ?>
