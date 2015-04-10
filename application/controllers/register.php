@@ -66,7 +66,6 @@ class Register extends CI_Controller {
             $photo = $profile_info->photo;
             $occupation = $profile_info->occupation;
             $selected_interests = json_decode($profile_info->special_interests);
-            //print_r($selected_interests);
             if (is_array($selected_interests)) {
                 $selected_special_interest = array();
                 foreach ($selected_interests as $value) {
@@ -221,7 +220,6 @@ class Register extends CI_Controller {
             $dob = $dob."0".$this->input->post('birthday_month')."-";
         }
         $dob = $dob.$this->input->post('birthday_year');
-        var_dump($dob);
         $dob = $this->utils->convert_date_from_user_to_db($dob);
         $profile_data = array(
                 'user_id' => $this->ion_auth->get_user_id(),

@@ -465,7 +465,7 @@ class Utils {
         return nl2br($text);
     }
     
-     /*
+  /*
   * this method return list of month
   * @Rashida 6th April 2015
   *  
@@ -473,6 +473,7 @@ class Utils {
     
  public function get_monthList(){
         $months = array(
+                        0=>'month',
                         1 => 'Jan',
                         2 => 'Feb',
                         3 => 'Mar',
@@ -493,28 +494,29 @@ class Utils {
   * @Rashida 6th April 2015
   *  
   *  */
- public function get_dateList(){
-        for($i=1; $i<=31; $i++){
-            if($i < 10)
-		{
-			$date_list["0".$i] = "0".$i;
-		}  else {
-                    $date_list["".$i] = "".$i;
-                }
-	
-            
+ public function get_dateList() {
+        $date_list[0] = "date";
+        for ($i = 1; $i <= 31; $i++) {
+            if ($i < 10) {
+                $date_list[$i] = "0" . $i;
+            } else {
+                $date_list[$i] = "" . $i;
+            }
         }
         return $date_list;
     }
- /*
+
+  /*
   * this method return list of year
   * @Rashida 6th April 2015
   *  
   *  */
- public function get_yearList(){
-        for($i=2011; $i>=1905; $i--){
-            $year_list[] = "".$i;
+ public function get_yearList() {
+        $year_list[0] = "year";
+        for ($i = 2011; $i >= 1905; $i--) {
+            $year_list[$i] = "" . $i;
         }
         return $year_list;
     }
+
 }
