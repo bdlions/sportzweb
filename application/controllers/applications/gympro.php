@@ -745,7 +745,7 @@ class Gympro extends Role_Controller{
                     $result['message'] = $this->gympro_library->errors_alert();
                 }
             } else {
-                $result['message'] = validation_errors();
+                $result['message'] = strip_tags(validation_errors());
             }
             echo json_encode($result);
             return;

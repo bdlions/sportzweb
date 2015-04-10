@@ -1941,7 +1941,7 @@ class Payments_pro extends CI_Controller {
             // Successful call.  Load view or whatever you need to do here.
             //update session status
             $additional_data = array(
-                'status_id' => GYMPRO_SESSION_STATUS_PAID_ID
+                'status_id' => GYMPRO_SESSION_STATUS_PAY_PT_PRO_ID
             );
             $session_update_id = $this->gympro_library->update_session($schedule_id, $additional_data);
             if ($session_update_id == TRUE) {

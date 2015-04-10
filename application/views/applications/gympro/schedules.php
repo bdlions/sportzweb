@@ -52,7 +52,11 @@
                 $('#session_status').html(event.session_info.status_title);
                 status_id = event.session_info.status_id;
                 if(status_id == '<?php echo GYMPRO_SESSION_STATUS_UNPAID_ID ?>'){
-                $('#pay_session_button').show();  
+                    $('#pay_session_button').show();  
+                }
+                else
+                {
+                    $('#pay_session_button').hide();  
                 }
                 var edit_href = document.getElementById('session_edit');
                 edit_href.href += event.session_info.id;

@@ -1824,17 +1824,13 @@ ALTER TABLE `app_sp_configure_homepage`
 CREATE TABLE IF NOT EXISTS `app_gympro_account_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
-  `price` varchar(200),
-  `total_user` int(11) NOT NULL DEFAULT 0,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-INSERT INTO `app_gympro_account_types` (`title`, `price`, `total_user`) VALUES
-('Client', 0, 0),
-('Personal Trainer Lightweight', 0, 5),
-('Personal Trainer Middleweight', 10, 30),
-('Personal Trainer Heavyweight', 25, 100000);
+INSERT INTO `app_gympro_account_types` (`title`) VALUES
+('Client'),
+('Personal Trainer');
 CREATE TABLE IF NOT EXISTS `app_gympro_height_unit_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
@@ -2901,8 +2897,9 @@ CREATE TABLE IF NOT EXISTS `app_gympro_session_statuses` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 INSERT INTO `app_gympro_session_statuses` (`title`) VALUES
-('Prepaid'),
-('Paid'),
+('Unpaid'),
+('Paid Cash'),
+('Paid PTPro'),
 ('Cancelled');
 CREATE TABLE IF NOT EXISTS `app_gympro_sessions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
