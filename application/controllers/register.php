@@ -34,12 +34,9 @@ class Register extends CI_Controller {
         $this->data["message"] = "";
         $this->data["gender_list"] = $this->dataprovider_model->getGenderList()->dropDownList('id', 'gender_name');
         $this->data["country_list"] = $this->dataprovider_model->getCountryList()->dropDownList('id', 'country_name');
-        $month_list = $this->data['month_list']  = $this->utils->get_monthList();
-        var_dump($month_list);
-        $date_list = $this->data["date_list"] = $this->utils->get_dateList();
-        var_dump($date_list);
-        $year_list = $this->data["year_list"] = $this->utils->get_yearList();
-        var_dump($year_list);
+        $this->data['month_list']  = $this->utils->get_monthList();
+        $this->data["date_list"] = $this->utils->get_dateList();
+        $this->data["year_list"] = $this->utils->get_yearList();
         $profile_info = $this->basic_profile->get_profile_info();
 
         $home_town = '';
@@ -200,8 +197,6 @@ class Register extends CI_Controller {
      */
     function step2(){
         $profile_id = $this->basic_profile->get_profile_id();
-//        $dob=$this->input->post('birthday_day')."_".$this->input->post('birthday_month')."_".$this->input->post('birthday_year');
-//        print_r($dob);
         $dob = "";
         if($this->input->post('birthday_day') > 9)
         {
