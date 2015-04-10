@@ -87,15 +87,18 @@ class Applications_directory extends Admin_Controller{
     {
         $this->data['message'] = '';
         $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        $this->form_validation->set_rules('app_order', 'Applications Order', 'xss_clean|required');
         $this->form_validation->set_rules('description', 'Description', 'xss_clean|required');
         $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');        
         if($this->input->post())
         {       
             $app_title = trim(htmlentities($this->input->post('title')));
+            $app_order = trim(htmlentities($this->input->post('app_order')));
             $description = trim(htmlentities($this->input->post('description')));
             $summary = trim(htmlentities($this->input->post('summary_editortext')));
             $data = array(
                 'title' => $app_title,
+                'applications_order' => $app_order,
                 'description' => $description,
                 'summary' => $summary,
                 'created_on' => now()
@@ -116,6 +119,12 @@ class Applications_directory extends Admin_Controller{
             'id' => 'title',
             'type' => 'text',
             'value' => $this->form_validation->set_value('title'),
+        );        
+        $this->data['app_order'] = array(
+            'name' => 'app_order',
+            'id' => 'app_order',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('app_order'),
         );        
         $this->data['description'] = array(
             'name' => 'description',
@@ -146,6 +155,7 @@ class Applications_directory extends Admin_Controller{
         }
         $this->data['message'] = '';
         $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        $this->form_validation->set_rules('app_order', 'Applications Order', 'xss_clean|required');
         $this->form_validation->set_rules('description', 'Description', 'xss_clean|required');
         $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
         
@@ -159,11 +169,13 @@ class Applications_directory extends Admin_Controller{
         if($this->input->post())
         {     
             $app_title = $this->input->post('title');
+            $app_order = $this->input->post('app_order');
             $description = trim(htmlentities($this->input->post('description')));
             $summary = trim(htmlentities($this->input->post('summary_editortext')));
 
             $data = array(
                 'title' => $app_title,
+                'applications_order' => $app_order,
                 'description' => $description,
                 'summary' => $summary,
                 'modified_on' => now()
@@ -184,7 +196,13 @@ class Applications_directory extends Admin_Controller{
             'id' => 'title',
             'type' => 'text',
             'value' => $application_info['title'],
-        );        
+        );  
+        $this->data['app_order'] = array(
+            'name' => 'app_order',
+            'id' => 'app_order',
+            'type' => 'text',
+            'value' => $application_info['applications_order'],
+        ); 
         $this->data['description'] = array(
             'name' => 'description',
             'id' => 'description',
