@@ -360,6 +360,7 @@ class Gympro extends Role_Controller{
         if(!empty($member_info_array))
         {
             $member_info = $member_info_array[0];
+            $member_info['dob']=$this->utils->convert_date_from_db_to_user($member_info['dob']);
         }
         else
         {
