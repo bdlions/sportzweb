@@ -450,7 +450,7 @@ CREATE TABLE IF NOT EXISTS `basic_profile` (
   `clg_or_uni` varchar(30),
   `employer` varchar(20),
   `gender_id` int(11) unsigned,
-  `dob` datetime,
+  `dob` varchar(30),
   `country_id` int(11) unsigned,
   `photo` varchar(100),
   `fav_team` varchar(30),
@@ -1023,6 +1023,7 @@ CREATE TABLE IF NOT EXISTS `application_directory` (
   `img_gallery` text,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
+  `order` int(11) Default 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 INSERT INTO `application_directory` (`id`, `title`) VALUES
@@ -3317,3 +3318,13 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
   `counter` int(11) unsigned DEFAULT 0,
   PRIMARY KEY(`hashtag`) 
 );
+-- notifications
+CREATE TABLE IF NOT EXISTS `notification_list`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `list` text,
+  PRIMARY KEY(`id`)
+)AUTO_INCREMENT=1;
+ALTER TABLE `notification_list`
+ADD CONSTRAINT `fk_notification_list` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION ;
+

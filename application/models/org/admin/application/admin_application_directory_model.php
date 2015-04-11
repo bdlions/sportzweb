@@ -44,7 +44,7 @@ class Admin_application_directory_model extends Ion_auth_model {
     public function get_all_applications() {
         return $this->db->select($this->tables['application_directory'] . ".*")
                         ->from($this->tables['application_directory'])
-                        ->order_by('applications_order', 'asc')
+                        ->order_by('order', 'asc')
                         ->get();
     }
 

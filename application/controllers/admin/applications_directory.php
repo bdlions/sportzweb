@@ -98,7 +98,7 @@ class Applications_directory extends Admin_Controller{
             $summary = trim(htmlentities($this->input->post('summary_editortext')));
             $data = array(
                 'title' => $app_title,
-                'applications_order' => $app_order,
+                'order' => $app_order,
                 'description' => $description,
                 'summary' => $summary,
                 'created_on' => now()
@@ -175,7 +175,7 @@ class Applications_directory extends Admin_Controller{
 
             $data = array(
                 'title' => $app_title,
-                'applications_order' => $app_order,
+                'order' => $app_order,
                 'description' => $description,
                 'summary' => $summary,
                 'modified_on' => now()
@@ -201,7 +201,7 @@ class Applications_directory extends Admin_Controller{
             'name' => 'app_order',
             'id' => 'app_order',
             'type' => 'text',
-            'value' => $application_info['applications_order'],
+            'value' => $application_info['order'],
         ); 
         $this->data['description'] = array(
             'name' => 'description',

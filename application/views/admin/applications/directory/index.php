@@ -40,7 +40,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <?php echo $row['applications_order']; ?>
+                                            <?php echo $row['order']; ?>
                                         </td>
                                         <td>
                                             <?php echo $row['description']; ?>
