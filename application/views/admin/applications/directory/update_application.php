@@ -150,7 +150,7 @@ $(function () {
             data: $("#form_update_application_directory").serializeArray(),
             success: function(data) {
                 alert(data.message);
-                window.location = '<?php echo base_url();?>admin/applications_directory/update_application/<?php echo $application_info["id"]; ?>';
+                window.location = '<?php echo base_url();?>admin/applications_directory/';
             }
         });
     });
