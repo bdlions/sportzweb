@@ -65,7 +65,8 @@ class Member_profile extends Role_Controller{
         $this->data['myself'] = $this->data['basic_profile'];
                 
         
-        $this->data['user_id'] = $this->ion_auth->get_user_id();
+        //$this->data['user_id'] = $this->ion_auth->get_user_id();
+        $this->data['user_id'] = $user_id;
         
         $photo_list = $this->profile->get_photo_list($user_id)->result_array();
         $photo = array();
