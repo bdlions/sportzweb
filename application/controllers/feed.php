@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Feed extends Role_Controller{
+class Feed extends Role_Controller {
 
     function __construct() {
         parent::__construct();
@@ -15,7 +15,8 @@ class Feed extends Role_Controller{
         $this->load->library("Trending_features");
         $this->load->library("users_album");
         $this->load->library("org/utility/utils");
-        
+        $this->load->library('notification');
+
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->library('mongo_db') :
@@ -32,42 +33,37 @@ class Feed extends Role_Controller{
     function index() {
         
     }
-    
-    function post_status()
-    {
+
+    function post_status() {
         $result = array();
         $status_data = $this->input->post();
-        if($status_data['description'] == "" && !isset($status_data['uploaded_image']) ){
+        if ($status_data['description'] == "" && !isset($status_data['uploaded_image'])) {
             echo STATUS_POST_EMPTY_ERROR;
             return;
         }
         $status_data["description"] = htmlentities($this->grabYoutubeVideo($status_data["description"]));
         $user_list_array = explode(",", $status_data['user_list']);
         $reference_list = array();
-        foreach($user_list_array as $user_id)
-        {
-            if($user_id != '')
-            {
+        foreach ($user_list_array as $user_id) {
+            if ($user_id != '') {
                 $user_info = new stdClass();
                 $user_info->id = $user_id;
                 //type_id 1 is user id
                 $user_info->type_id = 1;
                 $reference_list[] = $user_info;
-            }            
-        }        
+            }
+        }
         $status_data["reference_list"] = json_encode($reference_list);
-        if(isset($status_data['uploaded_image']))
-        {
-            /*$attachment_array = array();
-            $this->utils->copy_image_from_source_to_destination(STATUS_IMAGE_UPLOAD_TEMP_PATH, STATUS_IMAGE_UPLOAD_PATH, $status_data['uploaded_image']);
-            $current_attachment = new stdClass();
-            $current_attachment->type = STATUS_ATTACHMENT_IMAGE;
-            $current_attachment->name = $status_data['uploaded_image'];
-            $attachment_array[] = $current_attachment;
-            $status_data["attachments"] = json_encode($attachment_array);*/
-            
-            if($status_data["status_category_id"] == STATUS_LIST_NEWSFEED || $status_data["status_category_id"] == STATUS_LIST_USER_PROFILE)
-            {
+        if (isset($status_data['uploaded_image'])) {
+            /* $attachment_array = array();
+              $this->utils->copy_image_from_source_to_destination(STATUS_IMAGE_UPLOAD_TEMP_PATH, STATUS_IMAGE_UPLOAD_PATH, $status_data['uploaded_image']);
+              $current_attachment = new stdClass();
+              $current_attachment->type = STATUS_ATTACHMENT_IMAGE;
+              $current_attachment->name = $status_data['uploaded_image'];
+              $attachment_array[] = $current_attachment;
+              $status_data["attachments"] = json_encode($attachment_array); */
+
+            if ($status_data["status_category_id"] == STATUS_LIST_NEWSFEED || $status_data["status_category_id"] == STATUS_LIST_USER_PROFILE) {
                 $this->utils->copy_image_from_source_to_destination(STATUS_IMAGE_UPLOAD_TEMP_PATH, ALBUM_IMAGE_PATH, $status_data['uploaded_image']);
                 //adding this picture into profile picture album
                 $photo_data = array(
@@ -77,83 +73,70 @@ class Feed extends Role_Controller{
                 $status_data["status_type_id"] = STATUS_TYPE_IMAGE_ATTACHMENT;
                 $status_data["reference_id"] = $photo_id;
             }
-            
         }
         $status_id = $this->statuses->post_status($status_data);
-        if( $status_id !== FALSE)
-        {
+        if ($status_id !== FALSE) {
             $hashtag_list_array = explode(",", $status_data['hashtag_list']);
-            foreach($hashtag_list_array as $hashtag)
-            {
-                if($hashtag != '')
-                {
+            foreach ($hashtag_list_array as $hashtag) {
+                if ($hashtag != '') {
                     $this->trending_features->store_hashtag($hashtag, $status_id);
-                }            
-            } 
-            if(strpos($status_data["description"], "<object" ) !== false){
-                echo STATUS_POST_REFRESH;
+                }
             }
-            else{
+            if (strpos($status_data["description"], "<object") !== false) {
+                echo STATUS_POST_REFRESH;
+            } else {
                 echo STATUS_POST_SUCCESS;
             }
-        }
-        else
-        {
+        } else {
             echo STATUS_POST_INSERTION_ERROR;
         }
     }
+
     /**
      * Remote function call
      */
-    function post($status_place_type, $follower_id = 0){
+    function post($status_place_type, $follower_id = 0) {
         $status_data = $this->input->post();
-        if($status_data['description'] == "" && !isset($status_data['attachments']) ){
+        if ($status_data['description'] == "" && !isset($status_data['attachments'])) {
             echo STATUS_POST_EMPTY_ERROR;
         }
         //echo $this->grabYoutubeVideo($status_data->description);
         $status_data["description"] = htmlentities($this->grabYoutubeVideo($status_data["description"]));
         $user_list_array = explode(",", $status_data['user_list']);
         $reference_list = array();
-        foreach($user_list_array as $user_id)
-        {
-            if($user_id != '')
-            {
+        foreach ($user_list_array as $user_id) {
+            if ($user_id != '') {
                 $user_info = new stdClass();
                 $user_info->user_id = $user_id;
                 //type_id 1 is user id
                 $user_info->type_id = 1;
                 $reference_list[] = $user_info;
-            }            
-        }        
+            }
+        }
         $status_data["reference_list"] = json_encode($reference_list);
         //echo json_encode($status_data);
         $status = $this->newsfeed->post_status($status_data, array("status_in" => $status_place_type, "album_id" => $this->input->post("attachments")), $follower_id);
-        if( $status == FALSE){
+        if ($status == FALSE) {
             echo STATUS_POST_INSERTION_ERROR;
-        }
-        else{
-            if(strpos($status->description, "<object" ) !== false){
+        } else {
+            if (strpos($status->description, "<object") !== false) {
                 echo STATUS_POST_REFRESH;
-            }
-            else{
+            } else {
                 echo json_encode($status);
             }
         }
     }
-    
-    function get_statuses($status_list_id, $mapping_id, $limit, $offset, $hashtag = ''){
-        if($status_list_id == STATUS_LIST_HASHTAG)
-        {
+
+    function get_statuses($status_list_id, $mapping_id, $limit, $offset, $hashtag = '') {
+        if ($status_list_id == STATUS_LIST_HASHTAG) {
             $status_ids = $this->trending_features->get_status_ids_hashtag($hashtag);
             $newsfeeds = $this->statuses->get_statuses($status_list_id, $mapping_id, $limit, $offset, $status_ids);
-        }
-        else
-        {
+        } else {
             $newsfeeds = $this->statuses->get_statuses($status_list_id, $mapping_id, $limit, $offset);
-        }        
+        }
         $this->data['user_info'] = $this->ion_auth->get_user_info();
         //$this->data['user_id'] = $user_id;
-        if($newsfeeds){
+        if ($newsfeeds) {
             $this->data["status_list_id"] = $status_list_id;
             $this->data["mapping_id"] = $mapping_id;
             $this->data["hashtag"] = $hashtag;
@@ -162,68 +145,79 @@ class Feed extends Role_Controller{
             $this->load->view("member/newsfeed/partial_feeds_renderer", $this->data);
         }
     }
-    
-    function get_feeds($profile_type, $limit, $start, $user_id = 0){
+
+    function get_feeds($profile_type, $limit, $start, $user_id = 0) {
         $newsfeeds = $this->newsfeed->get_statuses($profile_type, $limit, $start, $user_id);
         $this->data['myself'] = $this->basic_profile->get_profile_info();
         $this->data['user_id'] = $user_id;
-        if($newsfeeds){
+        if ($newsfeeds) {
             $this->data["status_or_comment_in"] = $profile_type;
             $this->data["newsfeeds"] = $newsfeeds;
             $this->data["next_start"] = $start + $limit;
             $this->load->view("member/newsfeed/partial_feeds_renderer", $this->data);
         }
     }
-    
-    function post_feedback(){
+
+    function post_feedback() {
         $status_list_id = $this->input->post("status_list_id");
         $mapping_id = $this->input->post("mapping_id");
         $status_id = $this->input->post("status_id");
         $feedback = $this->input->post("feedback");
         $this->statuses->add_feedback($status_id, $feedback);
-        if($status_list_id == STATUS_LIST_NEWSFEED)
-        {
-            redirect("auth",'refresh');
-        }
-        else if($status_list_id == STATUS_LIST_USER_PROFILE)
-        {
-            redirect("member_profile/show/".$mapping_id,'refresh');
-        }
-        else if($status_list_id == STATUS_LIST_BUSINESS_PROFILE)
-        {
-            redirect("business_profile/show/".$mapping_id,'refresh');
-        }
-        else
-        {
-            redirect("member_profile/view_shared_status/".$status_id,'refresh');
+        if ($status_list_id == STATUS_LIST_NEWSFEED) {
+            redirect("auth", 'refresh');
+        } else if ($status_list_id == STATUS_LIST_USER_PROFILE) {
+            redirect("member_profile/show/" . $mapping_id, 'refresh');
+        } else if ($status_list_id == STATUS_LIST_BUSINESS_PROFILE) {
+            redirect("business_profile/show/" . $mapping_id, 'refresh');
+        } else {
+            redirect("member_profile/view_shared_status/" . $status_id, 'refresh');
         }
     }
-    
-    function ajax_post_feedback(){
+
+    function ajax_post_feedback() {
         $status_id = $_POST['status_id'];
         $feedback = $_POST['feedback'];
-        $this->statuses->add_feedback($status_id, $feedback);
-        $user_info = $this->ion_auth->get_user_info();
-        $feedback_info = array(
-            'user_info' => $user_info,
-            'feedback' => $feedback
-        );
+        $referenced_user_id = $_POST['referenced_user_id'];
+        $user_id = $this->session->userdata('user_id');
+        $feedback_result = $this->statuses->add_feedback($status_id, $feedback);
+        if ($feedback_result != FALSE) {
+           $reference_info_list = new stdClass();
+           $reference_info_list->user_id = $user_id;//reference id 
+           $reference_info_list->status_type = UNREAD_NOTIFICATION;
+           $reference_info_list->created_on = now();
+           
+           $notification_info_list = new stdClass();
+           $notification_info_list->id ='';
+           $notification_info_list->type_id =NOTIFICATION_WHILE_LIKE_ON_CREATED_POST;
+           $notification_info_list->reference_id = (int)$status_id;//status_id
+           $notification_info_list->reference_id_list = array();
+           $notification_info_list->reference_id_list[] = $reference_info_list;
+           $response = $this->notification->add_notification($referenced_user_id, $notification_info_list);
+           if(!empty($response)){
+            $user_info = $this->ion_auth->get_user_info();
+                $feedback_info = array(
+                    'user_info' => $user_info,
+                    'feedback' => $feedback
+                );
+           }
+        }
         echo json_encode($feedback_info);
     }
-    
-    /*function post_feedback(){
-        $comment_id = $this->input->post("comment_id");
-        $status_id = $this->input->post("status_id");
-        $feedback = $this->input->post("feedback");
-        $this->newsfeed->add_feedback($comment_id, $status_id, $feedback);
-        redirect("auth");
-    }*/
-    
+
+    /* function post_feedback(){
+      $comment_id = $this->input->post("comment_id");
+      $status_id = $this->input->post("status_id");
+      $feedback = $this->input->post("feedback");
+      $this->newsfeed->add_feedback($comment_id, $status_id, $feedback);
+      redirect("auth");
+      } */
+
     function grabYoutubeVideo($sText) {
         //$sText = "Check out my latest video here http://www.youtube.com/watch?v=Imh0vEnOMXU&feature=g-vrec Check out my latest video here http://www.youtube.com/watch?v=Imh0vEnOMXU&feature=g-vrec";
         //$sText =  "http://www.youtube.com/watch?v=Imh0vEnOMXU&feature=g-vrec";
         //return $sText;
-        if(preg_match_all('@https?://(www\.)?youtube.com/.[^\s.,"\']+@i', $sText, $aMatches)){
+        if (preg_match_all('@https?://(www\.)?youtube.com/.[^\s.,"\']+@i', $sText, $aMatches)) {
             //Need only the first youtube video link
             //echo $aMatches[0][0];
 
@@ -240,23 +234,20 @@ class Feed extends Role_Controller{
             $width = '470';
             $height = '400';
             return '<object width="' . $width . '" height="' . $height . '"><param name="movie" value="http://www.youtube.com/v/' . $v . '&amp;hl=en_US&amp;fs=1?rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/' . $v . '" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="' . $width . '" height="' . $height . '"></embed></object>';
-        }
-        else{
+        } else {
             return $sText;
         }
     }
-    
-    function seeAllSuggestedPeople()
-    {
+
+    function seeAllSuggestedPeople() {
         $this->template->load(null, "member/newsfeed/suggested_people", $this->data);
     }
-    
-    public function delete_status()
-    {
+
+    public function delete_status() {
         $status_id = $this->input->post('status_id');
         echo json_encode($this->statuses->delete_status($status_id));
     }
-    
 
 }
+
 ?>

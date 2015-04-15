@@ -371,4 +371,31 @@ class Test extends CI_Controller {
             }
         }
     }
+    
+    function test_msort(){
+        $reference_info_list = new stdClass();
+        $reference_info_list->user_id = 3; //reference id 
+      
+        $reference_info_list1 = new stdClass();
+        $reference_info_list1->user_id = 1; //reference id 
+      
+        
+        $reference_info_list2 = new stdClass();
+        $reference_info_list2->user_id = 2; //reference id 
+      
+        
+        $array_list = array();
+        $array_list[0] = $reference_info_list;
+        $array_list[1] = $reference_info_list1;
+        $array_list[2] = $reference_info_list2;
+        var_dump($array_list);
+        
+        function cmp($array_list, $compair_list) {
+
+                   return strcmp($array_list->user_id, $compair_list->user_id);
+                }
+        usort($array_list, "cmp");
+        var_dump($array_list);
+    }
+     
 }

@@ -42,7 +42,7 @@ class Statuses_model extends Ion_auth_model {
     {
         $status_data = $this->_filter_data($this->tables['statuses'], $additional_data);
         $this->db->where('id', $status_id);
-        $this->db->update($this->tables['statuses'], $status_data);
+       return $this->db->update($this->tables['statuses'], $status_data);
     }
     
     public function post_status($additional_data)

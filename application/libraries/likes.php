@@ -111,7 +111,7 @@ class Likes {
             'id' => $status_id,
             'likes' => json_encode($likes_array)
         );
-        $this->statuses->update_status($status_id, $additional_data);
+       return $this->statuses->update_status($status_id, $additional_data);
     }
     /*
      * This method will removed liked user id of a status

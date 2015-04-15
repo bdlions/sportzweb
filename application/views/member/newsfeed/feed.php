@@ -25,14 +25,15 @@
     {
         $("#text_input_comment_"+status_id).focus();
     }
-    function click_like_feed_post(status_id)
+    function click_like_feed_post(status_id,referenced_user_id)
     {
         $.ajax({
             dataType: 'json',
             type: "POST",
             url: '<?php echo base_url(); ?>' + "like/store_status_like",
             data: {
-                status_id: status_id
+                status_id: status_id,
+                referenced_user_id: referenced_user_id
             },
             success: function(data) {
                  window.location.reload();                     
@@ -57,12 +58,14 @@
     
     function show_liked_user_list(status_id)
     {       
+        
         $.ajax({
             dataType: 'json',
             type: "POST",
             url: '<?php echo base_url(); ?>' + "like/get_status_liked_user_list",
             data: {
                 status_id: status_id
+        
             },
             success: function(data) {
                 $('#modal_liked_user_list').modal('show');     
@@ -71,10 +74,11 @@
         });
     }
     
-    function click_share_feed_post(status_id)
+    function click_share_feed_post(status_id,referenced_user_id)
     {
         $('#modal_status_share').modal('show');
         $('#share_status_id').val(status_id);
+        $('#referenced_user_id').val(referenced_user_id);
         /*$.ajax({
             dataType: 'json',
             type: "POST",
@@ -96,7 +100,7 @@
             padding: 20
         });          
     });
-    function store_status_feedback(evt, element, status_id)
+    function store_status_feedback(evt, element, status_id , referenced_user_id)
     {
         if(evt.keyCode == 13)
         {
@@ -108,6 +112,7 @@
                 url: '<?php echo base_url(); ?>' + "feed/ajax_post_feedback",
                 data: {
                     status_id: status_id,
+                    referenced_user_id: referenced_user_id,
                     feedback: feedback
                 },
                 success: function(data) {

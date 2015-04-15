@@ -11,6 +11,7 @@ class Like extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library('likes');
         $this->load->helper('url');
+        $this->load->library('notification');
 
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
@@ -32,8 +33,23 @@ class Like extends CI_Controller {
     {
         $user_id = $this->session->userdata('user_id');
         $status_id = $_POST['status_id'];
-        $this->likes->store_status_like($status_id, $user_id);
-        echo 1;
+        $referenced_user_id = $_POST['referenced_user_id'];
+        $result =  $this->likes->store_status_like($status_id, $user_id);
+        if($result != FALSE ){
+           $reference_info_list = new stdClass();
+           $reference_info_list->user_id = $user_id;//reference id 
+           $reference_info_list->status_type = UNREAD_NOTIFICATION;
+           $reference_info_list->created_on = now();
+           
+           $notification_info_list = new stdClass();
+           $notification_info_list->id ='';
+           $notification_info_list->type_id =NOTIFICATION_WHILE_LIKE_ON_CREATED_POST;
+           $notification_info_list->reference_id = (int)$status_id;//status_id
+           $notification_info_list->reference_id_list = array();
+           $notification_info_list->reference_id_list[] = $reference_info_list;
+           $response = $this->notification->add_notification($referenced_user_id, $notification_info_list);
+        }
+        echo $response;
     }
     
     /*

@@ -9,6 +9,7 @@ class Share extends CI_Controller {
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
+        $this->load->library('notification');
         $this->load->library("statuses");
         $this->load->helper('url');
 
@@ -36,6 +37,7 @@ class Share extends CI_Controller {
         $status_category_id = $_POST['status_category_id'];
         $description = $_POST['description'];
         $shared_type_id = $_POST['shared_type_id'];
+        $referenced_user_id = $_POST['referenced_user_id'];
         $status_data = array();
         $status_info = array();
         $status_info_array = $this->statuses->get_status_info($reference_id)->result_array();
@@ -95,7 +97,20 @@ class Share extends CI_Controller {
         
         if($this->statuses->post_status($status_data) !== FALSE)
         {
-            echo STATUS_POST_SUCCESS;
+           $reference_info_list = new stdClass();
+           $reference_info_list->user_id = $this->session->userdata('user_id');
+           $reference_info_list->status_type = UNREAD_NOTIFICATION;
+           $reference_info_list->created_on = now();
+           
+           $notification_info_list = new stdClass();
+           $notification_info_list->id ='';
+           $notification_info_list->type_id =NOTIFICATION_WHILE_SHARES_CREATED_POST;
+           $notification_info_list->reference_id = $reference_id;//status_id
+           $notification_info_list->reference_id_list = array();
+           $notification_info_list->reference_id_list[] = $reference_info_list;
+           $response = $this->notification->add_notification($referenced_user_id, $notification_info_list);
+           
+        echo $response;
         }
         else
         {

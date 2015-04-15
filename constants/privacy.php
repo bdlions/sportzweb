@@ -19,6 +19,7 @@ define("NOTIFICATION_WHILE_ADDS_IN_GROUP",                              5);
 define("NOTIFICATION_WHILE_SHARES_POST_IN_ASSOCIATED_WITH_GROUP",       6);
 define("NOTIFICATION_WHILE_PHOTO_TAG",                                  7);
 define("NOTIFICATION_WHILE_COMMENTS_ON_ADDED_PHOTO",                    8);
+define("NOTIFICATION_WHILE_LIKE_ON_CREATED_POST",                       9);
 
 
 /**Ability or permission for a resources**/
@@ -48,6 +49,8 @@ define("ALBUM_TYPE_BUSINESS_PROFILE",                                   1);
 define("ALBUM_TYPE_USER_PROFILE",                                       2);
 define("ALBUM_TYPE_USER_STATUS",                                        3); 
 
-
+/* read and unread Notification **/
+define("UNREAD_NOTIFICATION",                                           1);
+define("READ_NOTIFICATION",                                             2);
 
 ?>

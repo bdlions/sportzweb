@@ -106,11 +106,11 @@
                         <?php }
                         else
                         { ?>
-                            <a onclick="click_like_feed_post(<?php echo $newsfeed['status_id'];?>); return false;" href="">Like</a>
+                            <a onclick="click_like_feed_post(<?php echo $newsfeed['status_id'];?>,<?php echo $newsfeed['user_id'];?>); return false;" href="">Like</a>
                         <?php }
                     ?>
                     <a onclick="click_comment(<?php echo $newsfeed['status_id'];?>)" href="javascript: void(0)">&nbsp;Comment&nbsp;</a>
-                    <a onclick="click_share_feed_post(<?php echo $newsfeed['status_id'];?>)" href="#">Share</a>
+                    <a onclick="click_share_feed_post(<?php echo $newsfeed['status_id'];?>,<?php echo $newsfeed['user_id'];?>)" href="#">Share</a>
                     <?php //echo convert_time($newsfeed['status_created_on'])?>                        
                 </div>
                 <?php } ?>
@@ -210,7 +210,7 @@
                                 </a>
                             </div>
                             <div class="row col-md-10">
-                                <input id="text_input_comment_<?php echo $newsfeed['status_id']?>" type="text" onkeyup="store_status_feedback(event, this, <?php echo $newsfeed['status_id']?>)" class="form-control small_text_pale" placeholder="Write a comment..."  name ="feedback" style="background-color: #EFE4B0"/>
+                                <input id="text_input_comment_<?php echo $newsfeed['status_id']?>" type="text" onkeyup="store_status_feedback(event, this, <?php echo $newsfeed['status_id']?>,<?php echo $newsfeed['user_id']?>)" class="form-control small_text_pale" placeholder="Write a comment..."  name ="feedback" style="background-color: #EFE4B0"/>
                             </div>
                         </div>
                         <?php } ?>

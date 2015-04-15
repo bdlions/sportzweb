@@ -48,6 +48,7 @@
                     description: $("#share_description").val(),
                     shared_type_id: '<?php echo STATUS_SHARE_OTHER_STATUS?>',
                     reference_id: $('#share_status_id').val(),
+                    referenced_user_id: $('#referenced_user_id').val(),
                     user_id_list:user_list
                 },
                 success: function(data) {
@@ -81,6 +82,7 @@
                     <div class="col-md-11"></div>
                     <div class="col-md-1">
                         <input id="share_status_id" type="hidden"/>
+                        <input id="referenced_user_id" type="hidden"/>
                         <button class="btn button-custom pull-right" id="button_post_share" name="button_post_share">Share</button>
                     </div>
                 </div>
