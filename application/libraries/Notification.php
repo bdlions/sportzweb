@@ -17,6 +17,7 @@ class Notification {
 
         // Load IonAuth MongoDB model if it's set to use MongoDB,
         // We assign the model object to "ion_auth_model" variable.
+        $this->load->library('org/utility/Utils');
         $this->load->model("notification_model");
 
         $this->notification_model->trigger_events('library_constructor');
@@ -104,10 +105,10 @@ class Notification {
             $isexist = FALSE;
             $notification_id = 0;
             foreach ($n_list_array as $n_info) {
-                
+
                 if ($n_info->type_id == $notification_info_list->type_id && $n_info->reference_id == $notification_info_list->reference_id) {
                     $isexist = TRUE;
-                    $n_info->reference_id_list[] =$notification_info_list->reference_id_list[0] ; 
+                    $n_info->reference_id_list[] = $notification_info_list->reference_id_list[0];
                     $n_info->modified_on = now();
                 }
                 $notification_id = $n_info->id;
@@ -115,13 +116,13 @@ class Notification {
             }
             if (!$isexist) {
                 $notification_info_list->id = ++$notification_id;
-                $notification_list[] = $notification_info_list;                
-            } 
+                $notification_list[] = $notification_info_list;
+            }
             $additional_data = array(
                 'user_id' => $referenced_user_id,
                 'list' => json_encode($notification_list)
             );
-            $response = $this->notification_model->update_notification($referenced_user_id, $additional_data);            
+            $response = $this->notification_model->update_notification($referenced_user_id, $additional_data);
         } else {
             $notification_list[] = $notification_info_list;
             $additional_data = array(
@@ -132,36 +133,56 @@ class Notification {
         }
         return $response;
     }
-    
-      public function get_all_notification_list($user_id = 0) {
-        $user_id = 1 ; 
-        $notification_array_list = array();
-        $result_array = array();
-        $result_array = $this->notification->get_notification_list($user_id);
-        $result_array = $result_array[0];
-        $result_array = json_decode($result_array['list']);
-         function cmp($result_array, $compare_list) {
 
-                   return strcmp($result_array->modified_on, $compare_list->modified_on);
-                }
-        usort($result_array, "cmp");
-        foreach ($result_array as $n_info) {
-                $reference_array_list = $n_info->reference_id_list;
-                $notification_type[] = $n_info->type_id;
-                $notification_reference_id_list[] = $n_info->reference_id;
-                foreach ($reference_array_list as $reference_array_info) {
-                    $reference_user_id = $reference_array_info->user_id ;
-                    $notification_user_info[] = $this->ion_auth->get_user_info($reference_user_id);
-                }
+    public function get_all_notification_list($user_id = 0) {
+        $user_id = 1;
+        $result_notification_list = array();
+        $notification_array = array();
+        $reference_user_id_list = array();
+        $user_info_array = array();
+        $notification_info_array = array();
+        $status_id_status_info_map = array();
+        $user_id_user_info_map = array();
+        $status_id_list = array();
+        $status_info_array = array();
+        $notification_info = array();
+        $notification_result_array = $this->notification->get_notification_list($user_id);
+        $notification_array = $notification_result_array[0];
+        $notification_list = json_decode($notification_array['list']);
+        
+        function cmp($notification_list, $compare_list) {
+
+            return strcmp($notification_list->modified_on, $compare_list->modified_on);
         }
-        $this->data['notification_status_id_list'] = $reference_array_list;
-        $this->data['notification_type'] = $notification_type;
-        $this->data['referenced_user_info'] = $notification_user_info;
-        $this->template->load();
-  
+        usort($notification_list, "cmp");
+        foreach ($notification_list as $n_info) {
+            $reference_array_list = $n_info->reference_id_list;
+            foreach ($reference_array_list as $reference_array_info) {
+                if (!in_array($reference_array_info->user_id, $reference_user_id_list)) {
+                    $reference_user_id_list[] = $reference_array_info->user_id;
+                }
+            }
+        }
+        if ($reference_user_id_list != null) {
+            $user_info_array = $this->notification_model->get_users($reference_user_id_list)->result_array();
+            foreach ($user_info_array as $user_info) {
+                $user_id_user_info_map[$user_info['user_id']] = $user_info;
+            }
+        }
+        foreach ($notification_list as $n_list_info) {
+            $notification_info =array();
+            $notification_info['type_id'] = $n_list_info->type_id;
+            $notification_info['reference_id'] = $n_list_info->reference_id;
+            $notification_info['reference_list'] = array();
+            $reference_array_list = $n_list_info->reference_id_list;
+            foreach ($reference_array_list as $notification_info_array) {
+                $notification_info['reference_list'][] = $user_id_user_info_map[$notification_info_array->user_id];
+            }
+            $notification_info['created_on'] = $this->utils->convert_time($n_list_info->modified_on);
+            $result_notification_list[] = $notification_info;
+        }
+            var_dump($result_notification_list);
     }
-    
-
 
 }
 

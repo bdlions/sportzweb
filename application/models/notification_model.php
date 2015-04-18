@@ -110,17 +110,25 @@ class Notification_model extends Ion_auth_model {
      * @Author Rashida on 13th April 2015
      */
 
-   public function get_notification_list($user_id = 0) {
+    public function get_notification_list($user_id = 0) {
         $this->db->where('user_id', $user_id);
         return $this->db->select($this->tables['notification_list'] . ".*")
                         ->get($this->tables['notification_list']);
     }
+    public function test_user_list($user_id) {
+        $this->db->where('id', $user_id);
+        return $this->db->select($this->tables['users'] . ".*")
+                        ->get($this->tables['users']);
+    }
     
-//   public function get_all_notification_list($user_id = 0) {
-////        $this->db->order_by($this->tables['notification_list'].'.created_on','asc');
-//        $this->db->where('user_id', $user_id);
-//        return $this->db->select($this->tables['notification_list'] . ".*")
-//                        ->get($this->tables['notification_list']);
-//    }
-
+    public function get_users($user_id_list)
+    {
+        $this->db->where_in($this->tables['users'].'.id',$user_id_list);
+        $result = $this->db->select("username, first_name, last_name, " . $this->tables['users']. ".id as user_id, ". $this->tables['basic_profile']. ".*")
+                ->from($this->tables['users'])
+                ->join($this->tables['basic_profile'], $this->tables['users'].'.id='.$this->tables['basic_profile'].'.user_id')
+                ->get();
+        return $result;
+    }
+    
 }
