@@ -182,25 +182,28 @@ class Feed extends Role_Controller {
         $user_id = $this->session->userdata('user_id');
         $feedback_result = $this->statuses->add_feedback($status_id, $feedback);
         if ($feedback_result != FALSE) {
-           $reference_info_list = new stdClass();
-           $reference_info_list->user_id = $user_id;//reference id 
-           $reference_info_list->status_type = UNREAD_NOTIFICATION;
-           $reference_info_list->created_on = now();
-           
-           $notification_info_list = new stdClass();
-           $notification_info_list->id ='';
-           $notification_info_list->type_id =NOTIFICATION_WHILE_LIKE_ON_CREATED_POST;
-           $notification_info_list->reference_id = (int)$status_id;//status_id
-           $notification_info_list->reference_id_list = array();
-           $notification_info_list->reference_id_list[] = $reference_info_list;
-           $response = $this->notification->add_notification($referenced_user_id, $notification_info_list);
-           if(!empty($response)){
-            $user_info = $this->ion_auth->get_user_info();
+            $current_time = now();
+            $reference_info_list = new stdClass();
+            $reference_info_list->user_id = $user_id; //reference id 
+            $reference_info_list->status_type = UNREAD_NOTIFICATION;
+            $reference_info_list->created_on = $current_time;
+
+            $notification_info_list = new stdClass();
+            $notification_info_list->id = '';
+            $notification_info_list->created_on = $current_time;
+            $notification_info_list->modified_on = $current_time;
+            $notification_info_list->type_id = NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST;
+            $notification_info_list->reference_id = (int) $status_id; //status_id
+            $notification_info_list->reference_id_list = array();
+            $notification_info_list->reference_id_list[] = $reference_info_list;
+            $response = $this->notification->add_notification($referenced_user_id, $notification_info_list);
+            if (!empty($response)) {
+                $user_info = $this->ion_auth->get_user_info();
                 $feedback_info = array(
                     'user_info' => $user_info,
                     'feedback' => $feedback
                 );
-           }
+            }
         }
         echo json_encode($feedback_info);
     }

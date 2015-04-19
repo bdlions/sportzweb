@@ -176,12 +176,12 @@ class Notification {
             $notification_info['reference_list'] = array();
             $reference_array_list = $n_list_info->reference_id_list;
             foreach ($reference_array_list as $notification_info_array) {
-                $notification_info['reference_list'][] = $user_id_user_info_map[$notification_info_array->user_id];
+            $notification_info['reference_list'][] = $user_id_user_info_map[$notification_info_array->user_id];
             }
             $notification_info['created_on'] = $this->utils->convert_time($n_list_info->modified_on);
             $result_notification_list[] = $notification_info;
         }
-            var_dump($result_notification_list);
+            return $result_notification_list;
     }
 
 }

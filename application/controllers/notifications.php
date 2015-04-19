@@ -34,7 +34,12 @@ class Notifications extends Role_Controller {
     }
 
     function index() {
-        $this->template->load(null, "member/notification/notifications", $this->data);
+        $user_id =1 ;
+        $result_array = $this->notification->get_all_notification_list($user_id);
+        if(!empty($result_array)){
+            $this->data['notification_list'] = $result_array;
+        }
+        $this->template->load(null, "member/notification/notification_notifications", $this->data);
     }
 
     function create_notification($user_id = 0) {
@@ -60,11 +65,16 @@ class Notifications extends Role_Controller {
     public function get_all_notification_list($user_id = 0, $type_id = 0, $status = 0) {
         $result_array = array();
         $result_array = $this->notification->get_all_notification_list($user_id);
+        if(!empty($result_array)){
+            $this->data['notification_list'] = $result_array;
+        }
+        $this->template->load(null, "member/notification/notifications", $this->data); 
     }
   
     public function get_notification_list($user_id = 0, $type_id = 0, $status = 0) {
         $result_array = array();
         $result_array = $this->notification->get_notification_list($user_id);
+        
     }
 
 }
