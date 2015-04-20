@@ -108,6 +108,7 @@ class Share extends CI_Controller {
             $notification_info_list->created_on = $current_time;
             $notification_info_list->modified_on = $current_time;
             $notification_info_list->type_id = NOTIFICATION_WHILE_SHARES_CREATED_POST;
+            $notification_info_list->status = UNREAD_NOTIFICATION;
             $notification_info_list->reference_id = (int) $reference_id; //status_id
             $notification_info_list->reference_id_list = array();
             $notification_info_list->reference_id_list[] = $reference_info_list;

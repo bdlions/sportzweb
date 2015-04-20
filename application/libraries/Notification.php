@@ -108,7 +108,9 @@ class Notification {
 
                 if ($n_info->type_id == $notification_info_list->type_id && $n_info->reference_id == $notification_info_list->reference_id) {
                     $isexist = TRUE;
-                    $n_info->reference_id_list[] = $notification_info_list->reference_id_list[0];
+                    if ($notification_info_list->reference_id_list != null) {
+                        $n_info->reference_id_list[] = $notification_info_list->reference_id_list[0];
+                    }
                     $n_info->modified_on = now();
                 }
                 $notification_id = $n_info->id;
@@ -135,7 +137,12 @@ class Notification {
     }
 
     public function get_all_notification_list($user_id = 0) {
-        $user_id = 1;
+        $result = array(
+            'total_unread_followers' => 0,
+            'total_unread_notifications' => 0,
+            'notification_list' => array()
+        );
+
         $result_notification_list = array();
         $notification_array = array();
         $reference_user_id_list = array();
@@ -149,13 +156,33 @@ class Notification {
         $notification_result_array = $this->notification->get_notification_list($user_id);
         $notification_array = $notification_result_array[0];
         $notification_list = json_decode($notification_array['list']);
-        
+        if ($notification_list == null) {
+            return $result;
+        }
+
         function cmp($notification_list, $compare_list) {
 
-            return strcmp($notification_list->modified_on, $compare_list->modified_on);
+            return strcmp($compare_list->modified_on ,$notification_list->modified_on);
         }
-        usort($notification_list, "cmp");
+
+        if (!empty($notification_list)) {
+            usort($notification_list, "cmp");
+        }
         foreach ($notification_list as $n_info) {
+            if ($n_info->type_id == NOTIFICATION_WHILE_START_FOLLOWING) {
+                if($n_info->status == UNREAD_NOTIFICATION){
+                    $result['total_unread_followers'] = $result['total_unread_followers']+1 ;
+                }
+                $reference_user_id_list[] = $n_info->reference_id;
+                if (!in_array($n_info->reference_id, $reference_user_id_list)) {
+                    $reference_user_id_list[] = $n_info->reference_id;
+                }
+            }  else {
+                if($n_info->status == UNREAD_NOTIFICATION){
+                    $result['total_unread_notifications'] = $result['total_unread_notifications']+1 ;
+                }
+                
+            }
             $reference_array_list = $n_info->reference_id_list;
             foreach ($reference_array_list as $reference_array_info) {
                 if (!in_array($reference_array_info->user_id, $reference_user_id_list)) {
@@ -170,19 +197,25 @@ class Notification {
             }
         }
         foreach ($notification_list as $n_list_info) {
-            $notification_info =array();
+            $notification_info = array();
             $notification_info['type_id'] = $n_list_info->type_id;
             $notification_info['reference_id'] = $n_list_info->reference_id;
+            $notification_info['reference_info'] = array();
+            if ($n_list_info->type_id == NOTIFICATION_WHILE_START_FOLLOWING) {
+                $notification_info['reference_info'] = $user_id_user_info_map[$n_list_info->reference_id];
+            }
             $notification_info['reference_list'] = array();
             $reference_array_list = $n_list_info->reference_id_list;
             foreach ($reference_array_list as $notification_info_array) {
-            $notification_info['reference_list'][] = $user_id_user_info_map[$notification_info_array->user_id];
+                $notification_info['reference_list'][] = $user_id_user_info_map[$notification_info_array->user_id];
             }
             $notification_info['created_on'] = $this->utils->convert_time($n_list_info->modified_on);
             $result_notification_list[] = $notification_info;
         }
-            return $result_notification_list;
+        $result['notification_list'] = $result_notification_list;
+        return $result;
     }
+
 
 }
 

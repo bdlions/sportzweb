@@ -118,11 +118,22 @@ class Followers extends Role_Controller {
         $user_id = $this->session->userdata('user_id');
         $follower_add_result = $this->follower->add_follower($user_id, $follower_id);
         if ($follower_add_result != FALSE) {
-            $n_list = new stdClass();
-            $n_list->type_id = NOTIFICATION_WHILE_START_FOLLOWING;
-            $response = $this->notification->add_notification($follower_id, $n_list);                       
+            $current_time = now();
+            $notification_info_list = new stdClass();
+            $notification_info_list->id = '';
+            $notification_info_list->created_on = $current_time;
+            $notification_info_list->modified_on = $current_time;
+            $notification_info_list->type_id = NOTIFICATION_WHILE_START_FOLLOWING;
+            $notification_info_list->status = UNREAD_NOTIFICATION;
+            $notification_info_list->reference_id = (int) $user_id; //user_id
+            $notification_info_list->reference_id_list = array();
+            $response = $this->notification->add_notification($follower_id, $notification_info_list);
+            if($response != null){
+                $response = TRUE ;
+            }
         }
-        echo $response;
+        
+       echo $response;
     }
 
     /*

@@ -34,48 +34,42 @@ class Notifications extends Role_Controller {
     }
 
     function index() {
-        $user_id =1 ;
-        $result_array = $this->notification->get_all_notification_list($user_id);
-        if(!empty($result_array)){
-            $this->data['notification_list'] = $result_array;
-        }
-        $this->template->load(null, "member/notification/notification_notifications", $this->data);
+        $this->template->load(null, "member/notification/notification", $this->data);
     }
 
     function create_notification($user_id = 0) {
         $current_time = now();
-        $reference_info_list = new stdClass();
-        $reference_info_list->user_id = 14; //reference id 
-        $reference_info_list->status_type = 1;
-        $reference_info_list->created_on = $current_time;
+//        $reference_info_list = new stdClass();
+//        $reference_info_list->user_id = 14; //reference id 
+//        $reference_info_list->status_type = 1;
+//        $reference_info_list->created_on = $current_time;
 
         $notification_info_list = new stdClass();
-        $notification_info_list->type_id = 9;
+        $notification_info_list->type_id = 1;
         $notification_info_list->id = 2;
         $notification_info_list->created_on = $current_time;
         $notification_info_list->modified_on = $current_time;
-        $notification_info_list->reference_id = 5; //status_id
+        $notification_info_list->reference_id = 2; //status_id
         $notification_info_list->reference_id_list = array();
-        $notification_info_list->reference_id_list[] = $reference_info_list;
-        $user_id = 1;
+//        $notification_info_list->reference_id_list[] = $reference_info_list;
+        $user_id = 2;
         $notification_id = $this->notification->add_notification($user_id, $notification_info_list);
     }
 
-  
     public function get_all_notification_list($user_id = 0, $type_id = 0, $status = 0) {
         $result_array = array();
         $result_array = $this->notification->get_all_notification_list($user_id);
-        if(!empty($result_array)){
-            $this->data['notification_list'] = $result_array;
+        if (!empty($result_array)) {
+            return $result_array;
         }
-        $this->template->load(null, "member/notification/notifications", $this->data); 
     }
-  
+
     public function get_notification_list($user_id = 0, $type_id = 0, $status = 0) {
         $result_array = array();
         $result_array = $this->notification->get_notification_list($user_id);
-        
     }
+
+  
 
 }
 

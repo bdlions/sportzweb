@@ -12,138 +12,24 @@
     </div>
 </div>
 <div class="scroll_box_style">
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="<?php echo base_url(); ?>resources/images/face.jpg">
-            </div>
-            <div class="col-md-4">
-                <a style="font-size: 12px; font-weight: bold;" href="#">Mohammad Ali</a>
-            </div>
-            <div class="col-md-6">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-xs follower_button_style">Confirm</button>
-                    <button type="submit" class="btn btn-xs follower_button_style">Delete</button>
+    <?php foreach ($notification_list as $notification_info) { ?>
+
+
+        <?php
+        $reference_id = $notification_info['reference_id'];
+        if ($notification_info['type_id'] == NOTIFICATION_WHILE_START_FOLLOWING) {
+            ?>
+            <div class="pagelet">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $notification_info['reference_info']['photo'] ?>">   
+                        <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_info']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_info']['first_name'] . " " . $notification_info['reference_info']['last_name']; ?></a>                            
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-12">
-                <span style="font-weight: bold;">People You May Know</span>
-            </div>
-        </div>
-    </div>
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="<?php echo base_url(); ?>resources/images/face.jpg" >
-            </div>
-            <div class="col-md-6">
-                <a style="font-size: 12px; font-weight: bold;" href="#">Maria Islam</a><br>
-                <a style="font-size: 11px; color: black;" href="#">2 Followers</a>
-            </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-xs follower_button_style" >Follow</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="<?php echo base_url(); ?>resources/images/face.jpg" >
-            </div>
-            <div class="col-md-6">
-                <a style="font-size: 12px; font-weight: bold;" href="#">Jannatul Ferdaus</a><br>
-                <a style="font-size: 11px; color: black;" href="#">49 Followers</a>
-            </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-xs follower_button_style" >Follow</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="<?php echo base_url(); ?>resources/images/face.jpg" >
-            </div>
-            <div class="col-md-6">
-                <a style="font-size: 12px; font-weight: bold;" href="#">Fatematul Kobra</a>
-            </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-xs follower_button_style" >Follow</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="<?php echo base_url(); ?>resources/images/face.jpg" >
-            </div>
-            <div class="col-md-6">
-                <a style="font-size: 12px; font-weight: bold;" href="#">Sharmin Akter</a><br>
-                <a style="font-size: 11px; color: black;" href="#">26 Followers</a>
-            </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-xs follower_button_style" >Follow</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="<?php echo base_url(); ?>resources/images/face.jpg" >
-            </div>
-            <div class="col-md-6">
-                <a style="font-size: 12px; font-weight: bold;" href="#"><b>Mohammad Rafique</b></a>
-            </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-xs follower_button_style" >Follow</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="<?php echo base_url(); ?>resources/images/face.jpg" >
-            </div>
-            <div class="col-md-6">
-                <a style="font-size: 12px; font-weight: bold;" href="#">Jannatul Ferdaus</a><br>
-                <a style="font-size: 11px; color: black;" href="#">21 Followers</a>
-            </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-xs follower_button_style" >Follow</button>
-                </div>
-            </div>
-        </div>
-    </div>  
-    <div class="pagelet">
-        <div class="row">
-            <div class="col-md-2">
-                <img src="<?php echo base_url(); ?>resources/images/face.jpg" >
-            </div>
-            <div class="col-md-6">
-                <a style="font-size: 12px; font-weight: bold;" href="#">Barak Obama</a>
-            </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-xs follower_button_style" >Follow</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        <?php }
+    }
+    ?>
 </div>
 <div class="pagelet">
     <div class="row">

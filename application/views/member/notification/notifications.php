@@ -54,12 +54,13 @@
                                     <?php
                                     break;
                                 }
+                                if ($counter == 1) {
+                                    ?>
+                                    <div class="col-md-2"> 
+                                        <img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $referenced_user_info['photo'] ?>">   
+                                    </div>
+                                <?php }
                                 ?>
-                                <?php 
-                                if($counter == 1){ ?>
-                                <img src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$referenced_user_info['photo'] ?>">   
-                               <?php }
-                                ?>   
                                 <a href='<?php echo base_url() . "member_profile/show/{$referenced_user_info['user_id']}" ?>' class="profile-name" ><?php echo $referenced_user_info['first_name'] . " " . $referenced_user_info['last_name']; ?></a>                            
                                 <?php
                                 $counter++;
@@ -70,12 +71,12 @@
                                 echo ' like ';
                             }
                             ?>
-                            <a href='<?php echo base_url(). "member_profile/show/{$reference_id}"?>'>Your post</a>                            
-                           <?php
-                           echo $created_on;
+                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'>Your post</a>                            
+                            <?php
+                            echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST) {
                             foreach ($notification_info['reference_list'] as $referenced_com_user_info) {
-                                 if ($counter > 1) {
+                                if ($counter > 1) {
                                     if ($counter == 3 && $counter <= $total_users) {
                                         echo ' and ';
                                     } else if ($counter == $total_users) {
@@ -84,27 +85,27 @@
                                         echo ' , ';
                                     }
                                 }
-                                ?>
-                                <?php 
-                                if($counter == 1){ ?>
-                                <img src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$referenced_com_user_info['photo'] ?>">   
-                               <?php }
+                                if ($counter == 1) {
+                                    ?>
+                                    <img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $referenced_com_user_info['photo'] ?>">   
+                                <?php }
                                 ?>
                                 <a href='<?php echo base_url() . "member_profile/show/{$referenced_com_user_info['user_id']}" ?>' class="profile-name" ><?php echo $referenced_com_user_info['first_name'] . " " . $referenced_com_user_info['last_name']; ?></a>                            
                                 <?php
-                               $counter++; 
+                                $counter++;
                             }
                             if ($total_users >= 1) {
                                 echo ' Commented on.';
                             } else if ($total_users > 3) {
                                 echo 'also commented on';
-                            }?>
-                            <a href='<?php echo base_url(). "member_profile/show/{$reference_id}"?>'>Your post</a>
-                           <?php
-                           echo $created_on;
+                            }
+                            ?>
+                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'>Your post</a>
+                            <?php
+                            echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST) {
-                             foreach ($notification_info['reference_list'] as $referenced_share_user_info) {
-                                 if ($counter > 1) {
+                            foreach ($notification_info['reference_list'] as $referenced_share_user_info) {
+                                if ($counter > 1) {
                                     if ($counter == 3 && $counter <= $total_users) {
                                         echo ' and ';
                                     } else if ($counter == $total_users) {
@@ -113,11 +114,10 @@
                                         echo ' , ';
                                     }
                                 }
-                                ?>
-                                <?php 
-                                if($counter == 1){ ?>
-                                <img src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$referenced_share_user_info['photo'] ?>">   
-                               <?php }
+                                if ($counter == 1) {
+                                    ?>
+                                    <img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $referenced_share_user_info['photo'] ?>">   
+                                <?php }
                                 ?>
                                 <a href='<?php echo base_url() . "member_profile/show/{$referenced_share_user_info['user_id']}" ?>' class="profile-name" ><?php echo $referenced_share_user_info['first_name'] . " " . $referenced_share_user_info['last_name']; ?></a>                            
                                 <?php
@@ -127,11 +127,11 @@
                                 echo ' shared';
                             } else if ($total_users > 3) {
                                 echo 'also shared';
-                            }?>
-                            <a href='<?php echo base_url(). "member_profile/show/{$reference_id}"?>'>Your post</a>
-                           <?php
-                           echo $created_on;
-                            
+                            }
+                            ?>
+                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'>Your post</a>
+                            <?php
+                            echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST) {
                             
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_MENTIONS_POST) {
@@ -146,4 +146,3 @@
             ?>
         </div>
     </div>
-    
