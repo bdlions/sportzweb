@@ -29,7 +29,7 @@
                 <div class="row col-md-12">
                     <?php //echo convert_time($newsfeed['status_created_on'])?> 
                     <span class="small_text_pale">
-                        <?php echo ($newsfeed['shared_type_id'] != STATUS_SHARE_ADMIN_WELCOME) ? $newsfeed['status_created_on'] : '';?> 
+                        <?php echo ($newsfeed['user_id'] != ADMIN_USER_ID) ? $newsfeed['status_created_on'] : '';?> 
                     </span>
                 </div>
                 <?php if(!empty($newsfeed['reference_list']) && !empty($newsfeed['reference_list']['user_list'])) {?>

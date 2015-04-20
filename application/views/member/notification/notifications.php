@@ -55,10 +55,8 @@
                                     break;
                                 }
                                 if ($counter == 1) {
-                                    ?>
-                                    <div class="col-md-2"> 
+                                    ?>                                    
                                         <img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $referenced_user_info['photo'] ?>">   
-                                    </div>
                                 <?php }
                                 ?>
                                 <a href='<?php echo base_url() . "member_profile/show/{$referenced_user_info['user_id']}" ?>' class="profile-name" ><?php echo $referenced_user_info['first_name'] . " " . $referenced_user_info['last_name']; ?></a>                            
@@ -146,3 +144,4 @@
             ?>
         </div>
     </div>
+</div>

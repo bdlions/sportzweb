@@ -78,7 +78,37 @@
     </a>
     <span class="shared-text">shared a</span>
     <a href="<?php echo base_url().PHOTOGRAPHY_HOME_PAGE_PATH?>"><span class="shared-text">link</span></a>
-<?php }else { ?>
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_LATEST_MAIN_RECIPE && isset($newsfeed['reference_info']) ){ ?>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
+    </a>
+    <span class="shared-text">shared a</span>
+    <a href="<?php echo base_url().APPLICATION_HEALTHY_RECIPE_PATH.$newsfeed['reference_info']['id'];?>"><span class="shared-text">link</span></a>
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_LATEST_BLOG1 ){ ?>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
+    </a>
+    <span class="shared-text">shared a</span>
+    <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id'];?>"><span class="shared-text">link</span></a>
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_LATEST_BLOG2 ){ ?>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
+    </a>
+    <span class="shared-text">shared a</span>
+    <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id'];?>"><span class="shared-text">link</span></a>
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_LATEST_BLOG3 ){ ?>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
+    </a>
+    <span class="shared-text">shared a</span>
+    <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id'];?>"><span class="shared-text">link</span></a>
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_LATEST_BLOG4 ){ ?>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
+    </a>
+    <span class="shared-text">shared a</span>
+    <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id'];?>"><span class="shared-text">link</span></a>
+<?php }else{ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
         <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
     </a>    

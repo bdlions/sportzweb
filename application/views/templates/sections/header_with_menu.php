@@ -170,7 +170,6 @@
                         <div class="col-md-offset-1 col-md-4 right-menu">
                             <div>
                                 <div id="mm_friend_request" style="position: relative" onclick="friend_toggle()">
-                                    <div class="notification_counter">3</div>
                                     <a href="javascript:void(0)"></a>                
                                     <div id="mm_friend_request_box">
                                         <?php $this->load->view("followers/notification_followers"); ?>

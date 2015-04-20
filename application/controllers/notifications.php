@@ -34,7 +34,7 @@ class Notifications extends Role_Controller {
     }
 
     function index() {
-        $this->template->load(null, "member/notification/notification", $this->data);
+        $this->template->load(null, "member/notification/notifications", $this->data);
     }
 
     function create_notification($user_id = 0) {

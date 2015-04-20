@@ -40,9 +40,14 @@
     define("STATUS_SHARE_BLOG",                                     5);
     define("STATUS_SHARE_PHOTO",                                    6);
     //if anyone changes the id then of course update the database schema also
-    define("STATUS_SHARE_APP_ADMIN_SERVICE_DIRECTORY",              7);
-    define("STATUS_SHARE_APP_ADMIN_PTPRO",                          8);
-    define("STATUS_SHARE_APP_ADMIN_BMI_CALCULATOR",                 9);
-    define("STATUS_SHARE_APP_ADMIN_PHOTOGRAPHY",                    10);
-    define("STATUS_SHARE_ADMIN_WELCOME",                            11);
+    define("STATUS_SHARE_ADMIN_WELCOME",                            7);
+    define("STATUS_SHARE_APP_ADMIN_LATEST_MAIN_RECIPE",             8);
+    define("STATUS_SHARE_LATEST_BLOG1",                             9);
+    define("STATUS_SHARE_APP_ADMIN_SERVICE_DIRECTORY",              10);
+    define("STATUS_SHARE_LATEST_BLOG2",                             11);
+    define("STATUS_SHARE_APP_ADMIN_PTPRO",                          12);
+    define("STATUS_SHARE_LATEST_BLOG3",                             13);
+    define("STATUS_SHARE_APP_ADMIN_PHOTOGRAPHY",                    14);
+    define("STATUS_SHARE_LATEST_BLOG4",                             15);
+    define("STATUS_SHARE_APP_ADMIN_BMI_CALCULATOR",                 16);
 ?>

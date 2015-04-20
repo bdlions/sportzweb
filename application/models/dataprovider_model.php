@@ -51,6 +51,8 @@ class DataProvider_model extends Ion_auth_model {
         return $this;
     }
     public function getCountryList(){
+        $this->db->order_by('order');
+        $this->db->order_by('country_name');
         $this->response = $this->db->select('id, country_code, country_name')
                                    ->get($this->tables['countries'])->result();
         return $this;

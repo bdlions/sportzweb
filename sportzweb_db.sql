@@ -195,6 +195,7 @@ CREATE TABLE `countries` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 `country_code` varchar(2) NOT NULL default '',
 `country_name` varchar(100) NOT NULL default '',
+`order` int(11) DEFAULT 239,
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=240 ;
 -- 
@@ -989,11 +990,16 @@ ALTER TABLE `statuses`
     ADD CONSTRAINT `fk_users_statuses1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_status_category_statuses1` FOREIGN KEY(`status_category_id`) REFERENCES `status_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 INSERT INTO `statuses` (`user_id`, `status_category_id`, `shared_type_id`, `description`, `created_on`, `modified_on`) VALUES
-(1, 1, 7, '', 1427345593, 1427345593),
-(1, 1, 8, '', 1427345593, 1427345593),
-(1, 1, 9, '', 1427345593, 1427345593),
-(1, 1, 10, '', 1427345593, 1427345593),
-(1, 1, 11, 'Welcome to Sonuto', 1304345593, 1304345593);
+(1, 1, 7, 'Welcome to Sonuto', 1427345599, 1427345599),
+(1, 1, 8, '', 1427345598, 1427345598),
+(1, 1, 9, '', 1427345597, 1427345597),
+(1, 1, 10, '', 1427345596, 1427345596),
+(1, 1, 11, '', 1427345595, 1427345595),
+(1, 1, 12, '', 1427345594, 1427345594),
+(1, 1, 13, '', 1427345593, 1427345593),
+(1, 1, 14, '', 1427345592, 1427345592),
+(1, 1, 15, '', 1427345591, 1427345591),
+(1, 1, 16, '', 1427345590, 1427345590);
 	
 -- Applications --------------------
 CREATE TABLE IF NOT EXISTS `applications` (
@@ -3326,5 +3332,5 @@ CREATE TABLE IF NOT EXISTS `notification_list`(
   PRIMARY KEY(`id`)
 )AUTO_INCREMENT=1;
 ALTER TABLE `notification_list`
-ADD CONSTRAINT `fk_notification_list` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION ;
+ADD CONSTRAINT `fk_notification_list` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
