@@ -93,3 +93,16 @@ font-size: 9px;
 font-weight: bold;
 line-height: 18px;
 }
+.notification_counter{
+    margin-top: 5px;
+    position: relative; 
+    bottom:  20px; 
+    left: 5px; 
+    border-radius: 3px; 
+    background-color: red; 
+    color: white; 
+    padding: 3%; 
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 10px;
+}
