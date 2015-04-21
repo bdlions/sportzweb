@@ -115,6 +115,19 @@ class Statuses {
         }
         $shared_status_id_list = array();
         $status_list = array();
+        
+        //default statuses from team sonuto
+        $admin_default_recipe_exists = false;
+        $admin_default_recipe_id = 1;
+        $admin_default_blog_map = array(
+            STATUS_SHARE_LATEST_BLOG1 => 2,
+            STATUS_SHARE_LATEST_BLOG2 => 3,
+            STATUS_SHARE_LATEST_BLOG3 => 5,
+            STATUS_SHARE_LATEST_BLOG4 => 6
+        );
+        $admin_default_blog_exists = false;
+        $admin_blog_shared_type_id_list = array(STATUS_SHARE_LATEST_BLOG1, STATUS_SHARE_LATEST_BLOG2, STATUS_SHARE_LATEST_BLOG3, STATUS_SHARE_LATEST_BLOG4);
+        
         $statuses = $this->statuses_model->get_statuses($status_category_id, $mapping_id, $limit, $offset, $filtered_user_id_list, $status_id_list)->result_array();
         if($statuses != null)
         {
@@ -218,6 +231,15 @@ class Statuses {
                         $user_id_list[] = $status['via_user_id'];
                     }
                 }
+                if($status['shared_type_id'] == STATUS_SHARE_APP_ADMIN_LATEST_MAIN_RECIPE)
+                {
+                    $admin_default_recipe_exists = true;
+                }
+                if(in_array($status['shared_type_id'] , $admin_blog_shared_type_id_list))
+                {
+                    $admin_default_blog_exists = true;
+                }
+                
             }
             $shared_status_id_info_map = array();
             $shared_statuse_info_array = $this->statuses_model->get_statuses(0, 0, 0, 0, 0, $shared_status_id_list)->result_array();
@@ -225,6 +247,10 @@ class Statuses {
             {
                 $shared_status_info['description'] = html_entity_decode($shared_status_info['description']);
                 $shared_status_id_info_map[$shared_status_info['status_id']] = $shared_status_info;
+            }
+            if($admin_default_recipe_exists && $admin_default_recipe_id > 0 && !in_array($admin_default_recipe_id, $shared_recipe_id_list))
+            {
+                $shared_recipe_id_list[] = $admin_default_recipe_id;
             }
             if(!empty($shared_recipe_id_list))
             {
@@ -249,6 +275,22 @@ class Statuses {
                 {
                     $news_id_info_map[$news_info['id']] = $news_info;
                 }
+            }
+            if($admin_default_blog_exists && $admin_default_blog_map[STATUS_SHARE_LATEST_BLOG1] > 0 && !in_array($admin_default_blog_map[STATUS_SHARE_LATEST_BLOG1], $shared_blog_id_list))
+            {
+                $shared_blog_id_list[] = $admin_default_blog_map[STATUS_SHARE_LATEST_BLOG1];
+            }
+            if($admin_default_blog_exists && $admin_default_blog_map[STATUS_SHARE_LATEST_BLOG2] > 0 && !in_array($admin_default_blog_map[STATUS_SHARE_LATEST_BLOG2], $shared_blog_id_list))
+            {
+                $shared_blog_id_list[] = $admin_default_blog_map[STATUS_SHARE_LATEST_BLOG2];
+            }
+            if($admin_default_blog_exists && $admin_default_blog_map[STATUS_SHARE_LATEST_BLOG3] > 0 && !in_array($admin_default_blog_map[STATUS_SHARE_LATEST_BLOG3], $shared_blog_id_list))
+            {
+                $shared_blog_id_list[] = $admin_default_blog_map[STATUS_SHARE_LATEST_BLOG3];
+            }
+            if($admin_default_blog_exists && $admin_default_blog_map[STATUS_SHARE_LATEST_BLOG4] > 0 && !in_array($admin_default_blog_map[STATUS_SHARE_LATEST_BLOG4], $shared_blog_id_list))
+            {
+                $shared_blog_id_list[] = $admin_default_blog_map[STATUS_SHARE_LATEST_BLOG4];
             }
             if(!empty($shared_blog_id_list))
             {
@@ -378,6 +420,27 @@ class Statuses {
                 {
                     $status['reference_info'] = $photo_id_photo_info_map[$status['reference_id']];
                 }
+                else if($status['shared_type_id'] == STATUS_SHARE_APP_ADMIN_LATEST_MAIN_RECIPE && isset($recipe_id_info_map[$admin_default_recipe_id]) )
+                {
+                    $status['reference_info'] = $recipe_id_info_map[$admin_default_recipe_id];
+                }
+                else if($status['shared_type_id'] == STATUS_SHARE_LATEST_BLOG1 && isset($blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG1]]) )
+                {
+                    $status['reference_info'] = $blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG1]];
+                }
+                else if($status['shared_type_id'] == STATUS_SHARE_LATEST_BLOG2 && isset($blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG2]]) )
+                {
+                    $status['reference_info'] = $blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG2]];
+                }
+                else if($status['shared_type_id'] == STATUS_SHARE_LATEST_BLOG3 && isset($blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG3]]) )
+                {
+                    $status['reference_info'] = $blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG3]];
+                }
+                else if($status['shared_type_id'] == STATUS_SHARE_LATEST_BLOG4 && isset($blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG4]]) )
+                {
+                    $status['reference_info'] = $blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG4]];
+                }
+                
                 if( $status['via_user_id'] != "" && $status['via_user_id'] != NULL )
                 {
                     $status['via_user_info'] = $user_id_user_info_map[$status['via_user_id']];

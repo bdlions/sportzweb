@@ -55,10 +55,8 @@
                                     break;
                                 }
                                 if ($counter == 1) {
-                                    ?>
-                                    <div class="col-md-2"> 
+                                    ?>                                    
                                         <img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $referenced_user_info['photo'] ?>">   
-                                    </div>
                                 <?php }
                                 ?>
                                 <a href='<?php echo base_url() . "member_profile/show/{$referenced_user_info['user_id']}" ?>' class="profile-name" ><?php echo $referenced_user_info['first_name'] . " " . $referenced_user_info['last_name']; ?></a>                            
@@ -66,12 +64,12 @@
                                 $counter++;
                             }
                             if ($total_users == 1) {
-                                echo ' likes ';
+                                echo ' likes';
                             } else if ($total_users > 1) {
-                                echo ' like ';
+                                echo ' like';
                             }
                             ?>
-                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'>Your post</a>                            
+                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'> your post</a>                            
                             <?php
                             echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST) {
@@ -95,12 +93,12 @@
                                 $counter++;
                             }
                             if ($total_users >= 1) {
-                                echo ' Commented on.';
+                                echo ' commented on';
                             } else if ($total_users > 3) {
                                 echo 'also commented on';
                             }
                             ?>
-                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'>Your post</a>
+                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'> your post</a>
                             <?php
                             echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST) {
@@ -129,7 +127,7 @@
                                 echo 'also shared';
                             }
                             ?>
-                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'>Your post</a>
+                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'> your post</a>
                             <?php
                             echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST) {
@@ -146,3 +144,4 @@
             ?>
         </div>
     </div>
+</div>
