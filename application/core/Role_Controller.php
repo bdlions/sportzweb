@@ -9,6 +9,7 @@ class Role_Controller extends CI_Controller{
         $business_profile_info = $this->business_profile_library->get_profile_info();
         $this->data['business_profile_info'] = $business_profile_info;
         $this->data = array_merge($this->data, $this->notification->get_all_notification_list($user_id));
+//        var_dump($this->data);exit;
     }
 }
 

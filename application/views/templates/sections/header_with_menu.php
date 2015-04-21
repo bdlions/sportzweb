@@ -108,7 +108,44 @@
                 window.location = datum.url;
             }
         });
+        $("#mm_notification").on("click", function() {
+            $('#mm_notification_box').show();
+            var notification_status_type_id_list = [
+                "<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>",
+                "<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>",
+                "<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>"
+            ];
+            var notification_type = '<?php echo NOTIFICATIONS ?>';
+            update_notifications_status(notification_status_type_id_list, notification_type);
+        });
+        $("#mm_friend_request").on("click", function() {
+            $('#mm_friend_request_box').show();
+            var notification_status_type_id_list = [
+                "<?php echo NOTIFICATION_WHILE_START_FOLLOWING; ?>"
+              
+            ];
+            var notification_type = '<?php echo FOLLOWERS ?>';
+            update_notifications_status(notification_status_type_id_list, notification_type);
+        });
     });
+    function update_notifications_status(notification_status_type_id_list, notification_type) {
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "notifications/update_notification_statuses",
+            data: {
+                notification_status_id_list: notification_status_type_id_list
+            },
+            success: function(data) {
+                if (data === 1 && notification_type === '<?php echo NOTIFICATIONS ?>') {
+                    $('#notification_counter_div').hide();
+                } else if(data === 1 && notification_type === '<?php echo FOLLOWERS ?>'){
+                     $('#follower_counter_dive').hide();
+                }
+            }
+        });
+
+    }
 
     $(document).mouseup(function(e) {
         var fr_container = $("#mm_friend_request_box");
@@ -127,7 +164,7 @@
     });
 
     function friend_toggle() {
-         $('#mm_friend_request_box').show();
+        $('#mm_friend_request_box').show();
     }
     function msg_toggle() {
         $('#mm_message_box').show();
@@ -136,6 +173,9 @@
     function notf_toggle() {
         $('#mm_notification_box').show();
     }
+
+
+
 </script>
 
 <nav class="navbar navbar-default navbar-top" role="navigation">
@@ -168,18 +208,18 @@
                         </div>
                         <div class="col-md-offset-1 col-md-4 right-menu">
                             <div style="margin-top: -4px;">
-                                <div id="mm_friend_request" style="position: relative" onclick="friend_toggle()">
+
+                                <div id="mm_friend_request" style="position: relative">
                                     <?php
                                     if ($total_unread_followers != 0) {
                                         ?>
-                                        <div class="notification_counter">
+                                        <div class="notification_counter" id="follower_counter_dive">
                                             <?php echo $total_unread_followers; ?>
                                         </div>
                                         <?php
                                     }
                                     ?>
-                                    
-                                    
+
                                     <a href="javascript:void(0)"></a>                
                                     <div id="mm_friend_request_box">
                                         <?php $this->load->view("followers/notification_followers"); ?>
@@ -189,23 +229,24 @@
                                     <?php
                                     if ($total_unread_notifications != 0) {
                                         ?>
-                                        <div class="notification_counter">
+                                        <div class="notification_counter" id="follower">
                                             <?php echo $total_unread_notifications; ?>
                                         </div>
                                         <?php
                                     }
                                     ?>
                                     <a href="javascript:void(0)"></a>
+
                                     <div id="mm_message_box">
                                         <?php $this->load->view("member/messages/notification_message"); ?>
                                     </div>
                                 </div>
 
-                                <div id="mm_notification" style="position: relative" onclick="notf_toggle()">
-                                     <?php
+                                <div id="mm_notification" style="position: relative">
+                                    <?php
                                     if ($total_unread_notifications != 0) {
                                         ?>
-                                        <div class="notification_counter">
+                                        <div class="notification_counter" id="notification_counter_div">
                                             <?php echo $total_unread_notifications; ?>
                                         </div>
                                         <?php

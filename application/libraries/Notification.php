@@ -112,6 +112,7 @@ class Notification {
                         $n_info->reference_id_list[] = $notification_info_list->reference_id_list[0];
                     }
                     $n_info->modified_on = now();
+                    $n_info->status = UNREAD_NOTIFICATION;
                 }
                 $notification_id = $n_info->id;
                 $notification_list[] = $n_info;
@@ -162,7 +163,7 @@ class Notification {
 
         function cmp($notification_list, $compare_list) {
 
-            return strcmp($compare_list->modified_on ,$notification_list->modified_on);
+            return strcmp($compare_list->modified_on, $notification_list->modified_on);
         }
 
         if (!empty($notification_list)) {
@@ -170,18 +171,17 @@ class Notification {
         }
         foreach ($notification_list as $n_info) {
             if ($n_info->type_id == NOTIFICATION_WHILE_START_FOLLOWING) {
-                if($n_info->status == UNREAD_NOTIFICATION){
-                    $result['total_unread_followers'] = $result['total_unread_followers']+1 ;
+                if ($n_info->status == UNREAD_NOTIFICATION) {
+                    $result['total_unread_followers'] = $result['total_unread_followers'] + 1;
                 }
                 $reference_user_id_list[] = $n_info->reference_id;
                 if (!in_array($n_info->reference_id, $reference_user_id_list)) {
                     $reference_user_id_list[] = $n_info->reference_id;
                 }
-            }  else {
-                if($n_info->status == UNREAD_NOTIFICATION){
-                    $result['total_unread_notifications'] = $result['total_unread_notifications']+1 ;
+            } else {
+                if ($n_info->status == UNREAD_NOTIFICATION) {
+                    $result['total_unread_notifications'] = $result['total_unread_notifications'] + 1;
                 }
-                
             }
             $reference_array_list = $n_info->reference_id_list;
             foreach ($reference_array_list as $reference_array_info) {
@@ -215,7 +215,6 @@ class Notification {
         $result['notification_list'] = $result_notification_list;
         return $result;
     }
-
 
 }
 

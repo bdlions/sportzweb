@@ -397,5 +397,8 @@ class Test extends CI_Controller {
         usort($array_list, "cmp");
         var_dump($array_list);
     }
+    function get_statuses(){
+     $result_array = $this->statuses->get_statuses();   
+    }
      
 }

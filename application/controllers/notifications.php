@@ -49,6 +49,7 @@ class Notifications extends Role_Controller {
         $notification_info_list->id = 2;
         $notification_info_list->created_on = $current_time;
         $notification_info_list->modified_on = $current_time;
+        $notification_info_list->status = UNREAD_NOTIFICATION;
         $notification_info_list->reference_id = 2; //status_id
         $notification_info_list->reference_id_list = array();
 //        $notification_info_list->reference_id_list[] = $reference_info_list;
@@ -68,6 +69,27 @@ class Notifications extends Role_Controller {
         $result_array = array();
         $result_array = $this->notification->get_notification_list($user_id);
     }
+    public function update_notification_statuses(){
+        $status_type_id_list = $_POST['notification_status_id_list'];
+        $result_array = array();
+        $user_id = $this->session->userdata('user_id');
+        $result_array = $this->notification->get_notification_list($user_id);
+        $result_notification_array = $result_array[0];
+        $notification_list = json_decode($result_notification_array['list']);
+        foreach ($notification_list as $notification_info) {
+            if(in_array($notification_info->type_id, $status_type_id_list)){
+                $notification_info->status = READ_NOTIFICATION ;
+            }
+            $modified_notification_list[] = $notification_info ;
+            
+        }
+        $new_notification_list = array(
+                'user_id' => $user_id,
+                'list' => json_encode($modified_notification_list)
+            );
+        $response = $this->notification->update_notification($user_id,$new_notification_list);
+        echo $response;
+        }
 
   
 

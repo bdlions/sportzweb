@@ -52,5 +52,7 @@ define("ALBUM_TYPE_USER_STATUS",                                        3);
 /* read and unread Notification **/
 define("UNREAD_NOTIFICATION",                                           1);
 define("READ_NOTIFICATION",                                             2);
+define("NOTIFICATIONS",                                                 1);
+define("FOLLOWERS",                                                     2);
 
 ?>

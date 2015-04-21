@@ -87,8 +87,6 @@ class Admin_healthy_recipes {
             foreach($result as $result_array){
                 $arranged_select_recipe_list[ $result_array['selected_date'] ][] = $result_array;
             }
-            var_dump($result_array);
-            var_dump($arranged_select_recipe_list);exit;
             ksort($arranged_select_recipe_list);
             $selected_recipe_list = end($arranged_select_recipe_list);
             $selected_recipe_list = end($selected_recipe_list);
