@@ -1,5 +1,6 @@
 #mm_friend_request {
     display: inline-block;
+    cursor: pointer;
     margin-right: 5px;
     margin-bottom: 5px;
     height: 20px;
@@ -9,18 +10,21 @@
 
 #mm_messages {
     display: inline-block;
-    margin-bottom: 2px;
-    margin-left: 5px;
-    height: 30px;
-    width: 30px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    height: 20px;
+    width: 20px;
     background-image: url('../..//images/inbox.png');
 }
 
 #mm_notification {
     display: inline-block;
-    margin-top: -2px;
-    height: 30px;
-    width: 30px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    height: 20px;
+    width: 20px;
     background-image: url('../..//images/bell.png');
 }
 #mm_setting {
@@ -94,15 +98,15 @@ font-weight: bold;
 line-height: 18px;
 }
 .notification_counter{
-    margin-top: 5px;
-    position: relative; 
-    bottom:  20px; 
-    left: 5px; 
-    border-radius: 3px; 
-    background-color: red; 
-    color: white; 
-    padding: 3%; 
-    text-align: center; 
-    font-weight: bold; 
+    background-color: red;
+    border-radius: 2px;
+    bottom: 20px;
+    color: white;
     font-size: 10px;
+    font-weight: bold;
+    left: 10px;
+    margin-top: 15px;
+    padding: 2%;
+    position: relative;
+    text-align: center;
 }

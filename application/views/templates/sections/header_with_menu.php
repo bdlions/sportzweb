@@ -2,84 +2,84 @@
     $(function() {
         $("#search_box").typeahead([
             {
-                name:"search_user",
-                remote:'<?php echo base_url()?>search/get_users?query=%QUERY',
+                name: "search_user",
+                remote: '<?php echo base_url() ?>search/get_users?query=%QUERY',
                 header: '<div style="font-size: 15px; font-weight:bold; width:33%">People</div>',
                 template: [
-                        '<div class="row">'+
-                            '<div class="col-md-3">'+
-                                '<div>'+
-                                    '<img alt="{{signature}}" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH?>{{photo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>'+
-                                    '<div style="visibility:hidden;height:0px">{{signature}}</div>'+
-                                '</div>'+
-                            '</div>'+
-                            '<div class="col-md-9">'+
-                                '<div class="row col-md-12 profile-name">'+
-                                    '{{first_name}} {{last_name}}'+
-                                    '<div class="pull-right" style="display: {{ptpro_display}}">'+
-                                        '<div style="background-color: yellow; color: maroon; font-size: 16px; padding: 2px">&nbsp;PT&nbsp;</div>'+
-                                    '</div>'+
-                                '</div>'+  
-                                '<div class="row col-md-12">'+
-                                    '{{country_name}} {{home_town}}'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'
-                  ].join(''),
+                    '<div class="row">' +
+                            '<div class="col-md-3">' +
+                            '<div>' +
+                            '<img alt="{{signature}}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH ?>{{photo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>' +
+                            '<div style="visibility:hidden;height:0px">{{signature}}</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-md-9">' +
+                            '<div class="row col-md-12 profile-name">' +
+                            '{{first_name}} {{last_name}}' +
+                            '<div class="pull-right" style="display: {{ptpro_display}}">' +
+                            '<div style="background-color: yellow; color: maroon; font-size: 16px; padding: 2px">&nbsp;PT&nbsp;</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row col-md-12">' +
+                            '{{country_name}} {{home_town}}' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>'
+                ].join(''),
                 engine: Hogan
             },
             {
-                name:"search_news",
-                remote:'<?php echo base_url()?>search/get_news?query=%QUERY',
+                name: "search_news",
+                remote: '<?php echo base_url() ?>search/get_news?query=%QUERY',
                 header: '<div style="font-size: 15px; font-weight:bold">News</div>',
                 template: [
-                    '<div class="row">'+
-                        '<div class="col-md-3">'+
-                            '<div>'+
-                                '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>'+
-                            '</div>'+
-                        '</div>'+
-                        '<div class="col-md-9 profile-name">{{title}}</div>'+
-                    '</div>'
-                  ].join(''),
+                    '<div class="row">' +
+                            '<div class="col-md-3">' +
+                            '<div>' +
+                            '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-md-9 profile-name">{{title}}</div>' +
+                            '</div>'
+                ].join(''),
                 engine: Hogan
             },
-             {
-                name:"search_healthy_recipe",
-                remote:'<?php echo base_url()?>search/get_healthy_recipes?query=%QUERY',
+            {
+                name: "search_healthy_recipe",
+                remote: '<?php echo base_url() ?>search/get_healthy_recipes?query=%QUERY',
                 header: '<div style="font-size: 15px; font-weight:bold">Recipes</div>',
                 template: [
-                     '<div class="row">'+
-                        '<div class="col-md-3">'+
-                            '<div>'+
-                                '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>'+
-                            '</div>'+
-                        '</div>'+
-                        '<div class="col-md-9 profile-name">{{title}}</div>'+
-                    '</div>'
-                  ].join(''),
+                    '<div class="row">' +
+                            '<div class="col-md-3">' +
+                            '<div>' +
+                            '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-md-9 profile-name">{{title}}</div>' +
+                            '</div>'
+                ].join(''),
                 engine: Hogan
             },
             {
-                name:"search_business_names",
-                remote:'<?php echo base_url()?>search/get_business_names?query=%QUERY',
+                name: "search_business_names",
+                remote: '<?php echo base_url() ?>search/get_business_names?query=%QUERY',
                 header: '<div style="font-size: 15px; font-weight:bold;">Companies and Groups</div>',
                 template: [
-                    '<div class="row">'+
-                        '<div class="col-md-3">'+
-                            '<div>'+
-                                '<img alt="{{signature}}" src="<?php echo base_url()?>resources/uploads/business/{{logo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>'+
-                                '<div style="visibility:hidden;height:0px">{{signature}}</div>'+
-                            '</div>'+
-                        '</div>'+
-                        '<div class="col-md-9 profile-name">{{business_name}}</div>'+
-                    '</div>'
-                  ].join(''),
+                    '<div class="row">' +
+                            '<div class="col-md-3">' +
+                            '<div>' +
+                            '<img alt="{{signature}}" src="<?php echo base_url() ?>resources/uploads/business/{{logo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>' +
+                            '<div style="visibility:hidden;height:0px">{{signature}}</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-md-9 profile-name">{{business_name}}</div>' +
+                            '</div>'
+                ].join(''),
                 engine: Hogan
             },
             {
-                name:"search_blogs",
-                remote:'<?php echo base_url()?>search/get_blogs?query=%QUERY',
+                name: "search_blogs",
+                remote: '<?php echo base_url() ?>search/get_blogs?query=%QUERY',
                 header: '<div style="font-size: 15px; font-weight:bold">Blogs</div>',
                 template: [
                     '<div class="row">' +
@@ -127,9 +127,8 @@
     });
 
     function friend_toggle() {
-        $('#mm_friend_request_box').show();
+         $('#mm_friend_request_box').show();
     }
-
     function msg_toggle() {
         $('#mm_message_box').show();
     }
@@ -168,15 +167,34 @@
                             </div>
                         </div>
                         <div class="col-md-offset-1 col-md-4 right-menu">
-                            <div>
+                            <div style="margin-top: -4px;">
                                 <div id="mm_friend_request" style="position: relative" onclick="friend_toggle()">
-                                    <div class="notification_counter">3</div>
+                                    <?php
+                                    if ($total_unread_followers != 0) {
+                                        ?>
+                                        <div class="notification_counter">
+                                            <?php echo $total_unread_followers; ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                    
+                                    
                                     <a href="javascript:void(0)"></a>                
                                     <div id="mm_friend_request_box">
                                         <?php $this->load->view("followers/notification_followers"); ?>
                                     </div>
                                 </div>
                                 <div id="mm_messages" style="position: relative" onclick="msg_toggle()">
+                                    <?php
+                                    if ($total_unread_notifications != 0) {
+                                        ?>
+                                        <div class="notification_counter">
+                                            <?php echo $total_unread_notifications; ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                     <a href="javascript:void(0)"></a>
                                     <div id="mm_message_box">
                                         <?php $this->load->view("member/messages/notification_message"); ?>
@@ -184,6 +202,15 @@
                                 </div>
 
                                 <div id="mm_notification" style="position: relative" onclick="notf_toggle()">
+                                     <?php
+                                    if ($total_unread_notifications != 0) {
+                                        ?>
+                                        <div class="notification_counter">
+                                            <?php echo $total_unread_notifications; ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                     <a href="javascript:void(0)"></a>
                                     <div id="mm_notification_box">
                                         <?php $this->load->view("member/notification/notification_notifications"); ?>
