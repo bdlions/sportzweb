@@ -112,7 +112,7 @@ class Statuses {
 
         //default statuses from team sonuto
         $admin_default_recipe_exists = false;
-        $admin_default_recipe_id = 0;
+        $admin_default_recipe_id = 1;
         $admin_default_blog_map = array(
             STATUS_SHARE_LATEST_BLOG1 => 2,
             STATUS_SHARE_LATEST_BLOG2 => 3,
