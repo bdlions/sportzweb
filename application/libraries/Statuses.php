@@ -208,7 +208,10 @@ class Statuses {
                 $shared_status_id_info_map[$shared_status_info['status_id']] = $shared_status_info;
             }
             if ($admin_default_recipe_exists == true) {
+                $recipe_array = $this->statuses->get_selected_recipe();
+                if(!empty($recipe_array)){
                 $admin_default_recipe_id = $this->statuses->get_selected_recipe();
+                }
                 if ($admin_default_recipe_id > 0 && !in_array($admin_default_recipe_id, $shared_recipe_id_list)) {
                     $shared_recipe_id_list[] = $admin_default_recipe_id;
                 }
