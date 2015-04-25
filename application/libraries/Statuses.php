@@ -208,11 +208,11 @@ class Statuses {
                 $shared_status_id_info_map[$shared_status_info['status_id']] = $shared_status_info;
             }
             if ($admin_default_recipe_exists == true) {
-                $recipe_array = $this->statuses->get_selected_recipe();
-                if(!empty($recipe_array)){
-                $admin_default_recipe_id = $this->statuses->get_selected_recipe();
+                $recipe_id = $this->statuses->get_selected_recipe();
+                if ($recipe_id > 0) {
+                    $admin_default_recipe_id = $recipe_id;
                 }
-                if ($admin_default_recipe_id > 0 && !in_array($admin_default_recipe_id, $shared_recipe_id_list)) {
+                if (!in_array($admin_default_recipe_id, $shared_recipe_id_list)) {
                     $shared_recipe_id_list[] = $admin_default_recipe_id;
                 }
             }
@@ -458,19 +458,13 @@ class Statuses {
     public function get_selected_recipe() {
         $present_date = $this->utils->get_current_date_db();
         $result = $this->statuses_model->get_recipe_selection($present_date)->result_array();
-        $arranged_select_recipe_list;
         if (!empty($result)) {
             foreach ($result as $result_array) {
-                $arranged_select_recipe_list[$result_array['selected_date']][] = $result_array;
-            }
-            ksort($arranged_select_recipe_list);
-            $selected_recipe_list = end($arranged_select_recipe_list);
-            $selected_recipe_list = end($selected_recipe_list);
-            $selected_recipe_item_list = json_decode($selected_recipe_list['recipe_view_list']);
-            ;
+            $selected_recipe_item_list = json_decode($result_array['recipe_view_list']);
             return $selected_recipe_item_list[0];
+            }
         } else {
-            return array();
+            return 0;
         }
     }
 

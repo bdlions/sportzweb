@@ -398,7 +398,7 @@ class Test extends CI_Controller {
         var_dump($array_list);
     }
     function get_statuses(){
-     $result_array = $this->statuses->get_statuses();   
+     $result_array = $this->statuses->get_selected_recipe();   
     }
      
 }

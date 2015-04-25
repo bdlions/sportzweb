@@ -138,6 +138,8 @@ class Statuses_model extends Ion_auth_model {
         $this->db->where($this->tables['recipe_selection'] . '.selected_date <=', $date);
         return $this->db->select("*")
                         ->from($this->tables['recipe_selection'])
+                        ->order_by('id', 'desc')
+                        ->limit(1)
                         ->get();
     }
 
