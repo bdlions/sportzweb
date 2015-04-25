@@ -109,7 +109,7 @@
             }
         });
         $("#mm_notification").on("click", function() {
-            $('#mm_notification_box').toggle();
+            $('#mm_notification_box').show();
             var notification_status_type_id_list = [
                 "<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>",
                 "<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>",
@@ -119,7 +119,7 @@
             update_notifications_status(notification_status_type_id_list, notification_type);
         });
         $("#mm_friend_request").on("click", function() {
-            $('#mm_friend_request_box').toggle();
+            $('#mm_friend_request_box').show();
             var notification_status_type_id_list = [
                 "<?php echo NOTIFICATION_WHILE_START_FOLLOWING; ?>"
             ];
@@ -127,7 +127,7 @@
             update_notifications_status(notification_status_type_id_list, notification_type);
         });
         $("#mm_messages").on('click',function(){
-           $('#mm_message_box').toggle(); 
+           $('#mm_message_box').show(); 
         });
     });
    
