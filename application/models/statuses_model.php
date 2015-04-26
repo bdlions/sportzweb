@@ -208,6 +208,15 @@ class Statuses_model extends Ion_auth_model {
             return TRUE;
         }
     }
+    
+    public function get_latest_photography_default_status()
+    {
+        return $this->db->select($this->tables['photography'] . '.*')
+                    ->from($this->tables['photography'])
+                    ->order_by('id', 'desc')
+                    ->limit(1)
+                    ->get();
+    }
 
 }
 

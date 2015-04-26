@@ -115,7 +115,7 @@
                 "<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>",
                 "<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>"
             ];
-            var notification_type = '<?php echo NOTIFICATIONS ?>';
+            var notification_type = 1;
             update_notifications_status(notification_status_type_id_list, notification_type);
         });
         $("#mm_friend_request").on("click", function() {
@@ -123,7 +123,7 @@
             var notification_status_type_id_list = [
                 "<?php echo NOTIFICATION_WHILE_START_FOLLOWING; ?>"
             ];
-            var notification_type = '<?php echo FOLLOWERS ?>';
+            var notification_type = 2;
             update_notifications_status(notification_status_type_id_list, notification_type);
         });
         $("#mm_messages").on('click',function(){
@@ -140,10 +140,10 @@
                 notification_status_id_list: notification_status_type_id_list
             },
             success: function(data) {
-                if (data === 1 && notification_type === '<?php echo NOTIFICATIONS ?>') {
+                if (data === 1 && notification_type === 1) {
                     $('#notification_counter_div').hide();
-                } else if (data === 1 && notification_type === '<?php echo FOLLOWERS ?>') {
-                    $('#follower_counter_dive').hide();
+                } else if(data === 1 && notification_type === 2){
+                     $('#follower_counter_dive').hide();
                 }
             }
         });

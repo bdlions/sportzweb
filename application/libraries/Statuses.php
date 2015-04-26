@@ -113,6 +113,9 @@ class Statuses {
         //default statuses from team sonuto
         $admin_default_recipe_exists = false;
         $admin_default_recipe_id = 1;
+        $admin_default_photography_exists = false;
+        $admin_default_photography_id = 1;
+        $admin_latest_photography_info = array();
         $admin_default_blog_map = array(
             STATUS_SHARE_LATEST_BLOG1 => 2,
             STATUS_SHARE_LATEST_BLOG2 => 3,
@@ -200,6 +203,9 @@ class Statuses {
                 if (in_array($status['shared_type_id'], $admin_blog_shared_type_id_list)) {
                     $admin_default_blog_exists = true;
                 }
+                if ($status['shared_type_id'] == STATUS_SHARE_APP_ADMIN_PHOTOGRAPHY) {
+                    $admin_default_photography_exists = true;
+                }
             }
             $shared_status_id_info_map = array();
             $shared_statuse_info_array = $this->statuses_model->get_statuses(0, 0, 0, 0, 0, $shared_status_id_list)->result_array();
@@ -214,6 +220,14 @@ class Statuses {
                 }
                 if (!in_array($admin_default_recipe_id, $shared_recipe_id_list)) {
                     $shared_recipe_id_list[] = $admin_default_recipe_id;
+                }
+            }
+            if($admin_default_photography_exists)
+            {
+                $latest_photography_info_array = $this->statuses_model->get_latest_photography_default_status()->result_array();
+                if(!empty($latest_photography_info_array))
+                {
+                    $admin_latest_photography_info = $latest_photography_info_array[0];
                 }
             }
             if (!empty($shared_recipe_id_list)) {
@@ -371,6 +385,8 @@ class Statuses {
                     $status['reference_info'] = $blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG3]];
                 } else if ($status['shared_type_id'] == STATUS_SHARE_LATEST_BLOG4 && isset($blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG4]])) {
                     $status['reference_info'] = $blog_id_info_map[$admin_default_blog_map[STATUS_SHARE_LATEST_BLOG4]];
+                }else if ($status['shared_type_id'] == STATUS_SHARE_APP_ADMIN_PHOTOGRAPHY && !empty($admin_latest_photography_info)) {
+                    $status['reference_info'] = $admin_latest_photography_info;
                 }
 
                 if ($status['via_user_id'] != "" && $status['via_user_id'] != NULL) {

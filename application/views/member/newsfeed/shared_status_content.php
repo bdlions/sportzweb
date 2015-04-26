@@ -152,6 +152,12 @@ else
             </div>
         </a>
     </div>
+    <?php if(!empty($newsfeed['reference_info'])){?>
+    <div class="row col-md-12">
+        <img class="img-responsive" style="width: 100%" 
+                     src="<?php echo base_url().PHOTOGRAPHY_IMAGE_PATH.$newsfeed['reference_info']['img'] ?>">
+    </div>
+    <?php }?>
 </div> 
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_LATEST_MAIN_RECIPE && isset($newsfeed['reference_info']) ){ ?>
 <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
