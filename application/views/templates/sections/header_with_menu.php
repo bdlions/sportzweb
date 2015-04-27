@@ -116,6 +116,7 @@
                 "<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>"
             ];
             var notification_type = 1;
+
             update_notifications_status(notification_status_type_id_list, notification_type);
         });
         $("#mm_friend_request").on("click", function() {
