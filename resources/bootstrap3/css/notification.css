@@ -3,38 +3,38 @@
     cursor: pointer;
     margin-right: 5px;
     margin-bottom: 5px;
-    height: 20px;
-    width: 20px;
-    background-image: url('../..//images/friends.png');
+    height: 33px;
+    width: 30px;
+    background-image: url('../..//images/2.png');
 }
 
 #mm_messages {
     display: inline-block;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     margin-right: 5px;
-    height: 20px;
-    width: 20px;
+    height: 33px;
+    width: 30px;
     background-image: url('../..//images/inbox.png');
 }
 
 #mm_notification {
     display: inline-block;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     margin-right: 5px;
-    height: 20px;
-    width: 20px;
+    height: 33px;
+    width: 30px;
     background-image: url('../..//images/bell.png');
 }
 #mm_setting {
     display: inline-block;
     cursor: pointer;
     height: 30px;
-    width: 30px;
+    width: 33px;
 }
 #mm_setting a img{
-    padding-bottom: 25px;
+    padding-bottom: 40px;
 }
 #mm_notification_box, #mm_message_box, #mm_friend_request_box{
     position: absolute;
