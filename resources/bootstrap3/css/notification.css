@@ -85,7 +85,9 @@ overflow-y: scroll;
 border-left: 1px solid lightgray; 
 border-right: 1px solid lightgray;
 }
-
+.notification_time_style{
+    padding-left: 27px;
+}
 .see_all_anchor_style{
     text-align: center;
     font-weight: bold;

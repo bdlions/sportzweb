@@ -2930,9 +2930,14 @@ class Gympro extends Role_Controller{
 
     public function earnings_summary()
     {
+        $start_date = date('Y-m-d');
+        $nextWeek = time() + (7 * 24 * 60 * 60);
+        $end_date = date('Y-m-d', $nextWeek);
         $u_data = $this->ion_auth_model->get_users($this->session->userdata('user_id'))->result_array();
         if(!empty($u_data)){$current_date = $this->utils->get_current_date( $u_data[0]['country_code'] );}
         $this->data['current_date'] = $current_date;
+        $this->data['start_date'] = $this->utils->convert_date_from_db_to_user($start_date);
+        $this->data['end_date'] = $this->utils->convert_date_from_db_to_user($end_date);
         $this->data['status_list'] = $this->gympro_library->get_all_session_statuses()->result_array();
         $this->data['group_list'] = $this->gympro_library->get_all_groups($this->session->userdata('user_id'));
         $this->data['client_list'] = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
@@ -2977,7 +2982,6 @@ class Gympro extends Role_Controller{
             $where['status_id'] = $group_client_data['status_id'];
         }
         $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
-        
         //group view can change, so two cases:
         if ($group_client_data['created_for_type_id'] == SESSION_CREATED_FOR_GROUP_TYPE_ID) {    //for group
             foreach ($get_sessions as $session) {

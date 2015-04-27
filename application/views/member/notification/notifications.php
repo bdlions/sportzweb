@@ -13,17 +13,7 @@
             </div>
         </div>  
         <div class="pagelet">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    Get notifications:
-                </div>
-            </div>
             <div class="row form-group"></div>
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <span style="font-weight: bold;">Today</span>
-                </div>
-            </div>
             <?php foreach ($notification_list as $notification_info) { ?>
                 <div class="pagelet_divider"></div>
                 <div class="row">    

@@ -21,13 +21,19 @@
             ?>
             <div class="pagelet">
                 <div class="row">
-                    <div class="col-md-12">
-                        <img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $notification_info['reference_info']['photo'] ?>">   
-                        <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_info']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_info']['first_name'] . " " . $notification_info['reference_info']['last_name']; ?></a>                            
+                    <div class="col-md-6">
+                        <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_info']['user_id']}" ?>'><img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $notification_info['reference_info']['photo'] ?>"></a>   
+                        <span class="profile-name" ><?php echo $notification_info['reference_info']['first_name'] . " " . $notification_info['reference_info']['last_name']; ?></span></a>                            
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-xs follower_button_style">Accept</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        <?php }
+        <?php
+        }
     }
     ?>
 </div>

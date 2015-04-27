@@ -1177,6 +1177,7 @@ class Gympro_model extends Ion_auth_model {
                     ->from($this->tables['app_gympro_sessions'])
                     ->get();
     }
+   
     /*
      * This method will return sessions
      * @Author Nazmul on 22nd January 2015
