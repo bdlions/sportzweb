@@ -2906,7 +2906,7 @@ CREATE TABLE IF NOT EXISTS `app_gympro_session_statuses` (
 INSERT INTO `app_gympro_session_statuses` (`title`) VALUES
 ('Unpaid'),
 ('Paid Cash'),
-('Paid PTPro'),
+('Paid via PT Pro'),
 ('Cancelled');
 CREATE TABLE IF NOT EXISTS `app_gympro_sessions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
