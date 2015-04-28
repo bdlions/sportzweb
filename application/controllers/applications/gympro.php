@@ -2982,6 +2982,11 @@ class Gympro extends Role_Controller{
             $where['status_id'] = $group_client_data['status_id'];
         }
         $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
+        if(empty($get_sessions)){
+            $result_array =array();
+             echo json_encode($result_array);
+            return ;
+        }
         //group view can change, so two cases:
         if ($group_client_data['created_for_type_id'] == SESSION_CREATED_FOR_GROUP_TYPE_ID) {    //for group
             foreach ($get_sessions as $session) {
@@ -3005,7 +3010,8 @@ class Gympro extends Role_Controller{
             $client_data = $result;
             echo json_encode($client_data);
             return;
-        }
+        } 
+          
     }
     
     

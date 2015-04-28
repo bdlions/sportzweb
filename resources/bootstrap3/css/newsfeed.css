@@ -312,7 +312,7 @@
 }
 
 .feed .profile-name, .feed .profile-name:hover{
-    font-size: 30px;
+    font-size: 15px;
     font-weight: bold;
     color: rgb(0, 63, 171);
 }

@@ -3,12 +3,7 @@
         <div class="col-md-6">
             <span style="font-size: 12px; font-weight: bold;">Follower Requests</span>
         </div>
-        <div class="col-md-6">
-            <div class="pull-right">
-                <a style="font-size: 11px;" href="#">Find Followers</a> .
-                <a style="font-size: 11px;" href="#">Settings</a> 
-            </div>
-        </div>
+        
     </div>
 </div>
 <div class="scroll_box_style">
