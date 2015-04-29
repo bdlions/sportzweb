@@ -85,7 +85,8 @@ class Auth extends Role_Controller{
             $this->data['user_info'] = $this->ion_auth->get_user_info();
             $this->data['user_id'] = $user_id;
             $this->data['current_user_id'] = $user_id;
-            $this->data['status_list_id'] = STATUS_LIST_NEWSFEED;
+            //status posted at newsfeed will be displayed at member profile
+            $this->data['status_list_id'] = STATUS_LIST_USER_PROFILE;
             $this->data['mapping_id'] = $user_id;
             $this->data['recent_activities'] = $this->recent_activities->get_recent_activites();
             $this->data['popular_trends'] = $this->trending_features->get_popular_trends()->result_array();
