@@ -64,7 +64,7 @@
             var special_subcategory_interest = selected_special_interest.sub_interest;
             var selected_special_interests = <?php echo $selected_special_interest; ?>;
             var interest_html_text = "<div id='special_interest_" + selected_special_interest.id + "'>";
-            interest_html_text += '<div class="form-group small_text_dark"><input type="checkbox" onclick="check_all_boxes(this, ' + selected_special_interest.id + ')">Select all</div>'
+            interest_html_text += '<div class="form-group small_text_dark"><label><input style="10px" type="checkbox" onclick="check_all_boxes(this, ' + selected_special_interest.id + ')"><span style="padding-left:5px;">Select all</span></label></div>'
             for (var j = 0; j < special_subcategory_interest.length; j++) {
                 var id = selected_special_interest.id+"_" + special_subcategory_interest[j].id;
                 var checked = $.inArray(id, selected_special_interests) > -1 == true?"checked":"";
