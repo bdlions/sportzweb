@@ -1,10 +1,10 @@
 #mm_friend_request {
     display: inline-block;
     cursor: pointer;
-    margin-right: 5px;
-    margin-bottom: 8px;
-    height: 32px;
-    width: 32px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    height: 16px;
+    width: 16px;
 
     background-image: url('../..//images/2.png');
 }
@@ -107,12 +107,12 @@ line-height: 18px;
 .notification_counter{
     background-color: red;
     border-radius: 2px;
-    bottom: 20px;
+    bottom: 30px;
     color: white;
     font-size: 10px;
     font-weight: bold;
     left: 10px;
-    margin-top: 15px;
+    margin-top: 22px;
     padding: 2%;
     position: relative;
     text-align: center;
