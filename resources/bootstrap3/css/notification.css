@@ -2,36 +2,36 @@
     display: inline-block;
     cursor: pointer;
     margin-right: 5px;
-    margin-bottom: 5px;
-    height: 33px;
-    width: 30px;
+    margin-bottom: 8px;
+    height: 32px;
+    width: 32px;
     background-image: url('../..//images/2.png');
 }
 
 #mm_messages {
     display: inline-block;
     cursor: pointer;
-    margin-bottom: 8px;
+    margin-bottom: 7px;
     margin-right: 5px;
-    height: 33px;
-    width: 30px;
+    height: 35px;
+    width: 32px;
     background-image: url('../..//images/inbox.png');
 }
 
 #mm_notification {
     display: inline-block;
     cursor: pointer;
-    margin-bottom: 3px;
+    margin-bottom: 10px;
     margin-right: 5px;
-    height: 33px;
-    width: 30px;
+    height: 24px;
+    width: 21px;
     background-image: url('../..//images/bell.png');
 }
 #mm_setting {
     display: inline-block;
     cursor: pointer;
-    height: 30px;
-    width: 33px;
+    height: 25px;
+    width: 28px;
 }
 #mm_setting a img{
     padding-bottom: 40px;
