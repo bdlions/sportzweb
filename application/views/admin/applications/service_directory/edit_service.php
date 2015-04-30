@@ -104,11 +104,7 @@
                         Business Profile
                     </label>
                     <div class ="col-md-6">
-                        <?php if($business_profile_list != NULL) : ?>
-                            <?php echo form_dropdown('business_profile_id', $business_profile_list, $selected_business_profile_id,'class=form-control'); ?>
-                            <?php else : ?>
-                            <?php echo form_dropdown('business_profile_id', $business_profile_list+array('' => 'Select'), '', 'class=form-control'); ?>
-                        <?php endif; ?>
+                        <?php echo form_dropdown('business_profile_id', array('0' => 'Select')+$business_profile_list, $service_info['business_profile_id'], 'class=form-control'); ?>
                     </div>
                 </div>
                 

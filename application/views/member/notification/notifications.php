@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="pull-right">
-                        <a href="#">Notification Settings</a>
+                        
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                                 echo ' like';
                             }
                             ?>
-                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'> your post</a>                            
+                            <a href='<?php echo base_url() . "member_profile/view_shared_status/{$reference_id}" ?>'> your post</a>                            
                             <?php
                             echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST) {
@@ -88,7 +88,7 @@
                                 echo 'also commented on';
                             }
                             ?>
-                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'> your post</a>
+                            <a href='<?php echo base_url() . "member_profile/view_shared_status/{$reference_id}" ?>'> your post</a>
                             <?php
                             echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST) {
@@ -117,7 +117,7 @@
                                 echo 'also shared';
                             }
                             ?>
-                            <a href='<?php echo base_url() . "member_profile/show/{$reference_id}" ?>'> your post</a>
+                            <a href='<?php echo base_url() . "member_profile/view_shared_status/{$reference_id}" ?>'> your post</a>
                             <?php
                             echo $created_on;
                         } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST) {

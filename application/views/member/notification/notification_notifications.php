@@ -11,7 +11,15 @@
     <?php foreach ($notification_list as $notification_info) { ?>
         <div class="pagelet message_friends_box">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-sm-3 feed-profile-picture">
+                    <a href='<?php echo base_url(). "member_profile/show/{$notification_info['reference_list'][0]['user_id']}"?>'>
+                        <div>
+                            <img alt="<?php echo $notification_info['reference_list'][0]['first_name'][0] . $notification_info['reference_list'][0]['last_name'][0]?>" src="<?php echo base_url().PROFILE_PICTURE_DISPLAY_PATH.$notification_info['reference_list'][0]['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+                            <p style="visibility:hidden"><?php echo $notification_info['reference_list'][0]['first_name'][0].$notification_info['reference_list'][0]['last_name'][0] ?></p>
+                        </div>
+                    </a>             
+                </div>
+                <div class="col-sm-9">
                     <?php
                     $reference_id = $notification_info['reference_id'];
                     $created_on = $notification_info['created_on'];
@@ -38,10 +46,6 @@
                                 <?php
                                 break;
                             }
-                            if ($counter == 1) {
-                                ?>
-                                <a href='<?php echo base_url() . "member_profile/show/{$referenced_user_info['user_id']}" ?>'><img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $referenced_user_info['photo'] ?>"></a>   
-                            <?php }
                             ?>   
                             <a href='<?php echo base_url() . "member_profile/show/{$referenced_user_info['user_id']}" ?>' class="profile-name" ><?php echo $referenced_user_info['first_name'] . " " . $referenced_user_info['last_name']; ?></a>                            
                             <?php
@@ -54,7 +58,7 @@
                         }
                         ?>
                         <a href='<?php echo base_url() . "member_profile/view_shared_status/{$reference_id}" ?>'> your post</a>    
-                        <div class="notification_time_style"><?php echo $created_on; ?> </div>
+                        <div><?php echo $created_on; ?> </div>
                         <?php
                     } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST) {
                         foreach ($notification_info['reference_list'] as $referenced_com_user_info) {
@@ -67,10 +71,6 @@
                                     echo ' , ';
                                 }
                             }
-                            if ($counter == 1) {
-                                ?>
-                                <a href='<?php echo base_url() . "member_profile/show/{$referenced_com_user_info['user_id']}" ?>'><img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $referenced_com_user_info['photo'] ?>"></a>  
-                            <?php }
                             ?>
                             <a href='<?php echo base_url() . "member_profile/show/{$referenced_com_user_info['user_id']}" ?>' class="profile-name" ><?php echo $referenced_com_user_info['first_name'] . " " . $referenced_com_user_info['last_name']; ?></a>                            
                             <?php
@@ -83,7 +83,7 @@
                         }
                         ?>
                         <a href='<?php echo base_url() . "member_profile/view_shared_status/{$reference_id}" ?>'> your post</a> 
-                        <div class="notification_time_style"><?php echo $created_on; ?> </div>
+                        <div><?php echo $created_on; ?> </div>
                         <?php
                     } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST) {
                         foreach ($notification_info['reference_list'] as $referenced_share_user_info) {
@@ -96,10 +96,6 @@
                                     echo ' , ';
                                 }
                             }
-                            if ($counter == 1) {
-                                ?>
-                                <a href='<?php echo base_url() . "member_profile/show/{$referenced_share_user_info['user_id']}" ?>'><img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $referenced_share_user_info['photo'] ?>"></a>   
-                            <?php }
                             ?>
                             <a href='<?php echo base_url() . "member_profile/show/{$referenced_share_user_info['user_id']}" ?>' class="profile-name" ><?php echo $referenced_share_user_info['first_name'] . " " . $referenced_share_user_info['last_name']; ?></a>                            
                             <?php
@@ -112,7 +108,7 @@
                         }
                         ?>
                         <a href='<?php echo base_url() . "member_profile/view_shared_status/{$reference_id}" ?>'>your post</a> 
-                        <div class="notification_time_style"><?php echo $created_on; ?> </div>
+                        <div><?php echo $created_on; ?> </div>
                         <?php
                     } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_PHOTO_TAG) {
                         

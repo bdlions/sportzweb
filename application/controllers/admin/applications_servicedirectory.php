@@ -630,11 +630,14 @@ class Applications_servicedirectory extends Admin_Controller{
                     'post_code' => $this->input->post('post_code'),
                     'telephone' => $this->input->post('telephone'),
                     'service_category_id'  => $this->input->post('service_category_id'),
-                    'business_profile_id'   => $this->input->post('business_profile_id'),
                     'website' => $this->utils->process_url($this->input->post('website')),
                     'picture' => '',
                     'modified_on' => now(),
                 );
+                if($this->input->post('business_profile_id') > 0)
+                {
+                    $data['business_profile_id'] = $this->input->post('business_profile_id');
+                }
                 if (isset($_FILES["userfile"]))
                 {
                     $file_info = $_FILES["userfile"];
@@ -760,12 +763,6 @@ class Applications_servicedirectory extends Admin_Controller{
             'type' => 'submit',
             'value' => 'Update',
         );
-        
-        if($service_info['business_profile_id'] != NULL) {
-            $this->data['selected_business_profile_id'] = $service_info['business_profile_id'];
-        } else {
-            $this->data['selected_business_profile_id'] = NULL;
-        }
         
         if($service_info['country_id'] != NULL) {
             $this->data['selected_country_id'] = $service_info['country_id'];

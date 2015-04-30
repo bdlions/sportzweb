@@ -111,9 +111,11 @@ class Notification_model extends Ion_auth_model {
      */
 
     public function get_notification_list($user_id = 0) {
-        $this->db->where('user_id', $user_id);
-        return $this->db->select($this->tables['notification_list'] . ".*")
-                        ->get($this->tables['notification_list']);
+        $this->db->where($this->tables['notification_list'].'.user_id', $user_id);
+        return $this->db->select($this->tables['usres_following_acceptance'].'.following_acceptance_type, '.$this->tables['notification_list'] . ".*")
+                    ->from($this->tables['notification_list'])  
+                    ->join($this->tables['usres_following_acceptance'], $this->tables['usres_following_acceptance'].'.user_id='.$this->tables['notification_list'].'.user_id ','left')
+                    ->get();
     }
     public function test_user_list($user_id) {
         $this->db->where('id', $user_id);

@@ -110,45 +110,41 @@
         });
         $("#mm_notification").on("click", function() {
             $('#mm_notification_box').show();
-            var notification_status_type_id_list = [
+            var notification_type_id_list = [
                 "<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>",
                 "<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>",
                 "<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>"
             ];
-            var notification_type = 1;
-
-            update_notifications_status(notification_status_type_id_list, notification_type);
+            update_notifications_status(notification_type_id_list, 1);
         });
         $("#mm_friend_request").on("click", function() {
             $('#mm_friend_request_box').show();
-            var notification_status_type_id_list = [
+            var notification_type_id_list = [
                 "<?php echo NOTIFICATION_WHILE_START_FOLLOWING; ?>"
             ];
-            var notification_type = 2;
-            update_notifications_status(notification_status_type_id_list, notification_type);
+            update_notifications_status(notification_type_id_list, 2);
         });
         $("#mm_messages").on('click',function(){
            $('#mm_message_box').show(); 
         });
     });
    
-    function update_notifications_status(notification_status_type_id_list, notification_type) {
+    function update_notifications_status(notification_type_id_list, notification_category) {
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: '<?php echo base_url(); ?>' + "notifications/update_notification_statuses",
+            url: '<?php echo base_url(); ?>' + "notifications/update_notifications_status",
             data: {
-                notification_status_id_list: notification_status_type_id_list
+                notification_type_id_list: notification_type_id_list
             },
             success: function(data) {
-                if (data === 1 && notification_type === 1) {
+                if (data === 1 && notification_category === 1) {
                     $('#notification_counter_div').hide();
-                } else if(data === 1 && notification_type === 2){
+                } else if(data === 1 && notification_category === 2){
                      $('#follower_counter_dive').hide();
                 }
             }
         });
-
     }
 
     $(document).mouseup(function(e) {
@@ -166,7 +162,23 @@
             container.hide();
         }
     });
-
+    
+    function open_modal_accept_confirm(follower_id){
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
+            data: {
+                follower_id: follower_id
+            },
+            success: function(data) {
+                $("#div_accept_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
+                $('#span_accept_confirm_message').text('Accept '+data.user_info.first_name+' '+data.user_info.last_name+'?');
+                $('#follower_id_confirm_accept').val(follower_id);
+                $('#modal_accept_confirm').modal('show');
+            }
+        });
+    }
 
  
 </script>
@@ -298,3 +310,4 @@
     <?php endif; ?>
 </nav>
 
+<?php $this->load->view("followers/modal_accept_confirm");

@@ -66,26 +66,6 @@
         //$('#modal_block_confirm').modal('show');
     }
     
-    function open_modal_accept_confirm(follower_id){
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: '<?php echo base_url(); ?>' + "followers/get_follower_info",
-            data: {
-                follower_id: follower_id
-            },
-            success: function(data) {
-                $("#div_accept_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
-                $('#span_accept_confirm_message').text('Accept '+data.user_info.first_name+' '+data.user_info.last_name+'?');
-                $('#follower_id_confirm_accept').val(follower_id);
-                $('#modal_accept_confirm').modal('show');
-            }
-        });
-        
-        //$('#follower_id_confirm_accept').val(follower_id);
-        //$('#modal_accept_confirm').modal('show');
-    }
-    
     function open_modal_unblock_confirm(follower_id){
         $.ajax({
             dataType: 'json',
@@ -152,5 +132,4 @@
 <?php $this->load->view("followers/modal_report");
       $this->load->view("followers/modal_unfollow_confirm");
       $this->load->view("followers/modal_block_confirm");
-      $this->load->view("followers/modal_accept_confirm");
       $this->load->view("followers/modal_unblock_confirm");

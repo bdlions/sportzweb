@@ -52,91 +52,103 @@ class Notification {
         return get_instance()->$var;
     }
 
+//    /*
+//     * Ajax Call
+//     * This method will return every  types  notifications best on  parameter
+//     * Parameter type or Status  
+//     * @Author Rashida on 13th April 2015
+//     */
+//
+//    public function get_notification_list($user_id = 0, $type_id = 0, $reference_id = 0) {
+//        $notification_list_array = array();
+//        $result_array = $this->notification_model->get_notification_list($user_id)->result_array();
+//        if (!empty($result_array)) {
+//            foreach ($result_array as $result) {
+//                $notification_list = json_decode($result['list']);
+//                $notification_list = $notification_list[0];
+//                if ($type_id != 0 && $reference_id != 0) {
+//                    if ($notification_list->type_id == $type_id && $notification_list->reference_id == $reference_id) {
+//                        $notification_list_array[] = $result;
+//                    } else {
+//                        continue;
+//                    }
+//                } else if ($type_id != 0 && $reference_id == 0) {
+//                    if ($notification_list->type_id == $type_id) {
+//                        $notification_list_array[] = $result;
+//                    } else {
+//                        continue;
+//                    }
+//                } else if ($type_id == 0 && $reference_id != 0) {
+//                    if ($notification_list->reference_id == $reference_id) {
+//                        $notification_list_array[] = $result;
+//                    } else {
+//                        continue;
+//                    }
+//                } else {
+//                    $notification_list_array[] = $result;
+//                }
+//            }
+//            return $notification_list_array;
+//        }
+//    }
+
     /*
-     * Ajax Call
-     * This method will return every  types  notifications best on  parameter
-     * Parameter type or Status  
-     * @Author Rashida on 13th April 2015
+     * This method will add a notification under a user
+     * @param $notified_user_id, user id
+     * @param $$notification_info_list, notification info
+     * @Author Nazmul Hasan on 30th April 2015
      */
-
-    public function get_notification_list($user_id = 0, $type_id = 0, $reference_id = 0) {
-        $notification_list_array = array();
-        $result_array = $this->notification_model->get_notification_list($user_id)->result_array();
-        if (!empty($result_array)) {
-            foreach ($result_array as $result) {
-                $notification_list = json_decode($result['list']);
-                $notification_list = $notification_list[0];
-                if ($type_id != 0 && $reference_id != 0) {
-                    if ($notification_list->type_id == $type_id && $notification_list->reference_id == $reference_id) {
-                        $notification_list_array[] = $result;
-                    } else {
-                        continue;
-                    }
-                } else if ($type_id != 0 && $reference_id == 0) {
-                    if ($notification_list->type_id == $type_id) {
-                        $notification_list_array[] = $result;
-                    } else {
-                        continue;
-                    }
-                } else if ($type_id == 0 && $reference_id != 0) {
-                    if ($notification_list->reference_id == $reference_id) {
-                        $notification_list_array[] = $result;
-                    } else {
-                        continue;
-                    }
-                } else {
-                    $notification_list_array[] = $result;
-                }
-            }
-            return $notification_list_array;
-        }
-    }
-
-    public function add_notification($referenced_user_id, $notification_info_list) {
+    public function add_notification($notified_user_id, $notification_info_list) {
         $total_notifications = 0;
         $notification_list = array();
         if ($notification_info_list->type_id != 0) {
             $notification_info_list->id = ++$total_notifications;
         }
-        $notification_list_array = $this->notification->get_notification_list($referenced_user_id);
-        if (!empty($notification_list_array)) {
-            $notification_list_array = $notification_list_array[0];
-            $n_list_array = json_decode($notification_list_array['list']);
+        $notification_info_array = $this->notification->get_notification_list($notified_user_id)->result_array();
+        if (!empty($notification_info_array)) {
+            $notification_info = $notification_info_array[0];
+            $n_list_array = json_decode($notification_info['list']);
             $isexist = FALSE;
             $notification_id = 0;
-            foreach ($n_list_array as $n_info) {
-
-                if ($n_info->type_id == $notification_info_list->type_id && $n_info->reference_id == $notification_info_list->reference_id) {
-                    $isexist = TRUE;
-                    if ($notification_info_list->reference_id_list != null) {
-                        $n_info->reference_id_list[] = $notification_info_list->reference_id_list[0];
+            if($n_list_array != null && $n_list_array != "")
+            {
+                foreach ($n_list_array as $n_info) {
+                    if ($n_info->type_id == $notification_info_list->type_id && $n_info->reference_id == $notification_info_list->reference_id) {
+                        $isexist = TRUE;
+                        if ($notification_info_list->reference_id_list != null) {
+                            $n_info->reference_id_list[] = $notification_info_list->reference_id_list[0];
+                        }
+                        $n_info->modified_on = now();
+                        $n_info->status = UNREAD_NOTIFICATION;
                     }
-                    $n_info->modified_on = now();
-                    $n_info->status = UNREAD_NOTIFICATION;
+                    $notification_id = $n_info->id;
+                    $notification_list[] = $n_info;
                 }
-                $notification_id = $n_info->id;
-                $notification_list[] = $n_info;
-            }
+            }            
             if (!$isexist) {
                 $notification_info_list->id = ++$notification_id;
                 $notification_list[] = $notification_info_list;
             }
             $additional_data = array(
-                'user_id' => $referenced_user_id,
                 'list' => json_encode($notification_list)
             );
-            $response = $this->notification_model->update_notification($referenced_user_id, $additional_data);
+            $response = $this->notification_model->update_notification($notified_user_id, $additional_data);
         } else {
             $notification_list[] = $notification_info_list;
             $additional_data = array(
-                'user_id' => $referenced_user_id,
+                'user_id' => $notified_user_id,
                 'list' => json_encode($notification_list)
             );
-            $response = $this->notification_model->add_notification($referenced_user_id, $additional_data);
+            $response = $this->notification_model->add_notification($notified_user_id, $additional_data);
         }
         return $response;
     }
 
+    /*
+     * This method will return entire notification list of a user
+     * @param $user_id,, user id
+     * @Author Nazmul Hasan on 30th April 2015
+     */
     public function get_all_notification_list($user_id = 0) {
         $result = array(
             'total_unread_followers' => 0,
@@ -145,16 +157,16 @@ class Notification {
         );
 
         $result_notification_list = array();
-        $notification_array = array();
         $reference_user_id_list = array();
         $user_info_array = array();
         $notification_info_array = array();
-        $status_id_status_info_map = array();
         $user_id_user_info_map = array();
-        $status_id_list = array();
-        $status_info_array = array();
         $notification_info = array();
-        $notification_result_array = $this->notification->get_notification_list($user_id);
+        $notification_result_array = $this->notification->get_notification_list($user_id)->result_array();
+        if(empty($notification_result_array))
+        {
+            return $result;
+        }
         $notification_array = $notification_result_array[0];
         $notification_list = json_decode($notification_array['list']);
         if ($notification_list == null) {
@@ -203,6 +215,7 @@ class Notification {
             $notification_info['reference_info'] = array();
             if ($n_list_info->type_id == NOTIFICATION_WHILE_START_FOLLOWING) {
                 $notification_info['reference_info'] = $user_id_user_info_map[$n_list_info->reference_id];
+                $notification_info['following_acceptance_type'] = $notification_array['following_acceptance_type'];
             }
             $notification_info['reference_list'] = array();
             $reference_array_list = $n_list_info->reference_id_list;
@@ -214,6 +227,81 @@ class Notification {
         }
         $result['notification_list'] = $result_notification_list;
         return $result;
+    }
+    
+    /*
+     * This method will update notification status
+     * @param $user_id, user id
+     * @param $type_id_list, notification type id list
+     * @param $status, notification status
+     * @Author Nazmul Hasan on 30th April 2015
+     */
+    public function update_notifications_status($user_id = 0, $type_id_list = array(), $status = READ_NOTIFICATION)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $notification_list = array();
+        $notification_info = array();
+        $notification_info_array = $this->notification->get_notification_list($user_id)->result_array();
+        if(!empty($notification_info_array))
+        {
+            $notification_info = $notification_info_array[0];
+            $notification_list_array = json_decode($notification_info['list']);
+            foreach ($notification_list_array as $n_info) {
+                if (in_array($n_info->type_id, $type_id_list)) {
+                    $n_info->status = $status;
+                }  
+                $notification_list[] = $n_info;
+            }
+            $additional_data = array(
+                'list' => json_encode($notification_list)
+            );
+            $this->notification_model->update_notification($user_id, $additional_data);          
+        }
+        return true;
+    }
+    
+    /*
+     * This method will remove notification from user notification list
+     * @param $type_id, notification type id
+     * @param $reference_id, notification reference id
+     * @param $user_id, user id
+     * @Author Nazmul Hasan on 30th April 2015
+     */
+    public function remove_notification($type_id = 0, $reference_id = 0, $user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
+        $notification_list = array();
+        $notification_info = array();
+        $notification_info_array = $this->notification->get_notification_list($user_id)->result_array();
+        if(!empty($notification_info_array))
+        {
+            $notification_info = $notification_info_array[0];
+            $notification_list_array = json_decode($notification_info['list']);
+            $is_exists = false;
+            foreach ($notification_list_array as $n_info) {
+
+                if ($n_info->type_id == $type_id && $n_info->reference_id == $reference_id) {
+                    $is_exists = true;
+                }  
+                else
+                {
+                    $notification_list[] = $n_info;
+                }
+            }
+            if($is_exists)
+            {
+                $additional_data = array(
+                    'list' => json_encode($notification_list)
+                );
+                $this->notification_model->update_notification($user_id, $additional_data);
+            }            
+        }
     }
 
 }

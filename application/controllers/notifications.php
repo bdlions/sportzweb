@@ -37,62 +37,31 @@ class Notifications extends Role_Controller {
         $this->template->load(null, "member/notification/notifications", $this->data);
     }
 
-    function create_notification($user_id = 0) {
-        $current_time = now();
-//        $reference_info_list = new stdClass();
-//        $reference_info_list->user_id = 14; //reference id 
-//        $reference_info_list->status_type = 1;
-//        $reference_info_list->created_on = $current_time;
-
-        $notification_info_list = new stdClass();
-        $notification_info_list->type_id = 1;
-        $notification_info_list->id = 2;
-        $notification_info_list->created_on = $current_time;
-        $notification_info_list->modified_on = $current_time;
-        $notification_info_list->status = UNREAD_NOTIFICATION;
-        $notification_info_list->reference_id = 2; //status_id
-        $notification_info_list->reference_id_list = array();
-//        $notification_info_list->reference_id_list[] = $reference_info_list;
-        $user_id = 2;
-        $notification_id = $this->notification->add_notification($user_id, $notification_info_list);
-    }
-
-    public function get_all_notification_list($user_id = 0, $type_id = 0, $status = 0) {
-        $result_array = array();
-        $result_array = $this->notification->get_all_notification_list($user_id);
-        if (!empty($result_array)) {
-            return $result_array;
-        }
-    }
-
-    public function get_notification_list($user_id = 0, $type_id = 0, $status = 0) {
-        $result_array = array();
-        $result_array = $this->notification->get_notification_list($user_id);
-    }
-    public function update_notification_statuses(){
-        $status_type_id_list = $_POST['notification_status_id_list'];
-        $result_array = array();
+//    function create_notification($user_id = 0) {
+//        $current_time = now();
+//        $notification_info_list = new stdClass();
+//        $notification_info_list->type_id = 1;
+//        $notification_info_list->id = 2;
+//        $notification_info_list->created_on = $current_time;
+//        $notification_info_list->modified_on = $current_time;
+//        $notification_info_list->status = UNREAD_NOTIFICATION;
+//        $notification_info_list->reference_id = 2; //status_id
+//        $notification_info_list->reference_id_list = array();
+//        $user_id = 2;
+//        $notification_id = $this->notification->add_notification($user_id, $notification_info_list);
+//    }
+   
+    /*
+     * Ajax call to update notifications status
+     * @Author Nazmul Hasan on 30th April 2015
+     */
+    public function update_notifications_status(){
+        
         $user_id = $this->session->userdata('user_id');
-        $result_array = $this->notification->get_notification_list($user_id);
-        $result_notification_array = $result_array[0];
-        $notification_list = json_decode($result_notification_array['list']);
-        foreach ($notification_list as $notification_info) {
-            if(in_array($notification_info->type_id, $status_type_id_list)){
-                $notification_info->status = READ_NOTIFICATION ;
-            }
-            $modified_notification_list[] = $notification_info ;
-            
-        }
-        $new_notification_list = array(
-                'user_id' => $user_id,
-                'list' => json_encode($modified_notification_list)
-            );
-        $response = $this->notification->update_notification($user_id,$new_notification_list);
+        $notification_type_id_list = $this->input->post('notification_type_id_list');
+        $response = $this->notification->update_notifications_status($user_id, $notification_type_id_list, READ_NOTIFICATION);
         echo $response;
-        }
-
-  
-
+    }
 }
 
 ?>

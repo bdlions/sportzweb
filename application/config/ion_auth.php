@@ -59,6 +59,7 @@ $config['tables']['collaborate_permission']                 = 'collaborate_permi
 $config['tables']['users_notifications']                    = 'users_notifications';
 $config['tables']['notification_list']                      = 'notification_list';
 $config['tables']['following_acceptance_types']             = 'following_acceptance_types';
+$config['tables']['usres_following_acceptance']             = 'usres_following_acceptance';
 $config['tables']['usres_mutual_relations']                 = 'usres_mutual_relations';
 $config['tables']['users_statuses']                         = 'users_statuses';
 $config['tables']['usres_following_acceptance']             = 'usres_following_acceptance';

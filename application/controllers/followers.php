@@ -16,6 +16,7 @@ class Followers extends Role_Controller {
         $this->load->library('permission');
         $this->load->library('report_users');
         $this->load->library('visitors');
+        $this->load->library('notification');
 
         // Load MongoDB library instead of native db driver if required
         $this->config->item('use_mongodb', 'ion_auth') ?
@@ -98,6 +99,8 @@ class Followers extends Role_Controller {
             echo FALSE;
         } else {
             $this->follower->accept_follower($user_id, $follower_id);
+            //remove the notification if exists
+            $this->notification->remove_notification(NOTIFICATION_WHILE_START_FOLLOWING, $follower_id, $user_id);
             echo TRUE;
         }
     }

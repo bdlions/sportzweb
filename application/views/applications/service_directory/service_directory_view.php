@@ -6,6 +6,7 @@
     $(function() {
         var result_arr = [];
         var services = Array();
+        var filtered_services = Array();
         var town_code = '<?php echo $towncode == "" ? "london_" : $towncode ?>';
         if (town_code != "london_") {
             services = <?php echo json_encode($services); ?>;
@@ -25,10 +26,12 @@
                     var hi = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(serviceLat, serviceLon), new google.maps.LatLng(townLat, townLon));
                     hi = hi / 1000;
                     hi = hi / 1.61;
-
-                    var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.city + ", " + service.post_code + ".<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
-//                            $("#services_displayer").append(service_text);
-                    result_arr.push([[service_text], [hi]]);
+                    if(hi <= '<?php echo SERVICE_SEARCH_REGION_ML;?>')
+                    {
+                        var service_text = "<p><h3>" + service.title + "</h3><b>Address</b><br/>" + service.address + "<br>" + service.city + ", " + service.post_code + ".<br><b>Phone:</b> " + service.telephone + "</br><b>Distance: </b>" + Number(hi.toString().match(/^\d+(?:\.\d{0,2})?/)) + " miles<br/><a style= 'font-size:16px;' href='<?php echo base_url(); ?>applications/service_directory/show_service_detail/" + service.id + "'>Details</a></p>";
+                        result_arr.push([[service_text], [hi]]);
+                        filtered_services.push(service);
+                    }                    
                 });
                 result_arr.sort(function(a, b) {
                     return a[1] - b[1]
@@ -36,15 +39,43 @@
                 $.each(result_arr, function(index, service_text) {
                     $("#services_displayer").append(service_text[0]);
                 });
+                
+                var map_canvas = document.getElementById('map_canvas');
+                var map_options = {
+                    center: new google.maps.LatLng(townLat, townLon),
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                var map = new google.maps.Map(map_canvas, map_options);
+                $.each(filtered_services, function(index, filtered_service) {
+                        var markers = new google.maps.Marker({
+                        position: new google.maps.LatLng(filtered_service['latitude'], filtered_service['longitude']),
+                        icon: '<?php echo base_url(). SERVICE_DIRECTORY_CATEGORY_IMAGE_PATH ?>'+filtered_service['picture'],
+                        map: map
+                    });
+                    var infowindows = new google.maps.InfoWindow({
+
+                        content: "<a href='"+"<?php echo base_url()?>"+"applications/service_directory/show_service_detail/" + filtered_service['id'] +"'><h4 style='color: limegreen'>" + filtered_service['title'] + "</h4></a><h4>Address:</h4>" + filtered_service['address'] + "<h4>Phone:</h4>" + filtered_service['telephone']
+                    });
+                    google.maps.event.addListener(markers, 'mouseover', function(event) {
+                        infowindows.open(map, markers);
+                    });
+                    google.maps.event.addListener(markers, 'mouseout', function(event) {
+                        setTimeout(function(){
+                            infowindows.close();
+                        }, <?php echo SERVICE_INFOWINDOW_TIMEOUT; ?>);
+                    });
+                });
             }
         });
 		
-        var map_canvas = document.getElementById('map_canvas');
+        /*var map_canvas = document.getElementById('map_canvas');
         geocoder.geocode({'address': another_town}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK){
-                //map.setCenter(results[0].geometry.location);
                 var latitude = results[0].geometry.location.lat();
                 var longitude = results[0].geometry.location.lng();
+                console.log("lat2:"+latitude);
+                console.log("lng2:"+longitude);
                 var map_options = {
                     center: new google.maps.LatLng(latitude, longitude),
                     zoom: 12,
@@ -53,7 +84,7 @@
                 var map = new google.maps.Map(map_canvas, map_options);
                 if (town_code != "london_") {
                     $.each(services, function(index, service) {
-                        var reference = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + service['address'].replace(/ /g, "+") + '&sensor=false';
+                        var reference = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + service['post_code'].replace(/ /g, "+") + '&sensor=false';
                         $.ajax({
                             url: reference,
                             dataType: 'json',
@@ -62,16 +93,9 @@
                             success: function(data) {
                                 if (data.results != undefined && data.results.length > 0) {
                                     var latlng = new google.maps.LatLng(service['latitude'], service['longitude']);
-
-//                                    var pinColor = "cc5533";
-//                                    var pinImage =  new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-//                                                    new google.maps.Size(21, 34),
-//                                                    new google.maps.Point(0,0),
-//                                                    new google.maps.Point(10, 34));
+                                    console.log("latlng"+latlng);
                                     var markers = new google.maps.Marker({
                                         position: latlng,
-//                                        icon: pinImage,
-//                                        icon: 'images/beachflag.png',
                                         icon: '<?php echo base_url(). SERVICE_DIRECTORY_CATEGORY_IMAGE_PATH ?>'+service['picture'],
                                         map: map
                                     });
@@ -96,7 +120,7 @@
             else {
                 alert("Location is not found");
             }
-        });
+        });*/
         
         $('#services_displayer').height($('#services_and_maps').height()-15);
         

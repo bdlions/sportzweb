@@ -7,10 +7,7 @@
     </div>
 </div>
 <div class="scroll_box_style">
-    <?php foreach ($notification_list as $notification_info) { ?>
-
-
-        <?php
+    <?php foreach ($notification_list as $notification_info) { 
         $reference_id = $notification_info['reference_id'];
         if ($notification_info['type_id'] == NOTIFICATION_WHILE_START_FOLLOWING) {
             ?>
@@ -20,11 +17,13 @@
                         <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_info']['user_id']}" ?>'><img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $notification_info['reference_info']['photo'] ?>"></a>   
                         <span class="profile-name" ><?php echo $notification_info['reference_info']['first_name'] . " " . $notification_info['reference_info']['last_name']; ?></span></a>                            
                     </div>
+                    <?php if($notification_info['following_acceptance_type'] == 2){?>
                     <div class="col-md-6">
                         <div class="pull-right">
-                            <button type="submit" class="btn btn-xs follower_button_style">Accept</button>
+                            <button type="submit" onclick="open_modal_accept_confirm('<?php echo $notification_info['reference_info']['user_id']; ?>')" class="btn btn-xs follower_button_style">Accept</button>
                         </div>
                     </div>
+                    <?php }?>
                 </div>
             </div>
         <?php
