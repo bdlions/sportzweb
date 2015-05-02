@@ -440,7 +440,8 @@ class Payments_pro extends CI_Controller {
         } else {
             // Successful call.  Load view or whatever you need to do here.
             $data = array('PayPalResult' => $PayPalResult);
-            $this->load->view('do_direct_payment_demo', $data);
+            print_r($PayPalResult);
+            //$this->load->view('do_direct_payment_demo', $data);
         }
     }
 
