@@ -114,7 +114,7 @@
                     <div class="row form-group">
                         <div class="col-md-4 content_text">Cost:</div>
                         <div class="col-md-8">
-                            <?php echo $session_info['cost'];?>
+                            <?php echo $session_info['cost'];?> <?php echo $session_info['currency_title'];?>
                         </div>
                     </div>
                     <div class="row form-group">
