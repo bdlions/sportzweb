@@ -103,6 +103,7 @@ class Applications_blogs extends Admin_Controller {
         $this->data['message'] = '';
         $this->form_validation->set_rules('title_editortext', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
+        $this->form_validation->set_rules('category_name', 'Category Name', 'xss_clean|required');
         $this->form_validation->set_rules('image_description_editortext', 'Image Description', 'xss_clean|required');
         if ($this->input->post()) {
             $picture = "";
@@ -118,36 +119,42 @@ class Applications_blogs extends Admin_Controller {
                     return;
                 }
             }
-            $related_blogs = explode(",", $this->input->post('related_blogs'));
-            $blog_title = trim(htmlentities($this->input->post('title_editortext')));
-            $description = trim(htmlentities($this->input->post('description_editortext')));
-            $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
-            $data = array(
-                'title' => $blog_title,
-                'description' => $description,
-                'user_id' => $this->session->userdata('user_id'),
-                'blog_status_id' => APPROVED,
-                'related_posts' => json_encode($related_blogs),
-                'picture' => $picture,
-                'picture_description' => $picture_description,
-                'created_on' => now()
-            );
-            $blog_id = $this->admin_blog->create_blog($data);
-            if ($blog_id !== FALSE) {
-                $category_name = $this->input->post('category_name');
-                if ($category_name != null) {
-                    foreach ($category_name as $category_id) {
-                        $this->admin_blog->add_blog_in_blog_category($category_id, $blog_id);
+            if ($this->form_validation->run() == true) {
+                $related_blogs = explode(",", $this->input->post('related_blogs'));
+                $blog_title = trim(htmlentities($this->input->post('title_editortext')));
+                $description = trim(htmlentities($this->input->post('description_editortext')));
+                $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
+                $data = array(
+                    'title' => $blog_title,
+                    'description' => $description,
+                    'user_id' => $this->session->userdata('user_id'),
+                    'blog_status_id' => APPROVED,
+                    'related_posts' => json_encode($related_blogs),
+                    'picture' => $picture,
+                    'picture_description' => $picture_description,
+                    'created_on' => now()
+                );
+                $blog_id = $this->admin_blog->create_blog($data);
+                if ($blog_id !== FALSE) {
+                    $category_name = $this->input->post('category_name');
+                    if ($category_name != null) {
+                        foreach ($category_name as $category_id) {
+                            $this->admin_blog->add_blog_in_blog_category($category_id, $blog_id);
+                        }
                     }
+                    $this->data['message'] = "Blog created successfully";
+                    echo json_encode($this->data);
+                    return;
+                } else {
+                    $this->data['message'] = $this->admin_blog->errors();
+                    echo json_encode($this->data);
+                    return;
                 }
-                $this->data['message'] = "Blog created successfully";
-                echo json_encode($this->data);
-                return;
             } else {
-                $this->data['message'] = $this->admin_blog->errors();
-                echo json_encode($this->data);
-                return;
+                $response['message'] = validation_errors();
             }
+            echo json_encode($response);
+            return;
         }
         $this->data['category_list'] = $this->admin_blog->get_all_blog_category()->result_array();
         $this->data['title'] = array(

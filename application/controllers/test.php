@@ -31,6 +31,7 @@ class Test extends CI_Controller {
         $this->load->library('org/admin/users_library');
         $this->load->library('org/admin/visitors');
         $this->load->library('albums');
+        $this->load->library('org/application/gympro_library');
         $this->load->helper('url');
         $this->user_type_list = $this->config->item("user_type", "ion_auth");
         // Load MongoDB library instead of native db driver if required
@@ -409,6 +410,11 @@ class Test extends CI_Controller {
         $date = strtotime(date("Y-m-d", strtotime($date)) . " +2 week");
         $date = strtotime(date("Y-m-d", strtotime($date)) . " +1 month");
         $date = strtotime(date("Y-m-d", strtotime($date)) . " +30 days");
+    }
+    function session(){
+        $user_id = 3;
+        $session_list_array = $this->gympro_model->get_client($user_id)->result_array();
+        var_dump($session_list_array);exit;
     }
 
 }

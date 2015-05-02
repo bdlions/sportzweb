@@ -2921,6 +2921,7 @@ CREATE TABLE IF NOT EXISTS `app_gympro_sessions` (
   `type_id` int(11) unsigned NOT NULL,
   `repeat` varchar(50),
   `cost` varchar(500),
+  `currency_id` int(11) unsigned DEFAULT NULL,
   `status_id` int(11) unsigned NOT NULL,
   `note` text,  
   `created_on` int(11) unsigned DEFAULT NULL,
@@ -2928,12 +2929,14 @@ CREATE TABLE IF NOT EXISTS `app_gympro_sessions` (
   PRIMARY KEY (`id`),
   KEY `app_gympro_sessions_users1_idx` (`user_id`),
   KEY `app_gympro_sessions_types1_idx` (`type_id`),
-  KEY `app_gympro_sessions_statuses1_idx` (`status_id`)
+  KEY `app_gympro_sessions_statuses1_idx` (`status_id`),
+  KEY `app_gympro_sessions_currency1_idx` (`currency_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `app_gympro_sessions`
 	ADD CONSTRAINT `app_gympro_sessions_users1` FOREIGN KEY(`user_id`) REFERENCES `app_gympro_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	ADD CONSTRAINT `app_gympro_sessions_types1` FOREIGN KEY(`type_id`) REFERENCES `app_gympro_session_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-	ADD CONSTRAINT `app_gympro_sessions_statuses1` FOREIGN KEY(`status_id`) REFERENCES `app_gympro_session_statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+	ADD CONSTRAINT `app_gympro_sessions_statuses1` FOREIGN KEY(`status_id`) REFERENCES `app_gympro_session_statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `app_gympro_sessions_currency1` FOREIGN KEY(`currency_id`) REFERENCES `app_gympro_currencies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 -- INSERT INTO `app_gympro_sessions` (`user_id`, `title`, `created_for_type_id`, `reference_id`, `date`, `start`, `end`, `type_id`, `status_id`) VALUES
 -- (4, 'title', 1, 1, '2015-01-23', '14:00:00', '17:00:00', 1, 1)
 -- Visitor log

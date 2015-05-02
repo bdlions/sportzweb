@@ -436,7 +436,7 @@ class Settings extends Role_Controller {
         $this->data['hourly_rate_list'] = $hourly_rate_list;
 
         $currency_list = array();
-        $currency_array = $this->gympro_library->get_all_hourly_currencies()->result_array();
+        $currency_array = $this->gympro_library->get_all_currencies()->result_array();
         foreach ($currency_array as $currency) {
             $currency_list[$currency['currency_id']] = $currency['title'];
         }

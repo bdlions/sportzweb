@@ -155,6 +155,12 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                        <div class="col-md-3 content_text ">Currency:</div>
+                        <div class="col-md-4">
+                             <?php echo form_dropdown('currency_list', $currency_list, '', 'class=form-control id=currency_list'); ?>
+                        </div>
+                    </div>
+                    <div class="row form-group">
                         <div class="col-md-3 content_text ">Status:</div>
                         <div class="col-md-4">
                             <select class="form-control" name="status">
