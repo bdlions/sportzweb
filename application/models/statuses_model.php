@@ -63,6 +63,7 @@ class Statuses_model extends Ion_auth_model {
      */
 
     public function get_statuses($status_category_id = STATUS_LIST_NEWSFEED, $mapping_id = 0, $limit = STATUS_LIMIT_PER_REQUEST, $offset = 0, $filtered_user_id_list = array(), $status_id_list = array()) {
+        $user_id = $this->session->userdata('user_id');
         if (empty($status_id_list)) {
             if ($status_category_id == STATUS_LIST_NEWSFEED) {
                 $this->db->where_in($this->tables['statuses'] . '.user_id', $filtered_user_id_list);
@@ -72,8 +73,11 @@ class Statuses_model extends Ion_auth_model {
                 $this->db->where($this->tables['statuses'] . '.status_category_id', $status_category_id);
                 $this->db->where($this->tables['statuses'] . '.mapping_id', $mapping_id);
                 $this->db->where_in($this->tables['statuses'] . '.user_id', $filtered_user_id_list);
-                //by default adding admin statuses
-                $this->db->or_where($this->tables['statuses'] . '.user_id', ADMIN_USER_ID);
+                if($mapping_id == $user_id)
+                {
+                    //by default adding admin statuses
+                    $this->db->or_where($this->tables['statuses'] . '.user_id', ADMIN_USER_ID);
+                }                
             } else if ($status_category_id == STATUS_LIST_BUSINESS_PROFILE) {
                 $this->db->where($this->tables['statuses'] . '.status_category_id', $status_category_id);
                 $this->db->where($this->tables['statuses'] . '.mapping_id', $mapping_id);
