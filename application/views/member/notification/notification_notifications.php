@@ -11,6 +11,7 @@
     <?php
 
     function referenced_user_info($user_info) {
+        $counter = 1;
         foreach ($user_info as $referenced_user_info) {
             if ($counter > 1) {
                 if ($counter == 3 && $counter <= $total_users) {
@@ -41,6 +42,7 @@
     <?php foreach ($notification_list as $notification_info) { ?>
         <div class="pagelet message_friends_box">
             <div class="row">
+                <?php if($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST){?>
                 <div class="col-sm-3 feed-profile-picture">
                     <?php if (!empty($notification_info['reference_list'])) { ?>
                         <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list'][0]['user_id']}" ?>'>
@@ -55,8 +57,7 @@
                     <?php
                     $reference_id = $notification_info['reference_id'];
                     $created_on = $notification_info['created_on'];
-                    $total_users = count($notification_info['reference_list']);
-                    $counter = 1;
+                    $total_users = count($notification_info['reference_list']);                    
                     if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST) {
                         referenced_user_info($notification_info['reference_list']);
                         if ($total_users == 1) {
@@ -99,6 +100,7 @@
                     }
                     ?>
                 </div>
+                <?php }?>
             </div>
         </div>
     <?php } ?>
