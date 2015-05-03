@@ -10,9 +10,10 @@
 <div class="scroll_box_style">
     <?php
 
-    function referenced_user_info($user_info) {
+    function referenced_user_info($user_list) {
         $counter = 1;
-        foreach ($user_info as $referenced_user_info) {
+        $total_users = count($user_list);
+        foreach ($user_list as $referenced_user_info) {
             if ($counter > 1) {
                 if ($counter == 3 && $counter <= $total_users) {
                     echo ' and ';
