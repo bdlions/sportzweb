@@ -151,7 +151,7 @@ class Applications_blogs extends Admin_Controller {
                     return;
                 }
             } else {
-                $response['message'] = validation_errors();
+                $response['message'] = strip_tags(validation_errors());
             }
             echo json_encode($response);
             return;
