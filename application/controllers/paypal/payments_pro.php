@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Payments_pro extends CI_Controller {
+class Payments_pro extends Role_Controller {
 
     function __construct() {
         parent::__construct();
@@ -1947,6 +1947,132 @@ class Payments_pro extends CI_Controller {
             $session_update_id = $this->gympro_library->update_session($schedule_id, $additional_data);
             if ($session_update_id == TRUE) {
                 $this->template->load(null, 'payment/ptpro/payment_success');
+            } else {
+                print_r($this->gympro_library->errors());
+                
+            }
+        }
+    }
+    
+    function Do_direct_payment_ptpro($session_id = 0) {
+        $session_info = array();
+        $session_info_array = $this->gympro_library->get_session_info($session_id)->result_array();
+        if(!empty($session_info_array)){
+            $session_info = $session_info_array[0];
+        }
+        $DPFields = array(
+            'paymentaction' => 'Sale', // How you want to obtain payment.  Authorization indidicates the payment is a basic auth subject to settlement with Auth & Capture.  Sale indicates that this is a final sale for which you are requesting payment.  Default is Sale.
+            'ipaddress' => $_SERVER['REMOTE_ADDR'], // Required.  IP address of the payer's browser.
+            'returnfmfdetails' => '1'      // Flag to determine whether you want the results returned by FMF.  1 or 0.  Default is 0.
+        );
+
+        $CCDetails = array(
+            'creditcardtype' => $this->input->post('payment_types'), // Required. Type of credit card.  Visa, MasterCard, Discover, Amex, Maestro, Solo.  If Maestro or Solo, the currency code must be GBP.  In addition, either start date or issue number must be specified.
+            'acct' => $this->input->post('card_number'), // Required.  Credit card number.  No spaces or punctuation.  
+            'expdate' => $this->input->post('expired_month').$this->input->post('expired_year'), // Required.  Credit card expiration date.  Format is MMYYYY
+            'cvv2' => $this->input->post('ccv_code'), // Requirements determined by your PayPal account settings.  Security digits for credit card.
+            'startdate' => '', // Month and year that Maestro or Solo card was issued.  MMYYYY
+            'issuenumber' => ''       // Issue number of Maestro or Solo card.  Two numeric digits max.
+        );
+
+        $PayerInfo = array(
+            'email' => 'test@domain.com', // Email address of payer.
+            'payerid' => '', // Unique PayPal customer ID for payer.
+            'payerstatus' => '', // Status of payer.  Values are verified or unverified
+            'business' => 'Testers, LLC'        // Payer's business name.
+        );
+
+        $PayerName = array(
+            'salutation' => 'Mr.', // Payer's salutation.  20 char max.
+            'firstname' => 'Tester', // Payer's first name.  25 char max.
+            'middlename' => '', // Payer's middle name.  25 char max.
+            'lastname' => 'Testerson', // Payer's last name.  25 char max.
+            'suffix' => ''        // Payer's suffix.  12 char max.
+        );
+
+        $BillingAddress = array(
+            'street' => '123 Test Ave.', // Required.  First street address.
+            'street2' => '', // Second street address.
+            'city' => 'Kansas City', // Required.  Name of City.
+            'state' => 'MO', // Required. Name of State or Province.
+            'countrycode' => 'US', // Required.  Country code.
+            'zip' => '64111', // Required.  Postal code of payer.
+            'phonenum' => '555-555-5555'       // Phone Number of payer.  20 char max.
+        );
+
+        $ShippingAddress = array(
+            'shiptoname' => 'Tester Testerson', // Required if shipping is included.  Person's name associated with this address.  32 char max.
+            'shiptostreet' => '123 Test Ave.', // Required if shipping is included.  First street address.  100 char max.
+            'shiptostreet2' => '', // Second street address.  100 char max.
+            'shiptocity' => 'Kansas City', // Required if shipping is included.  Name of city.  40 char max.
+            'shiptostate' => 'MO', // Required if shipping is included.  Name of state or province.  40 char max.
+            'shiptozip' => '64111', // Required if shipping is included.  Postal code of shipping address.  20 char max.
+            'shiptocountry' => 'US', // Required if shipping is included.  Country code of shipping address.  2 char max.
+            'shiptophonenum' => '555-555-5555'     // Phone number for shipping address.  20 char max.
+        );
+
+        $PaymentDetails = array(
+            'amt' => $session_info['cost'], // Required.  Total amount of order, including shipping, handling, and tax.  
+            'currencycode' => 'USD', // Required.  Three-letter currency code.  Default is USD.
+            'itemamt' => $session_info['cost'], // Required if you include itemized cart details. (L_AMTn, etc.)  Subtotal of items not including S&H, or tax.
+            'shippingamt' => '0.00', // Total shipping costs for the order.  If you specify shippingamt, you must also specify itemamt.
+            'shipdiscamt' => '', // Shipping discount for the order, specified as a negative number.  
+            'handlingamt' => '', // Total handling costs for the order.  If you specify handlingamt, you must also specify itemamt.
+            'taxamt' => '', // Required if you specify itemized cart tax details. Sum of tax for all items on the order.  Total sales tax. 
+            'desc' => 'Web Order', // Description of the order the customer is purchasing.  127 char max.
+            'custom' => '', // Free-form field for your own use.  256 char max.
+            'invnum' => '', // Your own invoice or tracking number
+            'notifyurl' => ''      // URL for receiving Instant Payment Notifications.  This overrides what your profile is set to use.
+        );
+
+        $OrderItems = array();
+        $Item = array(
+            'l_name' => 'Test Widget 123', // Item Name.  127 char max.
+            'l_desc' => 'The best test widget on the planet!', // Item description.  127 char max.
+            'l_amt' => $session_info['cost'], // Cost of individual item.
+            'l_number' => '123', // Item Number.  127 char max.
+            'l_qty' => '1', // Item quantity.  Must be any positive integer.  
+            'l_taxamt' => '', // Item's sales tax amount.
+            'l_ebayitemnumber' => '', // eBay auction number of item.
+            'l_ebayitemauctiontxnid' => '', // eBay transaction ID of purchased item.
+            'l_ebayitemorderid' => ''     // eBay order ID for the item.
+        );
+        array_push($OrderItems, $Item);
+
+        $Secure3D = array(
+            'authstatus3d' => '',
+            'mpivendor3ds' => '',
+            'cavv' => '',
+            'eci3ds' => '',
+            'xid' => ''
+        );
+
+        $PayPalRequestData = array(
+            'DPFields' => $DPFields,
+            'CCDetails' => $CCDetails,
+            'PayerInfo' => $PayerInfo,
+            'PayerName' => $PayerName,
+            'BillingAddress' => $BillingAddress,
+            'ShippingAddress' => $ShippingAddress,
+            'PaymentDetails' => $PaymentDetails,
+            'OrderItems' => $OrderItems,
+            'Secure3D' => $Secure3D
+        );
+
+        $PayPalResult = $this->paypal_pro->DoDirectPayment($PayPalRequestData);
+        if (!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])) {
+            $errors = array('Errors' => $PayPalResult['ERRORS']);
+            $this->data['errors'] = $errors;
+            $this->template->load(null, 'payment/ptpro/payment_fail',$this->data);
+        } else {
+            // Successful call.  Load view or whatever you need to do here.
+            //update session status
+            $additional_data = array(
+                'status_id' => GYMPRO_SESSION_STATUS_PAY_PT_PRO_ID
+            );
+            $session_update_id = $this->gympro_library->update_session($session_id, $additional_data);
+            if ($session_update_id == TRUE) {
+                $this->template->load(null, 'payment/ptpro/payment_success', $this->data);
             } else {
                 print_r($this->gympro_library->errors());
                 

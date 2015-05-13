@@ -1952,14 +1952,15 @@ INSERT INTO `app_gympro_hourly_rates` (`title`) VALUES
 CREATE TABLE IF NOT EXISTS `app_gympro_currencies` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
+  `currency_code` varchar(50),
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-INSERT INTO `app_gympro_currencies` (`title`) VALUES
-('Dollar ($)'),
-('Pound (£)'),
-('Euro (€)');
+INSERT INTO `app_gympro_currencies` (`title`, `currency_code`) VALUES
+('Dollar ($)', 'USD'),
+('Pound (£)', 'GBP'),
+('Euro (€)', 'EUR');
 CREATE TABLE IF NOT EXISTS `app_gympro_users` (
   `user_id` int(11) unsigned NOT NULL,
   `account_type_id` int(11) unsigned DEFAULT NULL,
