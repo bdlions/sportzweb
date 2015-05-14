@@ -1,5 +1,9 @@
 <script type="text/javascript">
     $(function() {
+
+
+
+
         $("#search_box").typeahead([
             {
                 name: "search_user",
@@ -108,6 +112,21 @@
                 window.location = datum.url;
             }
         });
+
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "notifications/get_all_notification_list",
+            data: {
+                user_id: '<?php echo $user_id; ?>'
+            },
+            success: function(data) {
+                $("#notification_list").html(tmpl("tmpl_notification", data.notification_list));
+            }
+        });
+
+
+
         $("#mm_notification").on("click", function() {
             $('#mm_notification_box').show();
             var notification_type_id_list = [
@@ -124,11 +143,11 @@
             ];
             update_notifications_status(notification_type_id_list, 2);
         });
-        $("#mm_messages").on('click',function(){
-           $('#mm_message_box').show(); 
+        $("#mm_messages").on('click', function() {
+            $('#mm_message_box').show();
         });
     });
-   
+
     function update_notifications_status(notification_type_id_list, notification_category) {
         $.ajax({
             dataType: 'json',
@@ -140,8 +159,8 @@
             success: function(data) {
                 if (data === 1 && notification_category === 1) {
                     $('#notification_counter_div').hide();
-                } else if(data === 1 && notification_category === 2){
-                     $('#follower_counter_dive').hide();
+                } else if (data === 1 && notification_category === 2) {
+                    $('#follower_counter_dive').hide();
                 }
             }
         });
@@ -162,8 +181,8 @@
             container.hide();
         }
     });
-    
-    function open_modal_accept_confirm(follower_id){
+
+    function open_modal_accept_confirm(follower_id) {
         $.ajax({
             dataType: 'json',
             type: "POST",
@@ -172,15 +191,90 @@
                 follower_id: follower_id
             },
             success: function(data) {
-                $("#div_accept_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info)); 
-                $('#span_accept_confirm_message').text('Accept '+data.user_info.first_name+' '+data.user_info.last_name+'?');
+                $("#div_accept_confirm_follower_info").html(tmpl("tmpl_user_info", data.user_info));
+                $('#span_accept_confirm_message').text('Accept ' + data.user_info.first_name + ' ' + data.user_info.last_name + '?');
                 $('#follower_id_confirm_accept').val(follower_id);
                 $('#modal_accept_confirm').modal('show');
             }
         });
     }
 
- 
+
+</script>
+<script type="text/x-tmpl" id="tmpl_notification">
+    {% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);%}
+    {% while(notification_info){ %}
+        
+    <div class="pagelet message_friends_box">
+    <div class="row">
+    {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>'){ %}
+    <div class="col-sm-3 feed-profile-picture">
+    {% if(notification_info.reference_list != null){ %}
+    <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>'>
+    <div>
+    <img alt="{%= notification_info.reference_list[0].first_name[0] %}{%= notification_info.reference_list[0].last_name[0] %}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . '{%= notification_info.reference_list[0].photo%}' ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+    <p style="visibility:hidden">{%= notification_info.reference_list[0].first_name[0] %}{%= notification_info.reference_list[0].last_name[0] %}</p>
+    </div>
+    </a>
+    {%}%}
+    </div>
+    {% } %}
+
+
+    <div class="col-sm-9">
+    {% var counter = 1; %}
+    {% var total_users = notification_info.reference_list.length; %}
+
+    {% for(var j = 0;j <total_users;j++){ %}
+    {% if(counter > 1){ %}
+    {% if(counter == 3 && counter <= total_users){ %}
+    <?php echo " and "; ?>
+    {% }else if(counter == total_users){  %}
+    <?php echo " and "; ?>
+    {% }else{  %}
+    <?php echo " , "; ?>
+    {% }  %}
+    {% }  %}
+    <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
+    {% counter++;%}
+    {% } %}
+    {% var created_on =notification_info.created_on ; %}
+    {% var reference_id =notification_info.reference_id ; %}
+    {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
+            if(total_users == 1){ %}
+                like
+        {% }
+        if(total_users > 1){ %}
+              likes
+       {% }
+       }%}
+    {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>') { 
+            if(total_users >= 1){ %}
+                commented on
+        {% }
+        if(total_users > 3){ %}
+              also commented on
+       {% }
+       }%}
+    {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
+            if(total_users >= 1){ %}
+                shared
+        {% }
+        if(total_users > 3){ %}
+              also shared
+       {% }
+       }%}
+    <a href='<?php echo base_url() . "member_profile/view_shared_status/{%=reference_id%}" ?>'> your post </a>
+    <div> {%= created_on%} </div> 
+    </div>
+    </div>    
+
+    {% notification_info = ((o instanceof Array) ? o[i++] : null); %}
+    {% } %}
+
+
+
+
 </script>
 
 <nav class="navbar navbar-default navbar-top" role="navigation">
@@ -310,4 +404,5 @@
     <?php endif; ?>
 </nav>
 
-<?php $this->load->view("followers/modal_accept_confirm");
+<?php
+$this->load->view("followers/modal_accept_confirm");

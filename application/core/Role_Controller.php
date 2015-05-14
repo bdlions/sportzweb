@@ -8,7 +8,10 @@ class Role_Controller extends CI_Controller{
         $user_id = $this->session->userdata('user_id');
         $business_profile_info = $this->business_profile_library->get_profile_info();
         $this->data['business_profile_info'] = $business_profile_info;
-        $this->data = array_merge($this->data, $this->notification->get_all_notification_list($user_id));
+        $this->data['total_unread_followers'] = 0;
+        $this->data['total_unread_notifications'] = 0;
+        $this->data['notification_list'] = array();        
+        //$this->data = array_merge($this->data, $this->notification->get_all_notification_list($user_id));
 //        var_dump($this->data);exit;
     }
 }

@@ -8,6 +8,10 @@
     </div>
 </div>
 <div class="scroll_box_style">
+    <div id="notification_list">
+        
+    </div>
+    
     <?php foreach ($notification_list as $notification_info) { ?>
         <div class="pagelet message_friends_box">
             <div class="row">

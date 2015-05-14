@@ -62,6 +62,12 @@ class Notifications extends Role_Controller {
         $response = $this->notification->update_notifications_status($user_id, $notification_type_id_list, READ_NOTIFICATION);
         echo $response;
     }
+    public function get_all_notification_list(){
+        $user_id = $this->input->post('user_id');
+        $response = $this->notification->get_all_notification_list($user_id);
+        echo json_encode($response);
+        
+    }
 }
 
 ?>
