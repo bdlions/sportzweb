@@ -202,8 +202,8 @@
 
 </script>
 <script type="text/x-tmpl" id="tmpl_notification">
-    {% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);%}
-    {% while(notification_info){ %}
+    {% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);
+        while(notification_info){ %}
         
     <div class="pagelet message_friends_box">
     <div class="row">
@@ -222,32 +222,32 @@
 
 
     <div class="col-sm-9">
-    {% var counter = 1; %}
-    {% var total_users = notification_info.reference_list.length; %}
+    {% var counter = 1;
+    var total_users = notification_info.reference_list.length; %}
 
-    {% for(var j = 0;j <total_users;j++){ %}
-    {% if(counter > 1){ %}
-    {% if(counter == 3 && counter <= total_users){ %}
-    <?php echo " and "; ?>
-    {% }else if(counter == total_users){  %}
-    <?php echo " and "; ?>
-    {% }else{  %}
-    <?php echo " , "; ?>
-    {% }  %}
-    {% }  %}
+    {% for(var j = 0;j <total_users;j++){
+            if(counter > 1){ 
+                if(counter == 3 && counter <= total_users){ %}
+                <?php echo " and "; ?>
+                {% }else if(counter == total_users){  %}
+                <?php echo " and "; ?>
+                {% }else{  %}
+                <?php echo " , "; ?>
+                {% }  }  %}
     <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
-    {% counter++;%}
-    {% } %}
-    {% var created_on =notification_info.created_on ; %}
-    {% var reference_id =notification_info.reference_id ; %}
-    {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
+    {% counter++;
+    } %}
+
+    {% var created_on =notification_info.created_on ; 
+        var reference_id =notification_info.reference_id ;
+        if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
             if(total_users == 1){ %}
                 like
         {% }
         if(total_users > 1){ %}
               likes
-       {% }
-       }%}
+        {% }
+        }%}
     {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>') { 
             if(total_users >= 1){ %}
                 commented on
