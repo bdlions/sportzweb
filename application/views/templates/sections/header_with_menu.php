@@ -234,9 +234,9 @@
                 {% }else{  %}
                 <?php echo " , "; ?>
                 {% }  }  %}
-    <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
-    {% counter++;
-    } %}
+    <a href='<?php echo base_url() . "member_profile/show/{%= notification_info.reference_list[j].user_id %}" ?>' class="profile-name"><?php echo '{%= notification_info.reference_list[j].first_name %}'?> <?php echo '{%= notification_info.reference_list[j].last_name %}'?></a>
+    {% counter++; %}
+    {% } %}
 
     {% var created_on =notification_info.created_on ; 
         var reference_id =notification_info.reference_id ;
