@@ -101,9 +101,11 @@
                                     <div class="col-md-12">
                                         <div class="profile-picture-box pull-right" >
                                             <div id="files" class="files">
-                                                <?php if(!empty($client_info['photo'])): ?>
-                                                    <img style="width: 50px; height: 50px;" src="<?php echo base_url() . PROFILE_PICTURE_PATH_W50_H50 . $client_info['photo']; ?>" class="img-responsive"/>
-                                                <?php endif; ?>
+                                                <?php if(isset($client_info['photo']) && $client_info['photo'] != ''){ ?>
+                                                <img onerror="this.src='<?php echo base_url().DEFAULT_LOGO ?>'" style="width: 100%; background-color: #75B3E6" class="img-responsive" src="<?php echo base_url().PROFILE_PICTURE_PATH_W50_H50.$client_info['photo'] ?>"/>
+                                                <?php }else{?>
+                                                <img onerror="this.src='<?php echo base_url().DEFAULT_LOGO ?>'" style="width: 100%; background-color: #75B3E6" class="img-responsive" src="<?php echo base_url().DEFAULT_LOGO ?>"/>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>

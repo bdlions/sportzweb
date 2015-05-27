@@ -16,7 +16,7 @@
             <div class="row form-group"></div>
             <div class="row form-group"></div>
             <div class="row form-group"></div>
-            <div class="row form-group"><span style="color: #880015;font-size: 20px">Sorry! You are not permitted to show this client information</span></div>
+            <div class="row form-group"><span style="color: #880015;font-size: 20px"><?php echo $message;?></span></div>
         </div>
     </div>
 </div>

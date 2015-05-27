@@ -601,11 +601,12 @@ class Gympro extends Role_Controller {
         if (!empty($client_info_array)) {
             $client_info = $client_info_array[0];
         } else {
+            $this->data['message'] = "Invalid Client id.";
             $this->template->load(null, 'applications/gympro/client/client_show_validation', $this->data);
             return;
             // redirect('applications/gympro/manage_clients', 'refresh');
         }
-        if ($client_info['user_id'] == $this->my_user_id) {
+        if ($client_info['ptpro_user_id'] == $this->my_user_id) {
             $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();
             $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id);
             $this->data['client_info'] = $client_info;
@@ -621,6 +622,7 @@ class Gympro extends Role_Controller {
 
             $this->template->load(null, 'applications/gympro/client/client_show', $this->data);
         } else {
+            $this->data['message'] = "Sorry! You are not permitted to show this client information";
             $this->template->load(null, 'applications/gympro/client/client_show_validation', $this->data);
         }
     }

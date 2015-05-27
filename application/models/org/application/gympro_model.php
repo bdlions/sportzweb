@@ -323,7 +323,7 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_client_detail($client_id) {
         $this->db->where($this->tables['app_gympro_clients'] . '.id', $client_id);
-        return $this->db->select($this->tables['app_gympro_clients'] . '.id as client_id,' . $this->tables['app_gympro_clients'] . '.*,' . $this->tables['app_gympro_client_statuses'] . '.title as status_title,' . $this->tables['gender'] . '.gender_name,' . $this->tables['users'] . '.*,' . $this->tables['basic_profile'] . '.*')
+        return $this->db->select($this->tables['app_gympro_clients'] . '.id as client_id,' .$this->tables['app_gympro_clients'] . '.user_id as ptpro_user_id,' . $this->tables['app_gympro_clients'] . '.*,' . $this->tables['app_gympro_client_statuses'] . '.title as status_title,' . $this->tables['gender'] . '.gender_name,' . $this->tables['users'] . '.*,' . $this->tables['basic_profile'] . '.*')
                         ->from($this->tables['app_gympro_clients'])
                         ->join($this->tables['app_gympro_client_statuses'], $this->tables['app_gympro_client_statuses'] . '.id=' . $this->tables['app_gympro_clients'] . '.status_id')
                         ->join($this->tables['users'], $this->tables['users'] . '.id=' . $this->tables['app_gympro_clients'] . '.member_id')
