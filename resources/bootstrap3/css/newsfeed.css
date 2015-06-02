@@ -37,9 +37,9 @@
 }
 
 .button-custom{
-    background-color:orange;
-    height:30px;
-    border-radius: 0px;
+     background-color: orange!important;
+    border-radius: 0!important;
+    height: 30px!important;
 }
 
 .button-custom-profile-message{
