@@ -20,7 +20,7 @@ a
 a:hover
 {
     text-decoration: none;
-    color: black;
+    color: #fff;
 }
 
 /*PAGE*/
@@ -98,6 +98,10 @@ a:hover
     /*font-size: 15px;*/
     line-height: 26px;
     color: darkgray;
+}
+.ln_item a:hover
+{
+    color: #428bca!important;
 }
 .btn:hover, .btn:focus
 {
