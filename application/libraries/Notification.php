@@ -214,9 +214,10 @@ class Notification {
             $notification_info['reference_id'] = $n_list_info->reference_id;
             $notification_info['reference_info'] = array();
             if ($n_list_info->type_id == NOTIFICATION_WHILE_START_FOLLOWING) {
-                $notification_info['reference_info'] = $user_id_user_info_map[$n_list_info->reference_id];
+                    $notification_info['reference_info'] = $user_id_user_info_map[$n_list_info->reference_id];
                 $notification_info['following_acceptance_type'] = $notification_array['following_acceptance_type'];
             }
+         
             $notification_info['reference_list'] = array();
             $reference_array_list = $n_list_info->reference_id_list;
             foreach ($reference_array_list as $notification_info_array) {

@@ -85,6 +85,20 @@ class Gympro_model extends Ion_auth_model {
     }
 
     //------------------------------------- Preference Module -------------------------------//
+    
+    
+     /*
+     * This method will return gympor user info
+     * @param $user_id, user id
+     * @Author Nazmul on 19th November 2014
+     */
+
+    public function get_gympro_user_email($user_id) {
+        $this->db->where('id', $user_id);
+        return $this->db->select('email')
+                        ->from($this->tables['users'])
+                        ->get();
+    }
     /*
      * This method will return all height units
      * @Author Nazmul on 17th November 2014

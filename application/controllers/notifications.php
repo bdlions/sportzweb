@@ -34,6 +34,9 @@ class Notifications extends Role_Controller {
     }
 
     function index() {
+        $user_id = $this->session->userdata('user_id');
+        $notification_info = $this->notification->get_all_notification_list($user_id);
+        $this->data['notification_list'] = $notification_info['notification_list'];
         $this->template->load(null, "member/notification/notifications", $this->data);
     }
 
@@ -63,8 +66,9 @@ class Notifications extends Role_Controller {
         echo $response;
     }
     public function get_all_notification_list(){
-        $user_id = $this->input->post('user_id');
+        $user_id = $this->session->userdata('user_id');
         $response = $this->notification->get_all_notification_list($user_id);
+//        var_dump($response);exit;
         echo json_encode($response);
         
     }

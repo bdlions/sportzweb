@@ -253,7 +253,7 @@ class Auth extends Role_Controller{
 
             $additional_data = array(
                 'first_name' => $this->input->post('r_first_name'),
-                'last_name' => $this->input->post('r_last_name')
+                'last_name' => $this->input->post('r_last_name'),
             );
             if ($this->ion_auth->register($username, $password, $email, $additional_data)) {
                 //check to see if we are creating the user

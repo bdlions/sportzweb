@@ -126,6 +126,7 @@ class Gympro extends Role_Controller {
         $this->data['message'] = '';
         if ($this->input->post('submit_update_preference')) {
             $data = array(
+                'account_email' => $this->input->post('account_email'),
                 'height_unit_id' => $this->input->post('height_unit_list'),
                 'weight_unit_id' => $this->input->post('weight_unit_list'),
                 'girth_unit_id' => $this->input->post('girth_unit_list'),
@@ -139,6 +140,13 @@ class Gympro extends Role_Controller {
             } else {
                 $this->data['message'] = $this->gympro_library->errors();
             }
+        }
+        
+        $user_email_array = array();
+        $user_email_array = $this->gympro_library->get_gympro_user_email($user_id)->result_array();
+        if(!empty($user_email_array)){
+            
+        $this->data['account_email'] = $user_email_array[0]['email'];
         }
         $height_unit_list = array();
         $height_unit_array = $this->gympro_library->get_all_height_units()->result_array();

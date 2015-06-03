@@ -16,16 +16,19 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/service_directory.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/notification.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/custom.css" />
         
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/custom_plugin.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery-ui.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/custom_error.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/expanding.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/typeahead.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/hogan-2.0.0.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery.jscroll.js"></script>
         <script type="text/javascript">
             var config = {
@@ -41,7 +44,7 @@
         <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
         <script src="<?php echo base_url() ?>resources/js/vendor/jquery.ui.widget.js"></script>
         <!-- The Templates plugin is included to render the upload/download listings -->
-        <script src="<?php echo base_url() ?>resources/js/tmpl.min.js"></script>
+        <!--<script src="<?php echo base_url() ?>resources/js/tmpl.min.js"></script>-->
         <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
         <script src="<?php echo base_url() ?>resources/js/load-image.min.js"></script>
         <!-- The Canvas to Blob plugin is included for image resizing functionality -->

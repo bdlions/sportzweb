@@ -6,7 +6,6 @@
                 var present_value = $('#get_selected_id').val();
                 var id = '#position_of_news_'+present_value;  
                 var position = $(id+"").val(news_id);
-                console.log(present_value);
                 var position_array = [];
                 var length = <?php echo NEWS_CONFIGURATION_COUNTER;?>;
                 var panel = $('#panel').val();
