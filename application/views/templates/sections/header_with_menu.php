@@ -2,120 +2,7 @@
 <script type="text/javascript">
 
     $(function () {
-
-
-
-//
-//        $("#search_box").typeahead([
-//            {
-//                name: "search_user",
-//                remote: '<?php echo base_url() ?>search/get_users?query=%QUERY',
-//                header: '<div style="font-size: 15px; font-weight:bold; width:33%">People</div>',
-//                template: [
-//                    '<div class="row">' +
-//                            '<div class="col-md-3">' +
-//                            '<div>' +
-//                            '<img alt="{{signature}}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH ?>{{photo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>' +
-//                            '<div style="visibility:hidden;height:0px">{{signature}}</div>' +
-//                            '</div>' +
-//                            '</div>' +
-//                            '<div class="col-md-9">' +
-//                            '<div class="row col-md-12 profile-name">' +
-//                            '{{first_name}} {{last_name}}' +
-//                            '<div class="pull-right" style="display: {{ptpro_display}}">' +
-//                            '<div style="background-color: yellow; color: maroon; font-size: 16px; padding: 2px">&nbsp;PT&nbsp;</div>' +
-//                            '</div>' +
-//                            '</div>' +
-//                            '<div class="row col-md-12">' +
-//                            '{{country_name}} {{home_town}}' +
-//                            '</div>' +
-//                            '</div>' +
-//                            '</div>'
-//                ].join(''),
-//                engine: Hogan
-//            },
-//            {
-//                name: "search_news",
-//                remote: '<?php echo base_url() ?>search/get_news?query=%QUERY',
-//                header: '<div style="font-size: 15px; font-weight:bold">News</div>',
-//                template: [
-//                    '<div class="row">' +
-//                            '<div class="col-md-3">' +
-//                            '<div>' +
-//                            '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>' +
-//                            '</div>' +
-//                            '</div>' +
-//                            '<div class="col-md-9 profile-name">{{title}}</div>' +
-//                            '</div>'
-//                ].join(''),
-//                engine: Hogan
-//            },
-//            {
-//                name: "search_healthy_recipe",
-//                remote: '<?php echo base_url() ?>search/get_healthy_recipes?query=%QUERY',
-//                header: '<div style="font-size: 15px; font-weight:bold">Recipes</div>',
-//                template: [
-//                    '<div class="row">' +
-//                            '<div class="col-md-3">' +
-//                            '<div>' +
-//                            '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>' +
-//                            '</div>' +
-//                            '</div>' +
-//                            '<div class="col-md-9 profile-name">{{title}}</div>' +
-//                            '</div>'
-//                ].join(''),
-//                engine: Hogan
-//            },
-//            {
-//                name: "search_business_names",
-//                remote: '<?php echo base_url() ?>search/get_business_names?query=%QUERY',
-//                header: '<div style="font-size: 15px; font-weight:bold;">Companies and Groups</div>',
-//                template: [
-//                    '<div class="row">' +
-//                            '<div class="col-md-3">' +
-//                            '<div>' +
-//                            '<img alt="{{signature}}" src="<?php echo base_url() ?>resources/uploads/business/{{logo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>' +
-//                            '<div style="visibility:hidden;height:0px">{{signature}}</div>' +
-//                            '</div>' +
-//                            '</div>' +
-//                            '<div class="col-md-9 profile-name">{{business_name}}</div>' +
-//                            '</div>'
-//                ].join(''),
-//                engine: Hogan
-//            },
-//            {
-//                name: "search_blogs",
-//                remote: '<?php echo base_url() ?>search/get_blogs?query=%QUERY',
-//                header: '<div style="font-size: 15px; font-weight:bold">Blogs</div>',
-//                template: [
-//                    '<div class="row">' +
-//                            '<div class="col-md-3">' +
-//                            '<div>' +
-//                            '<img style="width:50px;height:50px" src="{{picture}}" class="img-responsive"/>' +
-//                            '</div>' +
-//                            '</div>' +
-//                            '<div class="col-md-9 profile-name">{{title}}</div>' +
-//                            '</div>'
-//                ].join(''),
-//                engine: Hogan
-//            }
-//
-//        ]).on('typeahead:selected', function (obj, datum) {
-//            if (datum.business_name)
-//            {
-//                window.location = "<?php echo base_url() ?>business_profile/show/" + datum.id;
-//            }
-//            else if (datum.username)
-//            {
-//                window.location = "<?php echo base_url() ?>member_profile/show/" + datum.user_id;
-//            }
-//            else if (datum.type == 'page')
-//            {
-//                window.location = datum.url;
-//            }
-//        });
-
-        $.ajax({
+         $.ajax({
             dataType: 'json',
             type: "POST",
             url: '<?php echo base_url(); ?>' + "notifications/get_all_notification_list",
@@ -236,19 +123,6 @@
     var total_users = notification_info.reference_list.length; %}
 
     {% for(var j = 0;j <total_users;j++){
-<<<<<<< Updated upstream
-            if(counter > 1){ 
-                if(counter == 3 && counter <= total_users){ %}
-                <?php echo " and "; ?>
-                {% }else if(counter == total_users){  %}
-                <?php echo " and "; ?>
-                {% }else{  %}
-                <?php echo " , "; ?>
-                {% }  }  %}
-    <a href='<?php echo base_url() . "member_profile/show/{%= notification_info.reference_list[j].user_id %}" ?>' class="profile-name"><?php echo '{%= notification_info.reference_list[j].first_name %}'?> <?php echo '{%= notification_info.reference_list[j].last_name %}'?></a>
-    {% counter++; %}
-    {% } %}
-=======
     if(counter > 1){ 
     if(counter == 3 && counter <= total_users){ %}
     <?php echo " and "; ?>
@@ -260,8 +134,6 @@
     <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
     {% counter++;
     } %}
->>>>>>> Stashed changes
-
     {% var created_on =notification_info.created_on ; 
     var reference_id =notification_info.reference_id ;
     if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
