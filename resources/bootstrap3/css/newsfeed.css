@@ -543,3 +543,14 @@ a:hover{
     padding: 5px;
     width: 100px;
 }
+
+a:hover
+{
+    text-decoration: none;
+    color: #fff;
+}
+
+.ln_item a:hover
+{
+    color: #428bca!important;
+}
