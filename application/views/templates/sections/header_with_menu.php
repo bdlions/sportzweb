@@ -12,13 +12,13 @@
                     $("#follower_counter_dive").val(data.total_unread_followers);
                     $("#follower_counter_dive").html(data.total_unread_followers);
                 }
-                
+
                 if (data.total_unread_notifications > 0) {
                     $("#notification_counter_div").show();
                     $("#notification_counter_div").val(data.total_unread_notifications);
                     $("#notification_counter_div").html(data.total_unread_notifications);
                 }
-                
+
 //                console.log($("#follower_counter_dive").val(data.total_unread_followers));return;
                 $("#notification_list").html(tmpl("tmpl_notification", data.notification_list));
                 $("#follower_list").html(tmpl("tmpl_followers", data.notification_list));
@@ -104,9 +104,11 @@
 <script type="text/x-tmpl" id="tmpl_notification">
     {% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);
     while(notification_info){ %}
-    <div class="pagelet message_friends_box">
-    <div class="row">
+   
     {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>'){ %}
+
+ <div class="pagelet message_friends_box">
+    <div class="row">
     <div class="col-sm-3 feed-profile-picture">
     {% if(notification_info.reference_list != null){ %}
     <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>'>
@@ -117,23 +119,24 @@
     </a>
     {%}%}
     </div>
-
     <div class="col-sm-9">
     {% var counter = 1;
     var total_users = notification_info.reference_list.length; %}
 
     {% for(var j = 0;j <total_users;j++){
+
     if(counter > 1){ 
     if(counter == 3 && counter <= total_users){ %}
-    <?php echo " and "; ?>
+<?php echo " and "; ?>
     {% }else if(counter == total_users){  %}
-    <?php echo " and "; ?>
+<?php echo " and "; ?>
     {% }else{  %}
-    <?php echo " , "; ?>
+<?php echo " , "; ?>
     {% }  }  %}
     <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
     {% counter++;
     } %}
+
     {% var created_on =notification_info.created_on ; 
     var reference_id =notification_info.reference_id ;
     if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
@@ -174,9 +177,10 @@
 <script type="text/x-tmpl" id="tmpl_followers">
     {% var i=0, notification_list = ((o instanceof Array) ? o[i++] : o);%}
     {%while(notification_list){ %} 
+
+    {% if(notification_list.type_id == '<?php echo NOTIFICATION_WHILE_START_FOLLOWING; ?>'){ %}
     <div class="pagelet">
     <div class="row">
-    {% if(notification_list.type_id == '<?php echo NOTIFICATION_WHILE_START_FOLLOWING; ?>'){ %}
     <div class="col-md-3 feed-profile-picture">
     <a href='<?php echo base_url() . "member_profile/show/{%= notification_list.reference_info.user_id %}" ?>'>
     <div>
@@ -195,9 +199,10 @@
     </div>
     </div>
     {% } %}
+    </div>
+    </div>
     {% } %}
-    </div>
-    </div>
+
     {% notification_list = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
@@ -230,7 +235,7 @@
                             <div class=" input-group ">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                                 <input id="typeahead" class="form-control" type="text" placeholder="Search for people and interests" />
-                                <?php $this->load->view("custom_typeahead/typahead_tmpl"); ?>
+                                <?php $this->load->view("custom_typeahead/typeahead_tmpl"); ?>
                             </div>
                         </div>
                         <div class="col-md-offset-1 col-md-4 right-menu">
@@ -253,9 +258,9 @@
                                 </div>
 
                                 <div id="mm_notification" style="position: relative">
-                                   
+
                                     <div class="notification_counter" id="notification_counter_div" style="display: none">
-                                        </div>
+                                    </div>
                                     <a href="javascript:void(0)"></a>
                                     <div id="mm_notification_box">
                                         <?php $this->load->view("member/notification/notification_notifications"); ?>

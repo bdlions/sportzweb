@@ -189,13 +189,14 @@ class Search extends CI_Controller {
                 $user->ptpro_display = ($is_gympro) ? 'block' : 'none';
                 $user->value = $user->first_name . " " . $user->last_name;
                 $user->signature = "";
+                $user->url = base_url().'member_profile/show/'.$user->user_id;
                 if ($user->first_name != NULL && $user->first_name != "") {
                     $user->signature = $user->first_name[0];
                 }
                 if ($user->last_name != NULL && $user->last_name != "") {
                     $user->signature = $user->signature . $user->last_name[0];
                 }
-                //$user -> signature = $user -> first_name[0].$user -> last_name[0];
+                $user -> user_image = base_url() . PROFILE_PICTURE_DISPLAY_PATH .$user -> photo;
                 array_push($temp_users, $user);
             }
             $response['users'] = $temp_users;
@@ -206,7 +207,6 @@ class Search extends CI_Controller {
                 $news->value = strip_tags(html_entity_decode(html_entity_decode($news->headline)));
                 $news->title = strip_tags(html_entity_decode(html_entity_decode($news->headline)));
                 $news->picture = base_url() . NEWS_IMAGE_PATH . $news->picture;
-                $news->type = 'page';
                 $news->url = base_url() . 'applications/news_app/news_item/' . $news->id;
                 array_push($temp_news, $news);
             }
@@ -216,7 +216,6 @@ class Search extends CI_Controller {
             foreach ($healthy_recipes as $healthy_recipe) {
                 $healthy_recipe->value = $healthy_recipe->title;
                 $healthy_recipe->picture = base_url() . HEALTHY_RECIPES_IMAGE_PATH . $healthy_recipe->main_picture;
-                $healthy_recipe->type = 'page';
                 $healthy_recipe->url = base_url() . 'applications/healthy_recipes/recipe/' . $healthy_recipe->id;
                 array_push($temp_recipes, $healthy_recipe);
             }
@@ -227,7 +226,6 @@ class Search extends CI_Controller {
             foreach ($healthy_recipes as $healthy_recipe) {
                 $healthy_recipe->value = $healthy_recipe->title;
                 $healthy_recipe->picture = base_url() . HEALTHY_RECIPES_IMAGE_PATH . $healthy_recipe->main_picture;
-                $healthy_recipe->type = 'page';
                 $healthy_recipe->url = base_url() . 'applications/healthy_recipes/recipe/' . $healthy_recipe->id;
                 array_push($temp_recipes, $healthy_recipe);
             }
@@ -238,15 +236,15 @@ class Search extends CI_Controller {
                 $blog->value = strip_tags(html_entity_decode(html_entity_decode($blog->title)));
                 $blog->title = strip_tags(html_entity_decode(html_entity_decode($blog->title)));
                 $blog->picture = base_url() . BLOG_POST_IMAGE_PATH . $blog->picture;
-                $blog->type = 'page';
                 $blog->url = base_url() . 'applications/blog_app/view_blog_post/' . $blog->id;
                 array_push($temp_blogs, $blog);
             }
             $response['blogs'] = $temp_blogs;
 
             $business_names = $this->searches_model->get_all_business_profile($search_value);
-
             foreach ($business_names as $business_name) {
+                $business_name->url = base_url() . 'business_profile/show/' . $business_name->id;
+                $business_name->logo = base_url() . BUSINESS_PROFILE_LOGO_PATH . $business_name->logo;
                 $business_name->value = $business_name->business_name;
                 $business_name->signature = "";
                 if ($business_name->business_name != NULL && $business_name->business_name != "") {
