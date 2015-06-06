@@ -36,6 +36,7 @@
                                 $(blogs_dropdown_div).remove();
                                 var b_users_dropdown_div = $("#type_ahead_b_users #dropdown_b_users");
                                 $(b_users_dropdown_div).remove();
+                                $("#user_image_id").hide();
 
                                 var noOfUsers = 0;
                                 var noOfNews = 0;
@@ -66,7 +67,7 @@
                                 }
                                 
                                 if (noOfUsers > 0) {
-                                    $("#users_temp").show();
+                                    $("#user_image_id").show();
                                     $("#type_ahead_user").append("<div id='dropdown_user'></div>");
                                     var user_temp_div = $("#type_ahead_user #dropdown_design_user");
                                     var users_dropdown_div = $("#type_ahead_user #dropdown_user");

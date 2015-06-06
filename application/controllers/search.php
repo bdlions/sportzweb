@@ -219,18 +219,8 @@ class Search extends CI_Controller {
                 $healthy_recipe->url = base_url() . 'applications/healthy_recipes/recipe/' . $healthy_recipe->id;
                 array_push($temp_recipes, $healthy_recipe);
             }
-
             $response['recipes'] = $temp_recipes;
-
-            $healthy_recipes = $this->searches_model->get_healthy_recipes($search_value)->result();
-            foreach ($healthy_recipes as $healthy_recipe) {
-                $healthy_recipe->value = $healthy_recipe->title;
-                $healthy_recipe->picture = base_url() . HEALTHY_RECIPES_IMAGE_PATH . $healthy_recipe->main_picture;
-                $healthy_recipe->url = base_url() . 'applications/healthy_recipes/recipe/' . $healthy_recipe->id;
-                array_push($temp_recipes, $healthy_recipe);
-            }
-
-
+            
             $blog_list = $this->searches_model->get_blogs($search_value)->result();
             foreach ($blog_list as $blog) {
                 $blog->value = strip_tags(html_entity_decode(html_entity_decode($blog->title)));

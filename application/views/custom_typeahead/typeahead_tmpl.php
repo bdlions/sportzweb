@@ -16,8 +16,8 @@
                                     <div id="dropdown_design_user">
                                         <div class="row margin_style">
                                             <a class= "user_anchor" href="" >
-                                                <div class="col-md-3 user_image_id">
-                                                    <div class="profile-background " >                                                                    
+                                                <div class="col-md-3">
+                                                    <div class="profile-background user_image_id">                                                                    
                                                         <img  alt="" src="" class="user_image img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; "/>
                                                         <div class="signature_id" style="visibility:hidden;height:0px"></div>
                                                     </div>
