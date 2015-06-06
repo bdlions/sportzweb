@@ -556,6 +556,11 @@ a:hover
     color: #428bca!important;
 }
 
+.business_img_style > img{
+    height: 32px!important;
+    width:  32px!important;
+    line-height: 32px!important;
+}
 
 .news_image_style, .recipes_image_style , .blogs_image_style{
     height: 32px!important;

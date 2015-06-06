@@ -110,7 +110,7 @@
                                         <div class="row margin_style">
                                             <a class= "b_user_anchor" href="">
                                                 <div class="col-md-3">
-                                                    <div class="profile-background">                                                                    
+                                                    <div class="profile-background business_img_style">                                                                    
                                                         <img  alt="" src="" class="b_users_image img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; "/>
                                                         <div class="b_signature_id" style="visibility:hidden;height:0px"></div>
                                                     </div>
