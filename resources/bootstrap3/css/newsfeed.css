@@ -16,8 +16,8 @@
 }
 
 .logo-text a{
-    text-decoration: none;
-    color: #ffffff;
+    text-decoration: none!important;
+    color: #ffffff!important;
     font-size: 70px;
 }
 .navbar-top {
@@ -382,12 +382,12 @@ float: left;
 }
 .profile-background{
     background-color:#93C8FA; 
-    height:50px;
-    width:50px;
-    line-height: 50px;	
+    height:32px;
+    width:32px;
+    line-height: 32px;	
     text-align: center; 
     vertical-align: middle;
-    font-size: 30px;
+    font-size: 18px;
     color: white;
 }
 .profile-background-comment{
@@ -544,13 +544,51 @@ a:hover{
     width: 100px;
 }
 
+/*--------------------------------------- Author: Redoy -----------------------------------------*/
 a:hover
 {
     text-decoration: none;
-    color: #fff;
+    color: #428bca;
 }
 
 .ln_item a:hover
 {
     color: #428bca!important;
 }
+
+
+.news_image_style, .recipes_image_style , .blogs_image_style{
+    height: 32px!important;
+    width: 32px!important;
+    line-height: 32px!important;
+}
+
+
+@media only screen and (min-width: 1200px) {
+    .pixel_perfection{  
+        width: 850px;
+    } 
+}
+@media only screen and (min-width: 992px) and (max-width: 1159px) {
+    .pixel_perfection{  
+        width: 750px;
+    }  
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .pixel_perfection{  
+        width: 650px;
+    }  
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .pixel_perfection{  
+         width: 450px;
+    }  
+}
+
+@media only screen and (max-width: 479px) {
+    .pixel_perfection{  
+        width: 250px;
+    } 
+}
+
+  

@@ -1,7 +1,7 @@
 
-<div class="row" id="page_late_id" style="display: none; position: absolute; z-index: 1001;">;
+<div class="row pixel_perfection pagelet_z_index" id="page_late_id" style="display: none;">
     <div class="col-xs- 10 col-sm-10 col-md-10 col-lg-10">
-        <div class="pagelet">
+        <div class="search_pagelet">
             <div class="row">
                 <div class="col-md-4">
                     <div id="users_temp">
@@ -16,8 +16,8 @@
                                     <div id="dropdown_design_user">
                                         <div class="row margin_style">
                                             <a class= "user_anchor" href="" >
-                                                <div class="col-md-3 ">
-                                                    <div class="profile-background" >                                                                    
+                                                <div class="col-md-3 user_image_id">
+                                                    <div class="profile-background " >                                                                    
                                                         <img  alt="" src="" class="user_image img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; "/>
                                                         <div class="signature_id" style="visibility:hidden;height:0px"></div>
                                                     </div>
@@ -52,7 +52,7 @@
                                         <div class="row margin_style">
                                             <a class= "news_anchor" href="" >
                                                 <div class="col-md-3">
-                                                    <img src="" class="img-responsive news_image" style="display: none"/>
+                                                    <img src="" class="img-responsive news_image news_image_style" style="display: none"/>
                                                 </div>
                                                 <div class="col-md-9 font_style">
                                                     <div class="news_title">
@@ -80,7 +80,7 @@
                                         <div class="row margin_style">
                                             <a class= "recipes_anchor" href="" >
                                                 <div class="col-md-3">
-                                                    <img src="" class="img-responsive recipes_image" style="display: none"/>
+                                                    <img src="" class="img-responsive recipes_image recipes_image_style" style="display: none"/>
                                                 </div>
                                                 <div class="col-md-9 font_style">
                                                     <div class="recipes_title">
@@ -108,9 +108,9 @@
                                 <div id="type_ahead_b_users">
                                     <div id="dropdown_design_b_users">
                                         <div class="row margin_style">
-                                            <a class= "b_user_anchor" href="" >
+                                            <a class= "b_user_anchor" href="">
                                                 <div class="col-md-3">
-                                                    <div class="" >                                                                    
+                                                    <div class="profile-background">                                                                    
                                                         <img  alt="" src="" class="b_users_image img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; "/>
                                                         <div class="b_signature_id" style="visibility:hidden;height:0px"></div>
                                                     </div>
@@ -141,7 +141,7 @@
                                         <div class="row margin_style">
                                             <a class= "blogs_anchor" href="" >
                                                 <div class="col-md-3">
-                                                    <img src="" class="img-responsive blogs_image" style="display: none"/>
+                                                    <img src="" class="img-responsive blogs_image blogs_image_style" style="display: none"/>
                                                 </div>
                                                 <div class="col-md-9 font_style">
                                                     <div class="blogs_title">

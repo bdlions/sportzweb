@@ -196,7 +196,7 @@ class Search extends CI_Controller {
                 if ($user->last_name != NULL && $user->last_name != "") {
                     $user->signature = $user->signature . $user->last_name[0];
                 }
-                $user -> user_image = base_url() . PROFILE_PICTURE_DISPLAY_PATH .$user -> photo;
+                $user -> user_image = base_url() . PROFILE_PICTURE_PATH_W32_H32 .$user -> photo;
                 array_push($temp_users, $user);
             }
             $response['users'] = $temp_users;

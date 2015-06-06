@@ -41,13 +41,51 @@
 #mm_setting a img{
     margin-bottom: 40px;
 }
+
+
+@media only screen and (min-width: 1200px) {
+    #mm_notification_box, #mm_message_box, #mm_friend_request_box{
+        right: 1px;
+        height: 350px;
+        width: 350px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1159px) {
+   #mm_notification_box, #mm_message_box, #mm_friend_request_box{
+        right: 1px;
+        height: 325px;
+        width: 325px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+     #mm_notification_box, #mm_message_box, #mm_friend_request_box{
+        left: 1px;
+        height: 300px;
+        width: 300px;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    #mm_notification_box, #mm_message_box, #mm_friend_request_box{
+        left: 1px;
+        height: 275px;
+        width: 275px;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    #mm_notification_box, #mm_message_box, #mm_friend_request_box{
+        left: 1px;
+        height: 250px;
+        width: 250px;
+    }
+}
+
+
 #mm_notification_box, #mm_message_box, #mm_friend_request_box{
     position: absolute;
-    right: 1px;
     display: none;
     z-index: 101;
-    width: 350px;
-    height: 350px;
     color: black;
     background-color: #fff;
 }
