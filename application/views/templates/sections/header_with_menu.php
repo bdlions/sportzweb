@@ -2,7 +2,7 @@
 <script type="text/javascript">
 
     $(function () {
-         $.ajax({
+        $.ajax({
             dataType: 'json',
             type: "POST",
             url: '<?php echo base_url(); ?>' + "notifications/get_all_notification_list",
@@ -44,7 +44,8 @@
             update_notifications_status(notification_type_id_list, 2);
         });
         $("#mm_messages").on('click', function () {
-            $('#mm_message_box').show();
+            window.location = '<?php echo base_url(); ?>messages';
+//            $('#mm_message_box').show();
         });
     });
 
@@ -70,6 +71,7 @@
         var fr_container = $("#mm_friend_request_box");
         var container = $("#mm_notification_box");
         var msg_container = $("#mm_message_box");
+        var typeahead_container = $("#page_late_id");
 
         if (!fr_container.is(e.target) && fr_container.has(e.target).length === 0) {
             fr_container.hide();
@@ -79,6 +81,9 @@
         }
         if (!container.is(e.target) && container.has(e.target).length === 0) {
             container.hide();
+        }
+        if (!typeahead_container.is(e.target) && typeahead_container.has(e.target).length === 0) {
+            typeahead_container.hide();
         }
     });
 
@@ -104,10 +109,10 @@
 <script type="text/x-tmpl" id="tmpl_notification">
     {% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);
     while(notification_info){ %}
-   
+
     {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>'){ %}
 
- <div class="pagelet message_friends_box">
+    <div class="pagelet message_friends_box">
     <div class="row">
     <div class="col-sm-3 feed-profile-picture">
     {% if(notification_info.reference_list != null){ %}
@@ -127,11 +132,11 @@
 
     if(counter > 1){ 
     if(counter == 3 && counter <= total_users){ %}
-<?php echo " and "; ?>
+    <?php echo " and "; ?>
     {% }else if(counter == total_users){  %}
-<?php echo " and "; ?>
+    <?php echo " and "; ?>
     {% }else{  %}
-<?php echo " , "; ?>
+    <?php echo " , "; ?>
     {% }  }  %}
     <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
     {% counter++;
@@ -232,10 +237,10 @@
                 <div class="col-md-8">
                     <div class="header-menu-row">
                         <div class="col-md-offset-1 col-md-6" >
-                            <div class=" input-group ">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                <input id="typeahead" class="form-control" type="text" placeholder="Search for people and interests" />
-                                <?php $this->load->view("custom_typeahead/typeahead_tmpl"); ?>
+                                <div class=" input-group ">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                    <input id="typeahead" class="form-control" type="text" placeholder="Search for people and interests" />
+                                    <?php $this->load->view("custom_typeahead/typeahead_tmpl"); ?>
                             </div>
                         </div>
                         <div class="col-md-offset-1 col-md-4 right-menu">
