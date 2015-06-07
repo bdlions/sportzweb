@@ -27,73 +27,109 @@ class Payment extends Role_Controller {
     {
         
     }
-    
+    /*
+     * This method will used for displaying payment form and processing payment on form submission
+     * @param $session_id, id of a session which will be paid
+     */
     public function pay_ptpro($session_id = 0)
     {
+        //session info
         $session_info = array();
         $session_info_array = $this->gympro_library->get_session_info($session_id)->result_array();
         if(!empty($session_info_array)){
             $session_info = $session_info_array[0];
         }
-        $this->data['session_info'] = $session_info;
-        $this->data['schedule_id'] = $session_id;
         
-        $this->data['payment_types'] = array(
-            'Discover' => 'Discover',
-            'MasterCard' => 'MasterCard',
-            'Visa' => 'Visa'
-        );
-        $this->data['card_number'] = array(
-            'name' => 'card_number',
-            'id' => 'card_number',
-            'type' => 'text',
-            'value' => '5424180818927383'
-        );    
-        $this->data['expired_month'] = array(
-            '1' => '01-January',
-            '2' => '02-February',
-            '3' => '03-March',
-            '4' => '04-April',
-            '5' => '05-May',
-            '6' => '06-June',
-            '7' => '07-July',
-            '8' => '08-August',
-            '9' => '09-September',
-            '10' => '10-October',
-            '11' => '11-November',
-            '12' => '12-December',
-        );
-        $this->data['expired_year'] = array(
-            '2015' => '2015',
-            '2016' => '2016',
-            '2017' => '2017',
-            '2018' => '2018',
-            '2019' => '2019',
-            '2020' => '2020',
-            '2021' => '2021',
-            '2022' => '2022',
-            '2023' => '2023',
-            '2024' => '2024',
-            '2025' => '2025',
-            '2026' => '2026',
-            '2027' => '2027',
-            '2028' => '2028',
-            '2029' => '2029',
-            '2030' => '2030'
-        );
-        $this->data['ccv_code'] = array(
-            'name' => 'ccv_code',
-            'id' => 'ccv_code',
-            'type' => 'text',
-            'value' => 123
-        ); 
-        $this->data['submit_pay_session'] = array(
-            'name' => 'submit_pay_session',
-            'id' => 'submit_pay_session',
-            'type' => 'submit',
-            'value' => 'Submit',
-        );
-        $this->template->load(null, 'payment/ptpro/index', $this->data);
+        $data = array();
+
+        $this->load->helper(array('form', 'url'));
+
+        if ('POST' == $_SERVER['REQUEST_METHOD']) {
+                $this->config->load('paypal');
+                $this->load->library('paypal_chained_adaptive_payment', $this->config->item('paypal'));
+
+                /** @var Paypal_chained_adaptive_payment $payment */
+                $payment = $this->paypal_chained_adaptive_payment;
+                $payment->setProductName('session');// product name (if change here - must be changed also in IPN handler)
+                $payment->setProductId($session_id);// Session ID, required to update this Session payment status when PayPal sends back an IPN
+                $payment->setCurrency('GBP');// currency, must be three letters, and be accepted in configs
+                $payment->setAmount($session_info['cost']);// total payment amount
+                $payment->setSecondaryReceiver('ptpro-secondary@sonuto.com');// paypal email of trainer, for testing use ptpro-secondary@sonuto.com
+
+                // process payment
+                if (FALSE === $payment->process()) {// failed
+                        $data['payment_errors'] = $payment->getErrors();// process errors
+                }
+                else {// success
+                        // it must return PayPal UWL where user must be redirected
+                        if ($payPalUrl = $payment->getPayPalUrl()) {
+                                header("Location: {$payPalUrl}");// redirect user to PayPal website to complete a payment
+                                exit;
+                        }
+                        // if there is no PayPal URL, the PayPal payment status could be checked
+                        $data['payment_errors'][] = $payment->getPaymentExecStatus();
+                }
+        }
+
+        $this->data['session_info'] = $session_info;
+        $this->template->load(null, 'paypal_form', $this->data);
     }
+    /**
+    * Required to receive PayPal IPN messages and change payment status in website database
+    */
+   public function ipn()
+   {
+        error_reporting(E_ALL);
+        $this->config->load('paypal');
+        $this->load->library('paypal_chained_adaptive_payment', $this->config->item('paypal'));
+        log_message('debug', 'paypal library loaded');
+        /** @var Paypal_chained_adaptive_payment $payment */
+        $payment = $this->paypal_chained_adaptive_payment;
+        log_message('debug', 'paypal payment initialized');
+
+        $ipn = $payment->validateIpn();// validate IPN message
+        log_message('debug', 'ipn validated');
+
+        if (false !== $ipn) {// IPN verified by PayPal
+                if ('COMPLETED' !== $ipn->getStatus()) {
+                        log_message('error', 'Payment not completed: '.json_encode($ipn->getRawData()));
+                }
+                elseif ('session' === $ipn->getProductName()) {
+                        // change payment status in Session table
+                        $sessionId = $ipn->getProductId();
+                        //updating status of the session
+                        $additional_data = array(
+                             'status_id' => GYMPRO_SESSION_STATUS_PAY_PT_PRO_ID
+                        );
+                        $this->gympro_library->update_session($sessionId, $additional_data);
+                        log_message('debug', 'Valid payment: '.json_encode($ipn->getRawData()));
+                }
+                else {
+                        log_message('error', 'Unknown payment: '.json_encode($ipn->getRawData()));
+                }
+        }
+        else {
+                // log errors
+                log_message('error', implode("\n", $payment->getErrors()));
+        }
+        echo "SUCCESS";
+   }
+    /**
+    * Completed payments will be redirected here
+    */
+   public function completed()
+   {
+       $this->data['message'] = '';      
+       $this->template->load(null, 'paypal_completed', $this->data); 
+   }
+
+   /**
+    * Canceled payments will be redirected here
+    */
+   public function canceled()
+   {
+       $this->data['message'] = '';
+       $this->template->load(null, 'paypal_canceled', $this->data); 
+   }
 
 }
