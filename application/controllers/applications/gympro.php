@@ -134,6 +134,7 @@ class Gympro extends Role_Controller {
                 'hourly_rate_id' => $this->input->post('hourly_rate_list'),
                 'currency_id' => $this->input->post('currency_list')
             );
+            
             $status = $this->gympro_library->store_gympro_user_info($user_id, $data);
             if ($status) {
                 $this->data['message'] = $this->gympro_library->messages();
@@ -141,12 +142,17 @@ class Gympro extends Role_Controller {
                 $this->data['message'] = $this->gympro_library->errors();
             }
         }
-        
+
+        $user_gympro_email_array = array();
         $user_email_array = array();
-        $user_email_array = $this->gympro_library->get_gympro_user_email($user_id)->result_array();
-        if(!empty($user_email_array)){
-            
-        $this->data['account_email'] = $user_email_array[0]['email'];
+        $user_gympro_email_array = $this->gympro_library->get_gympro_user_email($user_id)->result_array();
+        if ((!empty($user_gympro_email_array))&& $user_gympro_email_array[0]['account_email'] != null) {
+            $this->data['account_email'] = $user_gympro_email_array[0]['account_email'];
+        } else {
+            $user_email_array = $this->gympro_library->get_user_email($user_id)->result_array();
+            if (!empty($user_email_array)) {
+                $this->data['account_email'] = $user_email_array[0]['email'];
+            }
         }
         $height_unit_list = array();
         $height_unit_array = $this->gympro_library->get_all_height_units()->result_array();
@@ -2627,9 +2633,9 @@ class Gympro extends Role_Controller {
                     'currency_id' => $this->input->post('currency_list'),
                     'note' => $this->input->post('note')
                 );
-                
-                if($status_id != null){
-                    $additional_data['status_id'] = $status_id ;
+
+                if ($status_id != null) {
+                    $additional_data['status_id'] = $status_id;
                 }
                 $session_update_id = $this->gympro_library->update_session($session_id, $additional_data);
                 if ($session_update_id == TRUE) {
