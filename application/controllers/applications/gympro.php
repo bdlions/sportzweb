@@ -143,11 +143,9 @@ class Gympro extends Role_Controller {
             }
         }
 
-        $user_gympro_email_array = array();
         $user_email_array = array();
-        $user_gympro_email_array = $this->gympro_library->get_gympro_user_email($user_id)->result_array();
-        if ((!empty($user_gympro_email_array))&& $user_gympro_email_array[0]['account_email'] != null) {
-            $this->data['account_email'] = $user_gympro_email_array[0]['account_email'];
+        if (($this->gympro_user_info['account_email']) != null) {
+            $this->data['account_email'] = $this->gympro_user_info['account_email'];
         } else {
             $user_email_array = $this->gympro_library->get_user_email($user_id)->result_array();
             if (!empty($user_email_array)) {

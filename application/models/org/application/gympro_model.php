@@ -93,13 +93,6 @@ class Gympro_model extends Ion_auth_model {
      * @Author Nazmul on 19th November 2014
      */
 
-    public function get_gympro_user_email($user_id) {
-        $this->db->where('user_id', $user_id);
-        return $this->db->select('account_email')
-                        ->from($this->tables['app_gympro_users'])
-                        ->get();
-    }
-
     public function get_user_email($user_id) {
         $this->db->where('id', $user_id);
         return $this->db->select('email')

@@ -400,17 +400,7 @@ class Settings extends Role_Controller {
                 $this->data['message'] = $this->gympro_library->errors();
             }
         }
-         $user_gympro_email_array = array();
-        $user_email_array = array();
-        $user_gympro_email_array = $this->gympro_library->get_gympro_user_email($user_id)->result_array();
-        if ((!empty($user_gympro_email_array))&& $user_gympro_email_array[0]['account_email'] != null) {
-            $this->data['account_email'] = $user_gympro_email_array[0]['account_email'];
-        } else {
-            $user_email_array = $this->gympro_library->get_user_email($user_id)->result_array();
-            if (!empty($user_email_array)) {
-                $this->data['account_email'] = $user_email_array[0]['email'];
-            }
-        }
+
         $height_unit_list = array();
         $height_unit_array = $this->gympro_library->get_all_height_units()->result_array();
         foreach ($height_unit_array as $height_unit) {
@@ -461,6 +451,7 @@ class Settings extends Role_Controller {
         $this->data['selected_hourly_rate_id'] = '';
         $this->data['selected_currency_id'] = '';
         $gympro_user_info = array();
+        $user_email_array = array();
         $gympro_user_info_array = $this->gympro_library->get_gympro_user_info($user_id)->result_array();
         if (!empty($gympro_user_info_array)) {
             $gympro_user_info = $gympro_user_info_array[0];
@@ -470,8 +461,15 @@ class Settings extends Role_Controller {
             $this->data['selected_time_zone_id'] = $gympro_user_info['time_zone_id'];
             $this->data['selected_hourly_rate_id'] = $gympro_user_info['hourly_rate_id'];
             $this->data['selected_currency_id'] = $gympro_user_info['currency_id'];
+            if (($gympro_user_info['account_email']) != null) {
+                $this->data['account_email'] = $gympro_user_info['account_email'];
+            } else {
+                $user_email_array = $this->gympro_library->get_user_email($user_id)->result_array();
+                if (!empty($user_email_array)) {
+                    $this->data['account_email'] = $user_email_array[0]['email'];
+                }
+            }
         }
-
         $this->data['user_id'] = $user_id;
         $this->data['submit_update_preference'] = array(
             'name' => 'submit_update_preference',
