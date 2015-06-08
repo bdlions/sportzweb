@@ -176,10 +176,10 @@ class Paypal_chained_adaptive_payment {
         /*
          *  (Optional) The payer of PayPal fees. Allowable values are:
 
-            SENDER â€“ Sender pays all fees (for personal, implicit simple/parallel payments; do not use for chained or unilateral payments)
-            PRIMARYRECEIVER â€“ Primary receiver pays all fees (chained payments only)
-            EACHRECEIVER â€“ Each receiver pays their own fee (default, personal and unilateral payments)
-            SECONDARYONLY â€“ Secondary receivers pay all fees (use only for chained payments with one secondary receiver)
+            SENDER – Sender pays all fees (for personal, implicit simple/parallel payments; do not use for chained or unilateral payments)
+            PRIMARYRECEIVER – Primary receiver pays all fees (chained payments only)
+            EACHRECEIVER – Each receiver pays their own fee (default, personal and unilateral payments)
+            SECONDARYONLY – Secondary receivers pay all fees (use only for chained payments with one secondary receiver)
 
          */
         $payRequest->feesPayer = $this->configs['adaptive_payments']['fees_payer'];

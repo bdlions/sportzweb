@@ -37,7 +37,7 @@
                                 var b_users_dropdown_div = $("#type_ahead_b_users #dropdown_b_users");
                                 $(b_users_dropdown_div).remove();
                                 $("#user_image_id").hide();
-                                $("#b_user_image_id").hide();
+                                $(".b_user_image_id").hide();
 
                                 var noOfUsers = 0;
                                 var noOfNews = 0;
@@ -175,7 +175,7 @@
                                     }
                                 }
                                 if (noOfbBUser > 0) {
-                                     $("#b_user_image_id").show();
+                                    $(".b_user_image_id").show();
                                     $("#type_ahead_b_users").append("<div id='dropdown_b_users'></div>");
                                     var b_users_temp_div = $("#type_ahead_b_users #dropdown_design_b_users");
                                     var b_users_dropdown_div = $("#type_ahead_b_users #dropdown_b_users");

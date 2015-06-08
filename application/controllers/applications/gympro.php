@@ -123,7 +123,7 @@ class Gympro extends Role_Controller {
         if ($user_id == 0) {
             $user_id = $this->my_user_id;
         }
-        $this->data['message'] = '';
+        $this->data['message'] = $this->session->flashdata('message');
         if ($this->input->post('submit_update_preference')) {
             $data = array(
                 'account_email' => $this->input->post('account_email'),
@@ -137,10 +137,13 @@ class Gympro extends Role_Controller {
             
             $status = $this->gympro_library->store_gympro_user_info($user_id, $data);
             if ($status) {
-                $this->data['message'] = $this->gympro_library->messages();
+                $this->session->set_flashdata('message', $this->gympro_library->messages());
+                //$this->data['message'] = $this->gympro_library->messages();
             } else {
-                $this->data['message'] = $this->gympro_library->errors();
+                $this->session->set_flashdata('message', $this->gympro_library->errors());
+                //$this->data['message'] = $this->gympro_library->errors();
             }
+            redirect('applications/gympro/preference/'.$user_id,'refresh');
         }
 
         $user_email_array = array();

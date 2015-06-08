@@ -119,7 +119,7 @@ class Payment extends Role_Controller {
     */
    public function completed()
    {
-       $this->data['message'] = '';      
+       $this->data['message'] = '';    
        $this->template->load(null, 'paypal_completed', $this->data); 
    }
 
