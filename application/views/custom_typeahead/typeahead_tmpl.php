@@ -25,6 +25,9 @@
                                                 <div class="col-md-9 font_style">
                                                     <div class="user_name">
                                                     </div>
+                                                    <div class=" ptpro_display pull-right">
+                                                        <div style="background-color: yellow; color: maroon; font-size: 16px; margin-top: -18px;"> PT</div>
+                                                    </div>
                                                     <div class="home_town">
                                                     </div>
                                                     <div class="country_name">
@@ -110,7 +113,7 @@
                                         <div class="row margin_style">
                                             <a class= "b_user_anchor" href="">
                                                 <div class="col-md-3">
-                                                    <div class="profile-background business_img_style b_user_image_id">                                                                    
+                                                    <div class="b_user_image_id profile-background business_img_style">                                                                    
                                                         <img  alt="" src="" class="b_users_image img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; "/>
                                                         <div class="b_signature_id" style="visibility:hidden;height:0px"></div>
                                                     </div>

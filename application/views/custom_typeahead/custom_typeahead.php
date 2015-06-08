@@ -1,7 +1,7 @@
 <script type="text/javascript">
             $(function () {
                 var typingTimer;
-                var doneTypingInterval = 1000;
+                var doneTypingInterval = 500;
                 var timeElapsed = 0;
                 var timeoutfn;
                 var waitForResult = false;
@@ -17,7 +17,6 @@
                     if (waitForResult == true && timeElapsed >= doneTypingInterval) {
                         waitForResult = false;
                         var inputvalue = $("#typeahead").val();
-                        console.log(inputvalue)
                         $.ajax({
                             dataType: 'json',
                             type: "POST",
@@ -36,15 +35,13 @@
                                 $(blogs_dropdown_div).remove();
                                 var b_users_dropdown_div = $("#type_ahead_b_users #dropdown_b_users");
                                 $(b_users_dropdown_div).remove();
-                                $("#user_image_id").hide();
+                                $(".user_image_id").hide();
                                 $(".b_user_image_id").hide();
-
                                 var noOfUsers = 0;
                                 var noOfNews = 0;
                                 var noOfRecipes = 0;
                                 var noOfbBlogs = 0;
                                 var noOfbBUser = 0;
-                                
                                 if (typeof data.users != 'undefined') {
                                     noOfUsers = data.users.length;
                                 }
@@ -68,7 +65,7 @@
                                 }
                                 
                                 if (noOfUsers > 0) {
-                                    $("#user_image_id").show();
+                                    $(".user_image_id").show();
                                     $("#type_ahead_user").append("<div id='dropdown_user'></div>");
                                     var user_temp_div = $("#type_ahead_user #dropdown_design_user");
                                     var users_dropdown_div = $("#type_ahead_user #dropdown_user");
@@ -85,12 +82,14 @@
                                             var user_name = $(this).find(".user_name");
                                             var user_anchor = $(this).find(".user_anchor");
                                             var user_image = $(this).find(".user_image");
+                                            var ptpro_display = $(this).find(".ptpro_display");
                                             var home_town = $(this).find(".home_town");
                                             var country_name = $(this).find(".country_name");
                                             var signature_id = $(this).find(".signature_id");
                                             $(user_anchor).attr('href', data.users[count].url);
-                                            $(user_image).attr('alt',data.users[count].signature);
-                                            $(user_image).attr('src',data.users[count].user_image);
+                                            $(user_image).attr('alt', data.users[count].signature);
+                                            $(user_image).attr('src', data.users[count].user_image);
+                                            $(ptpro_display).css('display', data.users[count].ptpro_display);
                                             $(signature_id).html(data.users[count].signature);
                                             $(user_name).html(data.users[count].username);
                                             $(home_town).html(data.users[count].home_town);
@@ -105,7 +104,6 @@
                                     var news_temp_div = $("#type_ahead_news #dropdown_design_news");
                                     var news_dropdown_div = $("#type_ahead_news #dropdown_news");
                                     $(news_temp_div).find(".row").each(function () {
-//                                    var noOfCols = $(this).find(".col").size();
                                         for (var i = 0; i < noOfNews; i++) {
                                             $(news_dropdown_div).append($(this).clone());
                                         }
@@ -130,7 +128,6 @@
                                     var recipes_temp_div = $("#type_ahead_recipes #dropdown_design_recipes");
                                     var recipes_dropdown_div = $("#type_ahead_recipes #dropdown_recipes");
                                     $(recipes_temp_div).find(".row").each(function () {
-//                                    var noOfCols = $(this).find(".col").size();
                                         for (var i = 0; i < noOfRecipes; i++) {
                                             $(recipes_dropdown_div).append($(this).clone());
                                         }
@@ -155,7 +152,6 @@
                                     var blogs_temp_div = $("#type_ahead_blogs #dropdown_design_blogs");
                                     var blogs_dropdown_div = $("#type_ahead_blogs #dropdown_blogs");
                                     $(blogs_temp_div).find(".row").each(function () {
-//                                    var noOfCols = $(this).find(".col").size();
                                         for (var i = 0; i < noOfbBlogs; i++) {
                                             $(blogs_dropdown_div).append($(this).clone());
                                         }
@@ -180,7 +176,6 @@
                                     var b_users_temp_div = $("#type_ahead_b_users #dropdown_design_b_users");
                                     var b_users_dropdown_div = $("#type_ahead_b_users #dropdown_b_users");
                                     $(b_users_temp_div).find(".row").each(function () {
-//                                    var noOfCols = $(this).find(".col").size();
                                         for (var i = 0; i < noOfbBUser; i++) {
                                             $(b_users_dropdown_div).append($(this).clone());
                                         }
@@ -193,7 +188,6 @@
                                             var business_name = $(this).find(".business_name");
                                             var b_user_anchor = $(this).find(".b_user_anchor");
                                             var b_signature_id = $(this).find(".b_signature_id");
-//                                            $(b_users_image).attr('src', data.business_user[count_b_users].signature);
                                             $(b_user_anchor).attr('href', data.business_user[count_b_users].url);
                                             $(b_users_image).attr('art',data.business_user[count_b_users].signature);
                                             $(b_users_image).attr('src',data.business_user[count_b_users].logo);
