@@ -85,9 +85,9 @@ class Gympro_model extends Ion_auth_model {
     }
 
     //------------------------------------- Preference Module -------------------------------//
-    
-    
-     /*
+
+
+    /*
      * This method will return gympor user info
      * @param $user_id, user id
      * @Author Nazmul on 19th November 2014
@@ -99,10 +99,12 @@ class Gympro_model extends Ion_auth_model {
                         ->from($this->tables['users'])
                         ->get();
     }
+
     /*
      * This method will return all height units
      * @Author Nazmul on 17th November 2014
      */
+
     public function get_all_height_units() {
         return $this->db->select($this->tables['app_gympro_height_unit_types'] . '.id as height_unit_id,' . $this->tables['app_gympro_height_unit_types'] . '.*')
                         ->from($this->tables['app_gympro_height_unit_types'])
@@ -337,7 +339,7 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_client_detail($client_id) {
         $this->db->where($this->tables['app_gympro_clients'] . '.id', $client_id);
-        return $this->db->select($this->tables['app_gympro_clients'] . '.id as client_id,' .$this->tables['app_gympro_clients'] . '.user_id as ptpro_user_id,' . $this->tables['app_gympro_clients'] . '.*,' . $this->tables['app_gympro_client_statuses'] . '.title as status_title,' . $this->tables['gender'] . '.gender_name,' . $this->tables['users'] . '.*,' . $this->tables['basic_profile'] . '.*')
+        return $this->db->select($this->tables['app_gympro_clients'] . '.id as client_id,' . $this->tables['app_gympro_clients'] . '.user_id as ptpro_user_id,' . $this->tables['app_gympro_clients'] . '.*,' . $this->tables['app_gympro_client_statuses'] . '.title as status_title,' . $this->tables['gender'] . '.gender_name,' . $this->tables['users'] . '.*,' . $this->tables['basic_profile'] . '.*')
                         ->from($this->tables['app_gympro_clients'])
                         ->join($this->tables['app_gympro_client_statuses'], $this->tables['app_gympro_client_statuses'] . '.id=' . $this->tables['app_gympro_clients'] . '.status_id')
                         ->join($this->tables['users'], $this->tables['users'] . '.id=' . $this->tables['app_gympro_clients'] . '.member_id')
@@ -1214,9 +1216,10 @@ class Gympro_model extends Ion_auth_model {
             }
             $this->_ion_where = array();
         }
-        return $this->db->select($this->tables['app_gympro_sessions'] . '.*, ' . $this->tables['app_gympro_session_statuses'] . '.title as status_title')
+        return $this->db->select($this->tables['app_gympro_sessions'] . '.*, ' . $this->tables['app_gympro_session_statuses'] . '.title as status_title,'. $this->tables['app_gympro_currencies'] . '.title as currency_title')
                         ->from($this->tables['app_gympro_sessions'])
                         ->join($this->tables['app_gympro_session_statuses'], $this->tables['app_gympro_sessions'] . '.status_id = ' . $this->tables['app_gympro_session_statuses'] . '.id')
+                        ->join($this->tables['app_gympro_currencies'], $this->tables['app_gympro_currencies'] . '.id = ' . $this->tables['app_gympro_sessions'] . '.currency_id')
                         ->get();
     }
 

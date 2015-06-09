@@ -134,7 +134,7 @@ class Gympro extends Role_Controller {
                 'hourly_rate_id' => $this->input->post('hourly_rate_list'),
                 'currency_id' => $this->input->post('currency_list')
             );
-            
+
             $status = $this->gympro_library->store_gympro_user_info($user_id, $data);
             if ($status) {
                 $this->session->set_flashdata('message', $this->gympro_library->messages());
@@ -143,7 +143,7 @@ class Gympro extends Role_Controller {
                 $this->session->set_flashdata('message', $this->gympro_library->errors());
                 //$this->data['message'] = $this->gympro_library->errors();
             }
-            redirect('applications/gympro/preference/'.$user_id,'refresh');
+            redirect('applications/gympro/preference/' . $user_id, 'refresh');
         }
 
         $user_email_array = array();
@@ -2782,43 +2782,69 @@ class Gympro extends Role_Controller {
         $where = array(
             'date >=' => $start_date,
             'date <=' => $end_date,
-            'reference_id' => $group_client_data['gr_cl_id'],
-            'created_for_type_id' => $group_client_data['created_for_type_id'],
         );
-
+        if ($group_client_data['select_all'] != 0) {
+            $where['reference_id'] = $group_client_data['gr_cl_id'];
+            $where['created_for_type_id'] = $group_client_data['created_for_type_id'];
+        }
         if ($group_client_data['status_id'] > 0) {
             $where['status_id'] = $group_client_data['status_id'];
         }
         $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
-        if (empty($get_sessions)) {
+        if (!empty($get_sessions)) {
+            foreach ($get_sessions as $session) {
+                $session_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
+                $session_data[$session['date']]['sessions'][] = $session;
+            }
+            foreach ($session_data as $data) {
+                $result[] = $data;
+            }
+            $session_data = $result;
+            echo json_encode($session_data);
+            return;
+        } else {
             $result_array = array();
             echo json_encode($result_array);
             return;
         }
-        //group view can change, so two cases:
-        if ($group_client_data['created_for_type_id'] == SESSION_CREATED_FOR_GROUP_TYPE_ID) {    //for group
-            foreach ($get_sessions as $session) {
-                $group_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
-                $group_data[$session['date']]['sessions'][] = $session;
-            }
-            foreach ($group_data as $data) {
-                $result[] = $data;
-            }
-            $group_data = $result;
-            echo json_encode($group_data);
-            return;
-        } else if ($group_client_data['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID) { //for client
-            foreach ($get_sessions as $session) {
-                $client_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
-                $client_data[$session['date']]['sessions'][] = $session;
-            }
-            foreach ($client_data as $data) {
-                $result[] = $data;
-            }
-            $client_data = $result;
-            echo json_encode($client_data);
-            return;
-        }
+//        //group view can change, so two cases:
+//        if ($group_client_data['created_for_type_id'] == SESSION_CREATED_FOR_GROUP_TYPE_ID) {    //for group
+//            foreach ($get_sessions as $session) {
+//                $group_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
+//                $group_data[$session['date']]['sessions'][] = $session;
+//            }
+//            foreach ($group_data as $data) {
+//                $result[] = $data;
+//            }
+//            $group_data = $result;
+////            var_dump($group_data);exit;
+//            echo json_encode($group_data);
+//            return;
+//        } else if ($group_client_data['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID) { //for client
+//            foreach ($get_sessions as $session) {
+//                $client_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
+//                $client_data[$session['date']]['sessions'][] = $session;
+//            }
+//            foreach ($client_data as $data) {
+//                $result[] = $data;
+//            }
+//            $client_data = $result;
+////            var_dump($client_data);exit;
+//            echo json_encode($client_data);
+//            return;
+//        } else {
+//            foreach ($get_sessions as $session) {
+//                $session_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);
+//                $session_data[$session['date']]['sessions'][] = $session;
+//            }
+//            foreach ($session_data as $data) {
+//                $result[] = $data;
+//            }
+//            $session_data = $result;
+////            var_dump($session_data);exit;
+//            echo json_encode($session_data);
+//            return;
+//        }
     }
 
 }

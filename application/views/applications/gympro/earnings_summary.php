@@ -16,30 +16,30 @@
             type: "POST",
             url: "<?php echo base_url() . 'applications/gympro/get_earning_summary'; ?>",
             data: {
+                select_all:gr_or_cl,
                 created_for_type_id: gr_or_cl.charAt(0),
                 gr_cl_id: gr_or_cl.substring(2),
                 start: st_date,
                 end: fin_date,
                 status_id: status_id
             },
-            success: function(data) {
-                console.log(data);
-                if (gr_or_cl.charAt(0) == '1') {
-                    $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
+            success: function (data) {
+//                if (gr_or_cl.charAt(0) == '1') {
+                    $("#sessions_tmpl_place").html(tmpl("tmpl_sessions_summery", data));
                     $("#earnings_summery").html(tmpl("tmpl_earings_summery", data));
-                } else if (gr_or_cl.charAt(0) == '2') {
-                    $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
-                    $("#earnings_summery").html(tmpl("tmpl_earings_summery", data));
+//                } else if (gr_or_cl.charAt(0) == '2') {
 //                    $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
-                }
+//                    $("#earnings_summery").html(tmpl("tmpl_earings_summery", data));
+//                    $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
+//                }
             }
         });
     }
-    $(function() {
-        $("#mark_status_dropdown").on('change', function() {
+    $(function () {
+        $("#mark_status_dropdown").on('change', function () {
             var session_id_array = Array();
             var cb_name;
-            $('input[name^="session_select_"]:checked').each(function() {
+            $('input[name^="session_select_"]:checked').each(function () {
                 cb_name = $(this).prop("name");
                 cb_name = cb_name.substring(15);
                 session_id_array.push(cb_name);
@@ -58,7 +58,7 @@
                         session_id_array: session_id_array,
                         status_id: $("#mark_status_dropdown").val()
                     },
-                    success: function(data) {
+                    success: function (data) {
                         alert(data['message']);
                         $('#mark_status_dropdown>option:eq(0)').prop('selected', true);
                         fetch_session_data();
@@ -66,7 +66,7 @@
                 });
             }
         });
-        $("#group_client, #fin_date, #st_date, #status_id").on('change', function() {
+        $("#group_client, #fin_date, #st_date, #status_id").on('change', function () {
             fetch_session_data();
         });
         fetch_session_data();
@@ -93,7 +93,7 @@
         });
     });
 </script>
-<script type="text/x-tmpl" id="tmpl_client">
+<script type="text/x-tmpl" id="tmpl_sessions_summery">
     {% var i=0, sessions_array = ((o instanceof Array) ? o[i++] : o); %}
     {% while(sessions_array){ %}
 
@@ -108,10 +108,11 @@
     {% while(session){ %}
     <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
     <div class="row">
-    <div class="col-md-4">{%= session['start']%} - {%= session['end']%}</div>
+    <div class="col-md-3">{%= session['start']%} - {%= session['end']%}</div>
     <div class="col-md-3">{%= session['title']%}</div>
     <div class="col-md-2">{%= session['cost']%}</div>
-    <div class="col-md-2">{%= session['status_title']%}</div>
+    <div class="col-md-2">{%= session['currency_title']%}</div>
+    <div class="col-md-1">{%= session['status_title']%}</div>
     <div class="col-md-1"><input name="session_select_<?php echo '{%= session["id"]%}'; ?>" type="checkbox"></div>
     </div>
     </div>
@@ -120,7 +121,7 @@
     {% sessions_array = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
-<script type="text/x-tmpl" id="tmpl_group">
+<!--<script type="text/x-tmpl" id="tmpl_group">
     {% var i=0, data_by_date = ((o instanceof Array) ? o[i++] : o); %}
     {% while(data_by_date){ %}
 
@@ -151,9 +152,10 @@
     {% while(session){ %}
     <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
     <div class="row">
-    <div class="col-md-4"></div>
+    <div class="col-md-2"></div>
     <div class="col-md-3">{%= session['name']%}</div>
     <div class="col-md-2">{%= session['cost']%}</div>
+    <div class="col-md-2">{%= session['currency_title']%}</div>
     <div class="col-md-2">{%= session['status']%}</div>
     <div class="col-md-1"></div>
     </div>
@@ -164,7 +166,7 @@
     {% } %}
     {% data_by_date = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
-</script>
+</script>-->
 <script type="text/x-tmpl" id="tmpl_earings_summery">
     {% var total_unpaid_session_cost = 0; %}
     {% var total_paid_session_cost = 0; %}
@@ -267,24 +269,20 @@
                         <div class="col-md-7">
                             <select class="form-control" id="group_client">
                                 <!--<option>-- Select --</option>-->
+                                <optgroup label=""></optgroup>
+                                <option value=0><span>Select all</span></option>
                                 <optgroup label="Groups">
                                     <?php foreach ($group_list as $group_info): ?>
                                         <option value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                                 <optgroup label="Clients">
-                                    <!--                                    <option value="2_1">Shem Haye</option>
-                                                                        <option value="2_2">Tan Haye</option>-->
                                     <?php foreach ($client_list as $client_info): ?>
                                         <option value="2_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                             </select>
-<!--                            <select class="form-control">
-                            <?php foreach ($client_list as $client_info): ?>
-                                                                                                                                <option value="<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
-                            <?php endforeach; ?>
-                            </select>-->
+
                         </div>
                     </div>
                     <div class="row form-group">
