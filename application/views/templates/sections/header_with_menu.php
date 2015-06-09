@@ -19,7 +19,6 @@
                     $("#notification_counter_div").html(data.total_unread_notifications);
                 }
 
-//                console.log($("#follower_counter_dive").val(data.total_unread_followers));return;
                 $("#notification_list").html(tmpl("tmpl_notification", data.notification_list));
                 $("#follower_list").html(tmpl("tmpl_followers", data.notification_list));
             }

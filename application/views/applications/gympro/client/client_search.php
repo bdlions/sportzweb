@@ -1,13 +1,11 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
 <script type="text/javascript">
-    $(function(){   
+    $(function(){  
+
         $("#search_client").typeahead([
             {
                 name:"search_user",
-                prefetch:{
-                            url: '<?php echo base_url()?>search/get_users',
-                            ttl: 0
-                        },
+                remote: '<?php echo base_url() ?>search/get_users?query=%QUERY',
                 header: '<div class="col-md-12" style="font-size: 15px; font-weight:bold">People</div>',
                 template: [
                     '<div class="row">'+

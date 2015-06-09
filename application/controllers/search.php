@@ -36,7 +36,6 @@ class Search extends CI_Controller {
     public function get_users() {
         $temp_users = array();
         $search_value = $_GET['query'];
-        if ($search_value != null) {
             $users = $this->searches_model->get_users($search_value);
             foreach ($users as $user) {
                 $is_gympro = $this->searches_model->is_gympro_user($user->user_id);
@@ -53,8 +52,6 @@ class Search extends CI_Controller {
                 array_push($temp_users, $user);
             }
             echo json_encode($temp_users);
-        } else
-            echo json_encode(array());
     }
 
     public function get_followers() {
