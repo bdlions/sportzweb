@@ -110,9 +110,8 @@
     <div class="row">
     <div class="col-md-3">{%= session['start']%} - {%= session['end']%}</div>
     <div class="col-md-3">{%= session['title']%}</div>
-    <div class="col-md-2">{%= session['cost']%}</div>
-    <div class="col-md-2">{%= session['currency_title']%}</div>
-    <div class="col-md-1">{%= session['status_title']%}</div>
+    <div class="col-md-3">{%= session['cost']%}&nbsp;&nbsp;{%= session['currency_title']%}</div>
+    <div class="col-md-2">{%= session['status_title']%}</div>
     <div class="col-md-1"><input name="session_select_<?php echo '{%= session["id"]%}'; ?>" type="checkbox"></div>
     </div>
     </div>
