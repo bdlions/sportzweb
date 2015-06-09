@@ -25,7 +25,7 @@ $config['paypal']['adaptive_payments'] = array(
     'ipnNotificationUrl' => 'http://app.sportzweb.com/payment/ipn',// where PayPal IPN will go
     'primary_receiver' => array(
         'email' => 'ptpro-owner@sonuto.com',// PayPal email of website owner
-        'payment_share' => '10',//website owner share % from user payment to trainer
+        'payment_share' => '1.6',//website owner share % from user payment to trainer
     ),
     /*
      *  The payer of PayPal fees. Allowable values are:

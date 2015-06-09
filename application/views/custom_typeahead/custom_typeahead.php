@@ -1,7 +1,7 @@
 <script type="text/javascript">
             $(function () {
                 var typingTimer;
-                var doneTypingInterval = 500;
+                var doneTypingInterval = 100;
                 var timeElapsed = 0;
                 var timeoutfn;
                 var waitForResult = false;
@@ -91,7 +91,7 @@
                                             $(user_image).attr('src', data.users[count].user_image);
                                             $(ptpro_display).css('display', data.users[count].ptpro_display);
                                             $(signature_id).html(data.users[count].signature);
-                                            $(user_name).html(data.users[count].username);
+                                            $(user_name).html(data.users[count].first_name+' '+data.users[count].last_name);
                                             $(home_town).html(data.users[count].home_town);
                                             $(country_name).html(data.users[count].country_name);
                                             count++;

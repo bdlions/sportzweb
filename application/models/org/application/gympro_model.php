@@ -1195,9 +1195,10 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_session_info($session_id) {
         $this->db->where($this->tables['app_gympro_sessions'] . '.id', $session_id);
-        return $this->db->select($this->tables['app_gympro_sessions'] . '.*, ' . $this->tables['app_gympro_currencies'] . '.title as currency_title, ' . $this->tables['app_gympro_currencies'] . '.currency_code, ' . $this->tables['app_gympro_sessions'] . '.id as session_id')
+        return $this->db->select($this->tables['app_gympro_sessions'] . '.*, ' . $this->tables['app_gympro_currencies'] . '.title as currency_title, ' . $this->tables['app_gympro_currencies'] . '.currency_code, ' . $this->tables['app_gympro_sessions'] . '.id as session_id, ' . $this->tables['app_gympro_users'] . '.account_email')
                         ->from($this->tables['app_gympro_sessions'])
                         ->join($this->tables['app_gympro_currencies'], $this->tables['app_gympro_currencies'] . '.id = ' . $this->tables['app_gympro_sessions'] . '.currency_id')
+                        ->join($this->tables['app_gympro_users'], $this->tables['app_gympro_users'] . '.user_id = ' . $this->tables['app_gympro_sessions'] . '.user_id')
                         ->get();
     }
 
