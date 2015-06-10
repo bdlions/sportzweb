@@ -11,7 +11,6 @@
             return;
         }
         var gr_or_cl = $("#group_client").val();
-        alert(gr_or_cl);
         $.ajax({
             dataType: 'json',
             type: "POST",
