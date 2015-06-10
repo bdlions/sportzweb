@@ -11,6 +11,7 @@
             return;
         }
         var gr_or_cl = $("#group_client").val();
+        alert(gr_or_cl);
         $.ajax({
             dataType: 'json',
             type: "POST",
@@ -269,15 +270,15 @@
                             <select class="form-control" id="group_client">
                                 <!--<option>-- Select --</option>-->
                                 <optgroup label=""></optgroup>
-                                <option value=0><span>Select all</span></option>
+                                <option value="<?php echo SESSION_CREATED_FOR_ALL_TYPE ;?>"><span>Select all</span></option>
                                 <optgroup label="Groups">
                                     <?php foreach ($group_list as $group_info): ?>
-                                        <option value="1_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
+                                        <option value="<?php echo SESSION_CREATED_FOR_GROUP_TYPE_ID ;?>_<?php echo $group_info['group_id']; ?>"><?php echo $group_info['title']; ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                                 <optgroup label="Clients">
                                     <?php foreach ($client_list as $client_info): ?>
-                                        <option value="2_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
+                                    <option value="<?php echo SESSION_CREATED_FOR_CLIENT_TYPE_ID ;?>_<?php echo $client_info['client_id']; ?>"><?php echo $client_info['first_name'] . ' ' . $client_info['last_name']; ?></option>
                                     <?php endforeach; ?>
                                 </optgroup>
                             </select>

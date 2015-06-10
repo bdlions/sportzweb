@@ -28,6 +28,7 @@ define("CLIENT_STATUS_INACTIVE_ID",                         "2");
 define("CLIENT_STATUS_POTENTIAL_ID",                        "3");
 
 //Session
+define("SESSION_CREATED_FOR_ALL_TYPE",                          0);
 define("SESSION_CREATED_FOR_GROUP_TYPE_ID",                     1);
 define("SESSION_CREATED_FOR_CLIENT_TYPE_ID",                    2);
 define("SESSION_CREATED_FOR_TYPE_EXPLODER",                     "_");
