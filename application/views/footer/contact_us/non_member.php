@@ -36,15 +36,16 @@
                 </div> 
                 <div class="form-group">
                     <div class ="row">
-                        </br>
-                        Sonuto</br>
-                        Westgate House</br>
-                        Westgate Road</br>
-                        London</br>
-                        W5 1YY</br>
-                        </br>
-                        E:Enquired@sonuto.com</br>
-                        T:020 3397 8425
+                        <br/>
+                        Sonuto<br/>
+                        Trinity House<br/>
+                        Heather Park Drive<br/>
+                        Wembley<br/>
+                        Greater London<br/>
+                        HA0 1SU<br/>
+                        <br/>
+                        Tel: 020 3397 8425<br/>
+                        Email: info@sonuto.com
                     </div> 
                      
                 </div>
