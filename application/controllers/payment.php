@@ -77,16 +77,15 @@ class Payment extends Role_Controller {
      * Completed payments will be redirected here
      */
     public function completed() {
-        $this->data['message'] = '';
-        $this->template->load(null, 'paypal_completed', $this->data);
+        $this->session->set_flashdata('message', "Payment has been completed. Thank you!");
+        redirect('applications/gympro/schedule','refresh');
     }
 
     /**
      * Canceled payments will be redirected here
      */
     public function canceled() {
-        //$this->data['message'] = '';
-        //$this->template->load(null, 'paypal_canceled', $this->data);
+        $this->session->set_flashdata('message', "Payment has been cancelled.");
         redirect('applications/gympro/schedule','refresh');
     }
 

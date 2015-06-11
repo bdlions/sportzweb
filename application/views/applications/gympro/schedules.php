@@ -123,7 +123,14 @@
         }
         ?>
 
-
+        <div class="row col-md-12" style="color:blue; font-size:16px;">
+            <?php 
+                if(isset($message))
+                {
+                    echo $message;
+                }
+            ?>
+        </div>
         <div class="row form-group">
             <div class="col-md-12">
                 <div id='calendar'></div>

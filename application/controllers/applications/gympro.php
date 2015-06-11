@@ -2503,7 +2503,7 @@ class Gympro extends Role_Controller {
      * @Author Nazmul on 4th February 2015
      */
     public function schedule() {
-        $this->data['message'] = '';
+        $this->data['message'] = $this->session->flashdata('message');
         $user_id = $this->session->userdata('user_id');
         $sessions_array = $this->gympro_library->get_sessions_in_calendar($user_id, $this->account_type_id);
         $this->data['events'] = json_encode($sessions_array);
