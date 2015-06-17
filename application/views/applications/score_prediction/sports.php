@@ -302,65 +302,6 @@
     {% team = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
-<script>
-    $(function () {
-        $('#Predicted_id_01').on('click', function () {
-            $('#predicted_row_title_01').toggle();
-            $('#predicted_row_box_01').toggle();
-        });
-        $('#Predict_id_01').on('click', function () {
-            $('#to_predict_row_title_01').toggle();
-            $('#to_predict_row_box_01').toggle();
-        });
-        $('#to_predict_row_box_01_col_01').on('click', function () {
-            $('#confirmModal').modal('show');
-            $('#vote_id').on('click', function () {
-                $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
-                $("#to_predict_row_box_01_col_01").find(".prediction_box").addClass("predited_color");
-                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('100.00%');
-                $('#confirmModal').modal('hide');
-                $("#to_predict_row_box_01_col_02").off('click');
-                $("#to_predict_row_box_01_col_03").off('click');
-                $("#to_predict_row_box_01_col_01").off('click');
-            });
-            $('#vote_ignore_id').on('click', function () {
-                $('#confirmModal').modal('hide');
-            });
-        });
-        $('#to_predict_row_box_01_col_02').on('click', function () {
-            $('#confirmModal').modal('show');
-            $('#vote_id').on('click', function () {
-                $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
-                $("#to_predict_row_box_01_col_02").find(".prediction_box").addClass("predited_color");
-                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('100.00%');
-                $('#confirmModal').modal('hide');
-                $("#to_predict_row_box_01_col_01").off('click');
-                $("#to_predict_row_box_01_col_03").off('click');
-                $("#to_predict_row_box_01_col_02").off('click');
-            });
-            $('#vote_ignore_id').on('click', function () {
-                $('#confirmModal').modal('hide');
-            });
-        });
-        $('#to_predict_row_box_01_col_03').on('click', function () {
-            $('#confirmModal').modal('show');
-            $('#vote_id').on('click', function () {
-                $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
-                $("#to_predict_row_box_01_col_03").find(".prediction_box").addClass("predited_color");
-                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('100.00%');
-                $('#confirmModal').modal('hide');
-                 $("#to_predict_row_box_01_col_01").off('click');
-                $("#to_predict_row_box_01_col_02").off('click');
-                $("#to_predict_row_box_01_col_03").off('click');
-            });
-            $('#vote_ignore_id').on('click', function () {
-                $('#confirmModal').modal('hide');
-            });
-           
-        });
-    });
-
-</script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 <style>
     .blue_banner{
@@ -386,27 +327,48 @@
     <div class="row">
         <h1>Fixtures & Results</h1>
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>
-        <div class="col-md-7 col-sm-7 col-xs-12">
-            <div class="form-group">
-                <div class="">
-                    <a data-toggle="collapse" href="#collapse_sports_id_01" aria-expanded="false" >
-                        <div class="row" style="padding: 0px; font-size: 20px;">
-                            <div class="col-md-12">
-                                <div class="heading blue_banner padding_collapse_header custom_heading">
-                                    Football
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="form-group collapse" id="collapse_sports_id_01">
-                        <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color">
-                                <span >Barclays premier league 2014/15</span>
+        <div class="col-md-7 pull-left">
+            <!--            <div class="col-md-12 well">
+                            <div class="form-group heading blue_banner custom_heading">
+                                <span id="pred_table_title"></span>
                             </div>
                             <div style="height: 50px">
                                 <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
                                 <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
                                 <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
+                            </div>
+                            <div>
+                                <table class="table-responsive table ">
+                                    <tbody id="tbl_predictions">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>-->
+
+
+            <div class="form-group">
+                <div class="">
+                    <!--                    <a data-toggle="collapse" href="#collapse_sports_id_01" aria-expanded="false" >
+                                            <div class="row" style="padding: 0px; font-size: 20px;">
+                                                <div class="col-md-12">
+                                                    <div class="heading blue_banner padding_collapse_header custom_heading">
+                                                        Football
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>-->
+                    <div class="form-group " id="">
+                        <div class="well">
+                            <div class="form-group heading blue_banner custom_heading tournament_background_color">
+                                <span >Barclays premier league 2014/15</span>
+                            </div>
+                            <div style="height: 50px">
+<!--                                <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
+                                <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
+                                <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">-->
+                                <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
+                                <span class="custom_heading">June, 2015</span>
+                                <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
                             </div>
                             <div>
 <!--                                <table class="table-responsive table ">
@@ -415,8 +377,8 @@
                                 </table>-->
                             </div>
                         </div>
-                        
-                        
+
+
                         <div>
                             <div>
                                 <div class="form-group">
@@ -510,7 +472,7 @@
                                                 </div>
                                             </div>
 
-                                        <div class="row form-group text_align row_hover">
+                                            <div class="row form-group text_align row_hover">
                                                 <div class="col-md-2">
                                                     15:00
                                                 </div>
@@ -647,7 +609,7 @@
                                                 </div>
                                             </div>
 
-                                        <div class="row form-group text_align row_hover">
+                                            <div class="row form-group text_align row_hover">
                                                 <div class="col-md-2">
                                                     18:00
                                                 </div>
@@ -666,7 +628,7 @@
                                                     <a id="">Predict</a>
                                                 </div>
                                             </div>
-                                           
+
                                         </table>
                                     </div>
                                 </div>
@@ -675,90 +637,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <a data-toggle="collapse" href="#collapse_sports_id_07" aria-expanded="false" >
-                        <div class="row" style="padding: 0px; font-size: 20px;">
-                            <div class="col-md-12">
-                                <div class="heading blue_banner padding_collapse_header custom_heading">
-                                    Cricket
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="collapse" id="collapse_sports_id_07">
-                        <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color">
-                                <span >Bangladesh vs India Series 2015</span>
-                            </div>
-                            <div style="height: 50px">
-<!--                                <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
-                                <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
-                                <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">-->
-                                <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
-                                <span class="custom_heading">June, 2015</span>
-                                <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
-                            </div>
-                            <div>
-<!--                                <table class="table-responsive table ">
-                                    <tbody id="tbl_predictions">
-                                    </tbody>
-                                </table>-->
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <table class="table table-hover text_align">
-                                        <tr>
-                                            <td>Time</td>
-                                            <td>Team A</td>
-                                            <td>vs</td>
-                                            <td>Team B</td>
-                                            <td>Match Result</td>
-                                            <td>Match Status</td>
-                                        </tr>
-                                        <tr>
-                                            <td>09:30</td>
-                                            <td>Bangladesh</td>
-                                            <td>vs</td>
-                                            <td>India</td>
-                                            <td>Drawn</td>
-                                            <td><a>Closed</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>15:00</td>
-                                            <td>Bangladesh</td>
-                                            <td>vs</td>
-                                            <td>India</td>
-                                            <td></td>
-                                            <td><a>Predict</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>10:00</td>
-                                            <td>Bangladesh</td>
-                                            <td>vs</td>
-                                            <td>India </td>
-                                            <td></td>
-                                            <td><a>Predicted</a></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            </div>
         </div>
+        <div class="col-md-4 pull-right">
+            <?php $this->load->view("applications/score_prediction/league_table"); ?>
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
-            <?php $this->load->view("applications/score_prediction/leader_board"); ?>
         </div>
     </div>
 </div>
-<?php $this->load->view("applications/score_prediction/prediction_confirmation_modal"); ?>
 
 <div class="row form-group"></div>
 <div class="row form-group"></div>
 <div class="row form-group"></div>
 <div class="row form-group"></div>
-
 

@@ -1,0 +1,103 @@
+/*!
+ * Bootstrap Responsive v2.3.2
+ *
+ * Copyright 2013 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world by @mdo and @fat.
+   
+*/
+/*---------------------------------- Author: Redoy ---------------------------------*/
+
+.custom_heading{
+    font-size: 20px!important;
+    padding: 5px!important;
+}
+
+.pagelet{
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 1px;
+    box-shadow: 0 0 1px #bbb;
+}
+
+.font_10px{
+    font-size: 11px;
+}
+.text_align{
+    text-align: center;  
+}
+.Leader_board_table_user_name_style{
+    vertical-align: middle;
+    white-space: normal;
+}
+.padding_collapse_header{
+    padding: 7px!important;
+}
+.well{
+    padding: 15px;
+    margin: 4px;
+}
+.tournament_background_color{
+    background-color: #76B4E7!important;
+    color: #fff!important;
+    font-weight: bold;
+}
+.prediction_box_title_font{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.prediction_box{
+    background-color: white;  
+    border: 1px solid blue; 
+    height: 100px;
+    margin: 15%;
+}
+.to_predict_box:hover{
+    background-color: #76B4E7;
+}
+.prediction_box_content{
+    text-align: center; 
+    margin-top: 27%;
+}
+.predited_color{
+    background-color: #76B4E7;
+    color: #fff;
+}
+
+.row_hover,.row_non_hover{
+    padding: 8px 0;
+    margin: 0 8px;
+}
+.row_hover:hover{
+    background-color:  lightgray;
+}
+.row_hover:hover{
+    background-color:  lightgray;
+}
+
+.title_row_hidden{
+    font-size: 25px;
+    font-weight: bold;
+    padding: 8px 0;
+    margin: 0 8px;
+}
+.close_button_custom{
+    font-weight: normal!important;
+    font-size: 14px;
+    opacity: 1!important; 
+    text-shadow: none;
+}
+.close_button_custom:hover{
+    opacity: 1!important; 
+}
+.common_modal_content{
+    font-weight: bold; 
+    font-size: 16px;
+}
+.padding_over_row_5px{
+    padding-top: 5px;
+}
+

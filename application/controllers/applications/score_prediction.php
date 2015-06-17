@@ -19,8 +19,17 @@ class Score_prediction extends Role_Controller{
     public function index(){
         $this->data['message'] = '';
         $current_date = $this->utils->get_current_date_yyyymmdd();
-        $configured_sports_id = $this->score_prediction_library->get_home_page_configuration($current_date);
-        redirect('applications/score_prediction/sports/'.$configured_sports_id,'refresh');
+        $sports_id = $this->score_prediction_library->get_home_page_configuration($current_date);
+//        redirect('applications/score_prediction/sports/'.$configured_sports_id,'refresh');
+         
+        $tournament_list = array();
+        $tournament_list_array = $this->score_prediction_library->get_all_tournaments($sports_id)->result_array();
+        foreach($tournament_list_array as $tournament_info){
+            $tournament_list[$tournament_info['tournament_id']] = $tournament_info['title'].' '.$tournament_info['season'];
+        }
+        $this->data['tournament_list'] = $tournament_list;
+        $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
+        $this->template->load(null,"applications/score_prediction/index", $this->data);
     }
         
     /*
@@ -34,7 +43,7 @@ class Score_prediction extends Role_Controller{
         }
         $this->data['tournament_list'] = $tournament_list;
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
-        $this->template->load(null,"applications/score_prediction/index", $this->data);
+        $this->template->load(null,"applications/score_prediction/sports", $this->data);
     }
 
     /*
