@@ -25,9 +25,13 @@
 .font_10px{
     font-size: 11px;
 }
-.text_align{
-    text-align: center;  
+.text_align_left{
+     text-align: left!important;
 }
+.text_align_center{
+     text-align: center!important;
+}
+
 .Leader_board_table_user_name_style{
     vertical-align: middle;
     white-space: normal;

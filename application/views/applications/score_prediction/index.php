@@ -313,15 +313,24 @@
             $('#to_predict_row_box_01').toggle();
         });
         $('#to_predict_row_box_01_col_01').on('click', function () {
-            $('#confirmModal').modal('show');
-            $('#vote_id').on('click', function () {
+                $('#confirmModal').modal('show');
+                $('#vote_id').on('click', function () {
+                $("#to_predict_row_box_01").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_02").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_03").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_01").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_02").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_03").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0.00%');
+                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0.00%');
+                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0.00%');
                 $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
                 $("#to_predict_row_box_01_col_01").find(".prediction_box").addClass("predited_color");
                 $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('100.00%');
-                $('#confirmModal').modal('hide');
+                $('#confirmModal').modal('hide'); 
+                $("#to_predict_row_box_01_col_01").off('click');
                 $("#to_predict_row_box_01_col_02").off('click');
                 $("#to_predict_row_box_01_col_03").off('click');
-                $("#to_predict_row_box_01_col_01").off('click');
             });
             $('#vote_ignore_id').on('click', function () {
                 $('#confirmModal').modal('hide');
@@ -330,13 +339,23 @@
         $('#to_predict_row_box_01_col_02').on('click', function () {
             $('#confirmModal').modal('show');
             $('#vote_id').on('click', function () {
+                $("#to_predict_row_box_01").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_02").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_03").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_01").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_02").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_03").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0.00%');
+                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0.00%');
+                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0.00%');
+            
                 $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
                 $("#to_predict_row_box_01_col_02").find(".prediction_box").addClass("predited_color");
                 $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('100.00%');
                 $('#confirmModal').modal('hide');
                 $("#to_predict_row_box_01_col_01").off('click');
-                $("#to_predict_row_box_01_col_03").off('click');
                 $("#to_predict_row_box_01_col_02").off('click');
+                $("#to_predict_row_box_01_col_03").off('click');
             });
             $('#vote_ignore_id').on('click', function () {
                 $('#confirmModal').modal('hide');
@@ -345,6 +364,16 @@
         $('#to_predict_row_box_01_col_03').on('click', function () {
             $('#confirmModal').modal('show');
             $('#vote_id').on('click', function () {
+                $("#to_predict_row_box_01").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_02").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_03").find(".predited_color").removeClass("predited_color");
+                $("#to_predict_row_box_01").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_02").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_03").find(".to_predict_box").addClass("to_predict_box");
+                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0.00%');
+                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0.00%');
+                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0.00%');
+            
                 $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
                 $("#to_predict_row_box_01_col_03").find(".prediction_box").addClass("predited_color");
                 $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('100.00%');
@@ -392,7 +421,7 @@
                     <a data-toggle="collapse" href="#collapse_sports_id_01" aria-expanded="false" >
                         <div class="row" style="padding: 0px; font-size: 20px;">
                             <div class="col-md-12">
-                                <div class="heading blue_banner padding_collapse_header custom_heading">
+                                <div class="heading blue_banner padding_collapse_header custom_heading text_align_center">
                                     Football
                                 </div>
                             </div>
@@ -400,7 +429,7 @@
                     </a>
                     <div class="form-group collapse" id="collapse_sports_id_01">
                         <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color">
+                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
                                 <span >Barclays premier league 2014/15</span>
                             </div>
                             <div style="height: 50px">
@@ -481,7 +510,7 @@
                                                     <a id="Predicted_id_01" >Predicted</a>
                                                 </div>
                                             </div>
-                                            <div id="predicted_row_title_01" class="row form-group text_align title_row_hidden" style="display: none;">
+                                            <div id="predicted_row_title_01" class="row form-group text_align_center title_row_hidden" style="display: none;">
                                                 <div class="col-md-4">
                                                     Tottenham
                                                 </div>
@@ -529,7 +558,7 @@
                                                     <a id="Predict_id_01">Predict</a>
                                                 </div>
                                             </div>
-                                            <div id="to_predict_row_title_01" class="row form-group text_align title_row_hidden" style="display: none;">
+                                            <div id="to_predict_row_title_01" class="row form-group text_align_center title_row_hidden" style="display: none;">
                                                 <div class="col-md-4">
                                                     Arsenal
                                                 </div>
@@ -564,7 +593,7 @@
                         </div>
                         <div class="form-group padding_over_row_10px"></div>
                         <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color">
+                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
                                 <span >Championship 2014/15</span>
                             </div>
                             <div style="height: 50px">
@@ -688,7 +717,7 @@
                     </a>
                     <div class="collapse" id="collapse_sports_id_07">
                         <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color">
+                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
                                 <span >Bangladesh vs India Series 2015</span>
                             </div>
                             <div style="height: 50px">
@@ -707,7 +736,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-12">
-                                    <table class="table table-hover text_align">
+                                    <table class="table table-hover text_align_center">
                                         <tr>
                                             <td>Time</td>
                                             <td>Team A</td>

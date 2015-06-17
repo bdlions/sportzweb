@@ -359,7 +359,7 @@
                                         </a>-->
                     <div class="form-group " id="">
                         <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color">
+                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
                                 <span >Barclays premier league 2014/15</span>
                             </div>
                             <div style="height: 50px">
@@ -526,7 +526,7 @@
                         </div>
                         <div class="form-group padding_over_row_10px"></div>
                         <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color">
+                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
                                 <span >Championship 2014/15</span>
                             </div>
                             <div style="height: 50px">
