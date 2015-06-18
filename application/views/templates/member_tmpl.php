@@ -17,6 +17,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/notification.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/search_bar_style.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/score_prediction.css" />
         
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery-1.11.1.min.js"></script>
@@ -77,5 +78,6 @@
         </div>
         <?php //$this->load->view("templates/sections/footer");?>
         <?php $this->load->view("member/messages/chat");?>
+        <?php $this->load->view("common/common_modal"); ?>
     </body>
 </html>
