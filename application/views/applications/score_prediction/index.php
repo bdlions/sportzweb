@@ -795,7 +795,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
             <?php $this->load->view("applications/score_prediction/leader_board"); ?>
         </div>
     </div>

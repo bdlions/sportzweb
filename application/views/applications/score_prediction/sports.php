@@ -337,7 +337,7 @@
     <div class="row">
         <h1>Fixtures & Results</h1>
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>
-        <div class="col-md-7 pull-left">
+        <div class="col-md-7 col-sm-7 col-xs-12 form-group">
             <div class="form-group">
                 <ul class="datePicker_data_list">
                     <li><a>Thu 18 Jun</a></li>
@@ -632,14 +632,13 @@
                                         <a id="">Predict</a>
                                     </div>
                                 </div>
-
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 pull-right">
+        <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
             <?php $this->load->view("applications/score_prediction/league_table"); ?>
         </div>
     </div>
