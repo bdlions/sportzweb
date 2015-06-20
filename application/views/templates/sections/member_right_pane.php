@@ -71,14 +71,14 @@
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a class="profile-name">
                                             <div>
-                                                <img class="img-responsive profile-photo" onerror="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" src="http://localhost/sportzweb/resources/uploads/profile_picture/50x50/car8.jpg" alt="AK">
+                                                <img class="img-responsive profile-photo" onerror="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" src="http://localhost/sportzweb/resources/uploads/profile_picture/50x50/car8.jpg" alt="AK">
                                                 <div style="visibility:hidden;height:0px">AK</div>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8">
                                         <a style="cursor: pointer" >Alamgir Kabir</a>
-                                        predicted <a style="cursor: pointer">football</a> score.
+                                        made a prediction. 
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
-                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
+                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
                                                 <div style="visibility:hidden;height:0px"><?php echo $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info']['last_name'][0] ?></div>
                                             </div>
                                         </a>
@@ -104,7 +104,7 @@
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
-                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
+                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
                                                 <div style="visibility:hidden;height:0px"><?php echo $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_PHOTOS]['photo_info']['user_info']['last_name'][0] ?></div>
                                             </div>
                                         </a>
@@ -119,7 +119,7 @@
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
-                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
+                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
                                                 <div style="visibility:hidden;height:0px"><?php echo $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_FOLLOWERS]['user_info']['last_name'][0] ?></div>
                                             </div>
                                         </a>
@@ -134,7 +134,7 @@
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
-                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
+                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
                                                 <div style="visibility:hidden;height:0px"><?php echo $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_STATUS]['status_info']['user_info']['last_name'][0] ?></div>
                                             </div>
                                         </a>
@@ -149,7 +149,7 @@
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
-                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
+                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
                                                 <div style="visibility:hidden;height:0px"><?php echo $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_COMMENTS]['to_user_info']['last_name'][0] ?></div>
                                             </div>
                                         </a>
@@ -164,7 +164,7 @@
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['user_id'] ?>' class="profile-name"> 
                                             <div>
-                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
+                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
                                                 <div style="visibility:hidden;height:0px"><?php echo $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_CONNECTIONS][0]['last_name'][0] ?></div>
                                             </div>
                                         </a>
@@ -179,7 +179,7 @@
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                         <a href='<?php echo base_url() . "member_profile/show/" . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['user_id'] ?>' class="profile-name"> 
                                             <div>
-                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
+                                                <img alt="<?php echo $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['last_name'][0] ?>" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['photo'] ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" /> 
                                                 <div style="visibility:hidden;height:0px"><?php echo $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['first_name'][0] . $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info']['last_name'][0] ?></div>
                                             </div>
                                         </a>
