@@ -19,39 +19,32 @@
             <table class="table table-hover text_align">
                 <tr>
                     <td>Rank</td>
-                    <td>Profile Picture</td>
-                    <td>User Name</td>
-                    <td>Predicted Score</td>
-                    <td>Correct Prediction(%)</td>
+                    <td>Predictor</td>
+                    <td>Prediction</td>
+                    <td>Score</td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>
                         <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_male.png">
-                    </td>
-                    <td>
                         <span class="Leader_board_table_user_name_style">Shem Haye</span>
                     </td>
-                    <td>95</td>
                     <td>95%</td>
+                    <td>95</td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>
                         <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_female.png">
-                    </td>
-                    <td>
                         <span class="Leader_board_table_user_name_style">Juliana</span>
                     </td>
-                    <td>90</td>
                     <td>90%</td>
+                    <td>90</td>
                 </tr>
                 <tr>
                     <td>3</td>
                     <td>
                         <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_male.png">
-                    </td>
-                    <td>
                         <span class="Leader_board_table_user_name_style">Alamgir Kabir</span>
                     </td>
                     <td>85</td>
@@ -61,23 +54,19 @@
                     <td>4</td>
                     <td>
                         <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_female.png">
-                    </td>
-                    <td>
                         <span class="Leader_board_table_user_name_style">Jessica</span>
                     </td>
-                    <td>80</td>
                     <td>80%</td>
+                    <td>80</td>
                 </tr>
                 <tr>
                     <td>5</td>
                     <td>
                         <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_male.png">
-                    </td>
-                    <td>
                         <span class="Leader_board_table_user_name_style">Robart</span>
                     </td>
-                    <td>67</td>
                     <td>67%</td>
+                    <td>67</td>
                 </tr>
             </table>
         </div>

@@ -26,10 +26,10 @@
     font-size: 11px;
 }
 .text_align_left{
-     text-align: left!important;
+    text-align: left!important;
 }
 .text_align_center{
-     text-align: center!important;
+    text-align: center!important;
 }
 
 .Leader_board_table_user_name_style{
@@ -97,11 +97,67 @@
 .close_button_custom:hover{
     opacity: 1!important; 
 }
-.common_modal_content{
+.common_modal_message_content{
     font-weight: bold; 
     font-size: 16px;
 }
 .padding_over_row_5px{
     padding-top: 5px;
 }
+.datePicker_data_list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    padding-bottom: 20px;
+}
+@media only screen and (max-width: 991px) {
+    .datePicker_data_list li{
+    }
+    .datePicker_data_list{
+        left: 10%;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .datePicker_data_list li{
+        padding: 3px 5px;
+    }
+    .datePicker_data_list{
+        left: 20%;
+    }
+}
+.datePicker_data_list li{
+    float: left;
+    color: #000;
+    background-color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.datePicker_data_list li:hover{
+    background-color: #E86F53;
+    margin-left: 10px;
+    cursor: pointer;
+    
+}
+.datePicker_data_list li a{
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+.datePicker_data_list li a{
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.active_item{
+    background-color: #A4CBFF!important;
+ }
+
 

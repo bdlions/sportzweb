@@ -177,8 +177,8 @@
     {% 
     var ddate = new Date(date),
     yr = ddate.getFullYear(),
-    month = +ddate.getMonth() < 10 ? '0' + ddate.getMonth() : ddate.getMonth() ,
-    day = +ddate.getDate() < 10 ? '0' + ddate.getDate() : ddate.getDate(),
+    month = +ddate.getMonth() < 10? '0' + ddate.getMonth() : ddate.getMonth() ,
+    day = +ddate.getDate() < 10? '0' + ddate.getDate() : ddate.getDate(),
     newDate = day + ' ' + monthNames[month-0] + ', ' + yr;
     %}{%=newDate%}
     </th>
@@ -194,7 +194,7 @@
     {%
     var mch_date = Date.parse(prediction['date']),
     tdy_date = Date.parse(new Date()),
-    match_over = (mch_date>=tdy_date) ? 0 : 1,
+    match_over = (mch_date>=tdy_date) ? 0: 1,
     mch_time = prediction['time'],
     now_time = new Date().getHours() + ":" + new Date().getMinutes(),match_over;
     if(mch_date>tdy_date){match_over=0}
@@ -313,21 +313,21 @@
             $('#to_predict_row_box_01').toggle();
         });
         $('#to_predict_row_box_01_col_01').on('click', function () {
-                $('#confirmModal').modal('show');
-                $('#vote_id').on('click', function () {
+            $('#confirmModal').modal('show');
+            $('#vote_id').on('click', function () {
                 $("#to_predict_row_box_01").find(".predited_color").removeClass("predited_color");
                 $("#to_predict_row_box_02").find(".predited_color").removeClass("predited_color");
                 $("#to_predict_row_box_03").find(".predited_color").removeClass("predited_color");
                 $("#to_predict_row_box_01").find(".to_predict_box").addClass("to_predict_box");
                 $("#to_predict_row_box_02").find(".to_predict_box").addClass("to_predict_box");
                 $("#to_predict_row_box_03").find(".to_predict_box").addClass("to_predict_box");
-                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0.00%');
-                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0.00%');
-                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0.00%');
+                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0%');
+                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0%');
+                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0%');
                 $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
                 $("#to_predict_row_box_01_col_01").find(".prediction_box").addClass("predited_color");
-                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('100.00%');
-                $('#confirmModal').modal('hide'); 
+                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('100%');
+                $('#confirmModal').modal('hide');
                 $("#to_predict_row_box_01_col_01").off('click');
                 $("#to_predict_row_box_01_col_02").off('click');
                 $("#to_predict_row_box_01_col_03").off('click');
@@ -345,13 +345,13 @@
                 $("#to_predict_row_box_01").find(".to_predict_box").addClass("to_predict_box");
                 $("#to_predict_row_box_02").find(".to_predict_box").addClass("to_predict_box");
                 $("#to_predict_row_box_03").find(".to_predict_box").addClass("to_predict_box");
-                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0.00%');
-                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0.00%');
-                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0.00%');
-            
+                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0%');
+                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0%');
+                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0%');
+
                 $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
                 $("#to_predict_row_box_01_col_02").find(".prediction_box").addClass("predited_color");
-                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('100.00%');
+                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('100%');
                 $('#confirmModal').modal('hide');
                 $("#to_predict_row_box_01_col_01").off('click');
                 $("#to_predict_row_box_01_col_02").off('click');
@@ -370,25 +370,46 @@
                 $("#to_predict_row_box_01").find(".to_predict_box").addClass("to_predict_box");
                 $("#to_predict_row_box_02").find(".to_predict_box").addClass("to_predict_box");
                 $("#to_predict_row_box_03").find(".to_predict_box").addClass("to_predict_box");
-                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0.00%');
-                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0.00%');
-                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0.00%');
-            
+                $("#to_predict_row_box_01_col_01").find(".prediction_box_content").text('0%');
+                $("#to_predict_row_box_01_col_02").find(".prediction_box_content").text('0%');
+                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('0%');
+
                 $("#to_predict_row_box_01").find(".to_predict_box").removeClass("to_predict_box");
                 $("#to_predict_row_box_01_col_03").find(".prediction_box").addClass("predited_color");
-                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('100.00%');
+                $("#to_predict_row_box_01_col_03").find(".prediction_box_content").text('100%');
                 $('#confirmModal').modal('hide');
-                 $("#to_predict_row_box_01_col_01").off('click');
+                $("#to_predict_row_box_01_col_01").off('click');
                 $("#to_predict_row_box_01_col_02").off('click');
                 $("#to_predict_row_box_01_col_03").off('click');
             });
             $('#vote_ignore_id').on('click', function () {
                 $('#confirmModal').modal('hide');
             });
-           
+
         });
     });
 
+</script>
+<!--<script>
+    $(function() {
+        $("#datepicker").datepicker({
+//            showOn: "button",
+//            buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
+//            buttonImageOnly: true,
+//            buttonText: "Select a date",
+ //           dateFormat: 'dd-mm-yy'
+        });
+    });
+</script>-->
+<script>
+    $(function () {
+        $("#datepicker").datepicker({
+            showOn: "button",
+            buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
+            buttonImageOnly: true,
+            buttonText: "Select a date"
+        });
+    });
 </script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 <style>
@@ -415,291 +436,287 @@
     <div class="row">
         <h1>Fixtures & Results</h1>
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>
-        <div class="col-md-7 col-sm-7 col-xs-12">
+        <div class="col-md-7 col-sm-7 col-xs-12 form-group">
             <div class="form-group">
-                <div class="">
-                    <a data-toggle="collapse" href="#collapse_sports_id_01" aria-expanded="false" >
-                        <div class="row" style="padding: 0px; font-size: 20px;">
-                            <div class="col-md-12">
-                                <div class="heading blue_banner padding_collapse_header custom_heading text_align_center">
-                                    Football
-                                </div>
+                <ul class="datePicker_data_list">
+                    <li><a>Thu 18 Jun</a></li>
+                    <li><a>Fri 19 Jun</a></li>
+                    <li class="active_item"><a>Today</a></li>
+                    <li><a>Sun 21 Jun</a></li>
+                    <li><a>Mon 21 Jun</a></li>
+                    <li style="background-color: #fff;"><input type="text" id="datepicker" class="hidden"></li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <a data-toggle="collapse" href="#collapse_sports_id_01" aria-expanded="false" >
+                    <div class="row" style="padding: 0px; font-size: 20px;">
+                        <div class="col-md-12">
+                            <div class="heading blue_banner padding_collapse_header custom_heading text_align_center">
+                                Football
                             </div>
                         </div>
-                    </a>
-                    <div class="form-group collapse" id="collapse_sports_id_01">
-                        <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
-                                <span >Barclays premier league 2014/15</span>
-                            </div>
-                            <div style="height: 50px">
-                                <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
-                                <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
-                                <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
-                            </div>
-                            <div>
-<!--                                <table class="table-responsive table ">
-                                    <tbody id="tbl_predictions">
-                                    </tbody>
-                                </table>-->
-                            </div>
+                    </div>
+                </a>
+                <div class="form-group collapse" id="collapse_sports_id_01">
+                    <div class="well">
+                        <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
+                            <span >Barclays premier league 2014/15</span>
                         </div>
-                        
-                        
-                        <div>
-                            <div>
-                                <div class="form-group">
-                                    <div class="">
-                                        <table class="table">
-                                            <div class="row form-group table-hover text_align row_non_hover">
-                                                <div class="col-md-2">
-                                                    Time
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Team A
-                                                </div>
-                                                <div class="col-md-2">
-                                                    vs
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Team B
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Match Result
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Match Status
-                                                </div>
-                                            </div>
-                                            <div class="row form-group text_align row_hover">
-                                                <div class="col-md-2">
-                                                    13:00
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Chelsea
-                                                </div>
-                                                <div class="col-md-2">
-                                                    vs
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Arsenal
-                                                </div>
-                                                <div class="col-md-2">
-                                                    2 - 0
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a>Closed</a>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group text_align row_hover">
-                                                <div class="col-md-2">
-                                                    14:00
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Tottenham
-                                                </div>
-                                                <div class="col-md-2">
-                                                    vs
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Chelsea
-                                                </div>
-                                                <div class="col-md-2">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a id="Predicted_id_01" >Predicted</a>
-                                                </div>
-                                            </div>
-                                            <div id="predicted_row_title_01" class="row form-group text_align_center title_row_hidden" style="display: none;">
-                                                <div class="col-md-4">
-                                                    Tottenham
-                                                </div>
-                                                <div class="col-md-4">
-                                                    Draw
-                                                </div>
-                                                <div class="col-md-4">
-                                                    Chelsea
-                                                </div>
-                                            </div>
-                                            <div id="predicted_row_box_01" class="row form-group text_align" style="display: none;">
-                                                <div class="col-md-4">
-                                                    <div class="prediction_box">
-                                                        <div class="prediction_box_content">0.00 %</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="prediction_box">
-                                                        <div class="prediction_box_content">0.00 %</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="prediction_box predited_color">
-                                                        <div class="prediction_box_content">100.00 %</div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <!--                            <div style="height: 50px">
+                                                        <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
+                                                        <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
+                                                        <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
+                                                    </div>-->
+                        <!--                            <div>
+                                                        <table class="table-responsive table ">
+                                                            <tbody id="tbl_predictions">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>-->
 
-                                        <div class="row form-group text_align row_hover">
-                                                <div class="col-md-2">
-                                                    15:00
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Arsenal
-                                                </div>
-                                                <div class="col-md-2">
-                                                    vs
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Swansea
-                                                </div>
-                                                <div class="col-md-2">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a id="Predict_id_01">Predict</a>
-                                                </div>
-                                            </div>
-                                            <div id="to_predict_row_title_01" class="row form-group text_align_center title_row_hidden" style="display: none;">
-                                                <div class="col-md-4">
-                                                    Arsenal
-                                                </div>
-                                                <div class="col-md-4">
-                                                    Draw
-                                                </div>
-                                                <div class="col-md-4">
-                                                    Swansea
-                                                </div>
-                                            </div>
-                                            <div id="to_predict_row_box_01" class="row form-group text_align" style="display: none;">
-                                                <div id="to_predict_row_box_01_col_01" class="col-md-4">
-                                                    <div class="prediction_box to_predict_box">
-                                                        <div class="prediction_box_content">0.00 %</div>
-                                                    </div>
-                                                </div>
-                                                <div id="to_predict_row_box_01_col_02" class="col-md-4">
-                                                    <div class="prediction_box to_predict_box">
-                                                        <div class="prediction_box_content">0.00 %</div>
-                                                    </div>
-                                                </div>
-                                                <div id="to_predict_row_box_01_col_03" class="col-md-4">
-                                                    <div class="prediction_box to_predict_box">
-                                                        <div class="prediction_box_content">0.00 %</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </table>
+                        <div class="form-group">
+                            <table class="table">
+                                <div class="row form-group table-hover text_align row_non_hover">
+                                    <div class="col-md-2">
+                                        Time
+                                    </div>
+                                    <div class="col-md-2">
+                                        Team A
+                                    </div>
+                                    <div class="col-md-2">
+                                        vs
+                                    </div>
+                                    <div class="col-md-2">
+                                        Team B
+                                    </div>
+                                    <div class="col-md-2">
+                                        Match Result
+                                    </div>
+                                    <div class="col-md-2">
+                                        Match Status
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group padding_over_row_10px"></div>
-                        <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
-                                <span >Championship 2014/15</span>
-                            </div>
-                            <div style="height: 50px">
-<!--                                <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
-                                <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
-                                <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">-->
-                                <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
-                                <span class="custom_heading">June, 2015</span>
-                                <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
-                            </div>
-                            <div>
-<!--                                <table class="table-responsive table ">
-                                    <tbody id="tbl_predictions">
-                                    </tbody>
-                                </table>-->
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <div class="form-group">
-                                    <div class="">
-                                        <table class="table">
-                                            <div class="row form-group table-hover text_align row_non_hover">
-                                                <div class="col-md-2">
-                                                    Time
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Team A
-                                                </div>
-                                                <div class="col-md-2">
-                                                    vs
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Team B
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Match Result
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Match Status
-                                                </div>
-                                            </div>
-                                            <div class="row form-group text_align row_hover">
-                                                <div class="col-md-2">
-                                                    16:00
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Hull
-                                                </div>
-                                                <div class="col-md-2">
-                                                    vs
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Aston Villa
-                                                </div>
-                                                <div class="col-md-2">
-                                                    2 - 3
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a>Closed</a>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group text_align row_hover">
-                                                <div class="col-md-2">
-                                                    17:00
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Aston Villa
-                                                </div>
-                                                <div class="col-md-2">
-                                                    vs
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Man City
-                                                </div>
-                                                <div class="col-md-2">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a id="" >Predicted</a>
-                                                </div>
-                                            </div>
-
-                                        <div class="row form-group text_align row_hover">
-                                                <div class="col-md-2">
-                                                    18:00
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Man City
-                                                </div>
-                                                <div class="col-md-2">
-                                                    vs
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Hull
-                                                </div>
-                                                <div class="col-md-2">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a id="">Predict</a>
-                                                </div>
-                                            </div>
-                                           
-                                        </table>
+                                <div class="row form-group text_align row_hover">
+                                    <div class="col-md-2">
+                                        13:00
+                                    </div>
+                                    <div class="col-md-2">
+                                        Chelsea
+                                    </div>
+                                    <div class="col-md-2">
+                                        vs
+                                    </div>
+                                    <div class="col-md-2">
+                                        Arsenal
+                                    </div>
+                                    <div class="col-md-2">
+                                        2 - 0
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a>Closed</a>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="row form-group text_align row_hover">
+                                    <div class="col-md-2">
+                                        14:00
+                                    </div>
+                                    <div class="col-md-2">
+                                        Tottenham
+                                    </div>
+                                    <div class="col-md-2">
+                                        vs
+                                    </div>
+                                    <div class="col-md-2">
+                                        Chelsea
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a id="Predicted_id_01" >Predicted</a>
+                                    </div>
+                                </div>
+                                <div id="predicted_row_title_01" class="row form-group text_align_center title_row_hidden" style="display: none;">
+                                    <div class="col-md-4">
+                                        Tottenham
+                                    </div>
+                                    <div class="col-md-4">
+                                        Draw
+                                    </div>
+                                    <div class="col-md-4">
+                                        Chelsea
+                                    </div>
+                                </div>
+                                <div id="predicted_row_box_01" class="row form-group text_align" style="display: none;">
+                                    <div class="col-md-4">
+                                        <div class="prediction_box">
+                                            <div class="prediction_box_content">0%</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="prediction_box">
+                                            <div class="prediction_box_content">0%</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="prediction_box predited_color">
+                                            <div class="prediction_box_content">100%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group text_align row_hover">
+                                    <div class="col-md-2">
+                                        15:00
+                                    </div>
+                                    <div class="col-md-2">
+                                        Arsenal
+                                    </div>
+                                    <div class="col-md-2">
+                                        vs
+                                    </div>
+                                    <div class="col-md-2">
+                                        Swansea
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a id="Predict_id_01">Predict</a>
+                                    </div>
+                                </div>
+                                <div id="to_predict_row_title_01" class="row form-group text_align_center title_row_hidden" style="display: none;">
+                                    <div class="col-md-4">
+                                        Arsenal
+                                    </div>
+                                    <div class="col-md-4">
+                                        Draw
+                                    </div>
+                                    <div class="col-md-4">
+                                        Swansea
+                                    </div>
+                                </div>
+                                <div id="to_predict_row_box_01" class="row form-group text_align" style="display: none;">
+                                    <div id="to_predict_row_box_01_col_01" class="col-md-4">
+                                        <div class="prediction_box to_predict_box">
+                                            <div class="prediction_box_content">0%</div>
+                                        </div>
+                                    </div>
+                                    <div id="to_predict_row_box_01_col_02" class="col-md-4">
+                                        <div class="prediction_box to_predict_box">
+                                            <div class="prediction_box_content">0%</div>
+                                        </div>
+                                    </div>
+                                    <div id="to_predict_row_box_01_col_03" class="col-md-4">
+                                        <div class="prediction_box to_predict_box">
+                                            <div class="prediction_box_content">0%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group padding_over_row_10px"></div>
+                    <div class="well">
+                        <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
+                            <span >Championship 2014/15</span>
+                        </div>
+                        <!--                            <div style="height: 50px">
+                                                        <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
+                                                        <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
+                                                        <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
+                                                        <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
+                                                        <span class="custom_heading">June, 2015</span>
+                                                        <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
+                                                    </div>-->
+                        <!--                            <div>
+                                                        <table class="table-responsive table ">
+                                                            <tbody id="tbl_predictions">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>-->
+
+                        <div class="form-group">
+                            <table class="table">
+                                <div class="row form-group table-hover text_align row_non_hover">
+                                    <div class="col-md-2">
+                                        Time
+                                    </div>
+                                    <div class="col-md-2">
+                                        Team A
+                                    </div>
+                                    <div class="col-md-2">
+                                        vs
+                                    </div>
+                                    <div class="col-md-2">
+                                        Team B
+                                    </div>
+                                    <div class="col-md-2">
+                                        Match Result
+                                    </div>
+                                    <div class="col-md-2">
+                                        Match Status
+                                    </div>
+                                </div>
+                                <div class="row form-group text_align row_hover">
+                                    <div class="col-md-2">
+                                        16:00
+                                    </div>
+                                    <div class="col-md-2">
+                                        Hull
+                                    </div>
+                                    <div class="col-md-2">
+                                        vs
+                                    </div>
+                                    <div class="col-md-2">
+                                        Aston Villa
+                                    </div>
+                                    <div class="col-md-2">
+                                        2 - 3
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a>Closed</a>
+                                    </div>
+                                </div>
+                                <div class="row form-group text_align row_hover">
+                                    <div class="col-md-2">
+                                        17:00
+                                    </div>
+                                    <div class="col-md-2">
+                                        Aston Villa
+                                    </div>
+                                    <div class="col-md-2">
+                                        vs
+                                    </div>
+                                    <div class="col-md-2">
+                                        Man City
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a id="" >Predicted</a>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group text_align row_hover">
+                                    <div class="col-md-2">
+                                        18:00
+                                    </div>
+                                    <div class="col-md-2">
+                                        Man City
+                                    </div>
+                                    <div class="col-md-2">
+                                        vs
+                                    </div>
+                                    <div class="col-md-2">
+                                        Hull
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a id="">Predict</a>
+                                    </div>
+                                </div>
+
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -720,21 +737,21 @@
                             <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
                                 <span >Bangladesh vs India Series 2015</span>
                             </div>
-                            <div style="height: 50px">
-<!--                                <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
-                                <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
-                                <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">-->
-                                <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
-                                <span class="custom_heading">June, 2015</span>
-                                <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
-                            </div>
-                            <div>
-<!--                                <table class="table-responsive table ">
-                                    <tbody id="tbl_predictions">
-                                    </tbody>
-                                </table>-->
-                            </div>
-                            <div class="row form-group">
+                            <!--                            <div style="height: 50px">
+                                                            <input onclick="month_decrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
+                                                            <span class="heading custom_heading" id="current_month_heading"></span><input type="hidden" id="current_month"><input type="hidden" id="next_month">
+                                                            <input onclick="month_incrim()" class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
+                                                            <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_l20.png">
+                                                            <span class="custom_heading">June, 2015</span>
+                                                            <input  class="lr_image" type="image" src="<?php echo base_url(); ?>resources/images/caret_r20.png">
+                                                        </div>-->
+                            <!--                            <div>
+                                                            <table class="table-responsive table ">
+                                                                <tbody id="tbl_predictions">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>-->
+                            <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-hover text_align_center">
                                         <tr>
