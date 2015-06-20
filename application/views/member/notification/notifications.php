@@ -3,7 +3,7 @@
         <div class="pagelet">
             <div class="row">
                 <div class="col-md-8">
-                    <span style="font-weight: bold;">Your Notifications</span>
+                    <span style="font-weight: bold;">Your Notifications:</span>
                 </div>
                 <div class="col-md-4">
                     <div class="pull-right">
@@ -13,7 +13,12 @@
             </div>
         </div>  
         <div class="pagelet">
-            <div class="row form-group"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                   <a >Alamgir Kabir</a> your prediction is correct.
+                </div>
+                
+            </div>
             <?php foreach ($notification_list as $notification_info) { ?>
                 <div class="pagelet message_friends_box">
                     <div class="row">

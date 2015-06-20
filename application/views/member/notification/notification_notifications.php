@@ -20,8 +20,7 @@
                 </a>
             </div>
             <div class="col-sm-9 col-md-9 col-xs-9 col-lg-9">
-                <a >Alamgir Kabir</a>
-                predicted <a >football</a> score.
+                <a >Alamgir Kabir</a> your prediction is correct.
             </div>
         </div>
         <!--End new static line-->
