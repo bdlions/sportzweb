@@ -10,23 +10,36 @@
     margin-right: 20px;
     margin-bottom: 5%;
 }
-.logo-text{
+/*.logo-text{
     color: #ffffff;
     font-size: 70px;
+}*/
+.logo-text{
+    color: #ffffff;
+    font-size: 47px;
 }
 
-.logo-text a{
+/*.logo-text a{
     text-decoration: none!important;
     color: #ffffff!important;
     font-size: 70px;
+}*/
+.logo-text a{
+    text-decoration: none!important;
+    color: #ffffff!important;
+    font-size: 47px;
 }
 .navbar-top {
     background: #ffffff url('../../images/bg2.png') top repeat-x;
     border:0px;
 }
-.logo{
+/*.logo{
     width:60px;
     height:60px;
+}*/
+.logo{
+    width:40px;
+    height:40px;
 }
 .top-menu{
     padding-top:80px;
@@ -230,8 +243,11 @@
     text-decoration: none;
     color: black;
 }
-.header-menu-row{
+/*.header-menu-row{
     padding-top: 40px;
+}*/
+.header-menu-row{
+    padding-top: 23px;
 }
 .status-box-container{
     padding-top: 10px;

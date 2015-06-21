@@ -1,7 +1,7 @@
 <div>
 
-    <div class="row form-group heading blue_banner" style="padding: 5px; font-size: 20px;">
-        Prediction Leader Board
+    <div class="row form-group heading blue_banner prediction_leader_board_header">
+        Voters Leader Board
     </div>
     <div class="row form-group font_10px">
         <div class="col-md-12">
@@ -19,8 +19,8 @@
             <table class="table table-hover text_align">
                 <tr>
                     <td>Rank</td>
-                    <td>Predictor</td>
-                    <td>Prediction</td>
+                    <td>Voter</td>
+                    <td>Prediction(%)</td>
                     <td>Score</td>
                 </tr>
                 <tr>
@@ -67,6 +67,51 @@
                     </td>
                     <td>67%</td>
                     <td>67</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_female.png">
+                        <span class="Leader_board_table_user_name_style">Rashida Sultana</span>
+                    </td>
+                    <td>63%</td>
+                    <td>63</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_male.png">
+                        <span class="Leader_board_table_user_name_style">Nazmul Hasan</span>
+                    </td>
+                    <td>60%</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_female.png">
+                        <span class="Leader_board_table_user_name_style">Salma Akter</span>
+                    </td>
+                    <td>55%</td>
+                    <td>55</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>
+                        <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_male.png">
+                        <span class="Leader_board_table_user_name_style">Nazrul Islam</span>
+                    </td>
+                    <td>52%</td>
+                    <td>52</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>
+                        <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_female.png">
+                        <span class="Leader_board_table_user_name_style">Maria De Souza</span>
+                    </td>
+                    <td>49%</td>
+                    <td>49</td>
                 </tr>
             </table>
         </div>

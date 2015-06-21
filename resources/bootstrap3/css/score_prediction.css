@@ -11,7 +11,7 @@
 /*---------------------------------- Author: Redoy ---------------------------------*/
 
 .custom_heading{
-    font-size: 20px!important;
+    font-size: 16px!important;
     padding: 5px!important;
 }
 
@@ -28,9 +28,7 @@
 .text_align_left{
     text-align: left!important;
 }
-.text_align_center{
-    text-align: center!important;
-}
+
 
 .Leader_board_table_user_name_style{
     vertical-align: middle;
@@ -44,9 +42,8 @@
     margin: 4px;
 }
 .tournament_background_color{
-    background-color: #76B4E7!important;
-    color: #fff!important;
-    font-weight: bold;
+    background-color: #C3C3C3!important;
+    color: #000!important;
 }
 .prediction_box_title_font{
     font-size: 20px;
@@ -69,17 +66,6 @@
 .predited_color{
     background-color: #76B4E7;
     color: #fff;
-}
-
-.row_hover,.row_non_hover{
-    padding: 8px 0;
-    margin: 0 8px;
-}
-.row_hover:hover{
-    background-color:  lightgray;
-}
-.row_hover:hover{
-    background-color:  lightgray;
 }
 
 .title_row_hidden{
@@ -112,10 +98,12 @@
     padding-bottom: 20px;
 }
 @media only screen and (max-width: 991px) {
-    .datePicker_data_list li{
-    }
+    
     .datePicker_data_list{
-        left: 10%;
+        left: 0;
+    }
+    .datePicker_data_list li{
+        margin-left: 3px;
     }
 }
 @media only screen and (min-width: 992px) {
@@ -130,14 +118,12 @@
     float: left;
     color: #000;
     background-color: #fff;
-    margin-left: 10px;
     cursor: pointer;
 }
 .datePicker_data_list li:hover{
     background-color: #E86F53;
-    margin-left: 10px;
     cursor: pointer;
-    
+
 }
 .datePicker_data_list li a{
     font-weight: bold;
@@ -158,6 +144,109 @@
 
 .active_item{
     background-color: #A4CBFF!important;
- }
+}
 
+.blue_banner{
+    color: #000;
+    background-color:#7092BE;
+}
+.title{
+    font-size: 20px;
+    text-align: center;
+}
+.heading{
+    padding: 15px;
+    font-size: 25px;
+    text-align: center;
+}
+.lr_image{
+    height: 18px;
+    padding: 4px 0px 0px;
+}
+
+.prediction_leader_board_header{
+    padding: 5px; 
+    font-size: 17px;
+}
+.progress_bar_backgraound{
+    background-color:#fff; 
+    height:30px; 
+    width:70%; 
+    border: 1px solid #7092BE;
+}
+.progress_bar_percentage_text{
+    float: right; 
+    padding: 3px; 
+    font-size: 16px;
+}
+.progress_bar_content{
+    float: left; 
+    padding: 3px; 
+    font-size: 16px; 
+    font-weight: bold;
+}
+.progress_bar_width_catulate{
+    background-color: #7092BE; 
+    height: 30px;
+}
+
+/*on clicking team A*/
+.team_a_previous_width_on_click_team_a{
+    width: 50%;
+}
+.team_a_present_width_on_click_team_a{
+    width: 60%;
+}
+.draw_previous_width_on_click_team_a{
+    width: 30%;
+}
+.draw_present_width_on_click_team_a{
+    width: 25%;
+}
+.team_b_previous_width_on_click_team_a{
+    width: 20%;
+}
+.team_b_present_width_on_click_team_a{
+    width: 15%;
+}
+
+/*on clicking draw*/
+.team_a_previous_width_on_click_draw{
+    width: 50%;
+}
+.team_a_present_width_on_click_draw{
+    width: 45%;
+}
+.draw_previous_width_on_click_draw{
+    width: 30%;
+}
+.draw_present_width_on_click_draw{
+    width: 40%;
+}
+.team_b_previous_width_on_click_draw{
+    width: 20%;
+}
+.team_b_present_width_on_click_draw{
+    width: 15%;
+}
+
+/*on clicking team B*/
+.team_a_previous_width_on_click_team_b{
+    width: 50%;
+}
+.team_a_present_width_on_click_team_b{
+    width: 45%;
+}
+.draw_previous_width_on_click_team_b{
+    width: 30%;
+}
+.draw_present_width_on_click_team_b{
+    width: 25%;
+}
+.team_b_previous_width_on_click_team_b{
+    width: 20%;
+}
+.team_b_present_width_on_click_team_b{
+    width: 30%;
+}
 
