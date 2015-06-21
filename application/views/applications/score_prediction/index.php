@@ -307,7 +307,7 @@
         $('#predicted_id_01').on('click', function () {
             $('#predicted_football_game_01').toggle();
         });
-        $('#predicted_id_01').on('click', function () {
+        $('#predict_id_01').on('click', function () {
             $('#predict_football_game_01').toggle();
         });
         $('#predict_football_game_01_team_a_win').on('click', function () {
@@ -555,7 +555,7 @@
                                     <div class="col-md-2">
                                     </div>
                                     <div class="col-md-2">
-                                        <a id="Predict_id_01">Predict</a>
+                                        <a id="predict_id_01">Predict</a>
                                     </div>
                                 </div>
                                 <div id="predict_football_game_01" style="display: none;">
