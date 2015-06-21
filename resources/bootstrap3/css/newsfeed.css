@@ -4,11 +4,17 @@
     border-radius: 0px;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
 }
-.logo{
+/*.logo{
     width:60px;
     height:60px;
     margin-right: 20px;
     margin-bottom: 5%;
+}*/
+.logo{
+    width:60px;
+    height:60px;
+    margin-right: 20px;
+    margin-bottom: 2.5%;
 }
 /*.logo-text{
     color: #ffffff;

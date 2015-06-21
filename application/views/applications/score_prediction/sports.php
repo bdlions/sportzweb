@@ -304,10 +304,10 @@
 </script>
 <script>
     $(function () {
-        $('#Predicted_id_01').on('click', function () {
+        $('#predicted_id_01').on('click', function () {
             $('#predicted_football_game_01').toggle();
         });
-        $('#Predict_id_01').on('click', function () {
+        $('#predicted_id_01').on('click', function () {
             $('#predict_football_game_01').toggle();
         });
         $('#predict_football_game_01_team_a_win').on('click', function () {
