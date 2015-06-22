@@ -47,7 +47,9 @@
                 url: '<?php echo base_url();?>applications/gympro/create_group',
                 data: $("#form_create_group").serialize()+"&selected_client_list=" + selected_client_list,
                 success: function(data) {
-                    alert(data.message);
+                    //alert(data.message);
+                    var message = data.message;
+                    print_common_message(message);
                     window.location = '<?php echo base_url();?>applications/gympro/manage_groups';
                 }
             });

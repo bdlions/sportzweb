@@ -16,7 +16,9 @@
                 } 
                 else
                 {
-                    alert('Internal server error. Try again later.');
+                    //alert('Internal server error. Try again later.');
+                    var message = "Internal server error. Try again later.";
+                    print_common_message(message);
                 }
             }
         });

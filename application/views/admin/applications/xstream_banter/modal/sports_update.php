@@ -3,7 +3,9 @@
         $("#button_update_sports").on("click", function() {
             if ($("#input_sports_update_title").val().length == 0)
             {
-                alert("Please assign sports name");
+               // alert("Please assign sports name");
+               var message = "Please assign sports name";
+                  print_common_message(message);
                 return;
             }
             $.ajax({
@@ -15,7 +17,9 @@
                     sports_id: $("#input_sports_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                  //  alert(data['message']);
+                  var message = data['message'];
+                  print_common_message(message);
                     $("#modal_sports_update").modal('hide');
                     window.location.reload();
                 }

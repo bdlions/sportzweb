@@ -3,7 +3,9 @@
         $("#button_update").on("click", function() {
             if ($("#input_update_title").val().length == 0)
             {
-                alert("Please assign category name");
+               // alert("Please assign category name");
+               var message = "Please assign category name";
+                    print_common_message(message);
                 return;
             }
             $.ajax({
@@ -17,7 +19,9 @@
 //                    total_user: $("#input_update_total_user").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                   var message = data['message'];
+                    print_common_message(message);
                     $("#modal_update").modal('hide');
                     window.location.reload();
                 }

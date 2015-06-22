@@ -223,16 +223,22 @@ $(function () {
         $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
         if (CKEDITOR.instances.headline.getData() === "")
         {
-            alert("News heading is required.");
+            //alert("News heading is required.");
+            var message = "News heading is required.";
+            print_common_message(message);
             return;
         } else if(CKEDITOR.instances.summary.getData() === "")
         {
-            alert("News summary is required.");
+            //alert("News summary is required.");
+            var message = "News summary is required.";
+            print_common_message(message);
             return;
         }
         else if(CKEDITOR.instances.description.getData() === "")
         {
-            alert("News description is required.");
+            //alert("News description is required.");
+            var message = "News description is required.";
+            print_common_message(message);
             return;
         }
         $.ajax({
@@ -241,7 +247,9 @@ $(function () {
             url: '<?php echo base_url();?>admin/applications_news/create_news',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
-                alert(data.message);
+                //alert(data.message);
+                var message = data.message;
+                print_common_message(message);
                 window.location = '<?php echo base_url();?>admin/applications_news/create_news';
             }
         });
@@ -257,16 +265,22 @@ $(function () {
                         $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
                         if (CKEDITOR.instances.headline.getData() === "")
                         {
-                            alert("News heading is required.");
+                           // alert("News heading is required.");
+                            var message = "News heading is required.";
+                            print_common_message(message);
                             return;
                         } else if(CKEDITOR.instances.summary.getData() === "")
                         {
-                            alert("News summary is required.");
+                           // alert("News summary is required.");
+                           var message = "News summary is required.";
+                            print_common_message(message);
                             return;
                         }
                         else if(CKEDITOR.instances.description.getData() === "")
                         {
-                            alert("News description is required.");
+                          //  alert("News description is required.");
+                           var message = "News description is required.";
+                            print_common_message(message);
                             return;
                         }
                         var $this = $(this),data = $this.data();
@@ -321,12 +335,16 @@ $(function () {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
-            alert(data.result.message);
+            //alert(data.result.message);
+            var message = data.result.message;
+            print_common_message(message);
             window.location = '<?php echo base_url();?>admin/applications_news/create_news';
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+            //alert(data.message);
+            var message = data.message;
+            print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

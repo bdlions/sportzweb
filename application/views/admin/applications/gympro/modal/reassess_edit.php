@@ -3,7 +3,9 @@
         $("#button_update").on("click", function() {
             if ($("#input_update_a").val().length == 0)
             {
-                alert("Please assign reassess name");
+               // alert("Please assign reassess name");
+              var message = "Please assign reassess name";
+                  print_common_message(message);
                 return;
             }
             $.ajax({
@@ -15,7 +17,9 @@
                     input_update_a: $("#input_update_a").val(),
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                  print_common_message(message);
                     $("#modal_update").modal('hide');
                     window.location.reload();
                 }

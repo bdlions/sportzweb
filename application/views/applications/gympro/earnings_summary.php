@@ -7,7 +7,9 @@
         var fin_date = $('#fin_date').val();
         var status_id = $('#status_id').val();
         if (fin_date == '' || st_date == '') {
-            alert("Please select the dates.");
+            //alert("Please select the dates.");
+            var message = "Please select the dates.";
+         print_common_message(message);
             return;
         }
         var gr_or_cl = $("#group_client").val();
@@ -46,7 +48,9 @@
             });
             if (session_id_array.length == 0)
             {
-                alert('Please select atlest 1 session');
+                //alert('Please select atlest 1 session');
+                var message = "Please select atlest 1 session";
+                print_common_message(message);
                 return;
             }
             if ($(this).val() != '0') {
@@ -59,7 +63,9 @@
                         status_id: $("#mark_status_dropdown").val()
                     },
                     success: function (data) {
-                        alert(data['message']);
+                       // alert(data['message']);
+                       var message = data['message'];
+                       print_common_message(message);
                         $('#mark_status_dropdown>option:eq(0)').prop('selected', true);
                         fetch_session_data();
                     }

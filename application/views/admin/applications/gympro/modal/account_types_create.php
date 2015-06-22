@@ -3,7 +3,9 @@
         $("#button_create").on("click", function() {
             if ($("#input_title").val().length == 0)
             {
-                alert("Please assign Category name");
+               // alert("Please assign Category name");
+               var message = "Please assign Category name";
+               print_common_message(message);
                 return;
             }
 //            if ($("#input_pricing").val().length == 0)
@@ -26,7 +28,9 @@
 //                    total_user: $("#input_total_user").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                  //  alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     $("#modal_create").modal('hide');
                     window.location.reload();
                 }

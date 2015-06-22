@@ -1,30 +1,32 @@
 <?php
-    $data = array();
-    
-    for($i=0;$i<count($recipe_list_item);$i++){
-        array_push($data,$recipe_list_item[$i]['id']);
-    }
-    $data = json_encode($data);
+$data = array();
+
+for ($i = 0; $i < count($recipe_list_item); $i++) {
+    array_push($data, $recipe_list_item[$i]['id']);
+}
+$data = json_encode($data);
 ?>
 
 <script type="text/javascript">
-    $(function() {
-        
-        
+    $(function () {
+
+
         var selected_array = Array();
-        selected_array = <?php echo $data;?>;
+        selected_array = <?php echo $data; ?>;
         //alert(selected_array);
         $('#recipes_list_after_select').val(JSON.stringify(selected_array));
-        
-        $("#recipe_list_for_home_page").on("click", function() {
+
+        $("#recipe_list_for_home_page").on("click", function () {
             var selected_date_for_item = $('#date_for_show_item').val();
             if (selected_date_for_item.length == 0)
             {
-                alert('please select a date first for your item');
+               // alert('please select a date first for your item');
+              var message = "please select a date first for your item";
+                  print_common_message(message);
             }
             var selected_recipe_array = Array();
             var selected_recipe_item = Array();
-            $("#tbody_recipe_list_for_home_page tr").each(function() {
+            $("#tbody_recipe_list_for_home_page tr").each(function () {
                 var lastColumn = $(this).find('td:last');
                 var lastPrevColumn = $(this).find('td:last').prev("td");
 
@@ -50,8 +52,10 @@
                         selected_recipe_item: JSON.stringify(selected_recipe_item),
                         selected_date_for_item: selected_date_for_item
                     },
-                    success: function(data) {
-                        alert(data['message']);
+                    success: function (data) {
+//                        alert(data['message']);
+                         var message = data['message'];
+                         print_common_message(message);
                         if (data['status'] === 1)
                         {
                             location.reload();
@@ -60,24 +64,28 @@
                 });
             } else if (selected_recipe_array.length > 7)
             {
-                alert('Please select only 6 recipe item for your home page');
+                //alert('Please select only 6 recipe item for your home page');
+               var message = "Please select only 6 recipe item for your home page";
+               print_common_message(message);
             } else
             {
-                alert('Please select only 6 recipe item for your home page');
+                //alert('Please select only 6 recipe item for your home page');
+                 var message = "Please select only 6 recipe item for your home page";
+               print_common_message(message);
             }
         });
     });
 </script> 
 <script type="text/javascript">
-    $(function() {
-        var a = <?php echo $show_advertise;?>;
-        if(a==1){
-            $('select option[value="3"]').attr("selected",true);
-        }   
+    $(function () {
+        var a = <?php echo $show_advertise; ?>;
+        if (a == 1) {
+            $('select option[value="3"]').attr("selected", true);
+        }
         $('#date_for_show_item').datepicker({
             dateFormat: 'dd-mm-yy',
             startDate: '-3d'
-        }).on('changeDate', function(ev) {
+        }).on('changeDate', function (ev) {
             $('#date_for_show_item').text($('#date_for_show_item').data('date'));
             $('#date_for_show_item').datepicker('hide');
         });
@@ -105,18 +113,18 @@
                         <?php if (count($recipe_view_list_item) > 1): ?>
                             <div class="col-md-8 grayborderbottom grayborderright">
                                 <?php if (array_key_exists(0, $recipe_view_list_item)) : ?>
-                                <button style="z-index: 500; position: relative;" id="button_edit_recipe_<?php echo $recipe_view_list_item[0]["id"]; ?>" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_recipe_<?php echo $recipe_view_list_item[0]["id"]; ?>', '1')">
-                                            Edit
-                                        </button>
+                                    <button style="z-index: 500; position: relative;" id="button_edit_recipe_<?php echo $recipe_view_list_item[0]["id"]; ?>" value="" class="btn button-custom pull-right" onclick="openModal('button_edit_recipe_<?php echo $recipe_view_list_item[0]["id"]; ?>', '1')">
+                                        Edit
+                                    </button>
                                     <?php if (!empty($recipe_view_list_item[0]['main_picture'])): ?>
-                                        
+
                                         <input type="hidden" name="top_left" id="position_of_recipe_1" value="<?php echo $recipe_view_list_item[0]["id"]; ?>">
-                                        
+
                                         <a href="<?php echo base_url() . 'admin/applications_healthyrecipes/recipes/' . $recipe_view_list_item[0]['id']; ?>">
                                             <img id="image_position_1" style="width: 480px;height: 200px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[0]['main_picture']; ?>" class="img-responsive" alt="<?php echo $recipe_view_list_item[0]['title']; ?>"/>
                                         </a>
                                     <?php endif; ?>
-                                        
+
                                     <span id="title_1" class="image-caption reciepe_title" style="color: #7092BE"><?php echo (!empty($recipe_view_list_item[0]['title'])) ? $recipe_view_list_item[0]['title'] : ''; ?></span>
                                 <?php endif; ?>
                             </div>
@@ -163,7 +171,7 @@
                             </div>
 
 
-                            
+
                             <div id="show_recipes_after_select">
                                 <?php if (count($recipe_list_item) > 0): ?>
                                     <?php foreach ($recipe_list_item as $key => $value): ?>
@@ -247,8 +255,8 @@
             </div>
             <input type="button" style="width:120px; float: right" value="Back" id="back_button" onclick="goBackByURL('<?php echo base_url(); ?>admin/applications_healthyrecipes')" class="form-control btn button-custom">
         </div>
-          <input type="hidden" name="get_selected_id" id="get_selected_id" value=""> 
-          <input type="hidden" name="recipes_list_after_select" id="recipes_list_after_select" value="">
+        <input type="hidden" name="get_selected_id" id="get_selected_id" value=""> 
+        <input type="hidden" name="recipes_list_after_select" id="recipes_list_after_select" value="">
     </div>
 </div>
 <?php $this->load->view("admin/applications/healthy_recipes/modal_edit_recipe_item_home_page"); ?>
@@ -261,8 +269,8 @@
     }
 </script>
 <script type="text/javascript">
-    $(function() {
-        $("#button_edit_recipes").on("click", function() {
+    $(function () {
+        $("#button_edit_recipes").on("click", function () {
             $('#modal_edit_recipes').modal('show');
         });
     });
@@ -277,44 +285,54 @@
         var value_bottom_up_extra = $('#position_of_recipe_5').val();
         var value_bottom_down_extra = $('#position_of_recipe_6').val();
         var value_bottom_down = $('#position_of_recipe_7').val();
-        
+
         //alert(value_top_left+' '+value_top_right+' '+value_bottom_left+' '+value_bottom_right+' '+value_bottom_up_extra+' '+value_bottom_down_extra+' '+value_bottom_down)
         var recipes_list = $('#recipes_list_after_select').val();
 
 //        alert(recipes_list);
         //alert(value_top_left + ' ' + value_top_right + ' '+ value_bottom_left + ' ' + value_bottom_right );
         if (value_top_left === '') {
-            alert('you have to select a item for top left position');
+            //alert('you have to select a item for top left position');
+            var message = "you have to select a item for top left position";
+            print_common_message(message);
             return;
         }
 
         if (value_top_right === '') {
-            alert('you have to select a item for top right position');
+            //alert('you have to select a item for top right position');
+             var message = "you have to select a item for top right position";
+            print_common_message(message);
             return;
         }
 
         if (value_bottom_left === '') {
-            alert('you have to select a item for bottom left position');
+            //alert('you have to select a item for bottom left position');
+             var message = "you have to select a item for bottom left position";
+            print_common_message(message);
             return;
         }
 
         if (value_bottom_right === '') {
-            alert('you have to select a item for bottom right position');
+            //alert('you have to select a item for bottom right position');
+             var message = "you have to select a item for bottom right position";
+            print_common_message(message);
             return;
         }
-        
+
         if (date_for_show_item === '') {
-            alert('Please select a date.');
+            //alert('Please select a date.');
+            var message = "Please select a date.";
+            print_common_message(message);
             return;
         }
-        
+
         var id = $('#panel').val();
         $.ajax({
             dataType: 'json',
             type: "POST",
             url: '<?php echo base_url(); ?>' + "admin/applications_healthyrecipes/create_selected_recipe",
             data: {
-                date_for_show_item:date_for_show_item,
+                date_for_show_item: date_for_show_item,
                 value_top_left: value_top_left,
                 value_top_right: value_top_right,
                 value_bottom_left: value_bottom_left,
@@ -325,8 +343,10 @@
                 recipes_list: recipes_list,
                 save_id: id
             },
-            success: function(data) {
-                alert(data['message']);
+            success: function (data) {
+                //alert(data['message']);
+                var message = data['message'];
+                print_common_message(message);
                 if (data['status'] === 1)
                 {
                     location.reload();
@@ -337,14 +357,17 @@
 
 </script>
 <script type="text/javascript">
-    var a = <?php echo $show_advertise;?>;
-        if(a==1){
-           $('#side_panel').hide(); 
-        }  
-    function panel_change(){
+    var a = <?php echo $show_advertise; ?>;
+    if (a == 1) {
+        $('#side_panel').hide();
+    }
+    function panel_change() {
         var id = $('#panel').val();
-        if(id==3) $('#side_panel').hide();
-        if(id==2) $('#side_panel').hide();
-        if(id==1) $('#side_panel').show();
+        if (id == 3)
+            $('#side_panel').hide();
+        if (id == 2)
+            $('#side_panel').hide();
+        if (id == 1)
+            $('#side_panel').show();
     }
 </script>

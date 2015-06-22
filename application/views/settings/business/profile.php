@@ -106,7 +106,7 @@
                             window.location = window.location;
                         }
                         else {
-                            alert("Error");
+                          //  alert("Error");
                         }
                     }
             });

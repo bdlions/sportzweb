@@ -88,6 +88,7 @@ var editor = CKEDITOR.replace( <em>textarea_id</em>, {
 // Trying to insert disallowed tag and attribute.
 editor.setData( '&lt;p <strong>style="color: red"</strong>&gt;Hello <strong>&lt;em&gt;world&lt;/em&gt;</strong>!&lt;/p&gt;' );
 alert( editor.getData() );
+ 
 
 // Filtered data is returned.
 "&lt;p&gt;Hello world!&lt;/p&gt;"

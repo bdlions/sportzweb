@@ -9,7 +9,9 @@
                     team_id: $("#input_team_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     $("#modal_team_delete_confirm").modal('hide');
                     window.location.reload();
                 }

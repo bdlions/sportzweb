@@ -3,7 +3,9 @@
         $("#button_create_product_category").on("click", function() {
             if ($("#input_product_category_create_title").val().length == 0)
             {
-                alert("Please assign Category name");
+                //alert("Please assign Category name");
+                 var message = "Please assign Category name";
+                print_common_message(message);
                 return;
             }
             $.ajax({
@@ -14,7 +16,9 @@
                     title: $("#input_product_category_create_title").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     $("#modal_product_category_create").modal('hide');
                     window.location.reload();
                 }

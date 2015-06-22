@@ -41,7 +41,9 @@
                     del_id: $("#delete_id_data").val()
                 },
                 success: function(data) {
-                    alert(data.message); 
+                    //alert(data.message); 
+                    var message = data.message;
+            print_common_message(message);
                     $('#modal_delete').modal('hide');
                     window.location = '<?php echo base_url();?>admin/contact_us/manage_topic';
                 }
@@ -53,7 +55,9 @@
         $("#button_save_topic_edit").on("click", function() {
             if ($("#input_topic_name_for_edit").val().length == 0)
             {
-                alert("Topic name is required.");
+                //alert("Topic name is required.");
+                 var message = "Topic name is required.";
+            print_common_message(message);
                 return;
             }
             $.ajax({
@@ -65,7 +69,9 @@
                     topic_id: $("#topic_id_data").val()
                 },
                 success: function(data) {                    
-                    alert(data.message); 
+                    //alert(data.message); 
+                    var message = data.message;
+                    print_common_message(message);
                     $('#modal_edit_topic').modal('hide');
                     window.location = '<?php echo base_url();?>admin/contact_us/manage_topic';
                 }

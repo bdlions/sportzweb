@@ -16,12 +16,16 @@
                     url: '<?php echo base_url().'admin/applications_scoreprediction/create_match/'.$tournament_id;?>',
                     data: $("#form_create_match").serializeArray(),
                     success: function(data) {
-                        alert(data.message);
+                        //alert(data.message);
+                        var message = data.message;
+                        print_common_message(message);
                         location.reload();
                     }
                 });
             }else{
-                alert('Invalid match time, use the time format (HH:MM)');
+               // alert('Invalid match time, use the time format (HH:MM)');
+               var message = "Invalid match time, use the time format (HH:MM)";
+               print_common_message(message);
                 return;
             }
         });

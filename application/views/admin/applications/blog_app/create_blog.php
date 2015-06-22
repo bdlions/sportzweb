@@ -1,6 +1,6 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-    window.onload = function()
+    window.onload = function ()
     {
         CKEDITOR.replace('title', {
             language: 'en',
@@ -88,23 +88,29 @@
 <?php $this->load->view("common/ckeditor_customization"); ?>
 
 <script>
-    $(function() {
-        $("#btnSubmit").on("click", function() {
+    $(function () {
+        $("#btnSubmit").on("click", function () {
             $("#title_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.title.getData())).html());
             $("#description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.description.getData())).html());
             $("#image_description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.image_description.getData())).html());
             if (!$('.category_id').is(':checked')) {
-                alert("Checked atleast one blog category");
+                //alert("Checked atleast one blog category");
+                 var message = data['message'];
+                 print_common_message(message);
                 return;
             }
             if (CKEDITOR.instances.title.getData() === "")
             {
-                alert("Blog heading is required.");
+                //alert("Blog heading is required.");
+                 var message = "Blog heading is required.";
+                print_common_message(message);
                 return;
             }
             else if (CKEDITOR.instances.description.getData() === "")
             {
-                alert("Blog description is required.");
+                //alert("Blog description is required.");
+                var message = "Blog description is required.";
+                print_common_message(message);
                 return;
             }
             $.ajax({
@@ -112,8 +118,10 @@
                 type: "POST",
                 url: '<?php echo base_url() . 'admin/applications_blogs/create_blog'; ?>',
                 data: $("#formsubmit").serializeArray(),
-                success: function(data) {
-                    alert(data.message);
+                success: function (data) {
+                   // alert(data.message);
+                    var message = data.message;
+                    print_common_message(message);
                     window.location = '<?php echo base_url() . 'admin/applications_blogs/create_blog'; ?>';
                 }
             });
@@ -122,7 +130,7 @@
         // Change this to the location of your server-side upload handler:
         var url = "<?php echo base_url() . 'admin/applications_blogs/create_blog'; ?>",
                 uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
-                on('click', function() {
+                on('click', function () {
                     $("#title_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.title.getData())).html());
                     $("#description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.description.getData())).html());
                     $("#image_description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.image_description.getData())).html());
@@ -130,20 +138,24 @@
 
                     if (CKEDITOR.instances.title.getData() === "")
                     {
-                        alert("Blog heading is required.");
+                        //alert("Blog heading is required.");
+                        var message = "Blog heading is required.";
+                        print_common_message(message);
                         return;
                     }
                     else if (CKEDITOR.instances.description.getData() === "")
                     {
-                        alert("BLog description is required.");
+                //  alert("BLog description is required.");
+                        var message = "BLog description is required.";
+                        print_common_message(message);
                         return;
                     }
                     var $this = $(this), data = $this.data();
-                    $this.off('click').text('Abort').on('click', function() {
+                    $this.off('click').text('Abort').on('click', function () {
                         $this.remove();
                         data.abort();
                     });
-                    data.submit().always(function() {
+                    data.submit().always(function () {
                         $this.remove();
                     });
                 });
@@ -164,16 +176,16 @@
             maxNumberOfFiles: 1,
             previewMaxHeight: 120,
             previewCrop: true
-        }).on('fileuploadadd', function(e, data) {
+        }).on('fileuploadadd', function (e, data) {
             $("#files").empty();
             data.context = $('<div/>').appendTo('#files');
             $("div#upload").empty();
             $("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
-            $.each(data.files, function(index, file) {
+            $.each(data.files, function (index, file) {
                 var node = $('<p/>');
                 node.appendTo(data.context);
             });
-        }).on('fileuploadprocessalways', function(e, data) {
+        }).on('fileuploadprocessalways', function (e, data) {
             var index = data.index,
                     file = data.files[index],
                     node = $(data.context.children()[index]);
@@ -186,17 +198,21 @@
             if (index + 1 === data.files.length) {
                 data.context.find('button').text('Upload').prop('disabled', !!data.files.error);
             }
-        }).on('fileuploadprogressall', function(e, data) {
+        }).on('fileuploadprogressall', function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css('width', progress + '%');
-        }).on('fileuploaddone', function(e, data) {
-            alert(data.result.message);
+        }).on('fileuploaddone', function (e, data) {
+            //alert(data.result.message);
+            var message = data.result.message;
+            print_common_message(message);
             window.location = '<?php echo base_url() . 'admin/applications_blogs/create_blog'; ?>';
-        }).on('fileuploadsubmit', function(e, data) {
+        }).on('fileuploadsubmit', function (e, data) {
             data.formData = $('form').serializeArray();
-        }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
-            $.each(data.files, function(index, file) {
+        }).on('fileuploadfail', function (e, data) {
+           // alert(data.message);
+            var message = data.message;
+            print_common_message(message);
+            $.each(data.files, function (index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);
             });

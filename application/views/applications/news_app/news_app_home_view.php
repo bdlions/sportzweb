@@ -27,7 +27,7 @@
                 $("#news_" + randomNewsNumber).show();
                 setInterval(function() {
                     var randomNewsNumber = Math.floor(Math.random() * news_id_list.length);
-                    console.log(news_id_list[randomNewsNumber]);
+//                    console.log(news_id_list[randomNewsNumber]);
                     for (var i = 0; i < news_id_list.length; i++) {
                         $("#news_" + news_id_list[i]).hide();
                     }

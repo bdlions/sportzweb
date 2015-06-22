@@ -23,7 +23,7 @@ $(function(){
                 var map = new google.maps.Map(map_canvas, map_options);
             } 
             else {
-                alert("Location is not found");
+                //("Location is not found");
             }
         });*/
         var services = Array();
@@ -61,7 +61,9 @@ $(function(){
             }
             else
             {
-                alert("Location is not found");
+                //alert("Location is not found");
+                var message = "Location is not found";
+                print_common_message(message);
             }
         }
         );

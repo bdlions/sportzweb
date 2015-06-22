@@ -4,7 +4,9 @@
         $("#submit_button").on("click", function() {
             if($("#client_list").val() == 0)
             {
-                alert("Please select the person you are assessing from the drop menu.");
+               // alert("Please select the person you are assessing from the drop menu.");
+                var message = "Please select the person you are assessing from the drop menu.";
+                print_common_message(message);
                 return false;
             }
             $.ajax({
@@ -13,7 +15,9 @@
                 url: '<?php echo base_url(); ?>applications/gympro/create_mission',
                 data: $("#form_create_mission").serializeArray(),
                 success: function(data) {
-                    alert(data.message);
+                    //alert(data.message);
+                     var message = data.message;
+                    print_common_message(message);
                     window.location = '<?php echo base_url(); ?>applications/gympro/manage_missions';
                 }
             });

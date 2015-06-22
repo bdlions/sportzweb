@@ -3,22 +3,30 @@
         $("#button_update").on("click", function() {
             if ($("#upd_title").val().length == 0)
             {
-                alert("Please assign category name");
+                //alert("Please assign category name");
+                var message = "Please assign category name";
+                print_common_message(message);
                 return;
             }
             if ($("#upd_us_ca").val().length == 0)
             {
-                alert("Please assign US - CA");
+                //alert("Please assign US - CA");
+                var message = "Please assign US - CA";
+                print_common_message(message);
                 return;
             }
             if ($("#upd_uk").val().length == 0)
             {
-                alert("Please assign UK");
+                //alert("Please assign UK");
+                var message = "Please assign UK";
+                print_common_message(message);
                 return;
             }
             if ($("#upd_eu").val().length == 0)
             {
-                alert("Please assign EU");
+                //alert("Please assign EU");
+                var message = "Please assign EU";
+                print_common_message(message);
                 return;
             }
             $.ajax({
@@ -33,7 +41,9 @@
                     eu: $("#upd_eu").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                  print_common_message(message);
                     $("#modal_update").modal('hide');
                     window.location.reload();
                 }

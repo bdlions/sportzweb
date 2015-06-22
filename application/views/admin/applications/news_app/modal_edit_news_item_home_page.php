@@ -36,7 +36,9 @@
                         if(i == j) continue;
                         if(news_id == position_array[j])
                         {
-                            alert('This news already selected in one position');
+                            //alert('This news already selected in one position');
+                            var message = "This news already selected in one position";
+                            print_common_message(message);
                             return;
                         }
                     }
@@ -73,7 +75,9 @@
                 });
                 $('#modal_edit_news_item_home_page').modal('hide');
             } else {
-                alert('You can only select one news for this position');
+               // alert('You can only select one news for this position');
+               var message = "You can only select one news for this positio";
+               print_common_message(message);
                 return ;
             }
            

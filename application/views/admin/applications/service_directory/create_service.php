@@ -158,23 +158,33 @@ $(function () {
     $("#btnSubmit").on("click", function(){
         if ($("#name").val().length == 0)
         {
-            alert("Name of service is required.");
+            //alert("Name of service is required.");
+            var message = "Name of service is required.";
+            print_common_message(message);
             return;
         } else if($("#title").val().length == 0)
         {
-            alert("Title of service is required.");
+            //alert("Title of service is required.");
+            var message = "Title of service is required.";
+            print_common_message(message);
             return;
         }else if($("#address").val().length == 0)
         {
-            alert("Address is required.");
+            //alert("Address is required.");
+            var message = "Address is required.";
+            print_common_message(message);
             return;
         }else if($("#city").val().length == 0)
         {
-            alert("City is required.");
+           // alert("City is required.");
+           var message = "City is required.";
+            print_common_message(message);
             return;
         }else if($("#post_code").val().length == 0)
         {
-            alert("post code is required.");
+            //alert("post code is required.");
+             var message = "post code is required.";
+            print_common_message(message);
             return;
         }
         $.ajax({
@@ -183,7 +193,9 @@ $(function () {
             url: '<?php echo base_url();?>admin/applications_servicedirectory/create_service/<?php echo $service_category_id?>',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
-                alert(data.message);
+                //alert(data.message);
+                var message = data.message;
+            print_common_message(message);
                 window.location = '<?php echo base_url();?>admin/applications_servicedirectory/create_service/<?php echo $service_category_id?>';
             }
         });
@@ -195,23 +207,33 @@ $(function () {
                     on('click', function() {
                                     if ($("#name").val().length == 0)
                                     {
-                                        alert("Name of service is required.");
+                                                // alert("Name of service is required.");
+                                                var message = "Name of service is required.";
+                                                 print_common_message(message);
                                         return;
                                     } else if($("#title").val().length == 0)
                                     {
-                                        alert("Title of service is required.");
+                                        //alert("Title of service is required.");
+                                        var message = "Title of service is required.";
+                                        print_common_message(message);
                                         return;
                                     }else if($("#address").val().length == 0)
                                     {
-                                        alert("Address is required.");
+                                        //alert("Address is required.");
+                                        var message = "Address is required.";
+                                        print_common_message(message);
                                         return;
                                     }else if($("#city").val().length == 0)
                                     {
-                                        alert("City is required.");
+                                       // alert("City is required.");
+                                       var message = "City is required.";
+                                        print_common_message(message);
                                         return;
                                     }else if($("#post_code").val().length == 0)
                                     {
-                                        alert("post code is required.");
+                                        //alert("post code is required.");
+                                         var message = "post code is required.";
+                                        print_common_message(message);
                                         return;
                                     }
                                     var $this = $(this),data = $this.data();
@@ -267,13 +289,17 @@ $(function () {
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
             //console.log(data);
-            alert(data.result.message);
+            //alert(data.result.message);
+             var message = data.result.message;
+             print_common_message(message);
             window.location = '<?php echo base_url();?>admin/applications_servicedirectory/create_service/<?php echo $service_category_id?>';
             //console.log(data);
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+           // alert(data.message);
+            var message = data.message;
+             print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

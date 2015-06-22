@@ -35,6 +35,7 @@ function InsertHTML() {
 	}
 	else
 		alert( 'You must be in WYSIWYG mode!' );
+                   
 }
 
 function InsertText() {
@@ -51,6 +52,7 @@ function InsertText() {
 	}
 	else
 		alert( 'You must be in WYSIWYG mode!' );
+                    
 }
 
 function SetContents() {
@@ -70,6 +72,7 @@ function GetContents() {
 	// Get editor contents
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-getData
 	alert( editor.getData() );
+        
 }
 
 function ExecuteCommand( commandName ) {
@@ -85,6 +88,7 @@ function ExecuteCommand( commandName ) {
 	}
 	else
 		alert( 'You must be in WYSIWYG mode!' );
+    
 }
 
 function CheckDirty() {
@@ -94,6 +98,7 @@ function CheckDirty() {
 	// to the contents loaded into the editor at startup
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-checkDirty
 	alert( editor.checkDirty() );
+ 
 }
 
 function ResetDirty() {
@@ -103,6 +108,7 @@ function ResetDirty() {
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-resetDirty
 	editor.resetDirty();
 	alert( 'The "IsDirty" status has been reset' );
+        
 }
 
 function Focus() {

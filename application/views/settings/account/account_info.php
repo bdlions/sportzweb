@@ -60,7 +60,9 @@
                             window.location = window.location;
                         }
                         else {
-                            alert("Error");
+                            //alert("Error");
+                             var message = "Error";
+                             print_common_message(message);
                         }
                     }
             });
@@ -108,7 +110,9 @@
                             window.location = window.location;
                         }
                         else {
-                            alert("Error");
+//                            alert("Error");
+                             var message = "Error";
+                             print_common_message(message);
                         }
                     }
             });
@@ -156,7 +160,9 @@
                             window.location = window.location;
                         }
                         else {
-                            alert("Error");
+                            //alert("Error");
+                             var message = "Error";
+                             print_common_message(message);
                         }
                     }
             });

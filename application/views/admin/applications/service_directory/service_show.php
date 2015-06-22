@@ -38,7 +38,9 @@
             }
             else
             {
-                alert("Location is not found");
+                //alert("Location is not found");
+                var message = "Location is not found";
+                print_common_message(message);
             }
         }
         );

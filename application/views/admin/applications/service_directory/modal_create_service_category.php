@@ -3,7 +3,9 @@
         $("#button_save_service_category").on("click", function() {
             if ($("#input_service_category_name").val().length == 0)
             {
-                alert("Service Category name is required.");
+               // alert("Service Category name is required.");
+               var message = "Service Category name is required.";
+               print_common_message(message);
                 return;
             }
             $.ajax({
@@ -14,7 +16,9 @@
                     service_category_name: $("#input_service_category_name").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     if (data['status'] === 1)
                     {                        
                         $("#tbody_service_category_list").html($("#tbody_service_category_list").html()+tmpl("tmpl_service_category_list",  data['service_category_info']));

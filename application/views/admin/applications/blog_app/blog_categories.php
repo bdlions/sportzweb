@@ -22,7 +22,7 @@
 <script type="text/javascript">
     $(function() {
         /*$("#tbody_blog_category_list").on("click", "button", function(e) {
-         alert('here');
+       //  alert('here');
          //console.log(this.id);
          var target = e.target;
          //console.log(target);

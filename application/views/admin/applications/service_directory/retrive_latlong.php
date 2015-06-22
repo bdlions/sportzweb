@@ -16,7 +16,9 @@
                     long: retrived_latlong[2]
                 },
                 success: function (data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     window.history.back();
                 }
             });
@@ -35,7 +37,9 @@
                     long: slong
                 },
                 success: function (data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                    print_common_message(message);
                 }
             });
         $('#text_place').html('<div class="alert alert-success alert-dismissible">Entries updated successfully.</div>');

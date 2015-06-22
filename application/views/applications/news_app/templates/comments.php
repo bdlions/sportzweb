@@ -10,7 +10,9 @@
         //alert(comment_id);
         if ($("#comment_for_edit_"+comment_id).val().length == 0)
         {
-            alert("please type your comment");
+            //alert("please type your comment");
+            var message = "please type your comment";
+                 print_common_message(message);
             return false;
         }
         var radios = $('#comment_nature_for_edit_'+comment_id+' input:radio[name=comment_nature]');
@@ -32,7 +34,9 @@
                 news_id : $("#news_id").val()
             },
             success: function(data) {
-                alert(data['message']);
+                //alert(data['message']);
+                var message = data['message'];
+                 print_common_message(message);
                 if (data['status'] === 1)
                 {                       
                     window.location.reload();
@@ -53,7 +57,9 @@
                 comment_id : id,
             },
             success: function(data) {
-                alert(data['message']);
+                //alert(data['message']);
+                 var message = data['message'];
+                 print_common_message(message);
                 if (data['status'] === 1)
                 {                       
                     window.location.reload();
@@ -65,9 +71,13 @@
     function changeView()
     {
         var value = $("#comment_view").val();
-        alert(value);
+       // alert(value);
+        var message = value;
+        print_common_message(message);
         var news_id = <?php echo $news['id'] ?>;
-        alert(news_id);
+        //alert(news_id);
+        var message = news_id;
+        print_common_message(message);
         $.ajax({
             dataType: 'json',
             type: "POST",
@@ -431,7 +441,9 @@
         $("#save_comment").on("click", function() {
             if ($("#comment").val().length == 0)
             {
-                alert("please type your comment");
+               // alert("please type your comment");
+                var message = "please type your comment";
+                print_common_message(message);
                 return false;
             }
             var $radios = $('input:radio[name=comment_nature]');
@@ -451,7 +463,9 @@
                     news_id : $("#news_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                print_common_message(message);
                     if (data['status'] === 1)
                     {                    
                         //$("#tbody_news_comments_list").html($("#tbody_news_comments_list").html()+tmpl("tmpl_news_comments_list",  data['news_comment_info']));

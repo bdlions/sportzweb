@@ -92,7 +92,9 @@
 //    });
 
     $('form').submit(function(){
-            alert($(this["options"]).val());
+           // alert($(this["options"]).val());
+           var message = $(this["options"]).val();
+           print_common_message(message);
         return false;
     });
     

@@ -4,12 +4,16 @@
             var selected_value = $( "#selected_recipes_category option:selected").val();
             if(selected_value== 0)
             {
-                alert("Please select a recipe category name.");
+                //alert("Please select a recipe category name.");
+                var message = "Please select a recipe category name.";
+                print_common_message(message);
                 return;
             }
             if ($("#input_recipe_name").val().length == 0)
             {
-                alert("Recipe name is required.");
+               // alert("Recipe name is required.");
+               var message = "Recipe name is required.";
+                print_common_message(message);
                 return;
             }
             
@@ -22,7 +26,9 @@
                     recipes_category_id: selected_value
                 },
                 success: function(data) {
-                    alert(data['message']);
+                  //  alert(data['message']);
+                   var message = data['message'];
+                   print_common_message(message);
                     if (data['status'] === 1)
                     {                        
                         $("#tbody_tournament_list").html($("#tbody_tournament_list").html()+tmpl("tmpl_tournament_list",  data['tournament_info']));

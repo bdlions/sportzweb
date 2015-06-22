@@ -9,8 +9,10 @@
                     image_id: $("#input_photography_id").val()
                 },
                 success: function(data) {
-                    console.log(data);
-                    alert(data.message);
+//                    console.log(data);
+                    //alert(data.message);
+                    var message = data.message;
+                    print_common_message(message);
                     $("#modal_photo_delete_confirm").modal('hide');
                     window.location.reload();
                 }

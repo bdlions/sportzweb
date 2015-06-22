@@ -3,7 +3,9 @@
         $("#button_update_team").on("click", function() {
             if ($("#input_team_update_title").val().length == 0)
             {
-                alert("Please assign team name");
+               // alert("Please assign team name");
+               var message = "Please assign team name";
+                  print_common_message(message);
                 return;
             }
             $.ajax({
@@ -15,7 +17,9 @@
                     team_id: $("#input_team_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                  print_common_message(message);
                     $("#modal_team_update").modal('hide');
                     window.location.reload();
                 }

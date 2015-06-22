@@ -57,12 +57,15 @@ function deleteRow(tableID) {
 				}
 			}
 		} 
-		if(!selectionMade){
-			alert("Please select one or more rows to delete");
-		}
-	} catch (e) {
-		alert(e);
-	}
+        if (!selectionMade) {
+            //		alert("Please select one or more rows to delete");
+                        var message = "Please select one or more rows to delete";
+                        print_common_message(message);
+        }
+    } catch (e) {
+        // alert(e);
+        var message = e;
+        print_common_message(message);
 }
 
 function cloneRow(tableID, maxRows) {

@@ -158,7 +158,9 @@
     {
         if (!parseInt($('#w').val()))
         {
-            alert('Please select a crop region then press submit.');
+            //alert('Please select a crop region then press submit.');
+            var message = "Please select a crop region then press submit.";
+                print_common_message(message);
             return false;
         }        
         $.ajax({
@@ -199,7 +201,9 @@
     function checkCoords()
     {
       if (parseInt($('#w').val())) return true;
-      alert('Please select a crop region then press submit.');
+      //alert('Please select a crop region then press submit.');
+      var message = "Please select a crop region then press submit.";
+                print_common_message(message);
       return false;
     };
 </script>

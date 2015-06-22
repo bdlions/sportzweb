@@ -79,7 +79,9 @@ $(function () {
                 node.append("<textarea rows='2' class='form-control' placeholder='Add Description' name='description'/>");
             }
             if (file.error) {
-                alert(file.error);
+                //alert(file.error);
+                var message = file.error;
+                print_common_message(message);
             }
             if (index + 1 === data.files.length) {
                 data.context.find('button').text('Upload').prop('disabled', !!data.files.error);
@@ -95,7 +97,9 @@ $(function () {
             $.each(data.files, function(index, file) {
                 //var error = $('<span class="text-danger"/>').text('File upload failed.');
                 //$(data.context.children()[index]).append('<br>').append(error);
-                alert('File upload failed');
+               // alert('File upload failed');
+               var message = "File upload failed";
+                print_common_message(message);
             });
         }).prop('disabled', !$.support.fileInput)
                 .parent().addClass($.support.fileInput ? undefined : 'disabled');

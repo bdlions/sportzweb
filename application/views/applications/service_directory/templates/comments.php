@@ -9,7 +9,9 @@
     {
         if ($("#comment_for_edit_"+comment_id).val().length == 0)
         {
-            alert("please type your comment");
+            //alert("please type your comment");
+             var message = "please type your comment";
+                print_common_message(message);
             return false;
         }
         var radios = $('#comment_nature_for_edit_'+comment_id+' input:radio[name=comment_nature]');
@@ -31,7 +33,9 @@
                 service_id : $("#service_id").val()
             },
             success: function(data) {
-                alert(data['message']);
+                //alert(data['message']);
+                var message = data['message'];
+                print_common_message(message);
                 if (data['status'] === 1)
                 {                       
                     window.location.reload();
@@ -52,7 +56,9 @@
                 comment_id : id,
             },
             success: function(data) {
-                alert(data['message']);
+               // alert(data['message']);
+               var message = data['message'];
+                print_common_message(message);
                 if (data['status'] === 1)
                 {                       
                     window.location.reload();
@@ -398,7 +404,9 @@
         $("#save_comment").on("click", function() {
             if ($("#comment").val().length == 0)
             {
-                alert("please type your comment");
+               // alert("please type your comment");
+               var message = "please type your comment";
+                print_common_message(message);
                 return false;
             }
             var radios = $('input:radio[name=comment_nature]');
@@ -418,7 +426,9 @@
                     service_id : $("#service_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                print_common_message(message);
                     if (data['status'] === 1)
                     {                    
                         //$("#tbody_service_comments_list").html($("#tbody_service_comments_list").html()+tmpl("tmpl_service_comments_list",  data['service_comment_info']));

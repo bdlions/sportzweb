@@ -35,7 +35,9 @@
                           window.location.replace('<?php echo base_url()."messages/user/".$to; ?>')();
                       }
                       else{
-                          alert("error for following users.");
+                          //alert("error for following users.");
+                          var message = "error for following users.";
+                          print_common_message(message);
                       }
                   }
               });

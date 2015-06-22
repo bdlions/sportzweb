@@ -9,7 +9,9 @@
                     news_id: $("#input_news_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                   print_common_message(message);
                     $("#modal_delete_confirm").modal('hide');
                     window.location.reload();
                 }

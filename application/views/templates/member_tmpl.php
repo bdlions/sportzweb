@@ -22,7 +22,6 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/custom_plugin.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery-ui.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/custom_error.js"></script>
@@ -32,6 +31,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery.jscroll.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
         <script type="text/javascript">
             var config = {
                base: "<?php echo base_url(); ?>"
@@ -78,6 +78,6 @@
         </div>
         <?php //$this->load->view("templates/sections/footer");?>
         <?php $this->load->view("member/messages/chat");?>
-        <?php $this->load->view("common/common_modal"); ?>
+        <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>

@@ -3,7 +3,9 @@
         $("#button_save_news_category").on("click", function() {
             if ($("#input_news_category_name").val().length == 0)
             {
-                alert("News Category name is required.");
+                //alert("News Category name is required.");
+                var message = "News Category name is required.";
+               print_common_message(message);
                 return;
             }
             $.ajax({
@@ -14,7 +16,9 @@
                     news_category_name: $("#input_news_category_name").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                   print_common_message(message);
                    if (data['status'] === 1)
                     {
                      $("#tbody_news_category_list").html($("#tbody_news_category_list").html()+tmpl("tmpl_news_category_list",  data['news_category_info']));

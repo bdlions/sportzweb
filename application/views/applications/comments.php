@@ -4,7 +4,9 @@
         $("#save_comment").on("click", function() {
             if ($("#comment").val().length == 0)
             {
-                alert("please type your comment");
+                //alert("please type your comment");
+                var message = "please type your comment";
+                print_common_message(message);
                 return false;
             }
             var radios = $('input:radio[name=comment_nature]');
@@ -99,7 +101,9 @@
     {
         if ($("#comment_for_edit_" + comment_id).val().length == 0)
         {
-            alert("please type your comment");
+            //alert("please type your comment");
+            var message = "please type your comment";
+                print_common_message(message);
             return false;
         }
         //var radios = $('#comment_nature_for_edit_' + comment_id + ' input:radio[name=comment_nature'+comment_id+']');

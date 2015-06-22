@@ -74,8 +74,8 @@
             if (status == google.maps.GeocoderStatus.OK){
                 var latitude = results[0].geometry.location.lat();
                 var longitude = results[0].geometry.location.lng();
-                console.log("lat2:"+latitude);
-                console.log("lng2:"+longitude);
+                //console.log("lat2:"+latitude);
+                //console.log("lng2:"+longitude);
                 var map_options = {
                     center: new google.maps.LatLng(latitude, longitude),
                     zoom: 12,
@@ -93,7 +93,7 @@
                             success: function(data) {
                                 if (data.results != undefined && data.results.length > 0) {
                                     var latlng = new google.maps.LatLng(service['latitude'], service['longitude']);
-                                    console.log("latlng"+latlng);
+                                    //console.log("latlng"+latlng);
                                     var markers = new google.maps.Marker({
                                         position: latlng,
                                         icon: '<?php echo base_url(). SERVICE_DIRECTORY_CATEGORY_IMAGE_PATH ?>'+service['picture'],
@@ -118,7 +118,7 @@
                 }
             }
             else {
-                alert("Location is not found");
+                //alert("Location is not found");
             }
         });*/
         

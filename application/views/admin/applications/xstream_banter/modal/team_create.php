@@ -3,7 +3,9 @@
         $("#button_create_team").on("click", function() {
             if ($("#input_team_create_title").val().length == 0)
             {
-                alert("Please assign team name");
+                //alert("Please assign team name");
+                var message = "Please assign team name";
+                  print_common_message(message);
                 return;
             }
             $.ajax({
@@ -15,7 +17,9 @@
                     sports_id:'<?php echo $sports_id?>'
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                  print_common_message(message);
                     $("#modal_team_create").modal('hide');
                     window.location.reload();
                 }

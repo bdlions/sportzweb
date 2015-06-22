@@ -10,7 +10,9 @@
         //alert(comment_id);
         if ($("#comment_for_edit_"+comment_id).val().length == 0)
         {
-            alert("please type your comment");
+            //alert("please type your comment");
+            var message = "please type your comment";
+            print_common_message(message);
             return false;
         }
         var radios = $('#comment_nature_for_edit_'+comment_id+' input:radio[name=comment_nature]');
@@ -32,7 +34,9 @@
                 blog_id : $("#blog_id").val()
             },
             success: function(data) {
-                alert(data['message']);
+                //alert(data['message']);
+                var message = data['message'];
+                print_common_message(message);
                 if (data['status'] === 1)
                 {                       
                     window.location.reload();
@@ -54,7 +58,9 @@
                 comment_id : id,
             },
             success: function(data) {
-                alert(data['message']);
+               // alert(data['message']);
+               var message = data['message'];
+                print_common_message(message);
                 if (data['status'] === 1)
                 {                       
                     window.location.reload();
@@ -68,7 +74,9 @@
         var value = document.getElementById("comment_view").value;
         
         var blog_id = <?php echo $blog['id'] ?>;
-        alert(blog_id);
+        //alert(blog_id);
+        var message = blog_id;
+        print_common_message(message);
         $.ajax({
             dataType: 'json',
             type: "POST",
@@ -432,7 +440,9 @@
         $("#save_comment").on("click", function() {
             if ($("#comment").val().length == 0)
             {
-                alert("please type your comment");
+                //alert("please type your comment");
+                 var message = "please type your comment";
+                 print_common_message(message);
                 return false;
             }
             var radios = $('input:radio[name=comment_nature]');
@@ -456,7 +466,9 @@
                     blog_id : $("#blog_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     if (data['status'] === 1)
                     {                    
                         //$("#tbody_blog_comments_list").html($("#tbody_blog_comments_list").html()+tmpl("tmpl_blog_comments_list",  data['blog_comment_info']));

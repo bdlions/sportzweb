@@ -51,7 +51,9 @@
                           window.location.reload();
                       }
                       else{
-                          alert("error for following users.");
+//                          alert("error for following users.");
+                         var message = "error for following users.";
+                          print_common_message(message);
                       }
                   }
               });

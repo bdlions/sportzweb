@@ -4,7 +4,9 @@
         $("#button_save_news_sub_category_edit").on("click", function() {
             if ($("#input_news_sub_category_name_for_edit").val().length == 0)
             {
-                alert("News sub category name is required.");
+               // alert("News sub category name is required.");
+               var message = "News sub category name is required.";
+               print_common_message(message);
                 return;
             }
             $.ajax({
@@ -17,7 +19,9 @@
                     news_sub_category_id: $("#input_news_sub_category_id").val(),
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                  var message = data['message'];
+                  print_common_message(message);
                     if (data['status'] === 1)
                     {
                         $("#news_title_" + data['news_sub_category_info']['id']).text(data['news_sub_category_info']['title']);

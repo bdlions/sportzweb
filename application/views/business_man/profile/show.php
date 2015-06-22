@@ -40,7 +40,9 @@ $(function(){
                 //node.prepend(file.preview);
             }
         if (file.error) {
-            alert("Uploading error!");
+           // alert("Uploading error!");
+           var message = "Uploading error!";
+                print_common_message(message);
         }
     }).on('fileuploadprogressall', function(e, data) {            
     }).on('fileuploaddone', function(e, data) {
@@ -74,7 +76,9 @@ $(function(){
           //      node.prepend(file.preview);
           //  }
         if (file.error) {
-            alert("Uploading error!");
+            //alert("Uploading error!");
+            var message = "Uploading error!";
+                print_common_message(message);
         }
     }).on('fileuploadprogressall', function(e, data) {            
     }).on('fileuploaddone', function(e, data) {

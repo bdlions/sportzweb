@@ -3,7 +3,9 @@
         $("#button_create").on("click", function() {
             if ($("#input_title").val().length == 0)
             {
-                alert("Please assign Currency name");
+               // alert("Please assign Currency name");
+               var message = "Please assign Currency name";
+               print_common_message(message);
                 return;
             }
             $.ajax({
@@ -14,7 +16,9 @@
                     title: $("#input_title").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     $("#modal_create").modal('hide');
                     window.location.reload();
                 }

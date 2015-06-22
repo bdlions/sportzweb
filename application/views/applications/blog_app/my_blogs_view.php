@@ -59,7 +59,9 @@
                     blog_id : blog_id
                 },
                 success: function(data) {
-                    alert(data.message);
+                    //alert(data.message);
+                    var message = data.message;
+                    print_common_message(message);
                     location.reload();
 
                 }

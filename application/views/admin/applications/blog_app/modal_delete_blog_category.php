@@ -11,7 +11,9 @@
                     blog_category_id: $("#input_blog_category_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                 //   alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     if (data['status'] === 1)
                     {
                         $("#modal_delete_blog_category").modal('hide');

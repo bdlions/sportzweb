@@ -59,11 +59,15 @@
                     }
                     else if(data == <?php echo STATUS_POST_EMPTY_ERROR?>)
                     {
-                        alert("Empty status can't be posted!");
+                       // alert("Empty status can't be posted!");
+                       var message = "Empty status can't be posted!";
+                    print_common_message(message);
                     }
                     else if(data == <?php echo STATUS_POST_INSERTION_ERROR?>)
                     {
-                        alert("Internal server error. Please try again.");
+                                // alert("Internal server error. Please try again.");
+                                var message = "Internal server error. Please try again.";
+                    print_common_message(message);
                     }
                     else 
                     {
@@ -99,11 +103,11 @@
                     }
                     else if(data == <?php echo STATUS_POST_EMPTY_ERROR?>)
                     {
-                        alert("Empty status can't be posted!");
+                        //alert("Empty status can't be posted!");
                     }
                     else if(data == <?php echo STATUS_POST_INSERTION_ERROR?>)
                     {
-                        alert("Internal server error. Please try again.");
+                     //   alert("Internal server error. Please try again.");
                     }
                     else 
                     {
@@ -255,7 +259,7 @@
             var myRegexp = new RegExp('#([^\\s]*)','g');
             var match = myRegexp.exec(newHtml);
             if(match != null){
-                console.log(match);
+                //console.log(match);
                 if(match[1] != '')
                 {
                     var status_text = $("#appendedInputButton").html();

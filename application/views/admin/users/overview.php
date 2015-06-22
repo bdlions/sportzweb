@@ -3,7 +3,9 @@
         $("#button_search_users").on("click", function() {
             if($("#start_age").val().length == 0 || $("#end_age").val().length == 0)
             {
-                alert('Please assign date range correctly.');
+                //alert('Please assign date range correctly.');
+                var message = "Please assign date range correctly.";
+                    print_common_message(message);
                 return;
             }
             $.ajax({

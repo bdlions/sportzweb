@@ -23,6 +23,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/typeahead.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/hogan-2.0.0.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
         <script type="text/javascript">
             var config = {
                base: "<?php echo base_url(); ?>"
@@ -114,5 +115,6 @@
         </div>
         <?php $this->load->view("member/messages/chat");?>
         <?php $this->load->view("templates/sections/footer");?>
+        <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>

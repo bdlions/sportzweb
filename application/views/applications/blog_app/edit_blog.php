@@ -228,17 +228,23 @@ $(function () {
         $("#description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.description.getData())).html());
         $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
         if (!$('.category_id').is(':checked')) {
-            alert("Checked atleast one blog category");
+            //alert("Checked atleast one blog category");
+            var message = "Checked atleast one blog category";
+            print_common_message(message);
             return;
         }
         else if (CKEDITOR.instances.title.getData() === "")
         {
-            alert("Blog heading is required.");
+           // alert("Blog heading is required.");
+            var message = "Blog heading is required.";
+            print_common_message(message);
             return;
         }
         else if(CKEDITOR.instances.description.getData() === "")
         {
-            alert("Blog description is required.");
+            //alert("Blog description is required.");
+            var message = "Blog description is required.";
+            print_common_message(message);
             return;
         }
         $.ajax({
@@ -247,7 +253,9 @@ $(function () {
             url: '<?php echo base_url();?>applications/blog_app/edit_blog/<?php echo $blog_id;?>',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
-                alert(data.message);
+                //alert(data.message);
+            var message = data.message;
+            print_common_message(message);
                 if(data.status == true)
                 {
                     window.location = '<?php echo base_url();?>applications/blog_app/users_blog/';
@@ -264,17 +272,23 @@ $(function () {
                         $("#description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.description.getData())).html());
                         $("#image_description_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.image_description.getData())).html());
                         if (!$('.category_id').is(':checked')) {
-                            alert("Checked atleast one blog category");
+                            //alert("Checked atleast one blog category");
+                            var message = "Checked atleast one blog category";
+                            print_common_message(message);
                             return;
                         }
                         else if (CKEDITOR.instances.title.getData() === "")
                         {
-                            alert("Blog heading is required.");
+                            //alert("Blog heading is required.");
+                            var message = "Blog heading is required.";
+                            print_common_message(message);
                             return;
                         }
                         else if(CKEDITOR.instances.description.getData() === "")
                         {
-                            alert("Blog description is required.");
+                            //alert("Blog description is required.");
+                            var message = "Blog description is required.";
+                            print_common_message(message);
                             return;
                         }
                         var $this = $(this),data = $this.data();
@@ -329,12 +343,16 @@ $(function () {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
-            alert(data.result.message);
+           // alert(data.result.message);
+           var message = data.result.message;
+           print_common_message(message);
             window.location = '<?php echo base_url();?>applications/blog_app/users_blog';
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+            //alert(data.message);
+           var message = data.message;
+           print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

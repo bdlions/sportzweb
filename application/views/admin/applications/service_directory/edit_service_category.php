@@ -65,7 +65,9 @@ $(function () {
     $("#btnSubmit").on("click", function(){
         if ($("#title").val().length == 0)
         {
-            alert("Title of service category is required.");
+            //alert("Title of service category is required.");
+            var message = "Title of service category is required.";
+            print_common_message(message);
             return;
         }
         $.ajax({
@@ -74,7 +76,9 @@ $(function () {
             url: '<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
-                alert(data.message);
+               // alert(data.message);
+               var message = data.message;
+            print_common_message(message);
                 window.location = '<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>';
             }
         });
@@ -86,7 +90,9 @@ $(function () {
                     on('click', function() {
                                     if ($("#title").val().length == 0)
                                     {
-                                        alert("Title of service category is required.");
+                                        //alert("Title of service category is required.");
+                                        var message = "Title of service category is required.";
+                                        print_common_message(message);
                                         return;
                                     }
                                     var $this = $(this),data = $this.data();
@@ -142,13 +148,17 @@ $(function () {
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
             //console.log(data);
-            alert(data.result.message);
+            //alert(data.result.message);
+            var message = data.result.message;
+            print_common_message(message);
             window.location = '<?php echo base_url();?>admin/applications_servicedirectory/edit_service_category/<?php echo $service_category_id; ?>';
             //console.log(data);
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+            //alert(data.message);
+            var message = data.message;
+            print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

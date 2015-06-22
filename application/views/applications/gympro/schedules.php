@@ -83,7 +83,9 @@
                     session_id: $("#selected_session").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                    var message = data['message'];
+                 print_common_message(message);
                     window.location.reload();
                 }
             });

@@ -24,7 +24,9 @@
         });
         if (is_product_previously_selected === true)
         {
-            alert('The question is already selected.');
+           // alert('The question is already selected.');
+            var message = "The question is already selected.";
+            print_common_message(message);
             return;
         }
         $("#tbody_selected_question_list").html($("#tbody_selected_question_list").html()+tmpl("tmpl_selected_question_info",  question_info)); 
@@ -132,7 +134,9 @@
             var selected_date_for_item = $('#date_for_show_item').val();
             if (selected_date_for_item.length == 0)
             {
-                alert('please select a date first');
+               // alert('please select a date first');
+               var message = "please select a date first";
+            print_common_message(message);
             }
             var global_check = true;
             var selected_question_array = Array();
@@ -148,14 +152,18 @@
                     selected_questions_order_array.push(questionOrder);
                 } else {
                     global_check = false;
-                    alert('you did not give order of a question');
+                    //alert('you did not give order of a question');
+                    var message = "you did not give order of a question";
+                    print_common_message(message);
                     return false;
                 }
                 
                 if(questionId !== '') {
                     selected_question_array.push(questionId);
                 } else {
-                    alert('your selected question have no id');
+                   // alert('your selected question have no id');
+                   var message = "your selected question have no id";
+                    print_common_message(message);
                     return false;
                 }
                 
@@ -173,7 +181,9 @@
                         show_advertise: show_advertise
                     },
                     success: function(data) {
-                        alert(data['message']);
+                      //  alert(data['message']);
+                        var message = data['message'];
+                    print_common_message(message);
                         if (data['status'] === 1)
                         {
                             location.reload();

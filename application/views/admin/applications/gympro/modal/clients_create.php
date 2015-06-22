@@ -3,12 +3,16 @@
         $("#button_create").on("click", function() {
             if ($("#input_title").val().length == 0)
             {
-                alert("Please enter First Name");
+               // alert("Please enter First Name");
+               var message = "Please enter First Name";
+               print_common_message(message);
                 return;
             }
             if ($("#input_pricing").val().length == 0)
             {
-                alert("Please enter Last Name");
+               // alert("Please enter Last Name");
+                var message = "Please enter Last Name";
+               print_common_message(message);
                 return;
             }
             $.ajax({
@@ -20,7 +24,9 @@
                     last_name: $("#input_pricing").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                     var message = data['message'];
+                     print_common_message(message);
                     $("#modal_create").modal('hide');
                     window.location.reload();
                 }

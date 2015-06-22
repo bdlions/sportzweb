@@ -72,15 +72,17 @@
             },
             success: function(data){
                 if(data.status === 1) {
-                    alert(data.message);
+                 //   alert(data.message);
+                 var message = data.message;
+                 print_common_message(message);
                     window.location = '<?php echo base_url();?>admin/applications_blogs/approve_blog';
                     location.reload(true);
                 }
                 else if(data.status==0)
                 {
                     //alert(data.message);
-                    $("#deletion_msg").text(data.message);
-                    $('#myModal').modal('show');
+                     var message = data.message;
+                     print_common_message(message);
                     $('#modal_button_confirm').on('click',function(){
                         $.ajax({
                             dataType: 'json',
@@ -90,7 +92,9 @@
                                 blog_id: blog_id
                             },
                             success: function(data){
-                                alert(data.message);
+                             //   alert(data.message);
+                              var message = data.message;
+                              print_common_message(message);
                                 window.location = '<?php echo base_url();?>admin/applications_blogs/approve_blog';
                                 location.reload(true);
                             }

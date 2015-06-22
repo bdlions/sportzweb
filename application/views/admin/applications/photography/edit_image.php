@@ -55,12 +55,16 @@
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css('width', progress + '%');
         }).on('fileuploaddone', function(e, data) {
-            alert(data.result.message);
+            //alert(data.result.message);
+            var message = data.result.message;
+            print_common_message(message);
             window.location = '<?php echo base_url() . 'admin/applications_photography'; ?>';
         }).on('fileuploadsubmit', function(e, data) {
             data.formData = $('#form_edit_image').serializeArray();
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+           // alert(data.message);
+          var message = data.message;
+          print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

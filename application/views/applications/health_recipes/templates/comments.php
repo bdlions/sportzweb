@@ -10,7 +10,9 @@
         //alert(comment_id);
         if ($("#comment_for_edit_" + comment_id).val().length == 0)
         {
-            alert("please type your comment");
+           // alert("please type your comment");
+           var message = please type your comment;
+           print_common_message(message);
             return false;
         }
         var radios = $('#comment_nature_for_edit_' + comment_id + ' input:radio[name=comment_nature'+comment_id+']');
@@ -37,7 +39,9 @@
                     var generated_html = tmpl("tmpl_recipe_comments_list", data['comment_info']);
                     $("#div_comment_"+comment_id+"").html($(generated_html).html());
                 }
-                alert(data['message']);                
+                //alert(data['message']); 
+                var message = data['message'];
+                 print_common_message(message);
             }
         });
 
@@ -54,7 +58,9 @@
                 comment_id: id,
             },
             success: function(data) {
-                alert(data['message']);
+               // alert(data['message']);
+               var message = data['message'];
+                 print_common_message(message);
                 if (data['status'] === 1)
                 {
                     $("#div_comment_"+id+"").remove();
@@ -298,7 +304,9 @@
         $("#save_comment").on("click", function() {
             if ($("#comment").val().length == 0)
             {
-                alert("please type your comment");
+                //alert("please type your comment");
+                var message = "please type your comment";
+                 print_common_message(message);
                 return false;
             }
             var radios = $('input:radio[name=comment_nature]');
@@ -317,7 +325,9 @@
                     recipe_id: $("#recipe_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                 print_common_message(message);
                     if (data['status'] === 1)
                     {
                         $("#div_comment_list").html(tmpl("tmpl_recipe_comments_list", data['comment_info'])+$("#div_comment_list").html());                        

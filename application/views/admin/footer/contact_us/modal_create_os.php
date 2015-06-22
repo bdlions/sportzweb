@@ -3,7 +3,9 @@
         $("#button_save_os").on("click", function() {
             if ($("#input_os_name").val().length == 0)
             {
-                alert("Operating System name is required.");
+                //alert("Operating System name is required.");
+                var message = "Operating System name is required.";
+                print_common_message(message);
                 return;
             }
             $.ajax({
@@ -14,7 +16,9 @@
                     new_os_name: $("#input_os_name").val()
                 },
                 success: function(data) {
-                    alert(data.message);
+                    //alert(data.message);
+                    var message = data.message;
+                print_common_message(message);
                     $('#modal_create_os').modal('hide');
                     window.location = '<?php echo base_url();?>admin/contact_us/manage_os';
                 }

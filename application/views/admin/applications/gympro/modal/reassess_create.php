@@ -3,7 +3,9 @@
         $("#button_create").on("click", function() {
             if ($("#input_a").val().length == 0)
             {
-                alert("Please assign title");
+                //alert("Please assign title");
+                var message = "Please assign title";
+                print_common_message(message);
                 return;
             }
             $.ajax({
@@ -14,7 +16,9 @@
                     input_a: $("#input_a").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                  //  alert(data['message']);
+                  var message = data['message'];
+                  print_common_message(message);
                     $("#modal_create").modal('hide');
                     window.location.reload();
                 }

@@ -3,7 +3,9 @@
         $("#button_save_recipe_category").on("click", function() {
             if ($("#input_recipe_category_name").val().length == 0)
             {
-                alert("Recipe Category name is required.");
+                //alert("Recipe Category name is required.");
+                var message = "Recipe Category name is required.";
+                   print_common_message(message);
                 return;
             }
             $.ajax({
@@ -14,7 +16,9 @@
                     recipe_category_name: $("#input_recipe_category_name").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                   print_common_message(message);
                     if (data['status'] === 1)
                     {                        
                         //$("#tbody_recipes_category_list").html($("#tbody_recipes_category_list").html()+tmpl("tmpl_recipes_category_list",  data['recipe_category_info']));

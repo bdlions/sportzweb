@@ -30,30 +30,46 @@
                 //alert(position_0 +"<>"+ position_1 +"<>"+position_2+"<>"+position_3+"<>"+position_4+"<>"+position_5);
                 
                 if(present_value == 0 &&( blog_id == position_1 || blog_id == position_2 || blog_id == position_3 || blog_id == position_4 || blog_id == position_5 || blog_id == position_6 || blog_id == position_7)) {
-                    alert('This blog is already selected in one position');
+                 //   alert('This blog is already selected in one position');
+                var message = "This blog is already selected in one position";
+                 print_common_message(message);
                     return;
                 } else if(present_value ==1 && (blog_id == position_0 || blog_id == position_2 || blog_id == position_3 || blog_id == position_4 || blog_id == position_5 || blog_id == position_6 || blog_id == position_7)) {
-                   alert('This blog is already selected in one position');
+                  // alert('This blog is already selected in one position');
+                  var message = "This blog is already selected in one position";
+                 print_common_message(message);
                    return;
                 }else if(present_value ==2 && (blog_id == position_0 || blog_id == position_1 || blog_id == position_3 || blog_id == position_4 || blog_id == position_5  || blog_id == position_6 || blog_id == position_7)) {
-                    alert('This blog is already selected in one position');
+                   // alert('This blog is already selected in one position');
+                   var message = "This blog is already selected in one position";
+                 print_common_message(message);
                     return;
                 }else if(present_value ==3 && (blog_id == position_0 || blog_id == position_1 || blog_id == position_2 || blog_id == position_4 || blog_id == position_5  || blog_id == position_6 || blog_id == position_7)){
-                    alert('This blog is already selected in one position');
+                  //  alert('This blog is already selected in one position');
+                  var message = "This blog is already selected in one position";
+                 print_common_message(message);
                     return;
                 }
                 else if(present_value ==4 && (blog_id == position_0 || blog_id == position_1 || blog_id == position_2 || blog_id == position_3 || blog_id == position_5  || blog_id == position_6 || blog_id == position_7)){
-                    alert('This blog is already selected in one position');
+                   // alert('This blog is already selected in one position');
+                   var message = "This blog is already selected in one position";
+                 print_common_message(message);
                     return;
                 }
                 else if(present_value ==5 && (blog_id == position_0 || blog_id == position_1 || blog_id == position_2 || blog_id == position_3 || blog_id == position_4  || blog_id == position_6 || blog_id == position_7)){
-                    alert('This blog is already selected in one position');
+//                    alert('This blog is already selected in one position');
+                        var message = "This blog is already selected in one position";
+                 print_common_message(message);
                     return;
                 }else if(present_value ==6 && (blog_id == position_0 || blog_id == position_1 || blog_id == position_2 || blog_id == position_3 || blog_id == position_4  || blog_id == position_5 || blog_id == position_7)){
-                    alert('This blog is already selected in one position');
+                    //alert('This blog is already selected in one position');
+                    var message = "This blog is already selected in one position";
+                 print_common_message(message);
                     return;
                 }else if(present_value ==7 && (blog_id == position_0 || blog_id == position_1 || blog_id == position_2 || blog_id == position_3 || blog_id == position_4  || blog_id == position_6 || blog_id == position_5)){
-                    alert('This blog is already selected in one position');
+                   // alert('This blog is already selected in one position');
+                   var message = "This blog is already selected in one position";
+                 print_common_message(message);
                     return;
                 }
                 
@@ -90,7 +106,9 @@
                 
                 $('#modal_edit_blog_home_page').modal('hide');
             } else {
-                alert('You can only select one blog for this position');
+                //alert('You can only select one blog for this position');
+                var message = "You can only select one blog for this position";
+                 print_common_message(message);
                 return ;
             }
            

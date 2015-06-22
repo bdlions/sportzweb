@@ -3,7 +3,9 @@
         $("#button_update_product_category").on("click", function() {
             if ($("#input_product_category_update_title").val().length == 0)
             {
-                alert("Please assign category name");
+               // alert("Please assign category name");
+               var message = "Please assign category name";
+               print_common_message(message);
                 return;
             }
             $.ajax({
@@ -15,7 +17,9 @@
                     category_id: $("#input_product_category_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                  //  alert(data['message']);
+                  var message = data['message'];
+                    print_common_message(message);
                     $("#modal_product_category_update").modal('hide');
                     window.location.reload();
                 }

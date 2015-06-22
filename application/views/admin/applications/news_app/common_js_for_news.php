@@ -23,7 +23,9 @@
                         if(i == j) continue;
                         if(news_id == position_array[j])
                         {
-                            alert('This news already selected in one position');
+                            //alert('This news already selected in one position');
+                            var message = "This news already selected in one position";
+                            print_common_message(message);
                             return;
                         }
                     }
@@ -39,7 +41,7 @@
                     success: function(data) {
 //                        console.log(data);
                         var img_position = $("#image_position_" + present_value);
-                        console.log(img_position);
+//                        console.log(img_position);
                         if(img_position != undefined){
                             img_position.attr("src", "<?php echo base_url().NEWS_IMAGE_PATH;?>" + data.picture.replace(/(\r\n|\n|\r)/gm,""));
                         }
@@ -59,7 +61,9 @@
                 });
                 $('#common_modal_news_list').modal('hide');
             } else {
-                alert('You can only select one news for this position');
+               // alert('You can only select one news for this position');
+                var message = "You can only select one news for this position";
+                print_common_message(message);
                 return ;
             }
         

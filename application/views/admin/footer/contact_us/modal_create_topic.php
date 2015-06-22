@@ -3,7 +3,9 @@
         $("#button_save_topic").on("click", function() {
             if ($("#input_topic_name").val().length == 0)
             {
-                alert("Topic name is required.");
+                //alert("Topic name is required.");
+                var message = "Topic name is required.";
+            print_common_message(message);
                 return;
             }
             $.ajax({
@@ -14,7 +16,9 @@
                     input_topic_name: $("#input_topic_name").val()
                 },
                 success: function(data) {
-                    alert(data.message);
+                    //alert(data.message);
+                     var message = data.message;
+                    print_common_message(message);
                     window.location = '<?php echo base_url();?>admin/contact_us/manage_topic';
                 }
             });

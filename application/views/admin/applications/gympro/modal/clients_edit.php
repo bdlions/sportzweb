@@ -3,12 +3,16 @@
         $("#button_update").on("click", function() {
             if ($("#input_update_title").val().length == 0)
             {
-                alert("Please assign First name");
+              //  alert("Please assign First name");
+                var message = "Please assign First name";
+                print_common_message(message);
                 return;
             }
             if ($("#input_update_pricing").val().length == 0)
             {
-                alert("Please assign Last name");
+               // alert("Please assign Last name");
+               var message = "Please assign Last name";
+                print_common_message(message);
                 return;
             }
             $.ajax({
@@ -21,7 +25,9 @@
                     price: $("#input_update_pricing").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                   print_common_message(message);
                     $("#modal_update").modal('hide');
                     window.location.reload();
                 }

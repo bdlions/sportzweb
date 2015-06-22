@@ -18,6 +18,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery-ui.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/custom_error.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/expanding.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
         
         
                 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
@@ -56,5 +57,7 @@
             </div>
         </div>
         <?php $this->load->view("templates/sections/footer");?>
+        <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>
+ 

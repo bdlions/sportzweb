@@ -42,7 +42,9 @@
                     del_id: $("#delete_id_data").val()
                 },
                 success: function(data) {
-                    alert(data.message); 
+                    //alert(data.message); 
+                    var message = data.message;
+            print_common_message(message);
                     $('#modal_delete').modal('hide');
                     window.location = '<?php echo base_url();?>admin/contact_us/manage_browser';
                 }
@@ -54,7 +56,9 @@
         $("#button_save_browser_edit").on("click", function() {
             if ($("#input_browser_name_for_edit").val().length == 0)
             {
-                alert("Browser name is required.");
+                //alert("Browser name is required.");
+                var message = "Browser name is required.";
+            print_common_message(message);
                 return;
             }
             $.ajax({
@@ -66,7 +70,9 @@
                     browser_id: $("#browser_id_data").val()
                 },
                 success: function(data) {
-                    alert(data.message); 
+                   // alert(data.message); 
+                   var message = data.message;
+            print_common_message(message);
                     $('#modal_edit_browser').modal('hide');
                     window.location = '<?php echo base_url();?>admin/contact_us/manage_browser';
                 }

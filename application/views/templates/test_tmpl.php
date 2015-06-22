@@ -22,6 +22,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/hogan-2.0.0.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery.jscroll.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
     </head>
 
     <body>
@@ -30,5 +31,7 @@
                 <?php echo $contents; ?>
             </div>
         </div>
+        <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>
+ 

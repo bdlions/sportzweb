@@ -16,7 +16,9 @@
             var configuration_date = $('#input_configuration_date').val();
             if(configuration_date.length == 0)
             {
-                alert('please select a date to configure your news item');
+               // alert('please select a date to configure your news item');
+                var message = "please select a date to configure your news item";
+                print_common_message(message);
                 return;
             }
             var show_advertise = 1;
@@ -47,7 +49,9 @@
                     selected_date: configuration_date
                 },
                 success: function(data){
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                print_common_message(message);
                 }
             });
         });

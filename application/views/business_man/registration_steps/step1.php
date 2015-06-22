@@ -65,7 +65,9 @@
                                 kmrSimpleTabs.setStep(1);
                             }
                             else {
-                                alert("Cannot update profile");
+                                //alert("Cannot update profile");
+                                var message = "Cannot update profile";
+                                print_common_message(message);
                             }
                         }
                     });

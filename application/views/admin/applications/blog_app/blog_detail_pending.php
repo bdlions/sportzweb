@@ -70,7 +70,9 @@
                     blog_id : blog_id
                 },
                 success: function(data) {
-                    alert('Category updated successfully');
+                 //   alert('Category updated successfully');
+                   var message = "Category updated successfully";
+                   print_common_message(message);
                 }
             });
         });

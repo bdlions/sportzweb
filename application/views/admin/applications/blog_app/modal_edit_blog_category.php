@@ -4,7 +4,9 @@
         $("#button_save_blog_category_edit").on("click", function() {
             if ($("#input_blog_category_name_for_edit").val().length == 0)
             {
-                alert("Blog Category name is required.");
+//                alert("Blog Category name is required.");
+                var message = "Blog Category name is required.";
+                    print_common_message(message);
                 return;
             }
             $.ajax({
@@ -16,7 +18,9 @@
                     blog_category_id: $("#input_blog_category_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                    print_common_message(message);
                     if (data['status'] === 1)
                     {
                         $("#blog_desc_" + data['blog_category_info']['id']).text(data['blog_category_info']['title']);

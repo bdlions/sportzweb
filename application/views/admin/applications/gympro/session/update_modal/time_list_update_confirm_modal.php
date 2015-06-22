@@ -3,7 +3,9 @@
         $("#button_update").on("click", function() {
             if ($("#input_update_title").val().length == 0)
             {
-                alert("Please assign session time");
+                //alert("Please assign session time");
+               var message = "Please assign session time";
+                  print_common_message(message);
                 return;
             }
             $.ajax({
@@ -16,7 +18,9 @@
                     input_update_title_24: $("#input_update_title_24").val(),
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                  print_common_message(message);
                     $("#modal_update").modal('hide');
                     window.location.reload();
                 }

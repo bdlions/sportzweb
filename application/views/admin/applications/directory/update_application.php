@@ -139,7 +139,9 @@ $(function () {
         $("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());
         if (CKEDITOR.instances.summary.getData() === "")
         {
-            alert("Application summary is required .");
+            //alert("Application summary is required .");
+            var message = "Application summary is required .";
+                print_common_message(message);
             return;
         }
         
@@ -149,7 +151,9 @@ $(function () {
             url: '<?php echo base_url();?>admin/applications_directory/update_application/<?php echo $application_info["id"]; ?>',
             data: $("#form_update_application_directory").serializeArray(),
             success: function(data) {
-                alert(data.message);
+               // alert(data.message);
+                var message = "Application summary is required .";
+                print_common_message(message);
                 window.location = '<?php echo base_url();?>admin/applications_directory/';
             }
         });
@@ -211,12 +215,16 @@ $(function () {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
-            alert(data.result.message);
+           // alert(data.result.message);
+            var message = data.result.message;
+            print_common_message(message);
             window.location = '<?php echo base_url();?>admin/applications_directory/update_application/<?php echo $application_info['id']; ?>';
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $("#formsubmitimage").serializeArray();
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+            //alert(data.message);
+            var message = data.message;
+            print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

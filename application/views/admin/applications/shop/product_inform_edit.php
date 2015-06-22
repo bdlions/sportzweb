@@ -2,7 +2,9 @@
 <script type="text/javascript">
 window.onload = function()
 {
-    alert($("#details").val());
+    //alert($("#details").val());
+    var message = $("#details").val();
+    print_common_message(message);
     CKEDITOR.replace('details', {
         language: 'en',
     toolbar: [

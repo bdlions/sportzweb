@@ -24,7 +24,9 @@
                         news_id_list: JSON.stringify(selected_news_array)
                     },
                     success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                  var message = data.message;
+           print_common_message(message);
                     if (data['status'] === 1)
                     {
                        location.reload(); 
@@ -33,7 +35,9 @@
                 });
             }else 
             {
-                alert('Please select atleast 1 news as a breaking news');
+                //alert('Please select atleast 1 news as a breaking news');
+                var message = "Please select atleast 1 news as a breaking news";
+                print_common_message(message);
             }
         });
     });

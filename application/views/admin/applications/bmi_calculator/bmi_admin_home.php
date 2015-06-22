@@ -101,13 +101,17 @@
             },
             success: function(data){
                 if(data.status === 1) {
-                    alert(data.message);
+                   // alert(data.message);
+                     var message = data['message'];
+                     print_common_message(message);
                     window.location = '<?php echo base_url();?>admin/applications_bmicalculator';
                     location.reload(true);
                 }
                 else if(data.status == 0)
                 {
-                    alert(data.message);
+                   // alert(data.message);
+                   var message = data['message'];
+                     print_common_message(message);
                     $('#myModal').modal('show');
                     $('#modal_button_confirm').on('click',function(){
                         $.ajax({
@@ -118,8 +122,9 @@
                                 question_id: id
                             },
                             success: function(data){
-                                alert(data.message);
-                                
+                               // alert(data.message);
+                                var message = data['message'];
+                                print_common_message(message);
                                 window.location = '<?php echo base_url();?>admin/applications_bmicalculator';
                                 location.reload(true);
                             }

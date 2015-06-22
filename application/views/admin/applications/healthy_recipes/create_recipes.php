@@ -242,24 +242,34 @@ $(function () {
         $("#preparation_method_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.preparation_method.getData())).html());
         if($("#title").val().length == 0)
         {
-            alert("Name of recipe is required.");
+            //alert("Name of recipe is required.");
+            var message = "Name of recipe is required.";
+            print_common_message(message);
             return;
         }else if($("#description").val().length == 0)
         {
-            alert("Recipe description is required.");
+           // alert("Recipe description is required.");
+           var message = "Recipe description is required.";
+            print_common_message(message);
             return;
         }else if(CKEDITOR.instances.duration.getData() === "")
         {
-            alert("Duration of recipe is required.");
+            //alert("Duration of recipe is required.");
+             var message = "Duration of recipe is required.";
+            print_common_message(message);
             return;
         }else if(CKEDITOR.instances.ingrediantes.getData() === "")
         {
-            alert("Ingrediantes of recipe is required.");
+            //alert("Ingrediantes of recipe is required.");
+            var message = "Ingrediantes of recipe is required.";
+            print_common_message(message);
             return;
         }
         else if(CKEDITOR.instances.preparation_method.getData() === "")
         {
-            alert("Preparation method of recipe is required.");
+           // alert("Preparation method of recipe is required.");
+              var message = "Preparation method of recipe is required.";
+            print_common_message(message);
             return;
         }
         $.ajax({
@@ -268,7 +278,9 @@ $(function () {
             url: '<?php echo base_url();?>admin/applications_healthyrecipes/create_recipe/<?php echo $recipe_category_id?>',
             data: $("#form_create_recipe").serializeArray(),
             success: function(data) {
-                alert(data.message);
+                //alert(data.message);
+                var message = data.message;
+            print_common_message(message);
                 window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/recipe_category/<?php echo $recipe_category_id?>';
             }
         });
@@ -284,24 +296,34 @@ $(function () {
 
                         if($("#title").val().length == 0)
                         {
-                            alert("Name of recipe is required.");
+                           // alert("Name of recipe is required.");
+                            var message = "Name of recipe is required.";
+                            print_common_message(message);
                             return;
                         }else if($("#description").val().length == 0)
                         {
-                            alert("Recipe description is required.");
+                           // alert("Recipe description is required.");
+                           var message = "Recipe description is required.";
+                            print_common_message(message);
                             return;
                         }else if(CKEDITOR.instances.duration.getData() === "")
                         {
-                            alert("Duration of recipe is required.");
+                           // alert("Duration of recipe is required.");
+                           var message = "Duration of recipe is required.";
+                            print_common_message(message);
                             return;
                         }else if(CKEDITOR.instances.ingrediantes.getData() === "")
                         {
-                            alert("Ingrediantes of recipe is required.");
+                           // alert("Ingrediantes of recipe is required.");
+                           var message = "Ingrediantes of recipe is required.";
+                            print_common_message(message);
                             return;
                         }
                         else if(CKEDITOR.instances.preparation_method.getData() === "")
                         {
-                            alert("Preparation method of recipe is required.");
+                            //alert("Preparation method of recipe is required.");
+                            var message = "Preparation method of recipe is required.";
+                            print_common_message(message);
                             return;
                         }
 
@@ -358,13 +380,17 @@ $(function () {
             $('#progress .progress-bar').css('width',progress + '%');
         }).on('fileuploaddone', function(e, data) {
             //console.log(data);
-            alert(data.result.message);
+           // alert(data.result.message);
+           var message = data.result.message;
+           print_common_message(message);
             window.location = '<?php echo base_url();?>admin/applications_healthyrecipes/recipe_category/<?php echo $recipe_category_id?>';
             //console.log(data);
         }).on('fileuploadsubmit', function(e, data){
             data.formData = $('form').serializeArray();
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+            //alert(data.message);
+            var message = data.message;
+           print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

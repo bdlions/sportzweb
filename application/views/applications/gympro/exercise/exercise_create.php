@@ -4,7 +4,9 @@
         $("#submit_create_exercise").on("click", function() {
             if($("#client_list").val() == 0)
             {
-                alert("Please select the person you are assessing from the drop menu.");
+                //alert("Please select the person you are assessing from the drop menu.");
+                var message = "Please select the person you are assessing from the drop menu.";
+                print_common_message(message);
                 return false;
             }
             $.ajax({
@@ -13,7 +15,9 @@
                 url: '<?php echo base_url(); ?>applications/gympro/create_exercise',
                 data: $("#form_create_exercise").serializeArray(),
                 success: function(data) {
-                    alert(data.message);
+                   // alert(data.message);
+                   var message = data.message;
+                print_common_message(message);
                     window.location = '<?php echo base_url(); ?>applications/gympro/manage_exercises';
                 }
             });
@@ -73,12 +77,16 @@
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css('width', progress + '%');
         }).on('fileuploaddone', function(e, data) {
-            alert(data.result.message);
+            //alert(data.result.message);
+            var message = data.result.message;
+            print_common_message(message);
             window.location = '<?php echo base_url(); ?>applications/gympro/manage_exercises';
         }).on('fileuploadsubmit', function(e, data) {
             data.formData = $('#form_create_exercise').serializeArray();
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+            //alert(data.message);
+             var message = data.message;
+            print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

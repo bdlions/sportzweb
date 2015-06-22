@@ -16,7 +16,9 @@
             //console.log(reported_id_list);
             if(reported_id_list.length == 0)
             {
-                alert('Please select at least one option to report a user.');
+                //alert('Please select at least one option to report a user.');
+                var message = "Please select at least one option to report a user.";
+                print_common_message(message);
                 return;
             }
             $.ajax({

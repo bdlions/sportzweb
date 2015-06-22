@@ -3,7 +3,9 @@
         $("#button_save_news_sub_category").on("click", function() {
             if ($("#input_news_sub_category_name").val().length == 0)
             {
-                alert("News Sub Category name is required.");
+               // alert("News Sub Category name is required.");
+                  var message = "News Sub Category name is required.";
+                   print_common_message(message);
                 return;
             }
             $.ajax({
@@ -15,7 +17,9 @@
                     news_category_id: $("#input_news_category_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                   // alert(data['message']);
+                   var message = data['message'];
+                   print_common_message(message);
                     
                     if (data['status'] === 1)
                     {

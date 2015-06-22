@@ -28,25 +28,39 @@
                 var value_bottom_down_extra = $('#position_of_recipe_7').val();
                 
                 if(present_value == 1 &&( recipe_id == value_top_right || recipe_id == value_bottom_left || recipe_id == value_bottom_right || recipe_id == value_bottom_up || recipe_id == value_bottom_down || recipe_id == value_bottom_down_extra)) {
-                    alert('This item is already selected in one position');
+                   // alert('This item is already selected in one position');
+                   var message = "This item is already selected in one position";
+                   print_common_message(message);
                     return;
                 } else if(present_value ==2 && (recipe_id == value_top_left || recipe_id == value_bottom_left || recipe_id == value_bottom_right || recipe_id == value_bottom_up || recipe_id == value_bottom_down || recipe_id == value_bottom_down_extra)) {
-                   alert('This item is already selected in one position');
+                 //  alert('This item is already selected in one position');
+                 var message = "This item is already selected in one position";
+                   print_common_message(message);
                    return;
                 }else if(present_value ==3 && (recipe_id == value_top_left || recipe_id == value_top_right || recipe_id == value_bottom_right || recipe_id == value_bottom_up || recipe_id == value_bottom_down || recipe_id == value_bottom_down_extra)) {
-                    alert('This item is already selected in one position');
+                    //alert('This item is already selected in one position');
+                   var message = "This item is already selected in one position";
+                   print_common_message(message);
                     return;
                 }else if(present_value ==4 && (recipe_id == value_top_left || recipe_id == value_top_right || recipe_id == value_bottom_left || recipe_id == value_bottom_up || recipe_id == value_bottom_down || recipe_id == value_bottom_down_extra)){
-                    alert('This item is already selected in one position');
+                   // alert('This item is already selected in one position');
+                   var message = "This item is already selected in one position";
+                   print_common_message(message);
                     return;
                 }else if(present_value ==5 && (recipe_id == value_top_left || recipe_id == value_top_right || recipe_id == value_bottom_left || recipe_id == value_bottom_right || recipe_id == value_bottom_down || recipe_id == value_bottom_down_extra)){
-                    alert('This item is already selected in one position');
+                   // alert('This item is already selected in one position');
+                   var message = "This item is already selected in one position";
+                   print_common_message(message);
                     return;
                 }else if(present_value ==6 && (recipe_id == value_top_left || recipe_id == value_top_right || recipe_id == value_bottom_left || recipe_id == value_bottom_up || recipe_id == value_bottom_right || recipe_id == value_bottom_down_extra)){
-                    alert('This item is already selected in one position');
+                    //alert('This item is already selected in one position');
+                   var message = "This item is already selected in one position";
+                   print_common_message(message);
                     return;
                 }else if(present_value ==7 && (recipe_id == value_top_left || recipe_id == value_top_right || recipe_id == value_bottom_left || recipe_id == value_bottom_up || recipe_id == value_bottom_right || recipe_id == value_bottom_down)){
-                    alert('This item is already selected in one position');
+                   // alert('This item is already selected in one position');
+                   var message = "This item is already selected in one position";
+                   print_common_message(message);
                     return;
                 }
                 
@@ -78,7 +92,9 @@
                 });
                 $('#modal_edit_recipe_item_home_page').modal('hide');
             } else {
-                alert('You can only select one recipe for this position');
+                //alert('You can only select one recipe for this position');
+                var message = "You can only select one recipe for this position";
+                print_common_message(message);
                 return ;
             }
            

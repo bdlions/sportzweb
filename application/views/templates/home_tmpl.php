@@ -23,7 +23,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/custom_error.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/expanding.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/hogan-2.0.0.js"></script>
-        
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
     </head>
     <body class="back">
         <?php $this->load->view("templates/sections/header_with_login");?>
@@ -33,5 +33,6 @@
             </div>
         </div>
         <?php $this->load->view("templates/sections/footer");?>
+        <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>

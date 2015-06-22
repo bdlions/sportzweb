@@ -15,7 +15,9 @@
             var configuration_date = $('#input_configuration_date').val();
             if(configuration_date.length == 0)
             {
-                alert('please select a date to configure your news item');
+               // alert('please select a date to configure your news item');
+               var message = "please select a date to configure your news item";
+                print_common_message(message);
                 return;
             }
             var show_advertise = 1;
@@ -38,7 +40,9 @@
                     configuration_date: configuration_date
                 },
                 success: function(data){
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                print_common_message(message);
                 }
             });
         });
@@ -66,7 +70,9 @@
                         if(i == j) continue;
                         if(news_id == position_array[j])
                         {
-                            alert('This news already selected in one position');
+                           // alert('This news already selected in one position');
+                            var message = "This news already selected in one position";
+                            print_common_message(message);
                             return;
                         }
                     }
@@ -103,7 +109,9 @@
                 });
                 $('#common_modal_news_list').modal('hide');
             } else {
-                alert('You can only select one news for this position');
+                //alert('You can only select one news for this position');
+                 var message = "You can only select one news for this position";
+                 print_common_message(message);
                 return ;
             }
         

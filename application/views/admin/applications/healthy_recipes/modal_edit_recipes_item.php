@@ -35,7 +35,9 @@
                 });
                 $('#modal_edit_recipes').modal('hide');
             } else {
-                alert('You have to select at least one item for your recipes');
+                //alert('You have to select at least one item for your recipes');
+                var message = "You have to select at least one item for your recipes";
+                print_common_message(message);
                 return ;
             }
            

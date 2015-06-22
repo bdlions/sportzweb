@@ -4,7 +4,9 @@
         $("#button_save_service_category_edit").on("click", function() {
             if ($("#input_service_category_name_for_edit").val().length == 0)
             {
-                alert("Service Category name is required.");
+                //alert("Service Category name is required.");
+                var message = "Service Category name is required.";
+                print_common_message(message);
                 return;
             }
             $.ajax({
@@ -16,7 +18,9 @@
                     service_category_id: $("#input_service_category_id").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     //console.log(data);
                     if (data['status'] === 1)
                     {

@@ -9,7 +9,9 @@
                 comment_id: id
             },
             success: function(data) {
-                alert(data['message']);
+               // alert(data['message']);
+              var message = data['message'];
+                print_common_message(message);
                     if (data['status'] === 1)
                     {
                        window.location = '<?php echo base_url();?>admin/applications_news/all_comments/<?php echo $news_id;?>';

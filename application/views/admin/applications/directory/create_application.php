@@ -100,7 +100,9 @@ $(function () {
         $("#summary_editortext").val(jQuery('<div />').text(CKEDITOR.instances.summary.getData()).html());
         if (CKEDITOR.instances.summary.getData() === "")
         {
-            alert("Application summary is required .");
+            //alert("Application summary is required .");
+            var message = "Application summary is required .";
+            print_common_message(message);
             return;
         }        
         $.ajax({
@@ -109,7 +111,9 @@ $(function () {
             url: '<?php echo base_url();?>admin/applications_directory/create_application',
             data: $("#formsubmit").serializeArray(),
             success: function(data) {
-                alert(data.message);
+                //alert(data.message);
+                var message = data.message;
+                print_common_message(message);
                 window.location = '<?php echo base_url();?>admin/applications_directory';
             }
         });

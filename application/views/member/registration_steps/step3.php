@@ -116,9 +116,13 @@
         }).on('fileuploaddone', function(e, data) {
 //            alert('fileuploaddone');
             alert(data.result.message);
+             var message = data.result.message;
+                    print_common_message(message);
             window.location = '<?php echo base_url(); ?>';
         }).on('fileuploadfail', function(e, data) {
-            alert(data.message);
+           // alert(data.message);
+           var message = data.message;
+                    print_common_message(message);
             $.each(data.files, function(index, file) {
                 var error = $('<span class="text-danger"/>').text('File upload failed.');
                 $(data.context.children()[index]).append('<br>').append(error);

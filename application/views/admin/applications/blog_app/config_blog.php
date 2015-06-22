@@ -4,7 +4,7 @@
      var selected_date_for_item = $('#date_for_show_item').val();
      if(selected_date_for_item.length == 0)
      {
-     alert('please select a date to config your blog item');
+     //alert('please select a date to config your blog item');
      return;
      }
      var selected_blog_array = Array();
@@ -28,7 +28,7 @@
      selected_date_for_item: selected_date_for_item
      },
      success: function(data) {
-     alert(data['message']);
+     //alert(data['message']);
      if (data['status'] === 1)
      {
      location.reload(); 
@@ -37,29 +37,29 @@
      });
      } else if(selected_blog_array.length > 13)
      {
-     alert('Please select 6 blog for your home page');
+     // alert('Please select 6 blog for your home page');
      } else 
      {
-     alert('Please select 6 blog for your home page');
+    // alert('Please select 6 blog for your home page');
      }
      });
      });*/
-    
-    $(function() {
-        var id = <?php echo $show_advertise;?>;
-    
-        if(id == 1){
-            $('select option[value="2"]').attr("selected",true);
+
+    $(function () {
+        var id = <?php echo $show_advertise; ?>;
+
+        if (id == 1) {
+            $('select option[value="2"]').attr("selected", true);
         }
         $('#date_for_show_item').datepicker({
             dateFormat: 'dd-mm-yy',
             startDate: '-3d'
-        }).on('changeDate', function(ev) {
+        }).on('changeDate', function (ev) {
             $('#date_for_show_item').text($('#date_for_show_item').data('date'));
             $('#date_for_show_item').datepicker('hide');
         });
     });
-    
+
 </script>
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -101,7 +101,7 @@
                                         </h2>
                                     </span><!--card heading-->
                                     <div class="blog_post_body_text" id="description_<?php echo $i; ?>">
-                                        <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])),0,255)." ....."; ?>
+                                        <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])), 0, 255) . " ....."; ?>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                                         </h2>
                                     </span><!--card heading-->
                                     <div class="blog_post_body_text" id="description_<?php echo $i; ?>">
-                                        <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])),0,255)." ....."; ?>
+                                        <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])), 0, 255) . " ....."; ?>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                                     </h2>
                                 </span><!--card heading-->
                                 <div class="blog_post_body_text" id="description_<?php echo $i; ?>">
-                                    <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])),0,255)." ....."; ?>
+                                    <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])), 0, 255) . " ....."; ?>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                     </h2>
                                 </span><!--card heading-->
                                 <div class="blog_post_body_text" id="description_<?php echo $i; ?>">
-                                    <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])),0,255)." ....."; ?>
+                                    <?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$i]]['description'])), 0, 255) . " ....."; ?>
                                 </div>
                             </div>
                         </div>
@@ -234,16 +234,16 @@
         <?php if (count($blog_list) > 0): ?>
             <?php $i = 1; ?>
             <?php foreach ($blog_list as $blog): ?>
-                                            <tr>
-                                                <td><?php echo $blog['id']; ?></td>
-                                                <td><?php echo $blog['blog_category_name'] ?></td>
-                                                
-                                                <td><?php echo html_entity_decode(html_entity_decode($blog['title'])); ?></td>
-                                                <td><?php echo unix_to_human($blog['created_on']); ?></td>
-                                                <td>
-                                                    <input id="<?php echo $blog['id'] ?>" class="" type="checkbox" name="item[]" />
-                                                </td>
-                                            </tr>
+                                                    <tr>
+                                                        <td><?php echo $blog['id']; ?></td>
+                                                        <td><?php echo $blog['blog_category_name'] ?></td>
+                                                        
+                                                        <td><?php echo html_entity_decode(html_entity_decode($blog['title'])); ?></td>
+                                                        <td><?php echo unix_to_human($blog['created_on']); ?></td>
+                                                        <td>
+                                                            <input id="<?php echo $blog['id'] ?>" class="" type="checkbox" name="item[]" />
+                                                        </td>
+                                                    </tr>
             <?php endforeach; ?>
         <?php endif; ?>
                         </tbody>
@@ -267,59 +267,61 @@
 
 <script type="text/javascript">
     /*function submit_setting() {
-        var selected_date_for_item = $('#date_for_show_item').val();
-        if (selected_date_for_item.length == 0)
-        {
-            alert('please select a date to config your blog item');
-            return;
-        }
-        var position_0 = $('#position_of_blog_0').val();
-        var position_1 = $('#position_of_blog_1').val();
-        var position_2 = $('#position_of_blog_2').val();
-        var position_3 = $('#position_of_blog_3').val();
-        var position_4 = $('#position_of_blog_4').val();
-        var position_5 = $('#position_of_blog_5').val();
-        var position_6 = $('#position_of_blog_6').val();
-        var position_7 = $('#position_of_blog_7').val();
-//        alert(position_0 + ' ' + position_1 + ' '+ position_6 + ' ' + position_7 );
-        var id = $('#panel_dd').val();
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: '<?php echo base_url(); ?>' + "admin/blogapp/save_selected_blog",
-            data: {
-                position_of_blog_0: position_0,
-                position_of_blog_1: position_1,
-                position_of_blog_2: position_2,
-                position_of_blog_3: position_3,
-                position_of_blog_4: position_4,
-                position_of_blog_5: position_5,
-                position_of_blog_6: position_6,
-                position_of_blog_7: position_7,
-                selected_date: selected_date_for_item,
-                show_advertise: id
-            },
-            success: function(data) {
-                alert(data['message']);
-                if (data['status'] === 1)
-                {
-                    location.reload();
-                }
-            }
-        });
-    }*/
-    
+     var selected_date_for_item = $('#date_for_show_item').val();
+     if (selected_date_for_item.length == 0)
+     {
+    // alert('please select a date to config your blog item');
+     return;
+     }
+     var position_0 = $('#position_of_blog_0').val();
+     var position_1 = $('#position_of_blog_1').val();
+     var position_2 = $('#position_of_blog_2').val();
+     var position_3 = $('#position_of_blog_3').val();
+     var position_4 = $('#position_of_blog_4').val();
+     var position_5 = $('#position_of_blog_5').val();
+     var position_6 = $('#position_of_blog_6').val();
+     var position_7 = $('#position_of_blog_7').val();
+     //        alert(position_0 + ' ' + position_1 + ' '+ position_6 + ' ' + position_7 );
+     var id = $('#panel_dd').val();
+     $.ajax({
+     dataType: 'json',
+     type: "POST",
+     url: '<?php echo base_url(); ?>' + "admin/blogapp/save_selected_blog",
+     data: {
+     position_of_blog_0: position_0,
+     position_of_blog_1: position_1,
+     position_of_blog_2: position_2,
+     position_of_blog_3: position_3,
+     position_of_blog_4: position_4,
+     position_of_blog_5: position_5,
+     position_of_blog_6: position_6,
+     position_of_blog_7: position_7,
+     selected_date: selected_date_for_item,
+     show_advertise: id
+     },
+     success: function(data) {
+     // alert(data['message']);
+     if (data['status'] === 1)
+     {
+     location.reload();
+     }
+     }
+     });
+     }*/
+
     function submit_setting() {
         var show_advertise;
         //update it if you do not want to show advertise
         var selected_date_for_item = $('#date_for_show_item').val();
         if (selected_date_for_item.length == 0)
         {
-            alert('please select a date to config your blog item');
+            //alert('please select a date to config your blog item');
+           var message = "please select a date to config your blog item";
+            print_common_message(message);
             return;
-        }        
+        }
         var id = $('#panel_dd').val();
-        if(id!=2) {
+        if (id != 2) {
             show_advertise = 0;
         } else {
             show_advertise = 1;
@@ -327,20 +329,23 @@
         var region_id_blog_id_map = {};
         // here key1 = region_id, value=blog_id
         var length = <?php echo BLOG_CONFIGURATION_COUNTER; ?>;
-        for(var i=0;i<length;i++) {
-            region_id_blog_id_map[''+i+''] = $('#position_of_blog_'+i).val();
+        for (var i = 0; i < length; i++) {
+            region_id_blog_id_map['' + i + ''] = $('#position_of_blog_' + i).val();
         }
         $.ajax({
             dataType: 'json',
             type: "POST",
             url: '<?php echo base_url(); ?>' + "admin/applications_blogs/save_selected_blog",
             data: {
-                region_id_blog_id_map:region_id_blog_id_map,
+                region_id_blog_id_map: region_id_blog_id_map,
                 selected_date: selected_date_for_item,
                 show_advertise: show_advertise
             },
-            success: function(data) {
-                alert(data['message']);
+            success: function (data) {
+
+//                alert(data['message']);
+                var message = data['message'];
+                print_common_message(message);
                 if (data['status'] === 1)
                 {
                     location.reload();
@@ -348,14 +353,17 @@
             }
         });
     }
-    
-    function panel_change(){
+
+    function panel_change() {
         var id = $('#panel_dd').val();
-        if(id==2) $('#right_column').hide();
-        if(id==1) $('#right_column').show();
+        if (id == 2)
+            $('#right_column').hide();
+        if (id == 1)
+            $('#right_column').show();
     }
 
-    var adv = <?php echo $show_advertise;?>;
-    
-    if(adv==1) $('#right_column').hide();
+    var adv = <?php echo $show_advertise; ?>;
+
+    if (adv == 1)
+        $('#right_column').hide();
 </script>

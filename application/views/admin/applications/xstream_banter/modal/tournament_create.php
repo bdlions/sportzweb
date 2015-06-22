@@ -3,12 +3,16 @@
         $("#button_create_tournament").on("click", function() {
             if ($("#input_tournament_create_title").val().length == 0)
             {
-                alert("Please assign Tournament name");
+                //alert("Please assign Tournament name");
+                var message = "Please assign Tournament name";
+                  print_common_message(message);
                 return;
             }
             if ($("#input_tournament_create_season").val().length == 0)
             {
-                alert("Please mension Season.");
+                //alert("Please mension Season.");
+                 var message = "Please mension Season.";
+                  print_common_message(message);
                 return;
             }
             $.ajax({
@@ -21,7 +25,9 @@
                     season: $("#input_tournament_create_season").val()
                 },
                 success: function(data) {
-                    alert(data['message']);
+                    //alert(data['message']);
+                     var message = data['message'];
+                  print_common_message(message);
                     $("#modal_tournament_create").modal('hide');
                     window.location.reload();
                 }
