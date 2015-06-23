@@ -66,22 +66,21 @@
                     <div class="container-fluid right-panel-list">
                         <div style="padding-bottom: 30px" class="small_text_pale">
                             <!--Start new static line-->
+                            <a style="cursor: pointer; color: #666666" href="<?php echo base_url()?>applications/score_prediction/predicted_result_view">
                             <div class="list-group-item right-panel-item">
                                 <div class="row">
                                     <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
-                                        <a class="profile-name">
                                             <div>
                                                 <img class="img-responsive profile-photo" onerror="this.style.display = 'none'; this.parentNode.className='profile-background profile_background_custom'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible';" src="http://localhost/sportzweb/resources/uploads/profile_picture/50x50/car8.jpg" alt="AK">
                                                 <div style="visibility:hidden;height:0px">AK</div>
                                             </div>
-                                        </a>
                                     </div>
                                     <div class="col-sm-8 col-md-8 col-xs-8 col-lg-8">
-                                        <a style="cursor: pointer" >Alamgir Kabir</a>
-                                        made a prediction. 
+                                        Alamgir Kabir made a prediction. 
                                     </div>
                                 </div>
                             </div>
+                            </a>
                             <!--End new static line-->
                         <?php if (!empty($recent_activities[RECENT_ACTIVITIES_LIKES]['from_user_info']) && !empty($recent_activities[RECENT_ACTIVITIES_LIKES]['to_user_info'])) { ?>
                             <div class="list-group-item right-panel-item">

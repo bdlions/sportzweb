@@ -45,6 +45,10 @@ class Score_prediction extends Role_Controller{
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
         $this->template->load(null,"applications/score_prediction/sports", $this->data);
     }
+    public function predicted_result_view(){
+        $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
+       $this->template->load(null,"applications/score_prediction/preticted_result_view", $this->data);
+    }
 
     /*
      * Responses to ajax call from post_vote()

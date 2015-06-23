@@ -100,18 +100,20 @@
 @media only screen and (max-width: 991px) {
     
     .datePicker_data_list{
-        left: 0;
+        left: 5%;
     }
     .datePicker_data_list li{
         margin-left: 3px;
+        margin-right: 20px;
     }
 }
 @media only screen and (min-width: 992px) {
     .datePicker_data_list li{
         padding: 3px 5px;
+        margin-right: 40px;
     }
     .datePicker_data_list{
-        left: 20%;
+        left: 8%;
     }
 }
 .datePicker_data_list li{
@@ -123,7 +125,6 @@
 .datePicker_data_list li:hover{
     background-color: #E86F53;
     cursor: pointer;
-
 }
 .datePicker_data_list li a{
     font-weight: bold;
@@ -185,9 +186,14 @@
     font-size: 16px; 
     font-weight: bold;
 }
+.progress_bar_width_catulate, .progress_bar_width_catulate_green{
+    height: 28px;
+}
 .progress_bar_width_catulate{
     background-color: #7092BE; 
-    height: 30px;
+}
+.progress_bar_width_catulate_green{
+    background-color: #6FCF6E; 
 }
 
 /*on clicking team A*/
@@ -248,5 +254,11 @@
 }
 .team_b_present_width_on_click_team_b{
     width: 30%;
+}
+.close_match_result_view_background{
+    background-color: #F5F5F5;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 3%;
 }
 
