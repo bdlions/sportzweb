@@ -6,7 +6,7 @@
                 <h4 class="modal-title">Confirm Vote...</h4>
             </div>
             <div class="modal-body">
-                <h3>Are you sure you want to vote?</h3>
+                <h3>Are you sure you want to vote <span id="team_name" style="font-weight: bold;"></span>?</h3>
             </div>
             <div class="modal-footer">
                 <button id="vote_id" type="button" class="btn btn-primary">Yes</button>

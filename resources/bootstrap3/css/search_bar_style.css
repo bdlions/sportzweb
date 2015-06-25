@@ -39,3 +39,8 @@
 .margin_style{
     margin-bottom: 8px;
 }
+.profile_background_search_bar{
+    height: 32px!important;
+    width: 32px!important;
+    line-height: 32px!important;	
+}

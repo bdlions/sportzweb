@@ -313,6 +313,7 @@
             $('#predict_football_game_01').toggle();
         });
         $('#predict_football_game_01_team_a_win').on('click', function () {
+            $('#team_name').html("Arsenal");
             $('#confirmModal').modal('show');
             $('#vote_id').on('click', function () {
                 $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
@@ -343,6 +344,7 @@
             });
         });
         $('#predict_football_game_01_draw').on('click', function () {
+            $('#team_name').html("Draw");
             $('#confirmModal').modal('show');
             $('#vote_id').on('click', function () {
                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
@@ -373,6 +375,7 @@
             });
         });
         $('#predict_football_game_01_team_b_win').on('click', function () {
+            $('#team_name').html("Swansea");
             $('#confirmModal').modal('show');
             $('#vote_id').on('click', function () {
                 $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
