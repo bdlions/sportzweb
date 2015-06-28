@@ -218,6 +218,7 @@ class Score_prediction extends Role_Controller{
         $sports_id = (string)$this->session->userdata('sports_id');
         //generate match list based on date and sports id
         $match1 = array(
+            'match_id' => 1,
             'time' => '13:00',
             'team_title_home' => 'Chelsea',
             'team_title_away' => 'Arsenal',
@@ -232,6 +233,7 @@ class Score_prediction extends Role_Controller{
             )
         );
         $match2 = array(
+            'match_id' => 2,
             'time' => '14:00',
             'team_title_home' => 'Tottenham',
             'team_title_away' => 'Chelsea',
@@ -246,6 +248,7 @@ class Score_prediction extends Role_Controller{
             )
         );
         $match3 = array(
+            'match_id' => 3,
             'time' => '15:00',
             'team_title_home' => 'Arsenal',
             'team_title_away' => 'Swansea',
@@ -268,6 +271,7 @@ class Score_prediction extends Role_Controller{
             'match_list' => $t1_match_list
         );
         $match4 = array(
+            'match_id' => 4,
             'time' => '16:00',
             'team_title_home' => 'Hull',
             'team_title_away' => 'Aston Villa',
@@ -282,6 +286,7 @@ class Score_prediction extends Role_Controller{
             )
         );
         $match5 = array(
+            'match_id' => 5,
             'time' => '17:00',
             'team_title_home' => 'Aston Villa',
             'team_title_away' => 'Man City',
@@ -296,6 +301,7 @@ class Score_prediction extends Role_Controller{
             )
         );
         $match6 = array(
+            'match_id' => 6,
             'time' => '18:00',
             'team_title_home' => 'Man City',
             'team_title_away' => 'Hull',
@@ -327,6 +333,7 @@ class Score_prediction extends Role_Controller{
         $sports_list = array();
         $sports_list[] = $sports1;
         $match7 = array(
+            'match_id' => 7,
             'time' => '09:30',
             'team_title_home' => 'Bangladesh',
             'team_title_away' => 'India',
@@ -341,6 +348,7 @@ class Score_prediction extends Role_Controller{
             )
         );
         $match8 = array(
+            'match_id' => 8,
             'time' => '15:00',
             'team_title_home' => 'Bangladesh',
             'team_title_away' => 'India',
@@ -355,6 +363,7 @@ class Score_prediction extends Role_Controller{
             )
         );
         $match9 = array(
+            'match_id' => 9,
             'time' => '18:00',
             'team_title_home' => 'Bangladesh',
             'team_title_away' => 'India',
