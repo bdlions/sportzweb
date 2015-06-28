@@ -4,7 +4,15 @@ define("MATCH_STATUS_WIN_HOME",                               2);
 define("MATCH_STATUS_WIN_AWAY",                               3);
 define("MATCH_STATUS_DRAW",                                   4);
 define("MATCH_STATUS_CANCEL",                                 5);
+
 define("MATCH_IMPORT_FILE_NAME",                              "score_prediction.xlsx");
+
 define("SCORE_WIN",         3);
 define("SCORE_LOSE",        0);
 define("SCORE_DRAW",        1);
+
+define("LEADER_BOARD_OPTION_ALL_TIME",          1);
+define("LEADER_BOARD_OPTION_THIS_WEEK",         2);
+define("LEADER_BOARD_OPTION_THIS_MONTH",        3);
+define("LEADER_BOARD_OPTION_LAST_WEEK",         4);
+define("LEADER_BOARD_OPTION_LAST_MONTH",        5);

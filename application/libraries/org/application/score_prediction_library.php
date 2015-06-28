@@ -64,7 +64,7 @@ class Score_prediction_library {
         return get_instance()->$var;
     }
     
-    public function get_home_page_configuration($date)
+    /*public function get_home_page_configuration($date)
     {
         $sports_id = 0;
         $configuration_array = $this->score_prediction_model->get_home_page_configuration_info($date)->result_array();
@@ -83,5 +83,16 @@ class Score_prediction_library {
             }
         }
         return $sports_id;
+    }*/
+    /*
+     * This method will store user vote for a match
+     * @param $match_id, match id
+     * @param $predicted_match_status_id, user prediction about the match
+     * @param $user_id, user id
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function post_vote($match_id, $predicted_match_status_id, $user_id)
+    {
+        
     }
 }

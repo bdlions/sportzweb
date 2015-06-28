@@ -16,7 +16,7 @@ class Score_prediction extends Role_Controller{
         }
     }
     
-    public function index(){
+    /*public function index(){
         $this->data['message'] = '';
         $current_date = $this->utils->get_current_date_yyyymmdd();
         $sports_id = $this->score_prediction_library->get_home_page_configuration($current_date);
@@ -30,21 +30,21 @@ class Score_prediction extends Role_Controller{
         $this->data['tournament_list'] = $tournament_list;
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
         $this->template->load(null,"applications/score_prediction/index", $this->data);
-    }
+    }*/
         
     /*
      * Loads home page for score predictions
      */
-    public function sports($sports_id){
-        $tournament_list = array();
-        $tournament_list_array = $this->score_prediction_library->get_all_tournaments($sports_id)->result_array();
-        foreach($tournament_list_array as $tournament_info){
-            $tournament_list[$tournament_info['tournament_id']] = $tournament_info['title'].' '.$tournament_info['season'];
-        }
-        $this->data['tournament_list'] = $tournament_list;
-        $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
-        $this->template->load(null,"applications/score_prediction/sports", $this->data);
-    }
+//    public function sports($sports_id){
+//        $tournament_list = array();
+//        $tournament_list_array = $this->score_prediction_library->get_all_tournaments($sports_id)->result_array();
+//        foreach($tournament_list_array as $tournament_info){
+//            $tournament_list[$tournament_info['tournament_id']] = $tournament_info['title'].' '.$tournament_info['season'];
+//        }
+//        $this->data['tournament_list'] = $tournament_list;
+//        $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
+//        $this->template->load(null,"applications/score_prediction/sports", $this->data);
+//    }
     public function predicted_result_view(){
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
        $this->template->load(null,"applications/score_prediction/preticted_result_view", $this->data);
@@ -54,7 +54,7 @@ class Score_prediction extends Role_Controller{
      * Responses to ajax call from post_vote()
      * @Author Tanveer Ahmed
      */
-    public function post_vote() {
+    /*public function post_vote() {
         $predictions = array();
         $match_id = (string)$this->input->post('match_id');
         $user_id = (string)$this->session->userdata('user_id');
@@ -84,7 +84,7 @@ class Score_prediction extends Role_Controller{
             $response['message'] = $this->score_prediction_library->errors_alert();
         }
         echo json_encode($response); return;
-    }
+    }*/
     
     /*
      * @Author Tanveer ahmed
@@ -184,5 +184,421 @@ class Score_prediction extends Role_Controller{
         echo json_encode($result_data); return;
     }
     
+    //------------------------------------------------------------------------//
+    /*
+     * This method will load home page of score prediction application
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function index(){
+        $this->data['message'] = '';
+        // sports list for the score prediction application
+        $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
+        $leader_board_options = array(
+            LEADER_BOARD_OPTION_ALL_TIME => 'All Time',
+            LEADER_BOARD_OPTION_THIS_WEEK => 'This Week',
+            LEADER_BOARD_OPTION_THIS_MONTH => 'This Month',
+            LEADER_BOARD_OPTION_LAST_WEEK => 'Last Week',
+            LEADER_BOARD_OPTION_LAST_MONTH => 'Last Month'
+        );
+        $this->data['leader_board_options'] = $leader_board_options;
+        $this->data['sports_id'] = 0;
+        $this->template->load(null,"applications/score_prediction/index", $this->data);
+    }
+    /*
+     * Ajax call
+     * This method will return match list
+     * @post date
+     * @post sports_id, sports id (optional)
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function get_match_list()
+    {
+        $response = array();
+        $date = (string)$this->input->post('date');
+        $sports_id = (string)$this->session->userdata('sports_id');
+        //generate match list based on date and sports id
+        $match1 = array(
+            'time' => '13:00',
+            'team_title_home' => 'Chelsea',
+            'team_title_away' => 'Arsenal',
+            'status_id' => 2,
+            'score_home' => 2,
+            'score_away' => 0,
+            'is_predicted' => 1,
+            'prediction_info' => array(
+                'home' => '40%',
+                'draw' => '50%',
+                'away' => '10%'
+            )
+        );
+        $match2 = array(
+            'time' => '14:00',
+            'team_title_home' => 'Tottenham',
+            'team_title_away' => 'Chelsea',
+            'status_id' => 1,
+            'score_home' => 0,
+            'score_away' => 0,
+            'is_predicted' => 1,
+            'prediction_info' => array(
+                'home' => '20%',
+                'draw' => '0%',
+                'away' => '80%'
+            )
+        );
+        $match3 = array(
+            'time' => '15:00',
+            'team_title_home' => 'Arsenal',
+            'team_title_away' => 'Swansea',
+            'status_id' => 1,
+            'score_home' => 0,
+            'score_away' => 0,
+            'is_predicted' => 0,
+            'prediction_info' => array(
+                'home' => '50%',
+                'draw' => '30%',
+                'away' => '20%'
+            )
+        );
+        $t1_match_list = array();
+        $t1_match_list[] = $match1;
+        $t1_match_list[] = $match2;
+        $t1_match_list[] = $match3;
+        $tournament1 = array(
+            'title' => 'Barclays premier league 2014/15',
+            'match_list' => $t1_match_list
+        );
+        $match4 = array(
+            'time' => '16:00',
+            'team_title_home' => 'Hull',
+            'team_title_away' => 'Aston Villa',
+            'status_id' => 3,
+            'score_home' => 2,
+            'score_away' => 3,
+            'is_predicted' => 1,
+            'prediction_info' => array(
+                'home' => '50%',
+                'draw' => '40%',
+                'away' => '10%'
+            )
+        );
+        $match5 = array(
+            'time' => '17:00',
+            'team_title_home' => 'Aston Villa',
+            'team_title_away' => 'Man City',
+            'status_id' => 1,
+            'score_home' => 0,
+            'score_away' => 0,
+            'is_predicted' => 1,
+            'prediction_info' => array(
+                'home' => '20%',
+                'draw' => '10%',
+                'away' => '70%'
+            )
+        );
+        $match6 = array(
+            'time' => '18:00',
+            'team_title_home' => 'Man City',
+            'team_title_away' => 'Hull',
+            'status_id' => 1,
+            'score_home' => 0,
+            'score_away' => 0,
+            'is_predicted' => 0,
+            'prediction_info' => array(
+                'home' => '20%',
+                'draw' => '30%',
+                'away' => '50%'
+            )
+        );
+        $t2_match_list = array();
+        $t2_match_list[] = $match4;
+        $t2_match_list[] = $match5;
+        $t2_match_list[] = $match6;
+        $tournament2 = array(
+            'title' => 'Championship 2014/15',
+            'match_list' => $t2_match_list
+        );
+        $s1_tournament_list = array();
+        $s1_tournament_list[] = $tournament1;
+        $s1_tournament_list[] = $tournament2;
+        $sports1 = array(
+            'title' => 'Football',
+            'tournament_list' => $s1_tournament_list
+        );
+        $sports_list = array();
+        $sports_list[] = $sports1;
+        $match7 = array(
+            'time' => '09:30',
+            'team_title_home' => 'Bangladesh',
+            'team_title_away' => 'India',
+            'status_id' => 4,
+            'score_home' => 0,
+            'score_away' => 0,
+            'is_predicted' => 1,
+            'prediction_info' => array(
+                'home' => '40%',
+                'draw' => '50%',
+                'away' => '10%'
+            )
+        );
+        $match8 = array(
+            'time' => '15:00',
+            'team_title_home' => 'Bangladesh',
+            'team_title_away' => 'India',
+            'status_id' => 1,
+            'score_home' => 0,
+            'score_away' => 0,
+            'is_predicted' => 1,
+            'prediction_info' => array(
+                'home' => '20%',
+                'draw' => '0%',
+                'away' => '80%'
+            )
+        );
+        $match9 = array(
+            'time' => '18:00',
+            'team_title_home' => 'Bangladesh',
+            'team_title_away' => 'India',
+            'status_id' => 1,
+            'score_home' => 0,
+            'score_away' => 0,
+            'is_predicted' => 0,
+            'prediction_info' => array(
+                'home' => '50%',
+                'draw' => '30%',
+                'away' => '20%'
+            )
+        );
+        $t3_match_list = array();
+        $t3_match_list[] = $match7;
+        $t3_match_list[] = $match8;
+        $t3_match_list[] = $match9;
+        $tournament3 = array(
+            'title' => 'Bangladesh vs India Series 2015',
+            'match_list' => $t3_match_list
+        );
+        $s2_tournament_list = array();
+        $s2_tournament_list[] = $tournament3;
+        $sports2 = array(
+            'title' => 'Cricket',
+            'tournament_list' => $s2_tournament_list
+        );
+        $sports_list[] = $sports2;
+        $response['sports_list'] = $sports_list;
+        echo json_encode($response);
+    }
+    /*
+     * Ajax call
+     * This method will return leader board content
+     * @post $leader_board_option, leader board selection option
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function get_leade_board_data()
+    {
+        $response = array();
+        $leader_board_option = $this->input->post('leader_board_option');
+        //generate leader board data based on leader board option
+        $user1 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user2 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user3 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user4 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user5 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user6 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user7 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user8 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user9 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user10 = array(
+            'rank' => 1,
+            'user_info' => array(
+                'user_id' => 1,
+                'first_name' => 'Shem',
+                'last_name' => 'Haye',
+                'picture' => 'user_male.png'
+            ),
+            'prediction' => '95%',
+            'score' => '95'
+        );
+        $user_list = array();
+        $user_list[] = $user1;
+        $user_list[] = $user2;
+        $user_list[] = $user3;
+        $user_list[] = $user4;
+        $user_list[] = $user5;
+        $user_list[] = $user6;
+        $user_list[] = $user7;
+        $user_list[] = $user8;
+        $user_list[] = $user9;
+        $user_list[] = $user10;
+        $response['user_list'] = $user_list;
+        echo json_encode($response);
+    }
+    
+    /*
+     * Ajax Call
+     * This method will post vota by a user under a match
+     * @post match_id, match id
+     * @post user_id, user id
+     * @post predicted_match_status_id, match status id
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function post_vote() {
+        $response = array();
+        $match_id = $this->input->post('match_id');
+        $user_id = $this->session->userdata('user_id');
+        $predicted_match_status_id = (string)$this->input->post('predicted_match_status_id');   
+        $this->score_prediction_library->post_vote($match_id, $predicted_match_status_id, $user_id);
+        echo json_encode($response);
+    }
+    /*
+     * This method will load home page of a sports
+     * @param $sports_id, sports id
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function sports($sports_id){
+        $tournament_list = array();
+        $tournament_list_array = $this->score_prediction_library->get_all_tournaments($sports_id)->result_array();
+        foreach($tournament_list_array as $tournament_info){
+            $tournament_list[$tournament_info['tournament_id']] = $tournament_info['title'].' '.$tournament_info['season'];
+        }
+        $this->data['tournament_list'] = $tournament_list;
+        $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
+        $this->data['sports_id'] = $sports_id;
+        $this->template->load(null,"applications/score_prediction/sports", $this->data);
+    }
+    /*
+     * Ajax call
+     * This method will generate league table data
+     * @post $tournament_id, tournament id
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function get_league_table_data()
+    {
+        $response = array();
+        $tournament_id = $this->input->post('tournament_id');
+        $team1 = array(
+            'position' => 1,
+            'title' => 'Aston Villa',
+            'point' => '2',
+            'difference' => '0',
+            'points' => '4'
+        );
+        $team2 = array(
+            'position' => 2,
+            'title' => 'Chelsea',
+            'point' => '1',
+            'difference' => '0',
+            'points' => '3'
+        );
+        $team3 = array(
+            'position' => 3,
+            'title' => 'Arsenal',
+            'point' => '1',
+            'difference' => '0',
+            'points' => '1'
+        );
+        $team4 = array(
+            'position' => 4,
+            'title' => 'Southampton',
+            'point' => '2',
+            'difference' => '0',
+            'points' => '0'
+        );
+        $team_list = array();
+        $team_list[] = $team1;
+        $team_list[] = $team2;
+        $team_list[] = $team3;
+        $team_list[] = $team4;
+        $response['team_list'] = $team_list;
+        echo json_encode($response);
+    }
 }
 

@@ -1,174 +1,175 @@
+<?php $this->load->view("applications/score_prediction/process_match_list", $this->data); ?>
 <script type="text/javascript">
-    var today_ymd_str;
-    function bring_tournament_info() {
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: '<?php echo base_url(); ?>' + "applications/score_prediction/get_team_standings",
-            data: {
-                tournament_id: $("#dd_tournaments").val()
-            },
-            success: function (data) {
-                $('#pred_table_title').html($("#dd_tournaments option:selected").text());
-                $('#tbl_team_standings').html(tmpl('tmpl_table_header'));
-                $('#tbl_team_standings').append(tmpl('tmpl_team_standings', data.team_standings));
-                //bring_prediction_info();
-            }
-        });
-    }
-    function bring_prediction_info() {
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: '<?php echo base_url(); ?>' + "applications/score_prediction/get_predictions_for_month",
-            data: {
-                tournament_id: $("#dd_tournaments").val(),
-                current_month: $('#current_month').val(),
-                next_month: $('#next_month').val()
-            },
-            success: function (data) {
-                $('#tbl_predictions').html(tmpl('tmpl_predictions', data));
-//                console.log(data);
-            }
-        });
-    }
-
-    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    function month_incrim() {
-        var in_date = $('#current_month').val();
-        var date = new Date(in_date);
-        var dd = date.getDate();
-        var mm = date.getMonth();
-        var yyyy = date.getFullYear();
-        mm++;//increment
-        if (mm > 11) {
-            mm = 0;
-            yyyy++
-        }
-        $('#current_month_heading').html(monthNames[mm] + ", " + yyyy);
-        mm++;//inc for date
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var out_date = yyyy + '-' + mm + '-' + dd;
-        $('#current_month').val(out_date);
-        mm++;//inc for next month
-        if (mm > 12) {
-            mm = 1;
-            yyyy++;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var out_date = yyyy + '-' + mm + '-' + dd;
-        $('#next_month').val(out_date);
-        bring_prediction_info();
-    }
-    function month_decrim() {
-        var in_date = $('#current_month').val();
-        var out_date;
-        var date = new Date(in_date);
-        var dd = date.getDate();
-        var mm = date.getMonth();
-        var yyyy = date.getFullYear();
-        mm--;
-        if (mm < 0) {
-            mm = 11;
-            yyyy--
-        }
-        $('#current_month_heading').html(monthNames[mm] + ", " + yyyy);
-        mm++;
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var out_date = yyyy + '-' + mm + '-' + dd;
-        $('#current_month').val(out_date);
-        mm++;//inc for next month
-        if (mm > 12) {
-            mm = 1;
-            yyyy++;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var out_date = yyyy + '-' + mm + '-' + dd;
-        $('#next_month').val(out_date);
-        bring_prediction_info();
-    }
-    function date_manage() {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        $('#current_month_heading').html(monthNames[mm - 1] + ", " + yyyy);
-        dd = 1;
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        today_ymd_str = yyyy + '-' + mm + '-' + dd;
-        $('#current_month').val(today_ymd_str);
-        mm++;//inc for next month
-        if (mm > 12) {
-            mm = 1;
-            yyyy++;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-//        today_ymd_str = yyyy+'-'+mm+'-'+dd;
-        $('#next_month').val(yyyy + '-' + mm + '-' + dd);
-    }
-
-    function confirmation_vote(match_id, match_status_id) {
-        $("#match_id").val(match_id);
-        $("#match_status_id").val(match_status_id);
-        $("#confirmModal").modal("show");
-    }
-    function post_vote() {
-        var match_id = $("#match_id").val();
-        var match_status_id = $("#match_status_id").val();
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo base_url(); ?>' + "applications/score_prediction/post_vote",
-            dataType: 'json',
-            data: {
-                match_id: match_id,
-                match_status_id: match_status_id
-            },
-            success: function (data) {
-                //alert(data.message);
-                var message = data.message;
-                print_common_message(message);
-                location.reload();
-            }
-        });
-    }
-    function pred_pressed(pred_butn) {
-        var match_id = ($(pred_butn).data('match_id'));
-        $(pred_butn).parent().parent().siblings('tr[id=prediction_' + match_id + ']').toggle("fade", {}, 600);
-    }
-    function result_pred_pressed(pred_butn) {
-        $(pred_butn).parent().parent().next().next().toggle("fade", {}, 600);
-//        $(pred_butn).parent().parent().siblings('tr[class=result_prediction]').toggle("fade", {}, 600);
-    }
-    $(function () {
-        date_manage();
-        bring_tournament_info();
-        bring_prediction_info();
-        $("#dd_tournaments").change(function () {
-            bring_tournament_info();
-            bring_prediction_info();
-        });
-    });
+//    var today_ymd_str;
+//    function bring_tournament_info() {
+//        $.ajax({
+//            dataType: 'json',
+//            type: "POST",
+//            url: '<?php echo base_url(); ?>' + "applications/score_prediction/get_team_standings",
+//            data: {
+//                tournament_id: $("#dd_tournaments").val()
+//            },
+//            success: function (data) {
+//                $('#pred_table_title').html($("#dd_tournaments option:selected").text());
+//                $('#tbl_team_standings').html(tmpl('tmpl_table_header'));
+//                $('#tbl_team_standings').append(tmpl('tmpl_team_standings', data.team_standings));
+//                //bring_prediction_info();
+//            }
+//        });
+//    }
+//    function bring_prediction_info() {
+//        $.ajax({
+//            dataType: 'json',
+//            type: "POST",
+//            url: '<?php echo base_url(); ?>' + "applications/score_prediction/get_predictions_for_month",
+//            data: {
+//                tournament_id: $("#dd_tournaments").val(),
+//                current_month: $('#current_month').val(),
+//                next_month: $('#next_month').val()
+//            },
+//            success: function (data) {
+//                $('#tbl_predictions').html(tmpl('tmpl_predictions', data));
+////                console.log(data);
+//            }
+//        });
+//    }
+//
+//    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+//    function month_incrim() {
+//        var in_date = $('#current_month').val();
+//        var date = new Date(in_date);
+//        var dd = date.getDate();
+//        var mm = date.getMonth();
+//        var yyyy = date.getFullYear();
+//        mm++;//increment
+//        if (mm > 11) {
+//            mm = 0;
+//            yyyy++
+//        }
+//        $('#current_month_heading').html(monthNames[mm] + ", " + yyyy);
+//        mm++;//inc for date
+//        if (dd < 10) {
+//            dd = '0' + dd;
+//        }
+//        if (mm < 10) {
+//            mm = '0' + mm;
+//        }
+//        var out_date = yyyy + '-' + mm + '-' + dd;
+//        $('#current_month').val(out_date);
+//        mm++;//inc for next month
+//        if (mm > 12) {
+//            mm = 1;
+//            yyyy++;
+//        }
+//        if (mm < 10) {
+//            mm = '0' + mm;
+//        }
+//        var out_date = yyyy + '-' + mm + '-' + dd;
+//        $('#next_month').val(out_date);
+//        bring_prediction_info();
+//    }
+//    function month_decrim() {
+//        var in_date = $('#current_month').val();
+//        var out_date;
+//        var date = new Date(in_date);
+//        var dd = date.getDate();
+//        var mm = date.getMonth();
+//        var yyyy = date.getFullYear();
+//        mm--;
+//        if (mm < 0) {
+//            mm = 11;
+//            yyyy--
+//        }
+//        $('#current_month_heading').html(monthNames[mm] + ", " + yyyy);
+//        mm++;
+//        if (dd < 10) {
+//            dd = '0' + dd;
+//        }
+//        if (mm < 10) {
+//            mm = '0' + mm;
+//        }
+//        var out_date = yyyy + '-' + mm + '-' + dd;
+//        $('#current_month').val(out_date);
+//        mm++;//inc for next month
+//        if (mm > 12) {
+//            mm = 1;
+//            yyyy++;
+//        }
+//        if (mm < 10) {
+//            mm = '0' + mm;
+//        }
+//        var out_date = yyyy + '-' + mm + '-' + dd;
+//        $('#next_month').val(out_date);
+//        bring_prediction_info();
+//    }
+//    function date_manage() {
+//        var today = new Date();
+//        var dd = today.getDate();
+//        var mm = today.getMonth() + 1;
+//        var yyyy = today.getFullYear();
+//        $('#current_month_heading').html(monthNames[mm - 1] + ", " + yyyy);
+//        dd = 1;
+//        if (dd < 10) {
+//            dd = '0' + dd;
+//        }
+//        if (mm < 10) {
+//            mm = '0' + mm;
+//        }
+//        today_ymd_str = yyyy + '-' + mm + '-' + dd;
+//        $('#current_month').val(today_ymd_str);
+//        mm++;//inc for next month
+//        if (mm > 12) {
+//            mm = 1;
+//            yyyy++;
+//        }
+//        if (mm < 10) {
+//            mm = '0' + mm;
+//        }
+////        today_ymd_str = yyyy+'-'+mm+'-'+dd;
+//        $('#next_month').val(yyyy + '-' + mm + '-' + dd);
+//    }
+//
+//    function confirmation_vote(match_id, match_status_id) {
+//        $("#match_id").val(match_id);
+//        $("#match_status_id").val(match_status_id);
+//        $("#confirmModal").modal("show");
+//    }
+//    function post_vote() {
+//        var match_id = $("#match_id").val();
+//        var match_status_id = $("#match_status_id").val();
+//        $.ajax({
+//            type: 'POST',
+//            url: '<?php echo base_url(); ?>' + "applications/score_prediction/post_vote",
+//            dataType: 'json',
+//            data: {
+//                match_id: match_id,
+//                match_status_id: match_status_id
+//            },
+//            success: function (data) {
+//                //alert(data.message);
+//                var message = data.message;
+//                print_common_message(message);
+//                location.reload();
+//            }
+//        });
+//    }
+//    function pred_pressed(pred_butn) {
+//        var match_id = ($(pred_butn).data('match_id'));
+//        $(pred_butn).parent().parent().siblings('tr[id=prediction_' + match_id + ']').toggle("fade", {}, 600);
+//    }
+//    function result_pred_pressed(pred_butn) {
+//        $(pred_butn).parent().parent().next().next().toggle("fade", {}, 600);
+////        $(pred_butn).parent().parent().siblings('tr[class=result_prediction]').toggle("fade", {}, 600);
+//    }
+//    $(function () {
+//        date_manage();
+//        bring_tournament_info();
+//        bring_prediction_info();
+//        $("#dd_tournaments").change(function () {
+//            bring_tournament_info();
+//            bring_prediction_info();
+//        });
+//    });
 </script>
 <script type="text/x-tmpl" id="tmpl_predictions">
     {% for(var date in o){
@@ -749,7 +750,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
             <?php $this->load->view("applications/score_prediction/leader_board"); ?>
         </div>

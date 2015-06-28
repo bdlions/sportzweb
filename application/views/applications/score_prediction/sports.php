@@ -1,3 +1,4 @@
+<?php $this->load->view("applications/score_prediction/process_match_list", $this->data); ?>
 <script type="text/javascript">
     var today_ymd_str;
     function bring_tournament_info() {

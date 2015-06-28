@@ -150,4 +150,22 @@ class Score_prediction_model extends Ion_auth_model
                         ->join($this->tables['app_sp_teams'].' as away_team_table', 'away_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_away', 'left')
                         ->get();
     }
+    ///////////////////////////--------------------------------------------------//////////////////////////
+    /*
+     * This method will return match list
+     * @param $date, match date
+     * @param $sports_id, sports id
+     * @param $match_id, match id
+     * @return match list
+     * @Author nazmul hasan on 27th June 2015
+     */
+    public function get_all_matches($date = '', $sports_id = 0, $match_id = 0)
+    {
+        return $this->db->select("*, ".$this->tables['app_sp_matches'].".id as match_id, ".$this->tables['app_sp_match_predictions'].".id as prediction_id, home_team_table.title as team_title_home, away_team_table.title as team_title_away")
+                        ->from($this->tables['app_sp_matches'])
+                        ->join($this->tables['app_sp_match_predictions'], $this->tables['app_sp_match_predictions'] . '.match_id=' . $this->tables['app_sp_matches'] . '.id', 'left')
+                        ->join($this->tables['app_sp_teams'].' as home_team_table', 'home_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_home', 'left')
+                        ->join($this->tables['app_sp_teams'].' as away_team_table', 'away_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_away', 'left')
+                        ->get();
+    }
 }

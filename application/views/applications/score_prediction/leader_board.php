@@ -1,17 +1,32 @@
+<script type="text/javascript">
+    $(function(){
+        populate_leader_board('<?php echo LEADER_BOARD_OPTION_ALL_TIME?>');
+        $("#leader_board_options").change(function(){
+            populate_leader_board($("#leader_board_options").val());
+        });
+    });
+    function populate_leader_board(leader_board_option)
+    {
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: "<?php echo base_url() . 'applications/score_prediction/get_leade_board_data'; ?>",
+            data: {
+                leader_board_option: leader_board_option
+            },
+            success: function(data) {
+                //generate the leader board content based on the ajax response using template
+            }
+        });        
+    }
+</script>
 <div>
-
     <div class="row form-group heading blue_banner prediction_leader_board_header">
         Voters Leader Board
     </div>
     <div class="row form-group font_10px">
         <div class="col-md-12">
-            <select class="form-control">
-                <option>All Time</option>
-                <option>This Week</option>
-                <option>This Month</option>
-                <option>Last Week</option>
-                <option>Last Month</option>
-            </select>
+            <?php echo form_dropdown('leader_board_options', $leader_board_options, '', 'class=form-control id=leader_board_options'); ?>
         </div>
     </div>
     <div class="row form-group font_10px">
@@ -47,8 +62,8 @@
                         <img class="img-rounded" height="25" width="25" src="<?php echo base_url(); ?>resources/images/user_male.png">
                         <span class="Leader_board_table_user_name_style">Alamgir Kabir</span>
                     </td>
-                    <td>85</td>
                     <td>85%</td>
+                    <td>85</td>
                 </tr>
                 <tr>
                     <td>4</td>
