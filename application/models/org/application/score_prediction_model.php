@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 /*
  * Name: Score Prediciton Model
  * 
- * Author: Nazmul
+ * Author: Nazmul Hasan
  * 
  * Requirement: PHP 5 and more
  */
@@ -41,6 +41,87 @@ class Score_prediction_model extends Ion_auth_model
     }
     
     /*
+     * This method will return matches based on where logic
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function get_matches() {
+        if (isset($this->_ion_where)) {
+            foreach ($this->_ion_where as $where) {
+                $this->db->where($where);
+            }
+            $this->_ion_where = array();
+        }
+        return $this->db->select('*')
+                        ->from($this->tables['app_sp_matches'])
+                        ->get();
+    }
+    /*
+     * This method will return match list
+     * @param $date, match date
+     * @param $sports_id, sports id
+     * @param $match_id, match id
+     * @return match list
+     * @Author nazmul hasan on 27th June 2015
+     */
+    public function get_all_matches($date = '', $sports_id = 0, $match_id = 0)
+    {
+        return $this->db->select("*, ".$this->tables['app_sp_matches'].".id as match_id, ".$this->tables['app_sp_match_predictions'].".id as prediction_id, home_team_table.title as team_title_home, away_team_table.title as team_title_away")
+                        ->from($this->tables['app_sp_matches'])
+                        ->join($this->tables['app_sp_match_predictions'], $this->tables['app_sp_match_predictions'] . '.match_id=' . $this->tables['app_sp_matches'] . '.id', 'left')
+                        ->join($this->tables['app_sp_teams'].' as home_team_table', 'home_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_home', 'left')
+                        ->join($this->tables['app_sp_teams'].' as away_team_table', 'away_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_away', 'left')
+                        ->get();
+    }
+    
+    /*
+     * This method will add prediction list
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function add_prediction( $additional_data )
+    {
+        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
+        $this->db->insert($this->tables['app_sp_match_predictions'], $data);
+        $insert_id = $this->db->insert_id();
+        if($insert_id > 0){
+            $this->set_message('sp_vote_successful');
+        } else {
+            $this->set_error('sp_vote_fail');
+        }
+        return (isset($insert_id)) ? $insert_id : FALSE;
+        
+    }
+    
+    /*
+     * This method will update prediction list
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function update_prediction($match_id, $additional_data) {
+        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
+        $this->db->update($this->tables['app_sp_match_predictions'], $data, array('match_id' => $match_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('sp_vote_fail');
+            return FALSE;
+        }
+        $this->set_message('sp_vote_successful');
+        return TRUE;
+    }
+    //------------------------------------------------------------------------------------------------//
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
      * This method will retrun home page configuration of a date
      * If there is no configuration for a date then it will return previously latest configured info
      * @param, $date, configuration date
@@ -70,17 +151,17 @@ class Score_prediction_model extends Ion_auth_model
     /*
      * Selectively returns matches from app_sp_matches
      */
-    public function get_matches() {
-        if (isset($this->_ion_where)) {
-            foreach ($this->_ion_where as $where) {
-                $this->db->where($where);
-            }
-            $this->_ion_where = array();
-        }
-        return $this->db->select('*')
-                        ->from($this->tables['app_sp_matches'])
-                        ->get();
-    }
+//    public function get_matches() {
+//        if (isset($this->_ion_where)) {
+//            foreach ($this->_ion_where as $where) {
+//                $this->db->where($where);
+//            }
+//            $this->_ion_where = array();
+//        }
+//        return $this->db->select('*')
+//                        ->from($this->tables['app_sp_matches'])
+//                        ->get();
+//    }
     
     /*
      * Returns prediction info for a match
@@ -97,38 +178,38 @@ class Score_prediction_model extends Ion_auth_model
      * Called when no predictions is under a match
      * @Aythor Tanveer Ahmed on 22-02-15
      */
-    public function add_prediction( $additional_data )
-    {
-        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
-        $this->db->insert($this->tables['app_sp_match_predictions'], $additional_data);
-        $insert_id = $this->db->insert_id();
-        if($insert_id > 0){
-            $this->set_message('sp_vote_successful');
-        } else {
-            $this->set_error('sp_vote_fail');
-        }
-        return (isset($insert_id)) ? $insert_id : FALSE;
-        
-    }
-    
+//    public function add_prediction( $additional_data )
+//    {
+//        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
+//        $this->db->insert($this->tables['app_sp_match_predictions'], $additional_data);
+//        $insert_id = $this->db->insert_id();
+//        if($insert_id > 0){
+//            $this->set_message('sp_vote_successful');
+//        } else {
+//            $this->set_error('sp_vote_fail');
+//        }
+//        return (isset($insert_id)) ? $insert_id : FALSE;
+//        
+//    }
+//    
     /*
      * Appends user predicitons to already existing predictions
      * @Author Tanveer Ahmed
      */
-    public function update_prediction($match_id, $prediction_list) {
-        $additional_data = array(
-            'match_id' => $match_id,
-            'prediction_list' => $prediction_list
-        );
-        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
-        $this->db->update($this->tables['app_sp_match_predictions'], $data, array('match_id' => $match_id));
-        if ($this->db->trans_status() === FALSE) {
-            $this->set_error('sp_vote_fail');
-            return FALSE;
-        }
-        $this->set_message('sp_vote_successful');
-        return TRUE;
-    }
+//    public function update_prediction($match_id, $prediction_list) {
+//        $additional_data = array(
+//            'match_id' => $match_id,
+//            'prediction_list' => $prediction_list
+//        );
+//        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
+//        $this->db->update($this->tables['app_sp_match_predictions'], $data, array('match_id' => $match_id));
+//        if ($this->db->trans_status() === FALSE) {
+//            $this->set_error('sp_vote_fail');
+//            return FALSE;
+//        }
+//        $this->set_message('sp_vote_successful');
+//        return TRUE;
+//    }
     
     /*
      * Gets match informations + prediction informations under match
@@ -150,22 +231,6 @@ class Score_prediction_model extends Ion_auth_model
                         ->join($this->tables['app_sp_teams'].' as away_team_table', 'away_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_away', 'left')
                         ->get();
     }
-    ///////////////////////////--------------------------------------------------//////////////////////////
-    /*
-     * This method will return match list
-     * @param $date, match date
-     * @param $sports_id, sports id
-     * @param $match_id, match id
-     * @return match list
-     * @Author nazmul hasan on 27th June 2015
-     */
-    public function get_all_matches($date = '', $sports_id = 0, $match_id = 0)
-    {
-        return $this->db->select("*, ".$this->tables['app_sp_matches'].".id as match_id, ".$this->tables['app_sp_match_predictions'].".id as prediction_id, home_team_table.title as team_title_home, away_team_table.title as team_title_away")
-                        ->from($this->tables['app_sp_matches'])
-                        ->join($this->tables['app_sp_match_predictions'], $this->tables['app_sp_match_predictions'] . '.match_id=' . $this->tables['app_sp_matches'] . '.id', 'left')
-                        ->join($this->tables['app_sp_teams'].' as home_team_table', 'home_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_home', 'left')
-                        ->join($this->tables['app_sp_teams'].' as away_team_table', 'away_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_away', 'left')
-                        ->get();
-    }
+    
+    
 }

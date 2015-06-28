@@ -10,7 +10,7 @@
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: "<?php echo base_url() . 'applications/score_prediction/get_leade_board_data'; ?>",
+            url: "<?php echo base_url() . 'applications/score_prediction/get_leader_board_data'; ?>",
             data: {
                 leader_board_option: leader_board_option
             },

@@ -85,6 +85,17 @@ class Score_prediction_library {
         return $sports_id;
     }*/
     /*
+     * This method will return match list
+     * $param $date, date of the matches
+     * @param $sports_id, sports id of the matches
+     * @param $match_id, if we need only a match
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function get_match_list($date = '', $sports_id = 0, $match_id = 0)
+    {
+        
+    }
+    /*
      * This method will store user vote for a match
      * @param $match_id, match id
      * @param $predicted_match_status_id, user prediction about the match
@@ -92,6 +103,24 @@ class Score_prediction_library {
      * @Author Nazmul Hasan on 28th June 2015
      */
     public function post_vote($match_id, $predicted_match_status_id, $user_id)
+    {
+        
+    }
+    /*
+     * This method will prepare leader board data
+     * @param $leader_board_option, leader board option selected by the user
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function get_leader_board_data($leader_board_option)
+    {
+        
+    }
+    /*
+     * This method will prepare league table data
+     * @param $tournament_id, tournament id
+     * @Author Nazmul Hasan on 28th June 2015
+     */
+    public function get_league_table_data($tournament_id)
     {
         
     }

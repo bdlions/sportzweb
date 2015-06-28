@@ -392,7 +392,7 @@ class Score_prediction extends Role_Controller{
      * @post $leader_board_option, leader board selection option
      * @Author Nazmul Hasan on 28th June 2015
      */
-    public function get_leade_board_data()
+    public function get_leader_board_data()
     {
         $response = array();
         $leader_board_option = $this->input->post('leader_board_option');
