@@ -189,7 +189,7 @@ class Score_prediction extends Role_Controller{
      * This method will load home page of score prediction application
      * @Author Nazmul Hasan on 28th June 2015
      */
-    public function index(){
+    public function index($match_id = 0){
         $this->data['message'] = '';
         // sports list for the score prediction application
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
@@ -202,6 +202,7 @@ class Score_prediction extends Role_Controller{
         );
         $this->data['leader_board_options'] = $leader_board_options;
         $this->data['sports_id'] = 0;
+        $this->data['match_id'] = $match_id;
         $this->template->load(null,"applications/score_prediction/index", $this->data);
     }
     /*
