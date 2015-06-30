@@ -188,7 +188,7 @@
     <div class="col-md-3 feed-profile-picture">
     <a href='<?php echo base_url() . "member_profile/show/{%= notification_list.reference_info.user_id %}" ?>'>
     <div>
-    <img alt="{%= notification_list.reference_info.first_name[0] %}{%= notification_list.reference_info.last_name[0] %}" src=src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . '{%= notification_list.reference_info.photo%}' ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+    <img alt="{%= notification_list.reference_info.first_name[0] %}{%= notification_list.reference_info.last_name[0] %}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . '{%= notification_list.reference_info.photo%}' ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
     <p style="visibility:hidden">{%= notification_list.reference_info.first_name[0] %}{%= notification_list.reference_info.last_name[0] %}</p>
     </div>
     </a>   

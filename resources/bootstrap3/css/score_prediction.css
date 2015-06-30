@@ -30,6 +30,7 @@
 }
 
 
+
 .Leader_board_table_user_name_style{
     vertical-align: middle;
     white-space: normal;
@@ -260,5 +261,26 @@
     border: 1px solid lightgray;
     border-radius: 5px;
     padding: 3%;
+}
+
+.input_custom{
+    padding-left: 5%;
+    padding-bottom: 1%;
+}
+
+.input_custom input{
+    width: 15%;
+    border: none;
+    padding: 1%;
+    background-color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+.input_active_class{
+    background-color: #A4CBFF!important;
+}
+.input_custom input:hover{
+    cursor: pointer;
+    background-color: #E86F53;
 }
 

@@ -16,6 +16,8 @@
                 sports_id:sports_id
             },
             success: function(data) {
+                console.dir(data.sports_list);
+                $('#home_page_sports_content').append(tmpl('tlmp_home_page_sports_content', data.sports_list));
                 //generate the leader board content based on the ajax response using template
             }
         });

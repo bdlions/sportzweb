@@ -329,6 +329,7 @@ class Score_prediction extends Role_Controller{
         $s1_tournament_list[] = $tournament2;
         $sports1 = array(
             'title' => 'Football',
+            'sports_id' => 1,
             'tournament_list' => $s1_tournament_list
         );
         $sports_list = array();
@@ -390,6 +391,7 @@ class Score_prediction extends Role_Controller{
         $s2_tournament_list[] = $tournament3;
         $sports2 = array(
             'title' => 'Cricket',
+            'sports_id' => 2,
             'tournament_list' => $s2_tournament_list
         );
         $sports_list[] = $sports2;

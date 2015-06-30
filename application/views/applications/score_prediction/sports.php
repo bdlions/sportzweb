@@ -305,6 +305,7 @@
     {% team = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
+
 <script>
     $(function () {
         $('#predicted_id_01').on('click', function () {
@@ -404,7 +405,7 @@
         });
     });
 </script>
-<script>
+<!--<script>
     $(function () {
         $("#datepicker").datepicker({
             showOn: "button",
@@ -413,7 +414,57 @@
             buttonText: "Select a date"
         });
     });
+</script>-->
+<script>
+     $(function () {
+        setDate(new Date());
+        $("#from, #to").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+            onSelect: function (selectedDate) {
+
+                if (this.id == 'from') {
+                    var dateMin = $('#from').datepicker("getDate");
+                    setDate(dateMin);
+//                    var rMin1 = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() - 2);
+//                    var rMin2 = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() - 1);
+//                    var today = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate());
+//                    var rMax1 = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() + 1);
+//                    var rMax2 = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() + 2);
+//
+//                    $('#rMin1').val($.datepicker.formatDate('D d M', new Date(rMin1)));
+//                    $('#rMin2').val($.datepicker.formatDate('D d M', new Date(rMin2)));
+//                    $('#today').val($.datepicker.formatDate('D d M', new Date(today)));
+//                    $('#rMax1').val($.datepicker.formatDate('D d M', new Date(rMax1)));
+//                    $('#rMax2').val($.datepicker.formatDate('D d M', new Date(rMax2)));
+                }
+            }
+        });
+
+        function setDate(selectedDate) {
+            var dateMin = selectedDate;
+            var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+            for (var i = -2; i <= 2; i++) {
+                var date = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() + i);
+                var formatDate = $.datepicker.formatDate('D d M', new Date(date));
+
+                if (today.getTime() === date.getTime()) {
+                    //when date is today
+                    formatDate = "Today";
+                }
+                while (today.getTime()+3 === date.getTime()) {
+                    //when date is today
+                    formatDate = "Today";
+                }
+                var index = "#rMin" + (i + 3);
+                $(index).val(formatDate);
+            }
+        }
+    });
 </script>
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 
 <div class="container-fluid">
@@ -422,14 +473,22 @@
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>
         <div class="col-md-7 col-sm-7 col-xs-12 form-group">
             <div class="form-group">
-                <ul class="datePicker_data_list">
+                 <div class="input_custom"> 
+                    <input type="text" id="rMin1" name="to"/>
+                    <input type="text" id="rMin2" name="to"/>
+                    <input class="input_active_class" type="text" id="rMin3" name="to">
+                    <input type="text" id="rMin4" name="to"/>
+                    <input type="text" id="rMin5" name="to"/> 
+                    <input type="text" id="from" value="Select A date"/>
+                </div>
+<!--                <ul class="datePicker_data_list">
                     <li><a>Thu 18 Jun</a></li>
                     <li><a>Fri 19 Jun</a></li>
                     <li class="active_item"><a>Today</a></li>
                     <li><a>Sun 21 Jun</a></li>
                     <li><a>Mon 21 Jun</a></li>
                     <li style="background-color: #fff;"><input type="text" id="datepicker" class="hidden"></li>
-                </ul>
+                </ul>-->
             </div>
             <div class="form-group">
                     <div class="well">

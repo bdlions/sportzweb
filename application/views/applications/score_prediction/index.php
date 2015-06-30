@@ -305,116 +305,136 @@
     {% team = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
-<script>
-    $(function () {
-        $('#predicted_id_01').on('click', function () {
-            $('#predicted_football_game_01').toggle();
-        });
-        $('#predict_id_01').on('click', function () {
-            $('#predict_football_game_01').toggle();
-        });
-        $('#predict_football_game_01_team_a_win').on('click', function () {
-            $('#team_name').html("Arsenal");
-            $('#confirmModal').modal('show');
-            $('#vote_id').on('click', function () {
-                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
-                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_draw").removeClass("team_a_previous_width_on_click_draw");
-                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_b").removeClass("team_a_previous_width_on_click_team_b");
-                $("#predict_football_game_01_team_a_win").find(".progress_bar_width_catulate").addClass("team_a_present_width_on_click_team_a");
-                $("#predict_football_game_01_team_a_win").find(".progress_bar_percentage_text").text('60%');
+<script type="text/x-tmpl" id="tlmp_home_page_sports_content">
+    {% var i=0, sports_list = ((o instanceof Array) ? o[i++] : o); %}
+    {% while(sports_list){ %}
+
+    <div class="form-group">
+    <a role="button" data-toggle="collapse" href="#collapse_sports_event{%= sports_list.sports_id%}">
+    <div class="row" style="padding: 0px; font-size: 20px;">
+    <div class="col-md-12">
+    <div class="heading blue_banner padding_collapse_header custom_heading text_align_left">
+    {%= sports_list.title%} 
+    </div>
+    </div>
+    </div>
+    </a>
+
+{% var count = sports_list.tournament_list.length; %}
+
+        {% for(var j=0; j<count; j++){ %}
+            <div class="collapse" id="collapse_sports_event{%= sports_list.sports_id%}">
+                <div class="well">
+
+                    <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
+                        <span ><?php echo '{%= sports_list.tournament_list[j].title%}'; ?> </span>
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table">
+                            <div class="row form-group table-hover text_align">
+                                <div class="col-md-2">
+                                    Time
+                                </div>
+                                <div class="col-md-2">
+                                    Team A
+                                </div>
+                                <div class="col-md-2">
+                                    vs
+                                </div>
+                                <div class="col-md-2">
+                                    Team B
+                                </div>
+                                <div class="col-md-2">
+                                    Match Result
+                                </div>
+                                <div class="col-md-2">
+                                    Match Status
+                                </div>
+                            </div>
+                        </table>
+                    </div>
+                    {% var count1 = sports_list.tournament_list[j].match_list.length; %}
+
+                    {% for(var k=0; k<count1; k++){ %}
+                        <div class="row form-group text_align ">
+                            <div class="col-md-2">
+<?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
+                            </div>
+                            <div class="col-md-2">
+<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_home %}'; ?>
+                            </div>
+                            <div class="col-md-2">
+                                vs
+                            </div>
+                            <div class="col-md-2">
+<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>
+                            </div>
+                            <div class="col-md-2">
+                                2 - 0
+                            </div>
+                            <div class="col-md-2">
+                                <a><?php echo '{%= sports_list.tournament_list[j].match_list[k].is_predicted %}</a>'; ?>
+                            </div>
+                        </div>
+                    {% } %}
+                        </div>
+                       
+
+                        {% } %}
                 
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_a").removeClass("draw_previous_width_on_click_team_a");
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_draw").removeClass("draw_previous_width_on_click_draw");
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_b").removeClass("draw_previous_width_on_click_team_b");
-                $("#predict_football_game_01_draw").find(".progress_bar_width_catulate").addClass("draw_present_width_on_click_team_a");
-                $("#predict_football_game_01_draw").find(".progress_bar_percentage_text").text('25%');
-                
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_a").removeClass("team_b_previous_width_on_click_team_a");
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_draw").removeClass("team_b_previous_width_on_click_draw");
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_b").removeClass("team_b_previous_width_on_click_team_b");
-                $("#predict_football_game_01_team_b_win").find(".progress_bar_width_catulate").addClass("team_b_present_width_on_click_team_a");
-                $("#predict_football_game_01_team_b_win").find(".progress_bar_percentage_text").text('15%');
-               
-                $('#confirmModal').modal('hide');
-                $("#predict_football_game_01_team_a_win").off('click');
-                $("#predict_football_game_01_draw").off('click');
-                $("#predict_football_game_01_team_b_win").off('click');
-            });
-            $('#vote_ignore_id').on('click', function () {
-                $('#confirmModal').modal('hide');
-            });
-        });
-        $('#predict_football_game_01_draw').on('click', function () {
-            $('#team_name').html("Draw");
-            $('#confirmModal').modal('show');
-            $('#vote_id').on('click', function () {
-               $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
-                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_draw").removeClass("team_a_previous_width_on_click_draw");
-                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_b").removeClass("team_a_previous_width_on_click_team_b");
-                $("#predict_football_game_01_team_a_win").find(".progress_bar_width_catulate").addClass("team_a_present_width_on_click_draw");
-                $("#predict_football_game_01_team_a_win").find(".progress_bar_percentage_text").text('45%');
-                
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_a").removeClass("draw_previous_width_on_click_team_a");
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_draw").removeClass("draw_previous_width_on_click_draw");
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_b").removeClass("draw_previous_width_on_click_team_b");
-                $("#predict_football_game_01_draw").find(".progress_bar_width_catulate").addClass("draw_present_width_on_click_draw");
-                $("#predict_football_game_01_draw").find(".progress_bar_percentage_text").text('40%');
-                
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_a").removeClass("team_b_previous_width_on_click_team_a");
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_draw").removeClass("team_b_previous_width_on_click_draw");
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_b").removeClass("team_b_previous_width_on_click_team_b");
-                $("#predict_football_game_01_team_b_win").find(".progress_bar_width_catulate").addClass("team_b_present_width_on_click_draw");
-                $("#predict_football_game_01_team_b_win").find(".progress_bar_percentage_text").text('15%');
-                
-                $('#confirmModal').modal('hide');
-               $("#predict_football_game_01_team_a_win").off('click');
-                $("#predict_football_game_01_draw").off('click');
-                $("#predict_football_game_01_team_b_win").off('click');
-            });
-            $('#vote_ignore_id').on('click', function () {
-                $('#confirmModal').modal('hide');
-            });
-        });
-        $('#predict_football_game_01_team_b_win').on('click', function () {
-            $('#team_name').html("Swansea");
-            $('#confirmModal').modal('show');
-            $('#vote_id').on('click', function () {
-                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
-                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_draw").removeClass("team_a_previous_width_on_click_draw");
-                $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_b").removeClass("team_a_previous_width_on_click_team_b");
-                $("#predict_football_game_01_team_a_win").find(".progress_bar_width_catulate").addClass("team_a_present_width_on_click_team_b");
-                $("#predict_football_game_01_team_a_win").find(".progress_bar_percentage_text").text('45%');
-                
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_a").removeClass("draw_previous_width_on_click_team_a");
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_draw").removeClass("draw_previous_width_on_click_draw");
-                $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_b").removeClass("draw_previous_width_on_click_team_b");
-                $("#predict_football_game_01_draw").find(".progress_bar_width_catulate").addClass("draw_present_width_on_click_team_b");
-                $("#predict_football_game_01_draw").find(".progress_bar_percentage_text").text('25%');
-                
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_a").removeClass("team_b_previous_width_on_click_team_a");
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_draw").removeClass("team_b_previous_width_on_click_draw");
-                $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_b").removeClass("team_b_previous_width_on_click_team_b");
-                $("#predict_football_game_01_team_b_win").find(".progress_bar_width_catulate").addClass("team_b_present_width_on_click_team_b");
-                $("#predict_football_game_01_team_b_win").find(".progress_bar_percentage_text").text('30%');
-                $('#confirmModal').modal('hide');
-               $("#predict_football_game_01_team_a_win").off('click');
-                $("#predict_football_game_01_draw").off('click');
-                $("#predict_football_game_01_team_b_win").off('click');
-            });
-            $('#vote_ignore_id').on('click', function () {
-                $('#confirmModal').modal('hide');
-            });
-        });
-    });
+
+    {% sports_list = ((o instanceof Array) ? o[i++] : null); %}
+    {% } %}
 </script>
+
 <script>
     $(function () {
-        $("#datepicker").datepicker({
-            showOn: "button",
-            buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
-            buttonImageOnly: true,
-            buttonText: "Select a date"
+        setDate(new Date());
+        $("#from, #to").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+            onSelect: function (selectedDate) {
+
+                if (this.id == 'from') {
+                    var dateMin = $('#from').datepicker("getDate");
+                    setDate(dateMin);
+//                    var rMin1 = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() - 2);
+//                    var rMin2 = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() - 1);
+//                    var today = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate());
+//                    var rMax1 = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() + 1);
+//                    var rMax2 = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() + 2);
+//
+//                    $('#rMin1').val($.datepicker.formatDate('D d M', new Date(rMin1)));
+//                    $('#rMin2').val($.datepicker.formatDate('D d M', new Date(rMin2)));
+//                    $('#today').val($.datepicker.formatDate('D d M', new Date(today)));
+//                    $('#rMax1').val($.datepicker.formatDate('D d M', new Date(rMax1)));
+//                    $('#rMax2').val($.datepicker.formatDate('D d M', new Date(rMax2)));
+                }
+            }
         });
+
+        function setDate(selectedDate) {
+            var dateMin = selectedDate;
+            var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+            for (var i = -2; i <= 2; i++) {
+                var date = new Date(dateMin.getFullYear(), dateMin.getMonth(), dateMin.getDate() + i);
+                var formatDate = $.datepicker.formatDate('D d M', new Date(date));
+
+                if (today.getTime() === date.getTime()) {
+                    //when date is today
+                    formatDate = "Today";
+                }
+                while (today.getTime()+3 === date.getTime()) {
+                    //when date is today
+                    formatDate = "Today";
+                }
+                var index = "#rMin" + (i + 3);
+                $(index).val(formatDate);
+            }
+        }
     });
 </script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
@@ -426,340 +446,469 @@
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>
         <div class="col-md-7 col-sm-7 col-xs-12 form-group">
             <div class="form-group">
-                <ul class="datePicker_data_list">
-                    <li><a>Thu 18 Jun</a></li>
-                    <li><a>Fri 19 Jun</a></li>
-                    <li class="active_item"><a>Today</a></li>
-                    <li><a>Sun 21 Jun</a></li>
-                    <li><a>Mon 21 Jun</a></li>
-                    <li style="background-color: #fff;"><input type="text" id="datepicker" class="hidden"></li>
-                </ul>
-            </div>
-            <div class="form-group">
-                <a data-toggle="collapse" href="#collapse_sports_id_01" aria-expanded="false" >
-                    <div class="row" style="padding: 0px; font-size: 20px;">
-                        <div class="col-md-12">
-                            <div class="heading blue_banner padding_collapse_header custom_heading text_align_left">
-                                Football
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="form-group collapse" id="collapse_sports_id_01">
-                    <div class="well">
-                        <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
-                            <span >Barclays premier league 2014/15</span>
-                        </div>
-
-                        <div class="form-group">
-                            <table class="table">
-                                <div class="row form-group table-hover text_align">
-                                    <div class="col-md-2">
-                                        Time
-                                    </div>
-                                    <div class="col-md-2">
-                                        Team A
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Team B
-                                    </div>
-                                    <div class="col-md-2">
-                                        Match Result
-                                    </div>
-                                    <div class="col-md-2">
-                                        Match Status
-                                    </div>
-                                </div>
-                                <div class="row form-group text_align ">
-                                    <div class="col-md-2">
-                                        13:00
-                                    </div>
-                                    <div class="col-md-2">
-                                        Chelsea
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Arsenal
-                                    </div>
-                                    <div class="col-md-2">
-                                        2 - 0
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a>Closed</a>
-                                    </div>
-                                </div>
-                                <div class="row form-group text_align ">
-                                    <div class="col-md-2">
-                                        14:00
-                                    </div>
-                                    <div class="col-md-2">
-                                        Tottenham
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Chelsea
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a id="predicted_id_01" >Predicted</a>
-                                    </div>
-                                </div>
-                                <div id="predicted_football_game_01" style="display: none;">
-                                <div class="row form-group" >
-                                    <div class="col-md-12">
-                                        <div class="progress_bar_backgraound">
-                                            <span class="progress_bar_percentage_text">20%</span>
-                                            <div class="progress_bar_width_catulate" style="width: 20%;">
-                                                <span class="progress_bar_content">Tottenham</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row form-group" >
-                                    <div class="col-md-12">
-                                        <div class="progress_bar_backgraound">
-                                            <span class="progress_bar_percentage_text">0%</span>
-                                            <div class="progress_bar_width_catulate" style="width:0%;">
-                                                <span class="progress_bar_content">Draw</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row form-group" >
-                                    <div class="col-md-12">
-                                        <div class="progress_bar_backgraound">
-                                            <span class="progress_bar_percentage_text">80%</span>
-                                            <div class="progress_bar_width_catulate" style="width: 80%;">
-                                                <span class="progress_bar_content">Chelsea</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-
-                                <div class="row form-group text_align ">
-                                    <div class="col-md-2">
-                                        15:00
-                                    </div>
-                                    <div class="col-md-2">
-                                        Arsenal
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Swansea
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a id="predict_id_01">Predict</a>
-                                    </div>
-                                </div>
-                                <div id="predict_football_game_01" style="display: none;">
-                                    <div id="predict_football_game_01_team_a_win" class="row form-group" >
-                                    <div class="col-md-12">
-                                        <div class="progress_bar_backgraound">
-                                            <span class="progress_bar_percentage_text">50%</span>
-                                            <div class="progress_bar_width_catulate team_a_previous_width_on_click_team_a team_a_previous_width_on_click_draw team_a_previous_width_on_click_team_b" >
-                                                <span class="progress_bar_content">Arsenal</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div id="predict_football_game_01_draw" class="row form-group" >
-                                    <div class="col-md-12">
-                                        <div class="progress_bar_backgraound">
-                                            <span class="progress_bar_percentage_text">30%</span>
-                                            <div class="progress_bar_width_catulate draw_previous_width_on_click_team_a draw_previous_width_on_click_draw draw_previous_width_on_click_team_b" >
-                                                <span class="progress_bar_content">Draw</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div id="predict_football_game_01_team_b_win" class="row form-group" >
-                                    <div class="col-md-12">
-                                        <div class="progress_bar_backgraound">
-                                            <span class="progress_bar_percentage_text">20%</span>
-                                            <div class="progress_bar_width_catulate team_b_previous_width_on_click_team_a team_b_previous_width_on_click_draw team_b_previous_width_on_click_team_b">
-                                                <span class="progress_bar_content">Swansea</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="form-group padding_over_row_10px"></div>
-                    <div class="well">
-                        <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
-                            <span >Championship 2014/15</span>
-                        </div>
-                        <div class="form-group">
-                            <table class="table">
-                                <div class="row form-group table-hover text_align">
-                                    <div class="col-md-2">
-                                        Time
-                                    </div>
-                                    <div class="col-md-2">
-                                        Team A
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Team B
-                                    </div>
-                                    <div class="col-md-2">
-                                        Match Result
-                                    </div>
-                                    <div class="col-md-2">
-                                        Match Status
-                                    </div>
-                                </div>
-                                <div class="row form-group text_align ">
-                                    <div class="col-md-2">
-                                        16:00
-                                    </div>
-                                    <div class="col-md-2">
-                                        Hull
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Aston Villa
-                                    </div>
-                                    <div class="col-md-2">
-                                        2 - 3
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a>Closed</a>
-                                    </div>
-                                </div>
-                                <div class="row form-group text_align ">
-                                    <div class="col-md-2">
-                                        17:00
-                                    </div>
-                                    <div class="col-md-2">
-                                        Aston Villa
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Man City
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a id="" >Predicted</a>
-                                    </div>
-                                </div>
-
-                                <div class="row form-group text_align ">
-                                    <div class="col-md-2">
-                                        18:00
-                                    </div>
-                                    <div class="col-md-2">
-                                        Man City
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Hull
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a id="">Predict</a>
-                                    </div>
-                                </div>
-
-                            </table>
-                        </div>
-                    </div>
+                <div class="input_custom"> 
+                    <input type="text" id="rMin1" name="to"/>
+                    <input type="text" id="rMin2" name="to"/>
+                    <input class="input_active_class" type="text" id="rMin3" name="to">
+                    <input type="text" id="rMin4" name="to"/>
+                    <input type="text" id="rMin5" name="to"/> 
+                    <input type="text" id="from" value="Select A date"/>
                 </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <a data-toggle="collapse" href="#collapse_sports_id_07" aria-expanded="false" >
-                        <div class="row" style="padding: 0px; font-size: 20px;">
-                            <div class="col-md-12">
-                                <div class="heading blue_banner padding_collapse_header custom_heading text_align_left">
-                                    Cricket
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="collapse" id="collapse_sports_id_07">
-                        <div class="well">
-                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
-                                <span >Bangladesh vs India Series 2015</span>
-                            </div>
-                            <div class="row">
+                <div id="home_page_sports_content">
+                </div>
+
+                <!--            <div class="form-group">
+                                <a data-toggle="collapse" href="#collapse_sports_id_01" aria-expanded="false" >
+                                    <div class="row" style="padding: 0px; font-size: 20px;">
+                                        <div class="col-md-12">
+                                            <div class="heading blue_banner padding_collapse_header custom_heading text_align_left">
+                                                Football
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                
+                                <div class="form-group collapse" id="collapse_sports_id_01"></div>
+                                    <div class="well">
+                                        <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
+                                            <span >Barclays premier league 2014/15</span>
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <table class="table">
+                                                <div class="row form-group table-hover text_align">
+                                                    <div class="col-md-2">
+                                                        Time
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Team A
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        vs
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Team B
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Match Result
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Match Status
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group text_align ">
+                                                    <div class="col-md-2">
+                                                        13:00
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Chelsea
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        vs
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Arsenal
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        2 - 0
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a>Closed</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group text_align ">
+                                                    <div class="col-md-2">
+                                                        14:00
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Tottenham
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        vs
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Chelsea
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a id="predicted_id_01" >Predicted</a>
+                                                    </div>
+                                                </div>
+                                                <div id="predicted_football_game_01" style="display: none;">
+                                                <div class="row form-group" >
+                                                    <div class="col-md-12">
+                                                        <div class="progress_bar_backgraound">
+                                                            <span class="progress_bar_percentage_text">20%</span>
+                                                            <div class="progress_bar_width_catulate" style="width: 20%;">
+                                                                <span class="progress_bar_content">Tottenham</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group" >
+                                                    <div class="col-md-12">
+                                                        <div class="progress_bar_backgraound">
+                                                            <span class="progress_bar_percentage_text">0%</span>
+                                                            <div class="progress_bar_width_catulate" style="width:0%;">
+                                                                <span class="progress_bar_content">Draw</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group" >
+                                                    <div class="col-md-12">
+                                                        <div class="progress_bar_backgraound">
+                                                            <span class="progress_bar_percentage_text">80%</span>
+                                                            <div class="progress_bar_width_catulate" style="width: 80%;">
+                                                                <span class="progress_bar_content">Chelsea</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                
+                                                <div class="row form-group text_align ">
+                                                    <div class="col-md-2">
+                                                        15:00
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Arsenal
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        vs
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Swansea
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a id="predict_id_01">Predict</a>
+                                                    </div>
+                                                </div>
+                                                <div id="predict_football_game_01" style="display: none;">
+                                                    <div id="predict_football_game_01_team_a_win" class="row form-group" >
+                                                    <div class="col-md-12">
+                                                        <div class="progress_bar_backgraound">
+                                                            <span class="progress_bar_percentage_text">50%</span>
+                                                            <div class="progress_bar_width_catulate team_a_previous_width_on_click_team_a team_a_previous_width_on_click_draw team_a_previous_width_on_click_team_b" >
+                                                                <span class="progress_bar_content">Arsenal</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div id="predict_football_game_01_draw" class="row form-group" >
+                                                    <div class="col-md-12">
+                                                        <div class="progress_bar_backgraound">
+                                                            <span class="progress_bar_percentage_text">30%</span>
+                                                            <div class="progress_bar_width_catulate draw_previous_width_on_click_team_a draw_previous_width_on_click_draw draw_previous_width_on_click_team_b" >
+                                                                <span class="progress_bar_content">Draw</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div id="predict_football_game_01_team_b_win" class="row form-group" >
+                                                    <div class="col-md-12">
+                                                        <div class="progress_bar_backgraound">
+                                                            <span class="progress_bar_percentage_text">20%</span>
+                                                            <div class="progress_bar_width_catulate team_b_previous_width_on_click_team_a team_b_previous_width_on_click_draw team_b_previous_width_on_click_team_b">
+                                                                <span class="progress_bar_content">Swansea</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </table>
+                                        </div>
+                                    </div>-->
+                <!--                    <div class="form-group padding_over_row_10px"></div>
+                                    <div class="well">
+                                        <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
+                                            <span >Championship 2014/15</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <table class="table">
+                                                <div class="row form-group table-hover text_align">
+                                                    <div class="col-md-2">
+                                                        Time
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Team A
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        vs
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Team B
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Match Result
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Match Status
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group text_align ">
+                                                    <div class="col-md-2">
+                                                        16:00
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Hull
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        vs
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Aston Villa
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        2 - 3
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a>Closed</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group text_align ">
+                                                    <div class="col-md-2">
+                                                        17:00
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Aston Villa
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        vs
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Man City
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a id="" >Predicted</a>
+                                                    </div>
+                                                </div>
+                
+                                                <div class="row form-group text_align ">
+                                                    <div class="col-md-2">
+                                                        18:00
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Man City
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        vs
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        Hull
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a id="">Predict</a>
+                                                    </div>
+                                                </div>
+                
+                                            </table>
+                                        </div>
+                                    </div>-->
+
+
+                <!--            <div class="row form-group">
                                 <div class="col-md-12">
-                                    <table class="table table-hover text_align_left">
-                                        <tr>
-                                            <td>Time</td>
-                                            <td>Team A</td>
-                                            <td>vs</td>
-                                            <td>Team B</td>
-                                            <td>Match Result</td>
-                                            <td>Match Status</td>
-                                        </tr>
-                                        <tr>
-                                            <td>09:30</td>
-                                            <td>Bangladesh</td>
-                                            <td>vs</td>
-                                            <td>India</td>
-                                            <td>Drawn</td>
-                                            <td><a>Closed</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>15:00</td>
-                                            <td>Bangladesh</td>
-                                            <td>vs</td>
-                                            <td>India</td>
-                                            <td></td>
-                                            <td><a>Predict</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>10:00</td>
-                                            <td>Bangladesh</td>
-                                            <td>vs</td>
-                                            <td>India </td>
-                                            <td></td>
-                                            <td><a>Predicted</a></td>
-                                        </tr>
-                                    </table>
+                                    <a data-toggle="collapse" href="#collapse_sports_id_07" aria-expanded="false" >
+                                        <div class="row" style="padding: 0px; font-size: 20px;">
+                                            <div class="col-md-12">
+                                                <div class="heading blue_banner padding_collapse_header custom_heading text_align_left">
+                                                    Cricket
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="collapse" id="collapse_sports_id_07">
+                                        <div class="well">
+                                            <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
+                                                <span >Bangladesh vs India Series 2015</span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table class="table table-hover text_align_left">
+                                                        <tr>
+                                                            <td>Time</td>
+                                                            <td>Team A</td>
+                                                            <td>vs</td>
+                                                            <td>Team B</td>
+                                                            <td>Match Result</td>
+                                                            <td>Match Status</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>09:30</td>
+                                                            <td>Bangladesh</td>
+                                                            <td>vs</td>
+                                                            <td>India</td>
+                                                            <td>Drawn</td>
+                                                            <td><a>Closed</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>15:00</td>
+                                                            <td>Bangladesh</td>
+                                                            <td>vs</td>
+                                                            <td>India</td>
+                                                            <td></td>
+                                                            <td><a>Predict</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>10:00</td>
+                                                            <td>Bangladesh</td>
+                                                            <td>vs</td>
+                                                            <td>India </td>
+                                                            <td></td>
+                                                            <td><a>Predicted</a></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
                                 </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
+                            </div>-->
             </div>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
             <?php $this->load->view("applications/score_prediction/leader_board"); ?>
         </div>
+
     </div>
-</div>
-<?php $this->load->view("applications/score_prediction/prediction_confirmation_modal"); ?>
+    <?php $this->load->view("applications/score_prediction/prediction_confirmation_modal"); ?>
 
-<div class="row form-group"></div>
-<div class="row form-group"></div>
-<div class="row form-group"></div>
-<div class="row form-group"></div>
+    <div class="row form-group"></div>
+    <div class="row form-group"></div>
+    <div class="row form-group"></div>
+    <div class="row form-group"></div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<script>
+$(function () {
+    $('#predicted_id_01').on('click', function () {
+        $('#predicted_football_game_01').toggle();
+    });
+    $('#predict_id_01').on('click', function () {
+        $('#predict_football_game_01').toggle();
+    });
+    $('#predict_football_game_01_team_a_win').on('click', function () {
+        $('#team_name').html("Arsenal");
+        $('#confirmModal').modal('show');
+        $('#vote_id').on('click', function () {
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_draw").removeClass("team_a_previous_width_on_click_draw");
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_b").removeClass("team_a_previous_width_on_click_team_b");
+            $("#predict_football_game_01_team_a_win").find(".progress_bar_width_catulate").addClass("team_a_present_width_on_click_team_a");
+            $("#predict_football_game_01_team_a_win").find(".progress_bar_percentage_text").text('60%');
+
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_a").removeClass("draw_previous_width_on_click_team_a");
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_draw").removeClass("draw_previous_width_on_click_draw");
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_b").removeClass("draw_previous_width_on_click_team_b");
+            $("#predict_football_game_01_draw").find(".progress_bar_width_catulate").addClass("draw_present_width_on_click_team_a");
+            $("#predict_football_game_01_draw").find(".progress_bar_percentage_text").text('25%');
+
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_a").removeClass("team_b_previous_width_on_click_team_a");
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_draw").removeClass("team_b_previous_width_on_click_draw");
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_b").removeClass("team_b_previous_width_on_click_team_b");
+            $("#predict_football_game_01_team_b_win").find(".progress_bar_width_catulate").addClass("team_b_present_width_on_click_team_a");
+            $("#predict_football_game_01_team_b_win").find(".progress_bar_percentage_text").text('15%');
+
+            $('#confirmModal').modal('hide');
+            $("#predict_football_game_01_team_a_win").off('click');
+            $("#predict_football_game_01_draw").off('click');
+            $("#predict_football_game_01_team_b_win").off('click');
+        });
+        $('#vote_ignore_id').on('click', function () {
+            $('#confirmModal').modal('hide');
+        });
+    });
+    $('#predict_football_game_01_draw').on('click', function () {
+        $('#team_name').html("Draw");
+        $('#confirmModal').modal('show');
+        $('#vote_id').on('click', function () {
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_draw").removeClass("team_a_previous_width_on_click_draw");
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_b").removeClass("team_a_previous_width_on_click_team_b");
+            $("#predict_football_game_01_team_a_win").find(".progress_bar_width_catulate").addClass("team_a_present_width_on_click_draw");
+            $("#predict_football_game_01_team_a_win").find(".progress_bar_percentage_text").text('45%');
+
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_a").removeClass("draw_previous_width_on_click_team_a");
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_draw").removeClass("draw_previous_width_on_click_draw");
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_b").removeClass("draw_previous_width_on_click_team_b");
+            $("#predict_football_game_01_draw").find(".progress_bar_width_catulate").addClass("draw_present_width_on_click_draw");
+            $("#predict_football_game_01_draw").find(".progress_bar_percentage_text").text('40%');
+
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_a").removeClass("team_b_previous_width_on_click_team_a");
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_draw").removeClass("team_b_previous_width_on_click_draw");
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_b").removeClass("team_b_previous_width_on_click_team_b");
+            $("#predict_football_game_01_team_b_win").find(".progress_bar_width_catulate").addClass("team_b_present_width_on_click_draw");
+            $("#predict_football_game_01_team_b_win").find(".progress_bar_percentage_text").text('15%');
+
+            $('#confirmModal').modal('hide');
+            $("#predict_football_game_01_team_a_win").off('click');
+            $("#predict_football_game_01_draw").off('click');
+            $("#predict_football_game_01_team_b_win").off('click');
+        });
+        $('#vote_ignore_id').on('click', function () {
+            $('#confirmModal').modal('hide');
+        });
+    });
+    $('#predict_football_game_01_team_b_win').on('click', function () {
+        $('#team_name').html("Swansea");
+        $('#confirmModal').modal('show');
+        $('#vote_id').on('click', function () {
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_a").removeClass("team_a_previous_width_on_click_team_a");
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_draw").removeClass("team_a_previous_width_on_click_draw");
+            $("#predict_football_game_01_team_a_win").find(".team_a_previous_width_on_click_team_b").removeClass("team_a_previous_width_on_click_team_b");
+            $("#predict_football_game_01_team_a_win").find(".progress_bar_width_catulate").addClass("team_a_present_width_on_click_team_b");
+            $("#predict_football_game_01_team_a_win").find(".progress_bar_percentage_text").text('45%');
+
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_a").removeClass("draw_previous_width_on_click_team_a");
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_draw").removeClass("draw_previous_width_on_click_draw");
+            $("#predict_football_game_01_draw").find(".draw_previous_width_on_click_team_b").removeClass("draw_previous_width_on_click_team_b");
+            $("#predict_football_game_01_draw").find(".progress_bar_width_catulate").addClass("draw_present_width_on_click_team_b");
+            $("#predict_football_game_01_draw").find(".progress_bar_percentage_text").text('25%');
+
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_a").removeClass("team_b_previous_width_on_click_team_a");
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_draw").removeClass("team_b_previous_width_on_click_draw");
+            $("#predict_football_game_01_team_b_win").find(".team_b_previous_width_on_click_team_b").removeClass("team_b_previous_width_on_click_team_b");
+            $("#predict_football_game_01_team_b_win").find(".progress_bar_width_catulate").addClass("team_b_present_width_on_click_team_b");
+            $("#predict_football_game_01_team_b_win").find(".progress_bar_percentage_text").text('30%');
+            $('#confirmModal').modal('hide');
+            $("#predict_football_game_01_team_a_win").off('click');
+            $("#predict_football_game_01_draw").off('click');
+            $("#predict_football_game_01_team_b_win").off('click');
+        });
+        $('#vote_ignore_id').on('click', function () {
+            $('#confirmModal').modal('hide');
+        });
+    });
+});
+</script>-->
+<!--<script>
+$(function () {
+    $("#datepicker").datepicker({
+        showOn: "button",
+        buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
+        buttonImageOnly: true,
+        buttonText: "Select a date"
+    });
+});
+
+</script>-->
