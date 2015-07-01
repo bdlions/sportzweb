@@ -1,5 +1,15 @@
 <script type="text/javascript">
     $(function () {
+
+
+        $(".predicted_id").on("click", function () {
+            alert("yes");
+
+        });
+        $(".predict_id").on("click", function () {
+            alert("yes");
+
+        });
         setDate(new Date());
         $("#from, #to").datepicker({
             defaultDate: "+1w",
@@ -10,11 +20,26 @@
                     var dateMin = $('#from').datepicker("getDate");
                     setDate(dateMin);
                 }
-            }            
+            }
         });
-        sports_id = '<?php echo $sports_id?>';
+        sports_id = '<?php echo $sports_id ?>';
         date = '2015-06-28';
         get_match_list(date, sports_id);
+        $('#vote_id').on('click', function () {
+            //retrieving matches of all types of sports
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: "<?php echo base_url() . 'applications/score_prediction/post_vote'; ?>",
+                data: {
+                    match_id: 1,
+                    predicted_match_status_id: 2
+                },
+                success: function (data) {
+                    //update relevant information
+                }
+            });
+        });
     });
     function setDate(selectedDate) {
         var dateMin = selectedDate;
@@ -27,13 +52,19 @@
                 //when date is today
                 formatDate = "Today";
             }
-            while (today.getTime()+3 === date.getTime()) {
+            while (today.getTime() + 3 === date.getTime()) {
                 //when date is today
                 formatDate = "Today";
             }
             var index = "#rMin" + (i + 3);
             $(index).val(formatDate);
         }
+    }
+
+    function predicted_match(match_id) {
+       $("#predicted_match_id").show();
+//        console.log(match_id);
+//        alert("fgfdg");
     }
     function get_match_list(date, sports_id)
     {
@@ -44,9 +75,9 @@
             url: "<?php echo base_url() . 'applications/score_prediction/get_match_list'; ?>",
             data: {
                 date: date,
-                sports_id:sports_id
+                sports_id: sports_id
             },
-            success: function(data) {
+            success: function (data) {
                 console.dir(data.sports_list);
                 $('#home_page_sports_content').append(tmpl('tlmp_home_page_sports_content', data.sports_list));
                 //generate the leader board content based on the ajax response using template
@@ -102,24 +133,66 @@
                         {% for(var k=0; k<count1; k++){ %}
                             <div class="row form-group text_align ">
                                 <div class="col-md-2">
-                                    <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
+                                  <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
                                 </div>
                                 <div class="col-md-2">
-                                    <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_home %}'; ?>
+                                 <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_home %}'; ?>
                                 </div>
                                 <div class="col-md-2">
                                     vs
                                 </div>
                                 <div class="col-md-2">
-                                    <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>
+                                   <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>
                                 </div>
                                 <div class="col-md-2">
                                     2 - 0
                                 </div>
                                 <div class="col-md-2">
-                                    <a><?php echo '{%= sports_list.tournament_list[j].match_list[k].is_predicted %}</a>'; ?>
+                                {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> ) { %}
+                                <span>Closed</span>
+                                 {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
+                                 <span id = "predicted_id{%= sports_list.tournament_list[j].match_list[k].match_id%}" onclick="predicted_match(<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}'; ?>)" >predicted</span>
+                                    
+                                 {% }else{ %}
+                                <span class = "predict_id"> predict </span>
+                                 {% } %}
+                             
                                 </div>
                             </div>
+    <div id= "predicted_match_id" style="display: none;">
+    <div class="close_match_result_view_background">
+                <div class="row form-group" >
+                    <div class="col-md-12">
+                        <div class="progress_bar_backgraound">
+                            <span class="progress_bar_percentage_text">20%</span>
+                            <div class="progress_bar_width_catulate" style="width: 20%;">
+                                <span class="progress_bar_content">Tottenham</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group" >
+                    <div class="col-md-12">
+                        <div class="progress_bar_backgraound">
+                            <span class="progress_bar_percentage_text">0%</span>
+                            <div class="progress_bar_width_catulate" style="width:0%;">
+                                <span class="progress_bar_content">Draw</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group" >
+                    <div class="col-md-12">
+                        <div class="progress_bar_backgraound">
+                            <span class="progress_bar_percentage_text">80%</span>
+                            <div class="progress_bar_width_catulate_green" style="width: 80%;">
+                                <span class="progress_bar_content">Chelsea</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+         </div>
                         {% } %}
                     </div>                 
                 {% } %}
@@ -127,16 +200,17 @@
         </div>    
         {% sports_list = ((o instanceof Array) ? o[sports_counter++] : null); %}
     {% } %}
-</script>           
+</script> 
 <div class="form-group">
     <div class="input_custom"> 
-        <input type="text" id="rMin1" name="to"/>
-        <input type="text" id="rMin2" name="to"/>
-        <input class="input_active_class" type="text" id="rMin3" name="to">
-        <input type="text" id="rMin4" name="to"/>
-        <input type="text" id="rMin5" name="to"/> 
-        <input type="text" id="from" value="Select A date"/>
+        <input class="input_custom_input" type="text" id="rMin1" name="to"/>
+        <input class="input_custom_input" type="text" id="rMin2" name="to"/>
+        <input class="input_custom_input input_active_class" type="text" id="rMin3" name="to">
+        <input class="input_custom_input" type="text" id="rMin4" name="to"/>
+        <input class="input_custom_input" type="text" id="rMin5" name="to"/> 
+        <input class="date_picker_img" type="image" id="from" src="<?php echo base_url(); ?>resources/images/calendar.png"/>
     </div>
     <div id="home_page_sports_content">
     </div>
 </div>
+<div id ="test" > fjeirfgejr</div>

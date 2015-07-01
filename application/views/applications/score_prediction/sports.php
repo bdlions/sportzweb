@@ -404,16 +404,7 @@
         });
     });
 </script>
-<!--<script>
-    $(function () {
-        $("#datepicker").datepicker({
-            showOn: "button",
-            buttonImage: "<?php echo base_url(); ?>resources/images/calendar.png",
-            buttonImageOnly: true,
-            buttonText: "Select a date"
-        });
-    });
-</script>-->
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 
 <div class="container-fluid">

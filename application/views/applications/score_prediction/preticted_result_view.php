@@ -313,23 +313,10 @@
         <h1>Fixtures & Results</h1>
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>
         <div class="col-md-offset-2 col-md-8">
+            
+            
+            
             <div class="close_match_result_view_background">
-                <div class="row form-group">
-                    <div class="col-md-12">
-                        <img class="img-rounded" width="25" height="25" src="<?php echo base_url()?>resources/images/user_male.png">
-                        <span style="font-size: 14px; vertical-align: middle;"><a href="<?php echo base_url()?>">Alamgir Kabir</a> made a prediction.</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-9">
-                        <p style="font-size: 16px; font-weight: bold; text-align: center;">Tottenham vs Chelsea</p>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-md-9">
-                         <p style="font-size: 14px; color: f5f5f5; text-align: center;">Full Time: Tottenham 2 - 3 Chelsea</p>
-                    </div>
-                </div>
                 <div class="row form-group" >
                     <div class="col-md-12">
                         <div class="progress_bar_backgraound">
@@ -361,6 +348,27 @@
                     </div>
                 </div>
             </div>
+            
+            
+            <div class="close_match_result_view_background">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <img class="img-rounded" width="25" height="25" src="<?php echo base_url()?>resources/images/user_male.png">
+                        <span style="font-size: 14px; vertical-align: middle;"><a href="<?php echo base_url()?>">Alamgir Kabir</a> made a prediction.</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <p style="font-size: 16px; font-weight: bold; text-align: center;">Tottenham vs Chelsea</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-9">
+                         <p style="font-size: 14px; color: f5f5f5; text-align: center;">Full Time: Tottenham 2 - 3 Chelsea</p>
+                    </div>
+                </div>
+            
+            
         </div>
     </div>
 </div>

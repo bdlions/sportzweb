@@ -268,7 +268,7 @@
     padding-bottom: 1%;
 }
 
-.input_custom input{
+.input_custom_input{
     width: 15%;
     border: none;
     padding: 1%;
@@ -279,8 +279,11 @@
 .input_active_class{
     background-color: #A4CBFF!important;
 }
-.input_custom input:hover{
+.input_custom_input:hover{
     cursor: pointer;
     background-color: #E86F53;
+}
+.date_picker_img{
+    cursor: pointer;
 }
 
