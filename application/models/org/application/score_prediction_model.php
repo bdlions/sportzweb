@@ -65,21 +65,46 @@ class Score_prediction_model extends Ion_auth_model
      */
     public function get_all_matches($date = '', $sports_id = 0, $match_id = 0)
     {
-        return $this->db->select("*, ".$this->tables['app_sp_matches'].".id as match_id, ".$this->tables['app_sp_match_predictions'].".id as prediction_id, home_team_table.title as team_title_home, away_team_table.title as team_title_away")
+        if($date != '')
+        {
+            $this->db->where('date' , $date);
+        }
+        if($sports_id != 0)
+        {
+            $this->db->where($this->tables['app_sp_tournaments'].'.sports_id' , $sports_id);
+        }
+        if($match_id != 0)
+        {
+            $this->db->where($this->tables['app_sp_matches'].'.id' , $match_id);
+        }
+        return $this->db->select($this->tables['app_sp_sports'].".id as sports_id, ".$this->tables['app_sp_sports'].".title as sports_title, ".$this->tables['app_sp_tournaments'].".id as tournament_id, ".$this->tables['app_sp_tournaments'].".title as tournament_title, ".$this->tables['app_sp_matches'].".*,".$this->tables['app_sp_matches'].".id as match_id, ".$this->tables['app_sp_match_predictions'].".prediction_list, home_team_table.title as team_title_home, away_team_table.title as team_title_away")
                         ->from($this->tables['app_sp_matches'])
+                        ->join($this->tables['app_sp_tournaments'], $this->tables['app_sp_tournaments'] . '.id =' . $this->tables['app_sp_matches'] . '.tournament_id', 'left')
+                        ->join($this->tables['app_sp_sports'], $this->tables['app_sp_sports'] . '.id =' . $this->tables['app_sp_tournaments'] . '.sports_id', 'left')
                         ->join($this->tables['app_sp_match_predictions'], $this->tables['app_sp_match_predictions'] . '.match_id=' . $this->tables['app_sp_matches'] . '.id', 'left')
                         ->join($this->tables['app_sp_teams'].' as home_team_table', 'home_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_home', 'left')
                         ->join($this->tables['app_sp_teams'].' as away_team_table', 'away_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_away', 'left')
                         ->get();
     }
-    
+    /*
+     * This method will return match predictions
+     * @param $match_id, match id
+     * @Author Nazmul Hasan on 1st July 2015
+     */
+    public function get_match_predictions( $match_id ) {
+        $this->db->where('match_id', $match_id);
+        return $this->db->select('*')
+                        ->from($this->tables['app_sp_match_predictions'])
+                        ->get();
+    }
     /*
      * This method will add prediction list
+     * @param $prediction_data, match predition data
      * @Author Nazmul Hasan on 28th June 2015
      */
-    public function add_prediction( $additional_data )
+    public function add_prediction( $prediction_data )
     {
-        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
+        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $prediction_data);
         $this->db->insert($this->tables['app_sp_match_predictions'], $data);
         $insert_id = $this->db->insert_id();
         if($insert_id > 0){
@@ -93,10 +118,12 @@ class Score_prediction_model extends Ion_auth_model
     
     /*
      * This method will update prediction list
+     * @param $match_id, match id
+     * @param $prediction_data, match prediction data
      * @Author Nazmul Hasan on 28th June 2015
      */
-    public function update_prediction($match_id, $additional_data) {
-        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $additional_data);
+    public function update_prediction($match_id, $prediction_data) {
+        $data = $this->_filter_data($this->tables['app_sp_match_predictions'], $prediction_data);
         $this->db->update($this->tables['app_sp_match_predictions'], $data, array('match_id' => $match_id));
         if ($this->db->trans_status() === FALSE) {
             $this->set_error('sp_vote_fail');

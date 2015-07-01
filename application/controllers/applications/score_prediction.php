@@ -193,6 +193,7 @@ class Score_prediction extends Role_Controller{
         $this->data['message'] = '';
         // sports list for the score prediction application
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
+        //populating leader board options
         $leader_board_options = array(
             LEADER_BOARD_OPTION_ALL_TIME => 'All Time',
             LEADER_BOARD_OPTION_THIS_WEEK => 'This Week',
@@ -201,7 +202,10 @@ class Score_prediction extends Role_Controller{
             LEADER_BOARD_OPTION_LAST_MONTH => 'Last Month'
         );
         $this->data['leader_board_options'] = $leader_board_options;
+        $this->data['date'] = $this->utils->get_current_date_yyyymmdd();
+        //at home page we have all types of sports
         $this->data['sports_id'] = 0;
+        //user will be able to load home page for a specific match
         $this->data['match_id'] = $match_id;
         $this->template->load(null,"applications/score_prediction/index", $this->data);
     }
@@ -215,188 +219,197 @@ class Score_prediction extends Role_Controller{
     public function get_match_list()
     {
         $response = array();
-        $date = (string)$this->input->post('date');
-        $sports_id = (string)$this->session->userdata('sports_id');
+        $date = $this->input->post('date');
+        $sports_id = $this->input->post('sports_id');
+        $user_id = $this->session->userdata('user_id');
+//        $date = '2015-07-01';
+//        $sports_id = 0;
         //generate match list based on date and sports id
-        $match1 = array(
-            'match_id' => 1,
-            'time' => '13:00',
-            'team_title_home' => 'Chelsea',
-            'team_title_away' => 'Arsenal',
-            'status_id' => 2,
-            'score_home' => 2,
-            'score_away' => 0,
-            'is_predicted' => 1,
-            'prediction_info' => array(
-                'home' => '40%',
-                'draw' => '50%',
-                'away' => '10%'
-            )
-        );
-        $match2 = array(
-            'match_id' => 2,
-            'time' => '14:00',
-            'team_title_home' => 'Tottenham',
-            'team_title_away' => 'Chelsea',
-            'status_id' => 1,
-            'score_home' => 0,
-            'score_away' => 0,
-            'is_predicted' => 1,
-            'prediction_info' => array(
-                'home' => '20%',
-                'draw' => '0%',
-                'away' => '80%'
-            )
-        );
-        $match3 = array(
-            'match_id' => 3,
-            'time' => '15:00',
-            'team_title_home' => 'Arsenal',
-            'team_title_away' => 'Swansea',
-            'status_id' => 1,
-            'score_home' => 0,
-            'score_away' => 0,
-            'is_predicted' => 0,
-            'prediction_info' => array(
-                'home' => '50%',
-                'draw' => '30%',
-                'away' => '20%'
-            )
-        );
-        $t1_match_list = array();
-        $t1_match_list[] = $match1;
-        $t1_match_list[] = $match2;
-        $t1_match_list[] = $match3;
-        $tournament1 = array(
-            'title' => 'Barclays premier league 2014/15',
-            'match_list' => $t1_match_list
-        );
-        $match4 = array(
-            'match_id' => 4,
-            'time' => '16:00',
-            'team_title_home' => 'Hull',
-            'team_title_away' => 'Aston Villa',
-            'status_id' => 3,
-            'score_home' => 2,
-            'score_away' => 3,
-            'is_predicted' => 1,
-            'prediction_info' => array(
-                'home' => '50%',
-                'draw' => '40%',
-                'away' => '10%'
-            )
-        );
-        $match5 = array(
-            'match_id' => 5,
-            'time' => '17:00',
-            'team_title_home' => 'Aston Villa',
-            'team_title_away' => 'Man City',
-            'status_id' => 1,
-            'score_home' => 0,
-            'score_away' => 0,
-            'is_predicted' => 1,
-            'prediction_info' => array(
-                'home' => '20%',
-                'draw' => '10%',
-                'away' => '70%'
-            )
-        );
-        $match6 = array(
-            'match_id' => 6,
-            'time' => '18:00',
-            'team_title_home' => 'Man City',
-            'team_title_away' => 'Hull',
-            'status_id' => 1,
-            'score_home' => 0,
-            'score_away' => 0,
-            'is_predicted' => 0,
-            'prediction_info' => array(
-                'home' => '20%',
-                'draw' => '30%',
-                'away' => '50%'
-            )
-        );
-        $t2_match_list = array();
-        $t2_match_list[] = $match4;
-        $t2_match_list[] = $match5;
-        $t2_match_list[] = $match6;
-        $tournament2 = array(
-            'title' => 'Championship 2014/15',
-            'match_list' => $t2_match_list
-        );
-        $s1_tournament_list = array();
-        $s1_tournament_list[] = $tournament1;
-        $s1_tournament_list[] = $tournament2;
-        $sports1 = array(
-            'title' => 'Football',
-            'sports_id' => 1,
-            'tournament_list' => $s1_tournament_list
-        );
-        $sports_list = array();
-        $sports_list[] = $sports1;
-        $match7 = array(
-            'match_id' => 7,
-            'time' => '09:30',
-            'team_title_home' => 'Bangladesh',
-            'team_title_away' => 'India',
-            'status_id' => 4,
-            'score_home' => 0,
-            'score_away' => 0,
-            'is_predicted' => 1,
-            'prediction_info' => array(
-                'home' => '40%',
-                'draw' => '50%',
-                'away' => '10%'
-            )
-        );
-        $match8 = array(
-            'match_id' => 8,
-            'time' => '15:00',
-            'team_title_home' => 'Bangladesh',
-            'team_title_away' => 'India',
-            'status_id' => 1,
-            'score_home' => 0,
-            'score_away' => 0,
-            'is_predicted' => 1,
-            'prediction_info' => array(
-                'home' => '20%',
-                'draw' => '0%',
-                'away' => '80%'
-            )
-        );
-        $match9 = array(
-            'match_id' => 9,
-            'time' => '18:00',
-            'team_title_home' => 'Bangladesh',
-            'team_title_away' => 'India',
-            'status_id' => 1,
-            'score_home' => 0,
-            'score_away' => 0,
-            'is_predicted' => 0,
-            'prediction_info' => array(
-                'home' => '50%',
-                'draw' => '30%',
-                'away' => '20%'
-            )
-        );
-        $t3_match_list = array();
-        $t3_match_list[] = $match7;
-        $t3_match_list[] = $match8;
-        $t3_match_list[] = $match9;
-        $tournament3 = array(
-            'title' => 'Bangladesh vs India Series 2015',
-            'match_list' => $t3_match_list
-        );
-        $s2_tournament_list = array();
-        $s2_tournament_list[] = $tournament3;
-        $sports2 = array(
-            'title' => 'Cricket',
-            'sports_id' => 2,
-            'tournament_list' => $s2_tournament_list
-        );
-        $sports_list[] = $sports2;
+        $sports_list = $this->score_prediction_library->get_match_list($date, $sports_id , 0, $user_id);
         $response['sports_list'] = $sports_list;
         echo json_encode($response);
+        return;
+        
+        
+//        $match1 = array(
+//            'match_id' => 1,
+//            'time' => '13:00',
+//            'team_title_home' => 'Chelsea',
+//            'team_title_away' => 'Arsenal',
+//            'status_id' => 2,
+//            'score_home' => 2,
+//            'score_away' => 0,
+//            'is_predicted' => 1,
+//            'prediction_info' => array(
+//                'home' => '40%',
+//                'draw' => '50%',
+//                'away' => '10%'
+//            )
+//        );
+//        $match2 = array(
+//            'match_id' => 2,
+//            'time' => '14:00',
+//            'team_title_home' => 'Tottenham',
+//            'team_title_away' => 'Chelsea',
+//            'status_id' => 1,
+//            'score_home' => 0,
+//            'score_away' => 0,
+//            'is_predicted' => 1,
+//            'prediction_info' => array(
+//                'home' => '20%',
+//                'draw' => '0%',
+//                'away' => '80%'
+//            )
+//        );
+//        $match3 = array(
+//            'match_id' => 3,
+//            'time' => '15:00',
+//            'team_title_home' => 'Arsenal',
+//            'team_title_away' => 'Swansea',
+//            'status_id' => 1,
+//            'score_home' => 0,
+//            'score_away' => 0,
+//            'is_predicted' => 0,
+//            'prediction_info' => array(
+//                'home' => '50%',
+//                'draw' => '30%',
+//                'away' => '20%'
+//            )
+//        );
+//        $t1_match_list = array();
+//        $t1_match_list[] = $match1;
+//        $t1_match_list[] = $match2;
+//        $t1_match_list[] = $match3;
+//        $tournament1 = array(
+//            'title' => 'Barclays premier league 2014/15',
+//            'match_list' => $t1_match_list
+//        );
+//        $match4 = array(
+//            'match_id' => 4,
+//            'time' => '16:00',
+//            'team_title_home' => 'Hull',
+//            'team_title_away' => 'Aston Villa',
+//            'status_id' => 3,
+//            'score_home' => 2,
+//            'score_away' => 3,
+//            'is_predicted' => 1,
+//            'prediction_info' => array(
+//                'home' => '50%',
+//                'draw' => '40%',
+//                'away' => '10%'
+//            )
+//        );
+//        $match5 = array(
+//            'match_id' => 5,
+//            'time' => '17:00',
+//            'team_title_home' => 'Aston Villa',
+//            'team_title_away' => 'Man City',
+//            'status_id' => 1,
+//            'score_home' => 0,
+//            'score_away' => 0,
+//            'is_predicted' => 1,
+//            'prediction_info' => array(
+//                'home' => '20%',
+//                'draw' => '10%',
+//                'away' => '70%'
+//            )
+//        );
+//        $match6 = array(
+//            'match_id' => 6,
+//            'time' => '18:00',
+//            'team_title_home' => 'Man City',
+//            'team_title_away' => 'Hull',
+//            'status_id' => 1,
+//            'score_home' => 0,
+//            'score_away' => 0,
+//            'is_predicted' => 0,
+//            'prediction_info' => array(
+//                'home' => '20%',
+//                'draw' => '30%',
+//                'away' => '50%'
+//            )
+//        );
+//        $t2_match_list = array();
+//        $t2_match_list[] = $match4;
+//        $t2_match_list[] = $match5;
+//        $t2_match_list[] = $match6;
+//        $tournament2 = array(
+//            'title' => 'Championship 2014/15',
+//            'match_list' => $t2_match_list
+//        );
+//        $s1_tournament_list = array();
+//        $s1_tournament_list[] = $tournament1;
+//        $s1_tournament_list[] = $tournament2;
+//        $sports1 = array(
+//            'title' => 'Football',
+//            'sports_id' => 1,
+//            'tournament_list' => $s1_tournament_list
+//        );
+//        $sports_list = array();
+//        $sports_list[] = $sports1;
+//        $match7 = array(
+//            'match_id' => 7,
+//            'time' => '09:30',
+//            'team_title_home' => 'Bangladesh',
+//            'team_title_away' => 'India',
+//            'status_id' => 4,
+//            'score_home' => 0,
+//            'score_away' => 0,
+//            'is_predicted' => 1,
+//            'prediction_info' => array(
+//                'home' => '40%',
+//                'draw' => '50%',
+//                'away' => '10%'
+//            )
+//        );
+//        $match8 = array(
+//            'match_id' => 8,
+//            'time' => '15:00',
+//            'team_title_home' => 'Bangladesh',
+//            'team_title_away' => 'India',
+//            'status_id' => 1,
+//            'score_home' => 0,
+//            'score_away' => 0,
+//            'is_predicted' => 1,
+//            'prediction_info' => array(
+//                'home' => '20%',
+//                'draw' => '0%',
+//                'away' => '80%'
+//            )
+//        );
+//        $match9 = array(
+//            'match_id' => 9,
+//            'time' => '18:00',
+//            'team_title_home' => 'Bangladesh',
+//            'team_title_away' => 'India',
+//            'status_id' => 1,
+//            'score_home' => 0,
+//            'score_away' => 0,
+//            'is_predicted' => 0,
+//            'prediction_info' => array(
+//                'home' => '50%',
+//                'draw' => '30%',
+//                'away' => '20%'
+//            )
+//        );
+//        $t3_match_list = array();
+//        $t3_match_list[] = $match7;
+//        $t3_match_list[] = $match8;
+//        $t3_match_list[] = $match9;
+//        $tournament3 = array(
+//            'title' => 'Bangladesh vs India Series 2015',
+//            'match_list' => $t3_match_list
+//        );
+//        $s2_tournament_list = array();
+//        $s2_tournament_list[] = $tournament3;
+//        $sports2 = array(
+//            'title' => 'Cricket',
+//            'sports_id' => 2,
+//            'tournament_list' => $s2_tournament_list
+//        );
+//        $sports_list[] = $sports2;
+//        $response['sports_list'] = $sports_list;
+//        echo json_encode($response);
     }
     /*
      * Ajax call
@@ -546,25 +559,45 @@ class Score_prediction extends Role_Controller{
         $response = array();
         $match_id = $this->input->post('match_id');
         $user_id = $this->session->userdata('user_id');
-        $predicted_match_status_id = (string)$this->input->post('predicted_match_status_id');   
+        $predicted_match_status_id = (string)$this->input->post('predicted_match_status_id');  
+//        $match_id = 1;
+//        $user_id = 5;
+//        $predicted_match_status_id = 4; 
         $this->score_prediction_library->post_vote($match_id, $predicted_match_status_id, $user_id);
         
-        $match1 = array(
-            'match_id' => 1,
-            'time' => '13:00',
-            'team_title_home' => 'Chelsea',
-            'team_title_away' => 'Arsenal',
-            'status_id' => 2,
-            'score_home' => 2,
-            'score_away' => 0,
-            'is_predicted' => 1,
-            'prediction_info' => array(
-                'home' => '40%',
-                'draw' => '50%',
-                'away' => '10%'
-            )
-        );
-        $response['match_info']= $match1;
+        $match_info = array();
+        $sports_list = $this->score_prediction_library->get_match_list('', 0, $match_id);
+        if(!empty($sports_list))
+        {
+            $sports_info = $sports_list[0];
+            $tournament_list = $sports_info['tournament_list'];
+            if(!empty($tournament_list))
+            {
+                $tournament_info = $tournament_list[0];
+                $match_list = $tournament_info['match_list'];
+                if(!empty($match_list))
+                {
+                    $match_info = $match_list[0];
+                }
+            }
+        }
+        
+//        $match1 = array(
+//            'match_id' => 1,
+//            'time' => '13:00',
+//            'team_title_home' => 'Chelsea',
+//            'team_title_away' => 'Arsenal',
+//            'status_id' => 1,
+//            'score_home' => 2,
+//            'score_away' => 1,
+//            'is_predicted' => 1,
+//            'prediction_info' => array(
+//                'home' => '40%',
+//                'draw' => '50%',
+//                'away' => '10%'
+//            )
+//        );
+        $response['match_info']= $match_info;
         echo json_encode($response);
     }
     /*
@@ -580,6 +613,7 @@ class Score_prediction extends Role_Controller{
         }
         $this->data['tournament_list'] = $tournament_list;
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
+        $this->data['date'] = $this->utils->get_current_date_yyyymmdd();
         $this->data['sports_id'] = $sports_id;
         $this->template->load(null,"applications/score_prediction/sports", $this->data);
     }
