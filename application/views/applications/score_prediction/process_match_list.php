@@ -22,7 +22,7 @@
             var month = dateParts[ 2 ];
             selectedDate = new Date(month + " " + day + ", " + thisYear);
             setDate(selectedDate);
-            get_match_list(selectedDate, sports_id);
+//            get_match_list(selectedDate, sports_id);
 
         });
 
@@ -41,9 +41,7 @@
                 },
                 success: function (data) {
                     $("#confirmModal").modal('hide');
-                    console.log(data);
-                    //update relevant information
-                    $('#collapse_match_event'+$("#match_id").val()).empty().append(tmpl('tmpl_update_predicted_score'));
+                    $('#collapse_match_event'+$("#match_id").val()).empty().append(tmpl('tmpl_update_predicted_score'),data.match_info);
                     
                 }
             });
@@ -89,7 +87,6 @@
                 sports_id: sports_id
             },
             success: function (data) {
-                console.dir(data.sports_list);
                 $('#home_page_sports_content').append(tmpl('tlmp_home_page_sports_content', data.sports_list));
                 //generate the leader board content based on the ajax response using template
             }
@@ -97,7 +94,8 @@
     }
 </script>
 <script type="text/x-tmpl" id="tmpl_update_predicted_score">
-    FDSKFJSDF
+Template add here....
+            
 </script>
 
 <script type="text/x-tmpl" id="tlmp_home_page_sports_content">
@@ -226,6 +224,6 @@
     </div>
 </div>
 
-
+<?php $this->load->view("applications/score_prediction/prediction_confirmation_modal"); ?>+
 
 

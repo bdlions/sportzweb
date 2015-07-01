@@ -34,7 +34,7 @@
         </div>
 
     </div>
-    <?php $this->load->view("applications/score_prediction/prediction_confirmation_modal"); ?>
+    
 </div>
 <div class="row form-group"></div>
 <div class="row form-group"></div>
