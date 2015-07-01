@@ -16,7 +16,10 @@
             }
         });
         $(".input_custom_input").on("click", function () {
-            var selectedDate = $("#rMin1").val();
+            var selectedDate = $(this).text();
+            if(selectedDate == "Today"){
+                selectedDate = $.datepicker.formatDate('D d M', new Date());
+            }
             var dateParts = selectedDate.split(" ");
             var day = dateParts[ 1 ];
             var month = dateParts[ 2 ];
@@ -64,7 +67,7 @@
             }
             
             var index = "#rMin" + (i + 3);
-            $(index).val(formatDate);
+            $(index).html(formatDate);
         }
     }
 
@@ -215,11 +218,11 @@
 
 <div class="form-group">
     <div class="input_custom"> 
-        <input class="input_custom_input" type="text" id="rMin1" name="to"/>
-        <input class="input_custom_input" type="text" id="rMin2" name="to"/>
-        <input class="input_custom_input input_active_class" type="text" id="rMin3" name="to">
-        <input class="input_custom_input" type="text" id="rMin4" name="to"/>
-        <input class="input_custom_input" type="text" id="rMin5" name="to"/> 
+        <label class="input_custom_input" type="text" id="rMin1" name="to"></label>
+        <label class="input_custom_input" type="text" id="rMin2" name="to"></label>
+        <label class="input_custom_input input_active_class" type="text" id="rMin3" name="to"></label>
+        <label class="input_custom_input" type="text" id="rMin4" name="to"></label>
+        <label class="input_custom_input" type="text" id="rMin5" name="to"></label> 
         <input class="date_picker_img" type="image" id="from" src="<?php echo base_url(); ?>resources/images/calendar.png"/>
     </div>
     <div id="home_page_sports_content">
