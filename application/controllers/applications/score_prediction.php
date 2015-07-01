@@ -548,6 +548,23 @@ class Score_prediction extends Role_Controller{
         $user_id = $this->session->userdata('user_id');
         $predicted_match_status_id = (string)$this->input->post('predicted_match_status_id');   
         $this->score_prediction_library->post_vote($match_id, $predicted_match_status_id, $user_id);
+        
+        $match1 = array(
+            'match_id' => 1,
+            'time' => '13:00',
+            'team_title_home' => 'Chelsea',
+            'team_title_away' => 'Arsenal',
+            'status_id' => 2,
+            'score_home' => 2,
+            'score_away' => 0,
+            'is_predicted' => 1,
+            'prediction_info' => array(
+                'home' => '40%',
+                'draw' => '50%',
+                'away' => '10%'
+            )
+        );
+        $response['match_info']= $match1;
         echo json_encode($response);
     }
     /*
