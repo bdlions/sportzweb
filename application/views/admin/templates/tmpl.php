@@ -22,7 +22,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/typeahead.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/hogan-2.0.0.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.js"></script>
-        
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/common.js"></script>
         
         <script type="text/javascript">
