@@ -464,6 +464,64 @@ class Utils {
         $url);
         return nl2br($text);
     }
+    /*
+     * This method will retun start date and end date of current week
+     * @Author Nazmul Hasan on 3rd July 2015
+     */
+    public function get_this_week_date_range()
+    {
+        $day = date('w');
+        $start_date = date('Y-m-d', strtotime('-'.$day.' days'));
+        $end_date = date('Y-m-d', strtotime('+'.(6-$day).' days'));
+        $result = array(
+            'start_date' => $start_date,
+            'end_date' => $end_date
+        );
+        return $result;
+    }
+    /*
+     * This method will retun start date and end date of last week
+     * @Author Nazmul Hasan on 3rd July 2015
+     */
+    public function get_last_week_date_range()
+    {
+        $day = date('w') + 7 ;
+        $start_date = date('Y-m-d', strtotime('-'.$day.' days'));
+        $end_date = date('Y-m-d', strtotime('+'.(6-$day).' days'));
+        $result = array(
+            'start_date' => $start_date,
+            'end_date' => $end_date
+        );
+        return $result;
+    }
+    /*
+     * This method will retun start date and end date of current month
+     * @Author Nazmul Hasan on 3rd July 2015
+     */
+    public function get_this_month_date_range()
+    {
+        $start_date = date('Y-m-01'); // hard-coded '01' for first day
+        $end_date  = date('Y-m-t');
+        $result = array(
+            'start_date' => $start_date,
+            'end_date' => $end_date
+        );
+        return $result;
+    }
+    /*
+     * This method will retun start date and end date of last month
+     * @Author Nazmul Hasan on 3rd July 2015
+     */
+    public function get_last_month_date_range()
+    {
+        $start_date = date("Y-m-d", strtotime("first day of previous month"));
+        $end_date = date("Y-m-d", strtotime("last day of previous month"));
+        $result = array(
+            'start_date' => $start_date,
+            'end_date' => $end_date
+        );
+        return $result;
+    }
     
   /*
   * this method return list of month

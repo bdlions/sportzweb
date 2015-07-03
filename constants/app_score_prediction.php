@@ -16,3 +16,6 @@ define("LEADER_BOARD_OPTION_THIS_WEEK",         2);
 define("LEADER_BOARD_OPTION_THIS_MONTH",        3);
 define("LEADER_BOARD_OPTION_LAST_WEEK",         4);
 define("LEADER_BOARD_OPTION_LAST_MONTH",        5);
+
+define("LEADER_BOARD_CORRECT_PREDICTION_SCORE",        1);
+define("LEADER_BOARD_MAXIMUM_USERS",                   10);

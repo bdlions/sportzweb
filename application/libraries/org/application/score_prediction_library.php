@@ -1,9 +1,6 @@
 <?php
-
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 /**
  * Name:  Score Prediction Library
  *
@@ -17,23 +14,19 @@ class Score_prediction_library {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
-        
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
             $this->load->library('session');
         } else {
             $this->load->driver('session');
         }
-
         // Load IonAuth MongoDB model if it's set to use MongoDB,
         // We assign the model object to "ion_auth_model" variable.
         $this->config->item('use_mongodb', 'ion_auth') ?
                         $this->load->model('ion_auth_mongodb_model', 'ion_auth_model') :
                         $this->load->model('org/application/score_prediction_model');
-
         $this->score_prediction_model->trigger_events('library_constructor');
     }
-
     /**
      * __call
      *
@@ -47,8 +40,6 @@ class Score_prediction_library {
 
         return call_user_func_array(array($this->score_prediction_model, $method), $arguments);
     }
-    
-
     /**
      * __get
      *
@@ -63,27 +54,6 @@ class Score_prediction_library {
     public function __get($var) {
         return get_instance()->$var;
     }
-    
-    /*public function get_home_page_configuration($date)
-    {
-        $sports_id = 0;
-        $configuration_array = $this->score_prediction_model->get_home_page_configuration_info($date)->result_array();
-        if(!empty($configuration_array))
-        {
-            $configuration_info = $configuration_array[0];
-            $sports_id = $configuration_info['sports_id'];
-        }
-        else
-        {
-            $sports_list = $this->score_prediction_model->get_all_sports()->result_array();
-            if(!empty($sports_list))
-            {
-                $sports_info = $sports_list[0];
-                $sports_id = $sports_info['sports_id'];
-            }
-        }
-        return $sports_id;
-    }*/
     /*
      * This method will return match list
      * $param $date, date of the matches
@@ -97,13 +67,16 @@ class Score_prediction_library {
         {
             $user_id = $this->session->userdata('user_id');
         }
+        //retrieving match list
         $match_list_array = $this->score_prediction_model->get_all_matches($date, $sports_id, $match_id)->result_array();
         $sports_list = array();
         $tournaments = array();
         $sports = array();
         foreach($match_list_array as $match_info)
         {
+            //whether the match is predicted by current user or not
             $match_info['is_predicted'] = 0;
+            //inatializing match prediction info
             $match_info['prediction_info'] = array(
                 'home' => '0%',
                 'draw' => '0%',
@@ -139,6 +112,7 @@ class Score_prediction_library {
                 }
                 if($prediction_counter > 0)
                 {
+                    //calculating match prediciton ratio
                     $match_info['prediction_info']['home'] = round($home_win_prediction_counter/$prediction_counter*100);
                     $match_info['prediction_info']['draw'] = round($draw_prediction_counter/$prediction_counter*100);
                     $match_info['prediction_info']['away'] = round($away_win_prediction_counter/$prediction_counter*100);
@@ -158,15 +132,6 @@ class Score_prediction_library {
             {
                 $sports[$match_info['sports_id']]['tournament_id_list'][] = $match_info['tournament_id'];
             }
-            
-            
-            
-//            $sports_list[$match_info['sports_id']]['title'] = $match_info['sports_title'];
-//            $sports_list[$match_info['sports_id']]['sports_id'] = $match_info['sports_id'];
-//            $sports_list[$match_info['sports_id']]['tournament_list'][$match_info['tournament_id']]['tournament_id'] = $match_info['tournament_id'];
-//            $sports_list[$match_info['sports_id']]['tournament_list'][$match_info['tournament_id']]['title'] = $match_info['tournament_title'];
-//            $sports_list[$match_info['sports_id']]['tournament_list'][$match_info['tournament_id']]['match_list'][$match_info['match_id']] = $match_info;
-//            //print_r($sports_list);
         }
         foreach($sports as $sports_id => $sports_info)
         {
@@ -188,8 +153,12 @@ class Score_prediction_library {
      * @param $user_id, user id
      * @Author Nazmul Hasan on 28th June 2015
      */
-    public function post_vote($match_id, $predicted_match_status_id, $user_id)
+    public function post_vote($match_id, $predicted_match_status_id, $user_id = 0)
     {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }
         $prediction_list = array();
         $prediction_info = new stdClass();
         $prediction_info->user_id = $user_id;
@@ -198,7 +167,7 @@ class Score_prediction_library {
         $match_predictions_array = $this->score_prediction_model->get_match_predictions($match_id)->result_array();
         if(empty($match_predictions_array))
         {
-            
+            //storing first vote of this match
             $prediction_list[] = $prediction_info;
             $additional_data = array(
                 'match_id' => $match_id,
@@ -208,6 +177,7 @@ class Score_prediction_library {
         }
         else
         {
+            //updating vote of this match
             $match_predictions_info = $match_predictions_array[0];
             $p_list = $match_predictions_info['prediction_list'];
             if($p_list != NULL && $p_list != "")
@@ -228,7 +198,100 @@ class Score_prediction_library {
      */
     public function get_leader_board_data($leader_board_option)
     {
-        
+        $leader_board_data = array();
+        $leader_board_user_list = array();
+        $user_id_list = array();
+        $user_id_info_map = array();        
+        //processing start date and end date based on selected option at leader board
+        $start_date = '';
+        $end_date = '';
+        $date_range = '';
+        if($leader_board_option == LEADER_BOARD_OPTION_THIS_WEEK)
+        {
+            $date_range = $this->utils->get_this_week_date_range();
+        }
+        else if($leader_board_option == LEADER_BOARD_OPTION_LAST_WEEK)
+        {
+            $date_range = $this->utils->get_last_week_date_range();
+        }
+        else if($leader_board_option == LEADER_BOARD_OPTION_THIS_MONTH)
+        {
+            $date_range = $this->utils->get_this_month_date_range();
+        }
+        else if($leader_board_option == LEADER_BOARD_OPTION_LAST_MONTH)
+        {
+            $date_range = $this->utils->get_last_month_date_range();
+        }
+        if($date_range != '')
+        {
+            $start_date =  $date_range['start_date'];
+            $end_date =  $date_range['end_date'];
+        }
+        //retrieving match list based on the dates
+        $match_list_array = $this->score_prediction_model->get_leader_board_matches($start_date, $end_date)->result_array();
+        foreach($match_list_array as $match_info)
+        {
+            $p_list = $match_info['prediction_list'];
+            if($p_list != NULL && $p_list != "")
+            {
+                $prediction_list = json_decode($p_list);
+                foreach($prediction_list as $prediction_info)
+                {
+                    if(!array_key_exists($prediction_info->user_id, $leader_board_data))
+                    {
+                        $leader_board_data[$prediction_info->user_id]['correct_predictions'] = 0;
+                        $leader_board_data[$prediction_info->user_id]['total_predictions'] = 0;
+                        $leader_board_data[$prediction_info->user_id]['prediction_ratio'] = 0;
+                        $leader_board_data[$prediction_info->user_id]['score'] = 0;
+                        $leader_board_data[$prediction_info->user_id]['user_id'] = $prediction_info->user_id; 
+                    }
+                    if($match_info['status_id'] == $prediction_info->prediction_id)
+                    {
+                        $leader_board_data[$prediction_info->user_id]['correct_predictions'] = ($leader_board_data[$prediction_info->user_id]['correct_predictions'] + 1);
+                        $leader_board_data[$prediction_info->user_id]['score'] = ($leader_board_data[$prediction_info->user_id]['score'] + LEADER_BOARD_CORRECT_PREDICTION_SCORE);
+                    }
+                    $leader_board_data[$prediction_info->user_id]['total_predictions'] = ($leader_board_data[$prediction_info->user_id]['total_predictions'] + 1);
+                    $leader_board_data[$prediction_info->user_id]['prediction_ratio'] = round($leader_board_data[$prediction_info->user_id]['correct_predictions'] / $leader_board_data[$prediction_info->user_id]['total_predictions'] * 100);
+                }
+            }
+        }        
+        //sorting user list based on score
+        $temp_user_list = array();
+        $score = array();
+        foreach($leader_board_data as $key => $user_score_info)
+        {
+            $score[$key] = $user_score_info['prediction_ratio'];
+            $temp_user_list[] = $user_score_info;
+        }
+        array_multisort($score, SORT_DESC, $temp_user_list);
+        //getting users ids which will be displayed at leader board
+        $user_counter = 0;
+        foreach($temp_user_list as $user_score_info)
+        {
+            if(!in_array($prediction_info->user_id, $user_id_list))
+            {
+                $user_id_list[] = $user_score_info['user_id'];
+            }
+            $user_counter++;
+            if( $user_counter == LEADER_BOARD_MAXIMUM_USERS )
+            {
+                break;
+            }
+        }
+        //getting user info based on user ids
+        if (!empty($user_id_list)) {
+            $user_info_array = $this->score_prediction_model->get_users($user_id_list)->result_array();
+            foreach ($user_info_array as $user_info) {
+                $user_id_user_info_map[$user_info['user_id']] = $user_info;
+            }
+        }
+        //appending user info at leader board users
+        foreach($temp_user_list as $user_score_info)
+        {
+            $user_score_info['user_info'] = $user_id_user_info_map[$user_score_info['user_id']];
+            $leader_board_user_list[] = $user_score_info;
+        }        
+        return $leader_board_user_list;
     }
     /*
      * This method will prepare league table data
@@ -237,6 +300,44 @@ class Score_prediction_library {
      */
     public function get_league_table_data($tournament_id)
     {
-        
+        $team_list = array();
+        $league_table_data = array();
+        //retrieving match list for a tournament
+        $match_list_array = $this->score_prediction_model->get_league_table_matches($tournament_id)->result_array();
+        foreach($match_list_array as $match_info)
+        {
+            //initializing team data
+            if(!array_key_exists($match_info['team_id_home'], $league_table_data))
+            {
+                $league_table_data[$match_info['team_id_home']]['title'] = $match_info['home_team_title'];
+                $league_table_data[$match_info['team_id_home']]['played_matches'] = 0;
+                $league_table_data[$match_info['team_id_home']]['score_difference'] = 0;
+                $league_table_data[$match_info['team_id_home']]['points'] = 0;
+            }
+            if(!array_key_exists($match_info['team_id_away'], $league_table_data))
+            {
+                $league_table_data[$match_info['team_id_away']]['title'] = $match_info['away_team_title'];
+                $league_table_data[$match_info['team_id_away']]['played_matches'] = 0;
+                $league_table_data[$match_info['team_id_away']]['score_difference'] = 0;
+                $league_table_data[$match_info['team_id_away']]['points'] = 0;
+            }
+            //updating team data
+            $league_table_data[$match_info['team_id_home']]['played_matches'] = ($league_table_data[$match_info['team_id_home']]['played_matches'] + 1);
+            $league_table_data[$match_info['team_id_home']]['points'] = ($league_table_data[$match_info['team_id_home']]['points'] + $match_info['point_home']);
+            $league_table_data[$match_info['team_id_home']]['score_difference'] =  ($league_table_data[$match_info['team_id_home']]['score_difference'] + $match_info['score_home'] - $match_info['score_away']);
+            
+            $league_table_data[$match_info['team_id_away']]['played_matches'] = ($league_table_data[$match_info['team_id_away']]['played_matches'] + 1);
+            $league_table_data[$match_info['team_id_away']]['points'] = ($league_table_data[$match_info['team_id_away']]['points'] + $match_info['point_away']);
+            $league_table_data[$match_info['team_id_away']]['score_difference'] =  ($league_table_data[$match_info['team_id_away']]['score_difference'] + $match_info['score_away'] - $match_info['score_home']);
+        }
+        //sorting team list based on points
+        $points = array();
+        foreach($league_table_data as $key => $team_score_info)
+        {
+            $points[$key] = $team_score_info['points'];
+            $team_list[] = $team_score_info;
+        }
+        array_multisort($points, SORT_DESC, $team_list);
+        return $team_list;
     }
 }

@@ -26,14 +26,8 @@
             var month = dateParts[ 2 ];
             selectedDate = new Date(month + " " + day + ", " + thisYear);
             setDate(selectedDate);
-//            get_match_list(selectedDate, sports_id);
-
-        });
-
-
-        
+        });        
         get_match_list(date, sports_id);
-
         $('#vote_id').on('click', function () {
             $.ajax({
                 dataType: 'json',
@@ -45,13 +39,10 @@
                 },
                 success: function (data) {
                     $("#confirmModal").modal('hide');
-                    $('#div_match_info_4').html(tmpl('tmpl_abc', data.match_info));
-                    
+                    $('#div_match_info_'+$("#match_id").val()).html(tmpl('tmpl_match_details', data.match_info));                    
                 }
             });
         });
-
-
     });
     function setDate(selectedDate) {
         var dateMin = selectedDate;
@@ -68,6 +59,13 @@
             var index = "#rMin" + (i + 3);
             $(index).html(formatDate);
         }
+        var formattedMonth = '' + (selectedDate.getMonth() + 1);
+        var formattedDay = '' + selectedDate.getDate();
+        var formattedYear = selectedDate.getFullYear();
+        if (formattedMonth.length < 2) formattedMonth = '0' + formattedMonth;
+        if (formattedDay.length < 2) formattedDay = '0' + formattedDay;            
+        var formattedDate = formattedYear+'-'+formattedMonth+'-'+formattedDay;            
+        get_match_list(formattedDate, sports_id);
     }
 
     function prediction_modal(teamName, matchId, statusId, matchStatusId) {
@@ -91,13 +89,12 @@
                 sports_id: sports_id
             },
             success: function (data) {
-                $('#home_page_sports_content').append(tmpl('tlmp_home_page_sports_content', data.sports_list));
-                //generate the leader board content based on the ajax response using template
+                $('#home_page_sports_content').html(tmpl('tlmp_home_page_sports_content', data.sports_list));
             }
         });
     }
 </script>
-<script type="text/x-tmpl" id="tmpl_abc">
+<script type="text/x-tmpl" id="tmpl_match_details">
     {% var sports_counte = 0, match_info = ((o instanceof Array) ? o[sports_counter++] : o); %}
     {% while(match_info){ %}
         <div class="row form-group text_align ">
@@ -276,7 +273,6 @@
 {% sports_list = ((o instanceof Array) ? o[sports_counter++] : null); %}
 {% } %}
 </script> 
-
 <div class="form-group">
     <div class="input_custom"> 
         <label class="input_custom_input" type="text" id="rMin1" name="to"></label>
@@ -289,7 +285,4 @@
     <div id="home_page_sports_content">
     </div>
 </div>
-
-<?php $this->load->view("applications/score_prediction/prediction_confirmation_modal"); ?>+
-
-
+<?php $this->load->view("applications/score_prediction/prediction_confirmation_modal");
