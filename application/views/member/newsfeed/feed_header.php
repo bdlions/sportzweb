@@ -72,6 +72,12 @@
     </a>
     <span class="shared-text">shared a</span>
     <a href="<?php echo base_url().BMI_HOME_PAGE_PATH?>"><span class="shared-text">link</span></a>
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_FIXTURES_RESULTS ){ ?>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
+    </a>
+    <span class="shared-text">shared a</span>
+    <a href="<?php echo base_url().FIXTURES_RESULTS_HOME_PAGE_PATH?>"><span class="shared-text">link</span></a>
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_PHOTOGRAPHY && isset($newsfeed['reference_info']) ){ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
         <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>

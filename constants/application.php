@@ -21,6 +21,7 @@
     define("SCORE_PREDICTION_HOME_PAGE_PATH",        "applications/score_prediction");
     define("SHOP_HOME_PAGE_PATH",                    "applications/shop");
     define("GYMPRO_HOME_PAGE_PATH",                  "applications/gympro");
+    define("FIXTURES_RESULTS_HOME_PAGE_PATH",        "applications/score_prediction");
     
     define("ADMIN_APPLICATION_XSTREAM_BANTER_HOME_PAGE_PATH",       "admin/applications_xstreambanter");
     define("ADMIN_APPLICATION_HEALTHY_RECIPE_HOME_PAGE_PATH",       "admin/applications_healthyrecipes");

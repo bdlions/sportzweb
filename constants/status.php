@@ -50,4 +50,5 @@
     define("STATUS_SHARE_APP_ADMIN_PHOTOGRAPHY",                    14);
     define("STATUS_SHARE_LATEST_BLOG4",                             15);
     define("STATUS_SHARE_APP_ADMIN_BMI_CALCULATOR",                 16);
+    define("STATUS_SHARE_APP_ADMIN_FIXTURES_RESULTS",               17);
 ?>

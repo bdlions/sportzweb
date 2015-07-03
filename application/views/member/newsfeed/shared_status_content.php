@@ -12,12 +12,14 @@ else
 </div>
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_HEALTHY_RECIPE && isset($newsfeed['reference_info']) ){ ?>
 <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
+    <?php if(isset($newsfeed['reference_info']['main_picture'])){ ?>
     <div class="col-md-4" style="padding:0px;">
         <a href="<?php echo base_url().APPLICATION_HEALTHY_RECIPE_PATH.$newsfeed['reference_info']['id']?>">
             <img class="img-responsive" style="height: 128px" 
                  src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $newsfeed['reference_info']['main_picture']; ?>">
         </a>
     </div>
+    <?php } ?>
     <div class="col-md-8">
         <div class="row col-md-12">
             <a href="<?php echo base_url().APPLICATION_HEALTHY_RECIPE_PATH.$newsfeed['reference_info']['id']?>">
@@ -31,12 +33,14 @@ else
 </div> 
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_SERVICE_DIRECTORY && isset($newsfeed['reference_info']) ){ ?>
 <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
-    <div class="col-md-4" style="padding:0px;">
+    <?php if(isset($newsfeed['reference_info']['picture'])){ ?>
+    <div class="col-md-4" style="padding:0px;">        
         <a href="<?php echo base_url().APPLICATION_SERVICE_PATH.$newsfeed['reference_info']['id']?>">
             <img class="img-responsive" style="height: 128px" 
                  src="<?php echo base_url() . SERVICE_IMAGE_PATH . $newsfeed['reference_info']['picture']; ?>">
-        </a>
+        </a>        
     </div>
+    <?php } ?>
     <div class="col-md-8">
         <div class="row col-md-12">
             <a href="<?php echo base_url().APPLICATION_SERVICE_PATH.$newsfeed['reference_info']['id']?>">
@@ -59,12 +63,14 @@ else
 </div> 
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_NEWS && isset($newsfeed['reference_info']) ){ ?>
 <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
+    <?php if(isset($newsfeed['reference_info']['picture'])){ ?>
     <div class="col-md-4" style="padding:0px;">
         <a href="<?php echo base_url().APPLICATION_NEWS_PATH.$newsfeed['reference_info']['id']?>">
             <img class="img-responsive" style="height: 128px" 
                  src="<?php echo base_url() . NEWS_IMAGE_PATH . $newsfeed['reference_info']['picture']; ?>">
         </a>
     </div>
+    <?php } ?>
     <div class="col-md-8">
         <div class="row col-md-12">
             <a href="<?php echo base_url().APPLICATION_NEWS_PATH.$newsfeed['reference_info']['id']?>">
@@ -78,12 +84,14 @@ else
 </div> 
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_BLOG && isset($newsfeed['reference_info']) ){ ?>
 <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
+    <?php if(isset($newsfeed['reference_info']['picture'])){ ?>
     <div class="col-md-4" style="padding:0px;">
         <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id']?>">
             <img class="img-responsive" style="height: 128px" 
                  src="<?php echo base_url() . BLOG_POST_IMAGE_PATH . $newsfeed['reference_info']['picture']; ?>">
         </a>
     </div>
+    <?php } ?>
     <div class="col-md-8">
         <div class="row col-md-12">
             <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id']?>">
@@ -132,6 +140,9 @@ else
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_BMI_CALCULATOR){ ?>
 <div class="row">
 </div> 
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_FIXTURES_RESULTS){ ?>
+<div class="row">
+</div>
 <?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_APP_ADMIN_PHOTOGRAPHY){ ?>
 <div class="form-group">
     <div class="row form-group">
