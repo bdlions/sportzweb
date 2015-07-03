@@ -2,6 +2,7 @@
     $(function () {
         sports_id = '<?php echo $sports_id ?>';
         date = '<?php echo $date ?>';
+        match_id = '<?php echo $match_id ?>';
         var thisYear = new Date().getFullYear();
         setDate(new Date());
         $("#from, #to").datepicker({
@@ -27,7 +28,7 @@
             selectedDate = new Date(month + " " + day + ", " + thisYear);
             setDate(selectedDate);
         });        
-        get_match_list(date, sports_id);
+        get_match_list(date, sports_id, match_id);
         $('#vote_id').on('click', function () {
             $.ajax({
                 dataType: 'json',
@@ -65,7 +66,7 @@
         if (formattedMonth.length < 2) formattedMonth = '0' + formattedMonth;
         if (formattedDay.length < 2) formattedDay = '0' + formattedDay;            
         var formattedDate = formattedYear+'-'+formattedMonth+'-'+formattedDay;            
-        get_match_list(formattedDate, sports_id);
+        get_match_list(formattedDate, sports_id, 0);
     }
 
     function prediction_modal(teamName, matchId, statusId, matchStatusId) {
@@ -77,7 +78,7 @@
 
         }
     }
-    function get_match_list(date, sports_id)
+    function get_match_list(date, sports_id, match_id)
     {
         //retrieving matches of all types of sports
         $.ajax({
@@ -86,7 +87,8 @@
             url: "<?php echo base_url() . 'applications/score_prediction/get_match_list'; ?>",
             data: {
                 date: date,
-                sports_id: sports_id
+                sports_id: sports_id,
+                match_id: match_id
             },
             success: function (data) {
                 $('#home_page_sports_content').html(tmpl('tlmp_home_page_sports_content', data.sports_list));

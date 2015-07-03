@@ -4,9 +4,9 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Name:  dataprovider Model
+ * Name:  Recent Activities Model
  *
- * Author:  alamgir kabir
+ * Author:  Nazmul Hasan
  *
  *
  * Requirements: PHP5 or above
@@ -68,6 +68,6 @@ class Recent_activities_model extends Ion_auth_model {
                 ->from($this->tables['statuses'])
                 ->get();
         return $result;
-    }
+    }       
 }
 ?>

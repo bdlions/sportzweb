@@ -94,6 +94,15 @@ class Score_prediction_model extends Ion_auth_model
                         ->get();
     }
     /*
+     * This method will return all matches prediction
+     * @Author Nazmul Hasan on 3rd July 2015
+     */
+    public function get_all_matches_predictions() {
+        return $this->db->select('*')
+                        ->from($this->tables['app_sp_match_predictions'])
+                        ->get();
+    }
+    /*
      * This method will add prediction list
      * @param $prediction_data, match predition data
      * @Author Nazmul Hasan on 28th June 2015

@@ -1,25 +1,9 @@
 <?php
-
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-
 /**
- * Name:  Ion Auth
- *
- * Author: Ben Edmunds
- * 		  ben.edmunds@gmail.com
- *         @benedmunds
- *
- * Added Awesomeness: Phil Sturgeon
- *
- * Location: http://github.com/benedmunds/CodeIgniter-Ion-Auth
- *
- * Created:  10.01.2009
- *
- * Description:  Modified auth system based on redux_auth with extensive customization.  This is basically what Redux Auth 2 should be.
- * Original Author name has been kept but that does not mean that the method has not been modified.
- *
+ * Name:  Recent Activities
+ * Author: Nazmul Hasan
  * Requirements: PHP5 or above
  *
  */
@@ -31,6 +15,7 @@ class Recent_activities {
         $this->load->helper('cookie');
         $this->load->library('users_album');
         $this->load->model('org/application/blog_app_model');
+        $this->load->model('org/application/score_prediction_model');
         
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
@@ -78,11 +63,13 @@ class Recent_activities {
         return get_instance()->$var;
     }
     
-    public function get_recent_activites()
+    public function get_recent_activites($user_id = 0)
     {
-        $user_id = $this->session->userdata('user_id');
-        $recent_activities = array();
-        
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        }        
+        $recent_activities = array();        
         $recent_activities[RECENT_ACTIVITIES_FOLLOWERS] = array();
         $user_followers_info_array = $this->recent_activities_model->get_user_mutual_relation_info($user_id)->result_array();
         $follower_id_list = array();
@@ -257,6 +244,43 @@ class Recent_activities {
         }        
         $recent_activities[RECENT_ACTIVITIES_BLOGS]['blog_info'] = $blog_info;
         
+        //score prediction
+        $match_predictions_array = $this->score_prediction_model->get_all_matches_predictions()->result_array();
+        $match_id = 0;
+        $prediction_follower_id = 0;
+        $created_on = 0;
+        foreach($match_predictions_array as $match_prediction_info)
+        {
+            $p_list = $match_prediction_info['prediction_list'];
+            if($p_list != NULL && $p_list != "")
+            {
+                $prediction_list = json_decode($p_list);
+                foreach($prediction_list as $prediction_info)
+                {
+                    if(in_array($prediction_info->user_id, $follower_id_list))
+                    {
+                        if($prediction_info->created_on > $created_on)
+                        {
+                            $match_id = $match_prediction_info['match_id'];
+                            $prediction_follower_id = $prediction_info->user_id;
+                            $created_on = $prediction_info->created_on; 
+                        }
+                    }
+                }
+            }    
+        }
+        $recent_activities[RECENT_ACTIVITIES_FIXTURES_RESULTS]['match_id'] = 0;
+        $recent_activities[RECENT_ACTIVITIES_FIXTURES_RESULTS]['user_info'] = array();
+        if($prediction_follower_id != 0 && $match_id > 0)
+        {
+            $user_info_array = $this->recent_activities_model->get_users(array($prediction_follower_id))->result_array();
+            if(!empty($user_info_array))
+            {
+                $prediction_user_info = $user_info_array[0];
+                $recent_activities[RECENT_ACTIVITIES_FIXTURES_RESULTS]['match_id'] = $match_id;
+                $recent_activities[RECENT_ACTIVITIES_FIXTURES_RESULTS]['user_info'] = $prediction_user_info;
+            }
+        }
         return $recent_activities;
     }
     
