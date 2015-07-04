@@ -99,7 +99,7 @@
     padding-bottom: 20px;
 }
 @media only screen and (max-width: 991px) {
-    
+
     .datePicker_data_list{
         left: 5%;
     }
@@ -170,17 +170,39 @@
     padding: 5px; 
     font-size: 17px;
 }
+
+@media screen and (max-width: 991px) {
+    .progress_bar_backgraound{
+        width: 100%; 
+    }
+    .progress_bar_percentage_text{
+        font-size: 12px;
+    }
+    .progress_bar_content{
+        width: 83%;
+    }
+}
+@media screen and (min-width: 992px) {
+    .progress_bar_backgraound{
+        width:70%; 
+    }
+    .progress_bar_percentage_text{
+        font-size: 16px;
+    }
+    .progress_bar_content{
+        width: 88%;
+    }
+}
 .progress_bar_backgraound{
     background-color:#fff; 
     height:30px; 
-    width:70%; 
     border: 1px solid #7092BE;
 }
 .progress_bar_percentage_text{
     float: right; 
     padding: 3px; 
-    font-size: 16px;
 }
+
 .progress_bar_content{
     float: left; 
     padding: 3px; 
