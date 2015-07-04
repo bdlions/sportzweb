@@ -31,7 +31,15 @@
                 $("#inp_cost").hide();
                 $("#inp_cost").val( $("#dd_cost").val() );
             }
-        })
+        });
+        $("#inp_cost").change(function() {
+            if($("#inp_cost").val() < 10)
+            {
+                alert('Please assign a cost value more than or equal to 10');
+                $("#inp_cost").val('');
+            }
+            
+        });
     });
 </script>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
@@ -87,7 +95,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text ">Date:</div>
                         <div class="col-md-6">
-                            <input class="" id="session_date" name="session_date" value="<?php echo set_value('session_date'); ?>" >
+                            <input class="" id="session_date" name="session_date" value="<?php echo $current_date; ?>" >
                         </div>
                     </div>
                     <div class="row form-group">
@@ -157,7 +165,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text ">Currency:</div>
                         <div class="col-md-4">
-                             <?php echo form_dropdown('currency_list', $currency_list, '', 'class=form-control id=currency_list'); ?>
+                             <?php echo form_dropdown('currency_list', $currency_list, GYMPRO_CURRENCY_POUND_ID, 'class=form-control id=currency_list'); ?>
                         </div>
                     </div>
                     <div class="row form-group">

@@ -262,12 +262,12 @@
         ?>
         <div class="col-md-10">
             <div class="row">
-                <div class="col-md-12">
-                    Earnings Summery
-                    <div class="row form-group">
-                        <div class="col-md-4" style="border-bottom: 1px solid #999999"></div>
+                <div class="row form-group">
+                    <div class="col-md-6" style="font-size: 20px; color: maroon">
+                        <span>Earnings Summery</span>
                     </div>
                 </div>
+                <div style="border-top: 2px solid lightgray; padding-bottom:10px;"></div>
                 <div class="col-md-4">
                     <div class="row form-group">
                         <div class="col-md-4 content_text" style="padding-right: 0">Group and Client:</div>

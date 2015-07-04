@@ -34,7 +34,15 @@
                 $("#inp_cost").hide();
                 $("#inp_cost").val($("#dd_cost").val());
             }
-        })
+        });
+        $("#inp_cost").change(function() {
+            if($("#inp_cost").val() < 10)
+            {
+                alert('Please assign a cost value more than or equal to 10');
+                $("#inp_cost").val('');
+            }
+            
+        });
     });
 </script>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">

@@ -1959,9 +1959,9 @@ CREATE TABLE IF NOT EXISTS `app_gympro_currencies` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 INSERT INTO `app_gympro_currencies` (`title`, `currency_code`) VALUES
-('Dollar ($)', 'USD'),
-('Pound (£)', 'GBP'),
-('Euro (€)', 'EUR');
+('&#36;', 'USD'),
+('&#163;', 'GBP'),
+('&#8364;', 'EUR');
 CREATE TABLE IF NOT EXISTS `app_gympro_users` (
   `user_id` int(11) unsigned NOT NULL,
   `account_type_id` int(11) unsigned DEFAULT NULL,

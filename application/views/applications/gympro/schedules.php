@@ -45,11 +45,11 @@
             slotMinutes: 60,
             aspectRatio: 2.5,
             eventClick: function(event, jsEvent, view) {
-                $('#modalTitle').html(event.session_info.title);
+                //$('#modalTitle').html(event.session_info.title);
                 $('#session_title').html(event.session_info.title);
                 $('#session_location').html(event.session_info.location);
-                $('#session_cost').html(event.session_info.cost);
-                $('#session_currency_id').html(event.session_info.currency_title);
+                $('#session_cost').html(event.session_info.currency_title+' '+event.session_info.cost);
+                //$('#session_currency_id').html(event.session_info.currency_title);
                 $('#session_status').html(event.session_info.status_title);
                 status_id = event.session_info.status_id;
                 if (status_id == '<?php echo GYMPRO_SESSION_STATUS_UNPAID_ID ?>') {
@@ -147,13 +147,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 id="modalTitle" class="modal-title"></h4>
+                <h4 id="modalTitle" class="modal-title">Session</h4>
             </div>
             <div id="modalBody" class="modal-body">
                 <div class="row">
                     <div class="col-sm-offset-2 col-sm-8" style="font-size: 16px;">
                         <div class="row form-group">
-                            <div class="col-sm-4">Title:</div>
+                            <div class="col-sm-4">Session:</div>
                             <div class="col-sm-8">
                                 <div id="session_title"></div>
                             </div>
@@ -166,11 +166,8 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-sm-4">Cost:</div>
-                            <div class="col-sm-1">
+                            <div class="col-sm-5">
                                 <div id="session_cost"></div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div id="session_currency_id"></div>
                             </div>
                         </div>
                         <div class="row form-group">

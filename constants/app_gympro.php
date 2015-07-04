@@ -44,3 +44,5 @@ define("GYMPRO_SESSION_STATUS_UNPAID_ID",                    "1");
 define("GYMPRO_SESSION_STATUS_PAY_CASH_ID",                  "2");
 define("GYMPRO_SESSION_STATUS_PAY_PT_PRO_ID",                "3");
 define("GYMPRO_SESSION_STATUS_CANCELLED_ID",                 "4");
+
+define("GYMPRO_CURRENCY_POUND_ID",                            2);

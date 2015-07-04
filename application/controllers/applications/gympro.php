@@ -68,10 +68,18 @@ class Gympro extends Role_Controller {
         $this->data['message'] = '';
         if ($this->input->post('account_type_list')) {
             $account_type_id = $this->input->post('account_type_list');
-            $data = array(
+            $additional_data = array(
                 'account_type_id' => $account_type_id
             );
-            $status = $this->gympro_library->store_gympro_user_info($user_id, $data);
+            if ( !empty($this->gympro_user_info) && ($this->gympro_user_info['account_email']) != null) {
+                $additional_data['account_email'] = $this->gympro_user_info['account_email'];
+            } else {
+                $user_email_array = $this->gympro_library->get_user_email($user_id)->result_array();
+                if (!empty($user_email_array)) {
+                    $additional_data['account_email'] = $user_email_array[0]['email'];
+                }
+            }
+            $status = $this->gympro_library->store_gympro_user_info($user_id, $additional_data);
             if ($status === FALSE) {
                 redirect('applications/gympro', 'refresh');
             } else {
@@ -2524,6 +2532,7 @@ class Gympro extends Role_Controller {
         }
         $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('session_date', 'Date', 'xss_clean|required');
+        $this->form_validation->set_rules('cost', 'Cost', 'xss_clean|required');
         $this->form_validation->set_rules('location', 'Location', 'xss_clean');
         if ($this->input->post()) {
             $result = array();
@@ -2569,6 +2578,7 @@ class Gympro extends Role_Controller {
         foreach ($currency_array as $currency) {
             $currency_list[$currency['currency_id']] = $currency['title'];
         }
+        $this->data['current_date'] = $this->utils->get_current_date();
         $this->data['currency_list'] = $currency_list;
         $this->data['session_statuses'] = $this->gympro_library->get_all_session_statuses()->result_array();
         $this->data['session_times'] = $this->gympro_library->get_all_session_times()->result_array();
@@ -2606,6 +2616,7 @@ class Gympro extends Role_Controller {
         }
         $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
         $this->form_validation->set_rules('session_date', 'Date', 'xss_clean|required');
+        $this->form_validation->set_rules('cost', 'Cost', 'xss_clean|required');
         if ($this->input->post()) {
             $result = array();
             $result['message'] = '';
