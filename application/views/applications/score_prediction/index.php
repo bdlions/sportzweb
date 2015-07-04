@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 <div class="container-fluid">
     <div class="row">
         <h1>Fixtures & Results</h1>
