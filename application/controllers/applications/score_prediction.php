@@ -121,6 +121,7 @@ class Score_prediction extends Role_Controller{
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
         $this->data['date'] = $this->utils->get_current_date_yyyymmdd();
         $this->data['sports_id'] = $sports_id;
+        $this->data['match_id'] = 0;
         $this->template->load(null,"applications/score_prediction/sports", $this->data);
     }
     /*
