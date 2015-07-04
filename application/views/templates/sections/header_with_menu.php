@@ -31,7 +31,8 @@
             var notification_type_id_list = [
                 "<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>",
                 "<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>",
-                "<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>"
+                "<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>",
+                "<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>"
             ];
             update_notifications_status(notification_type_id_list, 1);
         });
@@ -106,75 +107,83 @@
 
 </script>
 <script type="text/x-tmpl" id="tmpl_notification">
-    {% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);
-    while(notification_info){ %}
+{% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);
+while(notification_info){ %}
 
-    {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>'){ %}
+{% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>' ){ %}
 
-    <div class="pagelet message_friends_box">
+<div class="pagelet message_friends_box">
     <div class="row">
-    <div class="col-sm-3 feed-profile-picture">
-    {% if(notification_info.reference_list != null){ %}
-    <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>'>
-    <div>
-    <img alt="{%= notification_info.reference_list[0].first_name[0] %}{%= notification_info.reference_list[0].last_name[0] %}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . '{%= notification_info.reference_list[0].photo%}' ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
-    <p style="visibility:hidden">{%= notification_info.reference_list[0].first_name[0] %}{%= notification_info.reference_list[0].last_name[0] %}</p>
-    </div>
-    </a>
-    {%}%}
-    </div>
-    <div class="col-sm-9">
-    {% var counter = 1;
-    var total_users = notification_info.reference_list.length; %}
+        <div class="col-sm-3 feed-profile-picture">
+            {% if(notification_info.reference_list != null){ %}
+            <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>'>
+                <div>
+                    <img alt="{%= notification_info.reference_list[0].first_name[0] %}{%= notification_info.reference_list[0].last_name[0] %}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . '{%= notification_info.reference_list[0].photo%}' ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+                    <p style="visibility:hidden">{%= notification_info.reference_list[0].first_name[0] %}{%= notification_info.reference_list[0].last_name[0] %}</p>
+                </div>
+            </a>
+            {%}%}
+        </div>
+        <div class="col-sm-9">
+            {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>'){ %}
+                {% var counter = 1;
+                var total_users = notification_info.reference_list.length; %}
 
-    {% for(var j = 0;j <total_users;j++){
+                {% for(var j = 0;j <total_users;j++){
 
-    if(counter > 1){ 
-    if(counter == 3 && counter <= total_users){ %}
-    <?php echo " and "; ?>
-    {% }else if(counter == total_users){  %}
-    <?php echo " and "; ?>
-    {% }else{  %}
-    <?php echo " , "; ?>
-    {% }  }  %}
-    <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
-    {% counter++;
-    } %}
+                if(counter > 1){ 
+                if(counter == 3 && counter <= total_users){ %}
+                <?php echo " and "; ?>
+                {% }else if(counter == total_users){  %}
+                <?php echo " and "; ?>
+                {% }else{  %}
+                <?php echo " , "; ?>
+                {% }  }  %}
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
+                {% counter++;
+                } %}
 
-    {% var created_on =notification_info.created_on ; 
-    var reference_id =notification_info.reference_id ;
-    if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
-    if(total_users == 1){ %}
-    like
-    {% }
-    if(total_users > 1){ %}
-    likes
-    {% }
-    }%}
-    {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>') { 
-    if(total_users >= 1){ %}
-    commented on
-    {% }
-    if(total_users > 3){ %}
-    also commented on
-    {% }
-    }%}
-    {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
-    if(total_users >= 1){ %}
-    shared
-    {% }
-    if(total_users > 3){ %}
-    also shared
-    {% }
-    }%}
-    <a href='<?php echo base_url() . "member_profile/view_shared_status/{%=reference_id%}" ?>'> your post </a>
-    <div> {%= created_on%} </div> 
-    </div>
+                {% var created_on =notification_info.created_on ; 
+                var reference_id =notification_info.reference_id ;
+                if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
+                if(total_users == 1){ %}
+                like
+                {% }
+                if(total_users > 1){ %}
+                likes
+                {% }
+                }%}
+                {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>') { 
+                if(total_users >= 1){ %}
+                commented on
+                {% }
+                if(total_users > 3){ %}
+                also commented on
+                {% }
+                }%}
+                {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
+                if(total_users >= 1){ %}
+                shared
+                {% }
+                if(total_users > 3){ %}
+                also shared
+                {% }
+                }%}
+                <a href='<?php echo base_url() . "member_profile/view_shared_status/{%=reference_id%}" ?>'> your post </a>
+                <div> {%= created_on%} </div> 
+            {%}%}
+            {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>'){ %}
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
+                your 
+                <a href='<?php echo base_url() . "applications/score_prediction/index/{%=notification_info.reference_id %}" ?>'>prediction</a>
+                is correct
+            {%}%}
+        </div>
     </div>    
-    </div>
-    {% } %}
-    {% notification_info = ((o instanceof Array) ? o[i++] : null); %}
-    {% } %}
+</div>
+{% } %}
+{% notification_info = ((o instanceof Array) ? o[i++] : null); %}
+{% } %}
 
 
 </script>

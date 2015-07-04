@@ -16,10 +16,8 @@
                     url: '<?php echo base_url().'admin/applications_scoreprediction/update_match/'.$match_id;?>',
                     data: $("#form_update_match").serializeArray(),
                     success: function(data) {
-                        //alert(data.message);
-                        var message = data.message;
-                        print_common_message(message);
-                        location.reload();
+                        print_common_message(data.message);
+                        window.location = '<?php echo base_url(); ?>admin/applications_scoreprediction/manage_matches/<?php echo $tournament_id; ?>';
                     }
                 });
             }else{

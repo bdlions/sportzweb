@@ -497,6 +497,46 @@ class Admin_score_prediction_model extends Ion_auth_model
         
     }
     
+    public function get_match_prediction($match_id){
+        $this->db->where($this->tables['app_sp_match_predictions'].'.match_id', $match_id);
+        return  $this->db->select($this->tables['app_sp_match_predictions'].'.id as prdiction_id,'.$this->tables['app_sp_match_predictions'].'.*')
+                    ->from($this->tables['app_sp_match_predictions'])
+                    ->get();
+    
+        
+    }
+     /*
+     * This add notification
+     * Parameter  notification list array and user id
+     * @Author Rashida on 13th April 2015
+     */
+    public function add_notification($user_id,$new_notification_list) {
+        if ($user_id != 0) {
+            $new_notification_list = $this->_filter_data($this->tables['notification_list'], $new_notification_list);
+            $this->db->insert($this->tables['notification_list'], $new_notification_list);
+            return $insert_id = $this->db->insert_id();
+        }
+    }
+    /*
+     * This update notification
+     * Parameter  notification list array and user id
+     * @Author Rashida on 13th April 2015
+     */
+    public function update_notification($user_id, $new_notification_list)
+    {
+        $this->db->where('user_id', $user_id);
+        $new_notification_list = $this->_filter_data($this->tables['notification_list'], $new_notification_list);
+        return $this->db->update($this->tables['notification_list'], $new_notification_list);
+        
+    }
+    public function get_notification_list($user_id = 0) {
+        $this->db->where($this->tables['notification_list'].'.user_id', $user_id);
+        return $this->db->select($this->tables['usres_following_acceptance'].'.following_acceptance_type, '.$this->tables['notification_list'] . ".*")
+                    ->from($this->tables['notification_list'])  
+                    ->join($this->tables['usres_following_acceptance'], $this->tables['usres_following_acceptance'].'.user_id='.$this->tables['notification_list'].'.user_id ','left')
+                    ->get();
+    }
+    
     // ------------------------------- Home Page Configuration ---------------------------
     /*
      * This method will add home page configuration

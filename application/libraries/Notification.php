@@ -158,6 +158,7 @@ class Notification {
 
         $result_notification_list = array();
         $reference_user_id_list = array();
+        $reference_user_id_list[] = $user_id;
         $user_info_array = array();
         $notification_info_array = array();
         $user_id_user_info_map = array();
@@ -217,13 +218,17 @@ class Notification {
                     $notification_info['reference_info'] = $user_id_user_info_map[$n_list_info->reference_id];
                 $notification_info['following_acceptance_type'] = $notification_array['following_acceptance_type'];
             }
-         
+            
             $notification_info['reference_list'] = array();
             $reference_array_list = $n_list_info->reference_id_list;
             foreach ($reference_array_list as $notification_info_array) {
                 $notification_info['reference_list'][] = $user_id_user_info_map[$notification_info_array->user_id];
             }
             $notification_info['created_on'] = $this->utils->convert_time($n_list_info->modified_on);
+            if ($n_list_info->type_id == NOTIFICATION_WHILE_PREDICT_MATCH) {
+                $notification_info['reference_list'] = array();
+                $notification_info['reference_list'][] = $user_id_user_info_map[$user_id];
+            }
             $result_notification_list[] = $notification_info;
         }
         $result['notification_list'] = $result_notification_list;

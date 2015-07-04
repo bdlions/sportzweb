@@ -13,16 +13,11 @@
             </div>
         </div>  
         <div class="pagelet">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                   <a >Alamgir Kabir</a> your prediction is correct.
-                </div>
-                
-            </div>
-            <?php foreach ($notification_list as $notification_info) { ?>
+            <?php foreach ($notification_list as $notification_info) { 
+                ?>
                 <div class="pagelet message_friends_box">
                     <div class="row">
-                        <?php if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST) { ?>
+                        <?php if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_PREDICT_MATCH) { ?>
                             <div class="col-sm-3 feed-profile-picture">
                                 <?php if (!empty($notification_info['reference_list'])) { ?>
                                     <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list'][0]['user_id']}" ?>'>
@@ -33,8 +28,11 @@
                                     </a>  
                                 <?php } ?>
                             </div>
-                            <div class="col-sm-9">
-                                <?php
+                        <?php } ?>
+                        <div class="col-sm-9">
+
+                            <?php
+                            if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST) {
                                 $total_users = count($notification_info['reference_list']);
                                 $counter = 1;
                                 foreach ($notification_info['reference_list'] as $referenced_user_info) {
@@ -72,7 +70,7 @@
                                     }
                                     ?>
                                     <a href='<?php echo base_url() . "member_profile/view_shared_status/{$reference_id}" ?>'> your post</a>    
-                                   <?php echo $created_on; ?>
+                                    <?php echo $created_on; ?>
                                     <?php
                                 } else if ($notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST) {
                                     if ($total_users >= 1) {
@@ -92,14 +90,22 @@
                                     }
                                     ?>
                                     <a href='<?php echo base_url() . "member_profile/view_shared_status/{$reference_id}" ?>'>your post</a> 
-                                    <?php echo $created_on; 
+                                    <?php
+                                    echo $created_on;
                                 }
+                            }
+                            if ($notification_info['type_id'] == NOTIFICATION_WHILE_PREDICT_MATCH) {
                                 ?>
-                            </div>
-                        <?php } ?>
-                    </div>
+                                <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>                            
+                                your
+                                <a href='<?php echo base_url() . "applications/score_prediction/index/{$notification_info['reference_id']}" ?>'> prediction </a> 
+                                is correct
+                            <?php }
+                            ?>
+                        </div>
+<?php } ?>
                 </div>
-            <?php } ?>
+            </div>
         </div>
     </div>
 </div>

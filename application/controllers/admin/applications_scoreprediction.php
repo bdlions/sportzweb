@@ -152,9 +152,11 @@ class Applications_scoreprediction extends Admin_Controller{
             'title' => $title,
             'modified_on' => now()
         );
+        
         if($this->admin_score_prediction_library->update_sports($sports_id, $additional_data))
         {
             $result['message'] = $this->admin_score_prediction_library->messages_alert();
+            
         }
         else
         {
@@ -526,6 +528,7 @@ class Applications_scoreprediction extends Admin_Controller{
         {            
             if($this->form_validation->run() == true)
             {
+                 $status_id = $this->input->post('match_status_list');
                 $additional_data = array(
                     'team_id_home' => $this->input->post('home_team_list'),
                     'team_id_away' => $this->input->post('away_team_list'),
@@ -535,12 +538,15 @@ class Applications_scoreprediction extends Admin_Controller{
                     'score_away' => $this->input->post('score_away'),
                     'point_home' => $this->input->post('point_home'),
                     'point_away' => $this->input->post('point_away'),
-                    'status_id' => $this->input->post('match_status_list'),
+                    'status_id' => $status_id,
                     'modified_on' => now()
                 );
                 if($this->admin_score_prediction_library->update_match($match_id, $additional_data))
                 {
                     $result['message'] = $this->admin_score_prediction_library->messages_alert();
+                    if($status_id == MATCH_STATUS_WIN_HOME || $status_id == MATCH_STATUS_WIN_AWAY || $status_id == MATCH_STATUS_DRAW){
+                      $this->admin_score_prediction_library->get_match_prediction($match_id,$status_id);   
+                    }
                     echo json_encode($result);exit;
 //                    redirect('admin/applications_scoreprediction/update_match/'.$match_id,'refresh');
                 }
@@ -639,6 +645,7 @@ class Applications_scoreprediction extends Admin_Controller{
         $this->data['selected_away_team'] = $match_info['team_id_away'];
         $this->data['match_status'] = $match_info['status_id'];
         $this->data['match_id'] = $match_id;
+        $this->data['tournament_id'] = $tournament_id;
         $this->template->load($this->tmpl, "admin/applications/score_prediction/match_update", $this->data);
     }
     

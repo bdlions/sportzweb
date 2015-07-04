@@ -1,6 +1,5 @@
 <?php
 
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -13,6 +12,7 @@ if (!defined('BASEPATH'))
  *
  */
 class Admin_score_prediction_library {
+
     public function __construct() {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
@@ -47,7 +47,6 @@ class Admin_score_prediction_library {
 
         return call_user_func_array(array($this->admin_score_prediction_model, $method), $arguments);
     }
-    
 
     /**
      * __get
@@ -63,21 +62,18 @@ class Admin_score_prediction_library {
     public function __get($var) {
         return get_instance()->$var;
     }
-    
-    public function get_all_matches($tournament_id)
-    {
+
+    public function get_all_matches($tournament_id) {
         $match_list = array();
         $match_list_array = $this->admin_score_prediction_model->get_all_matches($tournament_id)->result_array();
-        foreach($match_list_array as $match_info)
-        {
+        foreach ($match_list_array as $match_info) {
             $match_info['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($match_info['date']);
             $match_list[] = $match_info;
         }
         return $match_list;
     }
-    
-    public function process_imported_match($match_data)
-    {
+
+    public function process_imported_match($match_data) {
         $sports_title = $match_data['sports'];
         $tournament_title = $match_data['tournament'];
         $season = $match_data['season'];
@@ -85,30 +81,23 @@ class Admin_score_prediction_library {
         $away_team_title = $match_data['away_team'];
         $date = $match_data['date'];
         $time = $match_data['time'];
-        
+
         $sports_id = 0;
         $sports_id_array = $this->admin_score_prediction_model->get_sports_id($sports_title)->result_array();
-        if(!empty($sports_id_array))
-        {
+        if (!empty($sports_id_array)) {
             $sports_id = $sports_id_array[0]['sports_id'];
-        }
-        else
-        {
+        } else {
             $sports_id = $this->admin_score_prediction_model->create_sports(array('title' => $sports_title));
         }
-        if($sports_id <= 0)
-        {
+        if ($sports_id <= 0) {
             return FALSE;
         }
-        
+
         $tournament_id = 0;
         $tournament_id_array = $this->admin_score_prediction_model->get_tournament_id($tournament_title, $season)->result_array();
-        if(!empty($tournament_id_array))
-        {
+        if (!empty($tournament_id_array)) {
             $tournament_id = $tournament_id_array[0]['tournament_id'];
-        }
-        else
-        {
+        } else {
             $additional_data = array(
                 'title' => $tournament_title,
                 'sports_id' => $sports_id,
@@ -117,49 +106,40 @@ class Admin_score_prediction_library {
             );
             $tournament_id = $this->admin_score_prediction_model->create_tournament($additional_data);
         }
-        if($tournament_id <= 0)
-        {
+        if ($tournament_id <= 0) {
             return FALSE;
         }
-        
+
         $team_id_home = 0;
         $home_team_id_array = $this->admin_score_prediction_model->get_team_id($home_team_title)->result_array();
-        if(!empty($home_team_id_array))
-        {
+        if (!empty($home_team_id_array)) {
             $team_id_home = $home_team_id_array[0]['team_id'];
-        }
-        else
-        {
+        } else {
             $home_team_data = array(
                 'title' => $home_team_title,
                 'sports_id' => $sports_id
             );
             $team_id_home = $this->admin_score_prediction_model->create_team($home_team_data);
         }
-        if($team_id_home <= 0)
-        {
+        if ($team_id_home <= 0) {
             return FALSE;
         }
-        
+
         $team_id_away = 0;
         $away_team_id_array = $this->admin_score_prediction_model->get_team_id($away_team_title)->result_array();
-        if(!empty($away_team_id_array))
-        {
+        if (!empty($away_team_id_array)) {
             $team_id_away = $away_team_id_array[0]['team_id'];
-        }
-        else
-        {
+        } else {
             $away_team_data = array(
                 'title' => $away_team_title,
                 'sports_id' => $sports_id
             );
             $team_id_away = $this->admin_score_prediction_model->create_team($away_team_data);
         }
-        if($team_id_away <= 0)
-        {
+        if ($team_id_away <= 0) {
             return FALSE;
         }
-        
+
         $additional_data = array(
             'tournament_id' => $tournament_id,
             'team_id_home' => $team_id_home,
@@ -169,13 +149,82 @@ class Admin_score_prediction_library {
             'status_id' => MATCH_STATUS_UPCOMING
         );
         $match_id = $this->admin_score_prediction_model->create_match($additional_data);
-        if($match_id !== FALSE)
-        {
+        if ($match_id !== FALSE) {
             return TRUE;
-        }
-        else
-        {
+        } else {
             return FALSE;
-        }        
+        }
     }
+
+    public function get_match_prediction($match_id, $status_id) {
+        $match_prediction_info_array = array();
+        $match_prediction_info_array = $this->admin_score_prediction_model->get_match_prediction($match_id)->result_array();
+        if (!empty($match_prediction_info_array)) {
+            $match_prediction_info = $match_prediction_info_array[0];
+            $p_list = $match_prediction_info['prediction_list'];
+            if ($p_list != NULL && $p_list != "") {
+                $prediction_list = json_decode($p_list);
+                foreach ($prediction_list as $prediction_info) {
+                    if ($prediction_info->prediction_id == $status_id) {
+                        $current_time = now();
+                        $notification_info_list = new stdClass();
+                        $notification_info_list->id = '';
+                        $notification_info_list->created_on = $current_time;
+                        $notification_info_list->modified_on = $current_time;
+                        $notification_info_list->type_id = NOTIFICATION_WHILE_PREDICT_MATCH;
+                        $notification_info_list->status = UNREAD_NOTIFICATION;
+                        $notification_info_list->reference_id = $match_id;
+                        $notification_info_list->reference_id_list = array();
+                        $match_prediction_info_array = $this->admin_score_prediction_library->add_notification($prediction_info->user_id, $notification_info_list);
+                    }
+                }
+            }
+        }
+    }
+
+    public function add_notification($notified_user_id, $notification_info_list) {
+        $total_notifications = 0;
+        $notification_list = array();
+        if ($notification_info_list->type_id != 0) {
+            $notification_info_list->id = ++$total_notifications;
+        }
+        $notification_info_array = $this->admin_score_prediction_model->get_notification_list($notified_user_id)->result_array();
+        if (!empty($notification_info_array)) {
+            $notification_info = $notification_info_array[0];
+            $n_list_array = json_decode($notification_info['list']);
+            $isexist = FALSE;
+            $notification_id = 0;
+            if ($n_list_array != null && $n_list_array != "") {
+                foreach ($n_list_array as $n_info) {
+                    if ($n_info->type_id == $notification_info_list->type_id && $n_info->reference_id == $notification_info_list->reference_id) {
+                        $isexist = TRUE;
+                        if ($notification_info_list->reference_id_list != null) {
+                            $n_info->reference_id_list[] = $notification_info_list->reference_id_list[0];
+                        }
+                        $n_info->modified_on = now();
+                        $n_info->status = UNREAD_NOTIFICATION;
+                    }
+                    $notification_id = $n_info->id;
+                    $notification_list[] = $n_info;
+                }
+            }
+            if (!$isexist) {
+                $notification_info_list->id = ++$notification_id;
+                $notification_list[] = $notification_info_list;
+            }
+            $additional_data = array(
+                'list' => json_encode($notification_list)
+            );
+            $response = $this->admin_score_prediction_model->update_notification($notified_user_id, $additional_data);
+        } else {
+            $notification_list[] = $notification_info_list;
+            $additional_data = array(
+                'user_id' => $notified_user_id,
+                'list' => json_encode($notification_list)
+            );
+            $response = $this->admin_score_prediction_model->add_notification($notified_user_id, $additional_data);
+        }
+        return $response;
+    }
+
 }
