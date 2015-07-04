@@ -134,8 +134,8 @@ class Score_prediction extends Role_Controller{
     {
         $response = array();
         $tournament_id = $this->input->post('tournament_id');
-        $team_list = $this->score_prediction_library->get_league_table_data($tournament_id);
-        $response['team_list'] = $team_list;
+        $response = $this->score_prediction_library->get_league_table_data($tournament_id);
+        //$response['team_list'] = $team_list;
         echo json_encode($response);
     }
 }

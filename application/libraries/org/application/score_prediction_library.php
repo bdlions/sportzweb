@@ -300,8 +300,17 @@ class Score_prediction_library {
      */
     public function get_league_table_data($tournament_id)
     {
+        $result = array();
         $team_list = array();
         $league_table_data = array();
+        
+        $league_table_configuration = array();
+        $league_table_configuration[] = 1;
+        $league_table_configuration[] = 4;
+        $league_table_configuration[] = 5;
+        $league_table_configuration[] = 6;
+        $league_table_configuration[] = 7;  
+        
         //retrieving match list for a tournament
         $match_list_array = $this->score_prediction_model->get_league_table_matches($tournament_id)->result_array();
         foreach($match_list_array as $match_info)
@@ -309,6 +318,7 @@ class Score_prediction_library {
             //initializing team data
             if(!array_key_exists($match_info['team_id_home'], $league_table_data))
             {
+                $league_table_data[$match_info['team_id_home']]['rank'] = 0;
                 $league_table_data[$match_info['team_id_home']]['title'] = $match_info['home_team_title'];
                 $league_table_data[$match_info['team_id_home']]['played_matches'] = 0;
                 $league_table_data[$match_info['team_id_home']]['score_difference'] = 0;
@@ -316,6 +326,7 @@ class Score_prediction_library {
             }
             if(!array_key_exists($match_info['team_id_away'], $league_table_data))
             {
+                $league_table_data[$match_info['team_id_away']]['rank'] = 0;
                 $league_table_data[$match_info['team_id_away']]['title'] = $match_info['away_team_title'];
                 $league_table_data[$match_info['team_id_away']]['played_matches'] = 0;
                 $league_table_data[$match_info['team_id_away']]['score_difference'] = 0;
@@ -338,6 +349,71 @@ class Score_prediction_library {
             $team_list[] = $team_score_info;
         }
         array_multisort($points, SORT_DESC, $team_list);
-        return $team_list;
+        $counter = 1;
+        $result_team_list = array();
+        foreach($team_list as $team_info)
+        {
+            $result_team_info = array();
+            if(in_array(LEAGUE_TABLE_POSITION_ID, $league_table_configuration))
+            {
+                $result_team_info['column1'] = $counter++;
+            }
+            if(in_array(LEAGUE_TABLE_DRIVERS_ID, $league_table_configuration))
+            {
+                $result_team_info['column2'] = $team_info['title'];
+            }
+            if(in_array(LEAGUE_TABLE_PLAYERS_ID, $league_table_configuration))
+            {
+                $result_team_info['column3'] = $team_info['title'];
+            }
+            if(in_array(LEAGUE_TABLE_TEAMS_ID, $league_table_configuration))
+            {
+                $result_team_info['column4'] = $team_info['title'];
+            }
+            if(in_array(LEAGUE_TABLE_PLAYED_ID, $league_table_configuration))
+            {
+                $result_team_info['column5'] = $team_info['played_matches'];
+            }
+            if(in_array(LEAGUE_TABLE_GOAL_DIFFERENCE_ID, $league_table_configuration))
+            {
+                $result_team_info['column6'] = $team_info['score_difference'];
+            }
+            if(in_array(LEAGUE_TABLE_POINTS_ID, $league_table_configuration))
+            {
+                $result_team_info['column7'] = $team_info['points'];
+            }
+            $result_team_list[] = $result_team_info;
+        }
+        $result['team_list'] = $result_team_list;
+        if(in_array(LEAGUE_TABLE_POSITION_ID, $league_table_configuration))
+        {
+            $league_table_header_title_list[] = 'POS';            
+        }
+        if(in_array(LEAGUE_TABLE_DRIVERS_ID, $league_table_configuration))
+        {
+            $league_table_header_title_list[] = 'DRIVER';            
+        }
+        if(in_array(LEAGUE_TABLE_PLAYERS_ID, $league_table_configuration))
+        {
+            $league_table_header_title_list[] = 'PLAYER';            
+        }
+        if(in_array(LEAGUE_TABLE_TEAMS_ID, $league_table_configuration))
+        {
+            $league_table_header_title_list[] = 'TEAM';            
+        }
+        if(in_array(LEAGUE_TABLE_PLAYED_ID, $league_table_configuration))
+        {
+            $league_table_header_title_list[] = 'P';            
+        }
+        if(in_array(LEAGUE_TABLE_GOAL_DIFFERENCE_ID, $league_table_configuration))
+        {
+            $league_table_header_title_list[] = 'GD';            
+        }
+        if(in_array(LEAGUE_TABLE_POINTS_ID, $league_table_configuration))
+        {
+            $league_table_header_title_list[] = 'PTS';            
+        }
+        $result['league_table_header_title_list'] = $league_table_header_title_list;
+        return $result;
     }
 }

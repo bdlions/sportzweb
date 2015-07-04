@@ -19,3 +19,11 @@ define("LEADER_BOARD_OPTION_LAST_MONTH",        5);
 
 define("LEADER_BOARD_CORRECT_PREDICTION_SCORE",        1);
 define("LEADER_BOARD_MAXIMUM_USERS",                   10);
+
+define("LEAGUE_TABLE_POSITION_ID",                     1);
+define("LEAGUE_TABLE_DRIVERS_ID",                      2);
+define("LEAGUE_TABLE_PLAYERS_ID",                      3);
+define("LEAGUE_TABLE_TEAMS_ID",                        4);
+define("LEAGUE_TABLE_PLAYED_ID",                       5);
+define("LEAGUE_TABLE_GOAL_DIFFERENCE_ID",              6);
+define("LEAGUE_TABLE_POINTS_ID",                       7);
