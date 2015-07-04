@@ -129,9 +129,9 @@
             <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= match_info.team_title_home %}'; ?>', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo  MATCH_STATUS_WIN_HOME ?>', '<?php echo'{%= match_info.is_predicted %}' ?>')">
                 <div class="col-md-12">
                     <div class="progress_bar_backgraound" >
+                        <span class="progress_bar_content"> <?php echo '{%= match_info.team_title_home %}'; ?></span>
                         <span class="progress_bar_percentage_text"><?php echo '{%= match_info.prediction_info.home %}'; ?></span>
                         <div class="progress_bar_width_catulate" style="width:<?php echo '{%= match_info.prediction_info.home %}'; ?>">
-                            <span class="progress_bar_content"> <?php echo '{%= match_info.team_title_home %}'; ?></span>
                         </div>
                     </div>
                 </div>
@@ -139,9 +139,9 @@
             <div class="row form-group" onclick = "prediction_modal('Draw', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo MATCH_STATUS_DRAW ?>', '<?php echo'{%= match_info.is_predicted %}' ?>')">
                 <div class="col-md-12">
                     <div class="progress_bar_backgraound">
+                        <span class="progress_bar_content">Draw</span>
                         <span class="progress_bar_percentage_text"><?php echo '{%= match_info.prediction_info.draw %}'; ?>`</span>
                         <div class="progress_bar_width_catulate" style="width:<?php echo '{%= match_info.prediction_info.draw %}'; ?>">
-                            <span class="progress_bar_content">Draw</span>
                         </div>
                     </div>
                 </div>
@@ -149,9 +149,9 @@
             <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= match_info.team_title_away %}'; ?>', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo'{%= match_info.is_predicted %}' ?>')">
                 <div class="col-md-12">
                     <div class="progress_bar_backgraound">
+                        <span class="progress_bar_content"><?php echo '{%= match_info.team_title_away %}'; ?></span>
                         <span class="progress_bar_percentage_text"><?php echo '{%= match_info.prediction_info.away %}'; ?></span>
                         <div class="progress_bar_width_catulate" style="width:<?php echo '{%= match_info.prediction_info.away %}'; ?>">
-                            <span class="progress_bar_content"><?php echo '{%= match_info.team_title_away %}'; ?></span>
                         </div>
                     </div>
                 </div>
