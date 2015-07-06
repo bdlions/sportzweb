@@ -178,7 +178,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <a href="" class="business_profile_achor_auth">Create a profile for your business.</a>
+                                    <a href="<?php echo base_url();?>business_profile.html" class="business_profile_achor_auth">Create a profile for your business.</a>
                                 </div>
                             </div>
                         </div>
