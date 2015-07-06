@@ -109,8 +109,10 @@ class Applications_scoreprediction extends Admin_Controller{
     {
         $result = array();
         $title = $this->input->post('title');
+        $league_table_value = $this->input->post('league_table_value');
         $additional_data = array(
-            'title' => $title
+            'title' => $title,
+            'list' => json_encode($league_table_value)  
         );
         if($this->admin_score_prediction_library->create_sports($additional_data))
         {

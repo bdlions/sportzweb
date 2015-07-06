@@ -308,4 +308,10 @@
 .date_picker_img{
     cursor: pointer;
 }
+.bgcolor_blue{
+    background-color: #00f!important;
+}
+.bgcolor_red{
+    background-color: #E13300!important;
+}
 

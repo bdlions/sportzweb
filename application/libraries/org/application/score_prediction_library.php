@@ -76,6 +76,7 @@ class Score_prediction_library {
         {
             //whether the match is predicted by current user or not
             $match_info['is_predicted'] = 0;
+            $match_info['my_prediction_id'] = 0;
             //inatializing match prediction info
             $match_info['prediction_info'] = array(
                 'home' => '0%',
@@ -95,6 +96,7 @@ class Score_prediction_library {
                     if($prediction_info->user_id == $user_id)
                     {
                         $match_info['is_predicted'] = 1;
+                        $match_info['my_prediction_id'] = $prediction_info->prediction_id;
                     }
                     if($prediction_info->prediction_id == MATCH_STATUS_WIN_HOME)
                     {
@@ -120,7 +122,7 @@ class Score_prediction_library {
                     $match_info['prediction_info']['draw'] = $match_info['prediction_info']['draw']."%";
                     $match_info['prediction_info']['away'] = $match_info['prediction_info']['away']."%";
                 }
-            }
+            }  
             
             $tournaments[$match_info['tournament_id']]['title'] = $match_info['tournament_title'];
             $tournaments[$match_info['tournament_id']]['tournament_id'] = $match_info['tournament_id'];
@@ -142,7 +144,7 @@ class Score_prediction_library {
                 $tournament_list[] = $tournament_info;
             }
             $sports_info['tournament_list'] = $tournament_list;
-            $sports_info['user_id'] = $user_id;
+            
             $sports_list[] = $sports_info;
         }
         return $sports_list;
