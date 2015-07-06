@@ -105,7 +105,8 @@
         });
     });
 </script>
-<div>
+<?php echo form_open("auth/login", array('id' => 'registration-form', 'role' => 'form')); ?>
+<div id="step1">
     <ul class="cb-slideshow bg_sliding_ul">
         <li>
             <span>Image 01</span>
@@ -165,7 +166,9 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <button class="btn button-custom pull-right">Join Now</button>
+                                    <div class="pull-right">
+                                        <?php echo form_input($next_btn + array('class' => 'btn button-custom')); ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -185,3 +188,31 @@
         </div>
     </div>
 </div>
+<div id="step2" class="security-captcha">
+    <div class="home-left-tit">
+        <div class="home-left-title home-left-title2">Sign Up</div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-4">
+            <input class="form-control" type="text" placeholder="First Name">
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-4">
+            <input class="form-control" type="text" placeholder="Last Name">
+        </div>
+    </div>
+    <div class="heading_medium_thin">
+        <?php echo lang('security_check_label'); ?>
+    </div>
+    <div class="row form-group"></div> 
+    <div class="form-group">
+        <?php echo lang('please_enter_the_characters_below_label'); ?>
+    </div> 
+    <div class="form-group" id="captcha_div"></div>
+    <div class="form-group">
+        <?php echo form_input($register_btn + array('class' => 'btn button-custom')); ?>
+    </div>
+</div>
+<div id="message"></div>
+<?php echo form_close(); ?>
