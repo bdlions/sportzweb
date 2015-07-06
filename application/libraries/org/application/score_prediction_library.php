@@ -142,6 +142,7 @@ class Score_prediction_library {
                 $tournament_list[] = $tournament_info;
             }
             $sports_info['tournament_list'] = $tournament_list;
+            $sports_info['user_id'] = $user_id;
             $sports_list[] = $sports_info;
         }
         return $sports_list;

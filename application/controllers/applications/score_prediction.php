@@ -53,6 +53,7 @@ class Score_prediction extends Role_Controller{
         $user_id = $this->session->userdata('user_id');
         //generate match list based on date and sports id
         $sports_list = $this->score_prediction_library->get_match_list($date, $sports_id , $match_id, $user_id);
+//        $sports_list['user_id'] = $user_id;
         $response['sports_list'] = $sports_list;
         echo json_encode($response);
         return;
