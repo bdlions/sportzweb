@@ -128,55 +128,57 @@
     </ul>
     <div class="container-fluid" style="margin-left: -15px; margin-right: -15px;">
         <div class="row padding_over_row">
-            <div class="col-md-offset-1 col-md-10">
+            <div class="col-md-11">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-12">
-                                <span style="color: #fff;">A social hub that allows you to connect and share health, sports and fitness information with people.
+                            <div class="col-md-offset-1 col-md-8">
+                                <p class="auth_sliding_bg_text">
+                                    A social hub that allows you to connect and share health, sports and fitness information with people.
                                     Members have access to a variety of health, sports and fitness applications including diets, personal
-                                    trainers, blogs, food recipes and news.</span>
+                                    trainers, blogs, food recipes and news.
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                            <div class="pagelet_auth">
-                                <div class="row form-group">
-                                    <div class="col-md-12">
-                                        <span style="color: #89c1f4; font-size: 27px;">Sign Up</span>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <input class="form-control" type="text" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <input class="form-control" type="text" placeholder="Confirm Email">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <input class="form-control" type="password" placeholder="Passowrd">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <button class="btn button-custom pull-right">Join Now</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div style="border-bottom: 1px solid #cecece;"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <a href="" class="business_profile_achor_auth">Create a profile for your business.</a>
-                                    </div>
+                        <div class="pagelet_auth">
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <span style="color: #89c1f4; font-size: 27px;">Sign Up</span>
                                 </div>
                             </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input class="form-control" type="text" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input class="form-control" type="text" placeholder="Confirm Email">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input class="form-control" type="password" placeholder="Passowrd">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <button class="btn button-custom pull-right">Join Now</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div style="border-bottom: 1px solid #cecece;"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <a href="" class="business_profile_achor_auth">Create a profile for your business.</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
