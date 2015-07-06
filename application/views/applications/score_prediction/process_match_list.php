@@ -40,6 +40,7 @@
                 },
                 success: function (data) {
                     $("#confirmModal").modal('hide');
+                    $('#collapse_match_event' + $("#match_id").val()).empty();
                     $('#div_match_info_' + $("#match_id").val()).html(tmpl('tmpl_match_details', data.match_info));
                 }
             });
@@ -71,11 +72,12 @@
         get_match_list(formattedDate, sports_id, 0);
     }
 
-    function prediction_modal(teamName, matchId, statusId, matchStatusId) {
-        if (matchStatusId == 0) {
+    function prediction_modal(teamName, matchId, voteId, matchStatusId, statusId) {
+        var matchSId = '<?php echo MATCH_STATUS_UPCOMING; ?>';
+        if (matchStatusId == 0 && statusId == matchSId) {
             $('#team_name_id').html(teamName);
             $("#match_id").val(matchId);
-            $("#status_id").val(statusId);
+            $("#status_id").val(voteId);
             $("#confirmModal").modal('show');
 
         }
@@ -93,7 +95,6 @@
                 match_id: match_id
             },
             success: function (data) {
-                console.dir(data.sports_list);
                 $('#home_page_sports_content').html(tmpl('tlmp_home_page_sports_content', data.sports_list));
 //                $('#home_page_sports_content').html(tmpl('tlmp_home_page_sports_content_test', data.sports_list));
             }
@@ -103,7 +104,9 @@
 <script type="text/x-tmpl" id="tmpl_match_details">
     {% var sports_counte = 0, match_info = ((o instanceof Array) ? o[sports_counter++] : o); %}
     {% while(match_info){ %}
-    <div class="row form-group text_align ">
+    <div class="panel panel-default">
+    <div class=" row form-group panel-heading " role="tab" id="div_match_info_{%= match_info.match_id%}">
+    <a role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= match_info.match_id%}" aria-expanded="true" aria-controls="">
     <div class="col-md-2">
     <?php echo '{%= match_info.time %}'; ?>
     </div>
@@ -120,16 +123,30 @@
     <?php echo '{%= match_info.score_home %}' . ' - ' . '{%= match_info.score_away %}'; ?>
     </div>
     <div class="col-md-2">
-    {% if(match_info.status_id != <?php echo MATCH_STATUS_UPCOMING; ?> ) { %}
-    <span>Closed</span>
-    {% }else if(match_info.is_predicted == 1){ %}
-    <span data-toggle="collapse" href="#collapse_match_event{%= match_info.match_id%}" >predicted</span>
+    {% if(match_info.status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
+    {% if(match_info.is_predicted == 1 && match_info.my_prediction_id == match_info.status_id){ %}
+    <span class = "bgcolor_blue" > Closed </span>
+    {% }else if(match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id){ %}
+    <span class = "bgcolor_red" > Closed </span>
     {% }else{ %}
-    <span data-toggle="collapse" href="#collapse_match_event{%= match_info.match_id%}" > predict </span>
+    <span > Closed </span>
+    {% } %}
+    {% }else if(match_info.is_predicted == 1){ %}
+    {% if(match_info.is_predicted == 1){ %}
+    <span class = "bgcolor_blue" > Prdicted </span>
+    {% }else{ %}
+    <span > Prdicted </span>
+    {% } %}
+    {% }else{ %}
+    <span>predict </span>
     {% } %}
     </div>
+    </a>
     </div>
-    <div class="in" style="height: auto;" id="collapse_match_event{%= match_info.match_id%}">
+    </div>
+
+    <div id="collapse_match_event{%= match_info.match_id%}" class="panel-collapse collapse {%= sports_counte === 0 ? 'in':'' %}" role="tabpanel" aria-labelledby="div_match_info_{%= match_info.match_id%}">
+    <div class="panel-body">
     <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= match_info.team_title_home %}'; ?>', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_HOME ?>', '<?php echo'{%= match_info.is_predicted %}' ?>')">
     <div class="col-md-12">
     <div class="progress_bar_backgraound" >
@@ -161,6 +178,7 @@
     </div>
     </div>
     </div>
+    </div>
     {% match_info = ((o instanceof Array) ? o[sports_counter++] : null); %}
     {% } %}
 </script>
@@ -182,132 +200,148 @@
             </a>
         </div>
         <div id="collapse_sports_event{%= sports_list.sports_id%}" class="panel-collapse collapse {%= sports_counter === 1 ? 'in':'' %}" role="tabpanel" aria-labelledby="heading{%= sports_list.sports_id%}">
-           
-                {% var count = sports_list.tournament_list.length; %}
-                {% for(var j=0; j<count; j++){ %}                
-                    <div class="well">
-                        <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
-                            <span ><?php echo '{%= sports_list.tournament_list[j].title%}'; ?> </span>
-                        </div>
-                        <div class="form-group">
-                            <table class="table">
-                                <div class="row form-group table-hover text_align">
-                                    <div class="col-md-2">
-                                        Time
-                                    </div>
-                                    <div class="col-md-2">
-                                        Team A
-                                    </div>
-                                    <div class="col-md-2">
-                                        vs
-                                    </div>
-                                    <div class="col-md-2">
-                                        Team B
-                                    </div>
-                                    <div class="col-md-2">
-                                        Match Result
-                                    </div>
-                                    <div class="col-md-2">
-                                        Match Status
-                                    </div>
+
+            {% var count = sports_list.tournament_list.length; %}
+            {% for(var j=0; j<count; j++){ %}                
+                <div class="well">
+                    <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
+                        <span ><?php echo '{%= sports_list.tournament_list[j].title%}'; ?> </span>
+                    </div>
+                    <div class="form-group">
+                        <table class="table">
+                            <div class="row form-group table-hover text_align">
+                                <div class="col-md-2">
+                                    Time
                                 </div>
-                            </table>
-                        </div>
+                                <div class="col-md-2">
+                                    Team A
+                                </div>
+                                <div class="col-md-2">
+                                    vs
+                                </div>
+                                <div class="col-md-2">
+                                    Team B
+                                </div>
+                                <div class="col-md-2">
+                                    Match Result
+                                </div>
+                                <div class="col-md-2">
+                                    Match Status
+                                </div>
+                            </div>
+                        </table>
+                    </div>
 
-                        <!-- Accordion here starts-->
-                        {% var count1 = sports_list.tournament_list[j].match_list.length; %}
-                        <div class="panel-group" id="accordion_match" role="tablist" aria-multiselectable="true">
-                            {% for(var k=0; k<count1; k++){ %}
-                                <div class="panel panel-default">
-                                    <div class=" row form-group panel-heading " role="tab" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
-                                            <div class="col-md-2">
-                                                <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
+                    <!-- Accordion here starts-->
+                    {% var count1 = sports_list.tournament_list[j].match_list.length; %}
+                    <div class="panel-group" id="accordion_match" role="tablist" aria-multiselectable="true">
+                        {% for(var k=0; k<count1; k++){ %}
+                            <div class="panel panel-default">
+                                <div class=" row form-group panel-heading " role="tab" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
+                                        <div class="col-md-2">
+                                            <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_home %}'; ?></div>
+                                        <div class="col-md-2">
+                                            vs
+                                        </div>
+                                        <div class="col-md-2">
+                                            <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <?php echo '{%= sports_list.tournament_list[j].match_list[k].score_home %}' . ' - ' . '{%= sports_list.tournament_list[j].match_list[k].score_away %}'; ?>
+                                        </div>
+                                        <div class="col-md-2">
+                                            {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
+                                            <span > Closed </span>
+                                            {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
+                                            <span > Prdicted </span>
+                                            {% }else{ %}
+                                            <span>predict </span>
+                                            {% } %}
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" class="panel-collapse collapse {%= k === 0 ? 'in':'' %}" role="tabpanel" aria-labelledby="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
+                                    <div class="panel-body">
+                                        <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_home %}'; ?>', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_HOME ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].status_id %}' ?>')">
+                                            <div class="col-md-12">
+                                                <div class="progress_bar_backgraound" >
+                                                    <span class="progress_bar_content"> 
+                                                        {%= sports_list.tournament_list[j].match_list[k].team_title_home %}
+                                                    </span>
+                                                    {% if((sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].my_prediction_id == sports_list.tournament_list[j].match_list[k].status_id)|| (sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1)){ %}
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
+                                                    </span>
+                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id){ %}
+                                                    <span class="progress_bar_percentage_text bgcolor_red">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
+                                                    </span>
+                                                    {% }else{ %}
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
+                                                    </span>
+                                                    {% } %}
+                                                    <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
+                                                </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_home %}'; ?></div>
-                                            <div class="col-md-2">
-                                                vs
-                                            </div>
-                                            <div class="col-md-2">
-                                                <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <?php echo '{%= sports_list.tournament_list[j].match_list[k].score_home %}' . ' - ' . '{%= sports_list.tournament_list[j].match_list[k].score_away %}'; ?>
-                                            </div>
-                                            <div class="col-md-2">
-                                                {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
-                                                {% if(sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id == sports_list.tournament_list[j].match_list[k].status_id){ %}
-                                                <span class = "bgcolor_blue" > Closed </span>
-                                                {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id){ %}
-                                                <span class = "bgcolor_red" > Closed </span>
-                                                {% }else{ %}
-                                                <span > Closed </span>
-                                                {% } %}
-                                                {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
-                                                {% if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
-                                                <span class = "bgcolor_blue" > Prdicted </span>
-                                                {% }else{ %}
-                                                <span > Prdicted </span>
-                                                {% } %}
-                                                {% }else{ %}
-                                                <span>predict </span>
-                                                {% } %}
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div id="collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" class="panel-collapse collapse {%= k === 0 ? 'in':'' %}" role="tabpanel" aria-labelledby="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
-                                        <div class="panel-body">
-                                            <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_home %}'; ?>', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_HOME ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>')">
-                                                <div class="col-md-12">
-                                                    <div class="progress_bar_backgraound" >
-                                                        <span class="progress_bar_content"> 
-                                                            {%= sports_list.tournament_list[j].match_list[k].team_title_home %}
-                                                        </span>
-                                                        <span class="progress_bar_percentage_text">
-                                                            {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
-                                                        </span>
-                                                        <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
+                                        </div>
+                                        <div class="row form-group" onclick = "prediction_modal('Draw', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_DRAW ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].status_id %}' ?>')">
+                                            <div class="col-md-12">
+                                                <div class="progress_bar_backgraound">
+                                                    <span class="progress_bar_content">Draw</span>
+                                                    {% if((sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].my_prediction_id == sports_list.tournament_list[j].match_list[k].status_id)|| (sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1)){ %}
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}
+                                                    </span>
+                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id){ %}
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}
+                                                    </span>
+                                                    {% }else{ %}
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}
+                                                    </span>
+                                                    {% } %} 
+                                                    <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row form-group" onclick = "prediction_modal('Draw', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_DRAW ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>')">
-                                                <div class="col-md-12">
-                                                    <div class="progress_bar_backgraound">
-                                                        <span class="progress_bar_content">Draw</span>
-                                                        <span class="progress_bar_percentage_text"><?php echo '{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}'; ?>`</span>
-                                                        <div class="progress_bar_width_catulate" style="width:<?php echo '{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}'; ?>">
-                                                        </div>
+                                        </div>
+                                        <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].status_id %}' ?>')">
+                                            <div class="col-md-12">
+                                                <div class="progress_bar_backgraound">
+                                                    <span class="progress_bar_content">
+                                                        {%= sports_list.tournament_list[j].match_list[k].team_title_away %}
+                                                    </span>
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}
+                                                    </span>
+                                                    <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>')">
-                                                <div class="col-md-12">
-                                                    <div class="progress_bar_backgraound">
-                                                        <span class="progress_bar_content"><?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?></span>
-                                                        <span class="progress_bar_percentage_text"><?php echo '{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}'; ?></span>
-                                                        <div class="progress_bar_width_catulate" style="width:<?php echo '{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}'; ?>">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>  
-                                    </div>
-                                </div>    
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>    
 
-                                {% } %}
-                        </div>
-                        <!-- Accordion here ends-->
+                            {% } %}
+                    </div>
+                    <!-- Accordion here ends-->
 
 
 
-                    </div>                 
-                    {% } %}
-            </div>
-        </div>    
-        {% sports_list = ((o instanceof Array) ? o[sports_counter++] : null); %}
-        {% } %}
-    </div>
+                </div>                 
+                {% } %}
+        </div>
+    </div>    
+    {% sports_list = ((o instanceof Array) ? o[sports_counter++] : null); %}
+    {% } %}
+</div>
 </script> 
 <div class="form-group">
     <div class="input_custom"> 
