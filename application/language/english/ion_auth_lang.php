@@ -6,6 +6,8 @@
 */
 
 // Account Creation
+$lang['account_creation_check_email_title']         = 'Check your email';
+$lang['account_creation_check_junk_email']          = 'You may need to check your junk folder or spam';
 $lang['account_creation_successful']                = 'Please click the link within your email account to complete your registration';
 $lang['account_creation_unsuccessful']              = 'Unable to Create Account';
 $lang['account_creation_duplicate_email']           = 'Email Already Used or Invalid';

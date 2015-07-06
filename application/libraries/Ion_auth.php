@@ -296,6 +296,8 @@ class Ion_auth {
                 'id' => $user->id,
                 'email' => $email,
                 'activation' => $activation_code,
+                'first_name' => $first_name,
+                'last_name' => $last_name,
             );
             if (!$this->config->item('use_ci_email', 'ion_auth')) {
                 $this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
