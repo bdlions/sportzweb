@@ -203,7 +203,7 @@
 }
 .progress_bar_percentage_text{
     float: right; 
-    padding: 3px; 
+    padding: 3px 0; 
 }
 
 .progress_bar_content{
