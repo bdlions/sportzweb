@@ -124,19 +124,9 @@
     </div>
     <div class="col-md-2">
     {% if(match_info.status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
-    {% if(match_info.is_predicted == 1 && match_info.my_prediction_id == match_info.status_id){ %}
-    <span class = "bgcolor_blue" > Closed </span>
-    {% }else if(match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id){ %}
-    <span class = "bgcolor_red" > Closed </span>
-    {% }else{ %}
     <span > Closed </span>
-    {% } %}
     {% }else if(match_info.is_predicted == 1){ %}
-    {% if(match_info.is_predicted == 1){ %}
-    <span class = "bgcolor_blue" > Prdicted </span>
-    {% }else{ %}
     <span > Prdicted </span>
-    {% } %}
     {% }else{ %}
     <span>predict </span>
     {% } %}
@@ -272,20 +262,16 @@
                                                     <span class="progress_bar_content"> 
                                                         {%= sports_list.tournament_list[j].match_list[k].team_title_home %}
                                                     </span>
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
+                                                    </span>
                                                     {% if((sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].my_prediction_id == sports_list.tournament_list[j].match_list[k].status_id)|| (sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1)){ %}
-                                                    <span class="progress_bar_percentage_text">
-                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
-                                                    </span>
+                                                    <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
                                                     {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id){ %}
-                                                    <span class="progress_bar_percentage_text">
-                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
-                                                    </span>
+                                                    <div class="progress_bar_width_catulate bgcolor_red" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
                                                     {% }else{ %}
-                                                    <span class="progress_bar_percentage_text">
-                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
-                                                    </span>
+                                                    <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
                                                     {% } %}
-                                                    <div class="progress_bar_width_catulate  bgcolor_red bgcolor_green" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -293,67 +279,70 @@
                                             <div class="col-md-12">
                                                 <div class="progress_bar_backgraound">
                                                     <span class="progress_bar_content">Draw</span>
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}
+                                                    </span>
                                                     {% if((sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].my_prediction_id == sports_list.tournament_list[j].match_list[k].status_id)|| (sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1)){ %}
-                                                    <span class="progress_bar_percentage_text">
-                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}
-                                                    </span>
-                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id){ %}
-                                                    <span class="progress_bar_percentage_text">
-                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}
-                                                    </span>
-                                                    {% }else{ %}
-                                                    <span class="progress_bar_percentage_text">
-                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}
-                                                    </span>
-                                                    {% } %} 
                                                     <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
+                                                        {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id){ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_red" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
+                                                            {% }else{ %}
+                                                            <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
+                                                                {% } %} 
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].status_id %}' ?>')">
-                                            <div class="col-md-12">
-                                                <div class="progress_bar_backgraound">
-                                                    <span class="progress_bar_content">
-                                                        {%= sports_list.tournament_list[j].match_list[k].team_title_away %}
-                                                    </span>
-                                                    <span class="progress_bar_percentage_text">
-                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}
-                                                    </span>
-                                                    <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
-                                                    </div>
+                                                <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].status_id %}' ?>')">
+                                                    <div class="col-md-12">
+                                                        <div class="progress_bar_backgraound">
+                                                            <span class="progress_bar_content">
+                                                                {%= sports_list.tournament_list[j].match_list[k].team_title_away %}
+                                                            </span>
+                                                            <span class="progress_bar_percentage_text">
+                                                                {%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}
+                                                            </span>
+                                                            {% if((sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].my_prediction_id == sports_list.tournament_list[j].match_list[k].status_id)|| (sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1)){ %}
+                                                            <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
+                                                                {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id){ %}
+                                                                <div class="progress_bar_width_catulate bgcolor_red" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
+                                                                    {% }else{ %}
+                                                                    <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
+                                                                        {% } %} 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
                                                 </div>
-                                            </div>
+                                            </div>    
+
+                                            {% } %}
                                         </div>
-                                    </div>  
+                                        <!-- Accordion here ends-->
+
+
+
+                                    </div>                 
+                                    {% } %}
                                 </div>
                             </div>    
-
+                            {% sports_list = ((o instanceof Array) ? o[sports_counter++] : null); %}
                             {% } %}
                     </div>
-                    <!-- Accordion here ends-->
-
-
-
-                </div>                 
-                {% } %}
-        </div>
-    </div>    
-    {% sports_list = ((o instanceof Array) ? o[sports_counter++] : null); %}
-    {% } %}
-</div>
-</script> 
-<div class="form-group">
-    <div class="input_custom"> 
-        <label class="input_custom_input" type="text" id="rMin1" name="to"></label>
-        <label class="input_custom_input" type="text" id="rMin2" name="to"></label>
-        <label class="input_custom_input input_active_class" type="text" id="rMin3" name="to"></label>
-        <label class="input_custom_input" type="text" id="rMin4" name="to"></label>
-        <label class="input_custom_input" type="text" id="rMin5" name="to"></label> 
-        <input class="date_picker_img" type="image" id="from" src="<?php echo base_url(); ?>resources/images/calendar.png"/>
-    </div>
-    <div id="home_page_sports_content">
-    </div>
-</div>
-<?php
-$this->load->view("applications/score_prediction/prediction_confirmation_modal");
+                    </script> 
+                    <div class="form-group">
+                        <div class="input_custom"> 
+                            <label class="input_custom_input" type="text" id="rMin1" name="to"></label>
+                            <label class="input_custom_input" type="text" id="rMin2" name="to"></label>
+                            <label class="input_custom_input input_active_class" type="text" id="rMin3" name="to"></label>
+                            <label class="input_custom_input" type="text" id="rMin4" name="to"></label>
+                            <label class="input_custom_input" type="text" id="rMin5" name="to"></label> 
+                            <input class="date_picker_img" type="image" id="from" src="<?php echo base_url(); ?>resources/images/calendar.png"/>
+                        </div>
+                        <div id="home_page_sports_content">
+                        </div>
+                    </div>
+                    <?php
+                    $this->load->view("applications/score_prediction/prediction_confirmation_modal");
+                    

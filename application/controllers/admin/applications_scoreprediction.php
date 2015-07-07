@@ -109,10 +109,10 @@ class Applications_scoreprediction extends Admin_Controller{
     {
         $result = array();
         $title = $this->input->post('title');
-        $league_table_value = $this->input->post('league_table_value');
+        $league_table_configuration = $this->input->post('league_table_configuration');
         $additional_data = array(
             'title' => $title,
-            'list' => json_encode($league_table_value)  
+            'list' => json_encode($league_table_configuration)  
         );
         if($this->admin_score_prediction_library->create_sports($additional_data))
         {
@@ -131,14 +131,16 @@ class Applications_scoreprediction extends Admin_Controller{
      */
     public function get_sports_info()
     {
-        $result['sports_info'] = array();
+        $response['sports_info'] = array();
         $sports_id = $this->input->post('sports_id');
         $sports_info_array = $this->admin_score_prediction_library->get_sports_info($sports_id)->result_array();
         if(!empty($sports_info_array))
         {
-            $result['sports_info'] = $sports_info_array[0];
+            $result_array = $sports_info_array[0];
+            $result_array['list'] = json_decode($result_array['list']);
+            $response['sports_info'] = $result_array;
         }
-        echo json_encode($result);
+        echo json_encode($response);
     }
     
     /*
@@ -150,11 +152,12 @@ class Applications_scoreprediction extends Admin_Controller{
         $result = array();
         $sports_id = $this->input->post('sports_id');
         $title = $this->input->post('title');
+        $league_table_configuration = $this->input->post('league_table_configuration');
         $additional_data = array(
             'title' => $title,
-            'modified_on' => now()
+            'modified_on' => now(),
+            'list' => json_encode($league_table_configuration) 
         );
-        
         if($this->admin_score_prediction_library->update_sports($sports_id, $additional_data))
         {
             $result['message'] = $this->admin_score_prediction_library->messages_alert();

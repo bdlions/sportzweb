@@ -1,9 +1,9 @@
 <script type="text/javascript">
     $(function () {
         $("#button_create_sports").on("click", function () {
-          var  sportArray = [];
-        $("input:checkbox[name=type]:checked").each(function () {
-            sportArray.push($(this).val());
+          var  leagueArray = [];
+        $("#league_table_option_list input:checkbox[name=type]:checked").each(function () {
+            leagueArray.push($(this).val());
         });
             if ($("#input_sports_create_title").val().length == 0)
             {
@@ -18,13 +18,14 @@
                 url: '<?php echo base_url(); ?>' + "admin/applications_scoreprediction/create_sports",
                 data: {
                     title: $("#input_sports_create_title").val(),
-                    league_table_value : sportArray
+                    league_table_configuration : leagueArray
                 },
                 success: function (data) {
                     //  alert(data['message']);
                     var message = data['message'];
                     print_common_message(message);
                     $("#modal_sports_create").modal('hide');
+                    $("#league_table_option_list").find( )
                     window.location.reload();
                 }
             });
@@ -41,8 +42,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Create Sports</h4>
             </div>
-            <div class="modal-body">
-                <div class="row form-group">
+            <div class="modal-body" id="league_table_option_list">
+                <div class="row form-group" >
                     <div class ="col-sm-2"></div>
                     <label class="col-sm-3 control-label">Sports Name:</label>
                     <div class ="col-sm-4">

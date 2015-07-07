@@ -1,6 +1,10 @@
 <script type="text/javascript">
-    $(function() {
-        $("#button_update_sports").on("click", function() {
+    $(function () {
+        $("#button_update_sports").on("click", function () {
+            var leagueArray = new Array();
+            $("#league_table_option_list input:checkbox[name=type]:checked").each(function () {
+                leagueArray.push($(this).val());
+            });
             if ($("#input_sports_update_title").val().length == 0)
             {
                 //alert("Please assign sports name");
@@ -14,12 +18,13 @@
                 url: '<?php echo base_url(); ?>' + "admin/applications_scoreprediction/update_sports",
                 data: {
                     title: $("#input_sports_update_title").val(),
-                    sports_id: $("#input_sports_id").val()
+                    sports_id: $("#input_sports_id").val(),
+                    league_table_configuration: leagueArray
                 },
-                success: function(data) {
-                   // alert(data['message']);
-                   var message = data['message'];
-                   print_common_message(message);
+                success: function (data) {
+                    // alert(data['message']);
+                    var message = data['message'];
+                    print_common_message(message);
                     $("#modal_sports_update").modal('hide');
                     window.location.reload();
                 }
@@ -34,7 +39,11 @@
             data: {
                 sports_id: sports_id
             },
-            success: function(data) {
+            success: function (data) {
+                var langueTableArray = data.sports_info['list'];
+                $('input[name="type"]').each(function () {
+                    $(this).prop("checked", ($.inArray($(this).val(), langueTableArray) != -1));
+                });
                 $('#input_sports_id').val(data.sports_info['sports_id']);
                 $('#input_sports_update_title').val(data.sports_info['title']);
                 $("#modal_sports_update").modal('show');
@@ -50,13 +59,55 @@
                 <h4 class="modal-title" id="myModalLabel">Update Sports</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <div class="row" id="league_table_option_list">
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Sports Name:</label>
                         <div class ="col-sm-4">
                             <input id="input_sports_update_title" name="input_sports_update_title" value="" type="text" class="form-control"/>
                             <input id="input_sports_id" name="input_sports_id" value="" type="hidden" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-4">
+                            <input type="checkbox" name="type" id="position" value="<?php echo LEAGUE_TABLE_POSITION_ID; ?>"> 
+                            <span style="vertical-align: top; font-size: 14px;">Position</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-4">
+                            <input type="checkbox" name="type" id="driver" value="<?php echo LEAGUE_TABLE_DRIVERS_ID; ?>"> 
+                            <span style="vertical-align: top; font-size: 14px;">Drivers</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-4">
+                            <input type="checkbox" name="type" id="player" value="<?php echo LEAGUE_TABLE_PLAYERS_ID; ?>"> 
+                            <span style="vertical-align: top; font-size: 14px;">Players</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-4">
+                            <input type="checkbox" name="type" id="team" value="<?php echo LEAGUE_TABLE_TEAMS_ID; ?>" > 
+                            <span style="vertical-align: top; font-size: 14px;">Teams</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-4">
+                            <input type="checkbox" name="type" id="played" value="<?php echo LEAGUE_TABLE_PLAYED_ID; ?>" > 
+                            <span style="vertical-align: top; font-size: 14px;">Played</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-4">
+                            <input type="checkbox" name="type" id="goal" value="<?php echo LEAGUE_TABLE_GOAL_DIFFERENCE_ID; ?>" > 
+                            <span style="vertical-align: top; font-size: 14px;">Goal Difference</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-4">
+                            <input type="checkbox" name="type" id="point" value="<?php echo LEAGUE_TABLE_POINTS_ID; ?>" > 
+                            <span style="vertical-align: top; font-size: 14px;">Points</span>
                         </div>
                     </div>
                     <div class="row form-group">
