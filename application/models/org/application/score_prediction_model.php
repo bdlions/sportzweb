@@ -176,7 +176,6 @@ class Score_prediction_model extends Ion_auth_model
     public function get_league_table_matches($tournament_id)
     {
         $this->db->where($this->tables['app_sp_matches'].'.tournament_id', $tournament_id);
-        $this->db->where_in($this->tables['app_sp_matches'].'.status_id', array(MATCH_STATUS_WIN_HOME, MATCH_STATUS_DRAW, MATCH_STATUS_WIN_AWAY, MATCH_STATUS_CANCEL));
         return $this->db->select($this->tables['app_sp_matches'].'.id as match_id,'.$this->tables['app_sp_matches'].'.*, home_team_table.title as home_team_title, away_team_table.title as away_team_title')
                     ->from($this->tables['app_sp_matches'])
                     ->join($this->tables['app_sp_teams'].' as home_team_table', 'home_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_home', 'left')
