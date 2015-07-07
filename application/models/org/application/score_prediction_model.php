@@ -35,6 +35,18 @@ class Score_prediction_model extends Ion_auth_model
                     ->from($this->tables['app_sp_tournaments'])
                     ->get();
     }    
+    
+    /*
+     * This method will return match info
+     * @param $match_id, mtach id
+     * @Author Nazmul Hasan on 8th July 2015
+     */
+    public function get_match_info($match_id) {
+        $this->db->where('id', $match_id);
+        return $this->db->select($this->tables['app_sp_matches'].'.id as match_id,'.$this->tables['app_sp_matches'].'.*')
+                        ->from($this->tables['app_sp_matches'])
+                        ->get();
+    }
     /*
      * This method will return matches based on where logic
      * @Author Nazmul Hasan on 28th June 2015
