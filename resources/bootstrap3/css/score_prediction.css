@@ -320,4 +320,9 @@
 .bgcolor_green{
     background-color: #6FCF6E!important;
 }
+.anchor_text_style{
+    color: #333333!important;
+    font-weight: normal!important;
+    font-size: 13px;
+}
 

@@ -227,8 +227,8 @@
                     <div class="panel-group" id="accordion_match" role="tablist" aria-multiselectable="true">
                         {% for(var k=0; k<count1; k++){ %}
                             <div class="panel panel-default">
-                                <div class=" row panel-heading " role="tab" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
+                                <div class="row panel-heading" role="tab" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
+                                    <a class="anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
                                         <div class="col-md-2">
                                             <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
                                         </div>
@@ -247,7 +247,7 @@
                                             {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
                                             <span > Closed </span>
                                             {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
-                                            <span > Prdicted </span>
+                                            <span > Predicted </span>
                                             {% }else{ %}
                                             <span>predict </span>
                                             {% } %}
