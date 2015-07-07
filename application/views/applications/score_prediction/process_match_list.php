@@ -237,7 +237,7 @@
                     <div class="panel-group" id="accordion_match" role="tablist" aria-multiselectable="true">
                         {% for(var k=0; k<count1; k++){ %}
                             <div class="panel panel-default">
-                                <div class=" row form-group panel-heading " role="tab" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
+                                <div class=" row panel-heading " role="tab" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
                                         <div class="col-md-2">
                                             <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
@@ -277,7 +277,7 @@
                                                         {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
                                                     </span>
                                                     {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id){ %}
-                                                    <span class="progress_bar_percentage_text bgcolor_red">
+                                                    <span class="progress_bar_percentage_text">
                                                         {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
                                                     </span>
                                                     {% }else{ %}
@@ -285,7 +285,7 @@
                                                         {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
                                                     </span>
                                                     {% } %}
-                                                    <div class="progress_bar_width_catulate" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
+                                                    <div class="progress_bar_width_catulate  bgcolor_red bgcolor_green" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
                                                 </div>
                                             </div>
                                         </div>

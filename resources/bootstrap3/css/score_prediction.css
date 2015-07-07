@@ -31,9 +31,12 @@
 
 
 
-.Leader_board_table_user_name_style{
+.leader_board_table_user_name_style{
     vertical-align: middle;
     white-space: normal;
+}
+.leader_board_verticle_align{
+    vertical-align: middle!important;
 }
 .padding_collapse_header{
     padding: 7px!important;
@@ -309,9 +312,12 @@
     cursor: pointer;
 }
 .bgcolor_blue{
-    background-color: #00f!important;
+    background-color: #89C1F4!important;
 }
 .bgcolor_red{
-    background-color: #E13300!important;
+    background-color: #FE6060!important;
+}
+.bgcolor_green{
+    background-color: #6FCF6E!important;
 }
 

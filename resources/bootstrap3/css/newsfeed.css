@@ -65,7 +65,12 @@
     height:22px;  
     padding-top:0px;
 }
-
+.button_custom_profile_message_modified{
+    background-color: orange!important;
+    border-radius: 0!important;
+    height: 22px!important;  
+    padding: 2px 8px!important;  
+}
 .list-group-item{
     border-left:0px;
     border-right:0px;

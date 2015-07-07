@@ -21,29 +21,29 @@
     }
 </script>
 <script type="text/x-tmpl" id="tlmp_home_page_leader_board">
-    <table class="table table-hover text_align">
-        <tr>
-            <td>Rank</td>
-            <td>Voter</td>
-            <td>Prediction(%)</td>
-            <td>Score</td>
-        </tr>
-        {% var i=0, user_list = ((o instanceof Array) ? o[i++] : o); %}
-        {% while(user_list){ %}
-            <tr>
-                <td>{%= i %}</td>
-                <td>
-                    <a href="<?php echo base_url().'member_profile/show/'.'{%= user_list.user_info.user_id %}'?>">
-                    <img class="img-rounded" src="<?php echo base_url() . PROFILE_PICTURE_PATH_W32_H32?>{%= user_list.user_info.photo%}">
-                    <span class="Leader_board_table_user_name_style">{%= user_list.user_info.first_name%} {%= user_list.user_info.last_name%}</span>
-                    </a>
-                </td>
-                <td>{%= user_list.prediction_ratio+'%' %}</td>
-                <td>{%= user_list.score%}</td>
-            </tr>
-        {% user_list = ((o instanceof Array) ? o[i++] : null); %}
-        {% } %}
-    </table>
+<table class="table table-hover text_align">
+    <tr>
+        <td>Rank</td>
+        <td>Voter</td>
+        <td>Prediction(%)</td>
+        <td>Score</td>
+    </tr>
+    {% var i=0, user_list = ((o instanceof Array) ? o[i++] : o); %}
+    {% while(user_list){ %}
+    <tr>
+        <td class="leader_board_verticle_align">{%= i %}</td>
+        <td>
+            <a href="<?php echo base_url() . 'member_profile/show/' . '{%= user_list.user_info.user_id %}' ?>">
+                <img class="img-rounded" src="<?php echo base_url() . PROFILE_PICTURE_PATH_W32_H32 ?>{%= user_list.user_info.photo%}">
+                <span class="leader_board_table_user_name_style">{%= user_list.user_info.first_name%} {%= user_list.user_info.last_name%}</span>
+            </a>
+        </td>
+        <td class="leader_board_verticle_align">{%= user_list.prediction_ratio+'%' %}</td>
+        <td class="leader_board_verticle_align">{%= user_list.score%}</td>
+    </tr>
+    {% user_list = ((o instanceof Array) ? o[i++] : null); %}
+    {% } %}
+</table>
 </script>
 <div>
     <div class="row form-group heading blue_banner prediction_leader_board_header">

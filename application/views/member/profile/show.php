@@ -259,7 +259,7 @@
                 <button class="btn button-custom pull-right">Edit Profile</button>
                 <?php echo form_close(); ?>
             <?php } elseif ($profile_type == PROFILE_FOLLOWER) { ?>
-                <div class="col-md-8"><a href="<?php echo base_url() . 'messages/new_message/' . $user_id ?>"><button class="btn button-custom button-custom-profile-message">Message</button></a>
+                <div class="col-md-8"><a href="<?php echo base_url() . 'messages/new_message/' . $user_id ?>"><button class="btn button_custom_profile_message_modified">Message</button></a>
                 </div>
                 <div class="col-md-4">
                     <div class="dropdown friends-satus-dropdown pull-right" style="width: 35px">
