@@ -3,8 +3,13 @@
         sports_id = '<?php echo $sports_id ?>';
         date = '<?php echo $date ?>';
         match_id = '<?php echo $match_id ?>';
-        var thisYear = new Date().getFullYear();
-        setDate(new Date());
+        
+        date_array = date.split("-");
+        
+        //var thisYear = new Date().getFullYear();
+        //setDate(new Date());
+        var thisYear = date_array[0];
+        setDate( new Date(date_array[0], date_array[1] - 1, date_array[2]) );
         $("#from, #to").datepicker({
             defaultDate: "+1w",
             changeMonth: true,

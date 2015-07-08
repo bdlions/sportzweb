@@ -35,6 +35,15 @@ class Score_prediction extends Role_Controller{
         $this->data['sports_id'] = 0;
         //user will be able to load home page for a specific match
         $this->data['match_id'] = $match_id;
+        if($match_id > 0)
+        {
+            $match_info_array = $this->score_prediction_library->get_match_info($match_id)->result_array();
+            if(!empty($match_info_array))
+            {
+                $match_info = $match_info_array[0];
+                $this->data['date'] = $match_info['date'];
+            }
+        }
         $this->template->load(null,"applications/score_prediction/index", $this->data);
     }
     /*

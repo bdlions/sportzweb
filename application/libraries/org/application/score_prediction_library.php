@@ -335,14 +335,17 @@ class Score_prediction_library {
                 $league_table_data[$match_info['team_id_away']]['score_difference'] = 0;
                 $league_table_data[$match_info['team_id_away']]['points'] = 0;
             }
-            //updating team data
-            $league_table_data[$match_info['team_id_home']]['played_matches'] = ($league_table_data[$match_info['team_id_home']]['played_matches'] + 1);
-            $league_table_data[$match_info['team_id_home']]['points'] = ($league_table_data[$match_info['team_id_home']]['points'] + $match_info['point_home']);
-            $league_table_data[$match_info['team_id_home']]['score_difference'] =  ($league_table_data[$match_info['team_id_home']]['score_difference'] + $match_info['score_home'] - $match_info['score_away']);
-            
-            $league_table_data[$match_info['team_id_away']]['played_matches'] = ($league_table_data[$match_info['team_id_away']]['played_matches'] + 1);
-            $league_table_data[$match_info['team_id_away']]['points'] = ($league_table_data[$match_info['team_id_away']]['points'] + $match_info['point_away']);
-            $league_table_data[$match_info['team_id_away']]['score_difference'] =  ($league_table_data[$match_info['team_id_away']]['score_difference'] + $match_info['score_away'] - $match_info['score_home']);
+            if( $match_info['status_id'] != MATCH_STATUS_UPCOMING)
+            {
+                //updating team data
+                $league_table_data[$match_info['team_id_home']]['played_matches'] = ($league_table_data[$match_info['team_id_home']]['played_matches'] + 1);
+                $league_table_data[$match_info['team_id_home']]['points'] = ($league_table_data[$match_info['team_id_home']]['points'] + $match_info['point_home']);
+                $league_table_data[$match_info['team_id_home']]['score_difference'] =  ($league_table_data[$match_info['team_id_home']]['score_difference'] + $match_info['score_home'] - $match_info['score_away']);
+
+                $league_table_data[$match_info['team_id_away']]['played_matches'] = ($league_table_data[$match_info['team_id_away']]['played_matches'] + 1);
+                $league_table_data[$match_info['team_id_away']]['points'] = ($league_table_data[$match_info['team_id_away']]['points'] + $match_info['point_away']);
+                $league_table_data[$match_info['team_id_away']]['score_difference'] =  ($league_table_data[$match_info['team_id_away']]['score_difference'] + $match_info['score_away'] - $match_info['score_home']);
+            }            
         }
         //sorting team list based on points
         $points = array();
