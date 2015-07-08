@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
         <meta name="keywords" content=""/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-         <!--Auth Background sliding Image-->
+        <!--Auth Background sliding Image-->
         <meta name="description" content="Fullscreen Background Image Slideshow with CSS3 - A Css-only fullscreen background image slideshow" />
         <meta name="keywords" content="css3, css-only, fullscreen, background, slideshow, images, content" />
         <meta name="author" content="Codrops" />
@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/bg_img_sliding.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/bootstrap.min.css">
-        
+
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/html5shiv.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/respond.min.js"></script>
 
@@ -38,13 +38,11 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
     </head>
     <body class="back">
-        <?php $this->load->view("templates/sections/header_with_login");?>
+        <?php $this->load->view("templates/sections/header_with_login"); ?>
         <div class="container">
-            <div class="row">
-                <?php echo $contents; ?>
-            </div>
+            <?php echo $contents; ?>
         </div>
-        <?php $this->load->view("templates/sections/footer");?>
+        <?php $this->load->view("templates/sections/footer"); ?>
         <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>

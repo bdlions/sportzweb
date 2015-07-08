@@ -106,112 +106,108 @@
     });
 </script>
 <?php echo form_open("auth/login", array('id' => 'registration-form', 'role' => 'form')); ?>
-<div id="step1">
-    <ul class="cb-slideshow bg_sliding_ul">
-        <li>
-            <span>Image 01</span>
-        </li>
-        <li>
-            <span>Image 02</span>
-        </li>
-        <li>
-            <span>Image 03</span>
-        </li>
-        <li>
-            <span>Image 04</span>
-        </li>
-        <li>
-            <span>Image 05</span>
-        </li>
-        <li>
-            <span>Image 06</span>
-        </li>
-    </ul>
-    <div class="container-fluid" style="margin-left: -15px; margin-right: -15px;">
-        <div class="row padding_over_row">
-            <div class="col-md-11">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-offset-1 col-md-8">
-                                <p class="auth_sliding_bg_text">
-                                    A social hub that allows you to connect and share health, sports and fitness information with people.
-                                    Members have access to a variety of health, sports and fitness applications including diets, personal
-                                    trainers, blogs, food recipes and news.
-                                </p>
+<div class="container">
+    <div id="step1">
+        <ul class="cb-slideshow bg_sliding_ul">
+            <li>
+                <span>Image 01</span>
+            </li>
+            <li>
+                <span>Image 02</span>
+            </li>
+            <li>
+                <span>Image 03</span>
+            </li>
+            <li>
+                <span>Image 04</span>
+            </li>
+            <li>
+                <span>Image 05</span>
+            </li>
+            <li>
+                <span>Image 06</span>
+            </li>
+        </ul>
+        <div class="row padding_over_row mg_bottom">
+            <div class="col-md-5">
+                <p class="auth_sliding_bg_text">
+                    A social hub that allows you to connect and share health, sports and fitness information with people.
+                    Members have access to a variety of health, sports and fitness applications including diets, personal
+                    trainers, blogs, food recipes and news.
+                </p>
+            </div>
+            <div class="col-md-offset-3 col-md-4">
+                <div class="pagelet_auth">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <span class="sign_up_text">Sign Up</span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input class="form-control input_custom_style" type="text" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input class="form-control input_custom_style" type="text" placeholder="Confirm Email">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input class="form-control input_custom_style" type="password" placeholder="Passowrd">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="pull-right">
+                                <?php echo form_input($next_btn + array('class' => 'btn button-custom')); ?>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="pagelet_auth">
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <span style="color: #89c1f4; font-size: 27px;">Sign Up</span>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <input class="form-control" type="text" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <input class="form-control" type="text" placeholder="Confirm Email">
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <input class="form-control" type="password" placeholder="Passowrd">
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <div class="pull-right">
-                                        <?php echo form_input($next_btn + array('class' => 'btn button-custom')); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <div style="border-bottom: 1px solid #cecece;"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <a href="<?php echo base_url();?>business_profile.html" class="business_profile_achor_auth">Create a profile for your business.</a>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div style="border-bottom: 1px solid #cecece;"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <a href="<?php echo base_url(); ?>business_profile.html" class="business_profile_achor_auth">Create a profile for your business.</a>
                         </div>
                     </div>
                 </div>
+                <div class="row form-group"></div>
+                <div class="row form-group"></div>
+                <div class="row form-group"></div>
             </div>
         </div>
     </div>
-</div>
-<div id="step2" class="security-captcha">
-    <div class="home-left-tit">
-        <div class="home-left-title home-left-title2">Sign Up</div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-4">
-            <input class="form-control" type="text" placeholder="First Name">
+
+    <div id="step2" class="security-captcha">
+        <div class="home-left-tit">
+            <div class="home-left-title home-left-title2">Sign Up</div>
         </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-4">
-            <input class="form-control" type="text" placeholder="Last Name">
+        <div class="row form-group">
+            <div class="col-md-4">
+                <input class="form-control security_check_input input_custom_style" type="text" placeholder="First Name">
+            </div>
         </div>
-    </div>
-    <div class="heading_medium_thin">
-        <?php echo lang('security_check_label'); ?>
-    </div>
-    <div class="row form-group"></div> 
-    <div class="form-group">
-        <?php echo lang('please_enter_the_characters_below_label'); ?>
-    </div> 
-    <div class="form-group" id="captcha_div"></div>
-    <div class="form-group">
-        <?php echo form_input($register_btn + array('class' => 'btn button-custom')); ?>
+        <div class="row form-group">
+            <div class="col-md-4">
+                <input class="form-control security_check_input input_custom_style" type="text" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="heading_medium_thin">
+            <?php echo lang('security_check_label'); ?>
+        </div>
+        <div class="row form-group"></div> 
+        <div class="form-group">
+            <?php echo lang('please_enter_the_characters_below_label'); ?>
+        </div> 
+        <div class="form-group" id="captcha_div"></div>
+        <div class="form-group">
+            <?php echo form_input($register_btn + array('class' => 'btn button-custom')); ?>
+        </div>
     </div>
 </div>
 <div id="message"></div>

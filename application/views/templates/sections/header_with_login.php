@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-top" role="navigation">
+<nav class="navbar navbar-default navbar-top" role="navigation" style="z-index: 999999;">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#open-collapse"> 
             <span class="sr-only">Toggle navigation</span>
@@ -11,40 +11,24 @@
     <div class="collapse navbar-collapse" id="open-collapse">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 logo-text">
-                    <a href="<?php echo base_url(); ?>" ><img class="logo" src="<?php echo base_url() ?>/resources/images/logo1.png" /><?php echo WEBSITE_TITLE; ?></a>
+                <div class="col-md-4 col-sm-4 logo-text logo_text_modify">
+                    <a href="<?php echo base_url(); ?>" ><img class="logo_modified" src="<?php echo base_url() ?>/resources/images/logo1.png" /><?php echo WEBSITE_TITLE; ?></a>
                 </div>
-                <div class="col-md-8 login12">
-                    <?php echo form_open("auth/login", array('class' => 'navbar-right', 'style' => 'min-width:590px;', 'id' => 'login_box')); ?>
-                    <div class="row login_port">
-                        <div class="col-md-4 login_width">
-                            <div class="row">
-                                <?php echo lang('login_identity_label'); ?>
-                            </div>
-                            <div class="row">
-                                <?php echo form_input($identity + array('class' => 'form-control login-textbox')); ?>
-                            </div>
+                <div class="col-md-8 col-sm-8">
+                    <div class="row form-group login_text_style">
+                        <div class="col-sm-5 col-md-offset-2 col-md-4">
+                            <?php echo lang('login_identity_label'); ?>
+                            <?php echo form_input($identity + array('class' => 'form-control input_custom_style')); ?>
                         </div>
-                        <div class="col-md-4 login_width">
-                            <div class="row">
-                                <?php echo lang('login_password_label'); ?><?php echo anchor("auth/forgot_password", "Forgot your password?", $forget_password); ?>
-                            </div>
-                            <div class="row">
-                                <?php echo form_input($password + array('class' => 'form-control login-textbox')); ?>
-                            </div>
+                        <div class="col-sm-5 col-md-4">
+                            <?php echo lang('login_password_label'); ?><?php echo anchor("auth/forgot_password", "Forgot your password?", $forget_password); ?>
+                            <?php echo form_input($password + array('class' => 'form-control input_custom_style')); ?>
                         </div>
-                        <div class="col-md-2 signin_button">
-                            <div class="row">
-                                &nbsp;
-                            </div>
-                            <div class="row">
-                                <?php echo form_input($login_btn + array('class' => 'btn button-custom')); ?>
-                            </div>
-
+                        <div class="col-sm-2 col-md-2">
+                            <br>
+                            <?php echo form_input($login_btn + array('class' => 'btn button-custom form-control')); ?>
                         </div>
                     </div>
-
-                    <?php echo form_close(); ?>
                 </div>
             </div>
         </div>

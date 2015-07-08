@@ -81,9 +81,10 @@ div.login_port{
 		width: 99%;		
 	}
 	.logo {
-		margin: 0% 0;
+		margin: 0;
 		position: relative;
 	}
+	
 	div.signin_button{
 		margin-right: 5%;
 	}
