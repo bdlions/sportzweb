@@ -25,7 +25,7 @@
                     var message = data['message'];
                     print_common_message(message);
                     $("#modal_sports_create").modal('hide');
-                    $("#league_table_option_list").find( )
+                     $('input:checkbox').removeAttr('checked');
                     window.location.reload();
                 }
             });
