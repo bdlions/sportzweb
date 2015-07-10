@@ -15,6 +15,7 @@
                     <a href="<?php echo base_url(); ?>" ><img class="logo_modified" src="<?php echo base_url() ?>/resources/images/logo1.png" /><?php echo WEBSITE_TITLE; ?></a>
                 </div>
                 <div class="col-md-8 col-sm-8">
+                    <?php echo form_open("auth/login", array('id' => 'login_box')); ?>
                     <div class="row form-group login_text_style">
                         <div class="col-sm-5 col-md-offset-2 col-md-4">
                             <?php echo lang('login_identity_label'); ?>
@@ -29,6 +30,7 @@
                             <?php echo form_input($login_btn + array('class' => 'btn button-custom form-control')); ?>
                         </div>
                     </div>
+                    <?php echo form_close(); ?>
                 </div>
             </div>
         </div>

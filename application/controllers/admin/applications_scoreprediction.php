@@ -112,7 +112,7 @@ class Applications_scoreprediction extends Admin_Controller{
         $league_table_configuration = $this->input->post('league_table_configuration');
         $additional_data = array(
             'title' => $title,
-            'list' => json_encode($league_table_configuration)  
+            'league_tbl_conf' => json_encode($league_table_configuration)  
         );
         if($this->admin_score_prediction_library->create_sports($additional_data))
         {
@@ -137,7 +137,7 @@ class Applications_scoreprediction extends Admin_Controller{
         if(!empty($sports_info_array))
         {
             $result_array = $sports_info_array[0];
-            $result_array['list'] = json_decode($result_array['list']);
+            $result_array['league_tbl_conf'] = json_decode($result_array['league_tbl_conf']);
             $response['sports_info'] = $result_array;
         }
         echo json_encode($response);
@@ -156,7 +156,7 @@ class Applications_scoreprediction extends Admin_Controller{
         $additional_data = array(
             'title' => $title,
             'modified_on' => now(),
-            'list' => json_encode($league_table_configuration) 
+            'league_tbl_conf' => json_encode($league_table_configuration) 
         );
         if($this->admin_score_prediction_library->update_sports($sports_id, $additional_data))
         {

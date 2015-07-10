@@ -33,6 +33,7 @@ class Score_prediction extends Role_Controller{
         $this->data['date'] = $this->utils->get_current_date_yyyymmdd();
         //at home page we have all types of sports
         $this->data['sports_id'] = 0;
+        $this->data['tournament_id'] = 0;
         //user will be able to load home page for a specific match
         $this->data['match_id'] = $match_id;
         if($match_id > 0)
@@ -122,10 +123,15 @@ class Score_prediction extends Role_Controller{
      * @Author Nazmul Hasan on 28th June 2015
      */
     public function sports($sports_id){
+        $this->data['tournament_id'] = 0;
         $tournament_list = array();
         $tournament_list_array = $this->score_prediction_library->get_all_tournaments($sports_id)->result_array();
         foreach($tournament_list_array as $tournament_info){
             $tournament_list[$tournament_info['tournament_id']] = $tournament_info['title'].' '.$tournament_info['season'];
+        }
+        if(!empty($tournament_list_array))
+        {
+            $this->data['tournament_id'] = $tournament_list_array[0]['tournament_id'];
         }
         $this->data['tournament_list'] = $tournament_list;
         $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
@@ -145,7 +151,6 @@ class Score_prediction extends Role_Controller{
         $response = array();
         $tournament_id = $this->input->post('tournament_id');
         $response = $this->score_prediction_library->get_league_table_data($tournament_id);
-        //$response['team_list'] = $team_list;
         echo json_encode($response);
     }
 }

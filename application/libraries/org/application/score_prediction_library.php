@@ -306,13 +306,17 @@ class Score_prediction_library {
         $result = array();
         $team_list = array();
         $league_table_data = array();
-        
         $league_table_configuration = array();
-        $league_table_configuration[] = 1;
-        $league_table_configuration[] = 4;
-        $league_table_configuration[] = 5;
-        $league_table_configuration[] = 6;
-        $league_table_configuration[] = 7;  
+        $sports_info_array = $this->score_prediction_model->get_sports_info($tournament_id)->result_array();
+        if(!empty($sports_info_array))
+        {
+            $sports_info = $sports_info_array[0];
+            $league_tbl_conf = json_decode($sports_info['league_tbl_conf']);  
+            if($league_tbl_conf != "" && $league_tbl_conf != NULL)
+            {
+                $league_table_configuration = $league_tbl_conf;
+            }
+        }
         
         //retrieving match list for a tournament
         $match_list_array = $this->score_prediction_model->get_league_table_matches($tournament_id)->result_array();

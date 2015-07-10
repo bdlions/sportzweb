@@ -31,6 +31,7 @@ class Score_prediction_model extends Ion_auth_model
     public function get_all_tournaments($sports_id)
     {
         $this->db->where('sports_id', $sports_id);
+        $this->db->order_by('title','asc');
         return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id,'.$this->tables['app_sp_tournaments'].'.*')
                     ->from($this->tables['app_sp_tournaments'])
                     ->get();
@@ -180,6 +181,14 @@ class Score_prediction_model extends Ion_auth_model
                 ->join($this->tables['basic_profile'], $this->tables['users'] . '.id=' . $this->tables['basic_profile'] . '.user_id')
                 ->get();
         return $result;
+    }
+    public function get_sports_info($tournament_id)
+    {
+        $this->db->where($this->tables['app_sp_tournaments'].'.id', $tournament_id);
+        return $this->db->select($this->tables['app_sp_sports'].'.id as sports_id,'.$this->tables['app_sp_sports'].'.*')
+                    ->from($this->tables['app_sp_sports'])
+                    ->join($this->tables['app_sp_tournaments'], $this->tables['app_sp_tournaments'] . '.sports_id=' . $this->tables['app_sp_sports'] . '.id', 'left')
+                    ->get();
     }
     /*
      * This method will return matches for the league table

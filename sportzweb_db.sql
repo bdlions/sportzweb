@@ -1708,6 +1708,7 @@ CREATE TABLE `photography`(
 CREATE TABLE IF NOT EXISTS `app_sp_sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
+  `league_tbl_conf` text,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)

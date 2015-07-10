@@ -3,7 +3,7 @@
         sports_id = '<?php echo $sports_id ?>';
         date = '<?php echo $date ?>';
         match_id = '<?php echo $match_id ?>';
-        
+        tournament_id = '<?php echo $tournament_id ?>';
         date_array = date.split("-");
         
         //var thisYear = new Date().getFullYear();
@@ -33,7 +33,7 @@
             selectedDate = new Date(month + " " + day + ", " + thisYear);
             setDate(selectedDate);
         });
-        get_match_list(date, sports_id, match_id);
+        //get_match_list(date, sports_id, match_id);
         $('#vote_id').on('click', function () {
             $.ajax({
                 dataType: 'json',
@@ -74,7 +74,7 @@
         if (formattedDay.length < 2)
             formattedDay = '0' + formattedDay;
         var formattedDate = formattedYear + '-' + formattedMonth + '-' + formattedDay;
-        get_match_list(formattedDate, sports_id, 0);
+        get_match_list(formattedDate, sports_id, match_id);
     }
 
     function prediction_modal(teamName, matchId, voteId, matchStatusId, statusId) {
@@ -100,8 +100,22 @@
                 match_id: match_id
             },
             success: function (data) {
+                if(data.sports_list.length > 0 && sports_id > 0 && tournament_id > 0)
+                {
+                    var tounament_list = data.sports_list[0].tournament_list;
+                    if(tounament_list.length > 0)
+                    {
+                        var selected_tournament_id = tounament_list[0].tournament_id;
+                        $('#tournament_list').val(selected_tournament_id);
+                        populate_league_table(selected_tournament_id);
+                    }                    
+                }
+                else if(sports_id > 0 && tournament_id > 0)
+                {
+                    $('#tournament_list').val(tournament_id);
+                    populate_league_table(tournament_id);
+                }
                 $('#home_page_sports_content').html(tmpl('tlmp_home_page_sports_content', data.sports_list));
-//                $('#home_page_sports_content').html(tmpl('tlmp_home_page_sports_content_test', data.sports_list));
             }
         });
     }
@@ -133,7 +147,7 @@
     {% }else if(match_info.is_predicted == 1){ %}
     <span > Prdicted </span>
     {% }else{ %}
-    <span>predict </span>
+    <span>Predict </span>
     {% } %}
     </div>
     </a>
@@ -254,7 +268,7 @@
                                             {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
                                             <span > Predicted </span>
                                             {% }else{ %}
-                                            <span>predict </span>
+                                            <span>Predict </span>
                                             {% } %}
                                         </div>
                                     </a>
@@ -342,18 +356,18 @@
                             {% } %}
                     </div>
                     </script> 
-                    <div class="form-group">
-                        <div class="input_custom"> 
-                            <label class="input_custom_input" type="text" id="rMin1" name="to"></label>
-                            <label class="input_custom_input" type="text" id="rMin2" name="to"></label>
-                            <label class="input_custom_input input_active_class" type="text" id="rMin3" name="to"></label>
-                            <label class="input_custom_input" type="text" id="rMin4" name="to"></label>
-                            <label class="input_custom_input" type="text" id="rMin5" name="to"></label> 
-                            <input class="date_picker_img" type="image" id="from" src="<?php echo base_url(); ?>resources/images/calendar.png"/>
-                        </div>
-                        <div id="home_page_sports_content">
-                        </div>
-                    </div>
-                    <?php
-                    $this->load->view("applications/score_prediction/prediction_confirmation_modal");
+<div class="form-group">
+    <div class="input_custom"> 
+        <label class="input_custom_input" type="text" id="rMin1" name="to"></label>
+        <label class="input_custom_input" type="text" id="rMin2" name="to"></label>
+        <label class="input_custom_input input_active_class" type="text" id="rMin3" name="to"></label>
+        <label class="input_custom_input" type="text" id="rMin4" name="to"></label>
+        <label class="input_custom_input" type="text" id="rMin5" name="to"></label> 
+        <input class="date_picker_img" type="image" id="from" src="<?php echo base_url(); ?>resources/images/calendar.png"/>
+    </div>
+    <div id="home_page_sports_content">
+    </div>
+</div>
+<?php
+$this->load->view("applications/score_prediction/prediction_confirmation_modal");
                     

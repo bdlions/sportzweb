@@ -2,12 +2,11 @@
     $(function () {
         $("#button_update_sports").on("click", function () {
             var leagueArray = new Array();
-            $("#league_table_option_list input:checkbox[name=type]:checked").each(function () {
+            $("#league_table_option_list_update input:checkbox[name=type]:checked").each(function () {
                 leagueArray.push($(this).val());
             });
             if ($("#input_sports_update_title").val().length == 0)
             {
-                //alert("Please assign sports name");
                 var message = "Please assign sports name";
                 print_common_message(message);
                 return;
@@ -22,7 +21,6 @@
                     league_table_configuration: leagueArray
                 },
                 success: function (data) {
-                    // alert(data['message']);
                     var message = data['message'];
                     print_common_message(message);
                     $("#modal_sports_update").modal('hide');
@@ -40,8 +38,9 @@
                 sports_id: sports_id
             },
             success: function (data) {
-                var langueTableArray = data.sports_info['list'];
-                $('input[name="type"]').each(function () {
+                var langueTableArray = data.sports_info['league_tbl_conf'];
+                console.log(langueTableArray);
+                $('#league_table_option_list_update input[name="type"]').each(function () {
                     $(this).prop("checked", ($.inArray($(this).val(), langueTableArray) != -1));
                 });
                 $('#input_sports_id').val(data.sports_info['sports_id']);
@@ -59,7 +58,7 @@
                 <h4 class="modal-title" id="myModalLabel">Update Sports</h4>
             </div>
             <div class="modal-body">
-                <div class="row" id="league_table_option_list">
+                <div class="row" id="league_table_option_list_update">
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-3 control-label">Sports Name:</label>
