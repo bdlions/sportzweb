@@ -265,6 +265,119 @@ else
         </div>
     </div>
 </div> 
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_FIXTURES_RESULTS && isset($newsfeed['reference_info']) ){ ?>
+<div class="row feed-description">
+    <div class="col-md-12">
+        <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
+            <div class="panel-group" aria-multiselectable="true" role="tablist">
+                <div class="panel panel-default">
+                    <div role="tab" class="row panel-heading">
+                        <a role="button" class="anchor_text_style">
+                            <div class="col-md-2">
+                                <?php echo $newsfeed['reference_info']['time'];?>
+                            </div>
+                            <div class="col-md-2">
+                                <?php echo $newsfeed['reference_info']['team_title_home'];?>
+                            </div>
+                            <div class="col-md-2">
+                                vs
+                            </div>
+                            <div class="col-md-2">
+                                <?php echo $newsfeed['reference_info']['team_title_away'];?>                                   
+                            </div>
+                            <div class="col-md-2">
+                               <?php echo $newsfeed['reference_info']['score_home'];?> - <?php echo $newsfeed['reference_info']['score_away'];?>                                        
+                            </div>
+                            <div class="col-md-2">
+                                <?php if($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING){ ?>
+                                     <span>                                     
+                                        Closed
+                                    </span>   
+                                <?php } else if($newsfeed['reference_info']['is_predicted'] == 1 ){ ?>
+                                    <span>                                     
+                                        Predicted
+                                    </span> 
+                                <?php }else{?>
+                                    <span>                                     
+                                        Predict
+                                    </span>
+                                <?php }?>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <?php
+                                $home_percentage = $newsfeed['reference_info']['prediction_info']['home'];
+                                $home_css_class = "";
+                                if($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['my_prediction_id'] == $newsfeed['reference_info']['status_id']){
+                                    $home_css_class = "progress_bar_width_catulate bgcolor_green";
+                                }else if($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1 && $newsfeed['reference_info']['my_prediction_id'] != $newsfeed['reference_info']['status_id']){
+                                    $home_css_class = "progress_bar_width_catulate bgcolor_red";
+                                }else if($newsfeed['reference_info']['status_id'] == MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1){
+                                    $home_css_class = "progress_bar_width_catulate";
+                                }else{
+                                    $home_css_class = "progress_bar_width_catulate";
+                                }
+                                ?>
+                                <div class="progress_bar_backgraound">                                    
+                                    <span class="progress_bar_content"> <?php echo $newsfeed['reference_info']['team_title_home']; ?> </span>
+                                    <span class="progress_bar_percentage_text"> <?php echo $home_percentage; ?> </span>
+                                    <div class="<?php echo $home_css_class; ?>" style="width:<?php echo $home_percentage; ?>"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <?php
+                                $draw_percentage = $newsfeed['reference_info']['prediction_info']['draw'];
+                                $draw_css_class = "";
+                                if($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['my_prediction_id'] == $newsfeed['reference_info']['status_id']){
+                                    $draw_css_class = "progress_bar_width_catulate bgcolor_green";
+                                }else if($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1 && $newsfeed['reference_info']['my_prediction_id'] != $newsfeed['reference_info']['status_id']){
+                                    $draw_css_class = "progress_bar_width_catulate bgcolor_red";
+                                }else if($newsfeed['reference_info']['status_id'] == MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1){
+                                    $draw_css_class = "progress_bar_width_catulate";
+                                }else{
+                                    $draw_css_class = "progress_bar_width_catulate";
+                                }
+                                ?>
+                                <div class="progress_bar_backgraound">                                    
+                                    <span class="progress_bar_content">Draw</span>
+                                    <span class="progress_bar_percentage_text"> <?php echo $draw_percentage; ?> </span>
+                                    <div class="<?php echo $draw_css_class; ?>" style="width:<?php echo $draw_percentage; ?>"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <?php
+                                $away_percentage = $newsfeed['reference_info']['prediction_info']['away'];
+                                $away_css_class = "";
+                                if($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['my_prediction_id'] == $newsfeed['reference_info']['status_id']){
+                                    $away_css_class = "progress_bar_width_catulate bgcolor_green";
+                                }else if($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1 && $newsfeed['reference_info']['my_prediction_id'] != $newsfeed['reference_info']['status_id']){
+                                    $away_css_class = "progress_bar_width_catulate bgcolor_red";
+                                }else if($newsfeed['reference_info']['status_id'] == MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1){
+                                    $away_css_class = "progress_bar_width_catulate";
+                                }else{
+                                    $away_css_class = "progress_bar_width_catulate";
+                                }
+                                ?>
+                                <div class="progress_bar_backgraound">                                    
+                                    <span class="progress_bar_content"> <?php echo $newsfeed['reference_info']['team_title_away']; ?> </span>
+                                    <span class="progress_bar_percentage_text"> <?php echo $away_percentage; ?> </span>
+                                    <div class="<?php echo $away_css_class; ?>" style="width:<?php echo $away_percentage; ?>"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?php }?>
 
 

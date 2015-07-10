@@ -39,6 +39,7 @@
     define("STATUS_SHARE_NEWS",                                     4);
     define("STATUS_SHARE_BLOG",                                     5);
     define("STATUS_SHARE_PHOTO",                                    6);
+    define("STATUS_SHARE_FIXTURES_RESULTS",                         18);
     //if anyone changes the id then of course update the database schema also
     define("STATUS_SHARE_ADMIN_WELCOME",                            7);
     define("STATUS_SHARE_APP_ADMIN_LATEST_MAIN_RECIPE",             8);

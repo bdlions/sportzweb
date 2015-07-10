@@ -7,6 +7,7 @@ class Score_prediction extends Role_Controller{
         $this->lang->load('auth');
         $this->load->helper('language');
         $this->load->helper('url');
+        $this->load->library("statuses");
         $this->load->library('org/application/score_prediction_library');
         $this->load->library('org/utility/utils');
         if (!$this->ion_auth->logged_in()) {
@@ -61,8 +62,13 @@ class Score_prediction extends Role_Controller{
         $sports_id = $this->input->post('sports_id');
         $match_id = $this->input->post('match_id');
         $user_id = $this->session->userdata('user_id');
+        $match_ids = array();
+        if($match_id > 0)
+        {
+            $match_ids[] = $match_id;
+        }
         //generate match list based on date and sports id
-        $sports_list = $this->score_prediction_library->get_match_list($date, $sports_id , $match_id, $user_id);
+        $sports_list = $this->score_prediction_library->get_match_list($date, $sports_id , $match_ids, $user_id);
 //        $sports_list['user_id'] = $user_id;
         $response['sports_list'] = $sports_list;
         echo json_encode($response);
@@ -98,6 +104,19 @@ class Score_prediction extends Role_Controller{
         $user_id = $this->session->userdata('user_id');
         $predicted_match_status_id = (string)$this->input->post('predicted_match_status_id');  
         $this->score_prediction_library->post_vote($match_id, $predicted_match_status_id, $user_id);        
+        
+        //storing as a status
+        $status_data = array(
+            'user_id' => $user_id,
+            'mapping_id' => $user_id,
+            'status_category_id' => STATUS_CATEGORY_USER_PROFILE,
+            'reference_id' => $match_id,
+            'shared_type_id' => STATUS_SHARE_FIXTURES_RESULTS,
+            'created_on' => now()
+        );
+        $this->statuses->post_status($status_data);
+        
+        
         $match_info = array();
         $sports_list = $this->score_prediction_library->get_match_list('', 0, $match_id);
         if(!empty($sports_list))

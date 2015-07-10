@@ -61,14 +61,14 @@ class Score_prediction_library {
      * @param $match_id, if we need only a match
      * @Author Nazmul Hasan on 28th June 2015
      */
-    public function get_match_list($date = '', $sports_id = 0, $match_id = 0, $user_id = 0)
+    public function get_match_list($date = '', $sports_id = 0, $match_ids = array(), $user_id = 0)
     {
         if($user_id == 0)
         {
             $user_id = $this->session->userdata('user_id');
         }
         //retrieving match list
-        $match_list_array = $this->score_prediction_model->get_all_matches($date, $sports_id, $match_id)->result_array();
+        $match_list_array = $this->score_prediction_model->get_all_matches($date, $sports_id, $match_ids)->result_array();
         $sports_list = array();
         $tournaments = array();
         $sports = array();

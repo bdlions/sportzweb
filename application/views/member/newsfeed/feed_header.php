@@ -114,6 +114,12 @@
     </a>
     <span class="shared-text">shared a</span>
     <a href="<?php echo base_url().APPLICATION_BLOG_PATH.$newsfeed['reference_info']['id'];?>"><span class="shared-text">link</span></a>
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_FIXTURES_RESULTS ){ ?>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
+    </a>
+    <span class="shared-text">made a</span>
+    <a href="<?php echo base_url().'applications/score_prediction/index/'.$newsfeed['reference_id'];?>"><span class="shared-text">prediction</span></a>
 <?php }else{ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
         <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>

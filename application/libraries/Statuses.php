@@ -4,20 +4,9 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Name:  Ion Auth
+ * Name:  Status library
  *
- * Author: Ben Edmunds
- * 		  ben.edmunds@gmail.com
- *         @benedmunds
- *
- * Added Awesomeness: Phil Sturgeon
- *
- * Location: http://github.com/benedmunds/CodeIgniter-Ion-Auth
- *
- * Created:  10.01.2009
- *
- * Description:  Modified auth system based on redux_auth with extensive customization.  This is basically what Redux Auth 2 should be.
- * Original Author name has been kept but that does not mean that the method has not been modified.
+ * @Author Nazmul Hasan
  *
  * Requirements: PHP5 or above
  *
@@ -29,6 +18,7 @@ class Statuses {
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
         $this->load->library('org/application/blog_app_library');
+        $this->load->library('org/application/score_prediction_library');
         $this->load->model('statuses_model');
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
@@ -81,6 +71,9 @@ class Statuses {
         //each key of this array is user id and value of the key is user info
         $user_id_user_info_map = array();
 
+        $app_sp_match_id_list = array();
+        $app_sp_match_id_match_info_map = array();
+        
         $shared_recipe_id_list = array();
         $shared_service_id_list = array();
         $shared_news_id_list = array();
@@ -152,6 +145,10 @@ class Statuses {
                 } else if ($status['shared_type_id'] == STATUS_SHARE_PHOTO) {
                     if (!in_array($status['reference_id'], $photo_id_list)) {
                         $photo_id_list[] = $status['reference_id'];
+                    }
+                } else if ($status['shared_type_id'] == STATUS_SHARE_FIXTURES_RESULTS) {
+                    if (!in_array($status['reference_id'], $app_sp_match_id_list)) {
+                        $app_sp_match_id_list[] = $status['reference_id'];
                     }
                 }
                 //we have photo id for changing profile picture or status with image
@@ -275,6 +272,22 @@ class Statuses {
                     }
                 }
             }
+            if (!empty($app_sp_match_id_list)) {
+                $app_sp_sports_list_array = $this->score_prediction_library->get_match_list('', 0 , $app_sp_match_id_list);
+                //print_r($app_sp_sports_list_array);
+                //exit();
+                foreach ($app_sp_sports_list_array as $app_sp_sports_info) {
+                    $tournament_list = $app_sp_sports_info['tournament_list'];
+                    foreach($tournament_list as $tournament_info)
+                    {
+                        $match_list = $tournament_info['match_list'];
+                        foreach($match_list as $match_info)
+                        {
+                            $app_sp_match_id_match_info_map[$match_info['match_id']] = $match_info;
+                        }
+                    }                    
+                }
+            }
             if (!empty($shared_blog_id_list)) {
                 $blog_info_array = $this->blog_app_library->get_blogs($shared_blog_id_list)->result_array();
                 foreach ($blog_info_array as $blog_info) {
@@ -373,6 +386,8 @@ class Statuses {
                     $status['reference_info'] = $news_id_info_map[$status['reference_id']];
                 } else if ($status['shared_type_id'] == STATUS_SHARE_BLOG && isset($blog_id_info_map[$status['reference_id']])) {
                     $status['reference_info'] = $blog_id_info_map[$status['reference_id']];
+                }else if ($status['shared_type_id'] == STATUS_SHARE_FIXTURES_RESULTS && isset($app_sp_match_id_match_info_map[$status['reference_id']])) {
+                    $status['reference_info'] = $app_sp_match_id_match_info_map[$status['reference_id']];
                 } else if ($status['shared_type_id'] == STATUS_SHARE_PHOTO && isset($photo_id_photo_info_map[$status['reference_id']])) {
                     $status['reference_info'] = $photo_id_photo_info_map[$status['reference_id']];
                 } else if ($status['shared_type_id'] == STATUS_SHARE_APP_ADMIN_LATEST_MAIN_RECIPE && isset($recipe_id_info_map[$admin_default_recipe_id])) {
