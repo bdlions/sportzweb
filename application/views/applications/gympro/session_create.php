@@ -35,7 +35,7 @@
         $("#inp_cost").change(function() {
             if($("#inp_cost").val() < 10)
             {
-                alert('Please assign a cost value more than or equal to 10');
+                print_common_message("Please assign a cost value more than or equal to 10");
                 $("#inp_cost").val('');
             }
             
