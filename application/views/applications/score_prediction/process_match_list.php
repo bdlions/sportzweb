@@ -34,22 +34,6 @@
             setDate(selectedDate);
         });
         //get_match_list(date, sports_id, match_id);
-        $('#vote_id').on('click', function () {
-            $.ajax({
-                dataType: 'json',
-                type: "POST",
-                url: "<?php echo base_url() . 'applications/score_prediction/post_vote'; ?>",
-                data: {
-                    match_id: $("#match_id").val(),
-                    predicted_match_status_id: $("#status_id").val()
-                },
-                success: function (data) {
-                    $("#confirmModal").modal('hide');
-                    $('#collapse_match_event' + $("#match_id").val()).empty();
-                    $('#div_match_info_' + $("#match_id").val()).html(tmpl('tmpl_match_details', data.match_info));
-                }
-            });
-        });
     });
     function setDate(selectedDate) {
         var dateMin = selectedDate;
@@ -77,16 +61,6 @@
         get_match_list(formattedDate, sports_id, match_id);
     }
 
-    function prediction_modal(teamName, matchId, voteId, matchStatusId, statusId) {
-        var matchSId = '<?php echo MATCH_STATUS_UPCOMING; ?>';
-        if (matchStatusId == 0 && statusId == matchSId) {
-            $('#team_name_id').html(teamName);
-            $("#match_id").val(matchId);
-            $("#status_id").val(voteId);
-            $("#confirmModal").modal('show');
-
-        }
-    }
     function get_match_list(date, sports_id, match_id)
     {
         //retrieving matches of all types of sports
@@ -119,77 +93,6 @@
             }
         });
     }
-</script>
-<script type="text/x-tmpl" id="tmpl_match_details">
-    {% var sports_counte = 0, match_info = ((o instanceof Array) ? o[sports_counter++] : o); %}
-    {% while(match_info){ %}
-    <div class="panel panel-default">
-    <div class=" row form-group panel-heading " role="tab" id="div_match_info_{%= match_info.match_id%}">
-    <a role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= match_info.match_id%}" aria-expanded="true" aria-controls="">
-    <div class="col-md-2">
-    <?php echo '{%= match_info.time %}'; ?>
-    </div>
-    <div class="col-md-2">
-    <?php echo '{%= match_info.team_title_home %}'; ?>
-    </div>
-    <div class="col-md-2">
-    vs
-    </div>
-    <div class="col-md-2">
-    <?php echo '{%= match_info.team_title_away %}'; ?>
-    </div>
-    <div class="col-md-2">
-    <?php echo '{%= match_info.score_home %}' . ' - ' . '{%= match_info.score_away %}'; ?>
-    </div>
-    <div class="col-md-2">
-    {% if(match_info.status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
-    <span > Closed </span>
-    {% }else if(match_info.is_predicted == 1){ %}
-    <span > Prdicted </span>
-    {% }else{ %}
-    <span>Predict </span>
-    {% } %}
-    </div>
-    </a>
-    </div>
-    </div>
-
-    <div id="collapse_match_event{%= match_info.match_id%}" class="panel-collapse collapse {%= sports_counte === 0 ? 'in':'' %}" role="tabpanel" aria-labelledby="div_match_info_{%= match_info.match_id%}">
-    <div class="panel-body">
-    <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= match_info.team_title_home %}'; ?>', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_HOME ?>', '<?php echo'{%= match_info.is_predicted %}' ?>')">
-    <div class="col-md-12">
-    <div class="progress_bar_backgraound" >
-    <span class="progress_bar_content"> <?php echo '{%= match_info.team_title_home %}'; ?></span>
-    <span class="progress_bar_percentage_text"><?php echo '{%= match_info.prediction_info.home %}'; ?></span>
-    <div class="progress_bar_width_catulate" style="width:<?php echo '{%= match_info.prediction_info.home %}'; ?>">
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="row form-group" onclick = "prediction_modal('Draw', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo MATCH_STATUS_DRAW ?>', '<?php echo'{%= match_info.is_predicted %}' ?>')">
-    <div class="col-md-12">
-    <div class="progress_bar_backgraound">
-    <span class="progress_bar_content">Draw</span>
-    <span class="progress_bar_percentage_text"><?php echo '{%= match_info.prediction_info.draw %}'; ?>`</span>
-    <div class="progress_bar_width_catulate" style="width:<?php echo '{%= match_info.prediction_info.draw %}'; ?>">
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= match_info.team_title_away %}'; ?>', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo'{%= match_info.is_predicted %}' ?>')">
-    <div class="col-md-12">
-    <div class="progress_bar_backgraound">
-    <span class="progress_bar_content"><?php echo '{%= match_info.team_title_away %}'; ?></span>
-    <span class="progress_bar_percentage_text"><?php echo '{%= match_info.prediction_info.away %}'; ?></span>
-    <div class="progress_bar_width_catulate" style="width:<?php echo '{%= match_info.prediction_info.away %}'; ?>">
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    {% match_info = ((o instanceof Array) ? o[sports_counter++] : null); %}
-    {% } %}
 </script>
 
 <script type="text/x-tmpl" id="tlmp_home_page_sports_content">
@@ -369,5 +272,6 @@
     </div>
 </div>
 <?php
+$this->load->view("applications/score_prediction/process_prediction");
 $this->load->view("applications/score_prediction/prediction_confirmation_modal");
                     

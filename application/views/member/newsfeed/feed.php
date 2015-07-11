@@ -274,3 +274,6 @@
 {% feedback_info = ((o instanceof Array) ? o[i++] : null); %}
 {% } %}
 </script>
+<?php
+$this->load->view("applications/score_prediction/process_prediction");
+$this->load->view("applications/score_prediction/prediction_confirmation_modal");

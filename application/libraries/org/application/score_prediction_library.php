@@ -186,6 +186,7 @@ class Score_prediction_library {
             if($p_list != NULL && $p_list != "")
             {
                 $prediction_list = json_decode($p_list);
+                //before predicting a match make sure that the match is not predicted by the user before
                 $prediction_list[] = $prediction_info;
             }
             $additional_data = array(
