@@ -238,6 +238,7 @@ Author: A.K.M. NAZMUL ISLAM
 }
 .pagelet_auth{
     background-color: white;
+    /*background: transparent;*/
     padding: 15px;
     box-shadow: 0 0 1px #bbb;
 }
