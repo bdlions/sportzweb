@@ -56,12 +56,12 @@
         $("#registration-form").validate({
             // Specify the validation rules
             rules: {
-                r_first_name: {
-                    required: true
-                },
-                r_last_name: {
-                    required: true
-                },
+//                r_first_name: {
+//                    required: true
+//                },
+//                r_last_name: {
+//                    required: true
+//                },
                 r_email: {
                     required: true,
                     email: true,
@@ -81,12 +81,12 @@
             },
             // Specify the validation error messages
             messages: {
-                r_first_name: {
-                    required: "required"
-                },
-                r_last_name: {
-                    required: "required"
-                },
+//                r_first_name: {
+//                    required: "required"
+//                },
+//                r_last_name: {
+//                    required: "required"
+//                },
                 r_password: {
                     required: "required",
                     minlength: "<?php echo lang('create_user_password_invalid_tooltip_label') ?>"
@@ -138,6 +138,7 @@
             </div>
             <div class="col-md-offset-3 col-md-4">
                 <div class="pagelet_auth">
+                    <?php echo form_open("auth/login", array('id' => 'registration-form', 'role' => 'form')); ?>
                     <div class="row form-group">
                         <div class="col-md-12">
                             <span class="sign_up_text">Sign Up</span>
@@ -145,17 +146,20 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <input class="form-control input_custom_style" type="text" placeholder="Email">
+                             <?php echo form_input($r_email + array('class' => 'form-control input_custom_style')); ?>
+                            <!--<input class="form-control input_custom_style" type="text" placeholder="Email">-->
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <input class="form-control input_custom_style" type="text" placeholder="Confirm Email">
+                            <?php echo form_input($r_email_conf + array('class' => 'form-control input_custom_style')); ?>
+                            <!--<input class="form-control input_custom_style" type="text" placeholder="Confirm Email">-->
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <input class="form-control input_custom_style" type="password" placeholder="Passowrd">
+                            <?php echo form_input($r_password + array('class' => 'form-control input_custom_style')); ?>
+                            <!--<input class="form-control input_custom_style" type="password" placeholder="Passowrd">-->
                         </div>
                     </div>
                     <div class="row form-group">
@@ -175,6 +179,13 @@
                             <a href="<?php echo base_url(); ?>business_profile.html" class="business_profile_achor_auth">Create a profile for your business.</a>
                         </div>
                     </div>
+<!--                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            Error is detected!!!
+                        </div>
+                    </div>-->
+                      <div id="message"></div>
+                      <?php echo form_close(); ?>
                 </div>
                 <div class="row form-group"></div>
                 <div class="row form-group"></div>
@@ -189,12 +200,14 @@
         </div>
         <div class="row form-group">
             <div class="col-md-4">
-                <input class="form-control security_check_input input_custom_style" type="text" placeholder="First Name">
+                <!--<input class="form-control security_check_input input_custom_style" type="text" placeholder="First Name">-->
+                 <?php echo form_input($r_first_name + array('class' => 'form-control security_check_input input_custom_style')); ?>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-4">
-                <input class="form-control security_check_input input_custom_style" type="text" placeholder="Last Name">
+                <?php echo form_input($r_last_name + array('class' => 'form-control security_check_input input_custom_style')); ?>
+                <!--<input class="form-control security_check_input input_custom_style" type="text" placeholder="Last Name">-->
             </div>
         </div>
         <div class="heading_medium_thin">
