@@ -40,6 +40,7 @@
 }
 .padding_collapse_header{
     padding: 7px!important;
+    margin: 0 4.5px!important;
 }
 .well{
     padding: 15px;
@@ -324,5 +325,10 @@
     color: #333333!important;
     font-weight: normal!important;
     font-size: 13px;
+}
+.feed_predict_score{
+    word-wrap: break-word;
+    font-size: 12px;
+    text-align: center;
 }
 

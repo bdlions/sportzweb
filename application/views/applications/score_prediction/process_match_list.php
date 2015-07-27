@@ -169,9 +169,9 @@
                                             {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
                                             <span > Closed </span>
                                             {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
-                                            <span > Predicted </span>
+                                            <span > Voted </span>
                                             {% }else{ %}
-                                            <span>Predict </span>
+                                            <span>Vote </span>
                                             {% } %}
                                         </div>
                                     </a>
