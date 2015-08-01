@@ -271,22 +271,22 @@
                     <div class="panel panel-default">
                         <div class=" row form-group panel-heading" role="tab">
                             <a class="feed_predict_score" href="<?php echo base_url() . 'applications/score_prediction/index/' . $newsfeed['reference_id']; ?>">
-                                <div class="col-md-2">
+                                <div class="time">
     <?php echo $newsfeed['reference_info']['time']; ?>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="team_home">
     <?php echo $newsfeed['reference_info']['team_title_home']; ?>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="vs">
                                     vs
                                 </div>
-                                <div class="col-md-3">
+                                <div class="team_away">
     <?php echo $newsfeed['reference_info']['team_title_away']; ?>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="match_result">
     <?php echo $newsfeed['reference_info']['score_home'] . ' - ' . $newsfeed['reference_info']['score_away']; ?>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="match_status">
     <?php if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING) { ?>
                                         <span>                                     
                                             Closed

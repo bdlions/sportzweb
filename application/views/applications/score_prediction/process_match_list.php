@@ -119,7 +119,7 @@
                     <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
                         <span ><?php echo '{%= sports_list.tournament_list[j].title%}'; ?> </span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin: 0 2.5%;">
                         <table class="table">
                             <div class="row form-group table-hover text_align">
                                 <div class="col-md-2">
