@@ -108,7 +108,7 @@
 <?php echo form_open("auth/login", array('id' => 'registration-form', 'role' => 'form')); ?>
 <div class="container">
     <div id="step1">
-        <ul class="cb-slideshow bg_sliding_ul">
+        <ul class="cb-slideshow bg_landing_ul">
             <li>
                 <span>Image 01</span>
             </li>
@@ -130,7 +130,7 @@
         </ul>
         <div class="row padding_over_row mg_bottom">
             <div class="col-md-5">
-                <p class="auth_sliding_bg_text">
+                <p class="auth_landing_bg_text">
                     A social hub that allows you to connect and share health, sports and fitness information with people.
                     Members have access to a variety of health, sports and fitness applications including diets, personal
                     trainers, blogs, food recipes and news.

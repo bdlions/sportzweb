@@ -11,7 +11,7 @@ if (!defined('BASEPATH'))
  * Requirement: PHP 5 and more
  */
 
-class sliding_image_model extends Ion_auth_model
+class landing_image_model extends Ion_auth_model
 {
     public function __construct() {
         parent::__construct();
@@ -21,8 +21,8 @@ class sliding_image_model extends Ion_auth_model
     {
         
         $this->trigger_events('pre_add_image');
-        $data = $this->_filter_data($this->tables['sliding_img'], $additional_data);
-        $this->db->insert($this->tables['sliding_img'], $data);
+        $data = $this->_filter_data($this->tables['landing_img'], $additional_data);
+        $this->db->insert($this->tables['landing_img'], $data);
         $id = $this->db->insert_id();        
         $this->trigger_events('post_add_image');
         return (isset($id)) ? $id : FALSE;
@@ -30,16 +30,16 @@ class sliding_image_model extends Ion_auth_model
     
     public function get_image_info($image_id)
     {
-        $this->db->where($this->tables['sliding_img'].'.id',$image_id);
+        $this->db->where($this->tables['landing_img'].'.id',$image_id);
         
         return $this->db->select("*")
-                    ->from($this->tables['sliding_img'])
+                    ->from($this->tables['landing_img'])
                     ->get();
     }
     
     public function update_image($image_id, $data)
     {
-        $this->db->update($this->tables['sliding_img'], $data, array('id' => $image_id));
+        $this->db->update($this->tables['landing_img'], $data, array('id' => $image_id));
         return true;
     }
     
@@ -56,7 +56,7 @@ class sliding_image_model extends Ion_auth_model
             return FALSE;
         }
         $this->db->where('id', $image_id);
-        $this->db->delete($this->tables['sliding_img']);
+        $this->db->delete($this->tables['landing_img']);
         
         if ($this->db->affected_rows() == 0) {
             $this->set_error('delete_photo_fail');
@@ -69,7 +69,7 @@ class sliding_image_model extends Ion_auth_model
      public function get_all_images()
     {
         return $this->db->select('*')
-                    ->from($this->tables['sliding_img'])
+                    ->from($this->tables['landing_img'])
                     ->get();
     }
 }

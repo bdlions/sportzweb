@@ -1705,8 +1705,8 @@ CREATE TABLE `photography`(
   PRIMARY KEY(`id`)
 )AUTO_INCREMENT=1;
 
--- Background Sliding Image Application
-CREATE TABLE `sliding_img`(
+-- Landing Image Application
+CREATE TABLE `landing_img`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `img` varchar(500) NOT NULL,
   `created_on` int(11) DEFAULT NULL,

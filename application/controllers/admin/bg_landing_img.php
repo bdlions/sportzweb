@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Bg_sliding_img extends Admin_Controller {
+class Bg_landing_img extends Admin_Controller {
 
     public $tmpl = '';
     public $user_group_array = array();
@@ -11,7 +11,7 @@ class Bg_sliding_img extends Admin_Controller {
     function __construct() {
         parent::__construct();
         $this->load->library('ion_auth');
-        $this->load->model('org/admin/sliding_image_model');
+        $this->load->model('org/admin/landing_image_model');
         $this->load->library('org/utility/Utils');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
@@ -71,89 +71,88 @@ class Bg_sliding_img extends Admin_Controller {
     }
 
     public function index() {
-        $image_array = $this->sliding_image_model->get_all_images()->result_array();
+        $image_array = $this->landing_image_model->get_all_images()->result_array();
         $this->data['image_list'] = $image_array;
-        $this->template->load(NULL, "admin/sliding_img/index",$this->data);
+        $this->template->load(NULL, "admin/landing_img/index", $this->data);
     }
 
     public function edit_image($image_id) {
+
         $this->data['message'] = '';
         $image_info = array();
-        $image_info_array = $this->sliding_image_model->get_image_info($image_id)->result_array();
+        $image_info_array = $this->landing_image_model->get_image_info($image_id)->result_array();
         if (!$image_id || empty($image_info_array)) {
-            redirect("admin/bg_sliding_img", "refresh");
+            redirect("admin/bg_landing_img", "refresh");
         }
         $image_info = $image_info_array[0];
-       
-            $result = array();
-            if (isset($_FILES["userfile"])) {
-                $file_info = $_FILES["userfile"];
-                $result = $this->utils->upload_image($file_info, SLIDING_IMAGE_PATH);
-                if ($result['status'] == 1) {
+        $result = array();
+        if (isset($_FILES["userfile"])) {
+            $file_info = $_FILES["userfile"];
+            $result = $this->utils->upload_image($file_info, SLIDING_IMAGE_PATH);
+            if ($result['status'] == 1) {
 //                    $path = PHOTOGRAPHY_IMAGE_PATH . $result['upload_data']['file_name'];
 //                    $this->utils->resize_image($path, $path, PHOTOGRAPHY_IMAGE_HEIGHT, PHOTOGRAPHY_IMAGE_WIDTH);
 
-                    $additional_data = array(
-                        'img' => $result['upload_data']['file_name'],
-                    );
-                    $id = $this->sliding_image_model->update_image($image_id, $additional_data);
-                    if ($id !== FALSE) {
-                        $result['message'] = 'Image is Updated successfully.';
-                    } else {
-                        $result['message'] = 'Error while storing Image.';
-                    }
+                $additional_data = array(
+                    'img' => $result['upload_data']['file_name'],
+                );
+                $id = $this->landing_image_model->update_image($image_id, $additional_data);
+                if ($id !== FALSE) {
+                    $result['message'] = 'Image is Updated successfully.';
+                } else {
+                    $result['message'] = 'Error while storing Image.';
                 }
-            } else {
-                $result['status'] = 0;
-                $result['message'] = 'Please select an image.';
             }
             echo json_encode($result);
             return;
+        } else {
+            $this->data['submit_edit_image'] = array(
+                'name' => 'submit_edit_image',
+                'value'=> 'Update',
+                'type' => 'submit',
+            );
+            $this->data['image_id'] = $image_id;
+            $this->data['image_file_name'] = $image_info['img'];
+            $this->template->load($this->tmpl, "admin/landing_img/edit_image", $this->data);
+        }
     }
 
-    
-    public function delete_image()
-    {
+    public function delete_image() {
         $result = array();
         $image_id = $this->input->post('image_id');
-        if($this->sliding_image_model->delete_image($image_id))
-        {
-            $result['message'] = $this->sliding_image_model->messages_alert();
-        }
-        else
-        {
-            $result['message'] = $this->sliding_image_model->errors_alert();
+        if ($this->landing_image_model->delete_image($image_id)) {
+            $result['message'] = $this->landing_image_model->messages_alert();
+        } else {
+            $result['message'] = $this->landing_image_model->errors_alert();
         }
         echo json_encode($result);
     }
 
-
-
-
-
     public function add_image() {
+
         $this->data['message'] = '';
         $result = array();
         if (isset($_FILES["userfile"])) {
             $file_info = $_FILES["userfile"];
             $result = $this->utils->upload_image($file_info, SLIDING_IMAGE_PATH);
             if ($result['status'] == 1) {
-                $path = SLIDING_IMAGE_PATH . $result['upload_data']['file_name'];
-                $this->utils->resize_image($path, $path, SLIDING_IMAGE_HEIGHT, SLIDING_IMAGE_WIDTH);
+//                $path = SLIDING_IMAGE_PATH . $result['upload_data']['file_name'];
+//                $this->utils->resize_image($path, $path, SLIDING_IMAGE_HEIGHT, SLIDING_IMAGE_WIDTH);
                 $additional_data = array(
                     'img' => $result['upload_data']['file_name']
                 );
-                $id = $this->sliding_image_model->add_image($additional_data);
+                $id = $this->landing_image_model->add_image($additional_data);
                 if ($id !== null) {
                     $result['message'] = 'Image is stored successfully.';
                 } else {
                     $result['message'] = 'Error while storing Image.';
                 }
             }
+            echo json_encode($result);
+            return;
+        } else {
+            $this->template->load($this->tmpl, "admin/landing_img/add_image");
         }
-        echo json_encode($result);
-//            return;
-//        $this->template->load($this->tmpl, "admin/applications/photography/add_image", $this->data);
     }
 
 }

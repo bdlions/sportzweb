@@ -1,9 +1,8 @@
-<div class="col-md-10" style="background-color: #F5F5F5; display: none;" id="upload_image_panel">
+<div class="col-md-10" style="background-color: #F5F5F5;" id="upload_image_panel">
     <div class="panel panel-default">
-        <div class="panel-heading">Background Sliding Image</div>
+        <div class="panel-heading">Background Landing Image</div>
         <div class="panel-body">
             <div class="row form-horizontal form-background top-bottom-padding">  
-                <?php // echo form_open("admin/applications_photography/add_image", array('id' => 'form_add_image', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
                 <div class="row">
                     <div class ="col-md-10 margin-top-bottom">                            
                         <div class="form-group">
@@ -26,16 +25,13 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-offset-8 col-md-4 disable_padding_right" id="upload">
                                     <input id="btnSubmit" type="submit" value="Save" class="btn button-custom pull-right"/>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-                <?php // echo form_close();?>
             </div>
         </div>
     </div>
@@ -44,7 +40,7 @@
 <script>
     $(function () {
         // Change this to the location of your server-side upload handler:
-        var url = "<?php echo base_url(); ?>admin/bg_sliding_img/add_image",
+        var url = "<?php echo base_url(); ?>admin/bg_landing_img/add_image",
                 uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
                 on('click', function () {
                     var $this = $(this), data = $this.data();
@@ -102,7 +98,7 @@
             // alert(data.result.message);
             var message = data.result.message;
             print_common_message(message);
-            window.location = '<?php echo base_url(); ?>admin/bg_sliding_img/';
+            window.location = '<?php echo base_url(); ?>admin/bg_landing_img/';
         }).on('fileuploadsubmit', function (e, data) {
             data.formData = $('#form_add_image').serializeArray();
         }).on('fileuploadfail', function (e, data) {

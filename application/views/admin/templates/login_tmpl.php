@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/property.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/newsfeed.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/bg_img_sliding.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/bg_img_landing.css">
 
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/html5shiv.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/respond.min.js"></script>

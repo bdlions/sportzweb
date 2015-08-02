@@ -124,7 +124,7 @@ $config['tables']['blog_configure_homepage']                = 'blog_configure_ho
 $config['tables']['bmi_questions']                          = 'bmi_questions';
 $config['tables']['bmi_home_page_configuration']            = 'bmi_home_page_configuration';
 $config['tables']['photography']                            = 'photography';
-$config['tables']['sliding_img']                            = 'sliding_img';
+$config['tables']['landing_img']                            = 'landing_img';
 
 $config['tables']['app_xb_sports']                          = 'app_xb_sports';
 $config['tables']['app_xb_teams']                           = 'app_xb_teams';
