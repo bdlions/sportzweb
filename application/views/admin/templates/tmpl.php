@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/newsfeed.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/left-nav.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/admin.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/bg_img_sliding.css">
 
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/bootstrap.min.js"></script>
@@ -118,6 +119,9 @@
                                     <li id="applications_bmicalculator"><a href="<?php echo base_url()?>admin/applications_bmicalculator">BMI Calculator</a></li>
                                     <li id="applications_photography"><a href="<?php echo base_url()?>admin/applications_photography">Photography</a></li>
                                 </ul>
+                            </li>
+                            <li id="bg_sliding_img">
+                                <a href="<?php echo base_url()?>admin/bg_sliding_img">Background Sliding Images</a>
                             </li>
                             <li id="business_profiles">
                                 <a href="<?php echo base_url()?>admin/businessprofiles_show">Business Profiles</a>

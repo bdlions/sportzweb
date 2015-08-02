@@ -179,6 +179,9 @@
                                     <?php }?>
                                 </ul>
                             </li>
+                            <li id="bg_sliding_img">
+                                <a href="<?php echo base_url()?>admin/bg_sliding_img">Background Sliding Images</a>
+                            </li>
                             <li id="business_profiles">
                                 <a href="<?php echo base_url()?>admin/businessprofiles_show">Business Profiles</a>
                             </li>

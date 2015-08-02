@@ -347,3 +347,29 @@ Author: A.K.M. NAZMUL ISLAM
 .logo_text_modify a{
     margin-left: 5px;
 }
+
+/*Background Sliding Image*/
+
+.sliding_img_textarea{
+    resize: none!important;
+}
+.panel_text{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.imgbuttonb {
+    height: 32px;
+    position: absolute;
+    right: 64px;
+    top: 30px;
+    width: 32px;
+}
+.imgbuttonf {
+    height: 32px;
+    position: absolute;
+    right: 32px;
+    top: 30px;
+    width: 32px;
+}
