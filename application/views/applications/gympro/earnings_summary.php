@@ -2,14 +2,13 @@
     function fetch_session_data()
     {
         $("#sessions_tmpl_place").html(null);
-        $("#earnings_summery").html(null);
+        $("#earnings_summary").html(null);
         var st_date = $('#st_date').val();
         var fin_date = $('#fin_date').val();
         var status_id = $('#status_id').val();
         if (fin_date == '' || st_date == '') {
-            //alert("Please select the dates.");
             var message = "Please select the dates.";
-         print_common_message(message);
+            print_common_message(message);
             return;
         }
         var gr_or_cl = $("#group_client").val();
@@ -26,14 +25,8 @@
                 status_id: status_id
             },
             success: function (data) {
-//                if (gr_or_cl.charAt(0) == '1') {
-                    $("#sessions_tmpl_place").html(tmpl("tmpl_sessions_summery", data));
-                    $("#earnings_summery").html(tmpl("tmpl_earings_summery", data));
-//                } else if (gr_or_cl.charAt(0) == '2') {
-//                    $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
-//                    $("#earnings_summery").html(tmpl("tmpl_earings_summery", data));
-//                    $("#sessions_tmpl_place").html(tmpl("tmpl_client", data));
-//                }
+                $("#sessions_tmpl_place").html(tmpl("tmpl_sessions_summery", data));
+                $("#earnings_summary").html(tmpl("tmpl_earnings_summary", data));
             }
         });
     }
@@ -48,7 +41,6 @@
             });
             if (session_id_array.length == 0)
             {
-                //alert('Please select atlest 1 session');
                 var message = "Please select atlest 1 session";
                 print_common_message(message);
                 return;
@@ -63,9 +55,8 @@
                         status_id: $("#mark_status_dropdown").val()
                     },
                     success: function (data) {
-                       // alert(data['message']);
-                       var message = data['message'];
-                       print_common_message(message);
+                        var message = data['message'];
+                        print_common_message(message);
                         $('#mark_status_dropdown>option:eq(0)').prop('selected', true);
                         fetch_session_data();
                     }
@@ -114,9 +105,10 @@
     {% while(session){ %}
     <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
     <div class="row">
-    <div class="col-md-3">{%= session['start']%} - {%= session['end']%}</div>
+    <div class="col-md-2">{%= session['start']%} - {%= session['end']%}</div>
+    <div class="col-md-2">{%= session['created_for']%}</div>
     <div class="col-md-3">{%= session['title']%}</div>
-    <div class="col-md-3">{%= session['cost']%}&nbsp;&nbsp;{%= session['currency_title']%}</div>
+    <div class="col-md-2">{%= session['cost']%}&nbsp;&nbsp;{%= session['currency_title']%}</div>
     <div class="col-md-2">{%= session['status_title']%}</div>
     <div class="col-md-1"><input name="session_select_<?php echo '{%= session["id"]%}'; ?>" type="checkbox"></div>
     </div>
@@ -126,53 +118,7 @@
     {% sessions_array = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
-<!--<script type="text/x-tmpl" id="tmpl_group">
-    {% var i=0, data_by_date = ((o instanceof Array) ? o[i++] : o); %}
-    {% while(data_by_date){ %}
-
-    <div class="row form-group">
-    <div class="col-md-4" style="color: red; border-bottom: 2px solid darkred; padding: 0px 0px 5px 0px">
-    {%=data_by_date['date']%}
-    </div>
-    </div>
-
-    {% var groups = data_by_date['groups']; %}
-
-    {% var mid_i=0, each_group = ((groups instanceof Array) ? groups[mid_i++] : groups); %}
-    {% while(each_group){ %}
-
-    <div class="row form-group" style="border-bottom: 2px solid gray; padding-bottom: 10px">
-    <div class="row">
-    <div class="col-md-4">{%= each_group['time']%}</div>
-    <div class="col-md-3">{%= each_group['title']%}</div>
-    <div class="col-md-2"> </div>
-    <div class="col-md-2"> </div>
-    <div class="col-md-1"> <input name="session_select_<?php echo '{%= each_group["id"]%}'; ?>" type="checkbox"> </div>
-    </div>
-    </div>            
-
-    {% var sessions = each_group['sessions']; %}
-
-    {% var j=0, session = ((sessions instanceof Array) ? sessions[j++] : sessions); %}
-    {% while(session){ %}
-    <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
-    <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-3">{%= session['name']%}</div>
-    <div class="col-md-2">{%= session['cost']%}</div>
-    <div class="col-md-2">{%= session['currency_title']%}</div>
-    <div class="col-md-2">{%= session['status']%}</div>
-    <div class="col-md-1"></div>
-    </div>
-    </div>
-    {% session = ((sessions instanceof Array) ? sessions[j++] : sessions); %}
-    {% } %}
-    {% each_group = ((groups instanceof Array) ? groups[mid_i++] : groups); %}
-    {% } %}
-    {% data_by_date = ((o instanceof Array) ? o[i++] : null); %}
-    {% } %}
-</script>-->
-<script type="text/x-tmpl" id="tmpl_earings_summery">
+<script type="text/x-tmpl" id="tmpl_earnings_summary">
     {% var total_unpaid_session_cost = 0; %}
     {% var total_paid_session_cost = 0; %}
     {% var total_cancelled_session_cost = 0; %}
@@ -246,11 +192,8 @@
     {%= total_session_counter %} session
     </div>
     </div>
-
 </script>
-
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
-
 <div class="container-fluid">
     <div class="row top_margin">
         <?php
@@ -264,7 +207,7 @@
             <div class="row">
                 <div class="row form-group">
                     <div class="col-md-6" style="font-size: 20px; color: maroon">
-                        <span>Earnings Summery</span>
+                        <span>Earnings Summary</span>
                     </div>
                 </div>
                 <div style="border-top: 2px solid lightgray; padding-bottom:10px;"></div>
@@ -287,7 +230,6 @@
                                     <?php endforeach; ?>
                                 </optgroup>
                             </select>
-
                         </div>
                     </div>
                     <div class="row form-group">
@@ -316,9 +258,8 @@
                 </div>
                 <div class="col-md-8">
                     <div class="row form-group" style="text-align: center">
-                        <div id="earnings_summery">
+                        <div id="earnings_summary">
                         </div>
-
                     </div>
                     <div class="row form-group" style="border-bottom: 1px solid lightgray; padding-bottom: 10px">
                         <div class="col-md-9" style="font-size: 15px; font-weight: bold; padding-left: 0px">
@@ -330,15 +271,10 @@
                                 <?php foreach ($status_list as $status): ?>
                                     <option value="<?php echo $status['id']; ?>"><?php echo $status['title'] ?></option>
                                 <?php endforeach; ?>
-                                <!--                                <option>Prepaid</option>
-                                                                <option>Paid</option>
-                                                                <option>Cancelled</option>-->
                             </select>
                         </div>
                     </div>
-
                     <div class="form-group" id="sessions_tmpl_place"></div>
-
                 </div>
             </div>
         </div>
@@ -350,6 +286,3 @@
         <div class="row form-group"></div>
     </div>
 </div>
-<?php
-//$this->load->view("applications/gympro/template/modal/browse_exercise");
-?>

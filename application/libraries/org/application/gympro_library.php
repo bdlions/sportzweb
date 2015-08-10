@@ -275,7 +275,8 @@ class Gympro_library {
             $where = array(
                 'user_id' => $user_id
             );
-            $session_list_array = $this->gympro_model->where($where)->get_all_sessions()->result_array();
+            //$session_list_array = $this->gympro_model->where($where)->get_all_sessions()->result_array();
+            $session_list_array = $this->get_sessions($where);
         }        
         foreach($session_list_array as $session_info){
             $rep_date = $session_info['date'];
@@ -288,7 +289,8 @@ class Gympro_library {
                 for( $repeat_times = $session_info['repeat']; $repeat_times>0; $repeat_times-- ){
                     $calendar_session_info = array(
                         'session_info' => $session_info,
-                        'title' => $session_info['title'],
+                        //'title' => $session_info['title'],
+                        'title' => $session_info['created_for'],
                         'start' => $rep_date.'T'.$session_info['start'],
                         'end' => $rep_date.'T'.$session_info['end']
                     );
@@ -300,12 +302,67 @@ class Gympro_library {
             } elseif ($session_info['type_id'] == GYMPRO_SINGLE_SESSION_TYPE_ID) {
                 $calendar_session_info = array(
                     'session_info' => $session_info,
-                    'title' => $session_info['title'],
+                    //'title' => $session_info['title'],
+                    'title' => $session_info['created_for'],
                     'start' => $rep_date.'T'.$session_info['start'],
                     'end' => $rep_date.'T'.$session_info['end']
                 );
                 $session_list[] = $calendar_session_info;
             }
+        }
+        return $session_list;
+    }
+    
+    /*
+     * This method will return sessions including relevant information from different tables
+     * @Author Nazmul on 9th August 2015
+     */
+    public function get_sessions($where = array())
+    {
+        $session_list = array();
+        $group_id_list = array();
+        $group_id_group_info_map = array();
+        $client_id_list = array();
+        $client_id_client_info_map = array();
+        $session_list_array = $this->gympro_model->where($where)->get_sessions()->result_array();
+        foreach($session_list_array as $session_info)
+        {
+            if($session_info['created_for_type_id'] == SESSION_CREATED_FOR_GROUP_TYPE_ID && !in_array($session_info['reference_id'], $group_id_list))
+            {
+                $group_id_list[] = $session_info['reference_id'];
+            }
+            else if($session_info['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID && !in_array($session_info['reference_id'], $client_id_list))
+            {
+                $client_id_list[] = $session_info['reference_id'];
+            }
+        }
+        if(!empty($group_id_list))
+        {
+            $group_list_array = $this->gympro_model->get_groups_info($group_id_list)->result_array();
+            foreach($group_list_array as $group_info)
+            {
+                $group_id_group_info_map[$group_info['group_id']] = $group_info;
+            }
+        }
+        if(!empty($client_id_list))
+        {
+            $client_list_array = $this->gympro_model->get_clients_info($client_id_list)->result_array();
+            foreach($client_list_array as $client_info)
+            {
+                $client_id_client_info_map[$client_info['client_id']] = $client_info;
+            }
+        }
+        foreach($session_list_array as $session_info)
+        {
+            if($session_info['created_for_type_id'] == SESSION_CREATED_FOR_GROUP_TYPE_ID)
+            {
+                $session_info['created_for'] = $group_id_group_info_map[$session_info['reference_id']]['title'];
+            }
+            else if($session_info['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID)
+            {
+                $session_info['created_for'] = $client_id_client_info_map[$session_info['reference_id']]['first_name'].' '.$client_id_client_info_map[$session_info['reference_id']]['last_name'];
+            }
+            $session_list[] = $session_info;
         }
         return $session_list;
     }

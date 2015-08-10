@@ -330,6 +330,22 @@ class Gympro_model extends Ion_auth_model {
                         ->join($this->tables['basic_profile'], $this->tables['basic_profile'] . '.user_id=' . $this->tables['users'] . '.id')
                         ->get();
     }
+    
+    /*
+     * This method will return clients info
+     * @param $client_id_list, client id list
+     * @Author Nazmul on 10th August 2015
+     */
+
+    public function get_clients_info($client_id_list = array()) {
+        $this->db->where_in($this->tables['app_gympro_clients'] . '.id', $client_id_list);
+        return $this->db->select($this->tables['app_gympro_clients'] . '.id as client_id,' . $this->tables['app_gympro_clients'] . '.*,' . $this->tables['app_gympro_client_statuses'] . '.title as status_title,' . $this->tables['users'] . '.first_name,' . $this->tables['users'] . '.last_name,' . $this->tables['basic_profile'] . '.photo as picture')
+                        ->from($this->tables['app_gympro_clients'])
+                        ->join($this->tables['app_gympro_client_statuses'], $this->tables['app_gympro_client_statuses'] . '.id=' . $this->tables['app_gympro_clients'] . '.status_id')
+                        ->join($this->tables['users'], $this->tables['users'] . '.id=' . $this->tables['app_gympro_clients'] . '.member_id')
+                        ->join($this->tables['basic_profile'], $this->tables['basic_profile'] . '.user_id=' . $this->tables['users'] . '.id')
+                        ->get();
+    }
 
     /*
      * This method will return client info
@@ -369,6 +385,19 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_group_info($group_id) {
         $this->db->where($this->tables['app_gympro_groups'] . '.id', $group_id);
+        return $this->db->select($this->tables['app_gympro_groups'] . '.id as group_id, ' . $this->tables['app_gympro_groups'] . '.*')
+                        ->from($this->tables['app_gympro_groups'])
+                        ->get();
+    }
+    
+    /*
+     * This method will return groups info
+     * @param $group_id_list, group id list
+     * @Author Nazmul on 10th August 2015
+     */
+
+    public function get_groups_info($group_id_list = array()) {
+        $this->db->where_in($this->tables['app_gympro_groups'] . '.id', $group_id_list);
         return $this->db->select($this->tables['app_gympro_groups'] . '.id as group_id, ' . $this->tables['app_gympro_groups'] . '.*')
                         ->from($this->tables['app_gympro_groups'])
                         ->get();
@@ -1256,11 +1285,12 @@ class Gympro_model extends Ion_auth_model {
         }
         $this->db->where($this->tables['app_gympro_sessions'] . '.created_for_type_id', SESSION_CREATED_FOR_CLIENT_TYPE_ID);
         $this->db->where($this->tables['app_gympro_clients'] . '.member_id', $member_id);
-        return $this->db->select($this->tables['app_gympro_sessions'] . '.*, ' . $this->tables['app_gympro_session_statuses'] . '.title as status_title,' . $this->tables['app_gympro_currencies'] . '.title as currency_title')
+        return $this->db->select($this->tables['app_gympro_sessions'] . '.*, concat(first_name," ",last_name) as created_for, ' . $this->tables['app_gympro_session_statuses'] . '.title as status_title,' . $this->tables['app_gympro_currencies'] . '.title as currency_title',FALSE)
                         ->from($this->tables['app_gympro_sessions'])
                         ->join($this->tables['app_gympro_session_statuses'], $this->tables['app_gympro_sessions'] . '.status_id = ' . $this->tables['app_gympro_session_statuses'] . '.id')
                         ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id = ' . $this->tables['app_gympro_sessions'] . '.reference_id')
                         ->join($this->tables['app_gympro_currencies'], $this->tables['app_gympro_currencies'] . '.id = ' . $this->tables['app_gympro_sessions'] . '.currency_id')
+                        ->join($this->tables['users'], $this->tables['users'] . '.id=' . $this->tables['app_gympro_clients'] . '.member_id')
                         ->get();
     }
 

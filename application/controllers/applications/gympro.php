@@ -2801,7 +2801,7 @@ class Gympro extends Role_Controller {
         if ($group_client_data['status_id'] > 0) {
             $where['status_id'] = $group_client_data['status_id'];
         }
-        $get_sessions = $this->gympro_library->where($where)->get_sessions()->result_array();
+        $get_sessions = $this->gympro_library->get_sessions($where);
         if (!empty($get_sessions)) {
             foreach ($get_sessions as $session) {
                 $session_data[$session['date']]['date'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($session['date']);

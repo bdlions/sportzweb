@@ -46,6 +46,7 @@
             aspectRatio: 2.5,
             eventClick: function(event, jsEvent, view) {
                 //$('#modalTitle').html(event.session_info.title);
+                $('#session_client_group').html(event.session_info.created_for);
                 $('#session_title').html(event.session_info.title);
                 $('#session_location').html(event.session_info.location);
                 $('#session_cost').html(event.session_info.currency_title+' '+event.session_info.cost);
@@ -152,6 +153,12 @@
             <div id="modalBody" class="modal-body">
                 <div class="row">
                     <div class="col-sm-offset-2 col-sm-8" style="font-size: 16px;">
+                        <div class="row form-group">
+                            <div class="col-sm-4">Client/Group:</div>
+                            <div class="col-sm-8">
+                                <div id="session_client_group"></div>
+                            </div>
+                        </div>
                         <div class="row form-group">
                             <div class="col-sm-4">Session:</div>
                             <div class="col-sm-8">
