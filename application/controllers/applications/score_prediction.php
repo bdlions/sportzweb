@@ -101,6 +101,7 @@ class Score_prediction extends Role_Controller{
     public function post_vote() {
         $response = array();
         $match_id = $this->input->post('match_id');
+        $location_id = $this->input->post('location_id');
         $user_id = $this->session->userdata('user_id');
         $predicted_match_status_id = (string)$this->input->post('predicted_match_status_id');  
         $this->score_prediction_library->post_vote($match_id, $predicted_match_status_id, $user_id);        
@@ -130,6 +131,7 @@ class Score_prediction extends Role_Controller{
                 if(!empty($match_list))
                 {
                     $match_info = $match_list[0];
+                    $match_info['location_id'] = $location_id;
                 }
             }
         }

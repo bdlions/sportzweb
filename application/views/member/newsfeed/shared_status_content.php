@@ -267,45 +267,45 @@
     <div class="row feed-description">
         <div class="col-md-12">
             <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
-                <div id="div_match_info_<?php echo $newsfeed['reference_info']['match_id']; ?>" class="panel-group" aria-multiselectable="true" role="tablist">
-                    <div class="panel panel-default">
-                        <div class=" row form-group panel-heading" role="tab">
+                <div class="panel-group" aria-multiselectable="true" role="tablist">
+                    <div class="panel panel-default" id="div_match_info_<?php echo $newsfeed['reference_info']['match_id']; ?>">
+                        <div class="row panel-heading" role="tab">
                             <a class="feed_predict_score" href="<?php echo base_url() . 'applications/score_prediction/index/' . $newsfeed['reference_id']; ?>">
                                 <div class="time">
-    <?php echo $newsfeed['reference_info']['time']; ?>
+                                    <?php echo $newsfeed['reference_info']['time']; ?>
                                 </div>
                                 <div class="team_home">
-    <?php echo $newsfeed['reference_info']['team_title_home']; ?>
+                                    <?php echo $newsfeed['reference_info']['team_title_home']; ?>
                                 </div>
                                 <div class="vs">
                                     vs
                                 </div>
                                 <div class="team_away">
-    <?php echo $newsfeed['reference_info']['team_title_away']; ?>
+                                    <?php echo $newsfeed['reference_info']['team_title_away']; ?>
                                 </div>
                                 <div class="match_result">
-    <?php echo $newsfeed['reference_info']['score_home'] . ' - ' . $newsfeed['reference_info']['score_away']; ?>
+                                    <?php echo $newsfeed['reference_info']['score_home'] . ' - ' . $newsfeed['reference_info']['score_away']; ?>
                                 </div>
                                 <div class="match_status">
-    <?php if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING) { ?>
+                                    <?php if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING) { ?>
                                         <span>                                     
                                             Closed
                                         </span>   
-    <?php } else if ($newsfeed['reference_info']['is_predicted'] == 1) { ?>
+                                    <?php } else if ($newsfeed['reference_info']['is_predicted'] == 1) { ?>
                                         <span>                                     
                                             Voted
                                         </span> 
-    <?php } else { ?>
+                                    <?php } else { ?>
                                         <span>                                     
                                             Vote
                                         </span>
-    <?php } ?>
+                                    <?php } ?>
                                 </div>
                             </a>
                         </div>
                         <div id="collapse_match_event<?php echo $newsfeed['reference_info']['match_id'] . '_' . $newsfeed['id']; ?>" role="tabpanel" aria-labelledby="div_match_info_<?php echo $newsfeed['reference_info']['match_id']; ?>">
                             <div class="panel-body">
-                                <div class="row form-group" onclick = "prediction_modal('<?php echo $newsfeed['reference_info']['team_title_home']; ?>', '<?php echo $newsfeed['reference_info']['match_id'] ?>', '<?php echo MATCH_STATUS_WIN_HOME ?>', '<?php echo $newsfeed['reference_info']['is_predicted'] ?>', '<?php echo $newsfeed['reference_info']['status_id'] ?>')">
+                                <div class="row form-group" onclick = "prediction_modal('<?php echo $newsfeed['reference_info']['team_title_home']; ?>', '<?php echo $newsfeed['reference_info']['match_id'] ?>', '<?php echo MATCH_STATUS_WIN_HOME ?>', '<?php echo $newsfeed['reference_info']['is_predicted'] ?>', '<?php echo $newsfeed['reference_info']['status_id'] ?>', '<?php echo MATCH_PREDICTION_FROM_NEWSFEED ?>')">
                                     <div class="col-md-12">
     <?php
     $home_percentage = $newsfeed['reference_info']['prediction_info']['home'];
@@ -327,7 +327,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row form-group" onclick = "prediction_modal('Draw', '<?php echo $newsfeed['reference_info']['match_id'] ?>', '<?php echo MATCH_STATUS_DRAW ?>', '<?php echo $newsfeed['reference_info']['is_predicted'] ?>', '<?php echo $newsfeed['reference_info']['status_id'] ?>')">
+                                <div class="row form-group" onclick = "prediction_modal('Draw', '<?php echo $newsfeed['reference_info']['match_id'] ?>', '<?php echo MATCH_STATUS_DRAW ?>', '<?php echo $newsfeed['reference_info']['is_predicted'] ?>', '<?php echo $newsfeed['reference_info']['status_id'] ?>', '<?php echo MATCH_PREDICTION_FROM_NEWSFEED ?>')">
                                     <div class="col-md-12">
     <?php
     $draw_percentage = $newsfeed['reference_info']['prediction_info']['draw'];
@@ -349,7 +349,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row form-group" onclick = "prediction_modal('<?php echo $newsfeed['reference_info']['team_title_away']; ?>', '<?php echo $newsfeed['reference_info']['match_id'] ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo $newsfeed['reference_info']['is_predicted'] ?>', '<?php echo $newsfeed['reference_info']['status_id'] ?>')">
+                                <div class="row form-group" onclick = "prediction_modal('<?php echo $newsfeed['reference_info']['team_title_away']; ?>', '<?php echo $newsfeed['reference_info']['match_id'] ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo $newsfeed['reference_info']['is_predicted'] ?>', '<?php echo $newsfeed['reference_info']['status_id'] ?>', '<?php echo MATCH_PREDICTION_FROM_NEWSFEED ?>')">
                                     <div class="col-md-12">
     <?php
     $away_percentage = $newsfeed['reference_info']['prediction_info']['away'];

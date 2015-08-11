@@ -9,6 +9,7 @@
                 <h3>Are you sure you want to vote <span id="team_name_id" style="font-weight: bold;"></span>?</h3>
                 <input id="match_id" name="id" value="" type="hidden" class="form-control"/>
                 <input id="status_id" name="id" value="" type="hidden" class="form-control"/>
+                <input id="location_id" name="id" value="" type="hidden" class="form-control"/>
             </div>
             <div class="modal-footer">
                 <button id="vote_id" type="button" class="btn btn-primary">Yes</button>

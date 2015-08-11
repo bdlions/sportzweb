@@ -27,3 +27,6 @@ define("LEAGUE_TABLE_TEAMS_ID",                        4);
 define("LEAGUE_TABLE_PLAYED_ID",                       5);
 define("LEAGUE_TABLE_GOAL_DIFFERENCE_ID",              6);
 define("LEAGUE_TABLE_POINTS_ID",                       7);
+
+define("MATCH_PREDICTION_FROM_APPLICATION",            1);
+define("MATCH_PREDICTION_FROM_NEWSFEED",               2);
