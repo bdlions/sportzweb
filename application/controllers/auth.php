@@ -125,6 +125,10 @@ class Auth extends Role_Controller{
             {
                 $this->data['current_configuration'] = $current_configuration[0];
             }
+            
+            $this->data['image_list'] = array(
+                'a.jpg', 'b.jpg', 'c.jpg', 'd.jpg'
+            );
             //login form values
             $this->data['identity'] = array('name' => 'identity',
                 'id' => 'identity',
