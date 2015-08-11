@@ -40,22 +40,22 @@
             {% }else{ %}
             <a class="anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= match_info.match_id%}" aria-expanded="true" aria-controls="">
             {% }%}
-                <div class="col-md-2">
+                <div class="app_sp_time">
                     <?php echo '{%= match_info.time %}'; ?>
                 </div>
-                <div class="col-md-2">
+                <div class="app_sp_team_home">
                     <?php echo '{%= match_info.team_title_home %}'; ?>
                 </div>
-                <div class="col-md-2">
+                <div class="app_sp_vs">
                     vs
                 </div>
-                <div class="col-md-2">
+                <div class="app_sp_team_away">
                     <?php echo '{%= match_info.team_title_away %}'; ?>
                 </div>
-                <div class="col-md-2">
+                <div class="app_sp_match_result">
                     <?php echo '{%= match_info.score_home %}' . ' - ' . '{%= match_info.score_away %}'; ?>
                 </div>
-                <div class="col-md-2">
+                <div class="app_sp_match_status">
                     {% if(match_info.status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
                     <span > Closed </span>
                     {% }else if(match_info.is_predicted == 1){ %}

@@ -335,22 +335,22 @@
     margin-left: 1%;
     margin-right: 1%;
 }
-.feed_predict_score .time{
+.feed_predict_score .app_sp_time{
    width: 7%;
 }
-.feed_predict_score .team_home{
+.feed_predict_score .app_sp_team_home{
    width: 25%;
 }
-.feed_predict_score .vs{
+.feed_predict_score .app_sp_vs{
    width: 10%;
 }
-.feed_predict_score .team_away{
+.feed_predict_score .app_sp_team_away{
    width: 25%;
 }
-.feed_predict_score .match_result{
+.feed_predict_score .app_sp_match_result{
    width: 11%;
 }
 
-.feed_predict_score .match_status{
+.feed_predict_score .app_sp_match_status{
    width: 8%;
 }

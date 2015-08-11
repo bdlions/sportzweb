@@ -122,22 +122,22 @@
                     <div class="form-group" style="margin: 0 2.5%;">
                         <table class="table">
                             <div class="row form-group table-hover text_align">
-                                <div class="col-md-2">
+                                <div class="app_sp_time">
                                     Time
                                 </div>
-                                <div class="col-md-2">
+                                <div class="app_sp_team_home">
                                     Team A
                                 </div>
-                                <div class="col-md-2">
+                                <div class="app_sp_vs">
                                     vs
                                 </div>
-                                <div class="col-md-2">
+                                <div class="app_sp_team_away">
                                     Team B
                                 </div>
-                                <div class="col-md-2">
+                                <div class="app_sp_match_result">
                                     Match Result
                                 </div>
-                                <div class="col-md-2">
+                                <div class="app_sp_match_status">
                                     Match Status
                                 </div>
                             </div>
@@ -151,21 +151,21 @@
                             <div class="panel panel-default" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
                                 <div class="row panel-heading" role="tab">
                                     <a class="anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
-                                        <div class="col-md-2">
+                                        <div class="app_sp_time">
                                             <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="app_sp_team_home">
                                             <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_home %}'; ?></div>
-                                        <div class="col-md-2">
+                                        <div class="app_sp_vs">
                                             vs
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="app_sp_team_away">
                                             <?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="app_sp_match_result">
                                             <?php echo '{%= sports_list.tournament_list[j].match_list[k].score_home %}' . ' - ' . '{%= sports_list.tournament_list[j].match_list[k].score_away %}'; ?>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="app_sp_match_status">
                                             {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
                                             <span > Closed </span>
                                             {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
