@@ -35,10 +35,10 @@
         <div class="row panel-heading" role="tab">
             {% if(match_info.location_id == <?php echo MATCH_PREDICTION_FROM_NEWSFEED; ?>){ %}
             <?php 
-                echo '<a href="'.base_url().'applications/score_prediction/index/{%= match_info.match_id%}">';                            
+                echo '<a class="feed_predict_score" href="'.base_url().'applications/score_prediction/index/{%= match_info.match_id%}">';                            
             ?>
             {% }else{ %}
-            <a class="anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= match_info.match_id%}" aria-expanded="true" aria-controls="">
+            <a class="anchor_text_style feed_predict_score" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= match_info.match_id%}" aria-expanded="true" aria-controls="">
             {% }%}
                 <div class="app_sp_time">
                     <?php echo '{%= match_info.time %}'; ?>
