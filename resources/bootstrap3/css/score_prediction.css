@@ -335,22 +335,32 @@
     margin-left: 1%;
     margin-right: 1%;
 }
-.feed_predict_score .app_sp_time{
-   width: 7%;
-}
-.feed_predict_score .app_sp_team_home{
-   width: 25%;
-}
-.feed_predict_score .app_sp_vs{
-   width: 10%;
-}
-.feed_predict_score .app_sp_team_away{
-   width: 25%;
-}
-.feed_predict_score .app_sp_match_result{
-   width: 11%;
-}
 
-.feed_predict_score .app_sp_match_status{
-   width: 8%;
+
+
+@media all and (max-width: 991px){
+    .feed_predict_score .app_sp_time, .feed_predict_score .app_sp_team_home,.feed_predict_score .app_sp_vs,.feed_predict_score .app_sp_team_away,.feed_predict_score .app_sp_match_result,.feed_predict_score .app_sp_match_status {
+        width: 100%;
+    }
+}
+@media all and (min-width: 992px){
+    .feed_predict_score .app_sp_time{
+        width: 7%;
+    }
+    .feed_predict_score .app_sp_team_home{
+        width: 23%;
+    }
+    .feed_predict_score .app_sp_vs{
+        width: 10%;
+    }
+    .feed_predict_score .app_sp_team_away{
+        width: 23%;
+    }
+    .feed_predict_score .app_sp_match_result{
+        width: 12%;
+    }
+
+    .feed_predict_score .app_sp_match_status{
+        width: 12%;
+    }
 }

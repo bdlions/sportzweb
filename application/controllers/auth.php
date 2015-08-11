@@ -127,7 +127,7 @@ class Auth extends Role_Controller{
             }
             
             $this->data['image_list'] = array(
-                'a.jpg', 'b.jpg', 'c.jpg', 'd.jpg'
+                '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg'
             );
             //login form values
             $this->data['identity'] = array('name' => 'identity',
