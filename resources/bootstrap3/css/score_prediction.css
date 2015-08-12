@@ -321,6 +321,9 @@
 .bgcolor_green{
     background-color: #6FCF6E!important;
 }
+.bgcolor_light_gray{
+    background-color: #BFC7CF!important;
+}
 .anchor_text_style{
     color: #333333!important;
     font-weight: normal!important;

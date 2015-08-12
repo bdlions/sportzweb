@@ -73,14 +73,14 @@
                     <div class="col-md-12">
                         {% var home_percentage = match_info.prediction_info.home; %}
                         {% var home_css_class = ""; %}
-                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id){ %}
+                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_HOME ?>'){ %}
                         {%    home_css_class = "progress_bar_width_catulate bgcolor_green"; %}
-                        {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id){ %}
+                        {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_HOME ?>'){ %}
                         {%    home_css_class = "progress_bar_width_catulate bgcolor_red"; %}
-                        {% }else if(match_info.status_id == '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1){ %}
-                        {%    home_css_class = "progress_bar_width_catulate"; %}
+                        {% }else if(match_info.status_id == '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_HOME ?>'){ %}
+                        {%    home_css_class = "progress_bar_width_catulate bgcolor_blue"; %}
                         {% }else{ %}
-                        {%    home_css_class = "progress_bar_width_catulate"; %}
+                        {%    home_css_class = "progress_bar_width_catulate bgcolor_light_gray"; %}
                         {% } %}
                         <div class="progress_bar_backgraound" >
                             <span class="progress_bar_content"> <?php echo '{%= match_info.team_title_home %}'; ?></span>
@@ -94,14 +94,14 @@
                     <div class="col-md-12">
                         {% var draw_percentage = match_info.prediction_info.draw; %}
                         {% var draw_css_class = ""; %}
-                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id){ %}
+                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_DRAW ?>'){ %}
                         {%    draw_css_class = "progress_bar_width_catulate bgcolor_green"; %}
-                        {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id){ %}
+                        {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_DRAW ?>'){ %}
                         {%    draw_css_class = "progress_bar_width_catulate bgcolor_red"; %}
-                        {% }else if(match_info.status_id == '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1){ %}
-                        {%    draw_css_class = "progress_bar_width_catulate"; %}
+                        {% }else if(match_info.status_id == '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id == '<?php echo MATCH_STATUS_DRAW ?>'){ %}
+                        {%    draw_css_class = "progress_bar_width_catulate bgcolor_blue"; %}
                         {% }else{ %}
-                        {%    draw_css_class = "progress_bar_width_catulate"; %}
+                        {%    draw_css_class = "progress_bar_width_catulate bgcolor_light_gray"; %}
                         {% } %}
                         <div class="progress_bar_backgraound">
                             <span class="progress_bar_content">Draw</span>
@@ -115,14 +115,14 @@
                     <div class="col-md-12">
                         {% var away_percentage = match_info.prediction_info.away; %}
                         {% var away_css_class = ""; %}
-                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id){ %}
+                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_AWAY ?>'){ %}
                         {%    away_css_class = "progress_bar_width_catulate bgcolor_green"; %}
-                        {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id){ %}
+                        {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_AWAY ?>'){ %}
                         {%    away_css_class = "progress_bar_width_catulate bgcolor_red"; %}
-                        {% }else if(match_info.status_id == '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1){ %}
-                        {%    away_css_class = "progress_bar_width_catulate"; %}
+                        {% }else if(match_info.status_id == '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_AWAY ?>'){ %}
+                        {%    away_css_class = "progress_bar_width_catulate bgcolor_blue"; %}
                         {% }else{ %}
-                        {%    away_css_class = "progress_bar_width_catulate"; %}
+                        {%    away_css_class = "progress_bar_width_catulate bgcolor_light_gray"; %}
                         {% } %}
                         <div class="progress_bar_backgraound">
                             <span class="progress_bar_content"><?php echo '{%= match_info.team_title_away %}'; ?></span>
