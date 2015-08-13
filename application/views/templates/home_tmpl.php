@@ -28,7 +28,6 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/respond.min.js"></script>
 
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>resources/js/modernizr.custom.86080.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery-ui.js"></script>

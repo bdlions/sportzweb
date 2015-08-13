@@ -1,89 +1,16 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/home.css">
 <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>resources/js/twitterslider.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
-<style type="text/css">
-    
-.cb-slideshow li:nth-child(1) span { 
-    background-image: url(<?php echo base_url()?>resources/images/auth_background/<?php echo $image_list[0]?>);
-}
-.cb-slideshow li:nth-child(2) span { 
-    background-image: url(<?php echo base_url()?>resources/images/auth_background/<?php echo $image_list[1]?>);
-    -webkit-animation-delay: 6s;
-    -moz-animation-delay: 6s;
-    -o-animation-delay: 6s;
-    -ms-animation-delay: 6s;
-    animation-delay: 6s; 
-}
-.cb-slideshow li:nth-child(3) span { 
-    background-image: url(<?php echo base_url()?>resources/images/auth_background/<?php echo $image_list[2]?>);
-    -webkit-animation-delay: 12s;
-    -moz-animation-delay: 12s;
-    -o-animation-delay: 12s;
-    -ms-animation-delay: 12s;
-    animation-delay: 12s; 
-}
-.cb-slideshow li:nth-child(4) span { 
-    background-image: url(<?php echo base_url()?>resources/images/auth_background/<?php echo $image_list[3]?>);
-    -webkit-animation-delay: 18s;
-    -moz-animation-delay: 18s;
-    -o-animation-delay: 18s;
-    -ms-animation-delay: 18s;
-    animation-delay: 18s; 
-}
-.cb-slideshow li:nth-child(5) span { 
-    background-image: url(<?php echo base_url()?>resources/images/auth_background/<?php echo $image_list[4]?>);
-    -webkit-animation-delay: 24s;
-    -moz-animation-delay: 24s;
-    -o-animation-delay: 24s;
-    -ms-animation-delay: 24s;
-    animation-delay: 24s; 
-}
-.cb-slideshow li:nth-child(6) span { 
-    background-image: url(<?php echo base_url()?>resources/images/auth_background/<?php echo $image_list[5]?>);
-    -webkit-animation-delay: 30s;
-    -moz-animation-delay: 30s;
-    -o-animation-delay: 30s;
-    -ms-animation-delay: 30s;
-    animation-delay: 30s; 
-}
-.cb-slideshow li:nth-child(2) div { 
-    -webkit-animation-delay: 6s;
-    -moz-animation-delay: 6s;
-    -o-animation-delay: 6s;
-    -ms-animation-delay: 6s;
-    animation-delay: 6s; 
-}
-.cb-slideshow li:nth-child(3) div { 
-    -webkit-animation-delay: 12s;
-    -moz-animation-delay: 12s;
-    -o-animation-delay: 12s;
-    -ms-animation-delay: 12s;
-    animation-delay: 12s; 
-}
-.cb-slideshow li:nth-child(4) div { 
-    -webkit-animation-delay: 18s;
-    -moz-animation-delay: 18s;
-    -o-animation-delay: 18s;
-    -ms-animation-delay: 18s;
-    animation-delay: 18s; 
-}
-.cb-slideshow li:nth-child(5) div { 
-    -webkit-animation-delay: 24s;
-    -moz-animation-delay: 24s;
-    -o-animation-delay: 24s;
-    -ms-animation-delay: 24s;
-    animation-delay: 24s; 
-}
-.cb-slideshow li:nth-child(6) div { 
-    -webkit-animation-delay: 30s;
-    -moz-animation-delay: 30s;
-    -o-animation-delay: 30s;
-    -ms-animation-delay: 30s;
-    animation-delay: 30s; 
-}
-</style>
+
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#slider").twitterSlideshow({
+            imagePath:'<?php echo base_url()?>resources/images/auth_background/', 
+            imageList:['1.jpg', '2.jpg','3.jpg', '4.jpg','5.jpg', '6.jpg'], 
+            interval: 6
+        });
+        
         $('#next_btn').on('click', function () {
             if ($("#registration-form").valid() === true) {
                 $("#login_box").hide();
@@ -189,26 +116,8 @@
 <?php echo form_open("auth/login", array('id' => 'registration-form', 'role' => 'form')); ?>
 <div class="container">
     <div id="step1">
-        <ul class="cb-slideshow bg_landing_ul">
-            <li>
-                <span>Image 01</span>
-            </li>
-            <li>
-                <span>Image 02</span>
-            </li>
-            <li>
-                <span>Image 03</span>
-            </li>
-            <li>
-                <span>Image 04</span>
-            </li>
-            <li>
-                <span>Image 05</span>
-            </li>
-            <li>
-                <span>Image 06</span>
-            </li>
-        </ul>
+        <div id="slider"></div>
+        
         <div class="row padding_over_row mg_bottom">
             <div class="col-md-5">
                 <p class="auth_landing_bg_text">
@@ -274,8 +183,7 @@
             </div>
         </div>
     </div>
-
-    <div id="step2" class="security-captcha">
+    <div id="step2" class="security-captcha" >
         <div class="home-left-tit">
             <div class="home-left-title home-left-title2">Sign Up</div>
         </div>
