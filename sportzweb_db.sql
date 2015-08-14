@@ -1705,15 +1705,6 @@ CREATE TABLE `photography`(
   PRIMARY KEY(`id`)
 )AUTO_INCREMENT=1;
 
--- Landing Image Application
-CREATE TABLE `landing_img`(
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `img` varchar(500) NOT NULL,
-  `created_on` int(11) DEFAULT NULL,
-  `modified_on` int(11) DEFAULT NULL,
-  PRIMARY KEY(`id`)
-)AUTO_INCREMENT=1;
-
 -- score prediction
 CREATE TABLE IF NOT EXISTS `app_sp_sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -3350,3 +3341,11 @@ CREATE TABLE IF NOT EXISTS `notification_list`(
 ALTER TABLE `notification_list`
 ADD CONSTRAINT `fk_notification_list` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- Login page background image configuration table
+CREATE TABLE `landing_img`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `img` varchar(500) NOT NULL,
+  `created_on` int(11) DEFAULT NULL,
+  `modified_on` int(11) DEFAULT NULL,
+  PRIMARY KEY(`id`)
+)AUTO_INCREMENT=1;

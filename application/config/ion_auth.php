@@ -124,7 +124,6 @@ $config['tables']['blog_configure_homepage']                = 'blog_configure_ho
 $config['tables']['bmi_questions']                          = 'bmi_questions';
 $config['tables']['bmi_home_page_configuration']            = 'bmi_home_page_configuration';
 $config['tables']['photography']                            = 'photography';
-$config['tables']['landing_img']                            = 'landing_img';
 
 $config['tables']['app_xb_sports']                          = 'app_xb_sports';
 $config['tables']['app_xb_teams']                           = 'app_xb_teams';
@@ -201,6 +200,7 @@ $config['tables']['application_visitor']                    = 'application_visit
 $config['tables']['business_profile_visitor']               = 'business_profile_visitor';
 //login page
 $config['tables']['configure_login_page']                   = 'configure_login_page';
+$config['tables']['landing_img']                            = 'landing_img';
 //logout page
 $config['tables']['configure_logout_page']                  = 'configure_logout_page';
 //trending feature

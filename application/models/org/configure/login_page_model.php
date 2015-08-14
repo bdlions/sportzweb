@@ -37,5 +37,16 @@ class Login_page_model extends Ion_auth_model {
                     ->limit(1)
                     ->get();
     }
+    
+    /*
+     * This method will return background image list at login page
+     * @Author Nazmul on 14th August 2015
+     */
+    public function get_login_page_background_image_list()
+    {
+        return $this->db->select('*')
+                    ->from($this->tables['landing_img'])
+                    ->get();
+    }
 }
 ?>

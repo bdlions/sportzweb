@@ -5,10 +5,11 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        var imageList = <?php echo json_encode($image_list) ?>;
         $("#slider").twitterSlideshow({
             imagePath:'<?php echo base_url()?>resources/images/auth_background/', 
-            imageList:['1.jpg', '2.jpg','3.jpg', '4.jpg','5.jpg', '6.jpg'], 
-            interval: 6
+            imageList:imageList, 
+            interval: 20
         });
         
         $('#next_btn').on('click', function () {
