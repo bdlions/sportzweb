@@ -20,7 +20,7 @@
     <body screen_capture_injected="true" cz-shortcut-listen="true">
         <div class="container">
             <div class="row-fluid">
-                <div class="span12">
+                <div class="col-md-12">
                     <div class="top">
                         <a href="<?php echo base_url();?>"><div class="logo"></div></a>
                         <?php
@@ -30,7 +30,7 @@
                 </div>
 
                 <div id="infoMessage"><?php echo $message; ?></div>
-                <div class="span12">
+                <div class="col-md-12">
                     <div class="index">
                         <div class="main">
                             <div class="home-left">

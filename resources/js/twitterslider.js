@@ -17,7 +17,6 @@ $(function() {
 
         var totalAnimationTime = settings.imageList.length * settings.interval;
         var j = 0;
-        ul.append("<li><span style=''></span></li>");
         
         for (var i = 0; i < settings.imageList.length; i++) {
             var fullImagePath = settings.imagePath + settings.imageList[ i ];
@@ -26,8 +25,9 @@ $(function() {
                 ul.append("<li><span style='-webkit-backface-visibility: hidden; -webkit-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s;  -moz-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; -o-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; -ms-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; background-image:url(" + fullImagePath + ")'>Image " + (i + 1) + "</span></li>");
             }
             else {
-                ul.append("<li ><span style='-webkit-backface-visibility: hidden; -webkit-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s;  -moz-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; -o-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; -ms-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; background-image:url(" + fullImagePath + "); -webkit-animation-delay:" + interval + "s; -moz-animation-delay:" + interval + "s; -o-animation-delay:" + interval + "s; -ms-animation-delay:" + interval + "s; animation-delay:" + interval + "s;'>Image " + (i + 1) + "</span></li>");
+                ul.append("<li ><span style='-webkit-backface-visibility: hidden; -webkit-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s;  -moz-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; -o-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; -ms-animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; animation: imageAnimation " + totalAnimationTime + "s linear infinite " + j + "s; background-image:url(" + fullImagePath + "); -webkit-animation-delay: " + interval + "s; -moz-animation-delay: " + interval + "s; -o-animation-delay: " + interval + "s; -ms-animation-delay: " + interval + "s; animation-delay: " + interval + "s;'>Image " + (i + 1) + "</span></li>");
             }
         }
     };
 });
+

@@ -26,6 +26,7 @@
      
 }
 
+
 /* Animation for the slideshow images */
 @-webkit-keyframes imageAnimation { 
     0% { opacity: 0;
@@ -72,7 +73,42 @@
     25% { opacity: 0 }
     100% { opacity: 0 }
 }
-
+/* Animation for the title */
+@-webkit-keyframes titleAnimation { 
+    0% { opacity: 0 }
+    8% { opacity: 1 }
+    17% { opacity: 1 }
+    19% { opacity: 0 }
+    100% { opacity: 0 }
+}
+@-moz-keyframes titleAnimation { 
+    0% { opacity: 0 }
+    8% { opacity: 1 }
+    17% { opacity: 1 }
+    19% { opacity: 0 }
+    100% { opacity: 0 }
+}
+@-o-keyframes titleAnimation { 
+    0% { opacity: 0 }
+    8% { opacity: 1 }
+    17% { opacity: 1 }
+    19% { opacity: 0 }
+    100% { opacity: 0 }
+}
+@-ms-keyframes titleAnimation { 
+    0% { opacity: 0 }
+    8% { opacity: 1 }
+    17% { opacity: 1 }
+    19% { opacity: 0 }
+    100% { opacity: 0 }
+}
+@keyframes titleAnimation { 
+    0% { opacity: 0 }
+    8% { opacity: 1 }
+    17% { opacity: 1 }
+    19% { opacity: 0 }
+    100% { opacity: 0 }
+}
 /* Show at least something when animations not supported */
 .no-cssanimations .cb-slideshow li span{
 	opacity: 1;
@@ -86,6 +122,12 @@ Theme: custom
 version: 1.0
 */
 
+.auth_bg{
+    background-color: #587BD3!important; 
+    margin-top: -17px; 
+    height: 577px; 
+    width: 100%;
+}
 .header_top_adjustment{
     padding-top: 100px;
 }

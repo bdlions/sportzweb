@@ -38,7 +38,7 @@
     </head>
     <body class="back">
         <?php $this->load->view("templates/sections/header_with_login"); ?>
-        <div class="container">
+        <div class="container-fluid">
             <?php echo $contents; ?>
         </div>
         <?php $this->load->view("templates/sections/footer"); ?>
