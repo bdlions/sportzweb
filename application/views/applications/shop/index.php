@@ -26,15 +26,15 @@
                 </div>
             </div>
             <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <div class="glyphicon-chevron-left" >
-                    <img class="" src="<?php echo base_url()?>resources/images/carat_tall_left.png" alt="...">
-                    
-                </div>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>
+             <a  href="#carousel-example-generic" data-slide="next">
+            <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+            <img class="imgbuttonf" src="<?php echo base_url(); ?>resources/images/frontArrow.png" onclick=""/>
+        </a>
+        <a  href="#carousel-example-generic" data-slide="prev">
+            <!--<span class="glyphicon glyphicon-chevron-right"></span>-->
+            <img class="imgbuttonb" src="<?php echo base_url(); ?>resources/images/backArrow.png" onclick=""/>
+        </a>
+            
         </div>
     </div>
 </div>

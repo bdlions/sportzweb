@@ -51,9 +51,7 @@
     <body>
         <?php $this->load->view("templates/sections/about_us");?>
         <div class="container">
-            <div class="row">
                 <?php echo $contents?>
-            </div>
         </div>
         <?php $this->load->view("common/common_message_modal"); ?>
     </body>

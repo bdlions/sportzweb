@@ -1,52 +1,52 @@
 <style type="text/css">
 
-.item{
-  
-    text-align: center;
-    height: 100% !important;
-}
-.carousel{
-    margin-top: 20px;
-}
-.bs-example{
-	margin: 20px;
-}
-.slider-size {
-    //min-height: 200px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    
-}
-.overimgtext2
-{
-    position: absolute;
-    bottom: 5%; 
-    /*border: 2px solid #75B3E6;*/
-    background:rgba(100,100,111,0.6); 
-    width: 97%;
-    color: white;
-    font-size: larger; 
-    text-align: center;
-    padding: 12px;
-}
-.overimgtext
-{
-    position: absolute;
-    top: 85%; 
-    background:rgba(100,100,111,0.6); 
-    width: 100%;
-    color: white;
-    font-size: larger; 
-    text-align: center;
-    padding: 12px;
-}
-.carousel {
-width:100%; 
-margin:0 auto; /* center your carousel if other than 100% */ 
-}
-#imgbuttonb{ height: 32px; width: 32px; position: absolute; right: 64px; top: 30px;}
-#imgbuttonf{ height: 32px; width: 32px; position: absolute; right: 32px; top: 30px;}
-.overimgtext{
+    .item{
+
+        text-align: center;
+        height: 100% !important;
+    }
+    .carousel{
+        margin-top: 20px;
+    }
+    .bs-example{
+        margin: 20px;
+    }
+    .slider-size {
+        //min-height: 200px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+
+    }
+    .overimgtext2
+    {
+        position: absolute;
+        bottom: 5%; 
+        /*border: 2px solid #75B3E6;*/
+        background:rgba(100,100,111,0.6); 
+        width: 97%;
+        color: white;
+        font-size: larger; 
+        text-align: center;
+        padding: 12px;
+    }
+    .overimgtext
+    {
+        position: absolute;
+        top: 85%; 
+        background:rgba(100,100,111,0.6); 
+        width: 100%;
+        color: white;
+        font-size: larger; 
+        text-align: center;
+        padding: 12px;
+    }
+    .carousel {
+        width:100%; 
+        margin:0 auto; /* center your carousel if other than 100% */ 
+    }
+    #imgbuttonb{ height: 32px; width: 32px; position: absolute; right: 64px; top: 30px;}
+    #imgbuttonf{ height: 32px; width: 32px; position: absolute; right: 32px; top: 30px;}
+    .overimgtext{
         position: absolute;
         bottom: 5%; 
         /*border: 2px solid #75B3E6;*/
@@ -96,13 +96,13 @@ margin:0 auto; /* center your carousel if other than 100% */
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-     $("div.item").each(function(){
-        $(this).find('div').height($(window).height()-$("body nav").height()-20);
-     });
-     $("#myCarousel").carousel({
-         interval : false,
-         pause: false
-     });
-});
+    $(document).ready(function() {
+        $("div.item").each(function() {
+            $(this).find('div').height($(window).height() - $("body nav").height() - 20);
+        });
+        $("#myCarousel").carousel({
+            interval: false,
+            pause: false
+        });
+    });
 </script>

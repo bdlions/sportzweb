@@ -51,9 +51,7 @@
     <body>
         <?php $this->load->view("templates/sections/header_with_logo");?>
         <div class="container">
-            <div class="row">
                 <?php echo $contents?>
-            </div>
         </div>
         <?php $this->load->view("common/common_message_modal"); ?>
     </body>

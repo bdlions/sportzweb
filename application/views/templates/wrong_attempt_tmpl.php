@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/newsfeed.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/bg_img_landing.css">
-         
+
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.validate.min.js"></script>
@@ -20,9 +20,9 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/custom_error.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/expanding.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
-        
-        
-                <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+
+
+        <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
         <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/jquery.fileupload.css">
 
         <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -51,14 +51,11 @@
         <script src="<?php echo base_url() ?>resources/js/jquery.fileupload-validate.js"></script>
     </head>
     <body>
-        <?php $this->load->view("templates/sections/header_with_logo");?>
+        <?php $this->load->view("templates/sections/header_with_logo"); ?>
         <div class="container">
-            <div class="row">
-                <?php echo $contents?>
-            </div>
+            <?php echo $contents ?>
         </div>
-        <?php $this->load->view("templates/sections/footer");?>
+        <?php $this->load->view("templates/sections/footer"); ?>
         <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>
- 

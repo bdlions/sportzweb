@@ -188,7 +188,7 @@
 }
 @media screen and (min-width: 992px) {
     .progress_bar_backgraound{
-        width:70%; 
+        width: 100%; 
     }
     .progress_bar_percentage_text{
         font-size: 16px;
@@ -204,13 +204,13 @@
 }
 .progress_bar_percentage_text{
     float: right; 
-    padding: 3px 0; 
+    padding: 3px; 
 }
 
 .progress_bar_content{
     float: left; 
     padding: 3px; 
-    font-size: 16px; 
+    font-size: 13px; 
     font-weight: bold;
 }
 .progress_bar_width_catulate, .progress_bar_width_catulate_green{

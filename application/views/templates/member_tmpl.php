@@ -72,9 +72,7 @@
     <body>
         <?php $this->load->view("templates/sections/header_with_menu");?>
         <div class="container">
-            <div class="row">
                 <?php echo $contents; ?>
-            </div>
         </div>
         <?php //$this->load->view("templates/sections/footer");?>
         <?php $this->load->view("member/messages/chat");?>

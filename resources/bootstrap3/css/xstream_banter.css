@@ -4,7 +4,7 @@
 }
 .xb-home
 {
-    
+
 }
 .xb-home img
 {
@@ -16,6 +16,7 @@
 .xb-home select
 {
     font-size: 20px;
+    height: 40px;
 }
 
 .xb-home-form-control
@@ -87,7 +88,7 @@
 }
 .create-chat-room
 {
-    
+
 }
 
 .create-chat-room h5
@@ -139,7 +140,7 @@
 }
 .join-chat-room
 {
-    
+
 }
 
 .join-chat-room h5
@@ -244,7 +245,7 @@
 }
 
 .chat_message-pre-scrollable {
-  height: 200px;
+    height: 200px;
 }
 
 div.xb1.xb2{text-align: center;}

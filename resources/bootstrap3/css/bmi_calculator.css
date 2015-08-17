@@ -12,7 +12,8 @@ and open the template in the editor.
 {
     border: 1px solid #888888;
     padding: 16px;
-    margin-left:220px;
+    margin-left: 25%;
+    margin-right: 10%;
     font-size: 16px;
 }
 .grey_title
@@ -29,5 +30,5 @@ and open the template in the editor.
 }
 .right_panel_body
 {
-    
+
 }

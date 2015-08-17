@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <h1>Fixtures & Results</h1>
         <?php $this->load->view("applications/score_prediction/templates/header_menu"); ?>

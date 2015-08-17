@@ -136,8 +136,8 @@ class Bg_landing_img extends Admin_Controller {
             $file_info = $_FILES["userfile"];
             $result = $this->utils->upload_image($file_info, SLIDING_IMAGE_PATH);
             if ($result['status'] == 1) {
-//                $path = SLIDING_IMAGE_PATH . $result['upload_data']['file_name'];
-//                $this->utils->resize_image($path, $path, SLIDING_IMAGE_HEIGHT, SLIDING_IMAGE_WIDTH);
+                $path = SLIDING_IMAGE_PATH . $result['upload_data']['file_name'];
+                $this->utils->resize_image($path, $path, SLIDING_IMAGE_HEIGHT, SLIDING_IMAGE_WIDTH);
                 $additional_data = array(
                     'img' => $result['upload_data']['file_name']
                 );

@@ -13,6 +13,20 @@ body
     font-family: arial,helvetica,sans-serif !important;
 }
 /*UNIVARSAL*/
+.imgbuttonb {
+    height: 32px;
+    position: absolute;
+    right: 64px;
+    top: 30px;
+    width: 32px;
+}
+.imgbuttonf {
+    height: 32px;
+    position: absolute;
+    right: 32px;
+    top: 30px;
+    width: 32px;
+}
 
 .heading_medium, .heading_small,
 .small_text_dark, .small_text_pale,
@@ -48,7 +62,7 @@ body
     /*color: #333;*/
 }
 .paypal_img_margir{
-        margin-left: -22px;
-    }
+    margin-left: -22px;
+}
 
 

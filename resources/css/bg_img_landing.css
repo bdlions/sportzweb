@@ -1,24 +1,21 @@
 .cb-slideshow,
 .cb-slideshow:after { 
-    position: relative;
+    position: fixed;
     width: 100%;
     height: 100%;
-    top: 0px;
+    top: 40px;
     left: 0px;
     z-index: 0; 
-}
-.cb-slideshow:after { 
-    content: '';
 }
 .cb-slideshow li span { 
     width: 100%;
     height: 100%;
     position: fixed;
-    top: 80px;
+    top: 40px;
     left: 0px;
     color: transparent;
     background-size: cover;
-    background-position: 0% 0%;
+    background-position: -15% -15%;
     background-repeat: no-repeat;
     opacity: 0;
     z-index: 0;
@@ -139,8 +136,8 @@ version: 1.0
 
 .auth_bg{
     /*background-color: #587BD3!important;*/ 
-    margin-top: -17px; 
-    height: 577px; 
+    margin-top: -17px;
+    height: 100%;
     width: 100%;
 }
 .header_top_adjustment{
@@ -257,6 +254,11 @@ version: 1.0
 }
 .footer_ul li a{
     color: #959595;
+    font-weight: bold;
+}
+.navbar_default_custom{
+    background-color: transparent!important;
+    border-color: transparent!important;
 }
 
 .logo_text_modify a{

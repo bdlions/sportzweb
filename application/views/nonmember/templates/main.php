@@ -115,7 +115,7 @@
     });
 </script>
 <?php echo form_open("auth/login", array('id' => 'registration-form', 'role' => 'form')); ?>
-        <div id="step1">
+<div id="step1">
     <div class="container-fluid auth_bg">
         <div class="container"> 
             <div id="slider" ></div>
@@ -177,12 +177,12 @@
                     <div class="row form-group"></div>
                     <div class="row form-group"></div>
                 </div>
+            </div>
         </div>
     </div>
-    </div>
 </div>
-    <div id="step2" class="security-captcha" >
-<div class="container">
+<div id="step2" class="security-captcha" >
+    <div class="container">
         <div class="home-left-tit">
             <div class="home-left-title home-left-title2">Sign Up</div>
         </div>
