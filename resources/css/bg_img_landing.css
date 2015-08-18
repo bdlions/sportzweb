@@ -15,12 +15,12 @@
     left: 0px;
     color: transparent;
     background-size: cover;
-    background-position: -15% -15%;
     background-repeat: no-repeat;
     opacity: 0;
     z-index: 0;
     -webkit-backface-visibility: hidden;
 }
+
 
 
 /* Animation for the slideshow images */
@@ -34,13 +34,13 @@
         -webkit-animation-timing-function: ease-out;
     }
     17% { 
-/*        opacity: 1*/
+        /*        opacity: 1*/
     }
     25% { 
         /*opacity: 0*/ 
     }
     100% { 
-/*        opacity: 0 */
+        /*        opacity: 0 */
     }
 }
 @-moz-keyframes imageAnimation { 
@@ -135,8 +135,7 @@ version: 1.0
 */
 
 .auth_bg{
-    /*background-color: #587BD3!important;*/ 
-    margin-top: -17px;
+    margin-top: 80px;
     height: 100%;
     width: 100%;
 }
@@ -181,13 +180,14 @@ version: 1.0
     .login_text_style{
         font-size: 11px;
     }
-    .footer_ul li{
-        float: left;
-        margin: 10px 0;
-        width: 50%;
-    }
     .mg_bottom{
         margin-bottom: 60px;
+    }
+    .cb-slideshow li span { 
+        background-position: 0px 40px;
+    }
+    .copyright {
+        margin-left: 0;
     }
 }
 @media screen and (min-width: 768px)and (max-width: 991px) { 
@@ -201,12 +201,13 @@ version: 1.0
     }
     .login_text_style{
         font-size: 11px;
-        margin-top: 10px;
+        margin-top: 10px!important;
     }
-    .footer_ul li{
-        float: left;
-        margin: 10px 0;
-        width: 33.33%;
+    .cb-slideshow li span { 
+        background-position: 0px 40px;
+    }
+    .copyright {
+        margin-left: 20%;
     }
 }
 @media screen and (min-width: 992px) { 
@@ -223,9 +224,11 @@ version: 1.0
         font-size: 11px;
         margin-top: 12px;
     }
-    .footer_ul li{
-        display: inline-block;
-        padding: 20px 20px 20px 0;
+    .cb-slideshow li span { 
+        background-position: 0px 40px;
+    }
+    .copyright {
+        margin-left: 60%;
     }
 }
 
@@ -247,15 +250,7 @@ version: 1.0
 .input_custom_style{
     border-radius: 0!important;
 }
-.footer_ul{
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-.footer_ul li a{
-    color: #959595;
-    font-weight: bold;
-}
+
 .navbar_default_custom{
     background-color: transparent!important;
     border-color: transparent!important;
@@ -289,4 +284,20 @@ version: 1.0
     right: 32px;
     top: 30px;
     width: 32px;
+}
+.footer_ul{
+    position: absolute;
+    top: 10px;
+}
+.footer_ul li a{
+    color: #7DB9ED;
+    font-weight: bold;
+}
+.copyright {
+    text-align: left;
+    color: #7DB9ED;
+    font-size: 10px;
+    line-height: 150%;
+    font-weight: bold;
+    vertical-align: top;
 }

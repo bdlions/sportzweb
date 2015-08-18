@@ -56,7 +56,7 @@
 }
 
 .button-custom{
-     background-color: orange!important;
+    background-color: orange!important;
     border-radius: 0!important;
     height: 30px!important;
 }
@@ -229,16 +229,7 @@
 .footer a {
     color: #959595;
 }
-.copyright {
-    position: absolute;
-    right: 0px;
-    top: 6px;
-    text-align: right;
-    color: #959595;
-    font-size: 12px;
-    line-height: 150%;
-    font-weight: bold;
-}
+
 
 .error-message{
     text-align: center;
@@ -281,8 +272,8 @@
 }
 
 .hidden {
-  display: none !important;
-  visibility: hidden !important;
+    display: none !important;
+    visibility: hidden !important;
 }
 .search-box-followers{
     border: 1px solid #CCCCCC;
@@ -325,8 +316,8 @@
     pointer-events: none;
 }
 .google_map_canvas {
-  width: 550px;
-  height: 450px;
+    width: 550px;
+    height: 450px;
 }
 .status-arrow{
     background:url('../../images/MWZW-8fqgdv.png') 0px -468px;
@@ -394,11 +385,11 @@
 /*****************************************************/
 
 input#r_captcha_input{
-width: 88%;
-float: left;
+    width: 88%;
+    float: left;
 }
 #register_btn.button-custom{
-	margin: 5px 0;
+    margin: 5px 0;
 }
 .spacer {
     margin-bottom: 60px;
@@ -424,13 +415,13 @@ float: left;
     line-height: 50px!important;	
 }
 .profile-background-comment{
-	background-color:#93C8FA; 
-	height:32px;
-	//width:32px;
-	line-height: 32px;	
-	text-align: center; 
-	vertical-align: middle;
-	font-size: 30px;
+    background-color:#93C8FA; 
+    height:32px;
+    //width:32px;
+    line-height: 32px;	
+    text-align: center; 
+    vertical-align: middle;
+    font-size: 30px;
     color: white;
 }
 
@@ -474,30 +465,30 @@ float: left;
 
 input#chat_friends,
 input#chat_friends:hover{
- border: 0;
+    border: 0;
     box-shadow: 0 0 0;
 }
 div.status-box-menu{
-	border: 1px solid #cccccc;
-	padding: 1%;
-	width: 95%;
-	margin: auto;
+    border: 1px solid #cccccc;
+    padding: 1%;
+    width: 95%;
+    margin: auto;
 }
 div.status-box-menu div.div1{
-	float: left;padding-top: 0.8%;
+    float: left;padding-top: 0.8%;
 }
 div.status-box-menu div.div1 div#status_selected_friends{
-	float: left;padding: 0 0 2% 0;
+    float: left;padding: 0 0 2% 0;
 }
 div.status-box-menu div.div2{
-	float: left;
-        width:250px;
+    float: left;
+    width:250px;
 }
 div.status-box-menu div.div3{
-	float:right;
-	width:100%;	
-	clear:both;
-	margin: 1% -1%;
+    float:right;
+    width:100%;	
+    clear:both;
+    margin: 1% -1%;
 }
 
 
@@ -619,7 +610,7 @@ a:hover
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     .pixel_perfection{  
-         width: 450px;
+        width: 450px;
     }  
 }
 
@@ -632,4 +623,4 @@ a:hover
 
 /*Redoy*/
 
-  
+

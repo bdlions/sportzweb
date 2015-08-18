@@ -1,4 +1,4 @@
-<div class="span12">
+<div class="col-md-12">
     <div class="foot">
         <div class="footer">
             <div class="footer-menu">

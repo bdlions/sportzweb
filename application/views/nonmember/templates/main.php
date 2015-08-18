@@ -181,7 +181,7 @@
         </div>
     </div>
 </div>
-<div id="step2" class="security-captcha" >
+<div id="step2" class="security-captcha" style="margin-top: 100px;">
     <div class="container">
         <div class="home-left-tit">
             <div class="home-left-title home-left-title2">Sign Up</div>
@@ -210,6 +210,10 @@
             <?php echo form_input($register_btn + array('class' => 'btn button-custom')); ?>
         </div>
     </div>
+    <div class="row form-group"></div>
+    <div class="row form-group"></div>
+    <div class="row form-group"></div>
+    <div class="row form-group"></div>
 </div>
 <div id="message"></div>
 <?php echo form_close(); ?>
