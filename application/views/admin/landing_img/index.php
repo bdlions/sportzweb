@@ -94,12 +94,8 @@
     <script>
         $(function () {
             $('#button_add_image').on('click', function () {
-                 $("#modal_photo_resolution_confirm").modal('show');
-                 $('#button_done').on('click', function () {
                    window.location = '<?php echo base_url(); ?>admin/bg_landing_img/add_image';
-            });
             });
         });
     </script>
     <?php $this->load->view("admin/landing_img/landing_delete_confirm_modal"); ?>
-    <?php $this->load->view("admin/landing_img/landing_img_resolution_confirm_modal"); ?>

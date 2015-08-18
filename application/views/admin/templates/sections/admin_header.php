@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    $(function(){
-        
+    $(function() {
+
     });
 </script>
 

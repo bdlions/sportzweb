@@ -4,7 +4,10 @@
         <div class="panel-body">
             <div class="row form-horizontal form-background top-bottom-padding">  
                 <div class="row">
-                    <div class ="col-md-10 margin-top-bottom">                            
+                    <div class ="col-md-10 margin-top-bottom"> 
+                        <div class="form-group">
+                            <label class="col-lg-offset-1 col-md-offset-1 col-xs-offset-1 col-sm-offset-1">Please upload an image at least Height: 683px and Width: 1024px for better resolution</label>
+                        </div>
                         <div class="form-group">
                             <label for="website" class="col-md-3 control-label requiredField">
                                 Set picture

@@ -24,3 +24,10 @@
     text-align: right;
     padding-bottom: 8px;
 }
+
+.padding_over_admin_img{
+    padding-top: 80px;
+}
+.margin_bottom_admin_img{
+    margin-bottom: 120px;
+}
