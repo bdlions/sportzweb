@@ -93,6 +93,13 @@
             $('[data-hover="dropdown"]').dropdownHover();
         });
     })(jQuery, this);
+
+//    active a particular menu item
+    $(function() {
+        $('.nav a').filter(function() {
+            return this.href == location.href
+        }).parent().addClass('active_news_item').siblings().removeClass('active_news_item')
+    });
 </script>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/customStyles.css" />
@@ -111,13 +118,13 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="row collapse navbar-collapse" id="news_header_menu_blue">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav news_app_navbar_custom">
                 <li class="dropdown">
                     <a style="padding-left:0px;" href="<?php echo base_url() . 'applications/news_app' ?>" class="dropdown-toggle" data-hover="dropdown">Home</a>
                 </li> 
                 <?php foreach ($news_header_menu as $news_category_id => $menu_item) : ?>
                     <li class="dropdown">
-                        <a href="<?php echo base_url() . 'applications/news_app/news_category/' .$news_category_id ; ?>" class="dropdown-toggle" data-hover="dropdown"><?php echo $menu_item['news_category_title']; ?></a>
+                        <a href="<?php echo base_url() . 'applications/news_app/news_category/' . $news_category_id; ?>" class="dropdown-toggle" data-hover="dropdown"><?php echo $menu_item['news_category_title']; ?></a>
                         <?php if (!empty($menu_item['sub_category_list'])): ?>
                             <ul class="dropdown-menu dropdown-menu-news" style="background-color: #75B3E6;">
                                 <?php foreach ($menu_item['sub_category_list'] as $sub_category_info): ?>

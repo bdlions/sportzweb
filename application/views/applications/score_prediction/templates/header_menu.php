@@ -1,8 +1,13 @@
-
-
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/customStyles.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/score_predict.css" />
-
+<script type="text/javascript">
+    //    active a particular menu item
+    $(function() {
+        $('.nav a').filter(function() {
+            return this.href == location.href
+        }).parent().addClass('active_score_prediction_item').siblings().removeClass('active_score_prediction_item')
+    });
+</script>
 <nav class="navbar navbar-menu-news navbar-default cus_news_header news-menu" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -21,13 +26,12 @@
                     <a style="padding-left:2px;" href="<?php echo base_url() . 'applications/score_prediction' ?>" >Home</a>
                 </li>
                 <?php
-                foreach($sports_list as $sports_info)
-                {
-                ?>
+                foreach ($sports_list as $sports_info) {
+                    ?>
                     <li>
-                        <a href="<?php echo base_url() . 'applications/score_prediction/sports/' . $sports_info['sports_id'];  ?>"><?php echo $sports_info['title']?></a>
+                        <a href="<?php echo base_url() . 'applications/score_prediction/sports/' . $sports_info['sports_id']; ?>"><?php echo $sports_info['title'] ?></a>
                     </li> 
-                <?php
+                    <?php
                 }
                 ?>                
             </ul>

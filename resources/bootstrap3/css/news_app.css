@@ -5,7 +5,7 @@
 
 .cus_news_header
 {
-    height: 34px;
+    height: 100%;
     margin-bottom: 20px;
     /*background-color: #00A2E8;*/
     border-top: 2px solid #999999;
@@ -16,6 +16,12 @@
 .cus_news_header a
 {
     font-size: 20px;
+}
+.active_news_item a{ 
+    color: blue!important;
+}
+.news_app_navbar_custom> li:hover{
+    background-color: #FFDEAD;
 }
 .navbar-menu-news .nav > li.dropdown.open > .dropdown-toggle,
 .navbar-menu-news .nav > li.dropdown.active > .dropdown-toggle,
@@ -101,7 +107,7 @@
     margin-bottom: 5px;
 }
 .news_item_box{
-/*    background-color: #F2F2FF;*/
+    /*    background-color: #F2F2FF;*/
     padding: 10px;
 }
 

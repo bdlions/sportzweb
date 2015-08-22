@@ -33,7 +33,7 @@ a_hover_color
     text-transform: uppercase;
     /*font-size: 20px;*/
     color: #B97A57;
-    
+
 }
 .recipe_a_list
 {
@@ -89,7 +89,7 @@ a_hover_color
 {
     margin-left: -10px ;
     margin-right: 1px;
-    
+
 }
 .purp_style
 {
@@ -137,5 +137,17 @@ a_hover_color
 .reciepe_title
 {
     font-family: arial,helvetica,sans-serif !important;
+}
+
+.health_recipes_header_menu{
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.active_health_recipes_item a{ 
+    color: blue!important;
+}
+.reciepe-menu > li:hover{
+    background-color: #FFDEAD;
 }
 

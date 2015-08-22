@@ -21,9 +21,13 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/customStyles.css" />
 
 <div class="row">
-    <div class="col-md-9">
+    <div class="row">
+        <div class="col-md-12">
         <h2>News</h2>
         <?php $this->load->view("applications/news_app/templates/header_menu"); ?>
+        </div>
+    </div>
+    <div class="col-md-9">
         
         <div class="row">
             <div class="col-md-12">

@@ -367,3 +367,10 @@
         width: 12%;
     }
 }
+
+.active_score_prediction_item a{ 
+    color: blue!important;
+}
+#news_header_menu_blue ul > li:hover{
+    background-color: #FFDEAD;
+}

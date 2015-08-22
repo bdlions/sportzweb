@@ -86,17 +86,40 @@ and open the template in the editor.
 }
 .blog_home_header_menu
 {
-    padding-top: 5px;
+    padding-top: 12px;
     padding-bottom: 5px;
     font-size: 15px;
     border-bottom: 1px solid red;
     border-top: 1px solid #7F7F7F;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
 }
 .blog_home_header_menu a
 {
     text-decoration: none;
     color: black;
 }
+
+.blog_app_navbar_custom{
+    background-color: #fff;
+}
+.blog_app_navbar_custom > li{
+    padding: 5px 0;
+    margin: -4px;
+}
+.blog_app_navbar_custom > li:hover{
+    background-color: #FFDEAD;
+}
+
+.active_blog_item a{ 
+    color: blue!important;
+}
+.blog_app_navbar_custom > li > a{
+    padding-bottom: 3px;
+    padding-top: 0;
+}
+
 
 .blog_app_catagory_rows
 {
