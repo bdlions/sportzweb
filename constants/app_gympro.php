@@ -46,3 +46,6 @@ define("GYMPRO_SESSION_STATUS_PAY_PT_PRO_ID",                "3");
 define("GYMPRO_SESSION_STATUS_CANCELLED_ID",                 "4");
 
 define("GYMPRO_CURRENCY_POUND_ID",                            2);
+
+define("GYMPRO_SESSION_DEFAULT_START_TIME",                  "08:00");
+define("GYMPRO_SESSION_DEFAULT_END_TIME",                    "08:15");

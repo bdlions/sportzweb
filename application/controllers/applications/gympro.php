@@ -2552,8 +2552,8 @@ class Gympro extends Role_Controller {
                     'created_for_type_id' => $created_for_type_id,
                     'reference_id' => $reference_id,
                     'date' => $this->utils->convert_date_from_user_to_db($this->input->post('session_date')),
-                    'start' => $this->input->post('start'),
-                    'end' => $this->input->post('end'),
+                    'start' => $this->input->post('session_start_time'),
+                    'end' => $this->input->post('session_end_time'),
                     'location' => $this->input->post('location'),
                     'type_id' => $type_id,
                     'repeat' => $repeat,
@@ -2574,14 +2574,23 @@ class Gympro extends Role_Controller {
         } else {
             $this->data['message'] = $this->session->flashdata('message');
         }
+        $currency_list = array();
         $currency_array = $this->gympro_library->get_all_currencies()->result_array();
         foreach ($currency_array as $currency) {
             $currency_list[$currency['currency_id']] = $currency['title'];
         }
+        $session_time_list = array();
+        $session_time_array = $this->gympro_library->get_all_session_times()->result_array();
+        foreach ($session_time_array as $session_time) {
+            $session_time_list[$session_time['title_24']] = $session_time['title'];
+        }
+        
         $this->data['current_date'] = $this->utils->get_current_date();
         $this->data['currency_list'] = $currency_list;
+        $this->data['session_time_list'] = $session_time_list;
+        $this->data['default_start_time'] = GYMPRO_SESSION_DEFAULT_START_TIME;
+        $this->data['default_end_time'] = GYMPRO_SESSION_DEFAULT_END_TIME;
         $this->data['session_statuses'] = $this->gympro_library->get_all_session_statuses()->result_array();
-        $this->data['session_times'] = $this->gympro_library->get_all_session_times()->result_array();
         $this->data['session_types'] = $this->gympro_library->get_all_session_types()->result_array();
         $this->data['session_repeats'] = $this->gympro_library->get_all_session_repeats()->result_array();
         $this->data['session_costs'] = $this->gympro_library->get_all_session_costs()->result_array();

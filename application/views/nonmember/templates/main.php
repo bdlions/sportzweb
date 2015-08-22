@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/home.css">
-<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/recaptcha_ajax.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>resources/js/twitterslider.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
 

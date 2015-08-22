@@ -97,6 +97,10 @@ class Auth extends Role_Controller{
         }
     }
     
+    /*
+     * This method will load the login page
+     * @author nazmul hasan
+     */
     function login() {
 
         if ($this->input->post('login_btn') != null) {
@@ -109,22 +113,29 @@ class Auth extends Role_Controller{
             $this->form_validation->set_rules('r_last_name', 'Last Name', 'required');
             $this->form_validation->set_rules('r_email', 'Email', 'required');
             $this->form_validation->set_rules('r_email_conf', 'Email confirm', 'required|matches[r_email]');
-            $this->form_validation->set_rules('r_password', 'Password', 'required');
-            //$this->form_validation->set_rules('r_captcha_input', 'Security code', 'required|callback_captcha_check');
+            $this->form_validation->set_rules('r_password', 'Password', 'required');            
         }
 
         if ($this->form_validation->run() === FALSE) {
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-            //setting all values for all forms of this page
-            //setting the filled values also
-            
-            $this->data['current_configuration'] = array();
+            if (!$this->ion_auth->logged_in()) {
+                if ($this->input->post('login_btn') != null) {
+                    $this->session->set_userdata('identity', $this->input->post('identity'));
+                    $this->session->set_flashdata('message', $this->data['message']);
+                    redirect('auth/login_wrong_attempt', 'refresh');
+                }
+            } else {
+                redirect('auth', 'refresh');
+            }
+          
+            //We have used twitter background image list for login page instead of this logic
+            /*$this->data['current_configuration'] = array();
             $current_date = $this->utils->get_current_date_yyyymmdd();
             $current_configuration = $this->login_page_library->get_current_configuration($current_date)->result_array();
             if(!empty($current_configuration))
             {
                 $this->data['current_configuration'] = $current_configuration[0];
-            }
+            }*/
             $image_list = array();
             $background_image_list_array = $this->login_page_library->get_login_page_background_image_list()->result_array();
             foreach($background_image_list_array as $image_info)
@@ -157,7 +168,7 @@ class Auth extends Role_Controller{
                 'value' => 'Sign in',
             );
 
-            /*             * ****************registration form values******************** */
+            /******************registration form values******************** */
             $this->data['r_first_name'] = array(
                 'name' => 'r_first_name',
                 'id' => 'r_first_name',
@@ -186,7 +197,6 @@ class Auth extends Role_Controller{
                 'placeholder' => lang('create_user_confirm_email_label'),
                 'value' => $this->form_validation->set_value('r_email_conf'),
             );
-
             $this->data['r_password'] = array(
                 'name' => 'r_password',
                 'id' => 'r_password',
@@ -194,63 +204,33 @@ class Auth extends Role_Controller{
                 'placeholder' => lang('create_user_password_label'),
                 'value' => $this->form_validation->set_value('r_password'),
             );
-
-            /*$this->data['r_captcha_input'] = array(
-                'name' => 'r_captcha_input',
-                'id' => 'r_captcha_input',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('r_captcha_input'),
-            );*/
-
             $this->data['next_btn'] = array('name' => 'next_btn',
                 'id' => 'next_btn',
                 'type' => 'submit',
                 'tabindex' => '4',
                 'value' => 'Join Now',
             );
-
             $this->data['register_btn'] = array('name' => 'register_btn',
                 'id' => 'register_btn',
                 'type' => 'submit',
                 'value' => 'Confirm',
             );
-            /* $captcha = create_captcha($this->captcha_params);
-              $this->session->set_userdata('captchaword', $captcha['word']);
-              $this->data['captcha_image'] = $captcha['image']; */
+
             $recaptch_config = $this->config->item('recaptcha');
             $this->data['public_key'] = $recaptch_config['public_key'];
-
-            /*****************registration form values completed******************** */
-
-            if (!$this->ion_auth->logged_in()) {
-                if ($this->input->post('login_btn') != null) {
-                    $this->session->set_flashdata('message', $this->data['message']);
-                    redirect('auth/login_wrong_attempt', 'refresh');
-                    //$this->template->load(WRONG_ATTEMPT_TEMPLATE, WRONG_ATTEMPT_VIEW, $this->data);
-                } else {
-                    $this->template->load(NULL, LOGIN_VIEW, $this->data);
-                }
-            } else {
-                redirect("auth");
-            }
+            $this->template->load(NULL, LOGIN_VIEW, $this->data);
         } elseif ($this->input->post('login_btn') != null) {
-            //check to see if the user is logging in
-            //check for "remember me"
             $remember = FALSE;
-
             if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) {
-                //if the login is successful
-                //redirect them back to the home page
-                
+                //login is successful
                 $date = date('Y-m-d');
                 $this->user_logs->store_user_log(0,$date);
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect('auth/', 'refresh');
+                redirect('auth', 'refresh');
             } else {
-                //if the login was un-successful
-                //redirect them back to the login page
+                //login is unsuccessful so redirecting to wrong login attempt page
+                $this->session->set_userdata('identity', $this->input->post('identity'));
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                //redirect('auth/login', 'refresh');
                 redirect('auth/login_wrong_attempt', 'refresh');
             }
         } elseif ($this->input->post('recaptcha_response_field') != null) {
@@ -263,15 +243,13 @@ class Auth extends Role_Controller{
                 'last_name' => $this->input->post('r_last_name'),
             );
             if ($this->ion_auth->register($username, $password, $email, $additional_data)) {
-                //check to see if we are creating the user
-                //redirect them back to the admin page
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
             } else {
+                //registration is unsuccessful
                 $this->session->set_flashdata('message', "Unsuccessful to register a user.");
-            }
-            //redirect("auth/login", 'refresh');
+                redirect("auth/login", 'refresh');
+            }            
             $this->data['message'] = $this->session->flashdata('message');
-            //redirect("auth/login", 'refresh');
             $this->template->load("templates/profile_setting_tmpl", "display_message", $this->data);
         }
     }
@@ -401,17 +379,24 @@ class Auth extends Role_Controller{
     }
 
     function login_wrong_attempt() {
+        $identity = "";
+        if($this->session->userdata('identity') !== FALSE && $this->session->userdata('identity') != "")
+        {
+            $identity = $this->session->userdata('identity');
+            $this->session->unset_userdata('identity');
+        }
         $this->data['message'] = $this->session->flashdata('message');
         $this->data['identity'] = array('name' => 'identity',
             'id' => 'identity',
             'type' => 'text',
             'tabindex' => '1',
-            'value' => $this->form_validation->set_value('identity'),
+            'value' => $identity
         );
         $this->data['password'] = array('name' => 'password',
             'id' => 'password',
             'type' => 'password',
-            'tabindex' => '2'
+            'tabindex' => '2',
+            'value' => ""
         );
 
         $this->data['forget_password'] = array('name' => 'forget_password',

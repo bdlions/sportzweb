@@ -8,11 +8,11 @@
             dateFormat: 'dd-mm-yy'
         });
         
-        $("#dd_start_date").change(function() {
-            var start_index = document.getElementById("dd_start_date").selectedIndex;
-            var dd_length      = document.getElementById("dd_start_date").length;
+        $("#session_start_time").change(function() {
+            var start_index = document.getElementById("session_start_time").selectedIndex;
+            var dd_length      = document.getElementById("session_start_time").length;
             var end_index = (start_index>=dd_length-1)? dd_length-1 : start_index+1;
-            document.getElementById("dd_end_date").selectedIndex = (end_index);
+            document.getElementById("session_end_time").selectedIndex = (end_index);
         });
         $("#dd_type").change(function() {
             if($("#dd_type").val()!='1'){
@@ -101,21 +101,13 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text">Start:</div>
                         <div class="col-md-4">
-                            <select class="form-control" name="start" id="dd_start_date">
-                                <?php foreach ($session_times as $session_time){ ?>
-                                    <option value="<?php echo $session_time['title_24']; ?>"><?php echo $session_time['title']; ?></option>
-                                <?php }; ?>
-                            </select>
+                            <?php echo form_dropdown('session_start_time', $session_time_list, GYMPRO_SESSION_DEFAULT_START_TIME, 'class=form-control id=session_start_time'); ?>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3 content_text ">Finish:</div>
                         <div class="col-md-4">
-                            <select class="form-control" name="end" id="dd_end_date">
-                                <?php foreach ($session_times as $session_time){ ?>
-                                    <option value="<?php echo $session_time['title_24']; ?>"><?php echo $session_time['title']; ?></option>
-                                <?php }; ?>
-                            </select>
+                            <?php echo form_dropdown('session_end_time', $session_time_list, GYMPRO_SESSION_DEFAULT_END_TIME, 'class=form-control id=session_end_time'); ?>
                         </div>
                     </div>
                     <div class="row form-group">
