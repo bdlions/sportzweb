@@ -73,7 +73,7 @@
                     <div class="col-md-12">
                         {% var home_percentage = match_info.prediction_info.home; %}
                         {% var home_css_class = ""; %}
-                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_HOME ?>'){ %}
+                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.status_id == '<?php echo MATCH_STATUS_WIN_HOME ?>'){ %}
                         {%    home_css_class = "progress_bar_width_catulate bgcolor_green"; %}
                         {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_HOME ?>'){ %}
                         {%    home_css_class = "progress_bar_width_catulate bgcolor_red"; %}
@@ -94,7 +94,7 @@
                     <div class="col-md-12">
                         {% var draw_percentage = match_info.prediction_info.draw; %}
                         {% var draw_css_class = ""; %}
-                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_DRAW ?>'){ %}
+                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.status_id == '<?php echo MATCH_STATUS_DRAW ?>'){ %}
                         {%    draw_css_class = "progress_bar_width_catulate bgcolor_green"; %}
                         {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_DRAW ?>'){ %}
                         {%    draw_css_class = "progress_bar_width_catulate bgcolor_red"; %}
@@ -115,7 +115,7 @@
                     <div class="col-md-12">
                         {% var away_percentage = match_info.prediction_info.away; %}
                         {% var away_css_class = ""; %}
-                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.my_prediction_id == match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_AWAY ?>'){ %}
+                        {% if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.status_id == '<?php echo MATCH_STATUS_WIN_AWAY ?>'){ %}
                         {%    away_css_class = "progress_bar_width_catulate bgcolor_green"; %}
                         {% }else if(match_info.status_id != '<?php echo MATCH_STATUS_UPCOMING ?>' && match_info.is_predicted == 1 && match_info.my_prediction_id != match_info.status_id && match_info.my_prediction_id == '<?php echo MATCH_STATUS_WIN_AWAY ?>'){ %}
                         {%    away_css_class = "progress_bar_width_catulate bgcolor_red"; %}

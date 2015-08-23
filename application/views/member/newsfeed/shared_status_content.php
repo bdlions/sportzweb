@@ -310,7 +310,7 @@
     <?php
     $home_percentage = $newsfeed['reference_info']['prediction_info']['home'];
     $home_css_class = "";
-    if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['my_prediction_id'] == $newsfeed['reference_info']['status_id'] && $newsfeed['reference_info']['my_prediction_id'] == MATCH_STATUS_WIN_HOME) {
+    if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['status_id'] == MATCH_STATUS_WIN_HOME) {
         $home_css_class = "progress_bar_width_catulate bgcolor_green";
     } else if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1 && $newsfeed['reference_info']['my_prediction_id'] != $newsfeed['reference_info']['status_id'] && $newsfeed['reference_info']['my_prediction_id'] == MATCH_STATUS_WIN_HOME) {
         $home_css_class = "progress_bar_width_catulate bgcolor_red";
@@ -332,7 +332,7 @@
     <?php
     $draw_percentage = $newsfeed['reference_info']['prediction_info']['draw'];
     $draw_css_class = "";
-    if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['my_prediction_id'] == $newsfeed['reference_info']['status_id'] && $newsfeed['reference_info']['my_prediction_id'] == MATCH_STATUS_DRAW) {
+    if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['status_id'] == MATCH_STATUS_DRAW) {
         $draw_css_class = "progress_bar_width_catulate bgcolor_green";
     } else if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1 && $newsfeed['reference_info']['my_prediction_id'] != $newsfeed['reference_info']['status_id'] && $newsfeed['reference_info']['my_prediction_id'] == MATCH_STATUS_DRAW) {
         $draw_css_class = "progress_bar_width_catulate bgcolor_red";
@@ -354,7 +354,7 @@
     <?php
     $away_percentage = $newsfeed['reference_info']['prediction_info']['away'];
     $away_css_class = "";
-    if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['my_prediction_id'] == $newsfeed['reference_info']['status_id'] && $newsfeed['reference_info']['my_prediction_id'] == MATCH_STATUS_WIN_AWAY) {
+    if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['status_id'] == MATCH_STATUS_WIN_AWAY) {
         $away_css_class = "progress_bar_width_catulate bgcolor_green";
     } else if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING && $newsfeed['reference_info']['is_predicted'] == 1 && $newsfeed['reference_info']['my_prediction_id'] != $newsfeed['reference_info']['status_id'] && $newsfeed['reference_info']['my_prediction_id'] == MATCH_STATUS_WIN_AWAY) {
         $away_css_class = "progress_bar_width_catulate bgcolor_red";

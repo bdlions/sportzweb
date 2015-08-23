@@ -387,7 +387,25 @@ class Statuses {
                 } else if ($status['shared_type_id'] == STATUS_SHARE_BLOG && isset($blog_id_info_map[$status['reference_id']])) {
                     $status['reference_info'] = $blog_id_info_map[$status['reference_id']];
                 }else if ($status['shared_type_id'] == STATUS_SHARE_FIXTURES_RESULTS && isset($app_sp_match_id_match_info_map[$status['reference_id']])) {
-                    $status['reference_info'] = $app_sp_match_id_match_info_map[$status['reference_id']];
+                    $reference_match_info = $app_sp_match_id_match_info_map[$status['reference_id']];
+                    if ($current_user_id != $status['user_id']) {
+                        $reference_match_info['is_predicted'] = 0;
+                        $reference_match_info['my_prediction_id'] = 0;
+                        $p_list = $reference_match_info['prediction_list'];
+                        if($p_list != NULL && $p_list != "")
+                        {
+                            $prediction_list = json_decode($p_list);
+                            foreach($prediction_list as $prediction_info)
+                            {
+                                if($prediction_info->user_id == $status['user_id'])
+                                {
+                                    $reference_match_info['is_predicted'] = 1;
+                                    $reference_match_info['my_prediction_id'] = $prediction_info->prediction_id;
+                                }
+                            }
+                        }
+                    }
+                    $status['reference_info'] = $reference_match_info;
                 } else if ($status['shared_type_id'] == STATUS_SHARE_PHOTO && isset($photo_id_photo_info_map[$status['reference_id']])) {
                     $status['reference_info'] = $photo_id_photo_info_map[$status['reference_id']];
                 } else if ($status['shared_type_id'] == STATUS_SHARE_APP_ADMIN_LATEST_MAIN_RECIPE && isset($recipe_id_info_map[$admin_default_recipe_id])) {
