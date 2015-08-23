@@ -54,8 +54,8 @@
         <?php $this->load->view("templates/sections/header_with_logo"); ?>
         <div class="container">
             <?php echo $contents ?>
-        </div>
         <?php $this->load->view("templates/sections/footer"); ?>
+        </div>
         <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>

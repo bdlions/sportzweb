@@ -51,7 +51,21 @@
             <div class="col-md-12" style="padding-bottom: 8px;">
                 <div class="row">
                     <div class="row form-group"></div>
-                    <div class="col-md-12">
+                    <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="blogs_item_logo" src="<?php echo base_url(); ?>resources/images/blogs_logo.png">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="blogs_item_logo_anchor" target="_blank" href="http://blog.com/" ><h4>Blog.com</h4></a>
+                </div>
+            </div>
+        </div>
+                    
+                    
+                    <div class="col-md-10">
                         <span class="heading_big"><?php echo isset($blog['title']) ? html_entity_decode(html_entity_decode($blog['title'])):''; ?></span>
                     </div>
                 </div>

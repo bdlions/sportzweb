@@ -11,20 +11,20 @@
 </style>
 
 <script>
-    $(function(){
+    $(function() {
         $("#button_share_recipe").on("click", function() {
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url(); ?>' + "share/share_application",
                 dataType: 'json',
                 data: {
-                    status_category_id: '<?php echo STATUS_CATEGORY_USER_NEWSFEED?>',                    
+                    status_category_id: '<?php echo STATUS_CATEGORY_USER_NEWSFEED ?>',
                     description: $("#text_share").val(),
-                    shared_type_id: '<?php echo STATUS_SHARE_HEALTHY_RECIPE?>',
-                    reference_id: <?php echo $recipe_item['id']?>
+                    shared_type_id: '<?php echo STATUS_SHARE_HEALTHY_RECIPE ?>',
+                    reference_id: <?php echo $recipe_item['id'] ?>
                 },
                 success: function(data) {
-                    window.location = '<?php echo base_url()?>';
+                    window.location = '<?php echo base_url() ?>';
                 }
             });
         });
@@ -54,11 +54,25 @@
         </div>
     </div>
 </div>
-<?php $recipe_id = $recipe_item['id'];?>
+<?php $recipe_id = $recipe_item['id']; ?>
 <?php $this->load->view("applications/health_recipes/templates/header_row"); ?>
 <div class="col-md-9">
     <div class="row grayborderbottom grayborderleft grayborderright" >
-        <div class="col-md-12 heading_big"><?php echo $recipe_item['title']; ?></div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="recipe_item_logo" src="<?php echo base_url(); ?>resources/images/recipe_logo.png">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="recipe_item_logo_anchor" target="_blank" href="http://www.foodnetworkasia.com/" ><h4>Food Network</h4></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 heading_big">
+            <?php echo $recipe_item['title']; ?>
+        </div>
     </div>
     <div class="row grayborderbottom grayborderleft grayborderright">
         <div class="col-md-9 grayborderright">
@@ -104,10 +118,10 @@
                     </h4>-->
                     <div class="cookbook-recommend">
                         <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recommend_item['id']; ?>">
-                        <?php if (!empty($recommend_item['main_picture'])): ?>
-                            <img style="padding-top:15px;padding-bottom:10px;width: 160px;height: 120px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recommend_item['main_picture']; ?>" class="img-responsive" alt="<?php echo $recommend_item['title']; ?>"/>
-                            <?php echo $recommend_item['title']; ?>
-                        <?php endif; ?>
+                            <?php if (!empty($recommend_item['main_picture'])): ?>
+                                <img style="padding-top:15px;padding-bottom:10px;width: 160px;height: 120px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recommend_item['main_picture']; ?>" class="img-responsive" alt="<?php echo $recommend_item['title']; ?>"/>
+                                <?php echo $recommend_item['title']; ?>
+                            <?php endif; ?>
                         </a>
                     </div>
                 <?php endforeach; ?>
@@ -122,17 +136,17 @@
                 <?php foreach ($alternative_recipes_item as $alternative_item): ?>
                     <div class="cookbook-recommend">
                         <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $alternative_item['id']; ?>">
-                        <?php if (!empty($alternative_item['main_picture'])): ?>
-                            <img style="padding-top:15px;padding-bottom:10px;width: 160px;height: 120px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $alternative_item['main_picture']; ?>" class="img-responsive" alt="<?php echo $recommend_item['title']; ?>"/>
-                            <?php echo $alternative_item['title']; ?>
-                        <?php endif; ?>
+                            <?php if (!empty($alternative_item['main_picture'])): ?>
+                                <img style="padding-top:15px;padding-bottom:10px;width: 160px;height: 120px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $alternative_item['main_picture']; ?>" class="img-responsive" alt="<?php echo $recommend_item['title']; ?>"/>
+                                <?php echo $alternative_item['title']; ?>
+                            <?php endif; ?>
                         </a>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
     </div>
-     <?php $this->load->view("applications/comments"); ?>
+    <?php $this->load->view("applications/comments"); ?>
 </div>
 <div class="col-md-3">
 

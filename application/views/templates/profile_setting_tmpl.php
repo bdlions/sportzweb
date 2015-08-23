@@ -54,7 +54,7 @@
         <div class="container">
                 <?php echo $contents?>
         </div>
-        <?php $this->load->view("templates/sections/footer");?>
+        <?php //$this->load->view("templates/sections/footer");?>
         <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>

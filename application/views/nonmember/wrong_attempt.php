@@ -24,7 +24,7 @@
                 <?php echo anchor("auth/forget_password", "Forgot your password?", $forget_password); ?>
             </div>
             <?php echo form_close(); ?>
-            <?php if($message != ""){ ?><div id="message" class="error-message"><?php echo $message; ?></div><?php }?>
+            <?php if($message != ""){ ?><div id="message" class="error-message form-group"><?php echo $message; ?></div><?php }?>
         </div>
     </div>
 

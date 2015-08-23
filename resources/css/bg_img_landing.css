@@ -228,7 +228,7 @@ version: 1.0
         background-position: 0px 40px;
     }
     .copyright {
-        margin-left: 62%;
+        margin-left: 62.5%;
     }
 }
 
@@ -285,9 +285,17 @@ version: 1.0
     top: 30px;
     width: 32px;
 }
+.auth_footer_ul{
+    position: absolute;
+    top: 50px;
+}
+.auth_footer_ul li a{
+    color: #7DB9ED;
+    font-weight: bold;
+}
 .footer_ul{
     position: absolute;
-    top: 2%;
+    top: 150px;
 }
 .footer_ul li a{
     color: #7DB9ED;

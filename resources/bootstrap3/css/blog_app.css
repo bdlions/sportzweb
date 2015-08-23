@@ -86,7 +86,7 @@ and open the template in the editor.
 }
 .blog_home_header_menu
 {
-    padding-top: 12px;
+    padding-top: 5px;
     padding-bottom: 5px;
     font-size: 15px;
     border-bottom: 1px solid red;
@@ -94,6 +94,7 @@ and open the template in the editor.
     border-left: 0;
     border-right: 0;
     border-radius: 0;
+    min-height: 30px;
 }
 .blog_home_header_menu a
 {

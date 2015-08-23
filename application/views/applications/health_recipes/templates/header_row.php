@@ -19,8 +19,8 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
-                <div class="collapse navbar-collapse" id="health_recipes_header_menu_item">
-                    <ul class="nav navbar-nav reciepe-menu heading_medium_thin list-inline">
+                <div class="collapse navbar-collapse reciepe-menu" id="health_recipes_header_menu_item">
+                    <ul class="nav navbar-nav navbar_nav_custom heading_medium_thin">
                         <li><a href="<?php echo base_url() . 'applications/healthy_recipes' ?>">Home</a></li>
 
                         <?php if (count($recipe_menu) > 0) : ?>
