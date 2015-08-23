@@ -8,7 +8,7 @@
         }).parent().addClass('active_score_prediction_item').siblings().removeClass('active_score_prediction_item')
     });
 </script>
-<nav class="navbar navbar-menu-news navbar-default cus_news_header news-menu" role="navigation">
+<nav style="padding-left: -10px;"  class="navbar navbar-default navbar-menu-news news-menu navbar_default_custom scroe_pretiction_navbar_default_custom" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -20,10 +20,10 @@
             </button>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="row collapse navbar-collapse" id="news_header_menu_blue">
-            <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse" id="news_header_menu_blue">
+            <ul class="nav navbar-nav ">
                 <li>
-                    <a style="padding-left:2px;" href="<?php echo base_url() . 'applications/score_prediction' ?>" >Home</a>
+                    <a href="<?php echo base_url() . 'applications/score_prediction' ?>" >Home</a>
                 </li>
                 <?php
                 foreach ($sports_list as $sports_info) {

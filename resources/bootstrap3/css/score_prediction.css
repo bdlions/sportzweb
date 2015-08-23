@@ -360,7 +360,7 @@
         width: 23%;
     }
     .feed_predict_score .app_sp_match_result{
-        width: 12%;
+        width: 10%;
     }
 
     .feed_predict_score .app_sp_match_status{
@@ -374,3 +374,17 @@
 #news_header_menu_blue ul > li:hover{
     background-color: #FFDEAD;
 }
+
+.scroe_pretiction_navbar_default_custom ul li a {
+    padding-bottom: 18px;
+    padding-top: 13px;
+    color: #777777;
+    font-size: 18px;
+}
+.scroe_pretiction_navbar_default_custom{
+    border-bottom: 2px solid #4C54CF;
+    border-top: 2px solid #BFBFBF;
+    border-left: 0;
+    border-right: 0;
+}
+
