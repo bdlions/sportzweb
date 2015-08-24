@@ -4,12 +4,12 @@
         <div class="row col-md-12">            
             <div class="row form-group" style="padding-left: 10px;">
                 <?php if($allow_write){ ?>
-                <div class ="col-md-2 pull-left">
+                <div class ="col-md-2 pull-left form-group">
                     <button onclick="open_modal_sports_create()" value="" class="form-control btn button-custom pull-right">Create Sports</button>  
                 </div>
                 <?php } ?>
                 <?php if($allow_configuration){ ?>
-                <div class ="col-md-2 pull-left">
+                <div class ="col-md-2 pull-left form-group" style="padding-right: 5px;">
                     <a href="<?php echo base_url()."admin/applications_scoreprediction/configure_home_page"; ?>">
                         <button value="" class="form-control btn button-custom pull-right">Configure Homepage</button>  
                     </a>
