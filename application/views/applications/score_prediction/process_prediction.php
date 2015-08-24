@@ -35,7 +35,7 @@
         <div class="row panel-heading" role="tab">
             {% if(match_info.location_id == <?php echo MATCH_PREDICTION_FROM_NEWSFEED; ?>){ %}
             <?php 
-                echo '<a class="feed_predict_score" href="'.base_url().'applications/score_prediction/index/{%= match_info.match_id%}">';                            
+                echo '<a class="score_prediction" href="'.base_url().'applications/score_prediction/index/{%= match_info.match_id%}">';                            
             ?>
             {% }else{ %}
             <a class="score_prediction anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= match_info.match_id%}" aria-expanded="true" aria-controls="">
