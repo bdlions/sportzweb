@@ -270,22 +270,25 @@
                 <div class="panel-group" aria-multiselectable="true" role="tablist">
                     <div class="panel panel-default" id="div_match_info_<?php echo $newsfeed['reference_info']['match_id']; ?>">
                         <div class="row panel-heading" role="tab">
-                            <a class="feed_predict_score" href="<?php echo base_url() . 'applications/score_prediction/index/' . $newsfeed['reference_id']; ?>">
+                            <a class="score_prediction" href="<?php echo base_url() . 'applications/score_prediction/index/' . $newsfeed['reference_id']; ?>">
                                 <div class="app_sp_time">
                                     <?php echo $newsfeed['reference_info']['time']; ?>
                                 </div>
                                 <div class="app_sp_team_home">
                                     <?php echo $newsfeed['reference_info']['team_title_home']; ?>
                                 </div>
+                                <?php if($newsfeed['reference_info']['status_id'] == MATCH_STATUS_UPCOMING){ ?>
                                 <div class="app_sp_vs">
                                     vs
                                 </div>
-                                <div class="app_sp_team_away">
-                                    <?php echo $newsfeed['reference_info']['team_title_away']; ?>
-                                </div>
+                                <?php }else{?>
                                 <div class="app_sp_match_result">
                                     <?php echo $newsfeed['reference_info']['score_home'] . ' - ' . $newsfeed['reference_info']['score_away']; ?>
                                 </div>
+                                <?php }?>
+                                <div class="app_sp_team_away">
+                                    <?php echo $newsfeed['reference_info']['team_title_away']; ?>
+                                </div>                                
                                 <div class="app_sp_match_status">
                                     <?php if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING) { ?>
                                         <span>                                     

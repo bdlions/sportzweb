@@ -38,7 +38,7 @@
                 echo '<a class="feed_predict_score" href="'.base_url().'applications/score_prediction/index/{%= match_info.match_id%}">';                            
             ?>
             {% }else{ %}
-            <a class="anchor_text_style feed_predict_score" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= match_info.match_id%}" aria-expanded="true" aria-controls="">
+            <a class="score_prediction anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= match_info.match_id%}" aria-expanded="true" aria-controls="">
             {% }%}
                 <div class="app_sp_time">
                     <?php echo '{%= match_info.time %}'; ?>
@@ -46,14 +46,17 @@
                 <div class="app_sp_team_home">
                     <?php echo '{%= match_info.team_title_home %}'; ?>
                 </div>
+                {% if(match_info.status_id == <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
                 <div class="app_sp_vs">
                     vs
                 </div>
-                <div class="app_sp_team_away">
-                    <?php echo '{%= match_info.team_title_away %}'; ?>
-                </div>
+                {% }else{ %}
                 <div class="app_sp_match_result">
                     <?php echo '{%= match_info.score_home %}' . ' - ' . '{%= match_info.score_away %}'; ?>
+                </div>
+                {% } %}
+                <div class="app_sp_team_away">
+                    <?php echo '{%= match_info.team_title_away %}'; ?>
                 </div>
                 <div class="app_sp_match_status">
                     {% if(match_info.status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
