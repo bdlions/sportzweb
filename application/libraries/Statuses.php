@@ -397,7 +397,7 @@ class Statuses {
                             $prediction_list = json_decode($p_list);
                             foreach($prediction_list as $prediction_info)
                             {
-                                if($prediction_info->user_id == $status['user_id'])
+                                if($prediction_info->user_id == $current_user_id)
                                 {
                                     $reference_match_info['is_predicted'] = 1;
                                     $reference_match_info['my_prediction_id'] = $prediction_info->prediction_id;
