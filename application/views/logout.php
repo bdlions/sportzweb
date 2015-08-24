@@ -5,4 +5,5 @@
         <img src="<?php echo base_url().LOGOUT_PAGE_IMAGE_PATH.$current_configuration['img'] ?>" class="img-responsive">
     </div>
 </div>
+<?php $this->load->view("templates/sections/footer");?>
 

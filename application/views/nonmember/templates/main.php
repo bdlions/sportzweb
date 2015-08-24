@@ -210,10 +210,9 @@
             <?php echo form_input($register_btn + array('class' => 'btn button-custom')); ?>
         </div>
     </div>
-    <div class="row form-group"></div>
-    <div class="row form-group"></div>
-    <div class="row form-group"></div>
-    <div class="row form-group"></div>
+    <div style="padding-bottom: 80px;"></div>
 </div>
 <div id="message"></div>
 <?php echo form_close(); ?>
+
+ <?php $this->load->view("templates/sections/auth_footer");?>

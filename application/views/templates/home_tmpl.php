@@ -41,7 +41,6 @@
         <div class="container-fluid">
             <?php echo $contents; ?>
         </div>
-        <?php $this->load->view("templates/sections/auth_footer"); ?>
         <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>

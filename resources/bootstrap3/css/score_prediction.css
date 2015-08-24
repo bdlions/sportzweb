@@ -330,7 +330,7 @@
     font-size: 13px;
 }
 
-.feed_predict_score div{
+.feed_predict_score div, .score_prediction div{
     display: block;
     float: left;
     font-size: 12px;
@@ -343,6 +343,9 @@
 
 @media all and (max-width: 991px){
     .feed_predict_score .app_sp_time, .feed_predict_score .app_sp_team_home,.feed_predict_score .app_sp_vs,.feed_predict_score .app_sp_team_away,.feed_predict_score .app_sp_match_result,.feed_predict_score .app_sp_match_status {
+        width: 100%;
+    }
+    .score_prediction .app_sp_time, .score_prediction .app_sp_team_home,.score_prediction .app_sp_vs,.score_prediction .app_sp_team_away, .score_prediction .app_sp_match_result, .score_prediction .app_sp_match_status {
         width: 100%;
     }
 }
@@ -364,6 +367,26 @@
     }
 
     .feed_predict_score .app_sp_match_status{
+        width: 12%;
+    }
+
+    .score_prediction .app_sp_time{
+        width: 7%;
+    }
+    .score_prediction .app_sp_team_home{
+        width: 28%;
+    }
+    .score_prediction .app_sp_vs{
+        width: 14%;
+    }
+    .score_prediction .app_sp_team_away{
+        width: 28%;
+    }
+    .score_prediction .app_sp_match_result{
+        width: 14%;
+    }
+
+    .score_prediction .app_sp_match_status{
         width: 12%;
     }
 }

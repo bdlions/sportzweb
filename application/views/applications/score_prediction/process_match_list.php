@@ -121,7 +121,7 @@
                     </div>
                     <div class="form-group" style="margin: 0 2.5%;">
                         <table class="table">
-                            <div class="feed_predict_score row form-group table-hover text_align">
+                            <div class="score_prediction row form-group table-hover text_align">
                                 <div class="app_sp_time">
                                     Time
                                 </div>
@@ -147,7 +147,7 @@
                         {% for(var k=0; k<count1; k++){ %}
                             <div class="panel panel-default" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
                                 <div class="row panel-heading" role="tab">
-                                    <a class="feed_predict_score anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
+                                    <a class="score_prediction anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
                                         <div class="app_sp_time">
                                             <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
                                         </div>

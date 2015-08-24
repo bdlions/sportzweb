@@ -287,15 +287,15 @@ version: 1.0
 }
 .auth_footer_ul{
     position: absolute;
-    top: 50px;
+    top: 30px;
 }
 .auth_footer_ul li a{
     color: #7DB9ED;
     font-weight: bold;
 }
 .footer_ul{
-    position: absolute;
-    top: 150px;
+    position: fixed;
+    bottom: 10px;
 }
 .footer_ul li a{
     color: #7DB9ED;
