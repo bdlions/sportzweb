@@ -25,7 +25,15 @@
 
                         <?php if (count($recipe_menu) > 0) : ?>
                             <?php foreach ($recipe_menu as $menu): ?>
-                                <li><a style="padding-left: 15px;" href="<?php echo base_url() . 'applications/healthy_recipes/recipe_category/' . $menu['id']; ?>"><?php echo $menu['description']; ?></a> </li>
+                                <li
+                                    <?php 
+                                    if(isset($recipe_item) && $recipe_item['recipe_category_id'] == $menu['id']) 
+                                    { 
+                                        echo 'class="active_health_recipes_item"';                                             
+                                    }
+                                    ?>
+                                    ><a 
+                                        style="padding-left: 15px; " href="<?php echo base_url() . 'applications/healthy_recipes/recipe_category/' . $menu['id']; ?>"><?php echo $menu['description']; ?></a> </li>
                             <?php endforeach; ?>
                         <?php endif; ?>
                         <li><a style="padding-left: 15px;" href="<?php echo base_url() . 'applications/healthy_recipes/recipe_category_letters' ?>">A-Z</a></li>
