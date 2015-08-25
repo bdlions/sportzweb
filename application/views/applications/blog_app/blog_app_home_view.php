@@ -1,8 +1,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/blog_app.css" />
 <?php $this->load->view("applications/blog_app/templates/header_menu"); ?>
-<div class="row">
     <?php if ($show_advertise): ?>
-        <div class="col-md-9" >
+        <div class="row col-md-9" >
             <div style="padding: 8px; background-color: #F5F5F5; padding-right:25px;">
             <?php else: ?>
                 <div class="col-md-12" style="padding: 8px; background-color: #F5F5F5">
@@ -204,7 +203,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 <script type="text/javascript">
