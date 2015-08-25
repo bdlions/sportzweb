@@ -89,8 +89,8 @@ and open the template in the editor.
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 15px;
-    border-bottom: 1px solid red;
-    border-top: 1px solid #7F7F7F;
+    border-bottom: 2px solid red;
+    border-top: 2px solid #7F7F7F;
     border-left: 0;
     border-right: 0;
     border-radius: 0;
