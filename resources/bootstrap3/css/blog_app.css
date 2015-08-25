@@ -86,8 +86,8 @@ and open the template in the editor.
 }
 .blog_home_header_menu
 {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     font-size: 15px;
     border-bottom: 2px solid red;
     border-top: 2px solid #7F7F7F;
@@ -141,4 +141,20 @@ and open the template in the editor.
     height: 24px;
     width: 64px;
     font-size: 16px;
+}
+
+@media (min-width: 992px){
+    .blog_header_collapse_margin_adjustment{
+        margin-left: -11px; 
+    }
+}
+@media (min-width: 768px) and (max-width: 991px){
+    .blog_header_collapse_margin_adjustment{
+        margin-left: -11px; 
+    }
+}
+@media (max-width: 767px){
+    .blog_header_collapse_margin_adjustment{
+        margin-left: 0; 
+    }
 }

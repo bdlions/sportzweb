@@ -20,7 +20,7 @@
             </button>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="news_header_menu_blue">
+        <div class="collapse navbar-collapse score_prediction_header_collapse_margin_adjustment" id="news_header_menu_blue">
             <ul class="nav navbar-nav ">
                 <li>
                     <a href="<?php echo base_url() . 'applications/score_prediction' ?>" >Home</a>

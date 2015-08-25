@@ -22,7 +22,7 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
-                <div class="collapse navbar-collapse" id="blog_header_menu_item">
+                <div class="collapse navbar-collapse blog_header_collapse_margin_adjustment" id="blog_header_menu_item">
                     <ul class="nav navbar-nav blog_app_navbar_custom">
                         <?php if (!empty($custom_blog_category_menu) && ($custom_blog_category_menu[0]['id'] == HOME)): ?>
                             <li><a href="<?php echo base_url() . 'applications/blog_app' ?>"><?php echo $custom_blog_category_menu[0]['title']; ?></a></li>
