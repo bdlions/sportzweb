@@ -2,6 +2,4 @@
     <div class="col-md-offset-2">
         <img src="<?php echo base_url()?>resources/images/gympro.png" style="padding-left: 60px;">
     </div>
-        
-    
 </div>

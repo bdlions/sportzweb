@@ -114,7 +114,7 @@ while(notification_info){ %}
 
 <div class="pagelet message_friends_box">
     <div class="row">
-        <div class="col-sm-3 feed-profile-picture">
+        <div class="col-md-3 feed-profile-picture">
             {% if(notification_info.reference_list != null){ %}
             <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>'>
                 <div>
@@ -124,7 +124,7 @@ while(notification_info){ %}
             </a>
             {%}%}
         </div>
-        <div class="col-sm-9">
+        <div class="col-md-9">
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>'){ %}
                 {% var counter = 1;
                 var total_users = notification_info.reference_list.length; %}
@@ -245,7 +245,7 @@ while(notification_info){ %}
                 <div class="col-md-8">
                     <div class="header-menu-row">
                         <div class="col-md-offset-1 col-md-6" >
-                                <div class=" input-group ">
+                                <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                                     <input id="typeahead" class="form-control" type="text" placeholder="Search for people and interests" />
                                     <?php $this->load->view("custom_typeahead/typeahead_tmpl"); ?>
@@ -315,13 +315,13 @@ while(notification_info){ %}
                                 </div>
 
                                 <!--                                <a href="#">
-                                                                    <img src="<?php echo base_url(); ?>resources/images/friends.png">
+                                                                    <img src="<?php //echo base_url(); ?>resources/images/friends.png">
                                                                 </a>
                                                                 <a href="#">
-                                                                    <img src="<?php echo base_url(); ?>resources/images/bell.png">
+                                                                    <img src="<?php //echo base_url(); ?>resources/images/bell.png">
                                                                 </a>
-                                                                <a href="<?php echo base_url() . 'messages' ?>">
-                                                                    <img src="<?php echo base_url(); ?>resources/images/inbox.png">
+                                                                <a href="<?php //echo base_url() . 'messages' ?>">
+                                                                    <img src="<?php //echo base_url(); ?>resources/images/inbox.png">
                                                                 </a>-->
 
                             </div>
@@ -331,6 +331,7 @@ while(notification_info){ %}
             </div>
         </div>
     </div>
+    
     <?php if (isset($application_id) && $application_id == APPLICATION_GYMPRO_ID): ?>
         <?php $this->load->view("applications/gympro/template/sections/top_banner"); ?>
     <?php endif; ?>

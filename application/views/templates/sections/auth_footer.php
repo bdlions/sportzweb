@@ -8,8 +8,8 @@
                 <li><a href="<?php echo base_url(); ?>footer/terms">TERMS</a></li>
                 <li><a href="<?php echo base_url(); ?>footer/privacy">PRIVACY</a></li>
                 <li><a href="<?php echo base_url(); ?>footer/contact_us">CONTACT US</a></li>
-                <li><div class="copyright">COPYRIGHT @ 2012 <a href="./"><?php // echo WEBSITE_TITLE;            ?></a> ALL RIGHT RESERVED.</div></li>
             </ul>
+            <div class="auth_copyright">COPYRIGHT @ 2012 <a href="./"><?php // echo WEBSITE_TITLE;              ?></a> ALL RIGHT RESERVED.</div>
         </div>
     </div>
 </div>

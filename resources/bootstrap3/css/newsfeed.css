@@ -38,6 +38,7 @@
 .navbar-top {
     background: #ffffff url('../../images/bg2.png') top repeat-x;
     border:0px;
+    min-height: 80px;
 }
 /*.logo{
     width:60px;
