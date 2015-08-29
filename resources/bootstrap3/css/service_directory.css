@@ -5,3 +5,15 @@
 .borderless td {
     border: none;
 }
+
+.app_sd_service_detail_box
+{
+    border: 1px solid #cccccc;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.app_sd_logo_aligned
+{
+    margin: 15px;
+}

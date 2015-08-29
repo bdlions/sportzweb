@@ -65,15 +65,8 @@ and open the template in the editor.
 .cus_comment_box
 {
     border: 1px solid #cccccc;
-    margin: 15px;
 }
-.cus_service_detail_box
-{
-    border: 1px solid #cccccc;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    margin: 15px;
-}
+
 .cus_service_directory_heading
 {
     
