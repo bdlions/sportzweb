@@ -89,6 +89,7 @@ $config['tables']['footer_privacy']                         = 'footer_privacy';
  * Applications
  */
 $config['tables']['application_directory']                  = 'application_directory';
+$config['tables']['app_item_reference_list']                = 'app_item_reference_list';
 $config['tables']['applications']                           = 'applications';
 $config['tables']['sports']                                 = 'sports';
 $config['tables']['tournaments']                            = 'tournaments';
