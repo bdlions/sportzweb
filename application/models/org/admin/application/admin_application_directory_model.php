@@ -114,5 +114,50 @@ class Admin_application_directory_model extends Ion_auth_model {
         $this->db->trans_commit();
         return TRUE;
     }
+    
+    /*
+     * This method will create an application item reference
+     * @aurhtor nazmul hasan on 29th august 2015
+     */
+    public function create_app_item_reference()
+    {
+        
+    }
+    
+    /*
+     * This method will edit an application item reference
+     * @aurhtor nazmul hasan on 29th august 2015
+     */
+    public function edit_app_item_reference()
+    {
+        
+    }
+    
+    /*
+     * This method will return an application item reference info
+     * @aurhtor nazmul hasan on 29th august 2015
+     */
+    public function get_app_item_reference_info($app_item_reference_id)
+    {
+        
+    }
+    
+    /*
+     * This method will return all application item references
+     * @aurhtor nazmul hasan on 29th august 2015
+     */
+    public function show_all_app_item_references()
+    {
+        
+    }
+    
+    /*
+     * This method will delete an application item reference
+     * @aurhtor nazmul hasan on 29th august 2015
+     */
+    public function delete_app_item_reference()
+    {
+        
+    }
 
 }

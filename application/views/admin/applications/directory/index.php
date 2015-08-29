@@ -2,15 +2,20 @@
     <div class="panel-heading">Applications</div>
     <div class="panel-body">
         <div class="row col-md-12">
-             <?php if ($allow_write) { ?>
+            <?php if ($allow_write) { ?>
             <div class="row form-group">
                 <div class ="pull-left" style="padding-left: 25px;">
                     <a href="<?php echo base_url(); ?>admin/applications_directory/create_application">
                         <button class="btn button-custom">Create Application</button>
                     </a>
                 </div>
+                <div class ="pull-left" style="padding-left: 25px;">
+                    <a href="<?php echo base_url(); ?>admin/applications_directory/show_app_item_references">
+                        <button class="btn button-custom">Manage Reference</button>
+                    </a>
+                </div>
             </div>
-             <?php } ?>
+            <?php } ?>
             <div class="row">
                 <div class="table-responsive table-left-padding">
                     <table class="table table-bordered" style="text-align: center;">

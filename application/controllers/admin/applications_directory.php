@@ -282,5 +282,26 @@ class Applications_directory extends Admin_Controller{
         }
     }
     
+    // --------------------- application item reference manage -----------------------//
+    public function show_app_item_references()
+    {
+        $this->data['message'] = "";
+        $this->template->load($this->tmpl, "admin/applications/directory/references/show_all_references", $this->data);
+    }
+    
+    public function create_app_item_reference()
+    {
+        
+    }
+    
+    public function edit_app_item_reference()
+    {
+        
+    }
+    
+    public function delete_app_itme_reference()
+    {
+        
+    }    
 }
 

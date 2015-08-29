@@ -1045,6 +1045,16 @@ INSERT INTO `application_directory` (`id`, `title`) VALUES
 (9, 'Shop'),
 (10, 'Gympro');
 
+-- application item reference site information
+CREATE TABLE IF NOT EXISTS `app_item_reference_list` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `img` varchar(200),
+  `link` text default '',
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
 -- modified xstream banter
 CREATE TABLE IF NOT EXISTS `app_xb_sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
