@@ -129,7 +129,7 @@
                 </div>
                 <div class="col-md-offset-3 col-md-4">
                     <div class="pagelet_auth">
-                        <?php echo form_open("auth/login", array('id' => 'registration-form', 'role' => 'form')); ?>
+                        <?php //echo form_open("auth/login", array('id' => 'registration-form', 'role' => 'form')); ?>
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <span class="sign_up_text">Sign Up</span>
@@ -171,7 +171,7 @@
                             </div>
                         </div>
                         <div id="message"></div>
-                        <?php echo form_close(); ?>
+                        <?php //echo form_close(); ?>
                     </div>
                     <div class="row form-group"></div>
                     <div class="row form-group"></div>
