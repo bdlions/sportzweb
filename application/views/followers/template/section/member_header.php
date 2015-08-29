@@ -106,19 +106,14 @@
     }
 </script>
 <div class="row" style="padding-bottom: 30px;">
-    <div class="col-md-4">
+    <div class="col-md-4 form-group">
         <div class=" input-group search-box-followers">
             <input id="search_followers_box" class="form-control typeahead" type="text" placeholder="Search for followers" />
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
         </div>
     </div>       
     <div class="col-md-8"> 
-        <ul class="list-inline">
-            <li class="form-group">
-                <?php if ($follow_permission->value == FOLLOWER_ACCEPTANCE_TYPE_MANUAL) { ?>
-                    <a href="<?php //echo base_url().'followers/pending_followers'    ?>"><button style="width:100%" class="btn button-custom btn-sm" id="button_pending_request">Pending Requests</button></a>
-                <?php } ?>
-            </li>
+        <ul class="list-inline follower_list_inline_custom">
             <li class="form-group">
                 <a href="<?php echo base_url() . 'followers/invite' ?>"><button style="width:100%" class="btn button-custom btn-sm">Invite</button></a>                    
             </li>
@@ -127,6 +122,11 @@
             </li>
             <li class="form-group">
                 <a href="<?php echo base_url() . 'followers/blocked_followers/' . $user_id ?>"><button style="width:100%" class="btn button-custom btn-sm">Blocked Members</button></a>                    
+            </li>
+             <li class="form-group">
+                <?php if ($follow_permission->value == FOLLOWER_ACCEPTANCE_TYPE_MANUAL) { ?>
+                    <a href="<?php //echo base_url().'followers/pending_followers'    ?>"><button style="width:100%" class="btn button-custom btn-sm" id="button_pending_request">Pending Requests</button></a>
+                <?php } ?>
             </li>
         </ul>
     </div>

@@ -76,3 +76,11 @@ body
 }
 
 
+
+@media all and (min-width: 992px) {
+    .follower_list_inline_custom{
+        margin-left: 15px;
+    }
+}
+
+
