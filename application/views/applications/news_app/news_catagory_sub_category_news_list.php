@@ -21,9 +21,9 @@
             <input type="hidden" name="get_selected_id" id="get_selected_id" value="">
             <div class="col-md-6 col-lg-6">
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[0]]['id']; ?>">
-                    <span class="heading_big">
+                    <div class="heading_big heading_big_alignment">
                         <p id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline'])); ?></p>
-                    </span>
+                    </div>
                 </a>
                 <span class="content_text">
                     <p id="summary_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['summary'])); ?></p>

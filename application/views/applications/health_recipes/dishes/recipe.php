@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-10 heading_big">
+        <div class="col-md-10 heading_big heading_big_alignment">
             <?php echo $recipe_item['title']; ?>
         </div>
     </div>

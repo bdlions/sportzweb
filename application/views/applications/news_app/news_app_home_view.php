@@ -64,9 +64,9 @@
         </div>
         <div class="col-md-6 col-lg-6">
             <a href="<?php echo base_url() . 'applications/news_app/news_item/'.$news_id_news_info_map[$region_id_news_id_map[0]]['id']; ?>">
-                <span class="heading_big">
+                <div class="heading_big heading_big_alignment">
                     <p><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline']));?></p>
-                </span>
+                </div>
             </a>
             <span class="content_text">
                 <p><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['summary']));?></p>

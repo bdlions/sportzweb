@@ -42,8 +42,7 @@
                 </div>
             </div>
             <div class="col-md-10">
-
-                <div class="heading_big">
+                <div class="heading_big heading_big_alignment">
                     <?php echo html_entity_decode(html_entity_decode($news['headline'])); ?>
                 </div>
             </div>

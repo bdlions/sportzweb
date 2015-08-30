@@ -269,7 +269,7 @@
             <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
                 <div class="panel-group" aria-multiselectable="true" role="tablist">
                     <div class="panel panel-default" id="div_match_info_<?php echo $newsfeed['reference_info']['match_id']; ?>">
-                        <div class="row panel-heading" role="tab">
+                        <div class="row panel-heading sp_app_panel_heading_margin" role="tab">
                             <a class="score_prediction" href="<?php echo base_url() . 'applications/score_prediction/index/' . $newsfeed['reference_id']; ?>">
                                 <div class="app_sp_time">
                                     <?php echo $newsfeed['reference_info']['time']; ?>
@@ -291,17 +291,11 @@
                                 </div>                                
                                 <div class="app_sp_match_status">
                                     <?php if ($newsfeed['reference_info']['status_id'] != MATCH_STATUS_UPCOMING) { ?>
-                                        <span>                                     
-                                            Closed
-                                        </span>   
+                                       <div class="floating_right">Closed </div>  
                                     <?php } else if ($newsfeed['reference_info']['is_predicted'] == 1) { ?>
-                                        <span>                                     
-                                            Voted
-                                        </span> 
+                                        <div class="floating_right">Voted </div>
                                     <?php } else { ?>
-                                        <span>                                     
-                                            Vote
-                                        </span>
+                                        <div class="floating_right">Vote </div>
                                     <?php } ?>
                                 </div>
                             </a>

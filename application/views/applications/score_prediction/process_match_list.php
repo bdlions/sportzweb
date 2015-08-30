@@ -119,7 +119,7 @@
                     <div class="form-group heading blue_banner custom_heading tournament_background_color text_align_left">
                         <span ><?php echo '{%= sports_list.tournament_list[j].title%}'; ?> </span>
                     </div>
-                    <div class="form-group" style="margin: 0 2.5%;">
+                    <div class="form-group sp_app_table_margin">
                         <table class="table">
                             <div class="score_prediction row form-group table-hover text_align">
                                 <div class="app_sp_time">
@@ -146,7 +146,7 @@
                     <div class="panel-group" id="accordion_match" role="tablist" aria-multiselectable="true">
                         {% for(var k=0; k<count1; k++){ %}
                             <div class="panel panel-default" id="div_match_info_{%= sports_list.tournament_list[j].match_list[k].match_id%}">
-                                <div class="row panel-heading" role="tab">
+                                <div class="row panel-heading sp_app_panel_heading_margin" role="tab">
                                     <a class="score_prediction anchor_text_style" role="button" data-toggle="collapse" data-parent="#accordion_match" href="#collapse_match_event{%= sports_list.tournament_list[j].match_list[k].match_id%}" aria-expanded="true" aria-controls="collapseOne">
                                         <div class="app_sp_time">
                                             <?php echo '{%= sports_list.tournament_list[j].match_list[k].time %}'; ?>
@@ -168,11 +168,11 @@
                                         </div>                                        
                                         <div class="app_sp_match_status">
                                             {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
-                                            <span > Closed </span>
+                                            <div class="floating_right">Closed </div>
                                             {% }else if(sports_list.tournament_list[j].match_list[k].is_predicted == 1){ %}
-                                            <span > Voted </span>
+                                            <div class="floating_right">Voted </div>
                                             {% }else{ %}
-                                            <span>Vote </span>
+                                            <div class="floating_right">Vote </div>
                                             {% } %}
                                         </div>
                                     </a>
