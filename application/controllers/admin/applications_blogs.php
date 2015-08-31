@@ -463,9 +463,9 @@ class Applications_blogs extends Admin_Controller {
         $delete_confirm = FALSE;
         $reference_id = null;
         $blog_id = $_POST['blog_id'];
-        $blog = $this->admin_blog->get_blog_info($blog_id)->result_array();
+        $blog = $this->admin_blog->get_blog_info($blog_id);
         if (!empty($blog)) {
-            $blog = $blog[0];
+            //$blog = $blog[0];
             $reference_id = $blog['reference_id'];
         }
         $present_date = $this->utils->get_current_date();
@@ -501,7 +501,7 @@ class Applications_blogs extends Admin_Controller {
     public function remove_blog_by_id($blog_id) {
         $blog_info = array();
         if ($blog_id != '' && $blog_id != NULL) {
-            $blog_info_array = $this->admin_blog->get_blog_info($blog_id)->result_array();
+            $blog_info_array = $this->admin_blog_model->get_blog_info($blog_id)->result_array();
             if (!empty($blog_info_array)) {
                 $blog_info = $blog_info_array[0];
                 $blog_category_list_array_map = $this->admin_blog->get_all_category_of_this_blog($blog_id);

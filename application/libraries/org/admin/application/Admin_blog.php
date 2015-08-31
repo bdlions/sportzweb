@@ -67,8 +67,8 @@ class Admin_blog{
     public function add_blog_in_blog_category($blog_category_id, $blog_id)
     {
         $blogs_array = array();
-        $blog_info = new stdClass();
-        $blog_info->blog_id = $blog_id;
+        $new_blog_info = new stdClass();
+        $new_blog_info->blog_id = $blog_id;
         $blog_category_info_array = $this->admin_blog_model->get_blog_category_info($blog_category_id)->result_array();
         if(!empty($blog_category_info_array)){
             $blog_list = $blog_category_info_array[0]['blog_list'];
@@ -83,7 +83,7 @@ class Admin_blog{
                 }
             }
         }
-        $blogs_array[] = $blog_info;
+        $blogs_array[] = $new_blog_info;
         $additional_data = array(
             'blog_list' => json_encode($blogs_array)
         );
