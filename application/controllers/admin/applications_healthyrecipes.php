@@ -500,7 +500,7 @@ class Applications_healthyrecipes extends Admin_Controller{
                     'recommend_desserts' => json_encode($recommend_desserts),
                     'alternative_recipes' => json_encode($alternative_recipes),
                     'modified_on' => now(),
-                    'main_picture' => '',
+                    //'main_picture' => '',
                 );
                 if (isset($_FILES["userfile"]))
                 {
