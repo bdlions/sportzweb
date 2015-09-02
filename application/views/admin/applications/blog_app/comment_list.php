@@ -35,7 +35,7 @@
                                 <th>Comment</th>
                                 <th>User</th>
                                 <th>Counted Like</th>
-                                <?php if($allow_access){ ?>
+                                <?php if($allow_delete){ ?>
                                 <th>Delete</th>
                                 <?php } ?>
                                 
@@ -50,7 +50,7 @@
                                         <td><?php echo $comment['comment'];?></td>
                                         <td><?php echo $comment['username'];?></td>
                                         <td><?php echo $comment['user_liked_list'];?></td>
-                                        <?php if($allow_access){ ?>
+                                        <?php if($allow_delete){ ?>
                                         <td><a href="javascript:void(o)" onclick="delete_blog_comment('<?php echo $comment['id'];?>')" id="">Delete</a></td>
                                         <?php } ?>
                                     </tr>
