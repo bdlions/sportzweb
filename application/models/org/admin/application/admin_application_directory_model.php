@@ -119,18 +119,37 @@ class Admin_application_directory_model extends Ion_auth_model {
      * This method will create an application item reference
      * @aurhtor nazmul hasan on 29th august 2015
      */
-    public function create_app_item_reference()
+    public function create_app_item_reference($data)
     {
-        
+        $additional_data = $this->_filter_data($this->tables['app_item_reference_list'], $data);
+        $this->db->insert($this->tables['app_item_reference_list'], $additional_data);
+        $insert_id = $this->db->insert_id();
+        return (isset($insert_id)) ? $insert_id : FALSE;
     }
     
     /*
-     * This method will edit an application item reference
+     * This method will update an application item reference
      * @aurhtor nazmul hasan on 29th august 2015
      */
-    public function edit_app_item_reference()
+    public function update_app_item_reference($app_item_reference_id, $data)
     {
+        $this->db->trans_begin();
         
+        $data = $this->_filter_data($this->tables['app_item_reference_list'], $data);
+        
+        $this->db->where('id',$app_item_reference_id);
+        $this->db->update($this->tables['app_item_reference_list'],$data);
+        
+        if ($this->db->affected_rows() == 0) {
+            return FALSE;
+        }
+
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            return FALSE;
+        }
+        $this->db->trans_commit();
+        return TRUE;
     }
     
     /*
@@ -139,25 +158,41 @@ class Admin_application_directory_model extends Ion_auth_model {
      */
     public function get_app_item_reference_info($app_item_reference_id)
     {
-        
+        $this->db->where('id', $app_item_reference_id);
+        return $this->db->select($this->tables['app_item_reference_list'] . ".id as reference_id, ".$this->tables['app_item_reference_list'].'.*')
+                ->from($this->tables['app_item_reference_list'])
+                ->get();
     }
     
     /*
      * This method will return all application item references
      * @aurhtor nazmul hasan on 29th august 2015
      */
-    public function show_all_app_item_references()
+    public function get_all_app_item_references()
     {
-        
+        return $this->db->select($this->tables['app_item_reference_list'] . ".id as reference_id, ".$this->tables['app_item_reference_list'].'.*')
+                ->from($this->tables['app_item_reference_list'])
+                ->order_by('title', 'asc')
+                ->get();
     }
     
     /*
      * This method will delete an application item reference
      * @aurhtor nazmul hasan on 29th august 2015
      */
-    public function delete_app_item_reference()
+    public function delete_app_item_reference($reference_id)
     {
+        if(!isset($reference_id) || $reference_id <= 0)
+        {
+            return FALSE;
+        }
+        $this->db->where('id', $reference_id);
+        $this->db->delete($this->tables['app_item_reference_list']);
         
+        if ($this->db->affected_rows() == 0) {
+            return FALSE;
+        }
+        return TRUE;
     }
 
 }

@@ -51,18 +51,20 @@
         <div class="col-md-12" style="padding-bottom: 8px;">
             <div class="row">
                 <div class="row form-group"></div>
+                <?php if(isset($blog['ref_id'])){?>
                 <div class="col-md-2">
                     <div class="row">
                         <div class="col-md-12">
-                            <img class="blogs_item_logo" src="<?php echo base_url(); ?>resources/images/blogs_logo.png">
+                            <img class="blogs_item_logo" src="<?php echo base_url().APP_ITEM_REFERENCE_IMAGE_PATH.$blog['reference_image']; ?>">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a class="blogs_item_logo_anchor" target="_blank" href="http://blog.com/" ><h4>Blog.com</h4></a>
+                            <?php echo $blog['reference_link'];?>
                         </div>
                     </div>
                 </div>
+                <?php } ?>
                 <div class="col-md-10">
                     <div class="heading_big heading_big_alignment"><?php echo isset($blog['title']) ? html_entity_decode(html_entity_decode($blog['title'])) : ''; ?></div>
                 </div>

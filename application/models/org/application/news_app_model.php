@@ -143,8 +143,9 @@ class News_app_model extends Ion_auth_model {
     public function get_news_info($news_id)
     {
         $this->db->where($this->tables['news'].'.id',$news_id);
-        return $this->db->select($this->tables['news'].'.*,'.$this->tables['news'].'.id as news_id')
+        return $this->db->select($this->tables['news'].'.*,'.$this->tables['news'].'.id as news_id,'.$this->tables['app_item_reference_list'].'.img as reference_image,'.$this->tables['app_item_reference_list'].'.link as reference_link')
                     ->from($this->tables['news'])
+                    ->join($this->tables['app_item_reference_list'], $this->tables['app_item_reference_list'].'.id='.$this->tables['news'].'.reference_id','left')
                     ->get();
     }
     

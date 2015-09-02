@@ -13,6 +13,7 @@ class Applications_news extends Admin_Controller{
         $this->load->library('excel');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
+        $this->load->library('org/admin/application/admin_application_directory_library');
         $this->load->library('org/admin/access_level/admin_access_level_library');
         $this->load->library('org/admin/application/admin_news');
         $this->load->library('org/utility/Utils');
@@ -131,6 +132,10 @@ class Applications_news extends Admin_Controller{
                     'picture_description' => $this->utils->add_blank_target_in_anchor($picture_description),
                     'created_on' => now()
                 );
+                if($this->input->post('reference_list') != '0')
+                {
+                    $news_data['reference_id'] = $this->input->post('reference_list');
+                }
                 if (isset($_FILES["userfile"]))
                 {
                     $file_info = $_FILES["userfile"];                    
@@ -165,7 +170,16 @@ class Applications_news extends Admin_Controller{
                 echo json_encode($this->data);
                 return;
             }
-        }        
+        }   
+        $app_item_reference_list = array(
+            '0' => 'Select'
+        );
+        $app_item_reference_list_array = $this->admin_application_directory_model->get_all_app_item_references()->result_array();
+        foreach($app_item_reference_list_array as $app_item_reference_info)
+        {
+            $app_item_reference_list[$app_item_reference_info['reference_id']] = $app_item_reference_info['title'];
+        }
+        $this->data['app_item_reference_list'] = $app_item_reference_list;
         $this->data['headline'] = array(
             'name' => 'headline',
             'id' => 'headline',
@@ -236,6 +250,13 @@ class Applications_news extends Admin_Controller{
                     'picture_description' => $picture_description,
                     'modified_on' => now(),
                 );
+                if($this->input->post('reference_list') != '0')
+                {
+                    $news_data['reference_id'] = $this->input->post('reference_list');
+                }
+                else{
+                    $news_data['reference_id'] = NULL;
+                }
                 if (isset($_FILES["userfile"]))
                 {
                     $file_info = $_FILES["userfile"];                    
@@ -277,7 +298,16 @@ class Applications_news extends Admin_Controller{
                 echo json_encode($this->data);
                 return;
             }
-        }        
+        } 
+        $app_item_reference_list = array(
+            '0' => 'Select'
+        );
+        $app_item_reference_list_array = $this->admin_application_directory_model->get_all_app_item_references()->result_array();
+        foreach($app_item_reference_list_array as $app_item_reference_info)
+        {
+            $app_item_reference_list[$app_item_reference_info['reference_id']] = $app_item_reference_info['title'];
+        }
+        $this->data['app_item_reference_list'] = $app_item_reference_list;
         $this->data['headline'] = array(
             'name' => 'headline',
             'id' => 'headline',

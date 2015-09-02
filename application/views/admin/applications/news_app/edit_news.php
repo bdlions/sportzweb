@@ -131,7 +131,14 @@ window.onload = function()
                             <div class="col-md-4"></div>
                             <div class="col-md-8"><?php echo $message; ?></div>
                         </div>
-
+                        <div class="form-group">
+                            <label for="title" class="col-md-3 control-label requiredField">
+                                Reference
+                            </label>
+                            <div class ="col-md-9">
+                                <?php echo form_dropdown('reference_list',$app_item_reference_list, $news['reference_id'], 'class=form-control id=reference_list'); ?>
+                            </div> 
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3"><div class="pull-right">Headline : </div></label>
                             <div class="col-sm-9">

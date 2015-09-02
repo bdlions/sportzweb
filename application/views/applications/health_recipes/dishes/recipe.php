@@ -58,18 +58,20 @@
 <?php $this->load->view("applications/health_recipes/templates/header_row"); ?>
 <div class="col-md-9">
     <div class="row grayborderbottom grayborderleft grayborderright" >
+        <?php if(isset($recipe_item['reference_id'])){?>
         <div class="col-md-2">
             <div class="row">
                 <div class="col-md-12">
-                    <img class="recipe_item_logo" src="<?php echo base_url(); ?>resources/images/recipe_logo.png">
+                    <img class="recipe_item_logo" src="<?php echo base_url().APP_ITEM_REFERENCE_IMAGE_PATH.$recipe_item['reference_image']; ?>">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <a class="recipe_item_logo_anchor" target="_blank" href="http://www.foodnetworkasia.com/" ><h4>Food Network</h4></a>
+                    <?php echo $recipe_item['reference_link'];?>                    
                 </div>
             </div>
         </div>
+        <?php } ?>
         <div class="col-md-10 heading_big heading_big_alignment">
             <?php echo $recipe_item['title']; ?>
         </div>

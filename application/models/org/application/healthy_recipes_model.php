@@ -76,12 +76,17 @@ class Healthy_recipes_model extends Ion_auth_model {
                     ->get();
     }
     
-    /*-------------------------Recipe written by Omar-----------*/
+    /*
+     * This method will return recipe info
+     * @param $recipe_id, recipe id
+     * @author nazmul hasan
+     */
     public function get_recipe($recipe_id)
     {
         $this->db->where($this->tables['recipes'].'.id',$recipe_id);
-        return $this->db->select("*")
+        return $this->db->select($this->tables['recipes'].".*,".$this->tables['app_item_reference_list'].'.img as reference_image,'.$this->tables['app_item_reference_list'].'.link as reference_link')
                 ->from($this->tables['recipes'])
+                ->join($this->tables['app_item_reference_list'], $this->tables['app_item_reference_list'].'.id='.$this->tables['recipes'].'.reference_id','left')
                 ->get();
     }
     

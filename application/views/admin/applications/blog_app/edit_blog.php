@@ -235,6 +235,14 @@
                             <div class="col-md-9"><?php echo $message; ?></div>
                         </div>
                         <div class="form-group">
+                            <label for="title" class="col-md-3 control-label requiredField">
+                                Reference
+                            </label>
+                            <div class ="col-md-9">
+                                <?php echo form_dropdown('reference_list',$app_item_reference_list, $blog_info['ref_id'], 'class=form-control id=reference_list'); ?>
+                            </div> 
+                        </div>
+                        <div class="form-group">
                             <label for="type" class="col-md-3 control-label requiredField">
                                 Blog Category
                             </label>

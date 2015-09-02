@@ -32,7 +32,7 @@
 <script type="text/x-tmpl" id="tmpl_match_details">
     {% var sports_counte = 0, match_info = ((o instanceof Array) ? o[sports_counter++] : o); %}
     {% while(match_info){ %}        
-        <div class="row panel-heading" role="tab">
+        <div class="row panel-heading sp_app_panel_heading_margin" role="tab">
             {% if(match_info.location_id == <?php echo MATCH_PREDICTION_FROM_NEWSFEED; ?>){ %}
             <?php 
                 echo '<a class="score_prediction" href="'.base_url().'applications/score_prediction/index/{%= match_info.match_id%}">';                            
@@ -60,11 +60,11 @@
                 </div>
                 <div class="app_sp_match_status">
                     {% if(match_info.status_id != <?php echo MATCH_STATUS_UPCOMING; ?>) { %}
-                    <span > Closed </span>
+                    <div class="floating_right">Closed </div>
                     {% }else if(match_info.is_predicted == 1){ %}
-                    <span > Voted </span>
+                    <div class="floating_right">Voted </div>
                     {% }else{ %}
-                    <span> Vote </span>
+                    <div class="floating_right">Vote </div>
                     {% } %}
                 </div>
             </a>            

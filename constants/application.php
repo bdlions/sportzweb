@@ -84,3 +84,5 @@
     
     define("DEFAULT_LOGO",                  '/resources/images/logo1.png');
     
+    define("APP_ITEM_REFERENCE_IMAGE_PATH",    "resources/images/applications/references/");
+    

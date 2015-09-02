@@ -1048,12 +1048,15 @@ INSERT INTO `application_directory` (`id`, `title`) VALUES
 -- application item reference site information
 CREATE TABLE IF NOT EXISTS `app_item_reference_list` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(500),
   `img` varchar(200),
-  `link` text default '',
+  `link` text default '',  
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_item_reference_list` (`title`, `img`, `link`) VALUES
+('Sky Sports', 'sky_sports.png', '<a target="_blank" href="http://www.skysports.com">Sky Sports</a>');
 
 -- modified xstream banter
 CREATE TABLE IF NOT EXISTS `app_xb_sports` (
@@ -1321,6 +1324,7 @@ INSERT INTO `recipe_category` (`id`, `description`) VALUES
 CREATE TABLE IF NOT EXISTS `recipes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `recipe_category_id` int(11) unsigned NOT NULL,
+  `reference_id` int(11) unsigned DEFAULT NULL,
   `title` varchar(500) NOT NULL,
   `description` varchar(1000) NOT NULL,
   `duration` varchar(1500) NOT NULL,
@@ -1335,7 +1339,8 @@ CREATE TABLE IF NOT EXISTS `recipes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `recipes`
-    ADD CONSTRAINT `fk_recipes_recipe_category1` FOREIGN KEY(`recipe_category_id`) REFERENCES `recipe_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT `fk_recipes_recipe_category1` FOREIGN KEY(`recipe_category_id`) REFERENCES `recipe_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_recipes_app_item_reference_list1` FOREIGN KEY(`reference_id`) REFERENCES `app_item_reference_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 INSERT INTO `recipes` (`id`, `recipe_category_id`, `title`, `description`, `duration`, `ingredients`, `preparation_method`, `main_picture`, `recommend_desserts`, `alternative_recipes`, `shared_text`, `created_on`, `modified_on`) VALUES
 (1, 1, 'Prawn dim sum', 'James Martin’s dim sum of steamed prawn parcels are served with two types of spicy dip – a great starter for sharing. ', '&amp;lt;p&amp;gt;1-2 hours preparation time&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;3-4 hours cooking time&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;3-4 or more to serve&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;450g/1lb chicken breasts, no skin or bone - cut into strips&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;1 egg white&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;2 tsp cornflour&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;good pinch salt&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;sesame oil 250ml/8fl oz groundnut oil&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;3 lemons, juice and zest&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;85ml/2fl oz chicken stock&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;1 tbsp sugar&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;1 tbsp light soy sauce&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;splash of dry sherry&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;1 clove garlic, crushed&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;1 red chilli, finely chopped&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;1 tsp cornflour or arrowroot - mixed with water&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;small bunch spring onions&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;shredded seasoning&amp;lt;/p&amp;gt;', '&amp;lt;ol&amp;gt;\r\n	&amp;lt;li&amp;gt;Combine the egg white, cornflour, salt, a little sesame oil and chicken in a bowl - stir to make sure the chicken is well coated. Leave for about 20 minutes.&amp;lt;/li&amp;gt;\r\n	&amp;lt;li&amp;gt;Heat a wok until very hot, add some groundnut oil and heat until smoking. Remove from the heat and add the chicken - stir quickly to stop it from sticking and cook until the chicken turns white. Drain the chicken over a heatproof bowl, set the chicken to one side, allow the oil to cool and discard.&amp;lt;/li&amp;gt;\r\n	&amp;lt;li&amp;gt;Wipe the wok clean and make the sauce. Add the stock, lemon juice and zest, sugar, soy and dry sherry together with the garlic and chilli. Bring to the boil and whisk in the cornflour or arrowroot mixture. Simmer gently for a few moments and then add the chicken. Stir fry to make sure the chicken is well coated and heated through properly.&amp;lt;/li&amp;gt;\r\n	&amp;lt;li&amp;gt;Add a little sesame oil as final seasoning and serve scattered with spring onions.&amp;lt;/li&amp;gt;\r\n&amp;lt;/ol&amp;gt;', 'prawn_dim_sum.jpg\r\n', '["2","8","10"]', '["4"]', '', 1399961022, 1399968555),
@@ -1447,6 +1452,7 @@ ALTER TABLE `service_comments`
 -- news application
 CREATE TABLE `news`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `reference_id` int(11) unsigned DEFAULT NULL,
   `headline` varchar(5000) NOT NULL,
   `summary` varchar(5000) NOT NULL,
   `description` varchar(5000) NOT NULL,
@@ -1459,6 +1465,9 @@ CREATE TABLE `news`(
   `modified_on` int(11) DEFAULT NULL,
   PRIMARY KEY(`id`)
 )AUTO_INCREMENT=1;
+ALTER TABLE `news`
+    ADD CONSTRAINT `fk_news_app_item_reference_list1` FOREIGN KEY(`reference_id`) REFERENCES `app_item_reference_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+	
 INSERT INTO `news` (`id`, `headline`, `summary`, `description`, `picture`, `news_date`, `user_liked_list`, `shared_text`, `created_on`, `modified_on`) VALUES
 (1, 'Wladimir Klitschko beats Italian Francesco Pianeta in Germany', 'Wladimir Klitschko retained his WBA, IBF and WBO world heavyweight titles with a sixth-round stoppage victory against Italian Francesco Pianeta', 'Ukraines Klitschko, 37, was never troubled as he made the 14th defence of his belts in his second stint as champion.', '1.jpg', '2014-04-30\r\n', NULL, '', 1399980517, NULL),
 (2, 'Masters 2013: Rory McIlroy', 'Rory McIlroy posted an impressive three-under-par final round of 69 at the Masters to end joint 25th at Augusta on two over', '&amp;lt;p&amp;gt;The world number two, who had a 79 on Saturday, carded four birdies and a bogey in his closing 18 holes.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;Adam Scott beat Angel Cabrera in play-off after they finished on nine under.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;amp;quot;I didn&amp;amp;#39;t feel that I played all that differently to what I did on Saturday, yet my score was 10 shots lower. It was a nice round to finish,&amp;amp;quot; said McIlroy.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;He added: &amp;amp;quot;A few mistakes around this course and you can pay a heavy penalty - that&amp;amp;#39;s what happened me on Saturday.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;amp;quot;I&amp;amp;#39;ve not had the best of tournaments but this gives me something to build on for the rest of the season.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;amp;quot;My third round was very disappointing and if I had done better on Saturday I might have had a chance going into Sunday,&amp;amp;quot; added the two-time major champion.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;McIlroy began Sunday&amp;amp;#39;s round brightly with a birdie at the second, but a bogey at the fourth saw him drop back to five over.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;Birdies at the eighth, 15th and 16th represented a strong finish for the 23-year-old.&amp;lt;/p&amp;gt;', '131.jpg', '2014-04-30\r\n', NULL, '', 1399980518, 1399986925),
@@ -1625,6 +1634,7 @@ INSERT INTO `blog_status` (`title`) VALUES
 
 CREATE TABLE `blogs`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ref_id` int(11) unsigned DEFAULT NULL,
   `blog_category_id` int(11) unsigned DEFAULT NULL,
   `blog_status_id` int(11) unsigned DEFAULT NULL,
   `user_id` int(11) unsigned DEFAULT NULL,
@@ -1641,7 +1651,8 @@ CREATE TABLE `blogs`(
 )AUTO_INCREMENT=1;
 ALTER TABLE `blogs`
     ADD CONSTRAINT `fk_blogs_blog_status1` FOREIGN KEY(`blog_status_id`) REFERENCES `blog_status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `fk_blogs_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT `fk_blogs_users1` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `fk_blogs_app_item_reference_list1` FOREIGN KEY(`ref_id`) REFERENCES `app_item_reference_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 INSERT INTO `blogs` (`id`, `blog_status_id`, `user_id`, `title`, `description`, `picture`, `related_posts`, `created_on`, `modified_on`) VALUES
 (1, 2, 3, '&amp;lt;p&amp;gt;I&amp;amp;#39;m Not Alone&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.&amp;lt;/p&amp;gt;', '1.jpg', '[""]', 1399982767, NULL),
 (2, 2, 3, '&amp;lt;p&amp;gt;Cool car wallpapers&amp;lt;/p&amp;gt;', '&amp;lt;p&amp;gt;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn&amp;amp;rsquo;t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;lt;br /&amp;gt;\r\nWhen she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.&amp;lt;/p&amp;gt;', '5.jpg', '["42"]', 1399982862, NULL),

@@ -118,6 +118,14 @@
                     </div>
                     <div class="form-group">
                         <label for="title" class="col-md-3 control-label requiredField">
+                            Reference
+                        </label>
+                        <div class ="col-md-9">
+                            <?php echo form_dropdown('reference_list',$app_item_reference_list, $recipes_info['reference_id'], 'class=form-control id=reference_list'); ?>
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="col-md-3 control-label requiredField">
                             Recipe Title
                         </label>
                         <div class ="col-md-9">

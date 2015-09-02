@@ -14,6 +14,7 @@ class Applications_blogs extends Admin_Controller {
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper(array('form', 'url'));
+        $this->load->library('org/admin/application/admin_application_directory_library');
         $this->load->library('org/admin/application/admin_blog');
         $this->load->library('org/admin/access_level/admin_access_level_library');
         $this->load->library('excel');
@@ -134,6 +135,10 @@ class Applications_blogs extends Admin_Controller {
                     'picture_description' => $picture_description,
                     'created_on' => now()
                 );
+                if($this->input->post('reference_list') != '0')
+                {
+                    $data['ref_id'] = $this->input->post('reference_list');
+                }
                 $blog_id = $this->admin_blog->create_blog($data);
                 if ($blog_id !== FALSE) {
                     $category_name = $this->input->post('category_name');
@@ -156,6 +161,15 @@ class Applications_blogs extends Admin_Controller {
             echo json_encode($response);
             return;
         }
+        $app_item_reference_list = array(
+            '0' => 'Select'
+        );
+        $app_item_reference_list_array = $this->admin_application_directory_model->get_all_app_item_references()->result_array();
+        foreach($app_item_reference_list_array as $app_item_reference_info)
+        {
+            $app_item_reference_list[$app_item_reference_info['reference_id']] = $app_item_reference_info['title'];
+        }
+        $this->data['app_item_reference_list'] = $app_item_reference_list;
         $this->data['category_list'] = $this->admin_blog->get_all_blog_category()->result_array();
         $this->data['title'] = array(
             'name' => 'title',
@@ -222,6 +236,13 @@ class Applications_blogs extends Admin_Controller {
                     'related_posts' => json_encode($related_blogs),
                     'modified_on' => now()
                 );
+                if($this->input->post('reference_list') != '0')
+                {
+                    $additional_data['ref_id'] = $this->input->post('reference_list');
+                }
+                else{
+                    $additional_data['ref_id'] = NULL;
+                }
                 if (isset($_FILES["userfile"])) {
                     $file_info = $_FILES["userfile"];
                     //uploading image
@@ -260,6 +281,15 @@ class Applications_blogs extends Admin_Controller {
             echo json_encode($response);
             return;
         }
+        $app_item_reference_list = array(
+            '0' => 'Select'
+        );
+        $app_item_reference_list_array = $this->admin_application_directory_model->get_all_app_item_references()->result_array();
+        foreach($app_item_reference_list_array as $app_item_reference_info)
+        {
+            $app_item_reference_list[$app_item_reference_info['reference_id']] = $app_item_reference_info['title'];
+        }
+        $this->data['app_item_reference_list'] = $app_item_reference_list;
         $blog_info_array = $this->admin_blog_model->get_blog_info($blog_id)->result_array();
         if (count($blog_info_array > 0)) {
             $blog_info_array = $blog_info_array[0];

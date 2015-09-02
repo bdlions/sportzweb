@@ -70,9 +70,10 @@ class Blog_app_model extends Ion_auth_model {
     public function get_blog_info($blog_id)
     {
         $this->db->where($this->tables['blogs'].'.id',$blog_id);
-        return $this->db->select($this->tables['blogs'].'.*,'.$this->tables['blogs'].'.id as blog_id,'.$this->tables['users'].'.first_name,'.$this->tables['users'].'.last_name')
+        return $this->db->select($this->tables['blogs'].'.*,'.$this->tables['blogs'].'.id as blog_id,'.$this->tables['users'].'.first_name,'.$this->tables['users'].'.last_name,'.$this->tables['app_item_reference_list'].'.img as reference_image,'.$this->tables['app_item_reference_list'].'.link as reference_link')
                     ->from($this->tables['blogs'])
                     ->join($this->tables['users'],  $this->tables['users'].'.id='.$this->tables['blogs'].'.user_id')
+                    ->join($this->tables['app_item_reference_list'], $this->tables['app_item_reference_list'].'.id='.$this->tables['blogs'].'.ref_id','left')
                     ->get();
     }
     

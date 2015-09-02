@@ -29,18 +29,20 @@
 <div class="row">
     <div class="col-md-9">
         <div class="row">
+            <?php if(isset($news['reference_id'])){?>
             <div class="col-md-2">
                 <div class="row">
                     <div class="col-md-12">
-                        <img class="news_item_logo" src="<?php echo base_url(); ?>resources/images/news_logo.png">
+                        <img class="news_item_logo" src="<?php echo base_url().APP_ITEM_REFERENCE_IMAGE_PATH.$news['reference_image']; ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <a style="text-decoration: none; color: #000" target="_blank" href="http://www.bbc.com/news" ><h4>BBC News</h4></a>
+                        <?php echo $news['reference_link'];?> 
                     </div>
                 </div>
             </div>
+            <?php } ?>
             <div class="col-md-10">
                 <div class="heading_big heading_big_alignment">
                     <?php echo html_entity_decode(html_entity_decode($news['headline'])); ?>

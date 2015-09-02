@@ -286,22 +286,175 @@ class Applications_directory extends Admin_Controller{
     public function show_app_item_references()
     {
         $this->data['message'] = "";
+        $app_item_reference_list = array();
+        $app_item_reference_list_array = $this->admin_application_directory_model->get_all_app_item_references()->result_array();
+        if(!empty($app_item_reference_list_array))
+        {
+            $app_item_reference_list = $app_item_reference_list_array;
+        }
+        $this->data['app_item_reference_list'] = $app_item_reference_list;
         $this->template->load($this->tmpl, "admin/applications/directory/references/show_all_references", $this->data);
     }
     
     public function create_app_item_reference()
     {
-        
+        $this->data['message'] = "";
+        $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        $this->form_validation->set_rules('link_editortext', 'Link', 'xss_clean|required');
+        if($this->input->post())
+        {
+            $response = array();
+            if($this->form_validation->run() == true)
+            {
+                $title = $this->input->post('title');
+                $link = trim(htmlentities($this->input->post('link_editortext')));
+                $data = array(
+                    'title' => $title,
+                    'link' => $link,
+                    'created_on' => now()
+                );
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];                    
+                    $result = $this->utils->upload_image($file_info, APP_ITEM_REFERENCE_IMAGE_PATH);
+                    if($result['status'] == 1)
+                    {
+                        $data['img'] = $result['upload_data']['file_name'];
+                        $path = APP_ITEM_REFERENCE_IMAGE_PATH.$result['upload_data']['file_name'];
+                        $this->utils->resize_image($path, APP_ITEM_REFERENCE_IMAGE_PATH, "50", "50");
+                    }
+                    else
+                    {
+                        $response['message'] = $result['message'];
+                        echo json_encode($response);
+                        return;
+                    }                  
+                }
+                $app_item_reference_id = $this->admin_application_directory_model->create_app_item_reference($data);
+                if($app_item_reference_id !== FALSE){
+                    $response['message'] = "Reference is created successfully";
+                    echo json_encode($response);
+                    return;                    
+                }else{
+                    $response['message'] = $this->admin_application_directory_model->errors();
+                    echo json_encode($response);
+                    return;
+                }
+            }  
+            else
+            {
+                $response['message'] = validation_errors();
+                echo json_encode($response);
+                return;
+            }
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text'
+        ); 
+        $this->data['link'] = array(
+            'name' => 'link',
+            'id' => 'link',
+            'type' => 'text',
+            'rows'  => '4',
+            'cols'  => '10'
+        );   
+        $this->template->load($this->tmpl, "admin/applications/directory/references/create_reference", $this->data);
     }
     
-    public function edit_app_item_reference()
+    public function update_app_item_reference($app_item_reference_id = 0)
     {
-        
+        $this->form_validation->set_rules('title', 'Title', 'xss_clean|required');
+        $this->form_validation->set_rules('link_editortext', 'Link', 'xss_clean|required');
+        if($this->input->post())
+        {
+            $response = array();
+            if($this->form_validation->run() == true)
+            {
+                $title = $this->input->post('title');
+                $link = trim(htmlentities($this->input->post('link_editortext')));
+                $data = array(
+                    'title' => $title,
+                    'link' => $link,
+                    'modified_on' => now()
+                );
+                if (isset($_FILES["userfile"]))
+                {
+                    $file_info = $_FILES["userfile"];                    
+                    $result = $this->utils->upload_image($file_info, APP_ITEM_REFERENCE_IMAGE_PATH);
+                    if($result['status'] == 1)
+                    {
+                        $data['img'] = $result['upload_data']['file_name'];
+                        $path = APP_ITEM_REFERENCE_IMAGE_PATH.$result['upload_data']['file_name'];
+                        $this->utils->resize_image($path, APP_ITEM_REFERENCE_IMAGE_PATH, "50", "50");
+                    }
+                    else
+                    {
+                        $response['message'] = $result['message'];
+                        echo json_encode($response);
+                        return;
+                    }                  
+                }                
+                if($this->admin_application_directory_model->update_app_item_reference($app_item_reference_id, $data) !== FALSE){
+                    $response['message'] = "Reference is updated successfully";
+                    echo json_encode($response);
+                    return;                    
+                }else{
+                    $response['message'] = $this->admin_application_directory_model->errors();
+                    echo json_encode($response);
+                    return;
+                }
+            }  
+            else
+            {
+                $response['message'] = validation_errors();
+                echo json_encode($response);
+                return;
+            }
+        }
+        $this->data['message'] = "";
+        $app_item_reference_info = array();
+        $app_item_reference_list_array = $this->admin_application_directory_model->get_app_item_reference_info($app_item_reference_id)->result_array();
+        if(!empty($app_item_reference_list_array))
+        {
+            $app_item_reference_info = $app_item_reference_list_array[0];
+        }
+        if(empty($app_item_reference_info))
+        {
+            redirect('admin/applications_directory/show_app_item_references', 'refresh');
+        }
+        $this->data['app_item_reference_info'] = $app_item_reference_info;
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text',
+            'value' => $app_item_reference_info['title']
+        ); 
+        $this->data['link'] = array(
+            'name' => 'link',
+            'id' => 'link',
+            'type' => 'text',
+            'value' => html_entity_decode(html_entity_decode($app_item_reference_info['link'])),
+            'rows'  => '4',
+            'cols'  => '10'
+        );
+        $this->template->load($this->tmpl, "admin/applications/directory/references/update_reference", $this->data);
     }
     
     public function delete_app_itme_reference()
     {
-        
+        $reference_id = $this->input->post('reference_id');
+        $result = array();
+        if($this->admin_application_directory_model->delete_app_item_reference($reference_id))
+        {
+            $result['message'] = "Reference is deleted successfully.";
+        }
+        else
+        {
+            $result['message'] = "Error while deleting reference.";
+        }
+        echo json_encode($result);
     }    
 }
 

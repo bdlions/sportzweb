@@ -37,7 +37,7 @@
     <div class="panel-heading">Create Reference</div>
     <div class="panel-body">
         <div class="row form-horizontal form-background top-bottom-padding">  
-            <form id="formsubmit" method="post" action="<?php echo base_url(); ?>admin/applications_directory/create_app_item_reference" onsubmit="return false;">
+            <form id="formsubmit" method="post" action="<?php echo base_url().'admin/applications_directory/update_app_item_reference/'.$app_item_reference_info['reference_id']; ?>" onsubmit="return false;">
                 <div class="row">
                     <div class ="col-md-10 margin-top-bottom">
                         <div class ="row">
@@ -80,6 +80,9 @@
                                 <div class=" col-md-4">
                                     <div class="profile-picture-box" >
                                         <div id="files" class="files">
+                                            <?php if(!empty($app_item_reference_info['img'])): ?>
+                                                <img style="width: 50px; height: 50px;" src="<?php echo base_url() . APP_ITEM_REFERENCE_IMAGE_PATH . $app_item_reference_info['img']; ?>" class="img-responsive"/>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -113,18 +116,18 @@
             $.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: '<?php echo base_url(); ?>' + "admin/applications_directory/create_app_item_reference",
+                url: '<?php echo base_url().'admin/applications_directory/update_app_item_reference/'.$app_item_reference_info['reference_id']; ?>',
                 data: $("#formsubmit").serializeArray(),
                 success: function(data) {
-                    //alert(data.message);
                     var message = data.message;
                     print_common_message(message);
+                    window.location = '<?php echo base_url(); ?>admin/applications_directory/show_app_item_references';
                 }
             });
         });
 //    
         // Change this to the location of your server-side upload handler:
-        var url = '<?php echo base_url(); ?>' + "admin/applications_directory/create_app_item_reference",
+        var url = '<?php echo base_url().'admin/applications_directory/update_app_item_reference/'.$app_item_reference_info['reference_id']; ?>',
                   uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
                     on('click', function() {
                         $("#link_editortext").val(jQuery('<div />').text( filter_html_tags( CKEDITOR.instances.link.getData())).html());

@@ -10,6 +10,7 @@ class Applications_healthyrecipes extends Admin_Controller{
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->library('form_validation');
+        $this->load->library('org/admin/application/admin_application_directory_library');
         $this->load->library('org/admin/application/admin_healthy_recipes');
         $this->load->library('excel');
         $this->load->library('image_lib');
@@ -252,6 +253,10 @@ class Applications_healthyrecipes extends Admin_Controller{
                     'main_picture' => '',
                     'created_on' => now(),
                 );
+                if($this->input->post('reference_list') != '0')
+                {
+                    $data['reference_id'] = $this->input->post('reference_list');
+                }
                 if (isset($_FILES["userfile"]))
                 {
                     $file_info = $_FILES["userfile"];
@@ -286,7 +291,17 @@ class Applications_healthyrecipes extends Admin_Controller{
                 return;
             }            
         }
-       
+        
+        $app_item_reference_list = array(
+            '0' => 'Select'
+        );
+        $app_item_reference_list_array = $this->admin_application_directory_model->get_all_app_item_references()->result_array();
+        foreach($app_item_reference_list_array as $app_item_reference_info)
+        {
+            $app_item_reference_list[$app_item_reference_info['reference_id']] = $app_item_reference_info['title'];
+        }
+        $this->data['app_item_reference_list'] = $app_item_reference_list;
+        
         $recipes_list = array();
         $recipe_list_array = $this->admin_healthy_recipes->get_all_recipes()->result_array();
         if(!empty($recipe_list_array))
@@ -502,6 +517,13 @@ class Applications_healthyrecipes extends Admin_Controller{
                     'modified_on' => now(),
                     //'main_picture' => '',
                 );
+                if($this->input->post('reference_list') != '0')
+                {
+                    $data['reference_id'] = $this->input->post('reference_list');
+                }
+                else{
+                    $data['reference_id'] = NULL;
+                }
                 if (isset($_FILES["userfile"]))
                 {
                     $file_info = $_FILES["userfile"];
@@ -541,6 +563,16 @@ class Applications_healthyrecipes extends Admin_Controller{
         {
             $this->data['message'] = $this->session->flashdata('message'); 
         }
+        
+        $app_item_reference_list = array(
+            '0' => 'Select'
+        );
+        $app_item_reference_list_array = $this->admin_application_directory_model->get_all_app_item_references()->result_array();
+        foreach($app_item_reference_list_array as $app_item_reference_info)
+        {
+            $app_item_reference_list[$app_item_reference_info['reference_id']] = $app_item_reference_info['title'];
+        }
+        $this->data['app_item_reference_list'] = $app_item_reference_list;
         
         $recipes_category_list = array();
         $recipe_category_list_array = $this->admin_healthy_recipes->get_all_category()->result_array();
