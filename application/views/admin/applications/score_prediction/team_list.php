@@ -15,15 +15,20 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th style="text-align: right">Id</th>
+                                <th style="text-align: right">Counter</th>
+                                <th style="text-align: right">Team Id</th>
                                 <th style="text-align: center">Title</th>
                                 <th style="text-align: center">Edit</th>
                                 <th style="text-align: center">Delete</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_team_list">                
-                            <?php foreach($team_list as $team){?>
+                            <?php 
+                            $counter = 1;
+                            foreach($team_list as $team){
+                            ?>
                             <tr>
+                                <td style="text-align: right"><?php echo $counter; ?></td>
                                 <td style="text-align: right"><?php echo $team['team_id']?></td>
                                 <td style="text-align: center"><?php echo $team['title']?></td>
                                 <?php if($allow_edit){ ?>
@@ -42,7 +47,9 @@
                                 </td>
                                 <?php } ?>
                             </tr>
-                            <?php } ?>                            
+                            <?php 
+                            $counter++;
+                            } ?>                            
                         </tbody>
                     </table>
                 </div>
