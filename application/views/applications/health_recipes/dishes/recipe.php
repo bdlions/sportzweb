@@ -67,7 +67,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <?php echo $recipe_item['reference_link'];?>                    
+                    <?php echo html_entity_decode(html_entity_decode($recipe_item['reference_link']));?>                    
                 </div>
             </div>
         </div>

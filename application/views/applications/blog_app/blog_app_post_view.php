@@ -60,7 +60,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?php echo $blog['reference_link'];?>
+                            <?php echo html_entity_decode(html_entity_decode($blog['reference_link']));?>
                         </div>
                     </div>
                 </div>

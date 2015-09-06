@@ -38,7 +38,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo $news['reference_link'];?> 
+                        <?php echo html_entity_decode(html_entity_decode($news['reference_link']));?> 
                     </div>
                 </div>
             </div>
