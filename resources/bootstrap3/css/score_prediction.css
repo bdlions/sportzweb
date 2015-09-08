@@ -443,3 +443,16 @@
 .sp_app_table_margin{
    margin: 0 4.67%!important;
 }
+
+.cus_news_header
+{
+    height: 34px;
+    margin-bottom: 20px;
+    /*background-color: #00A2E8;*/
+    border-top: 2px solid #999999;
+    border-bottom: 2px solid #3F48CC;
+}
+.cus_news_header a
+{
+    font-size: 20px;
+}
