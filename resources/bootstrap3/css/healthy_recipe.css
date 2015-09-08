@@ -42,8 +42,8 @@ a_hover_color
 }
 .reciepe-menu
 {
-    border-bottom: 1px solid #0044cc!important;
-    border-top: 1px solid #7F7F7F!important;
+    border-bottom: 2px solid #bfbfbf!important;
+    border-top: 2px solid #bfbfbf!important;
 }
 .reciepe-menu li a
 {
@@ -144,19 +144,16 @@ a_hover_color
 .active_health_recipes_item a{ 
     color: blue!important;
 }
- .navbar_nav_custom li a{
-        padding-bottom: 10px;
-        padding-top: 10px;
-    }
 .reciepe-menu ul > li > a{
     color: #b97a57;
 }
 .reciepe-menu ul > li:hover{
-    background-color: #7EBAEE;
+    background-color: #FFDEAD;
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: #b97a57;
+    color: #777777;
+    margin-bottom: 1px;
 }
 
 @media (min-width: 768px) { 
