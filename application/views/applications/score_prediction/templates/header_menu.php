@@ -9,7 +9,7 @@
     });
 </script>
 <nav style="padding-left: -10px;"  class="navbar navbar-default navbar-menu-news news-menu navbar_default_custom scroe_pretiction_navbar_default_custom" role="navigation">
-    <div class="container-fluid">
+    <div class="container-fluid app_header_bg">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#news_header_menu_blue">
@@ -21,7 +21,7 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse score_prediction_header_collapse_margin_adjustment" id="news_header_menu_blue">
-            <ul class="nav navbar-nav ">
+            <ul class="nav navbar-nav">
                 <li>
                     <a href="<?php echo base_url() . 'applications/score_prediction' ?>" >Home</a>
                 </li>

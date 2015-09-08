@@ -10,9 +10,7 @@
         });
     });
 </script>
-<div class="row">
-    <div class="col-md-12">
-        <nav class="navbar navbar-default blog_home_header_menu">
+        <nav class="navbar navbar-default blog_home_header_menu app_header_bg">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#blog_header_menu_item" aria-expanded="false">
@@ -49,7 +47,5 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-    </div>
-</div>
 
 

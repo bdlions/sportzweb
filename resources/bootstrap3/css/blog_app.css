@@ -103,11 +103,7 @@ and open the template in the editor.
 }
 
 .blog_app_navbar_custom{
-    background-color: #fff;
-}
-.blog_app_navbar_custom > li{
-    padding: 5px 0;
-    margin: -4px;
+    background-color: #EFEFEF!important;
 }
 .blog_app_navbar_custom > li:hover{
     background-color: #FFDEAD;
@@ -147,14 +143,26 @@ and open the template in the editor.
     .blog_header_collapse_margin_adjustment{
         margin-left: -11px; 
     }
+    .blog_app_navbar_custom > li{
+        padding: 5px 0;
+        margin: -4px;
+    }
 }
 @media (min-width: 768px) and (max-width: 991px){
     .blog_header_collapse_margin_adjustment{
         margin-left: -11px; 
     }
+    .blog_app_navbar_custom > li{
+        padding: 5px 0;
+        margin: -4px;
+    }
 }
 @media (max-width: 767px){
     .blog_header_collapse_margin_adjustment{
         margin-left: 0; 
+    }
+    .blog_app_navbar_custom > li{
+        padding: 5px 0;
+        margin: 0;
     }
 }

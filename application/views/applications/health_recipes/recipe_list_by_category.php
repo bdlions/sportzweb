@@ -9,12 +9,12 @@
     });
 </script>
 <div class="col-md-9">
-    <div class="row grayborderbottom grayborderleft grayborderright" >
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright" >
         <h3><?php echo isset($recipe_category_info['description']) ? $recipe_category_info['description'] : ''; ?></h3>
     </div>
     <?php if (count($results) > 0) : ?>
         <?php foreach ($results as $result) : ?>
-            <div class="row grayborderbottom grayborderleft grayborderright">        
+            <div class="row graybordertop grayborderbottom grayborderleft grayborderright">        
                 <!--Dynamic contents-->
                 <div class="col-md-3 grayborderright">
                     <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $result['id']; ?>">

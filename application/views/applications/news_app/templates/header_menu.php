@@ -104,9 +104,8 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/customStyles.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/news_app.css" />
-
 <nav class="navbar navbar-menu-news navbar-default cus_news_header news-menu" role="navigation">
-    <div class="container-fluid">
+    <div class="container-fluid app_header_bg">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#news_header_menu_blue">
@@ -120,7 +119,7 @@
         <div class="row collapse navbar-collapse" id="news_header_menu_blue">
             <ul class="nav navbar-nav news_app_navbar_custom">
                 <li class="dropdown">
-                    <a style="padding-left:0px;" href="<?php echo base_url() . 'applications/news_app' ?>" class="dropdown-toggle" data-hover="dropdown">Home</a>
+                    <a style="padding-left: 15px;" href="<?php echo base_url() . 'applications/news_app' ?>" class="dropdown-toggle" data-hover="dropdown">Home</a>
                 </li> 
                 <?php foreach ($news_header_menu as $news_category_id => $menu_item) : ?>
                     <li class="dropdown">

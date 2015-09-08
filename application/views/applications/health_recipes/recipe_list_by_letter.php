@@ -15,12 +15,12 @@
         </ul>  
     </div>
     
-    <div class="row grayborderbottom grayborderleft grayborderright" >
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright" >
         <h3><?php echo $alphabet_value; ?></h3>
     </div>
     <?php if (count($results) > 0) : ?>
         <?php foreach ($results as $result) : ?>
-            <div class="row grayborderbottom grayborderleft grayborderright">        
+            <div class="row graybordertop grayborderbottom grayborderleft grayborderright">        
                 <!--Dynamic contents-->
                 <div class="col-md-3 grayborderright">
                     <img style="width: 180px;height: 100px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $result['main_picture']; ?>" class="img-responsive" alt="<?php echo $result['title']; ?>"/>

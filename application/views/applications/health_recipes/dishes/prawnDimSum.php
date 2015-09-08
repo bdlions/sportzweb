@@ -1,8 +1,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/app_reciepe.css"/>
 <div class="col-md-9">
     <?php $this->load->view("applications/health_recipes/templates/header_row"); ?>
-    <div class="row grayborderbottom grayborderleft grayborderright" ><h3>Prawn dim sum</h3></div>
-    <div class="row grayborderbottom grayborderleft grayborderright">
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright" ><h3>Prawn dim sum</h3></div>
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-9 grayborderright">
             <img src="http://test.sportzweb.com/media/images/blog/blog_1360126167_0.jpg" class="img-responsive" alt="Prawn Dim Sum"/>
         </div>
@@ -15,7 +15,7 @@
             <br>3-4 or more to serve</p>
         </div>
     </div>
-    <div class="row grayborderbottom grayborderleft grayborderright">
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-4 grayborderright">
             <h3>Ingredients</h3>
             450g/1lb chicken 
@@ -55,12 +55,12 @@
             </ol>
         </div>
     </div>
-    <div class="row grayborderbottom grayborderleft grayborderright">
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-12">
             <h3>Recommend Desserts</h3>
         </div>
     </div>
-    <div class="row grayborderbottom grayborderleft grayborderright">
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-12">
             <h3>Alternative Recipes</h3>
         </div>

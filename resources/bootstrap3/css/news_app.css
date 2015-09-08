@@ -111,3 +111,9 @@
     padding: 10px;
 }
 
+@media (max-width: 767px) {
+    .news_app_navbar_custom> li{
+        margin-left: 15px;
+    }
+}
+

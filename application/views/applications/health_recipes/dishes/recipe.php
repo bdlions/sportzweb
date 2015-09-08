@@ -57,7 +57,7 @@
 <?php $recipe_id = $recipe_item['id']; ?>
 <?php $this->load->view("applications/health_recipes/templates/header_row"); ?>
 <div class="col-md-9">
-    <div class="row grayborderbottom grayborderleft grayborderright" >
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright" >
         <?php if(isset($recipe_item['reference_id'])){?>
         <div class="col-md-2">
             <?php if(isset($recipe_item['reference_image'])){?>
@@ -78,7 +78,7 @@
             <?php echo $recipe_item['title']; ?>
         </div>
     </div>
-    <div class="row grayborderbottom grayborderleft grayborderright">
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-9 grayborderright">
             <img src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_item['main_picture']; ?>" class="img-responsive" style="margin: 20px; margin-left: 0px;" alt="<?php echo $recipe_item['title']; ?>"/>
         </div>
@@ -96,7 +96,7 @@
             <div class="content_text"><?php echo html_entity_decode(html_entity_decode($recipe_item['duration'])); ?></div>
         </div>
     </div>
-    <div class="row grayborderbottom grayborderleft grayborderright">
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-4 grayborderright">
             <h2  class="heading_medium">Ingredients</h2>
             <div class="content_text">
@@ -110,7 +110,7 @@
             </div>
         </div>
     </div>
-    <div class="row grayborderbottom grayborderleft grayborderright">
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-12">
             <h2 style="color: #333333;">Recommend Desserts</h2>
             <?php if (!empty($recommend_desserts_item)): ?>
@@ -132,7 +132,7 @@
             <?php endif; ?>
         </div>
     </div>
-    <div class="row grayborderbottom grayborderleft grayborderright">
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-12">
             <h2 class="heading_medium">Alternative Recipes</h2>
 
