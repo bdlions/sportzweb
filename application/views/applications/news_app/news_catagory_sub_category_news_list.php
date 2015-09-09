@@ -22,7 +22,7 @@
             <div class="col-md-6 col-lg-6">
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[0]]['id']; ?>">
                     <div class="heading_big heading_big_alignment">
-                        <p id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline'])); ?></p>
+                        <div id="heading_1"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[0]]['headline'])); ?></div>
                     </div>
                 </a>
                 <span class="content_text">
