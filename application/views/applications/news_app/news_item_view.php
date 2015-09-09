@@ -31,11 +31,13 @@
         <div class="row">
             <?php if(isset($news['reference_id'])){?>
             <div class="col-md-2">
+                <?php if(isset($news['reference_image'])){?>
                 <div class="row">
                     <div class="col-md-12">
                         <img class="news_item_logo" src="<?php echo base_url().APP_ITEM_REFERENCE_IMAGE_PATH.$news['reference_image']; ?>">
                     </div>
                 </div>
+                <?php } ?>
                 <div class="row">
                     <div class="col-md-12">
                         <?php echo html_entity_decode(html_entity_decode($news['reference_link']));?> 

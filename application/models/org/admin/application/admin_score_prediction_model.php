@@ -454,6 +454,8 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function get_all_matches($tournament_id)
     {
+        $this->db->order_by($this->tables['app_sp_matches'].'.date','asc');
+        $this->db->order_by($this->tables['app_sp_matches'].'.time','asc');
         $this->db->where($this->tables['app_sp_matches'].'.tournament_id',$tournament_id);
         return $this->db->select($this->tables['app_sp_matches'].'.id as match_id,'.$this->tables['app_sp_matches'].'.*,'.$this->tables['app_sp_tournaments'].'.title as tournament_name,'.$this->tables['app_sp_tournaments'].'.season, home_team.title as home_team_name, away_team.title as away_team_name,'.$this->tables['app_sp_match_statuses'].'.title as match_status')
                     ->from($this->tables['app_sp_matches'])

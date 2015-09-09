@@ -60,11 +60,13 @@
     <div class="row grayborderbottom grayborderleft grayborderright" >
         <?php if(isset($recipe_item['reference_id'])){?>
         <div class="col-md-2">
+            <?php if(isset($recipe_item['reference_image'])){?>
             <div class="row">
                 <div class="col-md-12">
                     <img class="recipe_item_logo" src="<?php echo base_url().APP_ITEM_REFERENCE_IMAGE_PATH.$recipe_item['reference_image']; ?>">
                 </div>
             </div>
+            <?php } ?>
             <div class="row">
                 <div class="col-md-12">
                     <?php echo html_entity_decode(html_entity_decode($recipe_item['reference_link']));?>                    

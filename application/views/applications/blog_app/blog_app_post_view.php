@@ -53,11 +53,13 @@
                 <div class="row form-group"></div>
                 <?php if(isset($blog['ref_id'])){?>
                 <div class="col-md-2">
+                    <?php if(isset($blog['reference_image'])){?>
                     <div class="row">
                         <div class="col-md-12">
                             <img class="blogs_item_logo" src="<?php echo base_url().APP_ITEM_REFERENCE_IMAGE_PATH.$blog['reference_image']; ?>">
                         </div>
                     </div>
+                    <?php } ?>
                     <div class="row">
                         <div class="col-md-12">
                             <?php echo html_entity_decode(html_entity_decode($blog['reference_link']));?>

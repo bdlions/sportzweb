@@ -442,6 +442,8 @@ class Admin_xstream_banter_model extends Ion_auth_model
      */
     public function get_all_matches($tournament_id)
     {
+        $this->db->order_by($this->tables['app_xb_matches'].'.date','asc');
+        $this->db->order_by($this->tables['app_xb_matches'].'.time','asc');
         $this->db->where($this->tables['app_xb_matches'].'.tournament_id',$tournament_id);
         return $this->db->select($this->tables['app_xb_matches'].'.id as match_id,'.$this->tables['app_xb_matches'].'.*,'.$this->tables['app_xb_tournaments'].'.title as tournament_name,'.$this->tables['app_xb_tournaments'].'.season, home_team.title as home_team_name, away_team.title as away_team_name')
                     ->from($this->tables['app_xb_matches'])

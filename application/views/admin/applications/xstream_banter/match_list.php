@@ -17,7 +17,8 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th style="text-align: center">Id</th>
+                                <th style="text-align: center">Serial</th>
+                                <th style="text-align: center">Match Id</th>
                                 <th style="text-align: center">Tournament</th>
                                 <th style="text-align: center">Season</th>
                                 <th style="text-align: center">Home</th>
@@ -33,8 +34,12 @@
                             </tr>
                         </thead>
                         <tbody id="tbody_sports_list">                
-                            <?php foreach($match_list as $match){?>
+                            <?php 
+                            $counter = 1;
+                            foreach($match_list as $match){
+                            ?>
                             <tr>
+                                <td style="text-align: center"><?php echo $counter; ?></td>
                                 <td style="text-align: center"><?php echo $match['match_id']?></td>
                                 <td style="text-align: center"><?php echo $match['tournament_name']?></td>
                                 <td style="text-align: center"><?php echo $match['season']?></td>
@@ -57,7 +62,10 @@
                                 </td>
                                 <?php } ?>
                             </tr>
-                            <?php } ?>                            
+                            <?php 
+                            $counter++;
+                            } 
+                            ?>                            
                         </tbody>
                     </table>
                 </div>

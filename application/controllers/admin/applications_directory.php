@@ -321,7 +321,7 @@ class Applications_directory extends Admin_Controller{
                     {
                         $data['img'] = $result['upload_data']['file_name'];
                         $path = APP_ITEM_REFERENCE_IMAGE_PATH.$result['upload_data']['file_name'];
-                        $this->utils->resize_image($path, APP_ITEM_REFERENCE_IMAGE_PATH, "50", "50");
+                        //$this->utils->resize_image($path, APP_ITEM_REFERENCE_IMAGE_PATH, "50", "50");
                     }
                     else
                     {
@@ -387,7 +387,7 @@ class Applications_directory extends Admin_Controller{
                     {
                         $data['img'] = $result['upload_data']['file_name'];
                         $path = APP_ITEM_REFERENCE_IMAGE_PATH.$result['upload_data']['file_name'];
-                        $this->utils->resize_image($path, APP_ITEM_REFERENCE_IMAGE_PATH, "50", "50");
+                        //$this->utils->resize_image($path, APP_ITEM_REFERENCE_IMAGE_PATH, "50", "50");
                     }
                     else
                     {

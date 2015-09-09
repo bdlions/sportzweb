@@ -70,8 +70,8 @@ body
 
 
 .recipe_item_logo, .news_item_logo, .blogs_item_logo{
-    height: 40px;
-    width: 40px;
+    height: 100%;
+    width: 100%;
 }
 .recipe_item_logo_anchor, .recipe_item_logo_anchor:hover, .recipe_item_logo_anchor:focus, .news_item_logo_anchor, .news_item_logo_anchor:hover, .news_item_logo_anchor:focus, .blogs_item_logo_anchor, .blogs_item_logo_anchor:hover, .blogs_item_logo_anchor:focus{
     text-decoration: none; 
