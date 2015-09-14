@@ -125,6 +125,7 @@
 .create-chat-room select
 {
     font-size: 20px;
+    height: 40px;
 }
 
 .create-chat-room-form-control
@@ -273,3 +274,7 @@ div.xb1xb2 h3{color: #000000;font-size: 20px;clear: both;}
 div.xb1xb2 div{margin: 1% 0;clear: both;float: left;width: 100%;}
 div.xb11{padding: 3% 15%;}
 div.xb11 img{width: 266px;height: 90px;clear: both;float: left;}
+
+.textarea_chat_message{
+    resize: none;
+}
