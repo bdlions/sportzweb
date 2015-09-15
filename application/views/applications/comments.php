@@ -214,7 +214,7 @@
 <div class="row" style="margin-top: 8px;">
     <div class="col-md-12 cus_comment_box"><!--main box-->
         <div class="row cus_comment_box_header">
-            <h3 class="col-md-12 heading_medium_thin" style="padding-left: 16px"> Comments</h3>
+            <h3 class="col-md-12 heading_medium" style="padding-left: 18px"> Comments</h3>
         </div>
         <div class="col-md-12" ><!--content-->
             <div class="col-md-12" style="border: 1px solid #cccccc; background-color: #EDEDED; padding: 8px; margin-bottom: 16px;"><!--order-->

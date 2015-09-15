@@ -112,7 +112,7 @@
     </div>
     <div class="row graybordertop grayborderbottom grayborderleft grayborderright">
         <div class="col-md-12">
-            <h2 style="color: #333333;">Recommend Desserts</h2>
+            <h2 class="heading_medium">Recommend Desserts</h2>
             <?php if (!empty($recommend_desserts_item)): ?>
                 <?php foreach ($recommend_desserts_item as $recommend_item): ?>
                     <!--<h4>
