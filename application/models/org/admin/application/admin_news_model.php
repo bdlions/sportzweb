@@ -189,6 +189,7 @@ class Admin_news_model extends Ion_auth_model
         if(!empty($news_id_list)){
             $this->db->where_in('id',$news_id_list);
         }
+        $this->db->order_by('created_on','desc');
         return $this->db->select($this->tables['news'].'.id as news_id,'.$this->tables['news'].'.*')
                     ->from($this->tables['news'])
                     ->get();

@@ -55,16 +55,18 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                    <div class="row form-group">
-                        <div class ="col-sm-3 pull-right">
-                            <button id="button_save_alternative_recipe" name="button_save_alternative_recipe" value="" class="form-control btn button-custom pull-right">Save</button>
-                        </div>
-                    </div>
                 </div>                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn button-custom" data-dismiss="modal">Close</button>
+                <div class="row form-group">
+                    <div class="col-sm-6"></div>
+                    <div class ="col-sm-3">
+                        <button id="button_save_alternative_recipe" name="button_save_alternative_recipe" value="" class="form-control btn button-custom pull-right">Save</button>
+                    </div >
+                    <div class ="col-sm-3">
+                        <button type="button" class="btn button-custom" data-dismiss="modal">Close</button>
+                    </div>
+                </div>                
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
