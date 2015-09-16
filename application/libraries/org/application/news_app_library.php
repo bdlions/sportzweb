@@ -274,7 +274,7 @@ class News_app_library {
         if(!empty($news_info_array))
         {
             $news_info = $news_info_array[0];
-            $news_info['created_on'] = $this->utils->get_unix_to_human_date($news_info['created_on'], 1);
+            $news_info['created_on'] = $this->utils->convert_unix_to_news_application($news_info['created_on']);
         }
         return $news_info;
     }
