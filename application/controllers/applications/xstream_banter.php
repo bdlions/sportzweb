@@ -63,10 +63,10 @@ class Xstream_banter extends Role_Controller{
         }        
         $this->data['sports_id'] = $sports_id;
         $tournament_list = array();
-        $tournament_list_array = $this->xstream_banter_library->get_all_tournaments($sports_id)->result_array();
+        $tournament_list_array = $this->xstream_banter_library->get_tournaments_match_date($this->utils->get_current_date_db())->result_array();
         foreach($tournament_list_array as $tournament)
         {
-            $tournament_list[$tournament['id']] = $tournament['title'];
+            $tournament_list[$tournament['tournament_id']] = $tournament['title'];
         }
         $this->data['tournament_list'] = $tournament_list;
         

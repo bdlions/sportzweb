@@ -59,6 +59,22 @@ class Xstream_banter_model extends Ion_auth_model {
                     ->get();
     }
     
+    /*
+     * This method will return tournaments where we have matches under the date
+     * @param $date, date of a match
+     * @author nazmul hasan
+     * @created on 15th September 2015
+     */
+    public function get_tournaments_match_date($date)
+    {
+        $this->db->distinct();
+        $this->db->where($this->tables['app_xb_matches'].'.date',$date);
+        return $this->db->select($this->tables['app_xb_tournaments'].'.id as tournament_id,'.$this->tables['app_xb_tournaments'].'.*')
+                    ->from($this->tables['app_xb_tournaments'])
+                    ->join($this->tables['app_xb_matches'], $this->tables['app_xb_tournaments'].'.id='.$this->tables['app_xb_matches'].'.tournament_id')
+                    ->get();
+    }
+    
     // -----------------------------------Match Module --------------------------------------
     public function get_match($match_id)
     {
