@@ -223,3 +223,10 @@ a:hover
 { 
     font-size: 15px !important 
 }
+
+
+.ptpro_top_banner{
+    background-color: #880015; 
+    border-bottom: 12px solid #E4E4E4; 
+    margin-left: -35px;
+}

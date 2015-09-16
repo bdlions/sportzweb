@@ -38,12 +38,15 @@
     define("LOGOUT_PAGE_IMAGE_PATH",                     "resources/uploads/configure/logout_page/");
     
 //  GENDER
-    define("GENDER_MALE",                           "1");
-    define("GENDER_FEMALE",                         "2");
+    define("GENDER_MALE",                               "1");
+    define("GENDER_FEMALE",                             "2");
     
     // Login page background image list
     define("SLIDING_IMAGE_PATH",  "resources/images/auth_background/");
-    define("SLIDING_IMAGE_WIDTH",                     "1024");
-    define("SLIDING_IMAGE_HEIGHT",                    "683");
+    define("SLIDING_IMAGE_WIDTH",                       "1024");
+    define("SLIDING_IMAGE_HEIGHT",                      "683");
+    
+    // Copy right year
+    define("COPY_RIGHT_YEAR",                           "2015");
     
 ?>

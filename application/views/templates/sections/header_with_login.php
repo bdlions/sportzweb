@@ -1,3 +1,8 @@
+<script type="text/javascript">
+    $(window).load(function() {
+    $('#identity').focus();
+});
+</script>
 <nav class="navbar navbar-default navbar-fixed-top navbar-top" role="navigation" style="z-index: 999999;">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#open-collapse"> 
