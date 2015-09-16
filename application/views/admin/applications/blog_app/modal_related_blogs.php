@@ -29,7 +29,6 @@
                             <thead>
                                 <tr>
                                     <th>Check box</th>
-                                    <th>Blog Category Name</th>
                                     <th>Blog Title</th>
                                 </tr>
                             </thead>
@@ -47,7 +46,6 @@
                                         <td><input id="<?php echo $blog['id'] ?>" name="checkbox[]" class="" type="checkbox" /></td>
                                     <?php endif; ?>
                                     
-                                    <td id="<?php echo $blog['id'] ?>"><?php echo $blog['blog_category_name'] ?></td>
                                     <td id="<?php echo $blog['id'] ?>"><?php echo html_entity_decode(html_entity_decode($blog['title'])); ?></td>
                                 </tr>
                             <?php endforeach;?>

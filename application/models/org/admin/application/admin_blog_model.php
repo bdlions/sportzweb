@@ -178,17 +178,21 @@ class Admin_blog_model extends Ion_auth_model
         }
     }
     
+    /*
+     * This method will return entire blog list
+     * @author nazmul hasan
+     * @modified on 12th september 2015
+     */
     public function get_all_blogs($category_id=0)
     {
         if($category_id!=0)
         {
             $this->db->where($this->tables['blogs'].'.blog_category_id',$category_id);
         }
-        $this->db->where($this->tables['blogs'].'.blog_status_id',2);
-        return $this->db->select($this->tables['blogs'].'.*,'.$this->tables['blog_category'].'.title as blog_category_name')
+        $this->db->where($this->tables['blogs'].'.blog_status_id',APPROVED);
+        $this->db->order_by('created_on','desc');
+        return $this->db->select($this->tables['blogs'].'.*')
                     ->from($this->tables['blogs'])
-                    ->join($this->tables['blog_category'],  $this->tables['blog_category'].'.id='.$this->tables['blogs'].'.blog_category_id')
-                    
                     ->get();
     }
     
