@@ -1,5 +1,6 @@
 <?php
     define("BLOG_CONFIGURATION_COUNTER", 8);
+    define("APP_BLOG_DEFAULT_LOGO_NAME", "sonuto.png");
     define("BLOG_POST_IMAGE_PATH", "resources/images/applications/blog_app/");
     define("BLOG_IMAGE_HEIGHT",                       "300");
     define("BLOG_IMAGE_WIDTH",                        "450");

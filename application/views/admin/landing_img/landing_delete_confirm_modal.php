@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
-                        <label class="col-sm-10 control-label">Are you sure to delete this landing?</label>
+                        <label class="col-sm-10 control-label">Are you sure to delete this image?</label>
                         <input id="input_landing_id" name="input_landing_id" value="" type="hidden" class="form-control"/>
                     </div>
                 </div>                

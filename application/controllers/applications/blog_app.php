@@ -212,7 +212,6 @@ class Blog_app extends Role_Controller {
         }
         $this->data['related_blogs'] = $related_blogs;
         $comments = $this->blog_app_library->get_all_comments($blog_id, NEWEST_FIRST);
-        $total_comments = count($comments);
         $temp_array = array();
         $i = 0;
         foreach ($comments as $comment) {
@@ -233,7 +232,6 @@ class Blog_app extends Role_Controller {
         $this->data['user_info'] = $this->ion_auth->get_user_info();
         $this->data['application_id'] = APPLICATION_BLOG_APP_ID;
         $this->data['item_id'] = $blog['blog_id'];
-        $this->data['total_comments'] = $total_comments;
         $this->template->load(null, "applications/blog_app/blog_app_post_view", $this->data);
     }
 

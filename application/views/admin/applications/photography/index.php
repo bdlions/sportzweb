@@ -23,12 +23,6 @@
 </style>
 
 <script type="text/javascript">
-    function get_current_image_id() {
-            //var current_img_id = $('.item.active').find('div').prop('id');
-           //console.log($('.item.active').find('div').prop('id'));
-    }
-</script>
-<script type="text/javascript">
     $(document).ready(function() {
         $("div.item").each(function() {
             $(this).find('div').height($(window).height() - $("body nav").height() - 20);
@@ -76,10 +70,10 @@
                         <?php endif; ?>
                     </div> 
                     <a href="#myCarousel" data-slide="next">
-                        <img id="imgbuttonf" src="<?php echo base_url(); ?>resources/images/frontArrow.png" onclick="get_current_image_id();"/>
+                        <img id="imgbuttonf" src="<?php echo base_url(); ?>resources/images/frontArrow.png"/>
                     </a>
                     <a  href="#myCarousel" data-slide="prev">
-                        <img id="imgbuttonb" src="<?php echo base_url(); ?>resources/images/backArrow.png" onclick="get_current_image_id();"/>
+                        <img id="imgbuttonb" src="<?php echo base_url(); ?>resources/images/backArrow.png"/>
                     </a>
                 </div>
             </div>

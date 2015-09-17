@@ -50,54 +50,34 @@
     <div class="row">
         <div class="col-md-12" style="padding-bottom: 8px;">
             <div class="row">
-                <div class="row form-group"></div>
-                <?php if(isset($blog['ref_id'])){?>
+                <div class="row form-group"></div>                
                 <div class="col-md-2">
-                    <?php if(isset($blog['reference_image'])){?>
                     <div class="row">
                         <div class="col-md-12">
-                            <img class="blogs_item_logo" src="<?php echo base_url().APP_ITEM_REFERENCE_IMAGE_PATH.$blog['reference_image']; ?>">
+                            <img class="blogs_item_logo" src="<?php echo isset($blog['reference_image'])?base_url().APP_ITEM_REFERENCE_IMAGE_PATH.$blog['reference_image']:base_url().APP_ITEM_REFERENCE_IMAGE_PATH.APP_BLOG_DEFAULT_LOGO_NAME; ?>">
                         </div>
                     </div>
-                    <?php } ?>
                     <div class="row">
                         <div class="col-md-12">
+                            <?php if(isset($blog['ref_id'])){?>
                             <?php echo html_entity_decode(html_entity_decode($blog['reference_link']));?>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
-                <div class="col-md-10">
-                    <div class="heading_big heading_big_alignment"><?php echo isset($blog['title']) ? html_entity_decode(html_entity_decode($blog['title'])) : ''; ?></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 blog_post_subtitle_bar">
-                    <span class="small_text_pale">
-                        By
-                        <?php if ($blog['is_user_member'] == 1) { ?>
-                            <a href="<?php echo base_url(); ?>member_profile/show/<?php echo $blog['user_id']; ?>">
-                                <?php echo isset($blog['first_name']) ? $blog['first_name'] . ' ' . $blog['last_name'] : ''; ?>
-                            </a>
-                        <?php
-                        } else {
-                            echo $blog['first_name'] . ' ' . $blog['last_name'];
-                        }
-                        ?>
-                    </span>
-                    <div id="total_comments">
-                        <span class="pull-right">
-                            <a href="#">
+                            <?php }else{ ?>
+                                By
+                                <?php if ($blog['is_user_member'] == 1) { ?>
+                                    <a href="<?php echo base_url(); ?>member_profile/show/<?php echo $blog['user_id']; ?>">
+                                        <?php echo isset($blog['first_name']) ? $blog['first_name'] . ' ' . $blog['last_name'] : ''; ?>
+                                    </a>
                                 <?php
-                                if ($total_comments <= 1) {
-                                    echo '<span id="comment_counter">' . $total_comments . ' comment</span>';
                                 } else {
-                                    echo '<span id="comment_counter">' . $total_comments . ' comments</span>';
+                                    echo $blog['first_name'] . ' ' . $blog['last_name'];
                                 }
                                 ?>
-                            </a>
-                        </span>
+                            <?php } ?>
+                        </div>
                     </div>
+                </div>                
+                <div class="col-md-10">
+                    <div class="heading_big heading_big_alignment"><?php echo isset($blog['title']) ? html_entity_decode(html_entity_decode($blog['title'])) : ''; ?></div>
                 </div>
             </div>
             <div class="row">

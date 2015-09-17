@@ -206,7 +206,7 @@
             </div>
         </div>
     </div> 
-<?php } else if ($newsfeed['shared_type_id'] == STATUS_SHARE_LATEST_BLOG2 && isset($newsfeed['reference_info'])) { ?>
+<?php } else if ($newsfeed['shared_type_id'] == 1000 && isset($newsfeed['reference_info'])) { ?>
     <div class="row col-md-12 feed_shared_link_box" style="padding:0px;margin:0px;">
         <div class="col-md-4" style="padding:0px;">
             <a href="<?php echo base_url() . APPLICATION_BLOG_PATH . $newsfeed['reference_info']['id'] ?>">
