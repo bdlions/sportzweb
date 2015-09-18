@@ -1,5 +1,4 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/customStyles.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/bootstrap3/css/score_predict.css" />
 <script type="text/javascript">
     //    active a particular menu item
     $(function() {
