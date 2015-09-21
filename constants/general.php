@@ -33,8 +33,8 @@
     define("LOGIN_PAGE_IMAGE_PATH",                      "resources/uploads/configure/login_page/");
     
     //logout page
-    define("LOGOUT_PAGE_IMAGE_WIDTH",                    "768");
-    define("LOGOUT_PAGE_IMAGE_HEIGHT",                   "432");
+    define("LOGOUT_PAGE_IMAGE_WIDTH",                    "1500");
+    define("LOGOUT_PAGE_IMAGE_HEIGHT",                   "710");
     define("LOGOUT_PAGE_IMAGE_PATH",                     "resources/uploads/configure/logout_page/");
     
 //  GENDER
@@ -43,7 +43,7 @@
     
     // Login page background image list
     define("SLIDING_IMAGE_PATH",  "resources/images/auth_background/");
-    define("SLIDING_IMAGE_WIDTH",                       "1024");
+    define("SLIDING_IMAGE_WIDTH",                       "1500");
     define("SLIDING_IMAGE_HEIGHT",                      "683");
     
     // Copy right year

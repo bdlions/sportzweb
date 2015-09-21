@@ -28,11 +28,17 @@
                                 </div>
                             </div> 
                             <div class="form-group">
+                                <label for="type" class="col-md-10 control-label">
+                                    Please upload an image at least Height: 710px and Width: 1500px for better resolution
+                                </label>
+                            </div>
+                            <div class="form-group">
                                 <label for="website" class="col-md-3 control-label requiredField">
                                     Set Blog picture
                                 </label>
                                 <div class ="col-md-9">
                                     <div class="col-md-9">
+                                        
                                         <div class="row fileinput-button">
                                             <button class="btn button-custom">Upload a photo</button>
                                             <input id="fileupload" type="file" name="userfile">

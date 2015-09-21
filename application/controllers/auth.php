@@ -305,7 +305,7 @@ class Auth extends Role_Controller{
         
         //redirect them to the login page
         $this->session->set_flashdata('message', $this->ion_auth->messages());
-        $this->template->load("templates/home_tmpl","logout", $this->data);
+        $this->template->load("templates/logout_tmpl","logout", $this->data);
         //redirect('auth/login', 'refresh');
     }
 

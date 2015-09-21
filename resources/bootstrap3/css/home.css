@@ -1,3 +1,9 @@
+.logout_background_img{
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    margin-left: -2px;
+}
 .navbar-top {
     background: #ffffff url('../../images/bg2.png') top repeat-x;
     min-height:80px;
