@@ -1453,9 +1453,9 @@ ALTER TABLE `service_comments`
 CREATE TABLE `news`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `reference_id` int(11) unsigned DEFAULT NULL,
-  `headline` varchar(5000) NOT NULL,
-  `summary` varchar(5000) NOT NULL,
-  `description` varchar(5000) NOT NULL,
+  `headline` text DEFAULT '',
+  `summary` text DEFAULT '',
+  `description` text DEFAULT '',
   `picture` text,
   `picture_description` text default '',
   `news_date` varchar(50) DEFAULT NULL,
