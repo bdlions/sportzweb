@@ -32,7 +32,7 @@
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
-                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
+                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['total_comments']; ?></div>
                                             </div>
                                         </div>
                                         <?php $cardcount++; ?>
@@ -53,7 +53,7 @@
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
-                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
+                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['total_comments']; ?></div>
                                             </div>
                                         </div>                        
                                         <?php $cardcount++; ?>
@@ -76,7 +76,7 @@
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
-                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
+                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['total_comments']; ?></div>
                                             </div>
                                         </div>
                                         <?php $cardcount++; ?>
@@ -97,7 +97,7 @@
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
-                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
+                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['total_comments']; ?></div>
                                             </div>
                                         </div>
                                         <?php $cardcount++; ?>
@@ -120,7 +120,7 @@
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
-                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
+                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['total_comments']; ?></div>
                                             </div>
                                         </div>
                                         <?php $cardcount++; ?>
@@ -141,7 +141,7 @@
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
-                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
+                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['total_comments']; ?></div>
                                             </div>
                                         </div>
                                         <?php $cardcount++; ?>
@@ -168,7 +168,7 @@
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
-                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
+                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['total_comments']; ?></div>
                                             </div>
                                         </div>
                                         <?php $cardcount++; ?>
@@ -189,7 +189,7 @@
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
-                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['counted_comment']; ?></div>
+                                                <div class="pull-right"><img src="<?php echo base_url(); ?>resources/images/chatbubble.png" /><?php echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['total_comments']; ?></div>
                                             </div>
                                         </div>
                                         <?php $cardcount++; ?>

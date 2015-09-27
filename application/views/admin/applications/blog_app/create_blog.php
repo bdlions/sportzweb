@@ -86,7 +86,6 @@
     }
 </script>
 <?php $this->load->view("common/ckeditor_customization"); ?>
-
 <script>
     $(function () {
         $("#btnSubmit").on("click", function () {
@@ -94,21 +93,18 @@
             $("#description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.description.getData())).html());
             $("#image_description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.image_description.getData())).html());
             if (!$('.category_id').is(':checked')) {
-                //alert("Checked atleast one blog category");
-                 var message = data['message'];
-                 print_common_message(message);
+                var message = "Please select at least one blog category";
+                print_common_message(message);
                 return;
             }
             if (CKEDITOR.instances.title.getData() === "")
             {
-                //alert("Blog heading is required.");
-                 var message = "Blog heading is required.";
+                var message = "Blog title is required.";
                 print_common_message(message);
                 return;
             }
-            else if (CKEDITOR.instances.description.getData() === "")
+            if (CKEDITOR.instances.description.getData() === "")
             {
-                //alert("Blog description is required.");
                 var message = "Blog description is required.";
                 print_common_message(message);
                 return;
@@ -119,7 +115,6 @@
                 url: '<?php echo base_url() . 'admin/applications_blogs/create_blog'; ?>',
                 data: $("#formsubmit").serializeArray(),
                 success: function (data) {
-                   // alert(data.message);
                     var message = data.message;
                     print_common_message(message);
                     window.location = '<?php echo base_url() . 'admin/applications_blogs/create_blog'; ?>';
@@ -129,37 +124,38 @@
 
         // Change this to the location of your server-side upload handler:
         var url = "<?php echo base_url() . 'admin/applications_blogs/create_blog'; ?>",
-                uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
-                on('click', function () {
-                    $("#title_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.title.getData())).html());
-                    $("#description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.description.getData())).html());
-                    $("#image_description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.image_description.getData())).html());
+        uploadButton = $('<input type="submit" value="Save"/>').addClass('btn button-custom pull-right').text('Confirm').
+        on('click', function () {
+            $("#title_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.title.getData())).html());
+            $("#description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.description.getData())).html());
+            $("#image_description_editortext").val(jQuery('<div />').text(filter_html_tags(CKEDITOR.instances.image_description.getData())).html());
 
-
-                    if (CKEDITOR.instances.title.getData() === "")
-                    {
-                        //alert("Blog heading is required.");
-                        var message = "Blog heading is required.";
-                        print_common_message(message);
-                        return;
-                    }
-                    else if (CKEDITOR.instances.description.getData() === "")
-                    {
-                //  alert("BLog description is required.");
-                        var message = "BLog description is required.";
-                        print_common_message(message);
-                        return;
-                    }
-                    var $this = $(this), data = $this.data();
-                    $this.off('click').text('Abort').on('click', function () {
-                        $this.remove();
-                        data.abort();
-                    });
-                    data.submit().always(function () {
-                        $this.remove();
-                    });
-                });
-
+            if (!$('.category_id').is(':checked')) {
+                var message = "Please select at least one blog category";
+                print_common_message(message);
+                return;
+            }
+            if (CKEDITOR.instances.title.getData() === "")
+            {
+                var message = "Blog title is required.";
+                print_common_message(message);
+                return;
+            }
+            else if (CKEDITOR.instances.description.getData() === "")
+            {
+                var message = "Blog description is required.";
+                print_common_message(message);
+                return;
+            }
+            var $this = $(this), data = $this.data();
+            $this.off('click').text('Abort').on('click', function () {
+                $this.remove();
+                data.abort();
+            });
+            data.submit().always(function () {
+                $this.remove();
+            });
+        });
         $('#fileupload').fileupload({
             url: url,
             dataType: 'json',

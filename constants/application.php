@@ -86,3 +86,5 @@
     
     define("APP_ITEM_REFERENCE_IMAGE_PATH",    "resources/images/applications/references/");
     
+    
+    define("APPLICATION_ITEM_COMMENTS_PER_PAGE",                            4);

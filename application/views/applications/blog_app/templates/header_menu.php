@@ -38,7 +38,7 @@
                         </a></li>
                 <?php endif; ?>
 
-                <?php if (($have_my_blogs) > 0 && !empty($custom_blog_category_menu) && ($custom_blog_category_menu[2]['id'] == MY_BLOG)): ?>
+                <?php if ( $is_my_blog_exist  && !empty($custom_blog_category_menu) && ($custom_blog_category_menu[2]['id'] == MY_BLOG)): ?>
                     <li><a href="<?php echo base_url() . 'applications/blog_app/users_blog/' ?>" style="padding-left: 15px;">
                             <?php echo $custom_blog_category_menu[2]['title']; ?>
                         </a></li>

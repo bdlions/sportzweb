@@ -175,7 +175,7 @@ class Applications_blogs extends Admin_Controller {
             'name' => 'title',
             'id' => 'title',
             'type' => 'text',
-            'value' => $this->form_validation->set_value('title'),
+            'value' => '',
             'rows' => '4',
             'cols' => '10'
         );
@@ -183,7 +183,7 @@ class Applications_blogs extends Admin_Controller {
             'name' => 'description',
             'id' => 'description',
             'type' => 'text',
-            'value' => $this->form_validation->set_value('description'),
+            'value' => '',
             'rows' => '4',
             'cols' => '10'
         );
@@ -191,7 +191,7 @@ class Applications_blogs extends Admin_Controller {
             'name' => 'image_description',
             'id' => 'image_description',
             'type' => 'text',
-            'value' => $this->form_validation->set_value('image_description'),
+            'value' => '',
             'rows' => '4',
             'cols' => '10'
         );
@@ -642,17 +642,7 @@ class Applications_blogs extends Admin_Controller {
 
     function config_blog() {
         $this->data['message'] = '';
-        /* $all_blogs = $this->admin_blog->get_configed_blog_for_home_page();
-          //echo '<pre/>';print_r($all_blogs);exit('here');
-          $this->data['all_blogs'] = $all_blogs;
-          $this->data['show_advertise'] = $all_blogs['show_advertise'];
-          $blog_list = $this->admin_blog->get_all_blogs()->result_array();
-          $this->data['blog_list'] = $blog_list; */
-
         $this->data = array_merge($this->data, $this->admin_blog->get_home_page_blog_configuration());
-        //echo '<pre/>';print_r($this->data);exit('here');
-        //$result = $this->admin_blog->get_home_page_blog_configuration();
-        //echo '<pre/>';print_r($result['blog_id_blog_info_map']);exit('here');
         $this->template->load($this->tmpl, "admin/applications/blog_app/config_blog", $this->data);
     }
 
@@ -842,16 +832,15 @@ class Applications_blogs extends Admin_Controller {
         $this->data['pending_list'] = $pending_list;
         $this->template->load($this->tmpl, "admin/applications/blog_app/approve_blog", $this->data);
     }
-
+    
     public function get_selected_blog_data() {
         $response = array();
         $blog_id = $this->input->post('blog_id');
-
         $blog_array = $this->admin_blog->get_blog_info($blog_id);
         if (!empty($blog_array)) {
+            $blog_array['description'] = substr(strip_tags(html_entity_decode(html_entity_decode($blog_array['description']))), 0, 255). " .....";
             $response = $blog_array;
         }
-
         echo json_encode($response);
     }
 

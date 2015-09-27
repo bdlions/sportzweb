@@ -1635,11 +1635,10 @@ INSERT INTO `blog_status` (`title`) VALUES
 CREATE TABLE `blogs`(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ref_id` int(11) unsigned DEFAULT NULL,
-  `blog_category_id` int(11) unsigned DEFAULT NULL,
   `blog_status_id` int(11) unsigned DEFAULT NULL,
   `user_id` int(11) unsigned DEFAULT NULL,
   `title` varchar(5000) NOT NULL,
-  `description` varchar(5000) NOT NULL,
+  `description` text,
   `picture` text,
   `picture_description` text default '',
   `order_no` int(11) DEFAULT 99999999,

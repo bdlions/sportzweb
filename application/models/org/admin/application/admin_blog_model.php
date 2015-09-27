@@ -445,9 +445,8 @@ class Admin_blog_model extends Ion_auth_model
         if(count($blogs_id)!= 0) {
             $this->db->where_in($this->tables['blogs'].'.id',$blogs_id);
         }
-        return $this->db->select($this->tables['blogs'].'.*,'.$this->tables['blog_category'].'.title as blog_category_name')
+        return $this->db->select($this->tables['blogs'].'.*')
                     ->from($this->tables['blogs'])
-                    ->join($this->tables['blog_category'],  $this->tables['blog_category'].'.id='.$this->tables['blogs'].'.blog_category_id')
                     ->get();
     }
     

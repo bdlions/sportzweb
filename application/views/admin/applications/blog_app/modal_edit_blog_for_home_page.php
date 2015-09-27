@@ -96,19 +96,16 @@
                         
                         var description_ = $("#description_" + present_value);
                         if(description_ != undefined){
-                            //description_.text(data.description);
                             var str = data.description;
-                            var res = str.substring(0, 256);
-                            description_.text($("<div/>").html($("<div/>").html(res).text()).text().replace(/(<([^>]+)>)/ig, ""));
+                            description_.text($("<div/>").html($("<div/>").html(str).text()).text().replace(/(<([^>]+)>)/ig, ""));
                         }
                     }
                 });
                 
                 $('#modal_edit_blog_home_page').modal('hide');
             } else {
-                //alert('You can only select one blog for this position');
                 var message = "You can only select one blog for this position";
-                 print_common_message(message);
+                print_common_message(message);
                 return ;
             }
            
@@ -147,7 +144,7 @@
                                 <tr>
                                     <td><input id="<?php echo $blog['id'] ?>" name="checkbox[]" class="" type="checkbox" /></td>
                                     <td id="<?php echo $blog['id'] ?>"><?php echo html_entity_decode(html_entity_decode($blog['title'])) ?></td>
-                                    <td id="<?php echo $blog['id'] ?>"><?php echo html_entity_decode(html_entity_decode($blog['description'])); ?></td>
+                                    <td id="<?php echo $blog['id'] ?>"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog['description']))), 0, 256) . ' ...'; ?></td>
                                 </tr>
                             <?php endforeach;?>
                             </tbody>
