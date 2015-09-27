@@ -3,6 +3,13 @@
 <script type="text/javascript">
 window.onload = function()
 {
+    $('#news_date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        startDate: '-3d'
+    }).on('changeDate', function(ev) {
+        $('#news_date').text($('#news_date').data('date'));
+        $('#news_date').datepicker('hide');
+    });
     CKEDITOR.replace('headline', {
         language: 'en',
         toolbar: [
@@ -137,6 +144,14 @@ window.onload = function()
                             </label>
                             <div class ="col-md-9">
                                 <?php echo form_dropdown('reference_list',$app_item_reference_list, $news['reference_id'], 'class=form-control id=reference_list'); ?>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <label for="date" class="col-md-3 control-label requiredField">
+                                Date
+                            </label>
+                            <div class ="col-md-9">
+                                <input type="text" class="form-control" id="news_date" name="news_date" value="<?php echo $news['created_on'];?>"/>
                             </div> 
                         </div>
                         <div class="form-group">

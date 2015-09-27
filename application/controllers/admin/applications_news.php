@@ -111,6 +111,7 @@ class Applications_news extends Admin_Controller{
     function create_news()
     {
         $this->data['message'] = '';
+        $this->form_validation->set_rules('news_date', 'Date', 'xss_clean|required');
         $this->form_validation->set_rules('headline_editortext', 'HeadLine', 'xss_clean|required');
         $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
@@ -123,6 +124,7 @@ class Applications_news extends Admin_Controller{
                 $news_summary = trim(htmlentities($this->input->post('summary_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
                 $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
+                $news_date = $this->utils->convert_date_from_user_to_db($this->input->post('news_date'));
                 $news_data = array(
                     'headline' => $news_headline,
                     'summary' => $news_summary,
@@ -130,7 +132,7 @@ class Applications_news extends Admin_Controller{
                     'news_date' => $this->utils->get_current_date_db(),
                     'picture' => '',
                     'picture_description' => $this->utils->add_blank_target_in_anchor($picture_description),
-                    'created_on' => now()
+                    'created_on' => $this->utils->convert_date_human_to_unix($news_date.' 00:00 AM')
                 );
                 if($this->input->post('reference_list') != '0')
                 {
@@ -221,6 +223,7 @@ class Applications_news extends Admin_Controller{
     function edit_news($news_id)
     {
         $this->data['message'] = '';
+        $this->form_validation->set_rules('news_date', 'Date', 'xss_clean|required');
         $this->form_validation->set_rules('headline_editortext', 'HeadLine', 'xss_clean|required');
         $this->form_validation->set_rules('summary_editortext', 'Summary', 'xss_clean|required');
         $this->form_validation->set_rules('description_editortext', 'Description', 'xss_clean|required');
@@ -228,6 +231,7 @@ class Applications_news extends Admin_Controller{
         $news = $this->admin_news->get_news_info($news_id)->result_array();
         if(!empty($news)) {
             $news = $news[0];
+            $news['created_on'] = $this->utils->get_unix_to_human_date($news['created_on']);
         }
         else
         {
@@ -243,12 +247,14 @@ class Applications_news extends Admin_Controller{
                 $summary_headline = trim(htmlentities($this->input->post('summary_editortext')));
                 $description = trim(htmlentities($this->input->post('description_editortext')));
                 $picture_description = trim(htmlentities($this->utils->add_blank_target_in_anchor(html_entity_decode($this->input->post('image_description_editortext')))));
+                $news_date = $this->utils->convert_date_from_user_to_db($this->input->post('news_date'));
                 $news_data = array(
                     'headline' => $news_headline,
                     'summary' => $summary_headline,
                     'description' => $description,
                     'picture_description' => $picture_description,
-                    'modified_on' => now(),
+                    'created_on' => $this->utils->convert_date_human_to_unix($news_date.' 00:00 AM'),
+                    'modified_on' => now()
                 );
                 if($this->input->post('reference_list') != '0')
                 {

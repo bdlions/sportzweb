@@ -153,6 +153,15 @@ class Utils {
     }
     
     /*
+     * This method will convert human date to unix format
+     * @param $human_date, human date in the format of 2015-09-23 10:03 AM
+     */
+    public function convert_date_human_to_unix($human_date)
+    {
+        return human_to_unix($human_date);        
+    }
+    
+    /*
      * This method will return current date in YYYY-mm-dd format
      * @Author Nazmul on 24 September 2014
      */
