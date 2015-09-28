@@ -28,7 +28,7 @@
                                                     </h2>
                                                 </span>
                                             </a>
-                                            <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                            <div class="content_text"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description']))), 0, 256) . ' ...'; ?>
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
@@ -49,7 +49,7 @@
                                                     </h2>
                                                 </span>
                                             </a>
-                                            <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                            <div class="content_text"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description']))), 0, 256) . ' ...'; ?>
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
@@ -72,7 +72,7 @@
                                                     </h2>
                                                 </span>
                                             </a>
-                                            <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                            <div class="content_text"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description']))), 0, 256) . ' ...'; ?>
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
@@ -93,7 +93,7 @@
                                                     </h2>
                                                 </span>
                                             </a>
-                                            <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                            <div class="content_text"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description']))), 0, 256) . ' ...'; ?>
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
@@ -116,7 +116,7 @@
                                                     </h2>
                                                 </span>
                                             </a>
-                                            <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                            <div class="content_text"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description']))), 0, 256) . ' ...'; ?>
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
@@ -137,7 +137,7 @@
                                                     </h2>
                                                 </span>
                                             </a>
-                                            <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                            <div class="content_text"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description']))), 0, 256) . ' ...'; ?>
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
@@ -164,7 +164,7 @@
                                                     </h2>
                                                 </span>
                                             </a>
-                                            <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                            <div class="content_text"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description']))), 0, 256) . ' ...'; ?>
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
@@ -185,7 +185,7 @@
                                                     </h2>
                                                 </span>
                                             </a>
-                                            <div class="content_text"><?php echo substr(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description'])), 0, 256) . ' ...'; ?>
+                                            <div class="content_text"><?php echo substr(strip_tags(html_entity_decode(html_entity_decode($blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['description']))), 0, 256) . ' ...'; ?>
                                                 <!--line and below-->
                                                 <hr>
                                                 <div class="pull-left"><?php // echo $blog_id_blog_info_map[$region_id_blog_id_map[$cardcount]]['created_on'];     ?></div>
