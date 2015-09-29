@@ -25,14 +25,14 @@
 <div class="row form-group"></div>
 <div class="row" style="text-align: left;">
     <div class="col-md-4" style="font-size: 18px">
-        <div class="heading_medium_thin">Vision, Objective and Mission</div>
+        <div class="heading_medium_thin font_bold " >Vision, Objective and Mission</div>
         <?php echo $region_text_map[VISSION_OBJECT_MISSION_ID] ?>
     </div>
 
-    <div class="row form-group"></div>
-    <div class="row form-group"></div>
     <div class="col-md-7 pull-right">
-        <div class="heading_medium_thin">Mission statement:</div>
+    <div class="row form-group"></div>
+    <div class="row form-group"></div>
+        <div class="heading_medium_thin font_bold" >Mission statement:</div>
         <span style="text-align: justify; color: #0081c2;font-size: 20px; font-family: serif; font-style: italic">
             <?php echo $region_text_map[MISSION_STATEMENT_ID] ?>
         </span>
@@ -62,25 +62,25 @@
 
 <div class="row">
     <div class="col-md-3" style="height: 350px">
-        <div class="heading_medium_thin">Social</div>
+        <div class="heading_medium_thin font_bold" >Social</div>
         <div style="font-size: 18px">
             <?php echo $region_text_map[SOCIAL_ID]; ?>
         </div>
     </div>
     <div class="col-md-3" style="border-left: 1px solid #0081c2; height: 350px">
-        <div class="heading_medium_thin">Features</div>
+        <div class="heading_medium_thin font_bold" >Features</div>
         <div style="font-size: 18px">
             <?php echo $region_text_map[FEATURES_ID]; ?>
         </div>
     </div>
     <div class="col-md-3" style="border-left: 1px solid #0081c2; height: 350px">
-        <div class="heading_medium_thin">Security</div>
+        <div class="heading_medium_thin font_bold" >Security</div>
         <div style="font-size: 18px">
             <?php echo $region_text_map[SECURITY_ID]; ?>
         </div>
     </div>
     <div class="col-md-3" style="border-left: 1px solid #0081c2; height: 350px">
-        <div class="heading_medium_thin">Mobile</div>
+        <div class="heading_medium_thin font_bold" >Mobile</div>
         <div style="font-size: 18px">
             <?php echo $region_text_map[MOBILE_ID] ?>
         </div>

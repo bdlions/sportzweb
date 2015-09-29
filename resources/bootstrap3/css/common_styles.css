@@ -48,6 +48,9 @@ body
 .heading_medium, .heading_medium_thin{
     font-size: 20px;
 }
+.font_bold{
+    font-weight: bold;
+}
 .heading_small{
     font-size: 14px;
 }

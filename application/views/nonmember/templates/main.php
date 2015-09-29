@@ -9,7 +9,7 @@
         $("#slider").twitterSlideshow({
             imagePath: '<?php echo base_url() ?>resources/images/auth_background/',
             imageList: imageList,
-            interval: 6
+            interval: 8
         });
 
         $('#next_btn').on('click', function() {

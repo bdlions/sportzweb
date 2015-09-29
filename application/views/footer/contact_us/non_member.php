@@ -1,41 +1,39 @@
-<div class="row col-md-12" style="height: 64px; font-size: 32px;padding:0px">
-    Contact Us
+<div class="row" style="height: 64px; font-size: 32px;">
+    <div class="col-md-12">
+        Contact Us
+    </div>
 </div>
-<div class ="row col-md-12" style="padding:0px">
+<div class ="row">
+      <div class="col-md-12">
     <?php if (isset($message) && ($message != NULL)){?>
         <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
     <?php } ?>
 </div>
-<div class="row col-md-12">
+</div>
+<div class="row">
     <?php echo form_open("footer/contact_us", array('id' => 'form_add_feedback', 'class' => 'form-horizontal')); ?>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div style="font-size: 14px">
-                <div class="form-group">
-                    <div class ="row">
+                    <div class ="row col-md-12 form-group">
                         Name :
                     </div> 
-                    <div class ="row">
+                    <div class ="row col-md-12 form-group">
                         <?php echo form_input($name+array('class'=>'form-control')); ?>
                     </div> 
                 </div>
-                <div class="form-group">
-                    <div class ="row">
+                    <div class ="row col-md-12 form-group">
                         Email address :
                     </div> 
-                    <div class ="row">
+                    <div class ="row col-md-12 form-group">
                         <?php echo form_input($email+array('class'=>'form-control')); ?>
                     </div> 
-                </div>
-                <div class="form-group">
-                    <div class ="row">
+                    <div class ="row col-md-12 form-group">
                         Phone (optional) :
                     </div> 
-                    <div class ="row">
+                    <div class ="row col-md-12 form-group">
                         <?php echo form_input($phone+array('class'=>'form-control')); ?>
                     </div> 
-                </div> 
-                <div class="form-group">
-                    <div class ="row">
+                <div class="row col-md-12 form-group">
                         <br/>
                         Sonuto<br/>
                         Trinity House<br/>
@@ -46,11 +44,9 @@
                         <br/>
                         Tel: 020 3397 8425<br/>
                         Email: info@sonuto.com
-                    </div> 
                      
                 </div>
             </div>
-        </div>
         <div class="col-md-7 pull-right" style="font-size: 14px">
             <div class="form-group">
                 <div class ="row" style="padding-bottom:25px;">
@@ -64,7 +60,7 @@
                 <label for="submit_feedback" class="col-md-6 control-label requiredField">
 
                 </label>
-                <div class ="col-md-3 col-md-offset-3">
+                <div class ="">
                     <?php echo form_input($submit_feedback+array('class'=>'btn button-custom pull-right')); ?>
                 </div> 
             </div>
