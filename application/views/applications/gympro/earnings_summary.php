@@ -25,8 +25,8 @@
                 status_id: status_id
             },
             success: function (data) {
-                $("#sessions_tmpl_place").html(tmpl("tmpl_sessions_summery", data));
-                $("#earnings_summary").html(tmpl("tmpl_earnings_summary", data));
+                $("#sessions_tmpl_place").html(decode_html(tmpl("tmpl_sessions_summery", data)));
+                $("#earnings_summary").html(decode_html(tmpl("tmpl_earnings_summary", data)));
             }
         });
     }
