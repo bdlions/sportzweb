@@ -12,8 +12,8 @@
             data: {
             },
             success: function(data) {
-                $("#news").html(tmpl("tmpl_breaking_news_list", data['breaking_news_list']));
-                $("#news").html($("#news").html()+tmpl("tmpl_latest_news_list", data['latest_news_list']));
+                $("#news").html(decode_html(tmpl("tmpl_breaking_news_list", data['breaking_news_list'])));
+                $("#news").html($("#news").html()+decode_html(tmpl("tmpl_latest_news_list", data['latest_news_list'])));
                 var news_counter = 0;
                 for(var counter = 0; counter < data['breaking_news_list'].length; counter++)
                 {

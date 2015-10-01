@@ -22,3 +22,16 @@ function convert_date_from_user_to_db(date)
         return result[2]+"-"+result[1]+"-"+result[0];
     }
 }
+
+/*
+ * This method will decode html text. As an example after using this method &#039; becomes ' (single quote)
+ * @param html, html to be decoded
+ * @returns deocded html
+ * @author nazmul hasan
+ * @created on 1 October 2015
+ */
+function decode_html(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
