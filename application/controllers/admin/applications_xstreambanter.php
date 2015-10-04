@@ -375,7 +375,7 @@ class Applications_xstreambanter extends Admin_Controller{
         $this->data['message'] = '';
         $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
         $this->form_validation->set_rules('match_date', 'Match Date', 'xss_clean|required');
-        $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
+        //$this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
 
         if ($this->input->post('submit_create_match'))
         {            
@@ -462,7 +462,7 @@ class Applications_xstreambanter extends Admin_Controller{
         $this->data['message'] = '';
         $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
         $this->form_validation->set_rules('match_date', 'Match Date', 'xss_clean|required');
-        $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
+        //$this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
         
         if ($this->input->post('submit_update_match'))
         {            

@@ -392,7 +392,7 @@ class Applications_scoreprediction extends Admin_Controller{
         $this->data['message'] = '';
         $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
         $this->form_validation->set_rules('match_date', 'Match Date', 'xss_clean|required');
-        $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
+        //$this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
         $this->form_validation->set_rules('score_home', 'Home Score', 'xss_clean');
         $this->form_validation->set_rules('score_away', 'Away Score', 'xss_clean');
         $this->form_validation->set_rules('point_home', 'Home Point', 'xss_clean');
@@ -523,7 +523,7 @@ class Applications_scoreprediction extends Admin_Controller{
         $this->data['message'] = '';
         $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
         $this->form_validation->set_rules('match_date', 'Match Date', 'xss_clean|required');
-        $this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
+        //$this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
         $this->form_validation->set_rules('score_home', 'Home Score', 'xss_clean');
         $this->form_validation->set_rules('score_away', 'Away Score', 'xss_clean');
         $this->form_validation->set_rules('point_home', 'Home Point', 'xss_clean');
