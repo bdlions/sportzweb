@@ -88,6 +88,10 @@ a_hover_color
     margin-right: 1px;
 
 }
+.purp_style_header_custom{
+    margin-left: 0px!important;
+     margin-right: -1px!important;
+}
 .purp_style
 {
     color: white; 

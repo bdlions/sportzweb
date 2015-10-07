@@ -39,7 +39,7 @@
                     </div>
                     <div class="row">
                         <?php if (count($recipe_view_list_item) >= 3): ?>
-                            <div class="col-md-3 grayborderright">
+                            <div class="col-md-3 grayborderbottom">
                                 <?php if (array_key_exists(2, $recipe_view_list_item)) : ?>
                                     <img src="<?php echo base_url(); ?>resources/images/quote.png" class="img-responsive" alt=""/>
                                     <a style="color: red" href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe_view_list_item[2]['id']; ?>">
@@ -51,8 +51,8 @@
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
-                        <div class="col-md-4 grayborderright">
-                            <div class="purp_style_header">
+                        <div class="col-md-4 grayborderbottom grayborderleft">
+                            <div class="purp_style_header purp_style_header_custom">
                                 <div class="col-md-12 purp_style heading_medium_thin">
                                     Recipes
                                 </div>
@@ -67,7 +67,7 @@
                             <?php endif; ?>
 
                         </div>
-                        <div class="col-md-5 graybordertop">
+                        <div class="col-md-5 graybordertop grayborderbottom grayborderleft">
                             <?php if (array_key_exists(3, $recipe_view_list_item)) : ?>
                                 <?php if (!empty($recipe_view_list_item[3]['main_picture'])): ?>
                                     <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe_view_list_item[3]['id']; ?>">
