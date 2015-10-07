@@ -377,8 +377,9 @@ class Applications_xstreambanter extends Admin_Controller{
         $this->form_validation->set_rules('match_date', 'Match Date', 'xss_clean|required');
         //$this->form_validation->set_rules('match_time', 'Match Time', 'xss_clean|required');
 
-        if ($this->input->post('submit_create_match'))
+        if ($this->input->post())
         {            
+            $result = array();
             if($this->form_validation->run() == true)
             {
                 $additional_data = array(
@@ -391,18 +392,19 @@ class Applications_xstreambanter extends Admin_Controller{
                 $match_id = $this->admin_xstream_banter_library->create_match($additional_data);
                 if($match_id !== FALSE)
                 {
-                    $this->session->set_flashdata('message', $this->admin_xstream_banter_library->messages());
-                    redirect('admin/applications_xstreambanter/create_match/'.$tournament_id,'refresh');
+                    $result['message'] = $this->admin_xstream_banter_library->messages_alert();                    
                 }
                 else
                 {
-                    $this->data['message'] = 'Error while creating a match.';
+                    $result['message'] = 'Error while creating a match.';
                 }
             }
             else
             {
-                $this->data['message'] = validation_errors();
-            }            
+                $result['message'] = validation_errors();
+            } 
+            echo json_encode($result);
+            return;
         }
         else
         {

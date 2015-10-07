@@ -7,6 +7,18 @@
             $('#match_date').text($('#match_date').data('date'));
             $('#match_date').datepicker('hide');
         });
+        $('#submit_create_match').click(function () {
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: '<?php echo base_url() . 'admin/applications_xstreambanter/create_match/' . $tournament_id; ?>',
+                data: $("#form_create_match").serializeArray(),
+                success: function (data) {
+                    print_common_message(data.message);
+                    window.location = '<?php echo base_url(); ?>admin/applications_xstreambanter/manage_matches/<?php echo $tournament_id; ?>';
+                }
+            });                                    
+        });
     });
     
 </script>
@@ -16,7 +28,7 @@
         <div class="form-background top-bottom-padding">
             <div class="row">
                 <div class ="col-md-8 margin-top-bottom">
-                    <?php echo form_open("admin/applications_xstreambanter/create_match/".$tournament_id, array('id' => 'form_create_match', 'class' => 'form-horizontal')); ?>
+                    <?php echo form_open("admin/applications_xstreambanter/create_match/".$tournament_id, array('id' => 'form_create_match', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
                         <div class ="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-8"><?php echo $message; ?></div>

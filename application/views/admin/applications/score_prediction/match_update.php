@@ -9,7 +9,7 @@
         });
         $('#submit_update_match').click(function(){
             var match_time = $('#match_time').val();
-            if(/^([01][0-9]|2[0-3]):[0-5][0-9]$/.test(match_time)){
+            //if(/^([01][0-9]|2[0-3]):[0-5][0-9]$/.test(match_time)){
                 $.ajax({
                     dataType: 'json',
                     type: "POST",
@@ -20,12 +20,7 @@
                         window.location = '<?php echo base_url(); ?>admin/applications_scoreprediction/manage_matches/<?php echo $tournament_id; ?>';
                     }
                 });
-            }else{
-                //alert('Invalid match time, use the time format (HH:MM)');
-                var message = "Invalid match time, use the time format (HH:MM)";
-                print_common_message(message);
-                return;
-            }
+            //}
         });
     });
     

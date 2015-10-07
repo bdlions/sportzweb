@@ -147,15 +147,22 @@ class Admin_score_prediction_model extends Ion_auth_model
     /*
      * This method will check identity of team table
      * @param $identity, identity of team table
-     * @Author Nazmul on 24th October 2014
+     * @param $sports_id, sports id
+     * @author nazmul hasan 
+     * @created on 24th October 2014
+     * @modified on 4th October 2015
      */
-    public function team_identity_check($identity = '') {
+    public function team_identity_check($identity = '', $sports_id = 0) {
         if(empty($identity))
         {
             return FALSE;
         }
-        $this->db->where($this->team_identity_column,$identity);
-        return $this->db->count_all_results($this->tables['app_sp_teams']) > 0;
+        $this->db->where($this->tables['app_sp_teams'].'.'.$this->team_identity_column, $identity);
+        $this->db->where($this->tables['app_sp_sports'].'.id', $sports_id);
+        $this->db->select("*")
+            ->from($this->tables['app_sp_teams'])
+            ->join($this->tables['app_sp_sports'], $this->tables['app_sp_sports'].'.id='.$this->tables['app_sp_teams'].'.sports_id');
+        return $this->db->count_all_results() > 0;
     }
     /*
      * This method will create a team
@@ -164,7 +171,7 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function create_team($additional_data)
     {
-        if (array_key_exists($this->team_identity_column, $additional_data) && $this->team_identity_check($additional_data[$this->team_identity_column]) )
+        if (array_key_exists($this->team_identity_column, $additional_data) && array_key_exists('sports_id', $additional_data) && $this->team_identity_check($additional_data[$this->team_identity_column], $additional_data['sports_id']) )
         {
             $this->set_error('update_team_duplicate_' . $this->team_identity_column);
             return FALSE;
