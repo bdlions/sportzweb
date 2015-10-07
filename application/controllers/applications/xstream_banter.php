@@ -39,14 +39,14 @@ class Xstream_banter extends Role_Controller{
         }
         
         $sports_list = array();
-        $sports_list_array = $this->xstream_banter_library->get_all_sports()->result_array();
+        $sports_list_array = $this->xstream_banter_library->get_all_sports_match_date($this->utils->get_current_date_db())->result_array();
         foreach($sports_list_array as $sports)
         {
             $sports_list[$sports['id']] = $sports['title'];
         }
         $this->data['sports_list'] = $sports_list;
         
-        $visit_success = $this->visitors->store_application_visitor(APPLICATION_XSTREAM_BANTER_ID);
+        //$visit_success = $this->visitors->store_application_visitor(APPLICATION_XSTREAM_BANTER_ID);
         $this->template->load(null, "applications/xstream_banter/index", $this->data);
     }
     
