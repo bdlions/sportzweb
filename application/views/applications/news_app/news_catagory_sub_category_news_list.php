@@ -78,7 +78,7 @@
                 <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[3]]['id']; ?>">
                     <span class="heading_medium">
                         <p id="heading_4">
-                            <?php echo $news_id_news_info_map[$region_id_news_id_map[3]]['headline'] ?>
+                            <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[3]]['headline'])) ?>
                         </p>
                     </span>
                 </a>
@@ -99,7 +99,7 @@
                         <img id="image_position_5" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[4]]['picture'] ?>"/>
                     </a>
                 </div>
-                <div class="col-md-6" style="padding-left: 0px;">
+                <div class="col-md-6" style="padding-left: 0px; padding-top: 0px;">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[4]]['id']; ?>">
                         <span class="heading_medium">
                             <p id="heading_5">
@@ -118,7 +118,7 @@
                         <img id="image_position_6" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[5]]['picture'] ?>"/>
                     </a>
                 </div>
-                <div class="col-md-6" style="padding-left: 0px;">
+                <div class="col-md-6" style="padding-left: 0px; padding-top: 0px;">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[5]]['id']; ?>">
                         <span class="heading_medium">
                             <p id="heading_6">
@@ -139,7 +139,7 @@
                         <img id="image_position_7" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[6]]['picture'] ?>"/>
                     </a>
                 </div>
-                <div class="col-md-6" style="padding-left: 0px;">
+                <div class="col-md-6" style="padding-left: 0px; padding-top: 0px;">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[6]]['id']; ?>">
                         <span class="heading_medium">
                             <p id="heading_7"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[6]]['headline'])); ?></p>
@@ -156,7 +156,7 @@
                         <img id="image_position_8" style="width:100%;" class="img-responsive" src="<?php echo base_url() . NEWS_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[7]]['picture'] ?>"/>
                     </a>
                 </div>
-                <div class="col-md-6" style="padding-left: 0px;">
+                <div class="col-md-6" style="padding-left: 0px; padding-top: 0px;">
                     <a href="<?php echo base_url() . 'applications/news_app/news_item/' . $news_id_news_info_map[$region_id_news_id_map[7]]['id']; ?>">
                         <span class="heading_medium">
                             <p id="heading_8"><?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[7]]['headline'])); ?></p>
