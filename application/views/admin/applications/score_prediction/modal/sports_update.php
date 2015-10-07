@@ -17,6 +17,7 @@
                 url: '<?php echo base_url(); ?>' + "admin/applications_scoreprediction/update_sports",
                 data: {
                     title: $("#input_sports_update_title").val(),
+                    order: $("#input_sports_order").val(),
                     sports_id: $("#input_sports_id").val(),
                     league_table_configuration: leagueArray
                 },
@@ -39,12 +40,12 @@
             },
             success: function (data) {
                 var langueTableArray = data.sports_info['league_tbl_conf'];
-                console.log(langueTableArray);
                 $('#league_table_option_list_update input[name="type"]').each(function () {
                     $(this).prop("checked", ($.inArray($(this).val(), langueTableArray) != -1));
                 });
                 $('#input_sports_id').val(data.sports_info['sports_id']);
                 $('#input_sports_update_title').val(data.sports_info['title']);
+                $('#input_sports_order').val(data.sports_info['order']);
                 $("#modal_sports_update").modal('show');
             }
         });
@@ -65,6 +66,13 @@
                         <div class ="col-sm-4">
                             <input id="input_sports_update_title" name="input_sports_update_title" value="" type="text" class="form-control"/>
                             <input id="input_sports_id" name="input_sports_id" value="" type="hidden" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class ="col-sm-2"></div>
+                        <label class="col-sm-3 control-label">Sports Order:</label>
+                        <div class ="col-sm-4">
+                            <input id="input_sports_order" name="input_sports_order" value="" type="text" class="form-control"/>                            
                         </div>
                     </div>
                     <div class="row">

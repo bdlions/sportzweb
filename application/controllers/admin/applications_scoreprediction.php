@@ -155,6 +155,7 @@ class Applications_scoreprediction extends Admin_Controller{
         $league_table_configuration = $this->input->post('league_table_configuration');
         $additional_data = array(
             'title' => $title,
+            'order' => $this->input->post('order'),
             'modified_on' => now(),
             'league_tbl_conf' => json_encode($league_table_configuration) 
         );

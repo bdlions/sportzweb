@@ -20,6 +20,7 @@ class Score_prediction_model extends Ion_auth_model
      */
     public function get_all_sports()
     {
+        $this->db->order_by('order');
         return $this->db->select($this->tables['app_sp_sports'].'.id as sports_id,'.$this->tables['app_sp_sports'].'.*')
                     ->from($this->tables['app_sp_sports'])
                     ->get();
@@ -85,6 +86,7 @@ class Score_prediction_model extends Ion_auth_model
         {
             $this->db->where_in($this->tables['app_sp_matches'].'.id' , $match_ids);
         }
+        $this->db->order_by($this->tables['app_sp_sports'].'.order');
         $this->db->order_by('time');
         return $this->db->select($this->tables['app_sp_sports'].".id as sports_id, ".$this->tables['app_sp_sports'].".title as sports_title, ".$this->tables['app_sp_tournaments'].".id as tournament_id, ".$this->tables['app_sp_tournaments'].".title as tournament_title, ".$this->tables['app_sp_matches'].".*,".$this->tables['app_sp_matches'].".id as match_id, ".$this->tables['app_sp_match_predictions'].".prediction_list, home_team_table.title as team_title_home, away_team_table.title as team_title_away")
                         ->from($this->tables['app_sp_matches'])

@@ -1062,6 +1062,7 @@ INSERT INTO `app_item_reference_list` (`title`, `img`, `link`) VALUES
 CREATE TABLE IF NOT EXISTS `app_xb_sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
+  `order` int(11) unsigned NOT NULL DEFAULT 1,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1729,6 +1730,7 @@ CREATE TABLE `photography`(
 CREATE TABLE IF NOT EXISTS `app_sp_sports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
+  `order` int(11) unsigned NOT NULL DEFAULT 1,
   `league_tbl_conf` text,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,

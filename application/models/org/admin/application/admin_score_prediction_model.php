@@ -116,6 +116,7 @@ class Admin_score_prediction_model extends Ion_auth_model
      */
     public function get_all_sports()
     {
+        $this->db->order_by('order');
         return $this->db->select($this->tables['app_sp_sports'].'.id as sports_id,'.$this->tables['app_sp_sports'].'.*')
                     ->from($this->tables['app_sp_sports'])
                     ->get();
