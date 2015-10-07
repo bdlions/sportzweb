@@ -27,6 +27,7 @@ class Xstream_banter_model extends Ion_auth_model {
      */
     public function get_all_sports()
     {
+        $this->db->order_by('order');
         return $this->db->select('*')
                     ->from($this->tables['app_xb_sports'])
                     ->get();

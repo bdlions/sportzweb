@@ -140,6 +140,7 @@ class Applications_xstreambanter extends Admin_Controller{
         $title = $this->input->post('title');
         $additional_data = array(
             'title' => $title,
+            'order' => $this->input->post('order'),
             'modified_on' => now()
         );
         if($this->admin_xstream_banter_library->update_sports($sports_id, $additional_data))

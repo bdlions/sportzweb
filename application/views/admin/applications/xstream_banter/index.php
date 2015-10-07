@@ -24,6 +24,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Title</th>
+                                <th>Order</th>
                                 <?php if($allow_edit){ ?>
                                 <th style="text-align: center">Edit</th>
                                 <?php } ?>
@@ -37,6 +38,7 @@
                             <tr>
                                 <td><a href="<?php echo base_url()."admin/applications_xstreambanter/manage_tournaments/".$sports['sports_id']; ?>"><?php echo $sports['sports_id']?></a></td>
                                 <td><?php echo $sports['title']?></td>
+                                <td><?php echo $sports['order']?></td>
                                 <?php if($allow_edit){ ?>
                                 <td>
                                     <button onclick="open_modal_sports_update('<?php echo $sports['sports_id']; ?>')" value="" class="form-control btn pull-right">
