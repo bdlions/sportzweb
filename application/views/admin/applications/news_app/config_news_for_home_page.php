@@ -40,9 +40,8 @@
                     configuration_date: configuration_date
                 },
                 success: function(data){
-                    //alert(data['message']);
                     var message = data['message'];
-                print_common_message(message);
+                    print_common_message(message);
                 }
             });
         });
@@ -223,7 +222,7 @@
                         <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[3]]['news_id']; ?>">
                             <span class="cus_news_subheadline">
                                 <p id="heading_4">
-                                    <?php echo $news_id_news_info_map[$region_id_news_id_map[3]]['headline']?>
+                                    <?php echo html_entity_decode(html_entity_decode($news_id_news_info_map[$region_id_news_id_map[3]]['headline']))?>
                                 </p>
                             </span>
                         </a>
@@ -423,7 +422,7 @@
                             Edit
                         </button>
                         <input type="hidden" name="position_of_news_<?php echo 14+$fi;?>" id="position_of_news_<?php echo 14+$fi;?>" value="<?php echo !empty($news_id_news_info_map[$region_id_news_id_map[13+$fi]]['news_id'])?$news_id_news_info_map[$region_id_news_id_map[13+$fi]]['news_id']:'';?>">
-                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[13+$fi]['id']; ?>">
+                        <a href="<?php echo base_url() . 'admin/applications_news/news_details/'.$news_id_news_info_map[$region_id_news_id_map[13+$fi]]['news_id']; ?>">
                             <img id="image_position_<?php echo 14+$fi;?>" style="width:180px;height:120px;" class="img-responsive" src="<?php echo base_url() . NEWS_HOME_MIDDLE_IMAGE_PATH . $news_id_news_info_map[$region_id_news_id_map[13+$fi]]['picture'] ?>"/>
                         </a>
                         <br>
