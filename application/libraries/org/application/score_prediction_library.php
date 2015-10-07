@@ -292,8 +292,11 @@ class Score_prediction_library {
         //appending user info at leader board users
         foreach($temp_user_list as $user_score_info)
         {
-            $user_score_info['user_info'] = $user_id_user_info_map[$user_score_info['user_id']];
-            $leader_board_user_list[] = $user_score_info;
+            if(array_key_exists($user_score_info['user_id'], $user_id_user_info_map))
+            {
+                $user_score_info['user_info'] = $user_id_user_info_map[$user_score_info['user_id']];
+                $leader_board_user_list[] = $user_score_info;
+            }            
         }        
         return $leader_board_user_list;
     }
