@@ -228,31 +228,16 @@ a:hover
 .ptpro_top_banner{
     background-color: #880015; 
     border-bottom: 12px solid #E4E4E4; 
-    margin-left: -35px;
 }
 
-@media (min-width: 1200px) { 
-.gympro_img{
-        margin-left: 0!important;
-    }
-}
-@media (min-width: 992px)and (max-width: 1199px) { 
-.gympro_img{
-        margin-left: 20px!important;
-    }
-}
-@media (min-width: 768px)and (max-width: 991px) { 
-.gympro_img{
-        margin-left: 45px!important;
-    }
-}
+
 @media (min-width: 481px)and (max-width: 767px) {
 .gympro_img{
-        margin-left: 45px!important;
+        margin-left: 2.5%!important;
     }
 }
 @media (max-width: 480px) {
     .gympro_img{
-        margin-left: 35px;
+        margin-left: 4.5%;
     }
 }

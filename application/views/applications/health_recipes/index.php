@@ -2,7 +2,7 @@
 <?php if ($show_advertise) { ?>
     <div class="col-md-9 grayborderbottom" style="border-left: 2px solid #E7E7E7; border-right: 2px solid #E7E7E7; ">
     <?php } else { ?>
-        <div class="col-md-12 grayborderbottom" style="border-left: 2px solid #E7E7E7; border-right: 2px solid #E7E7E7; ">
+        <div class="col-md-12 grayborderbottom graybordertop" style="border-left: 2px solid #E7E7E7; border-right: 2px solid #E7E7E7; ">
         <?php } ?>
         <div class="row">
             <?php if ($show_advertise) { ?>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="row">
                         <?php if (count($recipe_view_list_item) >= 3): ?>
-                            <div class="col-md-3 grayborderbottom">
+                            <div class="col-md-3">
                                 <?php if (array_key_exists(2, $recipe_view_list_item)) : ?>
                                     <img src="<?php echo base_url(); ?>resources/images/quote.png" class="img-responsive" alt=""/>
                                     <a style="color: red" href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe_view_list_item[2]['id']; ?>">
@@ -51,7 +51,7 @@
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
-                        <div class="col-md-4 grayborderbottom grayborderleft">
+                        <div class="col-md-4 grayborderleft">
                             <div class="purp_style_header purp_style_header_custom">
                                 <div class="col-md-12 purp_style heading_medium_thin">
                                     Recipes
@@ -67,7 +67,7 @@
                             <?php endif; ?>
 
                         </div>
-                        <div class="col-md-5 graybordertop grayborderbottom grayborderleft">
+                        <div class="col-md-5 graybordertop grayborderleft">
                             <?php if (array_key_exists(3, $recipe_view_list_item)) : ?>
                                 <?php if (!empty($recipe_view_list_item[3]['main_picture'])): ?>
                                     <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe_view_list_item[3]['id']; ?>">
@@ -115,3 +115,6 @@
                 <?php } ?>        
             </div>    
         </div>
+    </div>
+</div>
+<div class="row form-group"></div>
