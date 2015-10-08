@@ -14,15 +14,15 @@
                         <?php if (count($recipe_view_list_item) > 1): ?>
                             <div class="cell_1st_top">
                                 <div style="padding-left: 8px;">
-                                <?php if (array_key_exists(0, $recipe_view_list_item)) : ?>
-                                    <?php if (!empty($recipe_view_list_item[0]['main_picture'])): ?>
-                                        <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe_view_list_item[0]['id']; ?>">
-                                            <img src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[0]['main_picture']; ?>" alt="<?php echo $recipe_view_list_item[0]['title']; ?>" class="img-responsive" style="width:100%; padding-right:12px;"/>
-                                        </a>
+                                    <?php if (array_key_exists(0, $recipe_view_list_item)) : ?>
+                                        <?php if (!empty($recipe_view_list_item[0]['main_picture'])): ?>
+                                            <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe_view_list_item[0]['id']; ?>">
+                                                <img src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[0]['main_picture']; ?>" alt="<?php echo $recipe_view_list_item[0]['title']; ?>" class="img-responsive" style="width:100%; padding-right:12px;"/>
+                                            </a>
+                                        <?php endif; ?>
+                                        <p class="image-caption reciepe_title heading_medium_thin" style="color: #7092BE"><?php echo (!empty($recipe_view_list_item[0]['title'])) ? $recipe_view_list_item[0]['title'] : ''; ?></p>
                                     <?php endif; ?>
-                                    <p class="image-caption reciepe_title heading_medium_thin" style="color: #7092BE"><?php echo (!empty($recipe_view_list_item[0]['title'])) ? $recipe_view_list_item[0]['title'] : ''; ?></p>
-                                <?php endif; ?>
-                            </div>
+                                </div>
                             </div>
                             <div class="cell_1st_bottom">
                                 <img src="<?php echo base_url(); ?>resources/images/quote.png" class="img-responsive" alt=""/>

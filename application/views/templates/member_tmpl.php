@@ -18,8 +18,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/search_bar_style.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/score_prediction.css" />
-                <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/healthy_recipe.css" />
-                
+
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/bootstrap.min.js"></script>
@@ -35,13 +34,13 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
         <script type="text/javascript">
             var config = {
-               base: "<?php echo base_url(); ?>"
+                base: "<?php echo base_url(); ?>"
             };
         </script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/date_converter.js"></script>
-        
-        
-                <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+
+
+        <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
         <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/jquery.fileupload.css">
 
         <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -71,12 +70,12 @@
     </head>
 
     <body>
-        <?php $this->load->view("templates/sections/header_with_menu");?>
+        <?php $this->load->view("templates/sections/header_with_menu"); ?>
         <div class="container">
-                <?php echo $contents; ?>
+            <?php echo $contents; ?>
         </div>
         <?php //$this->load->view("templates/sections/footer");?>
-        <?php $this->load->view("member/messages/chat");?>
+        <?php $this->load->view("member/messages/chat"); ?>
         <?php $this->load->view("common/common_message_modal"); ?>
     </body>
 </html>

@@ -175,6 +175,7 @@ a_hover_color
         margin: 0px;
     }
 }
+
 @media (min-width: 992px) { 
     .table_container {
         display: table;
@@ -210,6 +211,7 @@ a_hover_color
         width: 33%;
     }
 }
+
 @media (max-width: 991px) { 
     .table_container {
         margin: -2%;
@@ -226,7 +228,6 @@ a_hover_color
     .cell_2nd_top,.cell_2nd_middle,.cell_2nd_bottom {
         display: inline;
     }
-
 }
 
 
