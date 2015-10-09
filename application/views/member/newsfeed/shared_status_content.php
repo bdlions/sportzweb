@@ -272,7 +272,7 @@
                         <div class="row panel-heading sp_app_panel_heading_margin" role="tab">
                             <a class="score_prediction" href="<?php echo base_url() . 'applications/score_prediction/index/' . $newsfeed['reference_id']; ?>">
                                 <div class="app_sp_time">
-                                    <?php echo $newsfeed['reference_info']['time']; ?>
+                                    <?php echo $newsfeed['reference_info']['time'].'&nbsp;'; ?>
                                 </div>
                                 <div class="app_sp_team_home">
                                     <?php echo $newsfeed['reference_info']['team_title_home']; ?>
@@ -324,6 +324,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php if($newsfeed['reference_info']['sports_id'] != APP_SP_TENNIS_SPORTS_ID){ ?>
                                 <div class="row form-group" onclick = "prediction_modal('Draw', '<?php echo $newsfeed['reference_info']['match_id'] ?>', '<?php echo MATCH_STATUS_DRAW ?>', '<?php echo $newsfeed['reference_info']['is_predicted'] ?>', '<?php echo $newsfeed['reference_info']['status_id'] ?>', '<?php echo MATCH_PREDICTION_FROM_NEWSFEED ?>')">
                                     <div class="col-md-12">
     <?php
@@ -346,6 +347,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                                 <div class="row form-group" onclick = "prediction_modal('<?php echo $newsfeed['reference_info']['team_title_away']; ?>', '<?php echo $newsfeed['reference_info']['match_id'] ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo $newsfeed['reference_info']['is_predicted'] ?>', '<?php echo $newsfeed['reference_info']['status_id'] ?>', '<?php echo MATCH_PREDICTION_FROM_NEWSFEED ?>')">
                                     <div class="col-md-12">
     <?php

@@ -93,6 +93,7 @@
                         </div>
                     </div>
                 </div>
+                {% if(match_info.sports_id != <?php echo APP_SP_TENNIS_SPORTS_ID; ?>){ %}
                 <div class="row form-group" onclick = "prediction_modal('Draw', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo MATCH_STATUS_DRAW ?>', '<?php echo'{%= match_info.is_predicted %}' ?>', '<?php echo'{%= match_info.status_id %}' ?>', '<?php echo MATCH_PREDICTION_FROM_APPLICATION ?>')">
                     <div class="col-md-12">
                         {% var draw_percentage = match_info.prediction_info.draw; %}
@@ -114,6 +115,7 @@
                         </div>
                     </div>
                 </div>
+                {% } %}
                 <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= match_info.team_title_away %}'; ?>', '<?php echo '{%= match_info.match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo'{%= match_info.is_predicted %}' ?>', '<?php echo'{%= match_info.status_id %}' ?>', '<?php echo MATCH_PREDICTION_FROM_APPLICATION ?>')">
                     <div class="col-md-12">
                         {% var away_percentage = match_info.prediction_info.away; %}

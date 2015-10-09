@@ -1,4 +1,11 @@
 <?php
+define("APP_SP_RUGHBY_SPORTS_ID",                             8);
+define("APP_SP_FOOTBALL_SPORTS_ID",                           1);
+define("APP_SP_BASKETBALL_SPORTS_ID",                         4);
+define("APP_SP_BOXING_SPORTS_ID",                             5);
+define("APP_SP_TENNIS_SPORTS_ID",                             6);
+define("APP_SP_CRICKET_SPORTS_ID",                            7);
+
 define("MATCH_STATUS_UPCOMING",                               1);
 define("MATCH_STATUS_WIN_HOME",                               2);
 define("MATCH_STATUS_WIN_AWAY",                               3);
