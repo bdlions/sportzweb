@@ -171,7 +171,19 @@ class Score_prediction extends Role_Controller{
     {
         $response = array();
         $tournament_id = $this->input->post('tournament_id');
-        $response = $this->score_prediction_library->get_league_table_data($tournament_id);
+        
+        //$response = $this->score_prediction_library->get_league_table_data($tournament_id);
+        
+        $response['league_table'] = "";
+        $response['table_title'] = "";
+        $tournament_info = array();
+        $tournament_info_array = $this->score_prediction_library->get_tournament_info($tournament_id)->result_array();
+        if(!empty($tournament_info_array))
+        {
+            $tournament_info = $tournament_info_array[0];
+            $response['league_table'] = html_entity_decode(html_entity_decode($tournament_info['league_table']));
+            $response['table_title'] = $tournament_info['table_title'];
+        }        
         echo json_encode($response);
     }
 }

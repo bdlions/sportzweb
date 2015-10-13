@@ -34,10 +34,10 @@
                                 <td style="text-align: center"><?php echo $tournament['title']?></td>
                                 <td style="text-align: center"><?php echo $tournament['season']?></td>
                                 <?php if($allow_edit){ ?>
-                                <td>
-                                    <button onclick="open_modal_tournament_update('<?php echo $tournament['tournament_id']; ?>')" value="" class="form-control btn pull-right">
-                                        Edit
-                                    </button>
+                                <td>                                   
+                                    <a href="<?php echo base_url().'admin/applications_scoreprediction/update_tournament/'.$tournament['tournament_id']?>">
+                                        Update
+                                    </a>
                                 </td>
                                 <?php } ?>
                                 <?php if($allow_delete){ ?>

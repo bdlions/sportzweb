@@ -330,12 +330,95 @@ class Applications_scoreprediction extends Admin_Controller{
         echo json_encode($result);
     }
     /*
-     * Ajax call to update tournament
-     * @Author Nazmul on 24th October 2014
+     * This method will update tournament
+     * @param $tournament_id, tournament id
+     * @author nazmul hasan 
+     * @created on 24th October 2014
+     * @modified on 13th October 2015
      */
-    public function update_tournament()
+    public function update_tournament($tournament_id = 0)
     {
-        $result = array();
+        if($tournament_id == 0)
+        {
+            redirect('admin/applications_scoreprediction','refresh');
+        }
+        $this->data['message'] = '';
+        $this->form_validation->set_rules('title', ' Title', 'xss_clean|required');
+        $this->form_validation->set_rules('season', ' Season', 'xss_clean|required');
+        $this->form_validation->set_rules('table_title', ' Table Title', 'xss_clean|required');
+        if ($this->input->post()) 
+        {            
+            $result = array();
+            if($this->form_validation->run() == true)
+            {
+                $additional_data = array(
+                    'title' => $this->input->post('title'),
+                    'season' => $this->input->post('season'),
+                    'table_title' => $this->input->post('table_title'),
+                    'league_table' => trim(htmlentities($this->input->post('editortext_league_table'))),
+                    'modified_on' => now()
+                );
+                if($this->admin_score_prediction_library->update_tournament($tournament_id, $additional_data))
+                {
+                    $result['message'] = $this->admin_score_prediction_library->messages_alert();
+                }
+                else
+                {
+                    $result['message'] = $this->admin_score_prediction_library->errors_alert();
+                }
+            }  
+            else
+            {
+                $result['message'] = $this->validation_errors();
+            }
+            echo json_encode($result);
+            return;
+        }
+        $tournament_info = array();
+        $tournament_info_array = $this->admin_score_prediction_library->get_tournament_info($tournament_id)->result_array();
+        if(!empty($tournament_info_array))
+        {
+            $tournament_info = $tournament_info_array[0];
+        }
+        else
+        {
+            redirect('admin/applications_scoreprediction','refresh');
+        }
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text',
+            'value' => $tournament_info['title']
+        );
+        $this->data['season'] = array(
+            'name' => 'season',
+            'id' => 'season',
+            'type' => 'text',
+            'value' => $tournament_info['season']
+        );
+        $this->data['table_title'] = array(
+            'name' => 'table_title',
+            'id' => 'table_title',
+            'type' => 'text',
+            'value' => $tournament_info['table_title']
+        );
+        $this->data['league_table'] = array(
+            'name' => 'league_table',
+            'id' => 'league_table',
+            'type' => 'text',
+            'value' => html_entity_decode(html_entity_decode($tournament_info['league_table'])),
+            'rows'  => '4',
+            'cols'  => '10'
+        );
+        $this->data['submit_update_tournament'] = array(
+            'name' => 'submit_update_tournament',
+            'id' => 'submit_update_tournament',
+            'type' => 'submit',
+            'value' => 'Update',
+        );
+        $this->data['tournament_id'] = $tournament_id;
+        $this->template->load($this->tmpl, "admin/applications/score_prediction/update_tournament", $this->data);
+        /*$result = array();
         $tournament_id = $this->input->post('tournament_id');
         $season = $this->input->post('season');
         $title = $this->input->post('title');
@@ -352,7 +435,7 @@ class Applications_scoreprediction extends Admin_Controller{
         {
             $result['message'] = $this->admin_score_prediction_library->errors_alert();
         }
-        echo json_encode($result);
+        echo json_encode($result);*/
     }
     
     /*

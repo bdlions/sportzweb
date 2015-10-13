@@ -1773,6 +1773,8 @@ CREATE TABLE IF NOT EXISTS `app_sp_tournaments` (
   `sports_id` int(11) unsigned NOT NULL,
   `title` varchar(200),
   `season` varchar(200),
+  `table_title` varchar(200),
+  `league_table` text,
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),

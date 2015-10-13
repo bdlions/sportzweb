@@ -222,7 +222,7 @@ class Admin_blog{
         $region_id_blog_id_map = array();
         $blog_id_blog_info_map = array();
         //read blog_configure_homepage table
-        $present_date = $this->utils->get_current_date();
+        $present_date = $this->utils->get_current_date_db();
         $blog_id_list = array();
         $blog_configuration_array = $this->admin_blog_model->get_home_page_blog_configuration($present_date)->result_array();        
         if(!empty($blog_configuration_array)) {

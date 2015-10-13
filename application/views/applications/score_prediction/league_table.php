@@ -14,13 +14,15 @@
                 tournament_id: tournament_id
             },
             success: function(data) {
-                $('#league_table_content').html(tmpl('tlmp_table_header', data.league_table_header_title_list));
-                $('#league_table_content').append(tmpl('tlmp_league_table', data.team_list));
+                $('#table_title').html(data.table_title);        
+                $('#league_table_content').html(data.league_table);
+                //$('#league_table_content').html(tmpl('tlmp_table_header', data.league_table_header_title_list));
+                //$('#league_table_content').append(tmpl('tlmp_league_table', data.team_list));
             }
         });
     }
 </script>
-<script type="text/x-tmpl" id="tlmp_table_header">    
+<!--<script type="text/x-tmpl" id="tlmp_table_header">    
     <tr style="background-color: rgb(0, 0, 0); color: whitesmoke; font-size: 15px;">
     {% var i=0, team_list = ((o instanceof Array) ? o[i++] : o); %}
     {% while(team_list){ %}    
@@ -28,8 +30,8 @@
     {% team_list = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}   
     </tr>
-</script>
-<script type="text/x-tmpl" id="tlmp_league_table">
+</script>-->
+<!--<script type="text/x-tmpl" id="tlmp_league_table">
     {% var i=0, team_list = ((o instanceof Array) ? o[i++] : o); %}
     {% while(team_list){ %}
     <tr>
@@ -51,11 +53,11 @@
     </tr>
     {% team_list = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
-</script>
+</script>-->
 
 <div class="row form-group heading blue_banner prediction_league_table_header">
-    <div class="col-md-12">
-        League Table
+    <div class="col-md-12" id="table_title">
+        
     </div>
 </div>
 <div class="row" style="padding-top:10px; padding-bottom: 10px;">

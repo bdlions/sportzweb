@@ -205,4 +205,18 @@ class Score_prediction_model extends Ion_auth_model
                     ->join($this->tables['app_sp_teams'].' as away_team_table', 'away_team_table.id=' . $this->tables['app_sp_matches'] . '.team_id_away', 'left')
                     ->get();
     }
+    
+    /*
+     * This method will return tournament info
+     * @param $tournament_id, tournament id
+     * @author nazmul hasan
+     * @created on 24th October 2014
+     */
+    public function get_tournament_info($tournament_id)
+    {
+        $this->db->where($this->tables['app_sp_tournaments'].'.id', $tournament_id);
+        return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id,'.$this->tables['app_sp_tournaments'].'.*')
+                    ->from($this->tables['app_sp_tournaments'])
+                    ->get();
+    }
 }

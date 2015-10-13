@@ -305,7 +305,7 @@ class Score_prediction_library {
      * @param $tournament_id, tournament id
      * @Author Nazmul Hasan on 28th June 2015
      */
-    public function get_league_table_data($tournament_id)
+    /*public function get_league_table_data($tournament_id)
     {
         $result = array();
         $team_list = array();
@@ -399,6 +399,7 @@ class Score_prediction_library {
             $result_team_list[] = $result_team_info;
         }
         $result['team_list'] = $result_team_list;
+        $league_table_header_title_list = array();
         if(in_array(LEAGUE_TABLE_POSITION_ID, $league_table_configuration))
         {
             $league_table_header_title_list[] = 'POS';            
@@ -429,5 +430,5 @@ class Score_prediction_library {
         }
         $result['league_table_header_title_list'] = $league_table_header_title_list;
         return $result;
-    }
+    }*/
 }
