@@ -32,86 +32,86 @@
 /*       Modified by Noor    */
 /*****************************************************/
 div.login_width{
-	width: 41%;
+    width: 41%;
 }
 .login-textbox{
-	/*width: 99%;*/
-	padding-right: 15px;
+    /*width: 99%;*/
+    padding-right: 15px;
 }
 div.signin_button{
-	float: right;    
+    float: right;    
 }
 form.navbar-right{
-	min-width: 55% !important;
+    min-width: 55% !important;
 }
 form.navbar-right div.row{
-	float: none;
+    float: none;
     margin: 0 0;
     width: 96%;
 }
 div.login12{
-	margin-top: 13px;
+    margin-top: 13px;
 }
 div.home-left-tit{
-	font-size: 27px;
-	color: #89c1f4;
-	border-bottom: #cecece solid 1px;
-	padding-bottom: 3px;
-	margin-bottom: 13px;
+    font-size: 27px;
+    color: #89c1f4;
+    border-bottom: #cecece solid 1px;
+    padding-bottom: 3px;
+    margin-bottom: 13px;
 }
 a#forget_password{
-	margin-left: 5px;
+    margin-left: 5px;
 }
 div.hp_left_img_title{
-	font-weight: bold;
-	text-align: left;
-	padding-left: 0;
-	margin-top: 10px;
-	font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 0;
+    margin-top: 10px;
+    font-size: 15px;
 }
 .business_profile_ancor{
-	border-top: 1px solid #ccc;
-	padding-top: 7px;
+    border-top: 1px solid #ccc;
+    padding-top: 7px;
 }
 div.login_port{
-	margin:auto;
-	padding:auto;
+    margin:auto;
+    padding:auto;
 }
 
 /****************************************************************************/
 @media (max-width: 767px) { 
-	div.login_width{
-		width: 100%;
-	}
-	.login-textbox{
-		width: 99%;		
-	}
-	.logo {
-		margin: 0;
-		position: relative;
-	}
-	
-	div.signin_button{
-		margin-right: 5%;
-	}
+    div.login_width{
+        width: 100%;
+    }
+    .login-textbox{
+        width: 99%;		
+    }
+    .logo {
+        margin: 0;
+        position: relative;
+    }
+
+    div.signin_button{
+        margin-right: 5%;
+    }
 }
 /****************************************************************************/
 @media screen and (-webkit-min-device-pixel-ratio:0){
-div.signin_button{
-		float: right;
-	}
-	form.navbar-right div.row{
-		float: none;
-		width: 96%;
-		margin: 0 6%;
-	}
-		div.signin_button{
-		margin-right: 0%;
-	}
+    div.signin_button{
+        float: right;
+    }
+    form.navbar-right div.row{
+        float: none;
+        width: 96%;
+        margin: 0 6%;
+    }
+    div.signin_button{
+        margin-right: 0%;
+    }
 }
 @-moz-document url-prefix() { � �
-div.login_width {
-		margin-left: 8%;
-		width: 33%;
-	}
+                              div.login_width {
+                                  margin-left: 8%;
+                                  width: 33%;
+                              }
 }

@@ -29,7 +29,7 @@
                             </div> 
                             <div class="form-group">
                                 <label for="type" class="col-md-10 control-label">
-                                    Please upload an image at least Height: 683px and Width: 1349px for better resolution
+                                    Please upload an image at least Height: 1920px and Width: 2560px for better resolution
                                 </label>
                             </div>
                             <div class="form-group">

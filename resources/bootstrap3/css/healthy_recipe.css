@@ -230,15 +230,15 @@ a_hover_color
     .cell_1st_top{
         display: table-cell;
         vertical-align: top;
-        padding: 30px 13px;
+        padding: 30px 12px;
         border-right: 2px solid #E7E7E7;
-        width: 66.66%;
+        width: 66.67%;
         vertical-align: top;
     }
     .cell_1st_bottom{
         display: table-cell;
         vertical-align: top;
-        padding: 30px 13px;
+        padding: 30px 16px;
         width: 33.33%;
         vertical-align: top;
         border-right: 2px solid #E7E7E7;

@@ -33,8 +33,8 @@
     define("LOGIN_PAGE_IMAGE_PATH",                      "resources/uploads/configure/login_page/");
     
     //logout page
-    define("LOGOUT_PAGE_IMAGE_WIDTH",                    "1349");
-    define("LOGOUT_PAGE_IMAGE_HEIGHT",                   "683");
+    define("LOGOUT_PAGE_IMAGE_WIDTH",                    "2560");
+    define("LOGOUT_PAGE_IMAGE_HEIGHT",                   "1920");
     define("LOGOUT_PAGE_IMAGE_PATH",                     "resources/uploads/configure/logout_page/");
     
 //  GENDER
