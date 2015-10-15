@@ -155,6 +155,7 @@ class Applications_scoreprediction extends Admin_Controller{
         $league_table_configuration = $this->input->post('league_table_configuration');
         $additional_data = array(
             'title' => $title,
+            'table_title' => $this->input->post('table_title'),
             'order' => $this->input->post('order'),
             'modified_on' => now(),
             'league_tbl_conf' => json_encode($league_table_configuration) 
@@ -355,6 +356,7 @@ class Applications_scoreprediction extends Admin_Controller{
                     'title' => $this->input->post('title'),
                     'season' => $this->input->post('season'),
                     'table_title' => $this->input->post('table_title'),
+                    'visible' => $this->input->post('visible'),
                     'league_table' => trim(htmlentities($this->input->post('editortext_league_table'))),
                     'modified_on' => now()
                 );
@@ -409,6 +411,12 @@ class Applications_scoreprediction extends Admin_Controller{
             'value' => html_entity_decode(html_entity_decode($tournament_info['league_table'])),
             'rows'  => '4',
             'cols'  => '10'
+        );
+        $this->data['visible'] = array(
+            'name' => 'visible',
+            'id' => 'visible',
+            'type' => 'text',
+            'value' => $tournament_info['visible']
         );
         $this->data['submit_update_tournament'] = array(
             'name' => 'submit_update_tournament',

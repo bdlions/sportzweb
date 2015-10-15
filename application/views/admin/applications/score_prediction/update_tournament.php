@@ -80,6 +80,14 @@
                         </div> 
                     </div>
                     <div class="form-group">
+                        <label for="visible" class="col-md-3 control-label requiredField">
+                            Visible:
+                        </label>
+                        <div class ="col-md-9">
+                            <?php echo form_input($visible + array('class' => 'form-control')); ?>
+                        </div> 
+                    </div>
+                    <div class="form-group">
                         <label for="league_table" class="col-md-3 control-label requiredField">
                             League Table
                         </label>

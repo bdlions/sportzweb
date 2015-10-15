@@ -8,7 +8,9 @@
     <div class="col-md-7 col-sm-7 col-xs-12 form-group">
         <?php $this->load->view("applications/score_prediction/process_match_list", $this->data); ?>
     </div>
+    <?php if($sports_id != APP_SP_BASKETBALL_SPORTS_ID){?>
     <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
         <?php $this->load->view("applications/score_prediction/league_table"); ?>
     </div>
+    <?php }?>
 </div>

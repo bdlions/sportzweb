@@ -14,7 +14,10 @@
                 tournament_id: tournament_id
             },
             success: function(data) {
-                $('#table_title').html(data.table_title);        
+                if(data.table_title !== "" && data.table_title != null)
+                {
+                    $('#table_title').html(data.table_title); 
+                }                       
                 $('#league_table_content').html(data.league_table);
                 //$('#league_table_content').html(tmpl('tlmp_table_header', data.league_table_header_title_list));
                 //$('#league_table_content').append(tmpl('tlmp_league_table', data.team_list));
@@ -57,7 +60,7 @@
 
 <div class="row form-group heading blue_banner prediction_league_table_header">
     <div class="col-md-12" id="table_title">
-        
+        <?php if(isset($sports_info)){ echo $sports_info['table_title']; }?>
     </div>
 </div>
 <div class="row" style="padding-top:10px; padding-bottom: 10px;">

@@ -36,7 +36,21 @@ class Score_prediction_model extends Ion_auth_model
         return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id,'.$this->tables['app_sp_tournaments'].'.*')
                     ->from($this->tables['app_sp_tournaments'])
                     ->get();
-    }    
+    }  
+    
+    /*
+     * This method will return all tournaments of league table
+     * @Author Nazmul on 24th October 2014
+     */
+    public function get_league_table_tournaments($sports_id)
+    {
+        $this->db->where('sports_id', $sports_id);
+        //$this->db->where('visible', APP_SP_TOURNAMENT_VISIBLITY_VISIBLE);
+        $this->db->order_by('title','asc');
+        return $this->db->select($this->tables['app_sp_tournaments'].'.id as tournament_id,'.$this->tables['app_sp_tournaments'].'.*')
+                    ->from($this->tables['app_sp_tournaments'])
+                    ->get();
+    }
     
     /*
      * This method will return match info

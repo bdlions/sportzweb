@@ -37,3 +37,6 @@ define("LEAGUE_TABLE_POINTS_ID",                       7);
 
 define("MATCH_PREDICTION_FROM_APPLICATION",            1);
 define("MATCH_PREDICTION_FROM_NEWSFEED",               2);
+
+define("APP_SP_TOURNAMENT_VISIBLITY_VISIBLE",          1);
+define("APP_SP_TOURNAMENT_VISIBLITY_INVISIBLE",        0);

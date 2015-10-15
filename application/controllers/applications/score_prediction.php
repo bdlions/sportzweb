@@ -146,7 +146,7 @@ class Score_prediction extends Role_Controller{
     public function sports($sports_id){
         $this->data['tournament_id'] = 0;
         $tournament_list = array();
-        $tournament_list_array = $this->score_prediction_library->get_all_tournaments($sports_id)->result_array();
+        $tournament_list_array = $this->score_prediction_library->get_league_table_tournaments($sports_id)->result_array();
         foreach($tournament_list_array as $tournament_info){
             $tournament_list[$tournament_info['tournament_id']] = $tournament_info['title'].' '.$tournament_info['season'];
         }
@@ -155,7 +155,15 @@ class Score_prediction extends Role_Controller{
             $this->data['tournament_id'] = $tournament_list_array[0]['tournament_id'];
         }
         $this->data['tournament_list'] = $tournament_list;
-        $this->data['sports_list'] = $this->score_prediction_library->get_all_sports()->result_array();
+        $sports_list = $this->score_prediction_library->get_all_sports()->result_array();
+        foreach($sports_list as $sports_info)
+        {
+            if($sports_info['sports_id'] == $sports_id)
+            {
+                $this->data['sports_info'] = $sports_info;
+            }
+        }
+        $this->data['sports_list'] = $sports_list;
         $this->data['date'] = $this->utils->get_current_date_yyyymmdd();
         $this->data['sports_id'] = $sports_id;
         $this->data['match_id'] = 0;
