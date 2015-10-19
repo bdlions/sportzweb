@@ -77,7 +77,8 @@
                 if(data.sports_list.length > 0 && sports_id > 0 && tournament_id > 0)
                 {
                     var tounament_list = data.sports_list[0].tournament_list;
-                    if(tounament_list.length > 0)
+                    //right now we are skipping league table for basketball
+                    if(tounament_list.length > 0 && data.sports_list[0].sports_id != '<?php echo APP_SP_BASKETBALL_SPORTS_ID;?>')
                     {
                         var selected_tournament_id = tounament_list[0].tournament_id;
                         $('#tournament_list').val(selected_tournament_id);
@@ -89,13 +90,37 @@
                     $('#tournament_list').val(tournament_id);
                     populate_league_table(tournament_id);
                 }
-                $('#home_page_sports_content').html(tmpl('tlmp_home_page_sports_content', data.sports_list));
+                if(data.sports_list.length > 0)
+                {
+                    $('#home_page_sports_content').html(tmpl('tlmp_app_sp_sports_content', data.sports_list));
+                }
+                else
+                {
+                    $('#home_page_sports_content').html(tmpl('tlmp_no_sports_content', data.sports_list));
+                }
+                
             }
         });
     }
 </script>
-
-<script type="text/x-tmpl" id="tlmp_home_page_sports_content">
+<script type="text/x-tmpl" id="tlmp_no_sports_content">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="">
+                <div class="row" style="padding: 0px; font-size: 20px;">
+                    <div class="col-md-12">
+                        <div class="heading blue_banner padding_collapse_header custom_heading text_align_left">
+                            No Fixtures 
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</script>
+<script type="text/x-tmpl" id="tlmp_app_sp_sports_content">
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     {% var sports_counter = 0, sports_list = ((o instanceof Array) ? o[sports_counter++] : o); %}
     {% while(sports_list){ %}
@@ -188,16 +213,16 @@
                                                     <span class="progress_bar_percentage_text">
                                                         {%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}
                                                     </span>
-                                                     {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_WIN_HOME; ?>){ %}
-                                                    <div class="progress_bar_width_catulate bgcolor_green" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
-                                                     {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_WIN_HOME; ?>){ %}
-                                                    <div class="progress_bar_width_catulate bgcolor_red" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
-                                                     {% }else if(sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_WIN_HOME; ?>){ %}
-                                                    <div class="progress_bar_width_catulate bgcolor_blue" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
+                                                    {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_WIN_HOME; ?>){ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_green" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
+                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_WIN_HOME; ?>){ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_red" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
+                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_WIN_HOME; ?>){ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_blue" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
                                                     {% }else{ %}
-                                                    <div class="progress_bar_width_catulate bgcolor_light_gray" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
+                                                        <div class="progress_bar_width_catulate bgcolor_light_gray" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.home %}"/>
                                                     {% } %}
-                                                </div>
+                                                        </div>
                                             </div>
                                         </div>
                                         {% if(sports_list.sports_id != <?php echo APP_SP_TENNIS_SPORTS_ID; ?>){ %}
@@ -209,56 +234,55 @@
                                                         {%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}
                                                     </span>
                                                     {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_DRAW; ?>){ %}
-                                                    <div class="progress_bar_width_catulate bgcolor_green" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
-                                                        {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_DRAW; ?>){ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_green" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
+                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_DRAW; ?>){ %}
                                                         <div class="progress_bar_width_catulate bgcolor_red" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
-                                                         {% }else if(sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_DRAW; ?>){ %}
+                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_DRAW; ?>){ %}
                                                         <div class="progress_bar_width_catulate bgcolor_blue" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
-                                                            {% }else{ %}
-                                                            <div class="progress_bar_width_catulate bgcolor_light_gray" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
-                                                                {% } %} 
-                                                            </div>
+                                                    {% }else{ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_light_gray" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.draw %}">
+                                                    {% } %} 
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
                                         {% } %}
                                         <div class="row form-group" onclick = "prediction_modal('<?php echo '{%= sports_list.tournament_list[j].match_list[k].team_title_away %}'; ?>', '<?php echo '{%= sports_list.tournament_list[j].match_list[k].match_id%}' ?>', '<?php echo MATCH_STATUS_WIN_AWAY ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].is_predicted %}' ?>', '<?php echo'{%= sports_list.tournament_list[j].match_list[k].status_id %}' ?>', '<?php echo MATCH_PREDICTION_FROM_APPLICATION ?>')">
-                                                    <div class="col-md-12">
-                                                        <div class="progress_bar_backgraound">
-                                                            <span class="progress_bar_content">
-                                                                {%= sports_list.tournament_list[j].match_list[k].team_title_away %}
-                                                            </span>
-                                                            <span class="progress_bar_percentage_text">
-                                                                {%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}
-                                                            </span>
-                                                            {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_WIN_AWAY; ?>){ %}
-                                                            <div class="progress_bar_width_catulate bgcolor_green" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
-                                                                {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_WIN_AWAY; ?>){ %}
-                                                                <div class="progress_bar_width_catulate bgcolor_red" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
-                                                                {% }else if(sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_WIN_AWAY; ?>){ %}
-                                                                <div class="progress_bar_width_catulate bgcolor_blue" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
-                                                                    {% }else{ %}
-                                                                    <div class="progress_bar_width_catulate bgcolor_light_gray" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
-                                                                        {% } %} 
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="progress_bar_backgraound">
+                                                    <span class="progress_bar_content">
+                                                        {%= sports_list.tournament_list[j].match_list[k].team_title_away %}
+                                                    </span>
+                                                    <span class="progress_bar_percentage_text">
+                                                        {%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}
+                                                    </span>
+                                                    {% if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_WIN_AWAY; ?>){ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_green" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
+                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id != <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id != sports_list.tournament_list[j].match_list[k].status_id && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_WIN_AWAY; ?>){ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_red" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
+                                                    {% }else if(sports_list.tournament_list[j].match_list[k].status_id == <?php echo MATCH_STATUS_UPCOMING; ?> && sports_list.tournament_list[j].match_list[k].is_predicted == 1 && sports_list.tournament_list[j].match_list[k].my_prediction_id == <?php echo MATCH_STATUS_WIN_AWAY; ?>){ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_blue" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
+                                                    {% }else{ %}
+                                                        <div class="progress_bar_width_catulate bgcolor_light_gray" style="width:{%= sports_list.tournament_list[j].match_list[k].prediction_info.away %}">
+                                                    {% } %} 
                                                         </div>
-                                                    </div>  
                                                 </div>
-                                            </div>    
-
-                                            {% } %}
+                                            </div>
                                         </div>
-                                        <!-- Accordion here ends-->
-                                    </div>                 
-                                    {% } %}
+                                    </div>  
                                 </div>
-                            </div>    
-                            {% sports_list = ((o instanceof Array) ? o[sports_counter++] : null); %}
-                            {% } %}
+                            </div>
+                        {% } %}
                     </div>
-                    </script> 
+                    <!-- Accordion here ends-->
+                </div>                 
+            {% } %}
+        </div>
+    </div>    
+    {% sports_list = ((o instanceof Array) ? o[sports_counter++] : null); %}
+    {% } %}
+</div>
+</script>
 <div class="form-group">
     <div class="input_custom"> 
         <label class="input_custom_input" type="text" id="rMin1" name="to"></label>
