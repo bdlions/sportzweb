@@ -371,7 +371,7 @@ class Applications_scoreprediction extends Admin_Controller{
             }  
             else
             {
-                $result['message'] = $this->validation_errors();
+                $result['message'] = validation_errors();
             }
             echo json_encode($result);
             return;

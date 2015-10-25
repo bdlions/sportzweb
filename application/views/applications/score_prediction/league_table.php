@@ -60,7 +60,10 @@
 
 <div class="row form-group heading blue_banner prediction_league_table_header">
     <div class="col-md-12" id="table_title">
-        <?php if(isset($sports_info)){ echo $sports_info['table_title']; }?>
+        <?php if(isset($sports_info))
+        { 
+            echo $sports_info['table_title'];
+        }?>
     </div>
 </div>
 <div class="row" style="padding-top:10px; padding-bottom: 10px;">

@@ -87,8 +87,12 @@
                 }
                 else if(sports_id > 0 && tournament_id > 0)
                 {
-                    $('#tournament_list').val(tournament_id);
-                    populate_league_table(tournament_id);
+                    //right now we are skipping league table for basketball                
+                    if(sports_id != '<?php echo APP_SP_BASKETBALL_SPORTS_ID;?>')
+                    {
+                        $('#tournament_list').val(tournament_id);
+                        populate_league_table(tournament_id);
+                    }
                 }
                 if(data.sports_list.length > 0)
                 {
