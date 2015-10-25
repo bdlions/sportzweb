@@ -7,15 +7,11 @@
 <html lang="en"><!--<![endif]-->
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Social">
-        <meta name="author" content="Nazmul Hasan, Alamgir Kabir, Noor Alam, Ziaur Rahman, Omar Faruk,Redwan khaled,Tanveer">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
-        <meta name="keywords" content=""/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!--Auth Background sliding Image-->
-        <meta name="description" content="Fullscreen Background Image Slideshow with CSS3 - A Css-only fullscreen background image slideshow" />
-        <meta name="keywords" content="css3, css-only, fullscreen, background, slideshow, images, content" />
-        <meta name="author" content="Codrops" />
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="sonuto sonuto.com sport sports news blog blogs recipe food kitchen gym fitnes health service fixture fixtures result results match tournament team"/>
+        
         <title>Sonuto</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/property.css">
