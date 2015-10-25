@@ -166,6 +166,7 @@ version: 1.0
 .auth_landing_bg_text{
     color: #fff;
     text-align: justify;
+    margin-left: 6px;
 }
 
 @media (max-width: 767px) { 
