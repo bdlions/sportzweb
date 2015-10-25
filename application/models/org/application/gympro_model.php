@@ -578,7 +578,7 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_program_info($program_id) {
         $this->db->where($this->tables['app_gympro_programs'] . '.id', $program_id);
-        return $this->db->select($this->tables['app_gympro_programs'] . '.*,' . $this->tables['users'] . '.*')
+        return $this->db->select($this->tables['app_gympro_programs'] . '.*,' . $this->tables['users'] . '.*,' . $this->tables['app_gympro_clients'] . '.*')
                         ->from($this->tables['app_gympro_programs'])
                         ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id' . '=' . $this->tables['app_gympro_programs'] . '.client_id')
                         ->join($this->tables['users'], $this->tables['users'] . '.id' . '=' . $this->tables['app_gympro_clients'] . '.member_id')
@@ -699,7 +699,7 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_exercise_details($exercise_id) {
         $this->db->where($this->tables['app_gympro_exercises'] . '.id', $exercise_id);
-        return $this->db->select($this->tables['app_gympro_exercises'] . '.id as exercise_id,' . $this->tables['app_gympro_exercises'] . '.*,' . $this->tables['app_gympro_exercise_categories'] . '.title as exercise_category,' . $this->tables['users'] . '.*')
+        return $this->db->select($this->tables['app_gympro_exercises'] . '.id as exercise_id,' . $this->tables['app_gympro_exercises'] . '.*,' . $this->tables['app_gympro_exercise_categories'] . '.title as exercise_category,' . $this->tables['users'] . '.*,' . $this->tables['app_gympro_clients'] . '.*')
                         ->from($this->tables['app_gympro_exercises'])
                         ->join($this->tables['app_gympro_exercise_categories'], $this->tables['app_gympro_exercise_categories'] . '.id=' . $this->tables['app_gympro_exercises'] . '.category_id')
                         ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id' . '=' . $this->tables['app_gympro_exercises'] . '.client_id')
@@ -833,7 +833,7 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_nutrition_info($nutrition_id) {
         $this->db->where($this->tables['app_gympro_nutritions'] . '.id', $nutrition_id);
-        return $this->db->select($this->tables['app_gympro_nutritions'] . '.*,' . $this->tables['users'] . '.*')
+        return $this->db->select($this->tables['app_gympro_nutritions'] . '.*,' . $this->tables['users'] . '.*,' . $this->tables['app_gympro_clients'] . '.*')
                         ->from($this->tables['app_gympro_nutritions'])
                         ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id' . '=' . $this->tables['app_gympro_nutritions'] . '.client_id')
                         ->join($this->tables['users'], $this->tables['users'] . '.id' . '=' . $this->tables['app_gympro_clients'] . '.member_id')
@@ -954,7 +954,7 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_assessment_info($assessment_id = 0) {
         $this->db->where($this->tables['app_gympro_assessments'] . '.id', $assessment_id);
-        return $this->db->select($this->tables['app_gympro_assessments'] . '.*,' . $this->tables['users'] . '.*')
+        return $this->db->select($this->tables['app_gympro_assessments'] . '.*,' . $this->tables['users'] . '.*,' . $this->tables['app_gympro_clients'] . '.*')
                         ->from($this->tables['app_gympro_assessments'])
                         ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id' . '=' . $this->tables['app_gympro_assessments'] . '.client_id')
                         ->join($this->tables['users'], $this->tables['users'] . '.id' . '=' . $this->tables['app_gympro_clients'] . '.member_id')
@@ -1062,7 +1062,7 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_mission_info($missions_id) {
         $this->db->where($this->tables['app_gympro_missions'] . '.id', $missions_id);
-        return $this->db->select($this->tables['app_gympro_missions'] . '.*,' . $this->tables['users'] . '.*')
+        return $this->db->select($this->tables['app_gympro_missions'] . '.*,' . $this->tables['users'] . '.*,' . $this->tables['app_gympro_clients'] . '.*')
                         ->from($this->tables['app_gympro_missions'])
                         ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id' . '=' . $this->tables['app_gympro_missions'] . '.client_id')
                         ->join($this->tables['users'], $this->tables['users'] . '.id' . '=' . $this->tables['app_gympro_clients'] . '.member_id')

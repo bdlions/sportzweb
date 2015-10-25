@@ -1138,7 +1138,7 @@ class Gympro extends Role_Controller {
             $this->template->load(null, 'applications/gympro/program/program_show_validation', $this->data);
             return;
         }
-        if ($program_info['user_id'] == $this->my_user_id) {
+        if ($program_info['user_id'] == $this->my_user_id || $program_info['member_id'] == $this->my_user_id) {
             $this->data['program_info'] = $program_info;
             $this->data['exercise_list'] = json_decode($program_info['exercise_list'], TRUE);
             $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
@@ -1350,7 +1350,7 @@ class Gympro extends Role_Controller {
             $this->template->load(null, 'applications/gympro/exercise/exercise_show_validation', $this->data);
             return;
         }
-        if ($exercise_info['user_id'] == $this->my_user_id) {
+        if ($exercise_info['user_id'] == $this->my_user_id || $exercise_info['member_id'] == $this->my_user_id) {
             $this->data['exercise_info'] = $exercise_info;
             $this->template->load(null, 'applications/gympro/exercise/exercise_show', $this->data);
         } else {
@@ -1658,7 +1658,7 @@ class Gympro extends Role_Controller {
             $this->template->load(null, 'applications/gympro/nutrition_show_validation', $this->data);
             return;
         }
-        if ($nutrition_info['user_id'] == $this->my_user_id) {
+        if ($nutrition_info['user_id'] == $this->my_user_id || $nutrition_info['member_id'] == $this->my_user_id) {
             $this->data['nutrition_info'] = $nutrition_info;
             $this->data['meal_list'] = json_decode($nutrition_info['meal_list'], TRUE);
             $this->data['workout_list'] = $workout_list;
@@ -2151,7 +2151,7 @@ class Gympro extends Role_Controller {
             $this->template->load(null, 'applications/gympro/assessment/assessment_show_validation', $this->data);
             return;
         }
-        if ($assessment_info['user_id'] == $this->my_user_id) {
+        if ($assessment_info['user_id'] == $this->my_user_id || $assessment_info['member_id'] == $this->my_user_id) {
             $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
             foreach ($reassess_array as $reassess_info) {
                 if ($reassess_info['id'] == $assessment_info['reassess_id']) {
