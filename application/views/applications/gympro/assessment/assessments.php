@@ -21,7 +21,20 @@
                     <a href="<?php echo base_url()?>applications/gympro/create_assessment"><button class="pull-right btn button-custom btn_gympro">New Assessment</button></a>
                 </div>
             </div>
-            <div style="border-top: 2px solid lightgray; margin-right:-20px"></div>
+            <div class="form-group" style="border-top: 2px solid lightgray; margin-right:-20px"></div>
+            <div class="row">
+                <div class="col-md-9">
+                    Create assessments for your clients to instantly see
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control form_control_custom">
+                        <option value="date">Date</option>
+                        <option value="day">Day</option>
+                        <option value="month">Month</option>
+                        <option value="year">Year</option>
+                    </select> 
+                </div>
+            </div>
             <?php
             $total_assessments = count($assessment_list);
             $counter = 0;

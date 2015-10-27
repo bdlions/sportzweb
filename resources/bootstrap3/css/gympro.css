@@ -241,3 +241,12 @@ a:hover
         margin-left: 4.5%;
     }
 }
+
+
+.form_control_custom{
+    width: 125px;
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: -16px;
+    float: right;
+}
