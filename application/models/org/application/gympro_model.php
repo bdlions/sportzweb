@@ -578,7 +578,7 @@ class Gympro_model extends Ion_auth_model {
 
     public function get_program_info($program_id) {
         $this->db->where($this->tables['app_gympro_programs'] . '.id', $program_id);
-        return $this->db->select($this->tables['app_gympro_programs'] . '.*,' . $this->tables['users'] . '.*,' . $this->tables['app_gympro_clients'] . '.*')
+        return $this->db->select($this->tables['app_gympro_programs'] . '.*,' . $this->tables['users'] . '.*,' . $this->tables['app_gympro_clients'] . '.*,' . $this->tables['app_gympro_programs'] . '.start_date as program_start_date')
                         ->from($this->tables['app_gympro_programs'])
                         ->join($this->tables['app_gympro_clients'], $this->tables['app_gympro_clients'] . '.id' . '=' . $this->tables['app_gympro_programs'] . '.client_id')
                         ->join($this->tables['users'], $this->tables['users'] . '.id' . '=' . $this->tables['app_gympro_clients'] . '.member_id')

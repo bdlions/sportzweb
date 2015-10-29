@@ -1,23 +1,25 @@
 <script type="text/javascript">
-    var counter = 0;
+    var id_list = new Array();
+    var id_counter = 0;
+    var exercise_id = makeid(5);
     $(function() {
         $("#button_program_edit").on("click", function() {
             if($("#client_list").val() == 0)
             {
                 //alert("Please select the person you are assessing from the drop menu.");
-                var message = "Please select the person you are assessing from the drop menu.";
+                var message = "Please select the person you are assessing from the dropdown menu.";
                  print_common_message(message);
                 return false;
             }
+            $("#id_list").val(id_list);
             $.ajax({
                 dataType: 'json',
                 type: "POST",
                 url: '<?php echo base_url().'applications/gympro/edit_program/'.$program_id; ?>',
                 data: $("#form_edit_program").serializeArray(),
                 success: function(data) {
-                   // alert(data.message);
-                   var message = data.message;
-                 print_common_message(message);
+                    var message = data.message;
+                    print_common_message(message);
                     window.location = '<?php echo base_url(); ?>applications/gympro/programs';
                 }
             });
@@ -29,42 +31,50 @@
             $('#start_date').text($('#start_date').data('date'));
             $('#start_date').datepicker('hide');
         });
-        $("#counter").val(counter);
     });
     
     function add_weight_exercise()
     {
-        counter++;
-        $("#counter").val(counter);
-        $("#exercise_box").append(tmpl("tmpl_weight_exercise",counter));
+        exercise_id = makeid(5);
+        id_list[id_counter++] = exercise_id;
+        $("#exercise_box").append(tmpl("tmpl_weight_exercise",exercise_id));
     }
     function add_cardio_exercise()
     {
-        counter++;
-        $("#counter").val(counter);        
-        $("#exercise_box").append(tmpl("tmpl_cardio_exercise",counter));
+        exercise_id = makeid(5);
+        id_list[id_counter++] = exercise_id;
+        $("#exercise_box").append(tmpl("tmpl_cardio_exercise",exercise_id));
     }
     function weight_value_set( qq, ww, ee, rr, tt, yy, uu )
     {
-        $( "input[name='name_" + counter + "']" ).val(qq);
+        $( "input[name='name_" + exercise_id + "']" ).val(qq);
 //        $( "input[name='description_" + counter + "']" ).val(ww);
-        $( "#description_" + counter ).val(ww);
-        $( "input[name='sets_" + counter + "']" ).val(ee);
-        $( "input[name='reps_" + counter + "']" ).val(rr);
-        $( "input[name='weights_" + counter + "']" ).val(tt);
-        $( "input[name='reps2_" + counter + "']" ).val(yy);
-        $( "input[name='tempo_" + counter + "']" ).val(uu);
+        $( "#description_" + exercise_id ).val(ww);
+        $( "input[name='sets_" + exercise_id + "']" ).val(ee);
+        $( "input[name='reps_" + exercise_id + "']" ).val(rr);
+        $( "input[name='weights_" + exercise_id + "']" ).val(tt);
+        $( "input[name='reps2_" + exercise_id + "']" ).val(yy);
+        $( "input[name='tempo_" + exercise_id + "']" ).val(uu);
     }
     function cardio_value_set( qq, ww, ee, rr, tt, yy )
     {
-        $( "input[name='name_" + counter + "']" ).val(qq);
-        $( "#description_" + counter ).val(ww);
-        $( "input[name='level_" + counter + "']" ).val(ee);
-        $( "input[name='speed_" + counter + "']" ).val(rr);
-        $( "input[name='time_" + counter + "']" ).val(tt);
-        $( "input[name='target_" + counter + "']" ).val(yy);
+        $( "input[name='name_" + exercise_id + "']" ).val(qq);
+        $( "#description_" + exercise_id ).val(ww);
+        $( "input[name='level_" + exercise_id + "']" ).val(ee);
+        $( "input[name='speed_" + exercise_id + "']" ).val(rr);
+        $( "input[name='time_" + exercise_id + "']" ).val(tt);
+        $( "input[name='target_" + exercise_id + "']" ).val(yy);
     }
+    function makeid(length)
+    {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+        for( var i=0; i < length; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
 </script>
 <script type="text/x-tmpl" id="tmpl_weight_exercise">
     {% var weight=0, weight_num = ((o instanceof Array) ? o[weight++] : o); %}
@@ -75,7 +85,7 @@
                         <div class="col-md-12">
                             <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
                             <input style="width: 40%; min-width: 150px;" name="name_<?php echo '{%= weight_num%}'; ?>">
-                            <img onclick="open_modal_browse_exercise()" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
+                            <img onclick="open_modal_browse_exercise('<?php echo '{%= weight_num%}'; ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                             <img class="pull-right" onclick="$(this).closest('.deletable_box').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
                         </div>
                     </div>
@@ -127,7 +137,7 @@
                     <div class="col-md-12">
                         <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
                         <input style="width: 40%; min-width: 150px;" name="name_<?php echo '{%= cardio_num%}'; ?>">
-                        <img onclick="open_modal_browse_exercise()" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
+                        <img onclick="open_modal_browse_exercise('<?php echo '{%= cardio_num%}'; ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                         <img class="pull-right" onclick="$(this).closest('.deletable_box').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
                     </div>
                 </div>
@@ -196,7 +206,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
             <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <div>
-                    <input type=hidden class="form-control" name="counter" id="counter">
+                    <input type=hidden class="form-control" name="id_list" id="id_list">
                 </div>
                 <div class="row">
                     <div class="col-md-7">
@@ -209,7 +219,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Start date: </label>
                             <div class="col-sm-4">
-                                <input class="form-control" name="start_date" id="start_date" value="<?php echo $program['start_date'];?>">
+                                <input class="form-control" name="start_date" id="start_date" value="<?php echo $program['program_start_date'];?>">
                             </div>
                         </div>
                         <div class="form-group">

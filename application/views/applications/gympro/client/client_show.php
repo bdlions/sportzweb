@@ -116,25 +116,25 @@
                     <!--Contact details-->
                     <div class="row hidden_tab" id="contact_details">
                         <div class="col-md-9">
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Telephone:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['telephone'];?></label>
+                            <div class="row form-group">
+                                <label class="col-sm-6 col-md-6">Telephone:</label>
+                                <label class="col-sm-6 col-md-6">&nbsp;<?php echo $client_info['telephone'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Mobile:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['mobile'];?></label>
+                            <div class="row form-group">
+                                <label class="col-sm-6 col-md-6">Mobile:</label>
+                                <label class="col-sm-6 col-md-6">&nbsp;<?php echo $client_info['mobile'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Address:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['address'];?></label>
+                            <div class="row form-group">
+                                <label class="col-sm-6 col-md-6">Address:</label>
+                                <label class="col-sm-6 col-md-6">&nbsp;<?php echo $client_info['address'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Emergency contact:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['emergency_contact'];?></label>                                
+                            <div class="row form-group">
+                                <label class="col-sm-6 col-md-6">Emergency contact:</label>
+                                <label class="col-sm-6 col-md-6">&nbsp;<?php echo $client_info['emergency_contact'];?></label>                                
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Emergency phone:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['emergency_phone'];?></label>
+                            <div class="row form-group">
+                                <label class="col-sm-6 col-md-6">Emergency phone:</label>
+                                <label class="col-sm-6 col-md-6">&nbsp;<?php echo $client_info['emergency_phone'];?></label>
                             </div>
                         </div>
                     </div>

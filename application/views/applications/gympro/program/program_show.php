@@ -42,7 +42,7 @@
                     <div class="col-md-5">
                         <div class="row form-group">
                             <label class="col-sm-3 control-label">Start date: </label>
-                            <div class="col-md-9 "><?php echo $program_info['start_date']; ?></div>
+                            <div class="col-md-9 "><?php echo $program_info['program_start_date']; ?></div>
                         </div>
                         <div class="row form-group">
                             <label class="col-sm-3 control-label">Review In: </label>

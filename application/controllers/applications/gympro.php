@@ -632,6 +632,11 @@ class Gympro extends Role_Controller {
         if ($client_info['ptpro_user_id'] == $this->my_user_id) {
             $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();
             $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id);
+            
+            if(array_key_exists("dob", $client_info))
+            {
+                $client_info['dob'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($client_info['dob']);
+            }
             $this->data['client_info'] = $client_info;
 
             $program_list = $this->gympro_library->get_all_client_programs(0, $client_id)->result_array();
@@ -913,7 +918,7 @@ class Gympro extends Role_Controller {
 
     public function create_program() {
         $user_id = $this->session->userdata('user_id');
-        $this->form_validation->set_rules('focus', 'Focus', 'xss_clean|required');
+        //$this->form_validation->set_rules('focus', 'Focus', 'xss_clean|required');
         $this->form_validation->set_rules('start_date', 'Start Date', 'xss_clean');
 
         if ($this->input->post()) {
@@ -921,30 +926,31 @@ class Gympro extends Role_Controller {
             $result['message'] = '';
             if ($this->form_validation->run() == true) {
                 $exercise_list = array();
-//                $counter=$this->input->post('weight_counter');
-                $counter = $this->input->post('counter');
-                for ($i = 1; $i <= $counter; $i++) {
-                    if (($this->input->post('weight_is_present_' . $i) ) != NULL) {
+                $id_list = explode(",", $this->input->post('id_list'));
+                $total_items = count($id_list);
+                for ($counter = 0; $counter < $total_items; $counter++) {
+                    $exercise_id = $id_list[$counter];
+                    if (($this->input->post('weight_is_present_' . $exercise_id) ) != NULL) {
                         $exercise_list[] = array(
                             'type' => "weight",
-                            'name' => $this->input->post('name_' . $i),
-                            'description' => $this->input->post('description_' . $i),
-                            'sets' => $this->input->post('sets_' . $i),
-                            'reps' => $this->input->post('reps_' . $i),
-                            'weights' => $this->input->post('weights_' . $i),
-                            'reps2' => $this->input->post('reps2_' . $i),
-                            'tempo' => $this->input->post('tempo_' . $i)
+                            'name' => $this->input->post('name_' . $exercise_id),
+                            'description' => $this->input->post('description_' . $exercise_id),
+                            'sets' => $this->input->post('sets_' . $exercise_id),
+                            'reps' => $this->input->post('reps_' . $exercise_id),
+                            'weights' => $this->input->post('weights_' . $exercise_id),
+                            'reps2' => $this->input->post('reps2_' . $exercise_id),
+                            'tempo' => $this->input->post('tempo_' . $exercise_id)
                         );
                         continue;
-                    } elseif (($this->input->post('cardio_is_present_' . $i) ) != NULL) {
+                    } elseif (($this->input->post('cardio_is_present_' . $exercise_id) ) != NULL) {
                         $exercise_list[] = array(
                             'type' => "cardio",
-                            'name' => $this->input->post('name_' . $i),
-                            'description' => $this->input->post('description_' . $i),
-                            'level' => $this->input->post('level_' . $i),
-                            'speed' => $this->input->post('speed_' . $i),
-                            'time' => $this->input->post('time_' . $i),
-                            'target' => $this->input->post('target_' . $i)
+                            'name' => $this->input->post('name_' . $exercise_id),
+                            'description' => $this->input->post('description_' . $exercise_id),
+                            'level' => $this->input->post('level_' . $exercise_id),
+                            'speed' => $this->input->post('speed_' . $exercise_id),
+                            'time' => $this->input->post('time_' . $exercise_id),
+                            'target' => $this->input->post('target_' . $exercise_id)
                         );
                     }
                 }
@@ -1000,30 +1006,31 @@ class Gympro extends Role_Controller {
             $result['message'] = '';
             if ($this->form_validation->run() == true) {
                 $exercise_list = array();
-//                $counter=$this->input->post('weight_counter');
-                $counter = $this->input->post('counter');
-                for ($i = 1; $i <= $counter; $i++) {
-                    if (($this->input->post('weight_is_present_' . $i) ) != NULL) {
+                $id_list = explode(",", $this->input->post('id_list'));
+                $total_items = count($id_list);
+                for ($counter = 0; $counter < $total_items; $counter++) {
+                    $exercise_id = $id_list[$counter];
+                    if (($this->input->post('weight_is_present_' . $exercise_id) ) != NULL) {
                         $exercise_list[] = array(
                             'type' => "weight",
-                            'name' => $this->input->post('name_' . $i),
-                            'description' => $this->input->post('description_' . $i),
-                            'sets' => $this->input->post('sets_' . $i),
-                            'reps' => $this->input->post('reps_' . $i),
-                            'weights' => $this->input->post('weights_' . $i),
-                            'reps2' => $this->input->post('reps2_' . $i),
-                            'tempo' => $this->input->post('tempo_' . $i)
+                            'name' => $this->input->post('name_' . $exercise_id),
+                            'description' => $this->input->post('description_' . $exercise_id),
+                            'sets' => $this->input->post('sets_' . $exercise_id),
+                            'reps' => $this->input->post('reps_' . $exercise_id),
+                            'weights' => $this->input->post('weights_' . $exercise_id),
+                            'reps2' => $this->input->post('reps2_' . $exercise_id),
+                            'tempo' => $this->input->post('tempo_' . $exercise_id)
                         );
                         continue;
-                    } elseif (($this->input->post('cardio_is_present_' . $i) ) != NULL) {
+                    } elseif (($this->input->post('cardio_is_present_' . $exercise_id) ) != NULL) {
                         $exercise_list[] = array(
                             'type' => "cardio",
-                            'name' => $this->input->post('name_' . $i),
-                            'description' => $this->input->post('description_' . $i),
-                            'level' => $this->input->post('level_' . $i),
-                            'speed' => $this->input->post('speed_' . $i),
-                            'time' => $this->input->post('time_' . $i),
-                            'target' => $this->input->post('target_' . $i)
+                            'name' => $this->input->post('name_' . $exercise_id),
+                            'description' => $this->input->post('description_' . $exercise_id),
+                            'level' => $this->input->post('level_' . $exercise_id),
+                            'speed' => $this->input->post('speed_' . $exercise_id),
+                            'time' => $this->input->post('time_' . $exercise_id),
+                            'target' => $this->input->post('target_' . $exercise_id)
                         );
                     }
                 }

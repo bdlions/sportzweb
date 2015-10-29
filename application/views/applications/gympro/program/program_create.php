@@ -1,24 +1,26 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css"/>
 <script type="text/javascript">
-    var counter = 1;
+    var id_list = new Array();
+    var id_counter = 0;
+    var exercise_id = makeid(5);
     $(function() {
          $("#button_create_program").on("click", function() {
             if($("#client_list").val() == 0)
             {
               //  alert("Please select the person you are assessing from the drop menu.");
-              var message = "Please select the person you are assessing from the drop menu.";
+              var message = "Please select the person you are assessing from the dropdown menu.";
                  print_common_message(message);
                 return false;
             }
+            $("#id_list").val(id_list);
             $.ajax({
                 dataType: 'json',
                 type: "POST",
                 url: '<?php echo base_url(); ?>applications/gympro/create_program',
                 data: $("#form_create_program").serializeArray(),
                 success: function(data) {
-                   // alert(data.message);
-                   var message = data.message;
-                 print_common_message(message);
+                    var message = data.message;
+                    print_common_message(message);
                     window.location = '<?php echo base_url(); ?>applications/gympro/programs';
                 }
             });
@@ -30,25 +32,34 @@
             $('#start_date').text($('#start_date').data('date'));
             $('#start_date').datepicker('hide');
         });
-        $("#counter").val(counter);
-        $("#exercise_box").append(tmpl("tmpl_weight_exercise",counter));
+        id_list[id_counter++] = exercise_id;
+        $("#exercise_box").append(tmpl("tmpl_weight_exercise",exercise_id));
         
             
     });
     
     function add_weight_exercise()
     {
-        counter++;
-        $("#counter").val(counter);
-        $("#exercise_box").append(tmpl("tmpl_weight_exercise",counter));
+        exercise_id = makeid(5);
+        id_list[id_counter++] = exercise_id;
+        $("#exercise_box").append(tmpl("tmpl_weight_exercise",exercise_id));
     }
     function add_cardio_exercise()
     {
-        counter++;
-        $("#counter").val(counter);        
-        $("#exercise_box").append(tmpl("tmpl_cardio_exercise",counter));
+        exercise_id = makeid(5);
+        id_list[id_counter++] = exercise_id;
+        $("#exercise_box").append(tmpl("tmpl_cardio_exercise",exercise_id));
     }
-    
+    function makeid(length)
+    {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < length; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
 
 </script>
 <script type="text/x-tmpl" id="tmpl_weight_exercise">
@@ -112,7 +123,7 @@
                         <div class="col-md-12">
                             <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
                             <input style="width: 40%; min-width: 150px;" name="name_<?php echo '{%= cardio_num%}'; ?>">
-                            <img onclick="open_modal_browse_exercise(<?php echo '{%= cardio_num%}'; ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
+                            <img onclick="open_modal_browse_exercise('<?php echo '{%= cardio_num%}'; ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                             <img class="pull-right" onclick="$(this).closest('.deletable_box').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
                         </div>
                     </div>
@@ -178,14 +189,14 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
             <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
                 <div>
-                    <input type=hidden class="form-control" name="counter" id="counter">
+                    <input type=hidden class="form-control" name="id_list" id="id_list">
                 </div>
                 <div class="row">
                     <div class="col-md-7">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Programme Title: </label>
                             <div class="col-sm-6">
-                                <input class="form-control" name="focus">
+                                <input class="form-control" name="focus" id="focus">
                             </div>
                         </div>
                         <div class="form-group">
