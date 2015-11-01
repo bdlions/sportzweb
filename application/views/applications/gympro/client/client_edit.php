@@ -123,6 +123,7 @@ $(function () {
     #health{
         font-size: 14px;
     }
+    
 </style>
 <div class="container-fluid">
     <div class="row top_margin">
@@ -139,6 +140,7 @@ $(function () {
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
                 <a href="<?php echo base_url() . 'applications/gympro/manage_groups' ?>">Groups</a>
             </div>
+            <div class="nav_separate_border"></div>
             <!--left nav custom for this page-->
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
@@ -316,44 +318,63 @@ $(function () {
                     <div class="row hidden_tab" id="health">
                         <div class="col-md-12">
                             <?php foreach ($question_list as $question_info){ ?>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'yes') ? 'checked=""' : '' ;?> name="question_radio_<?php echo $question_info['question_id']?>" value="yes"> Yes
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'no') ? 'checked=""' : '' ;?> name="question_radio_<?php echo $question_info['question_id']?>" value="no"> No 
-                                    <input type="hidden" value="question_id_<?php echo $question_info['question_id']?>">
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div>
-                                            <label class="patapota"><?php echo $question_info['title']?></label>
-                                        </div>
-                                        <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" style="float: left">
-                                            <label style="padding-left:0px;" class="col-md-3">Additional info: </label>
-                                            <div class="col-md-9">
-                                                <input value="<?php echo $question_id_answer_map[$question_info['question_id']]['additional_info']?>" style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id']?>" name="question_additional_info_<?php echo $question_info['question_id']?>">
+                            <div class="row form-group">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'yes') ? 'checked=""' : ''; ?> name="question_radio_<?php echo $question_info['question_id'] ?>" value="yes"> Yes
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'no') ? 'checked=""' : ''; ?> name="question_radio_<?php echo $question_info['question_id'] ?>" value="no"> No 
+                                                <input type="hidden" value="question_id_<?php echo $question_info['question_id'] ?>">
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="patapota"><?php echo $question_info['title'] ?></label>
+                                            </div>
+                                        </div>     
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" style="float: left">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label style="padding-left:0px;">Additional info: </label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input value="<?php echo $question_id_answer_map[$question_info['question_id']]['additional_info'] ?>" style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>     
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Height (cm): </label>
-                                <div class="col-sm-5">
-                                    <?php echo form_input($height + array('class' => 'form-control'));?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <label>Height (cm): </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <?php echo form_input($height + array('class' => 'form-control')); ?>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Resting Heart Rate: </label>
-                                <div class="col-sm-5">
-                                    <?php echo form_input($resting_heart_rate + array('class' => 'form-control'));?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <label>Resting Heart Rate: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <?php echo form_input($resting_heart_rate + array('class' => 'form-control')); ?>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Blood Pressure: </label>
-                                <div class="col-sm-5">
-                                    <?php echo form_input($blood_pressure + array('class' => 'form-control'));?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <label>Blood Pressure: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <?php echo form_input($blood_pressure + array('class' => 'form-control')); ?>
                                 </div>
                             </div>
                         </div>
@@ -361,21 +382,25 @@ $(function () {
                     <!--Notes-->
                     <div class="row hidden_tab" id="notes">
                         <div class="col-md-9">
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Notes: </label>
-                                <div class="col-sm-8">
-                                    <?php echo form_textarea($notes + array('class' => 'form-control'));?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <label>Notes: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <?php echo form_textarea($notes + array('class' => 'form-control')); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div id="upload">
-                            <?php echo form_input($submit_edit_client);?>
-                            or <a href="<?php echo base_url().'applications/gympro/manage_clients'?>" style="font-size: 16px; line-height: 22px;">Cancel</a>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="upload">
+                                <?php echo form_input($submit_edit_client); ?>
+                                or <a href="<?php echo base_url() . 'applications/gympro/manage_clients' ?>" style="font-size: 16px; line-height: 22px;">Cancel</a>
+                            </div>
                         </div>
                     </div>
-                <?php echo form_close();?>
+                    <?php echo form_close();?>
             </div>
         </div>
     </div>

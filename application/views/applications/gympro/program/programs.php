@@ -24,7 +24,7 @@
             <div class="form-group" style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <div class="row">
                 <div class="col-md-9">
-                    Create programs for your clients to instantly see
+                    <span class="text_size_14px">Create programs for your clients to instantly see</span>
                 </div>
                 <div class="col-md-3">
                     <select class="form-control form_control_custom">

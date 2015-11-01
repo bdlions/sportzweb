@@ -128,6 +128,19 @@ $(function () {
 <div class="container-fluid">
     <div class="row top_margin">
         <div class="col-md-2">
+            <div class="ln_item content_text" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/home.png">
+                <a href="<?php echo base_url() . 'applications/gympro' ?>">Home</a>
+            </div>
+            <div class="ln_item content_text" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/client.png">
+                <a href="<?php echo base_url() . 'applications/gympro/manage_clients' ?>">Clients</a>
+            </div>
+            <div class="ln_item content_text" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
+                <a href="<?php echo base_url() . 'applications/gympro/manage_groups' ?>">Groups</a>
+            </div>
+            <div class="nav_separate_border"></div>
             <!--left nav custom for this page-->
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
@@ -300,48 +313,68 @@ $(function () {
                             </div>
                         </div>
                     </div>
+                    
                     <!--Health details-->
                     <div class="row hidden_tab" id="health">
                         <div class="col-md-12">
                             <?php foreach ($question_list as $question_info){?>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <input type="radio" name="question_radio_<?php echo $question_info['question_id']?>" value="yes"> Yes
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" name="question_radio_<?php echo $question_info['question_id']?>" value="no"> No 
-                                    <input type="hidden" value="question_id_<?php echo $question_info['question_id']?>">
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div>
-                                            <label class="patapota"><?php echo $question_info['title'] ?></label>
+                            <div class="row form-group">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="radio" name="question_radio_<?php echo $question_info['question_id'] ?>" value="yes"> Yes
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="radio" name="question_radio_<?php echo $question_info['question_id'] ?>" value="no"> No 
+                                                <input type="hidden" value="question_id_<?php echo $question_info['question_id'] ?>">
+                                            </div>
                                         </div>
-                                        <div class="" style="display: <?php echo ($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" >
-                                            <label style="padding-left:0px;" class="col-md-3">Additional info: </label>
-                                            <div class="col-md-9">
-                                                <input class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="patapota"><?php echo $question_info['title'] ?></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="display: <?php echo ($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" >
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label style="padding-left:0px;" class="col-md-3">Additional info: </label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php } ?>
-                            <div class="form-group">
-                                <label class="col-md-3 ">Height (cm): </label>
+                            <div class="row form-group">
+                                <div class="col-md-3">
+                                    <label>Height (cm): </label>
+                                </div>
                                 <div class="col-md-9">
-                                    <?php echo form_input($height + array('class' => 'form-control'));?>
+                                    <?php echo form_input($height + array('class' => 'form-control')); ?>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 ">Resting Heart Rate: </label>
+                            <div class="row form-group">
+                                <div class="col-md-3">
+                                    <label>Resting Heart Rate: </label>
+                                </div>
                                 <div class="col-md-9">
-                                    <?php echo form_input($resting_heart_rate + array('class' => 'form-control'));?>
+                                    <?php echo form_input($resting_heart_rate + array('class' => 'form-control')); ?>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 ">Blood Pressure: </label>
+                            <div class="row form-group">
+                                <div class="col-md-3">
+                                    <label>Blood Pressure: </label>
+                                </div>
                                 <div class="col-md-9">
-                                    <?php echo form_input($blood_pressure + array('class' => 'form-control'));?>
+                                    <?php echo form_input($blood_pressure + array('class' => 'form-control')); ?>
                                 </div>
                             </div>
                         </div>

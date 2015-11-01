@@ -75,7 +75,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text">Title: </div>
                         <div class="col-md-9">
-                            <input class="form-control" name="title" value="<?php echo $session_info['title']; ?>">
+                            <input type="text" class="form-control" name="title" value="<?php echo $session_info['title']; ?>">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -98,7 +98,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text">Date:</div>
                         <div class="col-md-6">
-                            <input class="" id="session_date" name="session_date" value="<?php echo $session_info['date']; ?>" >
+                            <input type="text" class="" id="session_date" name="session_date" value="<?php echo $session_info['date']; ?>" >
                         </div>
                     </div>
                     <div class="row form-group">
@@ -124,7 +124,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text">Location</div>
                         <div class="col-md-9">
-                            <input class="form-control" name="location" value="<?php echo $session_info['location']; ?>"> 
+                            <input type="text" class="form-control" name="location" value="<?php echo $session_info['location']; ?>"> 
                         </div>
                     </div>
                     <div class="row form-group">

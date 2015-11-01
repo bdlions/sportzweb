@@ -14,6 +14,7 @@
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
                 <a href="<?php echo base_url() . 'applications/gympro/manage_groups' ?>">Groups</a>
             </div>
+            <div class="nav_separate_border"></div>
             <!--left nav custom for this page-->
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
@@ -154,34 +155,51 @@
                     <div class="row hidden_tab" id="health">
                         <div class="col-md-12">
                             <?php foreach ($question_list as $question_info){ ?>
-                                <div class="row form-group">
-                                    <div class="col-sm-6">
-                                        <div>
-                                            <label class="patapota"><?php echo $question_info['title'].' '.$question_id_answer_map[$question_info['question_id']]['answer']?></label>
+                            <div class="row form-group">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="patapota"><?php echo $question_info['title'] . ' ' . $question_id_answer_map[$question_info['question_id']]['answer'] ?></label>
+                                            </div>
                                         </div>
-                                        <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none' ;?>" style="float: left">
-                                            Additional info: 
-                                            <?php
-                                            if($question_info['show_additional_info'] == 1)
-                                            {
-                                                echo $question_id_answer_map[$question_info['question_id']]['additional_info'];
-                                            }
-                                            ?>
-                                        </div>                                    
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" style="float: left">
+                                                    Additional info: 
+                                                    <?php
+                                                    if ($question_info['show_additional_info'] == 1) {
+                                                        echo $question_id_answer_map[$question_info['question_id']]['additional_info'];
+                                                    }
+                                                    ?>
+                                                </div>                                    
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             <?php } ?>
                             <div class="row form-group">
-                                <label class="col-sm-4 ">Height (cm):</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['height'];?></label>
+                                <div class="col-md-4">
+                                    <label>Height (cm):</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label><?php echo $client_info['height']; ?></label>
+                                </div>
                             </div>
                             <div class="row form-group">
-                                <label class="col-sm-4 ">Resting Heart Rate:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['resting_heart_rate'];?></label>
+                                <div class="col-md-4">
+                                    <label>Resting Heart Rate:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label><?php echo $client_info['resting_heart_rate']; ?></label>
+                                </div>
                             </div>
                             <div class="row form-group">
-                                <label class="col-sm-4 ">Blood Pressure:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['blood_pressure'];?></label>
+                                <div class="col-md-4">
+                                    <label>Blood Pressure:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label>&nbsp;<?php echo $client_info['blood_pressure']; ?></label>
+                                </div>
                             </div>
                         </div>
                     </div>

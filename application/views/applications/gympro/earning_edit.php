@@ -11,7 +11,7 @@
                         <div class="row form-group">
                             <div class="col-md-2 control-div">Title: </div>
                             <div class="col-md-6">
-                                <input class="form-control">
+                                <input type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -37,7 +37,7 @@
                         <div class="row form-group">
                             <div class="col-md-2 control-div">Date:</div>
                             <div class="col-md-6">
-                                <input class="form-control">
+                                <input type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -61,7 +61,7 @@
                         <div class="row form-group">
                             <div class="col-md-2 control-div">Location</div>
                             <div class="col-md-6">
-                                <input class="form-control"> 
+                                <input type="text" class="form-control"> 
                             </div>
                         </div>
                         <div class="row form-group">

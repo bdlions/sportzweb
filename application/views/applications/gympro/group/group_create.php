@@ -71,6 +71,7 @@
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
                 <a href="<?php echo base_url() . 'applications/gympro/manage_groups' ?>">Groups</a>
             </div>
+            <div class="nav_separate_border"></div>
             <!--left nav custom for this page-->
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">

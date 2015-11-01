@@ -214,7 +214,7 @@
                 <div style="border-top: 2px solid lightgray; padding-bottom:10px;"></div>
                 <div class="row form-group">
                     <div class="col-md-12">
-                        Create earnings summary for your clients to instantly see
+                        <span class="text_size_14px">Create earnings summary for your clients to instantly see</span>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -241,13 +241,13 @@
                     <div class="row form-group">
                         <div class="col-md-4 content_text">Start:</div>
                         <div class="col-md-8">
-                            <input id="st_date" style="margin-right: 5px;" value="<?php echo $start_date; ?>">
+                            <input  type="text" id="st_date" style="margin-right: 5px;" value="<?php echo $start_date; ?>">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-4 content_text">Finish:</div>
                         <div class="col-md-8">
-                            <input id="fin_date" style="margin-right: 5px;" value="<?php echo $end_date; ?>">
+                            <input  type="text" id="fin_date" style="margin-right: 5px;" value="<?php echo $end_date; ?>">
                         </div>
                     </div>
                     <div class="row form-group">

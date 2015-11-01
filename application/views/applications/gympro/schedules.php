@@ -135,7 +135,7 @@
         </div>
         <div class="row form-group">
             <div class="col-md-12">
-                Create schedules for your clients to instantly see
+                <span class="text_size_14px">Create schedules for your clients to instantly see</span>
             </div>
 
         </div>

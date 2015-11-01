@@ -196,13 +196,13 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Programme Title: </label>
                             <div class="col-sm-6">
-                                <input class="form-control" name="focus" id="focus">
+                                <input type="text" class="form-control" name="focus" id="focus">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Start date: </label>
                             <div class="col-sm-4">
-                                <input class="form-control" name="start_date" id="start_date">
+                                <input type="text" class="form-control" name="start_date" id="start_date">
                             </div>
                         </div>
                         <div class="form-group">

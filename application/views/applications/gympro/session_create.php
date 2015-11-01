@@ -72,7 +72,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text ">Title: </div>
                         <div class="col-md-9">
-                            <input class="form-control" name="title" value="<?php echo set_value('title'); ?>" >
+                            <input type="text" class="form-control" name="title" value="<?php echo set_value('title'); ?>" >
                         </div>
                     </div>
                     <div class="row form-group">
@@ -95,7 +95,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text ">Date:</div>
                         <div class="col-md-6">
-                            <input class="" id="session_date" name="session_date" value="<?php echo $current_date; ?>" >
+                            <input type="text" class="" id="session_date" name="session_date" value="<?php echo $current_date; ?>" >
                         </div>
                     </div>
                     <div class="row form-group">
@@ -113,7 +113,7 @@
                     <div class="row form-group">
                         <div class="col-md-3 content_text ">Location</div>
                         <div class="col-md-9">
-                            <input class="form-control" name="location" value="<?php echo set_value('location'); ?>" > 
+                            <input type="text" class="form-control" name="location" value="<?php echo set_value('location'); ?>" > 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -151,7 +151,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input value="<?php echo $session_costs[0]['title'];?>" type="text" id="inp_cost" name="cost" style="display: none" placeholder="Enter cost">
+                            <input type="text" value="<?php echo $session_costs[0]['title'];?>" type="text" id="inp_cost" name="cost" style="display: none" placeholder="Enter cost">
                         </div>
                     </div>
                     <div class="row form-group">

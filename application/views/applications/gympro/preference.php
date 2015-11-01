@@ -27,7 +27,7 @@
                     PayPal Account: 
                 </div>
                 <div class ="col-md-6 col-sm-6 col-xs-6">
-                     <input class="form-control" name="account_email" value="<?php echo $account_email; ?>"> 
+                     <input type="text" class="form-control" name="account_email" value="<?php echo $account_email; ?>"> 
                 </div>
                 <div class ="col-md-2 col-sm-2 col-xs-2">
                     <div class="paypal_img_margir">
