@@ -58,6 +58,18 @@
 <div class="container-fluid">
     <div class="row top_margin">
         <div class="col-md-3">
+            <div class="ln_item content_text" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/home.png">
+                <a href="<?php echo base_url() . 'applications/gympro' ?>">Home</a>
+            </div>
+            <div class="ln_item content_text" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/client.png">
+                <a href="<?php echo base_url() . 'applications/gympro/manage_clients' ?>">Clients</a>
+            </div>
+            <div class="ln_item content_text" >
+                <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
+                <a href="<?php echo base_url() . 'applications/gympro/manage_groups' ?>">Groups</a>
+            </div>
             <!--left nav custom for this page-->
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
