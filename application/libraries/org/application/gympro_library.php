@@ -11,11 +11,15 @@ if (!defined('BASEPATH'))
  *
  */
 class Gympro_library {
+    public $client_info;
     public function __construct() {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
         $this->load->library('org/utility/Utils');
+        $this->load->library("statuses");
+        $this->load->library('notification');
+        $this->load->library("follower");
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
             $this->load->library('session');
@@ -61,6 +65,144 @@ class Gympro_library {
     public function __get($var) {
         return get_instance()->$var;
     }
+    
+    public function create_client($client_info)
+    {
+        $client_id = $this->gympro_model->create_client($client_info);
+        if($client_id !== FALSE)
+        {
+            $result = $this->follower->get_relation_with_user($client_info['member_id']);
+            if($result['profile_type'] == PROFILE_NON_FOLLOWER)
+            {
+                //sending add request to the client
+                $this->follower->add_follower($client_info['user_id'], $client_info['member_id']);
+                //sending follower notification to the client
+                $current_time = now();
+                $notification_info_list = new stdClass();
+                $notification_info_list->id = '';
+                $notification_info_list->created_on = $current_time;
+                $notification_info_list->modified_on = $current_time;
+                $notification_info_list->type_id = NOTIFICATION_WHILE_START_FOLLOWING;
+                $notification_info_list->status = UNREAD_NOTIFICATION;
+                $notification_info_list->reference_id = $client_info['user_id'];
+                $notification_info_list->reference_id_list = array();
+                $this->notification->add_notification($client_info['member_id'], $notification_info_list);
+
+            }
+        }
+        return $client_id;
+    }
+    
+    public function get_follower_clients($user_id = 0)
+    {
+        $client_list = array();
+        $follower_id_list = $this->follower->get_follower_user_id_list($user_id);
+        $client_list_array = $this->gympro_model->get_all_clients($user_id)->result_array();
+        foreach($client_list_array as $client_info)
+        {
+            if(in_array($client_info['member_id'], $follower_id_list))
+            {
+                $client_list[] = $client_info;
+            }
+        }
+        return $client_list;
+    }
+    
+    public function create_assessment($assessment_info)
+    {
+        $assessment_id = $this->gympro_model->create_assessment($assessment_info);
+        if($assessment_id !== FALSE)
+        {
+            $client_info_array = $this->gympro_model->get_client_information($assessment_info['client_id'])->result_array();
+            if(!empty($client_info_array))
+            {
+                $client_info = $client_info_array[0];
+                $this->create_notification($client_info['user_id'], $client_info['member_id'], $assessment_id, NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT);
+            }
+        }
+        return $assessment_id;
+    }
+    
+    public function create_program($program_info)
+    {
+        $program_id = $this->gympro_model->create_program($program_info);
+        if($program_id !== FALSE)
+        {
+            $client_info_array = $this->gympro_model->get_client_information($program_info['client_id'])->result_array();
+            if(!empty($client_info_array))
+            {
+                $client_info = $client_info_array[0];
+                $this->create_notification($client_info['user_id'], $client_info['member_id'], $program_id, NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM);
+            }
+        }
+        return $program_id;
+    }
+    
+    public function create_mission($mission_info)
+    {
+        $mission_id = $this->gympro_model->create_mission($mission_info);
+        if($mission_id !== FALSE)
+        {
+            $client_info_array = $this->gympro_model->get_client_information($mission_info['client_id'])->result_array();
+            if(!empty($client_info_array))
+            {
+                $client_info = $client_info_array[0];
+                $this->create_notification($client_info['user_id'], $client_info['member_id'], $mission_id, NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION);
+            }
+        }
+        return $mission_id;
+    }
+    
+    public function create_exercise($exercise_info)
+    {
+        $exercise_id = $this->gympro_model->create_exercise($exercise_info);
+        if($exercise_id !== FALSE)
+        {
+            $client_info_array = $this->gympro_model->get_client_information($exercise_info['client_id'])->result_array();
+            if(!empty($client_info_array))
+            {
+                $client_info = $client_info_array[0];
+                $this->create_notification($client_info['user_id'], $client_info['member_id'], $exercise_id, NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE);
+            }
+        }
+        return $exercise_id;
+    }
+    
+    public function create_nutrition($nutrition_info)
+    {
+        $nutrition_id = $this->gympro_model->create_nutrition($nutrition_info);
+        if($nutrition_id !== FALSE)
+        {
+            $client_info_array = $this->gympro_model->get_client_information($nutrition_info['client_id'])->result_array();
+            if(!empty($client_info_array))
+            {
+                $client_info = $client_info_array[0];
+                $this->create_notification($client_info['user_id'], $client_info['member_id'], $nutrition_id, NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION);
+            }
+        }
+        return $nutrition_id;
+    }
+    
+    public function create_notification($sender_user_id, $receiver_user_id, $reference_id, $type_id)
+    {
+        $current_time = now();
+        $reference_info_list = new stdClass();
+        $reference_info_list->user_id = $sender_user_id;
+        $reference_info_list->status_type = UNREAD_NOTIFICATION;
+        $reference_info_list->created_on = $current_time;
+
+        $notification_info_list = new stdClass();
+        $notification_info_list->id = '';
+        $notification_info_list->created_on = $current_time;
+        $notification_info_list->modified_on = $current_time;
+        $notification_info_list->type_id = $type_id;
+        $notification_info_list->status = UNREAD_NOTIFICATION;
+        $notification_info_list->reference_id = $reference_id;
+        $notification_info_list->reference_id_list = array();
+        $notification_info_list->reference_id_list[] = $reference_info_list;
+        $this->notification->add_notification($receiver_user_id, $notification_info_list);
+    }
+    
     //------------------------Gympro User ------------------------------//
     /*
      * This method will store gympro user info
@@ -159,10 +301,10 @@ class Gympro_library {
      * This method will return all programs after converting date format
      * @Author Nazmul on 7th December 2014
      */
-    public function get_all_programs($user_id = 0)
+    public function get_all_programs($user_id = 0, $order_by = '')
     {
         $program_list = array();
-        $programs_array = $this->gympro_model->get_all_programs($user_id)->result_array();
+        $programs_array = $this->gympro_model->get_all_programs($user_id, $order_by)->result_array();
         foreach($programs_array as $program_info)
         {
             $program_info['created_on'] = $this->utils->get_unix_to_human_date($program_info['created_on']);
@@ -204,10 +346,10 @@ class Gympro_library {
      * This method will return all assessments after converting date format
      * @Author Nazmul on 7th December 2014
      */
-    public function get_all_assessments($user_id = 0)
+    public function get_all_assessments($user_id = 0, $order_by = '')
     {
         $assessment_list = array();
-        $assessments_array = $this->gympro_model->get_all_assessments($user_id)->result_array();
+        $assessments_array = $this->gympro_model->get_all_assessments($user_id, $order_by)->result_array();
         foreach($assessments_array as $assessment_info)
         {
             $assessment_info['created_on'] = $this->utils->get_unix_to_human_date($assessment_info['created_on']);
@@ -219,10 +361,10 @@ class Gympro_library {
      * This method will return all mission after converting date format
      * @Author Nazmul on 7th December 2014
      */
-    public function get_all_missions($user_id = 0)
+    public function get_all_missions($user_id = 0, $order_by = '')
     {
         $mission_list = array();
-        $missions_array = $this->gympro_model->get_all_missions($user_id)->result_array();
+        $missions_array = $this->gympro_model->get_all_missions($user_id, $order_by)->result_array();
         foreach($missions_array as $mission_info)
         {
             $mission_info['created_on'] = $this->utils->get_unix_to_human_date($mission_info['created_on']);
@@ -365,6 +507,63 @@ class Gympro_library {
             $session_list[] = $session_info;
         }
         return $session_list;
+    }
+    
+    public function create_session($session_data)
+    {
+        $session_id = $this->gympro_model->create_session($session_data);
+        //if session is created for a user with cash then add a new status here
+        if($session_id !== FALSE && $session_data['status_id'] == GYMPRO_SESSION_STATUS_PAY_CASH_ID && $session_data['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID)
+        {
+            $this->share_session($session_data['reference_id']);
+        }
+        //add session notification to the client
+        if($session_id !== FALSE && $session_data['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID)
+        {
+            $client_info = array();
+            if(empty($this->client_info))
+            {
+                $client_info_array = $this->gympro_model->get_client_information($session_data['reference_id'])->result_array();
+                if(!empty($client_info_array))
+                {
+                    $client_info = $client_info_array[0];                    
+                }
+            }
+            else
+            {
+                $client_info = $this->client_info;
+            }
+            $this->create_notification($client_info['user_id'], $client_info['member_id'], $session_id, NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION);
+        }
+        return $session_id;
+    }
+    
+    /*
+     * This method will share a session of a client
+     * @param $client_id, client id
+     * @author nazmul hasan on 4th November 2015
+     */
+    public function share_session($client_id = 0)
+    {
+        if($client_id <= 0)
+        {
+            return;
+        }
+        $client_info_array = $this->gympro_model->get_client_information($client_id)->result_array();
+        if(!empty($client_info_array))
+        {
+            $client_info = $client_info_array[0];
+            $this->client_info = $client_info;
+            $shared_status_data = array(
+                'user_id' => $client_info['member_id'],
+                'reference_id' => $client_info['user_id'],
+                'status_type_id' => STATUS_TYPE_GENERAL,
+                'status_category_id' => STATUS_CATEGORY_USER_NEWSFEED,
+                'shared_type_id' => STATUS_SHARE_GYMPRO_SESSION
+             );
+            $this->statuses->post_status($shared_status_data);
+        }
+        
     }
     
 }

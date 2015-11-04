@@ -9,6 +9,14 @@
                  print_common_message(message);
                 return false;
             }
+            if($("#start_date").val() == 0)
+            {
+                var message = "Please select the mission start date.";
+                print_common_message(message);
+                return false;
+            }
+            $('#start_date').val(convert_date_from_user_to_db($('#start_date').val()));
+            $('#end_date').val(convert_date_from_user_to_db($('#end_date').val()));
             $.ajax({
                 dataType: 'json',
                 type: "POST",

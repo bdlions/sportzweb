@@ -150,6 +150,10 @@ class Statuses {
                     if (!in_array($status['reference_id'], $app_sp_match_id_list)) {
                         $app_sp_match_id_list[] = $status['reference_id'];
                     }
+                } else if ($status['shared_type_id'] == STATUS_SHARE_GYMPRO_SESSION) {
+                    if (!in_array($status['reference_id'], $user_id_list)) {
+                        $user_id_list[] = $status['reference_id'];
+                    }
                 }
                 //we have photo id for changing profile picture or status with image
                 if (($status['status_type_id'] == STATUS_TYPE_PROFILE_PIC_CHANGE || $status['status_type_id'] == STATUS_TYPE_IMAGE_ATTACHMENT) && $status['reference_id'] != null) {
@@ -386,6 +390,8 @@ class Statuses {
                     $status['reference_info'] = $news_id_info_map[$status['reference_id']];
                 } else if ($status['shared_type_id'] == STATUS_SHARE_BLOG && isset($blog_id_info_map[$status['reference_id']])) {
                     $status['reference_info'] = $blog_id_info_map[$status['reference_id']];
+                }else if ($status['shared_type_id'] == STATUS_SHARE_GYMPRO_SESSION && isset($user_id_user_info_map[$status['reference_id']])) {
+                    $status['reference_info'] = $user_id_user_info_map[$status['reference_id']];
                 }else if ($status['shared_type_id'] == STATUS_SHARE_FIXTURES_RESULTS && isset($app_sp_match_id_match_info_map[$status['reference_id']])) {
                     $reference_match_info = $app_sp_match_id_match_info_map[$status['reference_id']];
                     if ($current_user_id != $status['user_id']) {

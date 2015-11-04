@@ -11,6 +11,14 @@
                  print_common_message(message);
                 return false;
             }
+            if($("#start_date").val() == 0)
+            {
+                var message = "Please select the mission start date.";
+                print_common_message(message);
+                return false;
+            }
+            $('#start_date').val(convert_date_from_user_to_db($('#start_date').val()));
+            $('#review').val(convert_date_from_user_to_db($('#review').val()));
             $("#id_list").val(id_list);
             $.ajax({
                 dataType: 'json',
@@ -30,6 +38,13 @@
         }).on('changeDate', function(ev) {
             $('#start_date').text($('#start_date').data('date'));
             $('#start_date').datepicker('hide');
+        });
+        $('#review').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#review').text($('#review').data('date'));
+            $('#review').datepicker('hide');
         });
     });
     
@@ -219,17 +234,13 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Start date: </label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="start_date" id="start_date" value="<?php echo $program['program_start_date'];?>">
+                                <input type="text" class="form-control" name="start_date" id="start_date" value="<?php echo convert_date_from_db_to_user($program['program_start_date']);?>">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Review In: </label>
+                            <label class="col-sm-3 control-label">Review: </label>
                             <div class="col-sm-4">
-                                <select class="form-control" name="review_id">
-                                    <?php foreach ($review_array as $review): ?>
-                                        <option <?php if($program['review_id'] == $review['id']) echo"selected "?>value="<?php echo $review['id']; ?>"><?php echo $review['title']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <input type="text" class="form-control" name="review" id="review" value="<?php echo convert_date_from_db_to_user($program['review']);?>">
                             </div>
                         </div>
                         <div class="form-group">

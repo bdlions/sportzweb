@@ -36,6 +36,19 @@ class Notifications extends Role_Controller {
     function index() {
         $user_id = $this->session->userdata('user_id');
         $notification_info = $this->notification->get_all_notification_list($user_id);
+        $notification_type_id_list = array();
+        $notification_type_id_list[] = NOTIFICATION_WHILE_LIKE_ON_CREATED_POST;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_SHARES_CREATED_POST;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_PREDICT_MATCH;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION;
+        
+        $this->data['notification_type_id_list'] = $notification_type_id_list;
         $this->data['notification_list'] = $notification_info['notification_list'];
         $this->template->load(null, "member/notification/notifications", $this->data);
     }

@@ -1,5 +1,12 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
-
+<script>
+    $(function () {
+        $("#sort_assessments").on('change', function () {
+            window.location = '<?php echo base_url();?>applications/gympro/manage_assessments/'+$("#sort_assessments").val();
+        });
+        $("#sort_assessments").val('<?php echo $sort; ?>');
+    });    
+</script>
 <div class="container-fluid">
     <div class="row top_margin">
         <?php 
@@ -24,17 +31,17 @@
             <div class="form-group" style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <div class="row">
                 <div class="col-md-9">
-                    <span class="text_size_14px">Create assessments for your clients to instantly see</span>
+                    <span class="text_size_14px">Add assessments and assign to your clients for them to instantly see</span>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-control form_control_custom">
-                        <option value="date">Date</option>
-                        <option value="day">Day</option>
-                        <option value="month">Month</option>
-                        <option value="year">Year</option>
+                    <select id="sort_assessments" class="form-control form_control_custom">
+                        <option value="2">Client</option>
+                        <option value="1">Date</option>
                     </select> 
                 </div>
             </div>
+            <div class="row col-md-12" id="assessment_list">
+                
             <?php
             $total_assessments = count($assessment_list);
             $counter = 0;
@@ -54,15 +61,15 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <a href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>">
-                            <?php if(isset($assessment['picture']) && $assessment['picture'] != ''){ ?>
-                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$assessment['picture'] ?>"/>
+                            <?php if(isset($assessment['profile_picture']) && $assessment['profile_picture'] != ''){ ?>
+                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().PROFILE_PICTURE_PATH_W100_H100.$assessment['profile_picture'] ?>"/>
                             <?php }else{?>
                             <img style="background-color: #76B4E7; width: 100%" class="img-responsive" src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_DEFAULT_PICTURE_NAME ?>"/>
                             <?php } ?>
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['first_name'].' '.$assessment['last_name'].'</br>'.$assessment['date']?></a>
+                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['first_name'].' '.$assessment['last_name'].'</br>'.convert_date_from_db_to_user($assessment['date'])?></a>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2">
                         <div class="dropdown friends-satus-dropdown">
@@ -73,6 +80,9 @@
                             <ul class="dropdown-menu" role="menu" aria-labelledby="friends_status">
                                 <li role="presentation">
                                     <a role="menuitem" tabindex="-1" href="<?php echo base_url().'applications/gympro/edit_assessment/'.$assessment['assessment_id'];?>" >Edit</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="<?php echo base_url().'applications/gympro/clone_assessment/'.$assessment['assessment_id'];?>" >Copy</a>
                                 </li>
                                 <li role="presentation">
                                     <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_delete_confirm(<?php echo $assessment['assessment_id'] ?>)">Delete</a>
@@ -92,41 +102,7 @@
         $counter++;
             }
             ?>
-            
-            
-            
-            
-            
-            
-         
-            
-<!--            <div class="row form-group">
-                <div class="col-md-12">
-                    <table class="table table-condensed table-responsive gympro_table">
-                        <tbody>
-                            <tr>
-                                <th>CREATED</th>
-                                <th>DATE</th>
-                                <th>EDIT</th>
-                                <th>DELETE</th>
-                            </tr>
-                            <?php foreach ($assessment_list as $assessment):?>
-                            <tr>
-                                <td><?php echo $assessment['created_on']?></td>
-                                <td><a href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['date']?></a></td>
-                                <td><a href="<?php echo base_url().'applications/gympro/edit_assessment/'.$assessment['assessment_id'];?>">Edit</a></td>
-                                <td style="text-align: center">
-                                <a onclick="open_modal_delete_confirm(<?php echo $assessment['assessment_id'] ?>)" >
-                                    Delete
-                                </a>
-                            </td>
-                            </tr>
-                            
-                            <?php endforeach;?>
-                        </tbody>
-                    </table>
-                </div>                
-            </div>-->
+        </div>
         </div>
     </div>
 

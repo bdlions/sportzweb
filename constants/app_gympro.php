@@ -49,3 +49,10 @@ define("GYMPRO_CURRENCY_POUND_ID",                            2);
 
 define("GYMPRO_SESSION_DEFAULT_START_TIME",                  "08:00");
 define("GYMPRO_SESSION_DEFAULT_END_TIME",                    "08:15");
+
+define("GYMPRO_ASSESSMENT_ORDRE_BY_DATE",                            1);
+define("GYMPRO_ASSESSMENT_ORDRE_BY_NAME",                            2);
+define("GYMPRO_PROGRAM_ORDRE_BY_DATE",                               1);
+define("GYMPRO_PROGRAM_ORDRE_BY_NAME",                               2);
+define("GYMPRO_MISSION_ORDRE_BY_DATE",                               1);
+define("GYMPRO_MISSION_ORDRE_BY_NAME",                               2);

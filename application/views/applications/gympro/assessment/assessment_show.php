@@ -32,14 +32,14 @@
                     <div class="col-md-5">
                         <div class="row form-group">
                             <div class="col-md-4">Date:</div>
-                             <label class="col-md-4 control-label"><?php echo $assessment_info['date'];?></label>
+                             <label class="col-md-4 control-label"><?php echo convert_date_from_db_to_user($assessment_info['date']);?></label>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-4">Weight:</div>
                              <label class="col-md-4 control-label"><?php echo $assessment_info['weight'];?></label>kg
                         </div>
                         <div class="row form-group">
-                            <div class="col-md-4">Head:</div>
+                            <div class="col-md-4">Height:</div>
                              <label class="col-md-4 control-label"><?php echo $assessment_info['head'];?></label>cm
                         </div>
                         <div class="row form-group">

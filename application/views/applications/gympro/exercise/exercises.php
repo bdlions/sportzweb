@@ -23,7 +23,7 @@
             <div class="form-group" style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <div class="row">
                 <div class="col-md-9">
-                    <span class="text_size_14px">Create exercises for your clients to instantly see</span>
+                    <span class="text_size_14px">Add exercises and assign to your clients for them to instantly see</span>
                 </div>
                 <div class="col-md-3">
                     <select class="form-control form_control_custom">

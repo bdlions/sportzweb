@@ -4,13 +4,17 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Gympro extends Role_Controller {
-
+    public $tables = array();
     private $my_user_id = 0;
     private $account_type_id = APP_GYMPRO_ACCOUNT_TYPE_ID_EXTERNAL;
     private $gympro_user_info = array();
 
     function __construct() {
         parent::__construct();
+        $this->load->config('ion_auth', TRUE);
+        //initialize db tables data
+        $this->tables = $this->config->item('tables', 'ion_auth');
+        
         $this->lang->load('auth');
         $this->load->library('form_validation');
         $this->load->library('org/application/gympro_library');
@@ -904,10 +908,23 @@ class Gympro extends Role_Controller {
      * This method will show all programs of this gympro user
      * @Author Nazmul on 7th December 2014
      */
-    public function programs() {
-        $program_list = $this->gympro_library->get_all_programs($this->session->userdata('user_id'));
+    public function programs($sort = 1) {
+        if($sort == GYMPRO_PROGRAM_ORDRE_BY_DATE)
+        {
+            $order_by = 'start_date';
+        }
+        else if($sort == GYMPRO_PROGRAM_ORDRE_BY_NAME)
+        {
+            $order_by = 'first_name';
+        }
+        else
+        {
+            $order_by = '';
+        }
+        $program_list = $this->gympro_library->get_all_programs($this->session->userdata('user_id'), $order_by);
         $this->data['program_list'] = $program_list;
         $this->data['message'] = '';
+        $this->data['sort'] = $sort;
         $this->template->load(null, 'applications/gympro/program/programs', $this->data);
     }
 
@@ -958,7 +975,7 @@ class Gympro extends Role_Controller {
                     'user_id' => $this->session->userdata('user_id'),
                     'focus' => $this->input->post('focus'),
                     'start_date' => $this->input->post('start_date'),
-                    'review_id' => $this->input->post('review_id'),
+                    'review' => $this->input->post('review'),
                     'description' => $this->input->post('description'),
                     'warm_up' => $this->input->post('warm_up'),
                     'cool_down' => $this->input->post('cool_down'),
@@ -992,7 +1009,6 @@ class Gympro extends Role_Controller {
         foreach ($exercise_categories_array as $exercise_category_info) {
             $this->data['exercise_category_list'][$exercise_category_info['exercise_category_id']] = $exercise_category_info['title'];
         }
-        $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
         $this->data['message'] = '';
         $this->template->load(null, 'applications/gympro/program/program_create', $this->data);
     }
@@ -1038,7 +1054,7 @@ class Gympro extends Role_Controller {
                     'user_id' => $this->session->userdata('user_id'),
                     'focus' => $this->input->post('focus'),
                     'start_date' => $this->input->post('start_date'),
-                    'review_id' => $this->input->post('review_id'),
+                    'review' => $this->input->post('review'),
                     'description' => $this->input->post('description'),
                     'warm_up' => $this->input->post('warm_up'),
                     'cool_down' => $this->input->post('cool_down'),
@@ -1085,7 +1101,6 @@ class Gympro extends Role_Controller {
         if ($program_info['user_id'] == $this->my_user_id) {
             $this->data['program'] = $program_info;
             $this->data['exercise_list'] = json_decode($program_info['exercise_list'], TRUE);
-            $this->data['review_array'] = $this->gympro_library->get_all_reviews()->result_array();
             $this->data['program_id'] = $program_id;
             $this->data['message'] = '';
             if ($program_info['client_id'] > 0) {
@@ -1681,9 +1696,23 @@ class Gympro extends Role_Controller {
      * This method will show all assessments of this gympro user
      * @Author Nazmul on 7th December 2014
      */
-    public function manage_assessments() {
+    public function manage_assessments($sort = 1) {
+        if($sort == GYMPRO_ASSESSMENT_ORDRE_BY_DATE)
+        {
+            $order_by = 'date';
+        }
+        else if($sort == GYMPRO_ASSESSMENT_ORDRE_BY_NAME)
+        {
+            $order_by = 'first_name';
+        }
+        else
+        {
+            $order_by = '';
+        }
+        $user_id =  $this->session->userdata('user_id');     
         $this->data['message'] = '';
-        $this->data['assessment_list'] = $this->gympro_library->get_all_assessments($this->session->userdata('user_id'));
+        $this->data['sort'] = $sort;
+        $this->data['assessment_list'] = $this->gympro_library->get_all_assessments($user_id , $order_by);
         $this->template->load(null, 'applications/gympro/assessment/assessments', $this->data);
     }
 
@@ -1749,7 +1778,7 @@ class Gympro extends Role_Controller {
         } else {
             $this->data['message'] = $this->session->flashdata('message');
         }
-        $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
+        $this->data['client_list'] = $this->gympro_library->get_follower_clients($user_id);
         $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
         $this->data['reassess_list'] = array();
         foreach ($reassess_array as $reassess_info) {
@@ -1889,6 +1918,28 @@ class Gympro extends Role_Controller {
         $this->data['selected_client_id'] = 0;
         $this->template->load(null, 'applications/gympro/assessment/assessment_create', $this->data);
     }
+    
+    public function clone_assessment($assessment_id = 0)
+    {
+        $user_id = $this->session->userdata('user_id');
+        $assessment_info = array();
+        $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
+        if (!empty($assessment_array)) {
+            $assessment_info = $assessment_array[0];
+            if($assessment_info['ptpro_id'] != $user_id)
+            {
+                $this->data['message'] = "You are not allowed to copy this assessment.";
+                $this->template->load(null, 'applications/gympro/message', $this->data);
+                return;
+            }
+            $this->gympro_library->cloneMySQLRecord($this->tables['app_gympro_assessments'], 'id', $assessment_id);
+            redirect('applications/gympro/manage_assessments','refresh');
+        } else {
+            $this->data['message'] = "Invalid assessment.";
+            $this->template->load(null, 'applications/gympro/message', $this->data);
+            return;
+        }
+    }
 
     /*
      * This method will edit an assessment
@@ -1975,7 +2026,7 @@ class Gympro extends Role_Controller {
                 'name' => 'date',
                 'id' => 'date',
                 'type' => 'text',
-                'value' => $assessment_info['date']
+                'value' => $this->utils->convert_date_from_db_to_user($assessment_info['date'])
             );
             $this->data['weight'] = array(
                 'name' => 'weight',
@@ -2194,10 +2245,23 @@ class Gympro extends Role_Controller {
      * This method will show all missions of this gympro user
      * @Author Nazmul on 7th December 2014
      */
-    public function manage_missions() {
-        $mission_list = $this->gympro_library->get_all_missions($this->session->userdata('user_id'));
+    public function manage_missions($sort = 1) {
+        if($sort == GYMPRO_MISSION_ORDRE_BY_DATE)
+        {
+            $order_by = 'start_date';
+        }
+        else if($sort == GYMPRO_ASSESSMENT_ORDRE_BY_NAME)
+        {
+            $order_by = 'first_name';
+        }
+        else
+        {
+            $order_by = '';
+        }
+        $mission_list = $this->gympro_library->get_all_missions($this->session->userdata('user_id'), $order_by);
         $this->data['mission_list'] = $mission_list;
         $this->data['message'] = '';
+        $this->data['sort'] = $sort;
         $this->template->load(null, 'applications/gympro/mission/missions', $this->data);
     }
 
@@ -2395,14 +2459,14 @@ class Gympro extends Role_Controller {
                 'name' => 'end_date',
                 'id' => 'end_date',
                 'type' => 'text',
-                'value' => $mission_info['end_date']
+                'value' => $this->utils->convert_date_from_db_to_user($mission_info['mission_end_date'])
             );
 
             $this->data['start_date'] = array(
                 'name' => 'start_date',
                 'id' => 'start_date',
                 'type' => 'text',
-                'value' => $mission_info['start_date']
+                'value' => $this->utils->convert_date_from_db_to_user($mission_info['mission_start_date'])
             );
             $this->data['sunday'] = array(
                 'name' => 'sunday',

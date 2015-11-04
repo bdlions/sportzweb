@@ -146,5 +146,9 @@ if (!function_exists('test_name')) {
     }
 }
 
-
-?>
+if (!function_exists('convert_date_from_db_to_user')) {
+    function convert_date_from_db_to_user($date) {
+        $CI = & get_instance();
+        return $CI->utils->convert_date_from_db_to_user($date);
+    }
+}

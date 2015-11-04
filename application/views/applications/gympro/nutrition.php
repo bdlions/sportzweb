@@ -24,15 +24,7 @@
             <div class="form-group" style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <div class="row">
                 <div class="col-md-9">
-                    <span class="text_size_14px">Create nutrition plan for your clients to instantly see</span>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control form_control_custom">
-                        <option value="date">Date</option>
-                        <option value="day">Day</option>
-                        <option value="month">Month</option>
-                        <option value="year">Year</option>
-                    </select> 
+                    <span class="text_size_14px">Add nutrition plans and assign to your clients for them to instantly see</span>
                 </div>
             </div>
             <?php
@@ -54,8 +46,8 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <a href="<?php echo base_url().'applications/gympro/show_nutrition/' . $nutrition['nutrition_id']; ?>">
-                            <?php if(isset($nutrition['picture']) && $nutrition['picture'] != ''){ ?>
-                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$nutrition['picture'] ?>"/>
+                            <?php if(isset($nutrition['profile_picture']) && $nutrition['profile_picture'] != ''){ ?>
+                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().PROFILE_PICTURE_PATH_W100_H100.$nutrition['profile_picture'] ?>"/>
                             <?php }else{?>
                             <img style="background-color: #76B4E7; width: 100%" class="img-responsive" src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_DEFAULT_PICTURE_NAME ?>"/>
                             <?php } ?>

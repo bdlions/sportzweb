@@ -52,8 +52,8 @@
                             <div class ="col-md-6">
                                     <div class="profile-picture-box" >
                                         <div id="files" class="files">
-                                            <?php if (!empty($exercise_info['picture'])): ?>
-                                                <img style="width: 50px; height: 50px;" src="<?php echo base_url() . EXERCISE_IMAGES_PATH_W50_H50 . $exercise_info['picture']; ?>" class="img-responsive"/>
+                                            <?php if (!empty($exercise_info['img_exercise'])): ?>
+                                                <img src="<?php echo base_url() . EXERCISE_IMAGEPATH . $exercise_info['img_exercise']; ?>" class="img-responsive"/>
                                             <?php endif; ?>
                                         </div>
                                     </div>

@@ -120,6 +120,14 @@
     </a>
     <span class="shared-text">made a</span>
     <a href="<?php echo base_url().'applications/score_prediction/index/'.$newsfeed['reference_id'];?>"><span class="shared-text">prediction</span></a>
+<?php }else if($newsfeed['shared_type_id'] == STATUS_SHARE_GYMPRO_SESSION ){ ?>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
+    </a>
+    <span class="shared-text">is attending a personal training session with</span>    
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['reference_info']['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['reference_info']['first_name'] . " ". $newsfeed['reference_info']['last_name'] ?></span>
+    </a>
 <?php }else{ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
         <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>

@@ -1,5 +1,12 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css">
-
+<script>
+    $(function () {
+        $("#sort_programmes").on('change', function () {
+            window.location = '<?php echo base_url();?>applications/gympro/programs/'+$("#sort_programmes").val();
+        });
+        $("#sort_programmes").val('<?php echo $sort; ?>');
+    });    
+</script>
 <div class="container-fluid">
     <div class="row top_margin">
         <?php 
@@ -24,14 +31,12 @@
             <div class="form-group" style="border-top: 2px solid lightgray; margin-right:-20px"></div>
             <div class="row">
                 <div class="col-md-9">
-                    <span class="text_size_14px">Create programs for your clients to instantly see</span>
+                    <span class="text_size_14px">Add programmes and assign to your clients for them to instantly see</span>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-control form_control_custom">
-                        <option value="date">Date</option>
-                        <option value="day">Day</option>
-                        <option value="month">Month</option>
-                        <option value="year">Year</option>
+                    <select id="sort_programmes" class="form-control form_control_custom">
+                        <option value="2">Client</option>
+                        <option value="1">Date</option>
                     </select> 
                 </div>
             </div>
@@ -54,15 +59,15 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <a href="<?php echo base_url().'applications/gympro/show_program/'.$program['program_id']?>">
-                            <?php if(isset($program['picture']) && $program['picture'] != ''){ ?>
-                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().CLIENT_PROFILE_PICTURE_PATH_W50_H50.$program['picture'] ?>"/>
+                            <?php if(isset($program['profile_picture']) && $program['profile_picture'] != ''){ ?>
+                            <img style="width: 100%" class="img-responsive" src="<?php echo base_url().PROFILE_PICTURE_PATH_W100_H100.$program['profile_picture'] ?>"/>
                             <?php }else{?>
                             <img style="background-color: #76B4E7; width: 100%" class="img-responsive" src="<?php echo base_url().GYMPRO_IMAGES_DEFAULT_PATH.GYMPRO_DEFAULT_PICTURE_NAME ?>"/>
                             <?php } ?>
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_program/'.$program['program_id']?>"><?php echo $program['focus'] ?></a>
+                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_program/'.$program['program_id']?>"><?php echo $program['first_name'].' '.$program['last_name'].'</br>'.$program['focus'].'</br>'.convert_date_from_db_to_user($program['program_start_date']) ?></a>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2">
                         <div class="dropdown friends-satus-dropdown">

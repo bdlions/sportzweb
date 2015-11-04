@@ -529,6 +529,38 @@ class Follower {
         return $follower_list;
     }
     
+    /*
+     * This method will return user id list of followers
+     * @param $user_id, user id
+     * @author nazmul hasan on 4th November 2015
+     */
+    public function get_follower_user_id_list($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        } 
+        $follower_id_list = array();
+        $user_mutual_relation_array = $this->follower_model->get_user_mutual_relations($user_id)->result_array();
+        if(!empty($user_mutual_relation_array))
+        {
+            $user_mutual_relation = $user_mutual_relation_array[0];
+            $relations = $user_mutual_relation['relations'];
+            if( $relations != "" && $relations != NULL )
+            {
+                $relations_array = json_decode($relations);
+                foreach($relations_array as $relation_info)
+                {
+                    if($relation_info->is_follower == 1 && !in_array($relation_info->user_id, $follower_id_list))
+                    {
+                        $follower_id_list[] = $relation_info->user_id;
+                    }
+                }
+            }
+        }
+        return $follower_id_list;
+    }
+    
     public function get_blocked_followers($user_id = 0)
     {
         if($user_id == 0)

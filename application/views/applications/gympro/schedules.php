@@ -135,7 +135,7 @@
         </div>
         <div class="row form-group">
             <div class="col-md-12">
-                <span class="text_size_14px">Create schedules for your clients to instantly see</span>
+                <span class="text_size_14px">Schedule PT sessions for your clients. Client's can then instantly see these sessions and make payments to your online account</span>
             </div>
 
         </div>

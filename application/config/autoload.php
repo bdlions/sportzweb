@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('ion_auth', 'template', 'org/utility/jsondb');
+$autoload['libraries'] = array('ion_auth', 'template', 'org/utility/jsondb', 'org/utility/utils');
 
 
 /*

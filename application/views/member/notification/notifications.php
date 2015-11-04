@@ -16,8 +16,8 @@
             <?php foreach ($notification_list as $notification_info) { 
                 ?>
                 <div class="pagelet message_friends_box">
-                    <div class="row">
-                        <?php if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_PREDICT_MATCH) { ?>
+                    <div class="row">                        
+                        <?php if (in_array($notification_info['type_id'], $notification_type_id_list)) { ?>
                             <div class="col-sm-3 feed-profile-picture">
                                 <?php if (!empty($notification_info['reference_list'])) { ?>
                                     <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list'][0]['user_id']}" ?>'>
@@ -30,7 +30,6 @@
                             </div>
                         <?php } ?>
                         <div class="col-sm-9">
-
                             <?php
                             if ($notification_info['type_id'] == NOTIFICATION_WHILE_LIKE_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST || $notification_info['type_id'] == NOTIFICATION_WHILE_SHARES_CREATED_POST) {
                                 $total_users = count($notification_info['reference_list']);
@@ -100,12 +99,37 @@
                                 your
                                 <a href='<?php echo base_url() . "applications/score_prediction/index/{$notification_info['reference_id']}" ?>'> prediction </a> 
                                 is correct
+                            <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT) {
+                                ?>
+                                <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
+                                <a href='<?php echo base_url() . "applications/gympro/show_assessment/{$notification_info['reference_id']}" ?>'>has created an assessment for you</a>
+                            <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM) {
+                                ?>
+                                <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
+                                <a href='<?php echo base_url() . "applications/gympro/show_program/{$notification_info['reference_id']}" ?>'>has created a program for you</a>
+                            <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION) {
+                                ?>
+                                <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
+                                <a href='<?php echo base_url() . "applications/gympro/show_mission/{$notification_info['reference_id']}" ?>'>has created a mission for you</a>
+                            <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE) {
+                                ?>
+                                <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
+                                <a href='<?php echo base_url() . "applications/gympro/show_exercise/{$notification_info['reference_id']}" ?>'>has created an exercise for you</a>
+                            <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION) {
+                                ?>
+                                <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
+                                <a href='<?php echo base_url() . "applications/gympro/show_nutrition/{$notification_info['reference_id']}" ?>'>has created a nutrition for you</a>
+                            <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION) {
+                                ?>
+                                <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
+                                <a href='<?php echo base_url() . "applications/gympro/show_session/{$notification_info['reference_id']}" ?>'>has created a session for you</a>
                             <?php }
                             ?>
                         </div>
-<?php } ?>
+            
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </div>

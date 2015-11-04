@@ -9,15 +9,15 @@
                 print_common_message(message);
                 return false;
             }
+            $('#date').val(convert_date_from_user_to_db($('#date').val()));
             $.ajax({
                 dataType: 'json',
                 type: "POST",
                 url: '<?php echo base_url(); ?>applications/gympro/create_assessment',
                 data: $("#form_assesment").serializeArray(),
                 success: function(data) {
-                    //alert(data.message);
                     var message = data.message;
-                print_common_message(message);
+                    print_common_message(message);
                     window.location = '<?php echo base_url(); ?>applications/gympro/manage_assessments';
                 }
             });
@@ -72,7 +72,7 @@
                             </div>kg
                         </div>
                         <div class="form-group">
-                            <div class="col-md-4">Head:</div>
+                            <div class="col-md-4">Height:</div>
                             <div class="col-md-5">
                                 <?php echo form_input($head + array('class' => 'form-control')) ?>
                             </div>cm

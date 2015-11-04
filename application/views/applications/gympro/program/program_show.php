@@ -42,21 +42,11 @@
                     <div class="col-md-5">
                         <div class="row form-group">
                             <label class="col-sm-3 control-label">Start date: </label>
-                            <div class="col-md-9 "><?php echo $program_info['program_start_date']; ?></div>
+                            <div class="col-md-9 "><?php echo convert_date_from_db_to_user($program_info['program_start_date']); ?></div>
                         </div>
                         <div class="row form-group">
-                            <label class="col-sm-3 control-label">Review In: </label>
-                            <div class="col-md-9 ">
-                                <?php
-                                foreach ($review_array as $review) {
-                                    if ($program_info['review_id'] == $review['id']) {
-                                        echo $review['title'];
-                                        break;
-                                    }
-                                }
-                                ?>
-
-                            </div>
+                            <label class="col-sm-3 control-label">Review: </label>
+                            <div class="col-md-9 "><?php echo convert_date_from_db_to_user($program_info['review']); ?></div>
                         </div>
                         <div class="row form-group">
                             <label class="col-sm-3 control-label">Warm Up: </label>

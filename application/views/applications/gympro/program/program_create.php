@@ -12,6 +12,14 @@
                  print_common_message(message);
                 return false;
             }
+            if($("#start_date").val() == 0)
+            {
+                var message = "Please select the start date.";
+                print_common_message(message);
+                return false;
+            }
+            $('#start_date').val(convert_date_from_user_to_db($('#start_date').val()));
+            $('#review').val(convert_date_from_user_to_db($('#review').val()));
             $("#id_list").val(id_list);
             $.ajax({
                 dataType: 'json',
@@ -31,6 +39,13 @@
         }).on('changeDate', function(ev) {
             $('#start_date').text($('#start_date').data('date'));
             $('#start_date').datepicker('hide');
+        });
+        $('#review').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#review').text($('#review').data('date'));
+            $('#review').datepicker('hide');
         });
         id_list[id_counter++] = exercise_id;
         $("#exercise_box").append(tmpl("tmpl_weight_exercise",exercise_id));
@@ -206,13 +221,9 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Review In: </label>
+                            <label class="col-sm-3 control-label">Review: </label>
                             <div class="col-sm-4">
-                                <select class="form-control" name="review_id">
-                                    <?php foreach ($review_array as $review): ?>
-                                        <option value="<?php echo $review['id']; ?>"><?php echo $review['title']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <input type="text" class="form-control" name="review" id="review">
                             </div>
                         </div>
                         <div class="form-group">

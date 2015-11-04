@@ -34,11 +34,11 @@
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Mission Starts: </label>
-                    <label class="col-md-4 control-label"><?php echo $mission_info['start_date'];?></label>
+                    <label class="col-md-4 control-label"><?php echo convert_date_from_db_to_user($mission_info['mission_start_date']);?></label>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Mission Ends: </label>
-                    <label class="col-md-4 control-label"><?php echo $mission_info['end_date'];?></label>
+                    <label class="col-md-4 control-label"><?php echo convert_date_from_db_to_user($mission_info['mission_end_date']);?></label>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">Monday: </label>

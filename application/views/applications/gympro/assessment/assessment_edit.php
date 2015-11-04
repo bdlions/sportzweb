@@ -9,6 +9,7 @@ $(function() {
              print_common_message(message);
             return false;
         }
+        $('#date').val(convert_date_from_user_to_db($('#date').val()));
         $.ajax({
             dataType: 'json',
             type: "POST",
@@ -20,7 +21,14 @@ $(function() {
              print_common_message(message);
                 window.location = '<?php echo base_url(); ?>applications/gympro/manage_assessments';
             }
-        });
+        });        
+    });
+    $('#date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        startDate: '-3d'
+    }).on('changeDate', function(ev) {
+        $('#date').text($('#date').data('date'));
+        $('#date').datepicker('hide');
     });
 });
 
@@ -65,7 +73,7 @@ $(function() {
                             </div>kg
                         </div>
                         <div class="form-group">
-                            <div class="col-md-4">Head:</div>
+                            <div class="col-md-4">Height:</div>
                             <div class="col-md-5">
                                 <?php echo form_input($head + array('class' => 'form-control')) ?>
                             </div>cm

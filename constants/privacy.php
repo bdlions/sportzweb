@@ -22,6 +22,13 @@ define("NOTIFICATION_WHILE_COMMENTS_ON_ADDED_PHOTO",                    8);
 define("NOTIFICATION_WHILE_LIKE_ON_CREATED_POST",                       9);
 define("NOTIFICATION_WHILE_PREDICT_MATCH",                              10);
 
+define("NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT",                   11);
+define("NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM",                      12);
+define("NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION",                      13);
+define("NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE",                     14);
+define("NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION",                    15);
+define("NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION",                      16);
+
 
 /**Ability or permission for a resources**/
 define("COLLABORATE_PERMISSION_VIEW_POST",                              1);
