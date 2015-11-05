@@ -1,26 +1,40 @@
 <script type="text/javascript">
-
     function subcategry_select()
     {
         if ($("#exercise_category_list").val()==0)
         {
             $("#subcategory_view").html("");
             return;
-        }
-          
+        }          
         $.ajax({
-                dataType: 'json',
-                type: "POST",
-                url: '<?php echo base_url(); ?>' + "applications/gympro/program_subcategory_list",
-                data: {
-                    category_id: $("#exercise_category_list").val()
-                },
-                success: function(data) {
-                    $("#subcategory_view").html(tmpl("tmpl_subcategory_list", data.subcategory_list));
-                }
-            });
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "applications/gympro/program_subcategory_list",
+            data: {
+                category_id: $("#exercise_category_list").val()
+            },
+            success: function(data) {
+                $("#subcategory_view").html(tmpl("tmpl_subcategory_list", data.subcategory_list));
+            }
+        });
     }
-    function open_modal_browse_exercise(number) {
+    function get_exercise_categories(type_id)
+    {
+         $("#subcategory_view").html("");
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: '<?php echo base_url(); ?>' + "applications/gympro/get_exercise_categories",
+            data: {
+                type_id: type_id
+            },
+            success: function(data) {
+                $("#exercise_category_list").html(tmpl("tmpl_exercise_category_list", data.exercise_category_list));
+            }
+        });
+    }
+    function open_modal_browse_exercise(number, type_id) {
+        get_exercise_categories(type_id);
         $("#hf_numb").val(number);
         $("#modal_exercise").modal('show');
     }
@@ -55,6 +69,14 @@
     {% subcategory_list = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
+<script type="text/x-tmpl" id="tmpl_exercise_category_list">
+    {% var i=0, exercise_category_info = ((o instanceof Array) ? o[i++] : o); %}
+    <option value="0">Select</option>
+    {% while(exercise_category_info){ %}
+        <option value="{%= exercise_category_info.exercise_category_id %}">{%= exercise_category_info.title %}</option>
+    {% exercise_category_info = ((o instanceof Array) ? o[i++] : null); %}
+    {% } %}
+</script>
 <div class="modal fade" id="modal_exercise" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -63,27 +85,25 @@
                 <h4 class="modal-title" id="myModalLabel">Browse Exercise</h4>
             </div>
             <div class="modal-body">
-
                 <div class="row form-group">
                     <div class="col-md-4">
-                        <?php echo form_dropdown('exercise_category_list', $exercise_category_list, '0', 'class=form-control id=exercise_category_list onchange=subcategry_select()'); ?>
+                        <select id="exercise_category_list" class="form-control form_control_custom" onchange=subcategry_select()>
+                            
+                        </select>
+                        <?php //echo form_dropdown('exercise_category_list', $exercise_category_list, '0', 'class=form-control id=exercise_category_list onchange=subcategry_select()'); ?>
                     </div>
                     <div class="col-md-8">
                         <span>Click on an exercise below to add it to the programme</span>
                     </div>
                     <input type=hidden id="hf_numb" >
-
                 </div>
-                <div class="form-group">
-                    
-                    <div id="subcategory_view">
-                        
+                <div class="form-group">                    
+                    <div id="subcategory_view">                        
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <div class ="col-md-9">
-
                 </div>
                 <div class ="col-md-3">
                     <button style="width:100%" type="button" class="btn button-custom" data-dismiss="modal">Cancel</button>

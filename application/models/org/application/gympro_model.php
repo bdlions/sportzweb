@@ -530,7 +530,11 @@ class Gympro_model extends Ion_auth_model {
      * This method will return all exercise categories
      * @Author Nazmul on 7th December 2014
      */
-    public function get_all_exercise_categories() {
+    public function get_all_exercise_categories($type_id = 0) {
+        if($type_id != 0)
+        {
+            $this->db->where('type_id', $type_id);
+        }
         return $this->db->select($this->tables['app_gympro_exercise_categories'] . '.id as exercise_category_id,' . $this->tables['app_gympro_exercise_categories'] . '.*')
                         ->from($this->tables['app_gympro_exercise_categories'])
                         ->get();
@@ -1248,6 +1252,25 @@ class Gympro_model extends Ion_auth_model {
         return TRUE;
     }
 
+    /*
+     * This method will return session row of a session info
+     * @param $session_id, session id
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function get_session($session_id) {
+        $this->db->where($this->tables['app_gympro_sessions'] . '.id', $session_id);
+        return $this->db->select($this->tables['app_gympro_sessions'] . '.*,' . $this->tables['app_gympro_sessions'] . '.id as session_id')
+                        ->from($this->tables['app_gympro_sessions'])
+                        ->get();
+    }
+    
+    public function get_session_list($session_id_list = array()) {
+        $this->db->where_in($this->tables['app_gympro_sessions'] . '.id', $session_id_list);
+        return $this->db->select($this->tables['app_gympro_sessions'] . '.*,' . $this->tables['app_gympro_sessions'] . '.id as session_id')
+                        ->from($this->tables['app_gympro_sessions'])
+                        ->get();
+    }
+    
     public function get_session_info($session_id) {
         $this->db->where($this->tables['app_gympro_sessions'] . '.id', $session_id);
         return $this->db->select($this->tables['app_gympro_sessions'] . '.*, ' . $this->tables['app_gympro_currencies'] . '.title as currency_title, ' . $this->tables['app_gympro_currencies'] . '.currency_code, ' . $this->tables['app_gympro_sessions'] . '.id as session_id, ' . $this->tables['app_gympro_users'] . '.account_email')

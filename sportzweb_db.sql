@@ -2124,13 +2124,29 @@ INSERT INTO `app_gympro_reviews` (`title`) VALUES
 ('6 weeks'),
 ('7 weeks'),
 ('8 weeks');
-CREATE TABLE IF NOT EXISTS `app_gympro_exercise_categories` (
+
+CREATE TABLE IF NOT EXISTS `app_gympro_exercise_types` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200),
   `created_on` int(11) unsigned DEFAULT NULL,
   `modified_on` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+INSERT INTO `app_gympro_exercise_types` (`id`, `title`) VALUES
+(1, 'Cardio Exercise'),
+(2, 'Weight Exercise');
+
+CREATE TABLE IF NOT EXISTS `app_gympro_exercise_categories` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200),
+  `type_id` int(11) unsigned DEFAULT NULL,
+  `created_on` int(11) unsigned DEFAULT NULL,
+  `modified_on` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+ALTER TABLE `app_gympro_exercise_categories`
+	ADD CONSTRAINT `app_gympro_exercise_categories_types1` FOREIGN KEY(`type_id`) REFERENCES `app_gympro_exercise_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 INSERT INTO `app_gympro_exercise_categories` (`id`, `title`) VALUES
 (1, 'Back'),
 (2, 'Balance'),

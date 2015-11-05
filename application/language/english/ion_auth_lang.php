@@ -312,6 +312,11 @@ $lang['update_session_fail']                             = "Failed to update ses
 $lang['delete_session_successful']                       = "Session deleted successfully.";
 $lang['delete_session_fail']                             = "Failed to delete the session.";
 
+$lang['create_exercise_category_duplicate_title']      = "Exercise Category is already used.";
+$lang['create_exercise_category_successful']           = "Exercise category created successfully.";
+$lang['update_exercise_category_duplicate_title']      = "Exercise Category is already used.";
+$lang['update_exercise_category_unsuccessful']         = "Failed to update exercise category.";
+$lang['update_exercise_category_successful']           = "Exercise category updated successfully.";
 $lang['create_program_successful']                     = "Program created successfully.";
 $lang['create_program_fail']                           = "Failed to create a program.";
 $lang['update_program_successful']                     = "Program updated successfully.";

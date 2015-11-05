@@ -165,6 +165,7 @@ $config['tables']['app_gympro_health_questions']            = 'app_gympro_health
 $config['tables']['app_gympro_groups']                      = 'app_gympro_groups';
 $config['tables']['app_gympro_groups_clients']              = 'app_gympro_groups_clients';
 $config['tables']['app_gympro_reviews']                     = 'app_gympro_reviews';
+$config['tables']['app_gympro_exercise_types']              = 'app_gympro_exercise_types';
 $config['tables']['app_gympro_exercise_categories']         = 'app_gympro_exercise_categories';
 $config['tables']['app_gympro_exercise_subcategories']      = 'app_gympro_exercise_subcategories';
 $config['tables']['app_gympro_programs']                    = 'app_gympro_programs';
@@ -257,6 +258,7 @@ $config['app_gympro_reviews_identity_column']           = 'title';
 $config['app_gympro_reassess_identity_column']          = 'title';
 $config['app_gympro_meal_times_identity_column']        = 'title';
 $config['app_gympro_workouts_identity_column']          = 'title';
+$config['app_gympro_exercise_category_identity_column'] = 'title';
 
 //SHOP APP
 $config['app_shop_product_identity_column']             = 'title';

@@ -19,6 +19,7 @@ class Statuses {
         $this->load->helper('cookie');
         $this->load->library('org/application/blog_app_library');
         $this->load->library('org/application/score_prediction_library');
+        $this->load->library('org/application/gympro_library');
         $this->load->model('statuses_model');
         // Load the session, CI2 as a library, CI3 uses it as a driver
         if (substr(CI_VERSION, 0, 1) == '2') {
@@ -73,6 +74,9 @@ class Statuses {
 
         $app_sp_match_id_list = array();
         $app_sp_match_id_match_info_map = array();
+        
+        $app_gympro_session_id_list = array();
+        $app_gympro_session_id_session_info_map = array();
         
         $shared_recipe_id_list = array();
         $shared_service_id_list = array();
@@ -151,8 +155,8 @@ class Statuses {
                         $app_sp_match_id_list[] = $status['reference_id'];
                     }
                 } else if ($status['shared_type_id'] == STATUS_SHARE_GYMPRO_SESSION) {
-                    if (!in_array($status['reference_id'], $user_id_list)) {
-                        $user_id_list[] = $status['reference_id'];
+                    if (!in_array($status['reference_id'], $app_gympro_session_id_list)) {
+                        $app_gympro_session_id_list[] = $status['reference_id'];
                     }
                 }
                 //we have photo id for changing profile picture or status with image
@@ -310,6 +314,13 @@ class Statuses {
                     $user_id_user_info_map[$user_info['user_id']] = $user_info;
                 }
             }
+            
+            if (!empty($app_gympro_session_id_list)) {
+                $app_gympro_session_info_array = $this->gympro_model->get_session_list($app_gympro_session_id_list)->result_array();
+                foreach ($app_gympro_session_info_array as $session_info) {
+                    $app_gympro_session_id_session_info_map[$session_info['session_id']] = $session_info;
+                }
+            }
 
 
             /* $status_id_list = array();
@@ -390,8 +401,8 @@ class Statuses {
                     $status['reference_info'] = $news_id_info_map[$status['reference_id']];
                 } else if ($status['shared_type_id'] == STATUS_SHARE_BLOG && isset($blog_id_info_map[$status['reference_id']])) {
                     $status['reference_info'] = $blog_id_info_map[$status['reference_id']];
-                }else if ($status['shared_type_id'] == STATUS_SHARE_GYMPRO_SESSION && isset($user_id_user_info_map[$status['reference_id']])) {
-                    $status['reference_info'] = $user_id_user_info_map[$status['reference_id']];
+                }else if ($status['shared_type_id'] == STATUS_SHARE_GYMPRO_SESSION && isset($app_gympro_session_id_session_info_map[$status['reference_id']])) {
+                    $status['reference_info'] = $app_gympro_session_id_session_info_map[$status['reference_id']];
                 }else if ($status['shared_type_id'] == STATUS_SHARE_FIXTURES_RESULTS && isset($app_sp_match_id_match_info_map[$status['reference_id']])) {
                     $reference_match_info = $app_sp_match_id_match_info_map[$status['reference_id']];
                     if ($current_user_id != $status['user_id']) {

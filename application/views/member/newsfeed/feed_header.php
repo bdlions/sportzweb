@@ -125,9 +125,15 @@
         <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>
     </a>
     <span class="shared-text">is attending a personal training session with</span>    
-    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['reference_info']['user_id']}"?>' class="profile-name" >
-        <span class="content_text"><?php echo $newsfeed['reference_info']['first_name'] . " ". $newsfeed['reference_info']['last_name'] ?></span>
+    <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['via_user_info']['user_id']}"?>' class="profile-name" >
+        <span class="content_text"><?php echo $newsfeed['via_user_info']['first_name'] . " ". $newsfeed['via_user_info']['last_name'] ?></span>
     </a>
+    <span class="shared-text">
+        <?php 
+            $timestamp = strtotime($newsfeed['reference_info']['date']);
+            echo date('l', $timestamp);
+        ?>
+    </span>   
 <?php }else{ ?>
     <a href='<?php echo base_url(). "member_profile/show/{$newsfeed['user_id']}"?>' class="profile-name" >
         <span class="content_text"><?php echo $newsfeed['first_name'] . " ". $newsfeed['last_name'] ?></span>

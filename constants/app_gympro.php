@@ -56,3 +56,6 @@ define("GYMPRO_PROGRAM_ORDRE_BY_DATE",                               1);
 define("GYMPRO_PROGRAM_ORDRE_BY_NAME",                               2);
 define("GYMPRO_MISSION_ORDRE_BY_DATE",                               1);
 define("GYMPRO_MISSION_ORDRE_BY_NAME",                               2);
+
+define("GYMPRO_CARDIO_EXERCISE_TYPE_ID",                             1);
+define("GYMPRO_WEIGHT_EXERCISE_TYPE_ID",                             2);

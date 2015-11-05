@@ -905,6 +905,20 @@ class Gympro extends Role_Controller {
 
     //-----------------------------------------Program Module------------------------------------//
     /*
+     * Ajax call
+     * This method will return exercise categories
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function get_exercise_categories()
+    {
+        $type_id = $this->input->post('type_id');
+        $exercise_categories_array = $this->gympro_model->get_all_exercise_categories($type_id)->result_array();
+        $response = array(
+            'exercise_category_list' => $exercise_categories_array
+        );
+        echo json_encode($response);
+    }
+    /*
      * This method will show all programs of this gympro user
      * @Author Nazmul on 7th December 2014
      */

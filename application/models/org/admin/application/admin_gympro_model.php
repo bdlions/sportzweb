@@ -27,6 +27,7 @@ class Admin_gympro_model extends Ion_auth_model
     protected $app_gympro_reassess_identity_column;
     protected $app_gympro_reviews_identity_column;
     protected $app_gympro_workouts_identity_column;
+    protected $exercise_category_identity_column;
 
     public function __construct() {
         parent::__construct();
@@ -44,6 +45,7 @@ class Admin_gympro_model extends Ion_auth_model
         $this->app_gympro_reassess_identity_column              = $this->config->item('app_gympro_reassess_identity_column', 'ion_auth');
         $this->app_gympro_reviews_identity_column               = $this->config->item('app_gympro_reviews_identity_column', 'ion_auth');
         $this->app_gympro_workouts_identity_column              = $this->config->item('app_gympro_workouts_identity_column', 'ion_auth');
+        $this->exercise_category_identity_column     = $this->config->item('app_gympro_exercise_category_identity_column', 'ion_auth');
     }
 
     
@@ -1360,15 +1362,107 @@ class Admin_gympro_model extends Ion_auth_model
     
     
     //-----------------------------Exercise Category of Program-----------------------//
-     /*
+    /*
+     * This method will return all exercise types
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function get_all_exercise_types()
+    {
+        return $this->db->select($this->tables['app_gympro_exercise_types'].'.id as exercise_type_id,'.$this->tables['app_gympro_exercise_types'].'.*')
+                    ->from($this->tables['app_gympro_exercise_types'])
+                    ->get();
+    }
+    /*
+     * This method will return exercise category info
+     * @param $exercise_category_id, exercise category id
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function get_exercise_category_info($exercise_category_id)
+    {
+        $this->db->where('id', $exercise_category_id);
+        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.id as exercise_category_id,'.$this->tables['app_gympro_exercise_categories'].'.*')
+                    ->from($this->tables['app_gympro_exercise_categories'])
+                    ->get();
+    }
+    /*
+     * This method will check identity of exercise category
+     * @param $identity, identity of exercise category
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function exercise_category_identity_check($identity = '') {
+        if(empty($identity))
+        {
+            return FALSE;
+        }
+        $this->db->where($this->exercise_category_identity_column,$identity);
+        return $this->db->count_all_results($this->tables['app_gympro_exercise_categories']) > 0;
+    }
+    /*
+     * This method will create exercise category info
+     * @param $additioal_data, exercise category data
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function create_exercise_category_info($additional_data)
+    {
+        if (array_key_exists($this->exercise_category_identity_column, $additional_data) && $this->exercise_category_identity_check($additional_data[$this->exercise_category_identity_column]) )
+        {
+            $this->set_error('create_exercise_category_duplicate_' . $this->exercise_category_identity_column);
+            return FALSE;
+        }
+        $additional_data['created_on'] = now();
+        $data = $this->_filter_data($this->tables['app_gympro_exercise_categories'], $additional_data);       
+        
+        $this->db->insert($this->tables['app_gympro_exercise_categories'], $data);
+        $id = $this->db->insert_id();
+        $this->set_message('create_exercise_category_successful');
+        return (isset($id)) ? $id : FALSE;
+    }
+    /*
+     * This method will update exercise category info
+     * @param $exercise_category_id, exercise category id
+     * @param $additioal_data, exercise category data
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function update_exercise_category_info($exercise_category_id, $additional_data)
+    {
+        $exercise_category_info = $this->get_exercise_category_info($exercise_category_id)->row();
+        if (array_key_exists($this->exercise_category_identity_column, $additional_data) && $this->exercise_category_identity_check($additional_data[$this->exercise_category_identity_column]) && $exercise_category_info->{$this->exercise_category_identity_column} !== $additional_data[$this->exercise_category_identity_column])
+        {
+            $this->set_error('update_exercise_category_duplicate_' . $this->exercise_category_identity_column);
+            return FALSE;
+        }
+        $additional_data['modified_on'] = now(); 
+        $data = $this->_filter_data($this->tables['app_gympro_exercise_categories'], $additional_data);
+        $this->db->update($this->tables['app_gympro_exercise_categories'], $data, array('id' => $exercise_category_id));
+        if ($this->db->trans_status() === FALSE) {
+            $this->set_error('update_exercise_category_unsuccessful');
+            return FALSE;
+        }
+        $this->set_message('update_exercise_category_successful');
+        return TRUE;
+    }
+    /*
      * This method will return all exercise categories
      * @Author Nazmul on 21st November 2014
      */
     public function get_all_exercise_categories()
     {
-        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.id as exercise_category_id,'.$this->tables['app_gympro_exercise_categories'].'.*')
+        $this->db->order_by($this->tables['app_gympro_exercise_categories'].'.type_id','asc');
+        $this->db->order_by($this->tables['app_gympro_exercise_categories'].'.title','asc');
+        return $this->db->select($this->tables['app_gympro_exercise_categories'].'.id as exercise_category_id,'.$this->tables['app_gympro_exercise_categories'].'.*,'.$this->tables['app_gympro_exercise_types'].'.title as exercise_type')
                     ->from($this->tables['app_gympro_exercise_categories'])
+                    ->join($this->tables['app_gympro_exercise_types'], $this->tables['app_gympro_exercise_types'] . '.id=' . $this->tables['app_gympro_exercise_categories'] . '.type_id')
                     ->get();
+    }
+    /*
+     * This method will delete exercise category
+     * @param $category_id, exercise category id
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function delete_exercise_category($category_id)
+    {
+        $this->db->where('id', $category_id);
+        $this->db->delete($this->tables['app_gympro_exercise_categories']);
     }
     //-----------------------------Exercise Subcategory of Program-----------------------//
      /*
@@ -1377,6 +1471,7 @@ class Admin_gympro_model extends Ion_auth_model
      */
     public function get_all_exercise_subcategories($exercise_category_id)
     {
+        $this->db->where('category_id', $exercise_category_id);
         return $this->db->select($this->tables['app_gympro_exercise_subcategories'].'.id as exercise_subcategory_id,'.$this->tables['app_gympro_exercise_subcategories'].'.*')
                     ->from($this->tables['app_gympro_exercise_subcategories'])
                     ->get();

@@ -86,7 +86,7 @@
                         <div class="col-md-12">
                             <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
                             <input style="width: 40%; min-width: 150px;" name="name_<?php echo '{%= weight_num%}'; ?>">
-                            <img onclick="open_modal_browse_exercise('<?php echo '{%= weight_num%}'; ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
+                            <img onclick="open_modal_browse_exercise('<?php echo '{%= weight_num%}'; ?>', '<?php echo GYMPRO_WEIGHT_EXERCISE_TYPE_ID ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                             <img class="pull-right" onclick="$(this).closest('.deletable_box').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
                         </div>
                     </div>
@@ -103,23 +103,23 @@
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Sets</div>
-                                <div><input style="width: 100%" name="sets_<?php echo '{%= weight_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="sets_<?php echo '{%= weight_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Reps</div>
-                                <div><input style="width: 100%" name="reps_<?php echo '{%= weight_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="reps_<?php echo '{%= weight_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Weights</div>
-                                <div><input style="width: 100%" name="weights_<?php echo '{%= weight_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="weights_<?php echo '{%= weight_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Rest</div>
-                                <div><input style="width: 100%" name="reps2_<?php echo '{%= weight_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="reps2_<?php echo '{%= weight_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Tempo</div>
-                                <div><input style="width: 100%" name="tempo_<?php echo '{%= weight_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="tempo_<?php echo '{%= weight_num%}'; ?>"></div>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                         <div class="col-md-12">
                             <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
                             <input style="width: 40%; min-width: 150px;" name="name_<?php echo '{%= cardio_num%}'; ?>">
-                            <img onclick="open_modal_browse_exercise('<?php echo '{%= cardio_num%}'; ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
+                            <img onclick="open_modal_browse_exercise('<?php echo '{%= cardio_num%}'; ?>', '<?php echo GYMPRO_CARDIO_EXERCISE_TYPE_ID ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                             <img class="pull-right" onclick="$(this).closest('.deletable_box').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
                         </div>
                     </div>
@@ -155,19 +155,19 @@
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Level</div>
-                                <div><input style="width: 100%" name="level_<?php echo '{%= cardio_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="level_<?php echo '{%= cardio_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Speed</div>
-                                <div><input style="width: 100%" name="speed_<?php echo '{%= cardio_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="speed_<?php echo '{%= cardio_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Time</div>
-                                <div><input style="width: 100%" name="time_<?php echo '{%= cardio_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="time_<?php echo '{%= cardio_num%}'; ?>"></div>
                             </div>
                             <div class="col-md-1" style="padding: 0px; margin: 2px;">
                                 <div style="font-size: 14px;">Target H.R</div>
-                                <div><input style="width: 100%" name="target_<?php echo '{%= cardio_num%}'; ?>"></div>
+                                <div><input type="text" style="width: 100%" name="target_<?php echo '{%= cardio_num%}'; ?>"></div>
                             </div>
                         </div>
                     </div>

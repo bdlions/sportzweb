@@ -540,14 +540,27 @@ class Gympro_library {
     
     /*
      * This method will share a session of a client
+     * @param $session_id, session id
      * @param $client_id, client id
      * @author nazmul hasan on 4th November 2015
      */
-    public function share_session($client_id = 0)
+    public function share_session($session_id, $client_id = 0)
     {
         if($client_id <= 0)
         {
-            return;
+            $session_info_array = $this->gympro_model->get_session($session_id)->result_array();
+            if(!empty($session_info_array))
+            {
+                $session_info = $session_info_array[0];
+                if($session_info['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID)
+                {
+                    $client_id = $session_info['reference_id'];
+                }
+            }
+            else
+            {
+                return;
+            }
         }
         $client_info_array = $this->gympro_model->get_client_information($client_id)->result_array();
         if(!empty($client_info_array))
@@ -556,7 +569,8 @@ class Gympro_library {
             $this->client_info = $client_info;
             $shared_status_data = array(
                 'user_id' => $client_info['member_id'],
-                'reference_id' => $client_info['user_id'],
+                'via_user_id' => $client_info['user_id'],
+                'reference_id' => $session_id,
                 'status_type_id' => STATUS_TYPE_GENERAL,
                 'status_category_id' => STATUS_CATEGORY_USER_NEWSFEED,
                 'shared_type_id' => STATUS_SHARE_GYMPRO_SESSION
@@ -565,5 +579,5 @@ class Gympro_library {
         }
         
     }
-    
+   
 }

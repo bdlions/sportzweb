@@ -962,15 +962,164 @@ class Applications_gympro extends Admin_Controller{
         echo json_encode($result);
     }
     
-    
-    
-    
-    
-    
+    /*
+     * This method will display all exercise categories
+     * @author nazmul hasan on 5th November 2015
+     */
     public function manage_exercise_categories()
     {
+        $this->data['message'] = $this->session->flashdata('message');
         $this->data['exercise_category_list'] = $this->admin_gympro_library->get_all_exercise_categories()->result_array();
         $this->template->load($this->tmpl, "admin/applications/gympro/manage_exercise_categories", $this->data);
+    }
+    /*
+     * This method will create a new exercise category
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function create_exercise_category()
+    {
+        $message = "";
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('title', 'Exercise Category Title', 'xss_clean|required');
+        if ($this->input->post('submit_create_exercise_category'))
+        {            
+            if($this->form_validation->run() == true)
+            {
+                $additional_data = array(
+                    'title' => $this->input->post('title'),
+                    'type_id' => $this->input->post('exercise_type_list')
+                );
+                if($this->admin_gympro_model->create_exercise_category_info($additional_data))
+                {
+                    $this->session->set_flashdata('message', $this->admin_gympro_model->messages());
+                    redirect('admin/applications_gympro/manage_exercise_categories','refresh');
+                }
+                else
+                {
+                    $message = $this->admin_gympro_model->errors();
+                }
+            }
+            else
+            {
+                $message = validation_errors();
+            }            
+        }
+        else
+        {
+            $message = $this->session->flashdata('message'); 
+        }
+        
+        $exercise_type_list = array();
+        $exercise_type_list_array = $this->admin_gympro_model->get_all_exercise_types()->result_array();
+        foreach($exercise_type_list_array as $exercise_type_info)
+        {
+            $exercise_type_list[$exercise_type_info['exercise_type_id']] = $exercise_type_info['title'];
+        }
+        $this->data['exercise_type_list'] = $exercise_type_list;
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text'
+        );
+        $this->data['submit_create_exercise_category'] = array(
+            'name' => 'submit_create_exercise_category',
+            'id' => 'submit_create_exercise_category',
+            'type' => 'submit',
+            'value' => 'Create',
+        );
+        $this->data['message'] = $message;
+        $this->template->load($this->tmpl, "admin/applications/gympro/create_exercise_category", $this->data);
+    }
+    /*
+     * This method will update exercise category info
+     * @param $category_id, exercise category id
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function update_exercise_category($category_id = 0)
+    {
+        if($category_id == 0)
+        {
+            redirect('admin/applications_gympro/manage_exercise_categories','refresh');
+        }
+        $message = "";
+        $this->form_validation->set_error_delimiters("<div style='color:red'>", '</div>');
+        $this->form_validation->set_rules('title', 'Exercise Category Title', 'xss_clean|required');
+        if ($this->input->post('submit_update_exercise_category'))
+        {            
+            if($this->form_validation->run() == true)
+            {
+                $additional_data = array(
+                    'title' => $this->input->post('title'),
+                    'type_id' => $this->input->post('exercise_type_list')
+                );
+                if($this->admin_gympro_model->update_exercise_category_info($category_id, $additional_data))
+                {
+                    $this->session->set_flashdata('message', $this->admin_gympro_model->messages());
+                    redirect('admin/applications_gympro/manage_exercise_categories','refresh');
+                }
+                else
+                {
+                    $message = $this->admin_gympro_model->errors();
+                }
+            }
+            else
+            {
+                $message = validation_errors();
+            }            
+        }
+        else
+        {
+            $message = $this->session->flashdata('message'); 
+        }
+        
+        $exercise_type_list = array();
+        $exercise_type_list_array = $this->admin_gympro_model->get_all_exercise_types()->result_array();
+        foreach($exercise_type_list_array as $exercise_type_info)
+        {
+            $exercise_type_list[$exercise_type_info['exercise_type_id']] = $exercise_type_info['title'];
+        }
+        $this->data['exercise_type_list'] = $exercise_type_list;
+        
+        $exercise_category_info = array();
+        $exercise_category_info_array = $this->admin_gympro_model->get_exercise_category_info($category_id)->result_array();
+        if(!empty($exercise_category_info_array))
+        {
+            $exercise_category_info = $exercise_category_info_array[0];
+        }
+        else
+        {
+            redirect('admin/applications_gympro/manage_exercise_categories','refresh');
+        }
+        $this->data['exercise_category_info'] = $exercise_category_info;
+        $this->data['title'] = array(
+            'name' => 'title',
+            'id' => 'title',
+            'type' => 'text',
+            'value' => $exercise_category_info['title'],
+        );
+        $this->data['submit_update_exercise_category'] = array(
+            'name' => 'submit_update_exercise_category',
+            'id' => 'submit_update_exercise_category',
+            'type' => 'submit',
+            'value' => 'Update',
+        );
+        $this->data['exercise_category_info'] = $exercise_category_info;
+        $this->data['message'] = $message;
+        $this->template->load($this->tmpl, "admin/applications/gympro/update_exercise_category", $this->data);
+    }
+    /*
+     * Ajax call
+     * This method will delete exercise category
+     * @author nazmul hasan on 5th November 2015
+     */
+    public function delete_exercise_category()
+    {
+        $category_id = $this->input->post('category_id');
+        $this->admin_gympro_model->delete_exercise_category($category_id);
+        $response = array(
+            'message' => "Exercise category is deleted successfully"
+        );
+        echo json_encode($response);
     }
     public function manage_exercise_subcategories($exercise_category_id = 0)
     {

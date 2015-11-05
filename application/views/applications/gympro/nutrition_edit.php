@@ -131,25 +131,25 @@
         <div class="row meal_row">
             <div class="col-md-12">
                 <div class="col-md-5" style="padding: 0px; margin: 2px;">
-                    <div><input style="width: 100%" name="label_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    <div><input type="text" style="width: 100%" name="label_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                 </div>
                 <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                    <div><input style="width: 100%" name="quan_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    <div><input type="text" style="width: 100%" name="quan_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                 </div>
                 <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                    <div><input style="width: 100%" name="unit_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    <div><input type="text" style="width: 100%" name="unit_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                 </div>
                 <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                    <div><input style="width: 100%" name="cal_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    <div><input type="text" style="width: 100%" name="cal_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                 </div>
                 <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                    <div><input style="width: 100%" name="prot_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    <div><input type="text" style="width: 100%" name="prot_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                 </div>
                 <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                    <div><input style="width: 100%" name="carb_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    <div><input type="text" style="width: 100%" name="carb_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                 </div>
                 <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                    <div><input style="width: 100%" name="fats_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
+                    <div><input type="text" style="width: 100%" name="fats_<?php echo '{%= o[0] %}';?>_<?php echo '{%= o[1] %}';?>"></div>
                 </div>
                 <input type="hidden" value="<?php echo '{%=o[1]%}'; ?>" name="row_is_present_<?php echo '{%=o[0]%}'; ?>_<?php echo '{%=o[1]%}'; ?>" class="group_number">
                 <img class="pull-right" onclick="delete_meal_row(this)" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
