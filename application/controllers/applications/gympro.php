@@ -346,8 +346,7 @@ class Gympro extends Role_Controller {
         $member_info = array();
         $member_info_array = $this->ion_auth_model->get_users(array($member_id))->result_array();
         if (!empty($member_info_array)) {
-            $member_info = $member_info_array[0];
-            $member_info['dob'] = $this->utils->convert_date_from_db_to_user($member_info['dob']);
+            $member_info = $member_info_array[0];            
         } else {
             redirect('applications/gympro/manage_clients', 'refresh');
         }
@@ -637,10 +636,6 @@ class Gympro extends Role_Controller {
             $this->data['question_list'] = $this->gympro_library->get_all_health_questions()->result_array();
             $this->data['question_id_answer_map'] = $this->gympro_library->get_question_answers($client_id);
             
-            if(array_key_exists("dob", $client_info))
-            {
-                $client_info['dob'] = $this->utils->convert_date_from_yyyymmdd_to_ddmmyyyy($client_info['dob']);
-            }
             $this->data['client_info'] = $client_info;
 
             $program_list = $this->gympro_library->get_all_client_programs(0, $client_id)->result_array();
@@ -2566,7 +2561,7 @@ class Gympro extends Role_Controller {
             $this->template->load(null, 'applications/gympro/mission/mission_show_validation', $this->data);
             return;
         }
-        if ($mission_info['user_id'] == $this->my_user_id) {
+        if ($mission_info['user_id'] == $this->my_user_id || $mission_info['member_id'] == $this->my_user_id) {
             $this->data['mission_info'] = $mission_info;
             $this->template->load(null, 'applications/gympro/mission/mission_show', $this->data);
         } else {

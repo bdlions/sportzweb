@@ -92,7 +92,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 ">Date of birth:</label>
-                                <label class="col-sm-6 ">&nbsp;<?php echo $client_info['dob'];?></label>
+                                <label class="col-sm-6 ">&nbsp;<?php echo convert_date_from_db_to_user($client_info['dob']);?></label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 ">Client Status:</label>

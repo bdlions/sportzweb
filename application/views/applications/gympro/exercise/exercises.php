@@ -25,14 +25,6 @@
                 <div class="col-md-9">
                     <span class="text_size_14px">Add exercises and assign to your clients for them to instantly see</span>
                 </div>
-                <div class="col-md-3">
-                    <select class="form-control form_control_custom">
-                        <option value="date">Date</option>
-                        <option value="day">Day</option>
-                        <option value="month">Month</option>
-                        <option value="year">Year</option>
-                    </select> 
-                </div>
             </div>
             <?php
             $total_exercise = count($exercise_list);

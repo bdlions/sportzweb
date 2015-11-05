@@ -218,7 +218,7 @@ $(function () {
                             <div class="form-group">
                                 <label class="col-sm-4 ">Date of birth: </label>
                                 <div class="col-sm-4">
-                                    <label class=""><?php echo $member_info['dob'];?></label>
+                                    <label class=""><?php echo convert_date_from_db_to_user($member_info['dob']);?></label>
                                 </div>
                             </div>
                             <div class="form-group">

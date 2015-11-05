@@ -498,13 +498,23 @@ class Gympro_library {
         {
             if($session_info['created_for_type_id'] == SESSION_CREATED_FOR_GROUP_TYPE_ID)
             {
-                $session_info['created_for'] = $group_id_group_info_map[$session_info['reference_id']]['title'];
+                //skipping session of groups which has been deleted
+                if(array_key_exists($session_info['reference_id'], $group_id_group_info_map))
+                {
+                    $session_info['created_for'] = $group_id_group_info_map[$session_info['reference_id']]['title'];
+                    $session_list[] = $session_info;
+                }
+                
             }
             else if($session_info['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID)
             {
-                $session_info['created_for'] = $client_id_client_info_map[$session_info['reference_id']]['first_name'].' '.$client_id_client_info_map[$session_info['reference_id']]['last_name'];
-            }
-            $session_list[] = $session_info;
+                //skipping session of clients which has been deleted
+                if(array_key_exists($session_info['reference_id'], $client_id_client_info_map))
+                {
+                    $session_info['created_for'] = $client_id_client_info_map[$session_info['reference_id']]['first_name'].' '.$client_id_client_info_map[$session_info['reference_id']]['last_name'];
+                    $session_list[] = $session_info;
+                }                
+            }            
         }
         return $session_list;
     }
@@ -515,7 +525,7 @@ class Gympro_library {
         //if session is created for a user with cash then add a new status here
         if($session_id !== FALSE && $session_data['status_id'] == GYMPRO_SESSION_STATUS_PAY_CASH_ID && $session_data['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID)
         {
-            $this->share_session($session_data['reference_id']);
+            $this->share_session($session_id, $session_data['reference_id']);
         }
         //add session notification to the client
         if($session_id !== FALSE && $session_data['created_for_type_id'] == SESSION_CREATED_FOR_CLIENT_TYPE_ID)
