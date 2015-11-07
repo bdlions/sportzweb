@@ -26,9 +26,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="row form-group">
-                        <div class="col-md-4 content_text">Title: </div>
+                        <div class="col-md-4">
+                            <div class="content_text">Title: </div>
+                        </div>
                         <div class="col-md-8">
-                            <?php echo $session_info['title'];?>
+                            <?php echo $session_info['title']; ?>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -131,10 +133,9 @@
                 </div>
                 <div class="col-md-5 col-md-offset-1">
                     <div class="row form-group">
-                        <div class="col-md-1 content_text">Notes</div> 
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10">
-                            <?php echo $session_info['note'];?>
+                        <div class="col-md-2 content_text">Notes</div> 
+                        <div class="col-md-10 content_text">
+                            <?php echo $session_info['note']; ?>
                         </div>
                     </div>
                 </div>

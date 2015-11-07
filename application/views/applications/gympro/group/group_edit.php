@@ -101,26 +101,32 @@
                 <?php } ?>
                 <div class="row hidden_tab" id="group_details_tab" style="display: block">
                     <div class="col-md-9">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Title: </label>
-                            <div class="col-sm-8">
-                                <?php echo form_input($title + array('class' => 'form-control'));?>
+                        <div class="row form-group">
+                            <div class="col-md-4 ">
+                                <label class="control-label">Title: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <?php echo form_input($title + array('class' => 'form-control')); ?>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row hidden_tab" id="group_contacts_tab">
                     <div class="col-md-9">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Phone Number: </label>
-                            <div class="col-sm-6">
-                                <?php echo form_input($phone + array('class' => 'form-control'));?>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Phone Number: </label>
+                            </div>
+                            <div class="col-md-6">
+                                <?php echo form_input($phone + array('class' => 'form-control')); ?>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Mobile Number: </label>
-                            <div class="col-sm-6">
-                                <?php echo form_input($mobile + array('class' => 'form-control'));?>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Mobile Number: </label>
+                            </div>
+                            <div class="col-md-6">
+                                <?php echo form_input($mobile + array('class' => 'form-control')); ?>
                             </div>
                         </div>
                     </div>
@@ -163,10 +169,12 @@
                 </div>
                 <div class="row hidden_tab" id="notes_tab">
                     <div class="col-md-9">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Notes: </label>
-                            <div class="col-sm-8">
-                                <?php echo form_textarea($notes + array('class' => 'form-control'));?>                                
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Notes: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <?php echo form_textarea($notes + array('class' => 'form-control')); ?>                                
                             </div>
                         </div>
                     </div>

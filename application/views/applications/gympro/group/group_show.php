@@ -45,21 +45,33 @@
                 <?php } ?>
                 <div class="row hidden_tab" id="group_details_tab" style="display: block">
                     <div class="col-md-9">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Title:</label>
-                            <label class="col-md-8 control-label">&nbsp;<?php echo $group_info['title'];?></label>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Title:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="control-label">&nbsp;<?php echo $group_info['title']; ?></label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row hidden_tab" id="group_contacts_tab">
                     <div class="col-md-9">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Phone Number:</label>
-                            <label class="col-md-8 control-label">&nbsp;<?php echo $group_info['phone'];?></label>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Phone Number:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="control-label"><?php echo $group_info['phone']; ?></label>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Mobile Number:</label>
-                            <label class="col-md-8 control-label">&nbsp;<?php echo $group_info['mobile'];?></label>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Mobile Number:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="control-label">&nbsp;<?php echo $group_info['mobile']; ?></label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,14 +100,17 @@
                 </div>
                 <div class="row hidden_tab" id="notes_tab">
                     <div class="col-md-9">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Notes:</label>
-                            <label class="col-md-8 control-label">&nbsp;<?php echo $group_info['notes'];?></label>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Notes:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="control-label"><?php echo $group_info['notes']; ?></label>
+                            </div>
                         </div>
                     </div>
                 </div>                    
             </div>
-              
         </div>
     </div>
 </div>

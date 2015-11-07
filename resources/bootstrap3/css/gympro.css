@@ -261,5 +261,10 @@ a:hover
 
 
 input:focus[type=text] {
-    border: 1px solid yellow;
+    border: 1px solid #EFE4B0;
+    background-color: #EFE4B0;
+}
+textarea:focus[type=text] {
+    border: 1px solid #EFE4B0;
+    background-color: #EFE4B0;
 }
