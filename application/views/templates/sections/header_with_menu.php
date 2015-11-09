@@ -202,7 +202,7 @@ while(notification_info){ %}
             {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION; ?>'){ %}
                 <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
-                <a href='<?php echo base_url() . "applications/gympro/show_nutrition/{%=notification_info.reference_id %}" ?>'>has created a nutrition for you</a>
+                <a href='<?php echo base_url() . "applications/gympro/show_nutrition/{%=notification_info.reference_id %}" ?>'>has created a nutrition plan for you</a>
             {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION; ?>'){ %}
                 <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
@@ -232,11 +232,11 @@ while(notification_info){ %}
     </div>
     </a>   
     </div>
-    <div class="col-md-4">
-    <span class="profile-name" >{%= notification_list.reference_info.first_name %}{%= notification_list.reference_info.last_name %} </span></a>
+    <div class="col-md-5">
+    <span class="profile-name" >{%= notification_list.reference_info.first_name %} {%= notification_list.reference_info.last_name %} </span></a>
     </div>  
     {% if(notification_list.following_acceptance_type != null){ %}
-    <div class="col-md-4">
+    <div class="col-md-3">
     <div class="pull-right">
     <button type="submit" onclick="open_modal_accept_confirm('<?php echo '{%= notification_list.reference_info.user_id %}'; ?>')" class="btn btn-xs follower_button_style">Accept</button>
     </div>

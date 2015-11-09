@@ -125,7 +125,7 @@
             </li>
              <li class="form-group">
                 <?php if ($follow_permission->value == FOLLOWER_ACCEPTANCE_TYPE_MANUAL) { ?>
-                    <a href="<?php //echo base_url().'followers/pending_followers'    ?>"><button style="width:100%" class="btn button-custom btn-sm" id="button_pending_request">Pending Requests</button></a>
+                    <a href="<?php echo base_url().'followers/pending_followers/'. $user_id    ?>"><button style="width:100%" class="btn button-custom btn-sm" id="button_pending_request">Pending Requests</button></a>
                 <?php } ?>
             </li>
         </ul>

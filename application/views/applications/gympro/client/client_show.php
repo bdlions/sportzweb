@@ -275,7 +275,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['first_name'].' '.$assessment['last_name'].'</br>'.$assessment['date']?></a>
+                                        <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_assessment/'.$assessment['assessment_id'];?>"><?php echo $assessment['first_name'].' '.$assessment['last_name'].'</br>'.convert_date_from_db_to_user($assessment['date'])?></a>
                                     </div>
                                 </div>
                             </div>

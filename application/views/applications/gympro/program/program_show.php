@@ -63,7 +63,7 @@
                         foreach ($exercise_list as $exercise) {
                             if ($exercise['type'] == "weight") { ?>
                         <div class="row form-group"></div>
-                        Weight_exercise: <?php echo $count++; ?>
+                        Weight exercise: <?php echo $count++; ?>
                         <div class="row form-group"></div>
                         <table class="table-bordered table-condensed" style="width: 100%">
                             <tr>
@@ -88,7 +88,7 @@
                         <div class="row form-group"></div>
                 <?php   } elseif ($exercise['type'] == "cardio") { ?>
                         <div class="row form-group"></div>
-                        Cardio_exercise: <?php echo $cardio_count++; ?>
+                        Cardio exercise: <?php echo $cardio_count++; ?>
                         <div class="row form-group"></div>
                         <table class="table-bordered table-condensed" style="width: 100%">
                             <tr>

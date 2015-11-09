@@ -1744,7 +1744,7 @@ class Gympro extends Role_Controller {
                     'head' => $this->input->post('head'),
                     'neck' => $this->input->post('neck'),
                     'chest' => $this->input->post('chest'),
-                    'reassess_id' => $this->input->post('reassess_list'),
+                    'reassess' => $this->input->post('reassess'),
                     'body_fat' => $this->input->post('body_fat'),
                     'abdominal' => $this->input->post('abdominal'),
                     'waist' => $this->input->post('waist'),
@@ -1788,11 +1788,7 @@ class Gympro extends Role_Controller {
             $this->data['message'] = $this->session->flashdata('message');
         }
         $this->data['client_list'] = $this->gympro_library->get_follower_clients($user_id);
-        $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
-        $this->data['reassess_list'] = array();
-        foreach ($reassess_array as $reassess_info) {
-            $this->data['reassess_list'][$reassess_info['id']] = $reassess_info['title'];
-        }
+
         $this->data['date'] = array(
             'name' => 'date',
             'id' => 'date',
@@ -1816,6 +1812,11 @@ class Gympro extends Role_Controller {
         $this->data['chest'] = array(
             'name' => 'chest',
             'id' => 'chest',
+            'type' => 'text'
+        );
+        $this->data['reassess'] = array(
+            'name' => 'reassess',
+            'id' => 'reassess',
             'type' => 'text'
         );
         $this->data['body_fat'] = array(
@@ -1972,7 +1973,7 @@ class Gympro extends Role_Controller {
                     'head' => $this->input->post('head'),
                     'neck' => $this->input->post('neck'),
                     'chest' => $this->input->post('chest'),
-                    'reassess_id' => $this->input->post('reassess_list'),
+                    'reassess' => $this->input->post('reassess'),
                     'body_fat' => $this->input->post('body_fat'),
                     'abdominal' => $this->input->post('abdominal'),
                     'waist' => $this->input->post('waist'),
@@ -2017,11 +2018,7 @@ class Gympro extends Role_Controller {
             $this->data['message'] = $this->session->flashdata('message');
         }
         $this->data['client_list'] = $this->gympro_library->get_all_clients($user_id)->result_array();
-        $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
-        $this->data['reassess_list'] = array();
-        foreach ($reassess_array as $reassess_info) {
-            $this->data['reassess_list'][$reassess_info['id']] = $reassess_info['title'];
-        }
+        
         $assessment_info = array();
         $assessment_array = $this->gympro_library->get_assessment_info($assessment_id)->result_array();
         if (!empty($assessment_array)) {
@@ -2061,7 +2058,13 @@ class Gympro extends Role_Controller {
                 'type' => 'text',
                 'value' => $assessment_info['chest']
             );
-
+            
+            $this->data['reassess'] = array(
+                'name' => 'reassess',
+                'id' => 'reassess',
+                'type' => 'text',
+                'value' => $this->utils->convert_date_from_db_to_user($assessment_info['reassess'])
+            );
             $this->data['body_fat'] = array(
                 'name' => 'body_fat',
                 'id' => 'body_fat',
@@ -2219,13 +2222,6 @@ class Gympro extends Role_Controller {
             return;
         }
         if ($assessment_info['user_id'] == $this->my_user_id || $assessment_info['member_id'] == $this->my_user_id) {
-            $reassess_array = $this->gympro_library->get_all_reassess()->result_array();
-            foreach ($reassess_array as $reassess_info) {
-                if ($reassess_info['id'] == $assessment_info['reassess_id']) {
-                    $this->data['reassess_in'] = $reassess_info['title'];
-                    break;
-                }
-            }
             $this->data['assessment_info'] = $assessment_info;
             $this->template->load(null, 'applications/gympro/assessment/assessment_show', $this->data);
         } else {

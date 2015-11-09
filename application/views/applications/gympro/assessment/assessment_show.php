@@ -53,10 +53,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row form-group">
-                            <div class="col-md-4">Reassess in:</div>
-                            <div class ="col-md-5">
-                              <?php echo $reassess_in;?>
-                            </div> 
+                            <div class="col-md-4">Reassess:</div>
+                            <label class ="col-md-5 control-label">
+                              <?php echo convert_date_from_db_to_user($assessment_info['reassess']);?>
+                            </label> 
                         </div>
                         <div class="row form-group">
                             <div class="col-md-4">Body fat:</div>

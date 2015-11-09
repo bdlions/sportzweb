@@ -10,6 +10,7 @@
                 return false;
             }
             $('#date').val(convert_date_from_user_to_db($('#date').val()));
+            $('#reassess').val(convert_date_from_user_to_db($('#reassess').val()));
             $.ajax({
                 dataType: 'json',
                 type: "POST",
@@ -29,7 +30,13 @@
             $('#date').text($('#date').data('date'));
             $('#date').datepicker('hide');
         });
-        
+        $('#reassess').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '-3d'
+        }).on('changeDate', function(ev) {
+            $('#reassess').text($('#reassess').data('date'));
+            $('#reassess').datepicker('hide');
+        });        
     });    
 </script>
 <div class="container-fluid">
@@ -92,9 +99,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <div class="col-md-4">Reassess in:</div>
+                            <div class="col-md-4">Reassess:</div>
                             <div class ="col-md-5">
-                                <?php echo form_dropdown('reassess_list', $reassess_list, '', 'class=form-control id=reassess_list'); ?>
+                                <?php echo form_input($reassess + array('class' => 'form-control')) ?>
                             </div> 
                         </div>
                         <div class="form-group">

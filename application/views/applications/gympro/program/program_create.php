@@ -84,7 +84,7 @@
                 <div class="pad_white">
                     <div class="row">
                         <div class="col-md-12">
-                            <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
+                            <span style="font-weight: bold;">Exercise name: &nbsp;&nbsp;</span>
                             <input style="width: 40%; min-width: 150px;" name="name_<?php echo '{%= weight_num%}'; ?>">
                             <img onclick="open_modal_browse_exercise('<?php echo '{%= weight_num%}'; ?>', '<?php echo GYMPRO_WEIGHT_EXERCISE_TYPE_ID ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                             <img class="pull-right" onclick="$(this).closest('.deletable_box').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">

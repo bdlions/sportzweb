@@ -118,7 +118,7 @@
                             <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION) {
                                 ?>
                                 <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
-                                <a href='<?php echo base_url() . "applications/gympro/show_nutrition/{$notification_info['reference_id']}" ?>'>has created a nutrition for you</a>
+                                <a href='<?php echo base_url() . "applications/gympro/show_nutrition/{$notification_info['reference_id']}" ?>'>has created a nutrition plan for you</a>
                             <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION) {
                                 ?>
                                 <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list']['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
