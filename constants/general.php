@@ -44,7 +44,7 @@
     // Login page background image list
     define("SLIDING_IMAGE_PATH",  "resources/images/auth_background/");
     define("SLIDING_IMAGE_WIDTH",                       "1349");
-    define("SLIDING_IMAGE_HEIGHT",                      "683");
+    define("SLIDING_IMAGE_HEIGHT",                      "665");
     
     // Copy right year
     define("COPY_RIGHT_YEAR",                           "2015");
