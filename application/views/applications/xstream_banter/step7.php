@@ -1,4 +1,4 @@
-<script src="http://31.222.168.64:8082/socket.io/socket.io.js"></script>
+<script src="http://31.222.157.106:8082/socket.io/socket.io.js"></script>
 <script type="text/javascript">
     function MessageInfo(){
         this.roomId = "";
@@ -20,7 +20,7 @@
 <script type="text/javascript">
 $(function(){
     
-    var socket = io.connect('http://31.222.168.64:8082/');
+    var socket = io.connect('http://31.222.157.106:8082/');
     //var socket = io.connect('http://127.0.0.1:8082/');
     socket.on('connect', function(){
         //console.log('a user conneccted to the server.');

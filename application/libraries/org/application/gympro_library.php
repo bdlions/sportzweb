@@ -16,6 +16,7 @@ class Gympro_library {
         $this->load->config('ion_auth', TRUE);
         $this->lang->load('ion_auth');
         $this->load->helper('cookie');
+        $this->load->library('org/utility/Date_utils');
         $this->load->library('org/utility/Utils');
         $this->load->library("statuses");
         $this->load->library('notification');
@@ -108,6 +109,56 @@ class Gympro_library {
         return $client_list;
     }
     
+    public function get_clients_homepage($user_id = 0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->userdata('user_id');
+        } 
+        $follower_id_relation_type_id_map = array();
+        $user_mutual_relation_array = $this->follower_model->get_user_mutual_relations($user_id)->result_array();
+        if(!empty($user_mutual_relation_array))
+        {
+            $user_mutual_relation = $user_mutual_relation_array[0];
+            $relations = $user_mutual_relation['relations'];
+            if( $relations != "" && $relations != NULL )
+            {
+                $relations_array = json_decode($relations);
+                foreach($relations_array as $relation_info)
+                {
+                    if($relation_info->is_follower == 1)
+                    {
+                        $follower_id_relation_type_id_map[$relation_info->user_id] = RELATION_TYPE_ID_FOLLOWER;
+                    }
+                    else if($relation_info->is_pending == 1)
+                    {
+                        $follower_id_relation_type_id_map[$relation_info->user_id] = RELATION_TYPE_ID_PENDING;
+                    }
+                    else if($relation_info->is_blocked == 1)
+                    {
+                        $follower_id_relation_type_id_map[$relation_info->user_id] = RELATION_TYPE_ID_BLOCKED;
+                    }
+                    else
+                    {
+                        $follower_id_relation_type_id_map[$relation_info->user_id] = RELATION_TYPE_ID_NONFOLLOWER;
+                    }
+                }
+            }
+        }
+        
+        $client_list = array();
+        $client_list_array = $this->gympro_model->get_all_clients($user_id)->result_array();
+        foreach($client_list_array as $client_info)
+        {
+            if(array_key_exists($client_info['member_id'], $follower_id_relation_type_id_map))
+            {
+                $client_info['relation_type_id'] = $follower_id_relation_type_id_map[$client_info['member_id']];
+                $client_list[] = $client_info;
+            }
+        }
+        return $client_list;
+    }
+    
     public function create_assessment($assessment_info)
     {
         $assessment_id = $this->gympro_model->create_assessment($assessment_info);
@@ -133,6 +184,7 @@ class Gympro_library {
             {
                 $client_info = $client_info_array[0];
                 $this->create_notification($client_info['user_id'], $client_info['member_id'], $program_id, NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM);
+                $this->create_notification($client_info['user_id'], $client_info['member_id'], $program_id, NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW, $this->date_utils->get_server_unix_time_of_date($program_info['review']));
             }
         }
         return $program_id;
@@ -183,9 +235,13 @@ class Gympro_library {
         return $nutrition_id;
     }
     
-    public function create_notification($sender_user_id, $receiver_user_id, $reference_id, $type_id)
+    public function create_notification($sender_user_id, $receiver_user_id, $reference_id, $type_id, $notification_time = "")
     {
         $current_time = now();
+        if(empty($notification_time))
+        {
+            $notification_time = $current_time;
+        }        
         $reference_info_list = new stdClass();
         $reference_info_list->user_id = $sender_user_id;
         $reference_info_list->status_type = UNREAD_NOTIFICATION;
@@ -194,7 +250,7 @@ class Gympro_library {
         $notification_info_list = new stdClass();
         $notification_info_list->id = '';
         $notification_info_list->created_on = $current_time;
-        $notification_info_list->modified_on = $current_time;
+        $notification_info_list->modified_on = $notification_time;
         $notification_info_list->type_id = $type_id;
         $notification_info_list->status = UNREAD_NOTIFICATION;
         $notification_info_list->reference_id = $reference_id;

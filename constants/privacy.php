@@ -24,6 +24,7 @@ define("NOTIFICATION_WHILE_PREDICT_MATCH",                              10);
 
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT",                   11);
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM",                      12);
+define("NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW",               17);
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION",                      13);
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE",                     14);
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION",                    15);

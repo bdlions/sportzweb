@@ -6,20 +6,19 @@
                 type: "POST",
                 url: '<?php echo base_url(); ?>' + "applications/gympro/delete_program",
                 data: {
-                    delete_id: $("#input_delete_id").val()
+                    program_id: $("#input_program_id").val()
                 },
                 success: function(data) {
-                    //alert(data['message']);
-                    var message = data['message'];
-                 print_common_message(message);
                     $("#modal_delete_confirm").modal('hide');
+                    var message = data['message'];
+                    print_common_message(message);
                     window.location.reload();
                 }
             });
         });
     });
-    function open_modal_delete_confirm(delete_id) {
-        $('#input_delete_id').val(delete_id);
+    function open_modal_delete_confirm(program_id) {
+        $('#input_program_id').val(program_id);
         $("#modal_delete_confirm").modal('show');
     }
 </script>
@@ -35,7 +34,7 @@
                     <div class="row form-group">
                         <div class ="col-sm-2"></div>
                         <label class="col-sm-10 control-label">Are you sure to delete this Program?</label>
-                        <input id="input_delete_id" name="input_delete_id" value="" type="hidden" class="form-control"/>
+                        <input id="input_program_id" name="input_program_id" value="" type="hidden" class="form-control"/>
                     </div>
                 </div>                
             </div>

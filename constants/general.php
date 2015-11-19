@@ -49,4 +49,7 @@
     // Copy right year
     define("COPY_RIGHT_YEAR",                           "2015");
     
+    // Country Code
+    define("COUNTRY_CODE_GB",                           "GB");
+    
 ?>

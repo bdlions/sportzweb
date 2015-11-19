@@ -9,4 +9,9 @@
     define("PROFILE_APPROVE_PENDING_FOLLOWER",                        5);
     define("PROFILE_BLOCKED_FOLLOWER",                                6);
     define("PROFILE_HIDE_BLOCKED_FOLLOWER",                           7);
+    
+    define("RELATION_TYPE_ID_FOLLOWER",                               1);
+    define("RELATION_TYPE_ID_PENDING",                                2);
+    define("RELATION_TYPE_ID_BLOCKED",                                3);
+    define("RELATION_TYPE_ID_NONFOLLOWER",                            4);
 ?>

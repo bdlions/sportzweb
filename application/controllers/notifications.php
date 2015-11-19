@@ -43,6 +43,7 @@ class Notifications extends Role_Controller {
         $notification_type_id_list[] = NOTIFICATION_WHILE_PREDICT_MATCH;
         $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT;
         $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM;
+        $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW;
         $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION;
         $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE;
         $notification_type_id_list[] = NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION;

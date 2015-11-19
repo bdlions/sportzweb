@@ -17,6 +17,7 @@ class Notification {
 
         // Load IonAuth MongoDB model if it's set to use MongoDB,
         // We assign the model object to "ion_auth_model" variable.
+        $this->load->library('org/utility/Date_utils');
         $this->load->library('org/utility/Utils');
         $this->load->model("notification_model");
 
@@ -150,6 +151,7 @@ class Notification {
      * @Author Nazmul Hasan on 30th April 2015
      */
     public function get_all_notification_list($user_id = 0) {
+        $local_unix_time = $this->date_utils->get_local_unix_time();
         $result = array(
             'total_unread_followers' => 0,
             'total_unread_notifications' => 0,
@@ -182,7 +184,12 @@ class Notification {
         if (!empty($notification_list)) {
             usort($notification_list, "cmp");
         }
+        
         foreach ($notification_list as $n_info) {
+            if($n_info->modified_on > $local_unix_time)
+            {
+                continue;
+            }
             if ($n_info->type_id == NOTIFICATION_WHILE_START_FOLLOWING) {
                 if ($n_info->status == UNREAD_NOTIFICATION) {
                     $result['total_unread_followers'] = $result['total_unread_followers'] + 1;
@@ -210,6 +217,10 @@ class Notification {
             }
         }
         foreach ($notification_list as $n_list_info) {
+            if($n_list_info->modified_on > $local_unix_time)
+            {
+                continue;
+            }
             $notification_info = array();
             $notification_info['type_id'] = $n_list_info->type_id;
             $notification_info['reference_id'] = $n_list_info->reference_id;

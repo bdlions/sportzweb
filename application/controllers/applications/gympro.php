@@ -259,7 +259,7 @@ class Gympro extends Role_Controller {
      */
 
     public function manage_clients() {
-        $client_list = $this->gympro_library->get_all_clients($this->session->userdata('user_id'))->result_array();
+        $client_list = $this->gympro_library->get_clients_homepage($this->session->userdata('user_id'));
         $this->data['client_list'] = $client_list;
         $this->data['message'] = '';
         $this->template->load(null, 'applications/gympro/client/clients', $this->data);
@@ -906,8 +906,8 @@ class Gympro extends Role_Controller {
      */
     public function get_exercise_categories()
     {
-        $type_id = $this->input->post('type_id');
-        $exercise_categories_array = $this->gympro_model->get_all_exercise_categories($type_id)->result_array();
+        //$type_id = $this->input->post('type_id');
+        $exercise_categories_array = $this->gympro_model->get_all_exercise_categories()->result_array();
         $response = array(
             'exercise_category_list' => $exercise_categories_array
         );
@@ -1142,8 +1142,8 @@ class Gympro extends Role_Controller {
 
     public function delete_program() {
         $result = array();
-        $delete_id = $this->input->post('delete_id');
-        if ($this->gympro_library->delete_program($delete_id)) {
+        $program_id = $this->input->post('program_id');
+        if ($this->gympro_library->delete_program($program_id)) {
             $result['message'] = $this->gympro_library->messages_alert();
         } else {
             $result['message'] = $this->gympro_library->errors_alert();

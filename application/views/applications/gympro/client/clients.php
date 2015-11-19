@@ -51,6 +51,8 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <a style="font-size: 18px" href="<?php echo base_url().'applications/gympro/show_client/'.$client_info['client_id']?>"><?php echo $client_info['first_name'].' '.$client_info['last_name']?></a>
+                        </br>
+                        <?php if($client_info['relation_type_id'] != RELATION_TYPE_ID_FOLLOWER){ echo "Request pending"; } ?>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2">
                         <div class="dropdown friends-satus-dropdown">

@@ -35,6 +35,7 @@
                 "<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM; ?>",
+                "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION; ?>",
@@ -116,7 +117,7 @@
 {% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);
 while(notification_info){ %}
 
-{% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION; ?>'){ %}
+{% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION; ?>'){ %}
 
 <div class="pagelet message_friends_box">
     <div class="row">
@@ -185,27 +186,34 @@ while(notification_info){ %}
                 is correct
             {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT; ?>'){ %}
-                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
                 <a href='<?php echo base_url() . "applications/gympro/show_assessment/{%=notification_info.reference_id %}" ?>'>has created an assessment for you</a>
             {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM; ?>'){ %}
-                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
                 <a href='<?php echo base_url() . "applications/gympro/show_program/{%=notification_info.reference_id %}" ?>'>has created a program for you</a>
             {%}%}
+            {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW; ?>'){ %}
+                A review of 
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}'s</a>
+                <a href='<?php echo base_url() . "applications/gympro/show_program/{%=notification_info.reference_id %}" ?>'> program </a>
+                is due today
+                
+            {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION; ?>'){ %}
-                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
                 <a href='<?php echo base_url() . "applications/gympro/show_mission/{%=notification_info.reference_id %}" ?>'>has created a mission for you</a>
             {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE; ?>'){ %}
-                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
                 <a href='<?php echo base_url() . "applications/gympro/show_exercise/{%=notification_info.reference_id %}" ?>'>has created an exercise for you</a>
             {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION; ?>'){ %}
-                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
                 <a href='<?php echo base_url() . "applications/gympro/show_nutrition/{%=notification_info.reference_id %}" ?>'>has created a nutrition plan for you</a>
             {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION; ?>'){ %}
-                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
                 <a href='<?php echo base_url() . "applications/gympro/show_session/{%=notification_info.reference_id %}" ?>'>has created a session for you</a>
             {%}%}
         </div>

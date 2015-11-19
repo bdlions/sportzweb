@@ -80,7 +80,7 @@
                                     <a role="menuitem" tabindex="-1" href="<?php echo base_url().'applications/gympro/edit_program/' . $program['program_id']; ?>" >Edit</a>
                                 </li>
                                 <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_delete_confirm(<?php echo $program['id'] ?>)">Delete</a>
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="open_modal_delete_confirm(<?php echo $program['program_id'] ?>)">Delete</a>
                                 </li>
                             </ul>
                         </div>
@@ -133,4 +133,4 @@
 
 </div>
 
-<?php $this->load->view("applications/gympro/modal/program_delete_confirm");?>
+<?php $this->load->view("applications/gympro/program/modal_program_delete_confirm");?>

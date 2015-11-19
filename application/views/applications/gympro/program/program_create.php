@@ -1,3 +1,6 @@
+<?php
+$this->load->view("applications/gympro/program/modal_exercise_program");
+?>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/gympro.css"/>
 <script type="text/javascript">
     var id_list = new Array();
@@ -86,12 +89,13 @@
                         <div class="col-md-12">
                             <span style="font-weight: bold;">Exercise name: &nbsp;&nbsp;</span>
                             <input style="width: 40%; min-width: 150px;" name="name_<?php echo '{%= weight_num%}'; ?>">
-                            <img onclick="open_modal_browse_exercise('<?php echo '{%= weight_num%}'; ?>', '<?php echo GYMPRO_WEIGHT_EXERCISE_TYPE_ID ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
+                            <img onclick="open_modal_browse_exercise('<?php echo '{%= weight_num%}'; ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                             <img class="pull-right" onclick="$(this).closest('.deletable_box').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
                         </div>
                     </div>
                 </div>
-                <div class="pad_white">
+                <div class="pad_white" id="{%= weight_num%}">
+                    <input type=hidden id="program_exercise_type_id_{%= weight_num%}" value="<?php echo GYMPRO_WEIGHT_EXERCISE_TYPE_ID; ?>">
                     <div class="row">
                         <div class="col-md-12">
                              <div>
@@ -138,12 +142,13 @@
                         <div class="col-md-12">
                             <span style="font-weight: bold;">Exercie name: &nbsp;&nbsp;</span>
                             <input style="width: 40%; min-width: 150px;" name="name_<?php echo '{%= cardio_num%}'; ?>">
-                            <img onclick="open_modal_browse_exercise('<?php echo '{%= cardio_num%}'; ?>', '<?php echo GYMPRO_CARDIO_EXERCISE_TYPE_ID ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
+                            <img onclick="open_modal_browse_exercise('<?php echo '{%= cardio_num%}'; ?>')" src="<?php echo base_url(); ?>resources/images/browse.png" style="margin: 4px">
                             <img class="pull-right" onclick="$(this).closest('.deletable_box').remove()" src="<?php echo base_url(); ?>resources/images/cross.png" style="margin: 4px">
                         </div>
                     </div>
                 </div>
-                <div class="pad_white">
+                <div class="pad_white" id="{%= cardio_num%}">
+                    <input type=hidden id="program_exercise_type_id_{%= cardio_num%}" value="<?php echo GYMPRO_CARDIO_EXERCISE_TYPE_ID; ?>">
                     <div class="row">
                         <div class="col-md-12">
                         <div>
@@ -177,10 +182,6 @@
     </div>
     
 </script>
-
-<?php
-$this->load->view("applications/gympro/program/modal_exercise_program");
-?>
 <div class="container-fluid">
     <div class="row top_margin">
         <?php 
