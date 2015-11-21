@@ -6,7 +6,7 @@
         <meta name="author" content="">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="sonuto sonuto.com sport sports news blog blogs recipe food kitchen gym fitnes health service fixture fixtures result results match tournament team"/>
-        
+
         <title>Sonuto</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/common_styles.css">
@@ -19,6 +19,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/search_bar_style.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/score_prediction.css" />
+        <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/bootstrap3/css/jquery.mCustomScrollbar.css"/>
 
         <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery-1.11.1.min.js"></script>
@@ -32,6 +33,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/tmpl.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/jquery.jscroll.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>resources/bootstrap3/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/bootstrap3/js/general.js"></script>
         <script type="text/javascript">
             var config = {
