@@ -268,7 +268,7 @@ function checkChatBoxInputKey(event, chatboxtextarea, user_id) {
         $(chatboxtextarea).focus();
         //$(chatboxtextarea).css('height', '44px');
         if (message != '') {
-            $.post("chat/send_message.html", {to: user_id, message: message}, function(data) {
+            $.post(config.base +"chat/send_message.html", {to: user_id, message: message}, function(data) {
                 $("#chatbox_" + user_id + " #chatContent").append("<div class='row'><div class='col-md-12'><font style='color:green; padding-right:10px;'>Me:</font>"+message+"</div></div>");
                 $("#chatbox_" + user_id + " #chatContent").scrollTop($("#chatbox_" + user_id + " #chatContent")[0].scrollHeight);
             });
