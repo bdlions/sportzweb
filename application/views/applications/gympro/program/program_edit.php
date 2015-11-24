@@ -280,7 +280,7 @@ $this->load->view("applications/gympro/program/modal_exercise_program");
                 </div>
             </div>
             <div class="pad_footer">
-                <input type="submit" id="button_program_edit" name="button_program_edit" value="Save Changes"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Go Back</a>
+                <input type="submit" id="button_program_edit" name="button_program_edit" value="Save"> or <a href="<?php echo base_url() ?>applications/gympro/programs">Previous</a>
             </div>
             <?php echo form_close();?>
             

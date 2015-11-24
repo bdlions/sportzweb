@@ -251,7 +251,7 @@
                     </div>
                 </div>
             <div class="pad_footer">
-                <?php echo form_input($submit_button) ?> or <a href="<?php echo base_url() ?>applications/gympro/manage_assessments">Go Back</a>
+                <?php echo form_input($submit_button) ?> or <a href="<?php echo base_url() ?>applications/gympro/manage_assessments">Previous</a>
             </div>            
         </div>
         <?php echo form_close(); ?>

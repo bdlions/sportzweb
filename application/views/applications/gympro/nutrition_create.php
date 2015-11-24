@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="pad_footer">
-                <button type="submit" id="submit_create_nutrition" name="submit_create_nutrition">Save Changes</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Go Back</a>
+                <button type="submit" id="submit_create_nutrition" name="submit_create_nutrition">Save</button> or <a href="<?php echo base_url() ?>applications/gympro/nutrition">Previous</a>
             </div>
             <?php echo form_close(); ?>
         </div>

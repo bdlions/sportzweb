@@ -175,7 +175,7 @@
             <div>
                 <div id="upload" class="pad_footer">
                     <?php echo form_input($submit_edit_exercise); ?>
-                    or <a href="<?php echo base_url() . 'applications/gympro/manage_exercises' ?>" style="font-size: 16px; line-height: 22px;">Cancel</a>
+                    or <a href="<?php echo base_url() . 'applications/gympro/manage_exercises' ?>" style="font-size: 16px; line-height: 22px;">Previous</a>
                 </div>
             </div>
             <?php echo form_close(); ?>

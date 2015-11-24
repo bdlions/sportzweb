@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div class="pad_footer">
-                <?php echo form_input($submit_button) ?> or <a href="<?php echo base_url()?>applications/gympro/manage_missions">Go Back</a>
+                <?php echo form_input($submit_button) ?> or <a href="<?php echo base_url()?>applications/gympro/manage_missions">Previous</a>
             </div>
             <?php echo form_close();?>
         </div>
