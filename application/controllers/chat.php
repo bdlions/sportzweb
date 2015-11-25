@@ -23,6 +23,9 @@ class Chat extends CI_Controller{
         $this->load->helper('language');
 
     }
+    function index(){
+        echo "fsdfsd";
+    }
     function startChatSession(){
         /**
          * If chat session is empty send empty json
@@ -61,7 +64,8 @@ class Chat extends CI_Controller{
     }
     
     function get_followers_heartbeat(){
-        echo json_encode($this->follower->get_followers());
+        echo "";
+        //echo json_encode($this->follower->get_followers());
     }
 }
 ?>

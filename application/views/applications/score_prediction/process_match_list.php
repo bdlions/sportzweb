@@ -74,7 +74,8 @@
                 match_id: match_id
             },
             success: function (data) {
-                if(data.sports_list.length > 0 && sports_id > 0 && tournament_id > 0)
+                //We have removed the relation between match list and league table
+                /*if(data.sports_list.length > 0 && sports_id > 0 && tournament_id > 0)
                 {
                     var tounament_list = data.sports_list[0].tournament_list;
                     //right now we are skipping league table for basketball
@@ -93,7 +94,7 @@
                         $('#tournament_list').val(tournament_id);
                         populate_league_table(tournament_id);
                     }
-                }
+                }*/
                 if(data.sports_list.length > 0)
                 {
                     $('#home_page_sports_content').html(tmpl('tlmp_app_sp_sports_content', data.sports_list));

@@ -1,5 +1,8 @@
 <script type="text/javascript">
     $(function() {
+        tournament_id = '<?php echo $tournament_id ?>';
+        $('#tournament_list').val(tournament_id);
+        populate_league_table(tournament_id);
         $("#tournament_list").change(function() {
             populate_league_table($("#tournament_list").val());
         });
