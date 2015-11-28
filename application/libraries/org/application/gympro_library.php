@@ -184,7 +184,7 @@ class Gympro_library {
             {
                 $client_info = $client_info_array[0];
                 $this->create_notification($client_info['user_id'], $client_info['member_id'], $program_id, NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM);
-                $this->create_notification($client_info['user_id'], $client_info['member_id'], $program_id, NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW, $this->date_utils->get_server_unix_time_of_date($program_info['review']));
+                $this->create_notification($client_info['member_id'], $client_info['user_id'],  $program_id, NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW, $this->date_utils->get_server_unix_time_of_date($program_info['review']));
             }
         }
         return $program_id;
