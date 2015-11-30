@@ -172,10 +172,12 @@ $(function () {
                         </div>
                         <div class="hidden_tab" id="contact_details_btn">
                             <button onclick="$('.hidden_tab').hide();$('#add_client').show();$('#add_client_btn').show();">Previous</button>
+                            &nbsp;&nbsp;
                             <button onclick="$('.hidden_tab').hide();$('#health').show();$('#health_btn').show();">Next</button>
                         </div>
                         <div class="hidden_tab" id="health_btn">
                             <button onclick="$('.hidden_tab').hide();$('#contact_details_btn').show();$('#contact_details').show();">Previous</button>
+                            &nbsp;&nbsp;
                             <button onclick="$('.hidden_tab').hide();$('#notes_btn').show();$('#notes').show();">Next</button>
                         </div>
                         <div class="hidden_tab" id="notes_btn">

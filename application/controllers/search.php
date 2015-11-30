@@ -68,6 +68,7 @@ class Search extends CI_Controller {
             if ($user->last_name != NULL && $user->last_name != "") {
                 $user->signature = $user->signature . $user->last_name[0];
             }
+            $user->ip_address = '';
             //$user -> signature = $user -> first_name[0].$user -> last_name[0];
             array_push($temp_users, $user);
         }

@@ -8,7 +8,7 @@
                     ttl: 0
                 },
                 template: [
-                    '<div class="col-md-3"><img src="<?php echo base_url()?>resources/uploads/{{photo}}"/></div>',
+                    '<div class="col-md-3"><img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH ?>{{photo}}"/></div>',
                     '<div class="col-md-9">{{first_name}} {{last_name}}</div>'
                 ].join(''),
                 engine: Hogan
@@ -60,7 +60,7 @@
             <div class="col-md-12">
                 <a href="<?php echo base_url() ?>messages/user/<?php echo $follower->user_id ?>">
                     <div class="profile-background">
-                        <img alt="<?php echo $follower->first_name[0] . $follower->last_name[0]?>" src="<?php echo base_url() ?>resources/uploads/<?php echo $follower->photo?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
+                        <img alt="<?php echo $follower->first_name[0] . $follower->last_name[0]?>" src="<?php echo base_url() ?>resources/uploads/profile_picture/100x100/<?php echo $follower->photo?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " /> 
                         <p style="visibility:hidden"><?php echo $follower->first_name[0].$follower->last_name[0] ?></p>
                     </div>
                     <div class="small_text_pale"><?php echo $follower->first_name . " " . $follower->last_name ?></div>
@@ -85,7 +85,7 @@
         </div>
     </div>
     <div class="col-md-12">
-        <div style="min-height: 300px;">
+<!--        <div style="min-height: 300px;">
             <?php foreach ($messages as $message) { ?>
                 <div class="row" style="padding-bottom: 10px; padding-top: 10px; border-bottom: 1px solid #CCCCCC">
                     <div class="row col-md-12">
@@ -102,12 +102,12 @@
                     </div>
                 </div>
             <?php } ?>
-        </div>
-        <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+        </div>-->
+<!--        <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
             <?php if(isset($to)){ echo form_open("", "id='postMessage'")?>
-            <!--<div class="col-md-2" style="padding-left: 0px;">
+            <div class="col-md-2" style="padding-left: 0px;">
                 <img src="<?php echo base_url() ?>resources/uploads/<?php echo $me->photo ?>" class="img-responsive"/>
-            </div>-->
+            </div>
             <div class="col-md-12">
                 <div class="row">
                     <textarea rows="3" name="message" class="form-control"></textarea>
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <?php echo form_close(); }?>
-        </div>
+        </div>-->
     </div>
 </div>
 

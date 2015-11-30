@@ -227,34 +227,32 @@ while(notification_info){ %}
 </script>
 <script type="text/x-tmpl" id="tmpl_followers">
     {% var i=0, notification_list = ((o instanceof Array) ? o[i++] : o);%}
-    {%while(notification_list){ %} 
-
-    {% if(notification_list.type_id == '<?php echo NOTIFICATION_WHILE_START_FOLLOWING; ?>'){ %}
-    <div class="pagelet">
-    <div class="row">
-    <div class="col-md-3 feed-profile-picture">
-    <a href='<?php echo base_url() . "member_profile/show/{%= notification_list.reference_info.user_id %}" ?>'>
-    <div>
-    <img alt="{%= notification_list.reference_info.first_name[0] %}{%= notification_list.reference_info.last_name[0] %}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . '{%= notification_list.reference_info.photo%}' ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
-    <p style="visibility:hidden">{%= notification_list.reference_info.first_name[0] %}{%= notification_list.reference_info.last_name[0] %}</p>
-    </div>
-    </a>   
-    </div>
-    <div class="col-md-5">
-    <span class="profile-name" >{%= notification_list.reference_info.first_name %} {%= notification_list.reference_info.last_name %} </span></a>
-    </div>  
-    {% if(notification_list.following_acceptance_type != null){ %}
-    <div class="col-md-3">
-    <div class="pull-right">
-    <button type="submit" onclick="open_modal_accept_confirm('<?php echo '{%= notification_list.reference_info.user_id %}'; ?>')" class="btn btn-xs follower_button_style">Accept</button>
-    </div>
-    </div>
-    {% } %}
-    </div>
-    </div>
-    {% } %}
-
-    {% notification_list = ((o instanceof Array) ? o[i++] : null); %}
+    {%while(notification_list){ %}
+        {% if(notification_list.type_id == '<?php echo NOTIFICATION_WHILE_START_FOLLOWING; ?>'){ %}
+            <div class="pagelet">
+                <div class="row">
+                    <div class="col-md-3 feed-profile-picture">
+                        <a href='<?php echo base_url() . "member_profile/show/{%= notification_list.reference_info.user_id %}" ?>'>
+                            <div>
+                                <img alt="{%= notification_list.reference_info.first_name[0] %}{%= notification_list.reference_info.last_name[0] %}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH . '{%= notification_list.reference_info.photo%}' ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.className='profile-background'; this.parentNode.getElementsByTagName('p')[0].style.visibility='visible'; " />                     
+                                <p style="visibility:hidden">{%= notification_list.reference_info.first_name[0] %}{%= notification_list.reference_info.last_name[0] %}</p>
+                            </div>
+                        </a>   
+                    </div>
+                    <div class="col-md-5">
+                        <span class="profile-name" >{%= notification_list.reference_info.first_name %} {%= notification_list.reference_info.last_name %} </span></a>
+                    </div>  
+                    {% if(notification_list.following_acceptance_type != null && notification_list.following_acceptance_type == '<?php echo FOLLOWER_ACCEPTANCE_TYPE_ID_CONFIRMATION;?>'){ %}
+                        <div class="col-md-3">
+                            <div class="pull-right">
+                                <button type="submit" onclick="open_modal_accept_confirm('<?php echo '{%= notification_list.reference_info.user_id %}'; ?>')" class="btn btn-xs follower_button_style">Accept</button>
+                            </div>
+                        </div>
+                    {% } %}
+                </div>
+            </div>
+        {% } %}
+        {% notification_list = ((o instanceof Array) ? o[i++] : null); %}
     {% } %}
 </script>
 

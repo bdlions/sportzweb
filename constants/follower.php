@@ -14,4 +14,7 @@
     define("RELATION_TYPE_ID_PENDING",                                2);
     define("RELATION_TYPE_ID_BLOCKED",                                3);
     define("RELATION_TYPE_ID_NONFOLLOWER",                            4);
+    
+    define("FOLLOWER_ACCEPTANCE_TYPE_ID_AUTOMATIC",                   1);
+    define("FOLLOWER_ACCEPTANCE_TYPE_ID_CONFIRMATION",                2);
 ?>
