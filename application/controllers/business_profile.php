@@ -366,14 +366,14 @@ class Business_profile extends Role_Controller {
         $this->data['last_uploaded_photo'] = $this->users_album->get_last_uploaded_photo(1, $user_id);
         $this->data['user_connection'] = $this->business_profile_library->get_total_business_connections($business_profile_id);
         
-        $visit_success = $this->visitors->store_business_profile_visitor($business_profile_id);
-        $this->template->load("templates/business_tmpl", "business_man/profile/show", $this->data);
+        //$visit_success = $this->visitors->store_business_profile_visitor($business_profile_id);
+        $this->template->load(null, "business_man/profile/show", $this->data);
     }
     public function update(){
         $this->data['profile'] = $this->profile->get_profile_info();
         //print_r($this->profile->get_profile_info());
         
-        $this->template->load("templates/business_tmpl", "business_man/profile/edit", $this->data);
+        $this->template->load(null, "business_man/profile/edit", $this->data);
     }
     
     /*

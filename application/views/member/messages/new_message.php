@@ -8,8 +8,15 @@
                     ttl: 0
                 },
                 template: [
-                    '<div class="col-md-3"><img src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH ?>{{photo}}"/></div>',
-                    '<div class="col-md-9">{{first_name}} {{last_name}}</div>'
+                    '<div class="row">' +
+                            '<div class="col-md-3">' +
+                            '<div>' +
+                            '<img alt="{{signature}}" src="<?php echo base_url() . PROFILE_PICTURE_DISPLAY_PATH ?>{{photo}}" class="img-responsive profile-photo" onError="this.style.display = \'none\'; this.parentNode.className=\'profile-background\'; this.parentNode.getElementsByTagName(\'div\')[0].style.visibility=\'visible\'; "/>' +
+                            '<div style="visibility:hidden;height:0px">{{signature}}</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-md-9">{{first_name}} {{last_name}}</div>' +
+                            '</div>'
                 ].join(''),
                 engine: Hogan
             }]).on('typeahead:selected', function(obj, datum) {
@@ -25,22 +32,22 @@
         });
         
         $("#buttonPost").on("click", function(){
-            $.ajax({
-                  type: 'POST',
-                  url: '<?php echo base_url() ?>messages/send_message/',
-                  data: $("#postMessage").serialize(),
-                  dataType: 'json',
-                  success: function(data) {
-                      if(data == true){
-                          window.location.replace('<?php echo base_url()."messages/user/".$to; ?>')();
-                      }
-                      else{
-                          //alert("error for following users.");
-                          var message = "error for following users.";
-                          print_common_message(message);
-                      }
-                  }
-              });
+//            $.ajax({
+//                  type: 'POST',
+//                  url: '<?php echo base_url() ?>messages/send_message/',
+//                  data: $("#postMessage").serialize(),
+//                  dataType: 'json',
+//                  success: function(data) {
+//                      if(data == true){
+//                          window.location.replace('<?php echo base_url()."messages/user/".$to; ?>')();
+//                      }
+//                      else{
+//                          //alert("error for following users.");
+//                          var message = "error for following users.";
+//                          print_common_message(message);
+//                      }
+//                  }
+//              });
             return false;
         });
         
@@ -85,32 +92,32 @@
         </div>
     </div>
     <div class="col-md-12">
-<!--        <div style="min-height: 300px;">
-            <?php foreach ($messages as $message) { ?>
+        <div style="min-height: 300px;">
+            <?php //foreach ($messages as $message) { ?>
                 <div class="row" style="padding-bottom: 10px; padding-top: 10px; border-bottom: 1px solid #CCCCCC">
                     <div class="row col-md-12">
-                        <?php $user = $message->from == $me->user_id ? $me : $follower; ?>
+<!--                        <?php $user = $message->from == $me->user_id ? $me : $follower; ?>
                         <div class="col-md-2" style="padding-left: 0px;">
                             <img src="<?php echo base_url() ?>resources/uploads/<?php echo $user->photo ?>" class="img-responsive"/>
                         </div>
                         <div class="col-md-9">
                             <?php echo $user->first_name . " " . $user->last_name . ": " . $message->message ?>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="row col-md-12">
-                        <div class="pull-right"><?php echo $message->received_date;?></div>
+<!--                        <div class="pull-right"><?php echo $message->received_date;?></div>-->
                     </div>
                 </div>
-            <?php } ?>
-        </div>-->
-<!--        <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+            <?php //} ?>
+        </div>
+        <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
             <?php if(isset($to)){ echo form_open("", "id='postMessage'")?>
-            <div class="col-md-2" style="padding-left: 0px;">
+<!--            <div class="col-md-2" style="padding-left: 0px;">
                 <img src="<?php echo base_url() ?>resources/uploads/<?php echo $me->photo ?>" class="img-responsive"/>
-            </div>
+            </div>-->
             <div class="col-md-12">
                 <div class="row">
-                    <textarea rows="3" name="message" class="form-control"></textarea>
+                    <textarea disabled="disabled" rows="3" name="message" class="form-control"></textarea>
                 </div>
                 <div class="row" style="padding-top: 10px;">
                     <input type="hidden" value="<?php echo $to?>" name="to"/>
@@ -118,7 +125,7 @@
                 </div>
             </div>
             <?php echo form_close(); }?>
-        </div>-->
+        </div>
     </div>
 </div>
 

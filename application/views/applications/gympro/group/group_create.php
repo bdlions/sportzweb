@@ -75,19 +75,23 @@
             <!--left nav custom for this page-->
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
-                <a onclick="$('.hidden_tab').hide();$('#group_details_tab').show();">GROUP DETAILS</a>
+                <!--<a onclick="$('.hidden_tab').hide();$('#group_details_tab').show();">GROUP DETAILS</a>-->
+                <a onclick="$('.hidden_tab').hide();$('#btn_group_details').show();$('#group_details_tab').show();">GROUP DETAILS</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
-                <a onclick="$('.hidden_tab').hide();$('#group_contacts_tab').show();">GROUP CONTACTS</a>
+                <!--<a onclick="$('.hidden_tab').hide();$('#group_contacts_tab').show();">GROUP CONTACTS</a>-->
+                <a onclick="$('.hidden_tab').hide();$('#btn_group_contacts').show();$('#group_contacts_tab').show();">GROUP CONTACTS</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
-                <a onclick="$('.hidden_tab').hide();$('#group_clients_tab').show();">GROUP CLIENTS</a>
+                <!--<a onclick="$('.hidden_tab').hide();$('#group_clients_tab').show();">GROUP CLIENTS</a>-->
+                <a onclick="$('.hidden_tab').hide();$('#btn_group_clients').show();$('#group_clients_tab').show();">GROUP CLIENTS</a>
             </div>
             <div class="ln_item" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/groups.png">
-                <a onclick="$('.hidden_tab').hide();$('#notes_tab').show();">NOTES</a>
+                <!--<a onclick="$('.hidden_tab').hide();$('#notes_tab').show();">NOTES</a>-->
+                <a onclick="$('.hidden_tab').hide();$('#btn_group_notes').show();$('#notes_tab').show();$('#btn_save_changes').show();">NOTES</a>
             </div>
         </div>
         <div class="col-md-7">
@@ -96,7 +100,7 @@
                     <div class="col-md-8">
                         <span>NEW CLIENT GROUP</span>
                     </div>
-                    <div class="col-md-4">
+<!--                    <div class="col-md-4">
                         <div class="hidden_tab" id="btn_group_details" style="display: block">
                             <button onclick="$('.hidden_tab').hide();$('#btn_group_contacts').show();$('#group_contacts_tab').show();">Next</button>
                         </div>
@@ -113,7 +117,7 @@
                         <div class="hidden_tab" id="btn_group_notes">
                             <button onclick="$('.hidden_tab').hide();$('#btn_group_clients').show();$('#group_clients_tab').show();">Previous</button>
                         </div>
-                    </div> 
+                    </div> -->
                 </div>
             </div>
             <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
@@ -192,9 +196,33 @@
                     </div>
                 </div>                    
             </div>
-            <div class="pad_footer row hidden_tab" id="btn_save_changes">
-                <?php echo form_input($submit_create_group);?> or <a href="<?php echo base_url()?>applications/gympro/manage_groups">Go Back</a>
+            <div class="pad_title">                
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="hidden_tab" id="btn_group_details" style="display: block">
+                            <button onclick="$('.hidden_tab').hide();$('#btn_group_contacts').show();$('#group_contacts_tab').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="btn_group_contacts">
+                            <button onclick="$('.hidden_tab').hide();$('#btn_group_details').show();$('#group_details_tab').show();">Previous</button>
+                            &nbsp;&nbsp;
+                            <button onclick="$('.hidden_tab').hide();$('#btn_group_clients').show();$('#group_clients_tab').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="btn_group_clients">
+                            <button onclick="$('.hidden_tab').hide();$('#btn_group_contacts').show();$('#group_contacts_tab').show();">Previous</button>
+                            &nbsp;&nbsp;
+                            <button onclick="$('.hidden_tab').hide();$('#btn_group_notes').show();$('#notes_tab').show();$('#btn_save_changes').show();">Next</button>
+                        </div>
+                        <div class="hidden_tab" id="btn_group_notes">
+                            <button onclick="$('.hidden_tab').hide();$('#btn_group_clients').show();$('#group_clients_tab').show();">Previous</button>
+                            &nbsp;&nbsp;
+                            <button id="submit_create_group" name="submit_create_group">Save Changes</button>
+                        </div>
+                    </div> 
+                </div>
             </div>
+<!--            <div class="pad_footer row hidden_tab" id="btn_save_changes">
+                <?php echo form_input($submit_create_group);?> or <a href="<?php echo base_url()?>applications/gympro/manage_groups">Go Back</a>
+            </div>-->
             <?php echo form_close();?>
         </div>
     </div>

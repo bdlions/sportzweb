@@ -1,4 +1,4 @@
-<div class="col-md-9 column join-chat-room">
+<div class="row col-md-9 column join-chat-room">
     <div class="row col-md-4">
         <a href="<?php echo base_url().'applications/xstream_banter'; ?>" >
             <img class="img-responsive" src="<?php echo base_url() ?>resources/images/xb_logo.png" />

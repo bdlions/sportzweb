@@ -103,6 +103,12 @@
                                 ?>
                                 <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list'][0]['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>
                                 <a href='<?php echo base_url() . "applications/gympro/show_assessment/{$notification_info['reference_id']}" ?>'>has created an assessment for you</a>
+                            <?php }if ($notification_info['type_id'] == NOTIFICATION_TYPE_ID_GYMPRO_ASSESSMENT_REASSESS) {
+                                ?>
+                                Reassess of 
+                                <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list'][0]['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']."'s";?></a>
+                                <a href='<?php echo base_url() . "applications/gympro/show_assessment/{$notification_info['reference_id']}" ?>'> assessment </a>
+                                is due today
                             <?php }if ($notification_info['type_id'] == NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM) {
                                 ?>
                                 <a href='<?php echo base_url() . "member_profile/show/{$notification_info['reference_list'][0]['user_id']}" ?>' class="profile-name" ><?php echo $notification_info['reference_list'][0]['first_name'] . " " . $notification_info['reference_list'][0]['last_name']; ?></a>

@@ -139,12 +139,12 @@
         <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
 <?php if (isset($to)) {
     echo form_open("", "id='postMessage'") ?>
-                <div class="col-md-2"> </div>
-                <div class="col-md-10">
-                    <div class="row">
+<!--                <div class="col-md-2"> </div>-->
+                <div class="col-md-12">
+                    <div class="row col-md-12">
                         <textarea rows="3" name="message" class="form-control"></textarea>
                     </div>
-                    <div class="row" style="padding-top: 10px;">
+                    <div class="row col-md-12" style="padding-top: 10px;">
                         <input type="hidden" value="<?php echo $to ?>" name="to"/>
                         <button class="btn button-custom pull-right" id="buttonPost">Post</button>
                     </div>

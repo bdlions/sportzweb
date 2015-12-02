@@ -169,6 +169,7 @@ class Gympro_library {
             {
                 $client_info = $client_info_array[0];
                 $this->create_notification($client_info['user_id'], $client_info['member_id'], $assessment_id, NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT);
+                $this->create_notification($client_info['member_id'], $client_info['user_id'],  $assessment_id, NOTIFICATION_TYPE_ID_GYMPRO_ASSESSMENT_REASSESS, $this->date_utils->get_server_unix_time_of_date($assessment_info['reassess']));
             }
         }
         return $assessment_id;

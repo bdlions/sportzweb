@@ -23,6 +23,7 @@ define("NOTIFICATION_WHILE_LIKE_ON_CREATED_POST",                       9);
 define("NOTIFICATION_WHILE_PREDICT_MATCH",                              10);
 
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT",                   11);
+define("NOTIFICATION_TYPE_ID_GYMPRO_ASSESSMENT_REASSESS",               18);
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM",                      12);
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW",               17);
 define("NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION",                      13);

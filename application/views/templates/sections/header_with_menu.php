@@ -34,6 +34,7 @@
                 "<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>",
                 "<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT; ?>",
+                "<?php echo NOTIFICATION_TYPE_ID_GYMPRO_ASSESSMENT_REASSESS; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW; ?>",
                 "<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION; ?>",
@@ -117,7 +118,7 @@
 {% var i=0, notification_info = ((o instanceof Array) ? o[i++] : o);
 while(notification_info){ %}
 
-{% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION; ?>'){ %}
+{% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>'|| notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_PREDICT_MATCH; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_ASSESSMENT; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_TYPE_ID_GYMPRO_ASSESSMENT_REASSESS; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM_REVIEW; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_MISSION; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_EXERCISE; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_NUTRITION; ?>' || notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_SESSION; ?>'){ %}
 
 <div class="pagelet message_friends_box">
     <div class="row">
@@ -189,6 +190,12 @@ while(notification_info){ %}
                 <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
                 <a href='<?php echo base_url() . "applications/gympro/show_assessment/{%=notification_info.reference_id %}" ?>'>has created an assessment for you</a>
             {%}%}
+            {% if(notification_info.type_id == '<?php echo NOTIFICATION_TYPE_ID_GYMPRO_ASSESSMENT_REASSESS; ?>'){ %}
+                Reassess of 
+                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}'s</a>
+                <a href='<?php echo base_url() . "applications/gympro/show_assessment/{%=notification_info.reference_id %}" ?>'> assessment </a>
+                is due today
+            {%}%}
             {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_CREATE_GYMPRO_PROGRAM; ?>'){ %}
                 <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.reference_list[0].user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %} {%= notification_info.reference_list[0].last_name %}</a>
                 <a href='<?php echo base_url() . "applications/gympro/show_program/{%=notification_info.reference_id %}" ?>'>has created a program for you</a>
@@ -240,7 +247,9 @@ while(notification_info){ %}
                         </a>   
                     </div>
                     <div class="col-md-5">
-                        <span class="profile-name" >{%= notification_list.reference_info.first_name %} {%= notification_list.reference_info.last_name %} </span></a>
+                        <a href='<?php echo base_url() . "member_profile/show/{%= notification_list.reference_info.user_id %}" ?>'>
+                            <span class="profile-name" >{%= notification_list.reference_info.first_name %} {%= notification_list.reference_info.last_name %} </span>
+                        </a>
                     </div>  
                     {% if(notification_list.following_acceptance_type != null && notification_list.following_acceptance_type == '<?php echo FOLLOWER_ACCEPTANCE_TYPE_ID_CONFIRMATION;?>'){ %}
                         <div class="col-md-3">

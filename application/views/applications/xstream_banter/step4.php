@@ -1,10 +1,10 @@
-<div class="col-md-9 column selected-match">
+<div class="row col-md-9 column selected-match">
     <div class="row col-md-4">
         <a href="<?php echo base_url().'applications/xstream_banter'; ?>" >
             <img class="img-responsive" src="<?php echo base_url() ?>resources/images/xb_logo.png" />
         </a>        
     </div>
-    <div class="row">
+    <div class="row col-md-12">
         <h4>Create a private chat room or join your friends</h4>
         <h3><?php echo $match_info['tournament_title'];?> <?php echo $match_date;?></h3>
         <div><h2><?php echo $match_info['team1_title']?> v <?php echo $match_info['team2_title']?></h2></div>    
