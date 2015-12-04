@@ -2,12 +2,14 @@
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="description" content="We believe that everyone should have access to and the ability to openly share health, sports and fitness related information">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="sonuto sonuto.com sport sports news blog blogs recipe food kitchen gym fitnes health service fixture fixtures result results match tournament team"/>
-        
-        <title>Sonuto</title>
+        <meta content="website" property="og:type">
+        <meta content="Sonuto" property="og:site_name">
+        <meta content="http://www.sonuto.com/footer/about_us" property="og:url">
+        <link href="http://www.sonuto.com/footer/about_us" rel="canonical">
+        <title>About Us</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/property.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/bootstrap3/css/newsfeed.css">

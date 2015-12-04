@@ -288,7 +288,7 @@ class Footer extends CI_Controller {
             'type' => 'submit',
             'value' => 'Submit',
         );
-        $this->template->load("templates/non_member_tmpl", "footer/contact_us/non_member", $this->data);
+        $this->template->load("templates/contact_us_tmpl", "footer/contact_us/non_member", $this->data);
     }
     /*
      * This method will load terms page
@@ -302,7 +302,7 @@ class Footer extends CI_Controller {
             $terms_info = $terms_info_array[0];
         }
         $this->data['terms_info'] = $terms_info;
-        $this->template->load("templates/non_member_tmpl", "footer/terms", $this->data);
+        $this->template->load("templates/terms_conditions_tmpl", "footer/terms", $this->data);
     }
 
     /*
@@ -318,6 +318,6 @@ class Footer extends CI_Controller {
             $privacy_info = $privacy_info_array[0];
         }
         $this->data['privacy_info'] = $privacy_info;
-        $this->template->load("templates/non_member_tmpl", "footer/privacy", $this->data);
+        $this->template->load("templates/privacy_tmpl", "footer/privacy", $this->data);
     }
 }
