@@ -64,6 +64,8 @@ $(function () {
             previewOrientation: false
         }).on('fileuploadadd', function(e, data) {
             data.context = $("<div class='col-md-3'/>").appendTo('#files');
+           
+//           data.context = $('<li class="col-md-3" style="padding-bottom:10px"/>').appendTo('#files');
             //$("div#upload").empty().append(uploadButton.clone(true).data(data));
             $.each(data.files, function(index, file) {
                 var node = $('<div/>');
@@ -76,7 +78,7 @@ $(function () {
             if (file.preview) {
                 var img = $(file.preview).addClass("img-responsive");
                 node.append(img);
-                node.append("<textarea rows='2' class='form-control' placeholder='Add Description' name='description'/>");
+                node.append("<textarea rows='2' class='form-control'placeholder='Add Description' name='description'/>");
             }
             if (file.error) {
                 //alert(file.error);

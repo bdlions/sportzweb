@@ -79,7 +79,7 @@
     </div>
     <?php } ?>
 </div>
-<div class="row" style="padding-top: 15px;">
+<div class="row" style="padding-top: 15px; padding-left: 14px!important;">
     <div class="col-md-9">
         <ul class="list-inline list-unstyled row files" id="files">
             <?php if($user_id == $current_user_id){ ?>

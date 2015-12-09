@@ -16,7 +16,7 @@
     </div>
     <?php } ?>
 </div>
-<div class="row">
+<div class="row" style="padding-left: 15px!important;">
     <div class="col-md-9 row">
         <div class="row form-group"></div>
         <ul class="list-unstyled row">

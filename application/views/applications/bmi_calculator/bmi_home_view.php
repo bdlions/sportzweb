@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label style="width: 159px;" for="btn-group">Choose unit of measurements: </label>
-                    <div class="btn-group" style="padding-left: 1px"> 
+                    <div class="btn-group" style="padding-left: 1px;padding-bottom: 20px;"> 
                         <button class="btn btn-success active" id="button_metric" style="border-radius:0 !important; border: 2px solid #22b14c;">Metric</button>
                         <button class="btn" id="button_imperial" style="margin-left: 10px;  border-radius:0 !important; border: 2px solid #22b14c;">Imperial</button>
                     </div>
@@ -59,9 +59,7 @@
                 <span class="content_text"><?php echo $question['answer'] ?></span>
                 <p></p><p></p>
             </div>
-
         <?php endforeach; ?>
-
     </div>
 </div>
 
