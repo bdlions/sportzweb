@@ -92,65 +92,78 @@
     <?php } ?>
 </div>
 <div class="col-md-7" style="border-left: 1px solid #CCCCCC; border-right: 1px solid #CCCCCC">
-    <div class="col-md-12">
-        <div class="row" style="padding-bottom: 20px; padding-top: 10px;">
-            <div class="col-md-5" style="padding-left: 0px;">
-                <div class=" input-group search-box-followers">
-                    <!--<input id="search_inbox" class="form-control typeahead" type="text" placeholder="Search inbox" />-->
-                    <input id="chat_friends" class="form-control typeahead search-user" type="text" placeholder="To: Name or Group" />
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" style="padding-bottom: 20px; padding-top: 10px;">
+                <div class="col-md-5 form-group">
+                    <div class=" input-group search-box-followers">
+                        <!--<input id="search_inbox" class="form-control typeahead" type="text" placeholder="Search inbox" />-->
+                        <input id="chat_friends" class="form-control typeahead search-user" type="text" placeholder="To: Name or Group" />
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <button class="btn button-custom pull-right" id="new_message">New Message</button>
                 </div>
             </div>
-            <button class="btn button-custom pull-right" id="new_message">New Message</button>
-        </div>
-        <div id="msg_box">
-            <div class="msg">
-                <?php foreach ($messages as $message) { ?>
-                    <div class="row" style="padding-bottom: 10px; padding-top: 10px; border-bottom: 1px solid #CCCCCC">
-                        <div class="row">
-                            <?php
-                            if ($message->from == $me->user_id) {
-                                $user = $me;
-                            } else {
-                                foreach ($followers as $follower) {
-                                    if ($follower->user_id == $message->from) {
-                                        $user = $follower;
-                                        break;
+            <div id="msg_box">
+                <div class="msg">
+                    <?php foreach ($messages as $message) { ?>
+                        <div class="row" style="padding-bottom: 10px; padding-top: 10px; border-bottom: 1px solid #CCCCCC">
+                            <div class="row">
+                                <?php
+                                if ($message->from == $me->user_id) {
+                                    $user = $me;
+                                } else {
+                                    foreach ($followers as $follower) {
+                                        if ($follower->user_id == $message->from) {
+                                            $user = $follower;
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                            ?>
-                            <div class="col-md-2" style="margin-left: 20px;">
-                                <div class="profile-background"><img alt="<?php echo $user->first_name[0] . $user->last_name[0] ?>" src="<?php echo base_url() ?>resources/uploads/profile_picture/100x100/<?php echo $user->photo ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; " /> 
-                                    <div style="visibility:hidden;"><?php echo $user->first_name[0] . $user->last_name[0] ?></div>
+                                ?>
+                                <div class="col-md-2" style="margin-left: 20px;">
+                                    <div class="profile-background"><img alt="<?php echo $user->first_name[0] . $user->last_name[0] ?>" src="<?php echo base_url() ?>resources/uploads/profile_picture/100x100/<?php echo $user->photo ?>" class="img-responsive profile-photo" onError="this.style.display = 'none'; this.parentNode.getElementsByTagName('div')[0].style.visibility='visible'; " /> 
+                                        <div style="visibility:hidden;"><?php echo $user->first_name[0] . $user->last_name[0] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 content_text">
+                                    <?php echo $user->first_name . " " . $user->last_name . ": " . $message->message ?>
                                 </div>
                             </div>
-                            <div class="col-md-9 content_text">
-    <?php echo $user->first_name . " " . $user->last_name . ": " . $message->message ?>
+                            <div class="row col-md-12">
+                                <div class="pull-right small_text_pale"><?php echo $message->received_date; ?></div>
                             </div>
                         </div>
-                        <div class="row col-md-12">
-                            <div class="pull-right small_text_pale"><?php echo $message->received_date; ?></div>
-                        </div>
-                    </div>
-            <?php } ?>
-            </div>
-        </div>
-        <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
-<?php if (isset($to)) {
-    echo form_open("", "id='postMessage'") ?>
-<!--                <div class="col-md-2"> </div>-->
-                <div class="col-md-12">
-                    <div class="row col-md-12">
-                        <textarea rows="3" name="message" class="form-control"></textarea>
-                    </div>
-                    <div class="row col-md-12" style="padding-top: 10px;">
-                        <input type="hidden" value="<?php echo $to ?>" name="to"/>
-                        <button class="btn button-custom pull-right" id="buttonPost">Post</button>
-                    </div>
+                    <?php } ?>
                 </div>
-    <?php echo form_close();
-} ?>
+            </div>
+            <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+                <div class="col-md-12">
+                    <?php
+                    if (isset($to)) {
+                        echo form_open("", "id='postMessage'")
+                        ?>
+                        <!--                <div class="col-md-2"> </div>-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea rows="3" name="message" class="form-control custom-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 10px;">
+                            <div class="col-md-12">
+                                <input type="hidden" value="<?php echo $to ?>" name="to"/>
+                                <button class="btn button-custom pull-right" id="buttonPost">Post</button>
+                            </div>
+                        </div>
+
+                        <?php
+                        echo form_close();
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -162,13 +175,13 @@
                 <input class="form-control" placeholder="Add name or email..."/>
             </div>
         </div>
-<?php foreach ($followers as $follower) { ?>
+        <?php foreach ($followers as $follower) { ?>
             <div class="row">
                 <div class="col-md-12">
                     <img src="<?php echo base_url() . 'resources/images/' . ($follower->online_status == TRUE ? 'online.png' : 'offline.png') ?>" />
-    <?php echo $follower->first_name . " " . $follower->last_name ?>
+                    <?php echo $follower->first_name . " " . $follower->last_name ?>
                 </div>
             </div>
-<?php } ?>
+        <?php } ?>
     </div>
 </div>
