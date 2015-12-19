@@ -18,35 +18,35 @@
             <!--left nav custom for this page-->
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#add_client').show();">Personal details</a>
+                <a onclick="$('.hidden_tab').hide();$('#personal_details_btn').show();$('#personal_details').show();">Personal details</a>
             </div>
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#contact_details').show();">Contact details</a>
+                <a onclick="$('.hidden_tab').hide();$('#contact_details_btn').show();$('#contact_details').show();">Contact details</a>
             </div>
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#health').show();">Health details</a>
+                <a onclick="$('.hidden_tab').hide();$('#health_details_btn').show();$('#health_details').show();">Health details</a>
             </div>
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#programmes').show();">Programmes</a>
+                <a onclick="$('.hidden_tab').hide();$('#programmes_btn').show();$('#programmes').show();">Programmes</a>
             </div>
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#assessments').show();">Assessments</a>
+                <a onclick="$('.hidden_tab').hide();$('#assessments_btn').show();$('#assessments').show();">Assessments</a>
             </div>
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#missions').show();">Missions</a>
+                <a onclick="$('.hidden_tab').hide();$('#missions_btn').show();$('#missions').show();">Missions</a>
             </div>
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#nutrition').show();">Nutrition</a>
+                <a onclick="$('.hidden_tab').hide();$('#nutrition_btn').show();$('#nutrition').show();">Nutrition</a>
             </div>
             <div class="ln_item content_text" >
                 <img class="img-responsive" src="<?php echo base_url() ?>resources/images/applications/gympro/programmes.png">
-                <a onclick="$('.hidden_tab').hide();$('#notes').show();">Notes</a>
+                <a onclick="$('.hidden_tab').hide();$('#notes_btn').show();$('#notes').show();">Notes</a>
             </div>
         </div>
         <!--ADDING CLIENT-->
@@ -64,8 +64,8 @@
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
                 <?php } ?>
                     <!--Personal details-->
-                    <div class="row hidden_tab" id="add_client" style="display: block">
-                        <div class="col-md-9">
+                    <div class="row hidden_tab" id="personal_details" style="display: block">
+                        <div class="row col-md-9">
                             <div class="form-group">
                                 <label class="col-sm-4 ">First Name:</label>
                                 <label class="col-sm-6 ">&nbsp;<?php echo $client_info['first_name'];?></label>
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <!--Health details-->
-                    <div class="row hidden_tab" id="health">
+                    <div class="row hidden_tab" id="health_details">
                         <div class="col-md-12">
                             <?php foreach ($question_list as $question_info){ ?>
                             <div class="row form-group">
@@ -380,13 +380,55 @@
                     </div>
                     <!--Notes-->
                     <div class="row hidden_tab" id="notes">
-                        <div class="col-md-9">
+                        <div class="row col-md-9">
                             <div class="form-group">
                                 <label class="col-sm-4 ">Notes:</label>
                                 <label class="col-sm-6 ">&nbsp;<?php echo $client_info['notes'];?></label>
                             </div>
                         </div>
                     </div>
+                    <div class="row pad_title" style="padding-left:15px">                
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="hidden_tab" id="personal_details_btn" style="display: block">
+                                <button onclick="$('.hidden_tab').hide();$('#contact_details_btn').show();$('#contact_details').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="contact_details_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#personal_details_btn').show();$('#personal_details').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button onclick="$('.hidden_tab').hide();$('#health_details_btn').show();$('#health_details').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="health_details_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#contact_details_btn').show();$('#contact_details').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button onclick="$('.hidden_tab').hide();$('#programmes_btn').show();$('#programmes').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="programmes_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#health_details_btn').show();$('#health_details').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button onclick="$('.hidden_tab').hide();$('#assessments_btn').show();$('#assessments').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="assessments_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#programmes_btn').show();$('#programmes').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button onclick="$('.hidden_tab').hide();$('#missions_btn').show();$('#missions').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="missions_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#assessments_btn').show();$('#assessments').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button onclick="$('.hidden_tab').hide();$('#nutrition_btn').show();$('#nutrition').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="nutrition_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#missions_btn').show();$('#missions').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button onclick="$('.hidden_tab').hide();$('#notes_btn').show();$('#notes').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="notes_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#nutrition_btn').show();$('#nutrition').show();">Previous</button>                                
+                            </div>
+                        </div> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>

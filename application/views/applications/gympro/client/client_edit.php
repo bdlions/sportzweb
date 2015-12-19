@@ -38,79 +38,7 @@ $(function () {
                 window.location = '<?php echo base_url().'applications/gympro/manage_clients';?>';
             }
         });
-    });
-    // Change this to the location of your server-side upload handler:
-    var url = "<?php echo base_url().'applications/gympro/edit_client/'.$client_info['client_id'];?>",
-    uploadButton = $('<input type="submit" value="Save"/>').text('Confirm').
-    on('click', function() {
-        var $this = $(this),data = $this.data();
-        $this.off('click').text('Abort').on('click', function() {
-            $this.remove();
-            data.abort();
-        });
-        data.submit().always(function() {
-            $this.remove();
-        });
-    });
-    $('#fileupload').fileupload({
-        url: url,
-        dataType: 'json',
-        formData: $("#form_edit_client").serializeArray(),
-        autoUpload: false,
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-        maxFileSize: 5000000, // 5 MB
-        // Enable image resizing, except for Android and Opera,
-        // which actually support image resizing, but fail to
-        // send Blob objects via XHR requests:
-        disableImageResize: /Android(?!.*Chrome)|Opera/
-                .test(window.navigator.userAgent),
-        previewMaxWidth: 120,
-        maxNumberOfFiles: 1,
-        previewMaxHeight: 120,
-        previewCrop: true
-    }).on('fileuploadadd', function(e, data) {
-        $("#files").empty();
-        data.context = $('<div/>').appendTo('#files');
-        $("div#upload").empty();
-        $("div#upload").append('<br>').append(uploadButton.clone(true).data(data));
-        $.each(data.files, function(index, file) {
-            var node = $('<p/>');
-            node.appendTo(data.context);
-        });
-    }).on('fileuploadprocessalways', function(e, data) {
-        var index = data.index,
-                file = data.files[index],
-                node = $(data.context.children()[index]);
-        if (file.preview) {
-            node.prepend('<br>').prepend(file.preview);
-        }
-        if (file.error) {
-            $("div#header").append('<br>').append($('<span class="text-danger"/>').text(file.error));
-        }
-        if (index + 1 === data.files.length) {
-            data.context.find('button').text('Upload').prop('disabled', !!data.files.error);
-        }
-    }).on('fileuploadprogressall', function(e, data) {
-        var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .progress-bar').css('width',progress + '%');
-    }).on('fileuploaddone', function(e, data) {
-        //alert(data.result.message);
-         var message = data.result.message;
-         print_common_message(message);
-        window.location = '<?php echo base_url().'applications/gympro/manage_clients';?>';
-    }).on('fileuploadsubmit', function(e, data){
-        data.formData = $('#form_edit_client').serializeArray();
-    }).on('fileuploadfail', function(e, data) {
-        //alert(data.message);
-         var message = data.message;
-         print_common_message(message);
-        $.each(data.files, function(index, file) {
-            var error = $('<span class="text-danger"/>').text('File upload failed.');
-            $(data.context.children()[index]).append('<br>').append(error);
-        });
-    }).prop('disabled', !$.support.fileInput)
-            .parent().addClass($.support.fileInput ? undefined : 'disabled');
-
+    });    
 });
 </script>
 <style>
@@ -165,24 +93,6 @@ $(function () {
                     <div class="col-md-8">
                         <span>EDIT CLIENT</span>
                     </div>
-                    <div class="col-md-4">
-                        <div class="hidden_tab" id="add_client_btn" style="display: block">
-                            <button onclick="$('.hidden_tab').hide();$('#contact_details').show();$('#contact_details_btn').show();">Next</button>
-                        </div>
-                        <div class="hidden_tab" id="contact_details_btn">
-                            <button onclick="$('.hidden_tab').hide();$('#add_client').show();$('#add_client_btn').show();">Previous</button>
-                            &nbsp;&nbsp;
-                            <button onclick="$('.hidden_tab').hide();$('#health').show();$('#health_btn').show();">Next</button>
-                        </div>
-                        <div class="hidden_tab" id="health_btn">
-                            <button onclick="$('.hidden_tab').hide();$('#contact_details_btn').show();$('#contact_details').show();">Previous</button>
-                            &nbsp;&nbsp;
-                            <button onclick="$('.hidden_tab').hide();$('#notes_btn').show();$('#notes').show();">Next</button>
-                        </div>
-                        <div class="hidden_tab" id="notes_btn">
-                            <button onclick="$('.hidden_tab').hide();$('#health_btn').show();$('#health').show();">Previous</button>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
@@ -191,218 +101,209 @@ $(function () {
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
                 <?php endif; ?>
                 <?php echo form_open("applications/gympro/edit_client/".$client_info['client_id'], array('id' => 'form_edit_client', 'class' => 'form-horizontal', 'onsubmit' => 'return false;'))?>
-                    <!--Personal details-->
-                    <div class="row hidden_tab" id="add_client" style="display: block">
-                        <div class="col-md-9">
-                            
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Name: </label>
-                                <div class="col-sm-6">
-                                    <label class=""><?php echo $member_info['first_name'];?> <?php echo $member_info['last_name'];?></label>
-                                </div>
+                <!--Personal details-->
+                <div class="row hidden_tab" id="add_client" style="display: block">
+                    <div class="col-md-9">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Name: </label>
+                            <div class="col-sm-6">
+                                <label class=""><?php echo $member_info['first_name'];?> <?php echo $member_info['last_name'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Gender </label>
-                                <div class="col-sm-4">
-                                    <label class="">
-                                        <?php if( $member_info['gender_id'] == GENDER_MALE )
-                                                echo "Male";
-                                                else echo 'Female';?>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Email: </label>
-                                <div class="col-sm-6">
-                                    <label class=""><?php echo $member_info['email'];?></label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Date of birth: </label>
-                                <div class="col-sm-4">
-                                    <label class=""><?php echo convert_date_from_db_to_user($member_info['dob']);?></label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Occupation: </label>
-                                <div class="col-sm-4">
-                                    <label class=""><?php echo $member_info['occupation'];?></label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Employer: </label>
-                                <div class="col-sm-4">
-                                    <label class=""><?php echo $member_info['employer'];?></label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Client Status </label>
-                                <div class="col-sm-4">
-                                    <?php echo form_dropdown('client_status_list', $client_status_list, $selected_status_id, 'class=form-control id=client_status_list'); ?>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Start Date: </label>
-                                <div class="col-sm-4">
-                                    <?php echo form_input($start_date + array('class' => 'form-control'));?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">End Date: </label>
-                                <div class="col-sm-4">
-                                    <?php echo form_input($end_date + array('class' => 'form-control'));?>
-                                </div>
-                            </div>
-<!--                            <div class="form-group">
-                                <label for="website" class="col-md-4  requiredField">
-                                    Set picture
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Gender </label>
+                            <div class="col-sm-4">
+                                <label class="">
+                                    <?php if( $member_info['gender_id'] == GENDER_MALE )
+                                            echo "Male";
+                                            else echo 'Female';?>
                                 </label>
-                                <div class ="col-md-8">
-                                    <div class="col-md-9">
-                                        <div class="row fileinput-button">
-                                            <button class="btn button-custom">Upload a photo</button>
-                                            <input id="fileupload" type="file" name="userfile">
-                                        </div>
-                                        <div id="progress" class="row progress" style="margin-top: 8px;">
-                                            <div class="progress-bar progress-bar-success"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="profile-picture-box" >
-                                            <div id="files" class="files">
-                                                <?php if(!empty($client_info['picture'])): ?>
-                                                    <img style="width: 50px; height: 50px;" src="<?php echo base_url() . CLIENT_PROFILE_PICTURE_PATH_W50_H50 . $client_info['picture']; ?>" class="img-responsive"/>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
+                            </div>
                         </div>
-                    </div>
-                    <!--Contact details-->
-                    <div class="row hidden_tab" id="contact_details">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Telephone: </label>
-                                <div class="col-sm-6">
-                                    <label class=""><?php echo $member_info['telephone'];?></label>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Email: </label>
+                            <div class="col-sm-6">
+                                <label class=""><?php echo $member_info['email'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Mobile: </label>
-                                <div class="col-sm-6">
-                                    <?php echo form_input($mobile + array('class' => 'form-control'));?>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Date of birth: </label>
+                            <div class="col-sm-4">
+                                <label class=""><?php echo convert_date_from_db_to_user($member_info['dob']);?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Address: </label>
-                                <div class="col-sm-6">
-                                    <?php echo form_textarea($address + array('class' => 'form-control'));?>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Occupation: </label>
+                            <div class="col-sm-4">
+                                <label class=""><?php echo $member_info['occupation'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Emergency contact: </label>
-                                <div class="col-sm-6">
-                                    <?php echo form_input($emergency_contact + array('class' => 'form-control'));?>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Employer: </label>
+                            <div class="col-sm-4">
+                                <label class=""><?php echo $member_info['employer'];?></label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 ">Emergency phone: </label>
-                                <div class="col-sm-6">
-                                    <?php echo form_input($emergency_phone + array('class' => 'form-control'));?>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Client Status </label>
+                            <div class="col-sm-4">
+                                <?php echo form_dropdown('client_status_list', $client_status_list, $selected_status_id, 'class=form-control id=client_status_list'); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Start Date: </label>
+                            <div class="col-sm-4">
+                                <?php echo form_input($start_date + array('class' => 'form-control'));?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">End Date: </label>
+                            <div class="col-sm-4">
+                                <?php echo form_input($end_date + array('class' => 'form-control'));?>
                             </div>
                         </div>
                     </div>
-                    <!--Health questions-->
-                    <div class="row hidden_tab" id="health">
-                        <div class="col-md-12">
-                            <?php foreach ($question_list as $question_info){ ?>
-                            <div class="row form-group">
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'yes') ? 'checked=""' : ''; ?> name="question_radio_<?php echo $question_info['question_id'] ?>" value="yes"> Yes
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'no') ? 'checked=""' : ''; ?> name="question_radio_<?php echo $question_info['question_id'] ?>" value="no"> No 
-                                                <input type="hidden" value="question_id_<?php echo $question_info['question_id'] ?>">
-                                            </div>
+                </div>
+                <!--Contact details-->
+                <div class="row hidden_tab" id="contact_details">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Telephone: </label>
+                            <div class="col-sm-6">
+                                <label class=""><?php echo $member_info['telephone'];?></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Mobile: </label>
+                            <div class="col-sm-6">
+                                <?php echo form_input($mobile + array('class' => 'form-control'));?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Address: </label>
+                            <div class="col-sm-6">
+                                <?php echo form_textarea($address + array('class' => 'form-control'));?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Emergency contact: </label>
+                            <div class="col-sm-6">
+                                <?php echo form_input($emergency_contact + array('class' => 'form-control'));?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 ">Emergency phone: </label>
+                            <div class="col-sm-6">
+                                <?php echo form_input($emergency_phone + array('class' => 'form-control'));?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Health questions-->
+                <div class="row hidden_tab" id="health">
+                    <div class="col-md-12">
+                        <?php foreach ($question_list as $question_info){ ?>
+                        <div class="row form-group">
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'yes') ? 'checked=""' : ''; ?> name="question_radio_<?php echo $question_info['question_id'] ?>" value="yes"> Yes
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="radio" <?php echo($question_id_answer_map[$question_info['question_id']]['answer'] == 'no') ? 'checked=""' : ''; ?> name="question_radio_<?php echo $question_info['question_id'] ?>" value="no"> No 
+                                            <input type="hidden" value="question_id_<?php echo $question_info['question_id'] ?>">
                                         </div>
                                     </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="patapota"><?php echo $question_info['title'] ?></label>
-                                            </div>
-                                        </div>     
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" style="float: left">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <label style="padding-left:0px;">Additional info: </label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input value="<?php echo $question_id_answer_map[$question_info['question_id']]['additional_info'] ?>" style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
-                                                        </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="patapota"><?php echo $question_info['title'] ?></label>
+                                        </div>
+                                    </div>     
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" style="float: left">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label style="padding-left:0px;">Additional info: </label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input value="<?php echo $question_id_answer_map[$question_info['question_id']]['additional_info'] ?>" style="display: <?php echo($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>     
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <label>Height (cm): </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <?php echo form_input($height + array('class' => 'form-control')); ?>
+                                        </div>
+                                    </div>     
                                 </div>
                             </div>
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <label>Resting Heart Rate: </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <?php echo form_input($resting_heart_rate + array('class' => 'form-control')); ?>
-                                </div>
+                        <?php } ?>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label>Height (cm): </label>
                             </div>
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <label>Blood Pressure: </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <?php echo form_input($blood_pressure + array('class' => 'form-control')); ?>
-                                </div>
+                            <div class="col-md-8">
+                                <?php echo form_input($height + array('class' => 'form-control')); ?>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label>Resting Heart Rate: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <?php echo form_input($resting_heart_rate + array('class' => 'form-control')); ?>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label>Blood Pressure: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <?php echo form_input($blood_pressure + array('class' => 'form-control')); ?>
                             </div>
                         </div>
                     </div>
-                    <!--Notes-->
-                    <div class="row hidden_tab" id="notes">
-                        <div class="col-md-9">
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <label>Notes: </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <?php echo form_textarea($notes + array('class' => 'form-control')); ?>
-                                </div>
+                </div>
+                <!--Notes-->
+                <div class="row hidden_tab" id="notes">
+                    <div class="col-md-9">
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label>Notes: </label>
+                            </div>
+                            <div class="col-md-8">
+                                <?php echo form_textarea($notes + array('class' => 'form-control')); ?>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row pad_title" style="padding-left:15px">                
                     <div class="row">
-                        <div class="col-md-12">
-                            <div id="upload">
-                                <?php echo form_input($submit_edit_client); ?>
-                                or <a href="<?php echo base_url() . 'applications/gympro/manage_clients' ?>" style="font-size: 16px; line-height: 22px;">Cancel</a>
+                        <div class="col-md-5">
+                            <div class="hidden_tab" id="add_client_btn" style="display: block">
+                                <button onclick="$('.hidden_tab').hide();$('#contact_details').show();$('#contact_details_btn').show();">Next</button>
                             </div>
-                        </div>
+                            <div class="hidden_tab" id="contact_details_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#add_client').show();$('#add_client_btn').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button onclick="$('.hidden_tab').hide();$('#health').show();$('#health_btn').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="health_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#contact_details_btn').show();$('#contact_details').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button onclick="$('.hidden_tab').hide();$('#notes_btn').show();$('#notes').show();">Next</button>
+                            </div>
+                            <div class="hidden_tab" id="notes_btn">
+                                <button onclick="$('.hidden_tab').hide();$('#health_btn').show();$('#health').show();">Previous</button>
+                                &nbsp;&nbsp;
+                                <button id="submit_edit_client" name="submit_edit_client">Save Changes</button>
+                            </div>
+                        </div> 
                     </div>
-                    <?php echo form_close();?>
+                </div>
+                <?php echo form_close();?>
             </div>
         </div>
     </div>
