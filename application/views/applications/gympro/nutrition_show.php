@@ -36,7 +36,7 @@
                             <th>Quantity</th>
                             <th>Qty.Unit</th>
                             <th>Calories</th>
-                            <th>Protin</th>
+                            <th>Protein</th>
                             <th>Carbs</th>
                             <th>Fats</th>
                         </tr>

@@ -112,7 +112,7 @@
                         <div style="font-size: 14px;">Calories</div>
                     </div>
                     <div class="col-md-1" style="padding: 0px; margin: 2px;">
-                        <div style="font-size: 14px;">Protin</div>
+                        <div style="font-size: 14px;">Protein</div>
                     </div>
                     <div class="col-md-1" style="padding: 0px; margin: 2px;">
                         <div style="font-size: 14px;">Carbs</div>
