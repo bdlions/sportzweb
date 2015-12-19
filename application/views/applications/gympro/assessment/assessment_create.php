@@ -2,10 +2,10 @@
 <script type="text/javascript">
     $(function() {
         $("#submit_button").on("click", function() {
-            if($("#client_list").val() == 0)
+            if ($("#client_list").val() == 0)
             {
-               // alert("Please select the person you are assessing from the drop menu.");
-               var message = "Please select the person you are assessing from the drop menu.";
+                // alert("Please select the person you are assessing from the drop menu.");
+                var message = "Please select the person you are assessing from the drop menu.";
                 print_common_message(message);
                 return false;
             }
@@ -36,23 +36,20 @@
         }).on('changeDate', function(ev) {
             $('#reassess').text($('#reassess').data('date'));
             $('#reassess').datepicker('hide');
-        });        
-    });    
+        });
+    });
 </script>
 <div class="container-fluid">
     <div class="row top_margin">
-        <?php 
-        if($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT)
-        {
-            $this->load->view("applications/gympro/template/sections/client_left_pane"); 
+        <?php
+        if ($account_type_id == APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT) {
+            $this->load->view("applications/gympro/template/sections/client_left_pane");
+        } else {
+            $this->load->view("applications/gympro/template/sections/pt_left_pane");
         }
-        else
-        {
-            $this->load->view("applications/gympro/template/sections/pt_left_pane"); 
-        }            
         ?>
         <div class="col-md-8">
-            <?php echo form_open("applications/gympro/create_assessment/", array('id' => 'form_assesment', 'class' => 'form-horizontal','onsubmit' => 'return false;')); ?>
+            <?php echo form_open("applications/gympro/create_assessment/", array('id' => 'form_assesment', 'class' => 'form-horizontal', 'onsubmit' => 'return false;')); ?>
             <div class="pad_title">
                 NEW ASSESSMENT
                 <div class="col-md-3 pull-right">
@@ -61,7 +58,7 @@
             </div>
             <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
-                <?php if (isset($message) && ($message != NULL)){ ?>
+                <?php if (isset($message) && ($message != NULL)) { ?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
                 <?php } ?> 
                 <div class="row form-group">
@@ -134,127 +131,123 @@
                     <div class="col-md-12">
                         <div style="background-color: white">
                             <div class="row form-group">
+                                <div class="col-md-2">LEFT SIDE</div>
                                 <div class="col-md-2"></div>
-                                <div class="col-md-2" style="text-align: center">LEFT SIDE</div>
                                 <div class="col-md-2"></div>
+                                <div class="col-md-2">RIGHT SIDE</div>
                                 <div class="col-md-2"></div>
-                                <div class="col-md-2" style="text-align: center">RIGHT SIDE</div>
                                 <div class="col-md-2"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div class="col-md-5">Arm Relaxed:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($ls_arm_relaxed + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Arm Flexed:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($ls_arm_flexed + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Forearm:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($ls_forearm + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Wrist:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($ls_wrist + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Thigh (gluteal):</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($ls_thigh_gluteal + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Thigh (mid):</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($ls_thigh_mid + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Kalf:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($ls_calf + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Ankle:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($ls_ankle + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Arm Relaxed:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($ls_arm_relaxed + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Arm Flexed:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($ls_arm_flexed + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Forearm:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($ls_forearm + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Wrist:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($ls_wrist + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Thigh (gluteal):</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($ls_thigh_gluteal + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Thigh (mid):</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($ls_thigh_mid + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Kalf:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($ls_calf + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Ankle:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($ls_ankle + array('class' => 'form-control')) ?>
+                                        </div>cm
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div class="col-md-5">Arm Relaxed:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($rs_arm_relaxed + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Arm Flexed:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($rs_arm_flexed + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Forearm:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($rs_forearm + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Wrist:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($rs_wrist + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Thigh (gluteal):</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($rs_thigh_gluteal + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Thigh (mid):</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($rs_thigh_mid + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Kalf:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($rs_calf + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-5">Ankle:</div>
-                                            <div class="col-md-6">
-                                                <?php echo form_input($rs_ankle + array('class' => 'form-control')) ?>
-                                            </div>cm
-                                        </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Arm Relaxed:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($rs_arm_relaxed + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Arm Flexed:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($rs_arm_flexed + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Forearm:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($rs_forearm + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Wrist:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($rs_wrist + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Thigh (gluteal):</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($rs_thigh_gluteal + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Thigh (mid):</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($rs_thigh_mid + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Kalf:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($rs_calf + array('class' => 'form-control')) ?>
+                                        </div>cm
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">Ankle:</div>
+                                        <div class="col-md-5">
+                                            <?php echo form_input($rs_ankle + array('class' => 'form-control')) ?>
+                                        </div>cm
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <div class="row pad_footer">
-                <?php echo form_input($submit_button) ?> or <a href="<?php echo base_url() ?>applications/gympro/manage_assessments">Previous</a>
-            </div>            
+                <div class="row pad_footer">
+                    <?php echo form_input($submit_button) ?> or <a href="<?php echo base_url() ?>applications/gympro/manage_assessments">Previous</a>
+                </div>            
+            </div>
+            <?php echo form_close(); ?>
         </div>
-        <?php echo form_close(); ?>
-     </div>
     </div>
 </div>

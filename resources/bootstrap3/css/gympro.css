@@ -82,7 +82,7 @@ a:hover
 .ln_current
 {
     background-color: #F5F5F5;
-    
+
     font-weight: bold;
 }
 .ln_wide_portion
@@ -141,9 +141,9 @@ a:hover
 .pad_title, .pad_body, .pad_footer
 {
     font-size: 15px;
-/*    background-color: #E4E4E4; 
-    display: inline-block; 
-    width: 100%;*/
+    /*    background-color: #E4E4E4; 
+        display: inline-block; 
+        width: 100%;*/
 }
 .pad_title, .pad_footer
 {
@@ -155,6 +155,14 @@ a:hover
 .pad_body
 {
     padding: 20px;
+}
+.pad_body_custom
+{
+    padding: 20px 6px 20px 10px!important;
+}
+.add_meal_custom
+{
+    padding: 0 6px 0 10px!important;
 }
 .pad_footer button
 {
@@ -232,7 +240,7 @@ a:hover
 
 
 @media (min-width: 481px)and (max-width: 767px) {
-.gympro_img{
+    .gympro_img{
         margin-left: 2.5%!important;
     }
 }
