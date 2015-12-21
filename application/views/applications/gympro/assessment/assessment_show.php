@@ -12,18 +12,18 @@
             <div class="pad_title">
                 ASSESSMENT INFO
                 <div class="col-md-3 pull-right">
-<?php
-if ($account_type_id != APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT) {
-    echo $assessment_info['first_name'] . ' ' . $assessment_info['last_name'];
-}
-?>
+                    <?php
+                    if ($account_type_id != APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT) {
+                        echo $assessment_info['first_name'] . ' ' . $assessment_info['last_name'];
+                    }
+                    ?>
                 </div>
             </div>
             <div style="border-top: 2px solid lightgray; margin-left: 20px"></div>
             <div class="pad_body">
-<?php if (isset($message) && ($message != NULL)) { ?>
+                <?php if (isset($message) && ($message != NULL)) { ?>
                     <div class="alert alert-danger alert-dismissible"><?php echo $message; ?></div>
-<?php } ?> 
+                <?php } ?> 
                 <div class="row">
                     <div class="col-md-5">
                         <div class="row form-group">
@@ -51,7 +51,7 @@ if ($account_type_id != APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT) {
                         <div class="row form-group">
                             <div class="col-md-4">Reassess:</div>
                             <label class ="col-md-5 control-label">
-<?php echo convert_date_from_db_to_user($assessment_info['reassess']); ?>
+                                <?php echo convert_date_from_db_to_user($assessment_info['reassess']); ?>
                             </label> 
                         </div>
                         <div class="row form-group">
@@ -157,8 +157,7 @@ if ($account_type_id != APP_GYMPRO_ACCOUNT_TYPE_ID_CLIENT) {
                     </div>
                 </div>                
             </div>
-
-<?php echo form_close(); ?>
+            <?php echo form_close(); ?>
         </div>
     </div>
 </div>
