@@ -227,7 +227,7 @@ $(function () {
                                             <div style="display: <?php echo ($question_info['show_additional_info'] == 1) ? 'block' : 'none'; ?>" >
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <label style="padding-left:0px;" class="col-md-3">Additional info: </label>
+                                                            <label style="padding-left:0px;">Additional info: </label>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input class="form-control" type="text" id="question_additional_info_<?php echo $question_info['question_id'] ?>" name="question_additional_info_<?php echo $question_info['question_id'] ?>">

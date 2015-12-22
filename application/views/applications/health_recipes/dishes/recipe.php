@@ -57,7 +57,7 @@
 <?php $recipe_id = $recipe_item['id']; ?>
 <?php $this->load->view("applications/health_recipes/templates/header_row"); ?>
 <div class="col-md-9">
-    <div class="row graybordertop grayborderbottom grayborderleft grayborderright" >
+    <div class="row graybordertop grayborderbottom grayborderleft grayborderright padding_top_15px" >
         <?php if(isset($recipe_item['reference_id'])){?>
         <div class="col-md-2">
             <?php if(isset($recipe_item['reference_image'])){?>
