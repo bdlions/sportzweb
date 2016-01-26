@@ -45,29 +45,43 @@ class Recent_activities_model extends Ion_auth_model {
         $this->db->where($this->tables['statuses'].'.status_category_id',STATUS_LIST_USER_PROFILE);
         $this->db->where_in($this->tables['statuses'].'.user_id',$follower_id_list);
         $this->db->order_by($this->tables['statuses'].'.id', 'desc');
-        return $this->db->select('*')
+        return $this->db->select($this->tables['statuses'].'.id as status_id, '. $this->tables['statuses'].'.*')
                   ->from($this->tables['statuses'])
                   ->limit(1)
                   ->get();
     }
     
-    public function get_connections()
+    public function get_connections($limit = 1)
     {
         $this->db->order_by($this->tables['users'].'.id', 'desc');
         return $this->db->select($this->tables['users'].'.id as user_id,'.$this->tables['users'].'.*,'.$this->tables['basic_profile'].'.*')
                   ->from($this->tables['users'])
                   ->join($this->tables['basic_profile'], $this->tables['users'].'.id='.$this->tables['basic_profile'].'.user_id')
-                  ->limit(1)
+                  ->limit($limit)
                   ->get();
     }
     public function get_recent_statuses($follower_id_list)
     {
         $this->db->order_by($this->tables['statuses'].'.modified_on', 'desc');
         $this->db->where_in($this->tables['statuses'].'.user_id',$follower_id_list);
-        $result = $this->db->select('*')
+        $result = $this->db->select($this->tables['statuses'].'.id as status_id,'.$this->tables['statuses'].'.*')
                 ->from($this->tables['statuses'])
                 ->get();
         return $result;
-    }       
+    }   
+    
+    public function get_latest_photo($user_id_list)
+    {
+        $this->db->where_in($this->tables['albums'].'.reference_id', $user_id_list);
+        $this->db->where_in($this->tables['albums'].'.album_type_id', array(ALBUM_TYPE_USER_PHOTOS, ALBUM_TYPE_USER_PROFILE_PHOTOS, ALBUM_TYPE_USER_STATUS_PHOTOS, ALBUM_TYPE_USER_ALBUM_PHOTOS));
+        $this->db->where($this->tables['albums'].'.creation_complete', 1);
+        $this->db->order_by($this->tables['albums_photos'].'.created_on','desc');
+        $result = $this->db->select($this->tables['albums'].'.reference_id as user_id,'.$this->tables['albums_photos'].'.created_on')
+                ->from($this->tables['albums_photos'])
+                ->join($this->tables['albums'], $this->tables['albums'].'.id='.$this->tables['albums_photos'].'.album_id')
+                ->limit(1)
+                ->get();
+        return $result;
+    }
 }
 ?>

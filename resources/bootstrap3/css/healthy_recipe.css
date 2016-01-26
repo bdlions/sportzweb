@@ -234,7 +234,7 @@ a_hover_color
     .cell_1st_top{
         display: table-cell;
         vertical-align: top;
-        padding: 30px 12px;
+        padding: 12px 12px;
         border-right: 2px solid #E7E7E7;
         width: 66.67%;
         vertical-align: top;

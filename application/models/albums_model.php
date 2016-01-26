@@ -55,6 +55,9 @@ class Albums_model extends Ion_auth_model {
     
     public function create_album($additional_data)
     {
+        $current_time = now();
+        $additional_data['created_on'] = $current_time;
+        $additional_data['modified_on'] = $current_time;
         $this->trigger_events('pre_create_album');
         $album_data = $this->_filter_data($this->tables['albums'], $additional_data);        
         $this->db->insert($this->tables['albums'], $album_data);
@@ -65,6 +68,9 @@ class Albums_model extends Ion_auth_model {
     
     public function add_photo($additional_data)
     {
+        $current_time = now();
+        $additional_data['created_on'] = $current_time;
+        $additional_data['modified_on'] = $current_time;
         $this->trigger_events('pre_add_photo');
         $photo_data = $this->_filter_data($this->tables['albums_photos'], $additional_data);        
         $this->db->insert($this->tables['albums_photos'], $photo_data);

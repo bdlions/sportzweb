@@ -195,7 +195,7 @@ class Admin_healthy_recipes_model extends Ion_auth_model {
     public function update_recipe($id,$data)
     {
         $recipe_info = $this->get_recipe($id)->row();
-        if(array_key_exists($this->recipe_identity_column, $data) && $this->recipe_identity_check($data[$this->recipe_identity_column]) && $recipe_info->title !== $data[$this->recipe_identity_column])
+        if(array_key_exists($this->recipe_identity_column, $data) && $this->recipe_identity_check($data[$this->recipe_identity_column]) && strtolower($recipe_info->title) !== strtolower($data[$this->recipe_identity_column]))
         {
             $this->set_error('recipe_update_duplicate_recipe');
             return FALSE;

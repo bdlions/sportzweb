@@ -20,7 +20,7 @@
                                                 <?php if (array_key_exists(0, $recipe_view_list_item)) : ?>
                                                     <?php if (!empty($recipe_view_list_item[0]['main_picture'])): ?>
                                                         <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe_view_list_item[0]['id']; ?>">
-                                                            <img src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[0]['main_picture']; ?>" alt="<?php echo $recipe_view_list_item[0]['title']; ?>" class="img-responsive" style="width:100%; padding-right:12px;"/>
+                                                            <img style="max-width:600px;max-height:330px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[0]['main_picture']; ?>" alt="<?php echo $recipe_view_list_item[0]['title']; ?>" class="img-responsive" style="width:100%; padding-right:12px;"/>
                                                         </a>
                                                     <?php endif; ?>
                                                     <p class="image-caption reciepe_title heading_medium_thin" style="color: #7092BE"><?php echo (!empty($recipe_view_list_item[0]['title'])) ? $recipe_view_list_item[0]['title'] : ''; ?></p>
@@ -75,7 +75,7 @@
                                             <?php if (array_key_exists(3, $recipe_view_list_item)) : ?>
                                                 <?php if (!empty($recipe_view_list_item[3]['main_picture'])): ?>
                                                     <a href="<?php echo base_url() . 'applications/healthy_recipes/recipe/' . $recipe_view_list_item[3]['id']; ?>">
-                                                        <img src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[3]['main_picture']; ?>" alt="<?php echo $recipe_view_list_item[3]['title']; ?>" class="img-responsive"/>
+                                                        <img style="max-width:450px;max-height:250px;" src="<?php echo base_url() . HEALTHY_RECIPES_IMAGE_PATH . $recipe_view_list_item[3]['main_picture']; ?>" alt="<?php echo $recipe_view_list_item[3]['title']; ?>" class="img-responsive"/>
                                                     </a>
                                                 <?php endif; ?>
                                                 <p class="reciepe_title heading_medium_thin custom_mg" style="color: #7092BE;"><?php echo (!empty($recipe_view_list_item[3]['title'])) ? $recipe_view_list_item[3]['title'] : ''; ?></p>

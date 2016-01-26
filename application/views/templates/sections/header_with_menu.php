@@ -147,7 +147,7 @@ while(notification_info){ %}
                 {% }else{  %}
                 <?php echo " , "; ?>
                 {% }  }  %}
-                <a href='<?php echo base_url() . "member_profile/show/{%=notification_info.user_id %}" ?>' class="profile-name">{%= notification_info.reference_list[0].first_name %}{%= notification_info.reference_list[0].last_name %}</a>
+                <a href='<?php echo base_url() . "member_profile/show/" ?>{%= notification_info.reference_list[j].user_id %}' class="profile-name">{%= notification_info.reference_list[j].first_name %} {%= notification_info.reference_list[j].last_name %}</a>
                 {% counter++;
                 } %}
 
@@ -155,10 +155,10 @@ while(notification_info){ %}
                 var reference_id =notification_info.reference_id ;
                 if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
                 if(total_users == 1){ %}
-                like
+                likes
                 {% }
                 if(total_users > 1){ %}
-                likes
+                like
                 {% }
                 }%}
                 {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_COMMENTS_ON_CREATED_POST; ?>') { 
@@ -169,7 +169,7 @@ while(notification_info){ %}
                 also commented on
                 {% }
                 }%}
-                {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_LIKE_ON_CREATED_POST; ?>') { 
+                {% if(notification_info.type_id == '<?php echo NOTIFICATION_WHILE_SHARES_CREATED_POST; ?>') { 
                 if(total_users >= 1){ %}
                 shared
                 {% }

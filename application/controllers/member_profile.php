@@ -297,8 +297,12 @@ class Member_profile extends Role_Controller{
         if(!empty($newsfeeds))
         {
             $this->data['newsfeed'] = $newsfeeds[0];
+            $this->template->load(NULL, "member/status/index", $this->data);
         }
-        $this->template->load(NULL, "member/status/index", $this->data);
+        else
+        {
+            $this->template->load(NULL, "member/no_content", $this->data);
+        }        
     }
     
     function upload_photo_on_list()
