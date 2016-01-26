@@ -6,7 +6,7 @@
      * <(?!\/?(p)|(a)(?...  removes tags excluding para and anchor.
      */
     function filter_html_tags(source_tags){
-        var regex = '<(?!\/?(p|a)\s*.*(?=>|\s.*>))\/?.*?>';
+        var regex = '<(?!\/?(p|a|strong)\s*.*(?=>|\s.*>))\/?.*?>';
         regex = new RegExp(regex, 'gi');
         source_tags = source_tags.replace( regex, '' );
         
