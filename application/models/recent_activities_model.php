@@ -51,13 +51,14 @@ class Recent_activities_model extends Ion_auth_model {
                   ->get();
     }
     
-    public function get_connections($limit = 1)
+    public function get_connections($user_id)
     {
+        $this->db->where($this->tables['users'].'.id != ', $user_id);
         $this->db->order_by($this->tables['users'].'.id', 'desc');
         return $this->db->select($this->tables['users'].'.id as user_id,'.$this->tables['users'].'.*,'.$this->tables['basic_profile'].'.*')
                   ->from($this->tables['users'])
                   ->join($this->tables['basic_profile'], $this->tables['users'].'.id='.$this->tables['basic_profile'].'.user_id')
-                  ->limit($limit)
+                  ->limit(1)
                   ->get();
     }
     public function get_recent_statuses($follower_id_list)

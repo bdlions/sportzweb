@@ -122,7 +122,7 @@ class Recent_activities {
             }
         }
         //recent connection
-        $user_info_array = $this->recent_activities_model->get_connections()->result_array();
+        $user_info_array = $this->recent_activities_model->get_connections($user_id)->result_array();
         if(!empty($user_info_array))
         {
             $user_info = $user_info_array[0];
