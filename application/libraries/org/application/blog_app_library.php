@@ -92,7 +92,7 @@ class Blog_app_library {
         }
         if(!empty($blog_id_array))
         {
-            $blogs_array = $this->blog_app_model->get_blogs($blog_id_array, array(APPROVED))->result_array();            
+            $blogs_array = $this->blog_app_model->get_blogs($blog_id_array, array(APPROVED), 0, 'desc')->result_array();            
             $blogs_comment_counter_array = $this->blog_app_model->get_blogs_comment_counter($blog_id_array)->result_array();
             $blog_id_total_comments_map = array();
             foreach($blogs_comment_counter_array as $blog_comment_counter)

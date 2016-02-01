@@ -46,7 +46,7 @@ class Blog_app_model extends Ion_auth_model {
      * @author nazmul hasan
      * @modified on 23rd September 2015
      */
-    public function get_blogs($blog_id_list = array(), $blog_status_id_list = array(), $limit = 0)
+    public function get_blogs($blog_id_list = array(), $blog_status_id_list = array(), $limit = 0, $order = 'asc')
     {
         if(!empty($blog_id_list))
         {
@@ -60,6 +60,7 @@ class Blog_app_model extends Ion_auth_model {
         {
             $this->db->limit($limit);
         }
+        $this->db->order_by('created_on', $order);
         return $this->db->select($this->tables['blogs'].'.id as blog_id,'.$this->tables['blogs'].'.*')
                     ->from($this->tables['blogs'])
                     ->get();
