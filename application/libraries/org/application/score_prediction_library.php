@@ -264,10 +264,13 @@ class Score_prediction_library {
         $score = array();
         foreach($leader_board_data as $key => $user_score_info)
         {
-            $score[$key] = $user_score_info['prediction_ratio'];
+            //$score[$key] = $user_score_info['prediction_ratio'];
+            $score['prediction_ratio'][$key] = $user_score_info['prediction_ratio'];
+            $score['score'][$key] = $user_score_info['score'];
             $temp_user_list[] = $user_score_info;
         }
-        array_multisort($score, SORT_DESC, $temp_user_list);
+        //array_multisort($score, SORT_DESC, $temp_user_list);
+        array_multisort($score['prediction_ratio'], SORT_DESC, $score['score'], SORT_DESC,$temp_user_list);
         //getting users ids which will be displayed at leader board
         $user_counter = 0;
         foreach($temp_user_list as $user_score_info)
