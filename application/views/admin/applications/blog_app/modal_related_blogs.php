@@ -22,7 +22,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Related Blogs </h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="max-height: 300px; overflow-y: auto;">
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -52,16 +52,19 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                    <div class="row form-group">
-                        <div class ="col-sm-3 pull-right">
-                            <button id="button_save_related_blogs" name="button_save_related_blogs" value="" class="form-control btn button-custom pull-right">Save</button>
-                        </div>
-                    </div>
                 </div>                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn button-custom" data-dismiss="modal">Close</button>
+                <div class="row form-group">
+                    <div class ="col-sm-6"></div>
+                    <div class ="col-sm-3">
+                        <button id="button_save_related_blogs" name="button_save_related_blogs" value="" class="form-control btn button-custom pull-right">Save</button>
+                    </div>
+                    <div class ="col-sm-3">
+                        <button type="button" class="btn button-custom" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
