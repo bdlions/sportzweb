@@ -215,7 +215,7 @@ class Admin_news{
         $region_id_news_id_map = array();
         $region_id_is_news_ignored_map = array();
         $news_id_news_info_map = array();
-        $present_date = $this->utils->get_current_date();
+        $present_date = $this->utils->get_current_date_db();
         $news_id_list = array();
         $result = $this->admin_news_model->get_news_sub_category_page_configuration($news_sub_category_id,$present_date)->result_array();
         if(!empty($result)) {
