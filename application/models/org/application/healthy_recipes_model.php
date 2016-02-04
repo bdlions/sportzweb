@@ -70,6 +70,7 @@ class Healthy_recipes_model extends Ion_auth_model {
         {
             $this->db->where('recipe_category_id', $recipe_category_id);
         }
+        $this->db->order_by('created_on','desc');
         return $this->db->select($this->tables['recipe_category'].'.description as categoty_description,'.$this->tables['recipes'].'.*')
                     ->from($this->tables['recipes'])
                     ->join($this->tables['recipe_category'], $this->tables['recipe_category'].'.id='.$this->tables['recipes'].'.recipe_category_id','left')
